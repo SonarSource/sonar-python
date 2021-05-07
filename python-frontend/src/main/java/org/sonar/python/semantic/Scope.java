@@ -153,7 +153,7 @@ class Scope {
       originalClassSymbol.hasDecorators(), originalClassSymbol.hasMetaClass(), originalClassSymbol.metaclassFQN(), originalClassSymbol.supportsGenerics());
 
     for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
-      Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName(), symbols);
+      Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName(), symbols, symbolName);
       if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
         Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
           ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
@@ -195,7 +195,7 @@ class Scope {
 
   void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName) {
     String symbolName = nameTree.name();
-    Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName, symbols);
+    Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName, symbols, symbolName);
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
     } else {

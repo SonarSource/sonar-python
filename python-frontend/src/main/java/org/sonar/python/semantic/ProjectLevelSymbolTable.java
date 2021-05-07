@@ -58,7 +58,7 @@ public class ProjectLevelSymbolTable {
       String moduleName = entry.getKey();
       Set<Symbol> exportedSymbols = entry.getValue();
       List<Summary> summaries = exportedSymbols.stream()
-        .flatMap(s -> SummaryUtils.summary(s).stream())
+        .flatMap(s -> SummaryUtils.summary(s, moduleName).stream())
         .collect(Collectors.toList());
       // TODO: Extract last dotted name from ModuleName?
       modules.put(moduleName, new ModuleSummary(moduleName, moduleName, summaries));
@@ -71,9 +71,10 @@ public class ProjectLevelSymbolTable {
   }
 
   @CheckForNull
-  public Symbol getSymbol(@Nullable String fullyQualifiedName, Set<Symbol> existingSymbols) {
+  public Symbol getSymbol(@Nullable String fullyQualifiedName, Set<Symbol> existingSymbols, String symbolName) {
     return new SymbolBuilder(Collections.emptyMap(), projectSummary)
       .fromFullyQualifiedName(fullyQualifiedName)
+      .havingAlias(symbolName)
       .build();
   }
 

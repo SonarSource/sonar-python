@@ -35,24 +35,26 @@ public class SummaryUtils {
   private SummaryUtils() {}
 
 
-  public static Collection<Summary> summary(Symbol symbol) {
+  public static Collection<Summary> summary(Symbol symbol, String moduleName) {
     switch (symbol.kind()) {
       case FUNCTION:
         return Collections.singleton(functionSummary(((FunctionSymbol) symbol)));
       case CLASS:
-        return Collections.singleton(classSummary((ClassSymbol) symbol));
+        return Collections.singleton(classSummary((ClassSymbol) symbol, moduleName));
       case AMBIGUOUS:
-        return ((AmbiguousSymbol) symbol).alternatives().stream().flatMap(s -> summary(s).stream()).collect(Collectors.toSet());
+        return ((AmbiguousSymbol) symbol).alternatives().stream().flatMap(s -> summary(s, moduleName).stream()).collect(Collectors.toSet());
       default:
-        return Collections.singleton(new VariableSummary(symbol.name(), symbol.fullyQualifiedName(), symbol.annotatedTypeName()));
+
+        String fqn = symbol.fullyQualifiedName();
+        return Collections.singleton(new VariableSummary(symbol.name(), fqn != null ? fqn : (moduleName + "." + symbol.name()), symbol.annotatedTypeName()));
     }
   }
 
-  private static ClassSummary classSummary(ClassSymbol classSymbol) {
+  private static ClassSummary classSummary(ClassSymbol classSymbol, String moduleName) {
     ClassSummary.ClassSummaryBuilder classSummary = new ClassSummary.ClassSummaryBuilder()
       .withName(classSymbol.name())
       .withFullyQualifiedName(classSymbol.fullyQualifiedName())
-      .withMembers(classSymbol.declaredMembers().stream().flatMap(s -> summary(s).stream()).collect(Collectors.toList()))
+      .withMembers(classSymbol.declaredMembers().stream().flatMap(s -> summary(s, moduleName).stream()).collect(Collectors.toList()))
       .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList()))
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())

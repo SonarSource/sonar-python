@@ -59,7 +59,7 @@ public class ProjectSummary {
     List<Summary> summaries = fileInput.globalVariables().stream()
       // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
       .filter(symbol -> !isBuiltInOrImportedName(fullyQualifiedModuleName, symbol))
-      .flatMap(s -> SummaryUtils.summary(s).stream())
+      .flatMap(s -> SummaryUtils.summary(s, fullyQualifiedModuleName).stream())
       .collect(Collectors.toList());
 
     modules.put(fullyQualifiedModuleName, new ModuleSummary(pythonFile.fileName(), fullyQualifiedModuleName, summaries));

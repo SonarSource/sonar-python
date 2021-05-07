@@ -19,12 +19,15 @@
  */
 package org.sonar.python.index;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+
 class VariableSummary implements Summary {
   private final String name;
   private final String fullyQualifiedName;
   private final String annotatedType;
 
-  public VariableSummary(String name, String fullyQualifiedName, String annotatedType) {
+  public VariableSummary(String name, String fullyQualifiedName, @Nullable String annotatedType) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedType = annotatedType;
@@ -40,6 +43,7 @@ class VariableSummary implements Summary {
     return fullyQualifiedName;
   }
 
+  @CheckForNull
   public String annotatedType() {
     return annotatedType;
   }
