@@ -577,7 +577,7 @@ public class ProjectLevelSymbolTableTest {
     FileInput fileInput = parseWithoutSymbols("class A(A): pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
-    assertThat(a.superClasses()).containsExactly(a);
+    assertThat(a.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("mod.mod.A");
   }
 
   @Test

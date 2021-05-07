@@ -40,6 +40,7 @@ public class SymbolBuilder {
   @Nullable
   private String fullyQualifiedName;
   private String alias;
+  private Set<String> derivedClasses = new HashSet<>();
 
   public SymbolBuilder(Map<String, Symbol> existingSymbols, ProjectSummary projectSummary) {
     this.existingSymbols = existingSymbols;
@@ -48,6 +49,11 @@ public class SymbolBuilder {
 
   public SymbolBuilder fromSummaries(Collection<Summary> summaries) {
     this.summaries = summaries;
+    return this;
+  }
+
+  public SymbolBuilder havingDerivedClassSymbols(Set<String> derivedClasses) {
+    this.derivedClasses= derivedClasses;
     return this;
   }
 
@@ -104,14 +110,21 @@ public class SymbolBuilder {
     for (String superClass : classSummary.superClasses()) {
       Symbol superClassSymbol = existingSymbols.get(superClass);
       if (superClassSymbol == null) {
-        superClassSymbol = new SymbolBuilder(existingSymbols, projectSummary)
-          .fromFullyQualifiedName(superClass)
-          .build();
+        if (derivedClasses.contains(superClass)) {
+          superClassSymbol = new SymbolImpl(superClass, superClass);
+        } else {
+          HashSet<String> derivedClassesFqn = new HashSet<>(this.derivedClasses);
+          derivedClassesFqn.add(classSummary.fullyQualifiedName());
+          superClassSymbol = new SymbolBuilder(existingSymbols, projectSummary)
+            .fromFullyQualifiedName(superClass)
+            .havingDerivedClassSymbols(derivedClassesFqn)
+            .build();
+        }
       }
       if (superClassSymbol != null) {
         classSymbol.addSuperClass(superClassSymbol);
       } else {
-        classSymbol.addSuperClass(new SymbolImpl(fullyQualifiedName, fullyQualifiedName));
+        classSymbol.addSuperClass(new SymbolImpl(superClass, superClass));
       }
     }
   }
