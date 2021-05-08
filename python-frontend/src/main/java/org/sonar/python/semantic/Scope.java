@@ -196,9 +196,18 @@ class Scope {
   void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName) {
     String symbolName = nameTree.name();
     Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName, symbols, symbolName);
+    if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
+      Symbol typeShedSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
+      if (typeShedSymbol != null) {
+        globalSymbol = copySymbol(symbolName, typeShedSymbol);
+      }
+    }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
     } else {
+      if (!globalSymbol.name().equals(symbolName)) {
+        globalSymbol = copySymbol(symbolName, globalSymbol);
+      }
       this.symbols.add(globalSymbol);
       symbolsByName.put(symbolName, globalSymbol);
       ((SymbolImpl) globalSymbol).addUsage(nameTree, Usage.Kind.IMPORT);
