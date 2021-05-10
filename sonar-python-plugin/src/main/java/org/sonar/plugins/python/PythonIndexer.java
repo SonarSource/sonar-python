@@ -40,7 +40,8 @@ import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 public abstract class PythonIndexer {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
-  File projectBaseDir;
+
+  protected File projectBaseDir;
 
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
@@ -57,7 +58,7 @@ public abstract class PythonIndexer {
   void removeFile(InputFile inputFile) {
     String packageName = packageNames.get(inputFile.uri());
     if (packageName == null) {
-      // File not indexed
+      LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", inputFile.filename());
       return;
     }
     packageNames.remove(inputFile.uri());
@@ -93,7 +94,7 @@ public abstract class PythonIndexer {
 
     @Override
     protected void processException(Exception e, InputFile file) {
-      LOG.debug("Unable to construct project-level symbol table for file: " + file.toString());
+      LOG.debug("Unable to construct project-level symbol table for file: " + file);
       LOG.debug(e.getMessage());
     }
   }

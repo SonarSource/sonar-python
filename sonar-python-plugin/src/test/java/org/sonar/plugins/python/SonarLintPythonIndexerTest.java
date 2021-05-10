@@ -49,20 +49,26 @@ public class SonarLintPythonIndexerTest {
   @org.junit.Rule
   public LogTester logTester = new LogTester();
 
+  InputFile file1;
+  InputFile file2;
+  SonarLintPythonIndexer pythonIndexer;
+  ProjectLevelSymbolTable projectLevelSymbolTable;
+
   @Before
   public void init() throws IOException {
     context = SensorContextTester.create(baseDir);
     Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
+
+    file1 = inputFile("main.py");
+    file2 = inputFile("mod.py");
+    pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    pythonIndexer.buildOnce(context);
+    projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
   }
 
   @Test
   public void test_indexer() {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
@@ -72,16 +78,11 @@ public class SonarLintPythonIndexerTest {
 
   @Test
   public void test_indexer_removed_file() {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
     pythonIndexer.process(moduleFileEvent);
+
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
@@ -90,16 +91,11 @@ public class SonarLintPythonIndexerTest {
 
   @Test
   public void test_indexer_file_removed_twice() {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
     pythonIndexer.process(moduleFileEvent);
+
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
     pythonIndexer.process(moduleFileEvent);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
@@ -108,17 +104,12 @@ public class SonarLintPythonIndexerTest {
 
   @Test
   public void test_indexer_added_file() throws IOException {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-
     InputFile file3 = createInputFile("added.py");
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
     when(moduleFileEvent.getTarget()).thenReturn(file3);
     pythonIndexer.process(moduleFileEvent);
+
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("added")).hasSize(1);
     Symbol newFuncSymbol = projectLevelSymbolTable.getSymbol("added.new_func");
@@ -128,12 +119,6 @@ public class SonarLintPythonIndexerTest {
 
   @Test
   public void test_indexer_added_nonexistent_file() throws IOException {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-
     InputFile nonExistentFile = TestInputFileBuilder.create("moduleKey", "nonexistent.py")
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
@@ -144,23 +129,19 @@ public class SonarLintPythonIndexerTest {
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
     when(moduleFileEvent.getTarget()).thenReturn(nonExistentFile);
     pythonIndexer.process(moduleFileEvent);
+
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("nonexistent")).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to load file \"nonexistent.py\" to the project symbol table");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to load file \"nonexistent.py\" (CREATED) to the project symbol table");
   }
 
   @Test
   public void test_indexer_modified_file() throws IOException {
-    InputFile file1 = inputFile("main.py");
-    InputFile file2 = inputFile("mod.py");
-    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
-    pythonIndexer.buildOnce(context);
-    ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
     pythonIndexer.process(moduleFileEvent);
+
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");

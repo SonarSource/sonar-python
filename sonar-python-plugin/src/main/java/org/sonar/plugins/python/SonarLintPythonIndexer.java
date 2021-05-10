@@ -72,7 +72,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       try {
         addFile(target);
       } catch (IOException e) {
-        LOG.debug("Failed to load file \"{}\" to the project symbol table", target.filename());
+        LOG.debug("Failed to load file \"{}\" ({}) to the project symbol table", target.filename(), type);
       }
     }
   }
