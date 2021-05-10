@@ -21,6 +21,7 @@ package org.sonar.plugins.python;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
@@ -33,7 +34,7 @@ public class TestModuleFileSystem implements ModuleFileSystem {
   }
 
   @Override
-  public void files(String s, InputFile.Type type, Consumer<InputFile> consumer) {
-    inputFiles.forEach(consumer);
+  public Stream<InputFile> files(String s, InputFile.Type type) {
+    return inputFiles.stream();
   }
 }

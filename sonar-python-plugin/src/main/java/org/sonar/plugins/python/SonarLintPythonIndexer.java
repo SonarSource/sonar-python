@@ -57,7 +57,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
     List<InputFile> files = new ArrayList<>();
-    moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN, files::add);
+    moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN).forEach(files::add);
     return Collections.unmodifiableList(files);
   }
 

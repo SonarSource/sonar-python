@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -100,7 +101,7 @@ public class SonarLintTest {
       logs.add(s);
       logsByLevel.putIfAbsent(level, logs);
     };
-    sonarlintEngine.declareModule(new ModuleInfo("myModule", (a, b, consumer) -> consumer.accept(inputFile)));
+    sonarlintEngine.declareModule(new ModuleInfo("myModule", (a, b) -> Stream.of(inputFile)));
     sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
 
     assertThat(logsByLevel.get(LogOutput.Level.WARN)).isNull();
