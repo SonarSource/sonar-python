@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -53,6 +55,7 @@ public class SonarLintPythonIndexerTest {
 
   InputFile file1;
   InputFile file2;
+  TestModuleFileSystem moduleFileSystem;
   SonarLintPythonIndexer pythonIndexer;
   ProjectLevelSymbolTable projectLevelSymbolTable;
 
@@ -64,7 +67,9 @@ public class SonarLintPythonIndexerTest {
 
     file1 = inputFile("main.py");
     file2 = inputFile("mod.py");
-    pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+    moduleFileSystem = new TestModuleFileSystem(inputFiles);
+    pythonIndexer = new SonarLintPythonIndexer(moduleFileSystem);
     pythonIndexer.buildOnce(context);
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
   }
@@ -76,6 +81,16 @@ public class SonarLintPythonIndexerTest {
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
     assertThat(modAddSymbol).isNotNull();
     assertThat(modAddSymbol.is(Symbol.Kind.FUNCTION)).isTrue();
+  }
+
+  @Test
+  public void build_once_should_build_once() {
+    InputFile file3 = inputFile("added.py");
+    moduleFileSystem.addFile(file3);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("added")).isNull();
+    assertThat(projectLevelSymbolTable.getSymbol("added.new_func")).isNull();
   }
 
   @Test

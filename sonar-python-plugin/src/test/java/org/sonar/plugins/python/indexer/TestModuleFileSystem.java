@@ -37,4 +37,8 @@ public class TestModuleFileSystem implements ModuleFileSystem {
   public Stream<InputFile> files(String s, InputFile.Type type) {
     return inputFiles.stream();
   }
+
+  public void addFile(InputFile inputFile) {
+    inputFiles.add(inputFile);
+  }
 }

@@ -38,6 +38,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   private final ModuleFileSystem moduleFileSystem;
   private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
+  private boolean shouldBuildProjectSymbolTable = true;
 
   public SonarLintPythonIndexer(ModuleFileSystem moduleFileSystem) {
     this.moduleFileSystem = moduleFileSystem;
@@ -45,6 +46,9 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   @Override
   public void buildOnce(SensorContext context) {
+    if (!shouldBuildProjectSymbolTable) {
+      return;
+    }
     this.projectBaseDir = context.fileSystem().baseDir();
     List<InputFile> files = getInputFiles(moduleFileSystem);
     LOG.debug("Input files for indexing: " + files);
@@ -54,6 +58,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     globalSymbolsStep.execute(files, context);
     long stopTime = System.currentTimeMillis() - startTime;
     LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
+    shouldBuildProjectSymbolTable = false;
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
