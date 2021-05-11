@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.indexer;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
@@ -29,6 +29,8 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.Scanner;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
@@ -47,11 +49,11 @@ public abstract class PythonIndexer {
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
 
-  ProjectLevelSymbolTable projectLevelSymbolTable() {
+  public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
   }
 
-  String packageName(URI uri) {
+  public String packageName(URI uri) {
     return packageNames.get(uri);
   }
 
@@ -74,11 +76,11 @@ public abstract class PythonIndexer {
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }
 
-  abstract void buildOnce(SensorContext context);
+  public abstract void buildOnce(SensorContext context);
 
   class GlobalSymbolsScanner extends Scanner {
 
-    GlobalSymbolsScanner(SensorContext context) {
+    protected GlobalSymbolsScanner(SensorContext context) {
       super(context);
     }
 

@@ -67,6 +67,9 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
+import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;

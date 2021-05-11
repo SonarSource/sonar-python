@@ -29,16 +29,16 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.ProgressReport;
 
-abstract class Scanner {
+public abstract class Scanner {
   private static final Logger LOG = Loggers.get(Scanner.class);
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   protected final SensorContext context;
 
-  Scanner(SensorContext context) {
+  protected Scanner(SensorContext context) {
     this.context = context;
   }
 
-  void execute(List<InputFile> files, SensorContext context) {
+  public void execute(List<InputFile> files, SensorContext context) {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
     LOG.info("Starting " + this.name());
     List<String> filenames = files.stream().map(InputFile::toString).collect(Collectors.toList());
@@ -63,9 +63,9 @@ abstract class Scanner {
     progressReport.stop();
   }
 
-  abstract String name();
+  protected abstract String name();
 
-  abstract void scanFile(InputFile file) throws IOException;
+  protected abstract void scanFile(InputFile file) throws IOException;
 
-  abstract void processException(Exception e, InputFile file);
+  protected abstract void processException(Exception e, InputFile file);
 }
