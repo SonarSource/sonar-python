@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -66,6 +67,9 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
+import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -284,6 +288,39 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void no_cross_file_issues_only_one_file() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile("main.py");
+    sensor().execute(context);
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
+  public void cross_files_issues_only_one_file_analyzed() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    InputFile mainFile = inputFile("main.py");
+    // "mod.py" created but not added to context
+    InputFile modFile = createInputFile("mod.py");
+    PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
+    sensor(CUSTOM_RULES, pythonIndexer).execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile);
+    // Secondary location outside of analyzed file is missing
+    assertThat(issue.flows()).isEmpty();
+  }
+
+  @Test
   public void loop_in_class_hierarchy() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -291,9 +328,10 @@ public class PythonSensorTest {
         .build())
       .build();
 
-    inputFile("modA.py");
-    inputFile("modB.py");
-    sensor().execute(context);
+    InputFile mainFile = inputFile("modA.py");
+    InputFile modFile = inputFile("modB.py");
+    PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
+    sensor(null, pythonIndexer).execute(context);
 
     assertThat(context.allIssues()).hasSize(1);
   }
@@ -404,24 +442,34 @@ public class PythonSensorTest {
     InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
-    sensor(null).execute(context);
+    sensor(null, null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES);
+    return sensor(CUSTOM_RULES, null);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    if(customRuleRepositories == null) {
+    if (indexer == null && customRuleRepositories == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories);
+    if (indexer != null && customRuleRepositories == null) {
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
+    }
+    if (indexer == null) {
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories);
+    }
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer);
+  }
+
+  private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
+    return new SonarLintPythonIndexer(new TestModuleFileSystem(files));
   }
 
   private InputFile inputFile(String name) {

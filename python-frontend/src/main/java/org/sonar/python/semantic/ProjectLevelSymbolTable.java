@@ -63,8 +63,8 @@ public class ProjectLevelSymbolTable {
     this.globalSymbolsByModuleName = new HashMap<>(globalSymbolsByModuleName);
   }
 
-  public void removeModule(String packageName, PythonFile pythonFile) {
-    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+  public void removeModule(String packageName, String fileName) {
+    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
     globalSymbolsByModuleName.remove(fullyQualifiedModuleName);
     // ensure globalSymbolsByFQN is re-computed
     this.globalSymbolsByFQN = null;

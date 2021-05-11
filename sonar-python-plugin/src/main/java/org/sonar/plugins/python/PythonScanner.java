@@ -50,6 +50,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
+import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
@@ -70,16 +71,15 @@ public class PythonScanner extends Scanner {
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> files
-  ) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parser = PythonParser.create();
-    this.indexer = new PythonIndexer();
-    this.indexer.buildOnce(context, files);
+    this.indexer = indexer;
+    this.indexer.buildOnce(context);
   }
 
   @Override
@@ -94,7 +94,7 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile.uri()), indexer.projectLevelSymbolTable());
+      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);

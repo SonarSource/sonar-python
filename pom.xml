@@ -92,7 +92,7 @@
     <sonar.version>8.9.0.43852</sonar.version>
     <sonar.orchestrator.version>3.35.1.2719</sonar.orchestrator.version>
     <sonar-analyzer-commons.version>1.14.1.690</sonar-analyzer-commons.version>
-    <sonarlint-core.version>4.4.0.2561</sonarlint-core.version>
+    <sonarlint-core.version>5.4.0.31832</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
   </properties>
 
@@ -192,6 +192,12 @@
         <artifactId>sonarlint-core</artifactId>
         <version>${sonarlint-core.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonarsource.sonarlint.core</groupId>
+        <artifactId>sonarlint-plugin-api</artifactId>
+        <version>${sonarlint-core.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>

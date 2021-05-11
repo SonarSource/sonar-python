@@ -17,19 +17,20 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.indexer;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.Scanner;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
@@ -38,40 +39,32 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
-public class PythonIndexer {
+public abstract class PythonIndexer {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
+
+  protected File projectBaseDir;
 
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-  private File projectBaseDir;
 
-
-  void buildOnce(SensorContext context, List<InputFile> files) {
-    this.projectBaseDir = context.fileSystem().baseDir();
-    LOG.debug("Input files for indexing: " + files);
-    // computes "globalSymbolsByModuleName"
-    long startTime = System.currentTimeMillis();
-    GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
-    globalSymbolsStep.execute(files, context);
-    long stopTime = System.currentTimeMillis() - startTime;
-    LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
-  }
-
-  String packageName(URI uri) {
-    return packageNames.get(uri);
-  }
-
-  ProjectLevelSymbolTable projectLevelSymbolTable() {
+  public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
+  }
+
+  public String packageName(InputFile inputFile) {
+    return packageNames.computeIfAbsent(inputFile.uri(), k -> pythonPackageName(inputFile.file(), projectBaseDir));
   }
 
   void removeFile(InputFile inputFile) {
     String packageName = packageNames.get(inputFile.uri());
+    if (packageName == null) {
+      LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", inputFile.filename());
+      return;
+    }
     packageNames.remove(inputFile.uri());
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-    projectLevelSymbolTable.removeModule(packageName, pythonFile);
+    projectLevelSymbolTable.removeModule(packageName, inputFile.filename());
   }
 
   void addFile(InputFile inputFile) throws IOException {
@@ -83,9 +76,11 @@ public class PythonIndexer {
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }
 
-  private class GlobalSymbolsScanner extends Scanner {
+  public abstract void buildOnce(SensorContext context);
 
-    private GlobalSymbolsScanner(SensorContext context) {
+  class GlobalSymbolsScanner extends Scanner {
+
+    protected GlobalSymbolsScanner(SensorContext context) {
       super(context);
     }
 
@@ -101,7 +96,7 @@ public class PythonIndexer {
 
     @Override
     protected void processException(Exception e, InputFile file) {
-      LOG.debug("Unable to construct project-level symbol table for file: " + file.toString());
+      LOG.debug("Unable to construct project-level symbol table for file: " + file);
       LOG.debug(e.getMessage());
     }
   }
