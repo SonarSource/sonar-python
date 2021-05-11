@@ -112,7 +112,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       boolean isVariadic = (parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD) || parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
       hasVariadicParameter |= isVariadic;
       ParameterImpl parameter = new ParameterImpl(
-        parameterSymbol.getName(), anyType(), parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
+        parameterSymbol.getName(), anyType(), null, parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
@@ -188,7 +188,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId), null));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, false, parameterState, locationInFile(anyParameter, fileId), null));
       }
     }
   }
@@ -198,7 +198,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       InferredType declaredType = getParameterType(parameter, starToken);
-      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
+      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId), null));
       if (starToken != null) {
         hasVariadicParameter = true;
@@ -290,7 +290,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
-    annotatedReturnTypeName = Optional.ofNullable(returnTypeAnnotation)
+    annotatedReturnTypeName = annotatedTypeName(returnTypeAnnotation);
+  }
+
+  private String annotatedTypeName(@Nullable TypeAnnotation typeAnnotation) {
+    return Optional.ofNullable(typeAnnotation)
       .map(TypeAnnotation::expression)
       .map(SymbolImpl::getTypeSymbolFromExpression)
       .map(Symbol::fullyQualifiedName)
@@ -327,6 +331,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private InferredType declaredType;
     private SymbolsProtos.Type protobufType;
+    private final String annotatedTypeName;
     private final boolean hasDefaultValue;
     private final boolean isVariadic;
     private final boolean isKeywordOnly;
@@ -334,7 +339,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final LocationInFile location;
     private boolean hasReadDeclaredType = false;
 
-    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue,
+    ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
                   boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location, @Nullable SymbolsProtos.Type protobufType) {
       this.name = name;
       this.declaredType = declaredType;
@@ -344,6 +349,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
       this.protobufType = protobufType;
+      this.annotatedTypeName = annotatedTypeName;
     }
 
     @Override
@@ -359,6 +365,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         hasReadDeclaredType = true;
       }
       return declaredType;
+    }
+
+    @CheckForNull
+    public String annotatedTypeName() {
+      return annotatedTypeName;
     }
 
     @Override
