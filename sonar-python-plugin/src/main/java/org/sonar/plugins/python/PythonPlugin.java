@@ -25,6 +25,8 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -39,6 +41,7 @@ import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 public class PythonPlugin implements Plugin {
 
   private static final String PYTHON_CATEGORY = "Python";
+  private static final Logger LOG = Loggers.get(PythonPlugin.class);
 
   // Subcategories
   private static final String GENERAL = "General";
@@ -81,7 +84,12 @@ public class PythonPlugin implements Plugin {
       addFlake8Extensions(context);
     }
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
-      context.addExtension(SonarLintPythonIndexer.class);
+      try {
+        Class.forName("org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener");
+        context.addExtension(SonarLintPythonIndexer.class);
+      } catch (ClassNotFoundException e) {
+        LOG.debug("Error while trying to inject SonarLintPythonIndexer");
+      }
     }
   }
 
