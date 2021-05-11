@@ -53,8 +53,8 @@ public abstract class PythonIndexer {
     return projectLevelSymbolTable;
   }
 
-  public String packageName(URI uri) {
-    return packageNames.get(uri);
+  public String packageName(InputFile inputFile) {
+    return packageNames.computeIfAbsent(inputFile.uri(), k -> pythonPackageName(inputFile.file(), projectBaseDir));
   }
 
   void removeFile(InputFile inputFile) {
