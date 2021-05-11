@@ -36,7 +36,7 @@ public class ClassDescriptorTest {
       "class A:",
       "  def foo(): ...");
     assertThat(classDescriptor.superClasses()).isEmpty();
-    assertThat(classDescriptor.hasSuperClassWithoutSymbol()).isFalse();
+    assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isFalse();
     assertThat(classDescriptor.hasMetaClass()).isFalse();
     assertThat(classDescriptor.metaclassFQN()).isNull();
     assertThat(classDescriptor.supportsGenerics()).isFalse();
@@ -60,7 +60,7 @@ public class ClassDescriptorTest {
       "def foo(): ...",
       "class A(foo()): ...");
     assertThat(classDescriptor.superClasses()).isEmpty();
-    assertThat(classDescriptor.hasSuperClassWithoutSymbol()).isTrue();
+    assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
   }
 
   @Test

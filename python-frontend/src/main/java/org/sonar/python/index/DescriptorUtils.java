@@ -56,7 +56,7 @@ public class DescriptorUtils {
       .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList()))
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
-      .withHasSuperClassWithoutSymbol(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol())
+      .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol())
       .withMetaclassFQN(((ClassSymbolImpl) classSymbol).metaclassFQN())
       .withHasDecorators(classSymbol.hasDecorators())
       .withSupportsGenerics(((ClassSymbolImpl) classSymbol).supportsGenerics());

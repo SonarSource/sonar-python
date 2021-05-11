@@ -33,13 +33,13 @@ public class ClassDescriptor implements Descriptor {
   private final Collection<Descriptor> members;
   private final boolean hasDecorators;
   private final LocationInFile definitionLocation;
-  private final boolean hasSuperClassWithoutSymbol;
+  private final boolean hasSuperClassWithoutDescriptor;
   private final boolean hasMetaClass;
   private final String metaclassFQN;
   private final boolean supportsGenerics;
 
   public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Collection<Descriptor> members,
-    boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutSymbol, boolean hasMetaClass,
+    boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,
     @Nullable String metaclassFQN, boolean supportsGenerics) {
 
     this.name = name;
@@ -48,7 +48,7 @@ public class ClassDescriptor implements Descriptor {
     this.members = members;
     this.hasDecorators = hasDecorators;
     this.definitionLocation = definitionLocation;
-    this.hasSuperClassWithoutSymbol = hasSuperClassWithoutSymbol;
+    this.hasSuperClassWithoutDescriptor = hasSuperClassWithoutDescriptor;
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
     this.supportsGenerics = supportsGenerics;
@@ -81,8 +81,8 @@ public class ClassDescriptor implements Descriptor {
     return hasDecorators;
   }
 
-  public boolean hasSuperClassWithoutSymbol() {
-    return hasSuperClassWithoutSymbol;
+  public boolean hasSuperClassWithoutDescriptor() {
+    return hasSuperClassWithoutDescriptor;
   }
 
   public LocationInFile definitionLocation() {
@@ -109,7 +109,7 @@ public class ClassDescriptor implements Descriptor {
     private Collection<Descriptor> members = new HashSet<>();
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
-    private boolean hasSuperClassWithoutSymbol = false;
+    private boolean hasSuperClassWithoutDescriptor = false;
     private boolean hasMetaClass = false;
     private String metaclassFQN = null;
     private boolean supportsGenerics = false;
@@ -139,8 +139,8 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
-    public ClassDescriptorBuilder withHasSuperClassWithoutSymbol(boolean hasSuperClassWithoutSymbol) {
-      this.hasSuperClassWithoutSymbol = hasSuperClassWithoutSymbol;
+    public ClassDescriptorBuilder withHasSuperClassWithoutDescriptor(boolean hasSuperClassWithoutDescriptor) {
+      this.hasSuperClassWithoutDescriptor = hasSuperClassWithoutDescriptor;
       return this;
     }
 
@@ -166,7 +166,7 @@ public class ClassDescriptor implements Descriptor {
 
     public ClassDescriptor build() {
       return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation,
-        hasSuperClassWithoutSymbol, hasMetaClass, metaclassFQN, supportsGenerics);
+        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics);
     }
   }
 }
