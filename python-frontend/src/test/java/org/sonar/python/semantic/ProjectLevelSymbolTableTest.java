@@ -406,7 +406,7 @@ public class ProjectLevelSymbolTableTest {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
-    projectLevelSymbolTable.removeModule("", pythonFile("mod.py"));
+    projectLevelSymbolTable.removeModule("", "mod.py");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
   }
 

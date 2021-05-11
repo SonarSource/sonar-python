@@ -41,6 +41,8 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -51,21 +53,33 @@ public final class PythonSensor implements Sensor {
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private final PythonIndexer indexer;
 
   /**
-   * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
+   * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+                      PythonIndexer indexer) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer);
+  }
+
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+                      PythonCustomRuleRepository[] customRuleRepositories) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null);
+  }
+
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.indexer = indexer;
   }
 
   @Override
@@ -80,7 +94,8 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles);
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);
     if (!testFiles.isEmpty()) {
       new TestHighlightingScanner(context).execute(testFiles, context);
