@@ -139,7 +139,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, false, parameterState, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -149,7 +149,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       InferredType declaredType = getParameterType(parameter, starToken);
-      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
+      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
@@ -237,7 +237,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
-    annotatedReturnTypeName = Optional.ofNullable(returnTypeAnnotation)
+    annotatedReturnTypeName = annotatedTypeName(returnTypeAnnotation);
+  }
+
+  private String annotatedTypeName(@Nullable TypeAnnotation typeAnnotation) {
+    return Optional.ofNullable(typeAnnotation)
       .map(TypeAnnotation::expression)
       .map(SymbolImpl::getTypeSymbolFromExpression)
       .map(Symbol::fullyQualifiedName)
@@ -269,17 +273,18 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.isDjangoView = isDjangoView;
   }
 
-  private static class ParameterImpl implements Parameter {
+  public static class ParameterImpl implements Parameter {
 
     private final String name;
     private final InferredType declaredType;
+    private final String annotatedTypeName;
     private final boolean hasDefaultValue;
     private final boolean isVariadic;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
 
-    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue,
+    public ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
                   boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location) {
       this.name = name;
       this.declaredType = declaredType;
@@ -288,6 +293,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isKeywordOnly = parameterState.keywordOnly;
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
+      this.annotatedTypeName = annotatedTypeName;
     }
 
     @Override
@@ -299,6 +305,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public InferredType declaredType() {
       return declaredType;
+    }
+
+    @CheckForNull
+    public String annotatedTypeName() {
+      return annotatedTypeName;
     }
 
     @Override
