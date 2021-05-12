@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 
@@ -99,6 +101,21 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
     isDjangoView = ((FunctionSymbolImpl) functionSymbol).isDjangoView();
+  }
+
+  public FunctionSymbolImpl(String name, FunctionDescriptor functionDescriptor) {
+    super(name, functionDescriptor.fullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    isInstanceMethod = functionDescriptor.isInstanceMethod();
+    isAsynchronous = functionDescriptor.isAsynchronous();
+    hasDecorators = functionDescriptor.hasDecorators();
+    decorators = functionDescriptor.decorators();
+    annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
+    hasVariadicParameter = functionDescriptor.parameters().stream().anyMatch(FunctionDescriptor.Parameter::isVariadic);
+    parameters.addAll(functionDescriptor.parameters().stream().map(ParameterImpl::new).collect(Collectors.toList()));
+    functionDefinitionLocation = functionDescriptor.definitionLocation();
+    declaredReturnType = InferredTypes.anyType();
+    isStub = false;
   }
 
   @Override
@@ -294,6 +311,17 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
       this.annotatedTypeName = annotatedTypeName;
+    }
+
+    private ParameterImpl(FunctionDescriptor.Parameter parameter) {
+      this.name = parameter.name();
+      this.declaredType = InferredTypes.anyType();
+      this.hasDefaultValue = parameter.hasDefaultValue();
+      this.isVariadic = parameter.isVariadic();
+      this.isKeywordOnly = parameter.isKeywordOnly();
+      this.isPositionalOnly = parameter.isPositionalOnly();
+      this.location = parameter.location();
+      this.annotatedTypeName = parameter.annotatedType();
     }
 
     @Override

@@ -50,7 +50,6 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
-import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -365,7 +364,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
-          importedModuleSymbols = TypeShed.symbolsForModule(moduleName);
+          importedModuleSymbols = new HashSet<>(TypeShed.symbolsForModule(moduleName).values());
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom);

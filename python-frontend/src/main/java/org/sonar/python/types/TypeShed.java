@@ -62,7 +62,7 @@ public class TypeShed {
   private static final String TYPING = "typing";
   private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
+  private static final Map<String, Map<String, Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
 
@@ -158,19 +158,20 @@ public class TypeShed {
     return new HashSet<>(typingExtensionSymbols.values());
   }
 
-  public static Set<Symbol> symbolsForModule(String moduleName) {
+  public static Map<String, Symbol> symbolsForModule(String moduleName) {
     if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
       Set<Symbol> symbols = searchTypeShedForModule(moduleName);
-      typeShedSymbols.put(moduleName, symbols);
-      return symbols;
+      Map<String, Symbol> symbolsByFqn = symbols.stream().collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
+      typeShedSymbols.put(moduleName, symbolsByFqn);
+      return symbolsByFqn;
     }
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
   @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
-    Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
-    Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    Map<String, Symbol> symbols = symbolsForModule(stdLibModuleName);
+    Symbol symbolByFqn = symbols.get(fullyQualifiedName);
     if (symbolByFqn != null || !fullyQualifiedName.contains(".")) {
       return symbolByFqn;
     }
@@ -182,11 +183,22 @@ public class TypeShed {
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
 
-    Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
+    Set<Symbol> matchByName = symbols.values().stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
     if (matchByName.size() == 1) {
       return matchByName.iterator().next();
     }
 
+    return null;
+  }
+
+  @CheckForNull
+  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
+      Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
+      if (symbol != null) {
+        return symbol;
+      }
+    }
     return null;
   }
 
@@ -268,7 +280,7 @@ public class TypeShed {
 
   public static Collection<Symbol> stubFilesSymbols() {
     Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
-    typeShedSymbols.values().forEach(symbols::addAll);
+    typeShedSymbols.values().forEach(symbolsByFqn -> symbols.addAll(symbolsByFqn.values()));
     return symbols;
   }
 
