@@ -84,12 +84,8 @@ public class PythonPlugin implements Plugin {
       addFlake8Extensions(context);
     }
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
-      try {
-        Class.forName("org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener");
-        context.addExtension(SonarLintPythonIndexer.class);
-      } catch (ClassNotFoundException e) {
-        LOG.debug("Error while trying to inject SonarLintPythonIndexer");
-      }
+      SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
+      sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
     }
   }
 
@@ -183,4 +179,26 @@ public class PythonPlugin implements Plugin {
       Flake8RulesDefinition.class);
   }
 
+  static class SonarLintPluginAPIManager {
+
+    public void addSonarlintPythonIndexer(Context context, SonarLintPluginAPIVersion sonarLintPluginAPIVersion) {
+      if (sonarLintPluginAPIVersion.isDependencyAvailable()) {
+        context.addExtension(SonarLintPythonIndexer.class);
+      } else {
+        LOG.debug("Error while trying to inject SonarLintPythonIndexer");
+      }
+    }
+  }
+
+  static class SonarLintPluginAPIVersion {
+
+    boolean isDependencyAvailable() {
+      try {
+        Class.forName("org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener");
+      } catch (ClassNotFoundException e) {
+        return false;
+      }
+      return true;
+    }
+  }
 }
