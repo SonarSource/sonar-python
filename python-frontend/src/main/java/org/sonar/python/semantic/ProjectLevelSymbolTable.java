@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,6 +47,9 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<String, Symbol> globalSymbolsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
+  private final Map<String, Set<String>> dependentModules = new HashMap<>();
+  private final Map<String, URI> moduleNameToURI = new HashMap<>();
+  private final Map<URI, String> uriToModuleName = new HashMap<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -73,7 +77,12 @@ public class ProjectLevelSymbolTable {
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+    moduleNameToURI.put(fullyQualifiedModuleName, pythonFile.uri());
+    uriToModuleName.put(pythonFile.uri(), fullyQualifiedModuleName);
     fileInput.accept(symbolTableBuilder);
+    for (String importedModuleName : symbolTableBuilder.importedModuleNames()) {
+      dependentModules.computeIfAbsent(importedModuleName, s -> new HashSet<>()).add(fullyQualifiedModuleName);
+    }
     Set<Symbol> globalSymbols = new HashSet<>();
     for (Symbol globalVariable : fileInput.globalVariables()) {
       String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
@@ -125,6 +134,11 @@ public class ProjectLevelSymbolTable {
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
     return globalSymbolsByModuleName.get(moduleName);
+  }
+
+  public Set<URI> getDependentFiles(URI uri) {
+    Set<String> modulesDependingOn = dependentModules.getOrDefault(uriToModuleName.get(uri), Collections.emptySet());
+    return modulesDependingOn.stream().map(moduleNameToURI::get).collect(Collectors.toSet());
   }
 
   public boolean isDjangoView(@Nullable String fqn) {

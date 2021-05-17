@@ -50,7 +50,6 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
-import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -100,6 +99,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
   private static final List<String> BASE_MODULES = Arrays.asList("", "typing", "typing_extensions");
+  private final Set<String> importedModuleNames = new HashSet<>();
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -121,6 +121,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       filePath.add("");
     }
     this.projectLevelSymbolTable = projectLevelSymbolTable;
+  }
+
+  public Set<String> importedModuleNames() {
+    return importedModuleNames;
   }
 
   @Override
@@ -389,6 +393,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
           targetModuleName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, targetModuleName);
+        }
+        if (targetModuleName != null) {
+          importedModuleNames.add(targetModuleName);
+        } else {
+          importedModuleNames.add(fullyQualifiedName);
         }
         Name alias = module.alias();
         if (targetModuleName != null) {

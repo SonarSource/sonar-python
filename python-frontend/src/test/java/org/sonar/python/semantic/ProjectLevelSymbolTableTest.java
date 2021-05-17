@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -709,4 +710,71 @@ public class ProjectLevelSymbolTableTest {
     assertThat(bar.isDjangoView()).isFalse();
   }
 
+  @Test
+  public void dependenciesGraph() {
+    String[] foo = {
+      "class A: ..."
+    };
+    String[] bar = {
+      "from foo import A",
+      "class B(A): ..."
+    };
+
+    String[] baz = {
+      "import foo, bar",
+      "class B(foo.A): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    PythonFile fooFile = pythonFile("foo.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", fooFile);
+    PythonFile barFile = pythonFile("bar.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "", barFile);
+    PythonFile bazFile = pythonFile("baz.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(baz), "", bazFile);
+
+    assertThat(projectSymbolTable.getDependentFiles(fooFile.uri())).containsExactlyInAnyOrder(bazFile.uri(), barFile.uri());
+    assertThat(projectSymbolTable.getDependentFiles(barFile.uri())).containsExactly(bazFile.uri());
+    assertThat(projectSymbolTable.getDependentFiles(bazFile.uri())).isEmpty();
+  }
+
+  @Test
+  public void dependenciesGraphRelative() {
+    String[] foo = {
+      "class A: ..."
+    };
+    String[] bar = {
+      "from ..foo import A",
+      "class B(A): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    PythonFile fooFile = pythonFile("foo.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", fooFile);
+    PythonFile barFile = pythonFile("bar.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "package", barFile);
+
+    assertThat(projectSymbolTable.getDependentFiles(barFile.uri())).isEmpty();
+    assertThat(projectSymbolTable.getDependentFiles(fooFile.uri())).containsExactly(barFile.uri());
+  }
+
+  @Test
+  public void dependenciesGraphRelativeNotFound() {
+    String[] foo = {
+      "class A: ..."
+    };
+    String[] bar = {
+      "from ..foo import A",
+      "class B(A): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    PythonFile fooFile = pythonFile("foo.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "package", fooFile);
+    PythonFile barFile = pythonFile("bar.py");
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "package", barFile);
+
+    assertThat(projectSymbolTable.getDependentFiles(barFile.uri())).isEmpty();
+    assertThat(projectSymbolTable.getDependentFiles(fooFile.uri())).isEmpty();
+  }
 }
