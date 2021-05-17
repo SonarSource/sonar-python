@@ -104,7 +104,7 @@ public class SonarLintTest {
     sonarlintEngine.declareModule(new ModuleInfo("myModule", (a, b) -> Stream.of(inputFile)));
     sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
 
-    assertThat(logsByLevel.get(LogOutput.Level.WARN)).isNull();
+    assertThat(logsByLevel.get(LogOutput.Level.WARN)).containsExactly("No workDir in SonarLint");
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
       tuple("python:BackticksUsage", 2, inputFile.getPath(), "BLOCKER"),
       tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));

@@ -447,6 +447,65 @@ public class PythonSensorTest {
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
+  @Test
+  public void saving_performance_measure_not_activated_by_default() throws IOException {
+    activeRules = (new ActiveRulesBuilder()).build();
+
+    inputFile("main.py");
+    sensor().execute(context);
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).noneMatch(s -> s.matches(".*performance measures.*"));
+    Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
+    assertThat(defaultPerformanceFile).doesNotExist();
+  }
+
+  @Test
+  public void saving_performance_measure() throws IOException {
+    context.setSettings(new MapSettings().setProperty("sonar.python.performance.measure", "true"));
+    activeRules = (new ActiveRulesBuilder()).build();
+
+    inputFile("main.py");
+    sensor().execute(context);
+    Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
+    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    assertThat(defaultPerformanceFile).exists();
+    assertThat(new String(Files.readAllBytes(defaultPerformanceFile), StandardCharsets.UTF_8)).contains("\"PythonSensor\"");
+  }
+
+  @Test
+  public void saving_performance_measure_custom_path() throws IOException {
+    Path customPerformanceFile = workDir.resolve("custom.performance.measure.json");
+    MapSettings mapSettings = new MapSettings();
+    mapSettings.setProperty("sonar.python.performance.measure", "true");
+    mapSettings.setProperty("sonar.python.performance.measure.path", customPerformanceFile.toString());
+    context.setSettings(mapSettings);
+    activeRules = (new ActiveRulesBuilder()).build();
+
+    inputFile("main.py");
+    sensor().execute(context);
+    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
+    assertThat(defaultPerformanceFile).doesNotExist();
+    assertThat(customPerformanceFile).exists();
+    assertThat(new String(Files.readAllBytes(customPerformanceFile), StandardCharsets.UTF_8)).contains("\"PythonSensor\"");
+  }
+
+  @Test
+  public void saving_performance_measure_empty_path() throws IOException {
+    MapSettings mapSettings = new MapSettings();
+    mapSettings.setProperty("sonar.python.performance.measure", "true");
+    mapSettings.setProperty("sonar.python.performance.measure.path", "");
+    context.setSettings(mapSettings);
+    activeRules = (new ActiveRulesBuilder()).build();
+
+    inputFile("main.py");
+    sensor().execute(context);
+    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
+    assertThat(defaultPerformanceFile).exists();
+    assertThat(new String(Files.readAllBytes(defaultPerformanceFile), StandardCharsets.UTF_8)).contains("\"PythonSensor\"");
+  }
+
   private PythonSensor sensor() {
     return sensor(CUSTOM_RULES, null);
   }
@@ -480,12 +539,12 @@ public class PythonSensorTest {
 
   private DefaultInputFile createInputFile(String name) {
     return TestInputFileBuilder.create("moduleKey", name)
-        .setModuleBaseDir(baseDir.toPath())
-        .setCharset(StandardCharsets.UTF_8)
-        .setType(Type.MAIN)
-        .setLanguage(Python.KEY)
-        .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
-        .build();
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(Type.MAIN)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
+      .build();
   }
 
   private void verifyUsages(String componentKey, int line, int offset, TextRange... trs) {

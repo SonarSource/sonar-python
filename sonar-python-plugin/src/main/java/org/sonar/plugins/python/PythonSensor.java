@@ -21,10 +21,12 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -47,8 +49,13 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonarsource.performance.measure.PerformanceMeasure;
 
 public final class PythonSensor implements Sensor {
+
+  private static final String PERFORMANCE_MEASURE_PROPERTY = "sonar.python.performance.measure";
+  private static final String PERFORMANCE_MEASURE_FILE_PATH_PROPERTY = "sonar.python.performance.measure.path";
+  private static final String PERFORMANCE_MEASURE_DESTINATION_FILE = "sonar-python-performance-measure.json";
 
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -92,11 +99,13 @@ public final class PythonSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
+    PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);
+    durationReport.stop();
     if (!testFiles.isEmpty()) {
       new TestHighlightingScanner(context).execute(testFiles, context);
     }
@@ -108,6 +117,20 @@ public final class PythonSensor implements Sensor {
     List<InputFile> list = new ArrayList<>();
     it.forEach(list::add);
     return Collections.unmodifiableList(list);
+  }
+
+  private static PerformanceMeasure.Duration createPerformanceMeasureReport(SensorContext context) {
+    return PerformanceMeasure.reportBuilder()
+      .activate(context.config().getBoolean(PERFORMANCE_MEASURE_PROPERTY).orElse(Boolean.FALSE))
+      .allowSingleThreadMode()
+      .toFile(context.config().get(PERFORMANCE_MEASURE_FILE_PATH_PROPERTY)
+        .filter(path -> !path.isEmpty())
+        .orElseGet(() -> Optional.ofNullable(context.fileSystem().workDir())
+          .filter(File::exists)
+          .map(file -> file.toPath().resolve(PERFORMANCE_MEASURE_DESTINATION_FILE).toString())
+          .orElse(null)))
+      .appendMeasurementCost()
+      .start("PythonSensor");
   }
 
   private static class TestHighlightingScanner extends Scanner {
