@@ -191,10 +191,10 @@ public class SymbolUtils {
     return names;
   }
 
-  public static String pythonPackageName(File file, File projectBaseDir) {
+  public static String pythonPackageName(File file, String projectBaseDirAbsolutePath) {
     File currentDirectory = file.getParentFile();
     Deque<String> packages = new ArrayDeque<>();
-    while (!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
+    while (!currentDirectory.getAbsolutePath().equals(projectBaseDirAbsolutePath)) {
       File initFile = new File(currentDirectory, "__init__.py");
       if (!initFile.exists()) {
         break;

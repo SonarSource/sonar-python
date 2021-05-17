@@ -20,7 +20,6 @@
 package org.sonar.plugins.python.indexer;
 
 import com.sonar.sslr.api.AstNode;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public abstract class PythonIndexer {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
 
-  protected File projectBaseDir;
+  protected String projectBaseDirAbsolutePath;
 
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
@@ -54,7 +53,7 @@ public abstract class PythonIndexer {
   }
 
   public String packageName(InputFile inputFile) {
-    return packageNames.computeIfAbsent(inputFile.uri(), k -> pythonPackageName(inputFile.file(), projectBaseDir));
+    return packageNames.computeIfAbsent(inputFile.uri(), k -> pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath));
   }
 
   void removeFile(InputFile inputFile) {
@@ -70,7 +69,7 @@ public abstract class PythonIndexer {
   void addFile(InputFile inputFile) throws IOException {
     AstNode astNode = parser.parse(inputFile.contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-    String packageName = pythonPackageName(inputFile.file(), projectBaseDir);
+    String packageName = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
     packageNames.put(inputFile.uri(), packageName);
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);

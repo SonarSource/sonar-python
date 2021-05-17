@@ -49,7 +49,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     if (!shouldBuildProjectSymbolTable) {
       return;
     }
-    this.projectBaseDir = context.fileSystem().baseDir();
+    this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     List<InputFile> files = getInputFiles(moduleFileSystem);
     LOG.debug("Input files for indexing: " + files);
     // computes "globalSymbolsByModuleName"
