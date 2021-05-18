@@ -122,7 +122,6 @@ public final class PythonSensor implements Sensor {
   private static PerformanceMeasure.Duration createPerformanceMeasureReport(SensorContext context) {
     return PerformanceMeasure.reportBuilder()
       .activate(context.config().getBoolean(PERFORMANCE_MEASURE_PROPERTY).orElse(Boolean.FALSE))
-      .allowSingleThreadMode()
       .toFile(context.config().get(PERFORMANCE_MEASURE_FILE_PATH_PROPERTY)
         .filter(path -> !path.isEmpty())
         .orElseGet(() -> Optional.ofNullable(context.fileSystem().workDir())
