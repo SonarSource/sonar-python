@@ -36,7 +36,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   @Override
   public void buildOnce(SensorContext context) {
-    this.projectBaseDir = context.fileSystem().baseDir();
+    this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     LOG.debug("Input files for indexing: " + files);
     // computes "globalSymbolsByModuleName"
     long startTime = System.currentTimeMillis();

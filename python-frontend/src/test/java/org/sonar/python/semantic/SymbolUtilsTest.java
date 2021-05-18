@@ -49,7 +49,7 @@ public class SymbolUtilsTest {
 
   @Test
   public void package_name_by_file() {
-    File baseDir = new File("src/test/resources").getAbsoluteFile();
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), baseDir)).isEqualTo("sound");
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/__init__.py"), baseDir)).isEqualTo("sound.formats");
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), baseDir)).isEqualTo("sound.formats");

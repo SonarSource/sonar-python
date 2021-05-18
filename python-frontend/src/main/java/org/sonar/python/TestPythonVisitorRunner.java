@@ -72,7 +72,7 @@ public class TestPythonVisitorRunner {
       TestPythonFile pythonFile = new TestPythonFile(file);
       AstNode astNode = PythonParser.create().parse(pythonFile.content());
       FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-      String packageName = pythonPackageName(file, baseDir);
+      String packageName = pythonPackageName(file, baseDir.getAbsolutePath());
       projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
     }
     return projectLevelSymbolTable;
