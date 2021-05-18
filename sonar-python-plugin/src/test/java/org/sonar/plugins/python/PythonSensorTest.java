@@ -321,6 +321,22 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void no_indexer_when_project_too_large_sonarlint() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+    context.setSettings(new MapSettings().setProperty("sonar.python.sonarlint.indexing.limit", 1));
+
+    InputFile mainFile = inputFile("main.py");
+    PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
+    sensor(CUSTOM_RULES, pythonIndexer).execute(context);
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size");
+  }
+
+  @Test
   public void loop_in_class_hierarchy() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
