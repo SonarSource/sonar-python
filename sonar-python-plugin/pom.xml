@@ -57,6 +57,10 @@
       <artifactId>sonar-xml-parsing</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-performance-measure</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sslr</groupId>
       <artifactId>sslr-testing-harness</artifactId>
     </dependency>
@@ -146,8 +150,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>4810000</maxsize>
-                  <minsize>4310000</minsize>
+                  <maxsize>5000000</maxsize>
+                  <minsize>4500000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

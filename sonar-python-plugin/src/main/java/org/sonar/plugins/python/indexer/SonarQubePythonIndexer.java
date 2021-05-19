@@ -24,6 +24,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.performance.measure.PerformanceMeasure;
 
 public class SonarQubePythonIndexer extends PythonIndexer {
 
@@ -37,12 +38,11 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public void buildOnce(SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    PerformanceMeasure.Duration duration = PerformanceMeasure.start("ProjectLevelSymbolTable");
     LOG.debug("Input files for indexing: " + files);
     // computes "globalSymbolsByModuleName"
-    long startTime = System.currentTimeMillis();
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
-    long stopTime = System.currentTimeMillis() - startTime;
-    LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
+    duration.stop();
   }
 }
