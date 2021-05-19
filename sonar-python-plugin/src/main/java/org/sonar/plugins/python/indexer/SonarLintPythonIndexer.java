@@ -22,7 +22,9 @@ package org.sonar.plugins.python.indexer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
@@ -37,7 +39,7 @@ import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileListener {
 
   private final ModuleFileSystem moduleFileSystem;
-  private final List<InputFile> indexedFiles = new ArrayList<>();
+  private final Map<String, InputFile> indexedFiles = new HashMap<>();
   private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 150_000;
@@ -71,7 +73,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   public InputFile getFileWithId(String fileId) {
     String compare = fileId.replace("\\", "/");
-    return indexedFiles.stream().filter(f -> f.absolutePath().equals(compare)).findFirst().orElse(null);
+    return indexedFiles.getOrDefault(compare, null);
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
@@ -83,13 +85,13 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   void addFile(InputFile inputFile) throws IOException {
     super.addFile(inputFile);
-    indexedFiles.add(inputFile);
+    indexedFiles.put(inputFile.absolutePath(), inputFile);
   }
 
   @Override
   void removeFile(InputFile inputFile) {
     super.removeFile(inputFile);
-    indexedFiles.remove(inputFile);
+    indexedFiles.remove(inputFile.absolutePath());
   }
 
   @Override
