@@ -327,13 +327,13 @@ public class PythonSensorTest {
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
         .build())
       .build();
-    context.setSettings(new MapSettings().setProperty("sonar.python.sonarlint.indexing.limit", 1));
+    context.setSettings(new MapSettings().setProperty("sonar.python.sonarlint.indexing.maxlines", 1));
 
     InputFile mainFile = inputFile("main.py");
     PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
     sensor(CUSTOM_RULES, pythonIndexer).execute(context);
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
   }
 
   @Test

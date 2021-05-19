@@ -40,7 +40,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 150_000;
-  private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.limit";
+  private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.maxlines";
 
   public SonarLintPythonIndexer(ModuleFileSystem moduleFileSystem) {
     this.moduleFileSystem = moduleFileSystem;
@@ -57,7 +57,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {
       // Avoid performance issues for large projects
-      LOG.debug("Project symbol table deactivated due to project size");
+      LOG.debug("Project symbol table deactivated due to project size (total number of lines is {}, maximum for indexing is {})", nLines, maxLinesForIndexing);
       return;
     }
     LOG.debug("Input files for indexing: " + files);
