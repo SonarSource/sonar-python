@@ -52,6 +52,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       return;
     }
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    shouldBuildProjectSymbolTable = false;
     List<InputFile> files = getInputFiles(moduleFileSystem);
     long nLines = files.stream().map(InputFile::lines).mapToLong(Integer::longValue).sum();
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
@@ -64,7 +65,6 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     // computes "globalSymbolsByModuleName"
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
-    shouldBuildProjectSymbolTable = false;
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
