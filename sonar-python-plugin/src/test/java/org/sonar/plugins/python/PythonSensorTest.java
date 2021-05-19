@@ -316,8 +316,11 @@ public class PythonSensorTest {
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile);
-    // Secondary location outside of analyzed file is missing
-    assertThat(issue.flows()).isEmpty();
+    assertThat(issue.flows()).hasSize(1);
+    Issue.Flow flow = issue.flows().get(0);
+    assertThat(flow.locations()).hasSize(2);
+    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile);
+    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile);
   }
 
   @Test

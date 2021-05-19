@@ -37,6 +37,7 @@ import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileListener {
 
   private final ModuleFileSystem moduleFileSystem;
+  private final List<InputFile> indexedFiles = new ArrayList<>();
   private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 150_000;
@@ -67,10 +68,28 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     globalSymbolsStep.execute(files, context);
   }
 
+  @Override
+  public InputFile getFileWithId(String fileId) {
+    String compare = fileId.replace("\\", "/");
+    return indexedFiles.stream().filter(f -> f.absolutePath().equals(compare)).findFirst().orElse(null);
+  }
+
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
     List<InputFile> files = new ArrayList<>();
     moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN).forEach(files::add);
     return Collections.unmodifiableList(files);
+  }
+
+  @Override
+  void addFile(InputFile inputFile) throws IOException {
+    super.addFile(inputFile);
+    indexedFiles.add(inputFile);
+  }
+
+  @Override
+  void removeFile(InputFile inputFile) {
+    super.removeFile(inputFile);
+    indexedFiles.remove(inputFile);
   }
 
   @Override
