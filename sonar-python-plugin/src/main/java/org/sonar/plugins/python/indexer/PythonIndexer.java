@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
@@ -76,6 +77,12 @@ public abstract class PythonIndexer {
   }
 
   public abstract void buildOnce(SensorContext context);
+
+  @CheckForNull
+  public InputFile getFileWithId(String fileId) {
+    // no op by default
+    return null;
+  }
 
   class GlobalSymbolsScanner extends Scanner {
 

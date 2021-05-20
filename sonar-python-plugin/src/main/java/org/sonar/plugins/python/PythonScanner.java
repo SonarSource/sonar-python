@@ -26,6 +26,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.api.SonarProduct;
@@ -172,8 +173,9 @@ public class PythonScanner extends Scanner {
   }
 
   @CheckForNull
-  private static InputFile component(String fileId, SensorContext sensorContext) {
-    InputFile inputFile = sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId)));
+  private InputFile component(String fileId, SensorContext sensorContext) {
+    InputFile inputFile = Optional.ofNullable(sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId))))
+      .orElseGet(() -> indexer.getFileWithId(fileId));
     if (inputFile == null) {
       LOG.debug("Failed to find InputFile for {}", fileId);
     }
