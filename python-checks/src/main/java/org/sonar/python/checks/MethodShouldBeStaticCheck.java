@@ -53,6 +53,7 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
         && hasValuableCode(funcDef)
         && !mayRaiseNotImplementedError(funcDef)
         && !isUsingSelfArg(funcDef)
+        && funcDef.decorators().isEmpty()
       ) {
         ctx.addIssue(funcDef.name(), MESSAGE);
       }
