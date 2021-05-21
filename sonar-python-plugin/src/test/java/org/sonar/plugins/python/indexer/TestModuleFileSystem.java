@@ -20,7 +20,6 @@
 package org.sonar.plugins.python.indexer;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
