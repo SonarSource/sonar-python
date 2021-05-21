@@ -62,6 +62,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     if (nLines > maxLinesForIndexing) {
       // Avoid performance issues for large projects
       LOG.debug("Project symbol table deactivated due to project size (total number of lines is {}, maximum for indexing is {})", nLines, maxLinesForIndexing);
+      LOG.debug("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
       return;
     }
     LOG.debug("Input files for indexing: " + files);
