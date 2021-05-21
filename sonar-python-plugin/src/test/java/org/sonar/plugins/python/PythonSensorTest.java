@@ -337,6 +337,7 @@ public class PythonSensorTest {
     sensor(CUSTOM_RULES, pythonIndexer).execute(context);
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
   }
 
   @Test
