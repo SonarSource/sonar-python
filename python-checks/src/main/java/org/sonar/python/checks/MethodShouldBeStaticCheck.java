@@ -69,11 +69,15 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
 
   private static boolean hasValuableCode(FunctionDef funcDef) {
     List<Statement> statements = funcDef.body().statements();
-    return !statements.stream().allMatch(st -> isStringLiteral(st) || st.is(Tree.Kind.PASS_STMT));
+    return !statements.stream().allMatch(st -> isStringLiteral(st) || st.is(Tree.Kind.PASS_STMT) || isEllipsis(st));
   }
 
   private static boolean isStringLiteral(Statement st) {
     return st.is(Tree.Kind.EXPRESSION_STMT) && ((ExpressionStatement) st).expressions().stream().allMatch(e -> e.is(Tree.Kind.STRING_LITERAL));
+  }
+
+  private static boolean isEllipsis(Statement st) {
+    return st.is(Tree.Kind.EXPRESSION_STMT) && ((ExpressionStatement) st).expressions().stream().allMatch(expr -> expr.is(Tree.Kind.ELLIPSIS));
   }
 
   private static boolean isUsingSelfArg(FunctionDef funcDef) {

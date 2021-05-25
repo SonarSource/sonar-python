@@ -59,6 +59,9 @@ class A:
     def fun16(self):
         pass
 
+    def fun15b(self):
+        ...
+
     def fun17(self):
         '''docstring'''
         pass
