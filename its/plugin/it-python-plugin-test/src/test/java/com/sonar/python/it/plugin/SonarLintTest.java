@@ -39,7 +39,9 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.sonarlint.core.StandaloneSonarLintEngineImpl;
+import org.sonarsource.sonarlint.core.client.api.common.ClientFileSystem;
 import org.sonarsource.sonarlint.core.client.api.common.Language;
 import org.sonarsource.sonarlint.core.client.api.common.LogOutput;
 import org.sonarsource.sonarlint.core.client.api.common.ModuleInfo;
@@ -101,7 +103,18 @@ public class SonarLintTest {
       logs.add(s);
       logsByLevel.putIfAbsent(level, logs);
     };
-    sonarlintEngine.declareModule(new ModuleInfo("myModule", (a, b) -> Stream.of(inputFile)));
+    ClientFileSystem clientFileSystem = new ClientFileSystem() {
+      @Override
+      public Stream<ClientInputFile> files(String s, InputFile.Type type) {
+        return Stream.of(inputFile);
+      }
+
+      @Override
+      public Stream<ClientInputFile> files() {
+        return Stream.of(inputFile);
+      }
+    };
+    sonarlintEngine.declareModule(new ModuleInfo("myModule", clientFileSystem));
     sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
 
     assertThat(logsByLevel.get(LogOutput.Level.WARN)).containsExactly("No workDir in SonarLint");
