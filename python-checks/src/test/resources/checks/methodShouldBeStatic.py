@@ -50,7 +50,7 @@ class A:
             print(slf.field)
 
     @another_decorator
-    def fun14(self): # Noncompliant
+    def fun14(self): # ok
         print(1)
 
     def fun15(self):
@@ -58,6 +58,9 @@ class A:
 
     def fun16(self):
         pass
+
+    def fun15b(self):
+        ...
 
     def fun17(self):
         '''docstring'''
