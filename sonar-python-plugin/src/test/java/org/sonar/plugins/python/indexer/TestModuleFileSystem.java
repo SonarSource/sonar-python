@@ -37,6 +37,11 @@ public class TestModuleFileSystem implements ModuleFileSystem {
     return inputFiles.stream();
   }
 
+  @Override
+  public Stream<InputFile> files() {
+    return inputFiles.stream();
+  }
+
   public void addFile(InputFile inputFile) {
     inputFiles.add(inputFile);
   }
