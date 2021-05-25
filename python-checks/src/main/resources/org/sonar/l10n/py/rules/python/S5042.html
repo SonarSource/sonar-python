@@ -23,95 +23,9 @@ compress irrelevant data (eg: a long string of repeated bytes). </p>
 <pre>
 import tarfile
 
-tfile = tarfile.open("TarBomb.tar")
-tfile.extractall('./tmp/')  # Sensitive
-tfile.close()
-</pre>
-<p>For <a href="https://docs.python.org/dev/library/zipfile.html">zipfile</a> module:</p>
-<pre>
-import zipfile
-
-zfile = zipfile.ZipFile('ZipBomb.zip', 'r')
-zfile.extractall('./tmp/') # Sensitive
-zfile.close()
-</pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.python.org/3.5/library/tarfile.html">tarfile</a> module:</p>
-<pre>
-import tarfile
-
-THRESHOLD_ENTRIES = 10000
-THRESHOLD_SIZE = 1000000000
-THRESHOLD_RATIO = 10
-
-totalSizeArchive = 0;
-totalEntryArchive = 0;
-
-tfile = tarfile.open("TarBomb.tar")
-for entry in tfile:
-  tarinfo = tfile.extractfile(entry)
-
-  totalEntryArchive += 1
-  sizeEntry = 0
-  result = b''
-  while True:
-    sizeEntry += 1024
-    totalSizeArchive += 1024
-
-    ratio = sizeEntry / entry.size
-    if ratio &gt; THRESHOLD_RATIO:
-      # ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
-      break
-
-    chunk = tarinfo.read(1024)
-    if not chunk:
-      break
-
-    result += chunk
-
-  if totalEntryArchive &gt; THRESHOLD_ENTRIES:
-    # too much entries in this archive, can lead to inodes exhaustion of the system
-    break
-
-  if totalSizeArchive &gt; THRESHOLD_SIZE:
-    # the uncompressed data size is too much for the application resource capacity
-    break
-
-tfile.close()
-</pre>
-<p>For <a href="https://docs.python.org/dev/library/zipfile.html">zipfile</a> module:</p>
-<pre>
-import zipfile
-
-THRESHOLD_ENTRIES = 10000
-THRESHOLD_SIZE = 1000000000
-THRESHOLD_RATIO = 10
-
-totalSizeArchive = 0;
-totalEntryArchive = 0;
-
-zfile = zipfile.ZipFile('ZipBomb.zip', 'r')
-for zinfo in zfile.infolist():
-    print('File', zinfo.filename)
-    data = zfile.read(zinfo)
-
-    totalEntryArchive += 1
-
-    totalSizeArchive = totalSizeArchive + len(data)
-    ratio = len(data) / zinfo.compress_size
-    if ratio &gt; THRESHOLD_RATIO:
-      # ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
-      break
-
-    if totalSizeArchive &gt; THRESHOLD_SIZE:
-      # the uncompressed data size is too much for the application resource capacity
-      break
-
-    if totalEntryArchive &gt; THRESHOLD_ENTRIES:
-      # too much entries in this archive, can lead to inodes exhaustion of the system
-      break
-
-zfile.close()
+tar = tarfile.open("attachment.tar.gz")  # Sensitive
+tar.extractall()
+tar.close()
 </pre>
 <h2>See</h2>
 <ul>
