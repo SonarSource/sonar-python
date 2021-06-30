@@ -101,4 +101,52 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>
+        typeshed_serializer
+      </id>
+      <activation>
+        <property>
+          <name>
+            !skipTypeshed
+          </name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <configuration>
+              <workingDirectory>typeshed_serializer</workingDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>tox</id>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <executable>tox</executable>
+                </configuration>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>tox -e serialize</id>
+                <phase>generate-resources</phase>
+                <goals><goal>exec</goal></goals>
+                <configuration>
+                  <executable>tox</executable>
+                  <arguments>-e serialize</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
