@@ -20,6 +20,9 @@
 package org.sonar.python.types;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,6 +57,7 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -328,7 +332,7 @@ public class TypeShed {
     }
   }
 
-  private static class ModuleDescription {
+  static class ModuleDescription {
     InputStream resource;
     String fileName;
     String packageName;
@@ -337,6 +341,14 @@ public class TypeShed {
       this.resource = resource;
       this.fileName = fileName;
       this.packageName = packageName;
+    }
+  }
+
+
+  static void deserializeSymbols(File file) throws IOException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = SymbolsProtos.ModuleSymbol.parseFrom(new FileInputStream(file));
+    for (SymbolsProtos.ClassSymbol classSymbol : moduleSymbol.getClassesList()) {
+      System.out.println(classSymbol.getFullyQualifiedName());
     }
   }
 

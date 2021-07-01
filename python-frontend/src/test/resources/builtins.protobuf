@@ -1,0 +1,7255 @@
+name: "builtins"
+fully_qualified_name: "builtins"
+classes {
+  fully_qualified_name: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.object.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.object.__new__"
+    return_annotation: "Any"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins.object"
+    }
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "builtins.object.__setattr__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "name"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "value"
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.object.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.object.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.object.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.object.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.object.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__format__"
+    fully_qualified_name: "builtins.object.__format__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "format_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__getattribute__"
+    fully_qualified_name: "builtins.object.__getattribute__"
+    return_annotation: "Any"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "name"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "builtins.object.__delattr__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "name"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__sizeof__"
+    fully_qualified_name: "builtins.object.__sizeof__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "builtins.object.__reduce__"
+    return_annotation: "Union[builtins.str,builtins.tuple[Any]]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__reduce_ex__"
+    fully_qualified_name: "builtins.object.__reduce_ex__"
+    return_annotation: "Union[builtins.str,builtins.tuple[Any]]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__dir__"
+    fully_qualified_name: "builtins.object.__dir__"
+    return_annotation: "typing.Iterable[builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__init_subclass__"
+    fully_qualified_name: "builtins.object.__init_subclass__"
+    return_annotation: "None"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins.object"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.bool"
+  super_classes: "builtins.int"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.bool.__new__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T"
+    }
+    parameters {
+      name: "__o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__getnewargs__"
+    fully_qualified_name: "builtins.bool.__getnewargs__"
+    return_annotation: "Tuple[builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bool"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.function"
+  super_classes: "builtins.object"
+}
+classes {
+  fully_qualified_name: "builtins._SupportsTrunc"
+  super_classes: "builtins.object"
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "builtins._SupportsTrunc.__trunc__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._SupportsTrunc"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.staticmethod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.staticmethod.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.staticmethod"
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.function"
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.staticmethod.__new__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "builtins.staticmethod.__get__"
+    return_annotation: "builtins.function"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.staticmethod"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._T"
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[Typebuiltins._T,None]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.classmethod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.classmethod.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.classmethod"
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.function"
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.classmethod.__new__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "builtins.classmethod.__get__"
+    return_annotation: "builtins.function"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.classmethod"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._T"
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[Typebuiltins._T,None]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.type"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "builtins.type.__call__"
+    return_annotation: "Any"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.type"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__subclasses__"
+    fully_qualified_name: "builtins.type.__subclasses__"
+    return_annotation: "builtins.list[builtins._TT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._TT"
+    }
+  }
+  methods {
+    name: "mro"
+    fully_qualified_name: "builtins.type.mro"
+    return_annotation: "builtins.list[builtins.type]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.type"
+    }
+  }
+  methods {
+    name: "__instancecheck__"
+    fully_qualified_name: "builtins.type.__instancecheck__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.type"
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__subclasscheck__"
+    fully_qualified_name: "builtins.type.__subclasscheck__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.type"
+    }
+    parameters {
+      name: "subclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.type"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.super"
+  super_classes: "builtins.object"
+}
+classes {
+  fully_qualified_name: "builtins.int"
+  super_classes: "builtins.object"
+  methods {
+    name: "as_integer_ratio"
+    fully_qualified_name: "builtins.int.as_integer_ratio"
+    return_annotation: "Tuple[builtins.int,builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "conjugate"
+    fully_qualified_name: "builtins.int.conjugate"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "bit_length"
+    fully_qualified_name: "builtins.int.bit_length"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "to_bytes"
+    fully_qualified_name: "builtins.int.to_bytes"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "byteorder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "signed"
+      kind: KEYWORD_ONLY
+      type_annotation: "builtins.bool"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.int.__add__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "builtins.int.__sub__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.int.__mul__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__floordiv__"
+    fully_qualified_name: "builtins.int.__floordiv__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "builtins.int.__truediv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "builtins.int.__mod__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "builtins.int.__divmod__"
+    return_annotation: "Tuple[builtins.int,builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "builtins.int.__radd__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "builtins.int.__rsub__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.int.__rmul__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rfloordiv__"
+    fully_qualified_name: "builtins.int.__rfloordiv__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rtruediv__"
+    fully_qualified_name: "builtins.int.__rtruediv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rmod__"
+    fully_qualified_name: "builtins.int.__rmod__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rdivmod__"
+    fully_qualified_name: "builtins.int.__rdivmod__"
+    return_annotation: "Tuple[builtins.int,builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rpow__"
+    fully_qualified_name: "builtins.int.__rpow__"
+    return_annotation: "Any"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "mod"
+      type_annotation: "Union[builtins.int,None]"
+    }
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "builtins.int.__and__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "builtins.int.__or__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "builtins.int.__xor__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__lshift__"
+    fully_qualified_name: "builtins.int.__lshift__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rshift__"
+    fully_qualified_name: "builtins.int.__rshift__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rand__"
+    fully_qualified_name: "builtins.int.__rand__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__ror__"
+    fully_qualified_name: "builtins.int.__ror__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rxor__"
+    fully_qualified_name: "builtins.int.__rxor__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rlshift__"
+    fully_qualified_name: "builtins.int.__rlshift__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rrshift__"
+    fully_qualified_name: "builtins.int.__rrshift__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "builtins.int.__neg__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "builtins.int.__pos__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__invert__"
+    fully_qualified_name: "builtins.int.__invert__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "builtins.int.__trunc__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__ceil__"
+    fully_qualified_name: "builtins.int.__ceil__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__floor__"
+    fully_qualified_name: "builtins.int.__floor__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__round__"
+    fully_qualified_name: "builtins.int.__round__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "ndigits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.int,None]"
+    }
+  }
+  methods {
+    name: "__getnewargs__"
+    fully_qualified_name: "builtins.int.__getnewargs__"
+    return_annotation: "Tuple[builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.int.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.int.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.int.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.int.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.int.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.int.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.int.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__float__"
+    fully_qualified_name: "builtins.int.__float__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__int__"
+    fully_qualified_name: "builtins.int.__int__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__abs__"
+    fully_qualified_name: "builtins.int.__abs__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.int.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "builtins.int.__bool__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__index__"
+    fully_qualified_name: "builtins.int.__index__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.float"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.float.__new__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T"
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[typing.SupportsFloat,typing_extensions.SupportsIndex,builtins.str,builtins.bytes,builtins.bytearray]"
+    }
+  }
+  methods {
+    name: "as_integer_ratio"
+    fully_qualified_name: "builtins.float.as_integer_ratio"
+    return_annotation: "Tuple[builtins.int,builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "hex"
+    fully_qualified_name: "builtins.float.hex"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "is_integer"
+    fully_qualified_name: "builtins.float.is_integer"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "conjugate"
+    fully_qualified_name: "builtins.float.conjugate"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.float.__add__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "builtins.float.__sub__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.float.__mul__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__floordiv__"
+    fully_qualified_name: "builtins.float.__floordiv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "builtins.float.__truediv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "builtins.float.__mod__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "builtins.float.__divmod__"
+    return_annotation: "Tuple[builtins.float,builtins.float]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__pow__"
+    fully_qualified_name: "builtins.float.__pow__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "mod"
+      type_annotation: "None"
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "builtins.float.__radd__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "builtins.float.__rsub__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.float.__rmul__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rfloordiv__"
+    fully_qualified_name: "builtins.float.__rfloordiv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rtruediv__"
+    fully_qualified_name: "builtins.float.__rtruediv__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rmod__"
+    fully_qualified_name: "builtins.float.__rmod__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rdivmod__"
+    fully_qualified_name: "builtins.float.__rdivmod__"
+    return_annotation: "Tuple[builtins.float,builtins.float]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__rpow__"
+    fully_qualified_name: "builtins.float.__rpow__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "mod"
+      type_annotation: "None"
+    }
+  }
+  methods {
+    name: "__getnewargs__"
+    fully_qualified_name: "builtins.float.__getnewargs__"
+    return_annotation: "Tuple[builtins.float]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "builtins.float.__trunc__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.float.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.float.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.float.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.float.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.float.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.float.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "builtins.float.__neg__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "builtins.float.__pos__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.float.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__int__"
+    fully_qualified_name: "builtins.float.__int__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__float__"
+    fully_qualified_name: "builtins.float.__float__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__abs__"
+    fully_qualified_name: "builtins.float.__abs__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.float.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "builtins.float.__bool__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.float"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.complex"
+  super_classes: "builtins.object"
+  methods {
+    name: "conjugate"
+    fully_qualified_name: "builtins.complex.conjugate"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.complex.__add__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "builtins.complex.__sub__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.complex.__mul__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__pow__"
+    fully_qualified_name: "builtins.complex.__pow__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "mod"
+      type_annotation: "None"
+    }
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "builtins.complex.__truediv__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "builtins.complex.__radd__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "builtins.complex.__rsub__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.complex.__rmul__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__rpow__"
+    fully_qualified_name: "builtins.complex.__rpow__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "mod"
+      type_annotation: "None"
+    }
+  }
+  methods {
+    name: "__rtruediv__"
+    fully_qualified_name: "builtins.complex.__rtruediv__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.complex.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.complex.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "builtins.complex.__neg__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "builtins.complex.__pos__"
+    return_annotation: "builtins.complex"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.complex.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__abs__"
+    fully_qualified_name: "builtins.complex.__abs__"
+    return_annotation: "builtins.float"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.complex.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.complex"
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "builtins.complex.__bool__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.complex"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins._FormatMapMapping"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "builtins._FormatMapMapping.__getitem__"
+    return_annotation: "Any"
+    parameters {
+      name: "self"
+      type_annotation: "builtins._FormatMapMapping"
+    }
+    parameters {
+      name: "__key"
+      type_annotation: "builtins.str"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.str"
+  super_classes: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "capitalize"
+    fully_qualified_name: "builtins.str.capitalize"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "casefold"
+    fully_qualified_name: "builtins.str.casefold"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "center"
+    fully_qualified_name: "builtins.str.center"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.str.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "encode"
+    fully_qualified_name: "builtins.str.encode"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "endswith"
+    fully_qualified_name: "builtins.str.endswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__suffix"
+      type_annotation: "Union[builtins.str,builtins.tuple[builtins.str]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "expandtabs"
+    fully_qualified_name: "builtins.str.expandtabs"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "tabsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "builtins.str.find"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "format"
+    fully_qualified_name: "builtins.str.format"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "format_map"
+    fully_qualified_name: "builtins.str.format_map"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._FormatMapMapping"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.str.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "isalnum"
+    fully_qualified_name: "builtins.str.isalnum"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isalpha"
+    fully_qualified_name: "builtins.str.isalpha"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isascii"
+    fully_qualified_name: "builtins.str.isascii"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isdecimal"
+    fully_qualified_name: "builtins.str.isdecimal"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isdigit"
+    fully_qualified_name: "builtins.str.isdigit"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isidentifier"
+    fully_qualified_name: "builtins.str.isidentifier"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "islower"
+    fully_qualified_name: "builtins.str.islower"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isnumeric"
+    fully_qualified_name: "builtins.str.isnumeric"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isprintable"
+    fully_qualified_name: "builtins.str.isprintable"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isspace"
+    fully_qualified_name: "builtins.str.isspace"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "istitle"
+    fully_qualified_name: "builtins.str.istitle"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "isupper"
+    fully_qualified_name: "builtins.str.isupper"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "builtins.str.join"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__iterable"
+      type_annotation: "typing.Iterable[builtins.str]"
+    }
+  }
+  methods {
+    name: "ljust"
+    fully_qualified_name: "builtins.str.ljust"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "lower"
+    fully_qualified_name: "builtins.str.lower"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "lstrip"
+    fully_qualified_name: "builtins.str.lstrip"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__chars"
+      type_annotation: "Union[builtins.str,None]"
+    }
+  }
+  methods {
+    name: "partition"
+    fully_qualified_name: "builtins.str.partition"
+    return_annotation: "Tuple[builtins.str,builtins.str,builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "builtins.str.replace"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__old"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__new"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__count"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rfind"
+    fully_qualified_name: "builtins.str.rfind"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rindex"
+    fully_qualified_name: "builtins.str.rindex"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rjust"
+    fully_qualified_name: "builtins.str.rjust"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "rpartition"
+    fully_qualified_name: "builtins.str.rpartition"
+    return_annotation: "Tuple[builtins.str,builtins.str,builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "rsplit"
+    fully_qualified_name: "builtins.str.rsplit"
+    return_annotation: "builtins.list[builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rstrip"
+    fully_qualified_name: "builtins.str.rstrip"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__chars"
+      type_annotation: "Union[builtins.str,None]"
+    }
+  }
+  methods {
+    name: "split"
+    fully_qualified_name: "builtins.str.split"
+    return_annotation: "builtins.list[builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "splitlines"
+    fully_qualified_name: "builtins.str.splitlines"
+    return_annotation: "builtins.list[builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "keepends"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bool"
+    }
+  }
+  methods {
+    name: "startswith"
+    fully_qualified_name: "builtins.str.startswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__prefix"
+      type_annotation: "Union[builtins.str,builtins.tuple[builtins.str]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "strip"
+    fully_qualified_name: "builtins.str.strip"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__chars"
+      type_annotation: "Union[builtins.str,None]"
+    }
+  }
+  methods {
+    name: "swapcase"
+    fully_qualified_name: "builtins.str.swapcase"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "title"
+    fully_qualified_name: "builtins.str.title"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "translate"
+    fully_qualified_name: "builtins.str.translate"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__table"
+      type_annotation: "Union[typing.Mapping[builtins.int,Union[builtins.int,builtins.str,None]],typing.Sequence[Union[builtins.int,builtins.str,None]]]"
+    }
+  }
+  methods {
+    name: "upper"
+    fully_qualified_name: "builtins.str.upper"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "zfill"
+    fully_qualified_name: "builtins.str.zfill"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.str.__add__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.str.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.str.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.str.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "builtins.str.__getitem__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "i"
+      type_annotation: "Union[builtins.int,builtins.slice]"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.str.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.str.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.str.__iter__"
+    return_annotation: "typing.Iterator[builtins.str]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.str.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.str.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.str.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "builtins.str.__mod__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.str.__mul__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.str.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.str.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.str.__rmul__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.str.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "__getnewargs__"
+    fully_qualified_name: "builtins.str.__getnewargs__"
+    return_annotation: "Tuple[builtins.str]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.bytes"
+  super_classes: "typing.ByteString"
+  mro: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "capitalize"
+    fully_qualified_name: "builtins.bytes.capitalize"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "center"
+    fully_qualified_name: "builtins.bytes.center"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.bytes.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "decode"
+    fully_qualified_name: "builtins.bytes.decode"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "endswith"
+    fully_qualified_name: "builtins.bytes.endswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__suffix"
+      type_annotation: "Union[builtins.bytes,builtins.tuple[builtins.bytes]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "expandtabs"
+    fully_qualified_name: "builtins.bytes.expandtabs"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "tabsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "builtins.bytes.find"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "hex"
+    fully_qualified_name: "builtins.bytes.hex"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,builtins.bytes]"
+    }
+    parameters {
+      name: "bytes_per_sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.bytes.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "isalnum"
+    fully_qualified_name: "builtins.bytes.isalnum"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "isalpha"
+    fully_qualified_name: "builtins.bytes.isalpha"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "isascii"
+    fully_qualified_name: "builtins.bytes.isascii"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "isdigit"
+    fully_qualified_name: "builtins.bytes.isdigit"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "islower"
+    fully_qualified_name: "builtins.bytes.islower"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "isspace"
+    fully_qualified_name: "builtins.bytes.isspace"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "istitle"
+    fully_qualified_name: "builtins.bytes.istitle"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "isupper"
+    fully_qualified_name: "builtins.bytes.isupper"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "builtins.bytes.join"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__iterable_of_bytes"
+      type_annotation: "typing.Iterable[Union[typing.ByteString,builtins.memoryview]]"
+    }
+  }
+  methods {
+    name: "ljust"
+    fully_qualified_name: "builtins.bytes.ljust"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "lower"
+    fully_qualified_name: "builtins.bytes.lower"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "lstrip"
+    fully_qualified_name: "builtins.bytes.lstrip"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "partition"
+    fully_qualified_name: "builtins.bytes.partition"
+    return_annotation: "Tuple[builtins.bytes,builtins.bytes,builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "builtins.bytes.replace"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__old"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__new"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__count"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rfind"
+    fully_qualified_name: "builtins.bytes.rfind"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rindex"
+    fully_qualified_name: "builtins.bytes.rindex"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rjust"
+    fully_qualified_name: "builtins.bytes.rjust"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "rpartition"
+    fully_qualified_name: "builtins.bytes.rpartition"
+    return_annotation: "Tuple[builtins.bytes,builtins.bytes,builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "rsplit"
+    fully_qualified_name: "builtins.bytes.rsplit"
+    return_annotation: "builtins.list[builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rstrip"
+    fully_qualified_name: "builtins.bytes.rstrip"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "split"
+    fully_qualified_name: "builtins.bytes.split"
+    return_annotation: "builtins.list[builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "splitlines"
+    fully_qualified_name: "builtins.bytes.splitlines"
+    return_annotation: "builtins.list[builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "keepends"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bool"
+    }
+  }
+  methods {
+    name: "startswith"
+    fully_qualified_name: "builtins.bytes.startswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__prefix"
+      type_annotation: "Union[builtins.bytes,builtins.tuple[builtins.bytes]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "strip"
+    fully_qualified_name: "builtins.bytes.strip"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "swapcase"
+    fully_qualified_name: "builtins.bytes.swapcase"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "title"
+    fully_qualified_name: "builtins.bytes.title"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "translate"
+    fully_qualified_name: "builtins.bytes.translate"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__table"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "delete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "upper"
+    fully_qualified_name: "builtins.bytes.upper"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "zfill"
+    fully_qualified_name: "builtins.bytes.zfill"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.bytes.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.bytes.__iter__"
+    return_annotation: "typing.Iterator[builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.bytes.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.bytes.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "builtins.bytes.__hash__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.bytes.__add__"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.bytes.__mul__"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.bytes.__rmul__"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "builtins.bytes.__mod__"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "value"
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.bytes.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "Union[typing_extensions.SupportsIndex,builtins.bytes]"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.bytes.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.bytes.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.bytes.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.bytes.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.bytes.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.bytes.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__getnewargs__"
+    fully_qualified_name: "builtins.bytes.__getnewargs__"
+    return_annotation: "Tuple[builtins.bytes]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.bytearray"
+  super_classes: "typing.MutableSequence"
+  super_classes: "typing.ByteString"
+  mro: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "append"
+    fully_qualified_name: "builtins.bytearray.append"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__item"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "capitalize"
+    fully_qualified_name: "builtins.bytearray.capitalize"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "center"
+    fully_qualified_name: "builtins.bytearray.center"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.bytearray.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.bytearray.copy"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "decode"
+    fully_qualified_name: "builtins.bytearray.decode"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+  }
+  methods {
+    name: "endswith"
+    fully_qualified_name: "builtins.bytearray.endswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__suffix"
+      type_annotation: "Union[builtins.bytes,builtins.tuple[builtins.bytes]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "expandtabs"
+    fully_qualified_name: "builtins.bytearray.expandtabs"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "tabsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "builtins.bytearray.extend"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__iterable_of_ints"
+      type_annotation: "typing.Iterable[typing_extensions.SupportsIndex]"
+    }
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "builtins.bytearray.find"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "hex"
+    fully_qualified_name: "builtins.bytearray.hex"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,builtins.bytes]"
+    }
+    parameters {
+      name: "bytes_per_sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.bytearray.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "builtins.bytearray.insert"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__index"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__item"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "isalnum"
+    fully_qualified_name: "builtins.bytearray.isalnum"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "isalpha"
+    fully_qualified_name: "builtins.bytearray.isalpha"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "isascii"
+    fully_qualified_name: "builtins.bytearray.isascii"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "isdigit"
+    fully_qualified_name: "builtins.bytearray.isdigit"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "islower"
+    fully_qualified_name: "builtins.bytearray.islower"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "isspace"
+    fully_qualified_name: "builtins.bytearray.isspace"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "istitle"
+    fully_qualified_name: "builtins.bytearray.istitle"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "isupper"
+    fully_qualified_name: "builtins.bytearray.isupper"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "builtins.bytearray.join"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__iterable_of_bytes"
+      type_annotation: "typing.Iterable[Union[typing.ByteString,builtins.memoryview]]"
+    }
+  }
+  methods {
+    name: "ljust"
+    fully_qualified_name: "builtins.bytearray.ljust"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "lower"
+    fully_qualified_name: "builtins.bytearray.lower"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "lstrip"
+    fully_qualified_name: "builtins.bytearray.lstrip"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "partition"
+    fully_qualified_name: "builtins.bytearray.partition"
+    return_annotation: "Tuple[builtins.bytearray,builtins.bytearray,builtins.bytearray]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "builtins.bytearray.replace"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__old"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__new"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__count"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rfind"
+    fully_qualified_name: "builtins.bytearray.rfind"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rindex"
+    fully_qualified_name: "builtins.bytearray.rindex"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sub"
+      type_annotation: "Union[builtins.bytes,typing_extensions.SupportsIndex]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "rjust"
+    fully_qualified_name: "builtins.bytearray.rjust"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+    parameters {
+      name: "__fillchar"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "rpartition"
+    fully_qualified_name: "builtins.bytearray.rpartition"
+    return_annotation: "Tuple[builtins.bytearray,builtins.bytearray,builtins.bytearray]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__sep"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "rsplit"
+    fully_qualified_name: "builtins.bytearray.rsplit"
+    return_annotation: "builtins.list[builtins.bytearray]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "rstrip"
+    fully_qualified_name: "builtins.bytearray.rstrip"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "split"
+    fully_qualified_name: "builtins.bytearray.split"
+    return_annotation: "builtins.list[builtins.bytearray]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "splitlines"
+    fully_qualified_name: "builtins.bytearray.splitlines"
+    return_annotation: "builtins.list[builtins.bytearray]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "keepends"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bool"
+    }
+  }
+  methods {
+    name: "startswith"
+    fully_qualified_name: "builtins.bytearray.startswith"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__prefix"
+      type_annotation: "Union[builtins.bytes,builtins.tuple[builtins.bytes]]"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "Union[typing_extensions.SupportsIndex,None]"
+    }
+  }
+  methods {
+    name: "strip"
+    fully_qualified_name: "builtins.bytearray.strip"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__bytes"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+  }
+  methods {
+    name: "swapcase"
+    fully_qualified_name: "builtins.bytearray.swapcase"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "title"
+    fully_qualified_name: "builtins.bytearray.title"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "translate"
+    fully_qualified_name: "builtins.bytearray.translate"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__table"
+      type_annotation: "Union[builtins.bytes,None]"
+    }
+    parameters {
+      name: "delete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "upper"
+    fully_qualified_name: "builtins.bytearray.upper"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "zfill"
+    fully_qualified_name: "builtins.bytearray.zfill"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "__width"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.bytearray.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.bytearray.__iter__"
+    return_annotation: "typing.Iterator[builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.bytearray.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.bytearray.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "builtins.bytearray.__delitem__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "i"
+      type_annotation: "Union[typing_extensions.SupportsIndex,builtins.slice]"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.bytearray.__add__"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "builtins.bytearray.__iadd__"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.Iterable[builtins.int]"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.bytearray.__mul__"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.bytearray.__rmul__"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "builtins.bytearray.__imul__"
+    return_annotation: "builtins.bytearray"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "builtins.bytearray.__mod__"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "value"
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.bytearray.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "Union[typing_extensions.SupportsIndex,builtins.bytes]"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "builtins.bytearray.__eq__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "builtins.bytearray.__ne__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.bytearray.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.bytearray.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.bytearray.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.bytearray.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.bytearray"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.bytes"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.memoryview"
+  super_classes: "typing.Sized"
+  super_classes: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.memoryview.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "builtins.memoryview.__enter__"
+    return_annotation: "_typeshed.Self"
+    parameters {
+      name: "self"
+      type_annotation: "_typeshed.Self"
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "builtins.memoryview.__exit__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation: "Union[Typebuiltins.BaseException,None]"
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation: "Union[builtins.BaseException,None]"
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation: "Union[types.TracebackType,None]"
+    }
+  }
+  methods {
+    name: "cast"
+    fully_qualified_name: "builtins.memoryview.cast"
+    return_annotation: "builtins.memoryview"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "shape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.list[builtins.int],Tuple[builtins.int]]"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.memoryview.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.memoryview.__iter__"
+    return_annotation: "typing.Iterator[builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.memoryview"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.memoryview.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.memoryview"
+    }
+  }
+  methods {
+    name: "tobytes"
+    fully_qualified_name: "builtins.memoryview.tobytes"
+    return_annotation: "builtins.bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "order"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,builtins.str,builtins.str,None]"
+    }
+  }
+  methods {
+    name: "tolist"
+    fully_qualified_name: "builtins.memoryview.tolist"
+    return_annotation: "builtins.list[builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+  }
+  methods {
+    name: "toreadonly"
+    fully_qualified_name: "builtins.memoryview.toreadonly"
+    return_annotation: "builtins.memoryview"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+  }
+  methods {
+    name: "release"
+    fully_qualified_name: "builtins.memoryview.release"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+  }
+  methods {
+    name: "hex"
+    fully_qualified_name: "builtins.memoryview.hex"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.memoryview"
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,builtins.bytes]"
+    }
+    parameters {
+      name: "bytes_per_sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing_extensions.SupportsIndex"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.slice"
+  super_classes: "builtins.object"
+  methods {
+    name: "indices"
+    fully_qualified_name: "builtins.slice.indices"
+    return_annotation: "Tuple[builtins.int,builtins.int,builtins.int]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.slice"
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.tuple"
+  super_classes: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.tuple.__new__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.tuple.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.tuple.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.tuple.__iter__"
+    return_annotation: "typing.Iterator[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.tuple.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.tuple.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.tuple.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.tuple.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.tuple.__mul__"
+    return_annotation: "builtins.tuple[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.tuple.__rmul__"
+    return_annotation: "builtins.tuple[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.tuple.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "__value"
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.tuple.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.tuple[builtins._T_co]"
+    }
+    parameters {
+      name: "__value"
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__stop"
+      type_annotation: "builtins.int"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.list"
+  super_classes: "typing.MutableSequence"
+  mro: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "clear"
+    fully_qualified_name: "builtins.list.clear"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.list.copy"
+    return_annotation: "builtins.list[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "builtins.list.append"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__object"
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "builtins.list.extend"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__iterable"
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "builtins.list.pop"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__index"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.list.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__value"
+      type_annotation: "builtins._T"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__stop"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.list.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__value"
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "builtins.list.insert"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__index"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__object"
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "builtins.list.remove"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "__value"
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "reverse"
+    fully_qualified_name: "builtins.list.reverse"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.list.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.list.__iter__"
+    return_annotation: "typing.Iterator[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.list.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "builtins.list.__delitem__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "i"
+      type_annotation: "Union[typing_extensions.SupportsIndex,builtins.slice]"
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "builtins.list.__add__"
+    return_annotation: "builtins.list[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "builtins.list.__iadd__"
+    return_annotation: "builtins._S"
+    parameters {
+      name: "self"
+      type_annotation: "builtins._S"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.list.__mul__"
+    return_annotation: "builtins.list[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.list.__rmul__"
+    return_annotation: "builtins.list[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "builtins.list.__imul__"
+    return_annotation: "builtins._S"
+    parameters {
+      name: "self"
+      type_annotation: "builtins._S"
+    }
+    parameters {
+      name: "n"
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.list.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "builtins.list.__reversed__"
+    return_annotation: "typing.Iterator[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.list.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.list.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.list.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.list.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+    parameters {
+      name: "x"
+      type_annotation: "builtins.list[builtins._T]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.dict"
+  super_classes: "typing.MutableMapping"
+  mro: "typing.Mapping"
+  mro: "typing.Collection"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "builtins.dict.__new__"
+    return_annotation: "builtins._T1"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Typebuiltins._T1"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "builtins.dict.clear"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.dict.copy"
+    return_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "builtins.dict.popitem"
+    return_annotation: "Tuple[builtins._KT,builtins._VT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "builtins.dict.setdefault"
+    return_annotation: "builtins._VT"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+    parameters {
+      name: "__key"
+      type_annotation: "builtins._KT"
+    }
+    parameters {
+      name: "__default"
+      type_annotation: "builtins._VT"
+    }
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "builtins.dict.keys"
+    return_annotation: "typing.KeysView[builtins._KT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "builtins.dict.values"
+    return_annotation: "typing.ValuesView[builtins._VT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "builtins.dict.items"
+    return_annotation: "typing.ItemsView[builtins._KT,builtins._VT]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.dict.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "builtins.dict.__getitem__"
+    return_annotation: "builtins._VT"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+    parameters {
+      name: "k"
+      type_annotation: "builtins._KT"
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "builtins.dict.__setitem__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+    parameters {
+      name: "k"
+      type_annotation: "builtins._KT"
+    }
+    parameters {
+      name: "v"
+      type_annotation: "builtins._VT"
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "builtins.dict.__delitem__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+    parameters {
+      name: "v"
+      type_annotation: "builtins._KT"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.dict.__iter__"
+    return_annotation: "typing.Iterator[builtins._KT]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "builtins.dict.__reversed__"
+    return_annotation: "typing.Iterator[builtins._KT]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.dict.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.dict[builtins._KT,builtins._VT]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.set"
+  super_classes: "typing.MutableSet"
+  mro: "typing.AbstractSet"
+  mro: "typing.Collection"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.set.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "builtins.set.add"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "element"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "builtins.set.clear"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.set.copy"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "difference"
+    fully_qualified_name: "builtins.set.difference"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "difference_update"
+    fully_qualified_name: "builtins.set.difference_update"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "discard"
+    fully_qualified_name: "builtins.set.discard"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "element"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "intersection"
+    fully_qualified_name: "builtins.set.intersection"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "intersection_update"
+    fully_qualified_name: "builtins.set.intersection_update"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "builtins.set.isdisjoint"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "issubset"
+    fully_qualified_name: "builtins.set.issubset"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "issuperset"
+    fully_qualified_name: "builtins.set.issuperset"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[Any]"
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "builtins.set.pop"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "builtins.set.remove"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "element"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._T"
+    }
+  }
+  methods {
+    name: "symmetric_difference"
+    fully_qualified_name: "builtins.set.symmetric_difference"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "symmetric_difference_update"
+    fully_qualified_name: "builtins.set.symmetric_difference_update"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "union"
+    fully_qualified_name: "builtins.set.union"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "builtins.set.update"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.set.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.set.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.set.__iter__"
+    return_annotation: "typing.Iterator[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.set.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "builtins.set.__and__"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__iand__"
+    fully_qualified_name: "builtins.set.__iand__"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "builtins.set.__or__"
+    return_annotation: "builtins.set[Union[builtins._T,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__ior__"
+    fully_qualified_name: "builtins.set.__ior__"
+    return_annotation: "builtins.set[Union[builtins._T,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "builtins.set.__sub__"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[Union[builtins._T,None]]"
+    }
+  }
+  methods {
+    name: "__isub__"
+    fully_qualified_name: "builtins.set.__isub__"
+    return_annotation: "builtins.set[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[Union[builtins._T,None]]"
+    }
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "builtins.set.__xor__"
+    return_annotation: "builtins.set[Union[builtins._T,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__ixor__"
+    fully_qualified_name: "builtins.set.__ixor__"
+    return_annotation: "builtins.set[Union[builtins._T,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.set.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.set.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.set.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.set.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.set[builtins._T]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.frozenset"
+  super_classes: "typing.AbstractSet"
+  mro: "typing.Collection"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.frozenset.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.frozenset.copy"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "difference"
+    fully_qualified_name: "builtins.frozenset.difference"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[builtins.object]"
+    }
+  }
+  methods {
+    name: "intersection"
+    fully_qualified_name: "builtins.frozenset.intersection"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[builtins.object]"
+    }
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "builtins.frozenset.isdisjoint"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "issubset"
+    fully_qualified_name: "builtins.frozenset.issubset"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins.object]"
+    }
+  }
+  methods {
+    name: "issuperset"
+    fully_qualified_name: "builtins.frozenset.issuperset"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins.object]"
+    }
+  }
+  methods {
+    name: "symmetric_difference"
+    fully_qualified_name: "builtins.frozenset.symmetric_difference"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "union"
+    fully_qualified_name: "builtins.frozenset.union"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      kind: VAR_POSITIONAL
+      type_annotation: "typing.Iterable[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.frozenset.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.frozenset.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.frozenset.__iter__"
+    return_annotation: "typing.Iterator[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.frozenset.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "builtins.frozenset.__and__"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "builtins.frozenset.__or__"
+    return_annotation: "builtins.frozenset[Union[builtins._T_co,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "builtins.frozenset.__sub__"
+    return_annotation: "builtins.frozenset[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "builtins.frozenset.__xor__"
+    return_annotation: "builtins.frozenset[Union[builtins._T_co,builtins._S]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins._S]"
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.frozenset.__le__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.frozenset.__lt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.frozenset.__ge__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.frozenset.__gt__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.frozenset[builtins._T_co]"
+    }
+    parameters {
+      name: "s"
+      type_annotation: "typing.AbstractSet[builtins.object]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.enumerate"
+  super_classes: "typing.Iterator"
+  mro: "typing.Iterable"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.enumerate.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.enumerate[builtins._T]"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "typing.Iterable[builtins._T]"
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.enumerate.__iter__"
+    return_annotation: "typing.Iterator[Tuple[builtins.int,builtins._T]]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.enumerate[builtins._T]"
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "builtins.enumerate.__next__"
+    return_annotation: "Tuple[builtins.int,builtins._T]"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.enumerate[builtins._T]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.range"
+  super_classes: "typing.Sequence"
+  mro: "typing.Collection"
+  mro: "typing.Reversible"
+  mro: "typing.Iterable"
+  mro: "typing.Container"
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.range.count"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.range"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.range.index"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.range"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.int"
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.range.__len__"
+    return_annotation: "builtins.int"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.range"
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.range.__contains__"
+    return_annotation: "builtins.bool"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.range"
+    }
+    parameters {
+      name: "o"
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.range.__iter__"
+    return_annotation: "typing.Iterator[builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.range"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.range.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.range"
+    }
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "builtins.range.__reversed__"
+    return_annotation: "typing.Iterator[builtins.int]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.range"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.property"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.property.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "fget"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.function,None]"
+    }
+    parameters {
+      name: "fset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.function,None]"
+    }
+    parameters {
+      name: "fdel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.function,None]"
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.str,None]"
+    }
+  }
+  methods {
+    name: "getter"
+    fully_qualified_name: "builtins.property.getter"
+    return_annotation: "builtins.property"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "fget"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.function"
+    }
+  }
+  methods {
+    name: "setter"
+    fully_qualified_name: "builtins.property.setter"
+    return_annotation: "builtins.property"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "fset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.function"
+    }
+  }
+  methods {
+    name: "deleter"
+    fully_qualified_name: "builtins.property.deleter"
+    return_annotation: "builtins.property"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "fdel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.function"
+    }
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "builtins.property.__get__"
+    return_annotation: "Any"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[builtins.type,None]"
+    }
+  }
+  methods {
+    name: "__set__"
+    fully_qualified_name: "builtins.property.__set__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Any"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+  methods {
+    name: "__delete__"
+    fully_qualified_name: "builtins.property.__delete__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.property"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Any"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins._NotImplementedType"
+  super_classes: "builtins.object"
+}
+classes {
+  fully_qualified_name: "builtins._PathLike"
+  super_classes: "builtins.object"
+  methods {
+    name: "__fspath__"
+    fully_qualified_name: "builtins._PathLike.__fspath__"
+    return_annotation: "builtins._AnyStr_co"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._PathLike[builtins._AnyStr_co]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.filter"
+  super_classes: "typing.Iterator"
+  mro: "typing.Iterable"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.filter.__iter__"
+    return_annotation: "typing.Iterator[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.filter[builtins._T]"
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "builtins.filter.__next__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.filter[builtins._T]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.map"
+  super_classes: "typing.Iterator"
+  mro: "typing.Iterable"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.map.__iter__"
+    return_annotation: "typing.Iterator[builtins._S]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.map[builtins._S]"
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "builtins.map.__next__"
+    return_annotation: "builtins._S"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.map[builtins._S]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins._SupportsPow2"
+  super_classes: "builtins.object"
+  methods {
+    name: "__pow__"
+    fully_qualified_name: "builtins._SupportsPow2.__pow__"
+    return_annotation: "builtins._T_co"
+    parameters {
+      name: "self"
+      type_annotation: "builtins._SupportsPow2[builtins._E,builtins._T_co]"
+    }
+    parameters {
+      name: "__other"
+      type_annotation: "builtins._E"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins._SupportsPow3"
+  super_classes: "builtins.object"
+  methods {
+    name: "__pow__"
+    fully_qualified_name: "builtins._SupportsPow3.__pow__"
+    return_annotation: "builtins._T_co"
+    parameters {
+      name: "self"
+      type_annotation: "builtins._SupportsPow3[builtins._E,builtins._M,builtins._T_co]"
+    }
+    parameters {
+      name: "__other"
+      type_annotation: "builtins._E"
+    }
+    parameters {
+      name: "__modulo"
+      type_annotation: "builtins._M"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.reversed"
+  super_classes: "typing.Iterator"
+  mro: "typing.Iterable"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.reversed.__iter__"
+    return_annotation: "typing.Iterator[builtins._T]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.reversed[builtins._T]"
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "builtins.reversed.__next__"
+    return_annotation: "builtins._T"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.reversed[builtins._T]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.zip"
+  super_classes: "typing.Iterator"
+  mro: "typing.Iterable"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.zip.__iter__"
+    return_annotation: "typing.Iterator[builtins._T_co]"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.zip[builtins._T_co]"
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "builtins.zip.__next__"
+    return_annotation: "builtins._T_co"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.zip[builtins._T_co]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.ellipsis"
+  super_classes: "builtins.object"
+}
+classes {
+  fully_qualified_name: "builtins.BaseException"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.BaseException.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.BaseException"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "builtins.object"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "builtins.BaseException.__str__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.BaseException"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "builtins.BaseException.__repr__"
+    return_annotation: "builtins.str"
+    parameters {
+      name: "self"
+      type_annotation: "builtins.BaseException"
+    }
+  }
+  methods {
+    name: "with_traceback"
+    fully_qualified_name: "builtins.BaseException.with_traceback"
+    return_annotation: "builtins._TBE"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins._TBE"
+    }
+    parameters {
+      name: "tb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "Union[types.TracebackType,None]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.GeneratorExit"
+  super_classes: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.KeyboardInterrupt"
+  super_classes: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.SystemExit"
+  super_classes: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.Exception"
+  super_classes: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.StopIteration"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.OSError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ArithmeticError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.AssertionError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.AttributeError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.BufferError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.EOFError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ImportError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.ImportError.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.ImportError"
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation: "builtins.object"
+    }
+    parameters {
+      name: "name"
+      kind: KEYWORD_ONLY
+      type_annotation: "Union[builtins.str,None]"
+    }
+    parameters {
+      name: "path"
+      kind: KEYWORD_ONLY
+      type_annotation: "Union[builtins.str,None]"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.LookupError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.MemoryError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.NameError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ReferenceError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.RuntimeError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.StopAsyncIteration"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.SyntaxError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.SystemError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.TypeError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ValueError"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.FloatingPointError"
+  super_classes: "builtins.ArithmeticError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.OverflowError"
+  super_classes: "builtins.ArithmeticError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ZeroDivisionError"
+  super_classes: "builtins.ArithmeticError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ModuleNotFoundError"
+  super_classes: "builtins.ImportError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.IndexError"
+  super_classes: "builtins.LookupError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.KeyError"
+  super_classes: "builtins.LookupError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.UnboundLocalError"
+  super_classes: "builtins.NameError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.BlockingIOError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ChildProcessError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ConnectionError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.BrokenPipeError"
+  super_classes: "builtins.ConnectionError"
+  mro: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ConnectionAbortedError"
+  super_classes: "builtins.ConnectionError"
+  mro: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ConnectionRefusedError"
+  super_classes: "builtins.ConnectionError"
+  mro: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ConnectionResetError"
+  super_classes: "builtins.ConnectionError"
+  mro: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.FileExistsError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.FileNotFoundError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.InterruptedError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.IsADirectoryError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.NotADirectoryError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.PermissionError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ProcessLookupError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.TimeoutError"
+  super_classes: "builtins.OSError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.NotImplementedError"
+  super_classes: "builtins.RuntimeError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.RecursionError"
+  super_classes: "builtins.RuntimeError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.IndentationError"
+  super_classes: "builtins.SyntaxError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.TabError"
+  super_classes: "builtins.IndentationError"
+  mro: "builtins.SyntaxError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.UnicodeError"
+  super_classes: "builtins.ValueError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.UnicodeDecodeError"
+  super_classes: "builtins.UnicodeError"
+  mro: "builtins.ValueError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.UnicodeDecodeError.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.UnicodeDecodeError"
+    }
+    parameters {
+      name: "__encoding"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__object"
+      type_annotation: "builtins.bytes"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__reason"
+      type_annotation: "builtins.str"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.UnicodeEncodeError"
+  super_classes: "builtins.UnicodeError"
+  mro: "builtins.ValueError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.UnicodeEncodeError.__init__"
+    return_annotation: "None"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation: "builtins.UnicodeEncodeError"
+    }
+    parameters {
+      name: "__encoding"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__object"
+      type_annotation: "builtins.str"
+    }
+    parameters {
+      name: "__start"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__end"
+      type_annotation: "builtins.int"
+    }
+    parameters {
+      name: "__reason"
+      type_annotation: "builtins.str"
+    }
+  }
+}
+classes {
+  fully_qualified_name: "builtins.UnicodeTranslateError"
+  super_classes: "builtins.UnicodeError"
+  mro: "builtins.ValueError"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.Warning"
+  super_classes: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.UserWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.DeprecationWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.SyntaxWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.RuntimeWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.FutureWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.PendingDeprecationWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ImportWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.UnicodeWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.BytesWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+classes {
+  fully_qualified_name: "builtins.ResourceWarning"
+  super_classes: "builtins.Warning"
+  mro: "builtins.Exception"
+  mro: "builtins.BaseException"
+}
+functions {
+  name: "abs"
+  fully_qualified_name: "builtins.abs"
+  return_annotation: "builtins._T"
+  parameters {
+    name: "__x"
+    type_annotation: "typing.SupportsAbs[builtins._T]"
+  }
+}
+functions {
+  name: "all"
+  fully_qualified_name: "builtins.all"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__iterable"
+    type_annotation: "typing.Iterable[builtins.object]"
+  }
+}
+functions {
+  name: "any"
+  fully_qualified_name: "builtins.any"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__iterable"
+    type_annotation: "typing.Iterable[builtins.object]"
+  }
+}
+functions {
+  name: "ascii"
+  fully_qualified_name: "builtins.ascii"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "bin"
+  fully_qualified_name: "builtins.bin"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__number"
+    type_annotation: "Union[builtins.int,typing_extensions.SupportsIndex]"
+  }
+}
+functions {
+  name: "breakpoint"
+  fully_qualified_name: "builtins.breakpoint"
+  return_annotation: "None"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+    type_annotation: "Any"
+  }
+  parameters {
+    name: "kws"
+    kind: VAR_KEYWORD
+    type_annotation: "Any"
+  }
+}
+functions {
+  name: "callable"
+  fully_qualified_name: "builtins.callable"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "chr"
+  fully_qualified_name: "builtins.chr"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__i"
+    type_annotation: "builtins.int"
+  }
+}
+functions {
+  name: "compile"
+  fully_qualified_name: "builtins.compile"
+  return_annotation: "Any"
+  parameters {
+    name: "source"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "Union[builtins.str,builtins.bytes,_ast.mod,_ast.AST]"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "Union[builtins.str,builtins.bytes,builtins._PathLike[Any]]"
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.str"
+  }
+  parameters {
+    name: "flags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.int"
+  }
+  parameters {
+    name: "dont_inherit"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.int"
+  }
+  parameters {
+    name: "optimize"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.int"
+  }
+  parameters {
+    name: "_feature_version"
+    kind: KEYWORD_ONLY
+    type_annotation: "builtins.int"
+  }
+}
+functions {
+  name: "copyright"
+  fully_qualified_name: "builtins.copyright"
+  return_annotation: "None"
+}
+functions {
+  name: "credits"
+  fully_qualified_name: "builtins.credits"
+  return_annotation: "None"
+}
+functions {
+  name: "delattr"
+  fully_qualified_name: "builtins.delattr"
+  return_annotation: "None"
+  parameters {
+    name: "__obj"
+    type_annotation: "Any"
+  }
+  parameters {
+    name: "__name"
+    type_annotation: "builtins.str"
+  }
+}
+functions {
+  name: "dir"
+  fully_qualified_name: "builtins.dir"
+  return_annotation: "builtins.list[builtins.str]"
+  parameters {
+    name: "__o"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "eval"
+  fully_qualified_name: "builtins.eval"
+  return_annotation: "Any"
+  parameters {
+    name: "__source"
+    type_annotation: "Union[builtins.str,builtins.bytes,types.CodeType]"
+  }
+  parameters {
+    name: "__globals"
+    type_annotation: "Union[builtins.dict[builtins.str,Any],None]"
+  }
+  parameters {
+    name: "__locals"
+    type_annotation: "Union[typing.Mapping[builtins.str,Any],None]"
+  }
+}
+functions {
+  name: "exec"
+  fully_qualified_name: "builtins.exec"
+  return_annotation: "Any"
+  parameters {
+    name: "__source"
+    type_annotation: "Union[builtins.str,builtins.bytes,types.CodeType]"
+  }
+  parameters {
+    name: "__globals"
+    type_annotation: "Union[builtins.dict[builtins.str,Any],None]"
+  }
+  parameters {
+    name: "__locals"
+    type_annotation: "Union[typing.Mapping[builtins.str,Any],None]"
+  }
+}
+functions {
+  name: "exit"
+  fully_qualified_name: "builtins.exit"
+  return_annotation: "NoReturn"
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "format"
+  fully_qualified_name: "builtins.format"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__value"
+    type_annotation: "builtins.object"
+  }
+  parameters {
+    name: "__format_spec"
+    type_annotation: "builtins.str"
+  }
+}
+functions {
+  name: "globals"
+  fully_qualified_name: "builtins.globals"
+  return_annotation: "builtins.dict[builtins.str,Any]"
+}
+functions {
+  name: "hasattr"
+  fully_qualified_name: "builtins.hasattr"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__obj"
+    type_annotation: "Any"
+  }
+  parameters {
+    name: "__name"
+    type_annotation: "builtins.str"
+  }
+}
+functions {
+  name: "hash"
+  fully_qualified_name: "builtins.hash"
+  return_annotation: "builtins.int"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "help"
+  fully_qualified_name: "builtins.help"
+  return_annotation: "None"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+    type_annotation: "Any"
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation: "Any"
+  }
+}
+functions {
+  name: "hex"
+  fully_qualified_name: "builtins.hex"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__number"
+    type_annotation: "Union[builtins.int,typing_extensions.SupportsIndex]"
+  }
+}
+functions {
+  name: "id"
+  fully_qualified_name: "builtins.id"
+  return_annotation: "builtins.int"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "input"
+  fully_qualified_name: "builtins.input"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__prompt"
+    type_annotation: "Any"
+  }
+}
+functions {
+  name: "isinstance"
+  fully_qualified_name: "builtins.isinstance"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+  parameters {
+    name: "__class_or_tuple"
+    type_annotation: "Union[builtins.type,builtins.tuple[Union[builtins.type,builtins.tuple[Any]]]]"
+  }
+}
+functions {
+  name: "issubclass"
+  fully_qualified_name: "builtins.issubclass"
+  return_annotation: "builtins.bool"
+  parameters {
+    name: "__cls"
+    type_annotation: "builtins.type"
+  }
+  parameters {
+    name: "__class_or_tuple"
+    type_annotation: "Union[builtins.type,builtins.tuple[Union[builtins.type,builtins.tuple[Any]]]]"
+  }
+}
+functions {
+  name: "len"
+  fully_qualified_name: "builtins.len"
+  return_annotation: "builtins.int"
+  parameters {
+    name: "__obj"
+    type_annotation: "typing.Sized"
+  }
+}
+functions {
+  name: "license"
+  fully_qualified_name: "builtins.license"
+  return_annotation: "None"
+}
+functions {
+  name: "locals"
+  fully_qualified_name: "builtins.locals"
+  return_annotation: "builtins.dict[builtins.str,Any]"
+}
+functions {
+  name: "oct"
+  fully_qualified_name: "builtins.oct"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__number"
+    type_annotation: "Union[builtins.int,typing_extensions.SupportsIndex]"
+  }
+}
+functions {
+  name: "ord"
+  fully_qualified_name: "builtins.ord"
+  return_annotation: "builtins.int"
+  parameters {
+    name: "__c"
+    type_annotation: "Union[builtins.str,builtins.bytes]"
+  }
+}
+functions {
+  name: "print"
+  fully_qualified_name: "builtins.print"
+  return_annotation: "None"
+  parameters {
+    name: "values"
+    kind: VAR_POSITIONAL
+    type_annotation: "builtins.object"
+  }
+  parameters {
+    name: "sep"
+    kind: KEYWORD_ONLY
+    type_annotation: "Union[builtins.str,None]"
+  }
+  parameters {
+    name: "end"
+    kind: KEYWORD_ONLY
+    type_annotation: "Union[builtins.str,None]"
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation: "Union[_typeshed.SupportsWrite[builtins.str],None]"
+  }
+  parameters {
+    name: "flush"
+    kind: KEYWORD_ONLY
+    type_annotation: "builtins.bool"
+  }
+}
+functions {
+  name: "quit"
+  fully_qualified_name: "builtins.quit"
+  return_annotation: "NoReturn"
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "repr"
+  fully_qualified_name: "builtins.repr"
+  return_annotation: "builtins.str"
+  parameters {
+    name: "__obj"
+    type_annotation: "builtins.object"
+  }
+}
+functions {
+  name: "setattr"
+  fully_qualified_name: "builtins.setattr"
+  return_annotation: "None"
+  parameters {
+    name: "__obj"
+    type_annotation: "Any"
+  }
+  parameters {
+    name: "__name"
+    type_annotation: "builtins.str"
+  }
+  parameters {
+    name: "__value"
+    type_annotation: "Any"
+  }
+}
+functions {
+  name: "vars"
+  fully_qualified_name: "builtins.vars"
+  return_annotation: "builtins.dict[builtins.str,Any]"
+  parameters {
+    name: "__object"
+    type_annotation: "Any"
+  }
+}
+functions {
+  name: "__import__"
+  fully_qualified_name: "builtins.__import__"
+  return_annotation: "Any"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.str"
+  }
+  parameters {
+    name: "globals"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "Union[typing.Mapping[builtins.str,Any],None]"
+  }
+  parameters {
+    name: "locals"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "Union[typing.Mapping[builtins.str,Any],None]"
+  }
+  parameters {
+    name: "fromlist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "typing.Sequence[builtins.str]"
+  }
+  parameters {
+    name: "level"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation: "builtins.int"
+  }
+}

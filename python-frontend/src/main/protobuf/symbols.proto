@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+// Not necessary for Python but should still be declared to avoid name collisions
+// in the Protocol Buffers namespace and non-Python languages
+package protoblog;
+option java_outer_classname = "SymbolsProtos";
+option java_package = "org.sonar.python.types.protobuf";
+
+enum ParameterKind {
+  POSITIONAL_ONLY = 0;
+  POSITIONAL_OR_KEYWORD = 1;
+  KEYWORD_ONLY = 2;
+  VAR_KEYWORD = 3;
+  VAR_POSITIONAL = 4;
+}
+
+message ParameterSymbol {
+  string name = 1;
+  ParameterKind kind = 2;
+  optional string type_annotation = 3;
+  bool has_default = 4;
+}
+
+message FunctionSymbol {
+  string name = 1;
+  string fully_qualified_name = 2;
+  optional string return_annotation = 4;
+  repeated ParameterSymbol parameters = 5;
+}
+
+message ClassSymbol {
+  string name = 1;
+  string fully_qualified_name = 2;
+  repeated string super_classes = 4;
+  repeated FunctionSymbol methods = 5;
+}
+
+message ModuleSymbol {
+  string name = 1;
+  string fully_qualified_name = 2;
+  repeated ClassSymbol classes = 3;
+  repeated FunctionSymbol functions = 4;
+}

@@ -19,6 +19,8 @@
  */
 package org.sonar.python.types;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -233,5 +235,12 @@ public class TypeShedTest {
     assertThat(symbols)
       .containsAll(mathSymbols)
       .containsAll(djangoHttpSymbols);
+  }
+
+  @Test
+  public void test_deserialization_protobuf() throws IOException {
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    File file = new File(baseDir, "builtins.protobuf");
+    TypeShed.deserializeSymbols(file);
   }
 }
