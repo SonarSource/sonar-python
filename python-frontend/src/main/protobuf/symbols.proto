@@ -32,7 +32,8 @@ message ClassSymbol {
   string name = 1;
   string fully_qualified_name = 2;
   repeated string super_classes = 4;
-  repeated FunctionSymbol methods = 5;
+  repeated string mro = 5;
+  repeated FunctionSymbol methods = 6;
 }
 
 message ModuleSymbol {

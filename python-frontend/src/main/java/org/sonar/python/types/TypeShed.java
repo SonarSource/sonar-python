@@ -19,11 +19,13 @@
  */
 package org.sonar.python.types;
 
+import com.google.protobuf.TextFormat;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -346,9 +348,33 @@ public class TypeShed {
 
 
   static void deserializeSymbols(File file) throws IOException {
-    SymbolsProtos.ModuleSymbol moduleSymbol = SymbolsProtos.ModuleSymbol.parseFrom(new FileInputStream(file));
+    SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
+    FileInputStream input = new FileInputStream(file);
+    InputStreamReader reader = new InputStreamReader(input, "ASCII");
+    TextFormat.merge(reader, builder);
+    SymbolsProtos.ModuleSymbol moduleSymbol = builder.build();
+    Map<String, ClassSymbol> classSymbols = new HashMap<>();
     for (SymbolsProtos.ClassSymbol classSymbol : moduleSymbol.getClassesList()) {
+      System.out.println(classSymbol.getName());
       System.out.println(classSymbol.getFullyQualifiedName());
+      ClassSymbolImpl classSymbolImpl = new ClassSymbolImpl("foo", "bar");
+      for (SymbolsProtos.FunctionSymbol method : classSymbol.getMethodsList()) {
+//        FunctionSymbolImpl methodSymbol = new FunctionSymbolImpl(method.getName(), method.getFullyQualifiedName());
+      }
+      classSymbols.put(classSymbolImpl.fullyQualifiedName(), classSymbolImpl);
+      System.out.println(classSymbol.getFullyQualifiedName());
+    }
+    for (SymbolsProtos.ClassSymbol classSymbolProto : moduleSymbol.getClassesList()) {
+      ClassSymbol classSymbol = classSymbols.get(classSymbolProto.getFullyQualifiedName());
+      classSymbolProto.getSuperClassesList().stream()
+        .map(superclassFqn -> {
+          ClassSymbol superClass = classSymbols.get(superclassFqn);
+          if (superClass == null) {
+            return new SymbolImpl(superclassFqn, superclassFqn);
+          }
+          return superClass;
+        })
+        .forEach(((ClassSymbolImpl) classSymbol)::addSuperClass);
     }
   }
 
