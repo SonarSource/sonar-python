@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
@@ -78,6 +79,35 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
+  }
+
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto) {
+    this(functionSymbolProto, false);
+  }
+
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass) {
+    super(functionSymbolProto.getName(), functionSymbolProto.getFullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
+    isAsynchronous = functionSymbolProto.getIsAsyncGenerator();
+    hasDecorators = functionSymbolProto.getHasDecorators();
+    decorators = functionSymbolProto.getResolvedDecoratorNamesList();
+    SymbolsProtos.Type returnAnnotation = functionSymbolProto.getReturnAnnotation();
+    annotatedReturnTypeName = returnAnnotation != null ? returnAnnotation.getSimpleName() : null;
+    for (SymbolsProtos.ParameterSymbol parameterSymbol : functionSymbolProto.getParametersList()) {
+      ParameterState parameterState = new ParameterState();
+      parameterState.positionalOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
+      parameterState.keywordOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.KEYWORD_ONLY;
+      boolean isVariadic = (parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD) || parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
+      hasVariadicParameter |= isVariadic;
+      ParameterImpl parameter = new ParameterImpl(
+        parameterSymbol.getName(), InferredTypes.fromTypeshedProtobuf(parameterSymbol.getTypeAnnotation()), parameterSymbol.getHasDefault(), isVariadic, parameterState, null);
+      parameters.add(parameter);
+    }
+    functionDefinitionLocation = null;
+    declaredReturnType = InferredTypes.fromTypeshedProtobuf(returnAnnotation);
+    isStub = true;
+    isDjangoView = false;
   }
 
   public void setParametersWithType(ParameterList parametersList) {

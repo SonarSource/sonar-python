@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import com.google.protobuf.TextFormat;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
@@ -252,5 +254,75 @@ public class FunctionSymbolTest {
     );
     assertThat(functionSymbol.declaredReturnType().canBeOrExtend("int")).isTrue();
     assertThat(InferredTypes.typeName(functionSymbol.declaredReturnType())).isEqualTo("Optional[int]");
+  }
+
+  @Test
+  public void from_protobuf() throws TextFormat.ParseException {
+    SymbolsProtos.FunctionSymbol.Builder builder = SymbolsProtos.FunctionSymbol.newBuilder();
+    String protobuf =
+      "name: \"fn\"\n" +
+      "fully_qualified_name: \"mod.fn\"\n" +
+      "return_annotation {\n" +
+      "  pretty_printed_name: \"None\"\n" +
+      "  kind: NONE\n" +
+      "}\n" +
+      "parameters {\n" +
+      "  name: \"p1\"\n" +
+      "  kind: POSITIONAL_OR_KEYWORD\n" +
+      "  type_annotation {\n" +
+      "    pretty_printed_name: \"builtins.str\"\n" +
+      "    simple_name: \"builtins.str\"\n" +
+      "  }\n" +
+      "}\n" +
+      "parameters {\n" +
+      "  name: \"p2\"\n" +
+      "  kind: KEYWORD_ONLY\n" +
+      "}\n" +
+      "parameters {\n" +
+      "  name: \"p3\"\n" +
+      "  kind: KEYWORD_ONLY\n" +
+      "  has_default: true\n" +
+      "}\n" +
+      "parameters {\n" +
+      "  name: \"p4\"\n" +
+      "  kind: VAR_KEYWORD\n" +
+      "}";
+    TextFormat.merge(protobuf, builder);
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(builder.build());
+    assertThat(functionSymbol.name()).isEqualTo("fn");
+    assertThat(functionSymbol.fullyQualifiedName()).isEqualTo("mod.fn");
+    assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.NONE);
+    assertThat(functionSymbol.isInstanceMethod()).isFalse();
+    assertThat(functionSymbol.parameters()).hasSize(4);
+    assertThat(functionSymbol.hasVariadicParameter()).isTrue();
+    assertThat(functionSymbol.hasDecorators()).isFalse();
+    assertParameter(functionSymbol);
+  }
+
+  private void assertParameter(FunctionSymbolImpl functionSymbol) {
+    List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
+    FunctionSymbol.Parameter p1 = parameters.get(0);
+    assertThat(p1.name()).isEqualTo("p1");
+    assertThat(p1.hasDefaultValue()).isFalse();
+    assertThat(p1.isKeywordOnly()).isFalse();
+    assertThat(p1.isPositionalOnly()).isFalse();
+    assertThat(p1.isVariadic()).isFalse();
+    assertThat(p1.declaredType()).isEqualTo(InferredTypes.STR);
+
+    FunctionSymbol.Parameter p2 = parameters.get(1);
+    assertThat(p2.name()).isEqualTo("p2");
+    assertThat(p2.hasDefaultValue()).isFalse();
+    assertThat(p2.isKeywordOnly()).isTrue();
+    assertThat(p2.isPositionalOnly()).isFalse();
+    assertThat(p2.isVariadic()).isFalse();
+    assertThat(p2.declaredType()).isEqualTo(InferredTypes.anyType());
+
+    FunctionSymbol.Parameter p3 = parameters.get(2);
+    assertThat(p3.name()).isEqualTo("p3");
+    assertThat(p3.hasDefaultValue()).isTrue();
+
+    FunctionSymbol.Parameter p4 = parameters.get(3);
+    assertThat(p4.name()).isEqualTo("p4");
+    assertThat(p4.isVariadic()).isTrue();
   }
 }

@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -86,6 +87,22 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.metaclassFQN = metaclassFQN;
     this.supportsGenerics = supportsGenerics;
     setKind(Kind.CLASS);
+  }
+
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto) {
+    super(classSymbolProto.getName(), classSymbolProto.getFullyQualifiedName());
+    setKind(Kind.CLASS);
+    classDefinitionLocation = null;
+    hasDecorators = classSymbolProto.getHasDecorators();
+    hasMetaClass = classSymbolProto.getHasMetaclass();
+    metaclassFQN = classSymbolProto.getMetaclassName();
+    supportsGenerics = classSymbolProto.getIsGeneric();
+    List<SymbolsProtos.FunctionSymbol> methodsList = classSymbolProto.getMethodsList();
+    Set<Symbol> methods = methodsList.stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet());
+    for (SymbolsProtos.OverloadedFunctionSymbol overloadedMethod : classSymbolProto.getOverloadedMethodsList()) {
+      methods.add(AmbiguousSymbolImpl.create(overloadedMethod.getDefinitionsList().stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet())));
+    }
+    addMembers(methods);
   }
 
   @Override

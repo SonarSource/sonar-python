@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import com.google.protobuf.TextFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.junit.Test;
@@ -33,17 +34,21 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
+import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.STR;
+import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
+import static org.sonar.python.types.InferredTypes.fromTypeshedProtobuf;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 import static org.sonar.python.types.InferredTypes.or;
@@ -327,6 +332,39 @@ public class InferredTypesTest {
     assertThat(containsDeclaredType(declaredType)).isTrue();
     assertThat(containsDeclaredType(or(declaredType, INT))).isTrue();
     assertThat(containsDeclaredType(anyType())).isFalse();
+  }
+
+  @Test
+  public void test_type_from_protobuf() throws TextFormat.ParseException {
+    assertThat(fromTypeshedProtobuf(null)).isEqualTo(anyType());
+    assertThat(protobufType(
+      "pretty_printed_name: \"None\"\n" +
+      "kind: NONE\n")).isEqualTo(NONE);
+    assertThat(protobufType("kind: TYPED_DICT")).isEqualTo(DICT);
+    assertThat(protobufType("kind: TUPLE")).isEqualTo(TUPLE);
+    assertThat(protobufType(
+      "pretty_printed_name: \"builtins.str\"\n" +
+      "simple_name: \"builtins.str\"\n")).isEqualTo(STR);
+    assertThat(protobufType(
+      "kind: TYPE_ALIAS\n" +
+      "args {\n" +
+      "  kind: UNION\n" +
+      "  args {\n" +
+      "    simple_name: \"builtins.str\"\n" +
+      "  }\n" +
+      "  args {\n" +
+      "    simple_name: \"builtins.int\"\n" +
+      "  }\n" +
+      "}\n" +
+      "simple_name: \"mod.t\""
+      ))
+      .isEqualTo(InferredTypes.or(STR, INT));
+  }
+
+  private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
+    SymbolsProtos.Type.Builder builder = SymbolsProtos.Type.newBuilder();
+    TextFormat.merge(protobuf, builder);
+    return fromTypeshedProtobuf(builder.build());
   }
 
   private TypeAnnotation typeAnnotation(String... code) {

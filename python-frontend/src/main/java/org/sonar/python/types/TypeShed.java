@@ -20,6 +20,7 @@
 package org.sonar.python.types;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,6 +34,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -54,6 +57,8 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -62,7 +67,7 @@ public class TypeShed {
   private static final String TYPING = "typing";
   private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
+  private static final Map<String, Map<String, Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
 
@@ -73,6 +78,9 @@ public class TypeShed {
   private static final String THIRD_PARTY_2 = "typeshed/third_party/2/";
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
   private static final String CUSTOM_THIRD_PARTY = "custom/";
+  private static final String PROTOBUF = "protobuf/";
+
+  private static final Logger LOG = Loggers.get(TypeShed.class);
 
   private TypeShed() {
   }
@@ -161,10 +169,11 @@ public class TypeShed {
   public static Set<Symbol> symbolsForModule(String moduleName) {
     if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
       Set<Symbol> symbols = searchTypeShedForModule(moduleName);
-      typeShedSymbols.put(moduleName, symbols);
+      Map<String, Symbol> symbolsByFqn = symbols.stream().collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
+      typeShedSymbols.put(moduleName, symbolsByFqn);
       return symbols;
     }
-    return TypeShed.typeShedSymbols.get(moduleName);
+    return new HashSet<>(TypeShed.typeShedSymbols.get(moduleName).values());
   }
 
   @CheckForNull
@@ -195,6 +204,11 @@ public class TypeShed {
       return new HashSet<>();
     }
     modulesInProgress.add(moduleName);
+    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName);
+    if (!symbolsFromProtobuf.isEmpty()) {
+      modulesInProgress.remove(moduleName);
+      return new HashSet<>(symbolsFromProtobuf);
+    }
     Set<Symbol> customSymbols = new HashSet<>(getModuleSymbols(moduleName, CUSTOM_THIRD_PARTY, builtinGlobalSymbols).values());
     if (!customSymbols.isEmpty()) {
       modulesInProgress.remove(moduleName);
@@ -268,7 +282,7 @@ public class TypeShed {
 
   public static Collection<Symbol> stubFilesSymbols() {
     Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
-    typeShedSymbols.values().forEach(symbols::addAll);
+    typeShedSymbols.values().forEach(symbolsByFqn -> symbols.addAll(symbolsByFqn.values()));
     return symbols;
   }
 
@@ -338,6 +352,79 @@ public class TypeShed {
       this.fileName = fileName;
       this.packageName = packageName;
     }
+  }
+
+
+  private static Collection<Symbol> getSymbolsFromProtobufModule(String moduleName) {
+    InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
+    if (resource == null) {
+      return Collections.emptySet();
+    }
+    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource)).values();
+  }
+
+  @CheckForNull
+  static ModuleSymbol deserializedModule(String moduleName, InputStream resource) {
+    try {
+      return ModuleSymbol.parseFrom(resource);
+    } catch (IOException e) {
+      LOG.debug("Error while deserializing protobuf for module " + moduleName, e);
+      return null;
+    }
+  }
+
+  static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol) {
+    if (moduleSymbol == null) {
+      return Collections.emptyMap();
+    }
+    Map<String, Symbol> deserializedSymbols = new HashMap<>();
+    for (SymbolsProtos.ClassSymbol classSymbolProto : moduleSymbol.getClassesList()) {
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbolProto);
+      addSuperClasses(deserializedSymbols, classSymbolProto, classSymbol);
+      deserializedSymbols.put(classSymbolProto.getFullyQualifiedName(), classSymbol);
+    }
+    for (SymbolsProtos.FunctionSymbol functionSymbolProto : moduleSymbol.getFunctionsList()) {
+      deserializedSymbols.put(functionSymbolProto.getFullyQualifiedName(), new FunctionSymbolImpl(functionSymbolProto));
+    }
+    for (SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol : moduleSymbol.getOverloadedFunctionsList()) {
+      deserializedSymbols.put(overloadedFunctionSymbol.getFullname(),
+        AmbiguousSymbolImpl.create(overloadedFunctionSymbol.getDefinitionsList().stream().map(FunctionSymbolImpl::new).collect(Collectors.toSet())));
+    }
+    return deserializedSymbols;
+  }
+
+
+  private static void addSuperClasses(Map<String, Symbol> deserializedSymbols, SymbolsProtos.ClassSymbol classSymbolProto, ClassSymbolImpl classSymbol) {
+    classSymbolProto.getSuperClassesList().forEach(superClassFqn -> {
+      if (deserializedSymbols.containsKey(superClassFqn)) {
+        classSymbol.addSuperClass(deserializedSymbols.get(superClassFqn));
+        return;
+      }
+      String[] fqnSplittedByDot = superClassFqn.split("\\.");
+      String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
+      Symbol symbol = symbolWithFQN(superClassFqn);
+      if (symbol != null) {
+        classSymbol.addSuperClass(symbol);
+        return;
+      }
+      classSymbol.addSuperClass(new SymbolImpl(localName, superClassFqn));
+    });
+  }
+
+  @CheckForNull
+  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
+    String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
+    if (fqnSplittedByDot.length == 2 && fqnSplittedByDot[0].equals("builtins") && builtins.containsKey(localName)) {
+      return builtins.get(localName);
+    }
+    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
+      Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
+      if (symbol != null) {
+        return symbol;
+      }
+    }
+    return builtins.getOrDefault(fullyQualifiedName, null);
   }
 
 }
