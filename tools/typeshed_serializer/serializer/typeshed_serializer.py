@@ -1,7 +1,6 @@
 import os
 import sys
 import collections
-
 from mypy import build, options
 
 from serializer.symbols import save_module
@@ -42,7 +41,8 @@ def load_single_module(module_fqn: str, category="stdlib"):
 def walk_typeshed_stdlib(opt=get_options()):
     source_list = []
     generate_python2_stdlib = opt.python_version < (3, 0)
-    path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
+    relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
+    path = os.path.join(os.path.dirname(__file__), relative_path)
     for root, dirs, files in os.walk(path):
         package_name = root.replace(path, "").replace("\\", ".").lstrip(".")
         if not generate_python2_stdlib and "python2" in package_name:
@@ -83,7 +83,12 @@ def serialize_typeshed_stdlib_multiple_python_version():
         serialize_typeshed_stdlib(f"output3{minor}", (3, minor))
 
 
-if __name__ == '__main__':
-    #annoy_mypy_file = build_single_module("annoy", "stubs/annoy")
-    #save_module(annoy_mypy_file, output_dir_name="annoy_output")
+def main():
     serialize_typeshed_stdlib()
+
+
+if __name__ == '__main__':
+    # annoy_mypy_file = build_single_module("annoy", "stubs/annoy")
+    # save_module(annoy_mypy_file, output_dir_name="annoy_output")
+    # serialize_typeshed_stdlib()
+    main()
