@@ -4,5 +4,4 @@ To run:
 
 in `protob` directory, run: ```protoc -I=. --python_out=../proto_out ./symbols.proto```
 
-```pip install protobuf```
-```pip install mypy```
+```pip install -r requirements.txt```
