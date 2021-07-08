@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonarsource.python</groupId>
+    <artifactId>python</artifactId>
+    <version>3.6-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>typeshed-serializer</artifactId>
+  <name>SonarQube Python :: Typeshed-serializer</name>
+
+  <properties>
+    <sonar.sources>serializer</sonar.sources>
+    <sonar.tests>tests</sonar.tests>
+    <sonar.language>ts</sonar.language>
+    <sonar.typescript.lcov.reportPaths>coverage/lcov.info</sonar.typescript.lcov.reportPaths>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>tox</id>
+            <phase>generate-resources</phase>
+            <configuration>
+              <executable>tox</executable>
+            </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>tox -e serialize</id>
+            <phase>generate-resources</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>tox</executable>
+              <arguments>-e serialize</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>output</directory>
+        <includes>
+          <include>**/*.protobuf</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

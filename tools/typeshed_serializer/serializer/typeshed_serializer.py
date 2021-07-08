@@ -7,6 +7,7 @@ from serializer.symbols import save_module
 
 VersionInfoTuple = collections.namedtuple('version_info', ['major', 'minor', 'micro', 'releaselevel', 'serial'])
 STDLIB_PATH = "../resources/typeshed/stdlib"
+CURRENT_PATH = os.path.dirname(__file__)
 
 
 def get_options(python_version=None):
@@ -29,20 +30,22 @@ def load_single_module(module_fqn: str, category="stdlib"):
     module_path = module_fqn
     if '.' in module_fqn:
         module_path = module_fqn.replace('.', "/")
-    if os.path.isfile(path := f"../resources/typeshed/{category}/{module_path}.pyi"):
+    if os.path.isfile(path := os.path.join(CURRENT_PATH,
+                                           f"../resources/typeshed/{category}/{module_path}.pyi")):
         module_source = build.BuildSource(path, module_fqn)
-    elif os.path.isfile(path := f"../resources/typeshed/{category}/{module_path}/__init__.pyi"):
+    elif os.path.isfile(path := os.path.join(CURRENT_PATH,
+                                             f"../resources/typeshed/{category}/{module_path}/__init__.pyi")):
         module_source = build.BuildSource(path, module_fqn)
     else:
         raise FileNotFoundError(f"No stub found for module {module_fqn}")
     return module_source
 
 
-def walk_typeshed_stdlib(opt=get_options()):
+def walk_typeshed_stdlib(opt: options.Options = get_options()):
     source_list = []
     generate_python2_stdlib = opt.python_version < (3, 0)
     relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
-    path = os.path.join(os.path.dirname(__file__), relative_path)
+    path = os.path.join(CURRENT_PATH, relative_path)
     for root, dirs, files in os.walk(path):
         package_name = root.replace(path, "").replace("\\", ".").lstrip(".")
         if not generate_python2_stdlib and "python2" in package_name:

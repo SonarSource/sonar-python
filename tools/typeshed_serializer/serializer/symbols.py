@@ -6,6 +6,8 @@ import mypy.nodes as mpn
 
 from serializer.proto_out import symbols_pb2
 
+CURRENT_PATH = os.path.dirname(__file__)
+
 
 class ParamKind(Enum):
     POSITIONAL_ONLY = 0
@@ -349,7 +351,8 @@ def save_module(mypy_file: mpn.MypyFile, save_as_text=True, output_dir_name="out
     save_dir = f"../{output_dir_name}" if save_as_text else f"../{output_dir_name}_binary"
     save_string = str(ms_pb) if save_as_text else ms_pb.SerializeToString()
     open_mode = "w" if save_as_text else "wb"
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-    with open(f"{save_dir}/{ms.fullname}.protobuf", open_mode) as f:
+    save_dir_path = os.path.join(CURRENT_PATH, save_dir)
+    if not os.path.exists(save_dir_path):
+        os.makedirs(save_dir_path)
+    with open(f"{save_dir_path}/{ms.fullname}.protobuf", open_mode) as f:
         f.write(save_string)
