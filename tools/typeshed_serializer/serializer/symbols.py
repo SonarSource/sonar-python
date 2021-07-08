@@ -120,10 +120,9 @@ class ParameterSymbol:
         self.name = param
         self.kind = None
         self.type_annotation = None
+        self.has_default = kind in [1, 5]
         if name is None:
             self.kind = ParamKind.POSITIONAL_ONLY
-        if kind in [1, 5]:
-            self.has_default = True
         if kind == 2:
             self.kind = ParamKind.VAR_POSITIONAL
         if kind == 4:
@@ -139,6 +138,7 @@ class ParameterSymbol:
         pb_parameter = symbols_pb2.ParameterSymbol()
         pb_parameter.name = self.name
         pb_parameter.kind = symbols_pb2.ParameterKind.Value(self.kind.name)
+        pb_parameter.has_default = self.has_default
         if self.type_annotation is not None:
             pb_parameter.type_annotation.CopyFrom(self.type_annotation.to_proto())
         return pb_parameter
@@ -186,6 +186,7 @@ class FunctionSymbol:
         self.is_overload = func_def.is_overload
         self.is_property = func_def.is_property
         self.is_static = func_def.is_static
+        self.is_class_method = func_def.is_class
         self.resolved_decorator_names = []
         if self.has_decorators and decorators is not None:
             for dec in decorators:
@@ -210,6 +211,7 @@ class FunctionSymbol:
         pb_func.is_overload = self.is_overload
         pb_func.is_property = self.is_property
         pb_func.is_static = self.is_static
+        pb_func.is_class_method = self.is_class_method
         if self.return_type is not None:
             pb_func.return_annotation.CopyFrom(self.return_type.to_proto())
         for argument in self.arguments:
