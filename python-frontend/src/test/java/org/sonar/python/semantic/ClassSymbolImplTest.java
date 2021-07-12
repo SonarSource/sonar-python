@@ -19,17 +19,20 @@
  */
 package org.sonar.python.semantic;
 
+import com.google.protobuf.TextFormat;
 import java.util.Collections;
 import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -224,5 +227,95 @@ public class ClassSymbolImplTest {
     assertThat(symbol.usages()).isEmpty();
     assertThat(symbol.declaredMembers()).allMatch(member -> member.usages().isEmpty());
     assertThat(symbol.superClasses()).allMatch(superClass -> superClass.usages().isEmpty());
+  }
+
+  @Test
+  public void from_protobuf() throws TextFormat.ParseException {
+    String protobuf =
+      "name: \"A\"\n" +
+      "fully_qualified_name: \"mod.A\"\n" +
+      "super_classes: \"builtins.object\"\n" +
+      "has_decorators: true\n" +
+      "has_metaclass: true\n" +
+      "metaclass_name: \"abc.ABCMeta\"\n" +
+      "metaclass_type {\n" +
+      "  pretty_printed_name: \"abc.ABCMeta\"\n" +
+      "  simple_name: \"abc.ABCMeta\"\n" +
+      "}";
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    assertThat(classSymbol.name()).isEqualTo("A");
+    assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
+    assertThat(classSymbol.superClasses()).containsExactly(TypeShed.typeShedClass("object"));
+    assertThat(classSymbol.hasDecorators()).isTrue();
+    assertThat(classSymbol.hasMetaClass()).isTrue();
+    assertThat(classSymbol.metaclassFQN()).isEqualTo("abc.ABCMeta");
+  }
+
+  @Test
+  public void from_protobuf_instance_method() throws TextFormat.ParseException {
+    String protobuf =
+      "name: \"A\"\n" +
+        "fully_qualified_name: \"mod.A\"\n" +
+        "super_classes: \"builtins.object\"\n" +
+        "methods {\n" +
+        "  name: \"foo\"\n" +
+        "  fully_qualified_name: \"mod.A.foo\"\n" +
+        "  parameters {\n" +
+        "    name: \"self\"\n" +
+        "    kind: POSITIONAL_OR_KEYWORD\n" +
+        "  }\n" +
+        "  has_decorators: true\n" +
+        "}";
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
+    assertThat(foo.isInstanceMethod()).isTrue();
+  }
+
+  @Test
+  public void from_protobuf_class_method() throws TextFormat.ParseException {
+    String protobuf =
+      "name: \"A\"\n" +
+      "fully_qualified_name: \"mod.A\"\n" +
+      "super_classes: \"builtins.object\"\n" +
+      "methods {\n" +
+      "  name: \"foo\"\n" +
+      "  fully_qualified_name: \"mod.A.foo\"\n" +
+      "  parameters {\n" +
+      "    name: \"cls\"\n" +
+      "    kind: POSITIONAL_OR_KEYWORD\n" +
+      "  }\n" +
+      "  has_decorators: true\n" +
+      "  is_class_method: true\n" +
+      "}";
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
+    assertThat(foo.isInstanceMethod()).isFalse();
+  }
+
+  @Test
+  public void from_protobuf_static_method() throws TextFormat.ParseException {
+    String protobuf =
+      "name: \"A\"\n" +
+        "fully_qualified_name: \"mod.A\"\n" +
+        "super_classes: \"builtins.object\"\n" +
+        "methods {\n" +
+        "  name: \"foo\"\n" +
+        "  fully_qualified_name: \"mod.A.foo\"\n" +
+        "  parameters {\n" +
+        "    name: \"x\"\n" +
+        "    kind: POSITIONAL_OR_KEYWORD\n" +
+        "  }\n" +
+        "  has_decorators: true\n" +
+        "  is_static: true\n" +
+        "}";
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
+    assertThat(foo.isInstanceMethod()).isFalse();
+  }
+
+  private static SymbolsProtos.ClassSymbol classSymbol(String protobuf) throws TextFormat.ParseException {
+    SymbolsProtos.ClassSymbol.Builder builder = SymbolsProtos.ClassSymbol.newBuilder();
+    TextFormat.merge(protobuf, builder);
+    return builder.build();
   }
 }

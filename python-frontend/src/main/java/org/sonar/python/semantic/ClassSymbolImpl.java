@@ -40,6 +40,8 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -47,6 +49,7 @@ import static org.sonar.python.tree.TreeUtils.locationInFile;
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = new ArrayList<>();
+  private List<String> superClassesFqns = new ArrayList<>();
   private Set<Symbol> allSuperClasses = null;
   private Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
   private boolean hasSuperClassWithoutSymbol = false;
@@ -88,6 +91,23 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     setKind(Kind.CLASS);
   }
 
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto) {
+    super(classSymbolProto.getName(), classSymbolProto.getFullyQualifiedName());
+    setKind(Kind.CLASS);
+    classDefinitionLocation = null;
+    hasDecorators = classSymbolProto.getHasDecorators();
+    hasMetaClass = classSymbolProto.getHasMetaclass();
+    metaclassFQN = classSymbolProto.getMetaclassName();
+    supportsGenerics = classSymbolProto.getIsGeneric();
+    List<SymbolsProtos.FunctionSymbol> methodsList = classSymbolProto.getMethodsList();
+    Set<Symbol> methods = methodsList.stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet());
+    for (SymbolsProtos.OverloadedFunctionSymbol overloadedMethod : classSymbolProto.getOverloadedMethodsList()) {
+      methods.add(AmbiguousSymbolImpl.create(overloadedMethod.getDefinitionsList().stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet())));
+    }
+    addMembers(methods);
+    superClassesFqns = classSymbolProto.getSuperClassesList();
+  }
+
   @Override
   ClassSymbolImpl copyWithoutUsages() {
     ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators, hasMetaClass, metaclassFQN, supportsGenerics);
@@ -111,8 +131,19 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public List<Symbol> superClasses() {
+    // In case of symbols coming from TypeShed protobuf, we resolve superclasses lazily
+    if (!hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty()) {
+      superClassesFqns.stream().map(ClassSymbolImpl::resolveSuperClass).forEach(this::addSuperClass);
+    }
     hasAlreadyReadSuperClasses = true;
     return Collections.unmodifiableList(superClasses);
+  }
+
+  private static Symbol resolveSuperClass(String superClassFqn) {
+    String[] fqnSplitByDot = superClassFqn.split("\\.");
+    String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
+    Symbol symbol = TypeShed.symbolWithFQN(superClassFqn);
+    return symbol == null ? new SymbolImpl(localName, superClassFqn) : symbol;
   }
 
   public void addSuperClass(Symbol symbol) {
