@@ -45,6 +45,7 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 
@@ -152,6 +153,27 @@ public class InferredTypes {
   public static InferredType fromTypeshedTypeAnnotation(TypeAnnotation typeAnnotation) {
     Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
     return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
+  }
+
+  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
+    switch (type.getKind()) {
+      case INSTANCE:
+        String typeName = type.getSimpleName();
+        return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
+      case TYPE_ALIAS:
+      case CALLABLE:
+        return fromTypeshedProtobuf(type.getArgs(0));
+      case UNION:
+        return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
+      case TUPLE:
+        return TUPLE;
+      case NONE:
+        return NONE;
+      case TYPED_DICT:
+        return DICT;
+      default:
+        return anyType();
+    }
   }
 
   @CheckForNull
