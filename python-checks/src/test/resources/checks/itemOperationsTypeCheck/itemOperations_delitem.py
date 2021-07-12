@@ -16,9 +16,9 @@ def builtin_types_supporting_delitem():
 def builtin_types_not_supporting_delitem():
   # dictviews https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects
   mydict = {'a': 1, 'b': 2}
-  del mydict.keys()[0]  # OK: FP in Python 2
-  del mydict.values()[0] # OK: FP in Python 2
-  del mydict.items()[0]  # OK: FP in Python 2
+  del mydict.keys()[0]  # Noncompliant
+  del mydict.values()[0] # Noncompliant
+  del mydict.items()[0]  # Noncompliant
 
   # iterators
   del iter(mylist)[0]  # Noncompliant
@@ -43,12 +43,12 @@ def builtin_types_not_supporting_delitem():
   # set Comprehension
   del {nb for nb in range(4)}[0]  # Noncompliant
 
-  del range(10)[0]  # FN
+  del range(10)[0]  # Noncompliant
 
   var = None
   del var[0]  # Noncompliant
 
-  del bytes(b'123')[0]  # FN: unknown return type
+  del bytes(b'123')[0]  # Noncompliant
   del memoryview(bytearray(b'abc'))[0]  # Noncompliant
 
   del "abc"[0]  # Noncompliant

@@ -41,11 +41,13 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
+import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 
@@ -58,12 +60,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean isAsynchronous;
   private final boolean hasDecorators;
   private String annotatedReturnTypeName = null;
+  private SymbolsProtos.Type protobufReturnType = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private final boolean isStub;
   private Symbol owner;
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
   private boolean isDjangoView = false;
+  private boolean hasReadDeclaredReturnType = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -86,7 +90,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass) {
-    super(functionSymbolProto.getName(), functionSymbolProto.getFullyQualifiedName());
+    super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName()));
     setKind(Kind.FUNCTION);
     isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();
@@ -95,6 +99,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     SymbolsProtos.Type returnAnnotation = functionSymbolProto.getReturnAnnotation();
     String returnTypeName = returnAnnotation.getFullyQualifiedName();
     annotatedReturnTypeName = returnTypeName.isEmpty() ? null : returnTypeName;
+    protobufReturnType = returnAnnotation;
     for (SymbolsProtos.ParameterSymbol parameterSymbol : functionSymbolProto.getParametersList()) {
       ParameterState parameterState = new ParameterState();
       parameterState.positionalOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
@@ -102,11 +107,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       boolean isVariadic = (parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD) || parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
       hasVariadicParameter |= isVariadic;
       ParameterImpl parameter = new ParameterImpl(
-        parameterSymbol.getName(), InferredTypes.fromTypeshedProtobuf(parameterSymbol.getTypeAnnotation()), parameterSymbol.getHasDefault(), isVariadic, parameterState, null);
+        parameterSymbol.getName(), anyType(), parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
-    declaredReturnType = InferredTypes.fromTypeshedProtobuf(returnAnnotation);
+    declaredReturnType = anyType();
     isStub = true;
     isDjangoView = false;
   }
@@ -170,7 +175,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId), null));
       }
     }
   }
@@ -181,7 +186,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     if (parameterName != null) {
       InferredType declaredType = getParameterType(parameter, starToken);
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
-        starToken != null, parameterState, locationInFile(parameter, fileId)));
+        starToken != null, parameterState, locationInFile(parameter, fileId), null));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -264,6 +269,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public InferredType declaredReturnType() {
+    if (!hasReadDeclaredReturnType && protobufReturnType != null) {
+      declaredReturnType = InferredTypes.fromTypeshedProtobuf(protobufReturnType);
+      hasReadDeclaredReturnType = true;
+    }
     return declaredReturnType;
   }
 
@@ -300,18 +309,20 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.isDjangoView = isDjangoView;
   }
 
-  private static class ParameterImpl implements Parameter {
+  public static class ParameterImpl implements Parameter {
 
     private final String name;
-    private final InferredType declaredType;
+    private InferredType declaredType;
+    private SymbolsProtos.Type protobufType;
     private final boolean hasDefaultValue;
     private final boolean isVariadic;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
+    private boolean hasReadDeclaredType = false;
 
     ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue,
-                  boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location) {
+                  boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location, @Nullable SymbolsProtos.Type protobufType) {
       this.name = name;
       this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
@@ -319,6 +330,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isKeywordOnly = parameterState.keywordOnly;
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
+      this.protobufType = protobufType;
     }
 
     @Override
@@ -329,6 +341,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
     @Override
     public InferredType declaredType() {
+      if (!hasReadDeclaredType && protobufType != null) {
+        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType);
+        hasReadDeclaredType = true;
+      }
       return declaredType;
     }
 
@@ -356,6 +372,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public LocationInFile location() {
       return location;
+    }
+
+    public void setDeclaredType(InferredType declaredType) {
+      this.declaredType = declaredType;
     }
   }
 }

@@ -89,7 +89,7 @@ def builtin_functions():
   number.__add__(x = unexpected) # Noncompliant {{Change this argument; Function "__add__" expects a different type}}
 #                ^^^^^^^^^^^^^^
   float.fromhex(42) # Noncompliant
-  eval(42)
+  eval(42) # Noncompliant
   "Some string literal".format(1, 2)
   exit(1)
   repr(A)

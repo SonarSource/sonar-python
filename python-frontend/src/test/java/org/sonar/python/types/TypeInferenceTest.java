@@ -21,7 +21,6 @@ package org.sonar.python.types;
 
 import java.util.List;
 import org.junit.Test;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -324,11 +323,8 @@ public class TypeInferenceTest {
   public void builtin_function_types() {
     assertThat(lastExpression("all([1, 2, 3])").type()).isEqualTo(BOOL);
     assertThat(lastExpression("round(42)").type()).isEqualTo(AnyType.ANY);
-    Symbol classSymbolRange = ((AmbiguousSymbol) TypeShed.builtinSymbols().get("range"))
-      .alternatives().stream()
-      .filter(symbol -> symbol.is(Symbol.Kind.CLASS))
-      .findFirst().get();
-    assertThat(lastExpression("range(42)").type()).isEqualTo(InferredTypes.or(InferredTypes.runtimeType(classSymbolRange), LIST));
+    Symbol classSymbolRange = TypeShed.builtinSymbols().get("range");
+    assertThat(lastExpression("range(42)").type()).isEqualTo(InferredTypes.runtimeType(classSymbolRange));
     assertThat(lastExpression("getattr(42)").type()).isEqualTo(AnyType.ANY);
   }
 

@@ -114,4 +114,4 @@ class ChildClassOneExtraDefault(ParentClass):
 from io import BytesIO
 
 class StreamingBuffer(BytesIO):
-  def read(self): ... # FN
+  def read(self): ... # Noncompliant

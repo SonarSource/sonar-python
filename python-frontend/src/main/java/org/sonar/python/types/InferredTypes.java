@@ -155,7 +155,10 @@ public class InferredTypes {
     return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
   }
 
-  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
+  public static InferredType fromTypeshedProtobuf(@Nullable SymbolsProtos.Type type) {
+    if (type == null) {
+      return anyType();
+    }
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
@@ -166,11 +169,11 @@ public class InferredTypes {
       case UNION:
         return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
       case TUPLE:
-        return TUPLE;
+        return InferredTypes.TUPLE;
       case NONE:
-        return NONE;
+        return InferredTypes.NONE;
       case TYPED_DICT:
-        return DICT;
+        return InferredTypes.DICT;
       default:
         return anyType();
     }
