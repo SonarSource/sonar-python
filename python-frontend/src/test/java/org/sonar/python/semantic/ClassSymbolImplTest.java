@@ -234,7 +234,7 @@ public class ClassSymbolImplTest {
     String protobuf =
       "name: \"A\"\n" +
       "fully_qualified_name: \"mod.A\"\n" +
-      "super_classes: \"mod.B\"\n" +
+      "super_classes: \"builtins.object\"\n" +
       "has_decorators: true\n" +
       "has_metaclass: true\n" +
       "metaclass_name: \"abc.ABCMeta\"\n" +
@@ -245,7 +245,7 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
-    assertThat(classSymbol.superClasses()).isEmpty();
+    assertThat(classSymbol.superClasses()).containsExactly(TypeShed.typeShedClass("object"));
     assertThat(classSymbol.hasDecorators()).isTrue();
     assertThat(classSymbol.hasMetaClass()).isTrue();
     assertThat(classSymbol.metaclassFQN()).isEqualTo("abc.ABCMeta");

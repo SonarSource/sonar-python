@@ -155,14 +155,11 @@ public class InferredTypes {
     return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
   }
 
-  public static InferredType fromTypeshedProtobuf(@Nullable SymbolsProtos.Type type) {
-    if (type == null) {
-      return anyType();
-    }
+  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getSimpleName();
-        return typeName != null ? runtimeType(TypeShed.symbolWithFQN(typeName)) : anyType();
+        return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
       case TYPE_ALIAS:
       case CALLABLE:
         return fromTypeshedProtobuf(type.getArgs(0));

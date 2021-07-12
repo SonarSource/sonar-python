@@ -37,6 +37,7 @@ import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -57,8 +58,8 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
+import org.sonar.python.types.protobuf.SymbolsProtos.OverloadedFunctionSymbol;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -378,37 +379,17 @@ public class TypeShed {
       return Collections.emptyMap();
     }
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
-    for (SymbolsProtos.ClassSymbol classSymbolProto : moduleSymbol.getClassesList()) {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbolProto);
-      addSuperClasses(deserializedSymbols, classSymbolProto, classSymbol);
-      deserializedSymbols.put(classSymbolProto.getFullyQualifiedName(), classSymbol);
-    }
-    for (SymbolsProtos.FunctionSymbol functionSymbolProto : moduleSymbol.getFunctionsList()) {
-      deserializedSymbols.put(functionSymbolProto.getFullyQualifiedName(), new FunctionSymbolImpl(functionSymbolProto));
-    }
-    for (SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol : moduleSymbol.getOverloadedFunctionsList()) {
-      deserializedSymbols.put(overloadedFunctionSymbol.getFullname(),
-        AmbiguousSymbolImpl.create(overloadedFunctionSymbol.getDefinitionsList().stream().map(FunctionSymbolImpl::new).collect(Collectors.toSet())));
-    }
+    moduleSymbol.getClassesList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new ClassSymbolImpl(proto)));
+    moduleSymbol.getFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new FunctionSymbolImpl(proto)));
+    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullname(), fromOverloadedFunction(proto)));
     return deserializedSymbols;
   }
 
-
-  private static void addSuperClasses(Map<String, Symbol> deserializedSymbols, SymbolsProtos.ClassSymbol classSymbolProto, ClassSymbolImpl classSymbol) {
-    classSymbolProto.getSuperClassesList().forEach(superClassFqn -> {
-      if (deserializedSymbols.containsKey(superClassFqn)) {
-        classSymbol.addSuperClass(deserializedSymbols.get(superClassFqn));
-        return;
-      }
-      String[] fqnSplittedByDot = superClassFqn.split("\\.");
-      String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
-      Symbol symbol = symbolWithFQN(superClassFqn);
-      if (symbol != null) {
-        classSymbol.addSuperClass(symbol);
-        return;
-      }
-      classSymbol.addSuperClass(new SymbolImpl(localName, superClassFqn));
-    });
+  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol) {
+    Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
+      .map(FunctionSymbolImpl::new)
+      .collect(Collectors.toSet());
+    return AmbiguousSymbolImpl.create(overloadedSymbols);
   }
 
   @CheckForNull
@@ -424,7 +405,7 @@ public class TypeShed {
         return symbol;
       }
     }
-    return builtins.getOrDefault(fullyQualifiedName, null);
+    return null;
   }
 
 }

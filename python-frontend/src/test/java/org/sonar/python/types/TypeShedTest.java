@@ -306,7 +306,7 @@ public class TypeShedTest {
       "classes {\n" +
       "  name: \"C\"\n" +
       "  fully_qualified_name: \"mod.C\"\n" +
-      "  super_classes: \"mod.Base\"\n" +
+      "  super_classes: \"builtins.str\"\n" +
       "}\n" +
       "classes {\n" +
       "  name: \"D\"\n" +
@@ -318,7 +318,7 @@ public class TypeShedTest {
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
 
     ClassSymbol C = (ClassSymbol) symbols.get("mod.C");
-    assertThat(C.superClasses()).containsExactly(symbols.get("mod.Base"));
+    assertThat(C.superClasses()).containsExactly(TypeShed.typeShedClass("str"));
     ClassSymbol D = (ClassSymbol) symbols.get("mod.D");
     assertThat(D.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactly(tuple(Kind.OTHER, "NOT_EXISTENT"));

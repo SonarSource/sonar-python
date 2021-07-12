@@ -336,7 +336,7 @@ public class InferredTypesTest {
 
   @Test
   public void test_type_from_protobuf() throws TextFormat.ParseException {
-    assertThat(fromTypeshedProtobuf(null)).isEqualTo(anyType());
+    assertThat(protobufType("")).isEqualTo(anyType());
     assertThat(protobufType(
       "pretty_printed_name: \"None\"\n" +
       "kind: NONE\n")).isEqualTo(NONE);

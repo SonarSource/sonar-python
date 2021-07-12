@@ -89,11 +89,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     super(functionSymbolProto.getName(), functionSymbolProto.getFullyQualifiedName());
     setKind(Kind.FUNCTION);
     isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
-    isAsynchronous = functionSymbolProto.getIsAsyncGenerator();
+    isAsynchronous = functionSymbolProto.getIsCoroutine() || functionSymbolProto.getIsAsyncGenerator();
     hasDecorators = functionSymbolProto.getHasDecorators();
     decorators = functionSymbolProto.getResolvedDecoratorNamesList();
     SymbolsProtos.Type returnAnnotation = functionSymbolProto.getReturnAnnotation();
-    annotatedReturnTypeName = returnAnnotation != null ? returnAnnotation.getSimpleName() : null;
+    String returnTypeName = returnAnnotation.getSimpleName();
+    annotatedReturnTypeName = returnTypeName.isEmpty() ? null : returnTypeName;
     for (SymbolsProtos.ParameterSymbol parameterSymbol : functionSymbolProto.getParametersList()) {
       ParameterState parameterState = new ParameterState();
       parameterState.positionalOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
