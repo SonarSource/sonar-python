@@ -307,8 +307,6 @@ def get_decorator_name(dec: mpn.Node):
     if isinstance(dec, mpn.NameExpr):
         # decorator full name might not be the actual fully qualified name if it could not be resolved
         # TODO: handle "None" case and check for fallbacks
-        if dec.fullname is not None:
-            return dec.fullname
         if dec.name is not None:
             return dec.name
     if isinstance(dec, mpn.MemberExpr):
