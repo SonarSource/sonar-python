@@ -63,10 +63,7 @@ message FunctionSymbol {
 message OverloadedFunctionSymbol {
   string name = 1;
   string fullname = 2;
-  bool is_final = 3;
-  bool is_property = 4;
-  bool is_static = 5;
-  repeated FunctionSymbol definitions = 6;
+  repeated FunctionSymbol definitions = 3;
 }
 
 message ClassSymbol {

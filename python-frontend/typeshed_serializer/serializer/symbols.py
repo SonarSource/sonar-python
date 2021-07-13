@@ -150,9 +150,6 @@ class OverloadedFunctionSymbol:
     def __init__(self, overloaded_func_def: mpn.OverloadedFuncDef):
         self.name = overloaded_func_def.name
         self.fullname = overloaded_func_def.fullname
-        self.is_final = overloaded_func_def.is_final
-        self.is_property = overloaded_func_def.is_property
-        self.is_static = overloaded_func_def.is_static
         self.definitions = []
         for item in overloaded_func_def.items:
             if isinstance(item, mpn.FuncDef):
@@ -165,9 +162,6 @@ class OverloadedFunctionSymbol:
         pb_overloaded_func = symbols_pb2.OverloadedFunctionSymbol()
         pb_overloaded_func.name = self.name
         pb_overloaded_func.fullname = self.fullname
-        pb_overloaded_func.is_final = self.is_final
-        pb_overloaded_func.is_property = self.is_property
-        pb_overloaded_func.is_static = self.is_static
         for definition in self.definitions:
             pb_overloaded_func.definitions.append(definition.to_proto())
         return pb_overloaded_func
