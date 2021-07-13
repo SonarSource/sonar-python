@@ -95,6 +95,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();
     hasDecorators = functionSymbolProto.getHasDecorators();
+
     decorators = functionSymbolProto.getResolvedDecoratorNamesList();
     SymbolsProtos.Type returnAnnotation = functionSymbolProto.getReturnAnnotation();
     String returnTypeName = returnAnnotation.getFullyQualifiedName();
@@ -114,6 +115,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     declaredReturnType = anyType();
     isStub = true;
     isDjangoView = false;
+  }
+
+  private static String localName(String fqn) {
+    String[] fqnSplitByDot = fqn.split("\\.");
+    return fqnSplitByDot[fqnSplitByDot.length - 1];
   }
 
   public void setParametersWithType(ParameterList parametersList) {

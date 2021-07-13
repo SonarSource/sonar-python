@@ -87,9 +87,13 @@ def serialize_typeshed_stdlib_multiple_python_version():
 
 
 def main():
-    annoy_mypy_file = build_single_module("annoy", "stubs/annoy")
-    save_module(annoy_mypy_file, save_as_text=False, output_dir_name="protobuf")
-
+    opts = get_options((3,9))
+    save_module(build_single_module("builtins", opt=opts), save_as_text=False, output_dir_name="protobuf")
+    save_module(build_single_module("typing", opt=opts), save_as_text=False, output_dir_name="protobuf")
+    save_module(build_single_module("typing_extensions", opt=opts), save_as_text=False, output_dir_name="protobuf")
+    save_module(build_single_module("io", opt=opts), save_as_text=False, output_dir_name="protobuf")
+    save_module(build_single_module("codecs", opt=opts), save_as_text=False, output_dir_name="protobuf")
+    save_module(build_single_module("annoy", "stubs/annoy", opt=opts), save_as_text=False, output_dir_name="protobuf")
 
 if __name__ == '__main__':
     main()
