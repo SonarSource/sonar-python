@@ -269,7 +269,7 @@ public class FunctionSymbolTest {
       "  kind: POSITIONAL_OR_KEYWORD\n" +
       "  type_annotation {\n" +
       "    pretty_printed_name: \"builtins.str\"\n" +
-      "    simple_name: \"builtins.str\"\n" +
+      "    fully_qualified_name: \"builtins.str\"\n" +
       "  }\n" +
       "}\n" +
       "parameters {\n" +

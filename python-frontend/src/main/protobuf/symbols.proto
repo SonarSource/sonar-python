@@ -34,7 +34,7 @@ message Type {
   string pretty_printed_name = 1;
   TypeKind kind = 2;
   repeated Type args = 3;
-  optional string simple_name = 4;
+  optional string fully_qualified_name = 4;
 }
 
 message ParameterSymbol {
@@ -52,23 +52,18 @@ message FunctionSymbol {
   bool has_decorators = 6;
   repeated string resolved_decorator_names = 7;
   bool is_abstract = 8;
-  bool is_async_generator = 9;
-  bool is_awaitable_coroutine = 10;
-  bool is_coroutine = 11;
-  bool is_final = 12;
-  bool is_overload = 13;
-  bool is_property = 14;
-  bool is_static = 15;
-  bool is_class_method = 16;
+  bool is_asynchronous = 9;
+  bool is_final = 10;
+  bool is_overload = 11;
+  bool is_property = 12;
+  bool is_static = 13;
+  bool is_class_method = 14;
 }
 
 message OverloadedFunctionSymbol {
   string name = 1;
   string fullname = 2;
-  bool is_final = 3;
-  bool is_property = 4;
-  bool is_static = 5;
-  repeated FunctionSymbol definitions = 6;
+  repeated FunctionSymbol definitions = 3;
 }
 
 message ClassSymbol {
@@ -82,10 +77,8 @@ message ClassSymbol {
   bool has_metaclass = 9;
   bool is_enum = 10;
   bool is_generic = 11;
-  bool is_named_tuple = 12;
-  bool is_protocol = 13;
-  optional string metaclass_name = 14;
-  optional Type metaclass_type = 15;
+  bool is_protocol = 12;
+  optional string metaclass_name = 13;
 }
 
 message ModuleSymbol {
