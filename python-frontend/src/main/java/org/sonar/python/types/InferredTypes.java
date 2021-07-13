@@ -158,7 +158,7 @@ public class InferredTypes {
   public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
     switch (type.getKind()) {
       case INSTANCE:
-        String typeName = type.getSimpleName();
+        String typeName = type.getFullyQualifiedName();
         return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
       case TYPE_ALIAS:
       case CALLABLE:

@@ -36,7 +36,7 @@ class TypeKind(Enum):
 class TypeDescriptor:
     def __init__(self, _type: mpt.Type):
         self.args = []
-        self.simple_name = None
+        self.fully_qualified_name = None
         # kind, fqn, pretty printed name, arguments
         if isinstance(_type, mpt.Instance):
             self.kind = TypeKind.INSTANCE
@@ -45,10 +45,10 @@ class TypeDescriptor:
                 item_names = [i.pretty_printed_name for i in items]
                 self.args.extend(items)
                 self.pretty_printed_name = f"{_type.type.fullname}[{','.join(item_names)}]"
-                self.simple_name = _type.type.fullname
+                self.fully_qualified_name = _type.type.fullname
             else:
                 self.pretty_printed_name = _type.type.fullname
-                self.simple_name = _type.type.fullname
+                self.fully_qualified_name = _type.type.fullname
         elif isinstance(_type, mpt.UnionType):
             self.kind = TypeKind.UNION
             items = [TypeDescriptor(t) for t in _type.items]
@@ -81,7 +81,7 @@ class TypeDescriptor:
             target = TypeDescriptor(alias.target)
             self.args.append(target)
             self.pretty_printed_name = f"TypeAlias[{target.pretty_printed_name}]"
-            self.simple_name = _type.alias.fullname
+            self.fully_qualified_name = _type.alias.fullname
         elif isinstance(_type, mpt.CallableType):
             self.kind = TypeKind.CALLABLE
             fallback = TypeDescriptor(_type.fallback)
@@ -110,8 +110,8 @@ class TypeDescriptor:
         pb_type = symbols_pb2.Type()
         pb_type.pretty_printed_name = self.pretty_printed_name
         pb_type.kind = symbols_pb2.TypeKind.Value(self.kind.name)
-        if self.simple_name is not None:
-            pb_type.simple_name = self.simple_name
+        if self.fully_qualified_name is not None:
+            pb_type.fully_qualified_name = self.fully_qualified_name
         for arg in self.args:
             pb_type.args.append(arg.to_proto())
         return pb_type
@@ -159,7 +159,7 @@ class OverloadedFunctionSymbol:
                 # Should not happen?
                 self.definitions.append(FunctionSymbol(item))
             if isinstance(item, mpn.Decorator):
-                self.definitions.append(FunctionSymbol(item.func, decorators=item.decorators))
+                self.definitions.append(FunctionSymbol(item.func, decorators=item.original_decorators))
 
     def to_proto(self) -> symbols_pb2.OverloadedFunctionSymbol:
         pb_overloaded_func = symbols_pb2.OverloadedFunctionSymbol()
@@ -178,12 +178,10 @@ class FunctionSymbol:
         self.name = func_def.name
         self.fullname = func_def.fullname
         self.return_type = extract_return_type(func_def)
-        self.arguments = extract_arguments(func_def)
+        self.parameters = extract_parameters(func_def)
         self.has_decorators = func_def.is_decorated
         self.is_abstract = func_def.is_abstract
-        self.is_async_generator = func_def.is_async_generator
-        self.is_awaitable_coroutine = func_def.is_awaitable_coroutine
-        self.is_coroutine = func_def.is_coroutine
+        self.is_asynchronous = func_def.is_async_generator or func_def.is_awaitable_coroutine or func_def.is_coroutine
         self.is_final = func_def.is_final
         self.is_overload = func_def.is_overload
         self.is_property = func_def.is_property
@@ -192,12 +190,9 @@ class FunctionSymbol:
         self.resolved_decorator_names = []
         if self.has_decorators and decorators is not None:
             for dec in decorators:
-                if isinstance(dec, mpn.NameExpr):
-                    # decorator full name might not be the actual fully qualified name if it could not be resolved
-                    # TODO: handle "None" case and check for fallbacks
-                    if dec.fullname is not None:
-                        self.resolved_decorator_names.append(dec.fullname)
-            ...
+                decorator_name = get_decorator_name(dec)
+                if decorator_name is not None:
+                    self.resolved_decorator_names.append(decorator_name)
 
     def to_proto(self) -> symbols_pb2.FunctionSymbol:
         pb_func = symbols_pb2.FunctionSymbol()
@@ -206,9 +201,7 @@ class FunctionSymbol:
         pb_func.has_decorators = self.has_decorators
         pb_func.resolved_decorator_names.extend(self.resolved_decorator_names)
         pb_func.is_abstract = self.is_abstract
-        pb_func.is_async_generator = self.is_async_generator
-        pb_func.is_awaitable_coroutine = self.is_awaitable_coroutine
-        pb_func.is_coroutine = self.is_coroutine
+        pb_func.is_asynchronous = self.is_asynchronous
         pb_func.is_final = self.is_final
         pb_func.is_overload = self.is_overload
         pb_func.is_property = self.is_property
@@ -216,8 +209,8 @@ class FunctionSymbol:
         pb_func.is_class_method = self.is_class_method
         if self.return_type is not None:
             pb_func.return_annotation.CopyFrom(self.return_type.to_proto())
-        for argument in self.arguments:
-            pb_func.parameters.append(argument.to_proto())
+        for parameter in self.parameters:
+            pb_func.parameters.append(parameter.to_proto())
         return pb_func
 
 
@@ -231,10 +224,8 @@ class ClassSymbol:
         self.overloaded_methods = []
         self.is_enum = type_info.is_enum
         self.is_generic = type_info.is_generic()
-        self.is_named_tuple = type_info.is_named_tuple
         self.is_protocol = type_info.is_protocol
         self.metaclass_name = None
-        self.metaclass_type = None
         for base in type_info.bases:
             if isinstance(base, mpt.Instance):
                 self.super_classes.append(base.type.fullname)
@@ -250,7 +241,7 @@ class ClassSymbol:
             if isinstance(node, mpn.FuncDef):
                 self.methods.append(FunctionSymbol(node))
             if isinstance(node, mpn.Decorator):
-                self.methods.append(FunctionSymbol(node.func, decorators=node.decorators))
+                self.methods.append(FunctionSymbol(node.func, decorators=node.original_decorators))
             if isinstance(node, mpn.OverloadedFuncDef):
                 self.overloaded_methods.append(OverloadedFunctionSymbol(node))
         class_def = type_info.defn
@@ -259,8 +250,6 @@ class ClassSymbol:
             self.has_metaclass = True
             if isinstance(class_def.metaclass, mpn.NameExpr):
                 self.metaclass_name = class_def.metaclass.fullname
-            if isinstance(metaclass_type := type_info.metaclass_type, mpt.Instance):
-                self.metaclass_type = TypeDescriptor(metaclass_type)
         self.has_decorators = len(class_def.decorators) > 0
 
     def to_proto(self) -> symbols_pb2.ClassSymbol:
@@ -273,12 +262,9 @@ class ClassSymbol:
         pb_class.has_metaclass = self.has_metaclass
         pb_class.is_enum = self.is_enum
         pb_class.is_generic = self.is_generic
-        pb_class.is_named_tuple = self.is_named_tuple
         pb_class.is_protocol = self.is_protocol
         if self.metaclass_name is not None:
             pb_class.metaclass_name = self.metaclass_name
-        if self.metaclass_type is not None:
-            pb_class.metaclass_type.CopyFrom(self.metaclass_type.to_proto())
         for method in self.methods:
             pb_class.methods.append(method.to_proto())
         for overloaded_method in self.overloaded_methods:
@@ -317,7 +303,22 @@ class ModuleSymbol:
         return pb_module
 
 
-def extract_arguments(func_def: mpn.FuncDef):
+def get_decorator_name(dec: mpn.Node):
+    if isinstance(dec, mpn.NameExpr):
+        # decorator full name might not be the actual fully qualified name if it could not be resolved
+        # TODO: handle "None" case and check for fallbacks
+        if dec.fullname is not None:
+            return dec.fullname
+        if dec.name is not None:
+            return dec.name
+    if isinstance(dec, mpn.MemberExpr):
+        prefix = get_decorator_name(dec.expr)
+        if prefix is not None and dec.name is not None:
+            return f"{prefix}.{dec.name}"
+    return None
+
+
+def extract_parameters(func_def: mpn.FuncDef):
     arguments = []
     func_type = func_def.type
     if not isinstance(func_type, mpt.CallableType):
@@ -345,10 +346,11 @@ def extract_return_type(func_def: mpn.FuncDef):
     return TypeDescriptor(func_type.ret_type)
 
 
-def save_module(mypy_file: mpn.MypyFile, save_as_text=True, output_dir_name="output"):
+def save_module(mypy_file: mpn.MypyFile, save_as_text=True, output_dir_name="output",
+                save_location="../../src/main/resources/org/sonar/python/types"):
     ms = ModuleSymbol(mypy_file)
     ms_pb = ms.to_proto()
-    save_dir = f"../../src/main/resources/{output_dir_name}" if save_as_text else f"../../src/main/resources/{output_dir_name}_binary"
+    save_dir = f"{save_location}/{output_dir_name}"
     save_string = str(ms_pb) if save_as_text else ms_pb.SerializeToString()
     open_mode = "w" if save_as_text else "wb"
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)

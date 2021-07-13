@@ -39,13 +39,12 @@ class TypeshedSerializerTest(unittest.TestCase):
         self.assertEqual(completenames_method_symbol.name, "completenames")
         self.assertEqual(completenames_method_symbol.fullname, "cmd.Cmd.completenames")
         self.assertFalse(completenames_method_symbol.has_decorators)
-        self.assertFalse(completenames_method_symbol.is_coroutine)
-        self.assertFalse(completenames_method_symbol.is_async_generator)
+        self.assertFalse(completenames_method_symbol.is_asynchronous)
         self.assertEqual(completenames_method_symbol.return_type.pretty_printed_name, "builtins.list[builtins.str]")
         self.assertEqual(len(completenames_method_symbol.resolved_decorator_names), 0)
         self.assertEqual(completenames_method_symbol.fullname, "cmd.Cmd.completenames")
 
-        args = completenames_method_symbol.arguments
+        args = completenames_method_symbol.parameters
         self.assertEqual(len(args), 3)
 
 

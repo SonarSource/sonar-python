@@ -344,19 +344,19 @@ public class InferredTypesTest {
     assertThat(protobufType("kind: TUPLE")).isEqualTo(TUPLE);
     assertThat(protobufType(
       "pretty_printed_name: \"builtins.str\"\n" +
-      "simple_name: \"builtins.str\"\n")).isEqualTo(STR);
+      "fully_qualified_name: \"builtins.str\"\n")).isEqualTo(STR);
     assertThat(protobufType(
       "kind: TYPE_ALIAS\n" +
       "args {\n" +
       "  kind: UNION\n" +
       "  args {\n" +
-      "    simple_name: \"builtins.str\"\n" +
+      "    fully_qualified_name: \"builtins.str\"\n" +
       "  }\n" +
       "  args {\n" +
-      "    simple_name: \"builtins.int\"\n" +
+      "    fully_qualified_name: \"builtins.int\"\n" +
       "  }\n" +
       "}\n" +
-      "simple_name: \"mod.t\""
+      "fully_qualified_name: \"mod.t\""
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
   }

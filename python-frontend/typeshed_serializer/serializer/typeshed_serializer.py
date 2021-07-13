@@ -47,7 +47,7 @@ def walk_typeshed_stdlib(opt: options.Options = get_options()):
     relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
     path = os.path.join(CURRENT_PATH, relative_path)
     for root, dirs, files in os.walk(path):
-        package_name = root.replace(path, "").replace("\\", ".").lstrip(".")
+        package_name = root.replace(path, "").replace("\\", ".").replace("/", ".").lstrip(".")
         if not generate_python2_stdlib and "python2" in package_name:
             # Avoid python2 stubs
             continue
@@ -75,7 +75,7 @@ def serialize_typeshed_stdlib(output_dir_name="output", python_version=(3, 8)):
     opt = get_options(python_version)
     build_result = walk_typeshed_stdlib(opt)
     for file in build_result.files:
-        save_module(build_result.files.get(file), output_dir_name=output_dir_name)
+        save_module(build_result.files.get(file), save_as_text=True, output_dir_name=output_dir_name)
 
 
 def serialize_typeshed_stdlib_multiple_python_version():
@@ -88,7 +88,7 @@ def serialize_typeshed_stdlib_multiple_python_version():
 
 def main():
     annoy_mypy_file = build_single_module("annoy", "stubs/annoy")
-    save_module(annoy_mypy_file, output_dir_name="protobuf")
+    save_module(annoy_mypy_file, save_as_text=False, output_dir_name="protobuf")
 
 
 if __name__ == '__main__':

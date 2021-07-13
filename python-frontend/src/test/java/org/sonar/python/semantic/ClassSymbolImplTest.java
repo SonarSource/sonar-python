@@ -237,11 +237,7 @@ public class ClassSymbolImplTest {
       "super_classes: \"builtins.object\"\n" +
       "has_decorators: true\n" +
       "has_metaclass: true\n" +
-      "metaclass_name: \"abc.ABCMeta\"\n" +
-      "metaclass_type {\n" +
-      "  pretty_printed_name: \"abc.ABCMeta\"\n" +
-      "  simple_name: \"abc.ABCMeta\"\n" +
-      "}";
+      "metaclass_name: \"abc.ABCMeta\"";
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
