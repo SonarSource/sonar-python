@@ -66,7 +66,7 @@ def stdlib():
     if passwd == pwd.getpwuid(1): pass # OK
     if 42 == pwd.getpwuid(1): pass # FN, unresolved type hierarchy
     if pwd.getpwall() == 42: pass # Noncompliant
-    if zip(l1, l2) == 42: pass # Noncompliant
+    if zip(l1, l2) == 42: pass # FN due to missing Python 2 and usage of zip.__new__
     if platform.architecture() == '32bit': ... # Noncompliant
 
 def third_party():

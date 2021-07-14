@@ -80,6 +80,7 @@ public class TypeShed {
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
   private static final String CUSTOM_THIRD_PARTY = "custom/";
   private static final String PROTOBUF = "protobuf/";
+  private static final String BUILTINS_PREFIX = "builtins.";
 
   private static final Logger LOG = Loggers.get(TypeShed.class);
 
@@ -90,29 +91,11 @@ public class TypeShed {
     // InferredTypes class initialization requires builtInSymbols to be computed. Calling dummy method
     // from it explicitly to overcome the issue of TypeShed.builtins being assigned twice
     if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
-      Map<String, Symbol> builtins = new HashMap<>();
+      Map<String, Symbol> builtins = builtinsSymbolsFromProtobuf();
+
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
-      // 2and3/builtins.pyi has been split into 2/builtins.pyi and 3/builtins.pyi
-      // for the time being sonar-python still relies on a copied version of '2and3/builtins.pyi'
-      // (https://github.com/python/typeshed/blob/b0f4900c9fbf5092ee40936f0b831641d6f49e03/stdlib/2and3/builtins.pyi)
-      // TODO: change logic to automatically merge 2/builtins.pyi and 3/builtins.pyi
-      InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
-      PythonFile file = new TypeShedPythonFile(resource, "");
-      AstNode astNode = PythonParser.create().parse(file.content());
-      FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-      Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
-      Set<Symbol> typingModuleSymbols = typingModuleSymbols();
-      globalSymbols.put(TYPING, typingModuleSymbols);
-      Set<Symbol> typingExtensionsSymbols = typingExtensionsSymbols(Collections.singletonMap(TYPING, typingModuleSymbols));
-      globalSymbols.put(TYPING_EXTENSIONS, typingExtensionsSymbols);
-      new SymbolTableBuilder("", file, ProjectLevelSymbolTable.from(globalSymbols)).visitFileInput(fileInput);
-      for (Symbol globalVariable : fileInput.globalVariables()) {
-        ((SymbolImpl) globalVariable).removeUsages();
-        builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
-      }
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
       InferredTypes.setBuiltinSymbols(builtins);
-      fileInput.accept(new ReturnTypeVisitor());
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
     return builtins;
@@ -129,13 +112,6 @@ public class TypeShed {
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
     }
-  }
-
-  // visible for testing
-  static Set<Symbol> typingModuleSymbols() {
-    Map<String, Symbol> typingPython3 = getModuleSymbols(TYPING, STDLIB_3, Collections.emptyMap());
-    Map<String, Symbol> typingPython2 = getModuleSymbols(TYPING, STDLIB_2, Collections.emptyMap());
-    return commonSymbols(typingPython2, typingPython3, TYPING);
   }
 
   private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
@@ -159,12 +135,6 @@ public class TypeShed {
     });
 
     return commonSymbols;
-  }
-
-  static Set<Symbol> typingExtensionsSymbols(Map<String, Set<Symbol>> typingSymbols) {
-    Map<String, Symbol> typingExtensionSymbols = getModuleSymbols(TYPING_EXTENSIONS, THIRD_PARTY_2AND3,
-      typingSymbols);
-    return new HashSet<>(typingExtensionSymbols.values());
   }
 
   public static Set<Symbol> symbolsForModule(String moduleName) {
@@ -205,7 +175,7 @@ public class TypeShed {
       return new HashSet<>();
     }
     modulesInProgress.add(moduleName);
-    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName);
+    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName).values();
     if (!symbolsFromProtobuf.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return new HashSet<>(symbolsFromProtobuf);
@@ -355,33 +325,39 @@ public class TypeShed {
     }
   }
 
+  private static Map<String, Symbol> builtinsSymbolsFromProtobuf() {
+    Map<String, Symbol> builtins = getSymbolsFromProtobufModule("builtins");
 
-  private static Collection<Symbol> getSymbolsFromProtobufModule(String moduleName) {
+    return builtins;
+  }
+
+  private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName) {
     InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
     if (resource == null) {
-      return Collections.emptySet();
-    }
-    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource)).values();
-  }
-
-  @CheckForNull
-  static ModuleSymbol deserializedModule(String moduleName, InputStream resource) {
-    try {
-      return ModuleSymbol.parseFrom(resource);
-    } catch (IOException e) {
-      LOG.debug("Error while deserializing protobuf for module " + moduleName, e);
-      return null;
-    }
-  }
-
-  static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol) {
-    if (moduleSymbol == null) {
       return Collections.emptyMap();
     }
+    InputStream resourcePython2 = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + "_python2.protobuf");
+    return getSymbolsFromProtobufModule(deserializedModules(moduleName, resource, resourcePython2));
+  }
+
+  static Collection<ModuleSymbol> deserializedModules(String moduleName, InputStream resource, @Nullable InputStream resourcePython2) {
+    try {
+      return Collections.singletonList(ModuleSymbol.parseFrom(resource));
+    } catch (IOException e) {
+      LOG.debug("Error while deserializing protobuf for module " + moduleName, e);
+      return Collections.emptyList();
+    }
+  }
+
+  static Map<String, Symbol> getSymbolsFromProtobufModule(Collection<ModuleSymbol> moduleSymbols) {
+    if (moduleSymbols.isEmpty()) {
+      return Collections.emptyMap();
+    }
+    ModuleSymbol moduleSymbol = moduleSymbols.iterator().next();
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
-    moduleSymbol.getClassesList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new ClassSymbolImpl(proto)));
-    moduleSymbol.getFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new FunctionSymbolImpl(proto)));
-    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullname(), fromOverloadedFunction(proto)));
+    moduleSymbol.getClassesList().forEach(proto -> deserializedSymbols.put(normalizedFqn(proto.getFullyQualifiedName()), new ClassSymbolImpl(proto)));
+    moduleSymbol.getFunctionsList().forEach(proto -> deserializedSymbols.put(normalizedFqn(proto.getFullyQualifiedName()), new FunctionSymbolImpl(proto)));
+    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> deserializedSymbols.put(normalizedFqn(proto.getFullname()), fromOverloadedFunction(proto)));
     return deserializedSymbols;
   }
 
@@ -394,6 +370,13 @@ public class TypeShed {
 
   @CheckForNull
   public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    if (builtins == null) {
+      return null;
+    }
+    Symbol builtinSymbol = builtins.get(fullyQualifiedName);
+    if (builtinSymbol != null) {
+      return builtinSymbol;
+    }
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
     if (fqnSplittedByDot.length == 2 && fqnSplittedByDot[0].equals("builtins") && builtins.containsKey(localName)) {
@@ -405,7 +388,19 @@ public class TypeShed {
         return symbol;
       }
     }
+    String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
+    Set<Symbol> symbols = symbolsForModule(moduleName);
+    if (!symbols.isEmpty()) {
+      return typeShedSymbols.get(moduleName).get(fullyQualifiedName);
+    }
     return null;
+  }
+
+  public static String normalizedFqn(String fqn) {
+    if (fqn.startsWith(BUILTINS_PREFIX)) {
+      return fqn.substring(BUILTINS_PREFIX.length());
+    }
+    return fqn;
   }
 
 }

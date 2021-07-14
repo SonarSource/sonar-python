@@ -92,7 +92,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto) {
-    super(classSymbolProto.getName(), classSymbolProto.getFullyQualifiedName());
+    super(classSymbolProto.getName(), TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName()));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
     hasDecorators = classSymbolProto.getHasDecorators();

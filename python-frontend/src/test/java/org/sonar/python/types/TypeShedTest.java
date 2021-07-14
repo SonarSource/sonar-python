@@ -50,7 +50,7 @@ public class TypeShedTest {
   @Test
   public void classes() {
     ClassSymbol intClass = TypeShed.typeShedClass("int");
-    assertThat(intClass.superClasses()).isEmpty();
+    assertThat(intClass.superClasses()).extracting(Symbol::name).containsExactly("object");
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(intClass.usages()).isEmpty();
     assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
@@ -61,10 +61,10 @@ public class TypeShedTest {
   public void str() {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
-    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"), tuple(Kind.AMBIGUOUS, "Sequence"));
+    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
     // python 3.9 support
-    assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
-    assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
+//    assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
+//    assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -85,12 +85,12 @@ public class TypeShedTest {
 
   @Test
   public void typing_module() {
-    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, s -> s));
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Kind.CLASS);
     // overlap btw python2 and python3
-    assertThat(symbols.get("Iterator").kind()).isEqualTo(Kind.AMBIGUOUS);
+//    assertThat(symbols.get("Iterator").kind()).isEqualTo(Kind.AMBIGUOUS);
   }
 
   @Test
@@ -212,8 +212,8 @@ public class TypeShedTest {
 
   @Test
   public void return_type_hints() {
-    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
-    assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("typing.Tuple");
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("builtins.tuple");
     symbols = TypeShed.symbolsForModule("flask_mail").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     ClassSymbol mail = (ClassSymbol) symbols.get("Mail");
     assertThat(((FunctionSymbol) mail.declaredMembers().stream().iterator().next()).annotatedReturnTypeName()).isNull();
@@ -254,7 +254,7 @@ public class TypeShedTest {
 
     ClassSymbol vector = (ClassSymbol) deserializedAnnoySymbols.get("annoy._Vector");
     assertThat(vector.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "typing.Sized"));
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "typing.Sized"));
     assertThat(vector.declaredMembers()).extracting(Symbol::name).containsExactlyInAnyOrder("__getitem__");
     assertThat(vector.hasDecorators()).isFalse();
     assertThat(vector.definitionLocation()).isNull();
@@ -289,7 +289,7 @@ public class TypeShedTest {
     assertThat(TypeShed.symbolsForModule("NOT_EXISTENT")).isEmpty();
     assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
     InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
-    assertThat(TypeShed.deserializedModule("mod", targetStream)).isNull();
+    assertThat(TypeShed.deserializedModules("mod", targetStream)).isNull();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Error while deserializing protobuf for module mod");
   }
 
