@@ -19,23 +19,33 @@
  */
 package org.sonar.python.types;
 
+import com.google.protobuf.TextFormat;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 public class TypeShedTest {
+
+  @org.junit.Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void classes() {
@@ -233,5 +243,141 @@ public class TypeShedTest {
     assertThat(symbols)
       .containsAll(mathSymbols)
       .containsAll(djangoHttpSymbols);
+  }
+
+  @Test
+  public void deserialize_annoy_protobuf() {
+    Map<String, Symbol> deserializedAnnoySymbols = TypeShed.symbolsForModule("annoy").stream()
+      .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
+    assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"));
+
+    ClassSymbol vector = (ClassSymbol) deserializedAnnoySymbols.get("annoy._Vector");
+    assertThat(vector.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "typing.Sized"));
+    assertThat(vector.declaredMembers()).extracting(Symbol::name).containsExactlyInAnyOrder("__getitem__");
+    assertThat(vector.hasDecorators()).isFalse();
+    assertThat(vector.definitionLocation()).isNull();
+
+    ClassSymbol annoyIndex = (ClassSymbol) deserializedAnnoySymbols.get("annoy.AnnoyIndex");
+    assertThat(annoyIndex.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"));
+    assertThat(annoyIndex.declaredMembers()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(
+      tuple(Kind.FUNCTION, "__init__"),
+      tuple(Kind.FUNCTION, "load"),
+      tuple(Kind.FUNCTION, "save"),
+      tuple(Kind.AMBIGUOUS, "get_nns_by_item"),
+      tuple(Kind.AMBIGUOUS, "get_nns_by_vector"),
+      tuple(Kind.FUNCTION, "get_item_vector"),
+      tuple(Kind.FUNCTION, "add_item"),
+      tuple(Kind.FUNCTION, "on_disk_build"),
+      tuple(Kind.FUNCTION, "build"),
+      tuple(Kind.FUNCTION, "unbuild"),
+      tuple(Kind.FUNCTION, "unload"),
+      tuple(Kind.FUNCTION, "get_distance"),
+      tuple(Kind.FUNCTION, "get_n_items"),
+      tuple(Kind.FUNCTION, "get_n_trees"),
+      tuple(Kind.FUNCTION, "verbose"),
+      tuple(Kind.FUNCTION, "set_seed")
+    );
+    assertThat(annoyIndex.hasDecorators()).isFalse();
+    assertThat(annoyIndex.definitionLocation()).isNull();
+  }
+
+  @Test
+  public void deserialize_nonexistent_or_incorrect_protobuf() {
+    assertThat(TypeShed.symbolsForModule("NOT_EXISTENT")).isEmpty();
+    assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
+    InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
+    assertThat(TypeShed.deserializedModule("mod", targetStream)).isNull();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Error while deserializing protobuf for module mod");
+  }
+
+  @Test
+  public void class_symbols_from_protobuf() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+      "name: \"mod\"\n" +
+      "fully_qualified_name: \"mod\"\n" +
+      "classes {\n" +
+      "  name: \"Base\"\n" +
+      "  fully_qualified_name: \"mod.Base\"\n" +
+      "  super_classes: \"builtins.object\"\n" +
+      "}\n" +
+      "classes {\n" +
+      "  name: \"C\"\n" +
+      "  fully_qualified_name: \"mod.C\"\n" +
+      "  super_classes: \"builtins.str\"\n" +
+      "}\n" +
+      "classes {\n" +
+      "  name: \"D\"\n" +
+      "  fully_qualified_name: \"mod.D\"\n" +
+      "  super_classes: \"NOT_EXISTENT\"\n" +
+      "}");
+    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
+
+    ClassSymbol C = (ClassSymbol) symbols.get("mod.C");
+    assertThat(C.superClasses()).containsExactly(TypeShed.typeShedClass("str"));
+    ClassSymbol D = (ClassSymbol) symbols.get("mod.D");
+    assertThat(D.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactly(tuple(Kind.OTHER, "NOT_EXISTENT"));
+  }
+
+  @Test
+  public void function_symbols_from_protobuf() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+      "name: \"mod\"\n" +
+      "fully_qualified_name: \"mod\"\n" +
+      "functions {\n" +
+      "  name: \"foo\"\n" +
+      "  fully_qualified_name: \"mod.foo\"\n" +
+      "  parameters {\n" +
+      "    name: \"p\"\n" +
+      "    kind: POSITIONAL_OR_KEYWORD\n" +
+      "  }\n" +
+      "}\n" +
+      "overloaded_functions {\n" +
+      "  name: \"bar\"\n" +
+      "  fullname: \"mod.bar\"\n" +
+      "  definitions {\n" +
+      "    name: \"bar\"\n" +
+      "    fully_qualified_name: \"mod.bar\"\n" +
+      "    parameters {\n" +
+      "      name: \"x\"\n" +
+      "      kind: POSITIONAL_OR_KEYWORD\n" +
+      "    }\n" +
+      "    has_decorators: true\n" +
+      "    resolved_decorator_names: \"typing.overload\"\n" +
+      "    is_overload: true\n" +
+      "  }\n" +
+      "  definitions {\n" +
+      "    name: \"bar\"\n" +
+      "    fully_qualified_name: \"mod.bar\"\n" +
+      "    parameters {\n" +
+      "      name: \"x\"\n" +
+      "      kind: POSITIONAL_OR_KEYWORD\n" +
+      "    }\n" +
+      "    parameters {\n" +
+      "      name: \"y\"\n" +
+      "      kind: POSITIONAL_OR_KEYWORD\n" +
+      "    }\n" +
+      "    has_decorators: true\n" +
+      "    resolved_decorator_names: \"typing.overload\"\n" +
+      "    is_overload: true\n" +
+      "  }\n" +
+      "}\n");
+    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(tuple(Kind.FUNCTION, "mod.foo"), tuple(Kind.AMBIGUOUS, "mod.bar"));
+    AmbiguousSymbol ambiguousSymbol = (AmbiguousSymbol) symbols.get("mod.bar");
+    assertThat(ambiguousSymbol.alternatives()).extracting(Symbol::kind).containsExactly(Kind.FUNCTION, Kind.FUNCTION);
+
+  }
+
+  private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
+    TextFormat.merge(protobuf, builder);
+    return builder.build();
   }
 }
