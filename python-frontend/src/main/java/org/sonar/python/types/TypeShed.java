@@ -336,23 +336,24 @@ public class TypeShed {
     if (resource == null) {
       return Collections.emptyMap();
     }
-    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource));
+    InputStream resourcePython2 = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + "_python2.protobuf");
+    return getSymbolsFromProtobufModule(deserializedModules(moduleName, resource, resourcePython2));
   }
 
-  @CheckForNull
-  static ModuleSymbol deserializedModule(String moduleName, InputStream resource) {
+  static Collection<ModuleSymbol> deserializedModules(String moduleName, InputStream resource, @Nullable InputStream resourcePython2) {
     try {
-      return ModuleSymbol.parseFrom(resource);
+      return Collections.singletonList(ModuleSymbol.parseFrom(resource));
     } catch (IOException e) {
       LOG.debug("Error while deserializing protobuf for module " + moduleName, e);
-      return null;
+      return Collections.emptyList();
     }
   }
 
-  static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol) {
-    if (moduleSymbol == null) {
+  static Map<String, Symbol> getSymbolsFromProtobufModule(Collection<ModuleSymbol> moduleSymbols) {
+    if (moduleSymbols.isEmpty()) {
       return Collections.emptyMap();
     }
+    ModuleSymbol moduleSymbol = moduleSymbols.iterator().next();
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
     moduleSymbol.getClassesList().forEach(proto -> deserializedSymbols.put(normalizedFqn(proto.getFullyQualifiedName()), new ClassSymbolImpl(proto)));
     moduleSymbol.getFunctionsList().forEach(proto -> deserializedSymbols.put(normalizedFqn(proto.getFullyQualifiedName()), new FunctionSymbolImpl(proto)));

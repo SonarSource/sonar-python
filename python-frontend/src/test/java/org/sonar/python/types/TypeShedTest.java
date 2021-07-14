@@ -289,7 +289,7 @@ public class TypeShedTest {
     assertThat(TypeShed.symbolsForModule("NOT_EXISTENT")).isEmpty();
     assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
     InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
-    assertThat(TypeShed.deserializedModule("mod", targetStream)).isNull();
+    assertThat(TypeShed.deserializedModules("mod", targetStream)).isNull();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Error while deserializing protobuf for module mod");
   }
 
