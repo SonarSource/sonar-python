@@ -11,7 +11,9 @@
   <artifactId>python-frontend</artifactId>
 
   <name>Python :: Frontend</name>
-
+  <properties>
+    <sonar.sources>pom.xml,src/main/java,typeshed_serializer/serializer</sonar.sources>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.sslr</groupId>

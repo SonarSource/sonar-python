@@ -67,6 +67,23 @@ build_win_task:
     - git submodule update --init
     - mvn.cmd -s /c/buildTools-docker/settings-public.xml test
   cleanup_before_cache_script: cleanup_maven_repository
+
+build_python_task:
+  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  gke_container:
+    dockerfile: .cirrus/python-env.Dockerfile
+    cluster_name: cirrus-ci-lt-cluster
+    zone: us-central1-a
+    namespace: default
+    cpu: 2
+    memory: 2G
+  maven_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  build_script:
+    - git submodule update --init
+    - cd python-frontend
+    - mvn clean install -DgenerateTypeshed
+  cleanup_before_cache_script: cleanup_maven_repository
  
 plugin_qa_task:
   depends_on:
