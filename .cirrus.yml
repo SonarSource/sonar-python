@@ -85,7 +85,9 @@ build_python_task:
     - git submodule update --init
     - cd python-frontend
     - mvn clean install -DgenerateTypeshed
-  cleanup_before_cache_script: cleanup_maven_repository
+  cleanup_before_cache_script: 
+    - rm -rf "$CIRRUS_WORKING_DIR/.m2/repository/org/sonarsource/"
+    - rm -rf "$CIRRUS_WORKING_DIR/.m2/repository/com/sonarsource/"
  
 plugin_qa_task:
   depends_on:
