@@ -13,7 +13,7 @@
   <name>Python :: Frontend</name>
   <properties>
     <sonar.sources>pom.xml,src/main/java,typeshed_serializer/serializer</sonar.sources>
-    <sonar.coverageReportPaths>typeshed_serializer/cov.xml</sonar.coverageReportPaths>
+    <sonar.python.coverage.reportPaths>typeshed_serializer/cov.xml</sonar.python.coverage.reportPaths>
   </properties>
   <dependencies>
     <dependency>
@@ -125,7 +125,7 @@
       <activation>
         <property>
           <name>
-            generateTypeshed
+            !skipTypeshed
           </name>
         </property>
       </activation>
