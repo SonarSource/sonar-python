@@ -1,11 +1,9 @@
 import os
-import sys
-import collections
+
 from mypy import build, options
 
-from serializer.symbols import save_module
+from serializer import symbols_merger, symbols
 
-VersionInfoTuple = collections.namedtuple('version_info', ['major', 'minor', 'micro', 'releaselevel', 'serial'])
 STDLIB_PATH = "../resources/typeshed/stdlib"
 CURRENT_PATH = os.path.dirname(__file__)
 
@@ -66,24 +64,31 @@ def walk_typeshed_stdlib(opt: options.Options = get_options()):
     return build_result
 
 
-def serialize_typeshed_stdlib(output_dir_name="output", python_version=(3, 8)):
+def serialize_typeshed_stdlib(output_dir_name="output", python_version=(3, 8), is_debug=False):
     """ Serialize semantic model for Python standard library
     :param output_dir_name: Optional output directory name
     :param python_version: Optional version of Python to use for serialization
+    :param is_debug: debug flag
     """
     output_dir_name = output_dir_name if python_version >= (3, 0) else f"{output_dir_name}@python2"
     opt = get_options(python_version)
     build_result = walk_typeshed_stdlib(opt)
     for file in build_result.files:
-        save_module(build_result.files.get(file), save_as_text=True, output_dir_name=output_dir_name)
+        module_symbol = symbols.ModuleSymbol(build_result.files.get(file))
+        symbols.save_module(module_symbol, is_debug=is_debug, debug_dir=output_dir_name)
 
 
 def serialize_typeshed_stdlib_multiple_python_version():
     """ Serialize semantic model for Python stdlib versions from 3.5 to 3.9
     """
     for minor in range(5, 10):
-        sys.version_info = VersionInfoTuple(3, minor, 0, 'final', 0)
-        serialize_typeshed_stdlib(f"output3{minor}", (3, minor))
+        serialize_typeshed_stdlib(f"output3{minor}", (3, minor), is_debug=True)
+
+
+def save_merged_symbols(is_debug=False):
+    merged_modules = symbols_merger.merge_multiple_python_versions()
+    for mod in merged_modules:
+        symbols.save_module(merged_modules[mod], is_debug=is_debug, debug_dir="output_merge")
 
 
 def main():
