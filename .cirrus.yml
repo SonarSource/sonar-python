@@ -70,7 +70,7 @@ build_win_task:
     folder: ~/.m2/repository
   build_script:
     - git submodule update --init
-    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test
+    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test -DskipTypeshed=true
   cleanup_before_cache_script: cleanup_maven_repository
  
 plugin_qa_task:
