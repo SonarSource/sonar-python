@@ -72,6 +72,8 @@ build_python_task:
   only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
   gke_container:
     dockerfile: .cirrus/python-env.Dockerfile
+    builder_image_project: language-team
+    builder_image_name: docker-builder-lt-v1
     cluster_name: cirrus-ci-lt-cluster
     zone: us-central1-a
     namespace: default
