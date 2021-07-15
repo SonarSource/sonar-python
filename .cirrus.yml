@@ -35,7 +35,12 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
 
 build_task:
   gke_container:
-    <<: *CONTAINER_DEFINITION
+    dockerfile: .cirrus/python-env.Dockerfile
+    builder_image_project: language-team
+    builder_image_name: docker-builder-lt-v1
+    cluster_name: cirrus-ci-lt-cluster
+    zone: us-central1-a
+    namespace: default
     cpu: 2
     memory: 2G
   env:
@@ -65,7 +70,7 @@ build_win_task:
     folder: ~/.m2/repository
   build_script:
     - git submodule update --init
-    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test
+    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test -DskipTypeshed=true
   cleanup_before_cache_script: cleanup_maven_repository
  
 plugin_qa_task:
