@@ -309,6 +309,37 @@ public class ClassSymbolImplTest {
     assertThat(foo.isInstanceMethod()).isFalse();
   }
 
+  @Test
+  public void overloaded_methods() throws TextFormat.ParseException {
+    String protobuf =
+        "name: \"A\"\n" +
+        "fully_qualified_name: \"mod.A\"\n" +
+        "super_classes: \"builtins.object\"\n" +
+        "methods {\n" +
+        "  name: \"foo\"\n" +
+        "  fully_qualified_name: \"mod.A.foo\"\n" +
+        "  valid_for: \"27\"\n" +
+        "}\n" +
+        "overloaded_methods {\n" +
+        "  name: \"foo\"\n" +
+        "  fullname: \"mod.A.foo\"\n" +
+        "  valid_for: \"39\"\n" +
+        "  definitions {\n" +
+        "    name: \"foo\"\n" +
+        "    fully_qualified_name: \"mod.A.foo\"\n" +
+        "    has_decorators: true\n" +
+        "  }\n" +
+        "  definitions {\n" +
+        "    name: \"foo\"\n" +
+        "    fully_qualified_name: \"mod.A.foo\"\n" +
+        "  }\n" +
+        "}\n";
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    Symbol foo = classSymbol.resolveMember("foo").get();
+    assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
+    assertThat(((SymbolImpl) foo).validFor()).containsExactlyInAnyOrder("27", "39");
+  }
+
   private static SymbolsProtos.ClassSymbol classSymbol(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.ClassSymbol.Builder builder = SymbolsProtos.ClassSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);

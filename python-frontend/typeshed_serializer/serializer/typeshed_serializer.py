@@ -87,9 +87,7 @@ def serialize_typeshed_stdlib_multiple_python_version():
 
 
 def main():
-    annoy_mypy_file = build_single_module("annoy", "stubs/annoy")
-    save_module(annoy_mypy_file, save_as_text=False, output_dir_name="protobuf")
-
+    ...
 
 if __name__ == '__main__':
     main()

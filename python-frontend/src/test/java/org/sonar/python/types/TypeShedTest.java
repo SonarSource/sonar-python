@@ -36,7 +36,9 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +52,7 @@ public class TypeShedTest {
   @Test
   public void classes() {
     ClassSymbol intClass = TypeShed.typeShedClass("int");
-    assertThat(intClass.superClasses()).isEmpty();
+    assertThat(intClass.superClasses()).extracting(Symbol::name).containsExactly("object");
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(intClass.usages()).isEmpty();
     assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
@@ -61,7 +63,7 @@ public class TypeShedTest {
   public void str() {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
-    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"), tuple(Kind.AMBIGUOUS, "Sequence"));
+    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "Sequence"));
     // python 3.9 support
     assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
     assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
@@ -85,12 +87,12 @@ public class TypeShedTest {
 
   @Test
   public void typing_module() {
-    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Kind.CLASS);
     // overlap btw python2 and python3
-    assertThat(symbols.get("Iterator").kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(symbols.get("Sequence").kind()).isEqualTo(Kind.AMBIGUOUS);
   }
 
   @Test
@@ -212,8 +214,8 @@ public class TypeShedTest {
 
   @Test
   public void return_type_hints() {
-    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
-    assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("typing.Tuple");
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("tuple");
     symbols = TypeShed.symbolsForModule("flask_mail").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     ClassSymbol mail = (ClassSymbol) symbols.get("Mail");
     assertThat(((FunctionSymbol) mail.declaredMembers().stream().iterator().next()).annotatedReturnTypeName()).isNull();
@@ -254,7 +256,7 @@ public class TypeShedTest {
 
     ClassSymbol vector = (ClassSymbol) deserializedAnnoySymbols.get("annoy._Vector");
     assertThat(vector.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "typing.Sized"));
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "typing.Sized"));
     assertThat(vector.declaredMembers()).extracting(Symbol::name).containsExactlyInAnyOrder("__getitem__");
     assertThat(vector.hasDecorators()).isFalse();
     assertThat(vector.definitionLocation()).isNull();
@@ -373,6 +375,21 @@ public class TypeShedTest {
     AmbiguousSymbol ambiguousSymbol = (AmbiguousSymbol) symbols.get("mod.bar");
     assertThat(ambiguousSymbol.alternatives()).extracting(Symbol::kind).containsExactly(Kind.FUNCTION, Kind.FUNCTION);
 
+  }
+
+  @Test
+  public void overloaded_functions() {
+    Symbol map = TypeShed.builtinSymbols().get("map");
+    assertThat(map.is(Kind.AMBIGUOUS)).isTrue();
+    assertThat(((SymbolImpl) map).validFor()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
+    ClassSymbol python3Symbol = (ClassSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.CLASS)).findFirst().get();
+    AmbiguousSymbol python2Symbol = (AmbiguousSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.AMBIGUOUS)).findFirst().get();
+    assertThat(((ClassSymbolImpl) python3Symbol).validFor()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
+    assertThat(((AmbiguousSymbolImpl) python2Symbol).validFor()).containsExactly("27");
+    for (Symbol alternative : python2Symbol.alternatives()) {
+      assertThat(alternative.is(Kind.FUNCTION)).isTrue();
+      assertThat(((FunctionSymbolImpl) alternative).validFor()).containsExactly("27");
+    }
   }
 
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {

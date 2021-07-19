@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -49,8 +50,10 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
+import org.sonar.python.semantic.BuiltinSymbols;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -58,15 +61,22 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
 import org.sonar.python.types.protobuf.SymbolsProtos.OverloadedFunctionSymbol;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.BOOL;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.COMPLEX;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.DICT;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.FLOAT;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.INT;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.STR;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
 
 public class TypeShed {
 
-  private static final String TYPING = "typing";
-  private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
   private static final Map<String, Map<String, Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
@@ -80,6 +90,15 @@ public class TypeShed {
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
   private static final String CUSTOM_THIRD_PARTY = "custom/";
   private static final String PROTOBUF = "protobuf/";
+  private static final String BUILTINS_FQN = "builtins";
+  private static final String BUILTINS_PREFIX = BUILTINS_FQN + ".";
+  // Those fundamentals builtins symbols need not to be ambiguous for the frontend to work properly
+  private static final Set<String> BUILTINS_TO_DISAMBIGUATE = new HashSet<>(
+    Arrays.asList(INT, FLOAT, COMPLEX, STR, BuiltinTypes.SET, DICT, LIST, TUPLE, NONE_TYPE, BOOL, "type", "super", "frozenset", "memoryview"));
+
+  static {
+    BUILTINS_TO_DISAMBIGUATE.addAll(BuiltinSymbols.EXCEPTIONS);
+  }
 
   private static final Logger LOG = Loggers.get(TypeShed.class);
 
@@ -90,29 +109,10 @@ public class TypeShed {
     // InferredTypes class initialization requires builtInSymbols to be computed. Calling dummy method
     // from it explicitly to overcome the issue of TypeShed.builtins being assigned twice
     if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
-      Map<String, Symbol> builtins = new HashMap<>();
+      Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN);
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
-      // 2and3/builtins.pyi has been split into 2/builtins.pyi and 3/builtins.pyi
-      // for the time being sonar-python still relies on a copied version of '2and3/builtins.pyi'
-      // (https://github.com/python/typeshed/blob/b0f4900c9fbf5092ee40936f0b831641d6f49e03/stdlib/2and3/builtins.pyi)
-      // TODO: change logic to automatically merge 2/builtins.pyi and 3/builtins.pyi
-      InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
-      PythonFile file = new TypeShedPythonFile(resource, "");
-      AstNode astNode = PythonParser.create().parse(file.content());
-      FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-      Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
-      Set<Symbol> typingModuleSymbols = typingModuleSymbols();
-      globalSymbols.put(TYPING, typingModuleSymbols);
-      Set<Symbol> typingExtensionsSymbols = typingExtensionsSymbols(Collections.singletonMap(TYPING, typingModuleSymbols));
-      globalSymbols.put(TYPING_EXTENSIONS, typingExtensionsSymbols);
-      new SymbolTableBuilder("", file, ProjectLevelSymbolTable.from(globalSymbols)).visitFileInput(fileInput);
-      for (Symbol globalVariable : fileInput.globalVariables()) {
-        ((SymbolImpl) globalVariable).removeUsages();
-        builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
-      }
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
       InferredTypes.setBuiltinSymbols(builtins);
-      fileInput.accept(new ReturnTypeVisitor());
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
     return builtins;
@@ -129,13 +129,6 @@ public class TypeShed {
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
     }
-  }
-
-  // visible for testing
-  static Set<Symbol> typingModuleSymbols() {
-    Map<String, Symbol> typingPython3 = getModuleSymbols(TYPING, STDLIB_3, Collections.emptyMap());
-    Map<String, Symbol> typingPython2 = getModuleSymbols(TYPING, STDLIB_2, Collections.emptyMap());
-    return commonSymbols(typingPython2, typingPython3, TYPING);
   }
 
   private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
@@ -159,12 +152,6 @@ public class TypeShed {
     });
 
     return commonSymbols;
-  }
-
-  static Set<Symbol> typingExtensionsSymbols(Map<String, Set<Symbol>> typingSymbols) {
-    Map<String, Symbol> typingExtensionSymbols = getModuleSymbols(TYPING_EXTENSIONS, THIRD_PARTY_2AND3,
-      typingSymbols);
-    return new HashSet<>(typingExtensionSymbols.values());
   }
 
   public static Set<Symbol> symbolsForModule(String moduleName) {
@@ -205,7 +192,7 @@ public class TypeShed {
       return new HashSet<>();
     }
     modulesInProgress.add(moduleName);
-    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName);
+    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName).values();
     if (!symbolsFromProtobuf.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return new HashSet<>(symbolsFromProtobuf);
@@ -279,6 +266,22 @@ public class TypeShed {
       throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
     }
     return (ClassSymbol) symbol;
+  }
+
+  /**
+   * Some special symbols need NOT to be ambiguous for the frontend to work properly.
+   * This method sort ambiguous symbol by python version and returns the one which is valid for
+   * the most recent Python version.
+   */
+  private static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
+    Map<String, Symbol> symbolByVersion = new HashMap<>();
+    for (Symbol alternative : alternatives) {
+      for (String pythonVersion : ((SymbolImpl) alternative).validFor()) {
+        symbolByVersion.put(pythonVersion, alternative);
+      }
+    }
+    List<String> pythonVersions = symbolByVersion.keySet().stream().sorted().collect(Collectors.toList());
+    return symbolByVersion.get(pythonVersions.get(pythonVersions.size() - 1));
   }
 
   public static Collection<Symbol> stubFilesSymbols() {
@@ -355,13 +358,12 @@ public class TypeShed {
     }
   }
 
-
-  private static Collection<Symbol> getSymbolsFromProtobufModule(String moduleName) {
+  private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName) {
     InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
     if (resource == null) {
-      return Collections.emptySet();
+      return Collections.emptyMap();
     }
-    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource)).values();
+    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource));
   }
 
   @CheckForNull
@@ -378,26 +380,61 @@ public class TypeShed {
     if (moduleSymbol == null) {
       return Collections.emptyMap();
     }
+
+    // TODO: Use a common proxy interface Descriptor instead of using Object
+    Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
+    moduleSymbol.getClassesList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getFunctionsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
-    moduleSymbol.getClassesList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new ClassSymbolImpl(proto)));
-    moduleSymbol.getFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullyQualifiedName(), new FunctionSymbolImpl(proto)));
-    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> deserializedSymbols.put(proto.getFullname(), fromOverloadedFunction(proto)));
+
+    for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
+      String fqn = normalizedFqn(entry.getKey());
+      Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), false);
+      if (moduleSymbol.getFullyQualifiedName().equals(BUILTINS_FQN) && BUILTINS_TO_DISAMBIGUATE.contains(fqn) && symbols.size() > 1) {
+        deserializedSymbols.put(fqn, disambiguateWithLatestPythonSymbol(symbols));
+      } else {
+        deserializedSymbols.put(fqn, symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
+      }
+    }
     return deserializedSymbols;
   }
 
-  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol) {
+  public static Set<Symbol> symbolsFromDescriptor(Set<Object> descriptors, boolean isInsideClass) {
+    Set<Symbol> symbols = new HashSet<>();
+    for (Object descriptor : descriptors) {
+      if (descriptor instanceof SymbolsProtos.ClassSymbol) {
+        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor)));
+      }
+      if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
+        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
+      }
+      if (descriptor instanceof OverloadedFunctionSymbol) {
+        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
+      }
+    }
+    return symbols;
+  }
+
+  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
-      .map(FunctionSymbolImpl::new)
+      .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList()))
       .collect(Collectors.toSet());
     return AmbiguousSymbolImpl.create(overloadedSymbols);
   }
 
   @CheckForNull
   public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    Map<String, Symbol> builtinSymbols = builtinSymbols();
+    Symbol builtinSymbol = builtinSymbols.get(fullyQualifiedName);
+    if (builtinSymbol != null) {
+      return builtinSymbol;
+    }
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
-    if (fqnSplittedByDot.length == 2 && fqnSplittedByDot[0].equals("builtins") && builtins.containsKey(localName)) {
-      return builtins.get(localName);
+    if (fqnSplittedByDot.length == 2 && fqnSplittedByDot[0].equals(BUILTINS_FQN) && builtinSymbols.containsKey(localName)) {
+      return builtinSymbols.get(localName);
     }
     for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
       Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
@@ -405,7 +442,19 @@ public class TypeShed {
         return symbol;
       }
     }
+    String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
+    Set<Symbol> symbols = symbolsForModule(moduleName);
+    if (!symbols.isEmpty()) {
+      return typeShedSymbols.get(moduleName).get(fullyQualifiedName);
+    }
     return null;
+  }
+
+  public static String normalizedFqn(String fqn) {
+    if (fqn.startsWith(BUILTINS_PREFIX)) {
+      return fqn.substring(BUILTINS_PREFIX.length());
+    }
+    return fqn;
   }
 
 }

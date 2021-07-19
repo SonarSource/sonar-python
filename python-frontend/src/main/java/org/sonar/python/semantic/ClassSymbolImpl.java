@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -45,6 +46,8 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
+import static org.sonar.python.types.TypeShed.normalizedFqn;
+import static org.sonar.python.types.TypeShed.symbolsFromDescriptor;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
@@ -77,49 +80,76 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
-    this(name, fullyQualifiedName, null, false, false, null, false);
+    super(name, fullyQualifiedName);
+    classDefinitionLocation = null;
+    hasDecorators = false;
+    hasMetaClass = false;
+    metaclassFQN = null;
+    supportsGenerics = false;
+    setKind(Kind.CLASS);
   }
 
-  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation,
-                         boolean hasDecorators, boolean hasMetaClass, @Nullable String metaclassFQN, boolean supportsGenerics) {
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, LocationInFile location) {
     super(name, fullyQualifiedName);
-    classDefinitionLocation = definitionLocation;
-    this.hasDecorators = hasDecorators;
-    this.hasMetaClass = hasMetaClass;
-    this.metaclassFQN = metaclassFQN;
-    this.supportsGenerics = supportsGenerics;
+    classDefinitionLocation = location;
+    hasDecorators = false;
+    hasMetaClass = false;
+    metaclassFQN = null;
+    supportsGenerics = false;
+    setKind(Kind.CLASS);
+  }
+
+  public static ClassSymbol copyFrom(String name, ClassSymbol classSymbol) {
+    return new ClassSymbolImpl(name, classSymbol);
+  }
+
+  private ClassSymbolImpl(String name, ClassSymbol classSymbol) {
+    super(name, classSymbol.fullyQualifiedName());
+    classDefinitionLocation = classSymbol.definitionLocation();
+    hasDecorators = classSymbol.hasDecorators();
+    hasMetaClass = ((ClassSymbolImpl) classSymbol).hasMetaClass();
+    metaclassFQN = ((ClassSymbolImpl) classSymbol).metaclassFQN;
+    supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
+    validFor = ((ClassSymbolImpl) classSymbol).validFor;
+    superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
     setKind(Kind.CLASS);
   }
 
   public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto) {
-    super(classSymbolProto.getName(), classSymbolProto.getFullyQualifiedName());
+    super(classSymbolProto.getName(), normalizedFqn(classSymbolProto.getFullyQualifiedName()));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
     hasDecorators = classSymbolProto.getHasDecorators();
     hasMetaClass = classSymbolProto.getHasMetaclass();
     metaclassFQN = classSymbolProto.getMetaclassName();
     supportsGenerics = classSymbolProto.getIsGeneric();
-    List<SymbolsProtos.FunctionSymbol> methodsList = classSymbolProto.getMethodsList();
-    Set<Symbol> methods = methodsList.stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet());
-    for (SymbolsProtos.OverloadedFunctionSymbol overloadedMethod : classSymbolProto.getOverloadedMethodsList()) {
-      methods.add(AmbiguousSymbolImpl.create(overloadedMethod.getDefinitionsList().stream().map(m -> new FunctionSymbolImpl(m, true)).collect(Collectors.toSet())));
+    Set<Symbol> methods = new HashSet<>();
+    Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
+    classSymbolProto.getMethodsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+    classSymbolProto.getOverloadedMethodsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+    for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
+      Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), true);
+      methods.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(methods);
-    superClassesFqns = classSymbolProto.getSuperClassesList();
+    superClassesFqns = classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList());
+    validFor = new HashSet<>(classSymbolProto.getValidForList());
   }
 
   @Override
-  ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators, hasMetaClass, metaclassFQN, supportsGenerics);
-    for (Symbol superClass : superClasses()) {
-      if (superClass == this) {
-        copiedClassSymbol.superClasses.add(copiedClassSymbol);
-      } else if (superClass.kind() == Symbol.Kind.CLASS) {
-        copiedClassSymbol.superClasses.add(((ClassSymbolImpl) superClass).copyWithoutUsages());
-      } else if (superClass.is(Kind.AMBIGUOUS)) {
-        copiedClassSymbol.superClasses.add(((AmbiguousSymbolImpl) superClass).copyWithoutUsages());
-      } else {
-        copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
+  public ClassSymbolImpl copyWithoutUsages() {
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), this);
+    if (hasResolvedSuperClasses()) {
+      for (Symbol superClass : superClasses()) {
+        if (superClass == this) {
+          copiedClassSymbol.superClasses.add(copiedClassSymbol);
+        } else if (superClass.kind() == Kind.CLASS) {
+          copiedClassSymbol.superClasses.add(((ClassSymbolImpl) superClass).copyWithoutUsages());
+        } else if (superClass.is(Kind.AMBIGUOUS)) {
+          copiedClassSymbol.superClasses.add(((AmbiguousSymbolImpl) superClass).copyWithoutUsages());
+        } else {
+          copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
+        }
       }
     }
     copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages()).collect(Collectors.toList()));
@@ -339,5 +369,9 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   public void setSupportsGenerics(boolean supportsGenerics) {
     this.supportsGenerics = supportsGenerics;
+  }
+
+  public boolean hasResolvedSuperClasses() {
+    return hasAlreadyReadSuperClasses || superClassesFqns.isEmpty();
   }
 }

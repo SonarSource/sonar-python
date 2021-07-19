@@ -150,18 +150,18 @@ class Scope {
 
   private ClassSymbolImpl copyClassSymbol(String symbolName, ClassSymbolImpl originalClassSymbol, Set<Symbol> alreadyVisitedSymbols) {
     // Must use symbolName to preserve import aliases
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation(),
-      originalClassSymbol.hasDecorators(), originalClassSymbol.hasMetaClass(), originalClassSymbol.metaclassFQN(), originalClassSymbol.supportsGenerics());
-
-    for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
-      Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
-      if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
-        Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
-          ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
-          : copySymbol(globalSymbol.name(), globalSymbol, alreadyVisitedSymbols);
-        classSymbol.addSuperClass(parentClass);
-      } else {
-        classSymbol.addSuperClass(originalSymbol);
+    ClassSymbolImpl classSymbol = (ClassSymbolImpl) ClassSymbolImpl.copyFrom(symbolName, originalClassSymbol);
+    if (originalClassSymbol.hasResolvedSuperClasses()) {
+      for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
+        Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
+        if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
+          Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
+            ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
+            : copySymbol(globalSymbol.name(), globalSymbol, alreadyVisitedSymbols);
+          classSymbol.addSuperClass(parentClass);
+        } else {
+          classSymbol.addSuperClass(originalSymbol);
+        }
       }
     }
     classSymbol.addMembers(originalClassSymbol
