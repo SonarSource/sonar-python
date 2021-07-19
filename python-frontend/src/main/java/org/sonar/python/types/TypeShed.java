@@ -38,7 +38,6 @@ import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -417,11 +416,17 @@ public class TypeShed {
     return symbols;
   }
 
-  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass) {
+  private static Symbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
       .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList()))
       .collect(Collectors.toSet());
-    return AmbiguousSymbolImpl.create(overloadedSymbols);
+    if (overloadedSymbols.isEmpty()) {
+      return new SymbolImpl(overloadedFunctionSymbol.getName(), overloadedFunctionSymbol.getFullname());
+    }
+    if (overloadedSymbols.size() > 1) {
+      return AmbiguousSymbolImpl.create(overloadedSymbols);
+    }
+    return overloadedSymbols.iterator().next();
   }
 
   @CheckForNull
