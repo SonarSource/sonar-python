@@ -1,0 +1,274 @@
+
+importlib.metadataimportlib.metadata§
+PackageNotFoundError'importlib.metadata.PackageNotFoundError"builtins.ModuleNotFoundError*builtins.ImportError*builtins.Exception*builtins.BaseExceptionr38r39³
+
+_EntryPointBase"importlib.metadata._EntryPointBase"builtins.tuple*typing.Sequence*typing.Collection*typing.Reversible*typing.Iterable*typing.Container2¢
+_replace+importlib.metadata._EntryPointBase._replace"*
+&importlib.metadata._EntryPointBase._NT*5
+_self*
+&importlib.metadata._EntryPointBase._NT*(
+name
+builtins.str"builtins.str *)
+value
+builtins.str"builtins.str *)
+group
+builtins.str"builtins.str z38z392Ë
+__new__*importlib.metadata._EntryPointBase.__new__"*
+&importlib.metadata._EntryPointBase._NT*f
+_cls\
+,Type[importlib.metadata._EntryPointBase._NT]*
+&importlib.metadata._EntryPointBase._NT*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*'
+group
+builtins.str"builtins.strz38z392Í
+_asdict*importlib.metadata._EntryPointBase._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*5
+_self*
+&importlib.metadata._EntryPointBase._NTz38z392Æ
+_make(importlib.metadata._EntryPointBase._make"*
+&importlib.metadata._EntryPointBase._NT*f
+_cls\
+,Type[importlib.metadata._EntryPointBase._NT]*
+&importlib.metadata._EntryPointBase._NT*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpz38z39r38r39Ä
+
+EntryPointimportlib.metadata.EntryPoint""importlib.metadata._EntryPointBase*builtins.tuple*typing.Sequence*typing.Collection*typing.Reversible*typing.Iterable*typing.Container2Ô
+load"importlib.metadata.EntryPoint.load"
+Any*–
+self‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strz38z392©
+extras$importlib.metadata.EntryPoint.extras"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*–
+self‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str0:property`z38z39r38r39Ã
+PackagePathimportlib.metadata.PackagePath"pathlib.PurePosixPath*pathlib.PurePath*os.PathLike2Õ
+	read_text(importlib.metadata.PackagePath.read_text"
+builtins.str"builtins.str*J
+self@
+importlib.metadata.PackagePath"importlib.metadata.PackagePath*,
+encoding
+builtins.str"builtins.str z38z392¯
+read_binary*importlib.metadata.PackagePath.read_binary" 
+builtins.bytes"builtins.bytes*J
+self@
+importlib.metadata.PackagePath"importlib.metadata.PackagePathz38z392Ë
+locate%importlib.metadata.PackagePath.locate"F
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*J
+self@
+importlib.metadata.PackagePath"importlib.metadata.PackagePathz38z39r38r39ó
+FileHashimportlib.metadata.FileHash"builtins.object2°
+__init__$importlib.metadata.FileHash.__init__"
+None*D
+self:
+importlib.metadata.FileHash"importlib.metadata.FileHash*&
+spec
+builtins.str"builtins.strz38z39r38r39½
+Distributionimportlib.metadata.Distribution"builtins.object2–
+	read_text)importlib.metadata.Distribution.read_text"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution**
+filename
+builtins.str"builtins.str0:abc.abstractmethod@z38z392ç
+locate_file+importlib.metadata.Distribution.locate_file"F
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath0:abc.abstractmethod@z38z392³
+	from_name)importlib.metadata.Distribution.from_name"B
+importlib.metadata.Distribution"importlib.metadata.Distribution*v
+clsm
+%Type[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution*&
+name
+builtins.str"builtins.str0:classmethodpz38z392…
+at"importlib.metadata.Distribution.at"J
+#importlib.metadata.PathDistribution"#importlib.metadata.PathDistribution*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath0:staticmethodhz38z392È
+metadata(importlib.metadata.Distribution.metadata".
+email.message.Message"email.message.Message*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution0:property`z38z392´
+version'importlib.metadata.Distribution.version"
+builtins.str"builtins.str*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution0:property`z38z392þ
+entry_points,importlib.metadata.Distribution.entry_points"Û
+<builtins.list[Tuple[builtins.str,builtins.str,builtins.str]]‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution0:property`z38z392ß
+files%importlib.metadata.Distribution.files"Ê
+9Union[builtins.list[importlib.metadata.PackagePath],None]€
+-builtins.list[importlib.metadata.PackagePath]@
+importlib.metadata.PackagePath"importlib.metadata.PackagePath"builtins.list
+None*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution0:property`z38z392œ
+requires(importlib.metadata.Distribution.requires"
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*L
+selfB
+importlib.metadata.Distribution"importlib.metadata.Distribution0:property`z38z39:­
+discover(importlib.metadata.Distribution.discoverÀ
+discover(importlib.metadata.Distribution.discover"‡
+0typing.Iterable[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution"typing.Iterable*v
+clsm
+%Type[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution*k
+context^
+-importlib.metadata.DistributionFinder.Context"-importlib.metadata.DistributionFinder.Context0:overload:classmethodXp«
+discover(importlib.metadata.Distribution.discover"‡
+0typing.Iterable[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution"typing.Iterable*v
+clsm
+%Type[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution*
+context
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+pathJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *
+kwargs
+Any0:overload:classmethodXp"38"39r38r39»
+DistributionFinder%importlib.metadata.DistributionFinder"importlib.abc.MetaPathFinder*importlib.abc.Finder2Á
+find_distributions8importlib.metadata.DistributionFinder.find_distributions"‡
+0typing.Iterable[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution"typing.Iterable*X
+selfN
+%importlib.metadata.DistributionFinder"%importlib.metadata.DistributionFinder*m
+context^
+-importlib.metadata.DistributionFinder.Context"-importlib.metadata.DistributionFinder.Context 0:abc.abstractmethod@z38z39r38r39˜
+MetadataPathFinder%importlib.metadata.MetadataPathFinder"%importlib.metadata.DistributionFinder*importlib.abc.MetaPathFinder*importlib.abc.Finder2÷
+find_distributions8importlib.metadata.MetadataPathFinder.find_distributions"“
+4typing.Iterable[importlib.metadata.PathDistribution]J
+#importlib.metadata.PathDistribution"#importlib.metadata.PathDistribution"typing.Iterable*ˆ
+cls
++Type[importlib.metadata.MetadataPathFinder]N
+%importlib.metadata.MetadataPathFinder"%importlib.metadata.MetadataPathFinder*m
+context^
+-importlib.metadata.DistributionFinder.Context"-importlib.metadata.DistributionFinder.Context 0:classmethodpz38z39r38r39½	
+PathDistribution#importlib.metadata.PathDistribution"importlib.metadata.Distribution2È
+__init__,importlib.metadata.PathDistribution.__init__"
+None*T
+selfJ
+#importlib.metadata.PathDistribution"#importlib.metadata.PathDistribution*&
+path
+pathlib.Path"pathlib.Pathz38z392±
+	read_text-importlib.metadata.PathDistribution.read_text"
+builtins.str"builtins.str*T
+selfJ
+#importlib.metadata.PathDistribution"#importlib.metadata.PathDistribution*ø
+filenameé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz38z392Û
+locate_file/importlib.metadata.PathDistribution.locate_file"F
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*T
+selfJ
+#importlib.metadata.PathDistribution"#importlib.metadata.PathDistribution*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz38z39r38r39"°
+distributionimportlib.metadata.distribution"B
+importlib.metadata.Distribution"importlib.metadata.Distribution*3
+distribution_name
+builtins.str"builtins.strz38z39"”
+metadataimportlib.metadata.metadata".
+email.message.Message"email.message.Message*3
+distribution_name
+builtins.str"builtins.strz38z39"€
+versionimportlib.metadata.version"
+builtins.str"builtins.str*3
+distribution_name
+builtins.str"builtins.strz38z39"¢
+entry_pointsimportlib.metadata.entry_points"è
+Ybuiltins.dict[builtins.str,builtins.tuple[Tuple[builtins.str,builtins.str,builtins.str]]]
+builtins.str"builtins.strÝ
+=builtins.tuple[Tuple[builtins.str,builtins.str,builtins.str]]‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.tuple"builtins.dictz38z39"«
+filesimportlib.metadata.files"Ê
+9Union[builtins.list[importlib.metadata.PackagePath],None]€
+-builtins.list[importlib.metadata.PackagePath]@
+importlib.metadata.PackagePath"importlib.metadata.PackagePath"builtins.list
+None*3
+distribution_name
+builtins.str"builtins.strz38z39"è
+requiresimportlib.metadata.requires"
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*3
+distribution_name
+builtins.str"builtins.strz38z39*–
+distributions importlib.metadata.distributions¶
+distributions importlib.metadata.distributions"‡
+0typing.Iterable[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution"typing.Iterable*k
+context^
+-importlib.metadata.DistributionFinder.Context"-importlib.metadata.DistributionFinder.Context0:overloadX¡
+distributions importlib.metadata.distributions"‡
+0typing.Iterable[importlib.metadata.Distribution]B
+importlib.metadata.Distribution"importlib.metadata.Distribution"typing.Iterable*
+context
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+pathJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *
+kwargs
+Any0:overloadX"38"39

@@ -1,0 +1,985 @@
+
+imaplibimaplibŸ¼
+IMAP4imaplib.IMAP4"builtins.object2¾
+__init__imaplib.IMAP4.__init__"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int z27z35z36z37z382‰
+__init__imaplib.IMAP4.__init__"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z392¶
+openimaplib.IMAP4.open"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int z27z35z36z37z382
+openimaplib.IMAP4.open"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z392—
+__getattr__imaplib.IMAP4.__getattr__"
+Any*&
+self
+imaplib.IMAP4"imaplib.IMAP4*$
+attr
+builtins.str"builtins.strz27z35z36z37z38z392
+readimaplib.IMAP4.read"
+builtins.str"builtins.str*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+size
+builtins.int"builtins.intz272¢
+readimaplib.IMAP4.read" 
+builtins.bytes"builtins.bytes*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+size
+builtins.int"builtins.intz35z36z37z38z392n
+readlineimaplib.IMAP4.readline"
+builtins.str"builtins.str*(
+self
+imaplib.IMAP4"imaplib.IMAP4z272‚
+readlineimaplib.IMAP4.readline" 
+builtins.bytes"builtins.bytes*(
+self
+imaplib.IMAP4"imaplib.IMAP4z35z36z37z38z392z
+sendimaplib.IMAP4.send"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+data
+builtins.str"builtins.strz272
+sendimaplib.IMAP4.send"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4**
+data 
+builtins.bytes"builtins.bytesz35z36z37z38z392n
+shutdownimaplib.IMAP4.shutdown"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392€
+socketimaplib.IMAP4.socket"
+socket.socket"socket.socket*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392©
+recentimaplib.IMAP4.recent"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392Õ
+responseimaplib.IMAP4.response"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+code
+builtins.str"builtins.strz27z35z36z37z38z392ª
+appendimaplib.IMAP4.append"
+builtins.str"builtins.str*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.str*'
+flags
+builtins.str"builtins.str*+
+	date_time
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strz27z35z36z37z38z392Ø
+authenticateimaplib.IMAP4.authenticate"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*(
+self
+imaplib.IMAP4"imaplib.IMAP4*+
+	mechanism
+builtins.str"builtins.str*[
+
+authobjectK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz27z35z36z37z38z392±
+
+capabilityimaplib.IMAP4.capability"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392§
+checkimaplib.IMAP4.check"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392§
+closeimaplib.IMAP4.close"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392ƒ
+copyimaplib.IMAP4.copy"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+message_set
+builtins.str"builtins.str*-
+new_mailbox
+builtins.str"builtins.strz27z35z36z37z38z392Ô
+createimaplib.IMAP4.create"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392Ô
+deleteimaplib.IMAP4.delete"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392
+	deleteaclimaplib.IMAP4.deleteacl"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.str*%
+who
+builtins.str"builtins.strz27z35z36z37z38z392«
+expungeimaplib.IMAP4.expunge"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392ı
+fetchimaplib.IMAP4.fetch"Ğ
+}Tuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]]
+builtins.str"builtins.str®
+iTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]¤
+^Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]].
+builtins.list[None]
+None"builtins.list
+Cbuiltins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]¸
+4Union[builtins.str,Tuple[builtins.str,builtins.str]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+message_set
+builtins.str"builtins.str*/
+message_parts
+builtins.str"builtins.strz272¼
+fetchimaplib.IMAP4.fetch"ÿ
+ƒTuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]]
+builtins.str"builtins.strÖ
+oTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]Æ
+dUnion[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]].
+builtins.list[None]
+None"builtins.list«
+Ibuiltins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]Î
+:Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]] 
+builtins.bytes"builtins.bytesl
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+message_set
+builtins.str"builtins.str*/
+message_parts
+builtins.str"builtins.strz35z36z37z38z392Ô
+getaclimaplib.IMAP4.getacl"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392¸
+getannotationimaplib.IMAP4.getannotation"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.str*'
+entry
+builtins.str"builtins.str*+
+	attribute
+builtins.str"builtins.strz27z35z36z37z38z392Õ
+getquotaimaplib.IMAP4.getquota"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+root
+builtins.str"builtins.strz27z35z36z37z38z392à
+getquotarootimaplib.IMAP4.getquotaroot"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392÷
+listimaplib.IMAP4.list"Ğ
+}Tuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]]
+builtins.str"builtins.str®
+iTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]¤
+^Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]].
+builtins.list[None]
+None"builtins.list
+Cbuiltins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]¸
+4Union[builtins.str,Tuple[builtins.str,builtins.str]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+	directory
+builtins.str"builtins.str *+
+pattern
+builtins.str"builtins.str z272¶
+listimaplib.IMAP4.list"ÿ
+ƒTuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]]
+builtins.str"builtins.strÖ
+oTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]Æ
+dUnion[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]].
+builtins.list[None]
+None"builtins.list«
+Ibuiltins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]Î
+:Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]] 
+builtins.bytes"builtins.bytesl
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+	directory
+builtins.str"builtins.str *+
+pattern
+builtins.str"builtins.str z35z36z37z38z392ò
+loginimaplib.IMAP4.login"Ñ
+<Tuple[Literal[builtins.unicode],builtins.list[builtins.str]]C
+Literal[builtins.unicode]	$
+builtins.unicode"builtins.unicodeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+user
+builtins.str"builtins.str**
+password
+builtins.str"builtins.strz272ú
+loginimaplib.IMAP4.login"É
+:Tuple[Literal[builtins.str],builtins.list[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.strP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+user
+builtins.str"builtins.str**
+password
+builtins.str"builtins.strz35z36z37z38z392
+login_cram_md5imaplib.IMAP4.login_cram_md5"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+user
+builtins.str"builtins.str**
+password
+builtins.str"builtins.strz27z35z36z37z38z392Ÿ
+logoutimaplib.IMAP4.logout"Ğ
+}Tuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]]
+builtins.str"builtins.str®
+iTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]]¤
+^Union[builtins.list[None],builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]].
+builtins.list[None]
+None"builtins.list
+Cbuiltins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]¸
+4Union[builtins.str,Tuple[builtins.str,builtins.str]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4z272Ş
+logoutimaplib.IMAP4.logout"ÿ
+ƒTuple[builtins.str,TypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]]
+builtins.str"builtins.strÖ
+oTypeAlias[Union[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]]Æ
+dUnion[builtins.list[None],builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]].
+builtins.list[None]
+None"builtins.list«
+Ibuiltins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]Î
+:Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]] 
+builtins.bytes"builtins.bytesl
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list"imaplib._AnyResponseData*(
+self
+imaplib.IMAP4"imaplib.IMAP4z35z36z37z38z392
+lsubimaplib.IMAP4.lsub"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+	directory
+builtins.str"builtins.str *+
+pattern
+builtins.str"builtins.str z27z35z36z37z38z392Ø
+myrightsimaplib.IMAP4.myrights"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392¯
+	namespaceimaplib.IMAP4.namespace"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392è
+noopimaplib.IMAP4.noop"
+/Tuple[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4z272€
+noopimaplib.IMAP4.noop"¥
+1Tuple[builtins.str,builtins.list[builtins.bytes]]
+builtins.str"builtins.strP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4z35z36z37z38z392İ
+partialimaplib.IMAP4.partial"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+message_num
+builtins.str"builtins.str*.
+message_part
+builtins.str"builtins.str*'
+start
+builtins.str"builtins.str*(
+length
+builtins.str"builtins.strz27z35z36z37z38z392×
+	proxyauthimaplib.IMAP4.proxyauth"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+user
+builtins.str"builtins.strz27z35z36z37z38z392…
+renameimaplib.IMAP4.rename"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*,
+
+oldmailbox
+builtins.str"builtins.str*,
+
+newmailbox
+builtins.str"builtins.strz27z35z36z37z38z392¨
+searchimaplib.IMAP4.search"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*Q
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None**
+criteria
+builtins.str"builtins.strz27z35z36z37z38z392‰
+selectimaplib.IMAP4.select"İ
+;Tuple[builtins.str,builtins.list[Union[builtins.str,None]]]
+builtins.str"builtins.str~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4*+
+mailbox
+builtins.str"builtins.str *.
+readonly
+builtins.bool"builtins.bool z272¤
+selectimaplib.IMAP4.select"è
+=Tuple[builtins.str,builtins.list[Union[builtins.bytes,None]]]
+builtins.str"builtins.str†
+)builtins.list[Union[builtins.bytes,None]]J
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4*+
+mailbox
+builtins.str"builtins.str *.
+readonly
+builtins.bool"builtins.bool z35z36z37z38z392£
+setaclimaplib.IMAP4.setacl"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.str*%
+who
+builtins.str"builtins.str*&
+what
+builtins.str"builtins.strz27z35z36z37z38z392ß
+setannotationimaplib.IMAP4.setannotation"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+args
+builtins.str"builtins.strz27z35z36z37z38z392ÿ
+setquotaimaplib.IMAP4.setquota"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+root
+builtins.str"builtins.str*(
+limits
+builtins.str"builtins.strz27z35z36z37z38z392´
+sortimaplib.IMAP4.sort"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*/
+sort_criteria
+builtins.str"builtins.str*)
+charset
+builtins.str"builtins.str*1
+search_criteria
+builtins.str"builtins.strz27z35z36z37z38z392ı
+statusimaplib.IMAP4.status"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.str*'
+names
+builtins.str"builtins.strz27z35z36z37z38z392ª
+storeimaplib.IMAP4.store"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*-
+message_set
+builtins.str"builtins.str*)
+command
+builtins.str"builtins.str*'
+flags
+builtins.str"builtins.strz27z35z36z37z38z392Ú
+	subscribeimaplib.IMAP4.subscribe"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392¾
+threadimaplib.IMAP4.thread"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*5
+threading_algorithm
+builtins.str"builtins.str*)
+charset
+builtins.str"builtins.str*1
+search_criteria
+builtins.str"builtins.strz27z35z36z37z38z392ö
+uidimaplib.IMAP4.uid"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+command
+builtins.str"builtins.str*&
+args
+builtins.str"builtins.strz27z35z36z37z38z392Ş
+unsubscribeimaplib.IMAP4.unsubscribe"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*)
+mailbox
+builtins.str"builtins.strz27z35z36z37z38z392÷
+xatomimaplib.IMAP4.xatom"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*&
+name
+builtins.str"builtins.str*&
+args
+builtins.str"builtins.strz27z35z36z37z38z392p
+	print_logimaplib.IMAP4.print_log"
+None*(
+self
+imaplib.IMAP4"imaplib.IMAP4z27z35z36z37z38z392Ó
+enableimaplib.IMAP4.enable"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4*,
+
+capability
+builtins.str"builtins.strz35z36z37z38z392h
+	__enter__imaplib.IMAP4.__enter__"
+_typeshed.Self*
+self
+_typeshed.Selfz35z36z37z38z392Å
+__exit__imaplib.IMAP4.__exit__"
+None*&
+self
+imaplib.IMAP4"imaplib.IMAP4*
+tŠ
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*g
+vb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Nonez35z36z37z38z392»
+starttlsimaplib.IMAP4.starttls"
+0Tuple[Literal[builtins.str],builtins.list[None]]7
+Literal[builtins.str]	
+builtins.str"builtins.str.
+builtins.list[None]
+None"builtins.list*(
+self
+imaplib.IMAP4"imaplib.IMAP4*9
+ssl_context&
+Union[Any,None]
+Any
+None z35z36z37z38z392™
+unselectimaplib.IMAP4.unselect"Æ
+1TypeAlias[Tuple[builtins.str,builtins.list[Any]]]v
+&Tuple[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"imaplib._CommandResults*(
+self
+imaplib.IMAP4"imaplib.IMAP4z39r27r35r36r37r38r39Ü
+	IMAP4_SSLimaplib.IMAP4_SSL"imaplib.IMAP42å
+__init__imaplib.IMAP4_SSL.__init__"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *S
+keyfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+certfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z272Ğ
+__init__imaplib.IMAP4_SSL.__init__"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *S
+keyfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+certfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *]
+ssl_contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None z35z36z37z382Ÿ
+__init__imaplib.IMAP4_SSL.__init__"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *S
+keyfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+certfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *]
+ssl_contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z392ê
+openimaplib.IMAP4_SSL.open"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*(
+host
+builtins.str"builtins.str *P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z27z35z36z37z382µ
+openimaplib.IMAP4_SSL.open"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*(
+host
+builtins.str"builtins.str *P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z392š
+readimaplib.IMAP4_SSL.read"
+builtins.str"builtins.str*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*&
+size
+builtins.int"builtins.intz272®
+readimaplib.IMAP4_SSL.read" 
+builtins.bytes"builtins.bytes*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*&
+size
+builtins.int"builtins.intz35z36z37z38z392z
+readlineimaplib.IMAP4_SSL.readline"
+builtins.str"builtins.str*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz272
+readlineimaplib.IMAP4_SSL.readline" 
+builtins.bytes"builtins.bytes*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz35z36z37z38z392†
+sendimaplib.IMAP4_SSL.send"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL*&
+data
+builtins.str"builtins.strz272š
+sendimaplib.IMAP4_SSL.send"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSL**
+data 
+builtins.bytes"builtins.bytesz35z36z37z38z392z
+shutdownimaplib.IMAP4_SSL.shutdown"
+None*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz27z35z36z37z38z392Œ
+socketimaplib.IMAP4_SSL.socket"
+socket.socket"socket.socket*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz27z35z36z37z38z392†
+sslimaplib.IMAP4_SSL.ssl"
+ssl.SSLSocket"ssl.SSLSocket*0
+self&
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz27z35z36z37z38z39r27r35r36r37r38r39Á
+IMAP4_streamimaplib.IMAP4_stream"imaplib.IMAP42®
+__init__imaplib.IMAP4_stream.__init__"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*)
+command
+builtins.str"builtins.strz27z35z36z37z38z392›
+openimaplib.IMAP4_stream.open"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*P
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z27z35z36z37z382æ
+openimaplib.IMAP4_stream.open"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*P
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z392£
+readimaplib.IMAP4_stream.read"
+builtins.str"builtins.str*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*&
+size
+builtins.int"builtins.intz272·
+readimaplib.IMAP4_stream.read" 
+builtins.bytes"builtins.bytes*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*&
+size
+builtins.int"builtins.intz35z36z37z38z392ƒ
+readlineimaplib.IMAP4_stream.readline"
+builtins.str"builtins.str*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_streamz272—
+readlineimaplib.IMAP4_stream.readline" 
+builtins.bytes"builtins.bytes*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_streamz35z36z37z38z392
+sendimaplib.IMAP4_stream.send"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream*&
+data
+builtins.str"builtins.strz272£
+sendimaplib.IMAP4_stream.send"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_stream**
+data 
+builtins.bytes"builtins.bytesz35z36z37z38z392ƒ
+shutdownimaplib.IMAP4_stream.shutdown"
+None*6
+self,
+imaplib.IMAP4_stream"imaplib.IMAP4_streamz27z35z36z37z38z39r27r35r36r37r38r39â	
+_Authenticatorimaplib._Authenticator"builtins.object2ä
+__init__imaplib._Authenticator.__init__"
+None*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*Y
+mechinstK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz27z35z36z37z38z392Ã
+processimaplib._Authenticator.process"
+builtins.str"builtins.str*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*&
+data
+builtins.str"builtins.strz27z35z36z37z38z392¬
+encodeimaplib._Authenticator.encode"
+builtins.str"builtins.str*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*%
+inp
+builtins.str"builtins.strz272À
+encodeimaplib._Authenticator.encode"
+builtins.str"builtins.str*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*)
+inp 
+builtins.bytes"builtins.bytesz35z36z37z38z392¬
+decodeimaplib._Authenticator.decode"
+builtins.str"builtins.str*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*%
+inp
+builtins.str"builtins.strz272À
+decodeimaplib._Authenticator.decode" 
+builtins.bytes"builtins.bytes*:
+self0
+imaplib._Authenticator"imaplib._Authenticator*%
+inp
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39"€
+Internaldate2tupleimaplib.Internaldate2tuple"
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*&
+resp
+builtins.str"builtins.strz27z35z36z37z38z39"u
+Int2APimaplib.Int2AP"
+builtins.str"builtins.str*%
+num
+builtins.int"builtins.intz27z35z36z37z38z39"—
+
+ParseFlagsimaplib.ParseFlags"5
+Tuple[builtins.str]
+builtins.str"builtins.str*&
+resp
+builtins.str"builtins.strz27z35z36z37z38z39"ê
+Time2Internaldateimaplib.Time2Internaldate"
+builtins.str"builtins.str*ƒ
+	date_timeó
+Union[builtins.float,Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],builtins.str] 
+builtins.float"builtins.float
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.strz27z35z36z37z38z39

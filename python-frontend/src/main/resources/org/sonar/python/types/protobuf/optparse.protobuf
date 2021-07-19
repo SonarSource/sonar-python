@@ -1,0 +1,1455 @@
+
+optparseoptparse–
+OptParseErroroptparse.OptParseError"builtins.Exception*builtins.BaseException2≥
+__init__optparse.OptParseError.__init__"
+None*:
+self0
+optparse.OptParseError"optparse.OptParseError*ª
+msg±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272¨
+__init__optparse.OptParseError.__init__"
+None*:
+self0
+optparse.OptParseError"optparse.OptParseError*%
+msg
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39¯
+BadOptionErroroptparse.BadOptionError"optparse.OptParseError*builtins.Exception*builtins.BaseException2∫
+__init__ optparse.BadOptionError.__init__"
+None*<
+self2
+optparse.BadOptionError"optparse.BadOptionError*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272≥
+__init__ optparse.BadOptionError.__init__"
+None*<
+self2
+optparse.BadOptionError"optparse.BadOptionError*)
+opt_str
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39¬
+AmbiguousOptionErroroptparse.AmbiguousOptionError"optparse.BadOptionError*optparse.OptParseError*builtins.Exception*builtins.BaseException2Í
+__init__&optparse.AmbiguousOptionError.__init__"
+None*H
+self>
+optparse.AmbiguousOptionError"optparse.AmbiguousOptionError*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*õ
+possibilitiesá
+@typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text"typing.Sequencez272®
+__init__&optparse.AmbiguousOptionError.__init__"
+None*H
+self>
+optparse.AmbiguousOptionError"optparse.AmbiguousOptionError*)
+opt_str
+builtins.str"builtins.str*a
+possibilitiesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequencez35z36z37z38z39r27r35r36r37r38r39∏
+OptionErroroptparse.OptionError"optparse.OptParseError*builtins.Exception*builtins.BaseException2›
+__init__optparse.OptionError.__init__"
+None*6
+self,
+optparse.OptionError"optparse.OptionError*ª
+msg±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*.
+option"
+optparse.Option"optparse.Optionz272÷
+__init__optparse.OptionError.__init__"
+None*6
+self,
+optparse.OptionError"optparse.OptionError*%
+msg
+builtins.str"builtins.str*.
+option"
+optparse.Option"optparse.Optionz35z36z37z38z39r27r35r36r37r38r39•
+OptionConflictErroroptparse.OptionConflictError"optparse.OptionError*optparse.OptParseError*builtins.Exception*builtins.BaseExceptionr27r35r36r37r38r39â
+OptionValueErroroptparse.OptionValueError"optparse.OptParseError*builtins.Exception*builtins.BaseExceptionr27r35r36r37r38r39ë2
+HelpFormatteroptparse.HelpFormatter"builtins.object2Ú
+__init__optparse.HelpFormatter.__init__"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*2
+indent_increment
+builtins.int"builtins.int*3
+max_help_position
+builtins.int"builtins.int*O
+widthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*-
+short_first
+builtins.int"builtins.intz27z35z36z37z38z392Ö
+dedentoptparse.HelpFormatter.dedent"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatterz27z35z36z37z38z392€
+expand_default%optparse.HelpFormatter.expand_default"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz272’
+expand_default%optparse.HelpFormatter.expand_default"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz35z36z37z38z392˘
+format_description)optparse.HelpFormatter.format_description"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*√
+description±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272‹
+format_description)optparse.HelpFormatter.format_description"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*-
+description
+builtins.str"builtins.strz35z36z37z38z392Í
+format_epilog$optparse.HelpFormatter.format_epilog"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*æ
+epilog±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272Õ
+format_epilog$optparse.HelpFormatter.format_epilog"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*(
+epilog
+builtins.str"builtins.strz35z36z37z38z392¡
+format_heading%optparse.HelpFormatter.format_heading"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*
+heading
+Anyz272ª
+format_heading%optparse.HelpFormatter.format_heading"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*
+heading
+Anyz35z36z37z38z392Ÿ
+format_option$optparse.HelpFormatter.format_option"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz272”
+format_option$optparse.HelpFormatter.format_option"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz35z36z37z38z392È
+format_option_strings,optparse.HelpFormatter.format_option_strings"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz272„
+format_option_strings,optparse.HelpFormatter.format_option_strings"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*.
+option"
+optparse.Option"optparse.Optionz35z36z37z38z392ª
+format_usage#optparse.HelpFormatter.format_usage"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*
+usage
+Anyz272µ
+format_usage#optparse.HelpFormatter.format_usage"
+builtins.str"builtins.str*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*
+usage
+Anyz35z36z37z38z392Ö
+indentoptparse.HelpFormatter.indent"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatterz27z35z36z37z38z392—
+set_long_opt_delimiter-optparse.HelpFormatter.set_long_opt_delimiter"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*Ω
+delim±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272 
+set_long_opt_delimiter-optparse.HelpFormatter.set_long_opt_delimiter"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*'
+delim
+builtins.str"builtins.strz35z36z37z38z392…
+
+set_parser!optparse.HelpFormatter.set_parser"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*:
+parser.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392”
+set_short_opt_delimiter.optparse.HelpFormatter.set_short_opt_delimiter"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*Ω
+delim±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272Ã
+set_short_opt_delimiter.optparse.HelpFormatter.set_short_opt_delimiter"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*'
+delim
+builtins.str"builtins.strz35z36z37z38z392›
+store_option_strings+optparse.HelpFormatter.store_option_strings"
+None*:
+self0
+optparse.HelpFormatter"optparse.HelpFormatter*:
+parser.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z39r27r35r36r37r38r39÷
+IndentedHelpFormatteroptparse.IndentedHelpFormatter"optparse.HelpFormatter2í
+__init__'optparse.IndentedHelpFormatter.__init__"
+None*J
+self@
+optparse.IndentedHelpFormatter"optparse.IndentedHelpFormatter*4
+indent_increment
+builtins.int"builtins.int *5
+max_help_position
+builtins.int"builtins.int *Q
+widthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+short_first
+builtins.int"builtins.int z27z35z36z37z38z392Ö
+format_heading-optparse.IndentedHelpFormatter.format_heading"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*J
+self@
+optparse.IndentedHelpFormatter"optparse.IndentedHelpFormatter*ø
+heading±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272Ë
+format_heading-optparse.IndentedHelpFormatter.format_heading"
+builtins.str"builtins.str*J
+self@
+optparse.IndentedHelpFormatter"optparse.IndentedHelpFormatter*)
+heading
+builtins.str"builtins.strz35z36z37z38z392ˇ
+format_usage+optparse.IndentedHelpFormatter.format_usage"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*J
+self@
+optparse.IndentedHelpFormatter"optparse.IndentedHelpFormatter*Ω
+usage±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272‚
+format_usage+optparse.IndentedHelpFormatter.format_usage"
+builtins.str"builtins.str*J
+self@
+optparse.IndentedHelpFormatter"optparse.IndentedHelpFormatter*'
+usage
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39¥
+TitledHelpFormatteroptparse.TitledHelpFormatter"optparse.HelpFormatter2å
+__init__%optparse.TitledHelpFormatter.__init__"
+None*F
+self<
+optparse.TitledHelpFormatter"optparse.TitledHelpFormatter*4
+indent_increment
+builtins.int"builtins.int *5
+max_help_position
+builtins.int"builtins.int *Q
+widthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+short_first
+builtins.int"builtins.int z27z35z36z37z38z392ˇ
+format_heading+optparse.TitledHelpFormatter.format_heading"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*F
+self<
+optparse.TitledHelpFormatter"optparse.TitledHelpFormatter*ø
+heading±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272‚
+format_heading+optparse.TitledHelpFormatter.format_heading"
+builtins.str"builtins.str*F
+self<
+optparse.TitledHelpFormatter"optparse.TitledHelpFormatter*)
+heading
+builtins.str"builtins.strz35z36z37z38z392˘
+format_usage)optparse.TitledHelpFormatter.format_usage"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*F
+self<
+optparse.TitledHelpFormatter"optparse.TitledHelpFormatter*Ω
+usage±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272‹
+format_usage)optparse.TitledHelpFormatter.format_usage"
+builtins.str"builtins.str*F
+self<
+optparse.TitledHelpFormatter"optparse.TitledHelpFormatter*'
+usage
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39Ê1
+Optionoptparse.Option"builtins.object2¸
+__init__optparse.Option.__init__"
+None*,
+self"
+optparse.Option"optparse.Option*Ö
+opts{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*
+attrs
+Anyz272‘
+__init__optparse.Option.__init__"
+None*,
+self"
+optparse.Option"optparse.Option*N
+optsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*
+attrs
+Anyz35z36z37z38z392~
+_check_actionoptparse.Option._check_action"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392Ç
+_check_callbackoptparse.Option._check_callback"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392~
+_check_choiceoptparse.Option._check_choice"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392|
+_check_constoptparse.Option._check_const"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392z
+_check_destoptparse.Option._check_dest"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392|
+_check_nargsoptparse.Option._check_nargs"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392»
+_check_opt_strings"optparse.Option._check_opt_strings"É
+>builtins.list[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text"builtins.list*,
+self"
+optparse.Option"optparse.Option*’
+opts 
+:typing.Iterable[Union[builtins.str,builtins.unicode,None]]{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None"typing.Iterablez272÷
+_check_opt_strings"optparse.Option._check_opt_strings"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*,
+self"
+optparse.Option"optparse.Option*ç
+optsÇ
+)typing.Iterable[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Iterablez35z36z37z38z392z
+_check_typeoptparse.Option._check_type"
+None*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z392É
+
+_set_attrsoptparse.Option._set_attrs"
+None*,
+self"
+optparse.Option"optparse.Option*ú
+attrsê
+Bbuiltins.dict[TypeAlias[Union[builtins.str,builtins.unicode]],Any]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text
+Any"builtins.dictz272ÿ
+
+_set_attrsoptparse.Option._set_attrs"
+None*,
+self"
+optparse.Option"optparse.Option*b
+attrsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictz35z36z37z38z392Ö
+_set_opt_strings optparse.Option._set_opt_strings"
+None*,
+self"
+optparse.Option"optparse.Option*í
+optsá
+@typing.Iterable[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text"typing.Iterablez272⁄
+_set_opt_strings optparse.Option._set_opt_strings"
+None*,
+self"
+optparse.Option"optparse.Option*X
+optsN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterablez35z36z37z38z392∑
+check_valueoptparse.Option.check_value"
+Any*,
+self"
+optparse.Option"optparse.Option*ª
+opt±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*
+value
+Anyz272∞
+check_valueoptparse.Option.check_value"
+Any*,
+self"
+optparse.Option"optparse.Option*%
+opt
+builtins.str"builtins.str*
+value
+Anyz35z36z37z38z392ª
+convert_valueoptparse.Option.convert_value"
+Any*,
+self"
+optparse.Option"optparse.Option*ª
+opt±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*
+value
+Anyz272¥
+convert_valueoptparse.Option.convert_value"
+Any*,
+self"
+optparse.Option"optparse.Option*%
+opt
+builtins.str"builtins.str*
+value
+Anyz35z36z37z38z392ñ
+get_opt_stringoptparse.Option.get_opt_string"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*,
+self"
+optparse.Option"optparse.Optionz272ê
+get_opt_stringoptparse.Option.get_opt_string"
+builtins.str"builtins.str*,
+self"
+optparse.Option"optparse.Optionz35z36z37z38z392˝
+processoptparse.Option.process"
+builtins.int"builtins.int*,
+self"
+optparse.Option"optparse.Option*
+opt
+Any*
+value
+Any*
+values
+Any*:
+parser.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392Ò
+take_actionoptparse.Option.take_action"
+builtins.int"builtins.int*,
+self"
+optparse.Option"optparse.Option*æ
+action±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*º
+dest±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*
+opt
+Any*
+value
+Any*
+values
+Any*:
+parser.
+optparse.OptionParser"optparse.OptionParserz272”
+take_actionoptparse.Option.take_action"
+builtins.int"builtins.int*,
+self"
+optparse.Option"optparse.Option*(
+action
+builtins.str"builtins.str*&
+dest
+builtins.str"builtins.str*
+opt
+Any*
+value
+Any*
+values
+Any*:
+parser.
+optparse.OptionParser"optparse.OptionParserz35z36z37z38z392ê
+takes_valueoptparse.Option.takes_value"
+builtins.bool"builtins.bool*,
+self"
+optparse.Option"optparse.Optionz27z35z36z37z38z39r27r35r36r37r38r39ô2
+OptionContaineroptparse.OptionContainer"builtins.object2ô
+__init__!optparse.OptionContainer.__init__"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*O
+option_class=
+Type[optparse.Option]"
+optparse.Option"optparse.Option*
+conflict_handler
+Any*
+description
+Anyz27z35z36z37z38z392≤
+_check_conflict(optparse.OptionContainer._check_conflict"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*
+option
+Anyz27z35z36z37z38z392≠
+_create_option_mappings0optparse.OptionContainer._create_option_mappings"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainerz27z35z36z37z38z392Á
+_share_option_mappings/optparse.OptionContainer._share_option_mappings"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*:
+parser.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392ˇ
+add_options$optparse.OptionContainer.add_options"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*h
+option_listW
+ typing.Iterable[optparse.Option]"
+optparse.Option"optparse.Option"typing.Iterablez27z35z36z37z38z392ç
+destroy optparse.OptionContainer.destroy"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainerz27z35z36z37z38z392ï
+format_description+optparse.OptionContainer.format_description"
+Any*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*q
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+Nonez27z35z36z37z38z392û
+format_help$optparse.OptionContainer.format_help"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*q
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+Nonez272ò
+format_help$optparse.OptionContainer.format_help"
+builtins.str"builtins.str*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*q
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+Nonez35z36z37z38z392¨
+format_option_help+optparse.OptionContainer.format_option_help"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*q
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+Nonez272¶
+format_option_help+optparse.OptionContainer.format_option_help"
+builtins.str"builtins.str*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*q
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+Nonez35z36z37z38z392ú
+get_description(optparse.OptionContainer.get_description"
+Any*>
+self4
+optparse.OptionContainer"optparse.OptionContainerz27z35z36z37z38z392Ü
+
+get_option#optparse.OptionContainer.get_option"M
+Union[optparse.Option,None]"
+optparse.Option"optparse.Option
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272ˇ
+
+get_option#optparse.OptionContainer.get_option"M
+Union[optparse.Option,None]"
+optparse.Option"optparse.Option
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*)
+opt_str
+builtins.str"builtins.strz35z36z37z38z392◊
+
+has_option#optparse.OptionContainer.has_option"
+builtins.bool"builtins.bool*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272–
+
+has_option#optparse.OptionContainer.has_option"
+builtins.bool"builtins.bool*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*)
+opt_str
+builtins.str"builtins.strz35z36z37z38z392«
+remove_option&optparse.OptionContainer.remove_option"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272¿
+remove_option&optparse.OptionContainer.remove_option"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*)
+opt_str
+builtins.str"builtins.strz35z36z37z38z392Ω
+set_conflict_handler-optparse.OptionContainer.set_conflict_handler"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*
+handler
+Anyz27z35z36z37z38z392∑
+set_description(optparse.OptionContainer.set_description"
+None*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*
+description
+Anyz27z35z36z37z38z39:∞
+
+add_option#optparse.OptionContainer.add_option–
+
+add_option#optparse.OptionContainer.add_option""
+optparse.Option"optparse.Option*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*+
+opt"
+optparse.Option"optparse.Option0:overloadX•
+
+add_option#optparse.OptionContainer.add_option"
+Any*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*Ö
+args{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*
+kwargs
+Any0:overloadX"27:à
+
+add_option#optparse.OptionContainer.add_option–
+
+add_option#optparse.OptionContainer.add_option""
+optparse.Option"optparse.Option*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*+
+opt"
+optparse.Option"optparse.Option0:overloadXÌ
+
+add_option#optparse.OptionContainer.add_option"
+Any*>
+self4
+optparse.OptionContainer"optparse.OptionContainer*N
+argsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*
+kwargs
+Any0:overloadX"35"36"37"38"39r27r35r36r37r38r39ë
+OptionGroupoptparse.OptionGroup"optparse.OptionContainer2¸
+__init__optparse.OptionGroup.__init__"
+None*6
+self,
+optparse.OptionGroup"optparse.OptionGroup*:
+parser.
+optparse.OptionParser"optparse.OptionParser*Ω
+title±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*é
+description{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None z272Ω
+__init__optparse.OptionGroup.__init__"
+None*6
+self,
+optparse.OptionGroup"optparse.OptionGroup*:
+parser.
+optparse.OptionParser"optparse.OptionParser*'
+title
+builtins.str"builtins.str*W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z35z36z37z38z392ô
+_create_option_list(optparse.OptionGroup._create_option_list"
+None*6
+self,
+optparse.OptionGroup"optparse.OptionGroupz27z35z36z37z38z392±
+	set_titleoptparse.OptionGroup.set_title"
+None*6
+self,
+optparse.OptionGroup"optparse.OptionGroup*Ω
+title±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272™
+	set_titleoptparse.OptionGroup.set_title"
+None*6
+self,
+optparse.OptionGroup"optparse.OptionGroup*'
+title
+builtins.str"builtins.strz35z36z37z38z39r27r35r36r37r38r39˘"
+Valuesoptparse.Values"builtins.object2ù
+__init__optparse.Values.__init__"
+None*,
+self"
+optparse.Values"optparse.Values*¶
+defaultsï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None z27z35z36z37z38z392ë
+_updateoptparse.Values._update"
+None*,
+self"
+optparse.Values"optparse.Values*ù
+dictí
+Ctyping.Mapping[TypeAlias[Union[builtins.str,builtins.unicode]],Any]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text
+Any"typing.Mapping*
+mode
+Anyz272Ê
+_updateoptparse.Values._update"
+None*,
+self"
+optparse.Values"optparse.Values*c
+dictY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*
+mode
+Anyz35z36z37z38z392é
+_update_carefuloptparse.Values._update_careful"
+None*,
+self"
+optparse.Values"optparse.Values*ù
+dictí
+Ctyping.Mapping[TypeAlias[Union[builtins.str,builtins.unicode]],Any]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text
+Any"typing.Mappingz272„
+_update_carefuloptparse.Values._update_careful"
+None*,
+self"
+optparse.Values"optparse.Values*c
+dictY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mappingz35z36z37z38z392ä
+_update_looseoptparse.Values._update_loose"
+None*,
+self"
+optparse.Values"optparse.Values*ù
+dictí
+Ctyping.Mapping[TypeAlias[Union[builtins.str,builtins.unicode]],Any]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text
+Any"typing.Mappingz272ﬂ
+_update_looseoptparse.Values._update_loose"
+None*,
+self"
+optparse.Values"optparse.Values*c
+dictY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mappingz35z36z37z38z392∫
+ensure_valueoptparse.Values.ensure_value"
+Any*,
+self"
+optparse.Values"optparse.Values*º
+attr±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*
+value
+Anyz272≥
+ensure_valueoptparse.Values.ensure_value"
+Any*,
+self"
+optparse.Values"optparse.Values*&
+attr
+builtins.str"builtins.str*
+value
+Anyz35z36z37z38z392Ê
+	read_fileoptparse.Values.read_file"
+None*,
+self"
+optparse.Values"optparse.Values*¿
+filename±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*æ
+mode±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text z272»
+	read_fileoptparse.Values.read_file"
+None*,
+self"
+optparse.Values"optparse.Values**
+filename
+builtins.str"builtins.str*(
+mode
+builtins.str"builtins.str z35z36z37z38z392È
+read_moduleoptparse.Values.read_module"
+None*,
+self"
+optparse.Values"optparse.Values*ø
+modname±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*æ
+mode±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text z272À
+read_moduleoptparse.Values.read_module"
+None*,
+self"
+optparse.Values"optparse.Values*)
+modname
+builtins.str"builtins.str*(
+mode
+builtins.str"builtins.str z35z36z37z38z392ù
+__getattr__optparse.Values.__getattr__"
+Any**
+self"
+optparse.Values"optparse.Values*$
+name
+builtins.str"builtins.strz27z35z36z37z38z392∞
+__setattr__optparse.Values.__setattr__"
+None**
+self"
+optparse.Values"optparse.Values*$
+name
+builtins.str"builtins.str*
+value
+Anyz27z35z36z37z38z39r27r35r36r37r38r39ét
+OptionParseroptparse.OptionParser"optparse.OptionContainer2ß
+__init__optparse.OptionParser.__init__"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*à
+usage{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None *ß
+option_listì
+,Union[typing.Iterable[optparse.Option],None]W
+ typing.Iterable[optparse.Option]"
+optparse.Option"optparse.Option"typing.Iterable
+None *Q
+option_class=
+Type[optparse.Option]"
+optparse.Option"optparse.Option *ä
+version{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None * 
+conflict_handler±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text *é
+description{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None *s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None *5
+add_help_option
+builtins.bool"builtins.bool *á
+prog{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None *â
+epilog{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None z272à
+__init__optparse.OptionParser.__init__"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*Q
+usageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ß
+option_listì
+,Union[typing.Iterable[optparse.Option],None]W
+ typing.Iterable[optparse.Option]"
+optparse.Option"optparse.Option"typing.Iterable
+None *Q
+option_class=
+Type[optparse.Option]"
+optparse.Option"optparse.Option *S
+versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *4
+conflict_handler
+builtins.str"builtins.str *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None *5
+add_help_option
+builtins.bool"builtins.bool *P
+progD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+epilogD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z35z36z37z38z392ñ
+_add_help_option&optparse.OptionParser._add_help_option"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392ú
+_add_version_option)optparse.OptionParser._add_version_option"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392ú
+_create_option_list)optparse.OptionParser._create_option_list"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392·
+_get_all_options&optparse.OptionParser._get_all_options"S
+builtins.list[optparse.Option]"
+optparse.Option"optparse.Option"builtins.list*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392Ë
+	_get_argsoptparse.OptionParser._get_args",
+builtins.list[Any]
+Any"builtins.list*8
+self.
+optparse.OptionParser"optparse.OptionParser*:
+args0
+typing.Iterable[Any]
+Any"typing.Iterablez27z35z36z37z38z392ú
+_init_parsing_state)optparse.OptionParser._init_parsing_state"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392Ë
+_match_long_opt%optparse.OptionParser._match_long_opt"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParser*ª
+opt±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272À
+_match_long_opt%optparse.OptionParser._match_long_opt"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParser*%
+opt
+builtins.str"builtins.strz35z36z37z38z392∫
+_populate_option_list+optparse.OptionParser._populate_option_list"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*h
+option_listW
+ typing.Iterable[optparse.Option]"
+optparse.Option"optparse.Option"typing.Iterable*.
+add_help
+builtins.bool"builtins.bool z27z35z36z37z38z392≤
+_process_args#optparse.OptionParser._process_args"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*7
+largs,
+builtins.list[Any]
+Any"builtins.list*7
+rargs,
+builtins.list[Any]
+Any"builtins.list*.
+values"
+optparse.Values"optparse.Valuesz27z35z36z37z38z392Ê
+_process_long_opt'optparse.OptionParser._process_long_opt"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*7
+rargs,
+builtins.list[Any]
+Any"builtins.list*
+values
+Anyz27z35z36z37z38z392Í
+_process_short_opts)optparse.OptionParser._process_short_opts"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*7
+rargs,
+builtins.list[Any]
+Any"builtins.list*
+values
+Anyz27z35z36z37z38z392∑
+check_values"optparse.OptionParser.check_values"É
+UTuple[optparse.Values,builtins.list[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
+optparse.Values"optparse.ValuesÉ
+>builtins.list[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text"builtins.list*8
+self.
+optparse.OptionParser"optparse.OptionParser*.
+values"
+optparse.Values"optparse.Values*é
+argsÉ
+>builtins.list[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text"builtins.listz272Ø
+check_values"optparse.OptionParser.check_values"¶
+2Tuple[optparse.Values,builtins.list[builtins.str]]"
+optparse.Values"optparse.ValuesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*8
+self.
+optparse.OptionParser"optparse.OptionParser*.
+values"
+optparse.Values"optparse.Values*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listz35z36z37z38z392®
+disable_interspersed_args/optparse.OptionParser.disable_interspersed_args"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392¶
+enable_interspersed_args.optparse.OptionParser.enable_interspersed_args"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392™
+erroroptparse.OptionParser.error"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*ª
+msg±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272£
+erroroptparse.OptionParser.error"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*%
+msg
+builtins.str"builtins.strz35z36z37z38z392˚
+exitoptparse.OptionParser.exit"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser**
+status
+builtins.int"builtins.int *O
+msgD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z27z35z36z37z38z392Ü
+expand_prog_name&optparse.OptionParser.expand_prog_name"
+Any*8
+self.
+optparse.OptionParser"optparse.OptionParser*Ç
+s{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+Nonez272ﬁ
+expand_prog_name&optparse.OptionParser.expand_prog_name"
+Any*8
+self.
+optparse.OptionParser"optparse.OptionParser*K
+sD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez35z36z37z38z392–
+format_epilog#optparse.OptionParser.format_epilog"
+Any*8
+self.
+optparse.OptionParser"optparse.OptionParser*?
+	formatter0
+optparse.HelpFormatter"optparse.HelpFormatterz27z35z36z37z38z392ó
+format_help!optparse.OptionParser.format_help"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParser*s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None z272ë
+format_help!optparse.OptionParser.format_help"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParser*s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None z35z36z37z38z392•
+format_option_help(optparse.OptionParser.format_option_help"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParser*s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None z272ü
+format_option_help(optparse.OptionParser.format_option_help"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParser*s
+	formatterb
+"Union[optparse.HelpFormatter,None]0
+optparse.HelpFormatter"optparse.HelpFormatter
+None z35z36z37z38z392¥
+get_default_values(optparse.OptionParser.get_default_values""
+optparse.Values"optparse.Values*8
+self.
+optparse.OptionParser"optparse.OptionParserz27z35z36z37z38z392√
+get_option_group&optparse.OptionParser.get_option_group"
+Any*8
+self.
+optparse.OptionParser"optparse.OptionParser*ø
+opt_str±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272º
+get_option_group&optparse.OptionParser.get_option_group"
+Any*8
+self.
+optparse.OptionParser"optparse.OptionParser*)
+opt_str
+builtins.str"builtins.strz35z36z37z38z392¶
+get_prog_name#optparse.OptionParser.get_prog_name"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParserz272†
+get_prog_name#optparse.OptionParser.get_prog_name"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParserz35z36z37z38z392û
+	get_usageoptparse.OptionParser.get_usage"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParserz272ò
+	get_usageoptparse.OptionParser.get_usage"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParserz35z36z37z38z392¢
+get_version!optparse.OptionParser.get_version"±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Text*8
+self.
+optparse.OptionParser"optparse.OptionParserz272ú
+get_version!optparse.OptionParser.get_version"
+builtins.str"builtins.str*8
+self.
+optparse.OptionParser"optparse.OptionParserz35z36z37z38z392ä
+
+parse_args optparse.OptionParser.parse_args"ù
+3Tuple[optparse.Values,builtins.list[typing.AnyStr]]"
+optparse.Values"optparse.Values@
+builtins.list[typing.AnyStr]
+typing.AnyStr"builtins.list*8
+self.
+optparse.OptionParser"optparse.OptionParser*ä
+args~
+*Union[typing.Sequence[typing.AnyStr],None]D
+typing.Sequence[typing.AnyStr]
+typing.AnyStr"typing.Sequence
+None *[
+valuesM
+Union[optparse.Values,None]"
+optparse.Values"optparse.Values
+None z27z35z36z37z38z392ê
+print_usage!optparse.OptionParser.print_usage"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*Å
+fileu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None z27z35z36z37z38z392é
+
+print_help optparse.OptionParser.print_help"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*Å
+fileu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None z27z35z36z37z38z392î
+print_version#optparse.OptionParser.print_version"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*Å
+fileu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None z27z35z36z37z38z392≥
+set_default!optparse.OptionParser.set_default"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*
+dest
+Any*
+value
+Anyz27z35z36z37z38z392£
+set_defaults"optparse.OptionParser.set_defaults"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*
+kwargs
+Anyz27z35z36z37z38z392¿
+set_process_default_values0optparse.OptionParser.set_process_default_values"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*
+process
+Anyz27z35z36z37z38z392¥
+	set_usageoptparse.OptionParser.set_usage"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*Ω
+usage±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz272≠
+	set_usageoptparse.OptionParser.set_usage"
+None*8
+self.
+optparse.OptionParser"optparse.OptionParser*'
+usage
+builtins.str"builtins.strz35z36z37z38z39:ù
+add_option_group&optparse.OptionParser.add_option_groupÌ
+add_option_group&optparse.OptionParser.add_option_group",
+optparse.OptionGroup"optparse.OptionGroup*8
+self.
+optparse.OptionParser"optparse.OptionParser*;
+__opt_group,
+optparse.OptionGroup"optparse.OptionGroup0:overloadXÿ
+add_option_group&optparse.OptionParser.add_option_group",
+optparse.OptionGroup"optparse.OptionGroup*8
+self.
+optparse.OptionParser"optparse.OptionParser*
+args
+Any*
+kwargs
+Any0:overloadX"27"35"36"37"38"39r27r35r36r37r38r39"∂
+check_builtinoptparse.check_builtin"
+Any*.
+option"
+optparse.Option"optparse.Option*
+opt
+Any*Ω
+value±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz27"Ø
+check_builtinoptparse.check_builtin"
+Any*.
+option"
+optparse.Option"optparse.Option*
+opt
+Any*'
+value
+builtins.str"builtins.strz35z36z37z38z39"¥
+check_choiceoptparse.check_choice"
+Any*.
+option"
+optparse.Option"optparse.Option*
+opt
+Any*Ω
+value±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"optparse._Textz27"≠
+check_choiceoptparse.check_choice"
+Any*.
+option"
+optparse.Option"optparse.Option*
+opt
+Any*'
+value
+builtins.str"builtins.strz35z36z37z38z39"Y
+isbasestringoptparse.isbasestring"
+builtins.bool"builtins.bool*
+x
+Anyz27

@@ -1,0 +1,361 @@
+
+concurrent.futures._baseconcurrent.futures._baseg
+Errorconcurrent.futures._base.Error"builtins.Exception*builtins.BaseExceptionr35r36r37r38r39ô
+CancelledError'concurrent.futures._base.CancelledError"concurrent.futures._base.Error*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39ï
+TimeoutError%concurrent.futures._base.TimeoutError"concurrent.futures._base.Error*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39ä
+_Collection$concurrent.futures._base._Collection"typing.Iterable"typing.Container2ô
+__len__,concurrent.futures._base._Collection.__len__"
+builtins.int"builtins.int*ô
+selfê
+Dconcurrent.futures._base._Collection[concurrent.futures._base._T_co]"
+concurrent.futures._base._T_co"$concurrent.futures._base._Collection0:abstractmethod@z35z36z37z38z39X`r35r36r37r38r39∑
+Futureconcurrent.futures._base.Future"builtins.object2‡
+__init__(concurrent.futures._base.Future.__init__"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392Ú
+cancel&concurrent.futures._base.Future.cancel"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392¯
+	cancelled)concurrent.futures._base.Future.cancelled"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392Ù
+running'concurrent.futures._base.Future.running"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392Ó
+done$concurrent.futures._base.Future.done"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392«
+add_done_callback1concurrent.futures._base.Future.add_done_callback"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz35z36z37z38z392Œ
+result&concurrent.futures._base.Future.result"
+concurrent.futures._base._T*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z392û
+set_running_or_notify_cancel<concurrent.futures._base.Future.set_running_or_notify_cancel"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z392ë
+
+set_result*concurrent.futures._base.Future.set_result"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*+
+result
+concurrent.futures._base._Tz35z36z37z38z392ó
+	exception)concurrent.futures._base.Future.exception"b
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z392›
+set_exception-concurrent.futures._base.Future.set_exception"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*q
+	exceptionb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+Nonez35z36z37z38z392ﬂ
+__class_getitem__1concurrent.futures._base.Future.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*”
+cls…
+BType[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*
+item
+Anypz39Xr35r36r37r38r39í
+Executor!concurrent.futures._base.Executor"builtins.object2î
+submit(concurrent.futures._base.Executor.submit"Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Anyz35z36z37z382à
+submit(concurrent.futures._base.Executor.submit"Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+__fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Anyz392î
+map%concurrent.futures._base.Executor.map"`
+,typing.Iterator[concurrent.futures._base._T]
+concurrent.futures._base._T"typing.Iterator*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*?
+	iterables0
+typing.Iterable[Any]
+Any"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *-
+	chunksize
+builtins.int"builtins.int z35z36z37z38z392Œ
+shutdown*concurrent.futures._base.Executor.shutdown"
+None*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
+wait
+builtins.bool"builtins.bool z35z36z37z382¯
+shutdown*concurrent.futures._base.Executor.shutdown"
+None*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
+wait
+builtins.bool"builtins.bool *4
+cancel_futures
+builtins.bool"builtins.bool z392ñ
+	__enter__+concurrent.futures._base.Executor.__enter__"
+concurrent.futures._base._T*'
+self
+concurrent.futures._base._Tz35z36z37z38z392ü
+__exit__*concurrent.futures._base.Executor.__exit__"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*N
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*
+exc_type
+Any*
+exc_val
+Any*
+exc_tb
+Anyz35z36z37z38z39r35r36r37r38r39·
+DoneAndNotDoneFutures.concurrent.futures._base.DoneAndNotDoneFutures"typing.Sequence*typing.Collection*typing.Reversible*typing.Iterable*typing.Container2‘
+__new__6concurrent.futures._base.DoneAndNotDoneFutures.__new__"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Å
+_clsˆ
+QType[concurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]]û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Ë
+done›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*Ï
+not_done›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.setz35z36z37z38z392ù
+__len__6concurrent.futures._base.DoneAndNotDoneFutures.__len__"
+builtins.int"builtins.int*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFuturesz35z36z37z38z39:∞
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__Ñ
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__"›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*!
+i
+builtins.int"builtins.int0:overloadX…
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*%
+s 
+builtins.slice"builtins.slice0:overloadX"35"36"37"38"39Xr35r36r37r38r39ö
+_Waiter concurrent.futures._base._Waiter"builtins.object2£
+__init__)concurrent.futures._base._Waiter.__init__"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiterz35z36z37z38z392Ö
+
+add_result+concurrent.futures._base._Waiter.add_result"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392ã
+add_exception.concurrent.futures._base._Waiter.add_exception"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392ã
+add_cancelled.concurrent.futures._base._Waiter.add_cancelled"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39r35r36r37r38r39≈	
+_AsCompletedWaiter+concurrent.futures._base._AsCompletedWaiter" concurrent.futures._base._Waiter2ƒ
+__init__4concurrent.futures._base._AsCompletedWaiter.__init__"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiterz35z36z37z38z392¶
+
+add_result6concurrent.futures._base._AsCompletedWaiter.add_result"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392¨
+add_exception9concurrent.futures._base._AsCompletedWaiter.add_exception"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392¨
+add_cancelled9concurrent.futures._base._AsCompletedWaiter.add_cancelled"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39r35r36r37r38r39ü
+_FirstCompletedWaiter.concurrent.futures._base._FirstCompletedWaiter" concurrent.futures._base._Waiter2Ø
+
+add_result9concurrent.futures._base._FirstCompletedWaiter.add_result"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392µ
+add_exception<concurrent.futures._base._FirstCompletedWaiter.add_exception"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392µ
+add_cancelled<concurrent.futures._base._FirstCompletedWaiter.add_cancelled"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39r35r36r37r38r39ø
+
+_AllCompletedWaiter,concurrent.futures._base._AllCompletedWaiter" concurrent.futures._base._Waiter2≥
+__init__5concurrent.futures._base._AllCompletedWaiter.__init__"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*3
+num_pending_calls
+builtins.int"builtins.int*5
+stop_on_exception
+builtins.bool"builtins.boolz35z36z37z38z392©
+
+add_result7concurrent.futures._base._AllCompletedWaiter.add_result"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392Ø
+add_exception:concurrent.futures._base._AllCompletedWaiter.add_exception"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z392Ø
+add_cancelled:concurrent.futures._base._AllCompletedWaiter.add_cancelled"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39r35r36r37r38r39÷
+_AcquireFutures(concurrent.futures._base._AcquireFutures"builtins.object2Ê
+__init__1concurrent.futures._base._AcquireFutures.__init__"
+None*^
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFutures*®
+futuresö
+5typing.Iterable[concurrent.futures._base.Future[Any]]P
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future"typing.Iterablez35z36z37z38z392ª
+	__enter__2concurrent.futures._base._AcquireFutures.__enter__"
+None*\
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFuturesz35z36z37z38z392Ã
+__exit__1concurrent.futures._base._AcquireFutures.__exit__"
+None*\
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFutures*
+args
+Anyz35z36z37z38z39r35r36r37r38r39à
+BrokenExecutor'concurrent.futures._base.BrokenExecutor"builtins.RuntimeError*builtins.Exception*builtins.BaseExceptionr37r38r39ì
+InvalidStateError*concurrent.futures._base.InvalidStateError"concurrent.futures._base.Error*builtins.Exception*builtins.BaseExceptionr38r39"˘
+as_completed%concurrent.futures._base.as_completed"„
+Mtyping.Iterator[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterator*Ï
+fs„
+Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39"’
+waitconcurrent.futures._base.wait"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Ï
+fs„
+Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+return_when
+builtins.str"builtins.str z35z36z37z38z39

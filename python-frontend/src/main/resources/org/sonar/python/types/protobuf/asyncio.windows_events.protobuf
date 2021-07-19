@@ -1,0 +1,234 @@
+
+asyncio.windows_eventsasyncio.windows_events«
+
+PipeServer!asyncio.windows_events.PipeServer"builtins.object2Ñ
+__init__*asyncio.windows_events.PipeServer.__init__"
+None*P
+selfF
+!asyncio.windows_events.PipeServer"!asyncio.windows_events.PipeServer*)
+address
+builtins.str"builtins.strz35z36z37z38z392¢
+__del__)asyncio.windows_events.PipeServer.__del__"
+None*N
+selfF
+!asyncio.windows_events.PipeServer"!asyncio.windows_events.PipeServerz35z36z37z38z392¸
+closed(asyncio.windows_events.PipeServer.closed"
+builtins.bool"builtins.bool*P
+selfF
+!asyncio.windows_events.PipeServer"!asyncio.windows_events.PipeServerz35z36z37z38z392 
+close'asyncio.windows_events.PipeServer.close"
+None*P
+selfF
+!asyncio.windows_events.PipeServer"!asyncio.windows_events.PipeServerz35z36z37z38z39r35r36r37r38r39Õ
+_WindowsSelectorEventLoop0asyncio.windows_events._WindowsSelectorEventLoop"-asyncio.selector_events.BaseSelectorEventLoop*!asyncio.base_events.BaseEventLoop* asyncio.events.AbstractEventLoopr35r36r37r38r39
+ProactorEventLoop(asyncio.windows_events.ProactorEventLoop"-asyncio.proactor_events.BaseProactorEventLoop*!asyncio.base_events.BaseEventLoop* asyncio.events.AbstractEventLoop2Ø
+__init__1asyncio.windows_events.ProactorEventLoop.__init__"
+None*^
+selfT
+(asyncio.windows_events.ProactorEventLoop"(asyncio.windows_events.ProactorEventLoop*š
+proactor‰
+/Union[asyncio.windows_events.IocpProactor,None]J
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor
+None z35z36z37z38z392£
+create_pipe_connection?asyncio.windows_events.ProactorEventLoop.create_pipe_connection"Ã
+ztyping.Coroutine[Any,Any,Tuple[asyncio.proactor_events._ProactorDuplexPipeTransport,asyncio.streams.StreamReaderProtocol]]
+Any
+Any 
+`Tuple[asyncio.proactor_events._ProactorDuplexPipeTransport,asyncio.streams.StreamReaderProtocol]l
+4asyncio.proactor_events._ProactorDuplexPipeTransport"4asyncio.proactor_events._ProactorDuplexPipeTransportL
+$asyncio.streams.StreamReaderProtocol"$asyncio.streams.StreamReaderProtocol"typing.Coroutine*^
+selfT
+(asyncio.windows_events.ProactorEventLoop"(asyncio.windows_events.ProactorEventLoop*a
+protocol_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.function*)
+address
+builtins.str"builtins.strHz35z36z37z38z392Ô
+start_serving_pipe;asyncio.windows_events.ProactorEventLoop.start_serving_pipe"ü
+Jtyping.Coroutine[Any,Any,builtins.list[asyncio.windows_events.PipeServer]]
+Any
+Any‰
+0builtins.list[asyncio.windows_events.PipeServer]F
+!asyncio.windows_events.PipeServer"!asyncio.windows_events.PipeServer"builtins.list"typing.Coroutine*^
+selfT
+(asyncio.windows_events.ProactorEventLoop"(asyncio.windows_events.ProactorEventLoop*a
+protocol_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.function*)
+address
+builtins.str"builtins.strHz35z36z37z38z39r35r36r37r38r39€)
+IocpProactor#asyncio.windows_events.IocpProactor"builtins.object2Ý
+__init__,asyncio.windows_events.IocpProactor.__init__"
+None*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*/
+concurrency
+builtins.int"builtins.int z35z36z37z38z392¾
+__repr__,asyncio.windows_events.IocpProactor.__repr__"
+builtins.str"builtins.str*R
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactorz35z36z37z38z392¨
+__del__+asyncio.windows_events.IocpProactor.__del__"
+None*R
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactorz35z36z37z38z392ü
+set_loop,asyncio.windows_events.IocpProactor.set_loop"
+None*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*N
+loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoopz35z36z37z38z392ð
+select*asyncio.windows_events.IocpProactor.select"{
+*builtins.list[asyncio.futures.Future[Any]]>
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future"builtins.list*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z392ý
+recv(asyncio.windows_events.IocpProactor.recv"b
+&asyncio.futures.Future[builtins.bytes] 
+builtins.bytes"builtins.bytes"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+conn
+socket.socket"socket.socket*(
+nbytes
+builtins.int"builtins.int*)
+flags
+builtins.int"builtins.int z35z36z37z38z392•
+send(asyncio.windows_events.IocpProactor.send">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+conn
+socket.socket"socket.socket*ã
+bufÙ
+STypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]ä
+HUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.WriteableBuffer*)
+flags
+builtins.int"builtins.int z35z36z37z38z392Œ
+accept*asyncio.windows_events.IocpProactor.accept">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*,
+listener
+socket.socket"socket.socketz35z36z37z38z392¹
+connect+asyncio.windows_events.IocpProactor.connect">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+conn
+socket.socket"socket.socket*-
+address 
+builtins.bytes"builtins.bytesz35z36z37z38z392’
+accept_pipe/asyncio.windows_events.IocpProactor.accept_pipe">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+pipe
+socket.socket"socket.socketz35z36z37z38z392„
+connect_pipe0asyncio.windows_events.IocpProactor.connect_pipe"¦
+:typing.Coroutine[Any,Any,asyncio.windows_utils.PipeHandle]
+Any
+AnyD
+ asyncio.windows_utils.PipeHandle" asyncio.windows_utils.PipeHandle"typing.Coroutine*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*-
+address 
+builtins.bytes"builtins.bytesHz35z36z37z38z392÷
+wait_for_handle3asyncio.windows_events.IocpProactor.wait_for_handle"
+builtins.bool"builtins.bool*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*P
+handleD
+ asyncio.windows_utils.PipeHandle" asyncio.windows_utils.PipeHandle*S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z392¦
+close)asyncio.windows_events.IocpProactor.close"
+None*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactorz35z36z37z38z392—
+	recv_into-asyncio.windows_events.IocpProactor.recv_into">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+conn
+socket.socket"socket.socket*ã
+bufÙ
+STypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]ä
+HUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.WriteableBuffer*)
+flags
+builtins.int"builtins.int z37z38z392«
+sendfile,asyncio.windows_events.IocpProactor.sendfile">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*T
+selfJ
+#asyncio.windows_events.IocpProactor"#asyncio.windows_events.IocpProactor*(
+sock
+socket.socket"socket.socket*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*(
+offset
+builtins.int"builtins.int*'
+count
+builtins.int"builtins.intz37z38z39r35r36r37r38r39¦
+_WindowsDefaultEventLoopPolicy5asyncio.windows_events._WindowsDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*&asyncio.events.AbstractEventLoopPolicy2ì
+get_child_watcherGasyncio.windows_events._WindowsDefaultEventLoopPolicy.get_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events._WindowsDefaultEventLoopPolicy"5asyncio.windows_events._WindowsDefaultEventLoopPolicyz35z362‚
+set_child_watcherGasyncio.windows_events._WindowsDefaultEventLoopPolicy.set_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events._WindowsDefaultEventLoopPolicy"5asyncio.windows_events._WindowsDefaultEventLoopPolicy*
+watcher
+Anyz35z36r35r36²
+WindowsSelectorEventLoopPolicy5asyncio.windows_events.WindowsSelectorEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*&asyncio.events.AbstractEventLoopPolicy2ð
+get_child_watcherGasyncio.windows_events.WindowsSelectorEventLoopPolicy.get_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events.WindowsSelectorEventLoopPolicy"5asyncio.windows_events.WindowsSelectorEventLoopPolicyz37z38z392†
+set_child_watcherGasyncio.windows_events.WindowsSelectorEventLoopPolicy.set_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events.WindowsSelectorEventLoopPolicy"5asyncio.windows_events.WindowsSelectorEventLoopPolicy*
+watcher
+Anyz37z38z39r37r38r39²
+WindowsProactorEventLoopPolicy5asyncio.windows_events.WindowsProactorEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*&asyncio.events.AbstractEventLoopPolicy2ð
+get_child_watcherGasyncio.windows_events.WindowsProactorEventLoopPolicy.get_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events.WindowsProactorEventLoopPolicy"5asyncio.windows_events.WindowsProactorEventLoopPolicyz37z38z392†
+set_child_watcherGasyncio.windows_events.WindowsProactorEventLoopPolicy.set_child_watcher"
+NoReturn
+*x
+selfn
+5asyncio.windows_events.WindowsProactorEventLoopPolicy"5asyncio.windows_events.WindowsProactorEventLoopPolicy*
+watcher
+Anyz37z38z39r37r38r39

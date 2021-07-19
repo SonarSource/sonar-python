@@ -1,0 +1,340 @@
+
+email.headerregistryemail.headerregistryÃ
+
+BaseHeaderemail.headerregistry.BaseHeader"builtins.str*typing.Sequence*typing.Collection*typing.Reversible*typing.Iterable*typing.Container2º
+name$email.headerregistry.BaseHeader.name"
+builtins.str"builtins.str*L
+selfB
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader0:property`z35z36z37z38z392š
+defects'email.headerregistry.BaseHeader.defects"v
+*builtins.tuple[email.errors.MessageDefect]8
+email.errors.MessageDefect"email.errors.MessageDefect"builtins.tuple*L
+selfB
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader0:property`z35z36z37z38z392ì
+	max_count)email.headerregistry.BaseHeader.max_count"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*L
+selfB
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader0:property`z35z36z37z38z392¾
+__new__'email.headerregistry.BaseHeader.__new__"B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*v
+clsm
+%Type[email.headerregistry.BaseHeader]B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*&
+name
+builtins.str"builtins.str*
+value
+Anyz35z36z37z38z392¦
+init$email.headerregistry.BaseHeader.init"
+None*L
+selfB
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*&
+name
+builtins.str"builtins.str*\
+
+parse_treeL
+$email._header_value_parser.TokenList"$email._header_value_parser.TokenList*…
+defectsx
++typing.Iterable[email.errors.MessageDefect]8
+email.errors.MessageDefect"email.errors.MessageDefect"typing.Iterablez35z36z37z38z392ä
+fold$email.headerregistry.BaseHeader.fold"
+builtins.str"builtins.str*L
+selfB
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*6
+policy*
+email.policy.Policy"email.policy.Policyz35z36z37z38z39r35r36r37r38r39ä
+UnstructuredHeader'email.headerregistry.UnstructuredHeader"builtins.object2ù
+value_parser4email.headerregistry.UnstructuredHeader.value_parser"d
+0email._header_value_parser.UnstructuredTokenList"0email._header_value_parser.UnstructuredTokenList*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z392ƒ
+parse-email.headerregistry.UnstructuredHeader.parse"
+None*
+cls…
+-Type[email.headerregistry.UnstructuredHeader]R
+'email.headerregistry.UnstructuredHeader"'email.headerregistry.UnstructuredHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z39r35r36r37r38r39†
+UniqueUnstructuredHeader-email.headerregistry.UniqueUnstructuredHeader"'email.headerregistry.UnstructuredHeaderr35r36r37r38r39Ì
+
+DateHeaderemail.headerregistry.DateHeader"builtins.object2Ì
+datetime(email.headerregistry.DateHeader.datetime"&
+datetime.datetime"datetime.datetime*L
+selfB
+email.headerregistry.DateHeader"email.headerregistry.DateHeader0:property`z35z36z37z38z392ñ
+value_parser,email.headerregistry.DateHeader.value_parser"d
+0email._header_value_parser.UnstructuredTokenList"0email._header_value_parser.UnstructuredTokenList*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z392´
+parse%email.headerregistry.DateHeader.parse"
+None*v
+clsm
+%Type[email.headerregistry.DateHeader]B
+email.headerregistry.DateHeader"email.headerregistry.DateHeader*z
+valueo
+%Union[builtins.str,datetime.datetime]
+builtins.str"builtins.str&
+datetime.datetime"datetime.datetime*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z39r35r36r37r38r39n
+UniqueDateHeader%email.headerregistry.UniqueDateHeader"email.headerregistry.DateHeaderr35r36r37r38r39ÿ	
+AddressHeader"email.headerregistry.AddressHeader"builtins.object2¡
+groups)email.headerregistry.AddressHeader.groups"v
+*builtins.tuple[email.headerregistry.Group]8
+email.headerregistry.Group"email.headerregistry.Group"builtins.tuple*R
+selfH
+"email.headerregistry.AddressHeader""email.headerregistry.AddressHeader0:property`z35z36z37z38z392­
+	addresses,email.headerregistry.AddressHeader.addresses"|
+,builtins.tuple[email.headerregistry.Address]<
+email.headerregistry.Address"email.headerregistry.Address"builtins.tuple*R
+selfH
+"email.headerregistry.AddressHeader""email.headerregistry.AddressHeader0:property`z35z36z37z38z392à
+value_parser/email.headerregistry.AddressHeader.value_parser"P
+&email._header_value_parser.AddressList"&email._header_value_parser.AddressList*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z392í
+parse(email.headerregistry.AddressHeader.parse"
+None*
+clsv
+(Type[email.headerregistry.AddressHeader]H
+"email.headerregistry.AddressHeader""email.headerregistry.AddressHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z39r35r36r37r38r39w
+UniqueAddressHeader(email.headerregistry.UniqueAddressHeader""email.headerregistry.AddressHeaderr35r36r37r38r39õ
+SingleAddressHeader(email.headerregistry.SingleAddressHeader""email.headerregistry.AddressHeader2û
+address0email.headerregistry.SingleAddressHeader.address"<
+email.headerregistry.Address"email.headerregistry.Address*^
+selfT
+(email.headerregistry.SingleAddressHeader"(email.headerregistry.SingleAddressHeader0:property`z35z36z37z38z39r35r36r37r38r39­
+UniqueSingleAddressHeader.email.headerregistry.UniqueSingleAddressHeader"(email.headerregistry.SingleAddressHeader*"email.headerregistry.AddressHeaderr35r36r37r38r39Á
+MIMEVersionHeader&email.headerregistry.MIMEVersionHeader"builtins.object2ı
+version.email.headerregistry.MIMEVersionHeader.version"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Z
+selfP
+&email.headerregistry.MIMEVersionHeader"&email.headerregistry.MIMEVersionHeader0:property`z35z36z37z38z392ù
+major,email.headerregistry.MIMEVersionHeader.major"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Z
+selfP
+&email.headerregistry.MIMEVersionHeader"&email.headerregistry.MIMEVersionHeader0:property`z35z36z37z38z392ù
+minor,email.headerregistry.MIMEVersionHeader.minor"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Z
+selfP
+&email.headerregistry.MIMEVersionHeader"&email.headerregistry.MIMEVersionHeader0:property`z35z36z37z38z392ä
+value_parser3email.headerregistry.MIMEVersionHeader.value_parser"P
+&email._header_value_parser.MIMEVersion"&email._header_value_parser.MIMEVersion*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z392ÿ
+parse,email.headerregistry.MIMEVersionHeader.parse"
+None*Œ
+cls‚
+,Type[email.headerregistry.MIMEVersionHeader]P
+&email.headerregistry.MIMEVersionHeader"&email.headerregistry.MIMEVersionHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z39r35r36r37r38r39«
+ParameterizedMIMEHeader,email.headerregistry.ParameterizedMIMEHeader"builtins.object2¢
+params3email.headerregistry.ParameterizedMIMEHeader.params"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*f
+self\
+,email.headerregistry.ParameterizedMIMEHeader",email.headerregistry.ParameterizedMIMEHeader0:property`z35z36z37z38z392—
+parse2email.headerregistry.ParameterizedMIMEHeader.parse"
+None*
+cls”
+2Type[email.headerregistry.ParameterizedMIMEHeader]\
+,email.headerregistry.ParameterizedMIMEHeader",email.headerregistry.ParameterizedMIMEHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z39r35r36r37r38r39ø
+ContentTypeHeader&email.headerregistry.ContentTypeHeader",email.headerregistry.ParameterizedMIMEHeader2ß
+content_type3email.headerregistry.ContentTypeHeader.content_type"
+builtins.str"builtins.str*Z
+selfP
+&email.headerregistry.ContentTypeHeader"&email.headerregistry.ContentTypeHeader0:property`z35z36z37z38z392×
+maintype/email.headerregistry.ContentTypeHeader.maintype"
+builtins.str"builtins.str*Z
+selfP
+&email.headerregistry.ContentTypeHeader"&email.headerregistry.ContentTypeHeader0:property`z35z36z37z38z392Õ
+subtype.email.headerregistry.ContentTypeHeader.subtype"
+builtins.str"builtins.str*Z
+selfP
+&email.headerregistry.ContentTypeHeader"&email.headerregistry.ContentTypeHeader0:property`z35z36z37z38z392ä
+value_parser3email.headerregistry.ContentTypeHeader.value_parser"P
+&email._header_value_parser.ContentType"&email._header_value_parser.ContentType*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z39r35r36r37r38r39Œ
+ContentDispositionHeader-email.headerregistry.ContentDispositionHeader",email.headerregistry.ParameterizedMIMEHeader2‚
+content_dispositionAemail.headerregistry.ContentDispositionHeader.content_disposition"
+builtins.str"builtins.str*h
+self^
+-email.headerregistry.ContentDispositionHeader"-email.headerregistry.ContentDispositionHeader0:property`z35z36z37z38z392ù
+value_parser:email.headerregistry.ContentDispositionHeader.value_parser"^
+-email._header_value_parser.ContentDisposition"-email._header_value_parser.ContentDisposition*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z39r35r36r37r38r39©
+ContentTransferEncodingHeader2email.headerregistry.ContentTransferEncodingHeader"builtins.object2ñ
+cte6email.headerregistry.ContentTransferEncodingHeader.cte"
+builtins.str"builtins.str*r
+selfh
+2email.headerregistry.ContentTransferEncodingHeader"2email.headerregistry.ContentTransferEncodingHeader0:property`z35z36z37z38z392¯
+parse8email.headerregistry.ContentTransferEncodingHeader.parse"
+None*°
+cls¦
+8Type[email.headerregistry.ContentTransferEncodingHeader]h
+2email.headerregistry.ContentTransferEncodingHeader"2email.headerregistry.ContentTransferEncodingHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz35z36z37z38z392ˆ
+value_parser?email.headerregistry.ContentTransferEncodingHeader.value_parser"h
+2email._header_value_parser.ContentTransferEncoding"2email._header_value_parser.ContentTransferEncoding*'
+value
+builtins.str"builtins.str0:staticmethodhz35z36z37z38z39r35r36r37r38r39ş
+HeaderRegistry#email.headerregistry.HeaderRegistry"builtins.object2é
+__init__,email.headerregistry.HeaderRegistry.__init__"
+None*T
+selfJ
+#email.headerregistry.HeaderRegistry"#email.headerregistry.HeaderRegistry*
+
+base_classm
+%Type[email.headerregistry.BaseHeader]B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader *‚
+default_classm
+%Type[email.headerregistry.BaseHeader]B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader *5
+use_default_map
+builtins.bool"builtins.bool z35z36z37z38z392Ò
+map_to_type/email.headerregistry.HeaderRegistry.map_to_type"
+None*T
+selfJ
+#email.headerregistry.HeaderRegistry"#email.headerregistry.HeaderRegistry*&
+name
+builtins.str"builtins.str*v
+clsm
+%Type[email.headerregistry.BaseHeader]B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeaderz35z36z37z38z392»
+__getitem__/email.headerregistry.HeaderRegistry.__getitem__"m
+%Type[email.headerregistry.BaseHeader]B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*R
+selfJ
+#email.headerregistry.HeaderRegistry"#email.headerregistry.HeaderRegistry*$
+name
+builtins.str"builtins.strz35z36z37z38z392¢
+__call__,email.headerregistry.HeaderRegistry.__call__"B
+email.headerregistry.BaseHeader"email.headerregistry.BaseHeader*T
+selfJ
+#email.headerregistry.HeaderRegistry"#email.headerregistry.HeaderRegistry*&
+name
+builtins.str"builtins.str*
+value
+Anyz35z36z37z38z39r35r36r37r38r39¹
+Addressemail.headerregistry.Address"builtins.object2Á
+display_name)email.headerregistry.Address.display_name"
+builtins.str"builtins.str*F
+self<
+email.headerregistry.Address"email.headerregistry.Address0:property`z35z36z37z38z392¹
+username%email.headerregistry.Address.username"
+builtins.str"builtins.str*F
+self<
+email.headerregistry.Address"email.headerregistry.Address0:property`z35z36z37z38z392µ
+domain#email.headerregistry.Address.domain"
+builtins.str"builtins.str*F
+self<
+email.headerregistry.Address"email.headerregistry.Address0:property`z35z36z37z38z392»
+	addr_spec&email.headerregistry.Address.addr_spec"
+builtins.str"builtins.str*F
+self<
+email.headerregistry.Address"email.headerregistry.Address0:property`z35z36z37z38z392Ê
+__init__%email.headerregistry.Address.__init__"
+None*F
+self<
+email.headerregistry.Address"email.headerregistry.Address*0
+display_name
+builtins.str"builtins.str *T
+usernameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	addr_specD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z35z36z37z38z392§
+__str__$email.headerregistry.Address.__str__"
+builtins.str"builtins.str*D
+self<
+email.headerregistry.Address"email.headerregistry.Addressz35z36z37z38z39r35r36r37r38r39´	
+Groupemail.headerregistry.Group"builtins.object2ã
+display_name'email.headerregistry.Group.display_name"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*B
+self8
+email.headerregistry.Group"email.headerregistry.Group0:property`z35z36z37z38z392•
+	addresses$email.headerregistry.Group.addresses"|
+,builtins.tuple[email.headerregistry.Address]<
+email.headerregistry.Address"email.headerregistry.Address"builtins.tuple*B
+self8
+email.headerregistry.Group"email.headerregistry.Group0:property`z35z36z37z38z392Ç
+__init__#email.headerregistry.Group.__init__"
+None*B
+self8
+email.headerregistry.Group"email.headerregistry.Group*X
+display_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ù
+	addressesÇ
+9Union[typing.Iterable[email.headerregistry.Address],None]~
+-typing.Iterable[email.headerregistry.Address]<
+email.headerregistry.Address"email.headerregistry.Address"typing.Iterable
+None z35z36z37z38z392¡
+__str__"email.headerregistry.Group.__str__"
+builtins.str"builtins.str*@
+self8
+email.headerregistry.Group"email.headerregistry.Groupz35z36z37z38z39r35r36r37r38r39’
+MessageIDHeader$email.headerregistry.MessageIDHeader"builtins.object2ê
+parse*email.headerregistry.MessageIDHeader.parse"
+None*…
+cls|
+*Type[email.headerregistry.MessageIDHeader]L
+$email.headerregistry.MessageIDHeader"$email.headerregistry.MessageIDHeader*'
+value
+builtins.str"builtins.str*a
+kwdsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodpz38z392Ò
+value_parser1email.headerregistry.MessageIDHeader.value_parser"L
+$email._header_value_parser.MessageID"$email._header_value_parser.MessageID*'
+value
+builtins.str"builtins.str0:staticmethodhz38z39r38r39

@@ -1,0 +1,657 @@
+
+smtplibsmtplibV
+SMTPExceptionsmtplib.SMTPException"builtins.Exception*builtins.BaseExceptionr27x
+SMTPExceptionsmtplib.SMTPException"builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39
+SMTPServerDisconnectedsmtplib.SMTPServerDisconnected"smtplib.SMTPException*builtins.Exception*builtins.BaseExceptionr27°
+SMTPServerDisconnectedsmtplib.SMTPServerDisconnected"smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39Ø
+SMTPResponseExceptionsmtplib.SMTPResponseException"smtplib.SMTPException*builtins.Exception*builtins.BaseException2Ø
+__init__&smtplib.SMTPResponseException.__init__"
+None*H
+self>
+smtplib.SMTPResponseException"smtplib.SMTPResponseException*
+code
+Any*
+msg
+Anyz27r27’
+SMTPResponseExceptionsmtplib.SMTPResponseException"smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseException2≥
+__init__&smtplib.SMTPResponseException.__init__"
+None*H
+self>
+smtplib.SMTPResponseException"smtplib.SMTPResponseException*&
+code
+builtins.int"builtins.int*o
+msgf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz35z36z37z38z39r35r36r37r38r39œ
+SMTPSenderRefusedsmtplib.SMTPSenderRefused"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.Exception*builtins.BaseException2∏
+__init__"smtplib.SMTPSenderRefused.__init__"
+None*@
+self6
+smtplib.SMTPSenderRefused"smtplib.SMTPSenderRefused*
+code
+Any*
+msg
+Any*
+sender
+Anyz27r27ƒ
+SMTPSenderRefusedsmtplib.SMTPSenderRefused"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseException2ã
+__init__"smtplib.SMTPSenderRefused.__init__"
+None*@
+self6
+smtplib.SMTPSenderRefused"smtplib.SMTPSenderRefused*&
+code
+builtins.int"builtins.int*)
+msg 
+builtins.bytes"builtins.bytes*(
+sender
+builtins.str"builtins.strz35z36z37z38z39r35r36r37r38r39£
+SMTPRecipientsRefusedsmtplib.SMTPRecipientsRefused"smtplib.SMTPException*builtins.Exception*builtins.BaseException2£
+__init__&smtplib.SMTPRecipientsRefused.__init__"
+None*H
+self>
+smtplib.SMTPRecipientsRefused"smtplib.SMTPRecipientsRefused*
+
+recipients
+Anyz27r27‚
+SMTPRecipientsRefusedsmtplib.SMTPRecipientsRefused"smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseException2¿
+__init__&smtplib.SMTPRecipientsRefused.__init__"
+None*H
+self>
+smtplib.SMTPRecipientsRefused"smtplib.SMTPRecipientsRefused*£
+
+recipientsí
+TTypeAlias[builtins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]]§
+Ibuiltins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]
+builtins.str"builtins.str©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply"builtins.dict"smtplib._SendErrsz35z36z37z38z39r35r36r37r38r39å
+SMTPDataErrorsmtplib.SMTPDataError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.Exception*builtins.BaseExceptionr27Æ
+SMTPDataErrorsmtplib.SMTPDataError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39í
+SMTPConnectErrorsmtplib.SMTPConnectError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.Exception*builtins.BaseExceptionr27¥
+SMTPConnectErrorsmtplib.SMTPConnectError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39å
+SMTPHeloErrorsmtplib.SMTPHeloError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.Exception*builtins.BaseExceptionr27Æ
+SMTPHeloErrorsmtplib.SMTPHeloError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39†
+SMTPAuthenticationErrorsmtplib.SMTPAuthenticationError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.Exception*builtins.BaseExceptionr27¬
+SMTPAuthenticationErrorsmtplib.SMTPAuthenticationError"smtplib.SMTPResponseException*smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39±
+SSLFakeFilesmtplib.SSLFakeFile"builtins.object2Å
+__init__smtplib.SSLFakeFile.__init__"
+None*4
+self*
+smtplib.SSLFakeFile"smtplib.SSLFakeFile*
+sslobj
+Anyz272B
+readlinesmtplib.SSLFakeFile.readline*
+self*
+
+size z2720
+closesmtplib.SSLFakeFile.close*
+selfz27r27˚d
+SMTPsmtplib.SMTP"builtins.object2‚
+__init__smtplib.SMTP.__init__"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *
+local_hostname
+Any *
+timeout
+Any z272Ÿ
+__init__smtplib.SMTP.__init__"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Z
+local_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+timeout 
+builtins.float"builtins.float *é
+source_address˜
+UUnion[Tuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int],None]ë
+ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
+5Union[builtins.bytearray,builtins.bytes,builtins.str](
+builtins.bytearray"builtins.bytearray 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+builtins.int"builtins.int
+None z35z36z37z38z392K
+set_debuglevelsmtplib.SMTP.set_debuglevel*
+self*
+
+debuglevelz272°
+set_debuglevelsmtplib.SMTP.set_debuglevel"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*,
+
+debuglevel
+builtins.int"builtins.intz35z36z37z38z392E
+connectsmtplib.SMTP.connect*
+self*
+
+host *
+
+port z272Ï
+connectsmtplib.SMTP.connect"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *é
+source_address˜
+UUnion[Tuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int],None]ë
+ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
+5Union[builtins.bytearray,builtins.bytes,builtins.str](
+builtins.bytearray"builtins.bytearray 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+builtins.int"builtins.int
+None z35z36z37z38z3920
+sendsmtplib.SMTP.send*
+self*
+strz272Œ
+sendsmtplib.SMTP.send"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*m
+sf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz35z36z37z38z392@
+putcmdsmtplib.SMTP.putcmd*
+self*
+cmd*
+
+args z272¥
+putcmdsmtplib.SMTP.putcmd"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*%
+cmd
+builtins.str"builtins.str*(
+args
+builtins.str"builtins.str z35z36z37z38z392/
+getreplysmtplib.SMTP.getreply*
+selfz272â
+getreplysmtplib.SMTP.getreply"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392>
+docmdsmtplib.SMTP.docmd*
+self*
+cmd*
+
+args z272‘
+docmdsmtplib.SMTP.docmd"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*%
+cmd
+builtins.str"builtins.str*(
+args
+builtins.str"builtins.str z35z36z37z38z3923
+helosmtplib.SMTP.helo*
+self*
+
+name z272´
+helosmtplib.SMTP.helo"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+name
+builtins.str"builtins.str z35z36z37z38z3923
+ehlosmtplib.SMTP.ehlo*
+self*
+
+name z272´
+ehlosmtplib.SMTP.ehlo"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+name
+builtins.str"builtins.str z35z36z37z38z3928
+has_extnsmtplib.SMTP.has_extn*
+self*
+optz272§
+has_extnsmtplib.SMTP.has_extn"
+builtins.bool"builtins.bool*&
+self
+smtplib.SMTP"smtplib.SMTP*%
+opt
+builtins.str"builtins.strz35z36z37z38z3923
+helpsmtplib.SMTP.help*
+self*
+
+args z272°
+helpsmtplib.SMTP.help" 
+builtins.bytes"builtins.bytes*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+args
+builtins.str"builtins.str z35z36z37z38z392'
+rsetsmtplib.SMTP.rset*
+selfz272Å
+rsetsmtplib.SMTP.rset"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392'
+noopsmtplib.SMTP.noop*
+selfz272Å
+noopsmtplib.SMTP.noop"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392B
+mailsmtplib.SMTP.mail*
+self*
+
+sender*
+options z272ä
+mailsmtplib.SMTP.mail"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*(
+sender
+builtins.str"builtins.str*]
+optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence z35z36z37z38z392A
+rcptsmtplib.SMTP.rcpt*
+self*	
+recip*
+options z272â
+rcptsmtplib.SMTP.rcpt"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*'
+recip
+builtins.str"builtins.str*]
+optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence z35z36z37z38z3920
+datasmtplib.SMTP.data*
+self*
+msgz272Ú
+datasmtplib.SMTP.data"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*o
+msgf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz35z36z37z38z3928
+verifysmtplib.SMTP.verify*
+self*
+addressz272∞
+verifysmtplib.SMTP.verify"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*)
+address
+builtins.str"builtins.strz35z36z37z38z3924
+expnsmtplib.SMTP.expn*
+self*
+addressz272¨
+expnsmtplib.SMTP.expn"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*)
+address
+builtins.str"builtins.strz35z36z37z38z392K
+ehlo_or_helo_if_needed#smtplib.SMTP.ehlo_or_helo_if_needed*
+selfz272É
+ehlo_or_helo_if_needed#smtplib.SMTP.ehlo_or_helo_if_needed"
+None*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392A
+loginsmtplib.SMTP.login*
+self*
+user*
+passwordz272í
+loginsmtplib.SMTP.login"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*&
+user
+builtins.str"builtins.str**
+password
+builtins.str"builtins.str*9
+initial_response_ok
+builtins.bool"builtins.bool z35z36z37z38z392N
+starttlssmtplib.SMTP.starttls*
+self*
+keyfile *
+certfile z272è
+starttlssmtplib.SMTP.starttls"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*S
+keyfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+certfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None z35z36z37z38z392}
+sendmailsmtplib.SMTP.sendmail*
+self*
+	from_addr*
+to_addrs*
+msg*
+mail_options *
+rcpt_options z272ç
+sendmailsmtplib.SMTP.sendmail"í
+TTypeAlias[builtins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]]§
+Ibuiltins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]
+builtins.str"builtins.str©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply"builtins.dict"smtplib._SendErrs*&
+self
+smtplib.SMTP"smtplib.SMTP*+
+	from_addr
+builtins.str"builtins.str*≤
+to_addrs£
+1Union[builtins.str,typing.Sequence[builtins.str]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*o
+msgf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*b
+mail_optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *b
+rcpt_optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence z35z36z37z38z392)
+closesmtplib.SMTP.close*
+selfz272a
+closesmtplib.SMTP.close"
+None*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392'
+quitsmtplib.SMTP.quit*
+selfz272Å
+quitsmtplib.SMTP.quit"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTPz35z36z37z38z392g
+	__enter__smtplib.SMTP.__enter__"
+_typeshed.Self*
+self
+_typeshed.Selfz35z36z37z38z392—
+__exit__smtplib.SMTP.__exit__"
+None*$
+self
+smtplib.SMTP"smtplib.SMTP*ó
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Nonez35z36z37z38z392•
+authsmtplib.SMTP.auth"©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply*&
+self
+smtplib.SMTP"smtplib.SMTP*+
+	mechanism
+builtins.str"builtins.str*:
+
+authobject*
+smtplib._AuthObject"smtplib._AuthObject*9
+initial_response_ok
+builtins.bool"builtins.bool z35z36z37z38z392‹
+
+auth_plainsmtplib.SMTP.auth_plain"
+builtins.str"builtins.str*&
+self
+smtplib.SMTP"smtplib.SMTP*[
+	challengeJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None z35z36z37z38z392‹
+
+auth_loginsmtplib.SMTP.auth_login"
+builtins.str"builtins.str*&
+self
+smtplib.SMTP"smtplib.SMTP*[
+	challengeJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None z35z36z37z38z392ò
+send_messagesmtplib.SMTP.send_message"í
+TTypeAlias[builtins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]]§
+Ibuiltins.dict[builtins.str,TypeAlias[Tuple[builtins.int,builtins.bytes]]]
+builtins.str"builtins.str©
+-TypeAlias[Tuple[builtins.int,builtins.bytes]]f
+"Tuple[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes"smtplib._Reply"builtins.dict"smtplib._SendErrs*&
+self
+smtplib.SMTP"smtplib.SMTP*7
+msg.
+email.message.Message"email.message.Message*U
+	from_addrD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *√
+to_addrs≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *b
+mail_optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *b
+rcpt_optionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence z35z36z37z38z39:˚
+auth_cram_md5smtplib.SMTP.auth_cram_md5Ü
+auth_cram_md5smtplib.SMTP.auth_cram_md5"
+None*&
+self
+smtplib.SMTP"smtplib.SMTP*
+	challenge
+None 0:overloadX∞
+auth_cram_md5smtplib.SMTP.auth_cram_md5"
+builtins.str"builtins.str*&
+self
+smtplib.SMTP"smtplib.SMTP*/
+	challenge 
+builtins.bytes"builtins.bytes0:overloadX"35"36"37"38"39r27r35r36r37r38r39®
+
+SMTP_SSLsmtplib.SMTP_SSL"smtplib.SMTP2ı
+__init__smtplib.SMTP_SSL.__init__"
+None*.
+self$
+smtplib.SMTP_SSL"smtplib.SMTP_SSL*
+host
+Any *
+port
+Any *
+local_hostname
+Any *
+keyfile
+Any *
+certfile
+Any *
+timeout
+Any z272Î
+__init__smtplib.SMTP_SSL.__init__"
+None*.
+self$
+smtplib.SMTP_SSL"smtplib.SMTP_SSL*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Z
+local_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+keyfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+certfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+timeout 
+builtins.float"builtins.float *é
+source_address˜
+UUnion[Tuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int],None]ë
+ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
+5Union[builtins.bytearray,builtins.bytes,builtins.str](
+builtins.bytearray"builtins.bytearray 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None z35z36z37z38z39r27r35r36r37r38r39œ
+LMTPsmtplib.LMTP"smtplib.SMTP2†
+__init__smtplib.LMTP.__init__"
+None*&
+self
+smtplib.LMTP"smtplib.LMTP*
+host
+Any *
+port
+Any *
+local_hostname
+Any z272®
+__init__smtplib.LMTP.__init__"
+None*&
+self
+smtplib.LMTP"smtplib.LMTP*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Z
+local_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *é
+source_address˜
+UUnion[Tuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int],None]ë
+ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
+5Union[builtins.bytearray,builtins.bytes,builtins.str](
+builtins.bytearray"builtins.bytearray 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+builtins.int"builtins.int
+None z35z36z37z38z392E
+connectsmtplib.LMTP.connect*
+self*
+
+host *
+
+port z27r27r35r36r37r38r39ü
+SMTPNotSupportedErrorsmtplib.SMTPNotSupportedError"smtplib.SMTPException*builtins.OSError*builtins.Exception*builtins.BaseExceptionr35r36r37r38r39ñ
+_AuthObjectsmtplib._AuthObject"builtins.object: 
+__call__smtplib._AuthObject.__call__Õ
+__call__smtplib._AuthObject.__call__"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*4
+self*
+smtplib._AuthObject"smtplib._AuthObject*
+	challenge
+None 0:overloadXª
+__call__smtplib._AuthObject.__call__"
+builtins.str"builtins.str*4
+self*
+smtplib._AuthObject"smtplib._AuthObject*/
+	challenge 
+builtins.bytes"builtins.bytes0:overloadX"35"36"37"38"39`r35r36r37r38r39",
+	quoteaddrsmtplib.quoteaddr*
+addrz27"~
+	quoteaddrsmtplib.quoteaddr"
+builtins.str"builtins.str*,
+
+addrstring
+builtins.str"builtins.strz35z36z37z38z39",
+	quotedatasmtplib.quotedata*
+dataz27"x
+	quotedatasmtplib.quotedata"
+builtins.str"builtins.str*&
+data
+builtins.str"builtins.strz35z36z37z38z39

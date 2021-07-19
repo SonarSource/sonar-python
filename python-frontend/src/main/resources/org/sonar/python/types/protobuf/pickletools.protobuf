@@ -1,0 +1,360 @@
+
+pickletoolspickletoolsï
+ArgumentDescriptorpickletools.ArgumentDescriptor"builtins.object2µ
+__init__'pickletools.ArgumentDescriptor.__init__"
+None*J
+self@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*&
+name
+builtins.str"builtins.str*#
+n
+builtins.int"builtins.int*ù
+readerê
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"pickletools._Reader*%
+doc
+builtins.str"builtins.strz27z35z36z37z38z39r27r35r36r37r38r39»
+StackObjectpickletools.StackObject"builtins.object2ˆ
+__init__ pickletools.StackObject.__init__"
+None*<
+self2
+pickletools.StackObject"pickletools.StackObject*&
+name
+builtins.str"builtins.str*ò
+obtypeã
+*Union[Type[Any],builtins.tuple[Type[Any]]]
+	Type[Any]
+AnyC
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*%
+doc
+builtins.str"builtins.strz27z35z36z37z38z39r27r35r36r37r38r39¸
+
+OpcodeInfopickletools.OpcodeInfo"builtins.object2¨
+__init__pickletools.OpcodeInfo.__init__"
+None*:
+self0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo*&
+name
+builtins.str"builtins.str*&
+code
+builtins.str"builtins.str*É
+argz
+*Union[pickletools.ArgumentDescriptor,None]@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor
+None*}
+stack_beforek
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.list*|
+stack_afterk
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.list*'
+proto
+builtins.int"builtins.int*%
+doc
+builtins.str"builtins.strz27z35z36z37z38z39r27r35r36r37r38r39"ë
+
+read_uint1pickletools.read_uint1"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ß
+
+read_uint1pickletools.read_uint1"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ë
+
+read_uint2pickletools.read_uint2"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ß
+
+read_uint2pickletools.read_uint2"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"è
+	read_int4pickletools.read_int4"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"•
+	read_int4pickletools.read_int4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"»
+read_stringnlpickletools.read_stringnl"l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*,
+decode
+builtins.bool"builtins.bool *1
+stripquotes
+builtins.bool"builtins.bool z27"ÿ
+read_stringnlpickletools.read_stringnl"f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*,
+decode
+builtins.bool"builtins.bool *1
+stripquotes
+builtins.bool"builtins.bool z35z36z37z38z39"©
+read_stringnl_noescape"pickletools.read_stringnl_noescape"
+builtins.str"builtins.str*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ø
+read_stringnl_noescape"pickletools.read_stringnl_noescape"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ª
+read_stringnl_noescape_pair'pickletools.read_stringnl_noescape_pair"$
+builtins.unicode"builtins.unicode*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"…
+read_stringnl_noescape_pair'pickletools.read_stringnl_noescape_pair"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ï
+read_string1pickletools.read_string1"
+builtins.str"builtins.str*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"´
+read_string1pickletools.read_string1"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ï
+read_string4pickletools.read_string4"
+builtins.str"builtins.str*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"´
+read_string4pickletools.read_string4"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"≠
+read_unicodestringnl pickletools.read_unicodestringnl"$
+builtins.unicode"builtins.unicode*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ª
+read_unicodestringnl pickletools.read_unicodestringnl"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"´
+read_unicodestring4pickletools.read_unicodestring4"$
+builtins.unicode"builtins.unicode*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"π
+read_unicodestring4pickletools.read_unicodestring4"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"•
+read_decimalnl_short pickletools.read_decimalnl_short"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ª
+read_decimalnl_short pickletools.read_decimalnl_short"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"£
+read_decimalnl_longpickletools.read_decimalnl_long"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"π
+read_decimalnl_longpickletools.read_decimalnl_long"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ô
+read_floatnlpickletools.read_floatnl" 
+builtins.float"builtins.float*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"Ø
+read_floatnlpickletools.read_floatnl" 
+builtins.float"builtins.float*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ó
+read_float8pickletools.read_float8" 
+builtins.float"builtins.float*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"≠
+read_float8pickletools.read_float8" 
+builtins.float"builtins.float*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ë
+
+read_long1pickletools.read_long1"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ß
+
+read_long1pickletools.read_long1"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ë
+
+read_long4pickletools.read_long4"
+builtins.int"builtins.int*I
+fB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"ß
+
+read_long4pickletools.read_long4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"õ
+genopspickletools.genops"◊
+Wtyping.Iterator[Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]]Í
+FTuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo&
+Union[Any,None]
+Any
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"typing.Iterator*û
+pickleë
++Union[builtins.str,typing.IO[builtins.str]]
+builtins.str"builtins.strB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"π
+genopspickletools.genops"◊
+Wtyping.Iterator[Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]]Í
+FTuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo&
+Union[Any,None]
+Any
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"typing.Iterator*¨
+pickleü
+/Union[builtins.bytes,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytesH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ﬁ
+optimizepickletools.optimize"
+builtins.str"builtins.str*ô
+pë
++Union[builtins.str,typing.IO[builtins.str]]
+builtins.str"builtins.strB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOz27"Ä
+optimizepickletools.optimize" 
+builtins.bytes"builtins.bytes*ß
+pü
+/Union[builtins.bytes,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytesH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"≥
+dispickletools.dis"
+None*û
+pickleë
++Union[builtins.str,typing.IO[builtins.str]]
+builtins.str"builtins.strB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*Ä
+outu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None *∑
+memo™
+3Union[typing.MutableMapping[builtins.int,Any],None]g
+'typing.MutableMapping[builtins.int,Any]
+builtins.int"builtins.int
+Any"typing.MutableMapping
+None */
+indentlevel
+builtins.int"builtins.int z27"ˇ
+dispickletools.dis"
+None*¨
+pickleü
+/Union[builtins.bytes,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytesH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*Ä
+outu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None *∑
+memo™
+3Union[typing.MutableMapping[builtins.int,Any],None]g
+'typing.MutableMapping[builtins.int,Any]
+builtins.int"builtins.int
+Any"typing.MutableMapping
+None */
+indentlevel
+builtins.int"builtins.int *,
+annotate
+builtins.int"builtins.int z35z36z37z38z39"ß
+
+read_uint4pickletools.read_uint4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"ß
+
+read_uint8pickletools.read_uint8"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"≠
+read_bytes1pickletools.read_bytes1" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"≠
+read_bytes4pickletools.read_bytes4" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"≠
+read_bytes8pickletools.read_bytes8" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"π
+read_unicodestring1pickletools.read_unicodestring1"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39"π
+read_unicodestring8pickletools.read_unicodestring8"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38z39

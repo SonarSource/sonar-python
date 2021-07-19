@@ -1,0 +1,346 @@
+
+httplibhttplibÂ
+HTTPMessagehttplib.HTTPMessage"mimetools.Message*rfc822.Message2Á
+addcontinuehttplib.HTTPMessage.addcontinue"
+None*4
+self*
+httplib.HTTPMessage"httplib.HTTPMessage*%
+key
+builtins.str"builtins.str*&
+more
+builtins.str"builtins.strz272¾
+	addheaderhttplib.HTTPMessage.addheader"
+None*4
+self*
+httplib.HTTPMessage"httplib.HTTPMessage*%
+key
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.strz272r
+readheadershttplib.HTTPMessage.readheaders"
+None*4
+self*
+httplib.HTTPMessage"httplib.HTTPMessagez27r27ë
+HTTPResponsehttplib.HTTPResponse"builtins.object2Å
+__init__httplib.HTTPResponse.__init__"
+None*6
+self,
+httplib.HTTPResponse"httplib.HTTPResponse*
+sock
+Any*.
+
+debuglevel
+builtins.int"builtins.int **
+strict
+builtins.int"builtins.int *4
+method&
+Union[Any,None]
+Any
+None */
+	buffering
+builtins.bool"builtins.bool z2721
+beginhttplib.HTTPResponse.begin*
+selfz2721
+closehttplib.HTTPResponse.close*
+selfz2727
+isclosedhttplib.HTTPResponse.isclosed*
+selfz272™
+readhttplib.HTTPResponse.read"
+Any*6
+self,
+httplib.HTTPResponse"httplib.HTTPResponse*1
+amt&
+Union[Any,None]
+Any
+None z2723
+filenohttplib.HTTPResponse.fileno*
+selfz272º
+	getheaderhttplib.HTTPResponse.getheader"
+Any*6
+self,
+httplib.HTTPResponse"httplib.HTTPResponse*
+name
+Any*5
+default&
+Union[Any,None]
+Any
+None z272;
+
+getheadershttplib.HTTPResponse.getheaders*
+selfz27r27ø
+HTTPConnectionProtocolhttplib.HTTPConnectionProtocol"builtins.object2¦
+__call__'httplib.HTTPConnectionProtocol.__call__"0
+httplib.HTTPConnection"httplib.HTTPConnection*J
+self@
+httplib.HTTPConnectionProtocol"httplib.HTTPConnectionProtocol*&
+host
+builtins.str"builtins.str*+
+timeout
+builtins.int"builtins.int *
+http_con_args
+Anyz27`r27«
+HTTPConnectionhttplib.HTTPConnection"builtins.object2È
+__init__httplib.HTTPConnection.__init__"
+None*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*
+host
+Any*2
+port&
+Union[Any,None]
+Any
+None *4
+strict&
+Union[Any,None]
+Any
+None *
+timeout
+Any *<
+source_address&
+Union[Any,None]
+Any
+None z272ö
+
+set_tunnel!httplib.HTTPConnection.set_tunnel"
+Any*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*
+host
+Any*2
+port&
+Union[Any,None]
+Any
+None *5
+headers&
+Union[Any,None]
+Any
+None z272P
+set_debuglevel%httplib.HTTPConnection.set_debuglevel*
+self*	
+levelz2727
+connecthttplib.HTTPConnection.connect*
+selfz2723
+closehttplib.HTTPConnection.close*
+selfz272;
+sendhttplib.HTTPConnection.send*
+self*
+dataz272ˆ
+
+putrequest!httplib.HTTPConnection.putrequest"
+Any*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*
+method
+Any*
+url
+Any*-
+	skip_host
+builtins.int"builtins.int *8
+skip_accept_encoding
+builtins.int"builtins.int z272S
+	putheader httplib.HTTPConnection.putheader*
+self*
+
+header*
+
+valuesz272´
+
+endheaders!httplib.HTTPConnection.endheaders"
+Any*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*:
+message_body&
+Union[Any,None]
+Any
+None z272å
+requesthttplib.HTTPConnection.request"
+Any*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*
+method
+Any*
+url
+Any*2
+body&
+Union[Any,None]
+Any
+None *
+headers
+Any z272«
+getresponse"httplib.HTTPConnection.getresponse"
+Any*:
+self0
+httplib.HTTPConnection"httplib.HTTPConnection*/
+	buffering
+builtins.bool"builtins.bool z27r27º
+HTTPhttplib.HTTP"builtins.object2ë
+__init__httplib.HTTP.__init__"
+None*&
+self
+httplib.HTTP"httplib.HTTP*(
+host
+builtins.str"builtins.str *2
+port&
+Union[Any,None]
+Any
+None *4
+strict&
+Union[Any,None]
+Any
+None z272¼
+connecthttplib.HTTP.connect"
+Any*&
+self
+httplib.HTTP"httplib.HTTP*2
+host&
+Union[Any,None]
+Any
+None *2
+port&
+Union[Any,None]
+Any
+None z272-
+getfilehttplib.HTTP.getfile*
+selfz272‡
+getreplyhttplib.HTTP.getreply"
+Any*&
+self
+httplib.HTTP"httplib.HTTP*/
+	buffering
+builtins.bool"builtins.bool z272)
+closehttplib.HTTP.close*
+selfz27r27ö
+HTTPSConnectionhttplib.HTTPSConnection"httplib.HTTPConnection2ó
+__init__ httplib.HTTPSConnection.__init__"
+None*<
+self2
+httplib.HTTPSConnection"httplib.HTTPSConnection*
+host
+Any*2
+port&
+Union[Any,None]
+Any
+None *6
+key_file&
+Union[Any,None]
+Any
+None *7
+	cert_file&
+Union[Any,None]
+Any
+None *4
+strict&
+Union[Any,None]
+Any
+None *
+timeout
+Any *<
+source_address&
+Union[Any,None]
+Any
+None *5
+context&
+Union[Any,None]
+Any
+None z2728
+connecthttplib.HTTPSConnection.connect*
+selfz27r27Á
+HTTPShttplib.HTTPS"httplib.HTTP2–
+__init__httplib.HTTPS.__init__"
+None*(
+self
+httplib.HTTPS"httplib.HTTPS*(
+host
+builtins.str"builtins.str *2
+port&
+Union[Any,None]
+Any
+None *6
+key_file&
+Union[Any,None]
+Any
+None *7
+	cert_file&
+Union[Any,None]
+Any
+None *4
+strict&
+Union[Any,None]
+Any
+None *5
+context&
+Union[Any,None]
+Any
+None z27r27V
+HTTPExceptionhttplib.HTTPException"builtins.Exception*builtins.BaseExceptionr27k
+NotConnectedhttplib.NotConnected"httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27g
+
+InvalidURLhttplib.InvalidURL"httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27‚
+UnknownProtocolhttplib.UnknownProtocol"httplib.HTTPException*builtins.Exception*builtins.BaseException2Ž
+__init__ httplib.UnknownProtocol.__init__"
+None*<
+self2
+httplib.UnknownProtocol"httplib.UnknownProtocol*
+version
+Anyz27r27
+UnknownTransferEncodinghttplib.UnknownTransferEncoding"httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27}
+UnimplementedFileModehttplib.UnimplementedFileMode"httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27µ
+IncompleteReadhttplib.IncompleteRead"httplib.HTTPException*builtins.Exception*builtins.BaseException2Ã
+__init__httplib.IncompleteRead.__init__"
+None*:
+self0
+httplib.IncompleteRead"httplib.IncompleteRead*
+partial
+Any*6
+expected&
+Union[Any,None]
+Any
+None z27r27
+ImproperConnectionStatehttplib.ImproperConnectionState"httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27–
+CannotSendRequesthttplib.CannotSendRequest"httplib.ImproperConnectionState*httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27”
+CannotSendHeaderhttplib.CannotSendHeader"httplib.ImproperConnectionState*httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27”
+ResponseNotReadyhttplib.ResponseNotReady"httplib.ImproperConnectionState*httplib.HTTPException*builtins.Exception*builtins.BaseExceptionr27õ
+BadStatusLinehttplib.BadStatusLine"httplib.HTTPException*builtins.Exception*builtins.BaseException2…
+__init__httplib.BadStatusLine.__init__"
+None*8
+self.
+httplib.BadStatusLine"httplib.BadStatusLine*
+line
+Anyz27r27ð
+LineTooLonghttplib.LineTooLong"httplib.HTTPException*builtins.Exception*builtins.BaseException2„
+__init__httplib.LineTooLong.__init__"
+None*4
+self*
+httplib.LineTooLong"httplib.LineTooLong*
+	line_type
+Anyz27r27ä
+LineAndFileWrapperhttplib.LineAndFileWrapper"builtins.object2§
+__init__#httplib.LineAndFileWrapper.__init__"
+None*B
+self8
+httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*
+line
+Any*
+file
+Anyz272M
+__getattr__&httplib.LineAndFileWrapper.__getattr__*
+self*
+attrz272«
+readhttplib.LineAndFileWrapper.read"
+Any*B
+self8
+httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*1
+amt&
+Union[Any,None]
+Any
+None z272=
+readline#httplib.LineAndFileWrapper.readline*
+selfz272¶
+	readlines$httplib.LineAndFileWrapper.readlines"
+Any*B
+self8
+httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*2
+size&
+Union[Any,None]
+Any
+None z27r27

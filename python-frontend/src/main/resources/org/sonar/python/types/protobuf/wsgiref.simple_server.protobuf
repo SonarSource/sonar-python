@@ -1,0 +1,135 @@
+
+wsgiref.simple_serverwsgiref.simple_server∑
+ServerHandler#wsgiref.simple_server.ServerHandler"wsgiref.handlers.SimpleHandler*wsgiref.handlers.BaseHandler2™
+close)wsgiref.simple_server.ServerHandler.close"
+None*T
+selfJ
+#wsgiref.simple_server.ServerHandler"#wsgiref.simple_server.ServerHandlerz27z35z36z37z38z39r27r35r36r37r38r39‡
+
+WSGIServer wsgiref.simple_server.WSGIServer"BaseHTTPServer.HTTPServer*SocketServer.TCPServer*SocketServer.BaseServer2ù
+setup_environ.wsgiref.simple_server.WSGIServer.setup_environ"
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServerz272ê
+get_app(wsgiref.simple_server.WSGIServer.get_app"Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServerz272¨
+set_app(wsgiref.simple_server.WSGIServer.set_app"
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServer*ò
+applicationÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonez27r27ù
+
+WSGIServer wsgiref.simple_server.WSGIServer"http.server.HTTPServer*socketserver.TCPServer*socketserver.BaseServer2≠
+setup_environ.wsgiref.simple_server.WSGIServer.setup_environ"
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServerz35z36z37z38z392†
+get_app(wsgiref.simple_server.WSGIServer.get_app"Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServerz35z36z37z38z392º
+set_app(wsgiref.simple_server.WSGIServer.set_app"
+None*N
+selfD
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServer*ò
+applicationÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonez35z36z37z38z39r35r36r37r38r39ù
+WSGIRequestHandler(wsgiref.simple_server.WSGIRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*!SocketServer.StreamRequestHandler*SocketServer.BaseRequestHandler2·
+get_environ4wsgiref.simple_server.WSGIRequestHandler.get_environ"∑
+.TypeAlias[builtins.dict[builtins.unicode,Any]]c
+#builtins.dict[builtins.unicode,Any]$
+builtins.unicode"builtins.unicode
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz272ﬂ
+
+get_stderr3wsgiref.simple_server.WSGIRequestHandler.get_stderr"8
+_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz272ß
+handle/wsgiref.simple_server.WSGIRequestHandler.handle"
+None*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz27r27 
+WSGIRequestHandler(wsgiref.simple_server.WSGIRequestHandler""http.server.BaseHTTPRequestHandler*!socketserver.StreamRequestHandler*socketserver.BaseRequestHandler2·
+get_environ4wsgiref.simple_server.WSGIRequestHandler.get_environ"ß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz35z36z37z38z392Ô
+
+get_stderr3wsgiref.simple_server.WSGIRequestHandler.get_stderr"8
+_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz35z36z37z38z392∑
+handle/wsgiref.simple_server.WSGIRequestHandler.handle"
+None*^
+selfT
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandlerz35z36z37z38z39r35r36r37r38r39"î
+demo_appwsgiref.simple_server.demo_app"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*≈
+environ∑
+.TypeAlias[builtins.dict[builtins.unicode,Any]]c
+#builtins.dict[builtins.unicode,Any]$
+builtins.unicode"builtins.unicode
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponsez27"ö
+demo_appwsgiref.simple_server.demo_app"P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponsez35z36z37z38z39*¥	
+make_server!wsgiref.simple_server.make_serverù
+make_server!wsgiref.simple_server.make_server"D
+ wsgiref.simple_server.WSGIServer" wsgiref.simple_server.WSGIServer*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*û
+handler_classà
+.Type[wsgiref.simple_server.WSGIRequestHandler]T
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandler 0:overloadX…
+make_server!wsgiref.simple_server.make_server"
+wsgiref.simple_server._S*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*R
+server_class@
+Type[wsgiref.simple_server._S]
+wsgiref.simple_server._S*û
+handler_classà
+.Type[wsgiref.simple_server.WSGIRequestHandler]T
+(wsgiref.simple_server.WSGIRequestHandler"(wsgiref.simple_server.WSGIRequestHandler 0:overloadX"27"35"36"37"38"39
