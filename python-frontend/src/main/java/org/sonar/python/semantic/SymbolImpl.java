@@ -50,7 +50,7 @@ public class SymbolImpl implements Symbol {
   private Kind kind;
   private InferredType inferredType = InferredTypes.anyType();
   private String annotatedTypeName = null;
-  protected Set<String> validFor = Collections.emptySet();
+  protected Set<String> validForPythonVersions = Collections.emptySet();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
@@ -169,7 +169,7 @@ public class SymbolImpl implements Symbol {
     return null;
   }
 
-  public Set<String> validFor() {
-    return validFor;
+  public Set<String> validForPythonVersions() {
+    return validForPythonVersions;
   }
 }

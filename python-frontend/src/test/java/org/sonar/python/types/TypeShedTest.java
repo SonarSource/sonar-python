@@ -381,14 +381,14 @@ public class TypeShedTest {
   public void overloaded_functions() {
     Symbol map = TypeShed.builtinSymbols().get("map");
     assertThat(map.is(Kind.AMBIGUOUS)).isTrue();
-    assertThat(((SymbolImpl) map).validFor()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
+    assertThat(((SymbolImpl) map).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
     ClassSymbol python3Symbol = (ClassSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.CLASS)).findFirst().get();
     AmbiguousSymbol python2Symbol = (AmbiguousSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.AMBIGUOUS)).findFirst().get();
-    assertThat(((ClassSymbolImpl) python3Symbol).validFor()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
-    assertThat(((AmbiguousSymbolImpl) python2Symbol).validFor()).containsExactly("27");
+    assertThat(((ClassSymbolImpl) python3Symbol).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
+    assertThat(((AmbiguousSymbolImpl) python2Symbol).validForPythonVersions()).containsExactly("27");
     for (Symbol alternative : python2Symbol.alternatives()) {
       assertThat(alternative.is(Kind.FUNCTION)).isTrue();
-      assertThat(((FunctionSymbolImpl) alternative).validFor()).containsExactly("27");
+      assertThat(((FunctionSymbolImpl) alternative).validForPythonVersions()).containsExactly("27");
     }
   }
 

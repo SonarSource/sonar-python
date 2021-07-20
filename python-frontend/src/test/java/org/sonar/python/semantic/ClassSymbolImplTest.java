@@ -337,7 +337,7 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
-    assertThat(((SymbolImpl) foo).validFor()).containsExactlyInAnyOrder("27", "39");
+    assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("27", "39");
   }
 
   private static SymbolsProtos.ClassSymbol classSymbol(String protobuf) throws TextFormat.ParseException {

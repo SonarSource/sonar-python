@@ -22,7 +22,6 @@ package org.sonar.python.types;
 import java.util.Collections;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -261,8 +260,7 @@ public class RuntimeTypeTest {
     assertThat(InferredTypes.STR.isCompatibleWith(InferredTypes.STR)).isTrue();
     assertThat(unicode.isCompatibleWith(InferredTypes.STR)).isFalse();
 
-    Symbol memoryview = TypeShed.builtinSymbols().get("memoryview");
-    InferredType memoryView = InferredTypes.runtimeType(memoryview);
+    InferredType memoryView = runtimeBuiltinType("memoryview");
     assertThat(memoryView.isCompatibleWith(InferredTypes.STR)).isTrue();
     assertThat(InferredTypes.STR.isCompatibleWith(memoryView)).isFalse();
   }

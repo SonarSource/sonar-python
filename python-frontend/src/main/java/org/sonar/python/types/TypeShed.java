@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -274,14 +273,16 @@ public class TypeShed {
    * the most recent Python version.
    */
   private static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
-    Map<String, Symbol> symbolByVersion = new HashMap<>();
+    int max = Integer.MIN_VALUE;
+    Symbol latestPythonSymbol = null;
     for (Symbol alternative : alternatives) {
-      for (String pythonVersion : ((SymbolImpl) alternative).validFor()) {
-        symbolByVersion.put(pythonVersion, alternative);
+      int maxPythonVersionForSymbol = ((SymbolImpl) alternative).validForPythonVersions().stream().mapToInt(Integer::parseInt).max().orElse(max);
+      if (maxPythonVersionForSymbol > max) {
+        max = maxPythonVersionForSymbol;
+        latestPythonSymbol = alternative;
       }
     }
-    List<String> pythonVersions = symbolByVersion.keySet().stream().sorted().collect(Collectors.toList());
-    return symbolByVersion.get(pythonVersions.get(pythonVersions.size() - 1));
+    return latestPythonSymbol;
   }
 
   public static Collection<Symbol> stubFilesSymbols() {
@@ -427,14 +428,9 @@ public class TypeShed {
   @CheckForNull
   public static Symbol symbolWithFQN(String fullyQualifiedName) {
     Map<String, Symbol> builtinSymbols = builtinSymbols();
-    Symbol builtinSymbol = builtinSymbols.get(fullyQualifiedName);
+    Symbol builtinSymbol = builtinSymbols.get(normalizedFqn(fullyQualifiedName));
     if (builtinSymbol != null) {
       return builtinSymbol;
-    }
-    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
-    String localName = fqnSplittedByDot[fqnSplittedByDot.length - 1];
-    if (fqnSplittedByDot.length == 2 && fqnSplittedByDot[0].equals(BUILTINS_FQN) && builtinSymbols.containsKey(localName)) {
-      return builtinSymbols.get(localName);
     }
     for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
       Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
@@ -442,6 +438,7 @@ public class TypeShed {
         return symbol;
       }
     }
+    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
     Set<Symbol> symbols = symbolsForModule(moduleName);
     if (!symbols.isEmpty()) {

@@ -119,7 +119,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     declaredReturnType = anyType();
     isStub = true;
     isDjangoView = false;
-    this.validFor = new HashSet<>(validFor);
+    this.validForPythonVersions = new HashSet<>(validFor);
   }
 
   public void setParametersWithType(ParameterList parametersList) {
@@ -146,7 +146,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
     isStub = functionSymbol.isStub();
     isDjangoView = functionSymbolImpl.isDjangoView();
-    validFor = functionSymbolImpl.validFor;
+    validForPythonVersions = functionSymbolImpl.validForPythonVersions;
 
   }
 

@@ -110,7 +110,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = ((ClassSymbolImpl) classSymbol).hasMetaClass();
     metaclassFQN = ((ClassSymbolImpl) classSymbol).metaclassFQN;
     supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
-    validFor = ((ClassSymbolImpl) classSymbol).validFor;
+    validForPythonVersions = ((ClassSymbolImpl) classSymbol).validForPythonVersions;
     superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
     setKind(Kind.CLASS);
   }
@@ -133,7 +133,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     }
     addMembers(methods);
     superClassesFqns = classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList());
-    validFor = new HashSet<>(classSymbolProto.getValidForList());
+    validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
   }
 
   @Override
@@ -143,10 +143,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       for (Symbol superClass : superClasses()) {
         if (superClass == this) {
           copiedClassSymbol.superClasses.add(copiedClassSymbol);
-        } else if (superClass.kind() == Kind.CLASS) {
-          copiedClassSymbol.superClasses.add(((ClassSymbolImpl) superClass).copyWithoutUsages());
-        } else if (superClass.is(Kind.AMBIGUOUS)) {
-          copiedClassSymbol.superClasses.add(((AmbiguousSymbolImpl) superClass).copyWithoutUsages());
+        } else if (superClass.is(Kind.CLASS, Kind.AMBIGUOUS)) {
+          copiedClassSymbol.superClasses.add(((SymbolImpl) superClass).copyWithoutUsages());
         } else {
           copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
         }
