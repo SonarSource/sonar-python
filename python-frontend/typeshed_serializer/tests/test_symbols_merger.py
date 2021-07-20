@@ -23,45 +23,17 @@ def test_basic_module_merge(typeshed_stdlib):
 
     # Merge single module
     merged_modules = symbols_merger.merge_modules({"abc"}, {"37": {"abc": abc_module_symbol}})
-    assert len(merged_modules) == 1
-    abc_merged_symbol = merged_modules["abc"]
-    assert isinstance(abc_merged_symbol, MergedModuleSymbol)
-    assert abc_merged_symbol.fullname == "abc"
-    assert ([c for c in abc_merged_symbol.classes]
-            == ['abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
-    for merged_class_proto in abc_merged_symbol.classes.values():
-        assert len(merged_class_proto) == 1
-        assert merged_class_proto[0].valid_for == ['37']
-    assert ([f for f in abc_merged_symbol.functions]
-            == ['abc.abstractmethod', 'abc.abstractstaticmethod', 'abc.abstractclassmethod', 'abc.get_cache_token'])
-    for f in abc_merged_symbol.functions.values():
-        assert len(f) == 1
-        assert f[0].valid_for == ['37']
-    assert len(abc_merged_symbol.overloaded_functions) == 0
+    assert_abc_merged_module(merged_modules, ["37"])
 
     # Merge identical modules
     merged_modules = symbols_merger.merge_modules({"abc"}, {"37": {"abc": abc_module_symbol},
                                                             "38": {"abc": abc_module_symbol}})
-    assert len(merged_modules) == 1
-    abc_merged_symbol = merged_modules["abc"]
-    assert isinstance(abc_merged_symbol, MergedModuleSymbol)
-    assert abc_merged_symbol.fullname == "abc"
-    assert ([c for c in abc_merged_symbol.classes]
-            == ['abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
-    for merged_class_proto in abc_merged_symbol.classes.values():
-        assert len(merged_class_proto) == 1
-        assert merged_class_proto[0].valid_for == ['37', '38']
-    assert ([f for f in abc_merged_symbol.functions]
-            == ['abc.abstractmethod', 'abc.abstractstaticmethod', 'abc.abstractclassmethod', 'abc.get_cache_token'])
-    for f in abc_merged_symbol.functions.values():
-        assert len(f) == 1
-        assert f[0].valid_for == ['37', '38']
-    assert len(abc_merged_symbol.overloaded_functions) == 0
+    assert_abc_merged_module(merged_modules, ["37", "38"])
 
     # Merged module symbol conversion to proto
+    abc_merged_symbol = merged_modules["abc"]
     abc_merged_symbol_proto = abc_merged_symbol.to_proto()
     assert abc_merged_symbol_proto.fully_qualified_name == abc_merged_symbol.fullname
-
     assert_merged_class_symbol_to_proto(abc_merged_symbol_proto.classes, abc_merged_symbol.classes)
     assert_merged_function_symbol_to_proto(abc_merged_symbol_proto.functions, abc_merged_symbol.functions)
 
@@ -139,6 +111,80 @@ def test_overloaded_functions_merge(typeshed_stdlib):
         assert merged_overloaded_func[0].valid_for == ['37', '38']
 
 
+def test_actual_module_merge(fake_module_36_38):
+    fake_module_36 = symbols.ModuleSymbol(fake_module_36_38[0])
+    fake_module_38 = symbols.ModuleSymbol(fake_module_36_38[1])
+    merged_modules = symbols_merger.merge_modules({"fakemodule"}, {"36": {"fakemodule": fake_module_36},
+                                                                   "38": {"fakemodule": fake_module_38}})
+    merged_fakemodule_module = merged_modules['fakemodule']
+    classes_dict = merged_fakemodule_module.classes
+
+    assert len(classes_dict) == 4
+
+    # Class unique to Python 3.6 is present
+    fakemodule_someclassunique36_symbols = classes_dict['fakemodule.SomeClassUnique36']
+    assert len(fakemodule_someclassunique36_symbols) == 1
+    merged_someclassunique36_symbol = fakemodule_someclassunique36_symbols[0]
+    assert merged_someclassunique36_symbol.valid_for == ["36"]
+
+    # Class unique to Python 3.8 is present
+    fakemodule_someclassunique36_symbols = classes_dict['fakemodule.SomeClassUnique38']
+    assert len(fakemodule_someclassunique36_symbols) == 1
+    merged_someclassunique36_symbol = fakemodule_someclassunique36_symbols[0]
+    assert merged_someclassunique36_symbol.valid_for == ["38"]
+
+    # Class common to Python 3.6 and Python 3.8 is present
+    fakemodule_commonclass_symbols = classes_dict['fakemodule.CommonClass']
+    assert len(fakemodule_commonclass_symbols) == 1
+    commonclass_symbol = fakemodule_commonclass_symbols[0]
+    # Some methods are common
+    assert commonclass_symbol.methods['fakemodule.CommonClass.common_method'][0].valid_for == ["36", "38"]
+    # Some methods exist only in a given Python version
+    assert commonclass_symbol.methods['fakemodule.CommonClass.method_unique_36'][0].valid_for == ["36"]
+    assert commonclass_symbol.methods['fakemodule.CommonClass.method_unique_38'][0].valid_for == ["38"]
+    # Some methods have different definitions depending on the Python version
+    assert commonclass_symbol.methods['fakemodule.CommonClass.common_method_multiple_definition'][0].valid_for == ["36"]
+    assert commonclass_symbol.methods['fakemodule.CommonClass.common_method_multiple_definition'][1].valid_for == ["38"]
+
+    functions_dict = merged_fakemodule_module.functions
+    assert len(functions_dict) == 4
+    common_function_symbols = functions_dict['fakemodule.common_function']
+    assert len(common_function_symbols) == 1
+    assert common_function_symbols[0].valid_for == ["36", "38"]
+
+    function_unique_36 = functions_dict['fakemodule.function_unique_36']
+    assert len(function_unique_36) == 1
+    assert function_unique_36[0].valid_for == ["36"]
+
+    function_unique_38 = functions_dict['fakemodule.function_unique_38']
+    assert len(function_unique_38) == 1
+    assert function_unique_38[0].valid_for == ["38"]
+
+    common_function_multiple_defs = functions_dict['fakemodule.common_function_multiple_defs']
+    assert len(common_function_multiple_defs) == 2
+    assert common_function_multiple_defs[0].valid_for == ["36"]
+    assert common_function_multiple_defs[1].valid_for == ["38"]
+
+    overloaded_functions_dict = merged_fakemodule_module.overloaded_functions
+    assert len(overloaded_functions_dict) == 4
+    common_overloaded_function_symbols = overloaded_functions_dict['fakemodule.common_overloaded_function']
+    assert len(common_overloaded_function_symbols) == 1
+    assert common_overloaded_function_symbols[0].valid_for == ["36", "38"]
+
+    overloaded_function_unique_36 = overloaded_functions_dict['fakemodule.overloaded_function_36']
+    assert len(overloaded_function_unique_36) == 1
+    assert overloaded_function_unique_36[0].valid_for == ["36"]
+
+    overloaded_function_unique_38 = overloaded_functions_dict['fakemodule.overloaded_function_38']
+    assert len(overloaded_function_unique_38) == 1
+    assert overloaded_function_unique_38[0].valid_for == ["38"]
+
+    fakemodule_proto = merged_fakemodule_module.to_proto()
+    flattened_overloaded_funcs = \
+        [func for alternatives in merged_fakemodule_module.overloaded_functions.values() for func in alternatives]
+    assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
+
+
 def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
     assert len(merged_classes_proto) == len(merged_classes)
     for merged_class_proto in merged_classes_proto:
@@ -189,7 +235,24 @@ def assert_merged_overloaded_functions_to_proto(merged_overloaded_functions_prot
         original_overloaded_function = matching_overloaded_function[0]
         assert merged_overloaded_function_proto.name == original_overloaded_function.overloaded_function_symbol.name
         assert (merged_overloaded_function_proto.fullname
-               == original_overloaded_function.overloaded_function_symbol.fullname)
+                == original_overloaded_function.overloaded_function_symbol.fullname)
         assert (len(merged_overloaded_function_proto.definitions)
-               == len(original_overloaded_function.overloaded_function_symbol.definitions))
+                == len(original_overloaded_function.overloaded_function_symbol.definitions))
 
+
+def assert_abc_merged_module(merged_modules, expected_valid_for):
+    assert len(merged_modules) == 1
+    abc_merged_symbol = merged_modules["abc"]
+    assert isinstance(abc_merged_symbol, MergedModuleSymbol)
+    assert abc_merged_symbol.fullname == "abc"
+    assert ([c for c in abc_merged_symbol.classes]
+            == ['abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
+    for merged_class_proto in abc_merged_symbol.classes.values():
+        assert len(merged_class_proto) == 1
+        assert merged_class_proto[0].valid_for == expected_valid_for
+    assert ([f for f in abc_merged_symbol.functions]
+            == ['abc.abstractmethod', 'abc.abstractstaticmethod', 'abc.abstractclassmethod', 'abc.get_cache_token'])
+    for f in abc_merged_symbol.functions.values():
+        assert len(f) == 1
+        assert f[0].valid_for == expected_valid_for
+    assert len(abc_merged_symbol.overloaded_functions) == 0

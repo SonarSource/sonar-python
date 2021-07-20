@@ -7,7 +7,7 @@ from serializer import typeshed_serializer as ts
 SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9))
 
 
-def build_multiple_python_version():
+def build_multiple_python_version() -> Dict[str, Dict[str, ModuleSymbol]]:
     model_by_version: Dict[str, Dict[str, ModuleSymbol]] = {}
     for major, minor in SUPPORTED_PYTHON_VERSIONS:
         build_result = ts.walk_typeshed_stdlib(ts.get_options((major, minor)))
@@ -31,8 +31,8 @@ def merge_multiple_python_versions():
     return merged_modules
 
 
-def merge_modules(all_python_modules, model_by_version):
-    merged_modules = {}
+def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict[str, ModuleSymbol]]):
+    merged_modules: Dict[str, MergedModuleSymbol] = {}
     for python_mod in all_python_modules:
         handled_classes: Dict[str, List[MergedClassSymbol]] = {}
         handled_funcs: Dict[str, List[MergedFunctionSymbol]] = {}

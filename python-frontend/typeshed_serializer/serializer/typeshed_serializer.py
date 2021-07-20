@@ -8,16 +8,16 @@ STDLIB_PATH = "../resources/typeshed/stdlib"
 CURRENT_PATH = os.path.dirname(__file__)
 
 
-def get_options(python_version=None):
+def get_options(python_version=(3, 8)):
     opt = options.Options()
     # Setting incremental to false to avoid issues with mypy caching
     opt.incremental = False
-    if python_version is not None:
-        opt.python_version = python_version
+    opt.python_version = python_version
     return opt
 
 
-def build_single_module(module_fqn: str, category="stdlib", opt=get_options()):
+def build_single_module(module_fqn: str, category="stdlib", python_version=(3, 8)):
+    opt = get_options(python_version)
     module_source = load_single_module(module_fqn, category)
     build_result = build.build([module_source], opt)
     built_file = build_result.files.get(module_fqn)

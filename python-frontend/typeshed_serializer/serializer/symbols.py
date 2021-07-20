@@ -1,6 +1,6 @@
 import os
 from enum import Enum
-from typing import List
+from typing import List, Union
 
 import mypy.types as mpt
 import mypy.nodes as mpn
@@ -107,9 +107,6 @@ class TypeDescriptor:
             # Can this happen?
             self.pretty_printed_name = "#Unknown"
 
-    def __eq__(self, other):
-        return isinstance(other, TypeDescriptor) and self.__dict__ == other.__dict__
-
     def to_proto(self) -> symbols_pb2.Type:
         pb_type = symbols_pb2.Type()
         pb_type.pretty_printed_name = self.pretty_printed_name
@@ -140,9 +137,6 @@ class ParameterSymbol:
         if _type is not None:
             self.type_annotation = TypeDescriptor(_type)
 
-    def __eq__(self, other):
-        return isinstance(other, ParameterSymbol) and self.__dict__ == other.__dict__
-
     def to_proto(self) -> symbols_pb2.ParameterSymbol:
         pb_parameter = symbols_pb2.ParameterSymbol()
         pb_parameter.name = self.name
@@ -166,7 +160,7 @@ class OverloadedFunctionSymbol:
                 self.definitions.append(FunctionSymbol(item.func, decorators=item.original_decorators))
 
     def __eq__(self, other):
-        return isinstance(other, OverloadedFunctionSymbol) and self.__dict__ == other.__dict__
+        return isinstance(other, OverloadedFunctionSymbol) and self.to_proto() == other.to_proto()
 
     def to_proto(self) -> symbols_pb2.OverloadedFunctionSymbol:
         pb_overloaded_func = symbols_pb2.OverloadedFunctionSymbol()
@@ -199,10 +193,7 @@ class FunctionSymbol:
                     self.resolved_decorator_names.append(decorator_name)
 
     def __eq__(self, other):
-        return isinstance(other, FunctionSymbol) and self.__dict__ == other.__dict__
-
-    def __hash__(self):
-        return hash(self.__dict__)
+        return isinstance(other, FunctionSymbol) and self.to_proto() == other.to_proto()
 
     def to_proto(self) -> symbols_pb2.FunctionSymbol:
         pb_func = symbols_pb2.FunctionSymbol()
@@ -272,11 +263,8 @@ class ClassSymbol:
                 and self.is_enum == other.is_enum
                 and self.is_generic == other.is_generic
                 and self.is_protocol == other.is_protocol
-                and self.metaclass_name == other.metaclass_name)
-
-    def __hash__(self):
-        return hash((self.fullname, self.super_classes, self.mro, self.is_enum,
-                     self.is_generic, self.is_protocol, self.metaclass_name))
+                and self.metaclass_name == other.metaclass_name
+                and self.has_decorators == other.has_decorators)
 
     def to_proto(self) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
@@ -323,7 +311,8 @@ class MergedOverloadedFunctionSymbol:
 
 
 class MergedClassSymbol:
-    def __init__(self, reference_class_symbols: ClassSymbol, merged_methods, merged_overloaded_methods, valid_for: List[str]):
+    def __init__(self, reference_class_symbols: ClassSymbol, merged_methods, merged_overloaded_methods,
+                 valid_for: List[str]):
         # nested class symbols functions are not relevant anymore
         self.class_symbol = reference_class_symbols
         self.methods = merged_methods
@@ -449,7 +438,7 @@ def extract_return_type(func_def: mpn.FuncDef):
     return TypeDescriptor(func_type.ret_type)
 
 
-def save_module(ms: ModuleSymbol, is_debug=False, debug_dir="output"):
+def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], is_debug=False, debug_dir="output"):
     ms_pb = ms.to_proto()
     save_dir = "../../src/main/resources/org/sonar/python/types/protobuf" if not is_debug else f"../{debug_dir}"
     save_string = ms_pb.SerializeToString() if not is_debug else str(ms_pb)
@@ -457,5 +446,17 @@ def save_module(ms: ModuleSymbol, is_debug=False, debug_dir="output"):
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)
     if not os.path.exists(save_dir_path):
         os.makedirs(save_dir_path)
-    with open(f"{save_dir_path}/{ms.fullname}.protobuf", open_mode) as f:
+    save_name = ms.fullname if not is_python_2_only_exception(ms) else f"2@{ms.fullname}"
+    with open(f"{save_dir_path}/{save_name}.protobuf", open_mode) as f:
         f.write(save_string)
+
+
+def is_python_2_only_exception(ms) -> bool:
+    """ This methods aims to flag some Python 2 modules whose name differ from their Python 3 counterpart
+    by capitalization only. This is done to avoid conflicts in the saved file for OS which are not case sensitive
+    (e.g Windows and macOS)
+    """
+    if (not isinstance(ms, MergedModuleSymbol)
+            or ms.fullname not in ['ConfigParser', 'Queue', 'SocketServer']):
+        return False
+    return True
