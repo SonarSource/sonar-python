@@ -24,9 +24,9 @@ def builtins_supporting_getitem():
 def builtins_not_supporting_getitem():
   # dictviews https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects
   mydict = {'a': 1, 'b': 2}
-  mydict.keys()[0] # OK: FP in Python 2
-  mydict.values()[0] # OK: FP in Python 2
-  mydict.items()[0] # OK: FP in Python 2
+  mydict.keys()[0] # Noncompliant
+  mydict.values()[0] # Noncompliant
+  mydict.items()[0] # Noncompliant
 
   # iterators
   iter(mylist)[0]  # Noncompliant

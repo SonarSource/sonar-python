@@ -58,12 +58,14 @@ message FunctionSymbol {
   bool is_property = 12;
   bool is_static = 13;
   bool is_class_method = 14;
+  repeated string valid_for = 15;
 }
 
 message OverloadedFunctionSymbol {
   string name = 1;
   string fullname = 2;
   repeated FunctionSymbol definitions = 3;
+  repeated string valid_for = 4;
 }
 
 message ClassSymbol {
@@ -79,6 +81,7 @@ message ClassSymbol {
   bool is_generic = 11;
   bool is_protocol = 12;
   optional string metaclass_name = 13;
+  repeated string valid_for = 14;
 }
 
 message ModuleSymbol {

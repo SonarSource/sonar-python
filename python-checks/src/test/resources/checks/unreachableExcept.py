@@ -76,8 +76,7 @@ def fn_Exception_not_a_super_class():
     raise UnicodeDecodeError()
   except Exception as e:
     print(e)
-  except ValueError as e:  # FN as "Exception" super class is missing
-#        ^^^^^^^^^^>
+  except ValueError as e:  # Noncompliant
     print("Never executed")
   except UnicodeError as e:  # Noncompliant
 #        ^^^^^^^^^^^^

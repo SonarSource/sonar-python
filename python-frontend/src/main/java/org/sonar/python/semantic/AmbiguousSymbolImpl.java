@@ -68,7 +68,7 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
   }
 
   @Override
-  AmbiguousSymbolImpl copyWithoutUsages() {
+  public AmbiguousSymbolImpl copyWithoutUsages() {
     Set<SymbolImpl> copiedAlternativeSymbols = symbols.stream()
       .map(SymbolImpl.class::cast)
       .map(SymbolImpl::copyWithoutUsages)
@@ -80,5 +80,10 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
   public void removeUsages() {
     super.removeUsages();
     symbols.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
+  }
+
+  @Override
+  public Set<String> validForPythonVersions() {
+    return alternatives().stream().flatMap(symbol -> ((SymbolImpl) symbol).validForPythonVersions().stream()).collect(Collectors.toSet());
   }
 }
