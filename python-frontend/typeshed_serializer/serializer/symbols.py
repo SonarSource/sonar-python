@@ -220,7 +220,6 @@ class ClassSymbol:
         self.name = type_info.name
         self.fullname = type_info.fullname
         self.super_classes = []
-        self.mro = []
         self.methods = []
         self.overloaded_methods = []
         self.is_enum = type_info.is_enum
@@ -230,12 +229,6 @@ class ClassSymbol:
         for base in type_info.bases:
             if isinstance(base, mpt.Instance):
                 self.super_classes.append(base.type.fullname)
-        if not type_info.bad_mro and len(type_info.mro) > 2:
-            for mro_type in type_info.mro:
-                if (mro_type.fullname not in [b.type.fullname for b in type_info.bases]
-                        and mro_type.fullname not in [type_info.fullname, "builtins.object"]):
-                    # Avoid obvious elements in mro
-                    self.mro.append(mro_type.fullname)
         for key in type_info.names:
             name = type_info.names.get(key)
             node = name.node
@@ -259,7 +252,6 @@ class ClassSymbol:
         return (self.name == other.name
                 and self.fullname == other.fullname
                 and self.super_classes == other.super_classes
-                and self.mro == other.mro
                 and self.is_enum == other.is_enum
                 and self.is_generic == other.is_generic
                 and self.is_protocol == other.is_protocol
@@ -271,7 +263,6 @@ class ClassSymbol:
         pb_class.name = self.name
         pb_class.fully_qualified_name = self.fullname
         pb_class.super_classes.extend(self.super_classes)
-        pb_class.mro.extend(self.mro)
         pb_class.has_decorators = self.has_decorators
         pb_class.has_metaclass = self.has_metaclass
         pb_class.is_enum = self.is_enum
@@ -284,6 +275,35 @@ class ClassSymbol:
         for overloaded_method in self.overloaded_methods:
             pb_class.overloaded_methods.append(overloaded_method.to_proto())
         return pb_class
+
+
+class ModuleSymbol:
+    def __init__(self, mypy_file: mpn.MypyFile):
+        self.fullname = mypy_file.fullname
+        self.classes = []
+        self.functions = []
+        self.overloaded_functions = []
+        for key in mypy_file.names:
+            name = mypy_file.names.get(key)
+            if name.fullname.startswith(mypy_file.fullname):
+                symbol_table_node = name.node
+                if isinstance(symbol_table_node, mpn.FuncDef):
+                    self.functions.append(FunctionSymbol(symbol_table_node))
+                if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
+                    self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node))
+                if isinstance(symbol_table_node, mpn.TypeInfo):
+                    self.classes.append(ClassSymbol(symbol_table_node))
+
+    def to_proto(self) -> symbols_pb2.ModuleSymbol:
+        pb_module = symbols_pb2.ModuleSymbol()
+        pb_module.fully_qualified_name = self.fullname
+        for cls in self.classes:
+            pb_module.classes.append(cls.to_proto())
+        for func in self.functions:
+            pb_module.functions.append(func.to_proto())
+        for overloaded_func in self.overloaded_functions:
+            pb_module.overloaded_functions.append(overloaded_func.to_proto())
+        return pb_module
 
 
 class MergedFunctionSymbol:
@@ -324,7 +344,6 @@ class MergedClassSymbol:
         pb_class.name = self.class_symbol.name
         pb_class.fully_qualified_name = self.class_symbol.fullname
         pb_class.super_classes.extend(self.class_symbol.super_classes)
-        pb_class.mro.extend(self.class_symbol.mro)
         pb_class.has_decorators = self.class_symbol.has_decorators
         pb_class.has_metaclass = self.class_symbol.has_metaclass
         pb_class.is_enum = self.class_symbol.is_enum
@@ -352,7 +371,6 @@ class MergedModuleSymbol:
 
     def to_proto(self):
         pb_module = symbols_pb2.ModuleSymbol()
-        pb_module.name = self.fullname  # FIXME: is it even useful to have name?
         pb_module.fully_qualified_name = self.fullname
         for cls in self.classes:
             for elem in self.classes[cls]:
@@ -363,37 +381,6 @@ class MergedModuleSymbol:
         for overloaded_func in self.overloaded_functions:
             for elem in self.overloaded_functions[overloaded_func]:
                 pb_module.overloaded_functions.append(elem.to_proto())
-        return pb_module
-
-
-class ModuleSymbol:
-    def __init__(self, mypy_file: mpn.MypyFile):
-        self.name = mypy_file.name
-        self.fullname = mypy_file.fullname
-        self.classes = []
-        self.functions = []
-        self.overloaded_functions = []
-        for key in mypy_file.names:
-            name = mypy_file.names.get(key)
-            if name.fullname.startswith(mypy_file.fullname):
-                symbol_table_node = name.node
-                if isinstance(symbol_table_node, mpn.FuncDef):
-                    self.functions.append(FunctionSymbol(symbol_table_node))
-                if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
-                    self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node))
-                if isinstance(symbol_table_node, mpn.TypeInfo):
-                    self.classes.append(ClassSymbol(symbol_table_node))
-
-    def to_proto(self) -> symbols_pb2.ModuleSymbol:
-        pb_module = symbols_pb2.ModuleSymbol()
-        pb_module.name = self.name
-        pb_module.fully_qualified_name = self.fullname
-        for cls in self.classes:
-            pb_module.classes.append(cls.to_proto())
-        for func in self.functions:
-            pb_module.functions.append(func.to_proto())
-        for overloaded_func in self.overloaded_functions:
-            pb_module.overloaded_functions.append(overloaded_func.to_proto())
         return pb_module
 
 
