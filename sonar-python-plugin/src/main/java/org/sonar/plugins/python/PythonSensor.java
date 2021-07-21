@@ -41,8 +41,10 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVersion;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -120,6 +122,7 @@ public final class PythonSensor implements Sensor {
         analysisWarnings.addUnique(UNSET_VERSION_WARNING);
       }
     }
+    pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersion(PythonVersion.fromString(value)));
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);

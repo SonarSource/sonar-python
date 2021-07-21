@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -36,7 +37,9 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVersion;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -100,21 +103,27 @@ public class TypeShed {
   }
 
   private static final Logger LOG = Loggers.get(TypeShed.class);
+  private static Set<String> supportedPythonVersions;
 
   private TypeShed() {
   }
 
   public static Map<String, Symbol> builtinSymbols() {
-    // InferredTypes class initialization requires builtInSymbols to be computed. Calling dummy method
-    // from it explicitly to overcome the issue of TypeShed.builtins being assigned twice
-    if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
+    if ((TypeShed.builtins == null)) {
+      supportedPythonVersions = ProjectPythonVersion.currentVersion().supportedVersions().stream().map(PythonVersion.Version::serializedValue).collect(Collectors.toSet());
       Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN);
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
-      InferredTypes.setBuiltinSymbols(builtins);
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
     return builtins;
+  }
+
+  // used by tests whenever 'sonar.python.version' changes
+  static void resetBuiltinSymbols() {
+    builtins = null;
+    typeShedSymbols.clear();
+    builtinSymbols();
   }
 
   private static void setDeclaredReturnType(Symbol symbol, FunctionDef functionDef) {
@@ -384,9 +393,15 @@ public class TypeShed {
 
     // TODO: Use a common proxy interface Descriptor instead of using Object
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
-    moduleSymbol.getClassesList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
-    moduleSymbol.getFunctionsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
-    moduleSymbol.getOverloadedFunctionsList().forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getClassesList().stream()
+      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getFunctionsList().stream()
+      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getOverloadedFunctionsList().stream()
+      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
 
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
 
@@ -400,6 +415,15 @@ public class TypeShed {
       }
     }
     return deserializedSymbols;
+  }
+
+  public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
+    if (validForPythonVersions.isEmpty()) {
+      return true;
+    }
+    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
+    intersection.retainAll(supportedPythonVersions);
+    return !intersection.isEmpty();
   }
 
   public static Set<Symbol> symbolsFromDescriptor(Set<Object> descriptors, boolean isInsideClass) {

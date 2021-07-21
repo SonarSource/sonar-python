@@ -38,15 +38,22 @@ import static org.sonar.plugins.python.api.PythonVersion.Version.V_39;
 public class PythonVersion {
 
   public enum Version {
-    V_27(2.7), V_35(3.5), V_36(3.6), V_37(3.7), V_38(3.8), V_39(3.9);
+    V_27(2.7, "27"), V_35(3.5, "35"), V_36(3.6, "36"), V_37(3.7, "37"), V_38(3.8, "38"), V_39(3.9, "39");
 
     private final double value;
-    Version(double value) {
+    private final String serializedValue;
+
+    Version(double value, String serializedValue) {
       this.value = value;
+      this.serializedValue = serializedValue;
     }
 
     public double value() {
       return value;
+    }
+
+    public String serializedValue() {
+      return serializedValue;
     }
   }
 

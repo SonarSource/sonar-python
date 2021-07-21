@@ -87,8 +87,6 @@ public class InferredTypes {
   public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
   public static final InferredType DECL_BOOL = declaredBuiltinType(BuiltinTypes.BOOL);
 
-  private static Map<String, Symbol> builtinSymbols;
-
   private static final String UNICODE = "unicode";
   private static final String BYTES = "bytes";
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
@@ -106,10 +104,6 @@ public class InferredTypes {
   }
 
   private InferredTypes() {
-  }
-
-  public static boolean isInitialized() {
-    return builtinSymbols != null;
   }
 
   public static InferredType anyType() {
@@ -134,10 +128,6 @@ public class InferredTypes {
     return anyType();
   }
 
-  static void setBuiltinSymbols(Map<String, Symbol> builtinSymbols) {
-    InferredTypes.builtinSymbols = Collections.unmodifiableMap(builtinSymbols);
-  }
-
   public static InferredType or(InferredType t1, InferredType t2) {
     return UnionType.or(t1, t2);
   }
@@ -147,7 +137,7 @@ public class InferredTypes {
   }
 
   public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation) {
-    Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
+    Map<String, Symbol> builtins = TypeShed.builtinSymbols();
     DeclaredType declaredType = declaredTypeFromTypeAnnotation(typeAnnotation.expression(), builtins);
     if (declaredType == null) {
       return InferredTypes.anyType();
@@ -156,7 +146,7 @@ public class InferredTypes {
   }
 
   public static InferredType fromTypeshedTypeAnnotation(TypeAnnotation typeAnnotation) {
-    Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
+    Map<String, Symbol> builtins = TypeShed.builtinSymbols();
     return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
   }
 
