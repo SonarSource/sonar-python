@@ -30,12 +30,17 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 
 class RuntimeType implements InferredType {
 
-  private final ClassSymbol typeClass;
+  private ClassSymbol typeClass;
+  private String builtinFullyQualifiedName;
   private Set<String> typeClassSuperClassesFQN = null;
   private Set<String> typeClassMembersFQN = null;
 
   RuntimeType(ClassSymbol typeClass) {
     this.typeClass = typeClass;
+  }
+
+  RuntimeType(String builtinFullyQualifiedName) {
+    this.builtinFullyQualifiedName = builtinFullyQualifiedName;
   }
 
   @Override
@@ -51,7 +56,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    return typeClass.canHaveMember(memberName);
+    return getTypeClass().canHaveMember(memberName);
   }
 
   @Override
@@ -61,7 +66,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    return typeClass.resolveMember(memberName);
+    return getTypeClass().resolveMember(memberName);
   }
 
   @Override
@@ -71,21 +76,21 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canOnlyBe(String typeName) {
-    return typeName.equals(typeClass.fullyQualifiedName());
+    return typeName.equals(getTypeClass().fullyQualifiedName());
   }
 
   @Override
   public boolean canBeOrExtend(String typeName) {
-    return typeClass.canBeOrExtend(typeName);
+    return getTypeClass().canBeOrExtend(typeName);
   }
 
   @Override
   public boolean isCompatibleWith(InferredType other) {
-    return InferredTypes.isTypeClassCompatibleWith(typeClass, other);
+    return InferredTypes.isTypeClassCompatibleWith(getTypeClass(), other);
   }
 
   public boolean mustBeOrExtend(String fullyQualifiedName) {
-    return typeClass.isOrExtends(fullyQualifiedName);
+    return getTypeClass().isOrExtends(fullyQualifiedName);
   }
 
   @Override
@@ -97,41 +102,44 @@ class RuntimeType implements InferredType {
       return false;
     }
     RuntimeType that = (RuntimeType) o;
-    return Objects.equals(typeClass.name(), that.typeClass.name()) &&
-      Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName())
+    return Objects.equals(getTypeClass().name(), that.getTypeClass().name()) &&
+      Objects.equals(getTypeClass().fullyQualifiedName(), that.getTypeClass().fullyQualifiedName())
       && Objects.equals(typeClassSuperClassesFQN(), that.typeClassSuperClassesFQN())
       && Objects.equals(typeClassMembersFQN(), that.typeClassMembersFQN());
   }
 
   private Set<String> typeClassSuperClassesFQN() {
     if (typeClassSuperClassesFQN == null) {
-      typeClassSuperClassesFQN = typeClass.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
+      typeClassSuperClassesFQN = getTypeClass().superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
     }
     return typeClassSuperClassesFQN;
   }
 
   private Set<String> typeClassMembersFQN() {
     if (typeClassMembersFQN == null) {
-      typeClassMembersFQN = typeClass.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
+      typeClassMembersFQN = getTypeClass().declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
     }
     return typeClassMembersFQN;
   }
 
   boolean hasUnresolvedHierarchy() {
-    return ((ClassSymbolImpl) typeClass).hasUnresolvedTypeHierarchy(false);
+    return ((ClassSymbolImpl) getTypeClass()).hasUnresolvedTypeHierarchy(false);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(typeClass.name(), typeClass.fullyQualifiedName(), typeClassSuperClassesFQN(), typeClassMembersFQN());
+    return Objects.hash(getTypeClass().name(), getTypeClass().fullyQualifiedName(), typeClassSuperClassesFQN(), typeClassMembersFQN());
   }
 
   @Override
   public String toString() {
-    return "RuntimeType(" + typeClass.fullyQualifiedName() + ')';
+    return "RuntimeType(" + getTypeClass().fullyQualifiedName() + ')';
   }
 
   public ClassSymbol getTypeClass() {
+    if (typeClass == null) {
+      return TypeShed.typeShedClass(builtinFullyQualifiedName);
+    }
     return typeClass;
   }
 }

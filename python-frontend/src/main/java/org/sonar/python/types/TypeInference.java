@@ -57,7 +57,7 @@ public class TypeInference extends BaseTreeVisitor {
   // The super() builtin is not specified precisely in typeshed.
   // It should return a proxy object (temporary object of the superclass) that allows to access methods of the base class
   // https://docs.python.org/3/library/functions.html#super
-  private static final InferredType TYPE_OF_SUPER = InferredTypes.runtimeType(TypeShed.typeShedClass("super"));
+  private static final InferredType TYPE_OF_SUPER = InferredTypes.runtimeBuiltinType("super");
 
   private final Map<Symbol, Set<Assignment>> assignmentsByLhs = new HashMap<>();
   private final Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr = new HashMap<>();

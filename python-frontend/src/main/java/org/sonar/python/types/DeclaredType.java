@@ -37,9 +37,10 @@ import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 
 public class DeclaredType implements InferredType {
 
-  private final Symbol typeClass;
+  private Symbol typeClass;
   private final List<DeclaredType> typeArgs;
-  private final Set<Symbol> alternativeTypeSymbols;
+  private Set<Symbol> alternativeTypeSymbols;
+  private String builtinFullyQualifiedName;
 
   public DeclaredType(Symbol typeClass, List<DeclaredType> typeArgs) {
     this.typeClass = typeClass;
@@ -53,9 +54,9 @@ public class DeclaredType implements InferredType {
       Symbol noneType = TypeShed.typeShedClass(BuiltinTypes.NONE_TYPE);
       symbols.add(noneType);
       DeclaredType argType = typeArgs.get(0);
-      symbols.addAll(resolveAlternativeSymbols(argType.typeClass, argType.typeArgs));
+      symbols.addAll(resolveAlternativeSymbols(argType.getTypeClass(), argType.typeArgs));
     } else if ("typing.Union".equals(typeClass.fullyQualifiedName())) {
-      symbols.addAll(typeArgs.stream().flatMap(arg -> resolveAlternativeSymbols(arg.typeClass, arg.typeArgs).stream()).collect(Collectors.toSet()));
+      symbols.addAll(typeArgs.stream().flatMap(arg -> resolveAlternativeSymbols(arg.getTypeClass(), arg.typeArgs).stream()).collect(Collectors.toSet()));
     } else if ("typing.Text".equals(typeClass.fullyQualifiedName())) {
       symbols.add(TypeShed.typeShedClass("str"));
     } else {
@@ -68,6 +69,11 @@ public class DeclaredType implements InferredType {
     this(typeClass, Collections.emptyList());
   }
 
+  DeclaredType(String builtinFullyQualifiedName) {
+    this.builtinFullyQualifiedName = builtinFullyQualifiedName;
+    typeArgs = Collections.emptyList();
+  }
+
   @Override
   public boolean canHaveMember(String memberName) {
     return true;
@@ -78,7 +84,7 @@ public class DeclaredType implements InferredType {
     if (hasUnresolvedHierarchy()) {
       return true;
     }
-    return alternativeTypeSymbols.stream().anyMatch(symbol -> !symbol.is(CLASS) || ((ClassSymbol) symbol).canHaveMember(memberName));
+    return alternativeTypeSymbols().stream().anyMatch(symbol -> !symbol.is(CLASS) || ((ClassSymbol) symbol).canHaveMember(memberName));
   }
 
   @Override
@@ -139,7 +145,7 @@ public class DeclaredType implements InferredType {
   }
 
   public String typeName() {
-    StringBuilder str = new StringBuilder(typeClass.name());
+    StringBuilder str = new StringBuilder(getTypeClass().name());
     if (!typeArgs.isEmpty()) {
       str.append("[");
       str.append(typeArgs.stream().map(DeclaredType::typeName).collect(Collectors.joining(", ")));
@@ -149,10 +155,16 @@ public class DeclaredType implements InferredType {
   }
 
   Symbol getTypeClass() {
+    if (typeClass == null) {
+      return TypeShed.typeShedClass(builtinFullyQualifiedName);
+    }
     return typeClass;
   }
 
   public Set<Symbol> alternativeTypeSymbols() {
+    if (alternativeTypeSymbols == null) {
+      return resolveAlternativeSymbols(getTypeClass(), typeArgs);
+    }
     return alternativeTypeSymbols;
   }
 
@@ -165,14 +177,14 @@ public class DeclaredType implements InferredType {
       return false;
     }
     DeclaredType that = (DeclaredType) o;
-    return Objects.equals(typeClass.name(), that.typeClass.name()) &&
-      Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName()) &&
+    return Objects.equals(getTypeClass().name(), that.getTypeClass().name()) &&
+      Objects.equals(getTypeClass().fullyQualifiedName(), that.getTypeClass().fullyQualifiedName()) &&
       Objects.equals(typeArgs, that.typeArgs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(typeClass.name(), typeClass.fullyQualifiedName(), typeArgs);
+    return Objects.hash(getTypeClass().name(), getTypeClass().fullyQualifiedName(), typeArgs);
   }
 
   public static InferredType fromInferredType(InferredType inferredType) {
@@ -187,10 +199,10 @@ public class DeclaredType implements InferredType {
   }
 
   boolean hasUnresolvedHierarchy() {
-    if (alternativeTypeSymbols.isEmpty()) {
+    if (alternativeTypeSymbols().isEmpty()) {
       return true;
     }
-    for (Symbol alternativeTypeSymbol : alternativeTypeSymbols) {
+    for (Symbol alternativeTypeSymbol : alternativeTypeSymbols()) {
       if (!alternativeTypeSymbol.is(CLASS) || ((ClassSymbol) alternativeTypeSymbol).hasUnresolvedTypeHierarchy()) {
         return true;
       }

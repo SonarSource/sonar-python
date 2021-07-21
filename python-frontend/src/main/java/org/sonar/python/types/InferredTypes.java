@@ -117,11 +117,11 @@ public class InferredTypes {
   }
 
   static InferredType runtimeBuiltinType(String fullyQualifiedName) {
-    return new RuntimeType(TypeShed.typeShedClass(fullyQualifiedName));
+    return new RuntimeType(fullyQualifiedName);
   }
 
   private static InferredType declaredBuiltinType(String fullyQualifiedName) {
-    return new DeclaredType(TypeShed.typeShedClass(fullyQualifiedName));
+    return new DeclaredType(fullyQualifiedName);
   }
 
   public static InferredType runtimeType(@Nullable Symbol typeClass) {
