@@ -151,7 +151,7 @@ class Scope {
   private ClassSymbolImpl copyClassSymbol(String symbolName, ClassSymbolImpl originalClassSymbol, Set<Symbol> alreadyVisitedSymbols) {
     // Must use symbolName to preserve import aliases
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) ClassSymbolImpl.copyFrom(symbolName, originalClassSymbol);
-    if (originalClassSymbol.hasResolvedSuperClasses()) {
+    if (originalClassSymbol.hasEvaluatedSuperClasses()) {
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {

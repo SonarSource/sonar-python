@@ -139,7 +139,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   @Override
   public ClassSymbolImpl copyWithoutUsages() {
     ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), this);
-    if (hasResolvedSuperClasses()) {
+    if (hasEvaluatedSuperClasses()) {
       for (Symbol superClass : superClasses()) {
         if (superClass == this) {
           copiedClassSymbol.superClasses.add(copiedClassSymbol);
@@ -369,7 +369,15 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.supportsGenerics = supportsGenerics;
   }
 
-  public boolean hasResolvedSuperClasses() {
+  /**
+   * Precomputed typeshed class symbols might be "lazily evaluated", i.e. only information about super classes fqn is stored, without having created the actual
+   * type hierarchy.
+   * This method is used to know if super classes have been already created and added to {@link #superClasses}.
+   * This might happen in the following cases:
+   * - Super classes have been already read, hence class symbol is not lazy anymore
+   * - {@link #superClassesFqns} is empty, meaning either this isn't a precomputed typeshed symbol or the class have no superclass.
+   */
+  public boolean hasEvaluatedSuperClasses() {
     return hasAlreadyReadSuperClasses || superClassesFqns.isEmpty();
   }
 }
