@@ -19,9 +19,9 @@ def builtin_types_supporting_setitem():
 def builtin_types_not_supporting_setitem():
   mydict = {'a': 1, 'b': 2}
   # dictviews https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects
-  mydict.keys()[0] = 42 # OK: FP in Python 2
-  mydict.values()[0] = 42 # OK: FP in Python 2
-  mydict.items()[0] = 42  # OK: FP in Python 2
+  mydict.keys()[0] = 42 # Noncompliant
+  mydict.values()[0] = 42 # Noncompliant
+  mydict.items()[0] = 42  # Noncompliant
 
   # iterators
   iter(mylist)[0] = 42  # Noncompliant
@@ -50,7 +50,7 @@ def builtin_types_not_supporting_setitem():
   var = None
   var[0] = 42  # Noncompliant
 
-  bytes(b'123')[0] = 42  # FN: unknown return type
+  bytes(b'123')[0] = 42  # Noncompliant
 
   # String
   "abc"[0] = 42  # Noncompliant

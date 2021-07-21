@@ -4,9 +4,8 @@ def func(p1, p2, p3, p4): ...  # Noncompliant
 #        ^^^^^^^^^^^^^^
 
 class MyTextIOWrapper(TextIOWrapper):
-  # FP (ambiguous symbol in type hierarchy)
   def __init__(
-          self,  # Noncompliant
+          self,
           buffer: IO[bytes],
           encoding: Optional[str] = ...,
           errors: Optional[str] = ...,
@@ -24,9 +23,8 @@ class MyTextIOWrapper(TextIOWrapper):
 class MyOtherTextIOWrapper(TextIOWrapper): ...
 
 class ChildWithComplexHierarchy(MyOtherTextIOWrapper):
-  # FP (ambiguous symbol in type hierarchy)
   def __init__(
-          self,  # Noncompliant
+          self,
           buffer: IO[bytes],
           encoding: Optional[str] = ...,
           errors: Optional[str] = ...,

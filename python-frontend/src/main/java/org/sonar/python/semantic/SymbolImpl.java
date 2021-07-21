@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -49,6 +50,7 @@ public class SymbolImpl implements Symbol {
   private Kind kind;
   private InferredType inferredType = InferredTypes.anyType();
   private String annotatedTypeName = null;
+  protected Set<String> validForPythonVersions = Collections.emptySet();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
@@ -142,7 +144,7 @@ public class SymbolImpl implements Symbol {
     this.annotatedTypeName = Optional.ofNullable(getTypeSymbolFromExpression(typeAnnotation.expression())).map(Symbol::fullyQualifiedName).orElse(null);
   }
 
-  SymbolImpl copyWithoutUsages() {
+  public SymbolImpl copyWithoutUsages() {
     return new SymbolImpl(name(), fullyQualifiedName, annotatedTypeName);
   }
 
@@ -165,5 +167,9 @@ public class SymbolImpl implements Symbol {
       return ((HasSymbol) expression).symbol();
     }
     return null;
+  }
+
+  public Set<String> validForPythonVersions() {
+    return validForPythonVersions;
   }
 }

@@ -59,11 +59,14 @@ def custom_compliant():
 
 def builtin_noncompliant():
   1 + "1"  # Noncompliant
+  "1" + 1  # Noncompliant
   1 + [1]  # Noncompliant
   1 + {1}  # Noncompliant
   1 + (1,)  # Noncompliant
   1 + {'a': 1}  # Noncompliant
   [1] + (1,)  # Noncompliant
+  "foo " + "bar".encode('base64') # OK, FP in Python2
+  "bar".encode('base64') + "foo"  # OK, FP in Python2
 
 
   -'1'  # Noncompliant

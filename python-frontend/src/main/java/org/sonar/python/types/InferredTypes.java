@@ -90,14 +90,19 @@ public class InferredTypes {
   private static Map<String, Symbol> builtinSymbols;
 
   private static final String UNICODE = "unicode";
+  private static final String BYTES = "bytes";
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
   private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
+
+
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(Collections.singletonList(BuiltinTypes.COMPLEX)));
-    HARDCODED_COMPATIBLE_TYPES.put("bytearray", new HashSet<>(Arrays.asList("bytes", BuiltinTypes.STR, UNICODE)));
-    HARDCODED_COMPATIBLE_TYPES.put("memoryview", new HashSet<>(Arrays.asList("bytes", BuiltinTypes.STR, UNICODE)));
-    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.STR, new HashSet<>(Collections.singletonList(UNICODE)));
+    HARDCODED_COMPATIBLE_TYPES.put("bytearray", new HashSet<>(Arrays.asList(BYTES, BuiltinTypes.STR, UNICODE)));
+    HARDCODED_COMPATIBLE_TYPES.put("memoryview", new HashSet<>(Arrays.asList(BYTES, BuiltinTypes.STR, UNICODE)));
+    // str <=> bytes equivalence only for Python2
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.STR, new HashSet<>(Arrays.asList(UNICODE, BYTES)));
+    HARDCODED_COMPATIBLE_TYPES.put(BYTES, new HashSet<>(Collections.singletonList(BuiltinTypes.STR)));
   }
 
   private InferredTypes() {
@@ -166,11 +171,11 @@ public class InferredTypes {
       case UNION:
         return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
       case TUPLE:
-        return TUPLE;
+        return InferredTypes.TUPLE;
       case NONE:
-        return NONE;
+        return InferredTypes.NONE;
       case TYPED_DICT:
-        return DICT;
+        return InferredTypes.DICT;
       default:
         return anyType();
     }
