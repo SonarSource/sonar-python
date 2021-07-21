@@ -1,5 +1,6 @@
 import os
 from enum import Enum
+from typing import List, Union
 
 import mypy.types as mpt
 import mypy.nodes as mpn
@@ -158,6 +159,9 @@ class OverloadedFunctionSymbol:
             if isinstance(item, mpn.Decorator):
                 self.definitions.append(FunctionSymbol(item.func, decorators=item.original_decorators))
 
+    def __eq__(self, other):
+        return isinstance(other, OverloadedFunctionSymbol) and self.to_proto() == other.to_proto()
+
     def to_proto(self) -> symbols_pb2.OverloadedFunctionSymbol:
         pb_overloaded_func = symbols_pb2.OverloadedFunctionSymbol()
         pb_overloaded_func.name = self.name
@@ -187,6 +191,9 @@ class FunctionSymbol:
                 decorator_name = get_decorator_name(dec)
                 if decorator_name is not None:
                     self.resolved_decorator_names.append(decorator_name)
+
+    def __eq__(self, other):
+        return isinstance(other, FunctionSymbol) and self.to_proto() == other.to_proto()
 
     def to_proto(self) -> symbols_pb2.FunctionSymbol:
         pb_func = symbols_pb2.FunctionSymbol()
@@ -246,6 +253,19 @@ class ClassSymbol:
                 self.metaclass_name = class_def.metaclass.fullname
         self.has_decorators = len(class_def.decorators) > 0
 
+    def __eq__(self, other):
+        if not isinstance(other, ClassSymbol):
+            return False
+        return (self.name == other.name
+                and self.fullname == other.fullname
+                and self.super_classes == other.super_classes
+                and self.mro == other.mro
+                and self.is_enum == other.is_enum
+                and self.is_generic == other.is_generic
+                and self.is_protocol == other.is_protocol
+                and self.metaclass_name == other.metaclass_name
+                and self.has_decorators == other.has_decorators)
+
     def to_proto(self) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
         pb_class.name = self.name
@@ -264,6 +284,86 @@ class ClassSymbol:
         for overloaded_method in self.overloaded_methods:
             pb_class.overloaded_methods.append(overloaded_method.to_proto())
         return pb_class
+
+
+class MergedFunctionSymbol:
+    def __init__(self, function_symbol: FunctionSymbol, valid_for: List[str]):
+        self.function_symbol = function_symbol
+        self.valid_for = valid_for
+
+    def to_proto(self) -> symbols_pb2.FunctionSymbol:
+        pb_func = self.function_symbol.to_proto()
+        for elem in self.valid_for:
+            pb_func.valid_for.append(elem)
+        return pb_func
+
+
+class MergedOverloadedFunctionSymbol:
+    def __init__(self, overloaded_function_symbol: OverloadedFunctionSymbol, valid_for: List[str]):
+        self.overloaded_function_symbol = overloaded_function_symbol
+        self.valid_for = valid_for
+
+    def to_proto(self) -> symbols_pb2.FunctionSymbol:
+        pb_func = self.overloaded_function_symbol.to_proto()
+        for elem in self.valid_for:
+            pb_func.valid_for.append(elem)
+        return pb_func
+
+
+class MergedClassSymbol:
+    def __init__(self, reference_class_symbols: ClassSymbol, merged_methods, merged_overloaded_methods,
+                 valid_for: List[str]):
+        # nested class symbols functions are not relevant anymore
+        self.class_symbol = reference_class_symbols
+        self.methods = merged_methods
+        self.overloaded_methods = merged_overloaded_methods
+        self.valid_for = valid_for
+
+    def to_proto(self) -> symbols_pb2.ClassSymbol:
+        pb_class = symbols_pb2.ClassSymbol()
+        pb_class.name = self.class_symbol.name
+        pb_class.fully_qualified_name = self.class_symbol.fullname
+        pb_class.super_classes.extend(self.class_symbol.super_classes)
+        pb_class.mro.extend(self.class_symbol.mro)
+        pb_class.has_decorators = self.class_symbol.has_decorators
+        pb_class.has_metaclass = self.class_symbol.has_metaclass
+        pb_class.is_enum = self.class_symbol.is_enum
+        pb_class.is_generic = self.class_symbol.is_generic
+        pb_class.is_protocol = self.class_symbol.is_protocol
+        if self.class_symbol.metaclass_name is not None:
+            pb_class.metaclass_name = self.class_symbol.metaclass_name
+        for method in self.methods:
+            for elem in self.methods[method]:
+                pb_class.methods.append(elem.to_proto())
+        for overloaded_func in self.overloaded_methods:
+            for elem in self.overloaded_methods[overloaded_func]:
+                pb_class.overloaded_methods.append(elem.to_proto())
+        for elem in self.valid_for:
+            pb_class.valid_for.append(elem)
+        return pb_class
+
+
+class MergedModuleSymbol:
+    def __init__(self, fullname, classes, functions, overloaded_functions):
+        self.fullname = fullname
+        self.classes = classes
+        self.functions = functions
+        self.overloaded_functions = overloaded_functions
+
+    def to_proto(self):
+        pb_module = symbols_pb2.ModuleSymbol()
+        pb_module.name = self.fullname  # FIXME: is it even useful to have name?
+        pb_module.fully_qualified_name = self.fullname
+        for cls in self.classes:
+            for elem in self.classes[cls]:
+                pb_module.classes.append(elem.to_proto())
+        for func in self.functions:
+            for elem in self.functions[func]:
+                pb_module.functions.append(elem.to_proto())
+        for overloaded_func in self.overloaded_functions:
+            for elem in self.overloaded_functions[overloaded_func]:
+                pb_module.overloaded_functions.append(elem.to_proto())
+        return pb_module
 
 
 class ModuleSymbol:
@@ -338,15 +438,25 @@ def extract_return_type(func_def: mpn.FuncDef):
     return TypeDescriptor(func_type.ret_type)
 
 
-def save_module(mypy_file: mpn.MypyFile, save_as_text=True, output_dir_name="output",
-                save_location="../../src/main/resources/org/sonar/python/types"):
-    ms = ModuleSymbol(mypy_file)
+def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], is_debug=False, debug_dir="output"):
     ms_pb = ms.to_proto()
-    save_dir = f"{save_location}/{output_dir_name}"
-    save_string = str(ms_pb) if save_as_text else ms_pb.SerializeToString()
-    open_mode = "w" if save_as_text else "wb"
+    save_dir = "../../src/main/resources/org/sonar/python/types/protobuf" if not is_debug else f"../{debug_dir}"
+    save_string = ms_pb.SerializeToString() if not is_debug else str(ms_pb)
+    open_mode = "wb" if not is_debug else "w"
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)
     if not os.path.exists(save_dir_path):
         os.makedirs(save_dir_path)
-    with open(f"{save_dir_path}/{ms.fullname}.protobuf", open_mode) as f:
+    save_name = ms.fullname if not is_python_2_only_exception(ms) else f"2@{ms.fullname}"
+    with open(f"{save_dir_path}/{save_name}.protobuf", open_mode) as f:
         f.write(save_string)
+
+
+def is_python_2_only_exception(ms) -> bool:
+    """ This methods aims to flag some Python 2 modules whose name differ from their Python 3 counterpart
+    by capitalization only. This is done to avoid conflicts in the saved file for OS which are not case sensitive
+    (e.g Windows and macOS)
+    """
+    if (not isinstance(ms, MergedModuleSymbol)
+            or ms.fullname not in ['ConfigParser', 'Queue', 'SocketServer']):
+        return False
+    return True
