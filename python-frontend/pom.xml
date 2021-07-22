@@ -160,6 +160,22 @@
               </execution>
             </executions>
           </plugin>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+                <!-- This plugin is already configured in parent pom, however we want a configuration specific to this project -->
+            <configuration>
+              <includes>
+                <include>src/*/java/**/*.java</include>
+                <include>typeshed_serializer/serializer/**/*.py</include>
+                <include>typeshed_serializer/tests/**/*.py</include>
+              </includes>
+              <excludes>
+                <exclude>typeshed_serializer/serializer/proto_out/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
         </plugins>
       </build>
     </profile>
