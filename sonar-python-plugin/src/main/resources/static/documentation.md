@@ -16,6 +16,18 @@ key: python
 
 Discover and update the Python-specific [properties](/analysis/analysis-parameters/) in: <!-- sonarcloud -->Project <!-- /sonarcloud --> **[Administration > General Settings > Python](/#sonarqube-admin#/admin/settings?category=python)**.
 
+## Handling Project Python Version
+
+Python code is analyzed by default as compatible with python 2 and python 3. Some issues will be automatically silenced to avoid raising False Positives.
+In order to get a more precise analysis you can specify the python versions your code supports via the `sonar.python.version` parameter.
+
+Accepted format are a comma separated list of versions having the format "X.Y"
+
+Examples: 
+  * `sonar.python.version=2.7`
+  * `sonar.python.version=3.8` 
+  * `sonar.python.version=2.7, 3.7, 3.8, 3.9`
+
 ## Custom Rules
 
 ### Overview

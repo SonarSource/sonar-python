@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -49,6 +51,14 @@ public class TypeShedTest {
   @org.junit.Rule
   public LogTester logTester = new LogTester();
 
+  /**
+   * This cleanup method is called manually when needed instead of having it run "BeforeEach" test to avoid the performance impact of recomputing builtins symbols
+   */
+  public void setPythonVersions(Set<PythonVersionUtils.Version> pythonVersion) {
+    ProjectPythonVersion.setCurrentVersions(pythonVersion);
+    TypeShed.resetBuiltinSymbols();
+  }
+
   @Test
   public void classes() {
     ClassSymbol intClass = TypeShed.typeShedClass("int");
@@ -67,6 +77,19 @@ public class TypeShedTest {
     // python 3.9 support
     assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
     assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
+
+    setPythonVersions(PythonVersionUtils.fromString("3.8"));
+    strClass = TypeShed.typeShedClass("str");
+    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
+    assertThat(strClass.resolveMember("removeprefix")).isEmpty();
+    assertThat(strClass.resolveMember("removesuffix")).isEmpty();
+
+    setPythonVersions(PythonVersionUtils.fromString("2.7"));
+    strClass = TypeShed.typeShedClass("str");
+    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name)
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"), tuple(Kind.CLASS, "basestring"));
+
+    setPythonVersions(PythonVersionUtils.allVersions());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -388,6 +411,28 @@ public class TypeShedTest {
       assertThat(alternative.is(Kind.FUNCTION)).isTrue();
       assertThat(((FunctionSymbolImpl) alternative).validForPythonVersions()).containsExactly("27");
     }
+  }
+
+  @Test
+  public void pythonVersions() {
+    // unknown version
+    Symbol range = TypeShed.builtinSymbols().get("range");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
+    assertThat(range.kind()).isEqualTo(Kind.AMBIGUOUS);
+
+    // python 2
+    setPythonVersions(PythonVersionUtils.fromString("2.7"));
+    range = TypeShed.builtinSymbols().get("range");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27");
+    assertThat(range.kind()).isEqualTo(Kind.FUNCTION);
+
+    // python 3
+    setPythonVersions(PythonVersionUtils.fromString("3.8"));
+    range = TypeShed.builtinSymbols().get("range");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
+    assertThat(range.kind()).isEqualTo(Kind.CLASS);
+
+    setPythonVersions(PythonVersionUtils.allVersions());
   }
 
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {
