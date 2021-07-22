@@ -156,6 +156,7 @@ public class DeclaredType implements InferredType {
 
   Symbol getTypeClass() {
     if (typeClass == null) {
+      // the value is recomputed each time instead of storing it to avoid consistency problem when 'sonar.python.version' property is changed
       return TypeShed.typeShedClass(builtinFullyQualifiedName);
     }
     return typeClass;
@@ -163,6 +164,7 @@ public class DeclaredType implements InferredType {
 
   public Set<Symbol> alternativeTypeSymbols() {
     if (alternativeTypeSymbols == null) {
+      // the value is recomputed each time instead of storing it to avoid consistency problem when 'sonar.python.version' property is changed
       return resolveAlternativeSymbols(getTypeClass(), typeArgs);
     }
     return alternativeTypeSymbols;

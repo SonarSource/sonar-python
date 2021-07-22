@@ -19,19 +19,24 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.util.Set;
+
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version;
+import static org.sonar.plugins.python.api.PythonVersionUtils.allVersions;
+
 public class ProjectPythonVersion {
 
   private ProjectPythonVersion() {
   }
 
-  private static PythonVersion currentVersion = PythonVersion.allVersions();
+  private static Set<Version> currentVersions = allVersions();
 
-  public static PythonVersion currentVersion() {
-    return currentVersion;
+  public static Set<Version> currentVersions() {
+    return currentVersions;
   }
 
-  public static void setCurrentVersion(PythonVersion currentVersion) {
-    ProjectPythonVersion.currentVersion = currentVersion;
+  public static void setCurrentVersions(Set<Version> currentVersions) {
+    ProjectPythonVersion.currentVersions = currentVersions;
   }
 
 }

@@ -68,7 +68,7 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
-import org.sonar.plugins.python.api.PythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
@@ -461,7 +461,7 @@ public class PythonSensorTest {
 
     context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
     sensor().execute(context);
-    assertThat(ProjectPythonVersion.currentVersion().supportedVersions()).containsExactly(PythonVersion.Version.V_38);
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
     assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }

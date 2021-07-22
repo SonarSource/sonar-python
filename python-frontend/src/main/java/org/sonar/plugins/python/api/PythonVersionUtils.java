@@ -19,23 +19,23 @@
  */
 package org.sonar.plugins.python.api;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_27;
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_35;
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_36;
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_37;
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_38;
-import static org.sonar.plugins.python.api.PythonVersion.Version.V_39;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_27;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_35;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
-public class PythonVersion {
+public class PythonVersionUtils {
 
   public enum Version {
     V_27(2.7, "27"), V_35(3.5, "35"), V_36(3.6, "36"), V_37(3.7, "37"), V_38(3.8, "38"), V_39(3.9, "39");
@@ -57,6 +57,10 @@ public class PythonVersion {
     }
   }
 
+  /**
+   * Note that versions between 3 and 3.5 are currently mapped to 3.5 because
+   * during we don't take into account those version during typeshed symbols serialization
+   */
   private static final Map<String, Version> STRING_VERSION_MAP = new HashMap<>();
   static {
     STRING_VERSION_MAP.put("2", V_27);
@@ -75,48 +79,44 @@ public class PythonVersion {
   }
   private static final Version MIN_SUPPORTED_VERSION = V_27;
   private static final Version MAX_SUPPORTED_VERSION = V_39;
-  private static final Logger LOG = Loggers.get(PythonVersion.class);
+  private static final Logger LOG = Loggers.get(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
-  private List<Version> supportedVersions = new ArrayList<>();
-
-  private PythonVersion() {
+  private PythonVersionUtils() {
   }
 
-  public static PythonVersion fromString(String propertyValue) {
+  public static Set<Version> fromString(String propertyValue) {
     String[] versions = propertyValue.split(",");
     if (versions.length == 0) {
       return allVersions();
     }
-    PythonVersion pythonVersion = new PythonVersion();
+    Set<Version> pythonVersions = new HashSet<>();
     for (String versionValue : versions) {
       versionValue = versionValue.trim();
       Version version = STRING_VERSION_MAP.get(versionValue);
       if (version != null) {
-        pythonVersion.addVersion(version);
+        pythonVersions.add(version);
       } else {
-        boolean isGuessSuccessful = guessPythonVersion(pythonVersion, versionValue);
+        boolean isGuessSuccessful = guessPythonVersion(pythonVersions, versionValue);
         if (!isGuessSuccessful) {
           return allVersions();
         }
       }
     }
-    return pythonVersion;
+    return pythonVersions;
   }
 
-  public static PythonVersion allVersions() {
-    PythonVersion pythonVersion = new PythonVersion();
-    pythonVersion.supportedVersions = Arrays.asList(V_27, V_35, V_36, V_37, V_38, V_39);
-    return pythonVersion;
+  public static Set<Version> allVersions() {
+    return new HashSet<>(Arrays.asList(V_27, V_35, V_36, V_37, V_38, V_39));
   }
 
-  private static boolean guessPythonVersion(PythonVersion pythonVersion, String versionValue) {
+  private static boolean guessPythonVersion(Set<Version> pythonVersions, String versionValue) {
     try {
       double parsedVersion = Double.parseDouble(versionValue);
       if (parsedVersion < MIN_SUPPORTED_VERSION.value()) {
-        pythonVersion.addVersion(MIN_SUPPORTED_VERSION);
+        pythonVersions.add(MIN_SUPPORTED_VERSION);
       } else if (parsedVersion > MAX_SUPPORTED_VERSION.value()) {
-        pythonVersion.addVersion(MAX_SUPPORTED_VERSION);
+        pythonVersions.add(MAX_SUPPORTED_VERSION);
       } else {
         logErrorMessage(versionValue);
         return false;
@@ -131,13 +131,5 @@ public class PythonVersion {
   private static void logErrorMessage(String propertyValue) {
     String prefix = "Error while parsing value of parameter '%s' (%s). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")";
     LOG.warn(String.format(Locale.ROOT, prefix, PYTHON_VERSION_KEY, propertyValue));
-  }
-
-  private void addVersion(Version version) {
-    supportedVersions.add(version);
-  }
-
-  public List<Version> supportedVersions() {
-    return supportedVersions;
   }
 }

@@ -39,7 +39,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.PythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -110,7 +110,7 @@ public class TypeShed {
 
   public static Map<String, Symbol> builtinSymbols() {
     if ((TypeShed.builtins == null)) {
-      supportedPythonVersions = ProjectPythonVersion.currentVersion().supportedVersions().stream().map(PythonVersion.Version::serializedValue).collect(Collectors.toSet());
+      supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
       Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN);
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       TypeShed.builtins = Collections.unmodifiableMap(builtins);

@@ -44,7 +44,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.PythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -55,7 +55,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
-import static org.sonar.plugins.python.api.PythonVersion.PYTHON_VERSION_KEY;
+import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
 public final class PythonSensor implements Sensor {
 
@@ -122,7 +122,7 @@ public final class PythonSensor implements Sensor {
         analysisWarnings.addUnique(UNSET_VERSION_WARNING);
       }
     }
-    pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersion(PythonVersion.fromString(value)));
+    pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);
