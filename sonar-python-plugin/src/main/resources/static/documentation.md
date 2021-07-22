@@ -39,8 +39,8 @@ Here are the steps to follow:
   <requirePlugins>python:2.0-SNAPSHOT</requirePlugin>
   ```
 * implement the following extension points:
-  * [Plugin](http://javadocs.sonarsource.org/latest/apidocs/org/sonar/api/Plugin.html)
-  * [RulesDefinition](http://javadocs.sonarsource.org/latest/apidocs/org/sonar/api/server/rule/RulesDefinition.html) and [PythonCustomRuleRepository](https://github.com/SonarSource/sonar-python/blob/master/python-frontend/src/main/java/org/sonar/plugins/python/api/PythonCustomRuleRepository.java), which can be implemented by a single class, to declare your custom rules.
+  * [Plugin](https://javadocs.sonarsource.org/latest/org/sonar/api/Plugin.html)
+  * [RulesDefinition](https://javadocs.sonarsource.org/latest/org/sonar/api/server/rule/RulesDefinition.html) and [PythonCustomRuleRepository](https://github.com/SonarSource/sonar-python/blob/master/python-frontend/src/main/java/org/sonar/plugins/python/api/PythonCustomRuleRepository.java), which can be implemented by a single class, to declare your custom rules.
 * declare the RulesDefinition as an extension in the Plugin extension point.
 
 #### Implement a Rule
