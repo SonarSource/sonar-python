@@ -12,7 +12,6 @@ def test_module_symbol(typeshed_stdlib):
     assert len(module_symbol.functions) == 4
 
     pb_module = module_symbol.to_proto()
-    assert pb_module.name == "abc"
     assert pb_module.fully_qualified_name == "abc"
     assert len(pb_module.classes) == 3
     assert len(pb_module.functions) == 4
@@ -25,7 +24,6 @@ def test_class_symbol(typeshed_stdlib):
     assert cmd_class_symbol.fullname == "cmd.Cmd"
     assert cmd_class_symbol.name == "Cmd"
     assert cmd_class_symbol.super_classes == ["builtins.object"]
-    assert len(cmd_class_symbol.mro) == 0
 
     pb_class_symbol = cmd_class_symbol.to_proto()
     assert pb_class_symbol.name == "Cmd"

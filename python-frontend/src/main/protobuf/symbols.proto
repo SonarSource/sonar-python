@@ -72,22 +72,20 @@ message ClassSymbol {
   string name = 1;
   string fully_qualified_name = 2;
   repeated string super_classes = 4;
-  repeated string mro = 5;
-  repeated FunctionSymbol methods = 6;
-  repeated OverloadedFunctionSymbol overloaded_methods = 7;
-  bool has_decorators = 8;
-  bool has_metaclass = 9;
-  bool is_enum = 10;
-  bool is_generic = 11;
-  bool is_protocol = 12;
-  optional string metaclass_name = 13;
-  repeated string valid_for = 14;
+  repeated FunctionSymbol methods = 5;
+  repeated OverloadedFunctionSymbol overloaded_methods = 6;
+  bool has_decorators = 7;
+  bool has_metaclass = 8;
+  bool is_enum = 9;
+  bool is_generic = 10;
+  bool is_protocol = 11;
+  optional string metaclass_name = 12;
+  repeated string valid_for = 13;
 }
 
 message ModuleSymbol {
-  string name = 1;
-  string fully_qualified_name = 2;
-  repeated ClassSymbol classes = 3;
-  repeated FunctionSymbol functions = 4;
-  repeated OverloadedFunctionSymbol overloaded_functions = 5;
+  string fully_qualified_name = 1;
+  repeated ClassSymbol classes = 2;
+  repeated FunctionSymbol functions = 3;
+  repeated OverloadedFunctionSymbol overloaded_functions = 4;
 }

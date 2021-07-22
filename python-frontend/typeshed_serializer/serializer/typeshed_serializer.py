@@ -94,5 +94,6 @@ def save_merged_symbols(is_debug=False):
 def main():
     ...
 
+
 if __name__ == '__main__':
     main()

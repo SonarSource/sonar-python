@@ -298,7 +298,6 @@ public class TypeShedTest {
   @Test
   public void class_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-      "name: \"mod\"\n" +
       "fully_qualified_name: \"mod\"\n" +
       "classes {\n" +
       "  name: \"Base\"\n" +
@@ -329,7 +328,6 @@ public class TypeShedTest {
   @Test
   public void function_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-      "name: \"mod\"\n" +
       "fully_qualified_name: \"mod\"\n" +
       "functions {\n" +
       "  name: \"foo\"\n" +
