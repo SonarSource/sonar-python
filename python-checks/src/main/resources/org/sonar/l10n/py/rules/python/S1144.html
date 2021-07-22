@@ -9,8 +9,8 @@ introduced.</p>
   be done with caution. </li>
   <li> "class-private" methods have a name which starts with at least two underscores and ends with at most one underscore. These methods' names will
   be automatically mangled to avoid collision with subclasses' methods. For example <code>__mymethod</code> will be renamed as
-  <code>_classname__mymethod</code>, where <code>classname</code> is the method's class name without its leading underscore(s). These methods
-  shouldn't be used outside of their enclosing class. </li>
+  <code>_classname__mymethod</code>, where <code>classname</code> is the method’s class name without its leading underscore(s). These methods
+  shouldn’t be used outside of their enclosing class. </li>
 </ul>
 <p>This rule raises an issue when a class-private method (two leading underscores, max one underscore at the end) is never called inside the class.
 Class methods, static methods and instance methods will all raise an issue.</p>

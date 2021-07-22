@@ -8,7 +8,7 @@ href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy">PEP-352</a>
 without preventing the software from stopping.</p>
 <p>The <code>GeneratorExit</code> class also derives from <code>BaseException</code> as it is not really an error and is not supposed to be caught by
 user code.</p>
-<p>As said in <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Python's documentation</a>, user-defined exceptions are not
+<p>As said in <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Python’s documentation</a>, user-defined exceptions are not
 supposed to inherit directly from <code>BaseException</code>. They should instead inherit from <code>Exception</code> or one of its subclasses.</p>
 <p>This rule raises an issue when a class derives from one of the following exception classes: <code>BaseException</code>,
 <code>KeyboardInterrupt</code>, <code>SystemExit</code> or <code>GeneratorExit</code>.</p>

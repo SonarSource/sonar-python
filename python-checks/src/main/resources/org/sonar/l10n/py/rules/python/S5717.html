@@ -10,7 +10,7 @@ modifying one objet will modify all of them.</p>
       <li> builtins: set, dict, list. </li>
       <li> <a href="https://docs.python.org/3/library/collections.html">collections</a> module: deque, UserList, ChainMap, Counter, OrderedDict,
       defaultdict, UserDict. </li>
-    </ul> </li>
+    </ul>  </li>
   <li> or when an attribute of a default value is assigned. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
@@ -69,10 +69,10 @@ print(a2.param)  # []
 </pre>
 <h2>Exceptions</h2>
 <p>In some very rare cases modifying a default value is ok. For example, default values can be used as a cache.</p>
-<p>No issue will be raised when the parameter's name contains "cache" or "memo" (as in memoization).</p>
+<p>No issue will be raised when the parameter’s name contains "cache" or "memo" (as in memoization).</p>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker's Guide to Python - Common Gotchas</a> </li>
+  <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker’s Guide to Python - Common Gotchas</a> </li>
   <li> <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Python documentation - Function definitions</a> </li>
 </ul>
 

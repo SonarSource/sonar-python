@@ -8,7 +8,7 @@ exception, including <code>SystemExit</code>. It is recommended to catch instead
 raised again.</p>
 <p>Note that it is also a good idea to reraise the <a
 href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> exception.</p>
-<p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> don't reraise
+<p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> don’t reraise
 the exception caught.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>

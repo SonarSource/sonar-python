@@ -1,6 +1,6 @@
 <p>The special method <a
 href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
-exception when it fails. It should never raise the provided exception, it is the caller's responsibility.</p>
+exception when it fails. It should never raise the provided exception, it is the caller’s responsibility.</p>
 <p>Raising this exception will make the stack trace difficult to understand.</p>
 <p>The <code>__exit__</code> method can filter passed-in exceptions by simply returning True or False.</p>
 <p>This rule raises an issue when:</p>

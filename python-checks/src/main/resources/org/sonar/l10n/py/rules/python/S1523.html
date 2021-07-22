@@ -6,12 +6,12 @@
 <p>Some APIs enable the execution of dynamic code by providing it as strings at runtime. These APIs might be useful in some very specific
 meta-programming use-cases. However most of the time their use is frowned upon because they also increase the risk of maliciously <a
 href="https://www.owasp.org/index.php/Code_Injection">Injected Code</a>. Such attacks can either run on the server or in the client (example: XSS
-attack) and have a huge impact on an application's security.</p>
+attack) and have a huge impact on an application’s security.</p>
 <p>This rule marks for review each occurrence of such dynamic code execution. This rule does not detect code injections. It only highlights the use of
 APIs which should be used sparingly and very carefully.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the executed code may come from an untrusted source and hasn't been sanitized. </li>
+  <li> the executed code may come from an untrusted source and hasn’t been sanitized. </li>
   <li> you really need to run code dynamically. </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
@@ -53,3 +53,4 @@ exec(command)  # Sensitive.
 <!-- This rule is deprecated only for Python language, that's why we can't deprecate in a standard way (through Jira RSPEC) -->
 <h2>Deprecated</h2>
 <p>This rule is deprecated, and will eventually be removed.</p>
+
