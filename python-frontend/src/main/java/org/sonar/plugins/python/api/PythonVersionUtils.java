@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.python.api;
 
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -90,7 +89,7 @@ public class PythonVersionUtils {
     if (versions.length == 0) {
       return allVersions();
     }
-    Set<Version> pythonVersions = new HashSet<>();
+    Set<Version> pythonVersions = EnumSet.noneOf(Version.class);
     for (String versionValue : versions) {
       versionValue = versionValue.trim();
       Version version = STRING_VERSION_MAP.get(versionValue);
@@ -107,7 +106,7 @@ public class PythonVersionUtils {
   }
 
   public static Set<Version> allVersions() {
-    return new HashSet<>(Arrays.asList(V_27, V_35, V_36, V_37, V_38, V_39));
+    return EnumSet.allOf(Version.class);
   }
 
   private static boolean guessPythonVersion(Set<Version> pythonVersions, String versionValue) {
