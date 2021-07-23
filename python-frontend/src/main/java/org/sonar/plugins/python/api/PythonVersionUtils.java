@@ -58,7 +58,7 @@ public class PythonVersionUtils {
 
   /**
    * Note that versions between 3 and 3.5 are currently mapped to 3.5 because
-   * during we don't take into account those version during typeshed symbols serialization
+   * we don't take into account those version during typeshed symbols serialization
    */
   private static final Map<String, Version> STRING_VERSION_MAP = new HashMap<>();
   static {
