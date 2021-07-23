@@ -42,7 +42,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   private final Map<String, InputFile> indexedFiles = new HashMap<>();
   private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
-  private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 150_000;
+  private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 200_000;
   private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.maxlines";
 
   public SonarLintPythonIndexer(ModuleFileSystem moduleFileSystem) {
