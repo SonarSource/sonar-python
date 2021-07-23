@@ -188,4 +188,17 @@ public class AmbiguousSymbolTest {
     FileInput fileInput = parse(new SymbolTableBuilder("", PythonTestUtils.pythonFile("foo")), code);
     return fileInput.globalVariables().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
   }
+
+  @Test
+  public void nested_ambiguous_symbols_should_be_flattened() {
+    SymbolImpl foo1 = new SymbolImpl("foo", "mod.foo");
+    ClassSymbolImpl classSymbol1 = new ClassSymbolImpl("foo", "mod.foo");
+    AmbiguousSymbol ambiguousSymbol1 = AmbiguousSymbolImpl.create(foo1, classSymbol1);
+    SymbolImpl foo2 = new SymbolImpl("foo", "mod.foo");
+    ClassSymbolImpl classSymbol2 = new ClassSymbolImpl("foo", "mod.foo");
+    AmbiguousSymbol ambiguousSymbol2 = AmbiguousSymbolImpl.create(foo2, classSymbol2);
+    AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(ambiguousSymbol1, ambiguousSymbol2);
+    assertThat(ambiguousSymbol.alternatives()).noneMatch(s -> s.is(Symbol.Kind.AMBIGUOUS));
+    assertThat(ambiguousSymbol.alternatives()).containsExactlyInAnyOrder(foo1, foo2, classSymbol1, classSymbol2);
+  }
 }
