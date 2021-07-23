@@ -6,7 +6,7 @@ is raised instead.</p>
 exception will be reraised, and nothing prevents a developer from calling the function in another context.</p>
 <p>Note also that using a bare <code>raise</code> in a <code>finally</code> block only works when an exception is active, i.e. when an exception from
 the <code>try</code> block is not caught or when an exception is raised by an <code>except</code> block. It will fail in any other case and should not
-be relied upon. This code smell is handled by rule S5704.</p>
+be relied upon. This code smell is handled by rule {rule:python:S5704}.</p>
 <p>This rule raises an exception when a bare <code>raise</code> statement is not in an <code>except</code> or <code>finally</code> block.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>

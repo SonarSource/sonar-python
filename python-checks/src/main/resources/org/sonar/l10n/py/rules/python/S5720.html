@@ -30,10 +30,10 @@ class ClassWithStaticMethod:
 ClassWithStaticMethod().static_method(42)
 </pre>
 <h2>Exceptions</h2>
-<p>This rule will also accept "cls" or "mcs" as first parameter's name for metaclasses' methods.</p>
+<p>This rule will also accept "cls" or "mcs" as first parameter’s name for metaclasses' methods.</p>
 <p>No issue will be raised for methods called <code>__init_subclass__</code>, <code>__class_getitem__</code> or <code>__new__</code> as these methods'
 first parameter is a class.</p>
-<p>You can also disable issues on methods decorated with a specific decorator. Add these decorators to this rule's "ignoreDecorators" parameter.</p>
+<p>You can also disable issues on methods decorated with a specific decorator. Add these decorators to this rule’s "ignoreDecorators" parameter.</p>
 <p>With "ignoredDecorators" set to "abstractmethod"</p>
 <pre>
 from abc import abstractmethod, ABC

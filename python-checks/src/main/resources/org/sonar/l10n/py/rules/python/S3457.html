@@ -1,14 +1,14 @@
 <p>Formatting strings, either with the <code>%</code> operator or <code>str.format</code> method, requires a valid string and arguments matching this
-string's replacement fields.</p>
+string’s replacement fields.</p>
 <p>This also applies to loggers from the <code>logging</code> module. Internally they use <code>%-formatting</code>. The only difference is that they
 will log an error instead of raising an exception when provided arguments are invalid.</p>
 <p>Formatted string literals, also called "f-strings", are generally simpler to use, and any syntax mistake will fail at compile time. However it is
-easy to forget curly braces and it won't raise any error.</p>
+easy to forget curly braces and it won’t raise any error.</p>
 <p>This rule raises an issue when:</p>
 <ul>
   <li> A string formatted with <code>%</code> will not return the expected string because some arguments are not used. </li>
   <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are not used. </li>
-  <li> An "f-string" doesn't contain any replacement field, which probably means that some curly braces are missing. </li>
+  <li> An "f-string" doesn’t contain any replacement field, which probably means that some curly braces are missing. </li>
   <li> Loggers will log an error because their message is not formatted properly. </li>
 </ul>
 <p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>

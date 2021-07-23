@@ -7,7 +7,7 @@ If you need to compare these types you should use instead equality operators <co
 chance as other integer values are not cached, for example <code>int("1000") is 1000</code> will always be <code>False</code>. This behavior is not
 part of Python language specification and could vary between interpreters. CPython 3.8 even <a
 href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">warns about comparing literals using identity operators</a>.</p>
-<p>The only case where using the "is" operator with a cached type is ok is with "interned" strings. Note however that interned strings don't
+<p>The only case where using the "is" operator with a cached type is ok is with "interned" strings. Note however that interned strings don’t
 necessarily have the same identity as string literals.</p>
 <p>This rule raises an issue when at least one operand of an identity operator:</p>
 <ul>

@@ -4,8 +4,8 @@
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5306">CVE-2015-5306</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2006">CVE-2013-2006</a> </li>
 </ul>
-<p>An application's debug features enable developers to find bugs more easily and thus facilitate also the work of attackers. It often gives access to
-detailed information on both the system running the application and users. </p>
+<p>An application’s debug features enable developers to find bugs more easily and thus facilitate also the work of attackers. It often gives access to
+detailed information on both the system running the application and users.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> the code or configuration enabling the application debug features is deployed on production servers. </li>
@@ -25,7 +25,7 @@ settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Sensitive when set to Tru
 def custom_config(config):
     settings.configure(default_settings=config, DEBUG=True)  # Sensitive
 </pre>
-<p>Django's "settings.py" or "global_settings.py" configuration file</p>
+<p>Django’s "settings.py" or "global_settings.py" configuration file</p>
 <pre>
 # NOTE: The following code raises issues only if the file is named "settings.py" or "global_settings.py". This is the default
 # name of Django configuration file

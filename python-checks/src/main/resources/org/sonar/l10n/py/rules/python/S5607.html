@@ -6,7 +6,7 @@ a complete list of operators and their methods: <a
 href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special%20methods#emulating-numeric-types">arithmetic and bitwise
 operators</a>, <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special%20methods#object.__lt__">comparison
 operators</a>.</p>
-<p>For symmetrical binary operators you need to define two methods so that the order of operands doesn't matter, ex: <code>__add__</code> and
+<p>For symmetrical binary operators you need to define two methods so that the order of operands doesn’t matter, ex: <code>__add__</code> and
 <code>__radd__</code>.</p>
 <p>This rule raises an issue when an operator is used on incompatible types. Types are considered incompatible if no built-in operations between those
 types exist and none of the operands has implemented the corresponding special methods.</p>

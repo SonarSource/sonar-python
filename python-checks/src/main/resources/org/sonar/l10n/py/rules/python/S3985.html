@@ -9,8 +9,8 @@ being introduced.</p>
   be done with caution. </li>
   <li> "class-private" classes are defined inside another class, and have a name starting with at least two underscores and ending with at most one
   underscore. These classes' names will be automatically mangled to avoid collision with subclasses' nested classes. For example
-  <code>__MyClass</code> will be renamed as <code>_classname__MyClass</code>, where <code>classname</code> is the enclosing class's name without its
-  leading underscore(s). Class-Private classes shouldn't be used outside of their enclosing class. </li>
+  <code>__MyClass</code> will be renamed as <code>_classname__MyClass</code>, where <code>classname</code> is the enclosing class’s name without its
+  leading underscore(s). Class-Private classes shouldn’t be used outside of their enclosing class. </li>
 </ul>
 <p>This rule raises an issue when a private nested class (either with one or two leading underscores) is never used inside its parent class.</p>
 <h2>Noncompliant Code Example</h2>

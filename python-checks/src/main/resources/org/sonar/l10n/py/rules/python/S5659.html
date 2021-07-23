@@ -1,10 +1,10 @@
 <p>If a JSON Web Token (JWT) is not signed with a strong cipher algorithm (or not signed at all) an attacker can forge it and impersonate user
 identities.</p>
 <ul>
-  <li> Don't use <code>none</code> algorithm to sign or verify the validity of a token. </li>
-  <li> Don't use a token without verifying its signature before. </li>
+  <li> Don’t use <code>none</code> algorithm to sign or verify the validity of a token. </li>
+  <li> Don’t use a token without verifying its signature before. </li>
 </ul>
-<h2>Noncompliant Code Examples</h2>
+<h2>Noncompliant Code Example</h2>
 <p>For <a href="https://github.com/jpadilla/pyjwt">pyjwt</a> module:</p>
 <pre>
 jwt.decode(token, verify = False)  # Noncompliant

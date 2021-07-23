@@ -1,6 +1,6 @@
 <p>In Python, special methods corresponding to numeric operators, rich comparison operators and the <code>__length_hint__</code> method should return
-<code>NotImplemented</code> when the operation is not supported. These methods should not raise <code>NotImplementedError</code> as callers don't
-expect it and won't catch this exception.</p>
+<code>NotImplemented</code> when the operation is not supported. These methods should not raise <code>NotImplementedError</code> as callers don’t
+expect it and won’t catch this exception.</p>
 <p>For example <code>A + B</code> is equivalent to calling <code>A.__add__(B)</code>. If this binary operation is not supported by class A,
 <code>A.__add__(B)</code> should return <code>NotImplemented</code>. The interpreter will then try the reverse operation, i.e.
 <code>B.__radd__(A)</code>. This enables adding new operations by changing only one class instead of two.</p>

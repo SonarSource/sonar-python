@@ -6,7 +6,7 @@ characters will at best make <code>open</code> fail, or worse, it will have an u
   <li> should contain zero or one of the following characters: "t" (text), "b" (binary). </li>
   <li> should contain zero or one "+" character (open for updating) </li>
   <li> cannot contain "a", "w", "+", or "x" if "U" (universal newlines) is used. Note that "U" has no effect in python 3, it is deprecated and
-  shouldn't be used anymore. </li>
+  shouldn’t be used anymore. </li>
 </ul>
 <p>This rule raises an issue when an invalid "mode" is provided to the <code>open</code> builtin.</p>
 <h2>Noncompliant Code Example</h2>

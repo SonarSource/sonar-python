@@ -3,7 +3,7 @@ the comparison and all its dependent code can simply be removed. This includes:<
 <ul>
   <li> comparing unrelated builtin types such as string and integer. </li>
   <li> comparing class instances which do not implement <code>__eq__</code> or <code>__ne__</code> to an object of a different type (builtin or from
-  an unrelated class which also doesn't implement <code>__eq__</code> or <code>__ne__</code>). </li>
+  an unrelated class which also doesn’t implement <code>__eq__</code> or <code>__ne__</code>). </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>

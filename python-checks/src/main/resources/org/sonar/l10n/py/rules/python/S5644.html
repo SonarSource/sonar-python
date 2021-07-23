@@ -9,7 +9,7 @@
   <li> Deleting items such as <code>del my_variable[key]</code> requires <code>my_variable</code> to have the <a
   href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__"><code>__delitem__</code></a> method. </li>
 </ul>
-<p>This rule raises an issue when an item operation is performed on an object which doesn't have the corresponding method.</p>
+<p>This rule raises an issue when an item operation is performed on an object which doesn’t have the corresponding method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 del (1, 2)[0]  # Noncompliant, tuples are immutable

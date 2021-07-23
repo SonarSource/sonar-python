@@ -2,7 +2,7 @@
 href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>BaseException</code></a> will have a negative impact on any code trying
 to catch these exceptions.</p>
 <p>First, the only way to handle differently multiple Exceptions is to check their message, which is error-prone and difficult to maintain.</p>
-<p>What's more, it becomes difficult to catch only your exception. The best practice is to catch only exceptions which require a specific handling.
+<p>What’s more, it becomes difficult to catch only your exception. The best practice is to catch only exceptions which require a specific handling.
 When you raise <code>Exception</code> or <code>BaseException</code> in a function the caller will have to add an <code>except Exception</code> or
 <code>except BaseException</code> and re-raise all exceptions which were unintentionally caught. This can create tricky bugs when the caller forgets
 to re-raise exceptions such as <code>SystemExit</code> and the software cannot be stopped.</p>
@@ -86,11 +86,6 @@ def caller():
 <ul>
   <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Built-in exceptions</a> </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/397.html">MITRE, CWE-397</a> - Declaration of Throws for Generic Exception </li>
-  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/_DdGBQ">CERT, ERR07-J.</a> - Do not throw RuntimeException, Exception, or Throwable </li>
-</ul>
-<h2>See</h2>
-<ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/397.html">MITRE, CWE-397</a> - Declaration of Throws for Generic Exception </li>
   <li> <a href="https://wiki.sei.cmu.edu/confluence/x/_DdGBQ">CERT, ERR07-J.</a> - Do not throw RuntimeException, Exception, or Throwable </li>
 </ul>
