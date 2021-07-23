@@ -404,10 +404,9 @@ public class TypeShedTest {
     assertThat(map.is(Kind.AMBIGUOUS)).isTrue();
     assertThat(((SymbolImpl) map).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
     ClassSymbol python3Symbol = (ClassSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.CLASS)).findFirst().get();
-    AmbiguousSymbol python2Symbol = (AmbiguousSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.AMBIGUOUS)).findFirst().get();
     assertThat(((ClassSymbolImpl) python3Symbol).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
-    assertThat(((AmbiguousSymbolImpl) python2Symbol).validForPythonVersions()).containsExactly("27");
-    for (Symbol alternative : python2Symbol.alternatives()) {
+    Set<Symbol> python2Symbols = ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.FUNCTION)).collect(Collectors.toSet());
+    for (Symbol alternative : python2Symbols) {
       assertThat(alternative.is(Kind.FUNCTION)).isTrue();
       assertThat(((FunctionSymbolImpl) alternative).validForPythonVersions()).containsExactly("27");
     }
