@@ -28,6 +28,7 @@ Examples:
   * `sonar.python.version=3.8` 
   * `sonar.python.version=2.7, 3.7, 3.8, 3.9`
 
+<!-- sonarqube -->
 ## Custom Rules
 
 ### Overview
