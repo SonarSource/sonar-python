@@ -26,10 +26,10 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.WildcardPattern;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonarsource.analyzer.commons.FileProvider;
 
 public abstract class PythonReportSensor implements Sensor {
 
@@ -69,23 +69,23 @@ public abstract class PythonReportSensor implements Sensor {
   public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String reportPath) {
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 
-    DirectoryScanner scanner = new DirectoryScanner(new File(baseDirPath), WildcardPattern.create(reportPath));
-    List<File> includedFiles = scanner.getIncludedFiles();
+    FileProvider provider = new FileProvider(new File(baseDirPath), reportPath);
+    List<File> matchingFiles = provider.getMatchingFiles();
 
-    if (includedFiles.isEmpty()) {
+    if (matchingFiles.isEmpty()) {
       if (conf.hasKey(reportPathPropertyKey)) {
         // try absolute path
         File file = new File(reportPath);
         if (!file.exists()) {
           LOG.warn("No report was found for {} using pattern {}", reportPathPropertyKey, reportPath);
         } else {
-          includedFiles.add(file);
+          matchingFiles.add(file);
         }
       } else {
         LOG.debug("No report was found for {} using default pattern {}", reportPathPropertyKey, reportPath);
       }
     }
-    return includedFiles;
+    return matchingFiles;
   }
 
   protected void processReports(SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
