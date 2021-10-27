@@ -46,11 +46,14 @@ public class AbstractRegexCheckTest {
 
   @Test
   public void test_regex_parse_result_is_retrieved_from_cache_in_context() {
-    PythonVisitorContext fileContext = fileContext();
+    PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(FILE);
     Check checkOne = new Check();
     Check checkTwo = new Check();
     SubscriptionVisitor.analyze(Arrays.asList(checkOne, checkTwo), fileContext);
-    assertThat(checkOne.receivedRegexParseResults.get(0)).isSameAs(checkTwo.receivedRegexParseResults.get(0));
+    assertThat(checkOne.receivedRegexParseResults).hasSameSizeAs(checkTwo.receivedRegexParseResults);
+    for (int i = 0; i < checkOne.receivedRegexParseResults.size(); i++) {
+      assertThat(checkOne.receivedRegexParseResults.get(i)).isSameAs(checkTwo.receivedRegexParseResults.get(i));
+    }
   }
 
   private static class Check extends AbstractRegexCheck {
@@ -62,7 +65,4 @@ public class AbstractRegexCheckTest {
     }
   }
 
-  private static PythonVisitorContext fileContext() {
-    return TestPythonVisitorRunner.createContext(FILE);
-  }
 }
