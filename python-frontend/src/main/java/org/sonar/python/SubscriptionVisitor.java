@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
@@ -39,16 +40,23 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.regex.PythonAnalyzerRegexSource;
+import org.sonar.python.regex.RegexContext;
 import org.sonar.python.types.TypeShed;
+import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.RegexParser;
+import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 public class SubscriptionVisitor {
 
   private final EnumMap<Kind, List<SubscriptionContextImpl>> consumers = new EnumMap<>(Kind.class);
   private final PythonVisitorContext pythonVisitorContext;
   private Tree currentElement;
+  private final HashMap<StringElement, RegexParseResult> regexCache = new HashMap<>();
 
   public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
     SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
@@ -83,7 +91,7 @@ public class SubscriptionVisitor {
     }
   }
 
-  private class SubscriptionContextImpl implements SubscriptionContext {
+  private class SubscriptionContextImpl implements SubscriptionContext, RegexContext {
     private final PythonCheck check;
     private final Consumer<SubscriptionContext> consumer;
 
@@ -151,6 +159,12 @@ public class SubscriptionVisitor {
     @CheckForNull
     public File workingDirectory() {
       return pythonVisitorContext.workingDirectory();
+    }
+
+    public RegexParseResult regexForStringElement(StringElement stringElement) {
+      // TODO: Real flags have to be provided
+      return regexCache.computeIfAbsent(stringElement,
+        s -> new RegexParser(new PythonAnalyzerRegexSource(s), new FlagSet()).parse());
     }
   }
 }
