@@ -49,6 +49,7 @@ import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
+import org.sonar.python.checks.regex.StringReplaceCheck;
 
 public final class CheckList {
 
@@ -199,6 +200,7 @@ public final class CheckList {
       StringFormatCorrectnessCheck.class,
       StringFormatMisuseCheck.class,
       StringLiteralDuplicationCheck.class,
+      StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
       TempFileCreationCheck.class,
       TooManyLinesInFileCheck.class,
