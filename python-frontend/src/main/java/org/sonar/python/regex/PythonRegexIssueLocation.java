@@ -19,18 +19,18 @@
  */
 package org.sonar.python.regex;
 
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.tree.StringElement;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
-public interface RegexContext {
+public class PythonRegexIssueLocation {
 
-  RegexParseResult regexForStringElement(StringElement stringElement);
+  private PythonRegexIssueLocation() {
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  }
 
-  PythonCheck.PreciseIssue addIssue(RegexSyntaxElement element, @Nullable String message);
+  public static IssueLocation preciseLocation(RegexSyntaxElement syntaxElement, String message) {
+    LocationInFile locationInFile = ((PythonAnalyzerRegexSource) syntaxElement.getSource()).locationInFileFor(syntaxElement.getRange());
+    return IssueLocation.preciseLocation(locationInFile, message);
+  }
 }

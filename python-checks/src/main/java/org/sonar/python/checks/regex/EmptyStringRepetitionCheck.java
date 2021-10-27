@@ -17,20 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.regex;
+package org.sonar.python.checks.regex;
 
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.tree.StringElement;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
-import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
+import org.sonarsource.analyzer.commons.regex.finders.EmptyStringRepetitionFinder;
 
-public interface RegexContext {
+@Rule(key = "S5842")
+public class EmptyStringRepetitionCheck extends AbstractRegexCheck {
 
-  RegexParseResult regexForStringElement(StringElement stringElement);
-
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
-
-  PythonCheck.PreciseIssue addIssue(RegexSyntaxElement element, @Nullable String message);
+  @Override
+  public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
+    new EmptyStringRepetitionFinder(this::addIssue).visit(regexParseResult);
+  }
 }

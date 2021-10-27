@@ -19,19 +19,76 @@
  */
 package org.sonar.python.regex;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonarsource.analyzer.commons.regex.CharacterParser;
+import org.sonarsource.analyzer.commons.regex.ast.IndexRange;
 import org.sonarsource.analyzer.commons.regex.python.PythonRegexSource;
 
 public class PythonAnalyzerRegexSource extends PythonRegexSource {
 
+  private final int sourceLine;
+  private final int sourceStartOffset;
+  private final int[] lineStartOffsets;
+
   public PythonAnalyzerRegexSource(StringElement s) {
     // TODO: Do we need the quote? If yes, don't hardcode
     super(s.trimmedQuotesValue(), '"');
+    Token firstToken = s.firstToken();
+    sourceLine = firstToken.line();
+    // TODO: The +1 represents the prefix size. Right now we only scan patterns with the raw prefix.
+    sourceStartOffset = firstToken.column() + (s.isTripleQuoted() ? 3 : 1) + 1;
+    lineStartOffsets = lineStartOffsets(getSourceText());
   }
 
   @Override
   public CharacterParser createCharacterParser() {
     return new PythonStringCharacterParser(this);
+  }
+
+  public LocationInFile locationInFileFor(IndexRange range) {
+    int[] startLineAndOffset = lineAndOffset(range.getBeginningOffset());
+    int[] endLineAndOffset = lineAndOffset(range.getEndingOffset());
+    return new LocationInFile(null, startLineAndOffset[0], startLineAndOffset[1], endLineAndOffset[0], endLineAndOffset[1]);
+  }
+
+  private int[] lineAndOffset(int index) {
+    int line;
+    int offset;
+    int searchResult = Arrays.binarySearch(lineStartOffsets, index);
+    if (searchResult >= 0) {
+      line = sourceLine + searchResult;
+      offset = 0;
+    } else {
+      line = sourceLine - searchResult - 2;
+      offset = index - lineStartOffsets[- searchResult - 2];
+    }
+    if (line == sourceLine) {
+      offset += sourceStartOffset;
+    }
+    return new int[] { line, offset };
+  }
+
+  private static int[] lineStartOffsets(String text) {
+    List<Integer> lineStartOffsets = new ArrayList<>();
+    lineStartOffsets.add(0);
+    int length = text.length();
+    int i = 0;
+    while (i < length) {
+      if (text.charAt(i) == '\n' || text.charAt(i) == '\r') {
+        int nextLineStartOffset = i + 1;
+        if (i < (length - 1) && text.charAt(i) == '\r' && text.charAt(i + 1) == '\n') {
+          nextLineStartOffset = i + 2;
+          i++;
+        }
+        lineStartOffsets.add(nextLineStartOffset);
+      }
+      i++;
+    }
+    return lineStartOffsets.stream().mapToInt(x -> x).toArray();
   }
 }

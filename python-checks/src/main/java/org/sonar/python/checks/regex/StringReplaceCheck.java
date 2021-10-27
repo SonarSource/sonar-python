@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
 import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
@@ -32,6 +33,7 @@ import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
 public class StringReplaceCheck extends AbstractRegexCheck {
 
   private static final String MESSAGE = "Replace this \"re.sub()\" call by a \"str.replace()\" function call.";
+  private static final String SECONDARY_MESSAGE = "Expression without regular expression features.";
 
   @Override
   protected Set<String> lookedUpFunctionNames() {
@@ -42,7 +44,8 @@ public class StringReplaceCheck extends AbstractRegexCheck {
   public void checkRegex(RegexParseResult regexParseResult, CallExpression callExpression) {
     RegexTree regex = regexParseResult.getResult();
     if (!regexParseResult.hasSyntaxErrors() && isPlainString(regex)) {
-      regexContext.addIssue(callExpression.callee(), MESSAGE);
+      regexContext.addIssue(callExpression.callee(), MESSAGE)
+        .secondary(PythonRegexIssueLocation.preciseLocation(regex, SECONDARY_MESSAGE));
     }
   }
 

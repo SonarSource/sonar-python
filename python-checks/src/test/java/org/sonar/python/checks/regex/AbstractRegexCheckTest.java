@@ -22,8 +22,10 @@ package org.sonar.python.checks.regex;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.SubscriptionVisitor;
@@ -45,6 +47,22 @@ public class AbstractRegexCheckTest {
   }
 
   @Test
+  public void test_regex_element_is_only_reported_once() {
+    Check check = new Check() {
+      @Override
+      public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
+        super.checkRegex(regexParseResult, regexFunctionCall);
+        addIssue(regexParseResult.getResult(), "MESSAGE", null, Collections.emptyList());
+      }
+    };
+
+    PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(FILE);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), fileContext);
+    assertThat(check.reportedRegexTrees).hasSize(1);
+    assertThat(fileContext.getIssues()).hasSize(1);
+  }
+
+  @Test
   public void test_regex_parse_result_is_retrieved_from_cache_in_context() {
     PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(FILE);
     Check checkOne = new Check();
@@ -59,9 +77,10 @@ public class AbstractRegexCheckTest {
   private static class Check extends AbstractRegexCheck {
     private final List<RegexParseResult> receivedRegexParseResults = new ArrayList<>();
 
+    @Override
     public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
       receivedRegexParseResults.add(regexParseResult);
-      regexContext.addIssue(regexFunctionCall, "MESSAGE");
+      addIssue(regexParseResult.getResult(), "MESSAGE", null, Collections.emptyList());
     }
   }
 

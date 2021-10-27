@@ -45,11 +45,13 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.regex.PythonAnalyzerRegexSource;
+import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.RegexParser;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
 public class SubscriptionVisitor {
 
@@ -127,6 +129,11 @@ public class SubscriptionVisitor {
     @Override
     public PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message) {
       return addIssue(IssueLocation.preciseLocation(from, to, message));
+    }
+
+    @Override
+    public PythonCheck.PreciseIssue addIssue(RegexSyntaxElement element, @Nullable String message) {
+      return addIssue(PythonRegexIssueLocation.preciseLocation(element, message));
     }
 
     @Override
