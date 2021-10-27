@@ -22,15 +22,13 @@ package org.sonar.python.checks.regex;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,32 +37,19 @@ public class AbstractRegexCheckTest {
 
   private static final File FILE = new File("src/test/resources/checks/regex/abstractRegexCheck.py");
 
-  private static PythonVisitorContext fileContext(File file) {
-    return TestPythonVisitorRunner.createContext(file);
-  }
-  
-  private static List<PythonCheck.PreciseIssue> scanFileForIssues(PythonVisitorContext fileContext, List<PythonSubscriptionCheck> checks) {
-    checks.forEach(c -> c.scanFile(fileContext));
-    SubscriptionVisitor.analyze(checks, fileContext);
-    return fileContext.getIssues();
-  }
-
   @Test
   public void test_regex_is_visited() {
     Check check = new Check();
-    List<PythonCheck.PreciseIssue> issues = scanFileForIssues(fileContext(FILE), Collections.singletonList(check));
-    assertThat(check.receivedRegexParseResults).hasSize(1);
-    assertThat(issues).hasSize(1);
+    PythonCheckVerifier.verify(FILE.getAbsolutePath(), check);
+    assertThat(check.receivedRegexParseResults).hasSize(10);
   }
 
   @Test
   public void test_regex_parse_result_is_retrieved_from_cache_in_context() {
-    PythonVisitorContext fileContext = fileContext(FILE);
-
+    PythonVisitorContext fileContext = fileContext();
     Check checkOne = new Check();
     Check checkTwo = new Check();
-    scanFileForIssues(fileContext, Arrays.asList(checkOne, checkTwo));
-
+    SubscriptionVisitor.analyze(Arrays.asList(checkOne, checkTwo), fileContext);
     assertThat(checkOne.receivedRegexParseResults.get(0)).isSameAs(checkTwo.receivedRegexParseResults.get(0));
   }
 
@@ -77,4 +62,7 @@ public class AbstractRegexCheckTest {
     }
   }
 
+  private static PythonVisitorContext fileContext() {
+    return TestPythonVisitorRunner.createContext(FILE);
+  }
 }

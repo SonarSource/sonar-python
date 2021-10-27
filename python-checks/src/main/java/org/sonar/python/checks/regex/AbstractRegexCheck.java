@@ -19,7 +19,7 @@
  */
 package org.sonar.python.checks.regex;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -37,7 +37,8 @@ import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 
 public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> REGEX_FUNCTIONS = new HashSet<>(Collections.singletonList("re.sub"));
+  private static final Set<String> REGEX_FUNCTIONS = new HashSet<>(Arrays.asList("re.sub", "re.subn", "re.compile", "re.search", "re.match",
+    "re.fullmatch", "re.split", "re.findall", "re.finditer"));
   protected RegexContext regexContext;
 
   protected Set<String> lookedUpFunctionNames() {
