@@ -35,7 +35,7 @@ import org.sonar.python.regex.RegexContext;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 
-abstract public class AbstractRegexCheck extends PythonSubscriptionCheck {
+public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> REGEX_FUNCTIONS = new HashSet<>(Collections.singletonList("re.sub"));
   protected RegexContext regexContext;
@@ -73,7 +73,7 @@ abstract public class AbstractRegexCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  private Optional<StringLiteral> patternArgStringLiteral(CallExpression regexFunctionCall) {
+  private static Optional<StringLiteral> patternArgStringLiteral(CallExpression regexFunctionCall) {
     RegularArgument patternArgument = TreeUtils.nthArgumentOrKeyword(0, "pattern", regexFunctionCall.arguments());
     if (patternArgument == null) {
       return Optional.empty();
