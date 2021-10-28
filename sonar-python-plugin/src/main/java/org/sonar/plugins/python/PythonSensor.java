@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import javax.servlet.http.HttpServletRequest;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -158,6 +159,12 @@ public final class PythonSensor implements Sensor {
       List<String> someList = Collections.emptyList();
       someList.add("hello");
     }
+  }
+
+  public void sonarsec1199(HttpServletRequest request) throws Exception {
+    String taintedString = request.getHeader("SomeHeader");
+    Runtime runtime = Runtime.getRuntime();
+    runtime.exec(taintedString);
   }
 
   private static class TestHighlightingScanner extends Scanner {
