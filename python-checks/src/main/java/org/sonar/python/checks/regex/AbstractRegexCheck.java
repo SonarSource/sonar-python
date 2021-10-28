@@ -21,8 +21,10 @@ package org.sonar.python.checks.regex;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -33,13 +35,18 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
 public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> REGEX_FUNCTIONS = new HashSet<>(Arrays.asList("re.sub", "re.subn", "re.compile", "re.search", "re.match",
     "re.fullmatch", "re.split", "re.findall", "re.finditer"));
   protected RegexContext regexContext;
+
+  // We want to report only one issue per element for one rule.
+  protected final Set<RegexSyntaxElement> reportedRegexTrees = new HashSet<>();
 
   protected Set<String> lookedUpFunctionNames() {
     return REGEX_FUNCTIONS;
@@ -86,4 +93,11 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
+  public void addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    if (reportedRegexTrees.add(regexTree)) {
+      regexContext.addIssue(regexTree, message);
+      // TODO: Add secondary location to the issue SONARPY-886
+      // TODO: Add cost to the issue SONARPY-893
+    }
+  }
 }
