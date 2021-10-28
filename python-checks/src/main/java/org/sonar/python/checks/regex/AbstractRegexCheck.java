@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
@@ -95,8 +96,8 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
   public void addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
     if (reportedRegexTrees.add(regexTree)) {
-      regexContext.addIssue(regexTree, message);
-      // TODO: Add secondary location to the issue SONARPY-886
+      PreciseIssue issue = regexContext.addIssue(regexTree, message);
+      secondaries.stream().map(PythonRegexIssueLocation::preciseLocation).forEach(issue::secondary);
       // TODO: Add cost to the issue SONARPY-893
     }
   }
