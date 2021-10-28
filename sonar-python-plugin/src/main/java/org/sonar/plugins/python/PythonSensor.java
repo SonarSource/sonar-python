@@ -153,6 +153,13 @@ public final class PythonSensor implements Sensor {
       .start("PythonSensor");
   }
 
+  private static void someBuggyMethod(String context) {
+    if (context.hashCode() == 42) {
+      List<String> someList = Collections.emptyList();
+      someList.add("hello");
+    }
+  }
+
   private static class TestHighlightingScanner extends Scanner {
 
     private static final Logger LOG = Loggers.get(TestHighlightingScanner.class);
