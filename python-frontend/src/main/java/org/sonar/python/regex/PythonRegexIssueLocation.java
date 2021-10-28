@@ -19,8 +19,11 @@
  */
 package org.sonar.python.regex;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.LocationInFile;
+import org.sonarsource.analyzer.commons.regex.ast.IndexRange;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
 public class PythonRegexIssueLocation {
@@ -30,7 +33,20 @@ public class PythonRegexIssueLocation {
   }
 
   public static IssueLocation preciseLocation(RegexSyntaxElement syntaxElement, String message) {
-    LocationInFile locationInFile = ((PythonAnalyzerRegexSource) syntaxElement.getSource()).locationInFileFor(syntaxElement.getRange());
-    return IssueLocation.preciseLocation(locationInFile, message);
+    return preciseLocation(Collections.singletonList(syntaxElement), message);
+  }
+
+  public static IssueLocation preciseLocation(List<RegexSyntaxElement> syntaxElements, String message) {
+    RegexSyntaxElement firstElement = syntaxElements.get(0);
+    PythonAnalyzerRegexSource source = (PythonAnalyzerRegexSource) firstElement.getSource();
+    IndexRange current = firstElement.getRange();
+
+    for (RegexSyntaxElement syntaxElement : syntaxElements.subList(1, syntaxElements.size())) {
+      if (syntaxElement.getRange().getBeginningOffset() == current.getEndingOffset()) {
+        current = new IndexRange(current.getBeginningOffset(), syntaxElement.getRange().getEndingOffset());
+      }
+      // We do not combine RegexSyntaxElement which are not located side by side
+    }
+    return IssueLocation.preciseLocation(source.locationInFileFor(Objects.requireNonNull(current)), message);
   }
 }
