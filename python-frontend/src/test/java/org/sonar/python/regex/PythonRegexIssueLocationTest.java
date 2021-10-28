@@ -20,7 +20,6 @@
 package org.sonar.python.regex;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -30,7 +29,6 @@ import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
 import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.sonar.python.regex.RegexParserTestUtils.assertKind;
 import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 
@@ -72,8 +70,8 @@ public class PythonRegexIssueLocationTest {
   }
 
   private void assertRange(int startLineOffset, int endLineOffset, IssueLocation location) {
-    assertEquals(String.format("Expected start character to be '%d' but got '%d'", startLineOffset, location.startLineOffset()), startLineOffset, location.startLineOffset());
-    assertEquals(String.format("Expected end character to be '%d' but got '%d'", endLineOffset, location.endLineOffset()), endLineOffset, location.endLineOffset());
+    assertThat(location.startLineOffset()).withFailMessage(String.format("Expected start character to be '%d' but got '%d'", startLineOffset, location.startLineOffset())).isEqualTo(startLineOffset);
+    assertThat(location.endLineOffset()).withFailMessage(String.format("Expected end character to be '%d' but got '%d'", endLineOffset, location.endLineOffset())).isEqualTo(endLineOffset);
   }
 
   private static IssueLocation correspondingTextSpans(RegexTree tree) {

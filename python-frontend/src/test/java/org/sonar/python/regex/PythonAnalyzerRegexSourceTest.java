@@ -21,12 +21,8 @@ package org.sonar.python.regex;
 
 
 import java.util.List;
-import junit.framework.AssertionFailedError;
 import org.junit.Test;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.StringElement;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.RegexParser;
 import org.sonarsource.analyzer.commons.regex.RegexSource;
@@ -36,7 +32,6 @@ import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
 import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.sonar.python.regex.RegexParserTestUtils.assertKind;
 import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 import static org.sonar.python.regex.RegexParserTestUtils.makeSource;
@@ -104,7 +99,7 @@ public class PythonAnalyzerRegexSourceTest {
 
   private static void assertCharacter(char expected, RegexTree tree) {
     assertKind(RegexTree.Kind.CHARACTER, tree);
-    assertEquals(expected, ((CharacterTree) tree).codePointOrUnit());
+    assertThat(((CharacterTree) tree).codePointOrUnit()).isEqualTo(expected);
   }
 
   private static void assertLocation(int line, int startLineOffset, int endLineOffset, RegexTree tree) {
@@ -113,10 +108,10 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   private static void assertLocation(int line, int startLineOffset, int endLineOffset, LocationInFile location) {
-    assertEquals(String.format("Expected line to be '%d' but got '%d'", line, location.startLine()), line, location.startLine());
-    assertEquals(String.format("Expected line to be '%d' but got '%d'", line, location.endLine()), line, location.endLine());
-    assertEquals(String.format("Expected start character to be '%d' but got '%d'", startLineOffset, location.startLineOffset()), startLineOffset, location.startLineOffset());
-    assertEquals(String.format("Expected end character to be '%d' but got '%d'", endLineOffset, location.endLineOffset()), endLineOffset, location.endLineOffset());
+    assertThat(location.startLine()).withFailMessage(String.format("Expected start line to be '%d' but got '%d'", line, location.startLine())).isEqualTo(line);
+    assertThat(location.endLine()).withFailMessage(String.format("Expected end line to be '%d' but got '%d'", line, location.endLine())).isEqualTo(line);
+    assertThat(location.startLineOffset()).withFailMessage(String.format("Expected start character to be '%d' but got '%d'", startLineOffset, location.startLineOffset())).isEqualTo(startLineOffset);
+    assertThat(location.endLineOffset()).withFailMessage(String.format("Expected end character to be '%d' but got '%d'", endLineOffset, location.endLineOffset())).isEqualTo(endLineOffset);
   }
 
 }

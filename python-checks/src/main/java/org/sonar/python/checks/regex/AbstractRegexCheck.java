@@ -46,7 +46,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
   protected RegexContext regexContext;
 
   // We want to report only one issue per element for one rule.
-  final Set<RegexSyntaxElement> reportedRegexTrees = new HashSet<>();
+  protected final Set<RegexSyntaxElement> reportedRegexTrees = new HashSet<>();
 
   protected Set<String> lookedUpFunctionNames() {
     return REGEX_FUNCTIONS;
@@ -100,7 +100,4 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
       // TODO: Add cost to the issue SONARPY-893
     }
   }
-
-
-
 }

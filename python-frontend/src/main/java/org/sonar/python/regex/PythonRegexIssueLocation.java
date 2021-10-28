@@ -47,6 +47,6 @@ public class PythonRegexIssueLocation {
       }
       // We do not combine RegexSyntaxElement which are not located side by side
     }
-    return IssueLocation.preciseLocation(source.locationInFileFor(Objects.requireNonNull(current)), message);
+    return IssueLocation.preciseLocation(source.locationInFileFor(current), message);
   }
 }

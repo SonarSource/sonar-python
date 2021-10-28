@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.SubscriptionVisitor;
@@ -58,8 +57,8 @@ public class AbstractRegexCheckTest {
 
     PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(FILE);
     SubscriptionVisitor.analyze(Collections.singletonList(check), fileContext);
-    assertThat(check.reportedRegexTrees).hasSize(1);
-    assertThat(fileContext.getIssues()).hasSize(1);
+    assertThat(check.reportedRegexTrees).hasSize(10);
+    assertThat(fileContext.getIssues()).hasSize(10);
   }
 
   @Test

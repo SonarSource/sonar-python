@@ -29,8 +29,7 @@ import org.sonarsource.analyzer.commons.regex.RegexSource;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 
@@ -62,8 +61,8 @@ public class RegexParserTestUtils {
   }
 
   public static void assertKind(RegexTree.Kind expected, RegexTree actual) {
-    assertEquals("Regex should have kind " + expected, expected, actual.kind());
-    assertTrue("`is` should return true when the kinds match.", actual.is(expected));
-    assertTrue("`is` should return true when one of the kinds match.", actual.is(RegexTree.Kind.CHARACTER, RegexTree.Kind.DISJUNCTION, expected));
+    assertThat(actual.kind()).withFailMessage("Regex should have kind " + expected).isEqualTo(expected);
+    assertThat(actual.is(expected)).withFailMessage("`is` should return true when the kinds match.").isTrue();
+    assertThat(actual.is(RegexTree.Kind.CHARACTER, RegexTree.Kind.DISJUNCTION, expected)).withFailMessage("`is` should return true when one of the kinds match.").isTrue();
   }
 }
