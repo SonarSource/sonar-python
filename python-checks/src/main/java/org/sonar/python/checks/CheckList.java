@@ -51,6 +51,7 @@ import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
+import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
@@ -143,6 +144,7 @@ public final class CheckList {
       IdentityComparisonWithNewObjectCheck.class,
       IgnoredPureOperationsCheck.class,
       ImplicitStringConcatenationCheck.class,
+      ImpossibleBoundariesCheck.class,
       IncompatibleOperandsCheck.class,
       InconsistentTypeHintCheck.class,
       IncorrectExceptionTypeCheck.class,
