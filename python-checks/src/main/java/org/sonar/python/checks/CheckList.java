@@ -50,6 +50,7 @@ import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
+import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 
@@ -198,6 +199,7 @@ public final class CheckList {
       SetDuplicateKeyCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
+      SingleCharacterAlternationCheck.class,
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
