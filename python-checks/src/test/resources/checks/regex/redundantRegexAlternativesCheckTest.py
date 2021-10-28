@@ -23,6 +23,3 @@ def compliant(input):
     re.match(r"|a", input)  # Compliant
     re.match(r"[ab]", input)  # Compliant
     re.match(r".*", input)  # Compliant
-    re.match(r"[[:space:]]|x", input)  # Compliant
-    re.match(r"x|[[:space:]]", input)  # Compliant
-    re.match(r"[[:space:]]|\n", input)  # Compliant, false negative
