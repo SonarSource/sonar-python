@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.ast.IndexRange;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
@@ -30,6 +31,10 @@ public class PythonRegexIssueLocation {
 
   private PythonRegexIssueLocation() {
 
+  }
+
+  public static IssueLocation preciseLocation(RegexIssueLocation regexIssueLocation) {
+    return preciseLocation(regexIssueLocation.syntaxElements(), regexIssueLocation.message());
   }
 
   public static IssueLocation preciseLocation(RegexSyntaxElement syntaxElement, String message) {
