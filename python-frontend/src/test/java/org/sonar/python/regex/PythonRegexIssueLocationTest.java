@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterTree;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
@@ -44,11 +45,11 @@ public class PythonRegexIssueLocationTest {
     assertThat(items).hasSize(2)
       .allMatch(tree -> tree.is(RegexTree.Kind.CHARACTER));
 
-    assertRange(11, 13, correspondingTextSpans(regex));
+    assertRange(11, 13, correspondingPythonIssueLocation(regex));
     CharacterTree char1 = (CharacterTree) items.get(0);
-    assertRange(11, 12, correspondingTextSpans(char1));
+    assertRange(11, 12, correspondingPythonIssueLocation(char1));
     CharacterTree char2 = (CharacterTree) items.get(1);
-    assertRange(12, 13, correspondingTextSpans(char2));
+    assertRange(12, 13, correspondingPythonIssueLocation(char2));
   }
 
   @Test
@@ -64,9 +65,17 @@ public class PythonRegexIssueLocationTest {
     RegexTree B = items.get(1);
     RegexTree C = items.get(2);
 
-    assertRange(11, 14, correspondingTextSpans(Arrays.asList(A, B, C)));
-    assertRange(11, 13, correspondingTextSpans(Arrays.asList(A, B)));
-    assertRange(11, 12, correspondingTextSpans(Arrays.asList(A, C)));
+    assertRange(11, 14, correspondingPythonIssueLocation(Arrays.asList(A, B, C)));
+    assertRange(11, 13, correspondingPythonIssueLocation(Arrays.asList(A, B)));
+    assertRange(11, 12, correspondingPythonIssueLocation(Arrays.asList(A, C)));
+  }
+
+  @Test
+  public void test_location_of_regex_issue_location() {
+    // force a separation
+    RegexTree regex = assertSuccessfulParse("r'A'");
+    RegexIssueLocation location = new RegexIssueLocation(regex, "message");
+    assertRange(11, 12, correspondingPythonIssueLocation(location));
   }
 
   private void assertRange(int startLineOffset, int endLineOffset, IssueLocation location) {
@@ -74,11 +83,15 @@ public class PythonRegexIssueLocationTest {
     assertThat(location.endLineOffset()).withFailMessage(String.format("Expected end character to be '%d' but got '%d'", endLineOffset, location.endLineOffset())).isEqualTo(endLineOffset);
   }
 
-  private static IssueLocation correspondingTextSpans(RegexTree tree) {
+  private static IssueLocation correspondingPythonIssueLocation(RegexIssueLocation location) {
+    return PythonRegexIssueLocation.preciseLocation(location);
+  }
+
+  private static IssueLocation correspondingPythonIssueLocation(RegexTree tree) {
     return PythonRegexIssueLocation.preciseLocation(tree, "message");
   }
 
-  private static IssueLocation correspondingTextSpans(List<RegexSyntaxElement> trees) {
+  private static IssueLocation correspondingPythonIssueLocation(List<RegexSyntaxElement> trees) {
     return PythonRegexIssueLocation.preciseLocation(trees, "message");
   }
 
