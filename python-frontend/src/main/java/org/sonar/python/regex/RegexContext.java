@@ -24,11 +24,12 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
 public interface RegexContext {
 
-  RegexParseResult regexForStringElement(StringElement stringElement);
+  RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet);
 
   PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
 

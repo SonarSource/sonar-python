@@ -19,9 +19,8 @@
  */
 package org.sonar.python.checks.regex;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.regex.PythonRegexIssueLocation;
@@ -36,8 +35,10 @@ public class StringReplaceCheck extends AbstractRegexCheck {
   private static final String SECONDARY_MESSAGE = "Expression without regular expression features.";
 
   @Override
-  protected Set<String> lookedUpFunctionNames() {
-    return new HashSet<>(Collections.singletonList("re.sub"));
+  protected Map<String, Integer> lookedUpFunctions() {
+    Map<String, Integer> result = new HashMap<>();
+    result.put("re.sub", 4);
+    return result;
   }
 
   @Override
