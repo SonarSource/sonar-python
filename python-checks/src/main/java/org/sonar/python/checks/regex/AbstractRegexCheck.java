@@ -90,7 +90,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
       return;
     }
     String functionFqn = calleeSymbol.fullyQualifiedName();
-    if (lookedUpFunctions().containsKey(functionFqn)) {
+    if (functionFqn != null && lookedUpFunctions().containsKey(functionFqn)) {
       FlagSet flagSet = getFlagSet(callExpression, functionFqn);
 
       patternArgStringLiteral(callExpression)
@@ -121,7 +121,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
   private FlagSet getFlagSet(CallExpression callExpression, String functionFqn) {
     HashSet<QualifiedExpression> flags = new HashSet<>();
-    getFlagsArgValue(callExpression, lookedUpFunctions().get(functionFqn)).ifPresent(f -> flags.addAll(extractFlags(f)));
+    getFlagsArgValue(callExpression, lookedUpFunctions().get(functionFqn)).ifPresent(f -> flags.addAll(extractFlagExpressions(f)));
     FlagSet flagSet = new FlagSet();
     flags.stream()
       .map(AbstractRegexCheck::mapPythonFlag)
@@ -129,11 +129,12 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
       .map(Optional::get)
       .forEach(flagSet::add);
 
-    // TODO: Do this only for python3
-    // We used Pattern.LITERAL to represent re.ASCII.
-    // For python3 by default UNICODE is parsed, and re.ASCII can be used to deactivate that.
+    // TODO: Don't do this when PYTHON_VERSION is 2
+    // We used Pattern.LITERAL to represent re.ASCII. So we are checking if re.ASCII is set here.
+    // For python3 matches are Unicode by default, and re.ASCII can be used to deactivate that.
     if (!flagSet.contains(Pattern.LITERAL)) {
       flagSet.add(Pattern.UNICODE_CHARACTER_CLASS);
+      flagSet.add(Pattern.UNICODE_CASE);
     }
     flagSet.removeAll(new FlagSet(Pattern.LITERAL));
 
@@ -148,14 +149,14 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     return patternArgument != null ? Optional.of(patternArgument.expression()) : Optional.empty();
   }
 
-  private static HashSet<QualifiedExpression> extractFlags(Tree flagsSubexpr) {
+  private static HashSet<QualifiedExpression> extractFlagExpressions(Tree flagsSubexpr) {
     if (flagsSubexpr.is(Tree.Kind.QUALIFIED_EXPR)) {
       return new HashSet<>(Collections.singletonList((QualifiedExpression) flagsSubexpr));
     } else if (flagsSubexpr.is(Tree.Kind.BITWISE_OR)) {
       // recurse into left and right branch
       BinaryExpression orExpr = (BinaryExpression) flagsSubexpr;
-      HashSet<QualifiedExpression> flags = extractFlags(orExpr.leftOperand());
-      flags.addAll(extractFlags(orExpr.rightOperand()));
+      HashSet<QualifiedExpression> flags = extractFlagExpressions(orExpr.leftOperand());
+      flags.addAll(extractFlagExpressions(orExpr.rightOperand()));
       return flags;
     } else {
       // failed to interpret. Ignore leaf.
