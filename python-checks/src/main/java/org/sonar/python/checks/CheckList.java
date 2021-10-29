@@ -51,6 +51,7 @@ import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
+import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
@@ -130,6 +131,7 @@ public final class CheckList {
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
+      GraphemeClustersInClassesCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
