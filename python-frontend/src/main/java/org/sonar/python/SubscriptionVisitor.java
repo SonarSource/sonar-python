@@ -168,10 +168,9 @@ public class SubscriptionVisitor {
       return pythonVisitorContext.workingDirectory();
     }
 
-    public RegexParseResult regexForStringElement(StringElement stringElement) {
-      // TODO: Real flags have to be provided
+    public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {
       return regexCache.computeIfAbsent(stringElement,
-        s -> new RegexParser(new PythonAnalyzerRegexSource(s), new FlagSet()).parse());
+        s -> new RegexParser(new PythonAnalyzerRegexSource(s), flagSet).parse());
     }
   }
 }

@@ -19,17 +19,22 @@
  */
 package org.sonar.python.checks.regex;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -39,18 +44,35 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
+import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> REGEX_FUNCTIONS = new HashSet<>(Arrays.asList("re.sub", "re.subn", "re.compile", "re.search", "re.match",
-    "re.fullmatch", "re.split", "re.findall", "re.finditer"));
+  private static final Map<String, Integer> REGEX_FUNCTIONS_TO_FLAG_PARAM = new HashMap<>();
+  static {
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.sub", 4);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.subn", 4);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.compile", null);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.search", 2);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.match", 2);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.fullmatch", 2);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.split", 3);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.findall", 2);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.finditer", 2);
+  }
+
   protected RegexContext regexContext;
 
   // We want to report only one issue per element for one rule.
   protected final Set<RegexSyntaxElement> reportedRegexTrees = new HashSet<>();
 
-  protected Set<String> lookedUpFunctionNames() {
-    return REGEX_FUNCTIONS;
+  /**
+   * Should return a map whose keys are the functions the check is interested in, and the values are the position of the flags parameter.
+   * Set the position of the flags parameter to {@code null} if there is none.
+   */
+  protected Map<String, Integer> lookedUpFunctions() {
+    return REGEX_FUNCTIONS_TO_FLAG_PARAM;
   }
 
   @Override
@@ -67,17 +89,20 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     if (calleeSymbol == null || calleeSymbol.fullyQualifiedName() == null) {
       return;
     }
-    if (lookedUpFunctionNames().contains(calleeSymbol.fullyQualifiedName())) {
+    String functionFqn = calleeSymbol.fullyQualifiedName();
+    if (lookedUpFunctions().containsKey(functionFqn)) {
+      FlagSet flagSet = getFlagSet(callExpression, functionFqn);
+
       patternArgStringLiteral(callExpression)
-        .flatMap(this::regexForStringLiteral)
+        .flatMap(l -> regexForStringLiteral(l, flagSet))
         .ifPresent(parseResult -> checkRegex(parseResult, callExpression));
     }
   }
 
-  private Optional<RegexParseResult> regexForStringLiteral(StringLiteral literal) {
+  private Optional<RegexParseResult> regexForStringLiteral(StringLiteral literal, FlagSet flagSet) {
     // TODO: for now we only handle strings with an "r" prefix. This will be extended.
     if (literal.stringElements().size() == 1 && "r".equalsIgnoreCase(literal.stringElements().get(0).prefix())) {
-      return Optional.of(regexContext.regexForStringElement(literal.stringElements().get(0)));
+      return Optional.of(regexContext.regexForStringElement(literal.stringElements().get(0), flagSet));
     }
     return Optional.empty();
   }
@@ -94,6 +119,92 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
+  private FlagSet getFlagSet(CallExpression callExpression, String functionFqn) {
+    HashSet<QualifiedExpression> flags = new HashSet<>();
+    getFlagsArgValue(callExpression, lookedUpFunctions().get(functionFqn)).ifPresent(f -> flags.addAll(extractFlags(f)));
+    FlagSet flagSet = new FlagSet();
+    flags.stream()
+      .map(AbstractRegexCheck::mapPythonFlag)
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .forEach(flagSet::add);
+
+    // TODO: Do this only for python3
+    // We used Pattern.LITERAL to represent re.ASCII.
+    // For python3 by default UNICODE is parsed, and re.ASCII can be used to deactivate that.
+    if (!flagSet.contains(Pattern.LITERAL)) {
+      flagSet.add(Pattern.UNICODE_CHARACTER_CLASS);
+    }
+    flagSet.removeAll(new FlagSet(Pattern.LITERAL));
+
+    return flagSet;
+  }
+
+  private static Optional<Expression> getFlagsArgValue(CallExpression regexFunctionCall, @Nullable Integer argPosition) {
+    if (argPosition == null) {
+      return Optional.empty();
+    }
+    RegularArgument patternArgument = TreeUtils.nthArgumentOrKeyword(argPosition, "flags", regexFunctionCall.arguments());
+    return patternArgument != null ? Optional.of(patternArgument.expression()) : Optional.empty();
+  }
+
+  private static HashSet<QualifiedExpression> extractFlags(Tree flagsSubexpr) {
+    if (flagsSubexpr.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return new HashSet<>(Collections.singletonList((QualifiedExpression) flagsSubexpr));
+    } else if (flagsSubexpr.is(Tree.Kind.BITWISE_OR)) {
+      // recurse into left and right branch
+      BinaryExpression orExpr = (BinaryExpression) flagsSubexpr;
+      HashSet<QualifiedExpression> flags = extractFlags(orExpr.leftOperand());
+      flags.addAll(extractFlags(orExpr.rightOperand()));
+      return flags;
+    } else {
+      // failed to interpret. Ignore leaf.
+      return new HashSet<>();
+    }
+  }
+
+  public static Optional<Integer> mapPythonFlag(QualifiedExpression ch) {
+    Symbol symbol = ch.symbol();
+    if (symbol == null) {
+      return Optional.empty();
+    }
+    String symbolFqn = symbol.fullyQualifiedName();
+    if (symbolFqn == null) {
+      return Optional.empty();
+    }
+
+    Integer result;
+    switch (symbolFqn) {
+      case "re.IGNORECASE":
+      case "re.I":
+        result = Pattern.CASE_INSENSITIVE;
+        break;
+      case "re.MULTILINE":
+      case "re.M":
+        result = Pattern.MULTILINE;
+        break;
+      case "re.DOTALL":
+      case "re.S":
+        result = Pattern.DOTALL;
+        break;
+      case "re.VERBOSE":
+      case "re.X":
+        result = Pattern.COMMENTS;
+        break;
+      case "re.UNICODE":
+      case "re.U":
+        result = Pattern.UNICODE_CHARACTER_CLASS;
+        break;
+      case "re.ASCII":
+      case "re.A":
+        // We misuse Pattern.LITERAL to represent re.ASCII. It will be removed before being provided to the parser.
+        result = Pattern.LITERAL;
+        break;
+      default:
+        result = null;
+    }
+    return Optional.ofNullable(result);
+  }
   public void addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
     if (reportedRegexTrees.add(regexTree)) {
       PreciseIssue issue = regexContext.addIssue(regexTree, message);
