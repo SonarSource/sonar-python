@@ -25,8 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -43,13 +43,13 @@ import org.sonar.python.regex.RegexContext;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
-import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
-import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 
 public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
 
   private static final Map<String, Integer> REGEX_FUNCTIONS_TO_FLAG_PARAM = new HashMap<>();
+
   static {
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.sub", 4);
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.subn", 4);
@@ -206,6 +206,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     }
     return Optional.ofNullable(result);
   }
+
   public void addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
     if (reportedRegexTrees.add(regexTree)) {
       PreciseIssue issue = regexContext.addIssue(regexTree, message);
