@@ -49,6 +49,7 @@ import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
+import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
@@ -67,6 +68,7 @@ public final class CheckList {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
+      AnchorPrecedenceCheck.class,
       ArgumentNumberCheck.class,
       ArgumentTypeCheck.class,
       BackslashInStringCheck.class,
