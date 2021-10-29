@@ -51,6 +51,7 @@ import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
+import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 
 public final class CheckList {
@@ -186,6 +187,7 @@ public final class CheckList {
       RaiseOutsideExceptCheck.class,
       RedundantJumpCheck.class,
       RedundantRegexAlternativesCheck.class,
+      ReluctantQuantifierCheck.class,
       RegexCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
