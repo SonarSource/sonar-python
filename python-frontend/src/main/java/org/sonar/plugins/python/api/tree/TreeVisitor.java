@@ -172,4 +172,12 @@ public interface TreeVisitor {
   void visitFormattedExpression(FormattedExpression formattedExpression);
 
   void visitFormatSpecifier(FormatSpecifier formatSpecifier);
+
+  void visitMatchStatement(MatchStatement matchStatement);
+
+  void visitCaseBlock(CaseBlock caseBlock);
+
+  void visitLiteralPattern(LiteralPattern literalPattern);
+
+  void visitGuard(Guard guard);
 }
