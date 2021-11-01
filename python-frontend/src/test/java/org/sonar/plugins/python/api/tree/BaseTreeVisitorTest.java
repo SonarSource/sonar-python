@@ -21,7 +21,6 @@ package org.sonar.plugins.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
-import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
@@ -362,9 +361,5 @@ public class BaseTreeVisitorTest extends RuleTest {
     expr.accept(visitor);
 
     verify(visitor).visitNumericLiteral((NumericLiteral) expr.expressionList().expressions().get(0));
-  }
-
-  private <T> T parse(String code, Function<AstNode, T> func) {
-    return func.apply(p.parse(code));
   }
 }

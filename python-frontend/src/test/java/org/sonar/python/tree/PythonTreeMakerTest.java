@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
-import com.sonar.sslr.api.TokenType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -31,8 +30,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
@@ -41,7 +38,6 @@ import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -78,6 +74,7 @@ import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
+import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
@@ -195,6 +192,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("async with foo, bar as qix : pass", WithStatement.class);
     testData.put("x = y", AssignmentStatement.class);
     testData.put("x += y", CompoundAssignmentStatement.class);
+    testData.put("match command:\n  case 42:...\n", MatchStatement.class);
 
     testData.forEach((c, clazz) -> {
       FileInput pyTree = parse(c, treeMaker::fileInput);
@@ -2538,25 +2536,6 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(unary.expression().is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
     assertThat(unary.operator().value()).isEqualTo(operator);
     assertThat(unary.children()).hasSize(2);
-  }
-
-  private <T extends Tree> T parse(String code, Function<AstNode, T> func) {
-    T tree = func.apply(p.parse(code));
-    // ensure every visit method of base tree visitor is called without errors
-    BaseTreeVisitor visitor = new BaseTreeVisitor();
-    tree.accept(visitor);
-    List<TokenType> ptt = Arrays.asList(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT, GenericTokenType.EOF);
-    List<Token> tokenList = TreeUtils.tokens(tree);
-
-    String tokens = tokenList.stream().filter(t -> !ptt.contains(t.type())).map(token -> {
-      if(token.type() == PythonTokenType.STRING) {
-        return token.value().replaceAll("\n", "").replaceAll(" ", "");
-      }
-      return token.value();
-    }).collect(Collectors.joining(""));
-    String originalCode = code.replaceAll("#.*\\n", "").replaceAll("\\n", "").replaceAll(" ", "");
-    assertThat(tokens).isEqualTo(originalCode);
-    return tree;
   }
 
   public String fileContent(File file) {
