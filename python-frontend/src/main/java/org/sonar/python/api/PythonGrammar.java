@@ -29,6 +29,7 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static org.sonar.python.api.PythonTokenType.DEDENT;
 import static org.sonar.python.api.PythonTokenType.INDENT;
 import static org.sonar.python.api.PythonTokenType.NEWLINE;
+import static org.sonar.python.api.PythonTokenType.NUMBER;
 
 public enum PythonGrammar implements GrammarRuleKey {
   FACTOR,
@@ -83,6 +84,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   OR_EXPR,
 
   NAMED_EXPR_TEST,
+  STAR_NAMED_EXPRESSIONS,
+  STAR_NAMED_EXPRESSION,
   FORMATTED_EXPR,
   F_STRING_CONTENT,
   FORMAT_SPECIFIER,
@@ -146,6 +149,17 @@ public enum PythonGrammar implements GrammarRuleKey {
   WITH_STMT,
   WITH_ITEM,
 
+  MATCH_STMT,
+  SUBJECT_EXPR,
+  CASE_BLOCK,
+  GUARD,
+
+  PATTERNS,
+  LITERAL_PATTERN,
+
+  SIGNED_NUMBER,
+  COMPLEX_NUMBER,
+
   FUNCDEF,
   DECORATORS,
   DECORATOR,
@@ -193,6 +207,11 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
     b.rule(NAMED_EXPR_TEST).is(TEST, b.optional(PythonPunctuator.WALRUS_OPERATOR, TEST));
+    b.rule(STAR_NAMED_EXPRESSIONS).is(STAR_NAMED_EXPRESSION, b.zeroOrMore(",", STAR_NAMED_EXPRESSION), b.optional(","));
+    b.rule(STAR_NAMED_EXPRESSION).is(b.firstOf(
+      STAR_EXPR,
+      NAMED_EXPR_TEST
+    ));
     b.rule(TEST).is(b.firstOf(
       b.sequence(OR_TEST, b.optional("if", OR_TEST, "else", TEST)),
       LAMBDEF));
@@ -401,6 +420,7 @@ public enum PythonGrammar implements GrammarRuleKey {
       FOR_STMT,
       TRY_STMT,
       WITH_STMT,
+      MATCH_STMT,
       FUNCDEF,
       CLASSDEF,
       ASYNC_STMT));
@@ -426,6 +446,33 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(WITH_STMT).is("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE);
     b.rule(WITH_ITEM).is(TEST, b.optional("as", EXPR));
+
+    b.rule(MATCH_STMT).is("match", SUBJECT_EXPR, ":", NEWLINE, INDENT, b.oneOrMore(CASE_BLOCK), DEDENT);
+    b.rule(SUBJECT_EXPR).is(STAR_NAMED_EXPRESSIONS);
+    b.rule(CASE_BLOCK).is("case", PATTERNS, b.optional(GUARD), ":", SUITE);
+    b.rule(GUARD).is("if", NAMED_EXPR_TEST);
+
+    // TODO: this should be either OR_PATTERN or AS_PATTERN
+    b.rule(PATTERNS).is(LITERAL_PATTERN);
+
+    b.rule(LITERAL_PATTERN).is(b.firstOf(
+      COMPLEX_NUMBER,
+      SIGNED_NUMBER,
+      b.oneOrMore(PythonTokenType.STRING),
+      PythonKeyword.NONE,
+      "True",
+      "False"
+    ));
+
+    b.rule(COMPLEX_NUMBER).is(b.firstOf(
+      b.sequence(SIGNED_NUMBER, "+" , NUMBER),
+      b.sequence(SIGNED_NUMBER, "-", NUMBER))
+    );
+
+    b.rule(SIGNED_NUMBER).is(b.firstOf(
+      NUMBER,
+      b.sequence("-", NUMBER)
+    ));
 
     b.rule(FUNCDEF).is(b.optional(DECORATORS), b.optional("async"), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
     b.rule(FUNCNAME).is(NAME);
