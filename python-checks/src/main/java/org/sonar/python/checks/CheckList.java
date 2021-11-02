@@ -52,6 +52,7 @@ import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
@@ -224,6 +225,7 @@ public final class CheckList {
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       ReferencedBeforeAssignmentCheck.class,
+      RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnreachableExceptCheck.class,
