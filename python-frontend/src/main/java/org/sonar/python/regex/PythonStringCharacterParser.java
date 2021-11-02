@@ -124,8 +124,6 @@ public class PythonStringCharacterParser implements CharacterParser {
         return createCharacterFromPattern(UNICODE_32_BIT_PATTERN, 16, 2);
       case 'x':
         return createCharacterFromPattern(HEX_PATTERN, 16, 2);
-      case 'N':
-        // escape sequence by unicode name is not supported, require java 9 to benefit from Character.codePointOf
       default:
         return createCharacterFromPattern(OCTAL_PATTERN, 8, 1);
     }
