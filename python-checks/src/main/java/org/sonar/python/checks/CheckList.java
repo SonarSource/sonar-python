@@ -54,6 +54,7 @@ import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
@@ -158,6 +159,7 @@ public final class CheckList {
       InstanceAndClassMethodsAtLeastOnePositionalCheck.class,
       InstanceMethodSelfAsFirstCheck.class,
       InvalidOpenModeCheck.class,
+      InvalidRegexCheck.class,
       InvariantReturnCheck.class,
       ItemOperationsTypeCheck.class,
       IterationOnNonIterableCheck.class,
