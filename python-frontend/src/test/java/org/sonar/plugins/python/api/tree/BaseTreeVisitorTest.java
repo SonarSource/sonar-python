@@ -21,7 +21,6 @@ package org.sonar.plugins.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
-import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
@@ -364,7 +363,41 @@ public class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitNumericLiteral((NumericLiteral) expr.expressionList().expressions().get(0));
   }
 
-  private <T> T parse(String code, Function<AstNode, T> func) {
-    return func.apply(p.parse(code));
+  @Test
+  public void match_stmt() {
+    setRootRule(PythonGrammar.MATCH_STMT);
+    MatchStatement matchStatement = parse("match command:\n" +
+      "    case \"quit\" if True:\n" +
+      "        ...\n" +
+      "    case \"foo\" if x:=cond:\n" +
+      "        ...\n", treeMaker::matchStatement);
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    matchStatement.accept(visitor);
+
+    verify(visitor).visitName(((Name) matchStatement.subjectExpression()));
+    verify(visitor).visitCaseBlock(matchStatement.caseBlocks().get(0));
+    verify(visitor).visitCaseBlock(matchStatement.caseBlocks().get(1));
+  }
+
+  @Test
+  public void case_block() {
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    CaseBlock caseBlock = parse("case 'quit' if True: ...", treeMaker::caseBlock);
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    caseBlock.accept(visitor);
+
+    verify(visitor).visitLiteralPattern(((LiteralPattern) caseBlock.patterns().get(0)));
+    verify(visitor).visitGuard(caseBlock.guard());
+    verify(visitor).visitStatementList(caseBlock.body());
+  }
+
+  @Test
+  public void guard() {
+    setRootRule(PythonGrammar.GUARD);
+    Guard guard = parse("if x > 10", treeMaker::guard);
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    guard.accept(visitor);
+
+    verify(visitor).visitBinaryExpression(((BinaryExpression) guard.condition()));
   }
 }

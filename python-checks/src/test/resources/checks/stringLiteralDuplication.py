@@ -103,3 +103,16 @@ def type_hints_should_be_excluded():
     a: "httpx.Response"
     b: "httpx.Response"
     c: "httpx.Response"
+
+def literal_patterns_should_be_excluded(value1, value2, value3):
+    match value1:
+        case "This is a duplicated pattern":
+            print("This is a duplicated literal")  # Noncompliant
+
+    match value2:
+        case "This is a duplicated pattern":
+            print("This is a duplicated literal")
+
+    match value3:
+        case "This is a duplicated pattern":
+            print("This is a duplicated literal")
