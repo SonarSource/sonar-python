@@ -50,6 +50,7 @@ import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
+import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
@@ -110,6 +111,7 @@ public final class CheckList {
       DuplicateArgumentCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
+      DuplicatesInCharacterClassCheck.class,
       DynamicCodeExecutionCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
