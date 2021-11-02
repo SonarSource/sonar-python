@@ -100,8 +100,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
   }
 
   private Optional<RegexParseResult> regexForStringLiteral(StringLiteral literal, FlagSet flagSet) {
-    // TODO: for now we only handle strings with an "r" prefix. This will be extended.
-    if (literal.stringElements().size() == 1 && "r".equalsIgnoreCase(literal.stringElements().get(0).prefix())) {
+    if (literal.stringElements().size() == 1 && literal.stringElements().get(0).formattedExpressions().isEmpty()) {
       return Optional.of(regexContext.regexForStringElement(literal.stringElements().get(0), flagSet));
     }
     return Optional.empty();

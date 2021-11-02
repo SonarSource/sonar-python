@@ -22,6 +22,7 @@ package org.sonar.python.regex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
@@ -35,14 +36,17 @@ public class PythonAnalyzerRegexSource extends PythonRegexSource {
   private final int sourceStartOffset;
   private final int[] lineStartOffsets;
 
+  private final boolean isRawString;
+
   public PythonAnalyzerRegexSource(StringElement s) {
     // TODO: Do we need the quote? If yes, don't hardcode
     super(s.trimmedQuotesValue(), '"');
+    String prefix = s.prefix();
     Token firstToken = s.firstToken();
     sourceLine = firstToken.line();
-    // TODO: The +1 represents the prefix size. Right now we only scan patterns with the raw prefix.
-    sourceStartOffset = firstToken.column() + (s.isTripleQuoted() ? 3 : 1) + 1;
+    sourceStartOffset = firstToken.column() + (s.isTripleQuoted() ? 3 : 1) + prefix.length();
     lineStartOffsets = lineStartOffsets(getSourceText());
+    isRawString = prefix.toLowerCase(Locale.ROOT).contains("r");
   }
 
   @Override
@@ -54,6 +58,10 @@ public class PythonAnalyzerRegexSource extends PythonRegexSource {
     int[] startLineAndOffset = lineAndOffset(range.getBeginningOffset());
     int[] endLineAndOffset = lineAndOffset(range.getEndingOffset());
     return new LocationInFile(null, startLineAndOffset[0], startLineAndOffset[1], endLineAndOffset[0], endLineAndOffset[1]);
+  }
+
+  public boolean isRawString() {
+    return isRawString;
   }
 
   private int[] lineAndOffset(int index) {
