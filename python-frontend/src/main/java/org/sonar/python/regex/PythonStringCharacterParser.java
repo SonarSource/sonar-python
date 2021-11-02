@@ -134,11 +134,11 @@ public class PythonStringCharacterParser implements CharacterParser {
     }
   }
 
-  private SourceCharacter createCharacterFromPattern(Pattern pattern, int radix, int startLength) {
-    Matcher unicodeMatcher = pattern.matcher(sourceText.substring(index + 1));
-    if (unicodeMatcher.find()) {
-      String unicodeValue = unicodeMatcher.group(1);
-      return createCharAndUpdateIndex((char) Integer.parseInt(unicodeValue, radix), unicodeValue.length() + startLength);
+  private SourceCharacter createCharacterFromPattern(Pattern pattern, int radix, int initialLength) {
+    Matcher matcher = pattern.matcher(sourceText.substring(index + 1));
+    if (matcher.find()) {
+      String value = matcher.group(1);
+      return createCharAndUpdateIndex((char) Integer.parseInt(value, radix), value.length() + initialLength);
     }
     return createCharAndUpdateIndex('\\', 1);
   }
