@@ -21,12 +21,12 @@ def non_compliant(input):
     re.match(r"\[.*?\]", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[^\]]*+".}}
     re.match(r".+?[abc]", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[^abc]++".}}
     re.match(r"(?-U:\s)*?\S", input)
-    re.match(r"(?U:\s)*?\S", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\s\S]*+".}}
+    re.match(r"(?U:\s)*?\S", input, re.ASCII)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\s\S]*+".}}
     re.match(r"(?U:a|\s)*?\S", input)
     re.match(r"\S*?\s", input)
     re.match(r"\S*?(?-U:\s)", input)
-    re.match(r"\S*?(?U:\s)", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\S\s]*+".}}
-    re.match(r"\S*?(?U)\s", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\S\s]*+".}}
+    re.match(r"\S*?(?U:\s)", input, re.ASCII)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\S\s]*+".}}
+    re.match(r"\S*?(?U)\s", input, re.ASCII)  # Noncompliant {{Replace this use of a reluctant quantifier with "[\S\s]*+".}}
 
     # coverage
     re.match(r"(?:(?m))*?a", input)
@@ -67,6 +67,10 @@ def compliant(input):
     re.match(r"", input)
     re.match(r".*?(?:a|b|c)", input)  # Alternatives are currently not covered even if they contain only single characters
 
+    # UNICODE flag is enabled by default
+    re.match(r"(?U:\s)*?\S", input)
+    re.match(r"\S*?(?U:\s)", input)
+    re.match(r"\S*?(?U)\s", input)
 
 def no_intersection(input):
     re.match(r"<\d+?>", input)
