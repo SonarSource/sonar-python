@@ -812,7 +812,7 @@ public class PythonTreeMaker {
     return new CaseBlockImpl(caseKeyword, patterns, guard, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
   }
 
-  private Guard guard(AstNode guardNode) {
+  public Guard guard(AstNode guardNode) {
     Token ifKeyword = toPyToken(guardNode.getTokens().get(0));
     Expression condition = expression(guardNode.getFirstChild(PythonGrammar.NAMED_EXPR_TEST));
     return new GuardImpl(ifKeyword, condition);
