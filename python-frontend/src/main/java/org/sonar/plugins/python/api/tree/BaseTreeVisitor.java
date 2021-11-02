@@ -471,4 +471,27 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitFormatSpecifier(FormatSpecifier formatSpecifier) {
     scan(formatSpecifier.formatExpressions());
   }
+
+  @Override
+  public void visitMatchStatement(MatchStatement matchStatement) {
+    scan(matchStatement.subjectExpression());
+    scan(matchStatement.caseBlocks());
+  }
+
+  @Override
+  public void visitCaseBlock(CaseBlock caseBlock) {
+    scan(caseBlock.patterns());
+    scan(caseBlock.guard());
+    scan(caseBlock.body());
+  }
+
+  @Override
+  public void visitLiteralPattern(LiteralPattern literalPattern) {
+    // noop
+  }
+
+  @Override
+  public void visitGuard(Guard guard) {
+    scan(guard.condition());
+  }
 }
