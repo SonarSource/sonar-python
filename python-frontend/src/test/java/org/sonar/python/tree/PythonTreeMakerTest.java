@@ -1462,6 +1462,18 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  public void with_stmt_parenthesized_context_manager() {
+    setRootRule(PythonGrammar.WITH_STMT);
+    WithStatement withStatement = parse(
+      "with (open(\"a_really_long_foo\") as foo,\n" +
+      "      open(\"a_really_long_bar\") as bar):\n" +
+      "        pass", treeMaker::withStatement);
+    assertThat(withStatement.children())
+      .filteredOn(t -> t.is(Kind.TOKEN))
+      .extracting(t -> ((Token) t).value()).contains("(", ")");
+  }
+
+  @Test
   public void verify_expected_expression() {
     Map<String, Class<? extends Tree>> testData = new HashMap<>();
     testData.put("foo", Name.class);

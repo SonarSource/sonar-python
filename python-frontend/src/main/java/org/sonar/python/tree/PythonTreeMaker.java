@@ -731,12 +731,16 @@ public class PythonTreeMaker {
       asyncKeyword = toPyToken(astNode.getFirstChild().getToken());
     }
     List<WithItem> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
+    AstNode lParens = withStmtNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
+    Token openParens = lParens == null ? null : toPyToken(lParens.getToken());
     List<Token> commas = punctuators(withStmtNode, PythonPunctuator.COMMA);
     AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
     Token withKeyword = toPyToken(withStmtNode.getToken());
     Token colon = toPyToken(suite.getPreviousSibling().getToken());
+    AstNode rParens = withStmtNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
+    Token closeParens = rParens == null ? null : toPyToken(rParens.getToken());
     StatementList body = getStatementListFromSuite(suite);
-    return new WithStatementImpl(withKeyword, withItems, commas, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), asyncKeyword);
+    return new WithStatementImpl(withKeyword, openParens, withItems, commas, closeParens, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), asyncKeyword);
   }
 
   private List<WithItem> withItems(List<AstNode> withItems) {

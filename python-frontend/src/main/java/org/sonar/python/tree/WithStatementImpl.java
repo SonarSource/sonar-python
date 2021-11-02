@@ -38,6 +38,8 @@ import org.sonar.plugins.python.api.tree.WithStatement;
 public class WithStatementImpl extends PyTree implements WithStatement {
 
   private final Token withKeyword;
+  @Nullable
+  private final Token openParens;
   private final List<WithItem> withItems;
   private final List<Token> commas;
   private final Token newLine;
@@ -47,12 +49,16 @@ public class WithStatementImpl extends PyTree implements WithStatement {
   private final Token asyncKeyword;
   private final boolean isAsync;
   private final Token colon;
+  @Nullable
+  private final Token closeParens;
 
-  public WithStatementImpl(Token withKeyword, List<WithItem> withItems, List<Token> commas, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
+  public WithStatementImpl(Token withKeyword, @Nullable Token openParens, List<WithItem> withItems, List<Token> commas, @Nullable Token closeParens, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
                            @Nullable Token dedent, @Nullable Token asyncKeyword) {
     this.withKeyword = withKeyword;
+    this.openParens = openParens;
     this.withItems = withItems;
     this.commas = commas;
+    this.closeParens = closeParens;
     this.colon = colon;
     this.newLine = newLine;
     this.indent = indent;
@@ -105,7 +111,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    List<Tree> children = new ArrayList<>(Arrays.asList(asyncKeyword, withKeyword));
+    List<Tree> children = new ArrayList<>(Arrays.asList(asyncKeyword, withKeyword, openParens));
     int i = 0;
     for (Tree item : withItems) {
       children.add(item);
@@ -114,7 +120,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
       }
       i++;
     }
-    children.addAll(Arrays.asList(colon, newLine, indent, statements, dedent));
+    children.addAll(Arrays.asList(closeParens, colon, newLine, indent, statements, dedent));
     return children.stream().filter(Objects::nonNull).collect(Collectors.toList());
   }
 
