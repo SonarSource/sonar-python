@@ -77,3 +77,4 @@ def compliant(input):
     re.match(r'(?:x*(Xab|^)abc)*Y?', input)
     re.match(r'a$\nb', input, re.MULTILINE)
     re.match(r'a\n^b', input, re.MULTILINE)
+    re.compile(r"(\d+)(\s+.*)$                         # score, vulgar components", re.VERBOSE)
