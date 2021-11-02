@@ -100,6 +100,9 @@ public class PythonStringCharacterParser implements CharacterParser {
     switch (charAfterBackslash) {
       case '\n':
         // \NEWLINE is ignored in python. We skip both characters
+        if (this.index + 2 >= this.textLength) {
+          return null;
+        }
         this.index += 2;
         this.moveNext();
         return getCurrent();
