@@ -53,7 +53,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
   static {
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.sub", 4);
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.subn", 4);
-    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.compile", null);
+    REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.compile", 1);
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.search", 2);
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.match", 2);
     REGEX_FUNCTIONS_TO_FLAG_PARAM.put("re.fullmatch", 2);
