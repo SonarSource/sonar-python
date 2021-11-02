@@ -98,6 +98,11 @@ public class PythonStringCharacterParser implements CharacterParser {
   private SourceCharacter parsePythonEscapeSequence() {
     char charAfterBackslash = sourceText.charAt(index + 1);
     switch (charAfterBackslash) {
+      case '\n':
+        // \NEWLINE is ignored in python. We skip both characters
+        this.index += 2;
+        this.moveNext();
+        return getCurrent();
       case '\\':
         return createCharAndUpdateIndex('\\', 2);
       case '\'':

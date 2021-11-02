@@ -81,6 +81,7 @@ public class PythonStringCharacterParserTest {
 
   @Test
   public void test_different_escape_sequences() {
+    assertThat(chars("'a\\\nb'")).containsExactly('a', 'b');
     assertThat(chars("'\\\\'")).containsExactly('\\');
     assertThat(chars("'\\''")).containsExactly('\'');
     assertThat(chars("'\\\"'")).containsExactly('"');
