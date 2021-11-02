@@ -424,7 +424,10 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(EXCEPT_CLAUSE).is("except", b.optional(TEST, b.optional(b.firstOf("as", ","), TEST)));
 
-    b.rule(WITH_STMT).is("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE);
+    b.rule(WITH_STMT).is(b.firstOf(
+      b.sequence("with", "(", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), b.optional(","), ")", ":", SUITE),
+      b.sequence("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE)
+    ));
     b.rule(WITH_ITEM).is(TEST, b.optional("as", EXPR));
 
     b.rule(FUNCDEF).is(b.optional(DECORATORS), b.optional("async"), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
