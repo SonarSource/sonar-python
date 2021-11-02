@@ -17,6 +17,10 @@ def non_compliant(input):
     #                    ^@-1< {{Expected ')', but found the end of the regex}}
 
 
+def compliant(input):
+    re.match(r'\(\[', input)
+
+
 def unsupported_feature(input):
     re.match(r'\p{Lower}', input)  # Noncompliant
     re.match(r'(?>x)', input)  # Noncompliant
