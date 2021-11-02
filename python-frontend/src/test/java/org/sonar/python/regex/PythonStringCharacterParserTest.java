@@ -65,18 +65,7 @@ public class PythonStringCharacterParserTest {
 
   @Test
   public void test_escaping_has_no_meaning_in_raw_string() {
-    CharacterParser characterParser = getCharacterParser("r'\\n'");
-    assertThat(characterParser.getCurrent().getCharacter()).isEqualTo('\\');
-    characterParser.moveNext();
-    assertThat(characterParser.getCurrent().getCharacter()).isEqualTo('n');
-  }
-
-  @Test
-  public void test_escaping_is_handled_in_not_raw_string() {
-    CharacterParser characterParser = getCharacterParser("'\\n'");
-    assertThat(characterParser.getCurrent().getCharacter()).isEqualTo('\n');
-    characterParser.moveNext();
-    assertThat(characterParser.isAtEnd()).isTrue();
+    assertThat(chars("r'\\n'")).containsExactly('\\', 'n');
   }
 
   @Test
