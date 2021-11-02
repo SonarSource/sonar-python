@@ -56,6 +56,8 @@ public interface Tree {
 
     CALL_EXPR(CallExpression.class),
 
+    CASE_BLOCK(CaseBlock.class),
+
     CLASSDEF(ClassDef.class),
 
     CONDITIONAL_EXPR(ConditionalExpression.class),
@@ -94,6 +96,8 @@ public interface Tree {
 
     GLOBAL_STMT(GlobalStatement.class),
 
+    GUARD(Guard.class),
+
     IF_STMT(IfStatement.class),
 
     IMPORT_FROM(ImportFrom.class),
@@ -105,6 +109,10 @@ public interface Tree {
     LAMBDA(LambdaExpression.class),
 
     LIST_LITERAL(ListLiteral.class),
+
+    LITERAL_PATTERN(LiteralPattern.class),
+
+    MATCH_STMT(MatchStatement.class),
 
     NAME(Name.class),
 

@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
+import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionClause;
@@ -62,15 +63,19 @@ import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
+import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ImportStatement;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.LiteralPattern;
+import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.PassStatement;
+import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.PrintStatement;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -208,6 +213,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.WITH_STMT)) {
       return withStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.MATCH_STMT)) {
+      return matchStatement(astNode);
     }
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
@@ -782,6 +790,56 @@ public class PythonTreeMaker {
     return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent, expression(exceptionNode));
   }
 
+
+  public MatchStatement matchStatement(AstNode matchStmt) {
+    Token matchKeyword = toPyToken(matchStmt.getTokens().get(0));
+    AstNode subjectExpr = matchStmt.getFirstChild(PythonGrammar.SUBJECT_EXPR);
+    Token colon = toPyToken(matchStmt.getFirstChild(PythonPunctuator.COLON).getToken());
+    Token newLine = toPyToken(matchStmt.getFirstChild(PythonTokenType.NEWLINE).getToken());
+    Token indent = toPyToken(matchStmt.getFirstChild(PythonTokenType.INDENT).getToken());
+    List<CaseBlock> caseBlocks = matchStmt.getChildren(PythonGrammar.CASE_BLOCK).stream().map(this::caseBlock).collect(Collectors.toList());
+    Token dedent = toPyToken(matchStmt.getFirstChild(PythonTokenType.DEDENT).getToken());
+    return new MatchStatementImpl(matchKeyword, expression(subjectExpr), colon, newLine, indent, caseBlocks, dedent);
+  }
+
+  public CaseBlock caseBlock(AstNode caseBlock) {
+    Token caseKeyword = toPyToken(caseBlock.getTokens().get(0));
+    List<Pattern> patterns = patterns(caseBlock.getFirstChild(PythonGrammar.PATTERNS));
+    Guard guard = null;
+    AstNode guardNode = caseBlock.getFirstChild(PythonGrammar.GUARD);
+    if (guardNode != null) {
+      guard = guard(guardNode);
+    }
+    Token colon = toPyToken(caseBlock.getFirstChild(PythonPunctuator.COLON).getToken());
+    AstNode suite = caseBlock.getFirstChild(PythonGrammar.SUITE);
+    StatementList body = getStatementListFromSuite(suite);
+    return new CaseBlockImpl(caseKeyword, patterns, guard, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
+  }
+
+  public Guard guard(AstNode guardNode) {
+    Token ifKeyword = toPyToken(guardNode.getTokens().get(0));
+    Expression condition = expression(guardNode.getFirstChild(PythonGrammar.NAMED_EXPR_TEST));
+    return new GuardImpl(ifKeyword, condition);
+  }
+
+  private static List<Pattern> patterns(AstNode pattern) {
+    // TODO: consider OR Patterns and other kind of patterns
+    AstNode literalPattern = pattern.getFirstChild(PythonGrammar.LITERAL_PATTERN);
+    LiteralPattern.LiteralKind literalKind;
+    if (literalPattern.hasDirectChildren(PythonGrammar.COMPLEX_NUMBER, PythonGrammar.SIGNED_NUMBER)) {
+      literalKind = LiteralPattern.LiteralKind.NUMBER;
+    } else if (literalPattern.hasDirectChildren(PythonTokenType.STRING)) {
+      literalKind = LiteralPattern.LiteralKind.STRING;
+    } else if (literalPattern.hasDirectChildren(PythonKeyword.NONE)) {
+      literalKind = LiteralPattern.LiteralKind.NONE;
+    } else {
+      literalKind = LiteralPattern.LiteralKind.BOOLEAN;
+    }
+    List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).collect(Collectors.toList());
+    return Collections.singletonList(new LiteralPatternImpl(tokens, literalKind));
+  }
+
+
   // expressions
 
   private List<Expression> expressionsFromTest(AstNode astNode) {
@@ -882,7 +940,26 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR)) {
       return exprListOrTestList(astNode);
     }
+    if (astNode.is(PythonGrammar.STAR_NAMED_EXPRESSIONS)) {
+      return starNamedExpressions(astNode);
+    }
+    if (astNode.is(PythonGrammar.SUBJECT_EXPR, PythonGrammar.STAR_NAMED_EXPRESSION)) {
+      return expression(astNode.getFirstChild());
+    }
     throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
+  }
+
+  private Expression starNamedExpressions(AstNode astNode) {
+    List<Expression> expressions = astNode
+      .getChildren(PythonGrammar.STAR_NAMED_EXPRESSION).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    List<AstNode> commas = astNode.getChildren(PythonPunctuator.COMMA);
+    if (!commas.isEmpty()) {
+      List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).collect(Collectors.toList()));
+      return new TupleImpl(null, expressions, commaTokens, null);
+    }
+    return expressions.get(0);
   }
 
   private Expression assignmentExpression(AstNode astNode) {

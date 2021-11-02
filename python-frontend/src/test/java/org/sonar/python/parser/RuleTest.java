@@ -19,7 +19,21 @@
  */
 package org.sonar.python.parser;
 
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.TokenType;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.sslr.grammar.GrammarRuleKey;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class RuleTest {
 
@@ -27,5 +41,24 @@ public abstract class RuleTest {
 
   protected void setRootRule(GrammarRuleKey ruleKey) {
     p.setRootRule(p.getGrammar().rule(ruleKey));
+  }
+
+  protected  <T extends Tree> T parse(String code, Function<AstNode, T> func) {
+    T tree = func.apply(p.parse(code));
+    // ensure every visit method of base tree visitor is called without errors
+    BaseTreeVisitor visitor = new BaseTreeVisitor();
+    tree.accept(visitor);
+    List<TokenType> ptt = Arrays.asList(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT, GenericTokenType.EOF);
+    List<Token> tokenList = TreeUtils.tokens(tree);
+
+    String tokens = tokenList.stream().filter(t -> !ptt.contains(t.type())).map(token -> {
+      if(token.type() == PythonTokenType.STRING) {
+        return token.value().replaceAll("\n", "").replaceAll(" ", "");
+      }
+      return token.value();
+    }).collect(Collectors.joining(""));
+    String originalCode = code.replaceAll("#.*\\n", "").replaceAll("\\n", "").replaceAll(" ", "");
+    assertThat(tokens).isEqualTo(originalCode);
+    return tree;
   }
 }
