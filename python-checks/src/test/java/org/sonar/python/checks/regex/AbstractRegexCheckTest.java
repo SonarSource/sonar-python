@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -31,6 +32,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +44,6 @@ public class AbstractRegexCheckTest {
   public void test_regex_is_visited() {
     Check check = new Check();
     PythonCheckVerifier.verify(FILE.getAbsolutePath(), check);
-    assertThat(check.receivedRegexParseResults).hasSize(10);
   }
 
   @Test
@@ -73,13 +74,58 @@ public class AbstractRegexCheckTest {
     }
   }
 
+  @Test
+  public void test_flags() {
+    Check check = new Check(true);
+    PythonCheckVerifier.verify("src/test/resources/checks/regex/abstractRegexCheckFlags.py", check);
+  }
+
   private static class Check extends AbstractRegexCheck {
     private final List<RegexParseResult> receivedRegexParseResults = new ArrayList<>();
+    private boolean printFlags;
+
+    private Check() {
+      new Check(false);
+    }
+
+    private Check(boolean printFlags) {
+      this.printFlags = printFlags;
+    }
 
     @Override
     public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
       receivedRegexParseResults.add(regexParseResult);
-      addIssue(regexParseResult.getResult(), "MESSAGE", null, Collections.emptyList());
+      addIssue(regexParseResult.getResult(), printFlags ? flagsToString(regexParseResult) : "MESSAGE", null, Collections.emptyList());
+    }
+
+    private String flagsToString(RegexParseResult regexParseResult) {
+      List<String> flags = new ArrayList<>();
+      FlagSet flagSet = regexParseResult.getInitialFlags();
+      if (flagSet.contains(Pattern.CASE_INSENSITIVE)) {
+        flags.add("CASE_INSENSITIVE");
+      }
+      if (flagSet.contains(Pattern.MULTILINE)) {
+        flags.add("MULTILINE");
+      }
+      if (flagSet.contains(Pattern.UNICODE_CASE)) {
+        flags.add("UNICODE_CASE");
+      }
+      if (flagSet.contains(Pattern.UNICODE_CHARACTER_CLASS)) {
+        flags.add("UNICODE_CHARACTER_CLASS");
+      }
+      if (flagSet.contains(Pattern.DOTALL)) {
+        flags.add("DOTALL");
+      }
+      if (flagSet.contains(Pattern.COMMENTS)) {
+        flags.add("VERBOSE");
+      }
+      if (!flagSet.contains(Pattern.UNICODE_CHARACTER_CLASS)) {
+        flags.add("ASCII");
+      }
+      if (flags.isEmpty()) {
+        return "NO FLAGS";
+      }
+      return String.join("|", flags);
     }
   }
 

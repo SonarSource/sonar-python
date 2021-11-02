@@ -49,9 +49,14 @@ import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
+import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
+import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
+import org.sonar.python.checks.regex.RegexLookaheadCheck;
+import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 
 public final class CheckList {
@@ -65,6 +70,7 @@ public final class CheckList {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
+      AnchorPrecedenceCheck.class,
       ArgumentNumberCheck.class,
       ArgumentTypeCheck.class,
       BackslashInStringCheck.class,
@@ -126,6 +132,7 @@ public final class CheckList {
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
+      GraphemeClustersInClassesCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
@@ -189,6 +196,7 @@ public final class CheckList {
       RedundantRegexAlternativesCheck.class,
       ReluctantQuantifierCheck.class,
       RegexCheck.class,
+      ReluctantQuantifierWithEmptyContinuationCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       RobustCipherAlgorithmCheck.class,
@@ -200,6 +208,7 @@ public final class CheckList {
       SetDuplicateKeyCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
+      SingleCharacterAlternationCheck.class,
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
@@ -215,6 +224,7 @@ public final class CheckList {
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       ReferencedBeforeAssignmentCheck.class,
+      RegexLookaheadCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,

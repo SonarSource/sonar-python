@@ -17,21 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.regex;
+package org.sonar.python.checks.regex;
 
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.tree.StringElement;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonarsource.analyzer.commons.regex.RegexParseResult;
-import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
-import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public interface RegexContext {
 
-  RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet);
+public class SingleCharacterAlternationCheckTest {
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/regex/singleCharacterAlternationCheck.py", new SingleCharacterAlternationCheck());
+  }
 
-  PythonCheck.PreciseIssue addIssue(RegexSyntaxElement element, @Nullable String message);
 }
