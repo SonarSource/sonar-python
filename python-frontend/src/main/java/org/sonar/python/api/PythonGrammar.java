@@ -154,7 +154,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   CASE_BLOCK,
   GUARD,
 
-  PATTERNS,
+  PATTERN,
   LITERAL_PATTERN,
 
   SIGNED_NUMBER,
@@ -452,11 +452,11 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(MATCH_STMT).is("match", SUBJECT_EXPR, ":", NEWLINE, INDENT, b.oneOrMore(CASE_BLOCK), DEDENT);
     b.rule(SUBJECT_EXPR).is(STAR_NAMED_EXPRESSIONS);
-    b.rule(CASE_BLOCK).is("case", PATTERNS, b.optional(GUARD), ":", SUITE);
+    b.rule(CASE_BLOCK).is("case", PATTERN, b.optional(GUARD), ":", SUITE);
     b.rule(GUARD).is("if", NAMED_EXPR_TEST);
 
     // TODO: this should be either OR_PATTERN or AS_PATTERN
-    b.rule(PATTERNS).is(LITERAL_PATTERN);
+    b.rule(PATTERN).is(LITERAL_PATTERN);
 
     b.rule(LITERAL_PATTERN).is(b.firstOf(
       COMPLEX_NUMBER,

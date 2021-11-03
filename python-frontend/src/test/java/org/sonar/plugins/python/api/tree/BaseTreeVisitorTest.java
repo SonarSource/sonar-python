@@ -386,7 +386,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     caseBlock.accept(visitor);
 
-    verify(visitor).visitLiteralPattern(((LiteralPattern) caseBlock.patterns().get(0)));
+    verify(visitor).visitLiteralPattern(((LiteralPattern) caseBlock.pattern()));
     verify(visitor).visitGuard(caseBlock.guard());
     verify(visitor).visitStatementList(caseBlock.body());
   }
