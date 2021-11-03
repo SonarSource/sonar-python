@@ -58,7 +58,7 @@ public class SubscriptionVisitor {
   private final EnumMap<Kind, List<SubscriptionContextImpl>> consumers = new EnumMap<>(Kind.class);
   private final PythonVisitorContext pythonVisitorContext;
   private Tree currentElement;
-  private final HashMap<StringElement, RegexParseResult> regexCache = new HashMap<>();
+  private final HashMap<String, RegexParseResult> regexCache = new HashMap<>();
 
   public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
     SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
@@ -169,8 +169,8 @@ public class SubscriptionVisitor {
     }
 
     public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {
-      return regexCache.computeIfAbsent(stringElement,
-        s -> new RegexParser(new PythonAnalyzerRegexSource(s), flagSet).parse());
+      return regexCache.computeIfAbsent(stringElement.hashCode() + "-" + flagSet.getMask(),
+        s -> new RegexParser(new PythonAnalyzerRegexSource(stringElement), flagSet).parse());
     }
   }
 }

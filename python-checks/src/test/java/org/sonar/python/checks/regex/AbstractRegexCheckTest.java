@@ -75,6 +75,31 @@ public class AbstractRegexCheckTest {
   }
 
   @Test
+  public void test_results_cache_also_considers_flags() {
+    PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(new File("src/test/resources/checks/regex/abstractRegexCheckCache.py"));
+
+    AbstractRegexCheck raisesOnMultiline = new AbstractRegexCheck() {
+      @Override
+      public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
+        if (regexParseResult.getInitialFlags().contains(Pattern.MULTILINE)) {
+          addIssue(regexParseResult.getResult(), "MESSAGE", null, Collections.emptyList());
+        }
+      }
+    };
+    AbstractRegexCheck raisesOnCaseInsensitive = new AbstractRegexCheck() {
+      @Override
+      public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
+        if (regexParseResult.getInitialFlags().contains(Pattern.CASE_INSENSITIVE)) {
+          addIssue(regexParseResult.getResult(), "MESSAGE", null, Collections.emptyList());
+        }
+      }
+    };
+
+    SubscriptionVisitor.analyze(Arrays.asList(raisesOnMultiline, raisesOnCaseInsensitive), fileContext);
+    assertThat(fileContext.getIssues()).hasSize(2);
+  }
+
+  @Test
   public void test_flags() {
     Check check = new Check(true);
     PythonCheckVerifier.verify("src/test/resources/checks/regex/abstractRegexCheckFlags.py", check);
