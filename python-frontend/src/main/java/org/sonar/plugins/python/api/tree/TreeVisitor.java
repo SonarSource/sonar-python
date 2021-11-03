@@ -179,5 +179,7 @@ public interface TreeVisitor {
 
   void visitLiteralPattern(LiteralPattern literalPattern);
 
+  void visitAsPattern(AsPattern asPattern);
+
   void visitGuard(Guard guard);
 }
