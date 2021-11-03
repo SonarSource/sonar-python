@@ -19,8 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,7 +35,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class CaseBlockImpl extends PyTree implements CaseBlock {
   private final Token caseKeyword;
-  private final List<Pattern> patterns;
+  private final Pattern pattern;
   @Nullable
   private final Guard guard;
   private final Token colon;
@@ -49,11 +47,11 @@ public class CaseBlockImpl extends PyTree implements CaseBlock {
   @Nullable
   private final Token dedent;
 
-  public CaseBlockImpl(Token caseKeyword, List<Pattern> patterns, @Nullable Guard guard, Token colon, @Nullable Token newLine,
+  public CaseBlockImpl(Token caseKeyword, Pattern pattern, @Nullable Guard guard, Token colon, @Nullable Token newLine,
     @Nullable Token indent, StatementList body, @Nullable Token dedent) {
 
     this.caseKeyword = caseKeyword;
-    this.patterns = patterns;
+    this.pattern = pattern;
     this.guard = guard;
     this.colon = colon;
     this.newLine = newLine;
@@ -69,8 +67,8 @@ public class CaseBlockImpl extends PyTree implements CaseBlock {
   }
 
   @Override
-  public List<Pattern> patterns() {
-    return patterns;
+  public Pattern pattern() {
+    return pattern;
   }
 
   @CheckForNull
@@ -96,8 +94,7 @@ public class CaseBlockImpl extends PyTree implements CaseBlock {
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(caseKeyword), patterns, Arrays.asList(guard, colon, newLine, indent, body, dedent))
-      .flatMap(List::stream)
+    return Stream.of(caseKeyword, pattern, guard, colon, newLine, indent, body, dedent)
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
   }

@@ -20,14 +20,13 @@
 package org.sonar.plugins.python.api.tree;
 
 
-import java.util.List;
 import javax.annotation.CheckForNull;
 
 /**
  * Case block
  *
  * <pre>
- *   {@link #caseKeyword()} {@link #patterns()} {@link #guard()}:
+ *   {@link #caseKeyword()} {@link #pattern()} {@link #guard()}:
  *     {@link #body()}
  * </pre>
  *
@@ -37,7 +36,7 @@ public interface CaseBlock extends Tree {
 
   Token caseKeyword();
 
-  List<Pattern> patterns();
+  Pattern pattern();
 
   @CheckForNull
   Guard guard();
