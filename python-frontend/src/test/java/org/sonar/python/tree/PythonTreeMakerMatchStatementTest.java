@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
+import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Guard;
@@ -156,5 +157,14 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
     assertThat(asPattern.alias().name()).isEqualTo("x");
     assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.NAME);
+  }
+
+  @Test
+  public void capture_pattern() {
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    CaseBlock caseBlock = parse("case x: ...", treeMaker::caseBlock);
+    CapturePattern capturePattern = (CapturePattern) caseBlock.pattern();
+    assertThat(capturePattern.name().name()).isEqualTo("x");
+    assertThat(capturePattern.children()).containsExactly(capturePattern.name());
   }
 }

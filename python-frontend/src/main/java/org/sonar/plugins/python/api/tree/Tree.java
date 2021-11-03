@@ -58,6 +58,8 @@ public interface Tree {
 
     CALL_EXPR(CallExpression.class),
 
+    CAPTURE_PATTERN(CapturePattern.class),
+
     CASE_BLOCK(CaseBlock.class),
 
     CLASSDEF(ClassDef.class),
