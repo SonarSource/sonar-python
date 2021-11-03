@@ -9,9 +9,14 @@ re.match(r'.*', "foo") # Noncompliant
 re.fullmatch(r'.*', "foo") # Noncompliant
 re.split(r'.*', "foo") # Noncompliant
 re.findall(r'.*', "foo") # Noncompliant
-re.finditer(r'.*', "foo") # Noncompliant
+re.finditer('.*', "foo") # Noncompliant
 
-re.sub('.*', "x", "a") # We only look at raw strings for now
+re.match('.*\N{GREEK SMALL LETTER FINAL SIGMA}', 'foo') # We do ignore not raw strings containing \N escape sequences
+re.match(r'.*\N{GREEK SMALL LETTER FINAL SIGMA}', 'foo') # Noncompliant
+
+some_var = 'foo'
+re.match(f'.*{some_var}', 'foo') # We do ignore f-strings that do contain an expression
+
 re.sub(r'.*' r'.*', "x", "a") # We do not look at concats for now
 re.sub() # Required arguments not provided
 re.not_relevant_method(r'.*', "x", "a")

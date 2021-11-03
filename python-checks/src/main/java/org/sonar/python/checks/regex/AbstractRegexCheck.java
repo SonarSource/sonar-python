@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -36,6 +37,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.PythonRegexIssueLocation;
@@ -100,11 +102,26 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
   }
 
   private Optional<RegexParseResult> regexForStringLiteral(StringLiteral literal, FlagSet flagSet) {
-    // TODO: for now we only handle strings with an "r" prefix. This will be extended.
-    if (literal.stringElements().size() == 1 && "r".equalsIgnoreCase(literal.stringElements().get(0).prefix())) {
+    if (shouldHandleStringLiteral(literal)) {
       return Optional.of(regexContext.regexForStringElement(literal.stringElements().get(0), flagSet));
     }
     return Optional.empty();
+  }
+
+  /**
+   * We do ignore strings in the following cases:
+   *  - It is a concatenation of multiple elements.
+   *  - It is an f-string containing expressions. We don't have a good mechanism to evaluate these expressions currently.
+   *  - The string is not raw and contains a \N{UNICODE NAME} escape sequence. In Java 8 we cannot make use of Character.codePointOf in the character parser (SONARPY-922).
+   */
+  private static boolean shouldHandleStringLiteral(StringLiteral literal) {
+    if (literal.stringElements().size() != 1) {
+      // We do not handle concatenations for now
+      return false;
+    }
+    StringElement stringElement = literal.stringElements().get(0);
+    return stringElement.formattedExpressions().isEmpty() &&
+      (stringElement.prefix().toLowerCase(Locale.ROOT).contains("r") || !stringElement.value().contains("\\N{"));
   }
 
   private static Optional<StringLiteral> patternArgStringLiteral(CallExpression regexFunctionCall) {
