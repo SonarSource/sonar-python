@@ -39,8 +39,7 @@ public class PythonAnalyzerRegexSource extends PythonRegexSource {
   private final boolean isRawString;
 
   public PythonAnalyzerRegexSource(StringElement s) {
-    // TODO: Do we need the quote? If yes, don't hardcode
-    super(s.trimmedQuotesValue(), '"');
+    super(s.trimmedQuotesValue());
     String prefix = s.prefix();
     Token firstToken = s.firstToken();
     sourceLine = firstToken.line();

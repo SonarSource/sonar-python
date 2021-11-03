@@ -16,8 +16,6 @@ def non_compliant(input):
     re.match(r"\".*?\"", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[^\"]*+".}}
     re.match(r".*?\w", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "\W*+".}}
     re.match(r".*?\W", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "\w*+".}}
-    re.match(r".*?\p{L}", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "\P{L}*+".}}
-    re.match(r".*?\P{L}", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "\p{L}*+".}}
     re.match(r"\[.*?\]", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[^\]]*+".}}
     re.match(r".+?[abc]", input)  # Noncompliant {{Replace this use of a reluctant quantifier with "[^abc]++".}}
     re.match(r"(?-U:\s)*?\S", input)

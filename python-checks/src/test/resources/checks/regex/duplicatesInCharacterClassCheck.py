@@ -90,7 +90,6 @@ def compliant(input):
     re.match(r"[[a-z&&b-e]c]", input)  # FN because we don't support intersections
     re.match(r"(?i)[A-_d-{]", input)  # FN because we ignore case insensitivity unless both ends of the ranges are letters
     re.match(r"(?i)[A-z_]", input)  # FN because A-z gets misinterpreted as A-Za-z due to the way we handle case insensitivity
-    re.match(r"[\p{Armenian}x]", input)  # FN because we don't support \p at the moment
     re.match(r"[\abc]", input)
     re.match(r'[\s\'"\:\{\}\[\],&\*\#\?]', input)
     re.match(r"[0-9\\d]", input)  # Compliant
