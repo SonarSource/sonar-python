@@ -58,8 +58,8 @@ public class AbstractRegexCheckTest {
 
     PythonVisitorContext fileContext = TestPythonVisitorRunner.createContext(FILE);
     SubscriptionVisitor.analyze(Collections.singletonList(check), fileContext);
-    assertThat(check.reportedRegexTrees).hasSize(11);
-    assertThat(fileContext.getIssues()).hasSize(11);
+    assertThat(check.reportedRegexTrees).hasSize(12);
+    assertThat(fileContext.getIssues()).hasSize(12);
   }
 
   @Test

@@ -11,6 +11,11 @@ re.split(r'.*', "foo") # Noncompliant
 re.findall(r'.*', "foo") # Noncompliant
 re.finditer('.*', "foo") # Noncompliant
 
+some_pattern = '.*' # Noncompliant
+re.match(some_pattern, 'some string')
+re.match(some_unknown_pattern, 'some string')
+re.match(get_pattern(), 'some string')
+
 re.match('.*\N{GREEK SMALL LETTER FINAL SIGMA}', 'foo') # We do ignore not raw strings containing \N escape sequences
 re.match(r'.*\N{GREEK SMALL LETTER FINAL SIGMA}', 'foo') # Noncompliant
 

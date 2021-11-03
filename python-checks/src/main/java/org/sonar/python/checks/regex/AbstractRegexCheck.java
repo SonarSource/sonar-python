@@ -35,11 +35,13 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.tree.TreeUtils;
@@ -129,9 +131,13 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     if (patternArgument == null) {
       return Optional.empty();
     }
-    Expression patternArgumentExpression = patternArgument.expression();
-    if (patternArgumentExpression.is(Tree.Kind.STRING_LITERAL)) {
-      return Optional.of((StringLiteral) patternArgumentExpression);
+    Expression patternValueExpression = patternArgument.expression();
+    if (patternValueExpression.is(Tree.Kind.NAME)) {
+      patternValueExpression = Expressions.singleAssignedValue((Name) patternValueExpression);
+    }
+
+    if (patternValueExpression != null && patternValueExpression.is(Tree.Kind.STRING_LITERAL)) {
+      return Optional.of((StringLiteral) patternValueExpression);
     }
     return Optional.empty();
   }
