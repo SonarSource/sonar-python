@@ -51,13 +51,12 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
 
     CaseBlock caseBlock = matchStatement.caseBlocks().get(0);
     assertThat(caseBlock.caseKeyword().value()).isEqualTo("case");
-    assertThat(caseBlock.patterns()).hasSize(1);
     assertThat(caseBlock.guard()).isNull();
     assertThat(caseBlock.body().statements()).extracting(Tree::getKind).containsExactly(Tree.Kind.EXPRESSION_STMT);
     assertThat(caseBlock.children()).extracting(Tree::getKind)
       .containsExactly(Tree.Kind.TOKEN, Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.STATEMENT_LIST);
 
-    Pattern pattern = caseBlock.patterns().get(0);
+    Pattern pattern = caseBlock.pattern();
     assertThat(pattern.getKind()).isEqualTo(Tree.Kind.LITERAL_PATTERN);
     LiteralPattern literalPattern = (LiteralPattern) pattern;
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.NUMBER);
@@ -113,37 +112,37 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   public void literal_patterns() {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse("case \"foo\": ...", treeMaker::caseBlock);
-    LiteralPattern literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    LiteralPattern literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
     assertThat(literalPattern.valueAsString()).isEqualTo("\"foo\"");
 
     caseBlock = parse("case \"foo\" \"bar\": ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
     assertThat(literalPattern.valueAsString()).isEqualTo("\"foo\"\"bar\"");
 
     caseBlock = parse("case -42: ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.NUMBER);
     assertThat(literalPattern.valueAsString()).isEqualTo("-42");
 
     caseBlock = parse("case 3 + 5j: ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.NUMBER);
     assertThat(literalPattern.valueAsString()).isEqualTo("3+5j");
 
     caseBlock = parse("case None: ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.NONE);
     assertThat(literalPattern.valueAsString()).isEqualTo("None");
 
     caseBlock = parse("case True: ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.BOOLEAN);
     assertThat(literalPattern.valueAsString()).isEqualTo("True");
 
     caseBlock = parse("case False: ...", treeMaker::caseBlock);
-    literalPattern = (LiteralPattern) caseBlock.patterns().get(0);
+    literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.BOOLEAN);
     assertThat(literalPattern.valueAsString()).isEqualTo("False");
   }

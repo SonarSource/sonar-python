@@ -30,7 +30,7 @@ public class CasePatternsTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.PATTERNS);
+    setRootRule(PythonGrammar.PATTERN);
   }
 
   @Test

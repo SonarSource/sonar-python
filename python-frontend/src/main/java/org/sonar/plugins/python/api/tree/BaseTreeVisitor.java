@@ -480,7 +480,7 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitCaseBlock(CaseBlock caseBlock) {
-    scan(caseBlock.patterns());
+    scan(caseBlock.pattern());
     scan(caseBlock.guard());
     scan(caseBlock.body());
   }

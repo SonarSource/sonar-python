@@ -804,7 +804,7 @@ public class PythonTreeMaker {
 
   public CaseBlock caseBlock(AstNode caseBlock) {
     Token caseKeyword = toPyToken(caseBlock.getTokens().get(0));
-    List<Pattern> patterns = patterns(caseBlock.getFirstChild(PythonGrammar.PATTERNS));
+    Pattern pattern = pattern(caseBlock.getFirstChild(PythonGrammar.PATTERN));
     Guard guard = null;
     AstNode guardNode = caseBlock.getFirstChild(PythonGrammar.GUARD);
     if (guardNode != null) {
@@ -813,7 +813,7 @@ public class PythonTreeMaker {
     Token colon = toPyToken(caseBlock.getFirstChild(PythonPunctuator.COLON).getToken());
     AstNode suite = caseBlock.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(suite);
-    return new CaseBlockImpl(caseKeyword, patterns, guard, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
+    return new CaseBlockImpl(caseKeyword, pattern, guard, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
   }
 
   public Guard guard(AstNode guardNode) {
@@ -822,7 +822,7 @@ public class PythonTreeMaker {
     return new GuardImpl(ifKeyword, condition);
   }
 
-  private static List<Pattern> patterns(AstNode pattern) {
+  private static Pattern pattern(AstNode pattern) {
     // TODO: consider OR Patterns and other kind of patterns
     AstNode literalPattern = pattern.getFirstChild(PythonGrammar.LITERAL_PATTERN);
     LiteralPattern.LiteralKind literalKind;
@@ -836,7 +836,7 @@ public class PythonTreeMaker {
       literalKind = LiteralPattern.LiteralKind.BOOLEAN;
     }
     List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).collect(Collectors.toList());
-    return Collections.singletonList(new LiteralPatternImpl(tokens, literalKind));
+    return new LiteralPatternImpl(tokens, literalKind);
   }
 
 
