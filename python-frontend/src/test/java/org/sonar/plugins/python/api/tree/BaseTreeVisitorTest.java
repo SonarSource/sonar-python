@@ -400,4 +400,25 @@ public class BaseTreeVisitorTest extends RuleTest {
 
     verify(visitor).visitBinaryExpression(((BinaryExpression) guard.condition()));
   }
+
+  @Test
+  public void as_pattern() {
+    setRootRule(PythonGrammar.AS_PATTERN);
+    AsPattern pattern = ((AsPattern) parse("'foo' as x", PythonTreeMaker::pattern));
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    pattern.accept(visitor);
+
+    verify(visitor).visitLiteralPattern((LiteralPattern) pattern.pattern());
+    verify(visitor).visitName(pattern.alias());
+  }
+
+  @Test
+  public void capture_pattern() {
+    setRootRule(PythonGrammar.CLOSED_PATTERN);
+    CapturePattern pattern = ((CapturePattern) parse("x", PythonTreeMaker::pattern));
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    pattern.accept(visitor);
+
+    verify(visitor).visitName(pattern.name());
+  }
 }

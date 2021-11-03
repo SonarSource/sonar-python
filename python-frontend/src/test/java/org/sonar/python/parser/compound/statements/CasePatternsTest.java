@@ -47,6 +47,7 @@ public class CasePatternsTest extends RuleTest {
 
   @Test
   public void booleans() {
+    setRootRule(PythonGrammar.LITERAL_PATTERN);
     assertThat(p)
       .matches("True")
       .matches("False")
@@ -71,6 +72,13 @@ public class CasePatternsTest extends RuleTest {
   public void as_patterns() {
     assertThat(p)
       .matches("'foo' as x")
+      .matches("x as y")
       .notMatches("'foo' as x as y");
+  }
+
+  @Test
+  public void capture() {
+    assertThat(p)
+      .matches("x");
   }
 }

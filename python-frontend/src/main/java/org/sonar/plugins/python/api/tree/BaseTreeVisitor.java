@@ -500,4 +500,9 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitGuard(Guard guard) {
     scan(guard.condition());
   }
+
+  @Override
+  public void visitCapturePattern(CapturePattern capturePattern) {
+    scan(capturePattern.name());
+  }
 }

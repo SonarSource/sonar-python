@@ -182,4 +182,6 @@ public interface TreeVisitor {
   void visitAsPattern(AsPattern asPattern);
 
   void visitGuard(Guard guard);
+
+  void visitCapturePattern(CapturePattern capturePattern);
 }
