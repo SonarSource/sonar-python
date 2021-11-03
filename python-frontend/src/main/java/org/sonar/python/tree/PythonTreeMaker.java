@@ -823,14 +823,11 @@ public class PythonTreeMaker {
     return new GuardImpl(ifKeyword, condition);
   }
 
-  private static Pattern pattern(AstNode pattern) {
-    // TODO: consider OR Patterns and other kind of patterns
+  public static Pattern pattern(AstNode pattern) {
     if (pattern.is(PythonGrammar.CLOSED_PATTERN)) {
-      return literalPattern(pattern.getFirstChild());
-    } else if (pattern.is(PythonGrammar.AS_PATTERN)) {
-      return asPattern(pattern);
+      return closedPattern(pattern);
     }
-    throw new IllegalStateException(String.format("Pattern %s not recognized.", pattern.getName()));
+    return asPattern(pattern);
   }
 
   private static AsPattern asPattern(AstNode asPattern) {
@@ -838,6 +835,16 @@ public class PythonTreeMaker {
     Token asKeyword = toPyToken(asPattern.getFirstChild(PythonKeyword.AS).getToken());
     Name alias = name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild());
     return new AsPatternImpl(pattern, asKeyword, alias);
+  }
+
+  private static Pattern closedPattern(AstNode closedPattern) {
+    AstNode astNode = closedPattern.getFirstChild();
+    if (astNode.is(PythonGrammar.LITERAL_PATTERN)) {
+      return literalPattern(astNode);
+    } else if (astNode.is(PythonGrammar.CAPTURE_PATTERN)) {
+      return new CapturePatternImpl(name(astNode.getFirstChild()));
+    }
+    throw new IllegalStateException(String.format("Pattern %s not recognized.", closedPattern.getName()));
   }
 
   private static LiteralPattern literalPattern(AstNode literalPattern) {
