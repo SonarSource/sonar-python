@@ -42,13 +42,14 @@ public class SubscriptionVisitorTest {
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
           StringElement stringElement = (StringElement)ctx.syntaxNode();
-          RegexParseResult resultWithNoFlags = ((RegexContext) ctx).regexForStringElement(stringElement, new FlagSet());
-          RegexParseResult resultWithFlags = ((RegexContext) ctx).regexForStringElement(stringElement, new FlagSet(Pattern.MULTILINE));
+          RegexContext regexCtx = (RegexContext) ctx;
+          RegexParseResult resultWithNoFlags = regexCtx.regexForStringElement(stringElement, new FlagSet());
+          RegexParseResult resultWithFlags = regexCtx.regexForStringElement(stringElement, new FlagSet(Pattern.MULTILINE));
 
           assertThat(resultWithNoFlags).isNotSameAs(resultWithFlags);
           // When we retrieve them again, it will be the same instance retrieved from the cache.
-          assertThat(resultWithNoFlags).isSameAs(((RegexContext) ctx).regexForStringElement(stringElement, new FlagSet()));
-          assertThat(resultWithFlags).isSameAs(((RegexContext) ctx).regexForStringElement(stringElement, new FlagSet(Pattern.MULTILINE)));
+          assertThat(resultWithNoFlags).isSameAs(regexCtx.regexForStringElement(stringElement, new FlagSet()));
+          assertThat(resultWithFlags).isSameAs(regexCtx.regexForStringElement(stringElement, new FlagSet(Pattern.MULTILINE)));
         });
       }
     };
