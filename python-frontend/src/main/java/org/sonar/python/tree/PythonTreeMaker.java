@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -804,7 +805,7 @@ public class PythonTreeMaker {
 
   public CaseBlock caseBlock(AstNode caseBlock) {
     Token caseKeyword = toPyToken(caseBlock.getTokens().get(0));
-    Pattern pattern = pattern(caseBlock.getFirstChild(PythonGrammar.PATTERN));
+    Pattern pattern = pattern(caseBlock.getFirstChild(PythonGrammar.PATTERN).getFirstChild());
     Guard guard = null;
     AstNode guardNode = caseBlock.getFirstChild(PythonGrammar.GUARD);
     if (guardNode != null) {
@@ -824,7 +825,22 @@ public class PythonTreeMaker {
 
   private static Pattern pattern(AstNode pattern) {
     // TODO: consider OR Patterns and other kind of patterns
-    AstNode literalPattern = pattern.getFirstChild(PythonGrammar.LITERAL_PATTERN);
+    if (pattern.is(PythonGrammar.CLOSED_PATTERN)) {
+      return literalPattern(pattern.getFirstChild());
+    } else if (pattern.is(PythonGrammar.AS_PATTERN)) {
+      return asPattern(pattern);
+    }
+    throw new IllegalStateException(String.format("Pattern %s not recognized.", pattern.getName()));
+  }
+
+  private static AsPattern asPattern(AstNode asPattern) {
+    Pattern pattern = literalPattern(asPattern.getFirstChild(PythonGrammar.CLOSED_PATTERN).getFirstChild());
+    Token asKeyword = toPyToken(asPattern.getFirstChild(PythonKeyword.AS).getToken());
+    Name alias = name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild());
+    return new AsPatternImpl(pattern, asKeyword, alias);
+  }
+
+  private static LiteralPattern literalPattern(AstNode literalPattern) {
     LiteralPattern.LiteralKind literalKind;
     if (literalPattern.hasDirectChildren(PythonGrammar.COMPLEX_NUMBER, PythonGrammar.SIGNED_NUMBER)) {
       literalKind = LiteralPattern.LiteralKind.NUMBER;
