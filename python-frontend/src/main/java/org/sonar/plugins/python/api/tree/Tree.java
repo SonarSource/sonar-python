@@ -42,6 +42,8 @@ public interface Tree {
   enum Kind {
     ALIASED_NAME(AliasedName.class),
 
+    AS_PATTERN(AsPattern.class),
+
     REGULAR_ARGUMENT(RegularArgument.class),
 
     ARG_LIST(ArgList.class),

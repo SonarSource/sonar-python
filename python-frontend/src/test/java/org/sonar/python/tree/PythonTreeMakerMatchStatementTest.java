@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Guard;
@@ -145,5 +146,15 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.BOOLEAN);
     assertThat(literalPattern.valueAsString()).isEqualTo("False");
+  }
+
+  @Test
+  public void as_pattern() {
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    CaseBlock caseBlock = parse("case \"foo\" as x: ...", treeMaker::caseBlock);
+    AsPattern asPattern = (AsPattern) caseBlock.pattern();
+    assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
+    assertThat(asPattern.alias().name()).isEqualTo("x");
+    assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.NAME);
   }
 }
