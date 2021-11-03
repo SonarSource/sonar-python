@@ -38,14 +38,3 @@ def false_positives():
     re.compile(r'^\s+\[([\s*[0-9]*)\] ([a-zA-Z0-9_]*)')  # Noncompliant
     re.compile(r'([^,[\]]*)(\[([^\]]+)\])?$')  # Noncompliant
     re.compile(r'{.*}')  # Noncompliant
-    # Noncompliant@+3
-    re.compile(
-        r"""
-        # Start with a literal "@{".
-        @\{
-          # Group at least 1 symbol, not "}".
-          ([^}]+)
-        # Followed by a closing "}"
-        \}
-        """,
-        flags=re.VERBOSE)
