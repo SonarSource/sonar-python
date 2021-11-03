@@ -66,4 +66,11 @@ public class CasePatternsTest extends RuleTest {
       .matches("3 + 4j")
       .matches("42j");
   }
+
+  @Test
+  public void as_patterns() {
+    assertThat(p)
+      .matches("'foo' as x")
+      .notMatches("'foo' as x as y");
+  }
 }

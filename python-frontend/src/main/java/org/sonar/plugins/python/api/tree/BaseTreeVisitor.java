@@ -491,6 +491,12 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitAsPattern(AsPattern asPattern) {
+    scan(asPattern.pattern());
+    scan(asPattern.alias());
+  }
+
+  @Override
   public void visitGuard(Guard guard) {
     scan(guard.condition());
   }
