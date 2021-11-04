@@ -831,7 +831,7 @@ public class PythonTreeMaker {
   }
 
   private static AsPattern asPattern(AstNode asPattern) {
-    Pattern pattern = literalPattern(asPattern.getFirstChild(PythonGrammar.CLOSED_PATTERN).getFirstChild());
+    Pattern pattern = closedPattern(asPattern.getFirstChild(PythonGrammar.CLOSED_PATTERN));
     Token asKeyword = toPyToken(asPattern.getFirstChild(PythonKeyword.AS).getToken());
     Name alias = name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild());
     return new AsPatternImpl(pattern, asKeyword, alias);
