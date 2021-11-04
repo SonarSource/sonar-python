@@ -81,4 +81,29 @@ public class CasePatternsTest extends RuleTest {
     assertThat(p)
       .matches("x");
   }
+
+  @Test
+  public void sequence() {
+    assertThat(p)
+      .matches("[]")
+      .matches("['foo', 'bar']")
+      .matches("['foo', x]")
+      .matches("['foo', *tail]")
+      .matches("[head, *tail]")
+      .matches("['foo' as head]");
+
+    assertThat(p)
+      .matches("()")
+      .matches("(x,)")
+      .matches("('foo', 'bar')")
+      .matches("(head, *tail)");
+
+    setRootRule(PythonGrammar.SEQUENCE_PATTERN);
+    assertThat(p).notMatches("(x)"); // this is a group pattern instead
+
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    assertThat(p)
+      .matches("case 'foo', x, z: ...");
+
+  }
 }

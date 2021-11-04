@@ -421,4 +421,28 @@ public class BaseTreeVisitorTest extends RuleTest {
 
     verify(visitor).visitName(pattern.name());
   }
+
+  @Test
+  public void sequence_pattern() {
+    setRootRule(PythonGrammar.CLOSED_PATTERN);
+    SequencePattern pattern = ((SequencePattern) parse("[x, y]", PythonTreeMaker::pattern));
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    pattern.accept(visitor);
+
+    verify(visitor).visitCapturePattern(((CapturePattern) pattern.elements().get(0)));
+    verify(visitor).visitCapturePattern(((CapturePattern) pattern.elements().get(1)));
+  }
+
+  @Test
+  public void star_pattern() {
+    setRootRule(PythonGrammar.CLOSED_PATTERN);
+    SequencePattern pattern = ((SequencePattern) parse("[x, *rest]", PythonTreeMaker::pattern));
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    pattern.accept(visitor);
+
+    verify(visitor).visitCapturePattern(((CapturePattern) pattern.elements().get(0)));
+    StarPattern starPattern = (StarPattern) pattern.elements().get(1);
+    verify(visitor).visitStarPattern(starPattern);
+    verify(visitor).visitCapturePattern(starPattern.capturePattern());
+  }
 }
