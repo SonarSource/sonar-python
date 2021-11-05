@@ -20,16 +20,17 @@
 package org.sonar.plugins.python.api.tree;
 
 /**
- * Capture Pattern
+ * Star Pattern
+ * Only used inside sequence patterns
  *
  * <pre>
- *   case x:
+ *   case [x, y, *others]:
  *     ...
  * </pre>
  *
- * See https://docs.python.org/3/reference/compound_stmts.html#capture-patterns
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-python-grammar-star_pattern
  */
-public interface CapturePattern extends Pattern {
+public interface StarPattern extends Pattern {
 
-  Name name();
+  CapturePattern capturePattern();
 }

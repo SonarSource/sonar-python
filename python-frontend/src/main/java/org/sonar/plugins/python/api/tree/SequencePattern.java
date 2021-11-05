@@ -19,17 +19,23 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import java.util.List;
+
 /**
- * Capture Pattern
+ * Sequence Pattern
  *
  * <pre>
- *   case x:
+ *   case [x, y, z]:
+ *     ...
+ *   case (x, y, z):
+ *     ...
+ *   case x, y, z:
  *     ...
  * </pre>
  *
- * See https://docs.python.org/3/reference/compound_stmts.html#capture-patterns
+ * See https://docs.python.org/3/reference/compound_stmts.html#sequence-patterns
  */
-public interface CapturePattern extends Pattern {
+public interface SequencePattern extends Pattern {
 
-  Name name();
+  List<Pattern> elements();
 }

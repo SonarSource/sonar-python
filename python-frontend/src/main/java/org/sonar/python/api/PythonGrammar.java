@@ -154,11 +154,17 @@ public enum PythonGrammar implements GrammarRuleKey {
   CASE_BLOCK,
   GUARD,
 
+  PATTERNS,
   PATTERN,
   AS_PATTERN,
   CLOSED_PATTERN,
   LITERAL_PATTERN,
   CAPTURE_PATTERN,
+  SEQUENCE_PATTERN,
+  STAR_PATTERN,
+  MAYBE_STAR_PATTERN,
+  MAYBE_SEQUENCE_PATTERN,
+  OPEN_SEQUENCE_PATTERN,
 
   SIGNED_NUMBER,
   COMPLEX_NUMBER,
@@ -455,13 +461,24 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(MATCH_STMT).is("match", SUBJECT_EXPR, ":", NEWLINE, INDENT, b.oneOrMore(CASE_BLOCK), DEDENT);
     b.rule(SUBJECT_EXPR).is(STAR_NAMED_EXPRESSIONS);
-    b.rule(CASE_BLOCK).is("case", PATTERN, b.optional(GUARD), ":", SUITE);
+    b.rule(CASE_BLOCK).is("case", PATTERNS, b.optional(GUARD), ":", SUITE);
     b.rule(GUARD).is("if", NAMED_EXPR_TEST);
 
+    b.rule(PATTERNS).is(b.firstOf(OPEN_SEQUENCE_PATTERN, PATTERN));
     b.rule(PATTERN).is(b.firstOf(AS_PATTERN, CLOSED_PATTERN));
-    b.rule(CLOSED_PATTERN).is(b.firstOf(LITERAL_PATTERN, CAPTURE_PATTERN));
+    b.rule(CLOSED_PATTERN).is(b.firstOf(LITERAL_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
     b.rule(AS_PATTERN).is(CLOSED_PATTERN, "as", CAPTURE_PATTERN);
     b.rule(CAPTURE_PATTERN).is(NAME);
+
+    b.rule(SEQUENCE_PATTERN).is(b.firstOf(
+      b.sequence("[", b.optional(MAYBE_SEQUENCE_PATTERN) , "]"),
+      b.sequence("(", b.optional(OPEN_SEQUENCE_PATTERN), ")")
+    ));
+    b.rule(OPEN_SEQUENCE_PATTERN).is(MAYBE_STAR_PATTERN, ",", b.optional(MAYBE_SEQUENCE_PATTERN));
+    b.rule(MAYBE_SEQUENCE_PATTERN).is(MAYBE_STAR_PATTERN, b.zeroOrMore(",", MAYBE_STAR_PATTERN), b.optional(","));
+    b.rule(MAYBE_STAR_PATTERN).is(b.firstOf(STAR_PATTERN, PATTERN));
+    // TODO: ADD wildcard pattern for "*_"
+    b.rule(STAR_PATTERN).is("*", CAPTURE_PATTERN);
 
     b.rule(LITERAL_PATTERN).is(b.firstOf(
       COMPLEX_NUMBER,

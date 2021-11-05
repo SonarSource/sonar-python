@@ -138,9 +138,13 @@ public interface Tree {
 
     RETURN_STMT(ReturnStatement.class),
 
+    SEQUENCE_PATTERN(SequencePattern.class),
+
     SET_LITERAL(SetLiteral.class),
 
     STATEMENT_LIST(StatementList.class),
+
+    STAR_PATTERN(StarPattern.class),
 
     STRING_LITERAL(StringLiteral.class),
 
