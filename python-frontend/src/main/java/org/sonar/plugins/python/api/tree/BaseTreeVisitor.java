@@ -505,4 +505,14 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitCapturePattern(CapturePattern capturePattern) {
     scan(capturePattern.name());
   }
+
+  @Override
+  public void visitSequencePattern(SequencePattern sequencePattern) {
+    scan(sequencePattern.elements());
+  }
+
+  @Override
+  public void visitStarPattern(StarPattern starPattern) {
+    scan(starPattern.capturePattern());
+  }
 }

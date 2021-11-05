@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import com.sonar.sslr.api.RecognitionException;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
@@ -29,7 +30,10 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.Pattern;
+import org.sonar.plugins.python.api.tree.SequencePattern;
+import org.sonar.plugins.python.api.tree.StarPattern;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
@@ -44,26 +48,26 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   public void match_statement() {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match command:\n  case 42:...\n", treeMaker::matchStatement);
-    assertThat(matchStatement.getKind()).isEqualTo(Tree.Kind.MATCH_STMT);
+    assertThat(matchStatement.getKind()).isEqualTo(Kind.MATCH_STMT);
     assertThat(matchStatement.matchKeyword().value()).isEqualTo("match");
-    assertThat(matchStatement.subjectExpression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(matchStatement.subjectExpression().getKind()).isEqualTo(Kind.NAME);
     assertThat(matchStatement.caseBlocks()).hasSize(1);
     assertThat(matchStatement.children()).extracting(Tree::getKind)
-      .containsExactly(Tree.Kind.TOKEN, Tree.Kind.NAME, Tree.Kind.TOKEN, Tree.Kind.TOKEN, Tree.Kind.TOKEN, Tree.Kind.CASE_BLOCK, Tree.Kind.TOKEN);
+      .containsExactly(Kind.TOKEN, Kind.NAME, Kind.TOKEN, Kind.TOKEN, Kind.TOKEN, Kind.CASE_BLOCK, Kind.TOKEN);
 
     CaseBlock caseBlock = matchStatement.caseBlocks().get(0);
     assertThat(caseBlock.caseKeyword().value()).isEqualTo("case");
     assertThat(caseBlock.guard()).isNull();
-    assertThat(caseBlock.body().statements()).extracting(Tree::getKind).containsExactly(Tree.Kind.EXPRESSION_STMT);
+    assertThat(caseBlock.body().statements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
     assertThat(caseBlock.children()).extracting(Tree::getKind)
-      .containsExactly(Tree.Kind.TOKEN, Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.STATEMENT_LIST);
+      .containsExactly(Kind.TOKEN, Kind.LITERAL_PATTERN, Kind.TOKEN, Kind.STATEMENT_LIST);
 
     Pattern pattern = caseBlock.pattern();
-    assertThat(pattern.getKind()).isEqualTo(Tree.Kind.LITERAL_PATTERN);
+    assertThat(pattern.getKind()).isEqualTo(Kind.LITERAL_PATTERN);
     LiteralPattern literalPattern = (LiteralPattern) pattern;
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.NUMBER);
     assertThat(literalPattern.children()).extracting(Tree::getKind)
-      .containsExactly(Tree.Kind.TOKEN);
+      .containsExactly(Kind.TOKEN);
   }
 
   @Test
@@ -71,22 +75,22 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match (x, y):\n  case 42:...\n", treeMaker::matchStatement);
     Expression subjectExpression = matchStatement.subjectExpression();
-    assertThat(subjectExpression.getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(subjectExpression.getKind()).isEqualTo(Kind.TUPLE);
     assertThat(((Tuple) subjectExpression).elements()).hasSize(2);
 
     matchStatement = parse("match x, y:\n  case 42:...\n", treeMaker::matchStatement);
     subjectExpression = matchStatement.subjectExpression();
-    assertThat(subjectExpression.getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(subjectExpression.getKind()).isEqualTo(Kind.TUPLE);
     assertThat(((Tuple) subjectExpression).elements()).hasSize(2);
 
     matchStatement = parse("match x,:\n  case 42:...\n", treeMaker::matchStatement);
     subjectExpression = matchStatement.subjectExpression();
-    assertThat(subjectExpression.getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(subjectExpression.getKind()).isEqualTo(Kind.TUPLE);
     assertThat(((Tuple) subjectExpression).elements()).hasSize(1);
 
     matchStatement = parse("match (x):\n  case 42:...\n", treeMaker::matchStatement);
     subjectExpression = matchStatement.subjectExpression();
-    assertThat(subjectExpression.getKind()).isEqualTo(Tree.Kind.PARENTHESIZED);
+    assertThat(subjectExpression.getKind()).isEqualTo(Kind.PARENTHESIZED);
   }
 
   @Test
@@ -94,7 +98,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match [x, y]:\n  case 42:...\n", treeMaker::matchStatement);
     Expression subjectExpression = matchStatement.subjectExpression();
-    assertThat(subjectExpression.getKind()).isEqualTo(Tree.Kind.LIST_LITERAL);
+    assertThat(subjectExpression.getKind()).isEqualTo(Kind.LIST_LITERAL);
     assertThat(((ListLiteral) subjectExpression).elements().expressions()).hasSize(2);
   }
 
@@ -105,9 +109,9 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     Guard guard = caseBlock.guard();
     assertThat(guard).isNotNull();
     assertThat(guard.ifKeyword().value()).isEqualTo("if");
-    assertThat(guard.condition().getKind()).isEqualTo(Tree.Kind.IS);
+    assertThat(guard.condition().getKind()).isEqualTo(Kind.IS);
     assertThat(guard.children()).extracting(Tree::getKind)
-      .containsExactly(Tree.Kind.TOKEN, Tree.Kind.IS);
+      .containsExactly(Kind.TOKEN, Kind.IS);
   }
 
   @Test
@@ -170,5 +174,54 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     CapturePattern capturePattern = (CapturePattern) caseBlock.pattern();
     assertThat(capturePattern.name().name()).isEqualTo("x");
     assertThat(capturePattern.children()).containsExactly(capturePattern.name());
+  }
+
+  @Test
+  public void sequence_pattern() {
+    assertSequenceElements(pattern("case [x, y]: ..."), "x", "y");
+    assertSequenceElements(pattern("case (x, y): ..."), "x", "y");
+    assertSequenceElements(pattern("case [x]: ..."), "x");
+    assertSequenceElements(pattern("case (x,): ..."), "x");
+    assertSequenceElements(pattern("case [x, y,]: ..."), "x", "y");
+    assertSequenceElements(pattern("case (x, y,): ..."), "x", "y");
+    assertThat(((SequencePattern) pattern("case []: ...")).elements()).isEmpty();
+    assertThat(((SequencePattern) pattern("case (): ...")).elements()).isEmpty();
+    assertSequenceElements(pattern("case ['foo' as head]: ..."), Kind.AS_PATTERN);
+  }
+
+  @Test(expected = RecognitionException.class)
+  public void not_a_sequence_pattern() {
+    // TODO: assert this is a group pattern and not a sequence pattern, when the former will be implemented
+    pattern("case (x): ...");
+  }
+
+  @Test
+  public void sequence_pattern_with_star_pattern() {
+    SequencePattern sequencePattern = pattern("case [head, *tail]: ...");
+   assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
+
+    StarPattern starPattern = (StarPattern) sequencePattern.elements().get(1);
+    assertThat(starPattern.capturePattern().name().name()).isEqualTo("tail");
+  }
+
+  @Test
+  public void sequence_pattern_without_parens() {
+    assertSequenceElements(pattern("case x, y: ..."), "x", "y");
+    assertSequenceElements(pattern("case x,: ..."), "x");
+  }
+
+  private void assertSequenceElements(SequencePattern sequencePattern, String... elements) {
+    assertThat(sequencePattern.elements()).extracting(t -> ((CapturePattern) t).name().name()).containsExactly(elements);
+  }
+
+  private void assertSequenceElements(SequencePattern sequencePattern, Kind... elements) {
+    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(elements);
+  }
+
+  @SuppressWarnings("unchecked")
+  private <T extends Pattern>  T pattern(String code) {
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    CaseBlock caseBlock = parse(code, treeMaker::caseBlock);
+    return (T) caseBlock.pattern();
   }
 }
