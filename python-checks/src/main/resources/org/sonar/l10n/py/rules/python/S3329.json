@@ -1,5 +1,5 @@
 {
-  "title": "Cipher Block Chaining IV\u0027s should be unpredictable",
+  "title": "Cipher Block Chaining IVs should be unpredictable",
   "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {
@@ -17,9 +17,10 @@
   "scope": "Main",
   "securityStandards": {
     "CWE": [
-      330,
       329,
-      340
+      330,
+      340,
+      1204
     ],
     "OWASP": [
       "A6"
@@ -29,6 +30,10 @@
     ],
     "MASVS": [
       "MSTG-CRYPTO-6"
+    ],
+    "OWASP Top 10 2021": [
+      "A2"
     ]
-  }
+  },
+  "quickfix": "unknown"
 }

@@ -1,7 +1,7 @@
 <p>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can
 lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of
 uncompressed data. To achieve this extreme <a href="https://en.wikipedia.org/wiki/Data_compression_ratio">compression ratio</a>, attackers will
-compress irrelevant data (eg: a long string of repeated bytes). </p>
+compress irrelevant data (eg: a long string of repeated bytes).</p>
 <h2>Ask Yourself Whether</h2>
 <p>Archives to expand are untrusted and:</p>
 <ul>
@@ -16,25 +16,111 @@ compress irrelevant data (eg: a long string of repeated bytes). </p>
   1 to 3. </li>
   <li> Define and control the threshold for maximum total size of the uncompressed data. </li>
   <li> Count the number of file entries extracted from the archive and abort the extraction if their number is greater than a predefined threshold, in
-  particular it's not recommended to recursively expand archives (an entry of an archive could be also an archive). </li>
+  particular it’s not recommended to recursively expand archives (an entry of an archive could be also an archive). </li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>For <a href="https://docs.python.org/3.5/library/tarfile.html">tarfile</a> module:</p>
 <pre>
 import tarfile
 
-tar = tarfile.open("attachment.tar.gz")  # Sensitive
-tar.extractall()
-tar.close()
+tfile = tarfile.open("TarBomb.tar")
+tfile.extractall('./tmp/')  # Sensitive
+tfile.close()
+</pre>
+<p>For <a href="https://docs.python.org/dev/library/zipfile.html">zipfile</a> module:</p>
+<pre>
+import zipfile
+
+zfile = zipfile.ZipFile('ZipBomb.zip', 'r')
+zfile.extractall('./tmp/') # Sensitive
+zfile.close()
+</pre>
+<h2>Compliant Solution</h2>
+<p>For <a href="https://docs.python.org/3.5/library/tarfile.html">tarfile</a> module:</p>
+<pre>
+import tarfile
+
+THRESHOLD_ENTRIES = 10000
+THRESHOLD_SIZE = 1000000000
+THRESHOLD_RATIO = 10
+
+totalSizeArchive = 0;
+totalEntryArchive = 0;
+
+tfile = tarfile.open("TarBomb.tar")
+for entry in tfile:
+  tarinfo = tfile.extractfile(entry)
+
+  totalEntryArchive += 1
+  sizeEntry = 0
+  result = b''
+  while True:
+    sizeEntry += 1024
+    totalSizeArchive += 1024
+
+    ratio = sizeEntry / entry.size
+    if ratio &gt; THRESHOLD_RATIO:
+      # ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
+      break
+
+    chunk = tarinfo.read(1024)
+    if not chunk:
+      break
+
+    result += chunk
+
+  if totalEntryArchive &gt; THRESHOLD_ENTRIES:
+    # too much entries in this archive, can lead to inodes exhaustion of the system
+    break
+
+  if totalSizeArchive &gt; THRESHOLD_SIZE:
+    # the uncompressed data size is too much for the application resource capacity
+    break
+
+tfile.close()
+</pre>
+<p>For <a href="https://docs.python.org/dev/library/zipfile.html">zipfile</a> module:</p>
+<pre>
+import zipfile
+
+THRESHOLD_ENTRIES = 10000
+THRESHOLD_SIZE = 1000000000
+THRESHOLD_RATIO = 10
+
+totalSizeArchive = 0;
+totalEntryArchive = 0;
+
+zfile = zipfile.ZipFile('ZipBomb.zip', 'r')
+for zinfo in zfile.infolist():
+    print('File', zinfo.filename)
+    data = zfile.read(zinfo)
+
+    totalEntryArchive += 1
+
+    totalSizeArchive = totalSizeArchive + len(data)
+    ratio = len(data) / zinfo.compress_size
+    if ratio &gt; THRESHOLD_RATIO:
+      # ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
+      break
+
+    if totalSizeArchive &gt; THRESHOLD_SIZE:
+      # the uncompressed data size is too much for the application resource capacity
+      break
+
+    if totalEntryArchive &gt; THRESHOLD_ENTRIES:
+      # too much entries in this archive, can lead to inodes exhaustion of the system
+      break
+
+zfile.close()
 </pre>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP Top 10 2021 Category A1</a> - Broken Access Control </li>
+  <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>
   <li> <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> -
   Security Misconfiguration </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/409.html">MITRE, CWE-409</a> - Improper Handling of Highly Compressed Data (Data Amplification)
   </li>
-  <li> <a href="https://wiki.sei.cmu.edu/confluence/display/java/IDS04-J.+Safely+extract+files+from+ZipInputStream">CERT, IDS04-J.</a> - Safely
-  extract files from ZipInputStream </li>
   <li> <a href="https://www.bamsoftware.com/hacks/zipbomb/">bamsoftware.com</a> - A better Zip Bomb </li>
 </ul>
 
