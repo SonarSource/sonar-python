@@ -31,12 +31,6 @@ def non_compliant(input):
     re.match(r"[\"\".]", input)  # Noncompliant
     re.match(r"[\x{F600}-\x{F637}\x{F608}]", input)  # Noncompliant
     re.match(r"[\Qxx\E]", input)  # Noncompliant
-    re.match(r"[[a][a]]", input)  # Noncompliant
-    re.match(r"[[abc][b]]", input)  # Noncompliant
-    re.match(r"[[^a]b]", input)  # Noncompliant
-    re.match(r"[[^a]z]", input)  # Noncompliant
-    re.match(r"[a[^z]]", input)  # Noncompliant
-    re.match(r"[z[^a]]", input)  # Noncompliant
     re.match(r"[\s\Sx]", input)  # Noncompliant
     re.match(r"(?U)[\s\Sx]", input)  # Noncompliant
     re.match(r"[\w\d]", input)  # Noncompliant
@@ -54,6 +48,8 @@ def non_compliant(input):
     re.match(r"(?i)[äÄ]", input) # Noncompliant
     re.match(r"(?i)[Ä-Üä]", input) # Noncompliant
     re.match(r"(?i)[a-Öö]", input) # Noncompliant
+    re.match(r"[[^\s\S]x]", input) # Noncompliant
+    re.match(r"(?U)[[^\W]a]", input)  # Noncompliant
 
 
 def compliant(input):
@@ -61,7 +57,6 @@ def compliant(input):
     re.match(r"[0-9][0-9]?", input)
     re.match(r"[xX]", input)
     re.match(r"[\s\S]", input)
-    re.match(r"[[^\s\S]x]", input)
     re.match(r"(?U)[\s\S]", input)
     re.match(r"(?U)[\S\u0085\u2028\u2029]", input)
     re.match(r"[\d\D]", input)
@@ -85,8 +80,6 @@ def compliant(input):
     re.match(r"[z-a9-0]", input)  # Illegal character class should not make the check explode
     re.match(r"[aa", input)  # Check should not run on syntactically invalid regexen
     re.match(r"(?U)[\wä]", input)  # False negative because we don't support Unicode characters in \w and \W
-    re.match(r"(?U)[[^\W]a]", input)  # False negative because once we negate a character class whose contents we don't
-    # fully understand, we ignore it to avoid false positives
     re.match(r"[[a-z&&b-e]c]", input)  # FN because we don't support intersections
     re.match(r"(?i)[A-_d-{]", input)  # FN because we ignore case insensitivity unless both ends of the ranges are letters
     re.match(r"(?i)[A-z_]", input)  # FN because A-z gets misinterpreted as A-Za-z due to the way we handle case insensitivity
