@@ -827,20 +827,31 @@ public class PythonTreeMaker {
   }
 
   public static Pattern pattern(AstNode pattern) {
-    if (pattern.is(PythonGrammar.CLOSED_PATTERN)) {
-      return closedPattern(pattern);
+    if (pattern.is(PythonGrammar.OR_PATTERN)) {
+      return orPattern(pattern);
     }
     return asPattern(pattern);
   }
 
+  private static Pattern orPattern(AstNode pattern) {
+    List<Token> separators = punctuators(pattern, PythonPunctuator.OR);
+    if (separators.isEmpty()) {
+      return closedPattern(pattern.getFirstChild(PythonGrammar.CLOSED_PATTERN));
+    }
+    List<Pattern> patterns = pattern.getChildren(PythonGrammar.CLOSED_PATTERN).stream()
+      .map(PythonTreeMaker::closedPattern)
+      .collect(Collectors.toList());
+    return new OrPatternImpl(patterns, separators);
+  }
+
   private static AsPattern asPattern(AstNode asPattern) {
-    Pattern pattern = closedPattern(asPattern.getFirstChild(PythonGrammar.CLOSED_PATTERN));
+    Pattern pattern = orPattern(asPattern.getFirstChild(PythonGrammar.OR_PATTERN));
     Token asKeyword = toPyToken(asPattern.getFirstChild(PythonKeyword.AS).getToken());
     Name alias = name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild());
     return new AsPatternImpl(pattern, asKeyword, alias);
   }
 
-  private static Pattern closedPattern(AstNode closedPattern) {
+  public static Pattern closedPattern(AstNode closedPattern) {
     AstNode astNode = closedPattern.getFirstChild();
     if (astNode.is(PythonGrammar.LITERAL_PATTERN)) {
       return literalPattern(astNode);

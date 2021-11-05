@@ -157,6 +157,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   PATTERNS,
   PATTERN,
   AS_PATTERN,
+  OR_PATTERN,
   CLOSED_PATTERN,
   LITERAL_PATTERN,
   CAPTURE_PATTERN,
@@ -465,9 +466,10 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(GUARD).is("if", NAMED_EXPR_TEST);
 
     b.rule(PATTERNS).is(b.firstOf(OPEN_SEQUENCE_PATTERN, PATTERN));
-    b.rule(PATTERN).is(b.firstOf(AS_PATTERN, CLOSED_PATTERN));
+    b.rule(PATTERN).is(b.firstOf(AS_PATTERN, OR_PATTERN));
     b.rule(CLOSED_PATTERN).is(b.firstOf(LITERAL_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
-    b.rule(AS_PATTERN).is(CLOSED_PATTERN, "as", CAPTURE_PATTERN);
+    b.rule(AS_PATTERN).is(OR_PATTERN, "as", CAPTURE_PATTERN);
+    b.rule(OR_PATTERN).is(CLOSED_PATTERN, b.zeroOrMore("|", CLOSED_PATTERN));
     b.rule(CAPTURE_PATTERN).is(NAME);
 
     b.rule(SEQUENCE_PATTERN).is(b.firstOf(

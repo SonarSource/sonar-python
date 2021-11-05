@@ -126,6 +126,8 @@ public interface Tree {
 
     NUMERIC_LITERAL(NumericLiteral.class),
 
+    OR_PATTERN(OrPattern.class),
+
     PASS_STMT(PassStatement.class),
 
     PRINT_STMT(PrintStatement.class),
