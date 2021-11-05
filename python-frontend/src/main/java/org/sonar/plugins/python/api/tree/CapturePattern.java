@@ -19,6 +19,16 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * Capture Pattern
+ *
+ * <pre>
+ *   case x:
+ *     ...
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#capture-patterns
+ */
 public interface CapturePattern extends Pattern {
 
   Name name();

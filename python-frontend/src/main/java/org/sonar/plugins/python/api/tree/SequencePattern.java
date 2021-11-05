@@ -21,6 +21,20 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Sequence Pattern
+ *
+ * <pre>
+ *   case [x, y, z]:
+ *     ...
+ *   case (x, y, z):
+ *     ...
+ *   case x, y, z:
+ *     ...
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#sequence-patterns
+ */
 public interface SequencePattern extends Pattern {
 
   List<Pattern> elements();

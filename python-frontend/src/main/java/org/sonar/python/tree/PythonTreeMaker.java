@@ -858,12 +858,16 @@ public class PythonTreeMaker {
     List<Token> commas = new ArrayList<>();
     List<Pattern> patterns = new ArrayList<>();
     if (leftDelimiter == null) {
+      // sequence patterns without neither parenthesis nor square brackets.
+      // In this case there needs to be at least one comma
       commas.add(toPyToken(sequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
       patterns.add(maybeStarPattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_STAR_PATTERN)));
       addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
       return new SequencePatternImpl(null, patterns, commas, null);
     }
     if (leftDelimiter.is(PythonPunctuator.LPARENTHESIS)) {
+      // we need to treat differently when delimiters are parenthesis '(' ')' because there needs to be at least one comma
+      // e.g. '(x)' is not a sequence pattern but a group pattern instead, while '(x,)' is a sequence pattern
       AstNode openSequencePattern = sequencePattern.getFirstChild(PythonGrammar.OPEN_SEQUENCE_PATTERN);
       if (openSequencePattern != null) {
         commas.add(toPyToken(openSequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
