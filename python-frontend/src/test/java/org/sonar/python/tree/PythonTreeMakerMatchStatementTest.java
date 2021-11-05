@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import com.sonar.sslr.api.RecognitionException;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
@@ -177,90 +178,50 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
 
   @Test
   public void sequence_pattern() {
-    setRootRule(PythonGrammar.CASE_BLOCK);
-    CaseBlock caseBlock = parse("case [x, y]: ...", treeMaker::caseBlock);
-    SequencePattern sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN
-    );
+    assertSequenceElements(pattern("case [x, y]: ..."), "x", "y");
+    assertSequenceElements(pattern("case (x, y): ..."), "x", "y");
+    assertSequenceElements(pattern("case [x]: ..."), "x");
+    assertSequenceElements(pattern("case (x,): ..."), "x");
+    assertSequenceElements(pattern("case [x, y,]: ..."), "x", "y");
+    assertSequenceElements(pattern("case (x, y,): ..."), "x", "y");
+    assertThat(((SequencePattern) pattern("case []: ...")).elements()).isEmpty();
+    assertThat(((SequencePattern) pattern("case (): ...")).elements()).isEmpty();
+    assertSequenceElements(pattern("case ['foo' as head]: ..."), Kind.AS_PATTERN);
+  }
 
-    caseBlock = parse("case (x, y): ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN
-    );
-
-    caseBlock = parse("case [x]: ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN
-    );
-
-    caseBlock = parse("case (x,): ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.TOKEN
-    );
-
-    caseBlock = parse("case [x, y,]: ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.TOKEN
-    );
-
-    caseBlock = parse("case (x, y,): ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.TOKEN
-    );
-
-    caseBlock = parse("case []: ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).isEmpty();
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(Kind.TOKEN, Kind.TOKEN);
-
-    caseBlock = parse("case (): ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).isEmpty();
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(Kind.TOKEN, Kind.TOKEN);
+  @Test(expected = RecognitionException.class)
+  public void not_a_sequence_pattern() {
+    // TODO: assert this is a group pattern and not a sequence pattern, when the former will be implemented
+    pattern("case (x): ...");
   }
 
   @Test
   public void sequence_pattern_with_star_pattern() {
-    setRootRule(PythonGrammar.CASE_BLOCK);
-    CaseBlock caseBlock = parse("case [head, *tail]: ...", treeMaker::caseBlock);
-    SequencePattern sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.TOKEN, Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.STAR_PATTERN, Kind.TOKEN
-    );
+    SequencePattern sequencePattern = pattern("case [head, *tail]: ...");
+   assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
 
     StarPattern starPattern = (StarPattern) sequencePattern.elements().get(1);
     assertThat(starPattern.capturePattern().name().name()).isEqualTo("tail");
-    assertThat(starPattern.children()).extracting(Tree::getKind).containsExactly(Kind.TOKEN, Kind.CAPTURE_PATTERN);
   }
 
   @Test
   public void sequence_pattern_without_parens() {
-    setRootRule(PythonGrammar.CASE_BLOCK);
-    CaseBlock caseBlock = parse("case x, y: ...", treeMaker::caseBlock);
-    SequencePattern sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-     Kind.CAPTURE_PATTERN, Kind.TOKEN, Kind.CAPTURE_PATTERN
-    );
+    assertSequenceElements(pattern("case x, y: ..."), "x", "y");
+    assertSequenceElements(pattern("case x,: ..."), "x");
+  }
 
-    caseBlock = parse("case x,: ...", treeMaker::caseBlock);
-    sequencePattern = (SequencePattern) caseBlock.pattern();
-    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN);
-    assertThat(sequencePattern.children()).extracting(Tree::getKind).containsExactly(
-      Kind.CAPTURE_PATTERN, Kind.TOKEN
-    );
+  private void assertSequenceElements(SequencePattern sequencePattern, String... elements) {
+    assertThat(sequencePattern.elements()).extracting(t -> ((CapturePattern) t).name().name()).containsExactly(elements);
+  }
+
+  private void assertSequenceElements(SequencePattern sequencePattern, Kind... elements) {
+    assertThat(sequencePattern.elements()).extracting(Tree::getKind).containsExactly(elements);
+  }
+
+  @SuppressWarnings("unchecked")
+  private <T extends Pattern>  T pattern(String code) {
+    setRootRule(PythonGrammar.CASE_BLOCK);
+    CaseBlock caseBlock = parse(code, treeMaker::caseBlock);
+    return (T) caseBlock.pattern();
   }
 }

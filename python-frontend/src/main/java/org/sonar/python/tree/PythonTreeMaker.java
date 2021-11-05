@@ -860,9 +860,7 @@ public class PythonTreeMaker {
     if (leftDelimiter == null) {
       // sequence patterns without neither parenthesis nor square brackets.
       // In this case there needs to be at least one comma
-      commas.add(toPyToken(sequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
-      patterns.add(maybeStarPattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_STAR_PATTERN)));
-      addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
+      addPatternsAndCommasFromSequencePattern(sequencePattern, commas, patterns);
       return new SequencePatternImpl(null, patterns, commas, null);
     }
     if (leftDelimiter.is(PythonPunctuator.LPARENTHESIS)) {
@@ -870,9 +868,7 @@ public class PythonTreeMaker {
       // e.g. '(x)' is not a sequence pattern but a group pattern instead, while '(x,)' is a sequence pattern
       AstNode openSequencePattern = sequencePattern.getFirstChild(PythonGrammar.OPEN_SEQUENCE_PATTERN);
       if (openSequencePattern != null) {
-        commas.add(toPyToken(openSequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
-        patterns.add(maybeStarPattern(openSequencePattern.getFirstChild(PythonGrammar.MAYBE_STAR_PATTERN)));
-        addPatternsAndCommasFromMaybeSequencePattern(openSequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
+        addPatternsAndCommasFromSequencePattern(openSequencePattern, commas, patterns);
       }
     } else {
       addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
@@ -880,12 +876,18 @@ public class PythonTreeMaker {
     return new SequencePatternImpl(toPyToken(leftDelimiter.getToken()), patterns, commas, toPyToken(rightDelimiter.getToken()));
   }
 
+  private static void addPatternsAndCommasFromSequencePattern(AstNode sequencePattern, List<Token> commas, List<Pattern> patterns) {
+    commas.add(toPyToken(sequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
+    patterns.add(maybeStarPattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_STAR_PATTERN)));
+    addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
+  }
+
   private static void addPatternsAndCommasFromMaybeSequencePattern(@Nullable AstNode maybeSequencePattern,List<Pattern> patterns, List<Token> commas) {
     if (maybeSequencePattern == null) {
       return;
     }
     patterns.addAll(maybeSequencePattern.getChildren(PythonGrammar.MAYBE_STAR_PATTERN).stream().map(PythonTreeMaker::maybeStarPattern).collect(Collectors.toList()));
-    commas.addAll(maybeSequencePattern.getChildren(PythonPunctuator.COMMA).stream().map(node -> toPyToken(node.getToken())).collect(Collectors.toList()));
+    commas.addAll(punctuators(maybeSequencePattern, PythonPunctuator.COMMA));
   }
 
   private static Pattern maybeStarPattern(AstNode maybeStarPattern) {
