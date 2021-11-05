@@ -21,54 +21,43 @@ package org.sonar.python.tree;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.CapturePattern;
+import org.sonar.plugins.python.api.tree.DoubleStarPattern;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class KeyValuePairImpl extends PyTree implements KeyValuePair {
-  private final Expression key;
-  private final Token colon;
-  private final Expression value;
+public class DoubleStarPatternImpl extends PyTree implements DoubleStarPattern {
 
-  public KeyValuePairImpl(Expression key, Token colon, Expression value) {
-    this.key = key;
-    this.colon = colon;
-    this.value = value;
+  private final Token doubleStarToken;
+  private final CapturePattern capturePattern;
+
+  public DoubleStarPatternImpl(Token doubleStarToken, CapturePattern capturePattern) {
+    this.doubleStarToken = doubleStarToken;
+    this.capturePattern = capturePattern;
+  }
+  @Override
+  public Token doubleStarToken() {
+    return doubleStarToken;
   }
 
-  @CheckForNull
   @Override
-  public Expression key() {
-    return key;
-  }
-
-  @CheckForNull
-  @Override
-  public Token colon() {
-    return colon;
-  }
-
-  @CheckForNull
-  @Override
-  public Expression value() {
-    return value;
+  public CapturePattern capturePattern() {
+    return capturePattern;
   }
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitKeyValuePair(this);
-  }
-
-  @Override
-  public List<Tree> computeChildren() {
-    return Arrays.asList(key, colon, value);
+    visitor.visitDoubleStarPattern(this);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.KEY_VALUE_PAIR;
+    return Kind.DOUBLE_STAR_PATTERN;
+  }
+
+  @Override
+  List<Tree> computeChildren() {
+    return Arrays.asList(doubleStarToken, capturePattern);
   }
 }

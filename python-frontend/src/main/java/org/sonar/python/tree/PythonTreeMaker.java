@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
+import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ClassPattern;
@@ -74,6 +75,7 @@ import org.sonar.plugins.python.api.tree.ImportStatement;
 import org.sonar.plugins.python.api.tree.KeywordPattern;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
+import org.sonar.plugins.python.api.tree.MappingPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
@@ -874,7 +876,9 @@ public class PythonTreeMaker {
     } else if (astNode.is(PythonGrammar.CLASS_PATTERN)) {
       return classPattern(astNode);
     } else if (astNode.is(PythonGrammar.VALUE_PATTERN)) {
-      return new ValuePatternImpl(nameAttributeAccess(astNode.getFirstChild()));
+      return new ValuePatternImpl((QualifiedExpression) nameOrAttr(astNode.getFirstChild()));
+    } else if (astNode.is(PythonGrammar.MAPPING_PATTERN)) {
+      return mappingPattern(astNode);
     }
     throw new IllegalStateException(String.format("Pattern %s not recognized.", astNode.getName()));
   }
@@ -1007,6 +1011,41 @@ public class PythonTreeMaker {
     return new WildcardPatternImpl(toPyToken(wildcardPattern.getFirstChild().getToken()));
   }
 
+  private static MappingPattern mappingPattern(AstNode astNode) {
+    Token lCurlyBrace = toPyToken(astNode.getFirstChild(PythonPunctuator.LCURLYBRACE).getToken());
+    Token rCurlyBrace = toPyToken(astNode.getLastChild(PythonPunctuator.RCURLYBRACE).getToken());
+    AstNode itemsPattern = astNode.getFirstChild(PythonGrammar.ITEMS_PATTERN);
+    AstNode doubleStarPattern = astNode.getFirstChild(PythonGrammar.DOUBLE_STAR_PATTERN);
+    if (itemsPattern == null && doubleStarPattern == null) {
+      return new MappingPatternImpl(lCurlyBrace, Collections.emptyList(), Collections.emptyList(), rCurlyBrace);
+    }
+    List<Token> commas = new ArrayList<>();
+    List<Pattern> keyValuePatterns = new ArrayList<>();
+    if (itemsPattern != null) {
+      commas.addAll(punctuators(itemsPattern, PythonPunctuator.COMMA));
+      List<AstNode> children = itemsPattern.getChildren();
+      for (AstNode currentChild : children) {
+        if (currentChild.is(PythonGrammar.KEY_VALUE_PATTERN)) {
+          List<AstNode> kVChildren = currentChild.getChildren();
+          Pattern keyPattern;
+          AstNode keyNode = kVChildren.get(0);
+          if (keyNode.is(PythonGrammar.LITERAL_PATTERN)) {
+            keyPattern = literalPattern(keyNode);
+          } else {
+            keyPattern = new ValuePatternImpl((QualifiedExpression) nameOrAttr(keyNode.getFirstChild()));
+          }
+          keyValuePatterns.add(new KeyValuePatternImpl(keyPattern, toPyToken(kVChildren.get(1).getToken()), pattern(kVChildren.get(2).getFirstChild())));
+        }
+      }
+    }
+    commas.addAll(punctuators(astNode, PythonPunctuator.COMMA));
+    if (doubleStarPattern != null) {
+      Token doubleStarToken = toPyToken(doubleStarPattern.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
+      CapturePattern capturePattern = new CapturePatternImpl(name(doubleStarPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild()));
+      keyValuePatterns.add(new DoubleStarPatternImpl(doubleStarToken, capturePattern));
+    }
+    return new MappingPatternImpl(lCurlyBrace, commas, keyValuePatterns, rCurlyBrace);
+  }
 
   private static LiteralPattern literalPattern(AstNode literalPattern) {
     LiteralPattern.LiteralKind literalKind;
@@ -1144,15 +1183,6 @@ public class PythonTreeMaker {
       return new TupleImpl(null, expressions, commaTokens, null);
     }
     return expressions.get(0);
-  }
-
-  private static QualifiedExpression nameAttributeAccess(AstNode astNode) {
-    Expression expr = name(astNode.getFirstChild(PythonGrammar.NAME));
-    for (AstNode trailer : astNode.getChildren(PythonGrammar.TRAILER)) {
-      Name name = name(trailer.getFirstChild(PythonGrammar.NAME));
-      expr = new QualifiedExpressionImpl(name, expr, toPyToken(trailer.getFirstChild(PythonPunctuator.DOT).getToken()));
-    }
-    return (QualifiedExpression) expr;
   }
 
   private Expression assignmentExpression(AstNode astNode) {

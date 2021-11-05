@@ -80,6 +80,8 @@ public interface Tree {
 
     DOTTED_NAME(DottedName.class),
 
+    DOUBLE_STAR_PATTERN(DoubleStarPattern.class),
+
     ELLIPSIS(EllipsisExpression.class),
 
     ELSE_CLAUSE(ElseClause.class),
@@ -123,6 +125,8 @@ public interface Tree {
     LITERAL_PATTERN(LiteralPattern.class),
 
     MATCH_STMT(MatchStatement.class),
+
+    MAPPING_PATTERN(MappingPattern.class),
 
     NAME(Name.class),
 
@@ -233,6 +237,7 @@ public interface Tree {
     ASSIGNMENT_EXPRESSION(AssignmentExpression.class),
 
     KEY_VALUE_PAIR(KeyValuePair.class),
+    KEY_VALUE_PATTERN(KeyValuePattern.class),
     TOKEN(Token.class);
     final Class<? extends Tree> associatedInterface;
 
