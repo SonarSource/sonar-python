@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.RecognitionException;
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
@@ -29,8 +30,11 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.KeywordPattern;
+import org.sonar.plugins.python.api.tree.DoubleStarPattern;
+import org.sonar.plugins.python.api.tree.KeyValuePattern;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
+import org.sonar.plugins.python.api.tree.MappingPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.OrPattern;
@@ -188,6 +192,58 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
+  public void mapping_pattern() {
+    MappingPattern mappingPattern = pattern("case {'x': 'foo', 'y': 'bar'}: ...");
+    List<Pattern> keyValuePatternList = mappingPattern.elements();
+    assertThat(keyValuePatternList).hasSize(2);
+    KeyValuePattern keyValuePattern = (KeyValuePattern) keyValuePatternList.get(0);
+    assertThat(keyValuePattern.colon().value()).isEqualTo(":");
+    LiteralPattern key = (LiteralPattern) keyValuePattern.key();
+    assertThat(key.getKind()).isEqualTo(Kind.LITERAL_PATTERN);
+    assertThat(key.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
+    assertThat(key.valueAsString()).isEqualTo("'x'");
+    LiteralPattern value = (LiteralPattern) keyValuePattern.value();
+    assertThat(value.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
+    assertThat(value.valueAsString()).isEqualTo("'foo'");
+    assertThat(mappingPattern.lCurlyBrace().value()).isEqualTo("{");
+    assertThat(mappingPattern.rCurlyBrace().value()).isEqualTo("}");
+    assertThat(mappingPattern.commas()).hasSize(1);
+    assertThat(mappingPattern.children())
+      .extracting(Tree::getKind)
+      .containsExactly(Tree.Kind.TOKEN, Tree.Kind.KEY_VALUE_PATTERN, Tree.Kind.TOKEN, Tree.Kind.KEY_VALUE_PATTERN, Tree.Kind.TOKEN);
+
+    mappingPattern = pattern("case {}: ...");
+    keyValuePatternList = mappingPattern.elements();
+    assertThat(keyValuePatternList).isEmpty();
+
+    mappingPattern = pattern("case {**d}: ...");
+    keyValuePatternList = mappingPattern.elements();
+    assertThat(keyValuePatternList).extracting(Tree::getKind).containsExactly(Tree.Kind.DOUBLE_STAR_PATTERN);
+
+    mappingPattern = pattern("case {'x': 'foo', **rest}: ...");
+    assertThat(mappingPattern.children()).extracting(Tree::getKind)
+      .containsExactly(Tree.Kind.TOKEN, Tree.Kind.KEY_VALUE_PATTERN, Tree.Kind.TOKEN, Tree.Kind.DOUBLE_STAR_PATTERN, Tree.Kind.TOKEN);
+    keyValuePatternList = mappingPattern.elements();
+    assertThat(keyValuePatternList).extracting(Tree::getKind)
+      .containsExactly(Tree.Kind.KEY_VALUE_PATTERN, Tree.Kind.DOUBLE_STAR_PATTERN);
+    DoubleStarPattern doubleStarPattern = (DoubleStarPattern) keyValuePatternList.get(1);
+    assertThat(doubleStarPattern.capturePattern().name().name()).isEqualTo("rest");
+    assertThat(doubleStarPattern.doubleStarToken().value()).isEqualTo("**");
+
+    mappingPattern = pattern("case {a.b: 'foo', c.d.e: 'bar'}: ...");
+
+    KeyValuePattern firstKeyValuePattern = (KeyValuePattern) mappingPattern.elements().get(0);
+    assertThat(((LiteralPattern) firstKeyValuePattern.value()).valueAsString()).isEqualTo("'foo'");
+    QualifiedExpression firstKeyQualExpr = ((ValuePattern) firstKeyValuePattern.key()).qualifiedExpression();
+    assertThat(TreeUtils.nameFromQualifiedExpression(firstKeyQualExpr)).isEqualTo("a.b");
+
+    KeyValuePattern secondKeyValuePattern = (KeyValuePattern) mappingPattern.elements().get(1);
+    assertThat(((LiteralPattern) secondKeyValuePattern.value()).valueAsString()).isEqualTo("'bar'");
+    QualifiedExpression secondKeyQualExpr = ((ValuePattern) secondKeyValuePattern.key()).qualifiedExpression();
+    assertThat(TreeUtils.nameFromQualifiedExpression(secondKeyQualExpr)).isEqualTo("c.d.e");
+  }
+
+  @Test
   public void capture_pattern() {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse("case x: ...", treeMaker::caseBlock);
@@ -298,7 +354,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @SuppressWarnings("unchecked")
-  private <T extends Pattern>  T pattern(String code) {
+  private <T extends Pattern> T pattern(String code) {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse(code, treeMaker::caseBlock);
     return (T) caseBlock.pattern();

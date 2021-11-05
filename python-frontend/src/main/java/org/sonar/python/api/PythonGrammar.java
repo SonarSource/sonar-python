@@ -174,6 +174,10 @@ public enum PythonGrammar implements GrammarRuleKey {
   KEYWORD_PATTERN,
   NAME_OR_ATTR,
   VALUE_PATTERN,
+  MAPPING_PATTERN,
+  ITEMS_PATTERN,
+  KEY_VALUE_PATTERN,
+  DOUBLE_STAR_PATTERN,
 
   SIGNED_NUMBER,
   COMPLEX_NUMBER,
@@ -476,11 +480,20 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(PATTERNS).is(b.firstOf(OPEN_SEQUENCE_PATTERN, PATTERN));
     b.rule(PATTERN).is(b.firstOf(AS_PATTERN, OR_PATTERN));
-    b.rule(CLOSED_PATTERN).is(b.firstOf(CLASS_PATTERN, LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, VALUE_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
+    b.rule(CLOSED_PATTERN).is(b.firstOf(CLASS_PATTERN, LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, VALUE_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN, MAPPING_PATTERN));
     b.rule(AS_PATTERN).is(OR_PATTERN, "as", CAPTURE_PATTERN);
     b.rule(OR_PATTERN).is(CLOSED_PATTERN, b.zeroOrMore("|", CLOSED_PATTERN));
     b.rule(CAPTURE_PATTERN).is(NAME);
     b.rule(VALUE_PATTERN).is(ATTR);
+    b.rule(MAPPING_PATTERN).is(b.firstOf(
+      b.sequence("{", "}"),
+      b.sequence("{", DOUBLE_STAR_PATTERN, b.optional(","), "}"),
+      b.sequence("{", ITEMS_PATTERN, ",", DOUBLE_STAR_PATTERN, b.optional(","), "}"),
+      b.sequence("{", ITEMS_PATTERN, b.optional(","), "}")
+    ));
+    b.rule(ITEMS_PATTERN).is(KEY_VALUE_PATTERN, b.zeroOrMore(",", KEY_VALUE_PATTERN));
+    b.rule(KEY_VALUE_PATTERN).is(b.firstOf(LITERAL_PATTERN, VALUE_PATTERN), ":", PATTERN);
+    b.rule(DOUBLE_STAR_PATTERN).is("**", CAPTURE_PATTERN);
 
     b.rule(SEQUENCE_PATTERN).is(b.firstOf(
       b.sequence("[", b.optional(MAYBE_SEQUENCE_PATTERN) , "]"),
@@ -493,6 +506,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(CLASS_PATTERN).is(NAME_OR_ATTR, "(", b.optional(PATTERN_ARGS), ")");
     b.rule(NAME_OR_ATTR).is(NAME, b.zeroOrMore(".", NAME));
+    b.rule(ATTR).is(NAME, b.oneOrMore(".", NAME));
     b.rule(PATTERN_ARGS).is(PATTERN_ARG, b.zeroOrMore(b.sequence(",", PATTERN_ARG)), b.optional(","));
     b.rule(PATTERN_ARG).is(b.firstOf(KEYWORD_PATTERN, PATTERN));
     b.rule(KEYWORD_PATTERN).is(NAME, "=", PATTERN);
@@ -526,7 +540,6 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));
     b.rule(DECORATOR).is("@", EXPR, NEWLINE);
     b.rule(DOTTED_NAME).is(NAME, b.zeroOrMore(".", NAME));
-    b.rule(ATTR).is(NAME, b.oneOrMore(b.nextNot("(", "["), TRAILER));
 
     b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME, b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
     b.rule(CLASSNAME).is(NAME);

@@ -37,6 +37,8 @@ public interface TreeVisitor {
 
   void visitDelStatement(DelStatement delStatement);
 
+  void visitDoubleStarPattern(DoubleStarPattern doubleStarPattern);
+
   void visitPassStatement(PassStatement passStatement);
 
   void visitPrintStatement(PrintStatement printStatement);
@@ -153,6 +155,8 @@ public interface TreeVisitor {
 
   void visitKeyValuePair(KeyValuePair keyValuePair);
 
+  void visitKeyValuePattern(KeyValuePattern keyValuePattern);
+
   void visitDictCompExpression(DictCompExpressionImpl dictCompExpression);
 
   void visitCompoundAssignment(CompoundAssignmentStatement compoundAssignmentStatement);
@@ -182,6 +186,8 @@ public interface TreeVisitor {
   void visitAsPattern(AsPattern asPattern);
 
   void visitOrPattern(OrPattern orPattern);
+
+  void visitMappingPattern(MappingPattern mappingPattern);
 
   void visitGuard(Guard guard);
 

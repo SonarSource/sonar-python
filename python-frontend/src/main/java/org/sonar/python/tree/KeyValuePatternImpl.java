@@ -19,56 +19,55 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Arrays;
 import java.util.List;
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.sonar.plugins.python.api.tree.KeyValuePattern;
+import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class KeyValuePairImpl extends PyTree implements KeyValuePair {
-  private final Expression key;
-  private final Token colon;
-  private final Expression value;
+public class KeyValuePatternImpl extends PyTree implements KeyValuePattern {
 
-  public KeyValuePairImpl(Expression key, Token colon, Expression value) {
+  private final Pattern key;
+  private final Token colon;
+  private final Pattern value;
+
+  public KeyValuePatternImpl(Pattern key, Token colon, Pattern value) {
     this.key = key;
     this.colon = colon;
     this.value = value;
   }
 
-  @CheckForNull
+
   @Override
-  public Expression key() {
+  public Pattern key() {
     return key;
   }
 
-  @CheckForNull
   @Override
   public Token colon() {
     return colon;
   }
 
-  @CheckForNull
   @Override
-  public Expression value() {
+  public Pattern value() {
     return value;
   }
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitKeyValuePair(this);
-  }
-
-  @Override
-  public List<Tree> computeChildren() {
-    return Arrays.asList(key, colon, value);
+    visitor.visitKeyValuePattern(this);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.KEY_VALUE_PAIR;
+    return Kind.KEY_VALUE_PATTERN;
+  }
+
+  @Override
+  List<Tree> computeChildren() {
+    return Stream.of(key, colon, value).collect(Collectors.toList());
   }
 }

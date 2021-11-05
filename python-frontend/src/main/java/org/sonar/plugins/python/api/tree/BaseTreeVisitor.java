@@ -84,6 +84,11 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitDoubleStarPattern(DoubleStarPattern doubleStarPattern) {
+    scan(doubleStarPattern.capturePattern());
+  }
+
+  @Override
   public void visitPassStatement(PassStatement pyPassStatementTree) {
     // nothing to visit for pass statement
   }
@@ -418,6 +423,12 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitKeyValuePattern(KeyValuePattern keyValuePattern) {
+    scan(keyValuePattern.key());
+    scan(keyValuePattern.value());
+  }
+
+  @Override
   public void visitDictCompExpression(DictCompExpressionImpl tree) {
     scan(tree.keyExpression());
     scan(tree.valueExpression());
@@ -499,6 +510,10 @@ public class BaseTreeVisitor implements TreeVisitor {
   @Override
   public void visitOrPattern(OrPattern orPattern) {
     scan(orPattern.patterns());
+  }
+
+  public void visitMappingPattern(MappingPattern mappingPattern) {
+    scan(mappingPattern.elements());
   }
 
   @Override
