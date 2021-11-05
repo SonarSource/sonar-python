@@ -29,9 +29,11 @@ import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
+import org.sonar.plugins.python.api.tree.OrPattern;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.SequencePattern;
 import org.sonar.plugins.python.api.tree.StarPattern;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -151,6 +153,16 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     literalPattern = (LiteralPattern) caseBlock.pattern();
     assertThat(literalPattern.literalKind()).isEqualTo(LiteralPattern.LiteralKind.BOOLEAN);
     assertThat(literalPattern.valueAsString()).isEqualTo("False");
+  }
+
+  @Test
+  public void or_pattern() {
+    OrPattern pattern = pattern("case 42 | None | True: ...");
+    assertThat(pattern.patterns()).extracting(p -> ((LiteralPattern) p).valueAsString()).containsExactly("42", "None", "True");
+    assertThat(pattern.separators()).extracting(Token::value).containsExactly("|", "|");
+
+    AsPattern asPattern = pattern("case 'foo' | 'bar' as x: ...");
+    assertThat(asPattern.pattern().getKind()).isEqualTo(Kind.OR_PATTERN);
   }
 
   @Test
