@@ -25,6 +25,12 @@ def unsupported_feature(input):
 
 
 def false_positives():
-    re.compile(r"\s*([ACGT])\s*[[]*[|]*\s*([0-9.\s]+)\s*[]]*\s*")  # Noncompliant
-    re.compile(r'^\s+\[([\s*[0-9]*)\] ([a-zA-Z0-9_]*)')  # Noncompliant
-    re.compile(r'([^,[\]]*)(\[([^\]]+)\])?$')  # Noncompliant
+    re.compile(r'''
+          # Match tail of: [text][id]
+          [ ]?          # one optional space
+          (?:\n[ ]*)?   # one optional newline followed by spaces
+          \[
+            (?P<id>.*?)
+          \]
+        ''', re.X | re.S)
+    # Noncompliant@-5
