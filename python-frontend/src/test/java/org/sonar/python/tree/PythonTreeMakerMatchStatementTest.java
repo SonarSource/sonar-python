@@ -157,6 +157,10 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
     assertThat(asPattern.alias().name()).isEqualTo("x");
     assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.NAME);
+
+    caseBlock = parse("case value as x: ...", treeMaker::caseBlock);
+    asPattern = (AsPattern) caseBlock.pattern();
+    assertThat(asPattern.pattern().getKind()).isEqualTo(Tree.Kind.CAPTURE_PATTERN);
   }
 
   @Test
