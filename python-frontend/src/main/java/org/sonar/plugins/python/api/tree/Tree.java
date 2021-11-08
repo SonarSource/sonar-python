@@ -172,6 +172,7 @@ public interface Tree {
     RETURN_TYPE_ANNOTATION(TypeAnnotation.class),
 
     PARAMETER_LIST(ParameterList.class),
+    VALUE_PATTERN(ValuePattern.class),
 
     WHILE_STMT(WhileStatement.class),
 

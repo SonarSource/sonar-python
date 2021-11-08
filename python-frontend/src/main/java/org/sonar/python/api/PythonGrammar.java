@@ -173,6 +173,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   PATTERN_ARG,
   KEYWORD_PATTERN,
   NAME_OR_ATTR,
+  VALUE_PATTERN,
 
   SIGNED_NUMBER,
   COMPLEX_NUMBER,
@@ -181,6 +182,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   DECORATORS,
   DECORATOR,
   DOTTED_NAME,
+  ATTR,
   FUNCNAME,
   FUN_RETURN_ANNOTATION,
 
@@ -474,10 +476,11 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(PATTERNS).is(b.firstOf(OPEN_SEQUENCE_PATTERN, PATTERN));
     b.rule(PATTERN).is(b.firstOf(AS_PATTERN, OR_PATTERN));
-    b.rule(CLOSED_PATTERN).is(b.firstOf(CLASS_PATTERN, LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
+    b.rule(CLOSED_PATTERN).is(b.firstOf(CLASS_PATTERN, LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, VALUE_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
     b.rule(AS_PATTERN).is(OR_PATTERN, "as", CAPTURE_PATTERN);
     b.rule(OR_PATTERN).is(CLOSED_PATTERN, b.zeroOrMore("|", CLOSED_PATTERN));
     b.rule(CAPTURE_PATTERN).is(NAME);
+    b.rule(VALUE_PATTERN).is(ATTR);
 
     b.rule(SEQUENCE_PATTERN).is(b.firstOf(
       b.sequence("[", b.optional(MAYBE_SEQUENCE_PATTERN) , "]"),
@@ -523,6 +526,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));
     b.rule(DECORATOR).is("@", EXPR, NEWLINE);
     b.rule(DOTTED_NAME).is(NAME, b.zeroOrMore(".", NAME));
+    b.rule(ATTR).is(NAME, b.oneOrMore(b.nextNot("(", "["), TRAILER));
 
     b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME, b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
     b.rule(CLASSNAME).is(NAME);

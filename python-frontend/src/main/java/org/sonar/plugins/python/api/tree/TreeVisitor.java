@@ -198,4 +198,6 @@ public interface TreeVisitor {
   void visitClassPattern(ClassPattern classPattern);
 
   void visitKeywordPattern(KeywordPattern keywordPattern);
+
+  void visitValuePattern(ValuePattern valuePattern);
 }
