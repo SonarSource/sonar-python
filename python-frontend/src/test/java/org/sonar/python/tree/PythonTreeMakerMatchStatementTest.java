@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.WildcardPattern;
+import org.sonar.plugins.python.api.tree.ValuePattern;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
@@ -193,6 +194,18 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     CapturePattern capturePattern = (CapturePattern) caseBlock.pattern();
     assertThat(capturePattern.name().name()).isEqualTo("x");
     assertThat(capturePattern.children()).containsExactly(capturePattern.name());
+  }
+
+  @Test
+  public void value_pattern() {
+    ValuePattern valuePattern = pattern("case a.b: ...");
+    QualifiedExpression qualifiedExpression = valuePattern.qualifiedExpression();
+    assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b");
+    assertThat(valuePattern.children()).containsExactly(valuePattern.qualifiedExpression());
+
+    valuePattern = pattern("case a.b.c: ...");
+    qualifiedExpression = valuePattern.qualifiedExpression();
+    assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b.c");
   }
 
   @Test

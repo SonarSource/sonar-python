@@ -542,4 +542,8 @@ public class BaseTreeVisitor implements TreeVisitor {
     scan(keywordPattern.attributeName());
     scan(keywordPattern.pattern());
   }
+
+  public void visitValuePattern(ValuePattern valuePattern) {
+    scan(valuePattern.qualifiedExpression());
+  }
 }

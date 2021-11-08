@@ -81,6 +81,7 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.PrintStatement;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -872,6 +873,8 @@ public class PythonTreeMaker {
       return wildcardPattern(astNode);
     } else if (astNode.is(PythonGrammar.CLASS_PATTERN)) {
       return classPattern(astNode);
+    } else if (astNode.is(PythonGrammar.VALUE_PATTERN)) {
+      return new ValuePatternImpl(nameAttributeAccess(astNode.getFirstChild()));
     }
     throw new IllegalStateException(String.format("Pattern %s not recognized.", astNode.getName()));
   }
@@ -1141,6 +1144,15 @@ public class PythonTreeMaker {
       return new TupleImpl(null, expressions, commaTokens, null);
     }
     return expressions.get(0);
+  }
+
+  private static QualifiedExpression nameAttributeAccess(AstNode astNode) {
+    Expression expr = name(astNode.getFirstChild(PythonGrammar.NAME));
+    for (AstNode trailer : astNode.getChildren(PythonGrammar.TRAILER)) {
+      Name name = name(trailer.getFirstChild(PythonGrammar.NAME));
+      expr = new QualifiedExpressionImpl(name, expr, toPyToken(trailer.getFirstChild(PythonPunctuator.DOT).getToken()));
+    }
+    return (QualifiedExpression) expr;
   }
 
   private Expression assignmentExpression(AstNode astNode) {
