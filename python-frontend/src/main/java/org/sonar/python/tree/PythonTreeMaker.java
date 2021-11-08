@@ -64,6 +64,7 @@ import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
+import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ImportFrom;
@@ -859,8 +860,19 @@ public class PythonTreeMaker {
       return new CapturePatternImpl(name(astNode.getFirstChild()));
     } else if (astNode.is(PythonGrammar.SEQUENCE_PATTERN)) {
       return sequencePattern(astNode);
+    } else if (astNode.is(PythonGrammar.GROUP_PATTERN)) {
+      return groupPattern(astNode);
+    } else if (astNode.is(PythonGrammar.WILDCARD_PATTERN)) {
+      return wildcardPattern(astNode);
     }
     throw new IllegalStateException(String.format("Pattern %s not recognized.", astNode.getName()));
+  }
+
+  private static GroupPattern groupPattern(AstNode groupPattern) {
+    Token leftPar = toPyToken(groupPattern.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken());
+    Pattern pattern = pattern(groupPattern.getFirstChild(PythonGrammar.PATTERN).getFirstChild());
+    Token rightPar = toPyToken(groupPattern.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
+    return new GroupPatternImpl(leftPar, pattern, rightPar);
   }
 
   private static SequencePattern sequencePattern(AstNode sequencePattern) {
@@ -911,9 +923,20 @@ public class PythonTreeMaker {
 
   private static StarPattern starPattern(AstNode starPattern) {
     Token starToken = toPyToken(starPattern.getFirstChild(PythonPunctuator.MUL).getToken());
+    Pattern pattern;
     AstNode capturePattern = starPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN);
-    return new StarPatternImpl(starToken, new CapturePatternImpl(name(capturePattern.getFirstChild())));
+    if (capturePattern != null) {
+      pattern = new CapturePatternImpl(name(capturePattern.getFirstChild()));
+    } else {
+      pattern = wildcardPattern(starPattern.getFirstChild(PythonGrammar.WILDCARD_PATTERN));
+    }
+    return new StarPatternImpl(starToken, pattern);
   }
+
+  private static WildcardPatternImpl wildcardPattern(AstNode wildcardPattern) {
+    return new WildcardPatternImpl(toPyToken(wildcardPattern.getFirstChild().getToken()));
+  }
+
 
   private static LiteralPattern literalPattern(AstNode literalPattern) {
     LiteralPattern.LiteralKind literalKind;

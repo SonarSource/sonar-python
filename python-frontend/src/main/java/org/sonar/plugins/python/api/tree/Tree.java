@@ -100,6 +100,8 @@ public interface Tree {
 
     GLOBAL_STMT(GlobalStatement.class),
 
+    GROUP_PATTERN(GroupPattern.class),
+
     GUARD(Guard.class),
 
     IF_STMT(IfStatement.class),
@@ -168,6 +170,8 @@ public interface Tree {
     PARAMETER_LIST(ParameterList.class),
 
     WHILE_STMT(WhileStatement.class),
+
+    WILDCARD_PATTERN(WildcardPattern.class),
 
     WITH_ITEM(WithItem.class),
 

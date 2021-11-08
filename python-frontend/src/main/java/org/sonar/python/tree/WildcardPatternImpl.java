@@ -17,23 +17,39 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.tree;
 
-/**
- * Star Pattern
- * Only used inside sequence patterns
- *
- * <pre>
- *   case [x, y, *others]:
- *     ...
- * </pre>
- *
- * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-python-grammar-star_pattern
- */
-public interface StarPattern extends Pattern {
+import java.util.Collections;
+import java.util.List;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.WildcardPattern;
 
-  /**
-   * Return value can only be either {@link CapturePattern} or {@link WildcardPattern}
-   */
-  Pattern pattern();
+public class WildcardPatternImpl extends PyTree implements WildcardPattern {
+  private final Token wildcard;
+
+  public WildcardPatternImpl(Token wildcard) {
+    this.wildcard = wildcard;
+  }
+
+  @Override
+  public void accept(TreeVisitor visitor) {
+    visitor.visitWildcardPattern(this);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.WILDCARD_PATTERN;
+  }
+
+  @Override
+  public Token wildcard() {
+    return wildcard;
+  }
+
+  @Override
+  List<Tree> computeChildren() {
+    return Collections.singletonList(wildcard);
+  }
 }

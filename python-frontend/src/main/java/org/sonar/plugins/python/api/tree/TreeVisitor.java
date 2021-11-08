@@ -190,4 +190,8 @@ public interface TreeVisitor {
   void visitSequencePattern(SequencePattern sequencePattern);
 
   void visitStarPattern(StarPattern starPattern);
+
+  void visitWildcardPattern(WildcardPattern wildcardPattern);
+
+  void visitGroupPattern(GroupPattern groupPattern);
 }
