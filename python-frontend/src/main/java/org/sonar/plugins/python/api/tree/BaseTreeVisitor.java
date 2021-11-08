@@ -530,4 +530,16 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitGroupPattern(GroupPattern groupPattern) {
     scan(groupPattern.pattern());
   }
+
+  @Override
+  public void visitClassPattern(ClassPattern classPattern) {
+    scan(classPattern.targetClass());
+    scan(classPattern.arguments());
+  }
+
+  @Override
+  public void visitKeywordPattern(KeywordPattern keywordPattern) {
+    scan(keywordPattern.attributeName());
+    scan(keywordPattern.pattern());
+  }
 }

@@ -64,6 +64,8 @@ public interface Tree {
 
     CLASSDEF(ClassDef.class),
 
+    CLASS_PATTERN(ClassPattern.class),
+
     CONDITIONAL_EXPR(ConditionalExpression.class),
 
     CONTINUE_STMT(ContinueStatement.class),
@@ -111,6 +113,8 @@ public interface Tree {
     IMPORT_NAME(DottedName.class),
 
     IMPORT_STMT(DottedName.class),
+
+    KEYWORD_PATTERN(KeywordPattern.class),
 
     LAMBDA(LambdaExpression.class),
 

@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ClassPattern;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionClause;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
@@ -70,6 +71,7 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ImportStatement;
+import org.sonar.plugins.python.api.tree.KeywordPattern;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
@@ -116,6 +118,10 @@ public class PythonTreeMaker {
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
     return pyFileInputTree;
+  }
+
+  private static void recognitionException(int line, String message) {
+    throw new RecognitionException(line, "Parse error at line " + line + ": " + message + ".");
   }
 
   private static Token toPyToken(@Nullable com.sonar.sslr.api.Token token) {
@@ -864,6 +870,8 @@ public class PythonTreeMaker {
       return groupPattern(astNode);
     } else if (astNode.is(PythonGrammar.WILDCARD_PATTERN)) {
       return wildcardPattern(astNode);
+    } else if (astNode.is(PythonGrammar.CLASS_PATTERN)) {
+      return classPattern(astNode);
     }
     throw new IllegalStateException(String.format("Pattern %s not recognized.", astNode.getName()));
   }
@@ -873,6 +881,65 @@ public class PythonTreeMaker {
     Pattern pattern = pattern(groupPattern.getFirstChild(PythonGrammar.PATTERN).getFirstChild());
     Token rightPar = toPyToken(groupPattern.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
     return new GroupPatternImpl(leftPar, pattern, rightPar);
+  }
+
+  private static ClassPattern classPattern(AstNode classPattern) {
+    Expression nameOrAttr = nameOrAttr(classPattern.getFirstChild(PythonGrammar.NAME_OR_ATTR));
+    Token leftPar = punctuators(classPattern, PythonPunctuator.LPARENTHESIS).get(0);
+    List<Token> commas = new ArrayList<>();
+    List<Pattern> patterns = patternArgs(classPattern.getFirstChild(PythonGrammar.PATTERN_ARGS), commas);
+    checkPositionalAndKeywordArgumentsConstraint(patterns);
+    Token rightPar = punctuators(classPattern, PythonPunctuator.RPARENTHESIS).get(0);
+    return new ClassPatternImpl(nameOrAttr, leftPar, patterns, commas, rightPar);
+  }
+
+  private static void checkPositionalAndKeywordArgumentsConstraint(List<Pattern> patterns) {
+    boolean positionalArgs = true;
+    for (Pattern pattern : patterns) {
+      if (pattern.is(Tree.Kind.KEYWORD_PATTERN)) {
+        positionalArgs = false;
+      } else if (!positionalArgs) {
+        int line = pattern.firstToken().line();
+        recognitionException(line, "Positional patterns follow keyword patterns");
+      }
+    }
+  }
+
+  private static List<Pattern> patternArgs(@Nullable AstNode patternArgs, List<Token> commas) {
+    if (patternArgs == null) {
+      return Collections.emptyList();
+    }
+    commas.addAll(punctuators(patternArgs, PythonPunctuator.COMMA));
+    return patternArgs.getChildren(PythonGrammar.PATTERN_ARG).stream().map(arg -> patternArg(arg.getFirstChild())).collect(Collectors.toList());
+  }
+
+  private static Pattern patternArg(AstNode patternArg) {
+    if (patternArg.is(PythonGrammar.KEYWORD_PATTERN)) {
+      return keywordPattern(patternArg);
+    }
+    return pattern(patternArg.getFirstChild());
+  }
+
+  private static KeywordPattern keywordPattern(AstNode keywordPattern) {
+    Name name = name(keywordPattern.getFirstChild(PythonGrammar.NAME));
+    Token equalToken = punctuators(keywordPattern, PythonPunctuator.ASSIGN).get(0);
+    Pattern pattern = pattern(keywordPattern.getFirstChild(PythonGrammar.PATTERN).getFirstChild());
+    return new KeywordPatternImpl(name, equalToken, pattern);
+  }
+
+  private static Expression nameOrAttr(AstNode nameOrAttr) {
+    List<Token> dots = punctuators(nameOrAttr, PythonPunctuator.DOT);
+    List<AstNode> names = nameOrAttr.getChildren(PythonGrammar.NAME);
+    if (dots.isEmpty()) {
+      return name(names.get(0));
+    }
+    Expression qualifier = name(names.get(0));
+
+    for (int i = 1; i < names.size(); i++) {
+      Name name = name(names.get(i));
+      qualifier = new QualifiedExpressionImpl(name, qualifier, dots.get(i-1));
+    }
+    return qualifier;
   }
 
   private static SequencePattern sequencePattern(AstNode sequencePattern) {
@@ -1081,7 +1148,7 @@ public class PythonTreeMaker {
     Expression nameExpression = expression(nameNode);
     if (!nameExpression.is(Tree.Kind.NAME)) {
       int line = nameNode.getTokenLine();
-      throw new RecognitionException(line, "Parse error at line " + line + ": The left-hand side of an assignment expression must be a name.");
+      recognitionException(line, "The left-hand side of an assignment expression must be a name");
     }
     Name name = (Name) nameExpression;
     AstNode operatorNode = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
@@ -1345,7 +1412,7 @@ public class PythonTreeMaker {
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
       int line = nonParenthesizedGeneratorExpressions.get(0).firstToken().line();
-      throw new RecognitionException(line, "Parse error at line " + line + ": Generator expression must be parenthesized if not sole argument.");
+      recognitionException(line, "Generator expression must be parenthesized if not sole argument");
     }
   }
 

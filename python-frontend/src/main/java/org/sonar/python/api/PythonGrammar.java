@@ -168,6 +168,11 @@ public enum PythonGrammar implements GrammarRuleKey {
   OPEN_SEQUENCE_PATTERN,
   WILDCARD_PATTERN,
   GROUP_PATTERN,
+  CLASS_PATTERN,
+  PATTERN_ARGS,
+  PATTERN_ARG,
+  KEYWORD_PATTERN,
+  NAME_OR_ATTR,
 
   SIGNED_NUMBER,
   COMPLEX_NUMBER,
@@ -469,7 +474,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(PATTERNS).is(b.firstOf(OPEN_SEQUENCE_PATTERN, PATTERN));
     b.rule(PATTERN).is(b.firstOf(AS_PATTERN, OR_PATTERN));
-    b.rule(CLOSED_PATTERN).is(b.firstOf(LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
+    b.rule(CLOSED_PATTERN).is(b.firstOf(CLASS_PATTERN, LITERAL_PATTERN, GROUP_PATTERN, WILDCARD_PATTERN, CAPTURE_PATTERN, SEQUENCE_PATTERN));
     b.rule(AS_PATTERN).is(OR_PATTERN, "as", CAPTURE_PATTERN);
     b.rule(OR_PATTERN).is(CLOSED_PATTERN, b.zeroOrMore("|", CLOSED_PATTERN));
     b.rule(CAPTURE_PATTERN).is(NAME);
@@ -482,6 +487,12 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(MAYBE_SEQUENCE_PATTERN).is(MAYBE_STAR_PATTERN, b.zeroOrMore(",", MAYBE_STAR_PATTERN), b.optional(","));
     b.rule(MAYBE_STAR_PATTERN).is(b.firstOf(STAR_PATTERN, PATTERN));
     b.rule(STAR_PATTERN).is("*", b.firstOf(WILDCARD_PATTERN, CAPTURE_PATTERN));
+
+    b.rule(CLASS_PATTERN).is(NAME_OR_ATTR, "(", b.optional(PATTERN_ARGS), ")");
+    b.rule(NAME_OR_ATTR).is(NAME, b.zeroOrMore(".", NAME));
+    b.rule(PATTERN_ARGS).is(PATTERN_ARG, b.zeroOrMore(b.sequence(",", PATTERN_ARG)), b.optional(","));
+    b.rule(PATTERN_ARG).is(b.firstOf(KEYWORD_PATTERN, PATTERN));
+    b.rule(KEYWORD_PATTERN).is(NAME, "=", PATTERN);
 
     b.rule(LITERAL_PATTERN).is(b.firstOf(
       COMPLEX_NUMBER,
