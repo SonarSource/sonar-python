@@ -20,20 +20,13 @@
 package org.sonar.plugins.python.api.tree;
 
 /**
- * Star Pattern
- * Only used inside sequence patterns
+ * Group Pattern
+ * <pre>case _: ...</pre>
  *
- * <pre>
- *   case [x, y, *others]:
- *     ...
- * </pre>
- *
- * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-python-grammar-star_pattern
+ * See https://docs.python.org/3/reference/compound_stmts.html#wildcard-patterns
  */
-public interface StarPattern extends Pattern {
+public interface WildcardPattern extends Pattern {
 
-  /**
-   * Return value can only be either {@link CapturePattern} or {@link WildcardPattern}
-   */
-  Pattern pattern();
+  Token wildcard();
+
 }

@@ -518,6 +518,16 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitStarPattern(StarPattern starPattern) {
-    scan(starPattern.capturePattern());
+    scan(starPattern.pattern());
+  }
+
+  @Override
+  public void visitWildcardPattern(WildcardPattern wildcardPattern) {
+    // noop
+  }
+
+  @Override
+  public void visitGroupPattern(GroupPattern groupPattern) {
+    scan(groupPattern.pattern());
   }
 }

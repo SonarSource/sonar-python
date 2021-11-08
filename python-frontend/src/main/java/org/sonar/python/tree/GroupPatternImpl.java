@@ -21,20 +21,27 @@ package org.sonar.python.tree;
 
 import java.util.Arrays;
 import java.util.List;
+import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Pattern;
-import org.sonar.plugins.python.api.tree.StarPattern;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class StarPatternImpl extends PyTree implements StarPattern {
+public class GroupPatternImpl extends PyTree implements GroupPattern {
 
-  private final Token starToken;
+  private final Token leftPar;
   private final Pattern pattern;
+  private final Token rightPar;
 
-  public StarPatternImpl(Token starToken, Pattern pattern) {
-    this.starToken = starToken;
+  public GroupPatternImpl(Token leftPar, Pattern pattern, Token rightPar) {
+    this.leftPar = leftPar;
     this.pattern = pattern;
+    this.rightPar = rightPar;
+  }
+
+  @Override
+  public Token leftPar() {
+    return leftPar;
   }
 
   @Override
@@ -43,17 +50,22 @@ public class StarPatternImpl extends PyTree implements StarPattern {
   }
 
   @Override
+  public Token rightPar() {
+    return rightPar;
+  }
+
+  @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitStarPattern(this);
+    visitor.visitGroupPattern(this);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.STAR_PATTERN;
+    return Kind.GROUP_PATTERN;
   }
 
   @Override
   List<Tree> computeChildren() {
-    return Arrays.asList(starToken, pattern);
+    return Arrays.asList(leftPar, pattern, rightPar);
   }
 }

@@ -19,12 +19,12 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.RecognitionException;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.WildcardPattern;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
@@ -201,19 +202,31 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertSequenceElements(pattern("case ['foo' as head]: ..."), Kind.AS_PATTERN);
   }
 
-  @Test(expected = RecognitionException.class)
-  public void not_a_sequence_pattern() {
-    // TODO: assert this is a group pattern and not a sequence pattern, when the former will be implemented
-    pattern("case (x): ...");
+  @Test
+  public void group_pattern() {
+    GroupPattern groupPattern = pattern("case (x): ...");
+    assertThat(groupPattern.leftPar().value()).isEqualTo("(");
+    assertThat(((CapturePattern) groupPattern.pattern()).name().name()).isEqualTo("x");
+    assertThat(groupPattern.rightPar().value()).isEqualTo(")");
+  }
+
+  @Test
+  public void wildcard_pattern() {
+    WildcardPattern wildcardPattern = pattern("case _: ...");
+    assertThat(wildcardPattern.wildcard().value()).isEqualTo("_");
   }
 
   @Test
   public void sequence_pattern_with_star_pattern() {
     SequencePattern sequencePattern = pattern("case [head, *tail]: ...");
-   assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
+    assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
 
     StarPattern starPattern = (StarPattern) sequencePattern.elements().get(1);
-    assertThat(starPattern.capturePattern().name().name()).isEqualTo("tail");
+    assertThat(((CapturePattern) starPattern.pattern()).name().name()).isEqualTo("tail");
+
+    sequencePattern = pattern("case [head, *_]: ...");
+    starPattern = (StarPattern) sequencePattern.elements().get(1);
+    assertThat(starPattern.pattern().getKind()).isEqualTo(Kind.WILDCARD_PATTERN);
   }
 
   @Test
