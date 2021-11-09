@@ -32,6 +32,8 @@ package org.sonar.plugins.python.api.tree;
  */
 public interface StarPattern extends Pattern {
 
+  Token starToken();
+
   /**
    * Return value can only be either {@link CapturePattern} or {@link WildcardPattern}
    */
