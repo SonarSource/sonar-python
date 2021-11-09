@@ -174,15 +174,13 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
 
   @Test
   public void as_pattern() {
-    setRootRule(PythonGrammar.CASE_BLOCK);
-    CaseBlock caseBlock = parse("case \"foo\" as x: ...", treeMaker::caseBlock);
-    AsPattern asPattern = (AsPattern) caseBlock.pattern();
+    AsPattern asPattern = pattern("case \"foo\" as x: ...");
     assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
+    assertThat(asPattern.asKeyword().value()).isEqualTo("as");
     assertThat(asPattern.alias().name()).isEqualTo("x");
     assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Tree.Kind.LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.NAME);
 
-    caseBlock = parse("case value as x: ...", treeMaker::caseBlock);
-    asPattern = (AsPattern) caseBlock.pattern();
+    asPattern = pattern("case value as x: ...");
     assertThat(asPattern.pattern().getKind()).isEqualTo(Tree.Kind.CAPTURE_PATTERN);
   }
 
