@@ -60,6 +60,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertThat(matchStatement.getKind()).isEqualTo(Kind.MATCH_STMT);
     assertThat(matchStatement.matchKeyword().value()).isEqualTo("match");
     assertThat(matchStatement.subjectExpression().getKind()).isEqualTo(Kind.NAME);
+    assertThat(matchStatement.colon().value()).isEqualTo(":");
     assertThat(matchStatement.caseBlocks()).hasSize(1);
     assertThat(matchStatement.children()).extracting(Tree::getKind)
       .containsExactly(Kind.TOKEN, Kind.NAME, Kind.TOKEN, Kind.TOKEN, Kind.TOKEN, Kind.CASE_BLOCK, Kind.TOKEN);
@@ -67,6 +68,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     CaseBlock caseBlock = matchStatement.caseBlocks().get(0);
     assertThat(caseBlock.caseKeyword().value()).isEqualTo("case");
     assertThat(caseBlock.guard()).isNull();
+    assertThat(caseBlock.colon().value()).isEqualTo(":");
     assertThat(caseBlock.body().statements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
     assertThat(caseBlock.children()).extracting(Tree::getKind)
       .containsExactly(Kind.TOKEN, Kind.LITERAL_PATTERN, Kind.TOKEN, Kind.STATEMENT_LIST);

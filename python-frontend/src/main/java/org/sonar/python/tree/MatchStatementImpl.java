@@ -62,6 +62,11 @@ public class MatchStatementImpl extends PyTree implements MatchStatement {
   }
 
   @Override
+  public Token colon() {
+    return colon;
+  }
+
+  @Override
   public List<CaseBlock> caseBlocks() {
     return caseBlocks;
   }

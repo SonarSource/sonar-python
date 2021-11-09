@@ -78,6 +78,11 @@ public class CaseBlockImpl extends PyTree implements CaseBlock {
   }
 
   @Override
+  public Token colon() {
+    return colon;
+  }
+
+  @Override
   public StatementList body() {
     return body;
   }

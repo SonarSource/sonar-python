@@ -38,5 +38,7 @@ public interface MatchStatement extends Statement {
 
   Expression subjectExpression();
 
+  Token colon();
+
   List<CaseBlock> caseBlocks();
 }
