@@ -41,6 +41,8 @@ public interface CaseBlock extends Tree {
   @CheckForNull
   Guard guard();
 
+  Token colon();
+
   StatementList body();
 
 }
