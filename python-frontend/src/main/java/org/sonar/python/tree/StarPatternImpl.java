@@ -38,6 +38,11 @@ public class StarPatternImpl extends PyTree implements StarPattern {
   }
 
   @Override
+  public Token starToken() {
+    return starToken;
+  }
+
+  @Override
   public Pattern pattern() {
     return pattern;
   }

@@ -281,6 +281,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
 
     StarPattern starPattern = (StarPattern) sequencePattern.elements().get(1);
+    assertThat(starPattern.starToken().value()).isEqualTo("*");
     assertThat(((CapturePattern) starPattern.pattern()).name().name()).isEqualTo("tail");
 
     sequencePattern = pattern("case [head, *_]: ...");
