@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.BreakStatement;
+import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ContinueStatement;
 import org.sonar.plugins.python.api.tree.ElseClause;
@@ -43,7 +44,9 @@ import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -182,11 +185,31 @@ public class ControlFlowGraphBuilder {
         return tryStatement(((TryStatement) statement), currentBlock);
       case BREAK_STMT:
         return buildBreakStatement((BreakStatement) statement, currentBlock);
+      case MATCH_STMT:
+        return buildMatchStatement((MatchStatement) statement, currentBlock);
       default:
         currentBlock.addElement(statement);
     }
 
     return currentBlock;
+  }
+
+  private PythonCfgBlock buildMatchStatement(MatchStatement statement, PythonCfgBlock successor) {
+    List<CaseBlock> caseBlocks = statement.caseBlocks();
+    PythonCfgBlock matchingBlock = null;
+    PythonCfgBlock falseSuccessor = successor;
+    for (int i = caseBlocks.size() - 1; i >= 0; i--) {
+      PythonCfgBlock caseBodyBlock = createSimpleBlock(successor);
+      CaseBlock caseBlock = caseBlocks.get(i);
+      Pattern pattern = caseBlock.pattern();
+      caseBodyBlock = build(caseBlock.body().statements(), caseBodyBlock);
+      matchingBlock = createBranchingBlock(pattern, caseBodyBlock, falseSuccessor);
+      matchingBlock.addElement(pattern);
+      matchingBlock.addElement(statement.subjectExpression());
+      blocks.add(matchingBlock);
+      falseSuccessor = matchingBlock;
+    }
+    return matchingBlock;
   }
 
   private PythonCfgBlock buildWithStatement(WithStatement withStatement, PythonCfgBlock successor) {
