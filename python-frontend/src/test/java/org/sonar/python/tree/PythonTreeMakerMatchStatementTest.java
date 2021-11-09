@@ -170,11 +170,10 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     KeyValuePattern keyValuePattern = (KeyValuePattern) keyValuePatternList.get(0);
     assertThat(keyValuePattern.colon().value()).isEqualTo(":");
     LiteralPattern key = (LiteralPattern) keyValuePattern.key();
-    assertThat(key.getKind()).isEqualTo(Kind.LITERAL_PATTERN);
-    assertThat(key.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
+    assertThat(key.getKind()).isEqualTo(Kind.STRING_LITERAL_PATTERN);
     assertThat(key.valueAsString()).isEqualTo("'x'");
     LiteralPattern value = (LiteralPattern) keyValuePattern.value();
-    assertThat(value.literalKind()).isEqualTo(LiteralPattern.LiteralKind.STRING);
+    assertThat(value.getKind()).isEqualTo(Kind.STRING_LITERAL_PATTERN);
     assertThat(value.valueAsString()).isEqualTo("'foo'");
     assertThat(mappingPattern.lCurlyBrace().value()).isEqualTo("{");
     assertThat(mappingPattern.rCurlyBrace().value()).isEqualTo("}");
