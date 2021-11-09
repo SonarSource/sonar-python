@@ -194,4 +194,8 @@ public interface TreeVisitor {
   void visitWildcardPattern(WildcardPattern wildcardPattern);
 
   void visitGroupPattern(GroupPattern groupPattern);
+
+  void visitClassPattern(ClassPattern classPattern);
+
+  void visitKeywordPattern(KeywordPattern keywordPattern);
 }

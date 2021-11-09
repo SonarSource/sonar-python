@@ -19,18 +19,23 @@
  */
 package org.sonar.python.tree;
 
+import com.sonar.sslr.api.RecognitionException;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
+import org.sonar.plugins.python.api.tree.ClassPattern;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Guard;
+import org.sonar.plugins.python.api.tree.KeywordPattern;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.LiteralPattern;
 import org.sonar.plugins.python.api.tree.MatchStatement;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.OrPattern;
 import org.sonar.plugins.python.api.tree.Pattern;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SequencePattern;
 import org.sonar.plugins.python.api.tree.StarPattern;
 import org.sonar.plugins.python.api.tree.Token;
@@ -42,6 +47,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class PythonTreeMakerMatchStatementTest extends RuleTest {
 
@@ -233,6 +239,41 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   public void sequence_pattern_without_parens() {
     assertSequenceElements(pattern("case x, y: ..."), "x", "y");
     assertSequenceElements(pattern("case x,: ..."), "x");
+  }
+
+  @Test
+  public void class_pattern() {
+    ClassPattern classPattern = pattern("case A(x, y, z,): ...");
+    assertThat(((Name) classPattern.targetClass()).name()).isEqualTo("A");
+    assertThat(classPattern.arguments()).extracting(arg -> ((CapturePattern) arg).name().name()).containsExactly("x", "y", "z");
+    assertThat(classPattern.argumentSeparators()).hasSize(3);
+    assertThat(classPattern.leftPar().value()).isEqualTo("(");
+    assertThat(classPattern.rightPar().value()).isEqualTo(")");
+
+    classPattern = pattern("case A.B.C(): ...");
+    assertThat(classPattern.arguments()).isEmpty();
+    QualifiedExpression qualifiedExpression = (QualifiedExpression) classPattern.targetClass();
+    assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("A.B.C");
+
+    classPattern = pattern("case A(foo='bar'): ...");
+    KeywordPattern arg = ((KeywordPattern) classPattern.arguments().get(0));
+    assertThat(arg.attributeName().name()).isEqualTo("foo");
+    assertThat(((LiteralPattern) arg.pattern()).valueAsString()).isEqualTo("'bar'");
+    assertThat(arg.equalToken().value()).isEqualTo("=");
+
+    classPattern = pattern("case A(x, foo='bar', baz=42,): ...");
+    assertThat(classPattern.arguments()).extracting(Tree::getKind).containsExactly(Kind.CAPTURE_PATTERN, Kind.KEYWORD_PATTERN, Kind.KEYWORD_PATTERN);
+    assertThat(classPattern.argumentSeparators()).hasSize(3);
+  }
+
+  @Test
+  public void class_pattern_positional_after_keyword() {
+    try {
+      pattern("case A(foo=42, x, y): ...");
+      fail("Position patterns cannot follow keyword patterns");
+    } catch (RecognitionException exception) {
+      assertThat(exception.getMessage()).isEqualTo("Parse error at line 1: Positional patterns follow keyword patterns.");
+    }
   }
 
   private void assertSequenceElements(SequencePattern sequencePattern, String... elements) {

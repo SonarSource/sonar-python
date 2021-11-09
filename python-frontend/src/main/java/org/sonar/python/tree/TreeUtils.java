@@ -275,7 +275,7 @@ public class TreeUtils {
     return null;
   }
 
-  private static String nameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+  public static String nameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
     String exprName = qualifiedExpression.name().name();
     Expression qualifier = qualifiedExpression.qualifier();
     String nameOfQualifier = decoratorNameFromExpression(qualifier);
