@@ -31,22 +31,17 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 // TODO: should we consider None as NoneExpression?
 public class LiteralPatternImpl extends PyTree implements LiteralPattern {
 
-  private final LiteralKind literalKind;
+  private final Kind kind;
   private final List<Token> tokens;
 
-  public LiteralPatternImpl(List<Token> tokens, LiteralKind literalKind) {
-    this.literalKind = literalKind;
+  public LiteralPatternImpl(List<Token> tokens, Kind kind) {
     this.tokens = tokens;
+    this.kind = kind;
   }
 
   @Override
   public String valueAsString() {
     return tokens.stream().map(Token::value).collect(Collectors.joining());
-  }
-
-  @Override
-  public LiteralKind literalKind() {
-    return literalKind;
   }
 
   @Override
@@ -56,7 +51,7 @@ public class LiteralPatternImpl extends PyTree implements LiteralPattern {
 
   @Override
   public Kind getKind() {
-    return Kind.LITERAL_PATTERN;
+    return kind;
   }
 
   @Override

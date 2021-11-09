@@ -39,12 +39,4 @@ public interface LiteralPattern extends Pattern {
 
   String valueAsString();
 
-  LiteralKind literalKind();
-
-  enum LiteralKind {
-    STRING,
-    NUMBER,
-    BOOLEAN,
-    NONE
-  }
 }

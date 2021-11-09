@@ -56,6 +56,8 @@ public interface Tree {
 
     BREAK_STMT(BreakStatement.class),
 
+    BOOLEAN_LITERAL_PATTERN(LiteralPattern.class),
+
     CALL_EXPR(CallExpression.class),
 
     CAPTURE_PATTERN(CapturePattern.class),
@@ -122,8 +124,6 @@ public interface Tree {
 
     LIST_LITERAL(ListLiteral.class),
 
-    LITERAL_PATTERN(LiteralPattern.class),
-
     MATCH_STMT(MatchStatement.class),
 
     MAPPING_PATTERN(MappingPattern.class),
@@ -134,7 +134,11 @@ public interface Tree {
 
     NONE(NoneExpression.class),
 
+    NONE_LITERAL_PATTERN(LiteralPattern.class),
+
     NUMERIC_LITERAL(NumericLiteral.class),
+
+    NUMERIC_LITERAL_PATTERN(LiteralPattern.class),
 
     OR_PATTERN(OrPattern.class),
 
@@ -159,6 +163,8 @@ public interface Tree {
     STAR_PATTERN(StarPattern.class),
 
     STRING_LITERAL(StringLiteral.class),
+
+    STRING_LITERAL_PATTERN(LiteralPattern.class),
 
     STRING_ELEMENT(StringElement.class),
 
