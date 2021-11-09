@@ -1006,15 +1006,15 @@ public class PythonTreeMaker {
 
 
   private static LiteralPattern literalPattern(AstNode literalPattern) {
-    LiteralPattern.LiteralKind literalKind;
+    Tree.Kind literalKind;
     if (literalPattern.hasDirectChildren(PythonGrammar.COMPLEX_NUMBER, PythonGrammar.SIGNED_NUMBER)) {
-      literalKind = LiteralPattern.LiteralKind.NUMBER;
+      literalKind = Tree.Kind.NUMERIC_LITERAL_PATTERN;
     } else if (literalPattern.hasDirectChildren(PythonTokenType.STRING)) {
-      literalKind = LiteralPattern.LiteralKind.STRING;
+      literalKind = Tree.Kind.STRING_LITERAL_PATTERN;
     } else if (literalPattern.hasDirectChildren(PythonKeyword.NONE)) {
-      literalKind = LiteralPattern.LiteralKind.NONE;
+      literalKind = Tree.Kind.NONE_LITERAL_PATTERN;
     } else {
-      literalKind = LiteralPattern.LiteralKind.BOOLEAN;
+      literalKind = Tree.Kind.BOOLEAN_LITERAL_PATTERN;
     }
     List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).collect(Collectors.toList());
     return new LiteralPatternImpl(tokens, literalKind);
