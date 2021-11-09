@@ -45,6 +45,11 @@ public class AsPatternImpl extends PyTree implements AsPattern {
   }
 
   @Override
+  public Token asKeyword() {
+    return asKeyword;
+  }
+
+  @Override
   public Name alias() {
     return alias;
   }
