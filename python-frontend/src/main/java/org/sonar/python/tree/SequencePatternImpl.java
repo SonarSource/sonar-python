@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.SequencePattern;
@@ -44,9 +45,26 @@ public class SequencePatternImpl extends PyTree implements SequencePattern {
     this.rightDelimiter = rightDelimiter;
   }
 
+  @CheckForNull
+  @Override
+  public Token lDelimiter() {
+    return leftDelimiter;
+  }
+
   @Override
   public List<Pattern> elements() {
     return elements;
+  }
+
+  @Override
+  public List<Token> commas() {
+    return commas;
+  }
+
+  @CheckForNull
+  @Override
+  public Token rDelimiter() {
+    return rightDelimiter;
   }
 
   @Override
