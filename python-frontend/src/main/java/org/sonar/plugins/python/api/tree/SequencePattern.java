@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 
 /**
  * Sequence Pattern
@@ -37,5 +38,13 @@ import java.util.List;
  */
 public interface SequencePattern extends Pattern {
 
+  @CheckForNull
+  Token lDelimiter();
+
   List<Pattern> elements();
+
+  List<Token> commas();
+
+  @CheckForNull
+  Token rDelimiter();
 }

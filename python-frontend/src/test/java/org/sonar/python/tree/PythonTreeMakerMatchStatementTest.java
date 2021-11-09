@@ -248,6 +248,22 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
+  public void sequence_pattern_delimiters() {
+    SequencePattern pattern = pattern("case [x, y]: ...");
+    assertThat(pattern.lDelimiter().value()).isEqualTo("[");
+    assertThat(pattern.rDelimiter().value()).isEqualTo("]");
+    assertThat(pattern.commas()).hasSize(1);
+
+    pattern = pattern("case (x, y): ...");
+    assertThat(pattern.lDelimiter().value()).isEqualTo("(");
+    assertThat(pattern.rDelimiter().value()).isEqualTo(")");
+
+    pattern = pattern("case x, y: ...");
+    assertThat(pattern.lDelimiter()).isNull();
+    assertThat(pattern.rDelimiter()).isNull();
+  }
+
+  @Test
   public void group_pattern() {
     GroupPattern groupPattern = pattern("case (x): ...");
     assertThat(groupPattern.leftPar().value()).isEqualTo("(");
