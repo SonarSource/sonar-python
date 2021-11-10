@@ -206,3 +206,17 @@ def try_block_without_jump_statements():
         print("except")
     return 42
     print("dead code") # Noncompliant
+
+
+def match_statement_no_fp(value):
+  match value:
+    case "1": return
+    case "2": return
+  print("reachable")
+
+
+def match_statement_fn(value):
+  match value:
+    case "1": return
+    case x: return
+  print("unreachable")  # FN, "case x" will match anything

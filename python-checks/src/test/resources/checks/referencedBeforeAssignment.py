@@ -179,3 +179,14 @@ def assignment_expression():
 def assignment_expression_fn():
   b = 41
   dict = {k: (k := b + 1)} # FN, key is evaluated first and value second
+
+def match_statement_no_fp(value):
+  match value:
+    case x:
+      ...
+  x = 42
+
+def match_statement_no_fp_reassignment(value):
+  match value:
+    case x:  # OK, though should be raised by S1854 (dead store)
+      x = 42

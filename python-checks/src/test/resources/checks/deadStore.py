@@ -301,3 +301,19 @@ def assignment_expression_fn():
 def assignment_expression_no_fp():
   a = 3 # No fp: a will be read before it's written into
   dict = {'b' : a, 'c' : (a:=3)} # FN (final assignment expression is unused)
+
+def match_statement_fn(value):
+  a = 42
+  match value:
+    case 1: ...
+    case a: ...  # FN
+
+
+class MyClass:
+  CONST = 99
+
+def match_statement_no_fp(value):
+  a = MyClass()
+  match value:
+    case 1: ...
+    case a.CONST: a = 42  # OK, read before write

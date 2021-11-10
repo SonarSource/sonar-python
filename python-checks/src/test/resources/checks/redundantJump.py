@@ -326,3 +326,15 @@ class Foo:
 
 def single_return():
     return # OK
+
+
+def match_statement(value):
+    match value:
+      case "42":
+        foo()
+        return  # Noncompliant
+
+def match_statement_single_return(value):
+    match value:
+      case "42":
+        return  # OK
