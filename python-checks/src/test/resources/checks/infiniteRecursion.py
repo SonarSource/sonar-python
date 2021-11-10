@@ -344,3 +344,16 @@ async def asyn6(i): # Noncompliant
 
 class A:
   def func(*, x, y): ...
+
+
+def match_statement_no_fp(value):
+  match value:
+    case 42:
+      return "hello"
+  return no_fp_with_match(value + 1)
+
+
+def match_statement_fn(value):  # FN, "case x" will always match
+  match value:
+    case x:
+      return match_statement_fn(value + 1)

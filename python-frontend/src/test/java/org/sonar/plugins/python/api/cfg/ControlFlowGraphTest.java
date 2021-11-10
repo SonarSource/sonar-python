@@ -20,10 +20,13 @@
 package org.sonar.plugins.python.api.cfg;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -597,6 +600,43 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void match_statement() {
+    ControlFlowGraph cfg = cfg("" +
+      "foo()   ",
+      "match x:",
+      "  case \"1\": y()",
+      "  case a.b if w(): z()",
+      "bar()"
+    );
+
+    assertThat(cfg.blocks()).hasSize(6);
+
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    PythonCfgEndBlock end = (PythonCfgEndBlock) cfg.end();
+    assertThat(end.predecessors()).hasSize(1);
+    CfgBlock barBlock = end.predecessors().stream().findFirst().get();
+
+    assertThat(barBlock.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
+    ExpressionStatement expressionStatement = (ExpressionStatement) barBlock.elements().get(0);
+    assertThat(expressionStatement.expressions()).extracting(Tree::getKind).containsExactly(Kind.CALL_EXPR);
+
+    assertThat(start.branchingTree().getKind()).isEqualTo(Kind.STRING_LITERAL_PATTERN);
+    assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT, Kind.NAME, Kind.STRING_LITERAL_PATTERN);
+
+    PythonCfgSimpleBlock firstCaseBody = (PythonCfgSimpleBlock) start.trueSuccessor();
+    assertThat(firstCaseBody.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
+    assertThat(firstCaseBody.successors()).containsExactly(barBlock);
+
+    PythonCfgBranchingBlock secondCaseEvaluation = (PythonCfgBranchingBlock) start.falseSuccessor();
+    assertThat(secondCaseEvaluation.elements()).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.VALUE_PATTERN, Kind.CALL_EXPR);
+
+    PythonCfgSimpleBlock secondCaseTrueSuccessor = (PythonCfgSimpleBlock) secondCaseEvaluation.trueSuccessor();
+    assertThat(secondCaseTrueSuccessor.successors()).containsExactly(barBlock);
+    PythonCfgSimpleBlock secondCaseFalseSuccessor = (PythonCfgSimpleBlock) secondCaseEvaluation.falseSuccessor();
+    assertThat(secondCaseFalseSuccessor).isEqualTo(barBlock);
+  }
+
+  @Test
   public void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
     assertThat(endBlock.toString()).isEqualTo("END");
@@ -607,6 +647,25 @@ public class ControlFlowGraphTest {
      "assert 2"
     );
     assertThat(cfg.start().toString()).isEqualTo("2:2:PASS_STMT;ASSERT_STMT");
+  }
+
+  @Test
+  public void CFG_matchStatement() {
+    ControlFlowGraph cfg = cfg("" +
+      "foo()   ",
+      "match x:",
+      "  case \"1\": y()",
+      "  case a.b: z()",
+      "bar()"
+    );
+    assertThat(cfg).hasToString("" +
+      "0[label=\"4:14:EXPRESSION_STMT\"];" +
+      "1[label=\"4:9:EXPRESSION_STMT;NAME;STRING_LITERAL_PATTERN\"];" +
+      "2[label=\"5:14:EXPRESSION_STMT\"];" +
+      "3[label=\"5:9:NAME;VALUE_PATTERN\"];" +
+      "4[label=\"6:2:EXPRESSION_STMT\"];" +
+      "5[label=\"END\"];" +
+      "0->4;1->0;1->3;2->4;3->2;3->4;4->5;");
   }
 
   @Test

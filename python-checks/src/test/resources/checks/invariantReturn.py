@@ -498,3 +498,25 @@ def unreachable_implicit_return_none(cond):  # Noncompliant
   except Exception:
     return 42
   # Implicit "None" return is unreachable
+
+def basic_match_statement_noncompliant(value):  # Noncompliant
+  match value:
+    case 1:
+      return 42
+  return 42
+
+
+def match_statement_no_fp_with_implicit_return(value):  # OK, implicit "None" return is reachable
+  match value:
+    case 1:
+      return 42
+    case 2:
+      return 42
+
+
+def match_statement_fn_with_capture(value): # FN, implicit "None" return is unreachable
+  match value:
+    case 1:
+      return 42
+    case x:
+      return 42
