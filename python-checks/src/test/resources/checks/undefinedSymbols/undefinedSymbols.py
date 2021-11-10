@@ -105,3 +105,9 @@ print(GLOB3) # FN
 
 _some_implicit_global_vars # ok we exclude variables starting with `_`
 __some_implicit_global_vars__ # ok
+
+
+def python_3_10(value):
+    match value:
+        case remaining:
+            print(remaining)

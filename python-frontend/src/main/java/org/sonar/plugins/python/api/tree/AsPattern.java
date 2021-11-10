@@ -33,5 +33,5 @@ public interface AsPattern extends Pattern {
 
   Token asKeyword();
 
-  Name alias();
+  CapturePattern alias();
 }

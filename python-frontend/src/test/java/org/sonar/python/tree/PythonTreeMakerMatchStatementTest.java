@@ -155,8 +155,8 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     AsPattern asPattern = pattern("case \"foo\" as x: ...");
     assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
     assertThat(asPattern.asKeyword().value()).isEqualTo("as");
-    assertThat(asPattern.alias().name()).isEqualTo("x");
-    assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Kind.STRING_LITERAL_PATTERN, Tree.Kind.TOKEN, Tree.Kind.NAME);
+    assertThat(asPattern.alias().name().name()).isEqualTo("x");
+    assertThat(asPattern.children()).extracting(Tree::getKind).containsExactly(Kind.STRING_LITERAL_PATTERN, Tree.Kind.TOKEN, Kind.CAPTURE_PATTERN);
 
     asPattern = pattern("case value as x: ...");
     assertThat(asPattern.pattern().getKind()).isEqualTo(Tree.Kind.CAPTURE_PATTERN);
@@ -226,6 +226,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   public void value_pattern() {
     ValuePattern valuePattern = pattern("case a.b: ...");
     QualifiedExpression qualifiedExpression = valuePattern.qualifiedExpression();
+    assertThat(((Name) qualifiedExpression.qualifier()).isVariable()).isTrue();
     assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b");
     assertThat(valuePattern.children()).containsExactly(valuePattern.qualifiedExpression());
 
@@ -300,7 +301,9 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   @Test
   public void class_pattern() {
     ClassPattern classPattern = pattern("case A(x, y, z,): ...");
-    assertThat(((Name) classPattern.targetClass()).name()).isEqualTo("A");
+    Name className = (Name) classPattern.targetClass();
+    assertThat(className.name()).isEqualTo("A");
+    assertThat(className.isVariable()).isTrue();
     assertThat(classPattern.arguments()).extracting(arg -> ((CapturePattern) arg).name().name()).containsExactly("x", "y", "z");
     assertThat(classPattern.argumentSeparators()).hasSize(3);
     assertThat(classPattern.leftPar().value()).isEqualTo("(");
@@ -309,6 +312,8 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
     classPattern = pattern("case A.B.C(): ...");
     assertThat(classPattern.arguments()).isEmpty();
     QualifiedExpression qualifiedExpression = (QualifiedExpression) classPattern.targetClass();
+    Name qualifierA = (Name) ((QualifiedExpression) qualifiedExpression.qualifier()).qualifier();
+    assertThat(qualifierA.isVariable()).isTrue();
     assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("A.B.C");
 
     classPattern = pattern("case A(foo='bar'): ...");

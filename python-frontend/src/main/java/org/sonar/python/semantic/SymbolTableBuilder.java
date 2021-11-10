@@ -46,11 +46,11 @@ import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
-import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -539,6 +539,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitWithItem(WithItem withItem) {
       boundNamesFromExpression(withItem.expression()).forEach(name -> addBindingUsage(name, Usage.Kind.WITH_INSTANCE));
       super.visitWithItem(withItem);
+    }
+
+    @Override
+    public void visitCapturePattern(CapturePattern capturePattern) {
+      addBindingUsage(capturePattern.name(), Usage.Kind.PATTERN_DECLARATION);
+      super.visitCapturePattern(capturePattern);
     }
 
     private void createScope(Tree tree, @Nullable Scope parent) {

@@ -37,6 +37,7 @@ public class UsageImplTest {
     assertBindingUsage(Usage.Kind.LOOP_DECLARATION, true);
     assertBindingUsage(Usage.Kind.COMP_DECLARATION, true);
     assertBindingUsage(Usage.Kind.PARAMETER, true);
+    assertBindingUsage(Usage.Kind.PATTERN_DECLARATION, true);
     assertBindingUsage(Usage.Kind.OTHER, false);
   }
 
