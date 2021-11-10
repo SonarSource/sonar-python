@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -98,7 +99,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       if (!TreeUtils.hasDescendant(tryStatement.body(), t -> t.is(Kind.RETURN_STMT))) {
         collectedBlocks.add(new LatestExecutedBlock(branchingBlock));
       }
-    } else if (branchingTree.is(Kind.IF_STMT)) {
+    } else if (branchingTree.is(Kind.IF_STMT) || branchingTree instanceof Pattern) {
       collectedBlocks.add(new LatestExecutedBlock(branchingBlock));
     } else {
       collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, branchingBlock);
