@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.ParameterList;
@@ -202,8 +203,12 @@ public class ControlFlowGraphBuilder {
       PythonCfgBlock caseBodyBlock = createSimpleBlock(successor);
       CaseBlock caseBlock = caseBlocks.get(i);
       Pattern pattern = caseBlock.pattern();
+      Guard guard = caseBlock.guard();
       caseBodyBlock = build(caseBlock.body().statements(), caseBodyBlock);
       matchingBlock = createBranchingBlock(pattern, caseBodyBlock, falseSuccessor);
+      if (guard != null) {
+        matchingBlock.addElement(guard.condition());
+      }
       matchingBlock.addElement(pattern);
       matchingBlock.addElement(statement.subjectExpression());
       blocks.add(matchingBlock);

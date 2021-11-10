@@ -605,7 +605,7 @@ public class ControlFlowGraphTest {
       "foo()   ",
       "match x:",
       "  case \"1\": y()",
-      "  case a.b: z()",
+      "  case a.b if w(): z()",
       "bar()"
     );
 
@@ -628,7 +628,7 @@ public class ControlFlowGraphTest {
     assertThat(firstCaseBody.successors()).containsExactly(barBlock);
 
     PythonCfgBranchingBlock secondCaseEvaluation = (PythonCfgBranchingBlock) start.falseSuccessor();
-    assertThat(secondCaseEvaluation.elements()).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.VALUE_PATTERN);
+    assertThat(secondCaseEvaluation.elements()).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.VALUE_PATTERN, Kind.CALL_EXPR);
 
     PythonCfgSimpleBlock secondCaseTrueSuccessor = (PythonCfgSimpleBlock) secondCaseEvaluation.trueSuccessor();
     assertThat(secondCaseTrueSuccessor.successors()).containsExactly(barBlock);
