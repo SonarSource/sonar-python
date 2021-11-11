@@ -409,7 +409,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     pattern.accept(visitor);
 
     verify(visitor).visitLiteralPattern((LiteralPattern) pattern.pattern());
-    verify(visitor).visitName(pattern.alias());
+    verify(visitor).visitCapturePattern(pattern.alias());
   }
 
   @Test

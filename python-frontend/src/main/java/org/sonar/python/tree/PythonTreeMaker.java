@@ -857,7 +857,7 @@ public class PythonTreeMaker {
   private static AsPattern asPattern(AstNode asPattern) {
     Pattern pattern = orPattern(asPattern.getFirstChild(PythonGrammar.OR_PATTERN));
     Token asKeyword = toPyToken(asPattern.getFirstChild(PythonKeyword.AS).getToken());
-    Name alias = name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild());
+    CapturePattern alias = new CapturePatternImpl(name(asPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN).getFirstChild()));
     return new AsPatternImpl(pattern, asKeyword, alias);
   }
 
@@ -938,9 +938,9 @@ public class PythonTreeMaker {
     List<Token> dots = punctuators(nameOrAttr, PythonPunctuator.DOT);
     List<AstNode> names = nameOrAttr.getChildren(PythonGrammar.NAME);
     if (dots.isEmpty()) {
-      return name(names.get(0));
+      return variable(names.get(0));
     }
-    Expression qualifier = name(names.get(0));
+    Expression qualifier = variable(names.get(0));
 
     for (int i = 1; i < names.size(); i++) {
       Name name = name(names.get(i));

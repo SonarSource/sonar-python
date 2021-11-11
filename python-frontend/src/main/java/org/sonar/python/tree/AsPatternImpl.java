@@ -22,7 +22,7 @@ package org.sonar.python.tree;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.plugins.python.api.tree.AsPattern;
-import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -31,9 +31,9 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class AsPatternImpl extends PyTree implements AsPattern {
   private final Pattern pattern;
   private final Token asKeyword;
-  private final Name alias;
+  private final CapturePattern alias;
 
-  public AsPatternImpl(Pattern pattern, Token asKeyword, Name alias) {
+  public AsPatternImpl(Pattern pattern, Token asKeyword, CapturePattern alias) {
     this.pattern = pattern;
     this.asKeyword = asKeyword;
     this.alias = alias;
@@ -50,7 +50,7 @@ public class AsPatternImpl extends PyTree implements AsPattern {
   }
 
   @Override
-  public Name alias() {
+  public CapturePattern alias() {
     return alias;
   }
 
