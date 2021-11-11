@@ -587,7 +587,7 @@ public class PythonTreeMaker {
 
   private Decorator decorator(AstNode astNode) {
     Token atToken = toPyToken(astNode.getFirstChild(PythonPunctuator.AT).getToken());
-    Expression expression = expression(astNode.getFirstChild(PythonGrammar.EXPR));
+    Expression expression = expression(astNode.getFirstChild(PythonGrammar.NAMED_EXPR_TEST));
     Token newLineToken = astNode.getFirstChild(PythonTokenType.NEWLINE) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.NEWLINE).getToken());
     return new DecoratorImpl(atToken, expression, newLineToken);
   }
