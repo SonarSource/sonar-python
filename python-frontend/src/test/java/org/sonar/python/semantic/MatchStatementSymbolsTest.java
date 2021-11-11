@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.ValuePattern;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.plugins.python.api.symbols.Usage.Kind.CLASS_DECLARATION;
 import static org.sonar.plugins.python.api.symbols.Usage.Kind.OTHER;
 import static org.sonar.plugins.python.api.symbols.Usage.Kind.PATTERN_DECLARATION;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CASE_BLOCK;
@@ -123,13 +124,16 @@ public class MatchStatementSymbolsTest {
 
   @Test
   public void or_pattern() {
-    OrPattern orPattern = patternFromCase("case A(x) | y: print(x + y)");
-    ClassPattern classPattern = (ClassPattern) orPattern.patterns().get(0);
-    Symbol x = ((CapturePattern) classPattern.arguments().get(0)).name().symbol();
-    CapturePattern capturePattern = (CapturePattern) orPattern.patterns().get(1);
-    Symbol y = capturePattern.name().symbol();
-    assertThat(x.usages()).extracting(Usage::kind).containsExactly(PATTERN_DECLARATION, OTHER);
-    assertThat(y.usages()).extracting(Usage::kind).containsExactly(PATTERN_DECLARATION, OTHER);
+    OrPattern orPattern = pattern(
+      "class A: ...",
+      "class B: ...",
+      "def foo(value):",
+      "  match(value):",
+      "    case A() | B(): ...");
+    Symbol symbolA = ((Name) ((ClassPattern) orPattern.patterns().get(0)).targetClass()).symbol();
+    Symbol symbolB = ((Name) ((ClassPattern) orPattern.patterns().get(1)).targetClass()).symbol();
+    assertThat(symbolA.usages()).extracting(Usage::kind).containsExactly(CLASS_DECLARATION, OTHER);
+    assertThat(symbolB.usages()).extracting(Usage::kind).containsExactly(CLASS_DECLARATION, OTHER);
   }
 
   @Test
@@ -156,6 +160,12 @@ public class MatchStatementSymbolsTest {
     GroupPattern groupPattern = patternFromCase("case (x): ...");
     CapturePattern capturePattern = (CapturePattern) groupPattern.pattern();
     assertThat(capturePattern.name().symbol()).isNotNull();
+  }
+
+  @Test
+  public void guard() {
+    CapturePattern capturePattern = patternFromCase("case x if x > 42: ...");
+    assertThat(capturePattern.name().symbol().usages()).extracting(Usage::kind).containsExactly(PATTERN_DECLARATION, OTHER);
   }
 
   @SuppressWarnings("unchecked")
