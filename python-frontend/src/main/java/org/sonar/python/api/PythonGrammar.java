@@ -286,7 +286,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(SUBSCRIPTLIST).is(SUBSCRIPT, b.zeroOrMore(",", SUBSCRIPT), b.optional(","));
     b.rule(SUBSCRIPT).is(b.firstOf(
         b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
-        TEST));
+        NAMED_EXPR_TEST));
     b.rule(SLICEOP).is(":", b.optional(TEST));
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
     b.rule(TESTLIST).is(TEST, b.zeroOrMore(",", TEST), b.optional(","));
