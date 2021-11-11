@@ -208,6 +208,19 @@ public class InferredTypesTest {
   }
 
   @Test
+  public void union_type_python_3_10() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "foo: int | str | bool"
+    );
+
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(DeclaredType.class);
+    assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder("int", "str", "bool");
+  }
+
+  @Test
   public void test_annotated_type_annotation() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Annotated",

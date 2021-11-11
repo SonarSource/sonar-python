@@ -74,6 +74,16 @@ public class DeclaredType implements InferredType {
     typeArgs = Collections.emptyList();
   }
 
+  /**
+   * Used for
+   * <pre>X | Y | Z</pre>
+   *
+   * In this case {@link #typeClass} is null
+   */
+  DeclaredType(List<DeclaredType> typeArgs) {
+    this(TypeShed.symbolWithFQN("typing", "typing.Union"), typeArgs);
+  }
+
   @Override
   public boolean canHaveMember(String memberName) {
     return true;

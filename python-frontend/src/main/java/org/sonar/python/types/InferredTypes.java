@@ -37,10 +37,10 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
-import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -173,18 +173,32 @@ public class InferredTypes {
 
   @CheckForNull
   private static DeclaredType declaredTypeFromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
-    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
-      Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null) {
-        String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
-        return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn)) : new DeclaredType(symbol);
-      }
+    switch (expression.getKind()) {
+      case NAME:
+        return declaredTypeFromName(((Name) expression), builtinSymbols);
+      case SUBSCRIPTION:
+        return declaredTypeFromTypeAnnotationSubscription((SubscriptionExpression) expression, builtinSymbols);
+      case NONE:
+        return new DeclaredType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+      case BITWISE_OR:
+        BinaryExpression binaryExpression = (BinaryExpression) expression;
+        DeclaredType left = declaredTypeFromTypeAnnotation(binaryExpression.leftOperand(), builtinSymbols);
+        DeclaredType right = declaredTypeFromTypeAnnotation(binaryExpression.rightOperand(), builtinSymbols);
+        return new DeclaredType(Arrays.asList(left, right));
+      default:
+        return null;
     }
-    if (expression.is(Kind.SUBSCRIPTION)) {
-      return declaredTypeFromTypeAnnotationSubscription((SubscriptionExpression) expression, builtinSymbols);
+  }
+
+  @CheckForNull
+  private static DeclaredType declaredTypeFromName(Name name, Map<String, Symbol> builtinSymbols) {
+    if (name.name().equals("Any")) {
+      return null;
     }
-    if (expression.is(Kind.NONE)) {
-      return new DeclaredType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+    Symbol symbol = name.symbol();
+    if (symbol != null) {
+      String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
+      return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn)) : new DeclaredType(symbol);
     }
     return null;
   }
@@ -209,29 +223,44 @@ public class InferredTypes {
   }
 
   private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
-    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
-      Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null) {
-        if ("typing.Text".equals(symbol.fullyQualifiedName())) {
-          return InferredTypes.runtimeType(builtinSymbols.get("str"));
-        }
-        return InferredTypes.genericType(symbol, Collections.emptyList(), builtinSymbols);
+    switch (expression.getKind()) {
+      case NAME:
+       return runtimeTypeFromName(((Name) expression), builtinSymbols);
+      case SUBSCRIPTION:
+        return runtimeTypeFromSubscription((SubscriptionExpression) expression, builtinSymbols);
+      case NONE:
+        return runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+      case BITWISE_OR:
+        BinaryExpression binaryExpression = (BinaryExpression) expression;
+        InferredType left = runtimeTypefromTypeAnnotation(binaryExpression.leftOperand(), builtinSymbols);
+        InferredType right = runtimeTypefromTypeAnnotation(binaryExpression.rightOperand(), builtinSymbols);
+        return or(left, right);
+      default:
+        return anyType();
+    }
+  }
+
+  private static InferredType runtimeTypeFromSubscription(SubscriptionExpression subscription, Map<String, Symbol> builtinSymbols) {
+    if (isAnnotatedSubscription(subscription)) {
+      return runtimeTypefromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
+    }
+    return TreeUtils.getSymbolFromTree(subscription.object())
+      .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
+      .orElse(InferredTypes.anyType());
+  }
+
+  private static InferredType runtimeTypeFromName(Name name, Map<String, Symbol> builtinSymbols) {
+    if (name.name().equals("Any")) {
+      return anyType();
+    }
+    Symbol symbol = name.symbol();
+    if (symbol != null) {
+      if ("typing.Text".equals(symbol.fullyQualifiedName())) {
+        return runtimeType(builtinSymbols.get("str"));
       }
-      return InferredTypes.anyType();
+      return genericType(symbol, Collections.emptyList(), builtinSymbols);
     }
-    if (expression.is(Kind.SUBSCRIPTION)) {
-      SubscriptionExpression subscription = (SubscriptionExpression) expression;
-      if (isAnnotatedSubscription(subscription)) {
-        return runtimeTypefromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
-      }
-      return TreeUtils.getSymbolFromTree(subscription.object())
-        .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
-        .orElse(InferredTypes.anyType());
-    }
-    if (expression.is(Kind.NONE)) {
-      return InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
-    }
-    return InferredTypes.anyType();
+    return anyType();
   }
 
   private static boolean isAnnotatedSubscription(SubscriptionExpression subscription) {
