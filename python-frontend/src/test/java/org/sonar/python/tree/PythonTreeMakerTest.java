@@ -902,6 +902,21 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(decorator.name().names()).isEmpty();
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isNull();
     assertThat(decorator.expression().is(Kind.QUALIFIED_EXPR)).isTrue();
+
+    functionDef = funcDef("@hello() or bye()\ndef func(x): pass");
+    decorators = functionDef.decorators();
+    assertThat(decorators).hasSize(1);
+    decorator = decorators.get(0);
+    assertThat(decorator.expression().getKind()).isEqualTo(Kind.OR);
+    BinaryExpression binaryExpression = (BinaryExpression) decorator.expression();
+    assertThat(binaryExpression.leftOperand().getKind()).isEqualTo(Kind.CALL_EXPR);
+    assertThat(binaryExpression.rightOperand().getKind()).isEqualTo(Kind.CALL_EXPR);
+
+    functionDef = funcDef("@b:=some_decorator\ndef func(x): pass");
+    decorators = functionDef.decorators();
+    assertThat(decorators).hasSize(1);
+    decorator = decorators.get(0);
+    assertThat(decorator.expression().getKind()).isEqualTo(Kind.ASSIGNMENT_EXPRESSION);
   }
 
   private FunctionDef funcDef(String code) {

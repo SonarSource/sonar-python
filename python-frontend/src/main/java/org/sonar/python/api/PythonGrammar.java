@@ -538,7 +538,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
 
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));
-    b.rule(DECORATOR).is("@", EXPR, NEWLINE);
+    b.rule(DECORATOR).is("@", NAMED_EXPR_TEST, NEWLINE);
     b.rule(DOTTED_NAME).is(NAME, b.zeroOrMore(".", NAME));
 
     b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME, b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
