@@ -1752,6 +1752,12 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(subscripts.children().get(1)).isSameAs(subscripts.commas().get(0));
     assertThat(subscripts.expressions()).extracting(Tree::getKind)
       .containsExactly(Tree.Kind.NAME, Tree.Kind.NUMERIC_LITERAL);
+
+    SubscriptionExpression subscriptionExpression = (SubscriptionExpression) parse("a[b:=1]", treeMaker::expression);
+    assertThat(subscriptionExpression.subscripts().expressions()).hasSize(1);
+    AssignmentExpression assignmentExpression = ((AssignmentExpression) subscriptionExpression.subscripts().expressions().get(0));
+    assertThat(assignmentExpression.lhsName().name()).isEqualTo("b");
+    assertThat(((NumericLiteral) assignmentExpression.expression()).valueAsLong()).isEqualTo(1);
   }
 
   @Test
