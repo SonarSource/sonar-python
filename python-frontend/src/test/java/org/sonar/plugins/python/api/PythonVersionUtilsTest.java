@@ -25,6 +25,7 @@ import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_27;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_35;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
@@ -38,13 +39,14 @@ public class PythonVersionUtilsTest {
 
   @Test
   public void supportedVersions() {
-    assertThat(PythonVersionUtils.fromString("")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39);
-    assertThat(PythonVersionUtils.fromString(",")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39);
+    assertThat(PythonVersionUtils.fromString("")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
+    assertThat(PythonVersionUtils.fromString(",")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
     assertThat(PythonVersionUtils.fromString("2.7")).containsExactlyInAnyOrder(V_27);
     assertThat(PythonVersionUtils.fromString("2")).containsExactlyInAnyOrder(V_27);
     assertThat(PythonVersionUtils.fromString("3")).containsExactlyInAnyOrder(V_35);
     assertThat(PythonVersionUtils.fromString("3.8, 3.9")).containsExactlyInAnyOrder(V_38, V_39);
     assertThat(PythonVersionUtils.fromString("2.7, 3.9")).containsExactlyInAnyOrder(V_27, V_39);
+    assertThat(PythonVersionUtils.fromString("3.10")).containsExactlyInAnyOrder(V_310);
   }
 
   @Test
@@ -55,9 +57,9 @@ public class PythonVersionUtilsTest {
 
   @Test
   public void error_while_parsing_version() {
-    assertThat(PythonVersionUtils.fromString("foo")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39);
-    assertThat(PythonVersionUtils.fromString("3.8.1")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39);
-    assertThat(PythonVersionUtils.fromString("3.81")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39);
+    assertThat(PythonVersionUtils.fromString("foo")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
+    assertThat(PythonVersionUtils.fromString("3.8.1")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
+    assertThat(PythonVersionUtils.fromString("3.81")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Error while parsing value of parameter 'sonar.python.version' (foo). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")");
   }
 }

@@ -28,6 +28,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_27;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_35;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
@@ -37,7 +38,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 public class PythonVersionUtils {
 
   public enum Version {
-    V_27(2.7, "27"), V_35(3.5, "35"), V_36(3.6, "36"), V_37(3.7, "37"), V_38(3.8, "38"), V_39(3.9, "39");
+    V_27(2.7, "27"), V_35(3.5, "35"), V_36(3.6, "36"), V_37(3.7, "37"), V_38(3.8, "38"), V_39(3.9, "39"), V_310(3.10, "310");
 
     private final double value;
     private final String serializedValue;
@@ -75,6 +76,7 @@ public class PythonVersionUtils {
     STRING_VERSION_MAP.put("3.7", V_37);
     STRING_VERSION_MAP.put("3.8", V_38);
     STRING_VERSION_MAP.put("3.9", V_39);
+    STRING_VERSION_MAP.put("3.10", V_310);
   }
   private static final Version MIN_SUPPORTED_VERSION = V_27;
   private static final Version MAX_SUPPORTED_VERSION = V_39;
