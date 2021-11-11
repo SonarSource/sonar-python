@@ -316,4 +316,6 @@ def match_statement_no_fp(value):
   a = MyClass()
   match value:
     case 1: ...
-    case a.CONST: a = 42  # OK, read before write
+    case a.CONST:
+        a = 42
+  print(a)

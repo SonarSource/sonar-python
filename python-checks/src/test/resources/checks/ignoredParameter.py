@@ -51,14 +51,14 @@ def assignment_expression_fn(a): # FN (first dict key computation overwrites "a"
 def assignment_expression_no_fp(a):
   dict = {'b' : a, 'c' : (a:=3)} # OK, read before write
 
-def match_statement_fp(value, param): # Noncompliant
+def match_statement_no_fp(value, param):
   match value:
-    case param.CONST: param = 42 # FP here: b.CONST should be a reading usage of b
+    case param.CONST: param = 42
     case "other": ...
   value = 42  # OK
 
-def match_statement_fn(value, param):
+def match_statement_no_fn(value, param): # Noncompliant
   match value:
     case 1: ...
-    case param: ...  # FN, c is overridden without having been read
+    case param: ...
   value = 42  # OK
