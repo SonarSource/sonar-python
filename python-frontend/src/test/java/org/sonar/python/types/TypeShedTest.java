@@ -402,9 +402,9 @@ public class TypeShedTest {
   public void overloaded_functions() {
     Symbol map = TypeShed.builtinSymbols().get("map");
     assertThat(map.is(Kind.AMBIGUOUS)).isTrue();
-    assertThat(((SymbolImpl) map).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
+    assertThat(((SymbolImpl) map).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39", "310");
     ClassSymbol python3Symbol = (ClassSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.CLASS)).findFirst().get();
-    assertThat(((ClassSymbolImpl) python3Symbol).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
+    assertThat(((ClassSymbolImpl) python3Symbol).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
     Set<Symbol> python2Symbols = ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.FUNCTION)).collect(Collectors.toSet());
     for (Symbol alternative : python2Symbols) {
       assertThat(alternative.is(Kind.FUNCTION)).isTrue();
@@ -416,7 +416,7 @@ public class TypeShedTest {
   public void pythonVersions() {
     // unknown version
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39", "310");
     assertThat(range.kind()).isEqualTo(Kind.AMBIGUOUS);
 
     // python 2
@@ -428,8 +428,12 @@ public class TypeShedTest {
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.8"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
+
+    setPythonVersions(PythonVersionUtils.fromString("3.10"));
+    ClassSymbol intSymbol = TypeShed.typeShedClass("int");
+    assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
 
     setPythonVersions(PythonVersionUtils.allVersions());
   }

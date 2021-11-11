@@ -24,7 +24,7 @@ from serializer.symbols import ModuleSymbol, MergedFunctionSymbol, MergedClassSy
     MergedModuleSymbol
 from serializer import typeshed_serializer as ts
 
-SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9))
+SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
 
 
 def build_multiple_python_version() -> Dict[str, Dict[str, ModuleSymbol]]:
