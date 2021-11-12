@@ -58,7 +58,6 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
@@ -73,6 +72,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -131,7 +131,7 @@ public class PythonSensorTest {
 
   private ActiveRules activeRules;
 
-  private final AnalysisWarnings analysisWarning = mock(AnalysisWarnings.class);
+  private final AnalysisWarningsWrapper analysisWarning = mock(AnalysisWarningsWrapper.class);
 
   @org.junit.Rule
   public LogTester logTester = new LogTester();
@@ -562,16 +562,13 @@ public class PythonSensorTest {
     return sensor(CUSTOM_RULES, null, analysisWarning);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarnings analysisWarnings) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarningsWrapper analysisWarnings) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if (indexer == null && customRuleRepositories == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings);
-    }
-    if (indexer != null && customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
     }
     if (indexer == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);

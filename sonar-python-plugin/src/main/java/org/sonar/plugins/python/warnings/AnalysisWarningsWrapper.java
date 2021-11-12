@@ -19,8 +19,10 @@
  */
 package org.sonar.plugins.python.warnings;
 
-import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.ScannerSide;
+import javax.annotation.Nullable;
+import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.scanner.ScannerSide;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
 /**
  * As {@link org.sonar.api.notifications.AnalysisWarnings} has been added in SQ 7.4, previous version of the API
@@ -29,7 +31,21 @@ import org.sonar.api.batch.ScannerSide;
  * warnings to the underlying {@link org.sonar.api.notifications.AnalysisWarnings} or do nothing when not available.
  */
 @ScannerSide
-@InstantiationStrategy("PER_BATCH")
-public interface AnalysisWarningsWrapper {
-  void addWarning(String text);
+@SonarLintSide(lifespan = SonarLintSide.MULTIPLE_ANALYSES)
+public class AnalysisWarningsWrapper {
+  private final AnalysisWarnings analysisWarnings;
+
+  public AnalysisWarningsWrapper(@Nullable AnalysisWarnings analysisWarnings) {
+    this.analysisWarnings = analysisWarnings;
+  }
+
+  public AnalysisWarningsWrapper() {
+    this.analysisWarnings = null;
+  }
+
+  public void addUnique(String text) {
+    if (analysisWarnings != null) {
+      this.analysisWarnings.addUnique(text);
+    }
+  }
 }

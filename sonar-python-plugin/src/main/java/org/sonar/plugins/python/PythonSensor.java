@@ -38,7 +38,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -49,6 +48,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -68,7 +68,7 @@ public final class PythonSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
   @Nullable
-  private final AnalysisWarnings analysisWarnings;
+  private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = Loggers.get(PythonSensor.class);
   static final String UNSET_VERSION_WARNING =
     "Your code is analyzed as compatible with python 2 and 3 by default. This will prevent the detection of issues specific to python 2 or python 3." +
@@ -77,22 +77,18 @@ public final class PythonSensor implements Sensor {
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, AnalysisWarnings analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, analysisWarnings);
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper defaultAnalysisWarningsWrapper) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, defaultAnalysisWarningsWrapper);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, null);
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarnings analysisWarnings) {
+                      PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarnings analysisWarnings) {
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarningsWrapper analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);

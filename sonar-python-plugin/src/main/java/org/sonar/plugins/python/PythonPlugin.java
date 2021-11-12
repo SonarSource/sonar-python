@@ -35,7 +35,7 @@ import org.sonar.plugins.python.flake8.Flake8Sensor;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.pylint.PylintRulesDefinition;
 import org.sonar.plugins.python.pylint.PylintSensor;
-import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
 public class PythonPlugin implements Plugin {
@@ -72,11 +72,11 @@ public class PythonPlugin implements Plugin {
       PythonProfile.class,
 
       PythonSensor.class,
-      PythonRuleRepository.class);
+      PythonRuleRepository.class,
+      AnalysisWarningsWrapper.class);
 
     SonarRuntime sonarRuntime = context.getRuntime();
     if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
-      context.addExtension(DefaultAnalysisWarningsWrapper.class);
       addCoberturaExtensions(context);
       addXUnitExtensions(context);
       addPylintExtensions(context);

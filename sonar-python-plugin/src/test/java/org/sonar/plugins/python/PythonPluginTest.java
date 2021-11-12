@@ -29,7 +29,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -45,8 +45,8 @@ public class PythonPluginTest {
     Version v79 = Version.create(7, 9);
     SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
     assertThat(extensions(runtime)).hasSize(21);
-    assertThat(extensions(runtime)).contains(DefaultAnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79))).hasSize(6);
+    assertThat(extensions(runtime)).contains(AnalysisWarningsWrapper.class);
+    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79))).hasSize(7);
   }
 
   @Test
