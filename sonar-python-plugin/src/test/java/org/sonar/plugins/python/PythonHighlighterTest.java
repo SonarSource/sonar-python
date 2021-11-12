@@ -80,6 +80,12 @@ public class PythonHighlighterTest {
 
     // await
     checkOnRange(98, 0, 5, TypeOfText.KEYWORD);
+
+    // match
+    checkOnRange(100, 0, 5, TypeOfText.KEYWORD);
+
+    // case
+    checkOnRange(101, 4, 4, TypeOfText.KEYWORD);
   }
 
   @Test

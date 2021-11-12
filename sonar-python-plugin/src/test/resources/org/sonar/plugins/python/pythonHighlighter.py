@@ -96,3 +96,6 @@ async def doSomethingAsync():
     return 1
 
 await doSomethingAsync()
+
+match value:
+    case 42: ...
