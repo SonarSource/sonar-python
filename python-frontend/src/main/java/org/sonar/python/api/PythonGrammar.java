@@ -314,15 +314,15 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(NAME).is(IDENTIFIER);
 
     b.rule(VARARGSLIST).is(b.firstOf(
-      b.sequence("**", NAME, b.optional(",")),
-      b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME), b.optional(",")),
+      b.sequence("**", NAME),
+      b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)),
       b.sequence(FPDEF, b.optional("=", TEST),
         b.zeroOrMore(",", FPDEF, b.optional("=", TEST)),
         b.optional(",", "/", b.zeroOrMore(",", FPDEF, b.optional("=", TEST))),
         b.optional(",", b.firstOf(
           b.sequence("**", NAME),
           b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME))))
-        ), b.optional(",")));
+        )), b.optional(","));
     b.rule(FPDEF).is(b.firstOf(
         NAME,
         b.sequence("(", FPLIST, ")")));
