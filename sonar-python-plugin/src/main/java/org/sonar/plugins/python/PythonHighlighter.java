@@ -144,7 +144,7 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
   }
 
   private static boolean isPython3Keyword(String value) {
-    return "await".equals(value) || "async".equals(value);
+    return "await".equals(value) || "async".equals(value) || "match".equals(value) || "case".equals(value);
   }
 
   @Override
