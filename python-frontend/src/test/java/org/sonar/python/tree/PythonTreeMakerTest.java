@@ -1908,6 +1908,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambda("lambda x, /, *args, **kwargs: x").parameters().all()).hasSize(4);
     assertThat(lambda("lambda *, x: x").parameters().all()).hasSize(2);
     assertThat(lambda("lambda **kwargs: kwargs").parameters().all()).hasSize(1);
+    assertThat(lambda("lambda x, y,: x + y").parameters().all()).hasSize(2);
   }
 
   private LambdaExpression lambda(String code) {
