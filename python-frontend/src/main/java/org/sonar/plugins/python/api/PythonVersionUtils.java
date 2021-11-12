@@ -38,22 +38,46 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 public class PythonVersionUtils {
 
   public enum Version {
-    V_27(2.7, "27"), V_35(3.5, "35"), V_36(3.6, "36"), V_37(3.7, "37"), V_38(3.8, "38"), V_39(3.9, "39"), V_310(3.10, "310");
+    V_27(2, 7, "27"),
+    V_35(3, 5, "35"),
+    V_36(3, 6, "36"),
+    V_37(3, 7, "37"),
+    V_38(3, 8, "38"),
+    V_39(3, 9, "39"),
+    V_310(3, 10, "310");
 
-    private final double value;
+    private final int major;
+    private final int minor;
     private final String serializedValue;
 
-    Version(double value, String serializedValue) {
-      this.value = value;
+    Version(int major, int minor, String serializedValue) {
+      this.major = major;
+      this.minor = minor;
       this.serializedValue = serializedValue;
     }
 
-    public double value() {
-      return value;
+    public int major() {
+      return major;
+    }
+
+    public int minor() {
+      return minor;
     }
 
     public String serializedValue() {
       return serializedValue;
+    }
+
+    public int compare(int major, int minor) {
+      if (major() == major) {
+        return Integer.compare(minor(), minor);
+      }
+      return Integer.compare(major(), major);
+    }
+
+    @Override
+    public String toString() {
+      return major + "." + minor;
     }
   }
 
@@ -112,12 +136,22 @@ public class PythonVersionUtils {
   }
 
   private static boolean guessPythonVersion(Set<Version> pythonVersions, String versionValue) {
+    String[] version = versionValue.split("\\.");
     try {
-      double parsedVersion = Double.parseDouble(versionValue);
-      if (parsedVersion < MIN_SUPPORTED_VERSION.value()) {
+      int major = Integer.parseInt(version[0]);
+      int minor = version.length > 1 ? Integer.parseInt(version[1]) : 0;
+      Version guessedVersion = STRING_VERSION_MAP.get(major + "." + minor);
+      if (guessedVersion != null) {
+        pythonVersions.add(guessedVersion);
+        logWarningGuessVersion(versionValue, guessedVersion);
+        return true;
+      }
+      if (MIN_SUPPORTED_VERSION.compare(major, minor) > 0) {
         pythonVersions.add(MIN_SUPPORTED_VERSION);
-      } else if (parsedVersion > MAX_SUPPORTED_VERSION.value()) {
+        logWarningGuessVersion(versionValue, MIN_SUPPORTED_VERSION);
+      } else if (MAX_SUPPORTED_VERSION.compare(major, minor) < 0) {
         pythonVersions.add(MAX_SUPPORTED_VERSION);
+        logWarningGuessVersion(versionValue, MAX_SUPPORTED_VERSION);
       } else {
         logErrorMessage(versionValue);
         return false;
@@ -132,5 +166,10 @@ public class PythonVersionUtils {
   private static void logErrorMessage(String propertyValue) {
     String prefix = "Error while parsing value of parameter '%s' (%s). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")";
     LOG.warn(String.format(Locale.ROOT, prefix, PYTHON_VERSION_KEY, propertyValue));
+  }
+
+  private static void logWarningGuessVersion(String propertyValue, Version guessedVersion) {
+    String prefix = "No explicit support for version %s. Python version has been set to %s.";
+    LOG.warn(String.format(Locale.ROOT, prefix, propertyValue, guessedVersion));
   }
 }

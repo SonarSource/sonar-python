@@ -51,15 +51,24 @@ public class PythonVersionUtilsTest {
 
   @Test
   public void version_out_of_range() {
-    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_39);
+    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_310);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("No explicit support for version 4. Python version has been set to 3.10.");
     assertThat(PythonVersionUtils.fromString("1")).containsExactlyInAnyOrder(V_27);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("No explicit support for version 1. Python version has been set to 2.7.");
+    assertThat(PythonVersionUtils.fromString("3.11")).containsExactlyInAnyOrder(V_310);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("No explicit support for version 3.11. Python version has been set to 3.10.");
+  }
+
+  @Test
+  public void bugfix_versions() {
+    assertThat(PythonVersionUtils.fromString("3.8.1")).containsExactlyInAnyOrder(V_38);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("No explicit support for version 3.8.1. Python version has been set to 3.8.");
+    assertThat(PythonVersionUtils.fromString("3.11.1")).containsExactlyInAnyOrder(V_310);
   }
 
   @Test
   public void error_while_parsing_version() {
     assertThat(PythonVersionUtils.fromString("foo")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
-    assertThat(PythonVersionUtils.fromString("3.8.1")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
-    assertThat(PythonVersionUtils.fromString("3.81")).containsExactlyInAnyOrder(V_27, V_35, V_36, V_37, V_38, V_39, V_310);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Error while parsing value of parameter 'sonar.python.version' (foo). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")");
   }
 }
