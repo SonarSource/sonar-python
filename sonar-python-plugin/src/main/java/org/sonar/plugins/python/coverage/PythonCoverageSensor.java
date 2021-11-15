@@ -98,7 +98,7 @@ public class PythonCoverageSensor implements Sensor {
     if (config.hasKey(REPORT_PATH_KEY)) {
       String msg = "Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.";
       LOG.warn(msg);
-      analysisWarnings.addWarning(msg);
+      analysisWarnings.addUnique(msg);
     }
   }
 

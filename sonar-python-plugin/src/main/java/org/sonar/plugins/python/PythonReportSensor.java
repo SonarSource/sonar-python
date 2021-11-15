@@ -62,7 +62,7 @@ public abstract class PythonReportSensor implements Sensor {
       processReports(context, reports);
     } catch (Exception e) {
       LOG.warn("Cannot read report '{}', the following exception occurred: {}", reportPath, e.getMessage());
-      analysisWarnings.addWarning(String.format("An error occurred while trying to import %s report(s): '%s'", reportType, reportPath));
+      analysisWarnings.addUnique(String.format("An error occurred while trying to import %s report(s): '%s'", reportType, reportPath));
     }
   }
 

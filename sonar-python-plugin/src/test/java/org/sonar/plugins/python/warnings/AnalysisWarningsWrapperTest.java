@@ -32,9 +32,9 @@ public class AnalysisWarningsWrapperTest {
   @Test
   public void test() {
     AnalysisWarnings analysisWarnings = spy(AnalysisWarnings.class);
-    DefaultAnalysisWarningsWrapper defaultAnalysisWarningsWrapper = new DefaultAnalysisWarningsWrapper(analysisWarnings);
-    defaultAnalysisWarningsWrapper.addWarning("abcd");
-    defaultAnalysisWarningsWrapper.addWarning("def");
+    AnalysisWarningsWrapper defaultAnalysisWarningsWrapper = new AnalysisWarningsWrapper(analysisWarnings);
+    defaultAnalysisWarningsWrapper.addUnique("abcd");
+    defaultAnalysisWarningsWrapper.addUnique("def");
     verify(analysisWarnings, times(2)).addUnique(anyString());
   }
 

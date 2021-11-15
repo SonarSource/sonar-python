@@ -119,7 +119,7 @@ public class PythonXUnitSensorTest {
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/invalid-time-xunit-report.xml', " +
       "the following exception occurred: java.text.ParseException: Unparseable number: \"brrrr\"");
     verify(analysisWarnings, times(1))
-      .addWarning(eq("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'"));
+      .addUnique(eq("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'"));
   }
 
   @Test

@@ -198,7 +198,7 @@ public class PythonCoverageSensorTest {
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
     Integer coverageAtLine6 = actual.get(5);
     assertThat(coverageAtLine6).isEqualTo(1);
-    verify(analysisWarnings, times(1)).addWarning(eq("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."));
+    verify(analysisWarnings, times(1)).addUnique(eq("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."));
   }
 
   @Test
