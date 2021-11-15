@@ -67,7 +67,6 @@ public final class PythonSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
-  @Nullable
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = Loggers.get(PythonSensor.class);
   static final String UNSET_VERSION_WARNING =
@@ -78,8 +77,8 @@ public final class PythonSensor implements Sensor {
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper defaultAnalysisWarningsWrapper) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, defaultAnalysisWarningsWrapper);
+    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
@@ -88,7 +87,12 @@ public final class PythonSensor implements Sensor {
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarningsWrapper analysisWarnings) {
+    PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, analysisWarnings);
+  }
+
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
@@ -96,6 +100,7 @@ public final class PythonSensor implements Sensor {
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
     this.analysisWarnings = analysisWarnings;
+    LOG.info("CONSTRUCTOR CALLED: WARNING, RULE REPOSITORY AND INDEXER");
   }
 
   @Override
@@ -114,9 +119,7 @@ public final class PythonSensor implements Sensor {
     Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
     if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
-      if (analysisWarnings != null) {
-        analysisWarnings.addUnique(UNSET_VERSION_WARNING);
-      }
+      analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
