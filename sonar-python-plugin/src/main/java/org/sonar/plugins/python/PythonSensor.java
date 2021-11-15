@@ -77,7 +77,7 @@ public final class PythonSensor implements Sensor {
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
+                      NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, analysisWarnings);
   }
 
@@ -87,7 +87,7 @@ public final class PythonSensor implements Sensor {
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-    PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+                      PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, analysisWarnings);
   }
 
@@ -100,7 +100,6 @@ public final class PythonSensor implements Sensor {
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
     this.analysisWarnings = analysisWarnings;
-    LOG.info("CONSTRUCTOR CALLED: WARNING, RULE REPOSITORY AND INDEXER");
   }
 
   @Override
