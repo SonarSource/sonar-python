@@ -81,7 +81,7 @@ ws_scan_task:
     cpu: 2
     memory: 2G
   # run only on master and long-term branches
-  only_if: $CIRRUS_USER_COLLABORATOR == 'true' && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
+  # only_if: $CIRRUS_USER_COLLABORATOR == 'true' && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
   env:
     WS_APIKEY: ENCRYPTED[!3929c6148b9dfc751a2d17c590b15d755f82cd9c108f2de5f24a5b32f2a0c26144e921fab7e2c959fc2824d6d6d1550d!]
   maven_cache:
