@@ -84,7 +84,7 @@ ws_scan_task:
   whitesource_script:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
-    - mvn clean install -DskipTests
+    - mvn clean install -DskipTests -DskipTypeshed -Denforcer.skip=true -Dskip.its=true
     - source ws_scan.sh
   allow_failures: "true"
   always:
