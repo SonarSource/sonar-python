@@ -1,0 +1,201 @@
+
+_csv·
+Iterabletyping.Iterable"builtins.object*å
+__iter__typing.Iterable.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Iterable[typing._T_co]
+typing._T_co"typing.Iterable0:abstractmethod@z27z35z36z37z38z39z3108PXj27j35j36j37j38j39j310î
+Iteratortyping.Iterator"typing.Iterable*”
+nexttyping.Iterator.next"
+typing._T_co*L
+selfB
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator0:abstractmethod@z27*Ñ
+__iter__typing.Iterator.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iteratorz27z35z36z37z38z39z310*±
+__next__typing.Iterator.__next__"
+typing._T_co*L
+selfB
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z3108PXj27j35j36j37j38j39j310‰
+Sequencetyping.Sequence"typing.Iterable"typing.Container"typing.Reversible*ž
+indextyping.Sequence.index"
+builtins.int"builtins.int*L
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*
+x
+Anyz27*ž
+counttyping.Sequence.count"
+builtins.int"builtins.int*L
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*
+x
+Anyz27*Å
+__contains__typing.Sequence.__contains__"
+builtins.bool"builtins.bool*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*'
+x"
+builtins.object"builtins.objectz27*¸
+__iter__typing.Sequence.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequencez27*À
+__reversed__typing.Sequence.__reversed__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequencez27*¤
+__len__typing.Sequence.__len__"
+builtins.int"builtins.int*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence0:abstractmethod@z272€
+__getitem__typing.Sequence.__getitem__Ë
+__getitem__typing.Sequence.__getitem__"
+typing._T_co*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*!
+i
+builtins.int"builtins.int0:overload:abstractmethod@X
+__getitem__typing.Sequence.__getitem__"B
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*%
+s 
+builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27D
+Error
+_csv.Error"builtins.Exceptionj27j35j36j37j38j39j310·
+Dialect_csv.Dialect"builtins.object*p
+__init___csv.Dialect.__init__"
+None*&
+self
+_csv.Dialect"_csv.Dialectz27z35z36z37z38z39z310j27j35j36j37j38j39j310Š
+_reader_csv._reader"typing.Iterator*‘
+next_csv._reader.next"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*&
+self
+_csv._reader"_csv._readerz27*®
+__next___csv._reader.__next__"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*&
+self
+_csv._reader"_csv._readerz35z36z37z38z39z310j27j35j36j37j38j39j310»
+_writer_csv._writer"builtins.object*‘
+writerow_csv._writer.writerow"
+Any*&
+self
+_csv._writer"_csv._writer*9
+row0
+typing.Sequence[Any]
+Any"typing.Sequencez27*¦
+writerow_csv._writer.writerow"
+Any*&
+self
+_csv._writer"_csv._writer*9
+row0
+typing.Iterable[Any]
+Any"typing.Iterablez35z36z37z38z39z310*Ï
+	writerows_csv._writer.writerows"
+None*&
+self
+_csv._writer"_csv._writer*t
+rowsj
+%typing.Iterable[typing.Sequence[Any]]0
+typing.Sequence[Any]
+Any"typing.Sequence"typing.Iterablez27*ä
+	writerows_csv._writer.writerows"
+None*&
+self
+_csv._writer"_csv._writer*t
+rowsj
+%typing.Iterable[typing.Iterable[Any]]0
+typing.Iterable[Any]
+Any"typing.Iterable"typing.Iterablez35z36z37z38z39z310j27j35j36j37j38j39j310Ø
+_Writer_csv._Writer"builtins.object*Ž
+write_csv._Writer.write"
+Any*&
+self
+_csv._Writer"_csv._Writer*#
+s
+builtins.str"builtins.strz27z35z36z37z38z39z310Xj27j35j36j37j38j39j310§
+writer_csv.writer"
+_csv._writer"_csv._writer*)
+csvfile
+_csv._Writer"_csv._Writer*‘
+dialect
+>TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]©
+3Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]
+builtins.str"builtins.str
+_csv.Dialect"_csv.Dialect4
+Type[_csv.Dialect]
+_csv.Dialect"_csv.Dialect"_csv._DialectLike *
+	fmtparams
+Anyz27z35z36z37z38z39z310Ì
+reader_csv.reader"
+_csv._reader"_csv._reader*g
+csvfileZ
+!typing.Iterable[builtins.unicode]$
+builtins.unicode"builtins.unicode"typing.Iterable*‘
+dialect
+>TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]©
+3Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]
+builtins.str"builtins.str
+_csv.Dialect"_csv.Dialect4
+Type[_csv.Dialect]
+_csv.Dialect"_csv.Dialect"_csv._DialectLike *
+	fmtparams
+Anyz27Õ
+reader_csv.reader"
+_csv._reader"_csv._reader*[
+csvfileN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*‘
+dialect
+>TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]©
+3Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]
+builtins.str"builtins.str
+_csv.Dialect"_csv.Dialect4
+Type[_csv.Dialect]
+_csv.Dialect"_csv.Dialect"_csv._DialectLike *
+	fmtparams
+Anyz35z36z37z38z39z310¨
+register_dialect_csv.register_dialect"
+None*&
+name
+builtins.str"builtins.str*
+dialect
+Any *
+	fmtparams
+Anyz27z35z36z37z38z39z310|
+unregister_dialect_csv.unregister_dialect"
+None*&
+name
+builtins.str"builtins.strz27z35z36z37z38z39z310‚
+get_dialect_csv.get_dialect"
+_csv.Dialect"_csv.Dialect*&
+name
+builtins.str"builtins.strz27z35z36z37z38z39z310Œ
+list_dialects_csv.list_dialects"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listz27z35z36z37z38z39z310“
+field_size_limit_csv.field_size_limit"
+builtins.int"builtins.int*-
+	new_limit
+builtins.int"builtins.int z27z35z36z37z38z39z310
