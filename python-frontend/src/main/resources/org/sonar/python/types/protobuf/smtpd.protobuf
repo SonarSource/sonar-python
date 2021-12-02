@@ -1,0 +1,318 @@
+
+smtpdø
+SMTPChannelsmtpd.SMTPChannel"asynchat.async_chat*ä
+__init__smtpd.SMTPChannel.__init__"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*0
+server$
+smtpd.SMTPServer"smtpd.SMTPServer*(
+conn
+socket.socket"socket.socket*
+addr
+Any*3
+data_size_limit
+builtins.int"builtins.int z27*™
+__init__smtpd.SMTPChannel.__init__"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*0
+server$
+smtpd.SMTPServer"smtpd.SMTPServer*(
+conn
+socket.socket"socket.socket*
+addr
+Any*3
+data_size_limit
+builtins.int"builtins.int *û
+mapí
++Union[builtins.dict[builtins.int,Any],None]W
+builtins.dict[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.dict
+None *5
+enable_SMTPUTF8
+builtins.bool"builtins.bool *1
+decode_data
+builtins.bool"builtins.bool z35z36z37z38z39z310*ç
+pushsmtpd.SMTPChannel.push"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*-
+msg$
+builtins.unicode"builtins.unicodez27*ö
+pushsmtpd.SMTPChannel.push"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+msg
+builtins.str"builtins.strz35z36z37z38z39z310*®
+collect_incoming_data'smtpd.SMTPChannel.collect_incoming_data"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*&
+data
+builtins.str"builtins.strz27*¡
+collect_incoming_data'smtpd.SMTPChannel.collect_incoming_data"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel**
+data 
+builtins.bytes"builtins.bytesz35z36z37z38z39z310*è
+found_terminator"smtpd.SMTPChannel.found_terminator"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannelz27z35z36z37z38z39z310*®
+	smtp_HELOsmtpd.SMTPChannel.smtp_HELO"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_NOOPsmtpd.SMTPChannel.smtp_NOOP"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_QUITsmtpd.SMTPChannel.smtp_QUIT"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_MAILsmtpd.SMTPChannel.smtp_MAIL"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_RCPTsmtpd.SMTPChannel.smtp_RCPT"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_RSETsmtpd.SMTPChannel.smtp_RSET"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*®
+	smtp_DATAsmtpd.SMTPChannel.smtp_DATA"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz27z35z36z37z38z39z310*π
+max_command_size_limit(smtpd.SMTPChannel.max_command_size_limit"
+builtins.int"builtins.int*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel0:property`z35z36z37z38z39z310*§
+	smtp_EHLOsmtpd.SMTPChannel.smtp_EHLO"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz35z36z37z38z39z310*§
+	smtp_HELPsmtpd.SMTPChannel.smtp_HELP"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz35z36z37z38z39z310*§
+	smtp_VRFYsmtpd.SMTPChannel.smtp_VRFY"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz35z36z37z38z39z310*§
+	smtp_EXPNsmtpd.SMTPChannel.smtp_EXPN"
+None*0
+self&
+smtpd.SMTPChannel"smtpd.SMTPChannel*%
+arg
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310≥
+
+SMTPServersmtpd.SMTPServer"asyncore.dispatcher*Å
+__init__smtpd.SMTPServer.__init__"
+None*.
+self$
+smtpd.SMTPServer"smtpd.SMTPServer*±
+	localaddr°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address*≤
+
+remoteaddr°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address*3
+data_size_limit
+builtins.int"builtins.int z27*°
+__init__smtpd.SMTPServer.__init__"
+None*.
+self$
+smtpd.SMTPServer"smtpd.SMTPServer*±
+	localaddr°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address*≤
+
+remoteaddr°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address*3
+data_size_limit
+builtins.int"builtins.int *û
+mapí
++Union[builtins.dict[builtins.int,Any],None]W
+builtins.dict[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.dict
+None *5
+enable_SMTPUTF8
+builtins.bool"builtins.bool *1
+decode_data
+builtins.bool"builtins.bool z35z36z37z38z39z310*«
+handle_accepted smtpd.SMTPServer.handle_accepted"
+None*.
+self$
+smtpd.SMTPServer"smtpd.SMTPServer*(
+conn
+socket.socket"socket.socket*
+addr
+Anyz27z35z36z37z38z39z310*Ó
+process_message smtpd.SMTPServer.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*.
+self$
+smtpd.SMTPServer"smtpd.SMTPServer*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*c
+rcpttosV
+builtins.list[builtins.unicode]$
+builtins.unicode"builtins.unicode"builtins.list*j
+data`
+ Union[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*
+kwargs
+Anyz27*˝
+process_message smtpd.SMTPServer.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*.
+self$
+smtpd.SMTPServer"smtpd.SMTPServer*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*W
+rcpttosJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*p
+dataf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*
+kwargs
+Anyz35z36z37z38z39z310j27j35j36j37j38j39j310W
+DebuggingServersmtpd.DebuggingServer"smtpd.SMTPServerj27j35j36j37j38j39j310å
+
+	PureProxysmtpd.PureProxy"smtpd.SMTPServer*÷
+process_messagesmtpd.PureProxy.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*,
+self"
+smtpd.PureProxy"smtpd.PureProxy*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*c
+rcpttosV
+builtins.list[builtins.unicode]$
+builtins.unicode"builtins.unicode"builtins.list*j
+data`
+ Union[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strz27*Â
+process_messagesmtpd.PureProxy.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*,
+self"
+smtpd.PureProxy"smtpd.PureProxy*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*W
+rcpttosJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*p
+dataf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310£
+
+MailmanProxysmtpd.MailmanProxy"smtpd.PureProxy*ﬂ
+process_message"smtpd.MailmanProxy.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*2
+self(
+smtpd.MailmanProxy"smtpd.MailmanProxy*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*c
+rcpttosV
+builtins.list[builtins.unicode]$
+builtins.unicode"builtins.unicode"builtins.list*j
+data`
+ Union[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strz27*Ó
+process_message"smtpd.MailmanProxy.process_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*2
+self(
+smtpd.MailmanProxy"smtpd.MailmanProxy*¨
+peer°
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"smtpd._Address**
+mailfrom
+builtins.str"builtins.str*W
+rcpttosJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*p
+dataf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310

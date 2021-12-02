@@ -1,0 +1,227 @@
+
+SocketServer»
+BinaryIOtyping.BinaryIO"	typing.IO*Ž
+	__enter__typing.BinaryIO.__enter__""
+typing.BinaryIO"typing.BinaryIO**
+self"
+typing.BinaryIO"typing.BinaryIO0:abstractmethod@z27j27Û
+
+BaseServerSocketServer.BaseServer"builtins.object*û
+__init__ SocketServer.BaseServer.__init__"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*
+server_address
+Any*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz27*ˆ
+filenoSocketServer.BaseServer.fileno"
+builtins.int"builtins.int*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*„
+handle_request&SocketServer.BaseServer.handle_request"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*¹
+serve_forever%SocketServer.BaseServer.serve_forever"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*5
+poll_interval 
+builtins.float"builtins.float z27*x
+shutdown SocketServer.BaseServer.shutdown"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*€
+server_close$SocketServer.BaseServer.server_close"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*¥
+finish_request&SocketServer.BaseServer.finish_request"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27*‘
+get_request#SocketServer.BaseServer.get_request"š
++Tuple[Any,Tuple[builtins.str,builtins.int]]
+Any`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*¡
+handle_error$SocketServer.BaseServer.handle_error"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27*„
+handle_timeout&SocketServer.BaseServer.handle_timeout"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*§
+process_request'SocketServer.BaseServer.process_request"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27*†
+server_activate'SocketServer.BaseServer.server_activate"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*~
+server_bind#SocketServer.BaseServer.server_bind"
+None*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServerz27*»
+verify_request&SocketServer.BaseServer.verify_request"
+builtins.bool"builtins.bool*<
+self2
+SocketServer.BaseServer"SocketServer.BaseServer*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27j27Í
+	TCPServerSocketServer.TCPServer"SocketServer.BaseServer*Š
+__init__SocketServer.TCPServer.__init__"
+None*:
+self0
+SocketServer.TCPServer"SocketServer.TCPServer*t
+server_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+bind_and_activate
+builtins.bool"builtins.bool z27j27Í
+	UDPServerSocketServer.UDPServer"SocketServer.BaseServer*Š
+__init__SocketServer.UDPServer.__init__"
+None*:
+self0
+SocketServer.UDPServer"SocketServer.UDPServer*t
+server_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+bind_and_activate
+builtins.bool"builtins.bool z27j27ý
+UnixStreamServerSocketServer.UnixStreamServer"SocketServer.BaseServer*¬
+__init__&SocketServer.UnixStreamServer.__init__"
+None*H
+self>
+SocketServer.UnixStreamServer"SocketServer.UnixStreamServer*€
+server_addressl
+$Union[builtins.unicode,builtins.str]$
+builtins.unicode"builtins.unicode
+builtins.str"builtins.str*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+bind_and_activate
+builtins.bool"builtins.bool z27j27‡
+UnixDatagramServerSocketServer.UnixDatagramServer"SocketServer.BaseServer*²
+__init__(SocketServer.UnixDatagramServer.__init__"
+None*L
+selfB
+SocketServer.UnixDatagramServer"SocketServer.UnixDatagramServer*€
+server_addressl
+$Union[builtins.unicode,builtins.str]$
+builtins.unicode"builtins.unicode
+builtins.str"builtins.str*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+bind_and_activate
+builtins.bool"builtins.bool z27j27Œ
+ForkingMixInSocketServer.ForkingMixIn"builtins.object*Ž
+collect_children*SocketServer.ForkingMixIn.collect_children"
+None*@
+self6
+SocketServer.ForkingMixIn"SocketServer.ForkingMixInz27*Š
+handle_timeout(SocketServer.ForkingMixIn.handle_timeout"
+None*@
+self6
+SocketServer.ForkingMixIn"SocketServer.ForkingMixInz27*­
+process_request)SocketServer.ForkingMixIn.process_request"
+None*@
+self6
+SocketServer.ForkingMixIn"SocketServer.ForkingMixIn*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27j27¼
+ThreadingMixInSocketServer.ThreadingMixIn"builtins.object*Á
+process_request_thread2SocketServer.ThreadingMixIn.process_request_thread"
+None*D
+self:
+SocketServer.ThreadingMixIn"SocketServer.ThreadingMixIn*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27*³
+process_request+SocketServer.ThreadingMixIn.process_request"
+None*D
+self:
+SocketServer.ThreadingMixIn"SocketServer.ThreadingMixIn*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intz27j27h
+ForkingTCPServerSocketServer.ForkingTCPServer"SocketServer.ForkingMixIn"SocketServer.TCPServerj27h
+ForkingUDPServerSocketServer.ForkingUDPServer"SocketServer.ForkingMixIn"SocketServer.UDPServerj27n
+ThreadingTCPServerSocketServer.ThreadingTCPServer"SocketServer.ThreadingMixIn"SocketServer.TCPServerj27n
+ThreadingUDPServerSocketServer.ThreadingUDPServer"SocketServer.ThreadingMixIn"SocketServer.UDPServerj27ƒ
+ThreadingUnixStreamServer&SocketServer.ThreadingUnixStreamServer"SocketServer.ThreadingMixIn"SocketServer.UnixStreamServerj27‰
+ThreadingUnixDatagramServer(SocketServer.ThreadingUnixDatagramServer"SocketServer.ThreadingMixIn"SocketServer.UnixDatagramServerj27û
+BaseRequestHandlerSocketServer.BaseRequestHandler"builtins.object*ƒ
+__init__(SocketServer.BaseRequestHandler.__init__"
+None*L
+selfB
+SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandler*
+request
+Any*
+client_address
+Any*>
+server2
+SocketServer.BaseServer"SocketServer.BaseServerz27*Š
+setup%SocketServer.BaseRequestHandler.setup"
+None*L
+selfB
+SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandlerz27*Œ
+handle&SocketServer.BaseRequestHandler.handle"
+None*L
+selfB
+SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandlerz27*Œ
+finish&SocketServer.BaseRequestHandler.finish"
+None*L
+selfB
+SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandlerz27j27^
+StreamRequestHandler!SocketServer.StreamRequestHandler"SocketServer.BaseRequestHandlerj27b
+DatagramRequestHandler#SocketServer.DatagramRequestHandler"SocketServer.BaseRequestHandlerj27
