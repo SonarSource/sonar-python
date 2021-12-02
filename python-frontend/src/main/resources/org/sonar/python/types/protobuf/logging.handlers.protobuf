@@ -1,0 +1,1499 @@
+
+logging.handlersÿ
+FileHandlerlogging.FileHandler"logging.StreamHandler*Õ
+__init__logging.FileHandler.__init__"
+None*4
+self*
+logging.FileHandler"logging.FileHandler*2
+filename$
+builtins.unicode"builtins.unicode*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z27*†
+__init__logging.FileHandler.__init__"
+None*4
+self*
+logging.FileHandler"logging.FileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z35z36z37z38*Ì
+__init__logging.FileHandler.__init__"
+None*4
+self*
+logging.FileHandler"logging.FileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z39z310*Ç
+_openlogging.FileHandler._open"$
+typing.IO[Any]
+Any"	typing.IO*4
+self*
+logging.FileHandler"logging.FileHandlerz27*ó
+_openlogging.FileHandler._open"$
+io.TextIOWrapper"io.TextIOWrapper*4
+self*
+logging.FileHandler"logging.FileHandlerz35z36z37z38z39z310j27j35j36j37j38j39j310ï
+Handlerlogging.Handler"logging.Filterer*¢
+__init__logging.Handler.__init__"
+None*,
+self"
+logging.Handler"logging.Handler*ø
+level±
+/TypeAlias[Union[builtins.int,builtins.unicode]]l
+$Union[builtins.int,builtins.unicode]
+builtins.int"builtins.int$
+builtins.unicode"builtins.unicode"logging._Level z27*ß
+__init__logging.Handler.__init__"
+None*,
+self"
+logging.Handler"logging.Handler*Ø
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level z35z36z37z38z39z310*}
+
+createLocklogging.Handler.createLock"
+None*,
+self"
+logging.Handler"logging.Handlerz27z35z36z37z38z39z310*w
+acquirelogging.Handler.acquire"
+None*,
+self"
+logging.Handler"logging.Handlerz27z35z36z37z38z39z310*w
+releaselogging.Handler.release"
+None*,
+self"
+logging.Handler"logging.Handlerz27z35z36z37z38z39z310*†
+setLevellogging.Handler.setLevel"
+None*,
+self"
+logging.Handler"logging.Handler*Ω
+level±
+/TypeAlias[Union[builtins.int,builtins.unicode]]l
+$Union[builtins.int,builtins.unicode]
+builtins.int"builtins.int$
+builtins.unicode"builtins.unicode"logging._Levelz27*•
+setLevellogging.Handler.setLevel"
+None*,
+self"
+logging.Handler"logging.Handler*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Levelz35z36z37z38z39z310*ô
+setFormatterlogging.Handler.setFormatter"
+None*,
+self"
+logging.Handler"logging.Handler*/
+fmt&
+logging.Formatter"logging.Formatterz27*€
+setFormatterlogging.Handler.setFormatter"
+None*,
+self"
+logging.Handler"logging.Handler*\
+fmtS
+Union[logging.Formatter,None]&
+logging.Formatter"logging.Formatter
+Nonez35z36z37z38z39z310*ø
+filterlogging.Handler.filter"
+builtins.bool"builtins.bool*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*s
+flushlogging.Handler.flush"
+None*,
+self"
+logging.Handler"logging.Handlerz27z35z36z37z38z39z310*s
+closelogging.Handler.close"
+None*,
+self"
+logging.Handler"logging.Handlerz27z35z36z37z38z39z310*ê
+handlelogging.Handler.handle"
+None*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz27*ª
+handlelogging.Handler.handle"
+builtins.bool"builtins.bool*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*≥
+handleErrorlogging.Handler.handleError"
+None*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*Ω
+formatlogging.Handler.format"
+builtins.str"builtins.str*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*•
+emitlogging.Handler.emit"
+None*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*â
+get_namelogging.Handler.get_name"
+builtins.str"builtins.str*,
+self"
+logging.Handler"logging.Handlerz35z36z37z38z39z310*ù
+set_namelogging.Handler.set_name"
+None*,
+self"
+logging.Handler"logging.Handler*&
+name
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310Â
+	LogRecordlogging.LogRecord"builtins.object*Ó
+__init__logging.LogRecord.__init__"
+None*0
+self&
+logging.LogRecord"logging.LogRecord*&
+name
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int**
+pathname
+builtins.str"builtins.str*(
+lineno
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*¬
+exc_info≥
+mUnion[Tuple[builtins.type,builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]¸
+KTuple[builtins.type,builtins.BaseException,Union[types.TracebackType,None]]
+builtins.type"builtins.type0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+None*P
+funcD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z27*ã
+__init__logging.LogRecord.__init__"
+None*0
+self&
+logging.LogRecord"logging.LogRecord*&
+name
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int**
+pathname
+builtins.str"builtins.str*(
+lineno
+builtins.int"builtins.int*
+msg
+Any*ò
+argsç
+RUnion[TypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]],None]™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType
+None*î
+exc_infoÖ
+|Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+None*P
+funcD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+sinfoD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z35z36z37z38z39z310*ó
+
+getMessagelogging.LogRecord.getMessage"
+builtins.str"builtins.str*0
+self&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310j27j35j36j37j38j39j310‹
+WatchedFileHandler#logging.handlers.WatchedFileHandler"logging.FileHandler*˝
+__init__,logging.handlers.WatchedFileHandler.__init__"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandler*2
+filename$
+builtins.unicode"builtins.unicode*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z27*–
+__init__,logging.handlers.WatchedFileHandler.__init__"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z35z36z37z38*ù
+__init__,logging.handlers.WatchedFileHandler.__init__"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z39z310*ª
+_statstream/logging.handlers.WatchedFileHandler._statstream"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandlerz27z35z36z37z38z39z310*Ω
+reopenIfNeeded2logging.handlers.WatchedFileHandler.reopenIfNeeded"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandlerz35z36z37z38z39z310j27j35j36j37j38j39j310–
+RotatingFileHandler$logging.handlers.RotatingFileHandler"logging.Handler*◊
+__init__-logging.handlers.RotatingFileHandler.__init__"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler**
+filename
+builtins.str"builtins.str*(
+mode
+builtins.str"builtins.str *,
+maxBytes
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z27*£
+
+doRollover/logging.handlers.RotatingFileHandler.doRollover"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandlerz27j27˜
+RotatingFileHandler$logging.handlers.RotatingFileHandler"$logging.handlers.BaseRotatingHandler*≤
+__init__-logging.handlers.RotatingFileHandler.__init__"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *,
+maxBytes
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z35z36z37z38*ˇ
+__init__-logging.handlers.RotatingFileHandler.__init__"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *,
+maxBytes
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z39z310*∏
+
+doRollover/logging.handlers.RotatingFileHandler.doRollover"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandlerz35z36z37z38z39z310*à
+shouldRollover3logging.handlers.RotatingFileHandler.shouldRollover"
+builtins.int"builtins.int*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310j35j36j37j38j39j310£
+TimedRotatingFileHandler)logging.handlers.TimedRotatingFileHandler"logging.Handler*ë
+__init__2logging.handlers.TimedRotatingFileHandler.__init__"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler**
+filename
+builtins.str"builtins.str*(
+when
+builtins.str"builtins.str *,
+interval
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *)
+utc
+builtins.bool"builtins.bool z27*≤
+
+doRollover4logging.handlers.TimedRotatingFileHandler.doRollover"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandlerz27j27à
+TimedRotatingFileHandler)logging.handlers.TimedRotatingFileHandler"$logging.handlers.BaseRotatingHandler*œ
+__init__2logging.handlers.TimedRotatingFileHandler.__init__"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+when
+builtins.str"builtins.str *,
+interval
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *)
+utc
+builtins.bool"builtins.bool *a
+atTimeS
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None z35z36z37z38*ú
+__init__2logging.handlers.TimedRotatingFileHandler.__init__"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+when
+builtins.str"builtins.str *,
+interval
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *)
+utc
+builtins.bool"builtins.bool *a
+atTimeS
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z39z310*«
+
+doRollover4logging.handlers.TimedRotatingFileHandler.doRollover"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandlerz35z36z37z38z39z310*ó
+shouldRollover8logging.handlers.TimedRotatingFileHandler.shouldRollover"
+builtins.int"builtins.int*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*î
+computeRollover9logging.handlers.TimedRotatingFileHandler.computeRollover"
+builtins.int"builtins.int*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*-
+currentTime
+builtins.int"builtins.intz35z36z37z38z39z310*ï
+getFilesToDelete:logging.handlers.TimedRotatingFileHandler.getFilesToDelete"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandlerz35z36z37z38z39z310j35j36j37j38j39j310É
+SocketHandlerlogging.handlers.SocketHandler"logging.Handler*›
+__init__'logging.handlers.SocketHandler.__init__"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.intz27*ö
+__init__'logging.handlers.SocketHandler.__init__"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*&
+host
+builtins.str"builtins.str*N
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonez35z36z37z38z39z310*¡
+
+makeSocket)logging.handlers.SocketHandler.makeSocket"
+Any*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*/
+timeout 
+builtins.float"builtins.float z27*Ì
+
+makeSocket)logging.handlers.SocketHandler.makeSocket"
+socket.socket"socket.socket*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*/
+timeout 
+builtins.float"builtins.float z35z36z37z38z39z310*Ÿ
+
+makePickle)logging.handlers.SocketHandler.makePickle"
+builtins.str"builtins.str*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27*Ú
+
+makePickle)logging.handlers.SocketHandler.makePickle" 
+builtins.bytes"builtins.bytes*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*™
+send#logging.handlers.SocketHandler.send"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*#
+s
+builtins.str"builtins.strz27*√
+send#logging.handlers.SocketHandler.send"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*'
+s 
+builtins.bytes"builtins.bytesz35z36z37z38z39z310*Æ
+createSocket+logging.handlers.SocketHandler.createSocket"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandlerz27z35z36z37z38z39z310j27j35j36j37j38j39j310Œ
+DatagramHandler logging.handlers.DatagramHandler"logging.handlers.SocketHandler*ñ
+
+makeSocket+logging.handlers.DatagramHandler.makeSocket"
+Any*N
+selfD
+ logging.handlers.DatagramHandler" logging.handlers.DatagramHandlerz27*¬
+
+makeSocket+logging.handlers.DatagramHandler.makeSocket"
+socket.socket"socket.socket*N
+selfD
+ logging.handlers.DatagramHandler" logging.handlers.DatagramHandlerz35z36z37z38z39z310j27j35j36j37j38j39j310ÿ
+SysLogHandlerlogging.handlers.SysLogHandler"logging.Handler*‹
+__init__'logging.handlers.SysLogHandler.__init__"
+None*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*»
+address∏
+4Union[Tuple[builtins.str,builtins.int],builtins.str]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.str *,
+facility
+builtins.int"builtins.int *T
+socktypeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z27*Ä
+__init__'logging.handlers.SysLogHandler.__init__"
+None*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*»
+address∏
+4Union[Tuple[builtins.str,builtins.int],builtins.str]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.str *,
+facility
+builtins.int"builtins.int *c
+socktypeS
+Union[socket.SocketKind,None]&
+socket.SocketKind"socket.SocketKind
+None z35z36z37z38z39z310*¶
+encodePriority-logging.handlers.SysLogHandler.encodePriority"
+builtins.int"builtins.int*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*n
+facility`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*n
+priority`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strz27z35z36z37z38z39z310*Ì
+mapPriority*logging.handlers.SysLogHandler.mapPriority"
+builtins.str"builtins.str*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*+
+	levelName
+builtins.str"builtins.strz27z35z36z37z38z39z310j27j35j36j37j38j39j310ﬁ	
+NTEventLogHandler"logging.handlers.NTEventLogHandler"logging.Handler*ﬂ
+__init__+logging.handlers.NTEventLogHandler.__init__"
+None*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*)
+appname
+builtins.str"builtins.str*S
+dllnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+logtype
+builtins.str"builtins.str z27z35z36z37z38z39z310*ä
+getEventCategory3logging.handlers.NTEventLogHandler.getEventCategory"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*Ç
+getEventType/logging.handlers.NTEventLogHandler.getEventType"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*Ç
+getMessageID/logging.handlers.NTEventLogHandler.getMessageID"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310j27j35j36j37j38j39j310Œ
+SMTPHandlerlogging.handlers.SMTPHandler"logging.Handler*≠
+__init__%logging.handlers.SMTPHandler.__init__"
+None*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*«
+mailhost∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int**
+fromaddr
+builtins.str"builtins.str*W
+toaddrsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*)
+subject
+builtins.str"builtins.str*∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *ˆ
+secureÁ
+@Union[Tuple[builtins.str],Tuple[builtins.str,builtins.str],None]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None z27*É	
+__init__%logging.handlers.SMTPHandler.__init__"
+None*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*«
+mailhost∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int**
+fromaddr
+builtins.str"builtins.str*´
+toaddrsù
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*)
+subject
+builtins.str"builtins.str*∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *∫
+secure´
+TUnion[builtins.tuple[Any],Tuple[builtins.str],Tuple[builtins.str,builtins.str],None].
+builtins.tuple[Any]
+Any"builtins.tuple5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None */
+timeout 
+builtins.float"builtins.float z35z36z37z38*Õ
+__init__%logging.handlers.SMTPHandler.__init__"
+None*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*«
+mailhost∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int**
+fromaddr
+builtins.str"builtins.str*´
+toaddrsù
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*)
+subject
+builtins.str"builtins.str*∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *ã
+secure¸
+HUnion[Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str],None]
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None */
+timeout 
+builtins.float"builtins.float z39z310*Ï
+
+getSubject'logging.handlers.SMTPHandler.getSubject"
+builtins.str"builtins.str*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310j27j35j36j37j38j39j310√
+BufferingHandler!logging.handlers.BufferingHandler"logging.Handler*€
+__init__*logging.handlers.BufferingHandler.__init__"
+None*P
+selfF
+!logging.handlers.BufferingHandler"!logging.handlers.BufferingHandler**
+capacity
+builtins.int"builtins.intz27z35z36z37z38z39z310*ˇ
+shouldFlush-logging.handlers.BufferingHandler.shouldFlush"
+builtins.bool"builtins.bool*P
+selfF
+!logging.handlers.BufferingHandler"!logging.handlers.BufferingHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310j27j35j36j37j38j39j310é
+
+MemoryHandlerlogging.handlers.MemoryHandler"!logging.handlers.BufferingHandler*∆
+__init__'logging.handlers.MemoryHandler.__init__"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler**
+capacity
+builtins.int"builtins.int*.
+
+flushLevel
+builtins.int"builtins.int *[
+targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+None z27*è
+__init__'logging.handlers.MemoryHandler.__init__"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler**
+capacity
+builtins.int"builtins.int*.
+
+flushLevel
+builtins.int"builtins.int *[
+targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+None *2
+flushOnClose
+builtins.bool"builtins.bool z35z36z37z38z39z310*ø
+	setTarget(logging.handlers.MemoryHandler.setTarget"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler*.
+target"
+logging.Handler"logging.Handlerz27*ˇ
+	setTarget(logging.handlers.MemoryHandler.setTarget"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler*Y
+targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+Nonez35z36z37z38z39z310j27j35j36j37j38j39j310ˇ
+HTTPHandlerlogging.handlers.HTTPHandler"logging.Handler*Ç
+__init__%logging.handlers.HTTPHandler.__init__"
+None*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*&
+host
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str**
+method
+builtins.str"builtins.str z27*”
+__init__%logging.handlers.HTTPHandler.__init__"
+None*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*&
+host
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str**
+method
+builtins.str"builtins.str *,
+secure
+builtins.bool"builtins.bool *∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None z35z36z37z38z39z310*´
+mapLogRecord)logging.handlers.HTTPHandler.mapLogRecord"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*2
+record&
+logging.LogRecord"logging.LogRecordz27z35z36z37z38z39z310*ö
+getConnection*logging.handlers.HTTPHandler.getConnection"8
+http.client.HTTPConnection"http.client.HTTPConnection*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*&
+host
+builtins.str"builtins.str**
+secure
+builtins.bool"builtins.boolz39z310j27j35j36j37j38j39j310H
+
+SocketKindsocket.SocketKind"enum.IntEnumHj35j36j37j38j39j310Ø"
+socketsocket.socket"_socket.socket*Ù
+__init__socket.socket.__init__"
+None*(
+self
+socket.socket"socket.socket*Ü
+familyx
+(Union[socket.AddressFamily,builtins.int],
+socket.AddressFamily"socket.AddressFamily
+builtins.int"builtins.int *{
+typeo
+%Union[socket.SocketKind,builtins.int]&
+socket.SocketKind"socket.SocketKind
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int *R
+filenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z39z310*c
+	__enter__socket.socket.__enter__"
+	socket._T*
+self
+	socket._Tz35z36z37z38z39z310*õ
+__exit__socket.socket.__exit__"
+None*&
+self
+socket.socket"socket.socket*,
+args"
+builtins.object"builtins.objectz35z36z37z38z39z310*Y
+dupsocket.socket.dup"
+	socket._T*
+self
+	socket._Tz35z36z37z38z39z310*‹
+acceptsocket.socket.accept"y
+#Tuple[socket.socket,TypeAlias[Any]]
+socket.socket"socket.socket0
+TypeAlias[Any]
+Any"_socket._RetAddress*(
+self
+socket.socket"socket.socketz35z36z37z38z39z310*∞
+sendfilesocket.socket.sendfile"
+builtins.int"builtins.int*(
+self
+socket.socket"socket.socket*,
+file"
+typing.BinaryIO"typing.BinaryIO**
+offset
+builtins.int"builtins.int *Q
+countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z39z310*ù
+familysocket.socket.family",
+socket.AddressFamily"socket.AddressFamily*(
+self
+socket.socket"socket.socket0:property`z35z36z37z38z39z310*ì
+typesocket.socket.type"&
+socket.SocketKind"socket.SocketKind*(
+self
+socket.socket"socket.socket0:property`z35z36z37z38z39z310*ì
+get_inheritablesocket.socket.get_inheritable"
+builtins.bool"builtins.bool*(
+self
+socket.socket"socket.socketz35z36z37z38z39z310*Æ
+set_inheritablesocket.socket.set_inheritable"
+None*(
+self
+socket.socket"socket.socket*/
+inheritable
+builtins.bool"builtins.boolz35z36z37z38z39z3102à
+makefilesocket.socket.makefileı
+makefilesocket.socket.makefile"
+typing.TextIO"typing.TextIO*(
+self
+socket.socket"socket.socket*¢
+modeï
+tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *U
+	bufferingD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX“
+
+makefilesocket.socket.makefile""
+typing.BinaryIO"typing.BinaryIO*(
+self
+socket.socket"socket.socket*˚
+mode
+¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*U
+	bufferingD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310ñ
+Patterntyping.Pattern"builtins.object*Ò
+searchtyping.Pattern.search"u
+'Union[typing.Match[typing.AnyStr],None]>
+typing.Match[typing.AnyStr]
+typing.AnyStr"typing.Match
+None*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*'
+pos
+builtins.int"builtins.int **
+endpos
+builtins.int"builtins.int z35z36z37z38z39z310*Ô
+matchtyping.Pattern.match"u
+'Union[typing.Match[typing.AnyStr],None]>
+typing.Match[typing.AnyStr]
+typing.AnyStr"typing.Match
+None*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*'
+pos
+builtins.int"builtins.int **
+endpos
+builtins.int"builtins.int z35z36z37z38z39z310*˜
+	fullmatchtyping.Pattern.fullmatch"u
+'Union[typing.Match[typing.AnyStr],None]>
+typing.Match[typing.AnyStr]
+typing.AnyStr"typing.Match
+None*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*'
+pos
+builtins.int"builtins.int **
+endpos
+builtins.int"builtins.int z35z36z37z38z39z310*ì
+splittyping.Pattern.split"@
+builtins.list[typing.AnyStr]
+typing.AnyStr"builtins.list*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*,
+maxsplit
+builtins.int"builtins.int z35z36z37z38z39z310*™
+findalltyping.Pattern.findall",
+builtins.list[Any]
+Any"builtins.list*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*'
+pos
+builtins.int"builtins.int **
+endpos
+builtins.int"builtins.int z35z36z37z38z39z310*ˇ
+finditertyping.Pattern.finditer"
+,typing.Iterator[typing.Match[typing.AnyStr]]>
+typing.Match[typing.AnyStr]
+typing.AnyStr"typing.Match"typing.Iterator*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+string
+typing.AnyStr*'
+pos
+builtins.int"builtins.int **
+endpos
+builtins.int"builtins.int z35z36z37z38z39z310*Û
+__class_getitem__ typing.Pattern.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*t
+clsk
+#Type[typing.Pattern[typing.AnyStr]]B
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+item
+Anypz39z3102–
+subtyping.Pattern.subÔ
+subtyping.Pattern.sub"
+typing.AnyStr*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+repl
+typing.AnyStr*
+string
+typing.AnyStr*)
+count
+builtins.int"builtins.int 0:overloadX©
+subtyping.Pattern.sub"
+typing.AnyStr*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*U
+replK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+string
+typing.AnyStr*)
+count
+builtins.int"builtins.int 0:overloadX"35"36"37"38"39"3102‡
+subntyping.Pattern.subn∂
+subntyping.Pattern.subn"V
+!Tuple[typing.AnyStr,builtins.int]
+typing.AnyStr
+builtins.int"builtins.int*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*
+repl
+typing.AnyStr*
+string
+typing.AnyStr*)
+count
+builtins.int"builtins.int 0:overloadX
+subntyping.Pattern.subn"V
+!Tuple[typing.AnyStr,builtins.int]
+typing.AnyStr
+builtins.int"builtins.int*L
+selfB
+typing.Pattern[typing.AnyStr]
+typing.AnyStr"typing.Pattern*U
+replK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+string
+typing.AnyStr*)
+count
+builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310°
+Queuequeue.Queue"builtins.object*Æ
+__init__queue.Queue.__init__"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*+
+maxsize
+builtins.int"builtins.int z35z36z37z38z39z310*¶
+_initqueue.Queue._init"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*)
+maxsize
+builtins.int"builtins.intz35z36z37z38z39z310*ë
+emptyqueue.Queue.empty"
+builtins.bool"builtins.bool*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*è
+fullqueue.Queue.full"
+builtins.bool"builtins.bool*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*É
+getqueue.Queue.get"
+queue._T*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*+
+block
+builtins.bool"builtins.bool *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310*â
+
+get_nowaitqueue.Queue.get_nowait"
+queue._T*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*}
+_getqueue.Queue._get"
+queue._T*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*ó
+putqueue.Queue.put"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*
+item
+queue._T*+
+block
+builtins.bool"builtins.bool *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310*ù
+
+put_nowaitqueue.Queue.put_nowait"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*
+item
+queue._Tz35z36z37z38z39z310*ë
+_putqueue.Queue._put"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queue*
+item
+queue._Tz35z36z37z38z39z310*y
+joinqueue.Queue.join"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*è
+qsizequeue.Queue.qsize"
+builtins.int"builtins.int*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*ë
+_qsizequeue.Queue._qsize"
+builtins.int"builtins.int*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*É
+	task_donequeue.Queue.task_done"
+None*<
+self2
+queue.Queue[queue._T]
+queue._T"queue.Queuez35z36z37z38z39z310*ÿ
+__class_getitem__queue.Queue.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*\
+clsS
+Type[queue.Queue[queue._T]]2
+queue.Queue[queue._T]
+queue._T"queue.Queue*
+item
+Anypz39z310Pj35j36j37j38j39j310
+BaseRotatingHandler$logging.handlers.BaseRotatingHandler"logging.FileHandler*—
+__init__-logging.handlers.BaseRotatingHandler.__init__"
+None*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*&
+mode
+builtins.str"builtins.str*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool z35z36z37z38*û
+__init__-logging.handlers.BaseRotatingHandler.__init__"
+None*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*&
+mode
+builtins.str"builtins.str*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z39z310*ä
+rotation_filename6logging.handlers.BaseRotatingHandler.rotation_filename"
+builtins.str"builtins.str*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*.
+default_name
+builtins.str"builtins.strz35z36z37z38z39z310*Ç
+rotate+logging.handlers.BaseRotatingHandler.rotate"
+None*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*(
+source
+builtins.str"builtins.str*&
+dest
+builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310ˇ
+QueueHandlerlogging.handlers.QueueHandler"logging.Handler*√
+__init__&logging.handlers.QueueHandler.__init__"
+None*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*3
+queue(
+queue.Queue[Any]
+Any"queue.Queuez35z36*∏
+__init__&logging.handlers.QueueHandler.__init__"
+None*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*û
+queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queuez37z38z39z310*–
+prepare%logging.handlers.QueueHandler.prepare"
+Any*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*—
+enqueue%logging.handlers.QueueHandler.enqueue"
+None*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310j35j36j37j38j39j310∆
+QueueListenerlogging.handlers.QueueListener"builtins.object*µ
+__init__'logging.handlers.QueueListener.__init__"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*3
+queue(
+queue.Queue[Any]
+Any"queue.Queue*0
+handlers"
+logging.Handler"logging.Handler*;
+respect_handler_level
+builtins.bool"builtins.bool z35z36*™
+__init__'logging.handlers.QueueListener.__init__"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*û
+queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queue*0
+handlers"
+logging.Handler"logging.Handler*;
+respect_handler_level
+builtins.bool"builtins.bool z37z38z39z310*È
+dequeue&logging.handlers.QueueListener.dequeue"&
+logging.LogRecord"logging.LogRecord*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*)
+block
+builtins.bool"builtins.boolz35z36z37z38z39z310*”
+prepare&logging.handlers.QueueListener.prepare"
+Any*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*ú
+start$logging.handlers.QueueListener.start"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListenerz35z36z37z38z39z310*ö
+stop#logging.handlers.QueueListener.stop"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListenerz35z36z37z38z39z310*≤
+enqueue_sentinel/logging.handlers.QueueListener.enqueue_sentinel"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListenerz35z36z37z38z39z310*“
+handle%logging.handlers.QueueListener.handle"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310j35j36j37j38j39j310Û
+SimpleQueuequeue.SimpleQueue"builtins.object*ã
+__init__queue.SimpleQueue.__init__"
+None*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueuez37z38z39z310*õ
+emptyqueue.SimpleQueue.empty"
+builtins.bool"builtins.bool*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueuez37z38z39z310*ç
+getqueue.SimpleQueue.get"
+queue._T*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueue*+
+block
+builtins.bool"builtins.bool *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z37z38z39z310*ì
+
+get_nowaitqueue.SimpleQueue.get_nowait"
+queue._T*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueuez37z38z39z310*°
+putqueue.SimpleQueue.put"
+None*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueue*
+item
+queue._T*+
+block
+builtins.bool"builtins.bool *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z37z38z39z310*ß
+
+put_nowaitqueue.SimpleQueue.put_nowait"
+None*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueue*
+item
+queue._Tz37z38z39z310*ô
+qsizequeue.SimpleQueue.qsize"
+builtins.int"builtins.int*H
+self>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueuez37z38z39z310*
+__class_getitem__#queue.SimpleQueue.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*n
+clse
+!Type[queue.SimpleQueue[queue._T]]>
+queue.SimpleQueue[queue._T]
+queue._T"queue.SimpleQueue*
+item
+Anypz39z310Pj37j38j39j310

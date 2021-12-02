@@ -1,0 +1,248 @@
+
+multiprocessing.connection¯
+Iterabletyping.Iterable"builtins.object*á
+__iter__typing.Iterable.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Iterable[typing._T_co]
+typing._T_co"typing.Iterable0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310Ó"
+_ConnectionBase*multiprocessing.connection._ConnectionBase"builtins.object*Ã
+__init__3multiprocessing.connection._ConnectionBase.__init__"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*(
+handle
+builtins.int"builtins.int*.
+readable
+builtins.bool"builtins.bool *.
+writable
+builtins.bool"builtins.bool z35z36z37*Ô
+__init__3multiprocessing.connection._ConnectionBase.__init__"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*8
+handle,
+typing.SupportsIndex"typing.SupportsIndex*.
+readable
+builtins.bool"builtins.bool *.
+writable
+builtins.bool"builtins.bool z38z39z310*æ
+closed1multiprocessing.connection._ConnectionBase.closed"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`z35z36z37z38z39z310*ê
+readable3multiprocessing.connection._ConnectionBase.readable"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`z35z36z37z38z39z310*ê
+writable3multiprocessing.connection._ConnectionBase.writable"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`z35z36z37z38z39z310*Ö
+fileno1multiprocessing.connection._ConnectionBase.fileno"
+builtins.int"builtins.int*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBasez35z36z37z38z39z310*À
+close0multiprocessing.connection._ConnectionBase.close"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBasez35z36z37z38z39z310*ó
+
+send_bytes5multiprocessing.connection._ConnectionBase.send_bytes"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*)
+buf 
+builtins.bytes"builtins.bytes**
+offset
+builtins.int"builtins.int *P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z39z310*Ð
+send/multiprocessing.connection._ConnectionBase.send"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*
+obj
+Anyz35z36z37z38z39z310*¹
+
+recv_bytes5multiprocessing.connection._ConnectionBase.recv_bytes" 
+builtins.bytes"builtins.bytes*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*U
+	maxlengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z35z36z37z38z39z310*¦
+recv_bytes_into:multiprocessing.connection._ConnectionBase.recv_bytes_into"
+builtins.int"builtins.int*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*
+buf
+Any**
+offset
+builtins.int"builtins.int z35z36z37z38z39z310*½
+recv/multiprocessing.connection._ConnectionBase.recv"
+Any*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBasez35z36z37z38z39z310*¯
+poll/multiprocessing.connection._ConnectionBase.poll"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310*–
+	__enter__4multiprocessing.connection._ConnectionBase.__enter__"X
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*`
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBasez35z36z37z38z39z310*´
+__exit__3multiprocessing.connection._ConnectionBase.__exit__"
+None*`
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*—
+exc_typeŠ
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*c
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Nonez35z36z37z38z39z310j35j36j37j38j39j310x
+
+Connection%multiprocessing.connection.Connection"*multiprocessing.connection._ConnectionBasej35j36j37j38j39j310÷
+Listener#multiprocessing.connection.Listener"builtins.object*ç
+__init__,multiprocessing.connection.Listener.__init__"
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*×
+addressÇ
+9Union[builtins.str,Tuple[builtins.str,builtins.int],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *R
+familyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+backlog
+builtins.int"builtins.int *Y
+authkeyJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None z35z36z37z38z39z310*ó
+accept*multiprocessing.connection.Listener.accept"N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listenerz35z36z37z38z39z310*«
+close)multiprocessing.connection.Listener.close"
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listenerz35z36z37z38z39z310*Ù
+address+multiprocessing.connection.Listener.address"£
+?TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]¸
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"#multiprocessing.connection._Address*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener0:property`z35z36z37z38z39z310*‰
+last_accepted1multiprocessing.connection.Listener.last_accepted"Ç
+9Union[builtins.str,Tuple[builtins.str,builtins.int],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener0:property`z35z36z37z38z39z310*ƒ
+	__enter__-multiprocessing.connection.Listener.__enter__"
+_typeshed.Self*
+self
+_typeshed.Selfz35z36z37z38z39z310*Ÿ
+__exit__,multiprocessing.connection.Listener.__exit__"
+None*R
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*—
+exc_typeŠ
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*c
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Nonez35z36z37z38z39z310j35j36j37j38j39j310û
+SupportsIndextyping.SupportsIndex"builtins.object*¢
+	__index__typing.SupportsIndex.__index__"
+builtins.int"builtins.int*6
+self,
+typing.SupportsIndex"typing.SupportsIndex0:abstractmethod@z38z39z3108@Xbabc.ABCMetaj38j39j310ó
+deliver_challenge,multiprocessing.connection.deliver_challenge"
+None*^
+
+connectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*-
+authkey 
+builtins.bytes"builtins.bytesz35z36z37z38z39z310ñ
+answer_challenge+multiprocessing.connection.answer_challenge"
+None*^
+
+connectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*-
+authkey 
+builtins.bytes"builtins.bytesz35z36z37z38z39z310½
+waitmultiprocessing.connection.wait"Ã
+Vbuiltins.list[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]Ù
+GUnion[multiprocessing.connection.Connection,socket.socket,builtins.int]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection
+socket.socket"socket.socket
+builtins.int"builtins.int"builtins.list*Ù
+object_listÇ
+Xtyping.Iterable[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]Ù
+GUnion[multiprocessing.connection.Connection,socket.socket,builtins.int]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection
+socket.socket"socket.socket
+builtins.int"builtins.int"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310÷
+Client!multiprocessing.connection.Client"N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*±
+address£
+?TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]¸
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"#multiprocessing.connection._Address*R
+familyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Y
+authkeyJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None z35z36z37z38z39z310ç
+Pipemultiprocessing.connection.Pipe"ö
+RTuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.ConnectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*,
+duplex
+builtins.bool"builtins.bool z35z36z37z38z39z310
