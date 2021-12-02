@@ -1,0 +1,346 @@
+
+	cookielibÖ
+Cookiecookielib.Cookie"builtins.object*ˆ
+__init__cookielib.Cookie.__init__"
+None*.
+self$
+cookielib.Cookie"cookielib.Cookie*
+version
+Any*
+name
+Any*
+value
+Any*
+port
+Any*
+port_specified
+Any*
+domain
+Any*
+domain_specified
+Any*
+domain_initial_dot
+Any*
+path
+Any*
+path_specified
+Any*
+secure
+Any*
+expires
+Any*
+discard
+Any*
+comment
+Any*
+comment_url
+Any*
+rest
+Any*-
+rfc2109
+builtins.bool"builtins.bool z27*U
+has_nonstandard_attr%cookielib.Cookie.has_nonstandard_attr*
+self*
+namez27*Ä
+get_nonstandard_attr%cookielib.Cookie.get_nonstandard_attr"
+Any*.
+self$
+cookielib.Cookie"cookielib.Cookie*
+name
+Any*5
+default&
+Union[Any,None]
+Any
+None z27*`
+set_nonstandard_attr%cookielib.Cookie.set_nonstandard_attr*
+self*
+name*	
+valuez27*™
+
+is_expiredcookielib.Cookie.is_expired"
+Any*.
+self$
+cookielib.Cookie"cookielib.Cookie*1
+now&
+Union[Any,None]
+Any
+None z27j27£
+CookiePolicycookielib.CookiePolicy"builtins.object*N
+set_okcookielib.CookiePolicy.set_ok*
+self*
+
+cookie*
+requestz27*T
+	return_ok cookielib.CookiePolicy.return_ok*
+self*
+
+cookie*
+requestz27*b
+domain_return_ok'cookielib.CookiePolicy.domain_return_ok*
+self*
+
+domain*
+requestz27*\
+path_return_ok%cookielib.CookiePolicy.path_return_ok*
+self*
+path*
+requestz27j27¢
+DefaultCookiePolicycookielib.DefaultCookiePolicy"cookielib.CookiePolicy*³
+__init__&cookielib.DefaultCookiePolicy.__init__"
+None*H
+self>
+cookielib.DefaultCookiePolicy"cookielib.DefaultCookiePolicy*=
+blocked_domains&
+Union[Any,None]
+Any
+None *=
+allowed_domains&
+Union[Any,None]
+Any
+None *.
+netscape
+builtins.bool"builtins.bool *-
+rfc2965
+builtins.bool"builtins.bool *A
+rfc2109_as_netscape&
+Union[Any,None]
+Any
+None *2
+hide_cookie2
+builtins.bool"builtins.bool *3
+strict_domain
+builtins.bool"builtins.bool *A
+strict_rfc2965_unverifiable
+builtins.bool"builtins.bool *<
+strict_ns_unverifiable
+builtins.bool"builtins.bool *
+strict_ns_domain
+Any *B
+strict_ns_set_initial_dollar
+builtins.bool"builtins.bool *8
+strict_ns_set_path
+builtins.bool"builtins.bool z27*N
+blocked_domains-cookielib.DefaultCookiePolicy.blocked_domains*
+selfz27*k
+set_blocked_domains1cookielib.DefaultCookiePolicy.set_blocked_domains*
+self*
+blocked_domainsz27*P
+
+is_blocked(cookielib.DefaultCookiePolicy.is_blocked*
+self*
+
+domainz27*N
+allowed_domains-cookielib.DefaultCookiePolicy.allowed_domains*
+selfz27*k
+set_allowed_domains1cookielib.DefaultCookiePolicy.set_allowed_domains*
+self*
+allowed_domainsz27*X
+is_not_allowed,cookielib.DefaultCookiePolicy.is_not_allowed*
+self*
+
+domainz27*U
+set_ok$cookielib.DefaultCookiePolicy.set_ok*
+self*
+
+cookie*
+requestz27*e
+set_ok_version,cookielib.DefaultCookiePolicy.set_ok_version*
+self*
+
+cookie*
+requestz27*q
+set_ok_verifiability2cookielib.DefaultCookiePolicy.set_ok_verifiability*
+self*
+
+cookie*
+requestz27*_
+set_ok_name)cookielib.DefaultCookiePolicy.set_ok_name*
+self*
+
+cookie*
+requestz27*_
+set_ok_path)cookielib.DefaultCookiePolicy.set_ok_path*
+self*
+
+cookie*
+requestz27*c
+set_ok_domain+cookielib.DefaultCookiePolicy.set_ok_domain*
+self*
+
+cookie*
+requestz27*_
+set_ok_port)cookielib.DefaultCookiePolicy.set_ok_port*
+self*
+
+cookie*
+requestz27*[
+	return_ok'cookielib.DefaultCookiePolicy.return_ok*
+self*
+
+cookie*
+requestz27*k
+return_ok_version/cookielib.DefaultCookiePolicy.return_ok_version*
+self*
+
+cookie*
+requestz27*w
+return_ok_verifiability5cookielib.DefaultCookiePolicy.return_ok_verifiability*
+self*
+
+cookie*
+requestz27*i
+return_ok_secure.cookielib.DefaultCookiePolicy.return_ok_secure*
+self*
+
+cookie*
+requestz27*k
+return_ok_expires/cookielib.DefaultCookiePolicy.return_ok_expires*
+self*
+
+cookie*
+requestz27*e
+return_ok_port,cookielib.DefaultCookiePolicy.return_ok_port*
+self*
+
+cookie*
+requestz27*i
+return_ok_domain.cookielib.DefaultCookiePolicy.return_ok_domain*
+self*
+
+cookie*
+requestz27*i
+domain_return_ok.cookielib.DefaultCookiePolicy.domain_return_ok*
+self*
+
+domain*
+requestz27*c
+path_return_ok,cookielib.DefaultCookiePolicy.path_return_ok*
+self*
+path*
+requestz27j27/
+Absentcookielib.Absent"builtins.objectj27ö	
+	CookieJarcookielib.CookieJar"builtins.object*¢
+__init__cookielib.CookieJar.__init__"
+None*4
+self*
+cookielib.CookieJar"cookielib.CookieJar*4
+policy&
+Union[Any,None]
+Any
+None z27*F
+
+set_policycookielib.CookieJar.set_policy*
+self*
+
+policyz27*U
+add_cookie_header%cookielib.CookieJar.add_cookie_header*
+self*
+requestz27*Y
+make_cookies cookielib.CookieJar.make_cookies*
+self*
+response*
+requestz27*_
+set_cookie_if_ok$cookielib.CookieJar.set_cookie_if_ok*
+self*
+
+cookie*
+requestz27*F
+
+set_cookiecookielib.CookieJar.set_cookie*
+self*
+
+cookiez27*_
+extract_cookies#cookielib.CookieJar.extract_cookies*
+self*
+response*
+requestz27*ƒ
+clearcookielib.CookieJar.clear"
+Any*4
+self*
+cookielib.CookieJar"cookielib.CookieJar*4
+domain&
+Union[Any,None]
+Any
+None *2
+path&
+Union[Any,None]
+Any
+None *2
+name&
+Union[Any,None]
+Any
+None z27*P
+clear_session_cookies)cookielib.CookieJar.clear_session_cookies*
+selfz27*P
+clear_expired_cookies)cookielib.CookieJar.clear_expired_cookies*
+selfz27*6
+__iter__cookielib.CookieJar.__iter__*
+selfz27*4
+__len__cookielib.CookieJar.__len__*
+selfz27j276
+	LoadErrorcookielib.LoadError"builtins.IOErrorj27¡	
+FileCookieJarcookielib.FileCookieJar"cookielib.CookieJar*—
+__init__ cookielib.FileCookieJar.__init__"
+None*<
+self2
+cookielib.FileCookieJar"cookielib.FileCookieJar*6
+filename&
+Union[Any,None]
+Any
+None */
+	delayload
+builtins.bool"builtins.bool *4
+policy&
+Union[Any,None]
+Any
+None z27*“
+savecookielib.FileCookieJar.save"
+Any*<
+self2
+cookielib.FileCookieJar"cookielib.FileCookieJar*6
+filename&
+Union[Any,None]
+Any
+None *4
+ignore_discard
+builtins.bool"builtins.bool *4
+ignore_expires
+builtins.bool"builtins.bool z27*“
+loadcookielib.FileCookieJar.load"
+Any*<
+self2
+cookielib.FileCookieJar"cookielib.FileCookieJar*6
+filename&
+Union[Any,None]
+Any
+None *4
+ignore_discard
+builtins.bool"builtins.bool *4
+ignore_expires
+builtins.bool"builtins.bool z27*—
+revertcookielib.FileCookieJar.revert"
+Any*<
+self2
+cookielib.FileCookieJar"cookielib.FileCookieJar*6
+filename&
+Union[Any,None]
+Any
+None *4
+ignore_discard
+builtins.bool"builtins.bool *4
+ignore_expires
+builtins.bool"builtins.bool z27j27¿
+LWPCookieJarcookielib.LWPCookieJar"cookielib.FileCookieJar*ù
+
+as_lwp_str!cookielib.LWPCookieJar.as_lwp_str"
+builtins.str"builtins.str*:
+self0
+cookielib.LWPCookieJar"cookielib.LWPCookieJar*4
+ignore_discard
+builtins.bool"builtins.bool *4
+ignore_expires
+builtins.bool"builtins.bool z27j27~
+lwp_cookie_strcookielib.lwp_cookie_str"
+builtins.str"builtins.str*0
+cookie$
+cookielib.Cookie"cookielib.Cookiez27
