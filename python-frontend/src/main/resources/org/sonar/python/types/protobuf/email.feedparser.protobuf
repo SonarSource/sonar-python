@@ -1,0 +1,593 @@
+
+email.feedparser¨
+
+BufferedSubFile email.feedparser.BufferedSubFile"builtins.object*“
+__init__)email.feedparser.BufferedSubFile.__init__"
+None*N
+selfD
+ email.feedparser.BufferedSubFile" email.feedparser.BufferedSubFilez27*¶
+push_eof_matcher1email.feedparser.BufferedSubFile.push_eof_matcher"
+None*N
+selfD
+ email.feedparser.BufferedSubFile" email.feedparser.BufferedSubFile*
+pred
+Anyz27*Q
+pop_eof_matcher0email.feedparser.BufferedSubFile.pop_eof_matcher*
+selfz27*
+close&email.feedparser.BufferedSubFile.close"
+None*N
+selfD
+ email.feedparser.BufferedSubFile" email.feedparser.BufferedSubFilez27*C
+readline)email.feedparser.BufferedSubFile.readline*
+selfz27*ª
+
+unreadline+email.feedparser.BufferedSubFile.unreadline"
+None*N
+selfD
+ email.feedparser.BufferedSubFile" email.feedparser.BufferedSubFile*
+line
+Anyz27*E
+push%email.feedparser.BufferedSubFile.push*
+self*
+dataz27*©
+	pushlines*email.feedparser.BufferedSubFile.pushlines"
+None*N
+selfD
+ email.feedparser.BufferedSubFile" email.feedparser.BufferedSubFile*
+lines
+Anyz27*E
+	is_closed*email.feedparser.BufferedSubFile.is_closed*
+selfz27*C
+__iter__)email.feedparser.BufferedSubFile.__iter__*
+selfz27*;
+next%email.feedparser.BufferedSubFile.next*
+selfz27j27ª
+
+FeedParseremail.feedparser.FeedParser"builtins.object*
+__init__$email.feedparser.FeedParser.__init__"
+None*D
+self:
+email.feedparser.FeedParser"email.feedparser.FeedParser*
+_factory
+Any z27*
+feed email.feedparser.FeedParser.feed"
+None*D
+self:
+email.feedparser.FeedParser"email.feedparser.FeedParser*
+data
+Anyz27*8
+close!email.feedparser.FeedParser.close*
+selfz27j27à	
+
+FeedParseremail.feedparser.FeedParser"builtins.object*ç
+feed email.feedparser.FeedParser.feed"
+None*r
+selfh
+0email.feedparser.FeedParser[email.feedparser._M]
+email.feedparser._M"email.feedparser.FeedParser*&
+data
+builtins.str"builtins.strz35z36z37z38z39z310*Ğ
+close!email.feedparser.FeedParser.close"
+email.feedparser._M*r
+selfh
+0email.feedparser.FeedParser[email.feedparser._M]
+email.feedparser._M"email.feedparser.FeedParserz35z36z37z38z39z3102Ë
+__init__$email.feedparser.FeedParser.__init__«
+__init__$email.feedparser.FeedParser.__init__"
+None*Œ
+self
+2email.feedparser.FeedParser[email.message.Message].
+email.message.Message"email.message.Message"email.feedparser.FeedParser*
+_factory
+None *8
+policy*
+email.policy.Policy"email.policy.Policy 0:overloadXÑ
+__init__$email.feedparser.FeedParser.__init__"
+None*r
+selfh
+0email.feedparser.FeedParser[email.feedparser._M]
+email.feedparser._M"email.feedparser.FeedParser*Y
+_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.function*8
+policy*
+email.policy.Policy"email.policy.Policy 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310¯a
+Messageemail.message.Message"builtins.object*—
+__str__email.message.Message.__str__"
+builtins.str"builtins.str*6
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*¥
+is_multipart"email.message.Message.is_multipart"
+builtins.bool"builtins.bool*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*»
+set_unixfrom"email.message.Message.set_unixfrom"
+None*8
+self.
+email.message.Message"email.message.Message**
+unixfrom
+builtins.str"builtins.strz35z36z37z38z39z310*Ë
+get_unixfrom"email.message.Message.get_unixfrom"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*À
+attachemail.message.Message.attach"
+None*8
+self.
+email.message.Message"email.message.Message*;
+payload.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*‰
+get_payload!email.message.Message.get_payload"
+Any*8
+self.
+email.message.Message"email.message.Message*M
+iD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *,
+decode
+builtins.bool"builtins.bool z35z36z37z38z39z310*ş
+set_payload!email.message.Message.set_payload"
+None*8
+self.
+email.message.Message"email.message.Message*õ
+payloadç
+RTypeAlias[Union[builtins.list[email.message.Message],builtins.str,builtins.bytes]]ò
+GUnion[builtins.list[email.message.Message],builtins.str,builtins.bytes]e
+$builtins.list[email.message.Message].
+email.message.Message"email.message.Message"builtins.list
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"email.message._PayloadType*ö
+charsetæ
+9TypeAlias[Union[email.charset.Charset,builtins.str,None]]Š
+.Union[email.charset.Charset,builtins.str,None].
+email.charset.Charset"email.charset.Charset
+builtins.str"builtins.str
+None"email.message._CharsetType z35z36z37z38z39z310*„
+set_charset!email.message.Message.set_charset"
+None*8
+self.
+email.message.Message"email.message.Message*ô
+charsetæ
+9TypeAlias[Union[email.charset.Charset,builtins.str,None]]Š
+.Union[email.charset.Charset,builtins.str,None].
+email.charset.Charset"email.charset.Charset
+builtins.str"builtins.str
+None"email.message._CharsetTypez35z36z37z38z39z310*ì
+get_charset!email.message.Message.get_charset"æ
+9TypeAlias[Union[email.charset.Charset,builtins.str,None]]Š
+.Union[email.charset.Charset,builtins.str,None].
+email.charset.Charset"email.charset.Charset
+builtins.str"builtins.str
+None"email.message._CharsetType*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*—
+__len__email.message.Message.__len__"
+builtins.int"builtins.int*6
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*É
+__contains__"email.message.Message.__contains__"
+builtins.bool"builtins.bool*6
+self.
+email.message.Message"email.message.Message*$
+name
+builtins.str"builtins.strz35z36z37z38z39z310*ß
+__getitem__!email.message.Message.__getitem__"6
+TypeAlias[Any]
+Any"email.message._HeaderType*6
+self.
+email.message.Message"email.message.Message*$
+name
+builtins.str"builtins.strz35z36z37z38z39z310*ğ
+__setitem__!email.message.Message.__setitem__"
+None*6
+self.
+email.message.Message"email.message.Message*$
+name
+builtins.str"builtins.str*=
+val6
+TypeAlias[Any]
+Any"email.message._HeaderTypez35z36z37z38z39z310*±
+__delitem__!email.message.Message.__delitem__"
+None*6
+self.
+email.message.Message"email.message.Message*$
+name
+builtins.str"builtins.strz35z36z37z38z39z310*Á
+keysemail.message.Message.keys"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*á
+valuesemail.message.Message.values"f
+builtins.list[TypeAlias[Any]]6
+TypeAlias[Any]
+Any"email.message._HeaderType"builtins.list*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*º
+itemsemail.message.Message.items"À
+1builtins.list[Tuple[builtins.str,TypeAlias[Any]]]|
+"Tuple[builtins.str,TypeAlias[Any]]
+builtins.str"builtins.str6
+TypeAlias[Any]
+Any"email.message._HeaderType"builtins.list*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*º
+getemail.message.Message.get"x
+&Union[TypeAlias[Any],email.message._T]6
+TypeAlias[Any]
+Any"email.message._HeaderType
+email.message._T*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*#
+failobj
+email.message._T z35z36z37z38z39z310*‚
+get_allemail.message.Message.get_all"·
+5Union[builtins.list[TypeAlias[Any]],email.message._T]f
+builtins.list[TypeAlias[Any]]6
+TypeAlias[Any]
+Any"email.message._HeaderType"builtins.list
+email.message._T*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*#
+failobj
+email.message._T z35z36z37z38z39z310*®
+
+add_header email.message.Message.add_header"
+None*8
+self.
+email.message.Message"email.message.Message*'
+_name
+builtins.str"builtins.str*(
+_value
+builtins.str"builtins.str*Í
+_params¿
+]TypeAlias[Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]À
+RUnion[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]
+builtins.str"builtins.str
+None¿
+9Tuple[builtins.str,Union[builtins.str,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"email.message._ParamsTypez35z36z37z38z39z310*€
+replace_header$email.message.Message.replace_header"
+None*8
+self.
+email.message.Message"email.message.Message*'
+_name
+builtins.str"builtins.str*B
+_value6
+TypeAlias[Any]
+Any"email.message._HeaderTypez35z36z37z38z39z310*«
+get_content_type&email.message.Message.get_content_type"
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*³
+get_content_maintype*email.message.Message.get_content_maintype"
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*±
+get_content_subtype)email.message.Message.get_content_subtype"
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*«
+get_default_type&email.message.Message.get_default_type"
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*À
+set_default_type&email.message.Message.set_default_type"
+None*8
+self.
+email.message.Message"email.message.Message*'
+ctype
+builtins.str"builtins.strz35z36z37z38z39z310*Š
+
+get_params email.message.Message.get_params"†
+GUnion[builtins.list[Tuple[builtins.str,builtins.str]],email.message._T]¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list
+email.message._T*8
+self.
+email.message.Message"email.message.Message*#
+failobj
+email.message._T **
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool z35z36z37z38z39z310*º
+	get_paramemail.message.Message.get_param"
+|Union[email.message._T,TypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]]
+email.message._Tö
+dTypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]ñ
+YUnion[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]
+builtins.str"builtins.stró
+ETuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"email.message._ParamType*8
+self.
+email.message.Message"email.message.Message*'
+param
+builtins.str"builtins.str*#
+failobj
+email.message._T **
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool z35z36z37z38z39z310*
+	del_paramemail.message.Message.del_param"
+None*8
+self.
+email.message.Message"email.message.Message*'
+param
+builtins.str"builtins.str**
+header
+builtins.str"builtins.str *-
+requote
+builtins.bool"builtins.bool z35z36z37z38z39z310*Š
+set_typeemail.message.Message.set_type"
+None*8
+self.
+email.message.Message"email.message.Message*&
+type
+builtins.str"builtins.str**
+header
+builtins.str"builtins.str *-
+requote
+builtins.bool"builtins.bool z35z36z37z38z39z310*ˆ
+get_filename"email.message.Message.get_filename"\
+$Union[email.message._T,builtins.str]
+email.message._T
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Message*#
+failobj
+email.message._T z35z36z37z38z39z310*ˆ
+get_boundary"email.message.Message.get_boundary"\
+$Union[email.message._T,builtins.str]
+email.message._T
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Message*#
+failobj
+email.message._T z35z36z37z38z39z310*»
+set_boundary"email.message.Message.set_boundary"
+None*8
+self.
+email.message.Message"email.message.Message**
+boundary
+builtins.str"builtins.strz35z36z37z38z39z310*–
+get_content_charset)email.message.Message.get_content_charset"\
+$Union[email.message._T,builtins.str]
+email.message._T
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Message*#
+failobj
+email.message._T z35z36z37z38z39z310*Æ
+get_charsets"email.message.Message.get_charsets"™
+3Union[email.message._T,builtins.list[builtins.str]]
+email.message._TJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*8
+self.
+email.message.Message"email.message.Message*#
+failobj
+email.message._T z35z36z37z38z39z310*
+walkemail.message.Message.walk"‰
+1typing.Generator[email.message.Message,None,None].
+email.message.Message"email.message.Message
+None
+None"typing.Generator*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*á
+get_content_disposition-email.message.Message.get_content_disposition"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*è
+	as_stringemail.message.Message.as_string"
+builtins.str"builtins.str*8
+self.
+email.message.Message"email.message.Message*.
+unixfrom
+builtins.bool"builtins.bool *0
+maxheaderlen
+builtins.int"builtins.int *g
+policyY
+Union[email.policy.Policy,None]*
+email.policy.Policy"email.policy.Policy
+None z35z36z37z38z39z310*¸
+as_bytesemail.message.Message.as_bytes" 
+builtins.bytes"builtins.bytes*8
+self.
+email.message.Message"email.message.Message*.
+unixfrom
+builtins.bool"builtins.bool *g
+policyY
+Union[email.policy.Policy,None]*
+email.policy.Policy"email.policy.Policy
+None z35z36z37z38z39z310*¡
+	__bytes__email.message.Message.__bytes__" 
+builtins.bytes"builtins.bytes*8
+self.
+email.message.Message"email.message.Messagez35z36z37z38z39z310*è
+	set_paramemail.message.Message.set_param"
+None*8
+self.
+email.message.Message"email.message.Message*'
+param
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str**
+header
+builtins.str"builtins.str *-
+requote
+builtins.bool"builtins.bool *S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+language
+builtins.str"builtins.str *-
+replace
+builtins.bool"builtins.bool z35z36z37z38z39z310*Á
+__init__email.message.Message.__init__"
+None*8
+self.
+email.message.Message"email.message.Message*8
+policy*
+email.policy.Policy"email.policy.Policy z35z36z37z38z39z310j35j36j37j38j39j310è
+Policyemail.policy.Policy"builtins.object*’
+__init__email.policy.Policy.__init__"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*
+kw
+Anyz35z36z37z38z39z310*®
+cloneemail.policy.Policy.clone"*
+email.policy.Policy"email.policy.Policy*4
+self*
+email.policy.Policy"email.policy.Policy*
+kw
+Anyz35z36z37z38z39z310*Š
+handle_defect!email.policy.Policy.handle_defect"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*7
+obj.
+email.message.Message"email.message.Message*D
+defect8
+email.errors.MessageDefect"email.errors.MessageDefectz35z36z37z38z39z310*
+register_defect#email.policy.Policy.register_defect"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*7
+obj.
+email.message.Message"email.message.Message*D
+defect8
+email.errors.MessageDefect"email.errors.MessageDefectz35z36z37z38z39z310*õ
+header_max_count$email.policy.Policy.header_max_count"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.strz35z36z37z38z39z310*à
+header_source_parse'email.policy.Policy.header_source_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*[
+sourcelinesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list0:abstractmethod@z35z36z37z38z39z310*Ò
+header_store_parse&email.policy.Policy.header_store_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@z35z36z37z38z39z310*
+header_fetch_parse&email.policy.Policy.header_fetch_parse"
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@z35z36z37z38z39z310*ò
+foldemail.policy.Policy.fold"
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@z35z36z37z38z39z310*„
+fold_binaryemail.policy.Policy.fold_binary" 
+builtins.bytes"builtins.bytes*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@z35z36z37z38z39z310j35j36j37j38j39j310ä
+TypeVartyping.TypeVar"builtins.object*
+__init__typing.TypeVar.__init__"
+None**
+self 
+typing.TypeVar"typing.TypeVar*&
+name
+builtins.str"builtins.str*'
+constraints
+	Type[Any]
+Any*s
+boundf
+"Union[None,Type[Any],builtins.str]
+None
+	Type[Any]
+Any
+builtins.str"builtins.str */
+	covariant
+builtins.bool"builtins.bool *3
+contravariant
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310¯
+
+BytesFeedParser email.feedparser.BytesFeedParser"builtins.object*ú
+feed%email.feedparser.BytesFeedParser.feed"
+None*|
+selfr
+5email.feedparser.BytesFeedParser[email.feedparser._M]
+email.feedparser._M" email.feedparser.BytesFeedParser**
+data 
+builtins.bytes"builtins.bytesz35z36z37z38z39z310*ß
+close&email.feedparser.BytesFeedParser.close"
+email.feedparser._M*|
+selfr
+5email.feedparser.BytesFeedParser[email.feedparser._M]
+email.feedparser._M" email.feedparser.BytesFeedParserz35z36z37z38z39z3102î
+__init__)email.feedparser.BytesFeedParser.__init__º
+__init__)email.feedparser.BytesFeedParser.__init__"
+None*–
+self‹
+7email.feedparser.BytesFeedParser[email.message.Message].
+email.message.Message"email.message.Message" email.feedparser.BytesFeedParser*
+_factory
+None *8
+policy*
+email.policy.Policy"email.policy.Policy 0:overloadXà
+__init__)email.feedparser.BytesFeedParser.__init__"
+None*|
+selfr
+5email.feedparser.BytesFeedParser[email.feedparser._M]
+email.feedparser._M" email.feedparser.BytesFeedParser*Y
+_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.function*8
+policy*
+email.policy.Policy"email.policy.Policy 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310\
+overloadtyping.overload"
+	typing._F*
+func
+	typing._Fz35z36z37z38z39z310

@@ -1,0 +1,239 @@
+
+BaseHTTPServerª
+BinaryIOtyping.BinaryIO"	typing.IO*é
+	__enter__typing.BinaryIO.__enter__""
+typing.BinaryIO"typing.BinaryIO**
+self"
+typing.BinaryIO"typing.BinaryIO0:abstractmethod@z27j27É
+Mappingtyping.Mapping"typing.Iterable"typing.Container*–
+__getitem__typing.Mapping.__getitem__"
+typing._VT_co*e
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mapping*
+k
+
+typing._KT0:abstractmethod@z27*ƒ
+keystyping.Mapping.keys":
+builtins.list[typing._KT]
+
+typing._KT"builtins.list*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*Œ
+valuestyping.Mapping.values"@
+builtins.list[typing._VT_co]
+typing._VT_co"builtins.list*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*î
+itemstyping.Mapping.items"á
+.builtins.list[Tuple[typing._KT,typing._VT_co]]F
+Tuple[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"builtins.list*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*–
+iterkeystyping.Mapping.iterkeys">
+typing.Iterator[typing._KT]
+
+typing._KT"typing.Iterator*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*⁄
+
+itervaluestyping.Mapping.itervalues"D
+typing.Iterator[typing._VT_co]
+typing._VT_co"typing.Iterator*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*†
+	iteritemstyping.Mapping.iteritems"ã
+0typing.Iterator[Tuple[typing._KT,typing._VT_co]]F
+Tuple[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Iterator*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mappingz27*ﬂ
+__contains__typing.Mapping.__contains__"
+builtins.bool"builtins.bool*e
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mapping*'
+o"
+builtins.object"builtins.objectz27*æ
+__len__typing.Mapping.__len__"
+builtins.int"builtins.int*e
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mapping0:abstractmethod@z272∆
+gettyping.Mapping.get„
+gettyping.Mapping.get":
+Union[typing._VT_co,None]
+typing._VT_co
+None*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mapping*
+k
+
+typing._KT0:overloadX¿
+gettyping.Mapping.get"D
+Union[typing._VT_co,typing._T]
+typing._VT_co
+	typing._T*g
+self]
+(typing.Mapping[typing._KT,typing._VT_co]
+
+typing._KT
+typing._VT_co"typing.Mapping*
+k
+
+typing._KT*Q
+defaultD
+Union[typing._VT_co,typing._T]
+typing._VT_co
+	typing._T0:overloadX"27Pj27†
+
+HTTPServerBaseHTTPServer.HTTPServer"SocketServer.TCPServer*⁄
+__init__"BaseHTTPServer.HTTPServer.__init__"
+None*@
+self6
+BaseHTTPServer.HTTPServer"BaseHTTPServer.HTTPServer*t
+server_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz27j27ø
+BaseHTTPRequestHandler%BaseHTTPServer.BaseHTTPRequestHandler"!SocketServer.StreamRequestHandler*É
+__init__.BaseHTTPServer.BaseHTTPRequestHandler.__init__"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*)
+request
+builtins.str"builtins.str*t
+client_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*>
+server2
+SocketServer.BaseServer"SocketServer.BaseServerz27*û
+handle,BaseHTTPServer.BaseHTTPRequestHandler.handle"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*∂
+handle_one_request8BaseHTTPServer.BaseHTTPRequestHandler.handle_one_request"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*£
+
+send_error0BaseHTTPServer.BaseHTTPRequestHandler.send_error"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*&
+code
+builtins.int"builtins.int*S
+messageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z27*©
+send_response3BaseHTTPServer.BaseHTTPRequestHandler.send_response"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*&
+code
+builtins.int"builtins.int*S
+messageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z27*¸
+send_header1BaseHTTPServer.BaseHTTPRequestHandler.send_header"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*)
+keyword
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.strz27*®
+end_headers1BaseHTTPServer.BaseHTTPRequestHandler.end_headers"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*¨
+flush_headers3BaseHTTPServer.BaseHTTPRequestHandler.flush_headers"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*Ñ
+log_request1BaseHTTPServer.BaseHTTPRequestHandler.log_request"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*l
+code`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str *l
+size`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str z27*·
+	log_error/BaseHTTPServer.BaseHTTPRequestHandler.log_error"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*(
+format
+builtins.str"builtins.str*
+args
+Anyz27*Â
+log_message1BaseHTTPServer.BaseHTTPRequestHandler.log_message"
+None*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*(
+format
+builtins.str"builtins.str*
+args
+Anyz27*¬
+version_string4BaseHTTPServer.BaseHTTPRequestHandler.version_string"
+builtins.str"builtins.str*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*ù
+date_time_string6BaseHTTPServer.BaseHTTPRequestHandler.date_time_string"
+builtins.str"builtins.str*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*U
+	timestampD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z27*Œ
+log_date_time_string:BaseHTTPServer.BaseHTTPRequestHandler.log_date_time_string"
+builtins.str"builtins.str*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*¬
+address_string4BaseHTTPServer.BaseHTTPRequestHandler.address_string"
+builtins.str"builtins.str*X
+selfN
+%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27j27

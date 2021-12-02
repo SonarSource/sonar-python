@@ -1,0 +1,1364 @@
+
+concurrent.futures._base˛
+Loggerlogging.Logger"logging.Filterer*Ã
+__init__logging.Logger.__init__"
+None**
+self 
+logging.Logger"logging.Logger*&
+name
+builtins.str"builtins.str*Ø
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level z35z36z37z38z39z310*¢
+setLevellogging.Logger.setLevel"
+None**
+self 
+logging.Logger"logging.Logger*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Levelz35z36z37z38z39z310*π
+isEnabledForlogging.Logger.isEnabledFor"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.intz35z36z37z38z39z310*ò
+getEffectiveLevel logging.Logger.getEffectiveLevel"
+builtins.int"builtins.int**
+self 
+logging.Logger"logging.Loggerz35z36z37z38z39z310*¥
+getChildlogging.Logger.getChild" 
+logging.Logger"logging.Logger**
+self 
+logging.Logger"logging.Logger*(
+suffix
+builtins.str"builtins.strz35z36z37z38z39z310*é
+debuglogging.Logger.debug"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*ø
+debuglogging.Logger.debug"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*å
+infologging.Logger.info"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*Ω
+infologging.Logger.info"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*í
+warninglogging.Logger.warning"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*√
+warninglogging.Logger.warning"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*å
+warnlogging.Logger.warn"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*Ω
+warnlogging.Logger.warn"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*é
+errorlogging.Logger.error"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*ø
+errorlogging.Logger.error"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*î
+criticallogging.Logger.critical"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*≈
+criticallogging.Logger.critical"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*≥
+loglogging.Logger.log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*‰
+loglogging.Logger.log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*ñ
+	exceptionlogging.Logger.exception"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz35z36z37*«
+	exceptionlogging.Logger.exception"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyz38z39z310*∂
+
+_loglogging.Logger._log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*é
+exc_info˝
+°Union[builtins.bool,Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],builtins.BaseException,None]
+builtins.bool"builtins.boolø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None0
+builtins.BaseException"builtins.BaseException
+None *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *0
+
+stack_info
+builtins.bool"builtins.bool z35z36z37*Á
+
+_loglogging.Logger._log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*é
+exc_info˝
+°Union[builtins.bool,Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],builtins.BaseException,None]
+builtins.bool"builtins.boolø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None0
+builtins.BaseException"builtins.BaseException
+None *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int z38z39z310*∏
+filterlogging.Logger.filter"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*§
+
+addHandlerlogging.Logger.addHandler"
+None**
+self 
+logging.Logger"logging.Logger*,
+hdlr"
+logging.Handler"logging.Handlerz35z36z37z38z39z310*™
+removeHandlerlogging.Logger.removeHandler"
+None**
+self 
+logging.Logger"logging.Logger*,
+hdlr"
+logging.Handler"logging.Handlerz35z36z37z38z39z310*˛
+
+findCallerlogging.Logger.findCaller"Í
+FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None**
+self 
+logging.Logger"logging.Logger*0
+
+stack_info
+builtins.bool"builtins.bool z35z36z37*Ø
+
+findCallerlogging.Logger.findCaller"Í
+FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None**
+self 
+logging.Logger"logging.Logger*0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int z38z39z310*¢
+handlelogging.Logger.handle"
+None**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310*ﬁ
+
+makeRecordlogging.Logger.makeRecord"&
+logging.LogRecord"logging.LogRecord**
+self 
+logging.Logger"logging.Logger*&
+name
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int*$
+fn
+builtins.str"builtins.str*%
+lno
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*î
+exc_infoÖ
+|Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+None*P
+funcD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *£
+extraï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *Q
+sinfoD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z35z36z37z38z39z310*é
+hasHandlerslogging.Logger.hasHandlers"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Loggerz35z36z37z38z39z310*Æ
+callHandlerslogging.Logger.callHandlers"
+None**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecordz35z36z37z38z39z310j35j36j37j38j39j310√
+	Containertyping.Container"builtins.object*Û
+__contains__typing.Container.__contains__"
+builtins.bool"builtins.bool*L
+selfD
+typing.Container[typing._T_co]
+typing._T_co"typing.Container*)
+__x"
+builtins.object"builtins.object0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310Ø
+Iterabletyping.Iterable"builtins.object*·
+__iter__typing.Iterable.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Iterable[typing._T_co]
+typing._T_co"typing.Iterable0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310œ
+Iteratortyping.Iterator"typing.Iterable*±
+__next__typing.Iterator.__next__"
+typing._T_co*L
+selfB
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z310*Õ
+__iter__typing.Iterator.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iteratorz35z36z37z38z39z3108PXj35j36j37j38j39j310¬
+Sequencetyping.Sequence"typing.Collection"typing.Reversible*å
+indextyping.Sequence.index"
+builtins.int"builtins.int*L
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*
+value
+Any*)
+start
+builtins.int"builtins.int *(
+stop
+builtins.int"builtins.int z35z36z37z38z39z310*∑
+counttyping.Sequence.count"
+builtins.int"builtins.int*L
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*
+value
+Anyz35z36z37z38z39z310*⁄
+__contains__typing.Sequence.__contains__"
+builtins.bool"builtins.bool*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*'
+x"
+builtins.object"builtins.objectz35z36z37z38z39z310*Õ
+__iter__typing.Sequence.__iter__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequencez35z36z37z38z39z310*’
+__reversed__typing.Sequence.__reversed__"B
+typing.Iterator[typing._T_co]
+typing._T_co"typing.Iterator*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequencez35z36z37z38z39z3102ï
+__getitem__typing.Sequence.__getitem__À
+__getitem__typing.Sequence.__getitem__"
+typing._T_co*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*!
+i
+builtins.int"builtins.int0:overload:abstractmethod@XÅ
+__getitem__typing.Sequence.__getitem__"B
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*J
+selfB
+typing.Sequence[typing._T_co]
+typing._T_co"typing.Sequence*%
+s 
+builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310‰
+TypeVartyping.TypeVar"builtins.object*û
+__init__typing.TypeVar.__init__"
+None**
+self 
+typing.TypeVar"typing.TypeVar*&
+name
+builtins.str"builtins.str*'
+constraints
+	Type[Any]
+Any*s
+boundf
+"Union[None,Type[Any],builtins.str]
+None
+	Type[Any]
+Any
+builtins.str"builtins.str */
+	covariant
+builtins.bool"builtins.bool *3
+contravariant
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310T
+Errorconcurrent.futures._base.Error"builtins.Exceptionj35j36j37j38j39j310r
+CancelledError'concurrent.futures._base.CancelledError"concurrent.futures._base.Errorj35j36j37j38j39j310n
+TimeoutError%concurrent.futures._base.TimeoutError"concurrent.futures._base.Errorj35j36j37j38j39j310î
+_Collection$concurrent.futures._base._Collection"typing.Iterable"typing.Container*û
+__len__,concurrent.futures._base._Collection.__len__"
+builtins.int"builtins.int*ô
+selfê
+Dconcurrent.futures._base._Collection[concurrent.futures._base._T_co]"
+concurrent.futures._base._T_co"$concurrent.futures._base._Collection0:abstractmethod@z35z36z37z38z39z310PXj35j36j37j38j39j310¯
+Futureconcurrent.futures._base.Future"builtins.object*Â
+__init__(concurrent.futures._base.Future.__init__"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*˜
+cancel&concurrent.futures._base.Future.cancel"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*˝
+	cancelled)concurrent.futures._base.Future.cancelled"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*˘
+running'concurrent.futures._base.Future.running"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*Û
+done$concurrent.futures._base.Future.done"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*Ã
+add_done_callback1concurrent.futures._base.Future.add_done_callback"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz35z36z37z38z39z310*”
+result&concurrent.futures._base.Future.result"
+concurrent.futures._base._T*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310*£
+set_running_or_notify_cancel<concurrent.futures._base.Future.set_running_or_notify_cancel"
+builtins.bool"builtins.bool*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Futurez35z36z37z38z39z310*ñ
+
+set_result*concurrent.futures._base.Future.set_result"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*+
+result
+concurrent.futures._base._Tz35z36z37z38z39z310*ú
+	exception)concurrent.futures._base.Future.exception"b
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310*‚
+set_exception-concurrent.futures._base.Future.set_exception"
+None*ã
+selfÄ
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*q
+	exceptionb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+Nonez35z36z37z38z39z310*‰
+__class_getitem__1concurrent.futures._base.Future.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*”
+cls…
+BType[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*
+item
+Anypz39z310Pj35j36j37j38j39j310∞
+Executor!concurrent.futures._base.Executor"builtins.object*î
+submit(concurrent.futures._base.Executor.submit"Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Anyz35z36z37z38*ç
+submit(concurrent.futures._base.Executor.submit"Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+__fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Anyz39z310*ô
+map%concurrent.futures._base.Executor.map"`
+,typing.Iterator[concurrent.futures._base._T]
+concurrent.futures._base._T"typing.Iterator*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*?
+	iterables0
+typing.Iterable[Any]
+Any"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *-
+	chunksize
+builtins.int"builtins.int z35z36z37z38z39z310*Œ
+shutdown*concurrent.futures._base.Executor.shutdown"
+None*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
+wait
+builtins.bool"builtins.bool z35z36z37z38*˝
+shutdown*concurrent.futures._base.Executor.shutdown"
+None*P
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
+wait
+builtins.bool"builtins.bool *4
+cancel_futures
+builtins.bool"builtins.bool z39z310*õ
+	__enter__+concurrent.futures._base.Executor.__enter__"
+concurrent.futures._base._T*'
+self
+concurrent.futures._base._Tz35z36z37z38z39z310*§
+__exit__*concurrent.futures._base.Executor.__exit__"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*N
+selfF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*
+exc_type
+Any*
+exc_val
+Any*
+exc_tb
+Anyz35z36z37z38z39z310j35j36j37j38j39j310¨
+DoneAndNotDoneFutures.concurrent.futures._base.DoneAndNotDoneFutures"typing.Sequence*Ÿ
+__new__6concurrent.futures._base.DoneAndNotDoneFutures.__new__"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Å
+_clsˆ
+QType[concurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]]û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Ë
+done›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*Ï
+not_done›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.setz35z36z37z38z39z310*¢
+__len__6concurrent.futures._base.DoneAndNotDoneFutures.__len__"
+builtins.int"builtins.int*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFuturesz35z36z37z38z39z3102µ
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__Ñ
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__"›
+Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*!
+i
+builtins.int"builtins.int0:overloadX…
+__getitem__:concurrent.futures._base.DoneAndNotDoneFutures.__getitem__"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*ß
+selfû
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*%
+s 
+builtins.slice"builtins.slice0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310≥
+_Waiter concurrent.futures._base._Waiter"builtins.object*®
+__init__)concurrent.futures._base._Waiter.__init__"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiterz35z36z37z38z39z310*ä
+
+add_result+concurrent.futures._base._Waiter.add_result"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*ê
+add_exception.concurrent.futures._base._Waiter.add_exception"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*ê
+add_cancelled.concurrent.futures._base._Waiter.add_cancelled"
+None*N
+selfD
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310j35j36j37j38j39j310ﬁ	
+_AsCompletedWaiter+concurrent.futures._base._AsCompletedWaiter" concurrent.futures._base._Waiter*…
+__init__4concurrent.futures._base._AsCompletedWaiter.__init__"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiterz35z36z37z38z39z310*´
+
+add_result6concurrent.futures._base._AsCompletedWaiter.add_result"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*±
+add_exception9concurrent.futures._base._AsCompletedWaiter.add_exception"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*±
+add_cancelled9concurrent.futures._base._AsCompletedWaiter.add_cancelled"
+None*d
+selfZ
++concurrent.futures._base._AsCompletedWaiter"+concurrent.futures._base._AsCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310j35j36j37j38j39j310≥
+_FirstCompletedWaiter.concurrent.futures._base._FirstCompletedWaiter" concurrent.futures._base._Waiter*¥
+
+add_result9concurrent.futures._base._FirstCompletedWaiter.add_result"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*∫
+add_exception<concurrent.futures._base._FirstCompletedWaiter.add_exception"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*∫
+add_cancelled<concurrent.futures._base._FirstCompletedWaiter.add_cancelled"
+None*j
+self`
+.concurrent.futures._base._FirstCompletedWaiter".concurrent.futures._base._FirstCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310j35j36j37j38j39j310ÿ
+
+_AllCompletedWaiter,concurrent.futures._base._AllCompletedWaiter" concurrent.futures._base._Waiter*∏
+__init__5concurrent.futures._base._AllCompletedWaiter.__init__"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*3
+num_pending_calls
+builtins.int"builtins.int*5
+stop_on_exception
+builtins.bool"builtins.boolz35z36z37z38z39z310*Æ
+
+add_result7concurrent.futures._base._AllCompletedWaiter.add_result"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*¥
+add_exception:concurrent.futures._base._AllCompletedWaiter.add_exception"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310*¥
+add_cancelled:concurrent.futures._base._AllCompletedWaiter.add_cancelled"
+None*f
+self\
+,concurrent.futures._base._AllCompletedWaiter",concurrent.futures._base._AllCompletedWaiter*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Futurez35z36z37z38z39z310j35j36j37j38j39j310Í
+_AcquireFutures(concurrent.futures._base._AcquireFutures"builtins.object*Î
+__init__1concurrent.futures._base._AcquireFutures.__init__"
+None*^
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFutures*®
+futuresö
+5typing.Iterable[concurrent.futures._base.Future[Any]]P
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future"typing.Iterablez35z36z37z38z39z310*¿
+	__enter__2concurrent.futures._base._AcquireFutures.__enter__"
+None*\
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFuturesz35z36z37z38z39z310*—
+__exit__1concurrent.futures._base._AcquireFutures.__exit__"
+None*\
+selfT
+(concurrent.futures._base._AcquireFutures"(concurrent.futures._base._AcquireFutures*
+args
+Anyz35z36z37z38z39z310j35j36j37j38j39j310a
+BrokenExecutor'concurrent.futures._base.BrokenExecutor"builtins.RuntimeErrorj37j38j39j310l
+InvalidStateError*concurrent.futures._base.InvalidStateError"concurrent.futures._base.Errorj38j39j310Ü
+GenericAliastypes.GenericAlias"builtins.object*≠
+__init__types.GenericAlias.__init__"
+None*2
+self(
+types.GenericAlias"types.GenericAlias**
+origin
+builtins.type"builtins.type*
+args
+Anyz39z310*ó
+__getattr__types.GenericAlias.__getattr__"
+Any*0
+self(
+types.GenericAlias"types.GenericAlias*$
+name
+builtins.str"builtins.strz39z310j39j310j
+abstractmethodabc.abstractmethod"
+
+abc._FuncT*
+funcobj
+
+abc._FuncTz35z36z37z38z39z310\
+overloadtyping.overload"
+	typing._F*
+func
+	typing._Fz35z36z37z38z39z310˛
+as_completed%concurrent.futures._base.as_completed"„
+Mtyping.Iterator[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterator*Ï
+fs„
+Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z35z36z37z38z39z310⁄
+waitconcurrent.futures._base.wait"û
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*Ï
+fs„
+Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]Ä
+<concurrent.futures._base.Future[concurrent.futures._base._T]
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+return_when
+builtins.str"builtins.str z35z36z37z38z39z310
