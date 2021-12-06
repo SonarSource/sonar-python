@@ -392,29 +392,45 @@ public class TypeShed {
     }
 
     // TODO: Use a common proxy interface Descriptor instead of using Object
-    Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
+    Map<String, Set<Object>> descriptorsByName = new HashMap<>();
     moduleSymbol.getClassesList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
     moduleSymbol.getFunctionsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
     moduleSymbol.getOverloadedFunctionsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
 
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
 
-    for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      String fqn = normalizedFqn(entry.getKey());
+    for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
+      String name = entry.getKey();
       Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), false);
-      if (moduleSymbol.getFullyQualifiedName().equals(BUILTINS_FQN) && BUILTINS_TO_DISAMBIGUATE.contains(fqn) && symbols.size() > 1) {
-        deserializedSymbols.put(fqn, disambiguateWithLatestPythonSymbol(symbols));
-      } else {
-        deserializedSymbols.put(fqn, symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
-      }
+      deserializedSymbols.put(name, disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName()));
     }
     return deserializedSymbols;
+  }
+
+  // TODO: to be checked when implementing SONARPY-941
+  private static Symbol disambiguateSymbolsWithSameName(String name, Set<Symbol> symbols, String moduleFqn) {
+    if (symbols.size() > 1) {
+      if (haveAllTheSameFqn(symbols) && !isBuiltinToDisambiguate(moduleFqn, name)) {
+        return AmbiguousSymbolImpl.create(symbols);
+      }
+      return disambiguateWithLatestPythonSymbol(symbols);
+    }
+    return symbols.iterator().next();
+  }
+
+  private static boolean isBuiltinToDisambiguate(String moduleFqn, String name) {
+    return moduleFqn.equals(BUILTINS_FQN) && BUILTINS_TO_DISAMBIGUATE.contains(name);
+  }
+
+  private static boolean haveAllTheSameFqn(Set<Symbol> symbols) {
+    String firstFqn = symbols.iterator().next().fullyQualifiedName();
+    return firstFqn != null && symbols.stream().map(Symbol::fullyQualifiedName).allMatch(firstFqn::equals);
   }
 
   public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
@@ -436,6 +452,11 @@ public class TypeShed {
         symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
       }
       if (descriptor instanceof OverloadedFunctionSymbol) {
+        // FIXME: SONARPY-942
+        if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
+          LOG.error("Overloaded function symbols should have at least two definitions");
+          continue;
+        }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
       }
     }
