@@ -64,7 +64,7 @@ def stdlib():
     passwd_2 = pwd.struct_passwd(tuple)
     if passwd == passwd_2: pass # OK
     if passwd == pwd.getpwuid(1): pass # OK
-    if 42 == pwd.getpwuid(1): pass # FN, unresolved type hierarchy
+    if 42 == pwd.getpwuid(1): pass # Noncompliant
     if pwd.getpwall() == 42: pass # Noncompliant
     if zip(l1, l2) == 42: pass # FN due to missing Python 2 and usage of zip.__new__
     if platform.architecture() == '32bit': ... # Noncompliant
