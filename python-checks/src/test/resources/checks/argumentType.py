@@ -68,7 +68,7 @@ def stdlib_functions():
   time.sleep(True) # OK, converted to 1
   time.sleep(1j) # FN, considered duck type compatible
   genericpath.isfile("some/path")
-  genericpath.isfile(42) # Noncompliant
+  genericpath.isfile(42) # FN - see SONARPY-937
   my_list = [1,2,3]
   _heapq.heapify(42) # Noncompliant {{Change this argument; Function "heapify" expects a different type}}
 #                ^^
