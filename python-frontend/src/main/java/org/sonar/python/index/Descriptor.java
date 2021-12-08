@@ -34,6 +34,5 @@ public interface Descriptor {
     FUNCTION,
     CLASS,
     VARIABLE,
-    MODULE
   }
 }
