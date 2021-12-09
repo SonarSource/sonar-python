@@ -34,5 +34,6 @@ public interface Descriptor {
     FUNCTION,
     CLASS,
     VARIABLE,
+    AMBIGUOUS
   }
 }
