@@ -112,3 +112,19 @@ def test_python2_exception():
     other_symbol = symbols.MergedModuleSymbol("other", {}, {}, {})
     assert symbols.is_python_2_only_exception(queue_symbol) is True
     assert symbols.is_python_2_only_exception(other_symbol) is False
+
+
+def test_fallback_unanalyzed_items_when_items_are_missing():
+    overloaded_func_mock = mock.Mock(mpn.OverloadedFuncDef)
+    overloaded_func_mock.items = []
+    func_def_mock1 = mock.Mock(mpn.Decorator)
+    func_def_mock2 = mock.Mock(mpn.Decorator)
+    overloaded_func_mock.unanalyzed_items = [func_def_mock1, func_def_mock2]
+
+    def mock_add_definitions(self, arg):
+        assert isinstance(arg, mpn.Decorator)
+        self.definitions.append(arg)
+
+    with mock.patch('serializer.symbols.OverloadedFunctionSymbol.add_overloaded_func_definition', mock_add_definitions):
+        overloaded_func_symbol = symbols.OverloadedFunctionSymbol(overloaded_func_mock)
+        assert len(overloaded_func_symbol.definitions) == 2
