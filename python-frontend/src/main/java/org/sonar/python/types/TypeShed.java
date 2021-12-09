@@ -143,7 +143,7 @@ public class TypeShed {
     Set<Symbol> commonSymbols = new HashSet<>();
     symbolsPython3.forEach((localName, python3Symbol) -> {
       Symbol python2Symbol = symbolsPython2.get(localName);
-      if (python2Symbol == null) {
+      if (python2Symbol == null || python2Symbol == python3Symbol) {
         commonSymbols.add(python3Symbol);
       } else {
         Set<Symbol> symbols = new HashSet<>();

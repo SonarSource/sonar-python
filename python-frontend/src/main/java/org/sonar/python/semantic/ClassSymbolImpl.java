@@ -41,10 +41,13 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.semantic.SymbolUtils.symbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
 import static org.sonar.python.types.TypeShed.normalizedFqn;
@@ -98,6 +101,27 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     metaclassFQN = null;
     supportsGenerics = false;
     setKind(Kind.CLASS);
+  }
+
+  public ClassSymbolImpl(ClassDescriptor classDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    super(symbolName, classDescriptor.fullyQualifiedName());
+    setKind(Kind.CLASS);
+    superClasses.addAll(classDescriptor.superClasses().stream().map(sc -> {
+      Symbol symbol = projectLevelSymbolTable.getSymbol(sc);
+      return symbol != null ? symbol : symbolWithFQN(sc);
+    }).collect(Collectors.toList()));
+    members.addAll(classDescriptor.members().stream().map(m -> DescriptorUtils.symbolFromDescriptor(m, projectLevelSymbolTable)).collect(Collectors.toList()));
+    members.forEach(m -> {
+      if (m instanceof FunctionSymbolImpl) {
+        ((FunctionSymbolImpl) m).setOwner(this);
+      }
+    });
+    classDefinitionLocation = classDescriptor.definitionLocation();
+    hasDecorators = classDescriptor.hasDecorators();
+    hasMetaClass = classDescriptor.hasMetaClass();
+    metaclassFQN = classDescriptor.metaclassFQN();
+    supportsGenerics = classDescriptor.supportsGenerics();
+    hasSuperClassWithoutSymbol = classDescriptor.hasSuperClassWithoutDescriptor();
   }
 
   public static ClassSymbol copyFrom(String name, ClassSymbol classSymbol) {
@@ -166,17 +190,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   public List<Symbol> superClasses() {
     // In case of symbols coming from TypeShed protobuf, we resolve superclasses lazily
     if (!hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty()) {
-      superClassesFqns.stream().map(ClassSymbolImpl::resolveSuperClass).forEach(this::addSuperClass);
+      superClassesFqns.stream().map(SymbolUtils::symbolWithFQN).forEach(this::addSuperClass);
     }
     hasAlreadyReadSuperClasses = true;
     return Collections.unmodifiableList(superClasses);
-  }
-
-  private static Symbol resolveSuperClass(String superClassFqn) {
-    String[] fqnSplitByDot = superClassFqn.split("\\.");
-    String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
-    Symbol symbol = TypeShed.symbolWithFQN(superClassFqn);
-    return symbol == null ? new SymbolImpl(localName, superClassFqn) : symbol;
   }
 
   public void addSuperClass(Symbol symbol) {

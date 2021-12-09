@@ -53,6 +53,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.TypeShedPythonFile;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -279,5 +280,12 @@ public class SymbolUtils {
       }
     }
     return Optional.empty();
+  }
+
+  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
+    String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
+    Symbol symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
+    return symbol == null ? new SymbolImpl(localName, fullyQualifiedName) : symbol;
   }
 }

@@ -21,10 +21,12 @@ package org.sonar.python.semantic;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -40,13 +42,17 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.semantic.SymbolUtils.symbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -120,6 +126,21 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isStub = true;
     isDjangoView = false;
     this.validForPythonVersions = new HashSet<>(validFor);
+  }
+
+  public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    super(symbolName, functionDescriptor.fullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    isInstanceMethod = functionDescriptor.isInstanceMethod();
+    isAsynchronous = functionDescriptor.isAsynchronous();
+    hasDecorators = functionDescriptor.hasDecorators();
+    decorators = functionDescriptor.decorators();
+    annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
+    functionDefinitionLocation = functionDescriptor.definitionLocation();
+    parameters.addAll(functionDescriptor.parameters().stream().map(p -> DescriptorUtils.functionParameter(p, projectLevelSymbolTable)).collect(Collectors.toList()));
+    hasVariadicParameter = parameters.stream().anyMatch(FunctionSymbol.Parameter::isVariadic);
+    // TODO: Will no longer be true once SONARPY-647 is fixed
+    isStub = false;
   }
 
   public void setParametersWithType(ParameterList parametersList) {
@@ -350,6 +371,21 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.location = location;
       this.protobufType = protobufType;
       this.annotatedTypeName = annotatedTypeName;
+    }
+
+    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
+      this.name = parameterDescriptor.name();
+      this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
+      this.isVariadic = parameterDescriptor.isVariadic();
+      this.isKeywordOnly = parameterDescriptor.isKeywordOnly();
+      this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
+      this.location = parameterDescriptor.location();
+      this.annotatedTypeName = parameterDescriptor.annotatedType();
+      Symbol typeSymbol = projectLevelSymbolTable.getSymbol(parameterDescriptor.annotatedType());
+      if (typeSymbol == null && annotatedTypeName != null) {
+        typeSymbol = symbolWithFQN(annotatedTypeName);
+      }
+      this.declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }
 
     @Override

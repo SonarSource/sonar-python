@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -294,9 +296,9 @@ public class ProjectLevelSymbolTableTest {
     Symbol importedASymbol = tree.globalVariables().iterator().next();
     assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classA = (ClassSymbol) importedASymbol;
-    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(true);
+    assertThat(classA.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classA.superClasses()).hasSize(1);
-    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
   }
 
   @Test
@@ -610,7 +612,7 @@ public class ProjectLevelSymbolTableTest {
     FileInput fileInput = parseWithoutSymbols("class A(A): pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
-    assertThat(a.superClasses()).containsExactly(a);
+    assertThat(a.superClasses()).extracting("name").containsExactly("A");
   }
 
   @Test
@@ -680,6 +682,27 @@ public class ProjectLevelSymbolTableTest {
     assertThat(parentOfImportedA.superClasses())
       .extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactly(tuple(Symbol.Kind.OTHER, "foo.A"));
+  }
+
+  @Test
+  public void annotated_parameter_is_translated_correctly() {
+    FileInput tree = parseWithoutSymbols(
+      "def fn(param: str): ..."
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactly("fn");
+    FunctionSymbol functionSymbol = ((FunctionSymbol) globalSymbols.stream().findFirst().get());
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::declaredType).containsExactly(InferredTypes.DECL_STR);
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void imported_typeshed_symbols_are_not_exported() {
+    FileInput tree = parseWithoutSymbols(
+      "from html import escape"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).isEmpty();
   }
 
   @Test

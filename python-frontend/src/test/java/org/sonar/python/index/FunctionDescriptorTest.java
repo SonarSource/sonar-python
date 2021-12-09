@@ -117,7 +117,7 @@ public class FunctionDescriptorTest {
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
   }
 
-  private FunctionDescriptor lastFunctionDescriptor(String... code) {
+  public static FunctionDescriptor lastFunctionDescriptor(String... code) {
     FunctionSymbol functionSymbol = lastFunctionSymbol(code);
     Collection<Descriptor> descriptors = descriptors(functionSymbol);
     assertThat(descriptors).extracting(Descriptor::kind).containsExactly(Descriptor.Kind.FUNCTION);

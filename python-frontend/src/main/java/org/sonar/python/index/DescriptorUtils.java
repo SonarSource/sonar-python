@@ -22,13 +22,19 @@ package org.sonar.python.index;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolImpl;
 
 public class DescriptorUtils {
 
@@ -53,10 +59,11 @@ public class DescriptorUtils {
       .withName(classSymbol.name())
       .withFullyQualifiedName(classSymbol.fullyQualifiedName())
       .withMembers(classSymbol.declaredMembers().stream().flatMap(s -> descriptors(s).stream()).collect(Collectors.toList()))
-      .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList()))
+      .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).filter(Objects::nonNull).collect(Collectors.toList()))
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
-      .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol())
+      .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol() ||
+        classSymbol.superClasses().stream().anyMatch(s -> s.fullyQualifiedName() == null))
       .withMetaclassFQN(((ClassSymbolImpl) classSymbol).metaclassFQN())
       .withHasDecorators(classSymbol.hasDecorators())
       .withSupportsGenerics(((ClassSymbolImpl) classSymbol).supportsGenerics());
@@ -90,4 +97,43 @@ public class DescriptorUtils {
     )).collect(Collectors.toList());
   }
 
+
+  public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
+    return symbolFromDescriptor(descriptor, projectLevelSymbolTable, null);
+  }
+
+  public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable String localSymbolName) {
+    // The symbol generated from the descriptor will not have the descriptor name if an alias (localSymbolName) is defined
+    String symbolName = localSymbolName != null ? localSymbolName : descriptor.name();
+    switch (descriptor.kind()) {
+      case CLASS:
+        return classSymbol((ClassDescriptor) descriptor, projectLevelSymbolTable, symbolName);
+      case FUNCTION:
+        return functionSymbol((FunctionDescriptor) descriptor, projectLevelSymbolTable, symbolName);
+      case VARIABLE:
+        return new SymbolImpl(symbolName, descriptor.fullyQualifiedName());
+      default:
+        // Ambiguous descriptor
+        return ambiguousSymbol((AmbiguousDescriptor) descriptor, projectLevelSymbolTable, symbolName);
+    }
+  }
+
+  private static ClassSymbol classSymbol(ClassDescriptor classDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    return new ClassSymbolImpl(classDescriptor, projectLevelSymbolTable, symbolName);
+  }
+
+  private static FunctionSymbol functionSymbol(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    return new FunctionSymbolImpl(functionDescriptor, projectLevelSymbolTable, symbolName);
+  }
+
+  public static FunctionSymbol.Parameter functionParameter(FunctionDescriptor.Parameter parameterDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
+    return new FunctionSymbolImpl.ParameterImpl(parameterDescriptor, projectLevelSymbolTable);
+  }
+
+  public static AmbiguousSymbol ambiguousSymbol(AmbiguousDescriptor ambiguousDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    Set<Symbol> descriptors = ambiguousDescriptor.alternatives().stream()
+      .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName))
+      .collect(Collectors.toSet());
+    return new AmbiguousSymbolImpl(symbolName, ambiguousDescriptor.fullyQualifiedName(), descriptors);
+  }
 }
