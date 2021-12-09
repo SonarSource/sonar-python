@@ -438,6 +438,11 @@ public class TypeShedTest {
     setPythonVersions(PythonVersionUtils.allVersions());
   }
 
+  @Test
+  public void bidi_test() {
+    /*This won't print Hello world, right? ⁧/*/ System.out.println("Hello world");
+  }
+
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);
