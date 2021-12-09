@@ -112,7 +112,7 @@ def save_merged_symbols(is_debug=False):
 
 
 def main():
-    ...
+    save_merged_symbols()
 
 
 if __name__ == '__main__':
