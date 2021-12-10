@@ -20,13 +20,12 @@
 package org.sonar.python.index;
 
 
-import java.util.Collection;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastFunctionSymbol;
-import static org.sonar.python.index.DescriptorUtils.descriptors;
+import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class FunctionDescriptorTest {
 
@@ -119,9 +118,8 @@ public class FunctionDescriptorTest {
 
   public static FunctionDescriptor lastFunctionDescriptor(String... code) {
     FunctionSymbol functionSymbol = lastFunctionSymbol(code);
-    Collection<Descriptor> descriptors = descriptors(functionSymbol);
-    assertThat(descriptors).extracting(Descriptor::kind).containsExactly(Descriptor.Kind.FUNCTION);
-    FunctionDescriptor functionDescriptor = ((FunctionDescriptor) descriptors.iterator().next());
+    FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor(functionSymbol);
+    assertThat(functionDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
     assertThat(functionDescriptor.name()).isEqualTo(functionSymbol.name());
     assertThat(functionDescriptor.fullyQualifiedName()).isEqualTo(functionSymbol.fullyQualifiedName());
     assertThat(functionDescriptor.definitionLocation()).isNotNull();

@@ -20,14 +20,13 @@
 package org.sonar.python.index;
 
 
-import java.util.Collection;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.index.DescriptorUtils.descriptors;
+import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class VariableDescriptorTest {
 
@@ -43,9 +42,8 @@ public class VariableDescriptorTest {
   private VariableDescriptor lastVariableDescriptor(String... code) {
     Symbol symbol = TreeUtils.getSymbolFromTree(lastExpression(code)).get();
 
-    Collection<Descriptor> descriptors = descriptors(symbol);
-    assertThat(descriptors).extracting(Descriptor::kind).containsExactly(Descriptor.Kind.VARIABLE);
-    VariableDescriptor variableDescriptor = ((VariableDescriptor) descriptors.iterator().next());
+    VariableDescriptor variableDescriptor = (VariableDescriptor) descriptor(symbol);
+    assertThat(variableDescriptor.kind()).isEqualTo(Descriptor.Kind.VARIABLE);
     assertThat(variableDescriptor.name()).isEqualTo(symbol.name());
     assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo(symbol.fullyQualifiedName());
     return variableDescriptor;

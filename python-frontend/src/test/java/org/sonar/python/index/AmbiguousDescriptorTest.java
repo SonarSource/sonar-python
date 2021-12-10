@@ -20,20 +20,17 @@
 package org.sonar.python.index;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastSymbolFromDef;
-import static org.sonar.python.index.DescriptorUtils.descriptors;
+import static org.sonar.python.index.ClassDescriptorTest.lastClassDescriptor;
+import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 
 public class AmbiguousDescriptorTest {
@@ -45,6 +42,17 @@ public class AmbiguousDescriptorTest {
       "class A: ...");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A");
+  }
+
+  @Test
+  public void test_flattened_ambiguous_descriptor() {
+    AmbiguousDescriptor firstAmbiguousSymbol = lastAmbiguousDescriptor(
+      "class A: ...",
+      "class A: ...");
+    ClassDescriptor classDescriptor = lastClassDescriptor("class A: ...");
+    AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(firstAmbiguousSymbol, classDescriptor);
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
   }
 
   @Test
@@ -64,8 +72,8 @@ public class AmbiguousDescriptorTest {
   public void ambiguous_descriptor_creation_different_name_same_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod.bar");
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
-    Descriptor fooDesc = descriptors(foo).stream().findFirst().get();
-    Descriptor barDesc = descriptors(bar).stream().findFirst().get();
+    Descriptor fooDesc = descriptor(foo);
+    Descriptor barDesc = descriptor(bar);
     AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(new HashSet<>(Arrays.asList(fooDesc, barDesc)));
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo("mod.bar");
     assertThat(ambiguousDescriptor.name()).isEmpty();
@@ -76,8 +84,7 @@ public class AmbiguousDescriptorTest {
     if (!(ambiguousSymbol instanceof AmbiguousSymbol)) {
       throw new AssertionError("Symbol is not ambiguous.");
     }
-    Collection<Descriptor> descriptors = descriptors(ambiguousSymbol);
-    AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create((Set<Descriptor>) descriptors);
+    AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) descriptor(ambiguousSymbol);
     assertThat(ambiguousDescriptor.name()).isEqualTo(ambiguousSymbol.name());
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo(ambiguousSymbol.fullyQualifiedName());
     return ambiguousDescriptor;

@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.VariableDescriptor;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
@@ -67,7 +69,7 @@ public class ProjectLevelSymbolTable {
     globalSymbolsByModuleName.entrySet().forEach(entry -> {
       String moduleName = entry.getKey();
       Set<Symbol> symbols = entry.getValue();
-      Set<Descriptor> globalDescriptors = symbols.stream().flatMap(g -> DescriptorUtils.descriptors(g).stream()).collect(Collectors.toSet());
+      Set<Descriptor> globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
       globalDescriptorsByModuleName.put(moduleName, globalDescriptors);
     });
   }
@@ -92,10 +94,14 @@ public class ProjectLevelSymbolTable {
         continue;
       }
       if (globalVariable.is(Symbol.Kind.CLASS, Symbol.Kind.FUNCTION)) {
-        globalDescriptors.addAll(DescriptorUtils.descriptors(globalVariable));
+        globalDescriptors.add(DescriptorUtils.descriptor(globalVariable));
       } else {
-        SymbolImpl symbol = new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name(), globalVariable.annotatedTypeName());
-        globalDescriptors.addAll(DescriptorUtils.descriptors(symbol));
+        String fullyQualifiedName = fullyQualifiedModuleName + "." + globalVariable.name();
+        if (globalVariable.is(Symbol.Kind.AMBIGUOUS)) {
+          globalDescriptors.add(DescriptorUtils.ambiguousDescriptor((AmbiguousSymbol) globalVariable, fullyQualifiedName));
+        } else {
+          globalDescriptors.add(new VariableDescriptor(globalVariable.name(), fullyQualifiedName, globalVariable.annotatedTypeName()));
+        }
       }
     }
     globalDescriptorsByModuleName.put(fullyQualifiedModuleName, globalDescriptors);
@@ -140,12 +146,12 @@ public class ProjectLevelSymbolTable {
       localSymbolName =  localSymbolName != null ? localSymbolName : fqnSplitByDot[fqnSplitByDot.length - 1];
       return new SymbolImpl(localSymbolName, fullyQualifiedName);
     }
-    queriedSymbolNames.add(fullyQualifiedName);
     Descriptor descriptor = globalDescriptorsByFQN().get(fullyQualifiedName);
     if (descriptor == null) {
       queriedSymbolNames = new HashSet<>();
       return null;
     } else {
+      queriedSymbolNames.add(fullyQualifiedName);
       Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName);
       queriedSymbolNames = new HashSet<>();
       return symbol;

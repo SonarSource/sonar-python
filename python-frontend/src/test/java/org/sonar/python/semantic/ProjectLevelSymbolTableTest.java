@@ -500,7 +500,7 @@ public class ProjectLevelSymbolTableTest {
       "fn = 42"
     );
     globalSymbols = globalSymbols(tree, "mod");
-    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.OTHER);
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.AMBIGUOUS);
   }
 
   @Test
@@ -687,12 +687,13 @@ public class ProjectLevelSymbolTableTest {
   @Test
   public void annotated_parameter_is_translated_correctly() {
     FileInput tree = parseWithoutSymbols(
-      "def fn(param: str): ..."
+      "def fn(param: str, **my_dict): ..."
     );
     Set<Symbol> globalSymbols = globalSymbols(tree, "");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactly("fn");
     FunctionSymbol functionSymbol = ((FunctionSymbol) globalSymbols.stream().findFirst().get());
-    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::declaredType).containsExactly(InferredTypes.DECL_STR);
+    // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type (InferredTypes.DICT instead of anyType)
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::declaredType).containsExactly(InferredTypes.DECL_STR, InferredTypes.anyType());
     assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
   }
 

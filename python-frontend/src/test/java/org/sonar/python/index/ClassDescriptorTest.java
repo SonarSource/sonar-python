@@ -20,13 +20,12 @@
 package org.sonar.python.index;
 
 
-import java.util.Collection;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastClassSymbol;
-import static org.sonar.python.index.DescriptorUtils.descriptors;
+import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class ClassDescriptorTest {
 
@@ -88,11 +87,10 @@ public class ClassDescriptorTest {
     assertThat(classDescriptor.supportsGenerics()).isTrue();
   }
 
-  private ClassDescriptor lastClassDescriptor(String... code) {
+  public static ClassDescriptor lastClassDescriptor(String... code) {
     ClassSymbol classSymbol = lastClassSymbol(code);
-    Collection<Descriptor> descriptors = descriptors(classSymbol);
-    assertThat(descriptors).extracting(Descriptor::kind).containsExactly(Descriptor.Kind.CLASS);
-    ClassDescriptor classDescriptor = ((ClassDescriptor) descriptors.iterator().next());
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor(classSymbol);
+    assertThat(classDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
     assertThat(classDescriptor.name()).isEqualTo(classSymbol.name());
     assertThat(classDescriptor.fullyQualifiedName()).isEqualTo(classSymbol.fullyQualifiedName());
     assertThat(classDescriptor.definitionLocation()).isNotNull();

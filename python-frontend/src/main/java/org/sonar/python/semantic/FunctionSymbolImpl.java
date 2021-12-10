@@ -42,7 +42,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.DeclaredType;
@@ -52,7 +51,7 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
-import static org.sonar.python.semantic.SymbolUtils.symbolWithFQN;
+import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -137,7 +136,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     decorators = functionDescriptor.decorators();
     annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
     functionDefinitionLocation = functionDescriptor.definitionLocation();
-    parameters.addAll(functionDescriptor.parameters().stream().map(p -> DescriptorUtils.functionParameter(p, projectLevelSymbolTable)).collect(Collectors.toList()));
+    parameters.addAll(functionDescriptor.parameters().stream().map(p -> new FunctionSymbolImpl.ParameterImpl(p, projectLevelSymbolTable)).collect(Collectors.toList()));
     hasVariadicParameter = parameters.stream().anyMatch(FunctionSymbol.Parameter::isVariadic);
     // TODO: Will no longer be true once SONARPY-647 is fixed
     isStub = false;
@@ -383,8 +382,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.annotatedTypeName = parameterDescriptor.annotatedType();
       Symbol typeSymbol = projectLevelSymbolTable.getSymbol(parameterDescriptor.annotatedType());
       if (typeSymbol == null && annotatedTypeName != null) {
-        typeSymbol = symbolWithFQN(annotatedTypeName);
+        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
       }
+      // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type
       this.declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }
 

@@ -282,7 +282,7 @@ public class SymbolUtils {
     return Optional.empty();
   }
 
-  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+  public static Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
     String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
     String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
     Symbol symbol = TypeShed.symbolWithFQN(fullyQualifiedName);

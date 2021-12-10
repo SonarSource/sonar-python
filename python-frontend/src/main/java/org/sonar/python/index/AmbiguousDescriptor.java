@@ -74,14 +74,14 @@ public class AmbiguousDescriptor implements Descriptor {
       // Here we have descriptors having same FQN but different local names, so we cannot assign any name to resulting value
       resultingSymbolName = "";
     }
-    return new AmbiguousDescriptor(resultingSymbolName, firstSymbol.fullyQualifiedName(), flattenAmbiguousSymbols(descriptors));
+    return new AmbiguousDescriptor(resultingSymbolName, firstSymbol.fullyQualifiedName(), flattenAmbiguousDescriptors(descriptors));
   }
 
-  private static Set<Descriptor> flattenAmbiguousSymbols(Set<Descriptor> descriptors) {
+  private static Set<Descriptor> flattenAmbiguousDescriptors(Set<Descriptor> descriptors) {
     Set<Descriptor> alternatives = new HashSet<>();
     for (Descriptor descriptor : descriptors) {
       if (descriptor.kind() == Kind.AMBIGUOUS) {
-        Set<Descriptor> flattenedAlternatives = flattenAmbiguousSymbols(((AmbiguousDescriptor) descriptor).alternatives());
+        Set<Descriptor> flattenedAlternatives = flattenAmbiguousDescriptors(((AmbiguousDescriptor) descriptor).alternatives());
         alternatives.addAll(flattenedAlternatives);
       } else {
         alternatives.add(descriptor);

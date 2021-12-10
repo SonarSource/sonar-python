@@ -22,7 +22,7 @@ package org.sonar.python.index;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-class VariableDescriptor implements Descriptor {
+public class VariableDescriptor implements Descriptor {
   private final String name;
   private final String fullyQualifiedName;
   private final String annotatedType;
