@@ -66,10 +66,12 @@ def member_access():
   my_callable.non_callable = 42
   my_callable.non_callable() # FN
 
-def types_from_typeshed():
+def types_from_typeshed(foo):
   from math import acos
+  from functools import wraps
   acos(42)() # Noncompliant {{Fix this call; this expression has type float and it is not callable.}}
 # ^^^^^^^^
+  wraps(func)(foo) # OK, wraps returns a Callable
 
 def with_metaclass():
   class Factory: ...
