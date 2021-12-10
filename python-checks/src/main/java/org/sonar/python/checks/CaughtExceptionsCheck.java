@@ -83,6 +83,6 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       return true;
     }
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    return classSymbol.isOrExtends(BASE_EXCEPTION) || classSymbol.hasUnresolvedTypeHierarchy();
+    return classSymbol.canBeOrExtend(BASE_EXCEPTION);
   }
 }
