@@ -158,7 +158,7 @@ public class InferredTypes {
       case TYPE_ALIAS:
         return fromTypeshedProtobuf(type.getArgs(0));
       case CALLABLE:
-        // this should be handled as a function type
+        // this should be handled as a function type - see SONARPY-953
         return anyType();
       case UNION:
         return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
