@@ -55,3 +55,9 @@ def foo():
     foo = 1/0
   except exceptions:
     foo = 0
+
+  import smtplib
+  try:
+    ...
+  except smtplib.SMTPServerDisconnected:  # OK, SMTPServerDisconnected when Python version is unknown
+    ...
