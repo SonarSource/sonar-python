@@ -28,12 +28,12 @@ def test_module_symbol(typeshed_stdlib):
     abc_module = typeshed_stdlib.files.get("abc")
     module_symbol = symbols.ModuleSymbol(abc_module)
     assert module_symbol.fullname == "abc"
-    assert len(module_symbol.classes) == 3
+    assert len(module_symbol.classes) == 5
     assert len(module_symbol.functions) == 4
 
     pb_module = module_symbol.to_proto()
     assert pb_module.fully_qualified_name == "abc"
-    assert len(pb_module.classes) == 3
+    assert len(pb_module.classes) == 5
     assert len(pb_module.functions) == 4
 
 
