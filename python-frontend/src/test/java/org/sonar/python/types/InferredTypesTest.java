@@ -359,6 +359,7 @@ public class InferredTypesTest {
       "fully_qualified_name: \"mod.t\""
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
+    assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
   }
 
   private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
