@@ -167,7 +167,7 @@ def test_actual_module_merge(fake_module_36_38):
     assert commonclass_symbol.methods['fakemodule.CommonClass.common_method_multiple_definition'][1].valid_for == ["38"]
 
     functions_dict = merged_fakemodule_module.functions
-    assert len(functions_dict) == 4
+    assert len(functions_dict) == 5
     common_function_symbols = functions_dict['fakemodule.common_function']
     assert len(common_function_symbols) == 1
     assert common_function_symbols[0].valid_for == ["36", "38"]
@@ -266,7 +266,7 @@ def assert_abc_merged_module(merged_modules, expected_valid_for):
     assert isinstance(abc_merged_symbol, MergedModuleSymbol)
     assert abc_merged_symbol.fullname == "abc"
     assert ([c for c in abc_merged_symbol.classes]
-            == ['abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
+            == ['_typeshed.SupportsWrite', 'typing.TypeVar', 'abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
     for merged_class_proto in abc_merged_symbol.classes.values():
         assert len(merged_class_proto) == 1
         assert merged_class_proto[0].valid_for == expected_valid_for
