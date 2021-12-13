@@ -23,11 +23,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -151,5 +155,26 @@ public final class PythonTestUtils {
 
   public static FunctionSymbol functionSymbol(String... code) {
     return functionSymbol(PythonTestUtils.pythonFile("foo"), code);
+  }
+
+  public static FunctionSymbol lastFunctionSymbol(String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));;
+    return TreeUtils.getFunctionSymbolFromDef(functionDef);
+  }
+
+  public static ClassSymbol lastClassSymbol(String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder("package", PythonTestUtils.pythonFile("mod")), code);
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    return TreeUtils.getClassSymbolFromDef(classDef);
+  }
+
+  public static Symbol lastSymbolFromDef(String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
+    Tree tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF));
+    if (tree.is(Tree.Kind.CLASSDEF)) {
+      return ((ClassDef) tree).name().symbol();
+    }
+    return ((FunctionDef) tree).name().symbol();
   }
 }

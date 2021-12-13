@@ -21,10 +21,12 @@ package org.sonar.python.semantic;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -40,13 +42,16 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -112,7 +117,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       boolean isVariadic = (parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD) || parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
       hasVariadicParameter |= isVariadic;
       ParameterImpl parameter = new ParameterImpl(
-        parameterSymbol.getName(), anyType(), parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
+        parameterSymbol.getName(), anyType(), null, parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
@@ -120,6 +125,21 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isStub = true;
     isDjangoView = false;
     this.validForPythonVersions = new HashSet<>(validFor);
+  }
+
+  public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+    super(symbolName, functionDescriptor.fullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    isInstanceMethod = functionDescriptor.isInstanceMethod();
+    isAsynchronous = functionDescriptor.isAsynchronous();
+    hasDecorators = functionDescriptor.hasDecorators();
+    decorators = functionDescriptor.decorators();
+    annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
+    functionDefinitionLocation = functionDescriptor.definitionLocation();
+    parameters.addAll(functionDescriptor.parameters().stream().map(p -> new FunctionSymbolImpl.ParameterImpl(p, projectLevelSymbolTable)).collect(Collectors.toList()));
+    hasVariadicParameter = parameters.stream().anyMatch(FunctionSymbol.Parameter::isVariadic);
+    // TODO: Will no longer be true once SONARPY-647 is fixed
+    isStub = false;
   }
 
   public void setParametersWithType(ParameterList parametersList) {
@@ -188,7 +208,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId), null));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, false, parameterState, locationInFile(anyParameter, fileId), null));
       }
     }
   }
@@ -198,7 +218,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       InferredType declaredType = getParameterType(parameter, starToken);
-      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
+      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId), null));
       if (starToken != null) {
         hasVariadicParameter = true;
@@ -290,7 +310,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
-    annotatedReturnTypeName = Optional.ofNullable(returnTypeAnnotation)
+    annotatedReturnTypeName = annotatedTypeName(returnTypeAnnotation);
+  }
+
+  private String annotatedTypeName(@Nullable TypeAnnotation typeAnnotation) {
+    return Optional.ofNullable(typeAnnotation)
       .map(TypeAnnotation::expression)
       .map(SymbolImpl::getTypeSymbolFromExpression)
       .map(Symbol::fullyQualifiedName)
@@ -327,6 +351,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private InferredType declaredType;
     private SymbolsProtos.Type protobufType;
+    private final String annotatedTypeName;
     private final boolean hasDefaultValue;
     private final boolean isVariadic;
     private final boolean isKeywordOnly;
@@ -334,7 +359,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final LocationInFile location;
     private boolean hasReadDeclaredType = false;
 
-    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue,
+    ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
                   boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location, @Nullable SymbolsProtos.Type protobufType) {
       this.name = name;
       this.declaredType = declaredType;
@@ -344,6 +369,23 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
       this.protobufType = protobufType;
+      this.annotatedTypeName = annotatedTypeName;
+    }
+
+    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
+      this.name = parameterDescriptor.name();
+      this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
+      this.isVariadic = parameterDescriptor.isVariadic();
+      this.isKeywordOnly = parameterDescriptor.isKeywordOnly();
+      this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
+      this.location = parameterDescriptor.location();
+      this.annotatedTypeName = parameterDescriptor.annotatedType();
+      Symbol typeSymbol = projectLevelSymbolTable.getSymbol(parameterDescriptor.annotatedType());
+      if (typeSymbol == null && annotatedTypeName != null) {
+        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
+      }
+      // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type
+      this.declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }
 
     @Override
@@ -359,6 +401,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         hasReadDeclaredType = true;
       }
       return declaredType;
+    }
+
+    @CheckForNull
+    public String annotatedTypeName() {
+      return annotatedTypeName;
     }
 
     @Override

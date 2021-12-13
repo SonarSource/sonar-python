@@ -30,22 +30,27 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.python.index.AmbiguousDescriptor;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.VariableDescriptor;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
 
-  private final Map<String, Set<Symbol>> globalSymbolsByModuleName;
-  private Map<String, Symbol> globalSymbolsByFQN;
+  private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
+  private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
+  private Set<String> queriedSymbolNames = new HashSet<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -56,25 +61,31 @@ public class ProjectLevelSymbolTable {
   }
 
   public ProjectLevelSymbolTable() {
-    this.globalSymbolsByModuleName = new HashMap<>();
+    this.globalDescriptorsByModuleName = new HashMap<>();
   }
 
   private ProjectLevelSymbolTable(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
-    this.globalSymbolsByModuleName = new HashMap<>(globalSymbolsByModuleName);
+    this.globalDescriptorsByModuleName = new HashMap<>();
+    globalSymbolsByModuleName.entrySet().forEach(entry -> {
+      String moduleName = entry.getKey();
+      Set<Symbol> symbols = entry.getValue();
+      Set<Descriptor> globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
+      globalDescriptorsByModuleName.put(moduleName, globalDescriptors);
+    });
   }
 
   public void removeModule(String packageName, String fileName) {
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
-    globalSymbolsByModuleName.remove(fullyQualifiedModuleName);
-    // ensure globalSymbolsByFQN is re-computed
-    this.globalSymbolsByFQN = null;
+    globalDescriptorsByModuleName.remove(fullyQualifiedModuleName);
+    // ensure globalDescriptorsByFQN is re-computed
+    this.globalDescriptorsByFQN = null;
   }
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     fileInput.accept(symbolTableBuilder);
-    Set<Symbol> globalSymbols = new HashSet<>();
+    Set<Descriptor> globalDescriptors = new HashSet<>();
     for (Symbol globalVariable : fileInput.globalVariables()) {
       String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
       if (((fullyQualifiedVariableName != null) && !fullyQualifiedVariableName.startsWith(fullyQualifiedModuleName)) ||
@@ -82,49 +93,79 @@ public class ProjectLevelSymbolTable {
         // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
         continue;
       }
-      if (globalVariable.kind() == Symbol.Kind.CLASS) {
-        globalSymbols.add(((ClassSymbolImpl) globalVariable).copyWithoutUsages());
-      } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
-        globalSymbols.add(new FunctionSymbolImpl(globalVariable.name(), ((FunctionSymbol) globalVariable)));
+      if (globalVariable.is(Symbol.Kind.CLASS, Symbol.Kind.FUNCTION)) {
+        globalDescriptors.add(DescriptorUtils.descriptor(globalVariable));
       } else {
-        globalSymbols.add(new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name(), globalVariable.annotatedTypeName()));
+        String fullyQualifiedName = fullyQualifiedModuleName + "." + globalVariable.name();
+        if (globalVariable.is(Symbol.Kind.AMBIGUOUS)) {
+          globalDescriptors.add(DescriptorUtils.ambiguousDescriptor((AmbiguousSymbol) globalVariable, fullyQualifiedName));
+        } else {
+          globalDescriptors.add(new VariableDescriptor(globalVariable.name(), fullyQualifiedName, globalVariable.annotatedTypeName()));
+        }
       }
     }
-    globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);
-    if (globalSymbolsByFQN != null) {
+    globalDescriptorsByModuleName.put(fullyQualifiedModuleName, globalDescriptors);
+    if (globalDescriptorsByFQN != null) {
       // TODO: build globalSymbolsByFQN incrementally
-      addModuleToGlobalSymbolsByFQN(globalSymbols);
+      addModuleToGlobalSymbolsByFQN(globalDescriptors);
     }
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
     fileInput.accept(djangoViewsVisitor);
   }
 
-  private void addModuleToGlobalSymbolsByFQN(Set<Symbol> symbols) {
-    Map<String, Symbol> moduleSymbolsByFQN = symbols.stream()
-      .filter(symbol -> symbol.fullyQualifiedName() != null)
-      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::create));
-    globalSymbolsByFQN.putAll(moduleSymbolsByFQN);
+  private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {
+    Map<String, Descriptor> moduleDescriptorsByFQN = descriptors.stream()
+      .filter(d -> d.fullyQualifiedName() != null)
+      .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
+    globalDescriptorsByFQN.putAll(moduleDescriptorsByFQN);
+
   }
 
-  private Map<String, Symbol> globalSymbolsByFQN() {
-    if (globalSymbolsByFQN == null) {
-      globalSymbolsByFQN = globalSymbolsByModuleName.values()
+  private Map<String, Descriptor> globalDescriptorsByFQN() {
+    if (globalDescriptorsByFQN == null) {
+      globalDescriptorsByFQN = globalDescriptorsByModuleName.values()
         .stream()
         .flatMap(Collection::stream)
-        .filter(symbol -> symbol.fullyQualifiedName() != null)
-        .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::create));
+        .filter(descriptor -> descriptor.fullyQualifiedName() != null)
+        .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
     }
-    return globalSymbolsByFQN;
+    return globalDescriptorsByFQN;
   }
 
   @CheckForNull
   public Symbol getSymbol(@Nullable String fullyQualifiedName) {
-    return globalSymbolsByFQN().get(fullyQualifiedName);
+    return getSymbol(fullyQualifiedName, null);
+  }
+
+  public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName) {
+    if (fullyQualifiedName == null) return null;
+    if (queriedSymbolNames.contains(fullyQualifiedName)) {
+      // cyclic dependencies
+      queriedSymbolNames = new HashSet<>();
+      String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
+      localSymbolName =  localSymbolName != null ? localSymbolName : fqnSplitByDot[fqnSplitByDot.length - 1];
+      return new SymbolImpl(localSymbolName, fullyQualifiedName);
+    }
+    Descriptor descriptor = globalDescriptorsByFQN().get(fullyQualifiedName);
+    if (descriptor == null) {
+      queriedSymbolNames = new HashSet<>();
+      return null;
+    } else {
+      queriedSymbolNames.add(fullyQualifiedName);
+      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName);
+      queriedSymbolNames = new HashSet<>();
+      return symbol;
+    }
   }
 
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
-    return globalSymbolsByModuleName.get(moduleName);
+    Set<Descriptor> descriptors = globalDescriptorsByModuleName.get(moduleName);
+    if (descriptors == null) {
+      return null;
+    }
+    return descriptors.stream()
+      .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this)).collect(Collectors.toSet());
   }
 
   public boolean isDjangoView(@Nullable String fqn) {
