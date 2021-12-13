@@ -74,9 +74,7 @@ public class AmbiguousDescriptorTest {
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
     Descriptor fooDesc = descriptor(foo);
     Descriptor barDesc = descriptor(bar);
-    AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(new HashSet<>(Arrays.asList(fooDesc, barDesc)));
-    assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo("mod.bar");
-    assertThat(ambiguousDescriptor.name()).isEmpty();
+    assertThatThrownBy(() -> AmbiguousDescriptor.create(fooDesc, barDesc)).isInstanceOf(IllegalArgumentException.class);
   }
 
   private AmbiguousDescriptor lastAmbiguousDescriptor(String... code) {

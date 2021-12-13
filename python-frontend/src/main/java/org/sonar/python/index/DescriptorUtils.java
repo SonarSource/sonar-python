@@ -60,6 +60,7 @@ public class DescriptorUtils {
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
       .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol() ||
+        // Setting hasSuperClassWithoutDescriptor if a parent has a null FQN as it would be impossible to retrieve it without one, even if the parent exists.
         classSymbol.superClasses().stream().anyMatch(s -> s.fullyQualifiedName() == null))
       .withMetaclassFQN(((ClassSymbolImpl) classSymbol).metaclassFQN())
       .withHasDecorators(classSymbol.hasDecorators())
@@ -126,7 +127,7 @@ public class DescriptorUtils {
           .collect(Collectors.toSet());
         return new AmbiguousSymbolImpl(symbolName, descriptor.fullyQualifiedName(), alternatives);
       default:
-        throw new IllegalStateException("Unexpected descriptor kind");
+        throw new IllegalStateException(String.format("Error while creating a Symbol from a Descriptor: Unexpected descriptor kind: %s", descriptor.kind()));
     }
   }
 }

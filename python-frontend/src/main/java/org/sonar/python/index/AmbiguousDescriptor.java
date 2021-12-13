@@ -21,7 +21,6 @@ package org.sonar.python.index;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nullable;
 
@@ -68,11 +67,7 @@ public class AmbiguousDescriptor implements Descriptor {
     Descriptor firstSymbol = descriptors.iterator().next();
     String resultingSymbolName = firstSymbol.name();
     if (!descriptors.stream().map(Descriptor::name).allMatch(symbolName -> symbolName.equals(firstSymbol.name()))) {
-      if (!descriptors.stream().map(Descriptor::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
-        throw new IllegalArgumentException("Ambiguous symbol should contain descriptors with the same name");
-      }
-      // Here we have descriptors having same FQN but different local names, so we cannot assign any name to resulting value
-      resultingSymbolName = "";
+      throw new IllegalArgumentException("Ambiguous descriptor should contain descriptors with the same name.");
     }
     return new AmbiguousDescriptor(resultingSymbolName, firstSymbol.fullyQualifiedName(), flattenAmbiguousDescriptors(descriptors));
   }

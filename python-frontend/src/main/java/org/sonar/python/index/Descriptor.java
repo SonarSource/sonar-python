@@ -19,13 +19,13 @@
  */
 package org.sonar.python.index;
 
-import javax.annotation.Nullable;
+import javax.annotation.CheckForNull;
 
 public interface Descriptor {
 
   String name();
 
-  @Nullable
+  @CheckForNull
   String fullyQualifiedName();
 
   Kind kind();
