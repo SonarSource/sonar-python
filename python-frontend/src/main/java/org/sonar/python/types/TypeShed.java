@@ -187,6 +187,7 @@ public class TypeShed {
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
 
+    // TODO: improve performance - see SONARPY-955
     Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
     if (matchByName.size() == 1) {
       return matchByName.iterator().next();
