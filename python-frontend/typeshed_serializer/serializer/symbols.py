@@ -18,6 +18,7 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import logging
 import os
 from enum import Enum
 from typing import List, Union
@@ -28,6 +29,8 @@ import mypy.nodes as mpn
 from serializer.proto_out import symbols_pb2
 
 CURRENT_PATH = os.path.dirname(__file__)
+
+logger = logging.getLogger(__name__)
 
 
 class ParamKind(Enum):
@@ -176,8 +179,13 @@ class OverloadedFunctionSymbol:
             self.add_overloaded_func_definition(item)
         if len(self.definitions) < 2:
             # Consider unanalyzed items if analyzed definitions are missing
+            if len(overloaded_func_def.unanalyzed_items) > 0:
+                logger.warning(f'Overloaded function definitions of '
+                               f'"{overloaded_func_def.fullname}" are missing: falling back on unanalyzed items.')
             for item in overloaded_func_def.unanalyzed_items:
                 self.add_overloaded_func_definition(item)
+        if len(self.definitions) < 2:
+            raise RuntimeError("Overloaded function symbol should contain at least 2 definitions.")
 
     def add_overloaded_func_definition(self, item):
         if isinstance(item, mpn.FuncDef):

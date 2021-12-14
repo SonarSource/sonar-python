@@ -453,6 +453,10 @@ public class TypeShed {
         symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
       }
       if (descriptor instanceof OverloadedFunctionSymbol) {
+        if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
+          LOG.error("Overloaded function symbols should have at least two definitions.");
+          continue;
+        }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
       }
     }
