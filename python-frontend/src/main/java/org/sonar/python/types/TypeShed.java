@@ -477,12 +477,6 @@ public class TypeShed {
     if (builtinSymbol != null) {
       return builtinSymbol;
     }
-    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
-      Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
-      if (symbol != null) {
-        return symbol;
-      }
-    }
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
     Set<Symbol> symbols = symbolsForModule(moduleName);

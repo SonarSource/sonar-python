@@ -448,6 +448,16 @@ public class TypeShedTest {
     setPythonVersions(PythonVersionUtils.allVersions());
   }
 
+  @Test
+  public void symbolWithFQN_should_be_consistent() {
+    // smtplib imports typing.Sequence only in Python3, hence typing.Sequence has kind CLASS
+    TypeShed.symbolsForModule("smtplib");
+    Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
+    assertThat(sequence.kind()).isEqualTo(Kind.AMBIGUOUS);
+    Map<String, Symbol> typing = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(sequence).isEqualTo(typing.get("Sequence"));
+  }
+
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);
