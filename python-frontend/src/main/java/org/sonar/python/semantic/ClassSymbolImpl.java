@@ -42,12 +42,10 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.python.index.ClassDescriptor;
-import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
-import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
 import static org.sonar.python.types.TypeShed.normalizedFqn;
@@ -103,19 +101,9 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     setKind(Kind.CLASS);
   }
 
-  public ClassSymbolImpl(ClassDescriptor classDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+  public ClassSymbolImpl(ClassDescriptor classDescriptor, String symbolName) {
     super(symbolName, classDescriptor.fullyQualifiedName());
     setKind(Kind.CLASS);
-    superClasses.addAll(classDescriptor.superClasses().stream().map(superClassFqn -> {
-      Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn);
-      return symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
-    }).collect(Collectors.toList()));
-    members.addAll(classDescriptor.members().stream().map(m -> DescriptorUtils.symbolFromDescriptor(m, projectLevelSymbolTable)).collect(Collectors.toList()));
-    members.forEach(m -> {
-      if (m instanceof FunctionSymbolImpl) {
-        ((FunctionSymbolImpl) m).setOwner(this);
-      }
-    });
     classDefinitionLocation = classDescriptor.definitionLocation();
     hasDecorators = classDescriptor.hasDecorators();
     hasMetaClass = classDescriptor.hasMetaClass();

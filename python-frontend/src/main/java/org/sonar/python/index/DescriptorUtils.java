@@ -19,7 +19,10 @@
  */
 package org.sonar.python.index;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,11 +31,16 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.types.DeclaredType;
+
+import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
+import static org.sonar.python.types.InferredTypes.anyType;
 
 public class DescriptorUtils {
 
@@ -108,26 +116,87 @@ public class DescriptorUtils {
   }
 
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
-    return symbolFromDescriptor(descriptor, projectLevelSymbolTable, null);
+    return symbolFromDescriptor(descriptor, projectLevelSymbolTable, null, new HashMap<>());
   }
 
-  public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable String localSymbolName) {
+  public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
+    @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
     // The symbol generated from the descriptor will not have the descriptor name if an alias (localSymbolName) is defined
     String symbolName = localSymbolName != null ? localSymbolName : descriptor.name();
     switch (descriptor.kind()) {
       case CLASS:
-        return new ClassSymbolImpl((ClassDescriptor) descriptor, projectLevelSymbolTable, symbolName);
+        return createClassSymbol(descriptor, projectLevelSymbolTable, createdSymbols, symbolName);
       case FUNCTION:
-        return new FunctionSymbolImpl((FunctionDescriptor) descriptor, projectLevelSymbolTable, symbolName);
+        return createFunctionSymbol((FunctionDescriptor) descriptor, projectLevelSymbolTable, createdSymbols, symbolName);
       case VARIABLE:
         return new SymbolImpl(symbolName, descriptor.fullyQualifiedName());
       case AMBIGUOUS:
         Set<Symbol> alternatives = ((AmbiguousDescriptor) descriptor).alternatives().stream()
-          .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName))
+          .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName, createdSymbols))
           .collect(Collectors.toSet());
         return new AmbiguousSymbolImpl(symbolName, descriptor.fullyQualifiedName(), alternatives);
       default:
         throw new IllegalStateException(String.format("Error while creating a Symbol from a Descriptor: Unexpected descriptor kind: %s", descriptor.kind()));
     }
+  }
+
+  private static ClassSymbolImpl createClassSymbol(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols, String symbolName) {
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl((ClassDescriptor) descriptor, symbolName);
+    createdSymbols.put(descriptor.fullyQualifiedName(), classSymbol);
+    addSuperClasses(classSymbol, classDescriptor, projectLevelSymbolTable, createdSymbols);
+    addMembers(classSymbol, classDescriptor, projectLevelSymbolTable, createdSymbols);
+    return classSymbol;
+  }
+
+  private static void addMembers(ClassSymbolImpl classSymbol, ClassDescriptor classDescriptor,
+    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+    classSymbol.addMembers(classDescriptor.members().stream()
+      .map(memberFqn -> DescriptorUtils.symbolFromDescriptor(memberFqn, projectLevelSymbolTable, null, createdSymbols))
+      .map(member -> {
+        if (member instanceof FunctionSymbolImpl) {
+          ((FunctionSymbolImpl) member).setOwner(classSymbol);
+        }
+        return member;
+      })
+      .collect(Collectors.toList()));
+  }
+
+  private static void addSuperClasses(ClassSymbolImpl classSymbol, ClassDescriptor classDescriptor,
+    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+    classDescriptor.superClasses().stream()
+      .map(superClassFqn -> {
+          if (createdSymbols.containsKey(superClassFqn)) {
+            return createdSymbols.get(superClassFqn);
+          }
+          Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn);
+          return symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
+        }
+      )
+      .forEach(classSymbol::addSuperClass);
+  }
+
+  private static FunctionSymbolImpl createFunctionSymbol(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
+    Map<String, Symbol> createdSymbols, String symbolName) {
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDescriptor, symbolName);
+    addParameters(functionSymbol, functionDescriptor, projectLevelSymbolTable, createdSymbols);
+    return functionSymbol;
+  }
+
+  private static void addParameters(FunctionSymbolImpl functionSymbol, FunctionDescriptor functionDescriptor,
+    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+    functionDescriptor.parameters().stream().map(p -> {
+      FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(p);
+      Symbol existingSymbol = createdSymbols.get(p.annotatedType());
+      Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(p.annotatedType());
+      String annotatedTypeName = parameter.annotatedTypeName();
+      if (typeSymbol == null && annotatedTypeName != null) {
+        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
+      }
+      // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type
+      InferredType declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
+      parameter.setDeclaredType(declaredType);
+      return parameter;
+    }).forEach(functionSymbol::addParameter);
   }
 }

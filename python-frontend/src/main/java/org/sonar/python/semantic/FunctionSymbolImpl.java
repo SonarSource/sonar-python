@@ -21,12 +21,10 @@ package org.sonar.python.semantic;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -44,14 +42,12 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
-import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -127,7 +123,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.validForPythonVersions = new HashSet<>(validFor);
   }
 
-  public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable, String symbolName) {
+  public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, String symbolName) {
     super(symbolName, functionDescriptor.fullyQualifiedName());
     setKind(Kind.FUNCTION);
     isInstanceMethod = functionDescriptor.isInstanceMethod();
@@ -136,8 +132,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     decorators = functionDescriptor.decorators();
     annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
     functionDefinitionLocation = functionDescriptor.definitionLocation();
-    parameters.addAll(functionDescriptor.parameters().stream().map(p -> new FunctionSymbolImpl.ParameterImpl(p, projectLevelSymbolTable)).collect(Collectors.toList()));
-    hasVariadicParameter = parameters.stream().anyMatch(FunctionSymbol.Parameter::isVariadic);
     // TODO: Will no longer be true once SONARPY-647 is fixed
     isStub = false;
   }
@@ -145,6 +139,13 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   public void setParametersWithType(ParameterList parametersList) {
     this.parameters.clear();
     createParameterNames(parametersList.all(), functionDefinitionLocation == null ? null : functionDefinitionLocation.fileId());
+  }
+
+  public void addParameter(ParameterImpl parameter) {
+    this.parameters.add(parameter);
+    if (parameter.isVariadic()) {
+      this.hasVariadicParameter = true;
+    }
   }
 
   FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
@@ -372,7 +373,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.annotatedTypeName = annotatedTypeName;
     }
 
-    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
+    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor) {
       this.name = parameterDescriptor.name();
       this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
       this.isVariadic = parameterDescriptor.isVariadic();
@@ -380,12 +381,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
       this.location = parameterDescriptor.location();
       this.annotatedTypeName = parameterDescriptor.annotatedType();
-      Symbol typeSymbol = projectLevelSymbolTable.getSymbol(parameterDescriptor.annotatedType());
-      if (typeSymbol == null && annotatedTypeName != null) {
-        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
-      }
-      // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type
-      this.declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }
 
     @Override
@@ -401,6 +396,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         hasReadDeclaredType = true;
       }
       return declaredType;
+    }
+
+    public void setDeclaredType(InferredType type) {
+      this.declaredType = type;
     }
 
     @CheckForNull

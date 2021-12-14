@@ -152,7 +152,7 @@ public class ProjectLevelSymbolTable {
       return null;
     } else {
       queriedSymbolNames.add(fullyQualifiedName);
-      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName);
+      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, new HashMap<>());
       queriedSymbolNames = new HashSet<>();
       return symbol;
     }

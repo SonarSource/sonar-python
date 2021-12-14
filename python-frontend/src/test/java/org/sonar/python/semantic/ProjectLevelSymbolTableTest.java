@@ -39,7 +39,9 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -612,7 +614,7 @@ public class ProjectLevelSymbolTableTest {
     FileInput fileInput = parseWithoutSymbols("class A(A): pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
-    assertThat(a.superClasses()).extracting("name").containsExactly("A");
+    assertThat(a.superClasses()).containsExactly(a);
   }
 
   @Test
@@ -704,6 +706,23 @@ public class ProjectLevelSymbolTableTest {
     );
     Set<Symbol> globalSymbols = globalSymbols(tree, "");
     assertThat(globalSymbols).isEmpty();
+  }
+
+  @Test
+  public void class_with_method_parameter_of_same_type() {
+    FileInput tree = parseWithoutSymbols(
+      "class Document:",
+             "  def my_method(param: Document): ..."
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).hasSize(1);
+    ClassSymbol classSymbol = (ClassSymbol) globalSymbols.stream().findFirst().get();
+    assertThat(classSymbol.declaredMembers()).hasSize(1);
+    FunctionSymbol functionSymbol = (FunctionSymbol) classSymbol.declaredMembers().stream().findFirst().get();
+    assertThat(functionSymbol.parameters()).hasSize(1);
+    FunctionSymbol.Parameter parameter = functionSymbol.parameters().get(0);
+    DeclaredType declaredType = (DeclaredType) parameter.declaredType();
+    assertThat(declaredType.getTypeClass()).isSameAs(classSymbol);
   }
 
   @Test
