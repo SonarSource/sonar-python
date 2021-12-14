@@ -455,7 +455,7 @@ public class TypeShedTest {
     Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
     assertThat(sequence.kind()).isEqualTo(Kind.AMBIGUOUS);
     Map<String, Symbol> typing = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
-    assertThat(sequence).isEqualTo(typing.get("Sequence"));
+    assertThat(sequence).isSameAs(typing.get("Sequence"));
   }
 
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {

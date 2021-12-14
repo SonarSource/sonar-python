@@ -479,11 +479,7 @@ public class TypeShed {
     }
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
-    Set<Symbol> symbols = symbolsForModule(moduleName);
-    if (!symbols.isEmpty()) {
-      return typeShedSymbols.get(moduleName).get(fullyQualifiedName);
-    }
-    return null;
+    return symbolWithFQN(moduleName, fullyQualifiedName);
   }
 
   public static String normalizedFqn(String fqn) {
