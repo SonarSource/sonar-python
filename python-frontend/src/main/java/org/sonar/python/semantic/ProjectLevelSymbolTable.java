@@ -50,7 +50,6 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
-  private Set<String> queriedSymbolNames = new HashSet<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -143,23 +142,8 @@ public class ProjectLevelSymbolTable {
 
   public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
     if (fullyQualifiedName == null) return null;
-    if (queriedSymbolNames.contains(fullyQualifiedName)) {
-      // cyclic dependencies
-      queriedSymbolNames = new HashSet<>();
-      String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
-      localSymbolName =  localSymbolName != null ? localSymbolName : fqnSplitByDot[fqnSplitByDot.length - 1];
-      return new SymbolImpl(localSymbolName, fullyQualifiedName);
-    }
     Descriptor descriptor = globalDescriptorsByFQN().get(fullyQualifiedName);
-    if (descriptor == null) {
-      queriedSymbolNames = new HashSet<>();
-      return null;
-    } else {
-      queriedSymbolNames.add(fullyQualifiedName);
-      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, createdSymbols);
-      queriedSymbolNames = new HashSet<>();
-      return symbol;
-    }
+    return descriptor == null ? null : DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, createdSymbols);
   }
 
   @CheckForNull
