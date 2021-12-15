@@ -187,6 +187,7 @@ public class TypeShed {
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
 
+    // TODO: improve performance - see SONARPY-955
     Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
     if (matchByName.size() == 1) {
       return matchByName.iterator().next();
@@ -477,19 +478,9 @@ public class TypeShed {
     if (builtinSymbol != null) {
       return builtinSymbol;
     }
-    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
-      Symbol symbol = symbolsByFqn.get(fullyQualifiedName);
-      if (symbol != null) {
-        return symbol;
-      }
-    }
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
-    Set<Symbol> symbols = symbolsForModule(moduleName);
-    if (!symbols.isEmpty()) {
-      return typeShedSymbols.get(moduleName).get(fullyQualifiedName);
-    }
-    return null;
+    return symbolWithFQN(moduleName, fullyQualifiedName);
   }
 
   public static String normalizedFqn(String fqn) {
