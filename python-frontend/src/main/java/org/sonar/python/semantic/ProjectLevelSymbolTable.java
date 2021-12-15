@@ -152,7 +152,7 @@ public class ProjectLevelSymbolTable {
       return null;
     } else {
       queriedSymbolNames.add(fullyQualifiedName);
-      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName);
+      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, new HashMap<>());
       queriedSymbolNames = new HashSet<>();
       return symbol;
     }
@@ -161,11 +161,12 @@ public class ProjectLevelSymbolTable {
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
     Set<Descriptor> descriptors = globalDescriptorsByModuleName.get(moduleName);
+    Map<String, Symbol> createdSymbols = new HashMap<>();
     if (descriptors == null) {
       return null;
     }
     return descriptors.stream()
-      .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this)).collect(Collectors.toSet());
+      .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this, null, createdSymbols)).collect(Collectors.toSet());
   }
 
   public boolean isDjangoView(@Nullable String fqn) {

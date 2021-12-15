@@ -154,7 +154,8 @@ public class DeclaredType implements InferredType {
     return str.toString();
   }
 
-  Symbol getTypeClass() {
+  // Visible for testing
+  public Symbol getTypeClass() {
     if (typeClass == null) {
       // the value is recomputed each time instead of storing it to avoid consistency problem when 'sonar.python.version' property is changed
       return TypeShed.typeShedClass(builtinFullyQualifiedName);
