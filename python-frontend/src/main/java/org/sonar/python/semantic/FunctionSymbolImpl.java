@@ -110,10 +110,19 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       ParameterState parameterState = new ParameterState();
       parameterState.positionalOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
       parameterState.keywordOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.KEYWORD_ONLY;
-      boolean isVariadic = (parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD) || parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
-      hasVariadicParameter |= isVariadic;
-      ParameterImpl parameter = new ParameterImpl(
-        parameterSymbol.getName(), anyType(), null, parameterSymbol.getHasDefault(), isVariadic, parameterState, null, parameterSymbol.getTypeAnnotation());
+      boolean isKeywordVariadic = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_KEYWORD;
+      boolean isPositionalVariadic = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
+      hasVariadicParameter |= isKeywordVariadic || isPositionalVariadic;
+      InferredType declaredType;
+      if (isPositionalVariadic) {
+        declaredType = InferredTypes.TUPLE;
+      } else if (isKeywordVariadic) {
+        declaredType = InferredTypes.DICT;
+      } else {
+        declaredType = anyType();
+      }
+      ParameterImpl parameter = new ParameterImpl(parameterSymbol.getName(), declaredType, null, parameterSymbol.getHasDefault(), parameterState,
+        isKeywordVariadic, isPositionalVariadic, parameterSymbol.getTypeAnnotation(), null);
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
@@ -209,7 +218,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, false, parameterState, locationInFile(anyParameter, fileId), null));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, parameterState, false, false, null, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -218,9 +227,28 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      InferredType declaredType = getParameterType(parameter, starToken);
+      InferredType declaredType = null;
+      boolean isPositionalVariadic = false;
+      boolean isKeywordVariadic = false;
+      if (starToken != null) {
+        // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+        hasVariadicParameter = true;
+        if ("*".equals(starToken.value())) {
+          // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
+          isPositionalVariadic = true;
+          declaredType = InferredTypes.TUPLE;
+        }
+        if ("**".equals(starToken.value())) {
+          //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
+          isKeywordVariadic = true;
+          declaredType = InferredTypes.DICT;
+        }
+      }
+      if (declaredType == null) {
+        declaredType = getParameterType(parameter);
+      }
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
-        starToken != null, parameterState, locationInFile(parameter, fileId), null));
+        parameterState, isKeywordVariadic, isPositionalVariadic, null, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -237,18 +265,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
   }
 
-  private InferredType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable Token starToken) {
-    if (starToken != null) {
-      // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
-      if ("*".equals(starToken.value())) {
-        // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
-        return InferredTypes.TUPLE;
-      }
-      if ("**".equals(starToken.value())) {
-        //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
-        return InferredTypes.DICT;
-      }
-    }
+  private InferredType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
     InferredType declaredType = InferredTypes.anyType();
     TypeAnnotation typeAnnotation = parameter.typeAnnotation();
     if (typeAnnotation != null) {
@@ -354,18 +371,20 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private SymbolsProtos.Type protobufType;
     private final String annotatedTypeName;
     private final boolean hasDefaultValue;
-    private final boolean isVariadic;
+    private final boolean isKeywordVariadic;
+    private final boolean isPositionalVariadic;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
     private boolean hasReadDeclaredType = false;
 
     ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
-                  boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location, @Nullable SymbolsProtos.Type protobufType) {
+      ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
       this.name = name;
       this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
-      this.isVariadic = isVariadic;
+      this.isKeywordVariadic = isKeywordVariadic;
+      this.isPositionalVariadic = isPositionalVariadic;
       this.isKeywordOnly = parameterState.keywordOnly;
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
@@ -376,7 +395,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor) {
       this.name = parameterDescriptor.name();
       this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
-      this.isVariadic = parameterDescriptor.isVariadic();
+      this.isPositionalVariadic = parameterDescriptor.isPositionalVariadic();
+      this.isKeywordVariadic = parameterDescriptor.isKeywordVariadic();
       this.isKeywordOnly = parameterDescriptor.isKeywordOnly();
       this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
       this.location = parameterDescriptor.location();
@@ -414,7 +434,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
     @Override
     public boolean isVariadic() {
-      return isVariadic;
+      return isKeywordVariadic || isPositionalVariadic;
     }
 
     @Override
@@ -425,6 +445,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public boolean isPositionalOnly() {
       return isPositionalOnly;
+    }
+
+    @Override
+    public boolean isKeywordVariadic() {
+      return isKeywordVariadic;
+    }
+
+    @Override
+    public boolean isPositionalVariadic() {
+      return isPositionalVariadic;
     }
 
     @CheckForNull

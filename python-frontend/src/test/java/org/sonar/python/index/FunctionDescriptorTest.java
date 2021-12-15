@@ -88,9 +88,11 @@ public class FunctionDescriptorTest {
 
   @Test
   public void variadicParameter() {
-    FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(*x): ...");
-    FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
-    assertThat(parameter.isVariadic()).isTrue();
+    FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(*x, **y): ...");
+    FunctionDescriptor.Parameter parameter1 = functionDescriptor.parameters().get(0);
+    FunctionDescriptor.Parameter parameter2 = functionDescriptor.parameters().get(1);
+    assertThat(parameter1.isVariadic()).isTrue();
+    assertThat(parameter2.isVariadic()).isTrue();
   }
 
   @Test

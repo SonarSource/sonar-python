@@ -104,17 +104,19 @@ public class FunctionDescriptor implements Descriptor {
     private final String name;
     private final String annotatedType;
     private final boolean hasDefaultValue;
-    private final boolean isVariadic;
+    private final boolean isKeywordVariadic;
+    private final boolean isPositionalVariadic;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
 
     public Parameter(@Nullable String name, @Nullable String annotatedType, boolean hasDefaultValue,
-      boolean isVariadic, boolean isKeywordOnly, boolean isPositionalOnly, @Nullable LocationInFile location) {
+                     boolean isKeywordOnly, boolean isPositionalOnly, boolean isPositionalVariadic, boolean isKeywordVariadic, @Nullable LocationInFile location) {
       this.name = name;
       this.annotatedType = annotatedType;
       this.hasDefaultValue = hasDefaultValue;
-      this.isVariadic = isVariadic;
+      this.isKeywordVariadic = isKeywordVariadic;
+      this.isPositionalVariadic = isPositionalVariadic;
       this.isKeywordOnly = isKeywordOnly;
       this.isPositionalOnly = isPositionalOnly;
       this.location = location;
@@ -134,7 +136,7 @@ public class FunctionDescriptor implements Descriptor {
     }
 
     public boolean isVariadic() {
-      return isVariadic;
+      return isKeywordVariadic || isPositionalVariadic;
     }
 
     public boolean isKeywordOnly() {
@@ -143,6 +145,14 @@ public class FunctionDescriptor implements Descriptor {
 
     public boolean isPositionalOnly() {
       return isPositionalOnly;
+    }
+
+    public boolean isKeywordVariadic() {
+      return isKeywordVariadic;
+    }
+
+    public boolean isPositionalVariadic() {
+      return isPositionalVariadic;
     }
 
     @CheckForNull

@@ -69,6 +69,8 @@ public interface FunctionSymbol extends Symbol {
     boolean isVariadic();
     boolean isKeywordOnly();
     boolean isPositionalOnly();
+    boolean isKeywordVariadic();
+    boolean isPositionalVariadic();
     @CheckForNull
     LocationInFile location();
   }
