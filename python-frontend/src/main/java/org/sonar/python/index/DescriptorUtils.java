@@ -95,7 +95,7 @@ public class DescriptorUtils {
   }
 
   public static AmbiguousDescriptor ambiguousDescriptor(AmbiguousSymbol ambiguousSymbol, @Nullable String overriddenFQN) {
-    String fullyQualifiedName = overriddenFQN != null ? overriddenFQN : ambiguousSymbol.fullyQualifiedName();
+                                                        String fullyQualifiedName = overriddenFQN != null ? overriddenFQN : ambiguousSymbol.fullyQualifiedName();
     Set<Descriptor> alternatives = ambiguousSymbol.alternatives().stream()
       .map(DescriptorUtils::descriptor)
       .collect(Collectors.toSet());
@@ -115,7 +115,7 @@ public class DescriptorUtils {
   }
 
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
-    @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
+                                            @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
     // The symbol generated from the descriptor will not have the descriptor name if an alias (localSymbolName) is defined
     if (createdSymbols.containsKey(descriptor.fullyQualifiedName())) {
       return createdSymbols.get(descriptor.fullyQualifiedName());
@@ -148,7 +148,7 @@ public class DescriptorUtils {
   }
 
   private static void addMembers(ClassSymbolImpl classSymbol, ClassDescriptor classDescriptor,
-    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+                                 ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
     classSymbol.addMembers(classDescriptor.members().stream()
       .map(memberFqn -> DescriptorUtils.symbolFromDescriptor(memberFqn, projectLevelSymbolTable, null, createdSymbols))
       .map(member -> {
@@ -161,7 +161,7 @@ public class DescriptorUtils {
   }
 
   private static void addSuperClasses(ClassSymbolImpl classSymbol, ClassDescriptor classDescriptor,
-    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+                                      ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
     classDescriptor.superClasses().stream()
       .map(superClassFqn -> {
           if (createdSymbols.containsKey(superClassFqn)) {
@@ -177,14 +177,14 @@ public class DescriptorUtils {
   }
 
   private static FunctionSymbolImpl createFunctionSymbol(FunctionDescriptor functionDescriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
-    Map<String, Symbol> createdSymbols, String symbolName) {
+                                                         Map<String, Symbol> createdSymbols, String symbolName) {
     FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDescriptor, symbolName);
     addParameters(functionSymbol, functionDescriptor, projectLevelSymbolTable, createdSymbols);
     return functionSymbol;
   }
 
   private static void addParameters(FunctionSymbolImpl functionSymbol, FunctionDescriptor functionDescriptor,
-    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+                                    ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
     functionDescriptor.parameters().stream().map(p -> {
       FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(p);
       Symbol existingSymbol = createdSymbols.get(p.annotatedType());
