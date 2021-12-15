@@ -20,7 +20,6 @@
 package org.sonar.python.index;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -113,10 +112,6 @@ public class DescriptorUtils {
       parameter.isPositionalOnly(),
       parameter.location()
     )).collect(Collectors.toList());
-  }
-
-  public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable) {
-    return symbolFromDescriptor(descriptor, projectLevelSymbolTable, null, new HashMap<>());
   }
 
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
