@@ -700,6 +700,22 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  public void symbols_from_module_should_be_the_same() {
+    FileInput tree = parseWithoutSymbols(
+      "class A: ...",
+             "class B(A): ..."
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+    Set<Symbol> mod = projectLevelSymbolTable.getSymbolsFromModule("mod");
+    assertThat(mod).extracting(Symbol::name).containsExactlyInAnyOrder("A", "B");
+    ClassSymbol classSymbolA = (ClassSymbol) mod.stream().filter(s -> s.fullyQualifiedName().equals("mod.A")).findFirst().get();
+    ClassSymbol classSymbolB = (ClassSymbol) mod.stream().filter(s -> s.fullyQualifiedName().equals("mod.B")).findFirst().get();
+    ClassSymbol superClass = (ClassSymbol) classSymbolB.superClasses().get(0);
+    assertThat(superClass).isSameAs(classSymbolA);
+  }
+
+  @Test
   public void imported_typeshed_symbols_are_not_exported() {
     FileInput tree = parseWithoutSymbols(
       "from html import escape"

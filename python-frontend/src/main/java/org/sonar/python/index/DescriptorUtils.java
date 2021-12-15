@@ -122,6 +122,9 @@ public class DescriptorUtils {
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
     @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
     // The symbol generated from the descriptor will not have the descriptor name if an alias (localSymbolName) is defined
+    if (createdSymbols.containsKey(descriptor.fullyQualifiedName())) {
+      return createdSymbols.get(descriptor.fullyQualifiedName());
+    }
     String symbolName = localSymbolName != null ? localSymbolName : descriptor.name();
     switch (descriptor.kind()) {
       case CLASS:
@@ -170,7 +173,9 @@ public class DescriptorUtils {
             return createdSymbols.get(superClassFqn);
           }
           Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn);
-          return symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
+          symbol = symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
+          createdSymbols.put(superClassFqn, symbol);
+          return symbol;
         }
       )
       .forEach(classSymbol::addSuperClass);
