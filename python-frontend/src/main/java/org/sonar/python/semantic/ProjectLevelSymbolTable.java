@@ -138,6 +138,10 @@ public class ProjectLevelSymbolTable {
   }
 
   public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName) {
+    return getSymbol(fullyQualifiedName, localSymbolName, new HashMap<>());
+  }
+
+  public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
     if (fullyQualifiedName == null) return null;
     if (queriedSymbolNames.contains(fullyQualifiedName)) {
       // cyclic dependencies
@@ -152,7 +156,7 @@ public class ProjectLevelSymbolTable {
       return null;
     } else {
       queriedSymbolNames.add(fullyQualifiedName);
-      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, new HashMap<>());
+      Symbol symbol = DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, createdSymbols);
       queriedSymbolNames = new HashSet<>();
       return symbol;
     }

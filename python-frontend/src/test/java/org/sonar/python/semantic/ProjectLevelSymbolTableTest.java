@@ -683,7 +683,7 @@ public class ProjectLevelSymbolTableTest {
     ClassSymbolImpl parentOfImportedA = (ClassSymbolImpl) importedA.superClasses().iterator().next();
     assertThat(parentOfImportedA.superClasses())
       .extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactly(tuple(Symbol.Kind.OTHER, "foo.A"));
+      .containsExactly(tuple(Symbol.Kind.CLASS, "foo.A"));
   }
 
   @Test
