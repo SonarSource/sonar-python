@@ -414,7 +414,6 @@ public class TypeShed {
     return deserializedSymbols;
   }
 
-  // TODO: to be checked when implementing SONARPY-941
   private static Symbol disambiguateSymbolsWithSameName(String name, Set<Symbol> symbols, String moduleFqn) {
     if (symbols.size() > 1) {
       if (haveAllTheSameFqn(symbols) && !isBuiltinToDisambiguate(moduleFqn, name)) {
