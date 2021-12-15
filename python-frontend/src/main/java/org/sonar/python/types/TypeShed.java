@@ -453,10 +453,8 @@ public class TypeShed {
         symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
       }
       if (descriptor instanceof OverloadedFunctionSymbol) {
-        // FIXME: SONARPY-942
         if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
-          LOG.error("Overloaded function symbols should have at least two definitions");
-          continue;
+          throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
       }
