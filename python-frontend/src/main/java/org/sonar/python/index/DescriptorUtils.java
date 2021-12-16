@@ -167,7 +167,7 @@ public class DescriptorUtils {
           if (createdSymbols.containsKey(superClassFqn)) {
             return createdSymbols.get(superClassFqn);
           }
-          Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn);
+          Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn, null, createdSymbols);
           symbol = symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
           createdSymbols.put(superClassFqn, symbol);
           return symbol;
@@ -188,7 +188,7 @@ public class DescriptorUtils {
     functionDescriptor.parameters().stream().map(p -> {
       FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(p);
       Symbol existingSymbol = createdSymbols.get(p.annotatedType());
-      Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(p.annotatedType());
+      Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(p.annotatedType(), null, createdSymbols);
       String annotatedTypeName = parameter.annotatedTypeName();
       if (typeSymbol == null && annotatedTypeName != null) {
         typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);

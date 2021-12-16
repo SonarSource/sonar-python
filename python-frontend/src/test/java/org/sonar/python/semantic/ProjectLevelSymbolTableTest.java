@@ -683,7 +683,7 @@ public class ProjectLevelSymbolTableTest {
     ClassSymbolImpl parentOfImportedA = (ClassSymbolImpl) importedA.superClasses().iterator().next();
     assertThat(parentOfImportedA.superClasses())
       .extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactly(tuple(Symbol.Kind.OTHER, "foo.A"));
+      .containsExactly(tuple(Symbol.Kind.CLASS, "foo.A"));
   }
 
   @Test
@@ -739,6 +739,40 @@ public class ProjectLevelSymbolTableTest {
     FunctionSymbol.Parameter parameter = functionSymbol.parameters().get(0);
     DeclaredType declaredType = (DeclaredType) parameter.declaredType();
     assertThat(declaredType.getTypeClass()).isSameAs(classSymbol);
+  }
+
+  @Test
+  public void loop_in_inheritance_with_method_paraneters_of_same_type() {
+    String[] foo = {
+      "from bar import B",
+      "class A(B):",
+      "  def my_A_method(param: A): ...",
+      "  def my_A_other_method(param: B): ..."
+    };
+    String[] bar = {
+      "from foo import A",
+      "class B(A):",
+      "  def my_B_method(param: A): ...",
+      "  def my_B_other_method(param: B): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
+
+    Set<Symbol> fooSymbols = projectSymbolTable.getSymbolsFromModule("foo");
+    ClassSymbol classSymbolA = (ClassSymbol) fooSymbols.stream().filter(s -> s.fullyQualifiedName().equals("foo.A")).findFirst().get();
+    ClassSymbol classSymbolB = (ClassSymbol) classSymbolA.superClasses().get(0);
+
+    assertThat(classSymbolB.superClasses()).containsExactly(classSymbolA);
+    assertThat(classSymbolA.declaredMembers().stream()
+      .map(FunctionSymbol.class::cast)
+      .flatMap(f -> f.parameters().stream()
+        .map(FunctionSymbol.Parameter::declaredType)
+        .map(DeclaredType.class::cast))
+      .collect(Collectors.toList()))
+      .extracting(DeclaredType::getTypeClass)
+      .containsExactlyInAnyOrder(classSymbolA, classSymbolB);
   }
 
   @Test
