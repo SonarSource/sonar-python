@@ -28,7 +28,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
@@ -115,7 +114,7 @@ public class TypeShedTest {
 
   @Test
   public void typing_module() {
-    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = symbolsForModule("typing");
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Kind.CLASS);
@@ -125,25 +124,25 @@ public class TypeShedTest {
 
   @Test
   public void stdlib_symbols() {
-    Map<String, Symbol> mathSymbols = TypeShed.symbolsForModule("math").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> mathSymbols = symbolsForModule("math");
     Symbol acosSymbol = mathSymbols.get("acos");
     assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
     assertThat(TypeShed.symbolWithFQN("math", "math.acos")).isSameAs(acosSymbol);
     assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> threadingSymbols = TypeShed.symbolsForModule("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> threadingSymbols = symbolsForModule("threading");
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Kind.CLASS);
     assertThat(threadingSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> imaplibSymbols = TypeShed.symbolsForModule("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> imaplibSymbols = symbolsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
     assertThat(imaplibSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
   }
 
   @Test
   public void third_party_symbols() {
-    Map<String, Symbol> emojiSymbols = TypeShed.symbolsForModule("emoji").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> emojiSymbols = symbolsForModule("emoji");
     Symbol emojizeSymbol = emojiSymbols.get("emojize");
     assertThat(emojizeSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
@@ -166,7 +165,7 @@ public class TypeShedTest {
 
   @Test
   public void package_symbols() {
-    Map<String, Symbol> cursesSymbols = TypeShed.symbolsForModule("curses").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> cursesSymbols = symbolsForModule("curses");
     Symbol wrapperSymbol = cursesSymbols.get("wrapper");
     assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) wrapperSymbol).declaredReturnType()).isEqualTo(AnyType.ANY);
@@ -175,7 +174,7 @@ public class TypeShedTest {
 
   @Test
   public void package_submodules_symbols() {
-    Map<String, Symbol> asciiSymbols = TypeShed.symbolsForModule("curses.ascii").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> asciiSymbols = symbolsForModule("curses.ascii");
     Symbol isalnumSymbol = asciiSymbols.get("isalnum");
     assertThat(isalnumSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) isalnumSymbol).declaredReturnType().canOnlyBe("bool")).isTrue();
@@ -184,7 +183,7 @@ public class TypeShedTest {
 
   @Test
   public void package_inner_submodules_symbols() {
-    Map<String, Symbol> driverSymbols = TypeShed.symbolsForModule("lib2to3.pgen2.driver").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> driverSymbols = symbolsForModule("lib2to3.pgen2.driver");
     Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
     // There is a small difference between Python 2 and Python 3 symbols: Python 2 uses Text instead of str
     assertThat(loadGrammarSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
@@ -193,7 +192,7 @@ public class TypeShedTest {
 
   @Test
   public void package_relative_import() {
-    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> osSymbols = symbolsForModule("os");
     // TODO: Add imported symbols SONARPY-938
     // Symbol sysSymbol = osSymbols.get("sys");
     // assertThat(sysSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
@@ -202,7 +201,7 @@ public class TypeShedTest {
     assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
     assertThat(timesResult.fullyQualifiedName()).isEqualTo("posix.times_result");
 
-    Map<String, Symbol> requestsSymbols = TypeShed.symbolsForModule("requests").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> requestsSymbols = symbolsForModule("requests");
     Symbol requestSymbol = requestsSymbols.get("request");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");
@@ -210,17 +209,16 @@ public class TypeShedTest {
 
   @Test
   public void package_member_fqn_points_to_original_fqn() {
-    Map<String, Symbol> symbols = TypeShed.symbolsForModule("flask").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = symbolsForModule("flask");
     Symbol targetSymbol = symbols.get("Response");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
     assertThat(TypeShed.symbolWithFQN("flask", "flask.Response")).isSameAs(targetSymbol);
   }
 
-  // TODO: there shouldn't be more than two symbols with the same name SONARPY-941
-  // TODO: FileIO is ambiguous and it has FQN null
-  @Ignore
+
+  @Test
   public void package_member_ambigous_symbol_common_fqn() {
-    Map<String, Symbol> symbols = TypeShed.symbolsForModule("io").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = symbolsForModule("io");
     Symbol targetSymbol = symbols.get("FileIO");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("io.FileIO");
     assertThat(TypeShed.symbolWithFQN("io", "io.FileIO")).isSameAs(targetSymbol);
@@ -228,9 +226,8 @@ public class TypeShedTest {
 
   @Test
   public void two_exported_symbols_with_same_local_names() {
-    // TODO: there shouldn't be more than two symbols with the same name SONARPY-941
-    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
-    Map<String, Symbol> posixSymbols = TypeShed.symbolsForModule("posix").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> osSymbols = symbolsForModule("os");
+    Map<String, Symbol> posixSymbols = symbolsForModule("posix");
     Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
     Symbol setupSymbolFromOs = osSymbols.get("stat_result");
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.CLASS);
@@ -239,7 +236,7 @@ public class TypeShedTest {
 
   @Test
   public void package_django() {
-    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("django.http").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> djangoSymbols = symbolsForModule("django.http");
     Symbol responseSymbol = djangoSymbols.get("HttpResponse");
     assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(responseSymbol.fullyQualifiedName()).isEqualTo("django.http.response.HttpResponse");
@@ -247,16 +244,16 @@ public class TypeShedTest {
 
   @Test
   public void return_type_hints() {
-    Map<String, Symbol> symbols = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> symbols = symbolsForModule("typing");
     assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("tuple");
-    symbols = TypeShed.symbolsForModule("flask_mail").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    symbols = symbolsForModule("flask_mail");
     ClassSymbol mail = (ClassSymbol) symbols.get("Mail");
     assertThat(((FunctionSymbol) mail.declaredMembers().stream().iterator().next()).annotatedReturnTypeName()).isNull();
   }
 
   @Test
   public void package_django_class_property_type() {
-    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("django.http.request").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> djangoSymbols = symbolsForModule("django.http.request");
     Symbol requestSymbol = djangoSymbols.get("HttpRequest");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(((ClassSymbol) requestSymbol).declaredMembers().iterator().next().annotatedTypeName()).isEqualTo("django.http.request.QueryDict");
@@ -264,7 +261,7 @@ public class TypeShedTest {
 
   @Test
   public void package_sqlite3_connect_type_in_ambiguous_symbol() {
-    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("sqlite3").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> djangoSymbols = symbolsForModule("sqlite3");
     Symbol requestSymbol = djangoSymbols.get("connect");
     assertThat(((FunctionSymbolImpl) ((((AmbiguousSymbolImpl) requestSymbol).alternatives()).toArray()[0])).annotatedReturnTypeName()).isEqualTo("sqlite3.dbapi2.Connection");
   }
@@ -454,7 +451,7 @@ public class TypeShedTest {
     TypeShed.symbolsForModule("smtplib");
     Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
     assertThat(sequence.kind()).isEqualTo(Kind.AMBIGUOUS);
-    Map<String, Symbol> typing = TypeShed.symbolsForModule("typing").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> typing = symbolsForModule("typing");
     assertThat(sequence).isSameAs(typing.get("Sequence"));
   }
 
@@ -462,5 +459,11 @@ public class TypeShedTest {
     SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);
     return builder.build();
+  }
+
+  private static Map<String, Symbol> symbolsForModule(String moduleName) {
+    Set<Symbol> symbols = TypeShed.symbolsForModule(moduleName);
+    assertThat(symbols.stream().map(Symbol::name)).doesNotHaveDuplicates();
+    return symbols.stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
   }
 }
