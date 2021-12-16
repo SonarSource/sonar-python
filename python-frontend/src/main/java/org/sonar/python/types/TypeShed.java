@@ -419,6 +419,14 @@ public class TypeShed {
       if (haveAllTheSameFqn(symbols) && !isBuiltinToDisambiguate(moduleFqn, name)) {
         return AmbiguousSymbolImpl.create(symbols);
       }
+      if (!moduleFqn.equals(BUILTINS_FQN)) {
+        String fqns = symbols.stream()
+          .map(Symbol::fullyQualifiedName)
+          .map(fqn -> fqn == null ? "N/A" : fqn)
+          .collect(Collectors.joining(","));
+        LOG.debug("Symbol " + name + " has conflicting fully qualified names:" + fqns);
+        LOG.debug("It has been disambiguated with its latest Python version available symbol.");
+      }
       return disambiguateWithLatestPythonSymbol(symbols);
     }
     return symbols.iterator().next();
