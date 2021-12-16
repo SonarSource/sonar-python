@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -46,7 +47,7 @@ import static org.sonar.python.types.InferredTypes.typeName;
 public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static class IssueToReport {
-    RegularArgument regularArgument;
+    Set<RegularArgument> regularArguments = new HashSet<>();
     String message;
     final Set<LocationInFile> secondaryLocations = new HashSet<>();
   }
@@ -59,14 +60,16 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (calleeSymbol == null) {
         return;
       }
-      Set<Symbol> symbols = flattenAmbiguousSymbols(calleeSymbol);
+      Set<Symbol> symbols = SymbolUtils.flattenAmbiguousSymbols(Collections.singleton(calleeSymbol));
       if (symbols.stream().anyMatch(s -> !s.is(Symbol.Kind.FUNCTION))) return;
       IssueToReport issue = new IssueToReport();
       if (symbols.stream().allMatch(symbol -> isNonCompliantFunctionCall(issue, ((FunctionSymbol) symbol), callExpression))) {
-        PreciseIssue preciseIssue = ctx.addIssue(issue.regularArgument, issue.message);
-        for (LocationInFile locationInFile : issue.secondaryLocations) {
-          preciseIssue.secondary(locationInFile, "Function definition");
-        }
+        issue.regularArguments.forEach(regularArgument -> {
+          PreciseIssue preciseIssue = ctx.addIssue(regularArgument, issue.message);
+          for (LocationInFile locationInFile : issue.secondaryLocations) {
+            preciseIssue.secondary(locationInFile, "Function definition");
+          }
+        });
       }
     });
   }
@@ -82,16 +85,6 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
     return checkFunctionCall(issue, callExpression, functionSymbol, isStaticCall);
   }
 
-  private static Set<Symbol> flattenAmbiguousSymbols(Symbol symbol) {
-    Set<Symbol> symbols = new HashSet<>();
-    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-      symbols.addAll(((AmbiguousSymbol) symbol).alternatives());
-    } else {
-      symbols.add(symbol);
-    }
-    return symbols;
-  }
-
   private static boolean checkFunctionCall(IssueToReport issue, CallExpression callExpression, FunctionSymbol functionSymbol, boolean isStaticCall) {
 
     boolean isKeyword = false;
@@ -100,7 +93,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       return false;
     }
     boolean hasIncompatibleArgumentType = false;
-    for (int i = 0; i < callExpression.arguments().size() && !hasIncompatibleArgumentType; i++) {
+    for (int i = 0; i < callExpression.arguments().size(); i++) {
       Argument argument = callExpression.arguments().get(i);
       int parameterIndex = i + firstParameterOffset;
       if (parameterIndex >= functionSymbol.parameters().size()) {
@@ -152,7 +145,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static void reportIssue(IssueToReport issue, FunctionSymbol functionSymbol, RegularArgument regularArgument) {
     String message = String.format("Change this argument; Function \"%s\" expects a different type", functionSymbol.name());
-    issue.regularArgument = regularArgument;
+    issue.regularArguments.add(regularArgument);
     issue.message = message;
     if (functionSymbol.definitionLocation() != null) {
       issue.secondaryLocations.add(functionSymbol.definitionLocation());

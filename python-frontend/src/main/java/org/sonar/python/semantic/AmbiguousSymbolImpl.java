@@ -29,6 +29,8 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
+import static org.sonar.python.semantic.SymbolUtils.flattenAmbiguousSymbols;
+
 public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
 
   private final Set<Symbol> symbols;
@@ -56,19 +58,6 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       return new AmbiguousSymbolImpl(resultingSymbolName, null, symbols);
     }
     return new AmbiguousSymbolImpl(resultingSymbolName, firstSymbol.fullyQualifiedName(), flattenAmbiguousSymbols(symbols));
-  }
-
-  private static Set<Symbol> flattenAmbiguousSymbols(Set<Symbol> symbols) {
-    Set<Symbol> alternatives = new HashSet<>();
-    for (Symbol symbol : symbols) {
-      if (symbol.is(Kind.AMBIGUOUS)) {
-        Set<Symbol> flattenedAlternatives = flattenAmbiguousSymbols(((AmbiguousSymbol) symbol).alternatives());
-        alternatives.addAll(flattenedAlternatives);
-      } else {
-        alternatives.add(symbol);
-      }
-    }
-    return alternatives;
   }
 
   public static AmbiguousSymbol create(Symbol... symbols) {

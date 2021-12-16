@@ -7,13 +7,13 @@ class B:
   def make_b(self): ...
 
 if predicate():
-  def overloaded_foo(param: A) : ...
+  def overloaded_foo(param1: A, param2: int) : ...
 #     ^^^^^^^^^^^^^^>
 else:
-  def overloaded_foo(param: B): ...
+  def overloaded_foo(param1: B, param2: int): ...
 #     ^^^^^^^^^^^^^^>
 
-overloaded_foo(42)  # Noncompliant {{Change this argument; Function "overloaded_foo" expects a different type}}
+overloaded_foo(42, 42)  # Noncompliant {{Change this argument; Function "overloaded_foo" expects a different type}}
 #              ^^
 
 
@@ -23,8 +23,8 @@ else:
   def overloaded_bar(param1: B, param2: B): ...
 
 # we report only on the first noncompliant argument
-overloaded_bar(42, 42)  # Noncompliant
-#              ^^
+overloaded_bar(42, 42)  # Noncompliant 2
+
 
 if predicate():
   def overloaded_baz(param1: A): ...
@@ -39,4 +39,4 @@ if predicate():
 else:
   def overloaded_fn(param1: B, param2: B): ...
 
-overloaded_fn(A(), B())  # Noncompliant
+overloaded_fn(A(), B())  # Noncompliant 2

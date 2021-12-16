@@ -27,13 +27,16 @@ import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -287,5 +290,18 @@ public class SymbolUtils {
     String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
     Symbol symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
     return symbol == null ? new SymbolImpl(localName, fullyQualifiedName) : symbol;
+  }
+
+  public static Set<Symbol> flattenAmbiguousSymbols(Set<Symbol> symbols) {
+    Set<Symbol> alternatives = new HashSet<>();
+    for (Symbol symbol : symbols) {
+      if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+        Set<Symbol> flattenedAlternatives = flattenAmbiguousSymbols(((AmbiguousSymbol) symbol).alternatives());
+        alternatives.addAll(flattenedAlternatives);
+      } else {
+        alternatives.add(symbol);
+      }
+    }
+    return alternatives;
   }
 }
