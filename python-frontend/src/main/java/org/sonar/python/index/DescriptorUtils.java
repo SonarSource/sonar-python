@@ -37,6 +37,7 @@ import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.DeclaredType;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -107,9 +108,10 @@ public class DescriptorUtils {
       parameter.name(),
       ((FunctionSymbolImpl.ParameterImpl) parameter).annotatedTypeName(),
       parameter.hasDefaultValue(),
-      parameter.isVariadic(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
+      parameter.isPositionalVariadic(),
+      parameter.isKeywordVariadic(),
       parameter.location()
     )).collect(Collectors.toList());
   }
@@ -185,18 +187,29 @@ public class DescriptorUtils {
 
   private static void addParameters(FunctionSymbolImpl functionSymbol, FunctionDescriptor functionDescriptor,
                                     ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
-    functionDescriptor.parameters().stream().map(p -> {
-      FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(p);
-      Symbol existingSymbol = createdSymbols.get(p.annotatedType());
-      Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(p.annotatedType(), null, createdSymbols);
+    functionDescriptor.parameters().stream().map(parameterDescriptor -> {
+      FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(parameterDescriptor);
+      setParameterType(parameter, parameterDescriptor.annotatedType(), projectLevelSymbolTable, createdSymbols);
+      return parameter;
+    }).forEach(functionSymbol::addParameter);
+  }
+
+  private static void setParameterType(FunctionSymbolImpl.ParameterImpl parameter, String annotatedType,
+                                       ProjectLevelSymbolTable projectLevelSymbolTable, Map<String, Symbol> createdSymbols) {
+    InferredType declaredType;
+    if (parameter.isKeywordVariadic()) {
+      declaredType = InferredTypes.DICT;
+    } else if (parameter.isPositionalVariadic()) {
+      declaredType = InferredTypes.TUPLE;
+    } else {
+      Symbol existingSymbol = createdSymbols.get(annotatedType);
+      Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(annotatedType, null, createdSymbols);
       String annotatedTypeName = parameter.annotatedTypeName();
       if (typeSymbol == null && annotatedTypeName != null) {
         typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
       }
-      // TODO: SONARPY-951 starred parameters should be mapped to the appropriate runtime type
-      InferredType declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
-      parameter.setDeclaredType(declaredType);
-      return parameter;
-    }).forEach(functionSymbol::addParameter);
+      declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
+    }
+    parameter.setDeclaredType(declaredType);
   }
 }
