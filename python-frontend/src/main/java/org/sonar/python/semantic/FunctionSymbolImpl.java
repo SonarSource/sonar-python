@@ -227,28 +227,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      InferredType declaredType = null;
-      boolean isPositionalVariadic = false;
-      boolean isKeywordVariadic = false;
-      if (starToken != null) {
-        // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
-        hasVariadicParameter = true;
-        if ("*".equals(starToken.value())) {
-          // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
-          isPositionalVariadic = true;
-          declaredType = InferredTypes.TUPLE;
-        }
-        if ("**".equals(starToken.value())) {
-          //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
-          isKeywordVariadic = true;
-          declaredType = InferredTypes.DICT;
-        }
-      }
-      if (declaredType == null) {
-        declaredType = getParameterType(parameter);
-      }
-      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
-        parameterState, isKeywordVariadic, isPositionalVariadic, null, locationInFile(parameter, fileId)));
+      ParameterType parameterType = getParameterType(parameter);
+      this.parameters.add(new ParameterImpl(parameterName.name(), parameterType.inferredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
+        parameterState, parameterType.isKeywordVariadic, parameterType.isPositionalVariadic, null, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -265,13 +246,31 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
   }
 
-  private InferredType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
-    InferredType declaredType = InferredTypes.anyType();
-    TypeAnnotation typeAnnotation = parameter.typeAnnotation();
-    if (typeAnnotation != null) {
-      declaredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
+  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
+    InferredType inferredType = InferredTypes.anyType();
+    boolean isPositionalVariadic = false;
+    boolean isKeywordVariadic = false;
+    Token starToken = parameter.starToken();
+    if (starToken != null) {
+      // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+      hasVariadicParameter = true;
+      if ("*".equals(starToken.value())) {
+        // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
+        isPositionalVariadic = true;
+        inferredType = InferredTypes.TUPLE;
+      }
+      if ("**".equals(starToken.value())) {
+        //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
+        isKeywordVariadic = true;
+        inferredType = InferredTypes.DICT;
+      }
+    } else {
+      TypeAnnotation typeAnnotation = parameter.typeAnnotation();
+      if (typeAnnotation != null) {
+        inferredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
+      }
     }
-    return declaredType;
+    return new ParameterType(inferredType, isKeywordVariadic, isPositionalVariadic);
   }
 
   @Override
@@ -325,6 +324,18 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       hasReadDeclaredReturnType = true;
     }
     return declaredReturnType;
+  }
+  
+  static class ParameterType {
+    InferredType inferredType;
+    boolean isPositionalVariadic;
+    boolean isKeywordVariadic;
+
+    public ParameterType(InferredType inferredType, boolean isKeywordVariadic, boolean isPositionalVariadic) {
+      this.inferredType = inferredType;
+      this.isKeywordVariadic = isKeywordVariadic;
+      this.isPositionalVariadic = isPositionalVariadic;
+    }
   }
 
   public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
