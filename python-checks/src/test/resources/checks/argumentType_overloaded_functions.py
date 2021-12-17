@@ -39,4 +39,7 @@ if predicate():
 else:
   def overloaded_fn(param1: B, param2: B): ...
 
-overloaded_fn(A(), B())  # Noncompliant 2
+overloaded_fn(A(),  # Noncompliant
+#             ^^^
+                   B())  # Noncompliant
+#                  ^^^
