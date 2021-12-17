@@ -21,13 +21,15 @@ package org.sonar.python.checks;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -47,7 +49,7 @@ import static org.sonar.python.types.InferredTypes.typeName;
 public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static class IssueToReport {
-    Set<RegularArgument> regularArguments = new HashSet<>();
+    SortedSet<Integer> nonCompliantArgs = new TreeSet<>();
     String message;
     final Set<LocationInFile> secondaryLocations = new HashSet<>();
   }
@@ -64,12 +66,11 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (symbols.stream().anyMatch(s -> !s.is(Symbol.Kind.FUNCTION))) return;
       IssueToReport issue = new IssueToReport();
       if (symbols.stream().allMatch(symbol -> isNonCompliantFunctionCall(issue, ((FunctionSymbol) symbol), callExpression))) {
-        issue.regularArguments.forEach(regularArgument -> {
-          PreciseIssue preciseIssue = ctx.addIssue(regularArgument, issue.message);
-          for (LocationInFile locationInFile : issue.secondaryLocations) {
-            preciseIssue.secondary(locationInFile, "Function definition");
-          }
-        });
+        List<Argument> args = callExpression.arguments();
+        Integer firstArgIndex = issue.nonCompliantArgs.first();
+        PreciseIssue preciseIssue = ctx.addIssue(args.get(firstArgIndex), issue.message);
+        issue.nonCompliantArgs.forEach(index -> { if(!index.equals(firstArgIndex)) preciseIssue.secondary(args.get(index), issue.message); });
+        issue.secondaryLocations.forEach(locationInFile -> preciseIssue.secondary(locationInFile, "Function definition"));
       }
     });
   }
@@ -107,7 +108,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
           : shouldReportPositionalArgument(regularArgument, functionSymbol, parameterIndex);
         if (shouldReport) {
           hasIncompatibleArgumentType = true;
-          reportIssue(issue, functionSymbol, regularArgument);
+          reportIssue(issue, functionSymbol, i);
         }
       }
     }
@@ -143,10 +144,9 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  private static void reportIssue(IssueToReport issue, FunctionSymbol functionSymbol, RegularArgument regularArgument) {
-    String message = String.format("Change this argument; Function \"%s\" expects a different type", functionSymbol.name());
-    issue.regularArguments.add(regularArgument);
-    issue.message = message;
+  private static void reportIssue(IssueToReport issue, FunctionSymbol functionSymbol, int argumentIndex) {
+    issue.nonCompliantArgs.add(argumentIndex);
+    issue.message = String.format("Change this argument; Function \"%s\" expects a different type", functionSymbol.name());
     if (functionSymbol.definitionLocation() != null) {
       issue.secondaryLocations.add(functionSymbol.definitionLocation());
     }
