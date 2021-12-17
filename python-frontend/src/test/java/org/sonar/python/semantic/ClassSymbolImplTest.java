@@ -241,7 +241,7 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
-    assertThat(classSymbol.superClasses()).containsExactly(TypeShed.typeShedClass("object"));
+    assertThat(classSymbol.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
     assertThat(classSymbol.hasDecorators()).isTrue();
     assertThat(classSymbol.hasMetaClass()).isTrue();
     assertThat(classSymbol.metaclassFQN()).isEqualTo("abc.ABCMeta");

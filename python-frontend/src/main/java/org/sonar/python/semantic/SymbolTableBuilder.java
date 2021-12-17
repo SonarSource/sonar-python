@@ -365,7 +365,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
-          importedModuleSymbols = TypeShed.symbolsForModule(moduleName);
+          importedModuleSymbols = TypeShed.symbolsForModule(moduleName).stream()
+            .map(importedSymbol -> currentScope().copySymbol(importedSymbol.name(), importedSymbol)).collect(Collectors.toSet());
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom);

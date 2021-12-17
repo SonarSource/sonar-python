@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -738,6 +739,42 @@ public class ProjectLevelSymbolTableTest {
     FunctionSymbol.Parameter parameter = functionSymbol.parameters().get(0);
     DeclaredType declaredType = (DeclaredType) parameter.declaredType();
     assertThat(declaredType.getTypeClass()).isSameAs(classSymbol);
+  }
+
+  @Test
+  public void no_stackoverflow_for_ambiguous_descriptor() {
+    String[] foo = {
+    "if cond:",
+    "  Ambiguous = ...",
+    "else:",
+    "  class Ambiguous(SomeParent):",
+    "    local_var = 'i'",
+    "    def func(param: Ambiguous):",
+    "      ..."
+    };
+    String[] bar = {
+      "from foo import *\n",
+    };
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
+
+    Set<Symbol> fooSymbols = projectSymbolTable.getSymbolsFromModule("foo");
+    assertThat(fooSymbols).hasSize(1);
+    AmbiguousSymbol symbolFromProjectTable = ((AmbiguousSymbol) fooSymbols.stream().findFirst().get());
+    assertThat(symbolFromProjectTable.fullyQualifiedName()).isEqualTo("foo.Ambiguous");
+    assertThat(symbolFromProjectTable.alternatives()).hasSize(2);
+    assertThat(symbolFromProjectTable.alternatives()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.CLASS, Symbol.Kind.OTHER);
+    ClassSymbol classSymbol = (ClassSymbol) symbolFromProjectTable.alternatives().stream().filter(s -> s.kind().equals(Symbol.Kind.CLASS)).findFirst().get();
+    assertThat(classSymbol.declaredMembers()).hasSize(2);
+    assertThat(classSymbol.declaredMembers()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.FUNCTION, Symbol.Kind.OTHER);
+
+    FileInput tree = parse(new SymbolTableBuilder("", pythonFile("bar.py"), projectSymbolTable), bar);
+    assertThat(tree.globalVariables()).hasSize(1);
+    AmbiguousSymbol localSymbol = (AmbiguousSymbol) tree.globalVariables().stream().findFirst().get();
+    assertThat(localSymbol.fullyQualifiedName()).isEqualTo("foo.Ambiguous");
+    assertThat(localSymbol.alternatives()).hasSize(2);
+    assertThat(localSymbol.alternatives()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.CLASS, Symbol.Kind.OTHER);
   }
 
   @Test

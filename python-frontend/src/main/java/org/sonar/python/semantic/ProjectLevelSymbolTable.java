@@ -137,24 +137,26 @@ public class ProjectLevelSymbolTable {
   }
 
   public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName) {
-    return getSymbol(fullyQualifiedName, localSymbolName, new HashMap<>());
+    return getSymbol(fullyQualifiedName, localSymbolName, new HashMap<>(), new HashMap<>());
   }
 
-  public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName, Map<String, Symbol> createdSymbols) {
+  public Symbol getSymbol(@Nullable String fullyQualifiedName, @Nullable String localSymbolName,
+                          Map<Descriptor, Symbol> createdSymbolsByDescriptor, Map<String, Symbol> createdSymbolsByFqn) {
     if (fullyQualifiedName == null) return null;
     Descriptor descriptor = globalDescriptorsByFQN().get(fullyQualifiedName);
-    return descriptor == null ? null : DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, createdSymbols);
+    return descriptor == null ? null : DescriptorUtils.symbolFromDescriptor(descriptor, this, localSymbolName, createdSymbolsByDescriptor, createdSymbolsByFqn);
   }
 
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
     Set<Descriptor> descriptors = globalDescriptorsByModuleName.get(moduleName);
-    Map<String, Symbol> createdSymbols = new HashMap<>();
     if (descriptors == null) {
       return null;
     }
+    Map<Descriptor, Symbol> createdSymbolsByDescriptor = new HashMap<>();
+    Map<String, Symbol> createdSymbolsByFqn = new HashMap<>();
     return descriptors.stream()
-      .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this, null, createdSymbols)).collect(Collectors.toSet());
+      .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this, null, createdSymbolsByDescriptor, createdSymbolsByFqn)).collect(Collectors.toSet());
   }
 
   public boolean isDjangoView(@Nullable String fqn) {
