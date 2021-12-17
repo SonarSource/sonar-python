@@ -66,7 +66,7 @@ public class TypeShedTest {
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(intClass.usages()).isEmpty();
     assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
-    assertThat(TypeShed.typeShedClass("bool").superClasses()).containsExactly(intClass);
+    assertThat(TypeShed.typeShedClass("bool").superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("int");
   }
 
   @Test
@@ -342,7 +342,7 @@ public class TypeShedTest {
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
 
     ClassSymbol C = (ClassSymbol) symbols.get("mod.C");
-    assertThat(C.superClasses()).containsExactly(TypeShed.typeShedClass("str"));
+    assertThat(C.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("str");
     ClassSymbol D = (ClassSymbol) symbols.get("mod.D");
     assertThat(D.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactly(tuple(Kind.OTHER, "NOT_EXISTENT"));

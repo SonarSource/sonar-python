@@ -117,6 +117,7 @@ public class DescriptorUtils {
     )).collect(Collectors.toList());
   }
 
+  // TODO SONARPY-958: Cleanup the symbol construction from descriptors by extracting this logic in a builder class
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,
                                             @Nullable String localSymbolName, Map<Descriptor, Symbol> createdSymbolsByDescriptor, Map<String, Symbol> createdSymbolsByFqn) {
     if (createdSymbolsByDescriptor.containsKey(descriptor)) {
@@ -180,7 +181,7 @@ public class DescriptorUtils {
             return createdSymbolsByFqn.get(superClassFqn);
           }
           Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn, null, createdSymbolsByDescriptor, createdSymbolsByFqn);
-          symbol = symbol != null ? symbol : ((SymbolImpl) typeshedSymbolWithFQN(superClassFqn)).copyWithoutUsages();
+          symbol = symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
           createdSymbolsByFqn.put(superClassFqn, symbol);
           return symbol;
         }
