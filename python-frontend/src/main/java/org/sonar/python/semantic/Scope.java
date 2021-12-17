@@ -82,15 +82,14 @@ class Scope {
 
   void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols, ImportFrom importFrom) {
     importedSymbols.forEach(symbol -> {
-      Symbol importedSymbol = copySymbol(symbol.name(), symbol);
-      if (!isExistingSymbol(importedSymbol.name())) {
-        symbols.add(importedSymbol);
-        symbolsByName.put(symbol.name(), importedSymbol);
-        ((SymbolImpl) importedSymbol).addUsage(importFrom, Usage.Kind.IMPORT);
+      if (!isExistingSymbol(symbol.name())) {
+        symbols.add(symbol);
+        symbolsByName.put(symbol.name(), symbol);
+        ((SymbolImpl) symbol).addUsage(importFrom, Usage.Kind.IMPORT);
       } else {
         SymbolImpl originalSymbol = resolve(symbol.name());
         if (originalSymbol != null) {
-          resetSymbolInfo(importedSymbol.fullyQualifiedName(), originalSymbol);
+          resetSymbolInfo(symbol.fullyQualifiedName(), originalSymbol);
           originalSymbol.addUsage(importFrom, Usage.Kind.IMPORT);
         }
       }
@@ -123,7 +122,7 @@ class Scope {
     }
   }
 
-  private Symbol copySymbol(String symbolName, Symbol symbol) {
+  public Symbol copySymbol(String symbolName, Symbol symbol) {
     return copySymbol(symbolName, symbol, new HashSet<>());
   }
 
