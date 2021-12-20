@@ -28,4 +28,9 @@ public class ArgumentTypeCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentType.py", new ArgumentTypeCheck());
   }
+
+  @Test
+  public void test_overloaded_functions() {
+    PythonCheckVerifier.verify("src/test/resources/checks/argumentType_overloaded_functions.py", new ArgumentTypeCheck());
+  }
 }
