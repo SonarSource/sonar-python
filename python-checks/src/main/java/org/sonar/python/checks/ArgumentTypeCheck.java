@@ -19,12 +19,17 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -43,6 +48,12 @@ import static org.sonar.python.types.InferredTypes.typeName;
 @Rule(key = "S5655")
 public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
+  private static class IssueToReport {
+    SortedSet<Integer> nonCompliantArgs = new TreeSet<>();
+    String message;
+    final Set<LocationInFile> secondaryLocations = new HashSet<>();
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
@@ -51,35 +62,44 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (calleeSymbol == null) {
         return;
       }
-      if (!calleeSymbol.is(Symbol.Kind.FUNCTION)) {
-        // We might want to support ambiguous symbols for which every definition is a function
-        return;
+      Set<Symbol> symbols = SymbolUtils.flattenAmbiguousSymbols(Collections.singleton(calleeSymbol));
+      if (symbols.stream().anyMatch(s -> !s.is(Symbol.Kind.FUNCTION))) return;
+      IssueToReport issue = new IssueToReport();
+      if (symbols.stream().allMatch(symbol -> isNonCompliantFunctionCall(issue, ((FunctionSymbol) symbol), callExpression))) {
+        List<Argument> args = callExpression.arguments();
+        Integer firstArgIndex = issue.nonCompliantArgs.first();
+        PreciseIssue preciseIssue = ctx.addIssue(args.get(firstArgIndex), issue.message);
+        issue.nonCompliantArgs.forEach(index -> { if(!index.equals(firstArgIndex)) preciseIssue.secondary(args.get(index), issue.message); });
+        issue.secondaryLocations.forEach(locationInFile -> preciseIssue.secondary(locationInFile, "Function definition"));
       }
-      FunctionSymbol functionSymbol = (FunctionSymbol) calleeSymbol;
-      if (functionSymbol.hasVariadicParameter()) {
-        return;
-      }
-      boolean isStaticCall = callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
-        .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
-        .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
-        .isPresent();
-      checkFunctionCall(ctx, callExpression, functionSymbol, isStaticCall);
     });
   }
 
-  private static void checkFunctionCall(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, boolean isStaticCall) {
+  private static boolean isNonCompliantFunctionCall(IssueToReport issue, FunctionSymbol functionSymbol, CallExpression callExpression) {
+    if (functionSymbol.hasVariadicParameter()) {
+      return false;
+    }
+    boolean isStaticCall = callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
+      .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
+      .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
+      .isPresent();
+    return checkFunctionCall(issue, callExpression, functionSymbol, isStaticCall);
+  }
+
+  private static boolean checkFunctionCall(IssueToReport issue, CallExpression callExpression, FunctionSymbol functionSymbol, boolean isStaticCall) {
 
     boolean isKeyword = false;
     int firstParameterOffset = SymbolUtils.firstParameterOffset(functionSymbol, isStaticCall);
     if (firstParameterOffset < 0) {
-      return;
+      return false;
     }
+    boolean hasIncompatibleArgumentType = false;
     for (int i = 0; i < callExpression.arguments().size(); i++) {
       Argument argument = callExpression.arguments().get(i);
       int parameterIndex = i + firstParameterOffset;
       if (parameterIndex >= functionSymbol.parameters().size()) {
         // S930 will raise the issue
-        return;
+        return false;
       }
       if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
         RegularArgument regularArgument = (RegularArgument) argument;
@@ -87,10 +107,12 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
         boolean shouldReport = isKeyword ? shouldReportKeywordArgument(regularArgument, functionSymbol)
           : shouldReportPositionalArgument(regularArgument, functionSymbol, parameterIndex);
         if (shouldReport) {
-          reportIssue(ctx, functionSymbol, regularArgument);
+          hasIncompatibleArgumentType = true;
+          reportIssue(issue, functionSymbol, i);
         }
       }
     }
+    return hasIncompatibleArgumentType;
   }
 
   private static boolean shouldReportPositionalArgument(RegularArgument regularArgument, FunctionSymbol functionSymbol, int index) {
@@ -122,11 +144,11 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  private static void reportIssue(SubscriptionContext ctx, FunctionSymbol functionSymbol, RegularArgument regularArgument) {
-    PreciseIssue issue = ctx.addIssue(regularArgument, String.format("Change this argument; Function \"%s\" expects a different type", functionSymbol.name()));
-    LocationInFile locationInFile = functionSymbol.definitionLocation();
-    if (locationInFile != null) {
-      issue.secondary(locationInFile, "Function definition");
+  private static void reportIssue(IssueToReport issue, FunctionSymbol functionSymbol, int argumentIndex) {
+    issue.nonCompliantArgs.add(argumentIndex);
+    issue.message = String.format("Change this argument; Function \"%s\" expects a different type", functionSymbol.name());
+    if (functionSymbol.definitionLocation() != null) {
+      issue.secondaryLocations.add(functionSymbol.definitionLocation());
     }
   }
 

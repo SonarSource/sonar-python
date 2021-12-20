@@ -68,7 +68,7 @@ def stdlib_functions():
   time.sleep(True) # OK, converted to 1
   time.sleep(1j) # FN, considered duck type compatible
   genericpath.isfile("some/path")
-  genericpath.isfile(42) # FN - see SONARPY-937
+  genericpath.isfile(42) # Noncompliant
   my_list = [1,2,3]
   _heapq.heapify(42) # Noncompliant {{Change this argument; Function "heapify" expects a different type}}
 #                ^^
@@ -89,7 +89,7 @@ def builtin_functions():
   number.__add__(x = unexpected) # Noncompliant {{Change this argument; Function "__add__" expects a different type}}
 #                ^^^^^^^^^^^^^^
   float.fromhex(42) # Noncompliant
-  eval(42)
+  eval(42) # Noncompliant
   "Some string literal".format(1, 2)
   exit(1)
   repr(A)
@@ -207,4 +207,3 @@ def duck_typing_no_member():
 
   a_function(Parent())  # OK, still duck type compatible with ChildA
   another_function(Parent())  # Noncompliant
-
