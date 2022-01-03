@@ -46,7 +46,7 @@ def test_serialize_typeshed_stdlib_multiple_python_version():
 
 
 def test_save_merged_symbols():
-    merged_module_symbol = symbols.MergedModuleSymbol('abc', {}, {}, {})
+    merged_module_symbol = symbols.MergedModuleSymbol('abc', {}, {}, {}, {})
     symbols_merger.merge_multiple_python_versions = Mock(return_value={'abc': merged_module_symbol})
     symbols.save_module = Mock()
     typeshed_serializer.save_merged_symbols()
