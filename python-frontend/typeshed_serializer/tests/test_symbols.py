@@ -110,8 +110,8 @@ def test_save_module(typeshed_stdlib):
 
 
 def test_python2_exception():
-    queue_symbol = symbols.MergedModuleSymbol("Queue", {}, {}, {})
-    other_symbol = symbols.MergedModuleSymbol("other", {}, {}, {})
+    queue_symbol = symbols.MergedModuleSymbol("Queue", {}, {}, {}, {})
+    other_symbol = symbols.MergedModuleSymbol("other", {}, {}, {}, {})
     assert symbols.is_python_2_only_exception(queue_symbol) is True
     assert symbols.is_python_2_only_exception(other_symbol) is False
 

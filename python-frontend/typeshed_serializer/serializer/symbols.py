@@ -32,6 +32,8 @@ CURRENT_PATH = os.path.dirname(__file__)
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_EXPORTED_VARS = ["__name__", "__doc__", "__file__", "__package__"]
+
 
 class ParamKind(Enum):
     POSITIONAL_ONLY = 0
@@ -61,6 +63,8 @@ class TypeDescriptor:
     def __init__(self, _type: mpt.Type):
         self.args = []
         self.fully_qualified_name = None
+        self.kind = None
+        self.is_unknown = False
         # kind, fqn, pretty printed name, arguments
         if isinstance(_type, mpt.Instance):
             self.kind = TypeKind.INSTANCE
@@ -127,13 +131,16 @@ class TypeDescriptor:
             # TODO: check in items for key/type mapping
             self.pretty_printed_name = "TypedDict"
         else:
-            # Can this happen?
-            self.pretty_printed_name = "#Unknown"
+            # this can happen when there is a var symbol assigned to an overload symbol
+            self.is_unknown = True
 
     def to_proto(self) -> symbols_pb2.Type:
         pb_type = symbols_pb2.Type()
+        if self.is_unknown:
+            return pb_type
         pb_type.pretty_printed_name = self.pretty_printed_name
-        pb_type.kind = symbols_pb2.TypeKind.Value(self.kind.name)
+        if self.kind is not None:
+            pb_type.kind = symbols_pb2.TypeKind.Value(self.kind.name)
         if self.fully_qualified_name is not None:
             pb_type.fully_qualified_name = self.fully_qualified_name
         for arg in self.args:
@@ -312,12 +319,31 @@ class ClassSymbol:
         return pb_class
 
 
+class VarSymbol:
+    def __init__(self, var: mpn.Var):
+        self.name = var.name
+        self.fullname = var.fullname
+        if var.type:
+            self.type = TypeDescriptor(var.type)
+
+    def __eq__(self, other):
+        return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()
+
+    def to_proto(self) -> symbols_pb2.VarSymbol:
+        pb_var = symbols_pb2.VarSymbol()
+        pb_var.name = self.name
+        pb_var.fully_qualified_name = self.fullname
+        pb_var.type_annotation.CopyFrom(self.type.to_proto())
+        return pb_var
+
+
 class ModuleSymbol:
     def __init__(self, mypy_file: mpn.MypyFile):
         self.fullname = mypy_file.fullname
         self.classes = []
         self.functions = []
         self.overloaded_functions = []
+        self.vars = []
         for key in mypy_file.names:
             name = mypy_file.names.get(key)
             symbol_table_node = name.node
@@ -327,6 +353,8 @@ class ModuleSymbol:
                 self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node))
             if isinstance(symbol_table_node, mpn.TypeInfo):
                 self.classes.append(ClassSymbol(symbol_table_node))
+            if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in DEFAULT_EXPORTED_VARS:
+                self.vars.append(VarSymbol(symbol_table_node))
 
     def to_proto(self) -> symbols_pb2.ModuleSymbol:
         pb_module = symbols_pb2.ModuleSymbol()
@@ -337,6 +365,8 @@ class ModuleSymbol:
             pb_module.functions.append(func.to_proto())
         for overloaded_func in self.overloaded_functions:
             pb_module.overloaded_functions.append(overloaded_func.to_proto())
+        for var in self.vars:
+            pb_module.vars.append(var.to_proto())
         return pb_module
 
 
@@ -396,12 +426,25 @@ class MergedClassSymbol:
         return pb_class
 
 
+class MergedVarSymbol:
+    def __init__(self, var_symbol: VarSymbol, valid_for: List[str]):
+        self.var_symbol = var_symbol
+        self.valid_for = valid_for
+
+    def to_proto(self) -> symbols_pb2.VarSymbol:
+        pb_var = self.var_symbol.to_proto()
+        for elem in self.valid_for:
+            pb_var.valid_for.append(elem)
+        return pb_var
+
+
 class MergedModuleSymbol:
-    def __init__(self, fullname, classes, functions, overloaded_functions):
+    def __init__(self, fullname, classes, functions, overloaded_functions, variables):
         self.fullname = fullname
         self.classes = classes
         self.functions = functions
         self.overloaded_functions = overloaded_functions
+        self.vars = variables
 
     def to_proto(self):
         pb_module = symbols_pb2.ModuleSymbol()
@@ -415,6 +458,9 @@ class MergedModuleSymbol:
         for overloaded_func in self.overloaded_functions:
             for elem in self.overloaded_functions[overloaded_func]:
                 pb_module.overloaded_functions.append(elem.to_proto())
+        for var in self.vars:
+            for elem in self.vars[var]:
+                pb_module.vars.append(elem.to_proto())
         return pb_module
 
 
