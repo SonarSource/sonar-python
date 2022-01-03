@@ -193,9 +193,10 @@ public class TypeShedTest {
   @Test
   public void package_relative_import() {
     Map<String, Symbol> osSymbols = symbolsForModule("os");
-    // TODO: Add imported symbols SONARPY-938
-    // Symbol sysSymbol = osSymbols.get("sys");
-    // assertThat(sysSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
+    Symbol sysSymbol = osSymbols.get("sys");
+    assertThat(sysSymbol.kind()).isEqualTo(Kind.OTHER);
+    Set<String> sysExportedSymbols = symbolsForModule("sys").keySet();
+    assertThat(((SymbolImpl) sysSymbol).getChildrenSymbolByName().values()).extracting(Symbol::name).containsAll(sysExportedSymbols);
 
     Symbol timesResult = osSymbols.get("times_result");
     assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
