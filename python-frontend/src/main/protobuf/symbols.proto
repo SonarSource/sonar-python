@@ -88,4 +88,12 @@ message ModuleSymbol {
   repeated ClassSymbol classes = 2;
   repeated FunctionSymbol functions = 3;
   repeated OverloadedFunctionSymbol overloaded_functions = 4;
+  repeated VarSymbol vars = 5;
+}
+
+message VarSymbol {
+  string name = 1;
+  string fully_qualified_name = 2;
+  optional Type type_annotation = 3;
+  repeated string valid_for = 4;
 }

@@ -204,6 +204,39 @@ def test_actual_module_merge(fake_module_36_38):
         [func for alternatives in merged_fakemodule_module.overloaded_functions.values() for func in alternatives]
     assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
 
+    all_vars = merged_fakemodule_module.vars
+    assert len(all_vars) == 5
+    common_var = all_vars['fakemodule.common_var']
+    assert len(common_var) == 1
+    assert common_var[0].valid_for == ["36", "38"]
+    var_symbol = common_var[0].var_symbol
+    assert var_symbol.name == "common_var"
+    assert var_symbol.fullname == "fakemodule.common_var"
+    assert var_symbol.type.fully_qualified_name == "builtins.bool"
+
+    unique_var_36 = all_vars['fakemodule.unique_var_36']
+    assert len(unique_var_36) == 1
+    assert unique_var_36[0].valid_for == ["36"]
+
+    unique_var_38 = all_vars['fakemodule.unique_var_38']
+    assert len(unique_var_38) == 1
+    assert unique_var_38[0].valid_for == ["38"]
+
+    var_multiple_defs = all_vars['fakemodule.var_multiple_defs']
+    assert len(var_multiple_defs) == 2
+    definition_36 = var_multiple_defs[0]
+    definition_38 = var_multiple_defs[1]
+    assert definition_36.valid_for == ["36"]
+    assert definition_36.var_symbol.type.fully_qualified_name == "builtins.int"
+    assert definition_38.valid_for == ["38"]
+    assert definition_38.var_symbol.type.fully_qualified_name == "builtins.str"
+
+    alias = all_vars['fakemodule.alias']
+    assert len(alias) == 1
+    alias_symbol = alias[0].var_symbol
+    assert alias_symbol.type.fully_qualified_name is None
+    assert alias_symbol.type.is_unknown is True
+
 
 def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
     assert len(merged_classes_proto) == len(merged_classes)

@@ -21,8 +21,9 @@
 from typing import Dict, Set, List
 
 from serializer.symbols import ModuleSymbol, MergedFunctionSymbol, MergedClassSymbol, MergedOverloadedFunctionSymbol, \
-    MergedModuleSymbol
+    MergedModuleSymbol, MergedVarSymbol
 from serializer import typeshed_serializer as ts
+from serializer.proto_out import symbols_pb2
 
 SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
 
@@ -57,8 +58,9 @@ def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict
         handled_classes: Dict[str, List[MergedClassSymbol]] = {}
         handled_funcs: Dict[str, List[MergedFunctionSymbol]] = {}
         handled_overloaded_functions: Dict[str, List[MergedOverloadedFunctionSymbol]] = {}
+        handled_vars: Dict[str, List[MergedVarSymbol]] = {}
         merged_modules[python_mod] = MergedModuleSymbol(python_mod, handled_classes,
-                                                        handled_funcs, handled_overloaded_functions)
+                                                        handled_funcs, handled_overloaded_functions, handled_vars)
         for version in model_by_version:
             model = model_by_version[version]
             # get current module
@@ -68,7 +70,24 @@ def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict
             merge_classes(current_module, handled_classes, version)
             merge_functions(current_module, handled_funcs, version)
             merge_overloaded_functions(current_module, handled_overloaded_functions, version)
+            merge_vars(current_module, handled_vars, version)
     return merged_modules
+
+
+def merge_vars(current_module, handled_vars, version):
+    for var in current_module.vars:
+        if var.fullname not in handled_vars:
+            # doesn't exist: we add it
+            handled_vars[var.fullname] = [MergedVarSymbol(var, [version])]
+        else:
+            compared = handled_vars[var.fullname]
+            for elem in compared:
+                if elem.var_symbol == var:
+                    elem.valid_for.append(version)
+                    break
+            else:
+                # no equivalent yet in the variations: add a new one
+                handled_vars[var.fullname].append(MergedVarSymbol(var, [version]))
 
 
 def merge_classes(current_module, handled_classes, version):
