@@ -137,7 +137,7 @@ public class SymbolImpl implements Symbol {
     ((SymbolImpl) symbol).addUsage(name, kind);
   }
 
-  void addChildSymbol(Symbol symbol) {
+  public void addChildSymbol(Symbol symbol) {
     childrenSymbolByName.put(symbol.name(), symbol);
   }
 
@@ -167,7 +167,7 @@ public class SymbolImpl implements Symbol {
     childrenSymbolByName.values().forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
   }
 
-  Map<String, Symbol> getChildrenSymbolByName() {
+  public Map<String, Symbol> getChildrenSymbolByName() {
     return Collections.unmodifiableMap(childrenSymbolByName);
   }
 
