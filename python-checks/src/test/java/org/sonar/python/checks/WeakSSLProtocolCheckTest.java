@@ -29,4 +29,8 @@ public class WeakSSLProtocolCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol.py", new WeakSSLProtocolCheck());
   }
 
+  @Test
+  public void test_fallback_import() {
+    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_fallback_import.py", new WeakSSLProtocolCheck());
+  }
 }

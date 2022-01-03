@@ -403,13 +403,17 @@ public class TypeShed {
     moduleSymbol.getOverloadedFunctionsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
+    moduleSymbol.getVarsList().stream()
+      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
 
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
       Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), false);
-      deserializedSymbols.put(name, disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName()));
+      Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
+      deserializedSymbols.put(name, disambiguatedSymbol);
     }
     return deserializedSymbols;
   }
@@ -464,6 +468,9 @@ public class TypeShed {
           throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
+      }
+      if (descriptor instanceof SymbolsProtos.VarSymbol) {
+        symbols.add(new SymbolImpl((SymbolsProtos.VarSymbol) descriptor));
       }
     }
     return symbols;

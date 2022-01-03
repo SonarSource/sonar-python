@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +40,8 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class SymbolImpl implements Symbol {
 
@@ -62,6 +65,17 @@ public class SymbolImpl implements Symbol {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedTypeName = annotatedTypeName;
+    this.kind = Kind.OTHER;
+  }
+
+  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol) {
+    this.name = varSymbol.getName();
+    this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName());
+    String fqn = varSymbol.getTypeAnnotation().getFullyQualifiedName();
+    if (!fqn.isEmpty()) {
+      this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
+    }
+    this.validForPythonVersions = new HashSet<>(varSymbol.getValidForList());
     this.kind = Kind.OTHER;
   }
 

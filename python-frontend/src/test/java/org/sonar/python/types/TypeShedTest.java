@@ -466,4 +466,25 @@ public class TypeShedTest {
     assertThat(symbols.stream().map(Symbol::name)).doesNotHaveDuplicates();
     return symbols.stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
   }
+
+  @Test
+  public void variables_from_protobuf() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+        "fully_qualified_name: \"mod\"\n" +
+        "vars {\n" +
+        "  name: \"foo\"\n" +
+        "  fully_qualified_name: \"mod.foo\"\n" +
+        "  type_annotation {\n" +
+        "    pretty_printed_name: \"builtins.str\"\n" +
+        "    fully_qualified_name: \"builtins.str\"\n" +
+        "  }\n" +
+        "}\n" +
+        "vars {\n" +
+        "  name: \"bar\"\n" +
+        "  fully_qualified_name: \"mod.bar\"\n" +
+        "}\n");
+    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName, Symbol::annotatedTypeName)
+      .containsExactlyInAnyOrder(tuple(Kind.OTHER, "mod.foo", "str"), tuple(Kind.OTHER, "mod.bar", null));
+  }
 }
