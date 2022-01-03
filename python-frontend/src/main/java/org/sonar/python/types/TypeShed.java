@@ -165,7 +165,7 @@ public class TypeShed {
   public static Set<Symbol> symbolsForModule(String moduleName) {
     if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
       Set<Symbol> symbols = searchTypeShedForModule(moduleName);
-      Map<String, Symbol> symbolsByFqn = symbols.stream().collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
+      Map<String, Symbol> symbolsByFqn = symbols.stream().collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s, (fst, snd) -> fst));
       typeShedSymbols.put(moduleName, symbolsByFqn);
       return symbols;
     }
@@ -470,7 +470,13 @@ public class TypeShed {
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
       }
       if (descriptor instanceof SymbolsProtos.VarSymbol) {
-        symbols.add(new SymbolImpl((SymbolsProtos.VarSymbol) descriptor));
+        SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
+        SymbolImpl symbol = new SymbolImpl(varSymbol);
+        if (varSymbol.getIsImportedModule()) {
+          Set<Symbol> moduleExportedSymbols = searchTypeShedForModule(varSymbol.getFullyQualifiedName());
+          moduleExportedSymbols.forEach(symbol::addChildSymbol);
+        }
+        symbols.add(symbol);
       }
     }
     return symbols;
