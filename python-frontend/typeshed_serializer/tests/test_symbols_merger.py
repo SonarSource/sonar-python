@@ -205,7 +205,7 @@ def test_actual_module_merge(fake_module_36_38):
     assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
 
     all_vars = merged_fakemodule_module.vars
-    assert len(all_vars) == 5
+    assert len(all_vars) == 6
     common_var = all_vars['fakemodule.common_var']
     assert len(common_var) == 1
     assert common_var[0].valid_for == ["36", "38"]
@@ -213,6 +213,7 @@ def test_actual_module_merge(fake_module_36_38):
     assert var_symbol.name == "common_var"
     assert var_symbol.fullname == "fakemodule.common_var"
     assert var_symbol.type.fully_qualified_name == "builtins.bool"
+    assert var_symbol.is_imported_module is False
 
     unique_var_36 = all_vars['fakemodule.unique_var_36']
     assert len(unique_var_36) == 1
@@ -236,6 +237,10 @@ def test_actual_module_merge(fake_module_36_38):
     alias_symbol = alias[0].var_symbol
     assert alias_symbol.type.fully_qualified_name is None
     assert alias_symbol.type.is_unknown is True
+
+    imported_sys = all_vars['sys']
+    assert len(imported_sys) == 1
+    assert imported_sys[0].var_symbol.is_imported_module is True
 
 
 def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
