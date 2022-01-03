@@ -320,11 +320,15 @@ class ClassSymbol:
 
 
 class VarSymbol:
-    def __init__(self, var: mpn.Var):
-        self.name = var.name
-        self.fullname = var.fullname
-        if var.type:
-            self.type = TypeDescriptor(var.type)
+    def __init__(self, name: str, fullname: str, is_imported_module=False, type_descriptor: TypeDescriptor = None):
+        self.name = name
+        self.fullname = fullname
+        self.is_imported_module = is_imported_module
+        self.type = type_descriptor
+
+    @classmethod
+    def from_var(cls, var: mpn.Var):
+        return cls(var.name, var.fullname, type_descriptor=TypeDescriptor(var.type) if var.type else None)
 
     def __eq__(self, other):
         return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()
@@ -333,7 +337,9 @@ class VarSymbol:
         pb_var = symbols_pb2.VarSymbol()
         pb_var.name = self.name
         pb_var.fully_qualified_name = self.fullname
-        pb_var.type_annotation.CopyFrom(self.type.to_proto())
+        if self.type is not None:
+            pb_var.type_annotation.CopyFrom(self.type.to_proto())
+        pb_var.is_imported_module = self.is_imported_module
         return pb_var
 
 
@@ -354,7 +360,11 @@ class ModuleSymbol:
             if isinstance(symbol_table_node, mpn.TypeInfo):
                 self.classes.append(ClassSymbol(symbol_table_node))
             if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in DEFAULT_EXPORTED_VARS:
-                self.vars.append(VarSymbol(symbol_table_node))
+                self.vars.append(VarSymbol.from_var(symbol_table_node))
+            if isinstance(symbol_table_node, mpn.MypyFile):
+                module_name = symbol_table_node.fullname
+                if module_name != "builtins":
+                    self.vars.append(VarSymbol(key, module_name, is_imported_module=True))
 
     def to_proto(self) -> symbols_pb2.ModuleSymbol:
         pb_module = symbols_pb2.ModuleSymbol()

@@ -37,6 +37,17 @@ def test_module_symbol(typeshed_stdlib):
     assert pb_module.fully_qualified_name == "abc"
     assert len(pb_module.classes) == 5
     assert len(pb_module.functions) == 4
+    imported_modules = [imported_module for imported_module in pb_module.vars if imported_module.is_imported_module is True]
+    assert len(imported_modules) == 0
+
+    os_module = typeshed_stdlib.files.get("os")
+    pb_module = symbols.ModuleSymbol(os_module).to_proto()
+    imported_modules = [imported_module for imported_module in pb_module.vars if imported_module.is_imported_module is True]
+    assert len(imported_modules) == 3
+    imported_modules = map(lambda m: (m.fully_qualified_name, m.name), imported_modules)
+    assert ("sys", "sys") in imported_modules
+    assert ("os.path", "_path") in imported_modules
+    assert ("os.path", "path") in imported_modules
 
 
 def test_class_symbol(typeshed_stdlib):
