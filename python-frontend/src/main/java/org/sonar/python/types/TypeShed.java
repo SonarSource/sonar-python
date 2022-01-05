@@ -198,15 +198,15 @@ public class TypeShed {
       return new HashSet<>();
     }
     modulesInProgress.add(moduleName);
-    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName).values();
-    if (!symbolsFromProtobuf.isEmpty()) {
-      modulesInProgress.remove(moduleName);
-      return new HashSet<>(symbolsFromProtobuf);
-    }
     Set<Symbol> customSymbols = new HashSet<>(getModuleSymbols(moduleName, CUSTOM_THIRD_PARTY, builtinGlobalSymbols).values());
     if (!customSymbols.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return customSymbols;
+    }
+    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName).values();
+    if (!symbolsFromProtobuf.isEmpty()) {
+      modulesInProgress.remove(moduleName);
+      return new HashSet<>(symbolsFromProtobuf);
     }
     Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols).values());
     if (thirdPartySymbols.isEmpty()) {
@@ -283,10 +283,26 @@ public class TypeShed {
     return latestPythonSymbol;
   }
 
+
+  /**
+   * Returns stub symbols to be used by SonarSecurity.
+   * Ambiguous symbols that contain all class symbols are disambiguated with latest Python version.
+   */
   public static Collection<Symbol> stubFilesSymbols() {
     Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
-    typeShedSymbols.values().forEach(symbolsByFqn -> symbols.addAll(symbolsByFqn.values()));
+    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
+      for (Symbol symbol : symbolsByFqn.values()) {
+        symbols.add(isAmbiguousSymbolOfClasses(symbol) ? disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) symbol).alternatives()) : symbol);
+      }
+    }
     return symbols;
+  }
+
+  private static boolean isAmbiguousSymbolOfClasses(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      return ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(s -> s.is(Symbol.Kind.CLASS));
+    }
+    return false;
   }
 
   static class ReturnTypeVisitor extends BaseTreeVisitor {

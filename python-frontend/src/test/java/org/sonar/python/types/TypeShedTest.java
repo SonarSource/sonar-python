@@ -488,4 +488,10 @@ public class TypeShedTest {
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName, Symbol::annotatedTypeName)
       .containsExactlyInAnyOrder(tuple(Kind.OTHER, "mod.foo", "str"), tuple(Kind.OTHER, "mod.bar", null));
   }
+
+  @Test
+  public void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
+    Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
+    assertThat(symbols).noneMatch(s -> s.is(Kind.AMBIGUOUS) && ((AmbiguousSymbol) s).alternatives().stream().allMatch(a -> a.is(Kind.CLASS)));
+  }
 }
