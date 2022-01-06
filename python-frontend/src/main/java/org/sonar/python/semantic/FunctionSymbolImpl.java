@@ -88,17 +88,17 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, String moduleName) {
-    this(functionSymbolProto, false, functionSymbolProto.getValidForList(), moduleName);
+    this(functionSymbolProto, null, functionSymbolProto.getValidForList(), moduleName);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass, String moduleName) {
-    this(functionSymbolProto, insideClass, functionSymbolProto.getValidForList(), moduleName);
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, String moduleName) {
+    this(functionSymbolProto, containerClassFqn, functionSymbolProto.getValidForList(), moduleName);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass, List<String> validFor, String moduleName) {
-    super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName(), moduleName, functionSymbolProto.getName()));
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, List<String> validFor, String moduleName) {
+    super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName(), moduleName, functionSymbolProto.getName(), containerClassFqn));
     setKind(Kind.FUNCTION);
-    isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
+    isInstanceMethod = containerClassFqn != null && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();
     hasDecorators = functionSymbolProto.getHasDecorators();
     decorators = functionSymbolProto.getResolvedDecoratorNamesList();

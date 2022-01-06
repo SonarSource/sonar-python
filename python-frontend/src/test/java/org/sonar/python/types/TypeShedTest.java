@@ -520,4 +520,12 @@ public class TypeShedTest {
     Symbol samefileFromSubModule = osPath.get("samefile");
     assertThat(samefileFromSubModule).isSameAs(samefile);
   }
+
+  @Test
+  public void typeshed_private_modules_should_not_affect_fqn()  {
+    Map<String, Symbol> socketModule = symbolsForModule("socket");
+    ClassSymbol socket = (ClassSymbol) TypeShed.disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) socketModule.get("socket")).alternatives());
+    assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
+    assertThat(socket.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
+  }
 }
