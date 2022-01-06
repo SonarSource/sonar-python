@@ -304,4 +304,8 @@ public class SymbolUtils {
     }
     return alternatives;
   }
+
+  public static boolean isPrivateName(String name) {
+    return name.startsWith("_") && !name.startsWith("__");
+  }
 }

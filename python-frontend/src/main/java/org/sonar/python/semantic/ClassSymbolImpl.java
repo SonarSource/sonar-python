@@ -45,6 +45,7 @@ import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
+import static org.sonar.python.semantic.SymbolUtils.isPrivateName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
@@ -54,6 +55,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = new ArrayList<>();
   private List<String> superClassesFqns = new ArrayList<>();
+  private List<String> inlinedSuperClassFqn = new ArrayList<>();
   private Set<Symbol> allSuperClasses = null;
   private Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
   private boolean hasSuperClassWithoutSymbol = false;
@@ -143,13 +145,36 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     classSymbolProto.getOverloadedMethodsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+
+    inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
+
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), true, moduleName);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName);
       methods.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(methods);
-    superClassesFqns = classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList());
+    superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList()));
+    superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
+  }
+
+  private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {
+    for (String superClassFqn : superClassesFqns) {
+      if (isPrivateName(superClassFqn)) {
+        SymbolsProtos.ClassSymbol superClass = TypeShed.classDescriptorWithFQN(superClassFqn);
+        if (superClass == null) return;
+        inlinedSuperClassFqn.add(superClassFqn);
+        for (SymbolsProtos.FunctionSymbol functionSymbol : superClass.getMethodsList()) {
+          String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
+          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>()).add(functionSymbol);
+        }
+        for (SymbolsProtos.OverloadedFunctionSymbol functionSymbol : superClass.getOverloadedMethodsList()) {
+          String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
+          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>()).add(functionSymbol);
+        }
+        this.superClassesFqns.addAll(superClass.getSuperClassesList());
+      }
+    }
   }
 
   @Override

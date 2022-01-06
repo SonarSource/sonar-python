@@ -179,6 +179,11 @@ public class TypeShed {
   }
 
   public static String normalizedFqn(String fqn, String moduleName, String localName) {
+    return normalizedFqn(fqn, moduleName, localName, null);
+  }
+
+  public static String normalizedFqn(String fqn, String moduleName, String localName, @Nullable String containerClassFqn) {
+    if (containerClassFqn != null) return containerClassFqn + "." + localName;
     if (fqn.startsWith(moduleName)) return normalizedFqn(fqn);
     return moduleName + "." + localName;
   }
@@ -192,20 +197,20 @@ public class TypeShed {
     return !intersection.isEmpty();
   }
 
-  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, boolean isInsideClass, String moduleName) {
+  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName) {
     Set<Symbol> symbols = new HashSet<>();
     for (Object descriptor : protobufDescriptors) {
       if (descriptor instanceof SymbolsProtos.ClassSymbol) {
         symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor), moduleName));
       }
       if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
-        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass, moduleName));
+        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), containerClassFqn, moduleName));
       }
       if (descriptor instanceof OverloadedFunctionSymbol) {
         if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
           throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
-        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass, moduleName));
+        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), containerClassFqn, moduleName));
       }
       if (descriptor instanceof SymbolsProtos.VarSymbol) {
         SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
@@ -218,6 +223,24 @@ public class TypeShed {
       }
     }
     return symbols;
+  }
+
+
+  @CheckForNull
+  public static SymbolsProtos.ClassSymbol classDescriptorWithFQN(String fullyQualifiedName) {
+    String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
+    String symbolLocalNameFromFqn = fqnSplitByDot[fqnSplitByDot.length - 1];
+    String moduleName = Arrays.stream(fqnSplitByDot, 0, fqnSplitByDot.length - 1).collect(Collectors.joining("."));
+    InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
+    if (resource == null) return null;
+    ModuleSymbol moduleSymbol = deserializedModule(moduleName, resource);
+    if (moduleSymbol == null) return null;
+    for (SymbolsProtos.ClassSymbol classSymbol : moduleSymbol.getClassesList()) {
+      if (classSymbol.getName().equals(symbolLocalNameFromFqn)) {
+        return classSymbol;
+      }
+    }
+    return null;
   }
 
   //================================================================================
@@ -260,7 +283,7 @@ public class TypeShed {
    * This method sort ambiguous symbol by python version and returns the one which is valid for
    * the most recent Python version.
    */
-  private static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
+  static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
     int max = Integer.MIN_VALUE;
     Symbol latestPythonSymbol = null;
     for (Symbol alternative : alternatives) {
@@ -322,7 +345,7 @@ public class TypeShed {
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), false, moduleSymbol.getFullyQualifiedName());
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName());
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }
@@ -356,9 +379,9 @@ public class TypeShed {
     return firstFqn != null && symbols.stream().map(Symbol::fullyQualifiedName).allMatch(firstFqn::equals);
   }
 
-  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass, String moduleName) {
+  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, @Nullable String containerClassFqn, String moduleName) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
-      .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList(), moduleName))
+      .map(def -> new FunctionSymbolImpl(def, containerClassFqn, overloadedFunctionSymbol.getValidForList(), moduleName))
       .collect(Collectors.toSet());
     return AmbiguousSymbolImpl.create(overloadedSymbols);
   }
