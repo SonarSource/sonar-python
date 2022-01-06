@@ -286,7 +286,7 @@ public class TypeShed {
 
   /**
    * Returns stub symbols to be used by SonarSecurity.
-   * Ambiguous symbols that contain all class symbols are disambiguated with latest Python version.
+   * Ambiguous symbols that only contain class symbols are disambiguated with latest Python version.
    */
   public static Collection<Symbol> stubFilesSymbols() {
     Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());

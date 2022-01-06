@@ -491,6 +491,8 @@ public class TypeShedTest {
 
   @Test
   public void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
+    // populate typeshed symbols cache by importing socket module
+    symbolsForModule("socket");
     Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
     assertThat(symbols).noneMatch(s -> s.is(Kind.AMBIGUOUS) && ((AmbiguousSymbol) s).alternatives().stream().allMatch(a -> a.is(Kind.CLASS)));
   }
