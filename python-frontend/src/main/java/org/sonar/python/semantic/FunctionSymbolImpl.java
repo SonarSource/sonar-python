@@ -87,16 +87,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto) {
-    this(functionSymbolProto, false, functionSymbolProto.getValidForList());
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, String moduleName) {
+    this(functionSymbolProto, false, functionSymbolProto.getValidForList(), moduleName);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass) {
-    this(functionSymbolProto, insideClass, functionSymbolProto.getValidForList());
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass, String moduleName) {
+    this(functionSymbolProto, insideClass, functionSymbolProto.getValidForList(), moduleName);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass, List<String> validFor) {
-    super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName()));
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, boolean insideClass, List<String> validFor, String moduleName) {
+    super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName(), moduleName, functionSymbolProto.getName()));
     setKind(Kind.FUNCTION);
     isInstanceMethod = insideClass && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();

@@ -202,7 +202,7 @@ public class TypeShedTest {
 
     Symbol timesResult = osSymbols.get("times_result");
     assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
-    assertThat(timesResult.fullyQualifiedName()).isEqualTo("posix.times_result");
+    assertThat(timesResult.fullyQualifiedName()).isEqualTo("os.times_result");
 
     Map<String, Symbol> requestsSymbols = symbolsForModule("requests");
     Symbol requestSymbol = requestsSymbols.get("request");
@@ -233,8 +233,10 @@ public class TypeShedTest {
     Map<String, Symbol> posixSymbols = symbolsForModule("posix");
     Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
     Symbol setupSymbolFromOs = osSymbols.get("stat_result");
-    assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.CLASS);
-    assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.CLASS);
+    assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(setupSymbolFromPosix.fullyQualifiedName()).isEqualTo("posix.stat_result");
+    assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(setupSymbolFromOs.fullyQualifiedName()).isEqualTo("os.stat_result");
   }
 
   @Test
@@ -512,6 +514,7 @@ public class TypeShedTest {
     SymbolImpl path = (SymbolImpl) os.get("path");
     Symbol samefile = path.getChildrenSymbolByName().get("samefile");
     assertThat(samefile).isNotNull();
+    assertThat(samefile.fullyQualifiedName()).isEqualTo("os.path.samefile");
 
     Map<String, Symbol> osPath = symbolsForModule("os.path");
     Symbol samefileFromSubModule = osPath.get("samefile");

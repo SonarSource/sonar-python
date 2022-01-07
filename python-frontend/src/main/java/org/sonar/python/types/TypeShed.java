@@ -178,6 +178,11 @@ public class TypeShed {
     return fqn;
   }
 
+  public static String normalizedFqn(String fqn, String moduleName, String localName) {
+    if (fqn.startsWith(moduleName)) return normalizedFqn(fqn);
+    return moduleName + "." + localName;
+  }
+
   public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
     if (validForPythonVersions.isEmpty()) {
       return true;
@@ -187,24 +192,24 @@ public class TypeShed {
     return !intersection.isEmpty();
   }
 
-  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, boolean isInsideClass) {
+  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, boolean isInsideClass, String moduleName) {
     Set<Symbol> symbols = new HashSet<>();
     for (Object descriptor : protobufDescriptors) {
       if (descriptor instanceof SymbolsProtos.ClassSymbol) {
-        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor)));
+        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor), moduleName));
       }
       if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
-        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
+        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass, moduleName));
       }
       if (descriptor instanceof OverloadedFunctionSymbol) {
         if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
           throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
-        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
+        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass, moduleName));
       }
       if (descriptor instanceof SymbolsProtos.VarSymbol) {
         SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
-        SymbolImpl symbol = new SymbolImpl(varSymbol);
+        SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName);
         if (varSymbol.getIsImportedModule()) {
           Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName());
           moduleExportedSymbols.values().forEach(symbol::addChildSymbol);
@@ -317,7 +322,7 @@ public class TypeShed {
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), false);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), false, moduleSymbol.getFullyQualifiedName());
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }
@@ -351,9 +356,9 @@ public class TypeShed {
     return firstFqn != null && symbols.stream().map(Symbol::fullyQualifiedName).allMatch(firstFqn::equals);
   }
 
-  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass) {
+  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass, String moduleName) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
-      .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList()))
+      .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList(), moduleName))
       .collect(Collectors.toSet());
     return AmbiguousSymbolImpl.create(overloadedSymbols);
   }

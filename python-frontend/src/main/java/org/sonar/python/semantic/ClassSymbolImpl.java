@@ -48,7 +48,6 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
-import static org.sonar.python.types.TypeShed.normalizedFqn;
 import static org.sonar.python.types.TypeShed.symbolsFromProtobufDescriptors;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
@@ -128,8 +127,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     setKind(Kind.CLASS);
   }
 
-  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto) {
-    super(classSymbolProto.getName(), normalizedFqn(classSymbolProto.getFullyQualifiedName()));
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName) {
+    super(classSymbolProto.getName(), TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName(), moduleName, classSymbolProto.getName()));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
     hasDecorators = classSymbolProto.getHasDecorators();
@@ -145,7 +144,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), true);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), true, moduleName);
       methods.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(methods);
