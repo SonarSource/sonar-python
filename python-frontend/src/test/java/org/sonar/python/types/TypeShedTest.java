@@ -27,7 +27,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +47,7 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.sonar.python.types.TypeShed.symbolsForModule;
 
 public class TypeShedTest {
 
@@ -153,16 +153,16 @@ public class TypeShedTest {
 
   @Test
   public void should_resolve_packages() {
-    assertThat(TypeShed.symbolsForModule("urllib")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("ctypes")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("email")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("json")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("docutils")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("ctypes.util")).isNotEmpty();
-    assertThat(TypeShed.symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
+    assertThat(symbolsForModule("urllib")).isNotEmpty();
+    assertThat(symbolsForModule("ctypes")).isNotEmpty();
+    assertThat(symbolsForModule("email")).isNotEmpty();
+    assertThat(symbolsForModule("json")).isNotEmpty();
+    assertThat(symbolsForModule("docutils")).isNotEmpty();
+    assertThat(symbolsForModule("ctypes.util")).isNotEmpty();
+    assertThat(symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
     // resolved but still empty
-    assertThat(TypeShed.symbolsForModule("cryptography")).isEmpty();
-    assertThat(TypeShed.symbolsForModule("kazoo")).isEmpty();
+    assertThat(symbolsForModule("cryptography")).isEmpty();
+    assertThat(symbolsForModule("kazoo")).isEmpty();
   }
 
   @Test
@@ -271,8 +271,8 @@ public class TypeShedTest {
 
   @Test
   public void stub_files_symbols() {
-    Set<Symbol> mathSymbols = TypeShed.symbolsForModule("math");
-    Set<Symbol> djangoHttpSymbols = TypeShed.symbolsForModule("django.http");
+    Collection<Symbol> mathSymbols = symbolsForModule("math").values();
+    Collection<Symbol> djangoHttpSymbols = symbolsForModule("django.http").values();
 
     Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
     assertThat(symbols)
@@ -282,7 +282,7 @@ public class TypeShedTest {
 
   @Test
   public void deserialize_annoy_protobuf() {
-    Map<String, Symbol> deserializedAnnoySymbols = TypeShed.symbolsForModule("annoy").stream()
+    Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"));
@@ -321,7 +321,7 @@ public class TypeShedTest {
 
   @Test
   public void deserialize_nonexistent_or_incorrect_protobuf() {
-    assertThat(TypeShed.symbolsForModule("NOT_EXISTENT")).isEmpty();
+    assertThat(symbolsForModule("NOT_EXISTENT")).isEmpty();
     assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
     InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
     assertThat(TypeShed.deserializedModule("mod", targetStream)).isNull();
@@ -451,7 +451,7 @@ public class TypeShedTest {
   @Test
   public void symbolWithFQN_should_be_consistent() {
     // smtplib imports typing.Sequence only in Python3, hence typing.Sequence has kind CLASS
-    TypeShed.symbolsForModule("smtplib");
+    symbolsForModule("smtplib");
     Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
     assertThat(sequence.kind()).isEqualTo(Kind.AMBIGUOUS);
     Map<String, Symbol> typing = symbolsForModule("typing");
@@ -462,12 +462,6 @@ public class TypeShedTest {
     SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);
     return builder.build();
-  }
-
-  private static Map<String, Symbol> symbolsForModule(String moduleName) {
-    Set<Symbol> symbols = TypeShed.symbolsForModule(moduleName);
-    assertThat(symbols.stream().map(Symbol::name)).doesNotHaveDuplicates();
-    return symbols.stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
   }
 
   @Test
@@ -508,7 +502,19 @@ public class TypeShedTest {
     python2Symbols.put("a", a1);
     python2Symbols.put("b", b);
     Map<String, Symbol> python3Symbols = Collections.singletonMap("a", a2);
-    Set<Symbol> symbols = TypeShedThirdParties.commonSymbols(python2Symbols, python3Symbols, "mod");
+    Collection<Symbol> symbols = TypeShedThirdParties.commonSymbols(python2Symbols, python3Symbols, "mod").values();
     assertThat(symbols).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "a"), tuple(Kind.OTHER, "b"));
+  }
+
+  @Test
+  public void symbol_from_submodule_access() {
+    Map<String, Symbol> os = symbolsForModule("os");
+    SymbolImpl path = (SymbolImpl) os.get("path");
+    Symbol samefile = path.getChildrenSymbolByName().get("samefile");
+    assertThat(samefile).isNotNull();
+
+    Map<String, Symbol> osPath = symbolsForModule("os.path");
+    Symbol samefileFromSubModule = osPath.get("samefile");
+    assertThat(samefileFromSubModule).isSameAs(samefile);
   }
 }

@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
@@ -91,23 +92,23 @@ public class TypeShedThirdParties {
     return new ModuleDescription(resource, moduleFileName, packageName);
   }
 
-  static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
-    Set<Symbol> commonSymbols = new HashSet<>();
+  static Map<String, Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
+    Map<String, Symbol> commonSymbols = new HashMap<>();
     symbolsPython3.forEach((localName, python3Symbol) -> {
       Symbol python2Symbol = symbolsPython2.get(localName);
       if (python2Symbol == null || python2Symbol == python3Symbol) {
-        commonSymbols.add(python3Symbol);
+        commonSymbols.put(localName, python3Symbol);
       } else {
         Set<Symbol> symbols = new HashSet<>();
         symbols.add(python2Symbol);
         symbols.add(python3Symbol);
-        commonSymbols.add(new AmbiguousSymbolImpl(localName, packageName + "." + localName, symbols));
+        commonSymbols.put(localName, new AmbiguousSymbolImpl(localName, packageName + "." + localName, symbols));
       }
     });
 
     symbolsPython2.forEach((localName, python2Symbol) -> {
       if (symbolsPython3.get(localName) == null) {
-        commonSymbols.add(python2Symbol);
+        commonSymbols.put(localName, python2Symbol);
       }
     });
 
