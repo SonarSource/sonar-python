@@ -19,7 +19,6 @@
  */
 package org.sonar.python.types;
 
-import com.sonar.sslr.api.AstNode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -29,40 +28,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.BuiltinSymbols;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
-import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.python.tree.FunctionDefImpl;
-import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
 import org.sonar.python.types.protobuf.SymbolsProtos.OverloadedFunctionSymbol;
@@ -76,6 +58,8 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.STR;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
+import static org.sonar.python.types.TypeShedThirdParties.commonSymbols;
+import static org.sonar.python.types.TypeShedThirdParties.getModuleSymbols;
 
 public class TypeShed {
 
@@ -105,6 +89,10 @@ public class TypeShed {
   private TypeShed() {
   }
 
+  //================================================================================
+  // Public methods
+  //================================================================================
+
   public static Map<String, Symbol> builtinSymbols() {
     if ((TypeShed.builtins == null)) {
       supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
@@ -116,47 +104,15 @@ public class TypeShed {
     return builtins;
   }
 
-  // used by tests whenever 'sonar.python.version' changes
-  static void resetBuiltinSymbols() {
-    builtins = null;
-    typeShedSymbols.clear();
-    builtinSymbols();
-  }
-
-  private static void setDeclaredReturnType(Symbol symbol, FunctionDef functionDef) {
-    TypeAnnotation returnTypeAnnotation = functionDef.returnTypeAnnotation();
-    if (returnTypeAnnotation == null) {
-      return;
+  public static ClassSymbol typeShedClass(String fullyQualifiedName) {
+    Symbol symbol = builtinSymbols().get(fullyQualifiedName);
+    if (symbol == null) {
+      throw new IllegalArgumentException("No TypeShed symbol found for name: " + fullyQualifiedName);
     }
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
-      FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-      functionSymbol.setDeclaredReturnType(InferredTypes.fromTypeshedTypeAnnotation(returnTypeAnnotation));
-    } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-      Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
+    if (symbol.kind() != Symbol.Kind.CLASS) {
+      throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
     }
-  }
-
-  private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
-    Set<Symbol> commonSymbols = new HashSet<>();
-    symbolsPython3.forEach((localName, python3Symbol) -> {
-      Symbol python2Symbol = symbolsPython2.get(localName);
-      if (python2Symbol == null || python2Symbol == python3Symbol) {
-        commonSymbols.add(python3Symbol);
-      } else {
-        Set<Symbol> symbols = new HashSet<>();
-        symbols.add(python2Symbol);
-        symbols.add(python3Symbol);
-        commonSymbols.add(new AmbiguousSymbolImpl(localName, packageName + "." + localName, symbols));
-      }
-    });
-
-    symbolsPython2.forEach((localName, python2Symbol) -> {
-      if (symbolsPython3.get(localName) == null) {
-        commonSymbols.add(python2Symbol);
-      }
-    });
-
-    return commonSymbols;
+    return (ClassSymbol) symbol;
   }
 
   public static Set<Symbol> symbolsForModule(String moduleName) {
@@ -193,6 +149,87 @@ public class TypeShed {
     return null;
   }
 
+  @CheckForNull
+  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    Map<String, Symbol> builtinSymbols = builtinSymbols();
+    Symbol builtinSymbol = builtinSymbols.get(normalizedFqn(fullyQualifiedName));
+    if (builtinSymbol != null) {
+      return builtinSymbol;
+    }
+    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
+    String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
+    return symbolWithFQN(moduleName, fullyQualifiedName);
+  }
+
+  /**
+   * Returns stub symbols to be used by SonarSecurity.
+   * Ambiguous symbols that only contain class symbols are disambiguated with latest Python version.
+   */
+  public static Collection<Symbol> stubFilesSymbols() {
+    Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
+    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
+      for (Symbol symbol : symbolsByFqn.values()) {
+        symbols.add(isAmbiguousSymbolOfClasses(symbol) ? disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) symbol).alternatives()) : symbol);
+      }
+    }
+    return symbols;
+  }
+
+  public static String normalizedFqn(String fqn) {
+    if (fqn.startsWith(BUILTINS_PREFIX)) {
+      return fqn.substring(BUILTINS_PREFIX.length());
+    }
+    return fqn;
+  }
+
+  public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
+    if (validForPythonVersions.isEmpty()) {
+      return true;
+    }
+    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
+    intersection.retainAll(supportedPythonVersions);
+    return !intersection.isEmpty();
+  }
+
+  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, boolean isInsideClass) {
+    Set<Symbol> symbols = new HashSet<>();
+    for (Object descriptor : protobufDescriptors) {
+      if (descriptor instanceof SymbolsProtos.ClassSymbol) {
+        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor)));
+      }
+      if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
+        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
+      }
+      if (descriptor instanceof OverloadedFunctionSymbol) {
+        if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
+          throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
+        }
+        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
+      }
+      if (descriptor instanceof SymbolsProtos.VarSymbol) {
+        SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
+        SymbolImpl symbol = new SymbolImpl(varSymbol);
+        if (varSymbol.getIsImportedModule()) {
+          Set<Symbol> moduleExportedSymbols = searchTypeShedForModule(varSymbol.getFullyQualifiedName());
+          moduleExportedSymbols.forEach(symbol::addChildSymbol);
+        }
+        symbols.add(symbol);
+      }
+    }
+    return symbols;
+  }
+
+  //================================================================================
+  // Private methods
+  //================================================================================
+
+  // used by tests whenever 'sonar.python.version' changes
+  static void resetBuiltinSymbols() {
+    builtins = null;
+    typeShedSymbols.clear();
+    builtinSymbols();
+  }
+
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {
     if (modulesInProgress.contains(moduleName)) {
       return new HashSet<>();
@@ -217,54 +254,6 @@ public class TypeShed {
     return thirdPartySymbols;
   }
 
-  @Nullable
-  private static ModuleDescription getResourceForModule(String moduleName, String categoryPath) {
-    String[] moduleNameHierarchy = moduleName.split("\\.");
-    String pathToModule = String.join("/", moduleNameHierarchy);
-    String moduleFileName = moduleNameHierarchy[moduleNameHierarchy.length - 1];
-    String packageName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
-    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
-    if (resource == null) {
-      resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + "/__init__.pyi");
-      if (resource == null) {
-        return null;
-      }
-      moduleFileName = "__init__";
-      packageName = moduleName;
-    }
-    return new ModuleDescription(resource, moduleFileName, packageName);
-  }
-
-  private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {
-    ModuleDescription moduleDescription = getResourceForModule(moduleName, categoryPath);
-    if (moduleDescription == null) {
-      return Collections.emptyMap();
-    }
-    PythonFile file = new TypeShedPythonFile(moduleDescription.resource, moduleDescription.fileName);
-    AstNode astNode = PythonParser.create().parse(file.content());
-    FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-    new SymbolTableBuilder(moduleDescription.packageName, file, ProjectLevelSymbolTable.from(initialSymbols)).visitFileInput(fileInput);
-    fileInput.accept(new ReturnTypeVisitor());
-    return fileInput.globalVariables().stream()
-      .map(symbol -> {
-        ((SymbolImpl) symbol).removeUsages();
-        return symbol;
-      })
-      .filter(s -> s.fullyQualifiedName() != null)
-      .collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
-  }
-
-  public static ClassSymbol typeShedClass(String fullyQualifiedName) {
-    Symbol symbol = builtinSymbols().get(fullyQualifiedName);
-    if (symbol == null) {
-      throw new IllegalArgumentException("No TypeShed symbol found for name: " + fullyQualifiedName);
-    }
-    if (symbol.kind() != Symbol.Kind.CLASS) {
-      throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
-    }
-    return (ClassSymbol) symbol;
-  }
-
   /**
    * Some special symbols need NOT to be ambiguous for the frontend to work properly.
    * This method sort ambiguous symbol by python version and returns the one which is valid for
@@ -283,94 +272,11 @@ public class TypeShed {
     return latestPythonSymbol;
   }
 
-
-  /**
-   * Returns stub symbols to be used by SonarSecurity.
-   * Ambiguous symbols that only contain class symbols are disambiguated with latest Python version.
-   */
-  public static Collection<Symbol> stubFilesSymbols() {
-    Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
-    for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
-      for (Symbol symbol : symbolsByFqn.values()) {
-        symbols.add(isAmbiguousSymbolOfClasses(symbol) ? disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) symbol).alternatives()) : symbol);
-      }
-    }
-    return symbols;
-  }
-
   private static boolean isAmbiguousSymbolOfClasses(Symbol symbol) {
     if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       return ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(s -> s.is(Symbol.Kind.CLASS));
     }
     return false;
-  }
-
-  static class ReturnTypeVisitor extends BaseTreeVisitor {
-
-    @Override
-    public void visitFunctionDef(FunctionDef functionDef) {
-      Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
-        setDeclaredReturnType(symbol, functionDef);
-        setParameterTypes(symbol, functionDef);
-        setAnnotatedReturnType(symbol, functionDef);
-      });
-      super.visitFunctionDef(functionDef);
-    }
-
-    @Override
-    public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
-      if (annotatedAssignment.variable().is(Tree.Kind.NAME)) {
-        Name variable = (Name) annotatedAssignment.variable();
-        Optional.ofNullable(variable.symbol()).ifPresent(symbol -> setAnnotatedType(symbol, annotatedAssignment));
-      }
-      super.visitAnnotatedAssignment(annotatedAssignment);
-    }
-
-    private static void setAnnotatedType(Symbol symbol, AnnotatedAssignment annotatedAssignment) {
-      TypeAnnotation typeAnnotation = annotatedAssignment.annotation();
-      if (symbol.is(Symbol.Kind.OTHER)) {
-        SymbolImpl other = (SymbolImpl) symbol;
-        other.setAnnotatedTypeName(typeAnnotation);
-      }
-    }
-
-    private static void setAnnotatedReturnType(Symbol symbol, FunctionDef functionDef) {
-      TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
-      if (symbol.is(Symbol.Kind.FUNCTION)) {
-        ((FunctionSymbolImpl) symbol).setAnnotatedReturnTypeName(typeAnnotation);
-      } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-        Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setAnnotatedReturnType(functionSymbol, functionDef));
-      }
-    }
-
-    private static void setParameterTypes(Symbol symbol, FunctionDef functionDef) {
-      if (symbol.is(Symbol.Kind.FUNCTION)) {
-        FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-        ParameterList parameters = functionDef.parameters();
-        if (parameters != null) {
-          // For builtin functions, we don't have type information from typings.pyi for the parameters when constructing the initial symbol table
-          // We need to recreate those with that information
-          functionSymbol.setParametersWithType(parameters);
-        }
-      } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-        FunctionSymbol funcDefSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
-        if (funcDefSymbol != null) {
-          setParameterTypes(funcDefSymbol, functionDef);
-        }
-      }
-    }
-  }
-
-  private static class ModuleDescription {
-    InputStream resource;
-    String fileName;
-    String packageName;
-
-    ModuleDescription(InputStream resource, String fileName, String packageName) {
-      this.resource = resource;
-      this.fileName = fileName;
-      this.packageName = packageName;
-    }
   }
 
   private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName) {
@@ -415,7 +321,7 @@ public class TypeShed {
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), false);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), false);
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }
@@ -449,67 +355,10 @@ public class TypeShed {
     return firstFqn != null && symbols.stream().map(Symbol::fullyQualifiedName).allMatch(firstFqn::equals);
   }
 
-  public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
-    if (validForPythonVersions.isEmpty()) {
-      return true;
-    }
-    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
-    intersection.retainAll(supportedPythonVersions);
-    return !intersection.isEmpty();
-  }
-
-  public static Set<Symbol> symbolsFromDescriptor(Set<Object> descriptors, boolean isInsideClass) {
-    Set<Symbol> symbols = new HashSet<>();
-    for (Object descriptor : descriptors) {
-      if (descriptor instanceof SymbolsProtos.ClassSymbol) {
-        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor)));
-      }
-      if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
-        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), isInsideClass));
-      }
-      if (descriptor instanceof OverloadedFunctionSymbol) {
-        if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
-          throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
-        }
-        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), isInsideClass));
-      }
-      if (descriptor instanceof SymbolsProtos.VarSymbol) {
-        SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
-        SymbolImpl symbol = new SymbolImpl(varSymbol);
-        if (varSymbol.getIsImportedModule()) {
-          Set<Symbol> moduleExportedSymbols = searchTypeShedForModule(varSymbol.getFullyQualifiedName());
-          moduleExportedSymbols.forEach(symbol::addChildSymbol);
-        }
-        symbols.add(symbol);
-      }
-    }
-    return symbols;
-  }
-
   private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isInsideClass) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
       .map(def -> new FunctionSymbolImpl(def, isInsideClass, overloadedFunctionSymbol.getValidForList()))
       .collect(Collectors.toSet());
     return AmbiguousSymbolImpl.create(overloadedSymbols);
   }
-
-  @CheckForNull
-  public static Symbol symbolWithFQN(String fullyQualifiedName) {
-    Map<String, Symbol> builtinSymbols = builtinSymbols();
-    Symbol builtinSymbol = builtinSymbols.get(normalizedFqn(fullyQualifiedName));
-    if (builtinSymbol != null) {
-      return builtinSymbol;
-    }
-    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
-    String moduleName = Arrays.stream(fqnSplittedByDot, 0, fqnSplittedByDot.length - 1).collect(Collectors.joining("."));
-    return symbolWithFQN(moduleName, fullyQualifiedName);
-  }
-
-  public static String normalizedFqn(String fqn) {
-    if (fqn.startsWith(BUILTINS_PREFIX)) {
-      return fqn.substring(BUILTINS_PREFIX.length());
-    }
-    return fqn;
-  }
-
 }
