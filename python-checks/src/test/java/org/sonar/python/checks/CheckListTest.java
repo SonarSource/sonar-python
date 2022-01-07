@@ -21,20 +21,30 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.Iterables;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
+import org.sonarsource.analyzer.commons.internal.json.simple.JSONObject;
+import org.sonarsource.analyzer.commons.internal.json.simple.parser.JSONParser;
+import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class CheckListTest {
 
@@ -48,7 +58,7 @@ public class CheckListTest {
   @Test
   public void count() {
     int count = 0;
-    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[] {"java"}, true);
+    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[]{"java"}, true);
     for (File file : files) {
       if (file.getName().endsWith("Check.java") && !file.getName().startsWith("Abstract")) {
         count++;
@@ -67,8 +77,8 @@ public class CheckListTest {
     for (Class cls : checks) {
       String testName = '/' + cls.getName().replace('.', '/') + "Test.class";
       assertThat(getClass().getResource(testName))
-          .overridingErrorMessage("No test for " + cls.getSimpleName())
-          .isNotNull();
+        .overridingErrorMessage("No test for " + cls.getSimpleName())
+        .isNotNull();
     }
   }
 
@@ -92,6 +102,76 @@ public class CheckListTest {
 
       assertThat(fileNames).isEqualTo(sqKeys);
     }
+  }
+
+  @Test
+  public void test_no_deprecated_rule_in_default_profile() throws IOException, ParseException {
+    try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
+      List<Path> jsonList = fileStream.collect(Collectors.toList());
+
+      Path sonarWayProfilePath = jsonList.stream().filter(path -> path.toString().endsWith("Sonar_way_profile.json")).findFirst().get();
+      List<String> keysInDefaultProfile = getKeysInDefaultProfile(sonarWayProfilePath);
+
+      Set<String> deprecatedKeys = jsonList.stream()
+        .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
+        .filter(path1 -> {
+          try {
+            return isDeprecated(path1);
+          } catch (Exception e) {
+            fail(String.format("Exception when deserializing JSON file \"%s\"", path1.getFileName().toString()));
+            return false;
+          }
+        })
+        .map(Path::getFileName)
+        .map(Path::toString)
+        .map(name -> name.replaceAll("\\.json$", ""))
+        .collect(Collectors.toSet());
+
+      assertThat(keysInDefaultProfile).isNotEmpty();
+      assertThat(deprecatedKeys).isNotEmpty();
+      assertThat(keysInDefaultProfile).doesNotContainAnyElementsOf(deprecatedKeys);
+    }
+  }
+
+  @Test
+  public void test_locally_deprecated_rules_stay_deprecated() throws IOException, ParseException {
+    // Some rules have been deprecated only for Python. When executed, rule-api reverts those rule to "ready" status, which is incorrect.
+    // This test is here to ensure it doesn't happen.
+    List<String> locallyDeprecatedRules = Arrays.asList("S1523", "S4721");
+    try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
+      Set<String> deprecatedKeys = fileStream
+        .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
+        .filter(path1 -> {
+          try {
+            return isDeprecated(path1);
+          } catch (Exception e) {
+            fail(String.format("Exception when deserializing JSON file \"%s\"", path1.getFileName().toString()));
+            return false;
+          }
+        })
+        .map(Path::getFileName)
+        .map(Path::toString)
+        .map(name -> name.replaceAll("\\.json$", ""))
+        .collect(Collectors.toSet());
+
+      assertThat(deprecatedKeys).containsAll(locallyDeprecatedRules);
+    }
+  }
+
+  private static boolean isDeprecated(Path path) throws IOException, ParseException {
+    InputStream in = new FileInputStream(path.toFile());
+    JSONParser jsonParser = new JSONParser();
+    JSONObject ruleJson = (JSONObject) jsonParser.parse(new InputStreamReader(in, UTF_8));
+    Object status = ruleJson.get("status");
+    return status.equals("deprecated");
+  }
+
+  private static List<String> getKeysInDefaultProfile(Path sonarWayPath) throws IOException, ParseException {
+    InputStream in = new FileInputStream(sonarWayPath.toFile());
+    JSONParser jsonParser = new JSONParser();
+    JSONObject sonarWayJson = (JSONObject) jsonParser.parse(new InputStreamReader(in, UTF_8));
+    JSONArray sonarWayKeys = (JSONArray) sonarWayJson.get("ruleKeys");
+    return (List<String>) sonarWayKeys.stream().sorted().collect(Collectors.toList());
   }
 
   private static String extractSqKey(Path jsonFile) {
