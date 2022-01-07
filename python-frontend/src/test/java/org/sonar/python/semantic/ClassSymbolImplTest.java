@@ -238,7 +238,7 @@ public class ClassSymbolImplTest {
       "has_decorators: true\n" +
       "has_metaclass: true\n" +
       "metaclass_name: \"abc.ABCMeta\"";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
     assertThat(classSymbol.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
@@ -262,7 +262,7 @@ public class ClassSymbolImplTest {
         "  }\n" +
         "  has_decorators: true\n" +
         "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isTrue();
   }
@@ -283,7 +283,7 @@ public class ClassSymbolImplTest {
       "  has_decorators: true\n" +
       "  is_class_method: true\n" +
       "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
   }
@@ -304,7 +304,7 @@ public class ClassSymbolImplTest {
         "  has_decorators: true\n" +
         "  is_static: true\n" +
         "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
   }
@@ -334,7 +334,7 @@ public class ClassSymbolImplTest {
         "    fully_qualified_name: \"mod.A.foo\"\n" +
         "  }\n" +
         "}\n";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf));
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
     assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("27", "39");

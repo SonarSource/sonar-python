@@ -68,9 +68,9 @@ public class SymbolImpl implements Symbol {
     this.kind = Kind.OTHER;
   }
 
-  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol) {
+  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName) {
     this.name = varSymbol.getName();
-    this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName());
+    this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName(), moduleName, name);
     String fqn = varSymbol.getTypeAnnotation().getFullyQualifiedName();
     if (!fqn.isEmpty()) {
       this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
