@@ -23,6 +23,8 @@ import com.google.protobuf.TextFormat;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -495,5 +497,18 @@ public class TypeShedTest {
     symbolsForModule("socket");
     Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
     assertThat(symbols).noneMatch(s -> s.is(Kind.AMBIGUOUS) && ((AmbiguousSymbol) s).alternatives().stream().allMatch(a -> a.is(Kind.CLASS)));
+  }
+
+  @Test
+  public void typeshed_common_symbols() {
+    SymbolImpl a1 = new SymbolImpl("a", "mod.a");
+    SymbolImpl a2 = new SymbolImpl("a", "mod.a");
+    SymbolImpl b = new SymbolImpl("b", "mod.b");
+    Map<String, Symbol> python2Symbols = new HashMap<>();
+    python2Symbols.put("a", a1);
+    python2Symbols.put("b", b);
+    Map<String, Symbol> python3Symbols = Collections.singletonMap("a", a2);
+    Set<Symbol> symbols = TypeShedThirdParties.commonSymbols(python2Symbols, python3Symbols, "mod");
+    assertThat(symbols).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "a"), tuple(Kind.OTHER, "b"));
   }
 }
