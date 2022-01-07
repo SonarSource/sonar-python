@@ -285,7 +285,7 @@ public class FunctionSymbolTest {
       "  name: \"p4\"\n" +
       "  kind: VAR_KEYWORD\n" +
       "}";
-    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf));
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
     assertThat(functionSymbol.name()).isEqualTo("fn");
     assertThat(functionSymbol.fullyQualifiedName()).isEqualTo("mod.fn");
     assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.NONE);
@@ -334,7 +334,7 @@ public class FunctionSymbolTest {
     String protobuf =
       "name: \"fn\"\n" +
       "fully_qualified_name: \"mod.fn\"\n";
-    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf));
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
     assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.anyType());
     assertThat(functionSymbol.annotatedReturnTypeName()).isNull();
   }

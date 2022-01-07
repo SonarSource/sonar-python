@@ -1,18 +1,11 @@
-from io import TextIOWrapper
-
 def func(p1, p2, p3, p4): ...  # Noncompliant
 #        ^^^^^^^^^^^^^^
 
-class MyTextIOWrapper(TextIOWrapper):
-  def __init__(
-          self,
-          buffer: IO[bytes],
-          encoding: Optional[str] = ...,
-          errors: Optional[str] = ...,
-          newline: Optional[str] = ...,
-          line_buffering: bool = ...,
-          write_through: bool = ...,
-      ) -> None: ...  # OK (parent is already non compliant)
+class ParentClass:
+  def __init__(self, p1, p2, p3, p4): ... # Noncompliant
+
+class Wrapper(ParentClass):
+  def __init__(self, p1, p2, p3, p4, p5): ...  # OK (parent is already non compliant)
 
   def readline(self, __size: int = ..., p2, p3, p4) -> str: ...  # Noncompliant
 
@@ -20,18 +13,10 @@ class MyTextIOWrapper(TextIOWrapper):
 
   def new_method_nok(self, p1, p2, p3, p4) -> str: ...  # Noncompliant
 
-class MyOtherTextIOWrapper(TextIOWrapper): ...
+class MyOtherWrapper(Wrapper): ...
 
-class ChildWithComplexHierarchy(MyOtherTextIOWrapper):
-  def __init__(
-          self,
-          buffer: IO[bytes],
-          encoding: Optional[str] = ...,
-          errors: Optional[str] = ...,
-          newline: Optional[str] = ...,
-          line_buffering: bool = ...,
-          write_through: bool = ...,
-      ) -> None: ...
+class ChildWithComplexHierarchy(MyOtherWrapper):
+  def __init__(self, p1, p2, p3, p4, p5, p6): ...
 
 class SuperBase:
   def method_nok(self, p1, p2, p3, p4): ...  # Noncompliant
