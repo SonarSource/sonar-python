@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -129,6 +130,31 @@ public class CheckListTest {
       assertThat(keysInDefaultProfile).isNotEmpty();
       assertThat(deprecatedKeys).isNotEmpty();
       assertThat(keysInDefaultProfile).doesNotContainAnyElementsOf(deprecatedKeys);
+    }
+  }
+
+  @Test
+  public void test_locally_deprecated_rules_stay_deprecated() throws IOException, ParseException {
+    // Some rules have been deprecated only for Python. When executed, rule-api reverts those rule to "ready" status, which is incorrect.
+    // This test is here to ensure it doesn't happen.
+    List<String> locallyDeprecatedRules = Arrays.asList("S1523", "S4721");
+    try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
+      Set<String> deprecatedKeys = fileStream
+        .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
+        .filter(path1 -> {
+          try {
+            return isDeprecated(path1);
+          } catch (Exception e) {
+            fail(String.format("Exception when deserializing JSON file \"%s\"", path1.getFileName().toString()));
+            return false;
+          }
+        })
+        .map(Path::getFileName)
+        .map(Path::toString)
+        .map(name -> name.replaceAll("\\.json$", ""))
+        .collect(Collectors.toSet());
+
+      assertThat(deprecatedKeys).containsAll(locallyDeprecatedRules);
     }
   }
 
