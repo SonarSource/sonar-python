@@ -115,20 +115,23 @@ public class TypeShed {
     return (ClassSymbol) symbol;
   }
 
-  public static Set<Symbol> symbolsForModule(String moduleName) {
+  /**
+   * Returns map of exported symbols by name for a given module
+   */
+  public static Map<String, Symbol> symbolsForModule(String moduleName) {
     if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
-      Set<Symbol> symbols = searchTypeShedForModule(moduleName);
-      Map<String, Symbol> symbolsByFqn = symbols.stream().collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s, (fst, snd) -> fst));
-      typeShedSymbols.put(moduleName, symbolsByFqn);
+      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
+      typeShedSymbols.put(moduleName, symbols);
       return symbols;
     }
-    return new HashSet<>(TypeShed.typeShedSymbols.get(moduleName).values());
+    return TypeShed.typeShedSymbols.get(moduleName);
   }
 
   @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
-    Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
-    Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    Map<String, Symbol> symbols = symbolsForModule(stdLibModuleName);
+    // TODO: improve performance - see SONARPY-955
+    Symbol symbolByFqn = symbols.values().stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
     if (symbolByFqn != null || !fullyQualifiedName.contains(".")) {
       return symbolByFqn;
     }
@@ -139,14 +142,7 @@ public class TypeShed {
     // FQN and try to look up by local symbol name, rather than FQN
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
-
-    // TODO: improve performance - see SONARPY-955
-    Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
-    if (matchByName.size() == 1) {
-      return matchByName.iterator().next();
-    }
-
-    return null;
+    return symbols.get(symbolLocalNameFromFqn);
   }
 
   @CheckForNull
@@ -210,8 +206,8 @@ public class TypeShed {
         SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
         SymbolImpl symbol = new SymbolImpl(varSymbol);
         if (varSymbol.getIsImportedModule()) {
-          Set<Symbol> moduleExportedSymbols = searchTypeShedForModule(varSymbol.getFullyQualifiedName());
-          moduleExportedSymbols.forEach(symbol::addChildSymbol);
+          Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName());
+          moduleExportedSymbols.values().forEach(symbol::addChildSymbol);
         }
         symbols.add(symbol);
       }
@@ -230,22 +226,22 @@ public class TypeShed {
     builtinSymbols();
   }
 
-  private static Set<Symbol> searchTypeShedForModule(String moduleName) {
+  private static Map<String, Symbol> searchTypeShedForModule(String moduleName) {
     if (modulesInProgress.contains(moduleName)) {
-      return new HashSet<>();
+      return new HashMap<>();
     }
     modulesInProgress.add(moduleName);
-    Set<Symbol> customSymbols = new HashSet<>(getModuleSymbols(moduleName, CUSTOM_THIRD_PARTY, builtinGlobalSymbols).values());
+    Map<String, Symbol> customSymbols = getModuleSymbols(moduleName, CUSTOM_THIRD_PARTY, builtinGlobalSymbols);
     if (!customSymbols.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return customSymbols;
     }
-    Collection<Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName).values();
+    Map<String, Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName);
     if (!symbolsFromProtobuf.isEmpty()) {
       modulesInProgress.remove(moduleName);
-      return new HashSet<>(symbolsFromProtobuf);
+      return symbolsFromProtobuf;
     }
-    Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols).values());
+    Map<String, Symbol> thirdPartySymbols = getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols);
     if (thirdPartySymbols.isEmpty()) {
       thirdPartySymbols = commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
         getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols), moduleName);

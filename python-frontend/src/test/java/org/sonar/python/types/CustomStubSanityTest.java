@@ -27,6 +27,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class CustomStubSanityTest {
     for (String module : moduleNames) {
       // Make sure that each module we describe with a custom stub declares something and has a valid syntax.
       try {
-        Set<Symbol> symbols = TypeShed.symbolsForModule(module);
+        Collection<Symbol> symbols = TypeShed.symbolsForModule(module).values();
         assertThat(symbols).isNotEmpty();
       } catch (RecognitionException ex) {
         fail(String.format("Syntax error in stub file while resolving module '%s' (error may be in a referenced module).", module), ex);

@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -182,7 +183,7 @@ class Scope {
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
-      Set<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName);
+      Collection<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName).values();
       if (!standardLibrarySymbols.isEmpty()) {
         SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
         standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
