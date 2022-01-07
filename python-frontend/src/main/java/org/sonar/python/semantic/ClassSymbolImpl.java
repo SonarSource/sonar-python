@@ -49,7 +49,7 @@ import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
 import static org.sonar.python.types.TypeShed.normalizedFqn;
-import static org.sonar.python.types.TypeShed.symbolsFromDescriptor;
+import static org.sonar.python.types.TypeShed.symbolsFromProtobufDescriptors;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
@@ -145,7 +145,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromDescriptor(entry.getValue(), true);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), true);
       methods.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(methods);
