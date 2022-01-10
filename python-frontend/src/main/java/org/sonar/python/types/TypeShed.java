@@ -165,7 +165,14 @@ public class TypeShed {
     Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
     for (Map<String, Symbol> symbolsByFqn : typeShedSymbols.values()) {
       for (Symbol symbol : symbolsByFqn.values()) {
-        symbols.add(isAmbiguousSymbolOfClasses(symbol) ? disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) symbol).alternatives()) : symbol);
+        Symbol stubSymbol = symbol;
+        if (isAmbiguousSymbolOfClasses(symbol)) {
+          Symbol disambiguatedSymbol = disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) symbol).alternatives());
+          if (disambiguatedSymbol != null) {
+            stubSymbol = disambiguatedSymbol;
+          }
+        }
+        symbols.add(stubSymbol);
       }
     }
     return symbols;
@@ -283,6 +290,7 @@ public class TypeShed {
    * This method sort ambiguous symbol by python version and returns the one which is valid for
    * the most recent Python version.
    */
+  @CheckForNull
   static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
     int max = Integer.MIN_VALUE;
     Symbol latestPythonSymbol = null;
