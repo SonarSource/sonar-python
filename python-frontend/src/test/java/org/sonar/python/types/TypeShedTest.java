@@ -528,4 +528,12 @@ public class TypeShedTest {
     assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
     assertThat(socket.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
   }
+
+  @Test
+  public void stubFilesSymbols_third_party_symbols_should_not_be_null() {
+    // six modules contain ambiguous symbols that only contain class symbols
+    // however third party symbols don't have validForPythonVersions field set
+    symbolsForModule("six");
+    assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
+  }
 }
