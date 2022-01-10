@@ -24,6 +24,6 @@ In order for it to work properly it needs to have Python runtime and [Typeshed](
 
 ## License
 
-Copyright 2011-2021 SonarSource.
+Copyright 2011-2022 SonarSource.
 
 Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
