@@ -95,6 +95,7 @@
     <sonarlint-core.version>6.0.0.32513</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
     <protobuf.version>3.17.3</protobuf.version>
+    <woodstox.version>6.2.7</woodstox.version>
   </properties>
 
   <dependencyManagement>
@@ -136,15 +137,11 @@
         <artifactId>sonar-regex-parsing</artifactId>
         <version>${sonar-analyzer-commons.version}</version>
       </dependency>
+      <!-- used by StaxParser, CoberturaParser and TestSuiteParser -->
       <dependency>
         <groupId>org.codehaus.staxmate</groupId>
         <artifactId>staxmate</artifactId>
         <version>2.0.1</version>
-      </dependency>
-      <dependency>
-        <groupId>org.sonarsource.orchestrator</groupId>
-        <artifactId>sonar-orchestrator</artifactId>
-        <version>${sonar.orchestrator.version}</version>
       </dependency>
       <dependency>
         <groupId>commons-lang</groupId>
@@ -156,18 +153,25 @@
         <artifactId>commons-io</artifactId>
         <version>${commons.io.version}</version>
       </dependency>
+      <!-- used by StaxParser and CoberturaParser -->
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>woodstox-core-lgpl</artifactId>
         <version>${woodstox.version}</version>
       </dependency>
       <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>30.1.1-jre</version>
       </dependency>
 
       <!-- test dependencies -->
+      <dependency>
+        <groupId>org.sonarsource.orchestrator</groupId>
+        <artifactId>sonar-orchestrator</artifactId>
+        <version>${sonar.orchestrator.version}</version>
+        <scope>test</scope>
+      </dependency>
       <dependency>
         <groupId>org.sonarsource.sonarqube</groupId>
         <artifactId>sonar-testing-harness</artifactId>
@@ -211,18 +215,10 @@
         <scope>provided</scope>
       </dependency>
       <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>30.1.1-jre</version>
-      </dependency>
-
-
-      <!-- provided dependencies -->
-      <dependency>
-        <groupId>org.sonarsource.sonarqube</groupId>
-        <artifactId>sonar-plugin-api</artifactId>
-        <version>${sonar.version}</version>
-        <scope>provided</scope>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.sonarsource.sonarqube</groupId>
@@ -231,6 +227,13 @@
         <scope>test</scope>
       </dependency>
 
+      <!-- provided dependencies -->
+      <dependency>
+        <groupId>org.sonarsource.sonarqube</groupId>
+        <artifactId>sonar-plugin-api</artifactId>
+        <version>${sonar.version}</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
