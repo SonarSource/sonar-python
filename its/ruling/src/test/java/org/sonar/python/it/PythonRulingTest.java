@@ -44,7 +44,7 @@ public class PythonRulingTest {
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-    .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.8.0.1209"))
+    .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"))
     .build();
 
   @BeforeClass
@@ -68,10 +68,10 @@ public class PythonRulingTest {
       .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
-      .setProperty("dump.old", FileLocation.of("src/test/resources/expected").getFile().getAbsolutePath())
-      .setProperty("dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
+      .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected").getFile().getAbsolutePath())
+      .setProperty("sonar.lits.dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.cpd.exclusions", "**/*")
-      .setProperty("lits.differences", litsDifferencesFile.getAbsolutePath())
+      .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
     ORCHESTRATOR.executeBuild(build);
