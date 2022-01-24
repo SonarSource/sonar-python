@@ -1,4 +1,4 @@
-from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional, TypedDict
+from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional, TypedDict, AsyncIterator, AsyncGenerator
 import numpy as np
 
 def builtins():
@@ -313,3 +313,12 @@ def type_dict():
     users = {1,2,3}
     messages = {1,2,3}
     return dict(user_ids=users, message_ids=messages)
+
+async def no_issue_for_async_iterators() -> AsyncIterator[int]:
+    yield 1
+
+async def no_issue_for_async_generators() -> AsyncGenerator[int]:
+    yield 1
+
+async def async_function_returning_iterator() -> Iterator[int]:
+    yield 1 # Noncompliant {{Annotate function "async_function_returning_iterator" with "typing.AsyncGenerator" or one of its supertypes.}}
