@@ -169,9 +169,9 @@ public class DeclaredTypeTest {
     assertThat(typeAmbiguousX1.mustBeOrExtend("other")).isFalse();
 
     DeclaredType declaredType = new DeclaredType(new SymbolImpl("C", "foo.C"));
-    assertThat(declaredType.mustBeOrExtend("other")).isTrue();
-    assertThat(declaredType.mustBeOrExtend("foo.C")).isTrue();
-    assertThat(declaredType.mustBeOrExtend("C")).isTrue();
+    assertThat(declaredType.mustBeOrExtend("other")).isFalse();
+    assertThat(declaredType.mustBeOrExtend("foo.C")).isFalse();
+    assertThat(declaredType.mustBeOrExtend("C")).isFalse();
   }
 
   @Test

@@ -131,12 +131,13 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean mustBeOrExtend(String typeName) {
-    return alternativeTypeSymbols().stream().flatMap(a -> {
+    List<Symbol> classSymbols = alternativeTypeSymbols().stream().flatMap(a -> {
       if (a.is(Symbol.Kind.AMBIGUOUS)) {
         return ((AmbiguousSymbol) a).alternatives().stream().filter(alternative -> alternative.is(CLASS));
       }
       return Stream.of(a);
-    }).filter(a -> a.is(CLASS)).allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
+    }).filter(a -> a.is(CLASS)).collect(Collectors.toList());
+    return !classSymbols.isEmpty() && classSymbols.stream().allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
   }
 
   @Override
