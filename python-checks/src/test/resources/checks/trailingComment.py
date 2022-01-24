@@ -48,3 +48,12 @@ var = (some.method(arg1, arg2)
 with errstate(over='ignore'): #some comment
     if bar:
         print("hello")
+
+# No issue for common pragma comments
+my_dict = {
+    'a': 1, 'b': 2,
+    'c': 3, 'z': 0
+}  # fmt: skip
+
+import frobnicate  # type: ignore
+frobnicate.start()
