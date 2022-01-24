@@ -44,6 +44,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
   private static final List<String> ITERABLE_TYPES = Arrays.asList("typing.Generator", "typing.Iterator", "typing.Iterable");
+  private static final List<String> ASYNC_ITERABLE_TYPES = Arrays.asList("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
 
   @Override
   public void initialize(Context context) {
@@ -68,14 +69,24 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     String functionName = functionDef.name().name();
     String returnTypeName = InferredTypes.typeName(declaredReturnType);
     if (!returnTypeVisitor.yieldStatements.isEmpty()) {
+      boolean isAsyncFunction = functionDef.asyncKeyword() != null;
+      String recommendedSuperType = isAsyncFunction ? "typing.AsyncGenerator" : "typing.Generator";
       // Here we should probably use an equivalent of "canBeOrExtend" (accepting uncertainty) instead of "mustBeOrExtend"
-      if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
+      if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend) || ASYNC_ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
+        if (isMixedUpAnnotation(isAsyncFunction, declaredReturnType)) {
+          returnTypeVisitor.yieldStatements
+            .forEach(y -> {
+              PreciseIssue issue =
+                ctx.addIssue(y, String.format("Annotate function \"%s\" with \"%s\" or one of its supertypes.", functionName, recommendedSuperType));
+              addSecondaries(issue, functionDef);
+            });
+        }
         return;
       }
       returnTypeVisitor.yieldStatements
         .forEach(y -> {
           PreciseIssue issue =
-            ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"typing.Generator\" or one of its supertypes.", functionName));
+            ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"%s\" or one of its supertypes.", functionName, recommendedSuperType));
           addSecondaries(issue, functionDef);
         });
     }
@@ -90,6 +101,10 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       }
       addSecondaries(issue, functionDef);
     });
+  }
+
+  private static boolean isMixedUpAnnotation(boolean isAsyncFunction, InferredType declaredReturnType) {
+    return isAsyncFunction ? ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend) : ASYNC_ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend);
   }
 
   private static void addSecondaries(PreciseIssue issue, FunctionDef functionDef) {
