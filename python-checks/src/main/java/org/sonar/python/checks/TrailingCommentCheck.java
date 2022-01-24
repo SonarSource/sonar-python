@@ -30,12 +30,12 @@ import org.sonar.plugins.python.api.tree.Trivia;
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
-  private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
+  private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+([^\\s]++|fmt.*|type.*)$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
 
   @RuleProperty(
     key = "legalTrailingCommentPattern",
-    description = "Pattern for text of trailing comments that are allowed. By default, comments containing only one word.",
+    description = "Pattern for text of trailing comments that are allowed. By default, Mypy and Black pragma comments as well as comments containing only one word.",
     defaultValue = DEFAULT_LEGAL_COMMENT_PATTERN)
   public String legalCommentPattern = DEFAULT_LEGAL_COMMENT_PATTERN;
 
