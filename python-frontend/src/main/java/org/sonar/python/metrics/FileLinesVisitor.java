@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -130,16 +131,16 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     }
 
     for (Trivia trivia : token.trivia()) {
-      visitComment(trivia);
+      visitComment(trivia, token);
     }
   }
 
-  private void visitComment(Trivia trivia) {
+  private void visitComment(Trivia trivia, Token parentToken) {
     String commentLine = getContents(trivia.token().value());
     int line = trivia.token().line();
     if (commentLine.contains("NOSONAR")) {
       linesOfComments.remove(line);
-      noSonar.add(line);
+      addNoSonarLines(trivia, parentToken);
     } else if (!isBlank(commentLine)) {
       linesOfComments.add(line);
     }
@@ -183,6 +184,23 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private static String getContents(String comment) {
     // Comment always starts with "#"
     return comment.substring(comment.indexOf('#'));
+  }
+
+  private void addNoSonarLines(Trivia trivia, Token parentToken) {
+    int line = trivia.token().line();
+    if (parentToken.parent().is(Tree.Kind.EXPRESSION_STMT)) {
+      ExpressionStatement expressionStatement = (ExpressionStatement) parentToken.parent();
+      if (!expressionStatement.expressions().isEmpty() && expressionStatement.expressions().get(0).is(Tree.Kind.STRING_LITERAL)) {
+        // Count every line of a string literal as part of the "NOSONAR" scope
+        StringLiteral stringLiteral = (StringLiteral) expressionStatement.expressions().get(0);
+        int firstLine = stringLiteral.firstToken().line();
+        for (int i = firstLine; i < line + 1; i++) {
+          noSonar.add(i);
+        }
+        return;
+      }
+    }
+    noSonar.add(line);
   }
 
   public int getStatements() {

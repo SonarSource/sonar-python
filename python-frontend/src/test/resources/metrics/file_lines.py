@@ -23,3 +23,23 @@ def foo1(x,y,z,): # end of line comment
     3 lines of docstring
     """
     pass
+
+
+def foo2(x,y,z,):
+    """
+    3 lines of docstring
+    """ # NOSONAR
+    pass
+
+"some string literal" # NOSONAR
+
+def foo3():
+    """
+    some tuple
+    """, """
+    of multiline strings
+    """ # NOSONAR
+
+def foo4():
+    (multine,
+    expression) # NOSONAR
