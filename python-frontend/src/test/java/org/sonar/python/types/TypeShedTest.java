@@ -287,7 +287,8 @@ public class TypeShedTest {
     Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"));
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"), tuple(Kind.OTHER, "annoy.Literal"),
+        tuple(Kind.CLASS, "annoy.Sized"), tuple(Kind.FUNCTION, "annoy.overload"), tuple(Kind.OTHER, "annoy.Protocol"));
 
     ClassSymbol vector = (ClassSymbol) deserializedAnnoySymbols.get("annoy._Vector");
     assertThat(vector.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
@@ -315,7 +316,8 @@ public class TypeShedTest {
       tuple(Kind.FUNCTION, "get_n_items"),
       tuple(Kind.FUNCTION, "get_n_trees"),
       tuple(Kind.FUNCTION, "verbose"),
-      tuple(Kind.FUNCTION, "set_seed")
+      tuple(Kind.FUNCTION, "set_seed"),
+      tuple(Kind.OTHER, "f")
     );
     assertThat(annoyIndex.hasDecorators()).isFalse();
     assertThat(annoyIndex.definitionLocation()).isNull();
