@@ -264,6 +264,7 @@ class ClassSymbol:
         self.super_classes = []
         self.methods = []
         self.overloaded_methods = []
+        self.vars = []
         self.is_enum = type_info.is_enum
         self.is_generic = type_info.is_generic()
         self.is_protocol = type_info.is_protocol
@@ -276,10 +277,12 @@ class ClassSymbol:
             node = name.node
             if isinstance(node, mpn.FuncDef):
                 self.methods.append(FunctionSymbol(node))
-            if isinstance(node, mpn.Decorator):
+            elif isinstance(node, mpn.Decorator):
                 self.methods.append(FunctionSymbol(node.func, decorators=node.original_decorators))
-            if isinstance(node, mpn.OverloadedFuncDef):
+            elif isinstance(node, mpn.OverloadedFuncDef):
                 self.overloaded_methods.append(OverloadedFunctionSymbol(node))
+            elif isinstance(node, mpn.Var) and node.name not in DEFAULT_EXPORTED_VARS:
+                self.vars.append(VarSymbol.from_var(node))
         class_def = type_info.defn
         self.has_metaclass = class_def.metaclass is not None
         if class_def.metaclass is not None:
@@ -316,6 +319,8 @@ class ClassSymbol:
             pb_class.methods.append(method.to_proto())
         for overloaded_method in self.overloaded_methods:
             pb_class.overloaded_methods.append(overloaded_method.to_proto())
+        for var in self.vars:
+            pb_class.attributes.append(var.to_proto())
         return pb_class
 
 
@@ -406,11 +411,12 @@ class MergedOverloadedFunctionSymbol:
 
 class MergedClassSymbol:
     def __init__(self, reference_class_symbols: ClassSymbol, merged_methods, merged_overloaded_methods,
-                 valid_for: List[str]):
+                 merged_attributes, valid_for: List[str]):
         # nested class symbols functions are not relevant anymore
         self.class_symbol = reference_class_symbols
         self.methods = merged_methods
         self.overloaded_methods = merged_overloaded_methods
+        self.vars = merged_attributes
         self.valid_for = valid_for
 
     def to_proto(self) -> symbols_pb2.ClassSymbol:
@@ -431,6 +437,9 @@ class MergedClassSymbol:
         for overloaded_func in self.overloaded_methods:
             for elem in self.overloaded_methods[overloaded_func]:
                 pb_class.overloaded_methods.append(elem.to_proto())
+        for var in self.vars:
+            for elem in self.vars[var]:
+                pb_class.attributes.append(elem.to_proto())
         for elem in self.valid_for:
             pb_class.valid_for.append(elem)
         return pb_class

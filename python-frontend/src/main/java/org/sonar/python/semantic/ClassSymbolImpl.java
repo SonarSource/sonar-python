@@ -137,7 +137,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = classSymbolProto.getHasMetaclass();
     metaclassFQN = classSymbolProto.getMetaclassName();
     supportsGenerics = classSymbolProto.getIsGeneric();
-    Set<Symbol> methods = new HashSet<>();
+    Set<Symbol> classMembers = new HashSet<>();
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
     classSymbolProto.getMethodsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
@@ -145,14 +145,17 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     classSymbolProto.getOverloadedMethodsList().stream()
       .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+    classSymbolProto.getAttributesList().stream()
+      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
 
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
       Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName);
-      methods.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
+      classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
-    addMembers(methods);
+    addMembers(classMembers);
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList()));
     superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());

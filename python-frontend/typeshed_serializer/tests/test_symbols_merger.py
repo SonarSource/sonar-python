@@ -139,7 +139,7 @@ def test_actual_module_merge(fake_module_36_38):
     merged_fakemodule_module = merged_modules['fakemodule']
     classes_dict = merged_fakemodule_module.classes
 
-    assert len(classes_dict) == 4
+    assert len(classes_dict) == 5
 
     # Class unique to Python 3.6 is present
     fakemodule_someclassunique36_symbols = classes_dict['fakemodule.SomeClassUnique36']
@@ -241,6 +241,18 @@ def test_actual_module_merge(fake_module_36_38):
     imported_sys = all_vars['sys']
     assert len(imported_sys) == 1
     assert imported_sys[0].var_symbol.is_imported_module is True
+
+    fakemodule_class_with_fields_symbols = classes_dict['fakemodule.ClassWithFields']
+    assert len(fakemodule_class_with_fields_symbols) == 1
+    fakemodule_class_symbol = fakemodule_class_with_fields_symbols[0]
+    # Some fields are common
+    assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.common_field'][0].valid_for == ["36", "38"]
+    # Some fields exist only in a given Python version
+    assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.field_unique_36'][0].valid_for == ["36"]
+    assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.field_unique_38'][0].valid_for == ["38"]
+    # Some fields have different definitions depending on the Python version
+    assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.field_multiple_defs'][0].valid_for == ["36"]
+    assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.field_multiple_defs'][1].valid_for == ["38"]
 
 
 def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
