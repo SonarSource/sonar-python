@@ -25,13 +25,13 @@ from serializer.symbols import MergedModuleSymbol
 
 
 def test_build_multiple_python_version(typeshed_stdlib):
-    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=typeshed_stdlib)
+    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     model_by_version = symbols_merger.build_multiple_python_version()
     assert set(model_by_version.keys()) == {'27', '35', '36', '37', '38', '39', '310'}
 
 
 def test_merge_multiple_python_versions(typeshed_stdlib):
-    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=typeshed_stdlib)
+    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     merged_modules = symbols_merger.merge_multiple_python_versions()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
@@ -326,3 +326,4 @@ def assert_abc_merged_module(merged_modules, expected_valid_for):
         assert len(f) == 1
         assert f[0].valid_for == expected_valid_for
     assert len(abc_merged_symbol.overloaded_functions) == 0
+

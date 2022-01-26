@@ -24,12 +24,13 @@ from unittest.mock import Mock
 import pytest
 from mypy import build
 
-from serializer import typeshed_serializer
+from serializer import typeshed_serializer, symbols_merger
 
 
 @pytest.fixture(scope="session")
 def typeshed_stdlib():
-    return typeshed_serializer.walk_typeshed_stdlib()
+    build_result, _ = typeshed_serializer.walk_typeshed_stdlib()
+    return build_result
 
 
 @pytest.fixture(scope="session")
@@ -39,3 +40,8 @@ def fake_module_36_38():
     fake_module_36 = typeshed_serializer.build_single_module('fakemodule', python_version=(3, 6))
     fake_module_38 = typeshed_serializer.build_single_module('fakemodule', python_version=(3, 8))
     return [fake_module_36, fake_module_38]
+
+
+@pytest.fixture(scope="session")
+def typeshed_third_parties():
+    return symbols_merger.merge_multiple_python_versions(is_third_parties=True)
