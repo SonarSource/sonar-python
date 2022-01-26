@@ -91,9 +91,13 @@ class TypeDescriptor:
         elif isinstance(_type, mpt.TupleType):
             self.kind = TypeKind.TUPLE
             items = [TypeDescriptor(t) for t in _type.items]
-            item_names = [i.pretty_printed_name for i in items]
-            self.args.extend(items)
-            self.pretty_printed_name = f"Tuple[{','.join(item_names)}]"
+            if any(item.is_unknown for item in items):
+                self.kind = None
+                self.is_unknown = True
+            else:
+                item_names = [i.pretty_printed_name for i in items]
+                self.args.extend(items)
+                self.pretty_printed_name = f"Tuple[{','.join(item_names)}]"
         elif isinstance(_type, mpt.TypeVarType):
             self.kind = TypeKind.TYPE_VAR
             self.pretty_printed_name = _type.fullname
@@ -524,9 +528,10 @@ def extract_return_type(func_def: mpn.FuncDef):
     return TypeDescriptor(func_type.ret_type)
 
 
-def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], is_debug=False, debug_dir="output"):
+def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], is_debug=False, debug_dir="output", is_stdlib=True):
     ms_pb = ms.to_proto()
     save_dir = "../../src/main/resources/org/sonar/python/types/protobuf" if not is_debug else f"../{debug_dir}"
+    save_dir = save_dir if is_stdlib else os.path.join(save_dir, "stubs")
     save_string = ms_pb.SerializeToString() if not is_debug else str(ms_pb)
     open_mode = "wb" if not is_debug else "w"
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)
