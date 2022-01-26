@@ -35,12 +35,12 @@ public class FileLinesVisitorTest {
 
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines.py"), visitor);
 
-    assertThat(visitor.getLinesOfCode()).hasSize(12);
-    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8, 11, 12, 13, 14, 15, 16, 18, 19, 21, 25);
+    assertThat(visitor.getLinesOfCode()).hasSize(24);
+    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8, 11, 12, 13, 14, 15, 16, 18, 19, 21, 25, 28, 32, 34, 36, 37, 38, 39, 40, 41, 43, 44, 45);
 
-    assertThat(visitor.getCommentLineCount()).isEqualTo(13);
+    assertThat(visitor.getCommentLineCount()).isEqualTo(16);
 
-    assertThat(visitor.getLinesWithNoSonar()).containsOnly(15);
+    assertThat(visitor.getLinesWithNoSonar()).containsOnly(15, 29, 30, 31, 34, 37, 38, 39, 40, 41, 45);
   }
 
   @Test
