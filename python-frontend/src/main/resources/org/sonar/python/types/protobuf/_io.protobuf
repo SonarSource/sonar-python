@@ -338,7 +338,7 @@ writelinestyping.IO.writelines"
 	__enter__typing.TextIO.__enter__"
 typing.TextIO"typing.TextIO*&
 self
-typing.TextIO"typing.TextIO0:abstractmethod@z27j27è
+typing.TextIO"typing.TextIO0:abstractmethod@z27j27°
 TypeVartyping.TypeVar"builtins.object*ﬁ
 __init__typing.TypeVar.__init__"
 None**
@@ -357,8 +357,23 @@ writelinestyping.IO.writelines"
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z27j27<
-BlockingIOError_io.BlockingIOError"builtins.IOErrorj27[
+builtins.bool"builtins.bool z27j27rf
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27rz
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27rQ
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27rY
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27ú
+BlockingIOError_io.BlockingIOError"builtins.IOErrorj27r^
+characters_written&_io.BlockingIOError.characters_written
+builtins.int"builtins.int*27[
 UnsupportedOperation_io.UnsupportedOperation"builtins.ValueError"builtins.IOErrorj27Ô
 _IOBase_io._IOBase"typing.BinaryIO*t
 closed_io._IOBase.closed"
@@ -553,7 +568,7 @@ writelines_io._IOBase.writelines"
 	__enter___io.BufferedRWPair.__enter__"
 _typeshed.Self*
 self
-_typeshed.Selfz27j27”
+_typeshed.Selfz27j27ò
 BufferedRandom_io.BufferedRandom"_io._BufferedIOBase*Ù
 __init___io.BufferedRandom.__init__"
 None*2
@@ -570,7 +585,13 @@ writelines_io._IOBase.writelines"
 self(
 _io.BufferedRandom"_io.BufferedRandom*%
 n
-builtins.int"builtins.int z27j27û
+builtins.int"builtins.int z27j27rA
+mode_io.BufferedRandom.mode
+builtins.str"builtins.str*27rA
+name_io.BufferedRandom.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedRandom.raw
+_io._IOBase"_io._IOBase*27„
 BufferedReader_io.BufferedReader"_io._BufferedIOBase*ø
 __init___io.BufferedReader.__init__"
 None*2
@@ -585,7 +606,13 @@ writelines_io._IOBase.writelines"
 self(
 _io.BufferedReader"_io.BufferedReader*%
 n
-builtins.int"builtins.int z27j27¥
+builtins.int"builtins.int z27j27rA
+mode_io.BufferedReader.mode
+builtins.str"builtins.str*27rA
+name_io.BufferedReader.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedReader.raw
+_io._IOBase"_io._IOBase*27˘
 BufferedWriter_io.BufferedWriter"_io._BufferedIOBase*Ù
 __init___io.BufferedWriter.__init__"
 None*2
@@ -596,7 +623,13 @@ writelines_io._IOBase.writelines"
 buffer_size
 builtins.int"builtins.int *3
 max_buffer_size
-builtins.int"builtins.int z27j27Ò
+builtins.int"builtins.int z27j27rA
+name_io.BufferedWriter.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedWriter.raw
+_io._IOBase"_io._IOBase*27rA
+mode_io.BufferedWriter.mode
+builtins.str"builtins.str*27ò	
 BytesIO_io.BytesIO"_io._BufferedIOBase*á
 __init___io.BytesIO.__init__"
 None*$
@@ -643,7 +676,9 @@ writelines_io.BytesIO.writelines"
 next_io.BytesIO.next"
 builtins.str"builtins.str*$
 self
-_io.BytesIO"_io.BytesIOz27j27±
+_io.BytesIO"_io.BytesIOz27j27r%
+name_io.BytesIO.name
+Any*27±
 
 _RawIOBase_io._RawIOBase"_io._IOBase*o
 readall_io._RawIOBase.readall"
@@ -655,7 +690,7 @@ _RawIOBase_io._RawIOBase"_io._IOBase*o
 self 
 _io._RawIOBase"_io._RawIOBase*%
 n
-builtins.int"builtins.int z27j27Ç
+builtins.int"builtins.int z27j27Ä
 FileIO
 _io.FileIO"_io._RawIOBase"_io.BytesIO*ñ
 __init___io.FileIO.__init__"
@@ -690,7 +725,11 @@ _io.FileIO*ø
 _io.FileIO"
 _io.FileIO*&
 pbuf
-builtins.str"builtins.strz27j27ˆ
+builtins.str"builtins.strz27j27r9
+mode_io.FileIO.mode
+builtins.str"builtins.str*27rA
+closefd_io.FileIO.closefd
+builtins.bool"builtins.bool*27ù	
 IncrementalNewlineDecoder_io.IncrementalNewlineDecoder"builtins.object* 
 __init__&_io.IncrementalNewlineDecoder.__init__"
 None*H
@@ -727,7 +766,11 @@ _io.FileIO*&
 reset#_io.IncrementalNewlineDecoder.reset"
 None*H
 self>
-_io.IncrementalNewlineDecoder"_io.IncrementalNewlineDecoderz27j27Ï
+_io.IncrementalNewlineDecoder"_io.IncrementalNewlineDecoderz27j27r§
+newlines&_io.IncrementalNewlineDecoder.newlinesl
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode*27»
 _TextIOBase_io._TextIOBase"typing.TextIO*Ä
 closed_io._TextIOBase.closed"
 builtins.bool"builtins.bool*,
@@ -867,7 +910,18 @@ writelines_io._TextIOBase.writelines"
 _io._T*
 self
 
-_io._Tz27j27È
+_io._Tz27j27rj
+errors_io._TextIOBase.errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27r•
+newlines_io._TextIOBase.newlines{
+)Union[None,builtins.unicode,builtins.str]
+None$
+builtins.unicode"builtins.unicode
+builtins.str"builtins.str*27rF
+encoding_io._TextIOBase.encoding
+builtins.str"builtins.str*27‰
 StringIO_io.StringIO"_io._TextIOBase*ü
 __init___io.StringIO.__init__"
 None*&
@@ -896,7 +950,11 @@ writelines_io._TextIOBase.writelines"
 getvalue_io.StringIO.getvalue"$
 builtins.unicode"builtins.unicode*&
 self
-_io.StringIO"_io.StringIOz27j27‡
+_io.StringIO"_io.StringIOz27j27rQ
+line_buffering_io.StringIO.line_buffering
+builtins.bool"builtins.bool*27r&
+name_io.StringIO.name
+Any*27ñ
 TextIOWrapper_io.TextIOWrapper"_io._TextIOBase*¶
 __init___io.TextIOWrapper.__init__"
 None*0
@@ -920,7 +978,15 @@ writelines_io._TextIOBase.writelines"
 line_buffering
 builtins.bool"builtins.bool *3
 write_through
-builtins.bool"builtins.bool z27j27í
+builtins.bool"builtins.bool z27j27r@
+name_io.TextIOWrapper.name
+builtins.str"builtins.str*27rV
+line_buffering _io.TextIOWrapper.line_buffering
+builtins.bool"builtins.bool*27rJ
+buffer_io.TextIOWrapper.buffer"
+typing.BinaryIO"typing.BinaryIO*27rN
+_CHUNK_SIZE_io.TextIOWrapper._CHUNK_SIZE
+builtins.int"builtins.int*27í
 open_io.open"$
 typing.IO[Any]
 Any"	typing.IO*¢

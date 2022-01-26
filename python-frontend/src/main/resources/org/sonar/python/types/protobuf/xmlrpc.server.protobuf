@@ -1,5 +1,5 @@
 
-xmlrpc.serveròW
+xmlrpc.serverŸZ
 datetimedatetime.datetime"datetime.date*±
 __new__datetime.datetime.__new__"
 datetime._S*/
@@ -363,7 +363,14 @@ isoweekdaydatetime.datetime.isoweekday"
 self&
 datetime.datetime"datetime.datetime*1
 other(
-datetime.timedelta"datetime.timedelta0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310¯
+datetime.timedelta"datetime.timedelta0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310r]
+mindatetime.datetime.min&
+datetime.datetime"datetime.datetime*35*36*37*38*39*310r]
+maxdatetime.datetime.max&
+datetime.datetime"datetime.datetime*35*36*37*38*39*310rm
+
+resolutiondatetime.datetime.resolution(
+datetime.timedelta"datetime.timedelta*35*36*37*38*39*310¯
 Iterabletyping.Iterable"builtins.object*á
 __iter__typing.Iterable.__iter__"B
 typing.Iterator[typing._T_co]
@@ -447,7 +454,7 @@ typing._KT*Q
 defaultD
 Union[typing._VT_co,typing._T]
 typing._VT_co
-	typing._T0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310–
+	typing._T0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310Ï 
 Patterntyping.Pattern"builtins.object*ñ
 searchtyping.Pattern.search"u
 'Union[typing.Match[typing.AnyStr],None]>
@@ -585,7 +592,18 @@ typing._KT*Q
 string
 typing.AnyStr*)
 count
-builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310¾
+builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310rT
+flagstyping.Pattern.flags
+builtins.int"builtins.int*35*36*37*38*39*310r¹
+
+groupindextyping.Pattern.groupindexw
+)typing.Mapping[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"typing.Mapping*35*36*37*38*39*310rV
+groupstyping.Pattern.groups
+builtins.int"builtins.int*35*36*37*38*39*310rM
+patterntyping.Pattern.pattern
+typing.AnyStr*35*36*37*38*39*310ˆ
 Faultxmlrpc.client.Fault"xmlrpc.client.Error*ñ
 __init__xmlrpc.client.Fault.__init__"
 None*4
@@ -596,7 +614,11 @@ typing._KT*Q
 faultString
 builtins.str"builtins.str*
 extra
-Anyz35z36z37z38z39z310j35j36j37j38j39j310Ù
+Anyz35z36z37z38z39z310j35j36j37j38j39j310ra
+	faultCodexmlrpc.client.Fault.faultCode
+builtins.int"builtins.int*35*36*37*38*39*310re
+faultStringxmlrpc.client.Fault.faultString
+builtins.str"builtins.str*35*36*37*38*39*310Ù
 _DispatchArity0xmlrpc.server._DispatchArity0"builtins.object*ú
 __call__&xmlrpc.server._DispatchArity0.__call__"â
 ¬TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime]]‘
@@ -903,7 +925,7 @@ typing._KT*Q
 builtins.dict[Any,Any]
 Any
 Any"builtins.dict&
-datetime.datetime"datetime.datetime"xmlrpc.server._Marshallablez35z36z37z38z39z310Xj35j36j37j38j39j310ãE
+datetime.datetime"datetime.datetime"xmlrpc.server._Marshallablez35z36z37z38z39z310Xj35j36j37j38j39j310ãR
 SimpleXMLRPCDispatcher$xmlrpc.server.SimpleXMLRPCDispatcher"builtins.object*õ
 __init__-xmlrpc.server.SimpleXMLRPCDispatcher.__init__"
 None*V
@@ -1080,7 +1102,29 @@ $xmlrpc.server.SimpleXMLRPCDispatcher"$xmlrpc.server.SimpleXMLRPCDispatcher*(
 builtins.dict[Any,Any]
 Any
 Any"builtins.dict&
-datetime.datetime"datetime.datetime"xmlrpc.server._Marshallable"typing.Iterablez35z36z37z38z39z310j35j36j37j38j39j310®
+datetime.datetime"datetime.datetime"xmlrpc.server._Marshallable"typing.Iterablez35z36z37z38z39z310j35j36j37j38j39j310r	
+funcs*xmlrpc.server.SimpleXMLRPCDispatcher.funcsÁ
+ábuiltins.dict[builtins.str,TypeAlias[Union[xmlrpc.server._DispatchArity0,xmlrpc.server._DispatchArity1,xmlrpc.server._DispatchArity2,xmlrpc.server._DispatchArity3,xmlrpc.server._DispatchArity4,xmlrpc.server._DispatchArityN]]]
+builtins.str"builtins.str­
+ÅTypeAlias[Union[xmlrpc.server._DispatchArity0,xmlrpc.server._DispatchArity1,xmlrpc.server._DispatchArity2,xmlrpc.server._DispatchArity3,xmlrpc.server._DispatchArity4,xmlrpc.server._DispatchArityN]]¿
+ºUnion[xmlrpc.server._DispatchArity0,xmlrpc.server._DispatchArity1,xmlrpc.server._DispatchArity2,xmlrpc.server._DispatchArity3,xmlrpc.server._DispatchArity4,xmlrpc.server._DispatchArityN]>
+xmlrpc.server._DispatchArity0"xmlrpc.server._DispatchArity0>
+xmlrpc.server._DispatchArity1"xmlrpc.server._DispatchArity1>
+xmlrpc.server._DispatchArity2"xmlrpc.server._DispatchArity2>
+xmlrpc.server._DispatchArity3"xmlrpc.server._DispatchArity3>
+xmlrpc.server._DispatchArity4"xmlrpc.server._DispatchArity4>
+xmlrpc.server._DispatchArityN"xmlrpc.server._DispatchArityN"xmlrpc.server._DispatchProtocol"builtins.dict*35*36*37*38*39*310rz
+instance-xmlrpc.server.SimpleXMLRPCDispatcher.instance&
+Union[Any,None]
+Any
+None*35*36*37*38*39*310rv
+
+allow_none/xmlrpc.server.SimpleXMLRPCDispatcher.allow_none
+builtins.bool"builtins.bool*35*36*37*38*39*310rp
+encoding-xmlrpc.server.SimpleXMLRPCDispatcher.encoding
+builtins.str"builtins.str*35*36*37*38*39*310r„
+use_builtin_types6xmlrpc.server.SimpleXMLRPCDispatcher.use_builtin_types
+builtins.bool"builtins.bool*35*36*37*38*39*310›
 SimpleXMLRPCRequestHandler(xmlrpc.server.SimpleXMLRPCRequestHandler""http.server.BaseHTTPRequestHandler*Ã
 accept_encodings9xmlrpc.server.SimpleXMLRPCRequestHandler.accept_encodings"{
 *builtins.dict[builtins.str,builtins.float]
@@ -1120,7 +1164,16 @@ report_4043xmlrpc.server.SimpleXMLRPCRequestHandler.report_404"
 size`
  Union[builtins.int,builtins.str]
 builtins.int"builtins.int
-builtins.str"builtins.str z35z36z37z38z39z310j35j36j37j38j39j310ó
+builtins.str"builtins.str z35z36z37z38z39z310j35j36j37j38j39j310rº
+	rpc_paths2xmlrpc.server.SimpleXMLRPCRequestHandler.rpc_paths`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*35*36*37*38*39*310r„
+encode_threshold9xmlrpc.server.SimpleXMLRPCRequestHandler.encode_threshold
+builtins.int"builtins.int*35*36*37*38*39*310r¦
+	aepattern2xmlrpc.server.SimpleXMLRPCRequestHandler.aepatternL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*35*36*37*38*39*310‰	
 SimpleXMLRPCServer xmlrpc.server.SimpleXMLRPCServer"socketserver.TCPServer"$xmlrpc.server.SimpleXMLRPCDispatcher*ã
 __init__)xmlrpc.server.SimpleXMLRPCServer.__init__"
 None*N
@@ -1145,7 +1198,11 @@ allow_none
 bind_and_activate
 builtins.bool"builtins.bool *7
 use_builtin_types
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310÷
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r„
+allow_reuse_address4xmlrpc.server.SimpleXMLRPCServer.allow_reuse_address
+builtins.bool"builtins.bool*35*36*37*38*39*310rŒ
+_send_traceback_handler8xmlrpc.server.SimpleXMLRPCServer._send_traceback_handler
+builtins.bool"builtins.bool*35*36*37*38*39*310ù
 MultiPathXMLRPCServer#xmlrpc.server.MultiPathXMLRPCServer" xmlrpc.server.SimpleXMLRPCServer*ì
 __init__,xmlrpc.server.MultiPathXMLRPCServer.__init__"
 None*T
@@ -1200,7 +1257,16 @@ $xmlrpc.server.SimpleXMLRPCDispatcher"$xmlrpc.server.SimpleXMLRPCDispatcher*T
 path&
 Union[Any,None]
 Any
-None z35z36z37z38z39z310j35j36j37j38j39j310Ì	
+None z35z36z37z38z39z310j35j36j37j38j39j310r—
+dispatchers/xmlrpc.server.MultiPathXMLRPCServer.dispatchers½
+@builtins.dict[builtins.str,xmlrpc.server.SimpleXMLRPCDispatcher]
+builtins.str"builtins.strL
+$xmlrpc.server.SimpleXMLRPCDispatcher"$xmlrpc.server.SimpleXMLRPCDispatcher"builtins.dict*35*36*37*38*39*310ru
+
+allow_none.xmlrpc.server.MultiPathXMLRPCServer.allow_none
+builtins.bool"builtins.bool*35*36*37*38*39*310ro
+encoding,xmlrpc.server.MultiPathXMLRPCServer.encoding
+builtins.str"builtins.str*35*36*37*38*39*310Ì	
 CGIXMLRPCRequestHandler%xmlrpc.server.CGIXMLRPCRequestHandler"$xmlrpc.server.SimpleXMLRPCDispatcher*ø
 __init__.xmlrpc.server.CGIXMLRPCRequestHandler.__init__"
 None*X
@@ -1276,7 +1342,7 @@ docroutine&xmlrpc.server.ServerHTMLDoc.docroutine"
 methodsu
 (builtins.dict[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dictz35z36z37z38z39z310j35j36j37j38j39j310Æ	
+builtins.str"builtins.str"builtins.dictz35z36z37z38z39z310j35j36j37j38j39j310·
 XMLRPCDocGenerator xmlrpc.server.XMLRPCDocGenerator"builtins.object*¨
 __init__)xmlrpc.server.XMLRPCDocGenerator.__init__"
 None*N
@@ -1303,7 +1369,13 @@ docroutine&xmlrpc.server.ServerHTMLDoc.docroutine"
 generate_html_documentation<xmlrpc.server.XMLRPCDocGenerator.generate_html_documentation"
 builtins.str"builtins.str*N
 selfD
- xmlrpc.server.XMLRPCDocGenerator" xmlrpc.server.XMLRPCDocGeneratorz35z36z37z38z39z310j35j36j37j38j39j310¹
+ xmlrpc.server.XMLRPCDocGenerator" xmlrpc.server.XMLRPCDocGeneratorz35z36z37z38z39z310j35j36j37j38j39j310rr
+server_name,xmlrpc.server.XMLRPCDocGenerator.server_name
+builtins.str"builtins.str*35*36*37*38*39*310r„
+server_documentation5xmlrpc.server.XMLRPCDocGenerator.server_documentation
+builtins.str"builtins.str*35*36*37*38*39*310rt
+server_title-xmlrpc.server.XMLRPCDocGenerator.server_title
+builtins.str"builtins.str*35*36*37*38*39*310¹
 DocXMLRPCRequestHandler%xmlrpc.server.DocXMLRPCRequestHandler"(xmlrpc.server.SimpleXMLRPCRequestHandler*³
 do_GET,xmlrpc.server.DocXMLRPCRequestHandler.do_GET"
 None*X

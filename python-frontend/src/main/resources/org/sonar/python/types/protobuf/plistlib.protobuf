@@ -364,7 +364,7 @@ typing._KT*Q
 self
 plistlib.Dict"plistlib.Dict*$
 attr
-builtins.str"builtins.strz27z35z36j27j35j36Ô
+builtins.str"builtins.strz27z35z36j27j35j36à
 Dataplistlib.Data"builtins.object*‚
 __init__plistlib.Data.__init__"
 None*(
@@ -377,14 +377,18 @@ typing._KT*Q
 self
 plistlib.Data"plistlib.Data**
 data 
-builtins.bytes"builtins.bytesz35z36z37z38j27j35j36j37j38º
+builtins.bytes"builtins.bytesz35z36z37z38j27j35j36j37j38r<
+dataplistlib.Data.data
+builtins.str"builtins.str*27rL
+dataplistlib.Data.data 
+builtins.bytes"builtins.bytes*35*36*37*38º
 InvalidFileExceptionplistlib.InvalidFileException"builtins.ValueError*Ğ
 __init__&plistlib.InvalidFileException.__init__"
 None*H
 self>
 plistlib.InvalidFileException"plistlib.InvalidFileException*+
 message
-builtins.str"builtins.str z27z35z36z37z38z39z310j27j35j36j37j38j39j310
+builtins.str"builtins.str z27z35z36z37z38z39z310j27j35j36j37j38j39j310«
 Enum	enum.Enum"builtins.object*¸
 	_missing_enum.Enum._missing_"
 Any*4
@@ -440,7 +444,35 @@ __format__enum.Enum.__format__"
 self
 	enum.Enum"	enum.Enum*-
 proto"
-builtins.object"builtins.objectz35z36z37z38z39z310@Hbenum.EnumMetaj35j36j37j38j39j310â
+builtins.object"builtins.objectz35z36z37z38z39z310@Hbenum.EnumMetaj35j36j37j38j39j310rM
+nameenum.Enum.name
+builtins.str"builtins.str*35*36*37*38*39*310r:
+valueenum.Enum.value
+Any*35*36*37*38*39*310rQ
+_name_enum.Enum._name_
+builtins.str"builtins.str*35*36*37*38*39*310r>
+_value_enum.Enum._value_
+Any*35*36*37*38*39*310r
+_member_names_enum.Enum._member_names_J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310r­
+_member_map_enum.Enum._member_map_l
+%builtins.dict[builtins.str,enum.Enum]
+builtins.str"builtins.str
+	enum.Enum"	enum.Enum"builtins.dict*35*36*37*38*39*310r¹
+_value2member_map_enum.Enum._value2member_map_l
+%builtins.dict[builtins.int,enum.Enum]
+builtins.int"builtins.int
+	enum.Enum"	enum.Enum"builtins.dict*35*36*37*38*39*310rS
+_order_enum.Enum._order_
+builtins.str"builtins.str*35*36*37*38*39*310rW
+	__order__enum.Enum.__order__
+builtins.str"builtins.str*35*36*37*38*39*310rÏ
+_ignore_enum.Enum._ignore_
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*37*38*39*310â
 MutableMappingtyping.MutableMapping"typing.Mapping*€
 __setitem__!typing.MutableMapping.__setitem__"
 None*m
@@ -581,8 +613,13 @@ typing._KT
 typing._VT"typing.MutableMapping*
 kwargs
 
-typing._VT0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310I
-PlistFormatplistlib.PlistFormat"	enum.EnumHj35j36j37j38j39j310
+typing._VT0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310
+PlistFormatplistlib.PlistFormat"	enum.EnumHj35j36j37j38j39j310r^
+FMT_XMLplistlib.PlistFormat.FMT_XML
+builtins.int"builtins.int*35*36*37*38*39*310rd
+
+FMT_BINARYplistlib.PlistFormat.FMT_BINARY
+builtins.int"builtins.int*35*36*37*38*39*310Õ
 UIDplistlib.UID"builtins.object*ˆ
 __init__plistlib.UID.__init__"
 None*&
@@ -602,7 +639,9 @@ __reduce__plistlib.UID.__reduce__"
 __hash__plistlib.UID.__hash__"
 builtins.int"builtins.int*&
 self
-plistlib.UID"plistlib.UIDz38z39z310j38j39j310Š
+plistlib.UID"plistlib.UIDz38z39z310j38j39j310rD
+dataplistlib.UID.data
+builtins.int"builtins.int*38*39*310Š
 	readPlistplistlib.readPlist"
 Any*Û
 

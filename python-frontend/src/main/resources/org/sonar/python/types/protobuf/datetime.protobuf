@@ -206,7 +206,8 @@
 typing._T_co*P
 selfH
  typing.SupportsAbs[typing._T_co]
-typing._T_co"typing.SupportsAbs0:abstractmethod@z27z35z36z37z38z39z3108PXj27j35j36j37j38j39j310É
+typing._T_co"typing.SupportsAbs0:abstractmethod@z27z35z36z37z38z39z3108PXj27j35j36j37j38j39j310À
+
 TypeVartyping.TypeVar"builtins.object*Þ
 __init__typing.TypeVar.__init__"
 None**
@@ -244,7 +245,20 @@
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310æ
+builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310r
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27*35*36*37*38*39*310r“
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27*35*36*37*38*39*310rj
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rr
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310æ
 tzinfodatetime.tzinfo"builtins.object*Ž
 tznamedatetime.tzinfo.tzname"D
 Union[builtins.str,None]
@@ -281,7 +295,7 @@
 self"
 datetime.tzinfo"datetime.tzinfo*.
 dt&
-datetime.datetime"datetime.datetimez27z35z36z37z38z39z310j27j35j36j37j38j39j310û/
+datetime.datetime"datetime.datetimez27z35z36z37z38z39z310j27j35j36j37j38j39j310˜2
 datedatetime.date"builtins.object*÷
 __new__datetime.date.__new__"
 datetime._S*/
@@ -487,7 +501,14 @@ isoweekdaydatetime.date.isoweekday"
 self
 datetime.date"datetime.date*'
 other
-datetime.date"datetime.date0:overloadX"27"35"36"37"38"39"310j27j35j36j37j38j39j310Í)
+datetime.date"datetime.date0:overloadX"27"35"36"37"38"39"310j27j35j36j37j38j39j310rU
+mindatetime.date.min
+datetime.date"datetime.date*27*35*36*37*38*39*310rU
+maxdatetime.date.max
+datetime.date"datetime.date*27*35*36*37*38*39*310rm
+
+resolutiondatetime.date.resolution(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310ê+
 timedatetime.time"builtins.object*ö
 __new__datetime.time.__new__"
 datetime._S*/
@@ -676,7 +697,14 @@ __format__datetime.time.__format__"
 Type[datetime._S]
 datetime._S*-
 time_string
-builtins.str"builtins.str0:classmethodpz37z38z39z310j27j35j36j37j38j39j310ª.
+builtins.str"builtins.str0:classmethodpz37z38z39z310j27j35j36j37j38j39j310rU
+mindatetime.time.min
+datetime.time"datetime.time*27*35*36*37*38*39*310rU
+maxdatetime.time.max
+datetime.time"datetime.time*27*35*36*37*38*39*310rm
+
+resolutiondatetime.time.resolution(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310ê0
 	timedeltadatetime.timedelta"typing.SupportsAbs*Þ
 __new__datetime.timedelta.__new__"
 datetime._S*/
@@ -846,7 +874,14 @@ __divmod__datetime.timedelta.__divmod__"r
 self(
 datetime.timedelta"datetime.timedelta*)
 other 
-builtins.float"builtins.float0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310÷m
+builtins.float"builtins.float0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310rd
+mindatetime.timedelta.min(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310rd
+maxdatetime.timedelta.max(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310rr
+
+resolutiondatetime.timedelta.resolution(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310°p
 datetimedatetime.datetime"datetime.date*ò
 __new__datetime.datetime.__new__"
 datetime._S*/
@@ -1308,7 +1343,14 @@ isoweekdaydatetime.datetime.isoweekday"
 self&
 datetime.datetime"datetime.datetime*1
 other(
-datetime.timedelta"datetime.timedelta0:overloadX"27"35"36"37"38"39"310j27j35j36j37j38j39j310ï
+datetime.timedelta"datetime.timedelta0:overloadX"27"35"36"37"38"39"310j27j35j36j37j38j39j310ra
+mindatetime.datetime.min&
+datetime.datetime"datetime.datetime*27*35*36*37*38*39*310ra
+maxdatetime.datetime.max&
+datetime.datetime"datetime.datetime*27*35*36*37*38*39*310rq
+
+resolutiondatetime.datetime.resolution(
+datetime.timedelta"datetime.timedelta*27*35*36*37*38*39*310Ð
 
 NamedTupletyping.NamedTuple"builtins.tuple*Ì
 __init__typing.NamedTuple.__init__"
@@ -1349,7 +1391,21 @@ NamedTupletyping.NamedTuple"builtins.tuple*Ì
 self
 	typing._T*
 kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310·
+Anyz35z36z37z38z39z310j35j36j37j38j39j310rÊ
+_field_typestyping.NamedTuple._field_types€
+/collections.OrderedDict[builtins.str,Type[Any]]
+builtins.str"builtins.str
+	Type[Any]
+Any"collections.OrderedDict*35*36*37*38*39*310r¦
+_field_defaults!typing.NamedTuple._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*35*36*37*38*39*310r‹
+_fieldstyping.NamedTuple._fieldsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*35*36*37*38*39*310r[
+_sourcetyping.NamedTuple._source
+builtins.str"builtins.str*35*36*37*38*39*310Ô
 timezonedatetime.timezone"datetime.tzinfo*Û
 __init__datetime.timezone.__init__"
 None*0
@@ -1362,7 +1418,13 @@ NamedTupletyping.NamedTuple"builtins.tuple*Ì
 __hash__datetime.timezone.__hash__"
 builtins.int"builtins.int*0
 self&
-datetime.timezone"datetime.timezonez35z36z37z38z39z310j35j36j37j38j39j310ã
+datetime.timezone"datetime.timezonez35z36z37z38z39z310j35j36j37j38j39j310r]
+utcdatetime.timezone.utc&
+datetime.timezone"datetime.timezone*35*36*37*38*39*310r]
+mindatetime.timezone.min&
+datetime.timezone"datetime.timezone*35*36*37*38*39*310r]
+maxdatetime.timezone.max&
+datetime.timezone"datetime.timezone*35*36*37*38*39*310é
 _IsoCalendarDatedatetime._IsoCalendarDate"builtins.tuple*‰
 _replace"datetime._IsoCalendarDate._replace"!
 datetime._IsoCalendarDate._NT*,
@@ -1402,7 +1464,32 @@ NamedTupletyping.NamedTuple"builtins.tuple*Ì
 new
 Any *
 len
-Any 0:classmethodpz39z310j39j310D
+Any 0:classmethodpz39z310j39j310rV
+yeardatetime._IsoCalendarDate.year
+builtins.int"builtins.int*39*39*310*310rV
+weekdatetime._IsoCalendarDate.week
+builtins.int"builtins.int*39*39*310*310r\
+weekday!datetime._IsoCalendarDate.weekday
+builtins.int"builtins.int*39*39*310*310rÃ
+_fields!datetime._IsoCalendarDate._fields‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*39*310r˜
+_field_types&datetime._IsoCalendarDate._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*39*310rž
+_field_defaults)datetime._IsoCalendarDate._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*39*310rS
+_source!datetime._IsoCalendarDate._source
+builtins.str"builtins.str*39*310rž
+__annotations__)datetime._IsoCalendarDate.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*39*310D
 overloadtyping.overload"
 	typing._F*
 f

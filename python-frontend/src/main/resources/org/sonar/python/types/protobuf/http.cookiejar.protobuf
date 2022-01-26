@@ -1,5 +1,5 @@
 
-http.cookiejar“#
+http.cookiejar¥)
 HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*è
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -128,7 +128,22 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 name
 builtins.str"builtins.str*
 default
-http.client._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310Ø
+http.client._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rp
+msghttp.client.HTTPResponse.msg2
+http.client.HTTPMessage"http.client.HTTPMessage*35*36*37*38*39*310rx
+headers http.client.HTTPResponse.headers2
+http.client.HTTPMessage"http.client.HTTPMessage*35*36*37*38*39*310rb
+version http.client.HTTPResponse.version
+builtins.int"builtins.int*35*36*37*38*39*310rh
+
+debuglevel#http.client.HTTPResponse.debuglevel
+builtins.int"builtins.int*35*36*37*38*39*310rb
+closedhttp.client.HTTPResponse.closed
+builtins.bool"builtins.bool*35*36*37*38*39*310r`
+statushttp.client.HTTPResponse.status
+builtins.int"builtins.int*35*36*37*38*39*310r`
+reasonhttp.client.HTTPResponse.reason
+builtins.str"builtins.str*35*36*37*38*39*310Ø
 Iterabletyping.Iterable"builtins.object*·
 __iter__typing.Iterable.__iter__"B
 typing.Iterator[typing._T_co]
@@ -201,7 +216,7 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 typing.Sequence[typing._T_co]
 typing._T_co"typing.Sequence*%
 s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310‰
+builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310À
 TypeVartyping.TypeVar"builtins.object*û
 __init__typing.TypeVar.__init__"
 None**
@@ -221,7 +236,20 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310ª
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r{
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*35*36*37*38*39*310rè
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*35*36*37*38*39*310rf
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310Ë'
 Requesturllib.request.Request"builtins.object*ı
 __init__urllib.request.Request.__init__"
 None*:
@@ -341,7 +369,37 @@ get_header!urllib.request.Request.get_header"^
 header_name
 builtins.str"builtins.str*"
 default
-urllib.request._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310P
+urllib.request._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rZ
+typeurllib.request.Request.type
+builtins.str"builtins.str*35*36*37*38*39*310rZ
+hosturllib.request.Request.host
+builtins.str"builtins.str*35*36*37*38*39*310rp
+origin_req_host&urllib.request.Request.origin_req_host
+builtins.str"builtins.str*35*36*37*38*39*310rb
+selectorurllib.request.Request.selector
+builtins.str"builtins.str*35*36*37*38*39*310rà
+dataurllib.request.Request.dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*35*36*37*38*39*310rπ
+headersurllib.request.Request.headersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*35*36*37*38*39*310rÕ
+unredirected_hdrs(urllib.request.Request.unredirected_hdrsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*35*36*37*38*39*310rl
+unverifiable#urllib.request.Request.unverifiable
+builtins.bool"builtins.bool*35*36*37*38*39*310rÜ
+methodurllib.request.Request.methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310ré
+timeouturllib.request.Request.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*35*36*37*38*39*310P
 	LoadErrorhttp.cookiejar.LoadError"builtins.OSErrorj35j36j37j38j39j310Å
 	CookieJarhttp.cookiejar.CookieJar"typing.Iterable*ë
 __init__!http.cookiejar.CookieJar.__init__"
@@ -425,7 +483,7 @@ set_cookie#http.cookiejar.CookieJar.set_cookie"
 __len__ http.cookiejar.CookieJar.__len__"
 builtins.int"builtins.int*<
 self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJarz35z36z37z38z39z310j35j36j37j38j39j310à
+http.cookiejar.CookieJar"http.cookiejar.CookieJarz35z36z37z38z39z310j35j36j37j38j39j310‡
 FileCookieJarhttp.cookiejar.FileCookieJar"http.cookiejar.CookieJar*ó
 __init__%http.cookiejar.FileCookieJar.__init__"
 None*F
@@ -492,7 +550,11 @@ set_cookie#http.cookiejar.CookieJar.set_cookie"
 ignore_discard
 builtins.bool"builtins.bool *4
 ignore_expires
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310j
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310rh
+filename%http.cookiejar.FileCookieJar.filename
+builtins.str"builtins.str*35*36*37*38*39*310rl
+	delayload&http.cookiejar.FileCookieJar.delayload
+builtins.bool"builtins.bool*35*36*37*38*39*310j
 MozillaCookieJarhttp.cookiejar.MozillaCookieJar"http.cookiejar.FileCookieJarj35j36j37j38j39j310Ç
 LWPCookieJarhttp.cookiejar.LWPCookieJar"http.cookiejar.FileCookieJar*ù
 
@@ -503,7 +565,7 @@ as_lwp_str&http.cookiejar.LWPCookieJar.as_lwp_str"
 ignore_discard
 builtins.bool"builtins.bool *4
 ignore_expires
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310˝	
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310ƒ
 CookiePolicyhttp.cookiejar.CookiePolicy"builtins.object*¶
 set_ok"http.cookiejar.CookiePolicy.set_ok"
 builtins.bool"builtins.bool*D
@@ -536,7 +598,13 @@ as_lwp_str&http.cookiejar.LWPCookieJar.as_lwp_str"
 path
 builtins.str"builtins.str*=
 request0
-urllib.request.Request"urllib.request.Requestz35z36z37z38z39z310j35j36j37j38j39j310Æ 
+urllib.request.Request"urllib.request.Requestz35z36z37z38z39z310j35j36j37j38j39j310ri
+netscape$http.cookiejar.CookiePolicy.netscape
+builtins.bool"builtins.bool*35*36*37*38*39*310rg
+rfc2965#http.cookiejar.CookiePolicy.rfc2965
+builtins.bool"builtins.bool*35*36*37*38*39*310rq
+hide_cookie2(http.cookiejar.CookiePolicy.hide_cookie2
+builtins.bool"builtins.bool*35*36*37*38*39*310Ñ-
 DefaultCookiePolicy"http.cookiejar.DefaultCookiePolicy"http.cookiejar.CookiePolicy*∆
 __init__+http.cookiejar.DefaultCookiePolicy.__init__"
 None*R
@@ -653,7 +721,31 @@ is_blocked-http.cookiejar.DefaultCookiePolicy.is_blocked"
 selfH
 "http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*(
 domain
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310˜
+builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rÜ
+rfc2109_as_netscape6http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape
+builtins.bool"builtins.bool*35*36*37*38*39*310rz
+strict_domain0http.cookiejar.DefaultCookiePolicy.strict_domain
+builtins.bool"builtins.bool*35*36*37*38*39*310rñ
+strict_rfc2965_unverifiable>http.cookiejar.DefaultCookiePolicy.strict_rfc2965_unverifiable
+builtins.bool"builtins.bool*35*36*37*38*39*310rå
+strict_ns_unverifiable9http.cookiejar.DefaultCookiePolicy.strict_ns_unverifiable
+builtins.bool"builtins.bool*35*36*37*38*39*310r~
+strict_ns_domain3http.cookiejar.DefaultCookiePolicy.strict_ns_domain
+builtins.int"builtins.int*35*36*37*38*39*310rò
+strict_ns_set_initial_dollar?http.cookiejar.DefaultCookiePolicy.strict_ns_set_initial_dollar
+builtins.bool"builtins.bool*35*36*37*38*39*310rÑ
+strict_ns_set_path5http.cookiejar.DefaultCookiePolicy.strict_ns_set_path
+builtins.bool"builtins.bool*35*36*37*38*39*310rÇ
+DomainStrictNoDots5http.cookiejar.DefaultCookiePolicy.DomainStrictNoDots
+builtins.int"builtins.int*35*36*37*38*39*310rà
+DomainStrictNonDomain8http.cookiejar.DefaultCookiePolicy.DomainStrictNonDomain
+builtins.int"builtins.int*35*36*37*38*39*310rÇ
+DomainRFC2965Match5http.cookiejar.DefaultCookiePolicy.DomainRFC2965Match
+builtins.int"builtins.int*35*36*37*38*39*310rx
+DomainLiberal0http.cookiejar.DefaultCookiePolicy.DomainLiberal
+builtins.int"builtins.int*35*36*37*38*39*310rv
+DomainStrict/http.cookiejar.DefaultCookiePolicy.DomainStrict
+builtins.int"builtins.int*35*36*37*38*39*310Ω#
 Cookiehttp.cookiejar.Cookie"builtins.object*—	
 __init__http.cookiejar.Cookie.__init__"
 None*8
@@ -748,7 +840,51 @@ is_expired http.cookiejar.Cookie.is_expired"
 name
 builtins.str"builtins.str*"
 default
-http.cookiejar._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310\
+http.cookiejar._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rá
+versionhttp.cookiejar.Cookie.versionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*35*36*37*38*39*310rY
+namehttp.cookiejar.Cookie.name
+builtins.str"builtins.str*35*36*37*38*39*310rÉ
+valuehttp.cookiejar.Cookie.valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rÅ
+porthttp.cookiejar.Cookie.portD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rY
+pathhttp.cookiejar.Cookie.path
+builtins.str"builtins.str*35*36*37*38*39*310ro
+path_specified$http.cookiejar.Cookie.path_specified
+builtins.bool"builtins.bool*35*36*37*38*39*310r_
+securehttp.cookiejar.Cookie.secure
+builtins.bool"builtins.bool*35*36*37*38*39*310rá
+expireshttp.cookiejar.Cookie.expiresD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*35*36*37*38*39*310ra
+discardhttp.cookiejar.Cookie.discard
+builtins.bool"builtins.bool*35*36*37*38*39*310rá
+commenthttp.cookiejar.Cookie.commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rè
+comment_url!http.cookiejar.Cookie.comment_urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310ra
+rfc2109http.cookiejar.Cookie.rfc2109
+builtins.bool"builtins.bool*35*36*37*38*39*310ro
+port_specified$http.cookiejar.Cookie.port_specified
+builtins.bool"builtins.bool*35*36*37*38*39*310r]
+domainhttp.cookiejar.Cookie.domain
+builtins.str"builtins.str*35*36*37*38*39*310rs
+domain_specified&http.cookiejar.Cookie.domain_specified
+builtins.bool"builtins.bool*35*36*37*38*39*310rw
+domain_initial_dot(http.cookiejar.Cookie.domain_initial_dot
+builtins.bool"builtins.bool*35*36*37*38*39*310\
 overloadtyping.overload"
 	typing._F*
 func

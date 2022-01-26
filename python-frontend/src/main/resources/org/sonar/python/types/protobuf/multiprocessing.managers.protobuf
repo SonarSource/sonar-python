@@ -164,7 +164,7 @@ typing._KT*Q
 typing.Sequence[typing._T_co]
 typing._T_co"typing.Sequence*%
 s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310‰
+builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310À
 TypeVartyping.TypeVar"builtins.object*û
 __init__typing.TypeVar.__init__"
 None**
@@ -184,9 +184,22 @@ typing._KT*Q
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310x
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r{
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*35*36*37*38*39*310rè
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*35*36*37*38*39*310rf
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310x
 
-Connection%multiprocessing.connection.Connection"*multiprocessing.connection._ConnectionBasej35j36j37j38j39j310ˆã
+Connection%multiprocessing.connection.Connection"*multiprocessing.connection._ConnectionBasej35j36j37j38j39j310Âí
 BaseContext#multiprocessing.context.BaseContext"builtins.object*Ω
 current_process3multiprocessing.context.BaseContext.current_process"J
 #multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodhz35z36z37z38z39z310*É
@@ -585,7 +598,22 @@ $multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*+
 	reduction
-builtins.str"builtins.str0:reducer.setter"35"36"37"38"39"310j35j36j37j38j39j310Í
+builtins.str"builtins.str0:reducer.setter"35"36"37"38"39"310j35j36j37j38j39j310r 
+Process+multiprocessing.context.BaseContext.Processy
+)Type[multiprocessing.process.BaseProcess]J
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess*35*36*37*38*39*310r°
+ProcessError0multiprocessing.context.BaseContext.ProcessErrorF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*35*36*37*38*39*310r•
+BufferTooShort2multiprocessing.context.BaseContext.BufferTooShortF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*35*36*37*38*39*310r°
+TimeoutError0multiprocessing.context.BaseContext.TimeoutErrorF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*35*36*37*38*39*310rØ
+AuthenticationError7multiprocessing.context.BaseContext.AuthenticationErrorF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*35*36*37*38*39*310Í
 	Namespace"multiprocessing.managers.Namespace"builtins.object*¡
 __init__+multiprocessing.managers.Namespace.__init__"
 None*R
@@ -606,7 +634,7 @@ $multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
 __name
 builtins.str"builtins.str*
 __value
-Anyz35z36z37z38z39z310j35j36j37j38j39j310à
+Anyz35z36z37z38z39z310j35j36j37j38j39j310¿
 Tokenmultiprocessing.managers.Token"builtins.object*£
 __init__'multiprocessing.managers.Token.__init__"
 None*J
@@ -670,7 +698,24 @@ $multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes
 builtins.int"builtins.int
-Nonez35z36z37z38z39z310j35j36j37j38j39j310 
+Nonez35z36z37z38z39z310j35j36j37j38j39j310rø
+typeid%multiprocessing.managers.Token.typeidu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None*35*36*37*38*39*310rç
+address&multiprocessing.managers.Token.address¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*35*36*37*38*39*310r„
+id!multiprocessing.managers.Token.id†
+4Union[builtins.str,builtins.bytes,builtins.int,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int
+None*35*36*37*38*39*310¡
 	BaseProxy"multiprocessing.managers.BaseProxy"builtins.object*Œ
 __init__+multiprocessing.managers.BaseProxy.__init__"
 None*R
@@ -731,7 +776,13 @@ __reduce__-multiprocessing.managers.BaseProxy.__reduce__"Ó
 Any
 Any"builtins.dict*R
 selfH
-"multiprocessing.managers.BaseProxy""multiprocessing.managers.BaseProxyz35z36z37z38z39z310j35j36j37j38j39j310˛
+"multiprocessing.managers.BaseProxy""multiprocessing.managers.BaseProxyz35z36z37z38z39z310j35j36j37j38j39j310rù
+_address_to_local4multiprocessing.managers.BaseProxy._address_to_local9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*35*36*37*38*39*310rU
+_mutex)multiprocessing.managers.BaseProxy._mutex
+Any*35*36*37*38*39*310Ï
 
 ValueProxy#multiprocessing.managers.ValueProxy""multiprocessing.managers.BaseProxy*˛
 get'multiprocessing.managers.ValueProxy.get"
@@ -753,7 +804,9 @@ FType[multiprocessing.managers.ValueProxy[multiprocessing.managers._T]]à
 @multiprocessing.managers.ValueProxy[multiprocessing.managers._T]
 multiprocessing.managers._T"#multiprocessing.managers.ValueProxy*
 item
-Anypz39z310Pj35j36j37j38j39j310â	
+Anypz39z310Pj35j36j37j38j39j310rl
+value)multiprocessing.managers.ValueProxy.value
+multiprocessing.managers._T*35*36*37*38*39*310ﬂ	
 Servermultiprocessing.managers.Server"builtins.object*»
 __init__(multiprocessing.managers.Server.__init__"
 None*L
@@ -786,7 +839,9 @@ serializer
 cN
 %multiprocessing.connection.Connection"%multiprocessing.connection.Connection*&
 name
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310Æ
+builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rT
+address'multiprocessing.managers.Server.address
+Any*35*36*37*38*39*310Æ
 BaseManager$multiprocessing.managers.BaseManager"typing.ContextManager*é
 __init__-multiprocessing.managers.BaseManager.__init__"
 None*V
@@ -950,7 +1005,7 @@ $multiprocessing.managers.SyncManager"$multiprocessing.managers.SyncManager*p
 sequence`
 ,typing.Sequence[multiprocessing.managers._T]
 multiprocessing.managers._T"typing.Sequence z35z36z37z38z39z310j35j36j37j38j39j310`
-RemoteError$multiprocessing.managers.RemoteError"builtins.Exceptionj35j36j37j38j39j310·
+RemoteError$multiprocessing.managers.RemoteError"builtins.Exceptionj35j36j37j38j39j310Å
 ShareableList+multiprocessing.shared_memory.ShareableList"builtins.object*Æ
 __init__4multiprocessing.shared_memory.ShareableList.__init__"
 None*±
@@ -1021,7 +1076,9 @@ UType[multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory.
 Omultiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]&
 "multiprocessing.shared_memory._SLT"+multiprocessing.shared_memory.ShareableList*
 item
-Anypz39z310Pj38j39j310¿
+Anypz39z310Pj38j39j310rù
+shm/multiprocessing.shared_memory.ShareableList.shmX
+*multiprocessing.shared_memory.SharedMemory"*multiprocessing.shared_memory.SharedMemory*38*39*310¿
 SharedMemory*multiprocessing.shared_memory.SharedMemory"builtins.object*‰
 __init__3multiprocessing.shared_memory.SharedMemory.__init__"
 None*b
@@ -1078,7 +1135,7 @@ Omultiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]
 ?Union[typing.Iterable[multiprocessing.shared_memory._SLT],None]n
 3typing.Iterable[multiprocessing.shared_memory._SLT]&
 "multiprocessing.shared_memory._SLT"typing.Iterable
-Nonez38z39z310j38j39j310Ü
+Nonez38z39z310j38j39j310¨
 GenericAliastypes.GenericAlias"builtins.object*≠
 __init__types.GenericAlias.__init__"
 None*2
@@ -1093,7 +1150,16 @@ Omultiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]
 self(
 types.GenericAlias"types.GenericAlias*$
 name
-builtins.str"builtins.strz39z310j39j310*)
+builtins.str"builtins.strz39z310j39j310rT
+
+__origin__types.GenericAlias.__origin__
+builtins.type"builtins.type*39*310r`
+__args__types.GenericAlias.__args__.
+builtins.tuple[Any]
+Any"builtins.tuple*39*310rl
+__parameters__!types.GenericAlias.__parameters__.
+builtins.tuple[Any]
+Any"builtins.tuple*39*310*)
 queuequeue *35*36*37*38*39*310*%
 syssys *35*36*37*38*39*310*1
 	threading	threading *35*36*37*38*39*310*N

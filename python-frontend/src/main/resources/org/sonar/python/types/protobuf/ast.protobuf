@@ -16,7 +16,7 @@
 typing._T_co*L
 selfB
 typing.Iterator[typing._T_co]
-typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z3108PXj27j35j36j37j38j39j310Ã
+typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z3108PXj27j35j36j37j38j39j310Ä
 AST_ast.AST"builtins.object*å
 __init___ast.AST.__init__"
 None*
@@ -25,86 +25,470 @@
 args
 Any*
 kwargs
-Anyz27z35z36z37z38z39z310j27j35j36j37j38j39j3106
-mod_ast.mod"_ast.ASTj27j35j36j37j38j39j310<
-Module_ast.Module"_ast.modj27j35j36j37j38j39j310F
-Interactive_ast.Interactive"_ast.modj27j35j36j37j38j39j310D
+Anyz27z35z36z37z38z39z310j27j35j36j37j38j39j310ré
+_attributes_ast.AST._attributesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27*35*36*37*38*39*310rÜ
+_fields_ast.AST._fieldsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27*35*36*37*38*39*310rP
+lineno_ast.AST.lineno
+builtins.int"builtins.int*35*36*37*38*39*310rX
 
-Expression_ast.Expression"_ast.modj27j35j36j37j38j39j3101
+col_offset_ast.AST.col_offset
+builtins.int"builtins.int*35*36*37*38*39*310rt
+
+end_lineno_ast.AST.end_linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*38*39*310r|
+end_col_offset_ast.AST.end_col_offsetD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*38*39*310rx
+type_comment_ast.AST.type_commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*38*39*3106
+mod_ast.mod"_ast.ASTj27j35j36j37j38j39j310√
+Module_ast.Module"_ast.modj27j35j36j37j38j39j310rx
+body_ast.Module.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310rä
+type_ignores_ast.Module.type_ignoresS
+builtins.list[_ast.TypeIgnore]"
+_ast.TypeIgnore"_ast.TypeIgnore"builtins.list*38*39*310≈
+Interactive_ast.Interactive"_ast.modj27j35j36j37j38j39j310r}
+body_ast.Interactive.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310ó
+
+Expression_ast.Expression"_ast.modj27j35j36j37j38j39j310rQ
+body_ast.Expression.body
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310°
 Suite
-_ast.Suite"_ast.modj27j35j36j37j388
-stmt	_ast.stmt"_ast.ASTj27j35j36j37j38j39j310G
-FunctionDef_ast.FunctionDef"	_ast.stmtj27j35j36j37j38j39j310A
-ClassDef_ast.ClassDef"	_ast.stmtj27j35j36j37j38j39j310=
-Return_ast.Return"	_ast.stmtj27j35j36j37j38j39j310=
-Delete_ast.Delete"	_ast.stmtj27j35j36j37j38j39j310=
-Assign_ast.Assign"	_ast.stmtj27j35j36j37j38j39j310C
-	AugAssign_ast.AugAssign"	_ast.stmtj27j35j36j37j38j39j310"
+_ast.Suite"_ast.modj27j35j36j37j38rn
+body_ast.Suite.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38º
+stmt	_ast.stmt"_ast.ASTj27j35j36j37j38j39j310r<
+lineno_ast.stmt.lineno
+builtins.int"builtins.int*27rD
+
+col_offset_ast.stmt.col_offset
+builtins.int"builtins.int*27ç
+FunctionDef_ast.FunctionDef"	_ast.stmtj27j35j36j37j38j39j310rX
+name_ast.FunctionDef.name
+builtins.str"builtins.str*27*35*36*37*38*39*310r\
+args_ast.FunctionDef.args 
+_ast.arguments"_ast.arguments*27*35*36*37*38*39*310r}
+body_ast.FunctionDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310rë
+decorator_list_ast.FunctionDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310ry
+returns_ast.FunctionDef.returns;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310≠
+ClassDef_ast.ClassDef"	_ast.stmtj27j35j36j37j38j39j310rU
+name_ast.ClassDef.name
+builtins.str"builtins.str*27*35*36*37*38*39*310r|
+bases_ast.ClassDef.basesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rz
+body_ast.ClassDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310ré
+decorator_list_ast.ClassDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rá
+keywords_ast.ClassDef.keywordsJ
+builtins.list[_ast.keyword]
+_ast.keyword"_ast.keyword"builtins.list*35*36*37*38*39*310≥
+Return_ast.Return"	_ast.stmtj27j35j36j37j38j39j310rt
+value_ast.Return.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38*39*310Ω
+Delete_ast.Delete"	_ast.stmtj27j35j36j37j38j39j310r~
+targets_ast.Delete.targetsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310é
+Assign_ast.Assign"	_ast.stmtj27j35j36j37j38j39j310r~
+targets_ast.Assign.targetsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rO
+value_ast.Assign.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310√
+	AugAssign_ast.AugAssign"	_ast.stmtj27j35j36j37j38j39j310rT
+target_ast.AugAssign.target
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rT
+op_ast.AugAssign.op
+_ast.operator"_ast.operator*27*35*36*37*38*39*310rR
+value_ast.AugAssign.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310ô
 Print
-_ast.Print"	_ast.stmtj277
-For_ast.For"	_ast.stmtj27j35j36j37j38j39j310;
+_ast.Print"	_ast.stmtj27rX
+dest_ast.Print.dest;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27rb
+values_ast.Print.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27r7
+nl_ast.Print.nl
+builtins.bool"builtins.bool*27≈
+For_ast.For"	_ast.stmtj27j35j36j37j38j39j310rN
+target_ast.For.target
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rJ
+iter_ast.For.iter
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310ru
+body_ast.For.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310ry
+orelse_ast.For.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310ˇ
 While
-_ast.While"	_ast.stmtj27j35j36j37j38j39j3105
-If_ast.If"	_ast.stmtj27j35j36j37j38j39j3109
-With	_ast.With"	_ast.stmtj27j35j36j37j38j39j310;
+_ast.While"	_ast.stmtj27j35j36j37j38j39j310rL
+test_ast.While.test
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rw
+body_ast.While.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310r{
+orelse_ast.While.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310
+If_ast.If"	_ast.stmtj27j35j36j37j38j39j310rI
+test_ast.If.test
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rt
+body_ast.If.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310rx
+orelse_ast.If.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310„
+With	_ast.With"	_ast.stmtj27j35j36j37j38j39j310rB
+context_expr_ast.With.context_expr
+	_ast.expr"	_ast.expr*27ri
+optional_vars_ast.With.optional_vars;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27rv
+body_ast.With.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310rÄ
+items_ast.With.itemsM
+builtins.list[_ast.withitem]
+_ast.withitem"_ast.withitem"builtins.list*35*36*37*38*39*310©
 Raise
-_ast.Raise"	_ast.stmtj27j35j36j37j38j39j310*
-	TryExcept_ast.TryExcept"	_ast.stmtj27,
+_ast.Raise"	_ast.stmtj27j35j36j37j38j39j310rX
+type_ast.Raise.type;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27rX
+inst_ast.Raise.inst;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27rZ
+tback_ast.Raise.tback;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27rk
+exc_ast.Raise.exc;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310ro
+cause_ast.Raise.cause;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310˛
+	TryExcept_ast.TryExcept"	_ast.stmtj27rb
+body_ast.TryExcept.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27rÖ
+handlers_ast.TryExcept.handlers\
+!builtins.list[_ast.ExceptHandler](
+_ast.ExceptHandler"_ast.ExceptHandler"builtins.list*27rf
+orelse_ast.TryExcept.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27Ä
 
-TryFinally_ast.TryFinally"	_ast.stmtj27=
-Assert_ast.Assert"	_ast.stmtj27j35j36j37j38j39j310=
-Import_ast.Import"	_ast.stmtj27j35j36j37j38j39j310E
+TryFinally_ast.TryFinally"	_ast.stmtj27rc
+body_ast.TryFinally.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27rm
+	finalbody_ast.TryFinally.finalbodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27˛
+Assert_ast.Assert"	_ast.stmtj27j35j36j37j38j39j310rM
+test_ast.Assert.test
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rp
+msg_ast.Assert.msg;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38*39*310º
+Import_ast.Import"	_ast.stmtj27j35j36j37j38j39j310r}
+names_ast.Import.namesD
+builtins.list[_ast.alias]
 
-ImportFrom_ast.ImportFrom"	_ast.stmtj27j35j36j37j38j39j310 
-Exec	_ast.Exec"	_ast.stmtj27=
-Global_ast.Global"	_ast.stmtj27j35j36j37j38j39j3109
-Expr	_ast.Expr"	_ast.stmtj27j35j36j37j38j39j3109
+_ast.alias"
+_ast.alias"builtins.list*27*35*36*37*38*39*310ê
+
+ImportFrom_ast.ImportFrom"	_ast.stmtj27j35j36j37j38j39j310rÉ
+module_ast.ImportFrom.moduleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310rÅ
+names_ast.ImportFrom.namesD
+builtins.list[_ast.alias]
+
+_ast.alias"
+_ast.alias"builtins.list*27*35*36*37*38*39*310rh
+level_ast.ImportFrom.levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*27rU
+level_ast.ImportFrom.level
+builtins.int"builtins.int*35*36*37*38*39*310ê
+Exec	_ast.Exec"	_ast.stmtj27r2
+body_ast.Exec.body
+	_ast.expr"	_ast.expr*27r]
+globals_ast.Exec.globals;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27r[
+locals_ast.Exec.locals;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27√
+Global_ast.Global"	_ast.stmtj27j35j36j37j38j39j310rÉ
+names_ast.Global.namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*27*35*36*37*38*39*310à
+Expr	_ast.Expr"	_ast.stmtj27j35j36j37j38j39j310rM
+value_ast.Expr.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*3109
 Pass	_ast.Pass"	_ast.stmtj27j35j36j37j38j39j310;
 Break
 _ast.Break"	_ast.stmtj27j35j36j37j38j39j310A
 Continue_ast.Continue"	_ast.stmtj27j35j36j37j38j39j3101
 slice
-_ast.slice"_ast.ASTj27j35j36j37j383
+_ast.slice"_ast.ASTj27j35j36j37j38ı
 Slice
 _ast.Slice"
-_ast.slicej27j35j36j37j38'
+_ast.slicej27j35j36j37j38rj
+lower_ast.Slice.lower;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38rj
+upper_ast.Slice.upper;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38rh
+step_ast.Slice.step;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38»
 Slice
-_ast.Slice"	_ast.exprj39j3109
+_ast.Slice"	_ast.exprj39j310r_
+lower_ast.Slice.lower;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*39*310r_
+upper_ast.Slice.upper;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*39*310r]
+step_ast.Slice.step;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*39*310Ø
 ExtSlice_ast.ExtSlice"
-_ast.slicej27j35j36j37j383
+_ast.slicej27j35j36j37j38rt
+dims_ast.ExtSlice.dimsD
+builtins.list[_ast.slice]
+
+_ast.slice"
+_ast.slice"builtins.list*27*35*36*37*38z
 Index
 _ast.Index"
-_ast.slicej27j35j36j37j38)
+_ast.slicej27j35j36j37j38rE
+value_ast.Index.value
+	_ast.expr"	_ast.expr*27*35*36*37*38)
 Ellipsis_ast.Ellipsis"
 _ast.slicej270
-Ellipsis_ast.Ellipsis"	_ast.exprj35j36j378
-expr	_ast.expr"_ast.ASTj27j35j36j37j38j39j310=
-BoolOp_ast.BoolOp"	_ast.exprj27j35j36j37j38j39j310;
+Ellipsis_ast.Ellipsis"	_ast.exprj35j36j37º
+expr	_ast.expr"_ast.ASTj27j35j36j37j38j39j310r<
+lineno_ast.expr.lineno
+builtins.int"builtins.int*27rD
+
+col_offset_ast.expr.col_offset
+builtins.int"builtins.int*27ä
+BoolOp_ast.BoolOp"	_ast.exprj27j35j36j37j38j39j310rM
+op_ast.BoolOp.op
+_ast.boolop"_ast.boolop*27*35*36*37*38*39*310r|
+values_ast.BoolOp.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310´
 BinOp
-_ast.BinOp"	_ast.exprj27j35j36j37j38j39j310?
-UnaryOp_ast.UnaryOp"	_ast.exprj27j35j36j37j38j39j310=
-Lambda_ast.Lambda"	_ast.exprj27j35j36j37j38j39j310;
+_ast.BinOp"	_ast.exprj27j35j36j37j38j39j310rL
+left_ast.BinOp.left
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rP
+op_ast.BinOp.op
+_ast.operator"_ast.operator*27*35*36*37*38*39*310rN
+right_ast.BinOp.right
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310Á
+UnaryOp_ast.UnaryOp"	_ast.exprj27j35j36j37j38j39j310rP
+op_ast.UnaryOp.op
+_ast.unaryop"_ast.unaryop*27*35*36*37*38*39*310rT
+operand_ast.UnaryOp.operand
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310Â
+Lambda_ast.Lambda"	_ast.exprj27j35j36j37j38j39j310rW
+args_ast.Lambda.args 
+_ast.arguments"_ast.arguments*27*35*36*37*38*39*310rM
+body_ast.Lambda.body
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310©
 IfExp
-_ast.IfExp"	_ast.exprj27j35j36j37j38j39j3109
-Dict	_ast.Dict"	_ast.exprj27j35j36j37j38j39j3107
-Set_ast.Set"	_ast.exprj27j35j36j37j38j39j310A
-ListComp_ast.ListComp"	_ast.exprj27j35j36j37j38j39j310?
-SetComp_ast.SetComp"	_ast.exprj27j35j36j37j38j39j310A
-DictComp_ast.DictComp"	_ast.exprj27j35j36j37j38j39j310I
-GeneratorExp_ast.GeneratorExp"	_ast.exprj27j35j36j37j38j39j310;
+_ast.IfExp"	_ast.exprj27j35j36j37j38j39j310rL
+test_ast.IfExp.test
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rL
+body_ast.IfExp.body
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rP
+orelse_ast.IfExp.orelse
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310∫
+Dict	_ast.Dict"	_ast.exprj27j35j36j37j38j39j310r]
+keys_ast.Dict.keysA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27r£
+keys_ast.Dict.keysr
+$builtins.list[Union[_ast.expr,None]];
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None"builtins.list*35*36*37*38*39*310rz
+values_ast.Dict.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310Æ
+Set_ast.Set"	_ast.exprj27j35j36j37j38j39j310ru
+elts_ast.Set.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310¥
+ListComp_ast.ListComp"	_ast.exprj27j35j36j37j38j39j310rM
+elt_ast.ListComp.elt
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310r°
+
+generators_ast.ListComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.list*27*35*36*37*38*39*310∞
+SetComp_ast.SetComp"	_ast.exprj27j35j36j37j38j39j310rL
+elt_ast.SetComp.elt
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310r†
+
+generators_ast.SetComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.list*27*35*36*37*38*39*310á
+DictComp_ast.DictComp"	_ast.exprj27j35j36j37j38j39j310rM
+key_ast.DictComp.key
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rQ
+value_ast.DictComp.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310r°
+
+generators_ast.DictComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.list*27*35*36*37*38*39*310ƒ
+GeneratorExp_ast.GeneratorExp"	_ast.exprj27j35j36j37j38j39j310rQ
+elt_ast.GeneratorExp.elt
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310r•
+
+generators_ast.GeneratorExp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.list*27*35*36*37*38*39*310∞
 Yield
-_ast.Yield"	_ast.exprj27j35j36j37j38j39j310?
-Compare_ast.Compare"	_ast.exprj27j35j36j37j38j39j3109
-Call	_ast.Call"	_ast.exprj27j35j36j37j38j39j310 
-Repr	_ast.Repr"	_ast.exprj27*
-Num_ast.Num"	_ast.exprj27j35j36j37*
-Str_ast.Str"	_ast.exprj27j35j36j37C
-	Attribute_ast.Attribute"	_ast.exprj27j35j36j37j38j39j310C
-	Subscript_ast.Subscript"	_ast.exprj27j35j36j37j38j39j3109
-Name	_ast.Name"	_ast.exprj27j35j36j37j38j39j3109
-List	_ast.List"	_ast.exprj27j35j36j37j38j39j310;
+_ast.Yield"	_ast.exprj27j35j36j37j38j39j310rs
+value_ast.Yield.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38*39*310ï
+Compare_ast.Compare"	_ast.exprj27j35j36j37j38j39j310rN
+left_ast.Compare.left
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rz
+ops_ast.Compare.opsD
+builtins.list[_ast.cmpop]
+
+_ast.cmpop"
+_ast.cmpop"builtins.list*27*35*36*37*38*39*310rá
+comparators_ast.Compare.comparatorsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310∆
+Call	_ast.Call"	_ast.exprj27j35j36j37j38j39j310rK
+func_ast.Call.func
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rv
+args_ast.Call.argsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rá
+keywords_ast.Call.keywordsJ
+builtins.list[_ast.keyword]
+_ast.keyword"_ast.keyword"builtins.list*27*35*36*37*38*39*310r_
+starargs_ast.Call.starargs;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27r[
+kwargs_ast.Call.kwargs;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27V
+Repr	_ast.Repr"	_ast.exprj27r4
+value_ast.Repr.value
+	_ast.expr"	_ast.expr*27§
+Num_ast.Num"	_ast.exprj27j35j36j37r5
+n
+_ast.Num.n 
+builtins.float"builtins.float*27rA
+n
+_ast.Num.n$
+builtins.complex"builtins.complex*35*36*37i
+Str_ast.Str"	_ast.exprj27j35j36j37r=
+s
+_ast.Str.s
+builtins.str"builtins.str*27*35*36*37œ
+	Attribute_ast.Attribute"	_ast.exprj27j35j36j37j38j39j310rR
+value_ast.Attribute.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rV
+attr_ast.Attribute.attr
+builtins.str"builtins.str*27*35*36*37*38*39*310r^
+ctx_ast.Attribute.ctx&
+_ast.expr_context"_ast.expr_context*27*35*36*37*38*39*310Ñ
+	Subscript_ast.Subscript"	_ast.exprj27j35j36j37j38j39j310rR
+value_ast.Subscript.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rK
+slice_ast.Subscript.slice
+
+_ast.slice"
+_ast.slice*27*35*36*37*38r>
+slice_ast.Subscript.slice
+	_ast.expr"	_ast.expr*39*310r^
+ctx_ast.Subscript.ctx&
+_ast.expr_context"_ast.expr_context*27*35*36*37*38*39*310„
+Name	_ast.Name"	_ast.exprj27j35j36j37j38j39j310rM
+id_ast.Name.id
+builtins.str"builtins.str*27*35*36*37*38*39*310rY
+ctx_ast.Name.ctx&
+_ast.expr_context"_ast.expr_context*27*35*36*37*38*39*310å
+List	_ast.List"	_ast.exprj27j35j36j37j38j39j310rv
+elts_ast.List.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rY
+ctx_ast.List.ctx&
+_ast.expr_context"_ast.expr_context*27*35*36*37*38*39*310ê
 Tuple
-_ast.Tuple"	_ast.exprj27j35j36j37j38j39j310H
+_ast.Tuple"	_ast.exprj27j35j36j37j38j39j310rw
+elts_ast.Tuple.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rZ
+ctx_ast.Tuple.ctx&
+_ast.expr_context"_ast.expr_context*27*35*36*37*38*39*310H
 expr_context_ast.expr_context"_ast.ASTj27j35j36j37j38j39j310>
 AugLoad_ast.AugLoad"_ast.expr_contextj27j35j36j37j38@
 AugStore_ast.AugStore"_ast.expr_contextj27j35j36j37j38?
@@ -160,14 +544,95 @@ _ast.NotEq"
 _ast.cmpopj27j35j36j37j38j39j310<
 NotIn
 _ast.NotIn"
-_ast.cmpopj27j35j36j37j38j39j310J
-comprehension_ast.comprehension"_ast.ASTj27j35j36j37j38j39j310J
-excepthandler_ast.excepthandler"_ast.ASTj27j35j36j37j38j39j310T
-ExceptHandler_ast.ExceptHandler"_ast.excepthandlerj27j35j36j37j38j39j310B
-	arguments_ast.arguments"_ast.ASTj27j35j36j37j38j39j310>
-keyword_ast.keyword"_ast.ASTj27j35j36j37j38j39j310:
+_ast.cmpopj27j35j36j37j38j39j310Ÿ
+comprehension_ast.comprehension"_ast.ASTj27j35j36j37j38j39j310rX
+target_ast.comprehension.target
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310rT
+iter_ast.comprehension.iter
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310r}
+ifs_ast.comprehension.ifsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310r^
+is_async_ast.comprehension.is_async
+builtins.int"builtins.int*35*36*37*38*39*310J
+excepthandler_ast.excepthandler"_ast.ASTj27j35j36j37j38j39j310»
+ExceptHandler_ast.ExceptHandler"_ast.excepthandlerj27j35j36j37j38j39j310ry
+type_ast.ExceptHandler.type;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27*35*36*37*38*39*310r`
+name_ast.ExceptHandler.name;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*27r~
+name_ast.ExceptHandler.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r
+body_ast.ExceptHandler.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*27*35*36*37*38*39*310rE
+lineno_ast.ExceptHandler.lineno
+builtins.int"builtins.int*27rM
+
+col_offset_ast.ExceptHandler.col_offset
+builtins.int"builtins.int*27ê
+
+	arguments_ast.arguments"_ast.ASTj27j35j36j37j38j39j310rb
+args_ast.arguments.argsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27rt
+args_ast.arguments.args>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.list*35*36*37*38*39*310ri
+vararg_ast.arguments.varargD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rr
+vararg_ast.arguments.vararg8
+Union[_ast.arg,None]
+_ast.arg"_ast.arg
+None*35*36*37*38*39*310rg
+kwarg_ast.arguments.kwargD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rp
+kwarg_ast.arguments.kwarg8
+Union[_ast.arg,None]
+_ast.arg"_ast.arg
+None*35*36*37*38*39*310rÉ
+defaults_ast.arguments.defaultsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*27*35*36*37*38*39*310rÄ
+
+kwonlyargs_ast.arguments.kwonlyargs>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.list*35*36*37*38*39*310r∂
+kw_defaults_ast.arguments.kw_defaultsr
+$builtins.list[Union[_ast.expr,None]];
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None"builtins.list*35*36*37*38*39*310rv
+posonlyargs_ast.arguments.posonlyargs>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.list*38*39*310√
+keyword_ast.keyword"_ast.ASTj27j35j36j37j38j39j310r9
+arg_ast.keyword.arg
+builtins.str"builtins.str*27rv
+arg_ast.keyword.argD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rP
+value_ast.keyword.value
+	_ast.expr"	_ast.expr*27*35*36*37*38*39*310é
 alias
-_ast.alias"_ast.ASTj27j35j36j37j38j39j310≠ñ
+_ast.alias"_ast.ASTj27j35j36j37j38j39j310rR
+name_ast.alias.name
+builtins.str"builtins.str*27*35*36*37*38*39*310r~
+asname_ast.alias.asnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310≠ñ
 NodeVisitorast.NodeVisitor"builtins.object*í
 visitast.NodeVisitor.visit"
 Any*,
@@ -940,7 +1405,7 @@ _ast.Bytesz35z36z37*ê
 self*
 ast.NodeTransformer"ast.NodeTransformer*
 node
-_ast.AST"_ast.ASTz35z36z37z38z39z310j27j35j36j37j38j39j310‰
+_ast.AST"_ast.ASTz35z36z37z38z39z310j27j35j36j37j38j39j310À
 TypeVartyping.TypeVar"builtins.object*û
 __init__typing.TypeVar.__init__"
 None**
@@ -960,34 +1425,173 @@ _ast.Bytesz35z36z37*ê
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310M
-AsyncFunctionDef_ast.AsyncFunctionDef"	_ast.stmtj35j36j37j38j39j310?
-	AnnAssign_ast.AnnAssign"	_ast.stmtj35j36j37j38j39j310=
-AsyncFor_ast.AsyncFor"	_ast.stmtj35j36j37j38j39j310?
-	AsyncWith_ast.AsyncWith"	_ast.stmtj35j36j37j38j39j3103
-Try_ast.Try"	_ast.stmtj35j36j37j38j39j310=
-Nonlocal_ast.Nonlocal"	_ast.stmtj35j36j37j38j39j3107
-Await
-_ast.Await"	_ast.exprj35j36j37j38j39j310?
-	YieldFrom_ast.YieldFrom"	_ast.exprj35j36j37j38j39j310I
-FormattedValue_ast.FormattedValue"	_ast.exprj35j36j37j38j39j310?
-	JoinedStr_ast.JoinedStr"	_ast.exprj35j36j37j38j39j310*
-Bytes
-_ast.Bytes"	_ast.exprj35j36j378
-NameConstant_ast.NameConstant"	_ast.exprj35j36j37=
-Constant_ast.Constant"	_ast.exprj35j36j37j38j39j310;
-Starred_ast.Starred"	_ast.exprj35j36j37j38j39j310?
-MatMult_ast.MatMult"_ast.operatorj35j36j37j38j39j3102
-arg_ast.arg"_ast.ASTj35j36j37j38j39j310<
-withitem_ast.withitem"_ast.ASTj35j36j37j38j39j3106
-type_ignore_ast.type_ignore"_ast.ASTj38j39j310<
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r{
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*35*36*37*38*39*310rè
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*35*36*37*38*39*310rf
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310ú
+AsyncFunctionDef_ast.AsyncFunctionDef"	_ast.stmtj35j36j37j38j39j310rY
+name_ast.AsyncFunctionDef.name
+builtins.str"builtins.str*35*36*37*38*39*310r]
+args_ast.AsyncFunctionDef.args 
+_ast.arguments"_ast.arguments*35*36*37*38*39*310r~
+body_ast.AsyncFunctionDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310rí
+decorator_list$_ast.AsyncFunctionDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*35*36*37*38*39*310r~
+returns_ast.AsyncFunctionDef.returns;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310∏
+	AnnAssign_ast.AnnAssign"	_ast.stmtj35j36j37j38j39j310rP
+target_ast.AnnAssign.target
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rX
 
-TypeIgnore_ast.TypeIgnore"_ast.type_ignorej38j39j3108
-FunctionType_ast.FunctionType"_ast.modj38j39j3103
-	NamedExpr_ast.NamedExpr"	_ast.exprj38j39j310*
-Numast.Num"_ast.Constantj38j39j310*
-Strast.Str"_ast.Constantj38j39j310.
-Bytes	ast.Bytes"_ast.Constantj38j39j310<
+annotation_ast.AnnAssign.annotation
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rs
+value_ast.AnnAssign.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310rV
+simple_ast.AnnAssign.simple
+builtins.int"builtins.int*35*36*37*38*39*310œ
+AsyncFor_ast.AsyncFor"	_ast.stmtj35j36j37j38j39j310rO
+target_ast.AsyncFor.target
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rK
+iter_ast.AsyncFor.iter
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rv
+body_ast.AsyncFor.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310rz
+orelse_ast.AsyncFor.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310¿
+	AsyncWith_ast.AsyncWith"	_ast.stmtj35j36j37j38j39j310rÖ
+items_ast.AsyncWith.itemsM
+builtins.list[_ast.withitem]
+_ast.withitem"_ast.withitem"builtins.list*35*36*37*38*39*310rw
+body_ast.AsyncWith.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310±
+Try_ast.Try"	_ast.stmtj35j36j37j38j39j310rq
+body_ast.Try.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310rî
+handlers_ast.Try.handlers\
+!builtins.list[_ast.ExceptHandler](
+_ast.ExceptHandler"_ast.ExceptHandler"builtins.list*35*36*37*38*39*310ru
+orelse_ast.Try.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310r{
+	finalbody_ast.Try.finalbodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*35*36*37*38*39*310¡
+Nonlocal_ast.Nonlocal"	_ast.stmtj35j36j37j38j39j310rÅ
+names_ast.Nonlocal.namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310É
+Await
+_ast.Await"	_ast.exprj35j36j37j38j39j310rJ
+value_ast.Await.value
+	_ast.expr"	_ast.expr*35*36*37*38*39*310è
+	YieldFrom_ast.YieldFrom"	_ast.exprj35j36j37j38j39j310rN
+value_ast.YieldFrom.value
+	_ast.expr"	_ast.expr*35*36*37*38*39*310≥
+FormattedValue_ast.FormattedValue"	_ast.exprj35j36j37j38j39j310rS
+value_ast.FormattedValue.value
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rã
+
+conversion_ast.FormattedValue.conversionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*35*36*37*38*39*310rÑ
+format_spec_ast.FormattedValue.format_spec;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310º
+	JoinedStr_ast.JoinedStr"	_ast.exprj35j36j37j38j39j310r{
+values_ast.JoinedStr.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*35*36*37*38*39*310k
+Bytes
+_ast.Bytes"	_ast.exprj35j36j37r?
+s_ast.Bytes.s 
+builtins.bytes"builtins.bytes*35*36*37o
+NameConstant_ast.NameConstant"	_ast.exprj35j36j37r5
+value_ast.NameConstant.value
+Any*35*36*37Ö
+Constant_ast.Constant"	_ast.exprj35j36j37j38j39j310r>
+value_ast.Constant.value
+Any*35*36*37*38*39*310ry
+kind_ast.Constant.kindD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r6
+s_ast.Constant.s
+Any*35*36*37*38*39*310rS
+n_ast.Constant.n$
+builtins.complex"builtins.complex*35*36*37*38*39*310„
+Starred_ast.Starred"	_ast.exprj35j36j37j38j39j310rL
+value_ast.Starred.value
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rX
+ctx_ast.Starred.ctx&
+_ast.expr_context"_ast.expr_context*35*36*37*38*39*310?
+MatMult_ast.MatMult"_ast.operatorj35j36j37j38j39j310˜
+arg_ast.arg"_ast.ASTj35j36j37j38j39j310rJ
+arg_ast.arg.arg
+builtins.str"builtins.str*35*36*37*38*39*310rw
+
+annotation_ast.arg.annotation;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*310û
+withitem_ast.withitem"_ast.ASTj35j36j37j38j39j310r[
+context_expr_ast.withitem.context_expr
+	_ast.expr"	_ast.expr*35*36*37*38*39*310rÇ
+optional_vars_ast.withitem.optional_vars;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*35*36*37*38*39*3106
+type_ignore_ast.type_ignore"_ast.ASTj38j39j310É
+
+TypeIgnore_ast.TypeIgnore"_ast.type_ignorej38j39j310rE
+tag_ast.TypeIgnore.tag
+builtins.str"builtins.str*38*39*310˚
+FunctionType_ast.FunctionType"_ast.modj38j39j310rv
+argtypes_ast.FunctionType.argtypesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*38*39*310rI
+returns_ast.FunctionType.returns
+	_ast.expr"	_ast.expr*38*39*310Ω
+	NamedExpr_ast.NamedExpr"	_ast.exprj38j39j310rD
+target_ast.NamedExpr.target
+	_ast.expr"	_ast.expr*38*39*310rB
+value_ast.NamedExpr.value
+	_ast.expr"	_ast.expr*38*39*310u
+Numast.Num"_ast.Constantj38j39j310rI
+valueast.Num.value$
+builtins.complex"builtins.complex*38*39*310®
+Strast.Str"_ast.Constantj38j39j310rA
+valueast.Str.value
+builtins.str"builtins.str*38*39*310r9
+s	ast.Str.s
+builtins.str"builtins.str*38*39*310∏
+Bytes	ast.Bytes"_ast.Constantj38j39j310rG
+valueast.Bytes.value 
+builtins.bytes"builtins.bytes*38*39*310r?
+sast.Bytes.s 
+builtins.bytes"builtins.bytes*38*39*310<
 NameConstantast.NameConstant"_ast.Constantj38j39j3104
 Ellipsisast.Ellipsis"_ast.Constantj38j39j310%
 slice	ast.slice"_ast.ASTj39j310,
@@ -996,22 +1600,84 @@ TypeIgnore_ast.TypeIgnore"_ast.type_ignorej38j39j3108
 Suite	ast.Suite"_ast.modj39j3102
 AugLoadast.AugLoad"_ast.expr_contextj39j3104
 AugStoreast.AugStore"_ast.expr_contextj39j310.
-Param	ast.Param"_ast.expr_contextj39j310#
+Param	ast.Param"_ast.expr_contextj39j310‘
 Match
-_ast.Match"	_ast.stmtj310&
-pattern_ast.pattern"_ast.ASTj310,
+_ast.Match"	_ast.stmtj310r:
+subject_ast.Match.subject
+	_ast.expr"	_ast.expr*310rs
+cases_ast.Match.casesS
+builtins.list[_ast.match_case]"
+_ast.match_case"_ast.match_case"builtins.list*310&
+pattern_ast.pattern"_ast.ASTj310ª
 
-match_case_ast.match_case"_ast.ASTj3100
+match_case_ast.match_case"_ast.ASTj310rE
+pattern_ast.match_case.pattern
+_ast.pattern"_ast.pattern*310r`
+guard_ast.match_case.guard;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*310rd
+body_ast.match_case.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list*310m
 
-MatchValue_ast.MatchValue"_ast.patternj3108
-MatchSingleton_ast.MatchSingleton"_ast.patternj3106
-MatchSequence_ast.MatchSequence"_ast.patternj310.
-	MatchStar_ast.MatchStar"_ast.patternj3104
-MatchMapping_ast.MatchMapping"_ast.patternj3100
+MatchValue_ast.MatchValue"_ast.patternj310r;
+value_ast.MatchValue.value
+	_ast.expr"	_ast.expr*310§
+MatchSingleton_ast.MatchSingleton"_ast.patternj310rÈ
+value_ast.MatchSingleton.valueø
+9Union[Literal[builtins.bool],Literal[builtins.bool],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+None*310∞
+MatchSequence_ast.MatchSequence"_ast.patternj310rx
+patterns_ast.MatchSequence.patternsJ
+builtins.list[_ast.pattern]
+_ast.pattern"_ast.pattern"builtins.list*310ñ
+	MatchStar_ast.MatchStar"_ast.patternj310rf
+name_ast.MatchStar.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*310Ä
+MatchMapping_ast.MatchMapping"_ast.patternj310rf
+keys_ast.MatchMapping.keysA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list*310rw
+patterns_ast.MatchMapping.patternsJ
+builtins.list[_ast.pattern]
+_ast.pattern"_ast.pattern"builtins.list*310ri
+rest_ast.MatchMapping.restD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*310ÿ
 
-MatchClass_ast.MatchClass"_ast.patternj310*
-MatchAs_ast.MatchAs"_ast.patternj310*
-MatchOr_ast.MatchOr"_ast.patternj310§
+MatchClass_ast.MatchClass"_ast.patternj310r7
+cls_ast.MatchClass.cls
+	_ast.expr"	_ast.expr*310ru
+patterns_ast.MatchClass.patternsJ
+builtins.list[_ast.pattern]
+_ast.pattern"_ast.pattern"builtins.list*310rw
+	kwd_attrs_ast.MatchClass.kwd_attrsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*310r}
+kwd_patterns_ast.MatchClass.kwd_patternsJ
+builtins.list[_ast.pattern]
+_ast.pattern"_ast.pattern"builtins.list*310¸
+MatchAs_ast.MatchAs"_ast.patternj310rj
+pattern_ast.MatchAs.patternD
+Union[_ast.pattern,None]
+_ast.pattern"_ast.pattern
+None*310rd
+name_ast.MatchAs.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*310û
+MatchOr_ast.MatchOr"_ast.patternj310rr
+patterns_ast.MatchOr.patternsJ
+builtins.list[_ast.pattern]
+_ast.pattern"_ast.pattern"builtins.list*310§
 parse	ast.parse"
 _ast.Module"_ast.Module*x
 sourcel

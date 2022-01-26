@@ -316,7 +316,7 @@ typing._KT*Q
 typing.Sequence[typing._T_co]
 typing._T_co"typing.Sequence*%
 s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27è
+builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27°
 TypeVartyping.TypeVar"builtins.object*ﬁ
 __init__typing.TypeVar.__init__"
 None**
@@ -335,7 +335,20 @@ typing._KT*Q
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z27j27¸
+builtins.bool"builtins.bool z27j27rf
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27rz
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27rQ
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27rY
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27π
 ContentTooShortErrorurllib.ContentTooShortError"builtins.IOError*∞
 __init__$urllib.ContentTooShortError.__init__"
 None*D
@@ -344,7 +357,9 @@ typing._KT*Q
 message
 Any*
 content
-Anyz27j27ö
+Anyz27j27r;
+content#urllib.ContentTooShortError.content
+Any*27Ë
 	URLopenerurllib.URLopener"builtins.object*ó
 __init__urllib.URLopener.__init__"
 None*.
@@ -437,7 +452,26 @@ open_httpsurllib.URLopener.open_https*
 self*
 url*
 
-data z27j27Í
+data z27j27r0
+versionurllib.URLopener.version
+Any*27r0
+proxiesurllib.URLopener.proxies
+Any*27r2
+key_fileurllib.URLopener.key_file
+Any*27r4
+	cert_fileurllib.URLopener.cert_file
+Any*27r0
+contexturllib.URLopener.context
+Any*27r6
+
+addheadersurllib.URLopener.addheaders
+Any*27r4
+	tempcacheurllib.URLopener.tempcache
+Any*27r2
+ftpcacheurllib.URLopener.ftpcache
+Any*27r*
+typeurllib.URLopener.type
+Any*27ì
 FancyURLopenerurllib.FancyURLopener"urllib.URLopener*ö
 __init__urllib.FancyURLopener.__init__"
 None*8
@@ -556,7 +590,14 @@ open_httpsurllib.URLopener.open_https*
 prompt_user_passwd(urllib.FancyURLopener.prompt_user_passwd*
 self*
 host*	
-realmz27j27â
+realmz27j27r;
+
+auth_cache urllib.FancyURLopener.auth_cache
+Any*27r1
+triesurllib.FancyURLopener.tries
+Any*27r7
+maxtriesurllib.FancyURLopener.maxtries
+Any*27Â
 
 ftpwrapperurllib.ftpwrapper"builtins.object*˙
 __init__urllib.ftpwrapper.__init__"
@@ -593,7 +634,27 @@ file_closeurllib.ftpwrapper.file_close*
 selfz27*8
 
 real_closeurllib.ftpwrapper.real_close*
-selfz27j27¶
+selfz27j27r+
+userurllib.ftpwrapper.user
+Any*27r/
+passwdurllib.ftpwrapper.passwd
+Any*27r+
+hosturllib.ftpwrapper.host
+Any*27r+
+porturllib.ftpwrapper.port
+Any*27r+
+dirsurllib.ftpwrapper.dirs
+Any*27r1
+timeouturllib.ftpwrapper.timeout
+Any*27r3
+refcounturllib.ftpwrapper.refcount
+Any*27r5
+	keepaliveurllib.ftpwrapper.keepalive
+Any*27r+
+busyurllib.ftpwrapper.busy
+Any*27r)
+ftpurllib.ftpwrapper.ftp
+Any*27Ã
 addbaseurllib.addbase"builtins.object*ê
 readurllib.addbase.read"
 builtins.str"builtins.str**
@@ -635,7 +696,9 @@ real_closeurllib.ftpwrapper.real_close*
 closeurllib.addbase.close"
 None**
 self 
-urllib.addbase"urllib.addbasez27j27ò
+urllib.addbase"urllib.addbasez27j27r$
+fpurllib.addbase.fp
+Any*27à
 addclosehookurllib.addclosehook"urllib.addbase*¨
 __init__urllib.addclosehook.__init__"
 None*4
@@ -648,7 +711,11 @@ real_closeurllib.ftpwrapper.real_close*
 hookargs
 Anyz27*0
 closeurllib.addclosehook.close*
-selfz27j27ﬂ
+selfz27j27r7
+	closehookurllib.addclosehook.closehook
+Any*27r5
+hookargsurllib.addclosehook.hookargs
+Any*27è
 addinfourllib.addinfo"urllib.addbase*Ñ
 __init__urllib.addinfo.__init__"
 None**
@@ -659,7 +726,9 @@ real_closeurllib.ftpwrapper.real_close*
 headers
 Anyz27*)
 infourllib.addinfo.info*
-selfz27j27˛
+selfz27j27r.
+headersurllib.addinfo.headers
+Any*27â
 
 addinfourlurllib.addinfourl"urllib.addbase*¥
 __init__urllib.addinfourl.__init__"
@@ -679,7 +748,13 @@ addinfourlurllib.addinfourl"urllib.addbase*¥
 getcodeurllib.addinfourl.getcode*
 selfz27*0
 geturlurllib.addinfourl.geturl*
-selfz27j27[
+selfz27j27r1
+headersurllib.addinfourl.headers
+Any*27r)
+urlurllib.addinfourl.url
+Any*27r+
+codeurllib.addinfourl.code
+Any*27[
 url2pathnameurllib.url2pathname"
 typing.AnyStr*
 pathname

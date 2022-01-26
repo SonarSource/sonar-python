@@ -1,5 +1,5 @@
 
-unittest 
+unittestÒ
 ABCMetaabc.ABCMeta"builtins.type*¿
 __init__abc.ABCMeta.__init__"
 None*$
@@ -41,7 +41,24 @@
 abc.ABCMeta"abc.ABCMeta*$
 subclass
 	Type[Any]
-Anyz27j27Ö
+Anyz27j27rê
+__abstractmethods__abc.ABCMeta.__abstractmethods__T
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*27rb
+
+_abc_cacheabc.ABCMeta._abc_cache8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27rd
+_abc_invalidation_counter%abc.ABCMeta._abc_invalidation_counter
+builtins.int"builtins.int*27rt
+_abc_negative_cacheabc.ABCMeta._abc_negative_cache8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27rh
+_abc_negative_cache_version'abc.ABCMeta._abc_negative_cache_version
+builtins.int"builtins.int*27rh
+_abc_registryabc.ABCMeta._abc_registry8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27Ö
 Iterabletyping.Iterable"builtins.object*Ã
 __iter__typing.Iterable.__iter__"B
 typing.Iterator[typing._T_co]
@@ -173,7 +190,7 @@ typing._KT*Q
 defaultD
 Union[typing._VT_co,typing._T]
 typing._VT_co
-	typing._T0:overloadX"27Pj27ê
+	typing._T0:overloadX"27Pj27È
 Patterntyping.Pattern"builtins.object*‰
 searchtyping.Pattern.search"{
 )Union[typing.Match[typing._AnyStr2],None]B
@@ -291,7 +308,18 @@ $Union[builtins.str,builtins.unicode]
 string
 typing._AnyStr2*)
 count
-builtins.int"builtins.int 0:overloadX"27Pj27â
+builtins.int"builtins.int 0:overloadX"27Pj27r?
+flagstyping.Pattern.flags
+builtins.int"builtins.int*27rò
+
+groupindextyping.Pattern.groupindexk
+)builtins.dict[typing.AnyStr,builtins.int]
+typing.AnyStr
+builtins.int"builtins.int"builtins.dict*27rA
+groupstyping.Pattern.groups
+builtins.int"builtins.int*27r8
+patterntyping.Pattern.pattern
+typing.AnyStr*27â
 Sequencetyping.Sequence"typing.Iterable"typing.Container"typing.Reversible*û
 indextyping.Sequence.index"
 builtins.int"builtins.int*L
@@ -373,7 +401,7 @@ $Union[builtins.str,builtins.unicode]
 	__enter__typing.TextIO.__enter__"
 typing.TextIO"typing.TextIO*&
 self
-typing.TextIO"typing.TextIO0:abstractmethod@z27j27è
+typing.TextIO"typing.TextIO0:abstractmethod@z27j27°
 TypeVartyping.TypeVar"builtins.object*ﬁ
 __init__typing.TypeVar.__init__"
 None**
@@ -392,7 +420,20 @@ $Union[builtins.str,builtins.unicode]
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z27j27ˇ
+builtins.bool"builtins.bool z27j27rf
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27rz
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27rQ
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27rY
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27ˇ
 Testableunittest.Testable"builtins.object*®
 rununittest.Testable.run"
 None*0
@@ -407,7 +448,7 @@ $Union[builtins.str,builtins.unicode]
 countTestCases unittest.Testable.countTestCases"
 builtins.int"builtins.int*0
 self&
-unittest.Testable"unittest.Testable0:abstractmethod@z27@babc.ABCMetaj27»
+unittest.Testable"unittest.Testable0:abstractmethod@z27@babc.ABCMetaj27»#
 
 TestResultunittest.TestResult"builtins.object*å
 wasSuccessful!unittest.TestResult.wasSuccessful"
@@ -503,8 +544,50 @@ addSuccessunittest.TestResult.addSuccess"
 self*
 unittest.TestResult"unittest.TestResult*0
 test&
-unittest.TestCase"unittest.TestCasez27j27R
-_AssertRaisesBaseContext!unittest._AssertRaisesBaseContext"builtins.objectj27˙
+unittest.TestCase"unittest.TestCasez27j27r·
+errorsunittest.TestResult.errors∂
+4builtins.list[Tuple[unittest.TestCase,builtins.str]]o
+%Tuple[unittest.TestCase,builtins.str]&
+unittest.TestCase"unittest.TestCase
+builtins.str"builtins.str"builtins.list*27rÂ
+failuresunittest.TestResult.failures∂
+4builtins.list[Tuple[unittest.TestCase,builtins.str]]o
+%Tuple[unittest.TestCase,builtins.str]&
+unittest.TestCase"unittest.TestCase
+builtins.str"builtins.str"builtins.list*27r„
+skippedunittest.TestResult.skipped∂
+4builtins.list[Tuple[unittest.TestCase,builtins.str]]o
+%Tuple[unittest.TestCase,builtins.str]&
+unittest.TestCase"unittest.TestCase
+builtins.str"builtins.str"builtins.list*27rı
+expectedFailures$unittest.TestResult.expectedFailures∂
+4builtins.list[Tuple[unittest.TestCase,builtins.str]]o
+%Tuple[unittest.TestCase,builtins.str]&
+unittest.TestCase"unittest.TestCase
+builtins.str"builtins.str"builtins.list*27rù
+unexpectedSuccesses'unittest.TestResult.unexpectedSuccessesY
+ builtins.list[unittest.TestCase]&
+unittest.TestCase"unittest.TestCase"builtins.list*27rP
+
+shouldStopunittest.TestResult.shouldStop
+builtins.bool"builtins.bool*27rJ
+testsRununittest.TestResult.testsRun
+builtins.int"builtins.int*27rH
+bufferunittest.TestResult.buffer
+builtins.bool"builtins.bool*27rL
+failfastunittest.TestResult.failfast
+builtins.bool"builtins.bool*27©
+_AssertRaisesBaseContext!unittest._AssertRaisesBaseContext"builtins.objectj27rC
+expected*unittest._AssertRaisesBaseContext.expected
+Any*27rû
+failureException2unittest._AssertRaisesBaseContext.failureExceptionR
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException*27rX
+obj_name*unittest._AssertRaisesBaseContext.obj_name
+builtins.str"builtins.str*27rî
+expected_regex0unittest._AssertRaisesBaseContext.expected_regexL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*27Ω
 _AssertRaisesContextunittest._AssertRaisesContext"!unittest._AssertRaisesBaseContext*¿
 	__enter__'unittest._AssertRaisesContext.__enter__">
 unittest._AssertRaisesContext"unittest._AssertRaisesContext*F
@@ -519,7 +602,9 @@ addSuccessunittest.TestResult.addSuccess"
 	exc_value
 Any*
 tb
-Anyz27j27’£
+Anyz27j27rA
+	exception'unittest._AssertRaisesContext.exception
+Any*27Äß
 TestCaseunittest.TestCase"unittest.Testable*ñ
 __init__unittest.TestCase.__init__"
 None*0
@@ -1273,7 +1358,18 @@ PUnion[Type[builtins.BaseException],builtins.tuple[Type[builtins.BaseException]]
 builtins.BaseException"builtins.BaseExceptioní
 ,builtins.tuple[Type[builtins.BaseException]]R
 Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"builtins.tuple"unittest._ExceptionType0:overloadX"27j27≈
+builtins.BaseException"builtins.BaseException"builtins.tuple"unittest._ExceptionType0:overloadX"27j27ré
+failureException"unittest.TestCase.failureExceptionR
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException*27rP
+longMessageunittest.TestCase.longMessage
+builtins.bool"builtins.bool*27rn
+maxDiffunittest.TestCase.maxDiffD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*27rV
+_testMethodName!unittest.TestCase._testMethodName
+builtins.str"builtins.str*27≈
 FunctionTestCaseunittest.FunctionTestCase"unittest.TestCase*„
 __init__"unittest.FunctionTestCase.__init__"
 None*@
@@ -1343,7 +1439,7 @@ PUnion[Type[builtins.BaseException],builtins.tuple[Type[builtins.BaseException]]
 "typing.Iterator[unittest.Testable]&
 unittest.Testable"unittest.Testable"typing.Iterator*0
 self(
-unittest.TestSuite"unittest.TestSuitez27j27¨
+unittest.TestSuite"unittest.TestSuitez27j27◊
 
 TestLoaderunittest.TestLoader"builtins.object*˛
 loadTestsFromTestCase)unittest.TestLoader.loadTestsFromTestCase"(
@@ -1401,7 +1497,18 @@ TestLoaderunittest.TestLoader"builtins.object*˛
 unittest.TestLoader"unittest.TestLoader*X
 testCaseClassC
 Type[unittest.TestCase]&
-unittest.TestCase"unittest.TestCase z27j27ç
+unittest.TestCase"unittest.TestCase z27j27rZ
+testMethodPrefix$unittest.TestLoader.testMethodPrefix
+builtins.str"builtins.str*27rÕ
+sortTestMethodsUsing(unittest.TestLoader.sortTestMethodsUsingÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*27r}
+
+suiteClassunittest.TestLoader.suiteClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27ç
 TextTestResultunittest.TextTestResult"unittest.TestResult*É
 __init__ unittest.TextTestResult.__init__"
 None*<
@@ -1466,12 +1573,14 @@ TestLoaderunittest.TestLoader"builtins.object*˛
 unittest.TextTestRunner"unittest.TextTestRunner*0
 test&
 unittest.Testable"unittest.Testablez27j275
-SkipTestunittest.SkipTest"builtins.Exceptionj27©
+SkipTestunittest.SkipTest"builtins.Exceptionj27Ä
 TestProgramunittest.TestProgram"builtins.object*o
 runTestsunittest.TestProgram.runTests"
 None*6
 self,
-unittest.TestProgram"unittest.TestProgramz27j27ê
+unittest.TestProgram"unittest.TestProgramz27j27rU
+resultunittest.TestProgram.result*
+unittest.TestResult"unittest.TestResult*27ê
 FunctionTestCaseunittest.case.FunctionTestCase"unittest.case.TestCase*á
 __init__'unittest.case.FunctionTestCase.__init__"
 None*J
@@ -1504,7 +1613,7 @@ TestLoaderunittest.TestLoader"builtins.object*˛
 self0
 unittest.case.SkipTest"unittest.case.SkipTest*(
 reason
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310¸ﬂ
+builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310ÄÂ
 TestCaseunittest.case.TestCase"builtins.object*∫
 __init__unittest.case.TestCase.__init__"
 None*:
@@ -2477,7 +2586,20 @@ DUnion[Type[unittest.case._E],builtins.tuple[Type[unittest.case._E]]]0
 typing.Pattern[builtins.bytes] 
 builtins.bytes"builtins.bytes"typing.Pattern*
 msg
-Any 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310ì
+Any 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310r®
+failureException'unittest.case.TestCase.failureExceptionR
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException*35*36*37*38*39*310rj
+longMessage"unittest.case.TestCase.longMessage
+builtins.bool"builtins.bool*35*36*37*38*39*310rà
+maxDiffunittest.case.TestCase.maxDiffD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*35*36*37*38*39*310rp
+_testMethodName&unittest.case.TestCase._testMethodName
+builtins.str"builtins.str*35*36*37*38*39*310rn
+_testMethodDoc%unittest.case.TestCase._testMethodDoc
+builtins.str"builtins.str*35*36*37*38*39*310Æ
 
 TestLoaderunittest.loader.TestLoader"builtins.object*√
 loadTestsFromTestCase0unittest.loader.TestLoader.loadTestsFromTestCase"4
@@ -2537,7 +2659,27 @@ TestLoaderunittest.loader.TestLoader"builtins.object*√
 top_level_dirD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z35z36z37z38z39z310j35j36j37j38j39j310à
+None z35z36z37z38z39z310j35j36j37j38j39j310r◊
+errors!unittest.loader.TestLoader.errorsê
++builtins.list[Type[builtins.BaseException]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"builtins.list*35*36*37*38*39*310rv
+testMethodPrefix+unittest.loader.TestLoader.testMethodPrefix
+builtins.str"builtins.str*35*36*37*38*39*310rÖ
+sortTestMethodsUsing/unittest.loader.TestLoader.sortTestMethodsUsing¢
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"%unittest.loader._SortComparisonMethod*35*36*37*38*39*310rÁ
+
+suiteClass%unittest.loader.TestLoader.suiteClassò
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"unittest.loader._SuiteClass*35*36*37*38*39*310r‘
+testNamePatterns+unittest.loader.TestLoader.testNamePatternsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*37*38*39*310‚
 TestProgramunittest.main.TestProgram"builtins.object*∞
 __init__"unittest.main.TestProgram.__init__"
 None*@
@@ -2622,7 +2764,42 @@ catchbreakG
 runTests"unittest.main.TestProgram.runTests"
 None*@
 self6
-unittest.main.TestProgram"unittest.main.TestProgramz35z36z37z38z39z310j35j36j37j38j39j310ñ,
+unittest.main.TestProgram"unittest.main.TestProgramz35z36z37z38z39z310j35j36j37j38j39j310r}
+result unittest.main.TestProgram.result8
+unittest.result.TestResult"unittest.result.TestResult*35*36*37*38*39*310r¿
+module unittest.main.TestProgram.module{
+)Union[None,builtins.str,types.ModuleType]
+None
+builtins.str"builtins.str$
+types.ModuleType"types.ModuleType*35*36*37*38*39*310rg
+	verbosity#unittest.main.TestProgram.verbosity
+builtins.int"builtins.int*35*36*37*38*39*310rê
+failfast"unittest.main.TestProgram.failfastG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*35*36*37*38*39*310rî
+
+catchbreak$unittest.main.TestProgram.catchbreakG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*35*36*37*38*39*310rå
+buffer unittest.main.TestProgram.bufferG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*35*36*37*38*39*310rç
+progName"unittest.main.TestProgram.progNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rç
+warnings"unittest.main.TestProgram.warningsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r”
+testNamePatterns*unittest.main.TestProgram.testNamePatternsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*37*38*39*310›:
 
 TestResultunittest.result.TestResult"builtins.object*°
 __init__#unittest.result.TestResult.__init__"
@@ -2769,7 +2946,41 @@ NTuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]
 None
 None
 None
-Nonez35z36z37z38z39z310j35j36j37j38j39j310™	
+Nonez35z36z37z38z39z310j35j36j37j38j39j310rë
+errors!unittest.result.TestResult.errors 
+9builtins.list[Tuple[unittest.case.TestCase,builtins.str]]~
+*Tuple[unittest.case.TestCase,builtins.str]0
+unittest.case.TestCase"unittest.case.TestCase
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rï
+failures#unittest.result.TestResult.failures 
+9builtins.list[Tuple[unittest.case.TestCase,builtins.str]]~
+*Tuple[unittest.case.TestCase,builtins.str]0
+unittest.case.TestCase"unittest.case.TestCase
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rì
+skipped"unittest.result.TestResult.skipped 
+9builtins.list[Tuple[unittest.case.TestCase,builtins.str]]~
+*Tuple[unittest.case.TestCase,builtins.str]0
+unittest.case.TestCase"unittest.case.TestCase
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310r•
+expectedFailures+unittest.result.TestResult.expectedFailures 
+9builtins.list[Tuple[unittest.case.TestCase,builtins.str]]~
+*Tuple[unittest.case.TestCase,builtins.str]0
+unittest.case.TestCase"unittest.case.TestCase
+builtins.str"builtins.str"builtins.list*35*36*37*38*39*310r»
+unexpectedSuccesses.unittest.result.TestResult.unexpectedSuccessesh
+%builtins.list[unittest.case.TestCase]0
+unittest.case.TestCase"unittest.case.TestCase"builtins.list*35*36*37*38*39*310rl
+
+shouldStop%unittest.result.TestResult.shouldStop
+builtins.bool"builtins.bool*35*36*37*38*39*310rf
+testsRun#unittest.result.TestResult.testsRun
+builtins.int"builtins.int*35*36*37*38*39*310rd
+buffer!unittest.result.TestResult.buffer
+builtins.bool"builtins.bool*35*36*37*38*39*310rh
+failfast#unittest.result.TestResult.failfast
+builtins.bool"builtins.bool*35*36*37*38*39*310rj
+	tb_locals$unittest.result.TestResult.tb_locals
+builtins.bool"builtins.bool*35*36*37*38*39*310º
 TextTestResultunittest.runner.TextTestResult"unittest.result.TestResult*≠
 __init__'unittest.runner.TextTestResult.__init__"
 None*J
@@ -2800,7 +3011,21 @@ NTuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]
 errors~
 *Tuple[unittest.case.TestCase,builtins.str]0
 unittest.case.TestCase"unittest.case.TestCase
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310¿
+builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rt
+descriptions+unittest.runner.TextTestResult.descriptions
+builtins.bool"builtins.bool*35*36*37*38*39*310rd
+dots#unittest.runner.TextTestResult.dots
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+
+separator1)unittest.runner.TextTestResult.separator1
+builtins.str"builtins.str*35*36*37*38*39*310rn
+
+separator2)unittest.runner.TextTestResult.separator2
+builtins.str"builtins.str*35*36*37*38*39*310rj
+showall&unittest.runner.TextTestResult.showall
+builtins.bool"builtins.bool*35*36*37*38*39*310rh
+stream%unittest.runner.TextTestResult.stream
+typing.TextIO"typing.TextIO*35*36*37*38*39*310µ
 TextTestRunnerunittest.runner.TextTestRunner"builtins.object*ç
 __init__'unittest.runner.TextTestRunner.__init__"
 None*J
@@ -2841,7 +3066,11 @@ NTuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]
 test¢
 6Union[unittest.suite.TestSuite,unittest.case.TestCase]4
 unittest.suite.TestSuite"unittest.suite.TestSuite0
-unittest.case.TestCase"unittest.case.TestCasez35z36z37z38z39z310j35j36j37j38j39j310∂
+unittest.case.TestCase"unittest.case.TestCasez35z36z37z38z39z310j35j36j37j38j39j310rÚ
+resultclass*unittest.runner.TextTestRunner.resultclassù
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function" unittest.runner._ResultClassType*35*36*37*38*39*310ﬂ
 BaseTestSuiteunittest.suite.BaseTestSuite"typing.Iterable*ô
 __init__%unittest.suite.BaseTestSuite.__init__"
 None*F
@@ -2899,7 +3128,12 @@ ATypeAlias[Union[unittest.case.TestCase,unittest.suite.TestSuite]]¢
 unittest.case.TestCase"unittest.case.TestCase4
 unittest.suite.TestSuite"unittest.suite.TestSuite"unittest.suite._TestType"typing.Iterator*D
 self<
-unittest.suite.BaseTestSuite"unittest.suite.BaseTestSuitez35z36z37z38z39z310j35j36j37j38j39j310à
+unittest.suite.BaseTestSuite"unittest.suite.BaseTestSuitez35z36z37z38z39z310j35j36j37j38j39j310r∞
+_tests#unittest.suite.BaseTestSuite._testsh
+%builtins.list[unittest.case.TestCase]0
+unittest.case.TestCase"unittest.case.TestCase"builtins.list*35*36*37*38*39*310rt
+_removed_tests+unittest.suite.BaseTestSuite._removed_tests
+builtins.int"builtins.int*35*36*37*38*39*310à
 	TestSuiteunittest.suite.TestSuite"unittest.suite.BaseTestSuite*©
 rununittest.suite.TestSuite.run"8
 unittest.result.TestResult"unittest.result.TestResult*>

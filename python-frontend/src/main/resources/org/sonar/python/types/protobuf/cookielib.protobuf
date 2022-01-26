@@ -1,5 +1,5 @@
 
-	cookielibÖ
+	cookielib¨
 Cookiecookielib.Cookie"builtins.object*ˆ
 __init__cookielib.Cookie.__init__"
 None*.
@@ -64,7 +64,39 @@ is_expiredcookielib.Cookie.is_expired"
 now&
 Union[Any,None]
 Any
-None z27j27£
+None z27j27r0
+versioncookielib.Cookie.version
+Any*27r*
+namecookielib.Cookie.name
+Any*27r,
+valuecookielib.Cookie.value
+Any*27r*
+portcookielib.Cookie.port
+Any*27r>
+port_specifiedcookielib.Cookie.port_specified
+Any*27r.
+domaincookielib.Cookie.domain
+Any*27rB
+domain_specified!cookielib.Cookie.domain_specified
+Any*27rF
+domain_initial_dot#cookielib.Cookie.domain_initial_dot
+Any*27r*
+pathcookielib.Cookie.path
+Any*27r>
+path_specifiedcookielib.Cookie.path_specified
+Any*27r.
+securecookielib.Cookie.secure
+Any*27r0
+expirescookielib.Cookie.expires
+Any*27r0
+discardcookielib.Cookie.discard
+Any*27r0
+commentcookielib.Cookie.comment
+Any*27r8
+comment_urlcookielib.Cookie.comment_url
+Any*27r0
+rfc2109cookielib.Cookie.rfc2109
+Any*27£
 CookiePolicycookielib.CookiePolicy"builtins.object*N
 set_okcookielib.CookiePolicy.set_ok*
 self*
@@ -84,7 +116,7 @@ is_expiredcookielib.Cookie.is_expired"
 path_return_ok%cookielib.CookiePolicy.path_return_ok*
 self*
 path*
-requestz27j27¢
+requestz27j27ù!
 DefaultCookiePolicycookielib.DefaultCookiePolicy"cookielib.CookiePolicy*³
 __init__&cookielib.DefaultCookiePolicy.__init__"
 None*H
@@ -217,8 +249,38 @@ is_blocked(cookielib.DefaultCookiePolicy.is_blocked*
 path_return_ok,cookielib.DefaultCookiePolicy.path_return_ok*
 self*
 path*
-requestz27j27/
-Absentcookielib.Absent"builtins.objectj27ö	
+requestz27j27rS
+DomainStrictNoDots0cookielib.DefaultCookiePolicy.DomainStrictNoDots
+Any*27rY
+DomainStrictNonDomain3cookielib.DefaultCookiePolicy.DomainStrictNonDomain
+Any*27rS
+DomainRFC2965Match0cookielib.DefaultCookiePolicy.DomainRFC2965Match
+Any*27rI
+DomainLiberal+cookielib.DefaultCookiePolicy.DomainLiberal
+Any*27rG
+DomainStrict*cookielib.DefaultCookiePolicy.DomainStrict
+Any*27r?
+netscape&cookielib.DefaultCookiePolicy.netscape
+Any*27r=
+rfc2965%cookielib.DefaultCookiePolicy.rfc2965
+Any*27rU
+rfc2109_as_netscape1cookielib.DefaultCookiePolicy.rfc2109_as_netscape
+Any*27rG
+hide_cookie2*cookielib.DefaultCookiePolicy.hide_cookie2
+Any*27rI
+strict_domain+cookielib.DefaultCookiePolicy.strict_domain
+Any*27re
+strict_rfc2965_unverifiable9cookielib.DefaultCookiePolicy.strict_rfc2965_unverifiable
+Any*27r[
+strict_ns_unverifiable4cookielib.DefaultCookiePolicy.strict_ns_unverifiable
+Any*27rO
+strict_ns_domain.cookielib.DefaultCookiePolicy.strict_ns_domain
+Any*27rg
+strict_ns_set_initial_dollar:cookielib.DefaultCookiePolicy.strict_ns_set_initial_dollar
+Any*27rS
+strict_ns_set_path0cookielib.DefaultCookiePolicy.strict_ns_set_path
+Any*27/
+Absentcookielib.Absent"builtins.objectj27Ö
 	CookieJarcookielib.CookieJar"builtins.object*¢
 __init__cookielib.CookieJar.__init__"
 None*4
@@ -277,8 +339,21 @@ set_cookiecookielib.CookieJar.set_cookie*
 __iter__cookielib.CookieJar.__iter__*
 selfz27*4
 __len__cookielib.CookieJar.__len__*
-selfz27j276
-	LoadErrorcookielib.LoadError"builtins.IOErrorj27¡	
+selfz27j27r;
+non_word_recookielib.CookieJar.non_word_re
+Any*27r5
+quote_recookielib.CookieJar.quote_re
+Any*27rE
+strict_domain_re$cookielib.CookieJar.strict_domain_re
+Any*27r7
+	domain_recookielib.CookieJar.domain_re
+Any*27r3
+dots_recookielib.CookieJar.dots_re
+Any*27r5
+magic_recookielib.CookieJar.magic_re
+Any*276
+	LoadErrorcookielib.LoadError"builtins.IOErrorj27™
+
 FileCookieJarcookielib.FileCookieJar"cookielib.CookieJar*—
 __init__ cookielib.FileCookieJar.__init__"
 None*<
@@ -329,7 +404,11 @@ set_cookiecookielib.CookieJar.set_cookie*
 ignore_discard
 builtins.bool"builtins.bool *4
 ignore_expires
-builtins.bool"builtins.bool z27j27¿
+builtins.bool"builtins.bool z27j27r9
+filename cookielib.FileCookieJar.filename
+Any*27r;
+	delayload!cookielib.FileCookieJar.delayload
+Any*27¿
 LWPCookieJarcookielib.LWPCookieJar"cookielib.FileCookieJar*ù
 
 as_lwp_str!cookielib.LWPCookieJar.as_lwp_str"

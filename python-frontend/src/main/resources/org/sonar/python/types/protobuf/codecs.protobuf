@@ -329,7 +329,8 @@ gi_runningtyping.Generator.gi_running"
 	__enter__typing.TextIO.__enter__"
 typing.TextIO"typing.TextIO*&
 self
-typing.TextIO"typing.TextIO0:abstractmethod@z27z35z36z37z38z39z310j27j35j36j37j38j39j310É
+typing.TextIO"typing.TextIO0:abstractmethod@z27z35z36z37z38z39z310j27j35j36j37j38j39j310À
+
 TypeVartyping.TypeVar"builtins.object*Þ
 __init__typing.TypeVar.__init__"
 None**
@@ -367,7 +368,20 @@ gi_runningtyping.Generator.gi_running"
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310Ž
+builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310r
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27*35*36*37*38*39*310r“
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27*35*36*37*38*39*310rj
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rr
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310Ž
 _Encodercodecs._Encoder"builtins.object*•
 __call__codecs._Encoder.__call__"`
  Tuple[builtins.str,builtins.int]
@@ -461,7 +475,7 @@ $Tuple[builtins.unicode,builtins.int]$
 self8
 codecs._IncrementalDecoder"codecs._IncrementalDecoder**
 errors
-builtins.str"builtins.str z27z35z36z37z38z39z310Xj27j35j36j37j38j39j310Ö
+builtins.str"builtins.str z27z35z36z37z38z39z310Xj27j35j36j37j38j39j310°
 	CodecInfocodecs.CodecInfo"builtins.tuple*ö
 encodecodecs.CodecInfo.encode""
 codecs._Encoder"codecs._Encoder*ƒ
@@ -551,7 +565,9 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 _is_text_encodingG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None z27z35z36z37z38z39z310j27j35j36j37j38j39j310—	
+None z27z35z36z37z38z39z310j27j35j36j37j38j39j310rX
+namecodecs.CodecInfo.name
+builtins.str"builtins.str*27*35*36*37*38*39*310—	
 Codeccodecs.Codec"builtins.object*ˆ
 encodecodecs.Codec.encode"`
  Tuple[builtins.str,builtins.int]
@@ -592,7 +608,7 @@ $Tuple[builtins.unicode,builtins.int]$
 input 
 builtins.bytes"builtins.bytes**
 errors
-builtins.str"builtins.str z35z36z37z38z39z310j27j35j36j37j38j39j310ž
+builtins.str"builtins.str z35z36z37z38z39z310j27j35j36j37j38j39j310…
 IncrementalEncodercodecs.IncrementalEncoder"builtins.object*Ã
 __init__"codecs.IncrementalEncoder.__init__"
 None*@
@@ -647,7 +663,9 @@ $Union[builtins.int,builtins.unicode]
 state`
  Union[builtins.int,builtins.str]
 builtins.int"builtins.int
-builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310’
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310re
+errors codecs.IncrementalEncoder.errors
+builtins.str"builtins.str*27*35*36*37*38*39*310ù
 IncrementalDecodercodecs.IncrementalDecoder"builtins.object*Ã
 __init__"codecs.IncrementalDecoder.__init__"
 None*@
@@ -702,7 +720,9 @@ $Union[builtins.int,builtins.unicode]
 statef
 "Tuple[builtins.bytes,builtins.int] 
 builtins.bytes"builtins.bytes
-builtins.int"builtins.intz35z36z37z38z39z310j27j35j36j37j38j39j310«
+builtins.int"builtins.intz35z36z37z38z39z310j27j35j36j37j38j39j310re
+errors codecs.IncrementalDecoder.errors
+builtins.str"builtins.str*27*35*36*37*38*39*310š
 BufferedIncrementalEncoder!codecs.BufferedIncrementalEncoder"codecs.IncrementalEncoder*Û
 __init__*codecs.BufferedIncrementalEncoder.__init__"
 None*P
@@ -745,7 +765,9 @@ $Union[builtins.int,builtins.unicode]
 input
 builtins.str"builtins.str*+
 final
-builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310·
+builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310rm
+buffer(codecs.BufferedIncrementalEncoder.buffer
+builtins.str"builtins.str*27*35*36*37*38*39*310ü
 BufferedIncrementalDecoder!codecs.BufferedIncrementalDecoder"codecs.IncrementalDecoder*Û
 __init__*codecs.BufferedIncrementalDecoder.__init__"
 None*P
@@ -792,7 +814,11 @@ $Tuple[builtins.unicode,builtins.int]$
 input 
 builtins.bytes"builtins.bytes*+
 final
-builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310ý
+builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310rT
+buffer(codecs.BufferedIncrementalDecoder.buffer
+builtins.str"builtins.str*27rm
+buffer(codecs.BufferedIncrementalDecoder.buffer 
+builtins.bytes"builtins.bytes*35*36*37*38*39*310Þ
 StreamWritercodecs.StreamWriter"codecs.Codec*è
 __init__codecs.StreamWriter.__init__"
 None*4
@@ -879,7 +905,9 @@ codecs._SWz27*s
 builtins.str"builtins.str*X
 getattrK
 CallableType[builtins.function]&
-builtins.function"builtins.function z27z35z36z37z38z39z310j27j35j36j37j38j39j310ß
+builtins.function"builtins.function z27z35z36z37z38z39z310j27j35j36j37j38j39j310r_
+errorscodecs.StreamWriter.errors
+builtins.str"builtins.str*27*35*36*37*38*39*310À
 StreamReadercodecs.StreamReader"codecs.Codec*è
 __init__codecs.StreamReader.__init__"
 None*4
@@ -1010,7 +1038,9 @@ codecs._SRz27*s
 builtins.str"builtins.str*X
 getattrK
 CallableType[builtins.function]&
-builtins.function"builtins.function z27z35z36z37z38z39z310j27j35j36j37j38j39j310˜3
+builtins.function"builtins.function z27z35z36z37z38z39z310j27j35j36j37j38j39j310r_
+errorscodecs.StreamReader.errors
+builtins.str"builtins.str*27*35*36*37*38*39*310˜3
 StreamReaderWritercodecs.StreamReaderWriter"typing.TextIO*î
 __init__"codecs.StreamReaderWriter.__init__"
 None*@

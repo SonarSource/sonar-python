@@ -1,5 +1,5 @@
 
-httplib²
+httplibç
 HTTPMessagehttplib.HTTPMessage"mimetools.Message*Á
 addcontinuehttplib.HTTPMessage.addcontinue"
 None*4
@@ -20,7 +20,19 @@
 readheadershttplib.HTTPMessage.readheaders"
 None*4
 self*
-httplib.HTTPMessage"httplib.HTTPMessagez27j27ë
+httplib.HTTPMessage"httplib.HTTPMessagez27j27r›
+dicthttplib.HTTPMessage.dictu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*27rJ
+unixfromhttplib.HTTPMessage.unixfrom
+builtins.str"builtins.str*27r3
+headershttplib.HTTPMessage.headers
+Any*27rF
+statushttplib.HTTPMessage.status
+builtins.str"builtins.str*27rL
+seekablehttplib.HTTPMessage.seekable
+builtins.bool"builtins.bool*27µ
 HTTPResponsehttplib.HTTPResponse"builtins.object*Å
 __init__httplib.HTTPResponse.__init__"
 None*6
@@ -67,7 +79,32 @@ debuglevel
 None z27*;
 
 getheadershttplib.HTTPResponse.getheaders*
-selfz27j27ø
+selfz27j27r*
+fphttplib.HTTPResponse.fp
+Any*27r:
+
+debuglevelhttplib.HTTPResponse.debuglevel
+Any*27r2
+stricthttplib.HTTPResponse.strict
+Any*27r,
+msghttplib.HTTPResponse.msg
+Any*27r4
+versionhttplib.HTTPResponse.version
+Any*27r2
+statushttplib.HTTPResponse.status
+Any*27r2
+reasonhttplib.HTTPResponse.reason
+Any*27r4
+chunkedhttplib.HTTPResponse.chunked
+Any*27r:
+
+chunk_lefthttplib.HTTPResponse.chunk_left
+Any*27r2
+lengthhttplib.HTTPResponse.length
+Any*27r:
+
+will_closehttplib.HTTPResponse.will_close
+Any*27ø
 HTTPConnectionProtocolhttplib.HTTPConnectionProtocol"builtins.object*¦
 __call__'httplib.HTTPConnectionProtocol.__call__"0
 httplib.HTTPConnection"httplib.HTTPConnection*J
@@ -78,7 +115,7 @@ getheadershttplib.HTTPResponse.getheaders*
 timeout
 builtins.int"builtins.int *
 http_con_args
-Anyz27Xj27«
+Anyz27Xj27¡
 HTTPConnectionhttplib.HTTPConnection"builtins.object*È
 __init__httplib.HTTPConnection.__init__"
 None*:
@@ -172,7 +209,28 @@ endheaders!httplib.HTTPConnection.endheaders"
 self0
 httplib.HTTPConnection"httplib.HTTPConnection*/
 	buffering
-builtins.bool"builtins.bool z27j27º
+builtins.bool"builtins.bool z27j27rD
+response_class%httplib.HTTPConnection.response_class
+Any*27r@
+default_port#httplib.HTTPConnection.default_port
+Any*27r:
+	auto_open httplib.HTTPConnection.auto_open
+Any*27r<
+
+debuglevel!httplib.HTTPConnection.debuglevel
+Any*27r4
+stricthttplib.HTTPConnection.strict
+Any*27r6
+timeouthttplib.HTTPConnection.timeout
+Any*27rD
+source_address%httplib.HTTPConnection.source_address
+Any*27r0
+sockhttplib.HTTPConnection.sock
+Any*27rE
+hosthttplib.HTTPConnection.host
+builtins.str"builtins.str*27rE
+porthttplib.HTTPConnection.port
+builtins.int"builtins.int*27Ä
 HTTPhttplib.HTTP"builtins.object*ë
 __init__httplib.HTTP.__init__"
 None*&
@@ -209,7 +267,14 @@ endheaders!httplib.HTTPConnection.endheaders"
 	buffering
 builtins.bool"builtins.bool z27*)
 closehttplib.HTTP.close*
-selfz27j27ö
+selfz27j27r2
+
+debuglevelhttplib.HTTP.debuglevel
+Any*27r&
+filehttplib.HTTP.file
+Any*27r,
+headershttplib.HTTP.headers
+Any*27ä
 HTTPSConnectionhttplib.HTTPSConnection"httplib.HTTPConnection*ó
 __init__ httplib.HTTPSConnection.__init__"
 None*<
@@ -244,7 +309,15 @@ endheaders!httplib.HTTPConnection.endheaders"
 Any
 None z27*8
 connecthttplib.HTTPSConnection.connect*
-selfz27j27Á
+selfz27j27rA
+default_port$httplib.HTTPSConnection.default_port
+Any*27r9
+key_file httplib.HTTPSConnection.key_file
+Any*27r;
+	cert_file!httplib.HTTPSConnection.cert_file
+Any*27r1
+sockhttplib.HTTPSConnection.sock
+Any*27¥
 HTTPShttplib.HTTPS"httplib.HTTP*–
 __init__httplib.HTTPS.__init__"
 None*(
@@ -271,20 +344,28 @@ endheaders!httplib.HTTPConnection.endheaders"
 context&
 Union[Any,None]
 Any
-None z27j27>
+None z27j27r/
+key_filehttplib.HTTPS.key_file
+Any*27r1
+	cert_filehttplib.HTTPS.cert_file
+Any*27>
 HTTPExceptionhttplib.HTTPException"builtins.Exceptionj27?
 NotConnectedhttplib.NotConnected"httplib.HTTPExceptionj27;
 
-InvalidURLhttplib.InvalidURL"httplib.HTTPExceptionj27Ö
+InvalidURLhttplib.InvalidURL"httplib.HTTPExceptionj27Â
 UnknownProtocolhttplib.UnknownProtocol"httplib.HTTPException*Ž
 __init__ httplib.UnknownProtocol.__init__"
 None*<
 self2
 httplib.UnknownProtocol"httplib.UnknownProtocol*
 version
-Anyz27j27U
+Anyz27j27r1
+argshttplib.UnknownProtocol.args
+Any*27r7
+versionhttplib.UnknownProtocol.version
+Any*27U
 UnknownTransferEncodinghttplib.UnknownTransferEncoding"httplib.HTTPExceptionj27Q
-UnimplementedFileModehttplib.UnimplementedFileMode"httplib.HTTPExceptionj27‰
+UnimplementedFileModehttplib.UnimplementedFileMode"httplib.HTTPExceptionj27­
 IncompleteReadhttplib.IncompleteRead"httplib.HTTPException*Ã
 __init__httplib.IncompleteRead.__init__"
 None*:
@@ -295,18 +376,28 @@ InvalidURLhttplib.InvalidURL"httplib.HTTPExceptionj27Ö
 expected&
 Union[Any,None]
 Any
-None z27j27U
+None z27j27r0
+argshttplib.IncompleteRead.args
+Any*27r6
+partialhttplib.IncompleteRead.partial
+Any*27r8
+expectedhttplib.IncompleteRead.expected
+Any*27U
 ImproperConnectionStatehttplib.ImproperConnectionState"httplib.HTTPExceptionj27S
 CannotSendRequesthttplib.CannotSendRequest"httplib.ImproperConnectionStatej27Q
 CannotSendHeaderhttplib.CannotSendHeader"httplib.ImproperConnectionStatej27Q
-ResponseNotReadyhttplib.ResponseNotReady"httplib.ImproperConnectionStatej27É
+ResponseNotReadyhttplib.ResponseNotReady"httplib.ImproperConnectionStatej27«
 BadStatusLinehttplib.BadStatusLine"httplib.HTTPException*…
 __init__httplib.BadStatusLine.__init__"
 None*8
 self.
 httplib.BadStatusLine"httplib.BadStatusLine*
 line
-Anyz27j27Ä
+Anyz27j27r/
+argshttplib.BadStatusLine.args
+Any*27r/
+linehttplib.BadStatusLine.line
+Any*27Ä
 LineTooLonghttplib.LineTooLong"httplib.HTTPException*„
 __init__httplib.LineTooLong.__init__"
 None*4

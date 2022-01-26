@@ -403,7 +403,7 @@ writelinestyping.IO.writelines"
 typing._T_co*L
 selfB
 typing.Iterator[typing._T_co]
-typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z3108PXj27j35j36j37j38j39j310î
+typing._T_co"typing.Iterator0:abstractmethod@z35z36z37z38z39z3108PXj27j35j36j37j38j39j310œ
 _RandomNameSequencetempfile._RandomNameSequence"builtins.object*¡
 rng tempfile._RandomNameSequence.rng"
 random.Random"random.Random*F
@@ -422,7 +422,12 @@ writelinestyping.IO.writelines"
 self<
 tempfile._RandomNameSequence"tempfile._RandomNameSequence*
 path
-typing.AnyStrz27j27º#
+typing.AnyStrz27j27rW
+
+characters'tempfile._RandomNameSequence.characters
+builtins.str"builtins.str*27rS
+mutex"tempfile._RandomNameSequence.mutex"
+thread.LockType"thread.LockType*27¾%
 _TemporaryFileWrappertempfile._TemporaryFileWrapper"	typing.IO*œ
 __init__'tempfile._TemporaryFileWrapper.__init__"
 None*J
@@ -556,7 +561,14 @@ writelines)tempfile._TemporaryFileWrapper.writelines"
 tempfile._TemporaryFileWrapper"tempfile._TemporaryFileWrapper*Y
 linesN
 typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterablez27j27™,
+builtins.str"builtins.str"typing.Iterablez27j27rS
+delete%tempfile._TemporaryFileWrapper.delete
+builtins.bool"builtins.bool*27rs
+file#tempfile._TemporaryFileWrapper.fileB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*27r8
+name#tempfile._TemporaryFileWrapper.name
+Any*27ç.
 _TemporaryFileWrappertempfile._TemporaryFileWrapper"	typing.IO*Þ
 __init__'tempfile._TemporaryFileWrapper.__init__"
 None*l
@@ -709,7 +721,14 @@ writelines)tempfile._TemporaryFileWrapper.writelines"
 typing.AnyStr"tempfile._TemporaryFileWrapper*O
 linesD
 typing.Iterable[typing.AnyStr]
-typing.AnyStr"typing.Iterablez35z36z37z38z39z310Pj35j36j37j38j39j310‡
+typing.AnyStr"typing.Iterablez35z36z37z38z39z310Pj35j36j37j38j39j310r~
+file#tempfile._TemporaryFileWrapper.file8
+typing.IO[typing.AnyStr]
+typing.AnyStr"	typing.IO*35*36*37*38*39*310rb
+name#tempfile._TemporaryFileWrapper.name
+builtins.str"builtins.str*35*36*37*38*39*310rh
+delete%tempfile._TemporaryFileWrapper.delete
+builtins.bool"builtins.bool*35*36*37*38*39*310¾
 TemporaryDirectorytempfile.TemporaryDirectory"builtins.object*õ
 __init__$tempfile.TemporaryDirectory.__init__"
 None*D
@@ -744,7 +763,9 @@ $Union[builtins.str,builtins.unicode]
 value
 Any*
 	traceback
-Anyz27j27í
+Anyz27j27r5
+name tempfile.TemporaryDirectory.name
+Any*27Ã
 TemporaryDirectorytempfile.TemporaryDirectory"builtins.object*¹
 cleanup#tempfile.TemporaryDirectory.cleanup"
 None*f
@@ -812,7 +833,10 @@ $Union[builtins.str,builtins.unicode]
 typing.AnyStr<
 os.PathLike[typing.AnyStr]
 typing.AnyStr"os.PathLike
-None 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310‡	
+None 0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310rT
+name tempfile.TemporaryDirectory.name
+typing.AnyStr*35*36*37*38*39*310œ
+
 TracebackTypetypes.TracebackType"builtins.object*Í
 tb_nexttypes.TracebackType.tb_next"Y
 Union[types.TracebackType,None]*
@@ -845,7 +869,11 @@ $Union[builtins.str,builtins.unicode]
 tb_lasti
 builtins.int"builtins.int*+
 	tb_lineno
-builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310ä
+builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310r’
+tb_nexttypes.TracebackType.tb_nextY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*37*38*39*310Ë
 TypeVartyping.TypeVar"builtins.object*ž
 __init__typing.TypeVar.__init__"
 None**
@@ -865,7 +893,20 @@ $Union[builtins.str,builtins.unicode]
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310×l
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r{
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*35*36*37*38*39*310r
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*35*36*37*38*39*310rf
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310×l
 SpooledTemporaryFiletempfile.SpooledTemporaryFile"	typing.IO*Á
 rollover&tempfile.SpooledTemporaryFile.rollover"
 None*j
@@ -1308,7 +1349,7 @@ writelines(tempfile.SpooledTemporaryFile.writelines"
 errorsD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:overloadX"38"39"310Pj35j36j37j38j39j310†
+None 0:overloadX"38"39"310Pj35j36j37j38j39j310¬
 GenericAliastypes.GenericAlias"builtins.object*­
 __init__types.GenericAlias.__init__"
 None*2
@@ -1323,7 +1364,16 @@ writelines(tempfile.SpooledTemporaryFile.writelines"
 self(
 types.GenericAlias"types.GenericAlias*$
 name
-builtins.str"builtins.strz39z310j39j310D
+builtins.str"builtins.strz39z310j39j310rT
+
+__origin__types.GenericAlias.__origin__
+builtins.type"builtins.type*39*310r`
+__args__types.GenericAlias.__args__.
+builtins.tuple[Any]
+Any"builtins.tuple*39*310rl
+__parameters__!types.GenericAlias.__parameters__.
+builtins.tuple[Any]
+Any"builtins.tuple*39*310D
 overloadtyping.overload"
 	typing._F*
 f
