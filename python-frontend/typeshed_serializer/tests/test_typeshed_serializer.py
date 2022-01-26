@@ -21,6 +21,7 @@
 from unittest.mock import Mock
 
 from serializer import typeshed_serializer, symbols, symbols_merger
+import os
 
 
 def test_build_mypy_model(typeshed_stdlib):
@@ -28,11 +29,22 @@ def test_build_mypy_model(typeshed_stdlib):
 
 
 def test_serialize_typeshed_stdlib(typeshed_stdlib):
-    typeshed_serializer.walk_typeshed_stdlib = Mock(return_value=typeshed_stdlib)
+    typeshed_serializer.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     symbols.save_module = Mock()
     typeshed_serializer.serialize_typeshed_stdlib()
     assert typeshed_serializer.walk_typeshed_stdlib.call_count == 1
     assert symbols.save_module.call_count == len(typeshed_stdlib.files)
+
+
+def test_all_third_parties_are_serialized(typeshed_third_parties):
+    stub_modules = set()
+    for stub_folder in typeshed_serializer.THIRD_PARTIES_STUBS:
+        stub_path = os.path.join(typeshed_serializer.CURRENT_PATH, typeshed_serializer.STUBS_PATH, stub_folder)
+        _, dirs, files = os.walk(stub_path).__next__()
+        stub_modules = stub_modules.union([dir for dir in dirs if not dir.startswith("@")])
+        stub_modules = stub_modules.union([file.replace(".pyi", "") for file in files if file.endswith(".pyi")])
+    for third_party_stub in stub_modules:
+        assert third_party_stub in typeshed_third_parties
 
 
 def test_serialize_typeshed_stdlib_multiple_python_version():
