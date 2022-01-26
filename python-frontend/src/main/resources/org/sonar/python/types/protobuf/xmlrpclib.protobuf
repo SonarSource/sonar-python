@@ -1,5 +1,5 @@
 
-	xmlrpclibñH
+	xmlrpclibßJ
 datetimedatetime.datetime"datetime.date*ò
 __new__datetime.datetime.__new__"
 datetime._S*/
@@ -315,7 +315,14 @@ isoweekdaydatetime.datetime.isoweekday"
 self&
 datetime.datetime"datetime.datetime*1
 other(
-datetime.timedelta"datetime.timedelta0:overloadX"27j27ç
+datetime.timedelta"datetime.timedelta0:overloadX"27j27rH
+mindatetime.datetime.min&
+datetime.datetime"datetime.datetime*27rH
+maxdatetime.datetime.max&
+datetime.datetime"datetime.datetime*27rX
+
+resolutiondatetime.datetime.resolution(
+datetime.timedelta"datetime.timedelta*27ƒ
 GzipFilegzip.GzipFile"io.BufferedIOBase*ï
 __init__gzip.GzipFile.__init__"
 None*(
@@ -366,7 +373,36 @@ isoweekdaydatetime.datetime.isoweekday"
 readlinegzip.GzipFile.readline*
 self*
 
-size z27j27«
+size z27j27r1
+	myfileobjgzip.GzipFile.myfileobj
+Any*27r;
+max_read_chunkgzip.GzipFile.max_read_chunk
+Any*27r'
+modegzip.GzipFile.mode
+Any*27r/
+extrabufgzip.GzipFile.extrabuf
+Any*27r1
+	extrasizegzip.GzipFile.extrasize
+Any*27r3
+
+extrastartgzip.GzipFile.extrastart
+Any*27r'
+namegzip.GzipFile.name
+Any*27r7
+min_readsizegzip.GzipFile.min_readsize
+Any*27r/
+compressgzip.GzipFile.compress
+Any*27r-
+fileobjgzip.GzipFile.fileobj
+Any*27r+
+offsetgzip.GzipFile.offset
+Any*27r)
+mtimegzip.GzipFile.mtime
+Any*27r'
+sizegzip.GzipFile.size
+Any*27r%
+crcgzip.GzipFile.crc
+Any*27¡
 HTTPConnectionhttplib.HTTPConnection"builtins.object*È
 __init__httplib.HTTPConnection.__init__"
 None*:
@@ -460,7 +496,28 @@ endheaders!httplib.HTTPConnection.endheaders"
 self0
 httplib.HTTPConnection"httplib.HTTPConnection*/
 	buffering
-builtins.bool"builtins.bool z27j27ë
+builtins.bool"builtins.bool z27j27rD
+response_class%httplib.HTTPConnection.response_class
+Any*27r@
+default_port#httplib.HTTPConnection.default_port
+Any*27r:
+	auto_open httplib.HTTPConnection.auto_open
+Any*27r<
+
+debuglevel!httplib.HTTPConnection.debuglevel
+Any*27r4
+stricthttplib.HTTPConnection.strict
+Any*27r6
+timeouthttplib.HTTPConnection.timeout
+Any*27rD
+source_address%httplib.HTTPConnection.source_address
+Any*27r0
+sockhttplib.HTTPConnection.sock
+Any*27rE
+hosthttplib.HTTPConnection.host
+builtins.str"builtins.str*27rE
+porthttplib.HTTPConnection.port
+builtins.int"builtins.int*27µ
 HTTPResponsehttplib.HTTPResponse"builtins.object*Å
 __init__httplib.HTTPResponse.__init__"
 None*6
@@ -507,7 +564,32 @@ debuglevel
 None z27*;
 
 getheadershttplib.HTTPResponse.getheaders*
-selfz27j27ö
+selfz27j27r*
+fphttplib.HTTPResponse.fp
+Any*27r:
+
+debuglevelhttplib.HTTPResponse.debuglevel
+Any*27r2
+stricthttplib.HTTPResponse.strict
+Any*27r,
+msghttplib.HTTPResponse.msg
+Any*27r4
+versionhttplib.HTTPResponse.version
+Any*27r2
+statushttplib.HTTPResponse.status
+Any*27r2
+reasonhttplib.HTTPResponse.reason
+Any*27r4
+chunkedhttplib.HTTPResponse.chunked
+Any*27r:
+
+chunk_lefthttplib.HTTPResponse.chunk_left
+Any*27r2
+lengthhttplib.HTTPResponse.length
+Any*27r:
+
+will_closehttplib.HTTPResponse.will_close
+Any*27ä
 HTTPSConnectionhttplib.HTTPSConnection"httplib.HTTPConnection*ó
 __init__ httplib.HTTPSConnection.__init__"
 None*<
@@ -542,7 +624,15 @@ getheadershttplib.HTTPResponse.getheaders*
 Any
 None z27*8
 connecthttplib.HTTPSConnection.connect*
-selfz27j27´/
+selfz27j27rA
+default_port$httplib.HTTPSConnection.default_port
+Any*27r9
+key_file httplib.HTTPSConnection.key_file
+Any*27r;
+	cert_file!httplib.HTTPSConnection.cert_file
+Any*27r1
+sockhttplib.HTTPSConnection.sock
+Any*27ê1
 
 SSLContextssl.SSLContext"builtins.object*à
 __new__ssl.SSLContext.__new__" 
@@ -709,7 +799,15 @@ Kbuiltins.tuple[TypeAlias[builtins.tuple[Tuple[builtins.str,builtins.str]]]]ó
 builtins.str"builtins.str
 builtins.int"builtins.int"builtins.dict**
 self 
-ssl.SSLContext"ssl.SSLContextz27j27˜
+ssl.SSLContext"ssl.SSLContextz27j27rS
+check_hostnamessl.SSLContext.check_hostname
+builtins.bool"builtins.bool*27rC
+optionsssl.SSLContext.options
+builtins.int"builtins.int*27rM
+verify_flagsssl.SSLContext.verify_flags
+builtins.int"builtins.int*27rK
+verify_modessl.SSLContext.verify_mode
+builtins.int"builtins.int*27®
 StringIOStringIO.StringIO"	typing.IO*¦
 __init__StringIO.StringIO.__init__"
 None*R
@@ -845,7 +943,15 @@ writelinesStringIO.StringIO.writelines"
 builtins.bool"builtins.bool*R
 selfH
  StringIO.StringIO[typing.AnyStr]
-typing.AnyStr"StringIO.StringIOz27Pj27ü
+typing.AnyStr"StringIO.StringIOz27Pj27rF
+closedStringIO.StringIO.closed
+builtins.bool"builtins.bool*27rJ
+	softspaceStringIO.StringIO.softspace
+builtins.int"builtins.int*27r>
+lenStringIO.StringIO.len
+builtins.int"builtins.int*27r@
+nameStringIO.StringIO.name
+builtins.str"builtins.str*27ü
 struct_timetime.struct_time"time._struct_time*š
 __init__time.struct_time.__init__"
 None*˜
@@ -1322,7 +1428,7 @@ typing._VT"typing.MutableMapping*
 kwargs
 
 typing._VT0:overloadX"27Pj270
-Errorxmlrpclib.Error"builtins.Exceptionj27Ê
+Errorxmlrpclib.Error"builtins.Exceptionj27ã
 ProtocolErrorxmlrpclib.ProtocolError"xmlrpclib.Error*Š
 __init__ xmlrpclib.ProtocolError.__init__"
 None*<
@@ -1335,8 +1441,16 @@ typing._VT0:overloadX"27Pj270
 errmsg
 builtins.str"builtins.str*
 headers
-Anyz27j27=
-ResponseErrorxmlrpclib.ResponseError"xmlrpclib.Errorj27ë
+Anyz27j27rD
+urlxmlrpclib.ProtocolError.url
+builtins.str"builtins.str*27rL
+errcodexmlrpclib.ProtocolError.errcode
+builtins.int"builtins.int*27rJ
+errmsgxmlrpclib.ProtocolError.errmsg
+builtins.str"builtins.str*27r7
+headersxmlrpclib.ProtocolError.headers
+Any*27=
+ResponseErrorxmlrpclib.ResponseError"xmlrpclib.Errorj27î
 Faultxmlrpclib.Fault"xmlrpclib.Error*»
 __init__xmlrpclib.Fault.__init__"
 None*,
@@ -1347,7 +1461,11 @@ typing._VT0:overloadX"27Pj270
 faultString
 builtins.str"builtins.str*
 extra
-Anyz27j27Í.
+Anyz27j27r3
+	faultCodexmlrpclib.Fault.faultCode
+Any*27rL
+faultStringxmlrpclib.Fault.faultString
+builtins.str"builtins.str*27’/
 DateTimexmlrpclib.DateTime"builtins.object*Ä
 __init__xmlrpclib.DateTime.__init__"
 None*2
@@ -1488,7 +1606,9 @@ GTypeAlias[Union[builtins.unicode,xmlrpclib.DateTime,datetime.datetime]]¸
 xmlrpclib.DateTime"xmlrpclib.DateTime*K
 outB
 typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IOz27j27¨
+builtins.str"builtins.str"	typing.IOz27j27rC
+valuexmlrpclib.DateTime.value
+builtins.str"builtins.str*27é
 Binaryxmlrpclib.Binary"builtins.object*µ
 __init__xmlrpclib.Binary.__init__"
 None*.
@@ -1516,7 +1636,9 @@ GTypeAlias[Union[builtins.unicode,xmlrpclib.DateTime,datetime.datetime]]¸
 xmlrpclib.Binary"xmlrpclib.Binary*K
 outB
 typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IOz27j27¸
+builtins.str"builtins.str"	typing.IOz27j27r?
+dataxmlrpclib.Binary.data
+builtins.str"builtins.str*27¸
 ExpatParserxmlrpclib.ExpatParser"builtins.object*´
 __init__xmlrpclib.ExpatParser.__init__"
 None*8
@@ -1532,7 +1654,7 @@ GTypeAlias[Union[builtins.unicode,xmlrpclib.DateTime,datetime.datetime]]¸
 data
 builtins.str"builtins.strz27*2
 closexmlrpclib.ExpatParser.close*
-selfz27j27ë
+selfz27j27‰
 
 SlowParserxmlrpclib.SlowParser"builtins.object*±
 __init__xmlrpclib.SlowParser.__init__"
@@ -1541,7 +1663,23 @@ SlowParserxmlrpclib.SlowParser"builtins.object*±
 xmlrpclib.SlowParser"xmlrpclib.SlowParser*@
 target4
 TypeAlias[Any]
-Any"xmlrpclib._Unmarshallerz27j27ì$
+Any"xmlrpclib._Unmarshallerz27j27r~
+
+handle_xmlxmlrpclib.SlowParser.handle_xmlK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27rŠ
+unknown_starttag%xmlrpclib.SlowParser.unknown_starttagK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27r€
+handle_data xmlrpclib.SlowParser.handle_dataK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27r‚
+handle_cdata!xmlrpclib.SlowParser.handle_cdataK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27r†
+unknown_endtag#xmlrpclib.SlowParser.unknown_endtagK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27¡*
 
 Marshallerxmlrpclib.Marshaller"builtins.object*÷
 __init__xmlrpclib.Marshaller.__init__"
@@ -1692,7 +1830,27 @@ $typing.Mapping[builtins.unicode,Any]$
 types.InstanceType"types.InstanceType*V
 writeK
 CallableType[builtins.function]&
-builtins.function"builtins.functionz27j27á
+builtins.function"builtins.functionz27j27rŽ
+memoxmlrpclib.Marshaller.memog
+'typing.MutableMapping[builtins.int,Any]
+builtins.int"builtins.int
+Any"typing.MutableMapping*27rk
+dataxmlrpclib.Marshaller.dataD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rs
+encodingxmlrpclib.Marshaller.encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rQ
+
+allow_nonexmlrpclib.Marshaller.allow_none
+builtins.bool"builtins.bool*27rì
+dispatchxmlrpclib.Marshaller.dispatch¼
+=typing.Mapping[builtins.type,CallableType[builtins.function]]
+builtins.type"builtins.typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping*27Ï
 Unmarshallerxmlrpclib.Unmarshaller"builtins.object*†
 appendxmlrpclib.Unmarshaller.append"
 None*:
@@ -1839,7 +1997,12 @@ end_params!xmlrpclib.Unmarshaller.end_params"
 self0
 xmlrpclib.Unmarshaller"xmlrpclib.Unmarshaller*&
 data
-builtins.str"builtins.strz27j27Ä
+builtins.str"builtins.strz27j27rë
+dispatchxmlrpclib.Unmarshaller.dispatch¹
+<typing.Mapping[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping*27Ä
 _MultiCallMethodxmlrpclib._MultiCallMethod"builtins.object*þ
 __init__#xmlrpclib._MultiCallMethod.__init__"
 None*B
@@ -1877,7 +2040,7 @@ end_params!xmlrpclib.Unmarshaller.end_params"
 __call__xmlrpclib.MultiCall.__call__":
 xmlrpclib.MultiCallIterator"xmlrpclib.MultiCallIterator*4
 self*
-xmlrpclib.MultiCall"xmlrpclib.MultiCallz27j27Ì
+xmlrpclib.MultiCall"xmlrpclib.MultiCallz27j27º
 GzipDecodedResponsexmlrpclib.GzipDecodedResponse"gzip.GzipFile*Æ
 __init__&xmlrpclib.GzipDecodedResponse.__init__"
 None*H
@@ -1886,7 +2049,10 @@ end_params!xmlrpclib.Unmarshaller.end_params"
 response,
 httplib.HTTPResponse"httplib.HTTPResponsez27*:
 close#xmlrpclib.GzipDecodedResponse.close*
-selfz27j27Ä
+selfz27j27rl
+stringio&xmlrpclib.GzipDecodedResponse.stringio4
+StringIO.StringIO[Any]
+Any"StringIO.StringIO*27Ä
 _Methodxmlrpclib._Method"builtins.object*å
 __init__xmlrpclib._Method.__init__"
 None*0
@@ -1908,7 +2074,7 @@ end_params!xmlrpclib.Unmarshaller.end_params"
 self&
 xmlrpclib._Method"xmlrpclib._Method*
 args
-Anyz27j27–$
+Anyz27j27'
 	Transportxmlrpclib.Transport"builtins.object* 
 __init__xmlrpclib.Transport.__init__"
 None*4
@@ -2048,7 +2214,18 @@ connection0
 self*
 xmlrpclib.Transport"xmlrpclib.Transport*:
 response,
-httplib.HTTPResponse"httplib.HTTPResponsez27j27à
+httplib.HTTPResponse"httplib.HTTPResponsez27j27rN
+
+user_agentxmlrpclib.Transport.user_agent
+builtins.str"builtins.str*27rd
+accept_gzip_encoding(xmlrpclib.Transport.accept_gzip_encoding
+builtins.bool"builtins.bool*27r‚
+encode_threshold$xmlrpclib.Transport.encode_thresholdD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*27rJ
+verbosexmlrpclib.Transport.verbose
+builtins.bool"builtins.bool*27à
 SafeTransportxmlrpclib.SafeTransport"xmlrpclib.Transport*‡
 __init__ xmlrpclib.SafeTransport.__init__"
 None*<

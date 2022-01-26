@@ -153,8 +153,10 @@ writelinestyping.IO.writelines"
 typing.AnyStr*B
 self8
 typing.IO[typing.AnyStr]
-typing.AnyStr"	typing.IO0:abstractmethod@z35z36z37z38z39z310Pj27j35j36j37j38j39j310<
-BlockingIOError_io.BlockingIOError"builtins.IOErrorj27”
+typing.AnyStr"	typing.IO0:abstractmethod@z35z36z37z38z39z310Pj27j35j36j37j38j39j310ú
+BlockingIOError_io.BlockingIOError"builtins.IOErrorj27r^
+characters_written&_io.BlockingIOError.characters_written
+builtins.int"builtins.int*27ò
 BufferedRandom_io.BufferedRandom"_io._BufferedIOBase*Ù
 __init___io.BufferedRandom.__init__"
 None*2
@@ -171,7 +173,13 @@ writelinestyping.IO.writelines"
 self(
 _io.BufferedRandom"_io.BufferedRandom*%
 n
-builtins.int"builtins.int z27j27û
+builtins.int"builtins.int z27j27rA
+mode_io.BufferedRandom.mode
+builtins.str"builtins.str*27rA
+name_io.BufferedRandom.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedRandom.raw
+_io._IOBase"_io._IOBase*27„
 BufferedReader_io.BufferedReader"_io._BufferedIOBase*ø
 __init___io.BufferedReader.__init__"
 None*2
@@ -186,7 +194,13 @@ writelinestyping.IO.writelines"
 self(
 _io.BufferedReader"_io.BufferedReader*%
 n
-builtins.int"builtins.int z27j27È
+builtins.int"builtins.int z27j27rA
+mode_io.BufferedReader.mode
+builtins.str"builtins.str*27rA
+name_io.BufferedReader.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedReader.raw
+_io._IOBase"_io._IOBase*27È
 BufferedRWPair_io.BufferedRWPair"_io._BufferedIOBase*´
 __init___io.BufferedRWPair.__init__"
 None*2
@@ -209,7 +223,7 @@ writelinestyping.IO.writelines"
 	__enter___io.BufferedRWPair.__enter__"
 _typeshed.Self*
 self
-_typeshed.Selfz27j27¥
+_typeshed.Selfz27j27˘
 BufferedWriter_io.BufferedWriter"_io._BufferedIOBase*Ù
 __init___io.BufferedWriter.__init__"
 None*2
@@ -220,7 +234,13 @@ writelinestyping.IO.writelines"
 buffer_size
 builtins.int"builtins.int *3
 max_buffer_size
-builtins.int"builtins.int z27j27Ò
+builtins.int"builtins.int z27j27rA
+name_io.BufferedWriter.name
+builtins.str"builtins.str*27r=
+raw_io.BufferedWriter.raw
+_io._IOBase"_io._IOBase*27rA
+mode_io.BufferedWriter.mode
+builtins.str"builtins.str*27ò	
 BytesIO_io.BytesIO"_io._BufferedIOBase*á
 __init___io.BytesIO.__init__"
 None*$
@@ -267,7 +287,9 @@ writelines_io.BytesIO.writelines"
 next_io.BytesIO.next"
 builtins.str"builtins.str*$
 self
-_io.BytesIO"_io.BytesIOz27j27Ç
+_io.BytesIO"_io.BytesIOz27j27r%
+name_io.BytesIO.name
+Any*27Ä
 FileIO
 _io.FileIO"_io._RawIOBase"_io.BytesIO*ñ
 __init___io.FileIO.__init__"
@@ -302,7 +324,11 @@ _io.FileIO*ø
 _io.FileIO"
 _io.FileIO*&
 pbuf
-builtins.str"builtins.strz27j27ˆ
+builtins.str"builtins.strz27j27r9
+mode_io.FileIO.mode
+builtins.str"builtins.str*27rA
+closefd_io.FileIO.closefd
+builtins.bool"builtins.bool*27ù	
 IncrementalNewlineDecoder_io.IncrementalNewlineDecoder"builtins.object* 
 __init__&_io.IncrementalNewlineDecoder.__init__"
 None*H
@@ -339,7 +365,11 @@ _io.FileIO*&
 reset#_io.IncrementalNewlineDecoder.reset"
 None*H
 self>
-_io.IncrementalNewlineDecoder"_io.IncrementalNewlineDecoderz27j27È
+_io.IncrementalNewlineDecoder"_io.IncrementalNewlineDecoderz27j27r§
+newlines&_io.IncrementalNewlineDecoder.newlinesl
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode*27‰
 StringIO_io.StringIO"_io._TextIOBase*ü
 __init___io.StringIO.__init__"
 None*&
@@ -368,7 +398,11 @@ _io.FileIO*&
 getvalue_io.StringIO.getvalue"$
 builtins.unicode"builtins.unicode*&
 self
-_io.StringIO"_io.StringIOz27j27‡
+_io.StringIO"_io.StringIOz27j27rQ
+line_buffering_io.StringIO.line_buffering
+builtins.bool"builtins.bool*27r&
+name_io.StringIO.name
+Any*27ñ
 TextIOWrapper_io.TextIOWrapper"_io._TextIOBase*¶
 __init___io.TextIOWrapper.__init__"
 None*0
@@ -392,9 +426,17 @@ _io.FileIO*&
 line_buffering
 builtins.bool"builtins.bool *3
 write_through
-builtins.bool"builtins.bool z27j27[
+builtins.bool"builtins.bool z27j27r@
+name_io.TextIOWrapper.name
+builtins.str"builtins.str*27rV
+line_buffering _io.TextIOWrapper.line_buffering
+builtins.bool"builtins.bool*27rJ
+buffer_io.TextIOWrapper.buffer"
+typing.BinaryIO"typing.BinaryIO*27rN
+_CHUNK_SIZE_io.TextIOWrapper._CHUNK_SIZE
+builtins.int"builtins.int*27[
 UnsupportedOperation_io.UnsupportedOperation"builtins.ValueError"builtins.IOErrorj27$
-IOBase	io.IOBase"_io._IOBasej27ﬁ
+IOBase	io.IOBase"_io._IOBasej27‹
 IOBase	io.IOBase"builtins.object*≠
 __iter__io.IOBase.__iter__"T
 typing.Iterator[builtins.bytes] 
@@ -521,7 +563,13 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 msgD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z35z36z37z38z39z310j35j36j37j38j39j3108
+None z35z36z37z38z39z310j35j36j37j38j39j310r|
+readio.IOBase.readK
+CallableType[builtins.function]&
+builtins.function"builtins.function*35*36*37*38*39*310r~
+writeio.IOBase.writeK
+CallableType[builtins.function]&
+builtins.function"builtins.function*35*36*37*38*39*3108
 	RawIOBaseio.RawIOBase"_io._RawIOBase"	io.IOBasej27Ò
 	RawIOBaseio.RawIOBase"	io.IOBase*Ç
 readallio.RawIOBase.readall" 
@@ -565,7 +613,7 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 io.RawIOBase"io.RawIOBase*(
 __size
 builtins.int"builtins.int z35z36z37z38z39z310j35j36j37j38j39j310G
-BufferedIOBaseio.BufferedIOBase"_io._BufferedIOBase"	io.IOBasej27õ
+BufferedIOBaseio.BufferedIOBase"_io._BufferedIOBase"	io.IOBasej27
 BufferedIOBaseio.BufferedIOBase"	io.IOBase*ã
 detachio.BufferedIOBase.detach"
 io.RawIOBase"io.RawIOBase*0
@@ -621,9 +669,11 @@ HUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap](
 self&
 io.BufferedIOBase"io.BufferedIOBase*(
 __size
-builtins.int"builtins.int z35z36z37z38z39z310j35j36j37j38j39j3100
+builtins.int"builtins.int z35z36z37z38z39z310j35j36j37j38j39j310rS
+rawio.BufferedIOBase.raw
+io.RawIOBase"io.RawIOBase*35*36*37*38*39*3100
 
-TextIOBaseio.TextIOBase"_io._TextIOBasej27÷
+TextIOBaseio.TextIOBase"_io._TextIOBasej27†
 
 TextIOBaseio.TextIOBase"	io.IOBase*≥
 __iter__io.TextIOBase.__iter__"N
@@ -677,7 +727,20 @@ writelinesio.TextIOBase.writelines"
 tellio.TextIOBase.tell"
 builtins.int"builtins.int*(
 self
-io.TextIOBase"io.TextIOBasez35z36z37z38z39z310j35j36j37j38j39j310á	
+io.TextIOBase"io.TextIOBasez35z36z37z38z39z310j35j36j37j38j39j310rY
+encodingio.TextIOBase.encoding
+builtins.str"builtins.str*35*36*37*38*39*310r}
+errorsio.TextIOBase.errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rÌ
+newlinesio.TextIOBase.newlinesØ
+5Union[builtins.str,builtins.tuple[builtins.str],None]
+builtins.str"builtins.strL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None*35*36*37*38*39*310ú
+
 TracebackTypetypes.TracebackType"builtins.object*Õ
 tb_nexttypes.TracebackType.tb_next"Y
 Union[types.TracebackType,None]*
@@ -710,7 +773,11 @@ writelinesio.TextIOBase.writelines"
 tb_lasti
 builtins.int"builtins.int*+
 	tb_lineno
-builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310Â
+builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310rí
+tb_nexttypes.TracebackType.tb_nextY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*37*38*39*310Â
 BinaryIOtyping.BinaryIO"	typing.IO*£
 	__enter__typing.BinaryIO.__enter__""
 typing.BinaryIO"typing.BinaryIO**
@@ -761,7 +828,7 @@ writelinesio.TextIOBase.writelines"
 	__enter__typing.TextIO.__enter__"
 typing.TextIO"typing.TextIO*&
 self
-typing.TextIO"typing.TextIO0:abstractmethod@z35z36z37z38z39z310j35j36j37j38j39j310‰
+typing.TextIO"typing.TextIO0:abstractmethod@z35z36z37z38z39z310j35j36j37j38j39j310À
 TypeVartyping.TypeVar"builtins.object*û
 __init__typing.TypeVar.__init__"
 None**
@@ -781,8 +848,21 @@ writelinesio.TextIOBase.writelines"
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310o
-UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueErrorj35j36j37j38j39j310Ÿ
+builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r{
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*35*36*37*38*39*310rè
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*35*36*37*38*39*310rf
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310rn
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*35*36*37*38*39*310o
+UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueErrorj35j36j37j38j39j310º
 FileIO	io.FileIO"io.RawIOBase"typing.BinaryIO*Û
 __init__io.FileIO.__init__"
 None* 
@@ -828,7 +908,13 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 	__enter__io.FileIO.__enter__"	
 io._T*
 self	
-io._Tz35z36z37z38z39z310j35j36j37j38j39j310ÿ
+io._Tz35z36z37z38z39z310j35j36j37j38j39j310rM
+modeio.FileIO.mode
+builtins.str"builtins.str*35*36*37*38*39*310rë
+nameio.FileIO.name`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*35*36*37*38*39*310ì
 BytesIO
 io.BytesIO"io.BufferedIOBase"typing.BinaryIO*ù
 __init__io.BytesIO.__init__"
@@ -874,7 +960,9 @@ io.BytesIO*P
 __sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z37z38z39z310j35j36j37j38j39j310®
+None z37z38z39z310j35j36j37j38j39j310r9
+nameio.BytesIO.name
+Any*35*36*37*38*39*310®
 BufferedReaderio.BufferedReader"io.BufferedIOBase"typing.BinaryIO*_
 	__enter__io.BufferedReader.__enter__"	
 io._T*
@@ -1087,7 +1175,7 @@ writelinesio.TextIOWrapper.writelines"
 write_throughG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None z37z38z39z310j35j36j37j38j39j310›
+None z37z38z39z310j35j36j37j38j39j310ô
 StringIOio.StringIO"io.TextIOWrapper*ô
 __init__io.StringIO.__init__"
 None*$
@@ -1104,7 +1192,9 @@ writelinesio.TextIOWrapper.writelines"
 getvalueio.StringIO.getvalue"
 builtins.str"builtins.str*$
 self
-io.StringIO"io.StringIOz35z36z37z38z39z310j35j36j37j38j39j310Ö	
+io.StringIO"io.StringIOz35z36z37z38z39z310j35j36j37j38j39j310r:
+nameio.StringIO.name
+Any*35*36*37*38*39*310Ö	
 IncrementalNewlineDecoderio.IncrementalNewlineDecoder"codecs.IncrementalDecoder*Ò
 __init__%io.IncrementalNewlineDecoder.__init__"
 None*F

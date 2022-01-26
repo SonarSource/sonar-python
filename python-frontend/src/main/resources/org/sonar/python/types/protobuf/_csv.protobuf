@@ -80,12 +80,33 @@
 s 
 builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27D
 Error
-_csv.Error"builtins.Exceptionj27j35j36j37j38j39j310·
+_csv.Error"builtins.Exceptionj27j35j36j37j38j39j310¡
 Dialect_csv.Dialect"builtins.object*p
 __init___csv.Dialect.__init__"
 None*&
 self
-_csv.Dialect"_csv.Dialectz27z35z36z37z38z39z310j27j35j36j37j38j39j310Š
+_csv.Dialect"_csv.Dialectz27z35z36z37z38z39z310j27j35j36j37j38j39j310r^
+	delimiter_csv.Dialect.delimiter
+builtins.str"builtins.str*27*35*36*37*38*39*310r†
+	quotechar_csv.Dialect.quotecharD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310rˆ
+
+escapechar_csv.Dialect.escapecharD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310rd
+doublequote_csv.Dialect.doublequote
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rn
+skipinitialspace_csv.Dialect.skipinitialspace
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rh
+lineterminator_csv.Dialect.lineterminator
+builtins.str"builtins.str*27*35*36*37*38*39*310rZ
+quoting_csv.Dialect.quoting
+builtins.int"builtins.int*27*35*36*37*38*39*310rX
+strict_csv.Dialect.strict
+builtins.int"builtins.int*27*35*36*37*38*39*310Ä
 _reader_csv._reader"typing.Iterator*‘
 next_csv._reader.next"J
 builtins.list[builtins.str]
@@ -96,7 +117,11 @@ _csv.Error"builtins.Exceptionj27j35j36j37j38j39j310·
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*&
 self
-_csv._reader"_csv._readerz35z36z37z38z39z310j27j35j36j37j38j39j310»
+_csv._reader"_csv._readerz35z36z37z38z39z310j27j35j36j37j38j39j310rZ
+dialect_csv._reader.dialect
+_csv.Dialect"_csv.Dialect*27*35*36*37*38*39*310r\
+line_num_csv._reader.line_num
+builtins.int"builtins.int*27*35*36*37*38*39*310—
 _writer_csv._writer"builtins.object*‘
 writerow_csv._writer.writerow"
 Any*&
@@ -127,7 +152,9 @@ _csv.Error"builtins.Exceptionj27j35j36j37j38j39j310·
 rowsj
 %typing.Iterable[typing.Iterable[Any]]0
 typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterablez35z36z37z38z39z310j27j35j36j37j38j39j310Ø
+Any"typing.Iterable"typing.Iterablez35z36z37z38z39z310j27j35j36j37j38j39j310rZ
+dialect_csv._writer.dialect
+_csv.Dialect"_csv.Dialect*27*35*36*37*38*39*310Ø
 _Writer_csv._Writer"builtins.object*Ž
 write_csv._Writer.write"
 Any*&

@@ -276,7 +276,7 @@ gi_runningtyping.Generator.gi_running"
 typing._T_co"typing.Iterator*J
 selfB
 typing.Iterable[typing._T_co]
-typing._T_co"typing.Iterable0:abstractmethod@z27z35z36z37z38z39z3108PXj27j35j36j37j38j39j310ú4
+typing._T_co"typing.Iterable0:abstractmethod@z27z35z36z37z38z39z3108PXj27j35j36j37j38j39j310Ú9
 Patterntyping.Pattern"builtins.object*ä
 searchtyping.Pattern.search"{
 )Union[typing.Match[typing._AnyStr2],None]B
@@ -531,7 +531,23 @@ $Union[builtins.str,builtins.unicode]
 string
 typing.AnyStr*)
 count
-builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj27j35j36j37j38j39j310‰
+builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj27j35j36j37j38j39j310rX
+flagstyping.Pattern.flags
+builtins.int"builtins.int*27*35*36*37*38*39*310r˜
+
+groupindextyping.Pattern.groupindexk
+)builtins.dict[typing.AnyStr,builtins.int]
+typing.AnyStr
+builtins.int"builtins.int"builtins.dict*27r¹
+
+groupindextyping.Pattern.groupindexw
+)typing.Mapping[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"typing.Mapping*35*36*37*38*39*310rZ
+groupstyping.Pattern.groups
+builtins.int"builtins.int*27*35*36*37*38*39*310rQ
+patterntyping.Pattern.pattern
+typing.AnyStr*27*35*36*37*38*39*310‰
 Sequencetyping.Sequence"typing.Iterable"typing.Container"typing.Reversible*ž
 indextyping.Sequence.index"
 builtins.int"builtins.int*L
@@ -640,7 +656,8 @@ $Union[builtins.str,builtins.unicode]
 typing.Sequence[typing._T_co]
 typing._T_co"typing.Sequence*%
 s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310É
+builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310À
+
 TypeVartyping.TypeVar"builtins.object*Þ
 __init__typing.TypeVar.__init__"
 None**
@@ -678,7 +695,20 @@ $Union[builtins.str,builtins.unicode]
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310ñ
+builtins.bool"builtins.bool z35z36z37z38z39z310j27j35j36j37j38j39j310r
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27*35*36*37*38*39*310r“
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27*35*36*37*38*39*310rj
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rr
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27*35*36*37*38*39*310ò
 ArgumentErrorargparse.ArgumentError"builtins.Exception*–
 __init__argparse.ArgumentError.__init__"
 None*:
@@ -689,7 +719,13 @@ $Union[builtins.str,builtins.unicode]
 argparse.Action"argparse.Action
 None*)
 message
-builtins.str"builtins.strz27z35z36z37z38z39z310j27j35j36j37j38j39j310®
+builtins.str"builtins.strz27z35z36z37z38z39z310j27j35j36j37j38j39j310r˜
+argument_name$argparse.ArgumentError.argument_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310rd
+messageargparse.ArgumentError.message
+builtins.str"builtins.str*27*35*36*37*38*39*310®
 _AttributeHolderargparse._AttributeHolder"builtins.object*
 _get_kwargs%argparse._AttributeHolder._get_kwargs"{
 &builtins.list[Tuple[builtins.str,Any]]B
@@ -702,7 +738,7 @@ $Union[builtins.str,builtins.unicode]
 builtins.list[Any]
 Any"builtins.list*@
 self6
-argparse._AttributeHolder"argparse._AttributeHolderz27z35z36z37z38z39z310j27j35j36j37j38j39j310¾N
+argparse._AttributeHolder"argparse._AttributeHolderz27z35z36z37z38z39z310j27j35j36j37j38j39j310Ùj
 _ActionsContainerargparse._ActionsContainer"builtins.object*÷
 __init__#argparse._ActionsContainer.__init__"
 None*B
@@ -1020,14 +1056,84 @@ XUnion[CallableType[builtins.function],CallableType[builtins.function],argparse.
 4typing.Iterable[Tuple[builtins.str,argparse.Action]]i
 #Tuple[builtins.str,argparse.Action]
 builtins.str"builtins.str"
-argparse.Action"argparse.Action"typing.Iterablez35z36z37z38z39z310j27j35j36j37j38j39j310Â
+argparse.Action"argparse.Action"typing.Iterablez35z36z37z38z39z310j27j35j36j37j38j39j310r¶
+description&argparse._ActionsContainer.description{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r”
+description&argparse._ActionsContainer.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rï
+prefix_chars'argparse._ActionsContainer.prefix_chars±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27rn
+prefix_chars'argparse._ActionsContainer.prefix_chars
+builtins.str"builtins.str*35*36*37*38*39*310re
+argument_default+argparse._ActionsContainer.argument_default
+Any*27*35*36*37*38*39*310r÷
+conflict_handler+argparse._ActionsContainer.conflict_handler±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27rv
+conflict_handler+argparse._ActionsContainer.conflict_handler
+builtins.str"builtins.str*35*36*37*38*39*310r‘
+_registries&argparse._ActionsContainer._registriesÕ
+Ubuiltins.dict[TypeAlias[Union[builtins.str,builtins.unicode]],builtins.dict[Any,Any]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.dict*27rí
+_registries&argparse._ActionsContainer._registriesœ
+2builtins.dict[builtins.str,builtins.dict[Any,Any]]
+builtins.str"builtins.str9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.dict*35*36*37*38*39*310r¡
+_actions#argparse._ActionsContainer._actionsS
+builtins.list[argparse.Action]"
+argparse.Action"argparse.Action"builtins.list*27*35*36*37*38*39*310r‰
+_option_string_actions1argparse._ActionsContainer._option_string_actions·
+Nbuiltins.dict[TypeAlias[Union[builtins.str,builtins.unicode]],argparse.Action]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text"
+argparse.Action"argparse.Action"builtins.dict*27rä
+_option_string_actions1argparse._ActionsContainer._option_string_actions~
++builtins.dict[builtins.str,argparse.Action]
+builtins.str"builtins.str"
+argparse.Action"argparse.Action"builtins.dict*35*36*37*38*39*310rÅ
+_action_groups)argparse._ActionsContainer._action_groupsk
+&builtins.list[argparse._ArgumentGroup]2
+argparse._ArgumentGroup"argparse._ArgumentGroup"builtins.list*27*35*36*37*38*39*310rù
+_mutually_exclusive_groups5argparse._ActionsContainer._mutually_exclusive_groups†
+/builtins.list[argparse._MutuallyExclusiveGroup]D
+ argparse._MutuallyExclusiveGroup" argparse._MutuallyExclusiveGroup"builtins.list*27*35*36*37*38*39*310r§
+	_defaults$argparse._ActionsContainer._defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*27*35*36*37*38*39*310rº
+_negative_number_matcher3argparse._ActionsContainer._negative_number_matcherL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*27*35*36*37*38*39*310rÇ
+_has_negative_number_optionals9argparse._ActionsContainer._has_negative_number_optionalsM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list*27*35*36*37*38*39*310Â
 _FormatterClassargparse._FormatterClass"builtins.object*ä
 __call__!argparse._FormatterClass.__call__"0
 argparse.HelpFormatter"argparse.HelpFormatter*>
 self4
 argparse._FormatterClass"argparse._FormatterClass*&
 prog
-builtins.str"builtins.strz27z35z36z37z38z39z310Xj27j35j36j37j38j39j310æ¦
+builtins.str"builtins.strz27z35z36z37z38z39z310Xj27j35j36j37j38j39j310«·
 ArgumentParserargparse.ArgumentParser"argparse._AttributeHolder"argparse._ActionsContainer*ÿ
 __init__ argparse.ArgumentParser.__init__"
 None*<
@@ -1699,7 +1805,56 @@ parse_args"argparse.ArgumentParser.parse_args"
 self2
 argparse.ArgumentParser"argparse.ArgumentParser*
 	namespace
-argparse._N0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310âq
+argparse._N0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310rÜ
+progargparse.ArgumentParser.prog±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27r[
+progargparse.ArgumentParser.prog
+builtins.str"builtins.str*35*36*37*38*39*310r§
+usageargparse.ArgumentParser.usage{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r…
+usageargparse.ArgumentParser.usageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r©
+epilogargparse.ArgumentParser.epilog{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r‡
+epilogargparse.ArgumentParser.epilogD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r
+formatter_class'argparse.ArgumentParser.formatter_class4
+argparse._FormatterClass"argparse._FormatterClass*27*35*36*37*38*39*310rÇ
+fromfile_prefix_chars-argparse.ArgumentParser.fromfile_prefix_chars{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r¥
+fromfile_prefix_chars-argparse.ArgumentParser.fromfile_prefix_charsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310ri
+add_help argparse.ArgumentParser.add_help
+builtins.bool"builtins.bool*27*35*36*37*38*39*310r…
+_positionals$argparse.ArgumentParser._positionals2
+argparse._ArgumentGroup"argparse._ArgumentGroup*27*35*36*37*38*39*310r
+
+_optionals"argparse.ArgumentParser._optionals2
+argparse._ArgumentGroup"argparse._ArgumentGroup*27*35*36*37*38*39*310r¶
+_subparsers#argparse.ArgumentParser._subparserse
+#Union[argparse._ArgumentGroup,None]2
+argparse._ArgumentGroup"argparse._ArgumentGroup
+None*27*35*36*37*38*39*310rm
+allow_abbrev$argparse.ArgumentParser.allow_abbrev
+builtins.bool"builtins.bool*35*36*37*38*39*310Ð~
 HelpFormatterargparse.HelpFormatter"builtins.object*å
 __init__argparse.HelpFormatter.__init__"
 None*:
@@ -2116,10 +2271,42 @@ $Union[builtins.str,builtins.unicode]
 self0
 argparse.HelpFormatter"argparse.HelpFormatter*.
 action"
-argparse.Action"argparse.Actionz35z36z37z38z39z310j27j35j36j37j38j39j310x
+argparse.Action"argparse.Actionz35z36z37z38z39z310j27j35j36j37j38j39j310rÝ
+_progargparse.HelpFormatter._prog±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27r\
+_progargparse.HelpFormatter._prog
+builtins.str"builtins.str*35*36*37*38*39*310rx
+_indent_increment(argparse.HelpFormatter._indent_increment
+builtins.int"builtins.int*27*35*36*37*38*39*310rz
+_max_help_position)argparse.HelpFormatter._max_help_position
+builtins.int"builtins.int*27*35*36*37*38*39*310rb
+_widthargparse.HelpFormatter._width
+builtins.int"builtins.int*27*35*36*37*38*39*310rt
+_current_indent&argparse.HelpFormatter._current_indent
+builtins.int"builtins.int*27*35*36*37*38*39*310rb
+_levelargparse.HelpFormatter._level
+builtins.int"builtins.int*27*35*36*37*38*39*310rz
+_action_max_length)argparse.HelpFormatter._action_max_length
+builtins.int"builtins.int*27*35*36*37*38*39*310r[
+_root_section$argparse.HelpFormatter._root_section
+Any*27*35*36*37*38*39*310ra
+_current_section'argparse.HelpFormatter._current_section
+Any*27*35*36*37*38*39*310r¬
+_whitespace_matcher*argparse.HelpFormatter._whitespace_matcherL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*27*35*36*37*38*39*310r¬
+_long_break_matcher*argparse.HelpFormatter._long_break_matcherL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*27*35*36*37*38*39*310r`
+_Sectionargparse.HelpFormatter._Section
+	Type[Any]
+Any*27*35*36*37*38*39*310x
 RawDescriptionHelpFormatter$argparse.RawDescriptionHelpFormatter"argparse.HelpFormatterj27j35j36j37j38j39j310x
 RawTextHelpFormatterargparse.RawTextHelpFormatter"$argparse.RawDescriptionHelpFormatterj27j35j36j37j38j39j310|
-ArgumentDefaultsHelpFormatter&argparse.ArgumentDefaultsHelpFormatter"argparse.HelpFormatterj27j35j36j37j38j39j310â
+ArgumentDefaultsHelpFormatter&argparse.ArgumentDefaultsHelpFormatter"argparse.HelpFormatterj27j35j36j37j38j39j310ö4
 Actionargparse.Action"argparse._AttributeHolder*õ
 
 __init__argparse.Action.__init__"
@@ -2258,7 +2445,76 @@ $Union[argparse._T,builtins.str,None]
 format_usageargparse.Action.format_usage"
 builtins.str"builtins.str*,
 self"
-argparse.Action"argparse.Actionz39z310j27j35j36j37j38j39j310ë
+argparse.Action"argparse.Actionz39z310j27j35j36j37j38j39j310r¾
+option_stringsargparse.Action.option_strings‡
+@typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text"typing.Sequence*27r™
+option_stringsargparse.Action.option_stringsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*35*36*37*38*39*310rÔ
+destargparse.Action.dest±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27rS
+destargparse.Action.dest
+builtins.str"builtins.str*35*36*37*38*39*310rË
+nargsargparse.Action.nargs¦
+6Union[builtins.int,builtins.str,builtins.unicode,None]
+builtins.int"builtins.int
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r¨
+nargsargparse.Action.nargso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None*35*36*37*38*39*310rD
+constargparse.Action.const
+Any*27*35*36*37*38*39*310rH
+defaultargparse.Action.default
+Any*27*35*36*37*38*39*310rü
+typeargparse.Action.typeÀ
+=Union[CallableType[builtins.function],argparse.FileType,None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function&
+argparse.FileType"argparse.FileType
+None*27*35*36*37*38*39*310r¡
+choicesargparse.Action.choices`
+ Union[typing.Iterable[Any],None]0
+typing.Iterable[Any]
+Any"typing.Iterable
+None*27*35*36*37*38*39*310ra
+requiredargparse.Action.required
+builtins.bool"builtins.bool*27*35*36*37*38*39*310r
+helpargparse.Action.help{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r{
+helpargparse.Action.helpD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rì
+metavarargparse.Action.metavarÃ
+iUnion[builtins.str,builtins.unicode,builtins.tuple[TypeAlias[Union[builtins.str,builtins.unicode]]],None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode…
+?builtins.tuple[TypeAlias[Union[builtins.str,builtins.unicode]]]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text"builtins.tuple
+None*27rí
+metavarargparse.Action.metavar¯
+5Union[builtins.str,builtins.tuple[builtins.str],None]
+builtins.str"builtins.strL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None*35*36*37*38*39*310ë
 	Namespaceargparse.Namespace"argparse._AttributeHolder*—
 __init__argparse.Namespace.__init__"
 None*2
@@ -2299,7 +2555,7 @@ $Union[argparse._T,builtins.str,None]
 self(
 argparse.Namespace"argparse.Namespace*#
 key
-builtins.str"builtins.strz27z35z36z37z38z39z310j27j35j36j37j38j39j310µ
+builtins.str"builtins.strz27z35z36z37z38z39z310j27j35j36j37j38j39j310Ü
 FileTypeargparse.FileType"builtins.object*í
 __init__argparse.FileType.__init__"
 None*0
@@ -2340,7 +2596,25 @@ $Union[argparse._T,builtins.str,None]
 self&
 argparse.FileType"argparse.FileType*(
 string
-builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310™
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310rØ
+_modeargparse.FileType._mode±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27rW
+_modeargparse.FileType._mode
+builtins.str"builtins.str*35*36*37*38*39*310ra
+_bufsizeargparse.FileType._bufsize
+builtins.int"builtins.int*27*35*36*37*38*39*310r‡
+	_encodingargparse.FileType._encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rƒ
+_errorsargparse.FileType._errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310ø
+
 _ArgumentGroupargparse._ArgumentGroup"argparse._ActionsContainer*š
 __init__ argparse._ArgumentGroup.__init__"
 None*<
@@ -2373,7 +2647,19 @@ $Union[argparse._T,builtins.str,None]
 builtins.str"builtins.str
 None *
 kwargs
-Anyz35z36z37z38z39z310j27j35j36j37j38j39j310™
+Anyz35z36z37z38z39z310j27j35j36j37j38j39j310r§
+titleargparse._ArgumentGroup.title{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r…
+titleargparse._ArgumentGroup.titleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310rª
+_group_actions&argparse._ArgumentGroup._group_actionsS
+builtins.list[argparse.Action]"
+argparse.Action"argparse.Action"builtins.list*27*35*36*37*38*39*310 
 _MutuallyExclusiveGroup argparse._MutuallyExclusiveGroup"argparse._ArgumentGroup*¥
 __init__)argparse._MutuallyExclusiveGroup.__init__"
 None*N
@@ -2382,7 +2668,12 @@ $Union[argparse._T,builtins.str,None]
 	container8
 argparse._ActionsContainer"argparse._ActionsContainer*.
 required
-builtins.bool"builtins.bool z27z35z36z37z38z39z310j27j35j36j37j38j39j310S
+builtins.bool"builtins.bool z27z35z36z37z38z39z310j27j35j36j37j38j39j310rr
+required)argparse._MutuallyExclusiveGroup.required
+builtins.bool"builtins.bool*27*35*36*37*38*39*310r
+
+_container+argparse._MutuallyExclusiveGroup._container8
+argparse._ActionsContainer"argparse._ActionsContainer*27*35*36*37*38*39*310S
 _StoreActionargparse._StoreAction"argparse.Actionj27j35j36j37j38j39j310®
 _StoreConstActionargparse._StoreConstAction"argparse.Action*¹
 __init__#argparse._StoreConstAction.__init__"
@@ -2622,7 +2913,8 @@ $Union[argparse._T,builtins.str,None]
 helpD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z35z36z37z38z39z310j27j35j36j37j38j39j310†
+None z35z36z37z38z39z310j27j35j36j37j38j39j310À
+
 _VersionActionargparse._VersionAction"argparse.Action*â
 __init__ argparse._VersionAction.__init__"
 None*<
@@ -2657,7 +2949,16 @@ $Union[argparse._T,builtins.str,None]
 default
 builtins.str"builtins.str *(
 help
-builtins.str"builtins.str z35z36z37z38z39z310j27j35j36j37j38j39j310ø
+builtins.str"builtins.str z35z36z37z38z39z310j27j35j36j37j38j39j310r«
+versionargparse._VersionAction.version{
+)Union[builtins.str,builtins.unicode,None]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode
+None*27r‰
+versionargparse._VersionAction.versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310°(
 _SubParsersActionargparse._SubParsersAction"argparse.Action*ø
 __init__#argparse._SubParsersAction.__init__"
 None*B
@@ -2755,7 +3056,45 @@ add_parser%argparse._SubParsersAction.add_parser"2
 builtins.list[argparse.Action]"
 argparse.Action"argparse.Action"builtins.list*B
 self8
-argparse._SubParsersAction"argparse._SubParsersActionz27z35z36z37z38z39z310j27j35j36j37j38j39j310`
+argparse._SubParsersAction"argparse._SubParsersActionz27z35z36z37z38z39z310j27j35j36j37j38j39j310r|
+_ChoicesPseudoAction/argparse._SubParsersAction._ChoicesPseudoAction
+	Type[Any]
+Any*27*35*36*37*38*39*310rï
+_prog_prefix'argparse._SubParsersAction._prog_prefix±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text*27rn
+_prog_prefix'argparse._SubParsersAction._prog_prefix
+builtins.str"builtins.str*35*36*37*38*39*310r­
+_parser_class(argparse._SubParsersAction._parser_classU
+Type[argparse.ArgumentParser]2
+argparse.ArgumentParser"argparse.ArgumentParser*27*35*36*37*38*39*310r•
+_name_parser_map+argparse._SubParsersAction._name_parser_mapÏ
+Vbuiltins.dict[TypeAlias[Union[builtins.str,builtins.unicode]],argparse.ArgumentParser]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text2
+argparse.ArgumentParser"argparse.ArgumentParser"builtins.dict*27rñ
+_name_parser_map+argparse._SubParsersAction._name_parser_map–
+3builtins.dict[builtins.str,argparse.ArgumentParser]
+builtins.str"builtins.str2
+argparse.ArgumentParser"argparse.ArgumentParser"builtins.dict*35*36*37*38*39*310rƒ
+choices"argparse._SubParsersAction.choicesÏ
+Vbuiltins.dict[TypeAlias[Union[builtins.str,builtins.unicode]],argparse.ArgumentParser]±
+/TypeAlias[Union[builtins.str,builtins.unicode]]l
+$Union[builtins.str,builtins.unicode]
+builtins.str"builtins.str$
+builtins.unicode"builtins.unicode"argparse._Text2
+argparse.ArgumentParser"argparse.ArgumentParser"builtins.dict*27rß
+choices"argparse._SubParsersAction.choices–
+3builtins.dict[builtins.str,argparse.ArgumentParser]
+builtins.str"builtins.str2
+argparse.ArgumentParser"argparse.ArgumentParser"builtins.dict*35*36*37*38*39*310r±
+_choices_actions+argparse._SubParsersAction._choices_actionsS
+builtins.list[argparse.Action]"
+argparse.Action"argparse.Action"builtins.list*27*35*36*37*38*39*310`
 ArgumentTypeErrorargparse.ArgumentTypeError"builtins.Exceptionj27j35j36j37j38j39j310n
 MetavarTypeHelpFormatter!argparse.MetavarTypeHelpFormatter"argparse.HelpFormatterj35j36j37j38j39j310ï	
 BooleanOptionalActionargparse.BooleanOptionalAction"argparse.Action*›	

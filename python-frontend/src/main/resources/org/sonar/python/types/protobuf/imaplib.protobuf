@@ -1,5 +1,5 @@
 
-imaplibâ5
+imaplib…6
 socketsocket.socket"builtins.object*€
 __init__socket.socket.__init__"
 None*(
@@ -248,7 +248,13 @@ getsockoptsocket.socket.getsockopt"
 'Union[builtins.tuple[Any],builtins.str].
 builtins.tuple[Any]
 Any"builtins.tuple
-builtins.str"builtins.str"socket._Address0:overloadX"27j27Ø"
+builtins.str"builtins.str"socket._Address0:overloadX"27j27r@
+familysocket.socket.family
+builtins.int"builtins.int*27r<
+typesocket.socket.type
+builtins.int"builtins.int*27r>
+protosocket.socket.proto
+builtins.int"builtins.int*27Ø"
 socketsocket.socket"_socket.socket*Ù
 __init__socket.socket.__init__"
 None*(
@@ -396,7 +402,7 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310ö±
+None 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310ì∂
 	SSLSocketssl.SSLSocket"socket.socket*Å
 __init__ssl.SSLSocket.__init__"
 None*(
@@ -989,7 +995,23 @@ Kbuiltins.tuple[TypeAlias[builtins.tuple[Tuple[builtins.str,builtins.str]]]]Û
 self
 ssl.SSLSocket"ssl.SSLSocket*/
 binary_form
-builtins.bool"builtins.bool0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310ú&
+builtins.bool"builtins.bool0:overloadX"35"36"37"38"39"310j27j35j36j37j38j39j310r_
+contextssl.SSLSocket.context 
+ssl.SSLContext"ssl.SSLContext*27*35*36*37*38*39*310re
+server_sidessl.SSLSocket.server_side
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rì
+server_hostnamessl.SSLSocket.server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27*35*36*37*38*39*310rÖ
+sessionssl.SSLSocket.sessionJ
+Union[ssl.SSLSession,None] 
+ssl.SSLSession"ssl.SSLSession
+None*35*36*37*38*39*310rê
+session_reusedssl.SSLSocket.session_reusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*35*36*37*38*39*310ú&
 IO	typing.IO"typing.Iterator*£
 modetyping.IO.mode"
 builtins.str"builtins.str*B
@@ -1143,7 +1165,7 @@ writelinestyping.IO.writelines"
 typing.AnyStr*B
 self8
 typing.IO[typing.AnyStr]
-typing.AnyStr"	typing.IO0:abstractmethod@z35z36z37z38z39z310Pj27j35j36j37j38j39j310˙4
+typing.AnyStr"	typing.IO0:abstractmethod@z35z36z37z38z39z310Pj27j35j36j37j38j39j310⁄9
 Patterntyping.Pattern"builtins.object*‰
 searchtyping.Pattern.search"{
 )Union[typing.Match[typing._AnyStr2],None]B
@@ -1398,7 +1420,23 @@ $Union[builtins.str,builtins.unicode]
 string
 typing.AnyStr*)
 count
-builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj27j35j36j37j38j39j310∑æ
+builtins.int"builtins.int 0:overloadX"35"36"37"38"39"310Pj27j35j36j37j38j39j310rX
+flagstyping.Pattern.flags
+builtins.int"builtins.int*27*35*36*37*38*39*310rò
+
+groupindextyping.Pattern.groupindexk
+)builtins.dict[typing.AnyStr,builtins.int]
+typing.AnyStr
+builtins.int"builtins.int"builtins.dict*27rπ
+
+groupindextyping.Pattern.groupindexw
+)typing.Mapping[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"typing.Mapping*35*36*37*38*39*310rZ
+groupstyping.Pattern.groups
+builtins.int"builtins.int*27*35*36*37*38*39*310rQ
+patterntyping.Pattern.pattern
+typing.AnyStr*27*35*36*37*38*39*310´‚
 IMAP4imaplib.IMAP4"builtins.object*æ
 __init__imaplib.IMAP4.__init__"
 None*(
@@ -2104,7 +2142,107 @@ capability
 builtins.list[Any]
 Any"builtins.list"imaplib._CommandResults*(
 self
-imaplib.IMAP4"imaplib.IMAP4z39z310j27j35j36j37j38j39j310â
+imaplib.IMAP4"imaplib.IMAP4z39z310j27j35j36j37j38j39j310rÅ
+errorimaplib.IMAP4.errorF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*27*35*36*37*38*39*310rÅ
+abortimaplib.IMAP4.abortF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*27*35*36*37*38*39*310rá
+readonlyimaplib.IMAP4.readonlyF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*27*35*36*37*38*39*310rÇ
+	mustquoteimaplib.IMAP4.mustquoteX
+ typing.Pattern[builtins.unicode]$
+builtins.unicode"builtins.unicode"typing.Pattern*27rã
+	mustquoteimaplib.IMAP4.mustquoteL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*35*36*37*38*39*310rW
+debugimaplib.IMAP4.debug
+builtins.int"builtins.int*27*35*36*37*38*39*310rW
+stateimaplib.IMAP4.state
+builtins.str"builtins.str*27*35*36*37*38*39*310rv
+literalimaplib.IMAP4.literalP
+Union[builtins.unicode,None]$
+builtins.unicode"builtins.unicode
+None*27r
+literalimaplib.IMAP4.literalD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*35*36*37*38*39*310r≠
+tagged_commandsimaplib.IMAP4.tagged_commandsˆ
+Cbuiltins.dict[builtins.str,Union[builtins.list[builtins.str],None]]
+builtins.str"builtins.strÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None"builtins.dict*27r“
+tagged_commandsimaplib.IMAP4.tagged_commandsÜ
+Gbuiltins.dict[builtins.bytes,Union[builtins.list[builtins.bytes],None]] 
+builtins.bytes"builtins.bytesâ
+)Union[builtins.list[builtins.bytes],None]P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list
+None"builtins.dict*35*36*37*38*39*310r›
+untagged_responses imaplib.IMAP4.untagged_responses†
+_builtins.dict[builtins.str,builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]]
+builtins.str"builtins.strè
+Cbuiltins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]∏
+4Union[builtins.str,Tuple[builtins.str,builtins.str]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list"builtins.dict*27rî
+untagged_responses imaplib.IMAP4.untagged_responses¬
+ebuiltins.dict[builtins.str,builtins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]]
+builtins.str"builtins.str´
+Ibuiltins.list[Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]]]Œ
+:Union[builtins.bytes,Tuple[builtins.bytes,builtins.bytes]] 
+builtins.bytes"builtins.bytesl
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list"builtins.dict*35*36*37*38*39*310rw
+continuation_response#imaplib.IMAP4.continuation_response
+builtins.str"builtins.str*27*35*36*37*38*39*310re
+is_readonlyimaplib.IMAP4.is_readonly
+builtins.bool"builtins.bool*27*35*36*37*38*39*310rY
+tagnumimaplib.IMAP4.tagnum
+builtins.int"builtins.int*27*35*36*37*38*39*310rY
+tagpreimaplib.IMAP4.tagpre
+builtins.str"builtins.str*27*35*36*37*38*39*310rz
+tagreimaplib.IMAP4.tagreX
+ typing.Pattern[builtins.unicode]$
+builtins.unicode"builtins.unicode"typing.Pattern*27rÉ
+tagreimaplib.IMAP4.tagreL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*35*36*37*38*39*310rB
+welcomeimaplib.IMAP4.welcome
+builtins.str"builtins.str*27r[
+welcomeimaplib.IMAP4.welcome 
+builtins.bytes"builtins.bytes*35*36*37*38*39*310r~
+capabilitiesimaplib.IMAP4.capabilities5
+Tuple[builtins.str]
+builtins.str"builtins.str*27*35*36*37*38*39*310rm
+PROTOCOL_VERSIONimaplib.IMAP4.PROTOCOL_VERSION
+builtins.str"builtins.str*27*35*36*37*38*39*310rU
+hostimaplib.IMAP4.host
+builtins.str"builtins.str*27*35*36*37*38*39*310rU
+portimaplib.IMAP4.port
+builtins.int"builtins.int*27*35*36*37*38*39*310rW
+sockimaplib.IMAP4.sock
+socket.socket"socket.socket*27*35*36*37*38*39*310rÛ
+fileimaplib.IMAP4.file“
+:Union[typing.IO[builtins.unicode],typing.IO[builtins.str]]N
+typing.IO[builtins.unicode]$
+builtins.unicode"builtins.unicode"	typing.IOB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*27rÄ
+fileimaplib.IMAP4.file 
+8Union[typing.IO[builtins.str],typing.IO[builtins.bytes]]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IOH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*35*36*37*38*39*310§
 	IMAP4_SSLimaplib.IMAP4_SSL"imaplib.IMAP4*Â
 __init__imaplib.IMAP4_SSL.__init__"
 None*0
@@ -2233,7 +2371,22 @@ capability
 sslimaplib.IMAP4_SSL.ssl"
 ssl.SSLSocket"ssl.SSLSocket*0
 self&
-imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz27z35z36z37z38z39z310j27j35j36j37j38j39j310‰
+imaplib.IMAP4_SSL"imaplib.IMAP4_SSLz27z35z36z37z38z39z310j27j35j36j37j38j39j310r_
+keyfileimaplib.IMAP4_SSL.keyfile
+builtins.str"builtins.str*27*35*36*37*38*39*310ra
+certfileimaplib.IMAP4_SSL.certfile
+builtins.str"builtins.str*27*35*36*37*38*39*310rY
+hostimaplib.IMAP4_SSL.host
+builtins.str"builtins.str*27*35*36*37*38*39*310rY
+portimaplib.IMAP4_SSL.port
+builtins.int"builtins.int*27*35*36*37*38*39*310r[
+sockimaplib.IMAP4_SSL.sock
+socket.socket"socket.socket*27*35*36*37*38*39*310r_
+sslobjimaplib.IMAP4_SSL.sslobj
+ssl.SSLSocket"ssl.SSLSocket*27*35*36*37*38*39*310ra
+fileimaplib.IMAP4_SSL.file$
+typing.IO[Any]
+Any"	typing.IO*27*35*36*37*38*39*310¬
 IMAP4_streamimaplib.IMAP4_stream"imaplib.IMAP4*≥
 __init__imaplib.IMAP4_stream.__init__"
 None*6
@@ -2304,7 +2457,30 @@ capability
 shutdownimaplib.IMAP4_stream.shutdown"
 None*6
 self,
-imaplib.IMAP4_stream"imaplib.IMAP4_streamz27z35z36z37z38z39z310j27j35j36j37j38j39j310˚	
+imaplib.IMAP4_stream"imaplib.IMAP4_streamz27z35z36z37z38z39z310j27j35j36j37j38j39j310rb
+commandimaplib.IMAP4_stream.command
+builtins.str"builtins.str*27*35*36*37*38*39*310r\
+hostimaplib.IMAP4_stream.host
+builtins.str"builtins.str*27*35*36*37*38*39*310r\
+portimaplib.IMAP4_stream.port
+builtins.int"builtins.int*27*35*36*37*38*39*310r^
+sockimaplib.IMAP4_stream.sock
+socket.socket"socket.socket*27*35*36*37*38*39*310rd
+fileimaplib.IMAP4_stream.file$
+typing.IO[Any]
+Any"	typing.IO*27*35*36*37*38*39*310r}
+processimaplib.IMAP4_stream.processP
+subprocess.Popen[builtins.str]
+builtins.str"builtins.str"subprocess.Popen*27rò
+processimaplib.IMAP4_stream.processV
+ subprocess.Popen[builtins.bytes] 
+builtins.bytes"builtins.bytes"subprocess.Popen*35*36*37*38*39*310rn
+	writefileimaplib.IMAP4_stream.writefile$
+typing.IO[Any]
+Any"	typing.IO*27*35*36*37*38*39*310rl
+readfileimaplib.IMAP4_stream.readfile$
+typing.IO[Any]
+Any"	typing.IO*27*35*36*37*38*39*310ã
 _Authenticatorimaplib._Authenticator"builtins.object*È
 __init__imaplib._Authenticator.__init__"
 None*:
@@ -2342,7 +2518,10 @@ capability
 self0
 imaplib._Authenticator"imaplib._Authenticator*%
 inp
-builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310÷<
+builtins.str"builtins.strz35z36z37z38z39z310j27j35j36j37j38j39j310rç
+mechimaplib._Authenticator.mechK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27*35*36*37*38*39*310”E
 
 SSLContextssl.SSLContext"builtins.object*˜
 __new__ssl.SSLContext.__new__" 
@@ -2550,7 +2729,32 @@ Kbuiltins.tuple[TypeAlias[builtins.tuple[Tuple[builtins.str,builtins.str]]]]Û
 builtins.str"builtins.str
 builtins.int"builtins.int"builtins.dict**
 self 
-ssl.SSLContext"ssl.SSLContextz35z36z37z38z39z310j35j36j37j38j39j310á	
+ssl.SSLContext"ssl.SSLContextz35z36z37z38z39z310j35j36j37j38j39j310rh
+check_hostnamessl.SSLContext.check_hostname
+builtins.bool"builtins.bool*35*36*37*38*39*310rV
+optionsssl.SSLContext.options
+ssl.Options"ssl.Options*35*36*37*38*39*310rb
+verify_flagsssl.SSLContext.verify_flags
+builtins.int"builtins.int*35*36*37*38*39*310r`
+verify_modessl.SSLContext.verify_mode
+builtins.int"builtins.int*35*36*37*38*39*310r≈
+sni_callbackssl.SSLContext.sni_callbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*37*38*39*310r{
+sslobject_classssl.SSLContext.sslobject_class7
+Type[ssl.SSLObject]
+ssl.SSLObject"ssl.SSLObject*37*38*39*310rz
+hostname_checks_common_name*ssl.SSLContext.hostname_checks_common_name
+builtins.bool"builtins.bool*37*38*39*310rd
+maximum_versionssl.SSLContext.maximum_version 
+ssl.TLSVersion"ssl.TLSVersion*37*38*39*310rd
+minimum_versionssl.SSLContext.minimum_version 
+ssl.TLSVersion"ssl.TLSVersion*37*38*39*310rf
+post_handshake_auth"ssl.SSLContext.post_handshake_auth
+builtins.bool"builtins.bool*38*39*310ú
+
 TracebackTypetypes.TracebackType"builtins.object*Õ
 tb_nexttypes.TracebackType.tb_next"Y
 Union[types.TracebackType,None]*
@@ -2583,7 +2787,11 @@ Kbuiltins.tuple[TypeAlias[builtins.tuple[Tuple[builtins.str,builtins.str]]]]Û
 tb_lasti
 builtins.int"builtins.int*+
 	tb_lineno
-builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310Ö
+builtins.int"builtins.intz37z38z39z310j35j36j37j38j39j310rí
+tb_nexttypes.TracebackType.tb_nextY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*37*38*39*310Ö
 Internaldate2tupleimaplib.Internaldate2tuple"ç
 {Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int

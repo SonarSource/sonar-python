@@ -148,7 +148,7 @@ writelinestyping.IO.writelines"
 	tracebackY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None0:abstractmethod@z27Pj27ç
+None0:abstractmethod@z27Pj27ƒ
 GzipFilegzip.GzipFile"io.BufferedIOBase*ï
 __init__gzip.GzipFile.__init__"
 None*(
@@ -199,7 +199,36 @@ writelinestyping.IO.writelines"
 readlinegzip.GzipFile.readline*
 self*
 
-size z27j27â=
+size z27j27r1
+	myfileobjgzip.GzipFile.myfileobj
+Any*27r;
+max_read_chunkgzip.GzipFile.max_read_chunk
+Any*27r'
+modegzip.GzipFile.mode
+Any*27r/
+extrabufgzip.GzipFile.extrabuf
+Any*27r1
+	extrasizegzip.GzipFile.extrasize
+Any*27r3
+
+extrastartgzip.GzipFile.extrastart
+Any*27r'
+namegzip.GzipFile.name
+Any*27r7
+min_readsizegzip.GzipFile.min_readsize
+Any*27r/
+compressgzip.GzipFile.compress
+Any*27r-
+fileobjgzip.GzipFile.fileobj
+Any*27r+
+offsetgzip.GzipFile.offset
+Any*27r)
+mtimegzip.GzipFile.mtime
+Any*27r'
+sizegzip.GzipFile.size
+Any*27r%
+crcgzip.GzipFile.crc
+Any*27—D
 GzipFilegzip.GzipFile"_compression.BaseStream*‘
 filenamegzip.GzipFile.filename"
 builtins.str"builtins.str*(
@@ -441,7 +470,27 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 mtimeJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310Ù
+None 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rz
+	myfileobjgzip.GzipFile.myfileobj;
+Union[io.FileIO,None]
+	io.FileIO"	io.FileIO
+None*35*36*37*38*39*310rÞ
+modegzip.GzipFile.mode¨
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int*35*36*37*38*39*310rQ
+namegzip.GzipFile.name
+builtins.str"builtins.str*35*36*37*38*39*310r]
+compressgzip.GzipFile.compress 
+zlib._Compress"zlib._Compress*35*36*37*38*39*310rÒ
+fileobjgzip.GzipFile.fileobj–
+2Union[gzip._ReadableFileobj,gzip._WritableFileobj].
+gzip._ReadableFileobj"gzip._ReadableFileobj.
+gzip._WritableFileobj"gzip._WritableFileobj*35*36*37*38*39*310rO
+crcgzip.GzipFile.crc
+builtins.int"builtins.int*35*36*37*38*39*310¼
 FileIO	io.FileIO"io.RawIOBase"typing.BinaryIO*ó
 __init__io.FileIO.__init__"
 None* 
@@ -487,7 +536,13 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 	__enter__io.FileIO.__enter__"	
 io._T*
 self	
-io._Tz35z36z37z38z39z310j35j36j37j38j39j310×
+io._Tz35z36z37z38z39z310j35j36j37j38j39j310rM
+modeio.FileIO.mode
+builtins.str"builtins.str*35*36*37*38*39*310r‘
+nameio.FileIO.name`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*35*36*37*38*39*310×
 TextIOtyping.TextIO"	typing.IO*“
 buffertyping.TextIO.buffer""
 typing.BinaryIO"typing.BinaryIO*(
@@ -538,7 +593,7 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 flushgzip._WritableFileobj.flush"
 Any*8
 self.
-gzip._WritableFileobj"gzip._WritableFileobjz35z36z37z38z39z310Xj35j36j37j38j39j310È
+gzip._WritableFileobj"gzip._WritableFileobjz35z36z37z38z39z310Xj35j36j37j38j39j310°
 _PaddedFilegzip._PaddedFile"builtins.object*à
 __init__gzip._PaddedFile.__init__"
 None*.
@@ -569,7 +624,9 @@ WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mm
 seekablegzip._PaddedFile.seekable"
 builtins.bool"builtins.bool*.
 self$
-gzip._PaddedFile"gzip._PaddedFilez35z36z37z38z39z310j35j36j37j38j39j310¿
+gzip._PaddedFile"gzip._PaddedFilez35z36z37z38z39z310j35j36j37j38j39j310rf
+filegzip._PaddedFile.file.
+gzip._ReadableFileobj"gzip._ReadableFileobj*35*36*37*38*39*310¿
 _GzipReadergzip._GzipReader"_compression.DecompressReader*°
 __init__gzip._GzipReader.__init__"
 None*.

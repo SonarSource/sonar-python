@@ -3,7 +3,7 @@
 exceptionsG
 ArithmeticErrorbuiltins.ArithmeticError"builtins.StandardErrorj27E
 AssertionErrorbuiltins.AssertionError"builtins.StandardErrorj27E
-AttributeErrorbuiltins.AttributeError"builtins.StandardErrorj27â
+AttributeErrorbuiltins.AttributeError"builtins.StandardErrorj27ö
 BaseExceptionbuiltins.BaseException"builtins.object*£
 __init__builtins.BaseException.__init__"
 None*:
@@ -33,11 +33,22 @@ exceptionsG
 start
 builtins.int"builtins.int*&
 stop
-builtins.int"builtins.intz27j27?
+builtins.int"builtins.intz27j27rW
+argsbuiltins.BaseException.args.
+builtins.tuple[Any]
+Any"builtins.tuple*27r6
+messagebuiltins.BaseException.message
+Any*27?
 BufferErrorbuiltins.BufferError"builtins.StandardErrorj27;
 BytesWarningbuiltins.BytesWarning"builtins.Warningj27G
-DeprecationWarningbuiltins.DeprecationWarning"builtins.Warningj27I
-EnvironmentErrorbuiltins.EnvironmentError"builtins.StandardErrorj279
+DeprecationWarningbuiltins.DeprecationWarning"builtins.Warningj27π
+EnvironmentErrorbuiltins.EnvironmentError"builtins.StandardErrorj27rJ
+errnobuiltins.EnvironmentError.errno
+builtins.int"builtins.int*27rP
+strerror"builtins.EnvironmentError.strerror
+builtins.str"builtins.str*27rP
+filename"builtins.EnvironmentError.filename
+builtins.str"builtins.str*279
 EOFErrorbuiltins.EOFError"builtins.StandardErrorj27;
 	Exceptionbuiltins.Exception"builtins.BaseExceptionj27O
 FloatingPointErrorbuiltins.FloatingPointError"builtins.ArithmeticErrorj27=
@@ -62,15 +73,35 @@ IndexErrorbuiltins.IndexError"builtins.LookupErrorj27:
 RuntimeErrorbuiltins.RuntimeError"builtins.StandardErrorj27?
 RuntimeWarningbuiltins.RuntimeWarning"builtins.Warningj27?
 StandardErrorbuiltins.StandardError"builtins.Exceptionj27?
-StopIterationbuiltins.StopIteration"builtins.Exceptionj27?
-SyntaxErrorbuiltins.SyntaxError"builtins.StandardErrorj27=
+StopIterationbuiltins.StopIteration"builtins.Exceptionj27∆
+SyntaxErrorbuiltins.SyntaxError"builtins.StandardErrorj27rA
+msgbuiltins.SyntaxError.msg
+builtins.str"builtins.str*27ro
+linenobuiltins.SyntaxError.linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*27ro
+offsetbuiltins.SyntaxError.offsetD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*27rk
+textbuiltins.SyntaxError.textD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rs
+filenamebuiltins.SyntaxError.filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27=
 SyntaxWarningbuiltins.SyntaxWarning"builtins.Warningj27?
-SystemErrorbuiltins.SystemError"builtins.StandardErrorj27=
+SystemErrorbuiltins.SystemError"builtins.StandardErrorj27Å
 
-SystemExitbuiltins.SystemExit"builtins.BaseExceptionj27<
+SystemExitbuiltins.SystemExit"builtins.BaseExceptionj27rB
+codebuiltins.SystemExit.code
+builtins.int"builtins.int*27<
 TabErrorbuiltins.TabError"builtins.IndentationErrorj27;
 	TypeErrorbuiltins.TypeError"builtins.StandardErrorj27G
-UnboundLocalErrorbuiltins.UnboundLocalError"builtins.NameErrorj27£
+UnboundLocalErrorbuiltins.UnboundLocalError"builtins.NameErrorj27Ø
 UnicodeDecodeErrorbuiltins.UnicodeDecodeError"builtins.UnicodeError*‘
 __init__$builtins.UnicodeDecodeError.__init__"
 None*D
@@ -86,7 +117,17 @@ __encoding
 __end
 builtins.int"builtins.int*(
 __reason
-builtins.str"builtins.strz27j27´
+builtins.str"builtins.strz27j27rR
+encoding$builtins.UnicodeDecodeError.encoding
+builtins.str"builtins.str*27rN
+object"builtins.UnicodeDecodeError.object
+builtins.str"builtins.str*27rL
+start!builtins.UnicodeDecodeError.start
+builtins.int"builtins.int*27rH
+endbuiltins.UnicodeDecodeError.end
+builtins.int"builtins.int*27rN
+reason"builtins.UnicodeDecodeError.reason
+builtins.str"builtins.str*27ø
 UnicodeEncodeErrorbuiltins.UnicodeEncodeError"builtins.UnicodeError*‹
 __init__$builtins.UnicodeEncodeError.__init__"
 None*D
@@ -102,7 +143,17 @@ __encoding
 __end
 builtins.int"builtins.int*(
 __reason
-builtins.str"builtins.strz27j27>
+builtins.str"builtins.strz27j27rR
+encoding$builtins.UnicodeEncodeError.encoding
+builtins.str"builtins.str*27rV
+object"builtins.UnicodeEncodeError.object$
+builtins.unicode"builtins.unicode*27rL
+start!builtins.UnicodeEncodeError.start
+builtins.int"builtins.int*27rH
+endbuiltins.UnicodeEncodeError.end
+builtins.int"builtins.int*27rN
+reason"builtins.UnicodeEncodeError.reason
+builtins.str"builtins.str*27>
 UnicodeErrorbuiltins.UnicodeError"builtins.ValueErrorj27R
 UnicodeTranslateErrorbuiltins.UnicodeTranslateError"builtins.UnicodeErrorj27?
 UnicodeWarningbuiltins.UnicodeWarning"builtins.Warningj279

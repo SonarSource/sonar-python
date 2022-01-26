@@ -10,7 +10,7 @@
 timeout
 builtins.int"builtins.int *
 http_con_args
-Anyz27Xj27Î
+Anyz27Xj27µ
 HTTPResponsehttplib.HTTPResponse"builtins.object*≈
 __init__httplib.HTTPResponse.__init__"
 None*6
@@ -57,7 +57,32 @@ debuglevel
 None z27*;
 
 getheadershttplib.HTTPResponse.getheaders*
-selfz27j27É
+selfz27j27r*
+fphttplib.HTTPResponse.fp
+Any*27r:
+
+debuglevelhttplib.HTTPResponse.debuglevel
+Any*27r2
+stricthttplib.HTTPResponse.strict
+Any*27r,
+msghttplib.HTTPResponse.msg
+Any*27r4
+versionhttplib.HTTPResponse.version
+Any*27r2
+statushttplib.HTTPResponse.status
+Any*27r2
+reasonhttplib.HTTPResponse.reason
+Any*27r4
+chunkedhttplib.HTTPResponse.chunked
+Any*27r:
+
+chunk_lefthttplib.HTTPResponse.chunk_left
+Any*27r2
+lengthhttplib.HTTPResponse.length
+Any*27r:
+
+will_closehttplib.HTTPResponse.will_close
+Any*27É
 Mappingtyping.Mapping"typing.Iterable"typing.Container*–
 __getitem__typing.Mapping.__getitem__"
 typing._VT_co*e
@@ -225,7 +250,7 @@ typing._KT*Q
 typing.Sequence[typing._T_co]
 typing._T_co"typing.Sequence*%
 s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27˛
+builtins.slice"builtins.slice0:overload:abstractmethod@X"27Pj27â
 
 addinfourlurllib.addinfourl"urllib.addbase*¥
 __init__urllib.addinfourl.__init__"
@@ -245,8 +270,18 @@ addinfourlurllib.addinfourl"urllib.addbase*¥
 getcodeurllib.addinfourl.getcode*
 selfz27*0
 geturlurllib.addinfourl.geturl*
-selfz27j272
-URLErrorurllib2.URLError"builtins.IOErrorj27≈
+selfz27j27r1
+headersurllib.addinfourl.headers
+Any*27r)
+urlurllib.addinfourl.url
+Any*27r+
+codeurllib.addinfourl.code
+Any*27⁄
+URLErrorurllib2.URLError"builtins.IOErrorj27r•
+reasonurllib2.URLError.reason~
+*Union[builtins.str,builtins.BaseException]
+builtins.str"builtins.str0
+builtins.BaseException"builtins.BaseException*27´
 	HTTPErrorurllib2.HTTPError"urllib2.URLError"urllib.addinfourl*˚
 __init__urllib2.HTTPError.__init__"
 None*0
@@ -263,7 +298,13 @@ addinfourlurllib.addinfourl"urllib.addbase*¥
 builtins.str"builtins.str
 builtins.str"builtins.str"typing.Mapping*.
 fp&
-urllib.addinfourl"urllib.addinfourlz27j27¨
+urllib.addinfourl"urllib.addinfourlz27j27r@
+codeurllib2.HTTPError.code
+builtins.int"builtins.int*27r°
+headersurllib2.HTTPError.headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*27 
 Requesturllib2.Request"builtins.object*Ò
 __init__urllib2.Request.__init__"
 None*,
@@ -375,8 +416,33 @@ get_headerurllib2.Request.get_header"
 builtins.str"builtins.str
 None z27*:
 header_itemsurllib2.Request.header_items*
-selfz27j27ç
-
+selfz27j27r>
+hosturllib2.Request.host
+builtins.str"builtins.str*27r>
+porturllib2.Request.port
+builtins.str"builtins.str*27r>
+dataurllib2.Request.data
+builtins.str"builtins.str*27rù
+headersurllib2.Request.headersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*27rP
+unverifiableurllib2.Request.unverifiable
+builtins.bool"builtins.bool*27rf
+typeurllib2.Request.typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*27rZ
+origin_req_hosturllib2.Request.origin_req_host"
+builtins.object"builtins.object*27r±
+unredirected_hdrs!urllib2.Request.unredirected_hdrsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*27rr
+timeouturllib2.Request.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*27Ë
 OpenerDirectorurllib2.OpenerDirector"builtins.object*¥
 add_handler"urllib2.OpenerDirector.add_handler"
 None*:
@@ -416,7 +482,13 @@ $Union[builtins.str,builtins.unicode]
 builtins.str"builtins.str$
 builtins.unicode"builtins.unicode"urllib2._string*
 args
-Anyz27j27·
+Anyz27j27rÿ
+
+addheaders!urllib2.OpenerDirector.addheaders¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*27ì
 BaseHandlerurllib2.BaseHandler"builtins.object*Æ
 
 add_parenturllib2.BaseHandler.add_parent"
@@ -434,7 +506,11 @@ add_parenturllib2.BaseHandler.add_parent"
 self*
 urllib2.BaseHandler"urllib2.BaseHandler*
 other
-Anyz27j27≠
+Anyz27j27rT
+handler_order!urllib2.BaseHandler.handler_order
+builtins.int"builtins.int*27rZ
+parenturllib2.BaseHandler.parent0
+urllib2.OpenerDirector"urllib2.OpenerDirector*27≠
 HTTPErrorProcessorurllib2.HTTPErrorProcessor"urllib2.BaseHandler*b
 http_response(urllib2.HTTPErrorProcessor.http_response*
 self*
@@ -456,7 +532,7 @@ add_parenturllib2.BaseHandler.add_parent"
 hdrsw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27Ω
+builtins.str"builtins.str"typing.Mappingz27j27Õ
 HTTPRedirectHandlerurllib2.HTTPRedirectHandler"urllib2.BaseHandler*€
 redirect_request,urllib2.HTTPRedirectHandler.redirect_request"
 Any*D
@@ -539,7 +615,13 @@ add_parenturllib2.BaseHandler.add_parent"
 headersw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27«
+builtins.str"builtins.str"typing.Mappingz27j27rX
+max_repeats'urllib2.HTTPRedirectHandler.max_repeats
+builtins.int"builtins.int*27rb
+max_redirections,urllib2.HTTPRedirectHandler.max_redirections
+builtins.int"builtins.int*27rP
+inf_msg#urllib2.HTTPRedirectHandler.inf_msg
+builtins.str"builtins.str*27Ó
 ProxyHandlerurllib2.ProxyHandler"urllib2.BaseHandler*æ
 __init__urllib2.ProxyHandler.__init__"
 None*6
@@ -561,7 +643,11 @@ proxy_openurllib2.ProxyHandler.proxy_open"
 proxy
 Any*
 type
-Anyz27j27£
+Anyz27j27r§
+proxiesurllib2.ProxyHandler.proxiesw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*27£
 HTTPPasswordMgrurllib2.HTTPPasswordMgr"builtins.object*x
 __init__ urllib2.HTTPPasswordMgr.__init__"
 None*<
@@ -674,7 +760,7 @@ $Union[builtins.str,builtins.unicode]
 req"
 urllib2.Request"urllib2.Request*
 realm
-Anyz27j27∑
+Anyz27j27í
 HTTPBasicAuthHandlerurllib2.HTTPBasicAuthHandler" urllib2.AbstractBasicAuthHandler"urllib2.BaseHandler*≈
 http_error_401+urllib2.HTTPBasicAuthHandler.http_error_401"
 Any*F
@@ -691,7 +777,9 @@ $Union[builtins.str,builtins.unicode]
 headersw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27º
+builtins.str"builtins.str"typing.Mappingz27j27rY
+auth_header(urllib2.HTTPBasicAuthHandler.auth_header
+builtins.str"builtins.str*27ò
 ProxyBasicAuthHandlerurllib2.ProxyBasicAuthHandler" urllib2.AbstractBasicAuthHandler"urllib2.BaseHandler*»
 http_error_407,urllib2.ProxyBasicAuthHandler.http_error_407"
 Any*H
@@ -708,7 +796,9 @@ $Union[builtins.str,builtins.unicode]
 headersw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27í
+builtins.str"builtins.str"typing.Mappingz27j27rZ
+auth_header)urllib2.ProxyBasicAuthHandler.auth_header
+builtins.str"builtins.str*27í
 AbstractDigestAuthHandler!urllib2.AbstractDigestAuthHandler"builtins.object*ã
 __init__*urllib2.AbstractDigestAuthHandler.__init__"
 None*P
@@ -803,7 +893,7 @@ FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
 chalw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27Ω
+builtins.str"builtins.str"typing.Mappingz27j27˘
 HTTPDigestAuthHandlerurllib2.HTTPDigestAuthHandler"urllib2.BaseHandler"!urllib2.AbstractDigestAuthHandler*»
 http_error_401,urllib2.HTTPDigestAuthHandler.http_error_401"
 Any*H
@@ -820,7 +910,11 @@ FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
 headersw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27¬
+builtins.str"builtins.str"typing.Mappingz27j27rZ
+auth_header)urllib2.HTTPDigestAuthHandler.auth_header
+builtins.str"builtins.str*27r^
+handler_order+urllib2.HTTPDigestAuthHandler.handler_order
+builtins.int"builtins.int*27Ä
 ProxyDigestAuthHandlerurllib2.ProxyDigestAuthHandler"urllib2.BaseHandler"!urllib2.AbstractDigestAuthHandler*À
 http_error_407-urllib2.ProxyDigestAuthHandler.http_error_407"
 Any*J
@@ -837,7 +931,11 @@ FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
 headersw
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz27j27˛
+builtins.str"builtins.str"typing.Mappingz27j27r[
+auth_header*urllib2.ProxyDigestAuthHandler.auth_header
+builtins.str"builtins.str*27r_
+handler_order,urllib2.ProxyDigestAuthHandler.handler_order
+builtins.int"builtins.int*27˛
 AbstractHTTPHandlerurllib2.AbstractHTTPHandler"urllib2.BaseHandler*¥
 __init__$urllib2.AbstractHTTPHandler.__init__"
 None*D

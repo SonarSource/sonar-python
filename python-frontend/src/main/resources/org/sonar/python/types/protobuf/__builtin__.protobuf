@@ -23,7 +23,7 @@
 ,_typeshed.SupportsWrite[_typeshed._T_contra]
 _typeshed._T_contra"_typeshed.SupportsWrite*
 __s
-_typeshed._T_contraz27PXj27Ê
+_typeshed._T_contraz27PXj27ñ
 ABCMetaabc.ABCMeta"builtins.type*À
 __init__abc.ABCMeta.__init__"
 None*$
@@ -65,8 +65,25 @@
 abc.ABCMeta"abc.ABCMeta*$
 subclass
 	Type[Any]
-Anyz27j27
-mod_ast.mod"_ast.ASTj27Ç
+Anyz27j27r
+__abstractmethods__abc.ABCMeta.__abstractmethods__T
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*27rb
+
+_abc_cacheabc.ABCMeta._abc_cache8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27rd
+_abc_invalidation_counter%abc.ABCMeta._abc_invalidation_counter
+builtins.int"builtins.int*27rt
+_abc_negative_cacheabc.ABCMeta._abc_negative_cache8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27rh
+_abc_negative_cache_version'abc.ABCMeta._abc_negative_cache_version
+builtins.int"builtins.int*27rh
+_abc_registryabc.ABCMeta._abc_registry8
+_weakrefset.WeakSet[Any]
+Any"_weakrefset.WeakSet*27
+mod_ast.mod"_ast.ASTj27±
 CodeTypetypes.CodeType"builtins.object*•
 __init__types.CodeType.__init__"
 None**
@@ -105,7 +122,41 @@ codestring
 builtins.str"builtins.str"builtins.tuple *\
 cellvarsL
 builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple z27j27Ú
+builtins.str"builtins.str"builtins.tuple z27j27rK
+co_argcounttypes.CodeType.co_argcount
+builtins.int"builtins.int*27r{
+co_cellvarstypes.CodeType.co_cellvarsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27rC
+co_codetypes.CodeType.co_code
+builtins.str"builtins.str*27rY
+	co_conststypes.CodeType.co_consts.
+builtins.tuple[Any]
+Any"builtins.tuple*27rK
+co_filenametypes.CodeType.co_filename
+builtins.str"builtins.str*27rQ
+co_firstlinenotypes.CodeType.co_firstlineno
+builtins.int"builtins.int*27rE
+co_flagstypes.CodeType.co_flags
+builtins.int"builtins.int*27r{
+co_freevarstypes.CodeType.co_freevarsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27rG
+	co_lnotabtypes.CodeType.co_lnotab
+builtins.str"builtins.str*27rC
+co_nametypes.CodeType.co_name
+builtins.str"builtins.str*27ru
+co_namestypes.CodeType.co_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27rI
+
+co_nlocalstypes.CodeType.co_nlocals
+builtins.int"builtins.int*27rM
+co_stacksizetypes.CodeType.co_stacksize
+builtins.int"builtins.int*27r{
+co_varnamestypes.CodeType.co_varnamesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*27Ú
 AbstractSettyping.AbstractSet"typing.Iterable"typing.Container*â
 __contains__typing.AbstractSet.__contains__"
 builtins.bool"builtins.bool*P
@@ -804,7 +855,7 @@ Reversibletyping.Reversible"builtins.object*Ú
 __int__typing.SupportsInt.__int__"
 builtins.int"builtins.int*0
 self(
-typing.SupportsInt"typing.SupportsInt0:abstractmethod@z278@Xbabc.ABCMetaj27
+typing.SupportsInt"typing.SupportsInt0:abstractmethod@z278@Xbabc.ABCMetaj27¡
 TypeVartyping.TypeVar"builtins.object*Þ
 __init__typing.TypeVar.__init__"
 None**
@@ -823,7 +874,20 @@ Reversibletyping.Reversible"builtins.object*Ú
 	covariant
 builtins.bool"builtins.bool *3
 contravariant
-builtins.bool"builtins.bool z27j27Ü
+builtins.bool"builtins.bool z27j27rf
+	__bound__typing.TypeVar.__bound__;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None*27rz
+__constraints__typing.TypeVar.__constraints__C
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*27rQ
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.bool*27rY
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.bool*27Ü
 
 ValuesViewtyping.ValuesView"typing.MappingView"typing.Iterable*ú
 __init__typing.ValuesView.__init__"
@@ -857,7 +921,7 @@ ValuesViewtyping.ValuesView"typing.MappingView"typing.Iterable*ú
 	__trunc__$__builtin__._SupportsTrunc.__trunc__""
 __builtin__.int"__builtin__.int*B
 self8
-__builtin__._SupportsTrunc"__builtin__._SupportsTruncz27Xj27Ù
+__builtin__._SupportsTrunc"__builtin__._SupportsTruncz27Xj27¡
 object__builtin__.object"builtins.object*i
 __init____builtin__.object.__init__"
 None*2
@@ -953,7 +1017,19 @@ __reduce____builtin__.object.__reduce__"‚
 __builtin__.object"__builtin__.object*P
 __typeF
 Type[__builtin__.object](
-__builtin__.object"__builtin__.object0:__class__.setter"27j27ý
+__builtin__.object"__builtin__.object0:__class__.setter"27j27r„
+__dict____builtin__.object.__dict__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*27rï
+	__slots____builtin__.object.__slots__¿
+9Union[builtins.unicode,typing.Iterable[builtins.unicode]]$
+builtins.unicode"builtins.unicodeZ
+!typing.Iterable[builtins.unicode]$
+builtins.unicode"builtins.unicode"typing.Iterable*27rM
+
+__module____builtin__.object.__module__
+builtins.str"builtins.str*27ý
 staticmethod__builtin__.staticmethod"__builtin__.object*Ï
 __init__!__builtin__.staticmethod.__init__"
 None*>
@@ -982,7 +1058,10 @@ __reduce____builtin__.object.__reduce__"‚
  Union[Type[__builtin__._T],None],
 Type[__builtin__._T]
 __builtin__._T
-None z27j27ô
+None z27j27r~
+__func__!__builtin__.staticmethod.__func__K
+CallableType[builtins.function]&
+builtins.function"builtins.function*27ó
 classmethod__builtin__.classmethod"__builtin__.object*Ì
 __init__ __builtin__.classmethod.__init__"
 None*<
@@ -1011,7 +1090,10 @@ __reduce____builtin__.object.__reduce__"‚
  Union[Type[__builtin__._T],None],
 Type[__builtin__._T]
 __builtin__._T
-None z27j27Ú
+None z27j27r}
+__func__ __builtin__.classmethod.__func__K
+CallableType[builtins.function]&
+builtins.function"builtins.function*27¨
 type__builtin__.type"__builtin__.object*ˆ
 __call____builtin__.type.__call__"
 Any*.
@@ -1084,7 +1166,32 @@ __reduce____builtin__.object.__reduce__"‚
 	namespace`
 "builtins.dict[__builtin__.str,Any]"
 __builtin__.str"__builtin__.str
-Any"builtins.dict0:overloadX"27j27÷
+Any"builtins.dict0:overloadX"27j27rO
+__base____builtin__.type.__base__$
+__builtin__.type"__builtin__.type*27r…
+	__bases____builtin__.type.__bases__X
+ builtins.tuple[__builtin__.type]$
+__builtin__.type"__builtin__.type"builtins.tuple*27rQ
+__basicsize____builtin__.type.__basicsize__
+builtins.int"builtins.int*27r‚
+__dict____builtin__.type.__dict__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*27rS
+__dictoffset____builtin__.type.__dictoffset__
+builtins.int"builtins.int*27rI
+	__flags____builtin__.type.__flags__
+builtins.int"builtins.int*27rO
+__itemsize____builtin__.type.__itemsize__
+builtins.int"builtins.int*27rK
+
+__module____builtin__.type.__module__
+builtins.str"builtins.str*27r
+__mro____builtin__.type.__mro__X
+ builtins.tuple[__builtin__.type]$
+__builtin__.type"__builtin__.type"builtins.tuple*27rY
+__weakrefoffset__"__builtin__.type.__weakrefoffset__
+builtins.int"builtins.int*27÷
 super__builtin__.super"__builtin__.object2Â
 __init____builtin__.super.__init__’
 __init____builtin__.super.__init__"
@@ -2803,7 +2910,7 @@ BTuple[__builtin__.unicode,__builtin__.unicode,__builtin__.unicode]*
 self"
 __builtin__.str"__builtin__.str*5
 chars*
-__builtin__.unicode"__builtin__.unicode0:overloadX"27j27Çx
+__builtin__.unicode"__builtin__.unicode0:overloadX"27j27y
 	bytearray__builtin__.bytearray"typing.MutableSequence"typing.ByteString*œ
 
 capitalize __builtin__.bytearray.capitalize".
@@ -3287,7 +3394,9 @@ startswith __builtin__.bytearray.startswith"$
 7Union[typing.Iterable[__builtin__.int],__builtin__.str]W
  typing.Iterable[__builtin__.int]"
 __builtin__.int"__builtin__.int"typing.Iterable"
-__builtin__.str"__builtin__.str0:overloadX"27j27Ô
+__builtin__.str"__builtin__.str0:overloadX"27j27r8
+__hash____builtin__.bytearray.__hash__
+None*27ã
 
 memoryview__builtin__.memoryview"typing.Sized"typing.Container*Ö
 __init____builtin__.memoryview.__init__"
@@ -3357,7 +3466,31 @@ eUnion[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap
 i"
 __builtin__.int"__builtin__.int*'
 o"
-__builtin__.int"__builtin__.int0:overloadX"27j27Í
+__builtin__.int"__builtin__.int0:overloadX"27j27rO
+format__builtin__.memoryview.format"
+__builtin__.str"__builtin__.str*27rS
+itemsize__builtin__.memoryview.itemsize"
+__builtin__.int"__builtin__.int*27r¼
+shape__builtin__.memoryview.shape
++Union[builtins.tuple[__builtin__.int],None]U
+builtins.tuple[__builtin__.int]"
+__builtin__.int"__builtin__.int"builtins.tuple
+None*27rÀ
+strides__builtin__.memoryview.strides
++Union[builtins.tuple[__builtin__.int],None]U
+builtins.tuple[__builtin__.int]"
+__builtin__.int"__builtin__.int"builtins.tuple
+None*27rÆ
+
+suboffsets!__builtin__.memoryview.suboffsets
++Union[builtins.tuple[__builtin__.int],None]U
+builtins.tuple[__builtin__.int]"
+__builtin__.int"__builtin__.int"builtins.tuple
+None*27rO
+readonly__builtin__.memoryview.readonly
+builtins.bool"builtins.bool*27rK
+ndim__builtin__.memoryview.ndim"
+__builtin__.int"__builtin__.int*27Í
 bool__builtin__.bool"__builtin__.int*¥
 __new____builtin__.bool.__new__"
 __builtin__._T*5
@@ -3448,7 +3581,7 @@ eUnion[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap
 self$
 __builtin__.bool"__builtin__.bool*'
 x"
-__builtin__.int"__builtin__.int0:overloadX"278j27Ç
+__builtin__.int"__builtin__.int0:overloadX"278j27†
 slice__builtin__.slice"__builtin__.object*°
 indices__builtin__.slice.indices"¦
 6Tuple[__builtin__.int,__builtin__.int,__builtin__.int]"
@@ -3475,7 +3608,15 @@ eUnion[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap
 stop
 Any*
 step
-Any 0:overloadX"27j27 
+Any 0:overloadX"27j27r-
+start__builtin__.slice.start
+Any*27r+
+step__builtin__.slice.step
+Any*27r+
+stop__builtin__.slice.stop
+Any*27r4
+__hash____builtin__.slice.__hash__
+None*27 
 tuple__builtin__.tuple"typing.Sequence*Ñ
 __new____builtin__.tuple.__new__"
 __builtin__._T*5
@@ -3599,8 +3740,13 @@ $__builtin__.tuple[__builtin__._T_co]
 __builtin__._T_co"__builtin__.tuple*3
 x.
 builtins.tuple[Any]
-Any"builtins.tuple0:overloadX"27Pj275
-function__builtin__.function"builtins.objectj27·9
+Any"builtins.tuple0:overloadX"27Pj27Ý
+function__builtin__.function"builtins.objectj27rU
+
+__module____builtin__.function.__module__"
+__builtin__.str"__builtin__.str*27rO
+__code____builtin__.function.__code__ 
+types.CodeType"types.CodeType*27ì9
 list__builtin__.list"typing.MutableSequence*£
 append__builtin__.list.append"
 None*R
@@ -3859,7 +4005,9 @@ __iterableF
 __builtin__.slice"__builtin__.slice*K
 oF
 typing.Iterable[__builtin__._T]
-__builtin__._T"typing.Iterable0:overloadX"27Pj27¹7
+__builtin__._T"typing.Iterable0:overloadX"27Pj27r3
+__hash____builtin__.list.__hash__
+None*27î7
 dict__builtin__.dict"typing.MutableMapping*
 __new____builtin__.dict.__new__"
 __builtin__._T1*7
@@ -4097,7 +4245,9 @@ __iterableF
 typing.Iterable[__builtin__._T]
 __builtin__._T"typing.Iterable*
 __value
-__builtin__._S0:classmethod:overloadX"27Pj27¥G
+__builtin__._S0:classmethod:overloadX"27Pj27r3
+__hash____builtin__.dict.__hash__
+None*27ÙG
 set__builtin__.set"typing.MutableSet*Ü
 __init____builtin__.set.__init__"
 None*P
@@ -4401,7 +4551,9 @@ $Union[__builtin__._T,__builtin__._S]
 .typing.AbstractSet[Union[__builtin__._T,None]]<
 Union[__builtin__._T,None]
 __builtin__._T
-None"typing.AbstractSet0:overloadX"27Pj27•0
+None"typing.AbstractSet0:overloadX"27Pj27r2
+__hash____builtin__.set.__hash__
+None*27•0
 	frozenset__builtin__.frozenset"typing.AbstractSet*ú
 __init____builtin__.frozenset.__init__"
 None*b
@@ -4722,8 +4874,10 @@ __delete____builtin__.property.__delete__"
 fdel__builtin__.property.fdel"
 None*6
 self,
-__builtin__.property"__builtin__.propertyz27j27K
-_NotImplementedType__builtin__._NotImplementedType"builtins.objectj27»
+__builtin__.property"__builtin__.propertyz27j27¦
+_NotImplementedType__builtin__._NotImplementedType"builtins.objectj27rY
+__call__(__builtin__._NotImplementedType.__call__
+UnboundType[NotImplemented]*27»
 _SupportsPow2__builtin__._SupportsPow2"builtins.object*õ
 __pow__!__builtin__._SupportsPow2.__pow__"
 __builtin__._T_co*Œ
@@ -4794,7 +4948,7 @@ J__builtin__._SupportsPow3[__builtin__._E,__builtin__._M,__builtin__._T_co]
 self(
 __builtin__.buffer"__builtin__.buffer*'
 x"
-__builtin__.int"__builtin__.intz27j27à
+__builtin__.int"__builtin__.intz27j27÷
 BaseException__builtin__.BaseException"__builtin__.object*²
 __init__"__builtin__.BaseException.__init__"
 None*@
@@ -4824,15 +4978,28 @@ J__builtin__._SupportsPow3[__builtin__._E,__builtin__._M,__builtin__._T_co]
 start"
 __builtin__.int"__builtin__.int*,
 stop"
-__builtin__.int"__builtin__.intz27j27I
+__builtin__.int"__builtin__.intz27j27rZ
+args__builtin__.BaseException.args.
+builtins.tuple[Any]
+Any"builtins.tuple*27r9
+message!__builtin__.BaseException.message
+Any*27I
 GeneratorExit__builtin__.GeneratorExit"__builtin__.BaseExceptionj27Q
-KeyboardInterrupt__builtin__.KeyboardInterrupt"__builtin__.BaseExceptionj27C
+KeyboardInterrupt__builtin__.KeyboardInterrupt"__builtin__.BaseExceptionj27
 
-SystemExit__builtin__.SystemExit"__builtin__.BaseExceptionj27A
+SystemExit__builtin__.SystemExit"__builtin__.BaseExceptionj27rK
+code__builtin__.SystemExit.code"
+__builtin__.int"__builtin__.int*27A
 	Exception__builtin__.Exception"__builtin__.BaseExceptionj27E
 StopIteration__builtin__.StopIteration"__builtin__.Exceptionj27E
-StandardError__builtin__.StandardError"__builtin__.Exceptionj27O
-EnvironmentError__builtin__.EnvironmentError"__builtin__.StandardErrorj27@
+StandardError__builtin__.StandardError"__builtin__.Exceptionj27Ú
+EnvironmentError__builtin__.EnvironmentError"__builtin__.StandardErrorj27rS
+errno"__builtin__.EnvironmentError.errno"
+__builtin__.int"__builtin__.int*27rY
+strerror%__builtin__.EnvironmentError.strerror"
+__builtin__.str"__builtin__.str*27rY
+filename%__builtin__.EnvironmentError.filename"
+__builtin__.str"__builtin__.str*27@
 OSError__builtin__.OSError"__builtin__.EnvironmentErrorj27@
 IOError__builtin__.IOError"__builtin__.EnvironmentErrorj27M
 ArithmeticError__builtin__.ArithmeticError"__builtin__.StandardErrorj27K
@@ -4845,8 +5012,26 @@ SystemExit__builtin__.SystemExit"__builtin__.BaseExceptionj27A
 MemoryError__builtin__.MemoryError"__builtin__.StandardErrorj27A
 	NameError__builtin__.NameError"__builtin__.StandardErrorj27K
 ReferenceError__builtin__.ReferenceError"__builtin__.StandardErrorj27G
-RuntimeError__builtin__.RuntimeError"__builtin__.StandardErrorj27E
-SyntaxError__builtin__.SyntaxError"__builtin__.StandardErrorj27E
+RuntimeError__builtin__.RuntimeError"__builtin__.StandardErrorj27…
+SyntaxError__builtin__.SyntaxError"__builtin__.StandardErrorj27rJ
+msg__builtin__.SyntaxError.msg"
+__builtin__.str"__builtin__.str*27r{
+lineno__builtin__.SyntaxError.linenoM
+Union[__builtin__.int,None]"
+__builtin__.int"__builtin__.int
+None*27r{
+offset__builtin__.SyntaxError.offsetM
+Union[__builtin__.int,None]"
+__builtin__.int"__builtin__.int
+None*27rw
+text__builtin__.SyntaxError.textM
+Union[__builtin__.str,None]"
+__builtin__.str"__builtin__.str
+None*27r
+filename __builtin__.SyntaxError.filenameM
+Union[__builtin__.str,None]"
+__builtin__.str"__builtin__.str
+None*27E
 SystemError__builtin__.SystemError"__builtin__.StandardErrorj27A
 	TypeError__builtin__.TypeError"__builtin__.StandardErrorj27C
 
@@ -4857,12 +5042,14 @@ ValueError__builtin__.ValueError"__builtin__.StandardErrorj27U
 
 IndexError__builtin__.IndexError"__builtin__.LookupErrorj27=
 KeyError__builtin__.KeyError"__builtin__.LookupErrorj27M
-UnboundLocalError__builtin__.UnboundLocalError"__builtin__.NameErrorj27A
-WindowsError__builtin__.WindowsError"__builtin__.OSErrorj27T
+UnboundLocalError__builtin__.UnboundLocalError"__builtin__.NameErrorj27˜
+WindowsError__builtin__.WindowsError"__builtin__.OSErrorj27rU
+winerror!__builtin__.WindowsError.winerror"
+__builtin__.int"__builtin__.int*27T
 NotImplementedError__builtin__.NotImplementedError"__builtin__.RuntimeErrorj27M
 IndentationError__builtin__.IndentationError"__builtin__.SyntaxErrorj27B
 TabError__builtin__.TabError"__builtin__.IndentationErrorj27D
-UnicodeError__builtin__.UnicodeError"__builtin__.ValueErrorj27Ð
+UnicodeError__builtin__.UnicodeError"__builtin__.ValueErrorj27‰
 UnicodeDecodeError__builtin__.UnicodeDecodeError"__builtin__.UnicodeError*û
 __init__'__builtin__.UnicodeDecodeError.__init__"
 None*J
@@ -4878,7 +5065,17 @@ __encoding"
 __end"
 __builtin__.int"__builtin__.int*.
 __reason"
-__builtin__.str"__builtin__.strz27j27Ò
+__builtin__.str"__builtin__.strz27j27r[
+encoding'__builtin__.UnicodeDecodeError.encoding"
+__builtin__.str"__builtin__.str*27rW
+object%__builtin__.UnicodeDecodeError.object"
+__builtin__.str"__builtin__.str*27rU
+start$__builtin__.UnicodeDecodeError.start"
+__builtin__.int"__builtin__.int*27rQ
+end"__builtin__.UnicodeDecodeError.end"
+__builtin__.int"__builtin__.int*27rW
+reason%__builtin__.UnicodeDecodeError.reason"
+__builtin__.str"__builtin__.str*27
 UnicodeEncodeError__builtin__.UnicodeEncodeError"__builtin__.UnicodeError*ý
 __init__'__builtin__.UnicodeEncodeError.__init__"
 None*J
@@ -4894,7 +5091,17 @@ __encoding"
 __end"
 __builtin__.int"__builtin__.int*.
 __reason"
-__builtin__.str"__builtin__.strz27j27X
+__builtin__.str"__builtin__.strz27j27r[
+encoding'__builtin__.UnicodeEncodeError.encoding"
+__builtin__.str"__builtin__.str*27rY
+object%__builtin__.UnicodeEncodeError.object$
+builtins.unicode"builtins.unicode*27rU
+start$__builtin__.UnicodeEncodeError.start"
+__builtin__.int"__builtin__.int*27rQ
+end"__builtin__.UnicodeEncodeError.end"
+__builtin__.int"__builtin__.int*27rW
+reason%__builtin__.UnicodeEncodeError.reason"
+__builtin__.str"__builtin__.str*27X
 UnicodeTranslateError!__builtin__.UnicodeTranslateError"__builtin__.UnicodeErrorj279
 Warning__builtin__.Warning"__builtin__.Exceptionj27?
 UserWarning__builtin__.UserWarning"__builtin__.Warningj27M

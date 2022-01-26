@@ -4,7 +4,7 @@
 	__enter__typing.BinaryIO.__enter__""
 typing.BinaryIO"typing.BinaryIO**
 self"
-typing.BinaryIO"typing.BinaryIO0:abstractmethod@z27j27€
+typing.BinaryIO"typing.BinaryIO0:abstractmethod@z27j27√
 
 BaseServerSocketServer.BaseServer"builtins.object*˚
 __init__ SocketServer.BaseServer.__init__"
@@ -97,7 +97,28 @@ BaseServerSocketServer.BaseServer"builtins.object*˚
 client_address`
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.intz27j27Õ
+builtins.int"builtins.intz27j27rZ
+address_family&SocketServer.BaseServer.address_family
+builtins.int"builtins.int*27rì
+RequestHandlerClass+SocketServer.BaseServer.RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*27rû
+server_address&SocketServer.BaseServer.server_address`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*27r5
+socketSocketServer.BaseServer.socket
+Any*27rf
+allow_reuse_address+SocketServer.BaseServer.allow_reuse_address
+builtins.bool"builtins.bool*27rb
+request_queue_size*SocketServer.BaseServer.request_queue_size
+builtins.int"builtins.int*27rT
+socket_type#SocketServer.BaseServer.socket_type
+builtins.int"builtins.int*27rz
+timeoutSocketServer.BaseServer.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*27Õ
 	TCPServerSocketServer.TCPServer"SocketServer.BaseServer*ä
 __init__SocketServer.TCPServer.__init__"
 None*:
@@ -153,7 +174,7 @@ $Union[builtins.unicode,builtins.str]$
 CallableType[builtins.function]&
 builtins.function"builtins.function*7
 bind_and_activate
-builtins.bool"builtins.bool z27j27å
+builtins.bool"builtins.bool z27j27´
 ForkingMixInSocketServer.ForkingMixIn"builtins.object*é
 collect_children*SocketServer.ForkingMixIn.collect_children"
 None*@
@@ -172,7 +193,18 @@ $Union[builtins.unicode,builtins.str]$
 client_address`
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.intz27j27º
+builtins.int"builtins.intz27j27r|
+timeout!SocketServer.ForkingMixIn.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*27rƒ
+active_children)SocketServer.ForkingMixIn.active_childrenÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*27rX
+max_children&SocketServer.ForkingMixIn.max_children
+builtins.int"builtins.int*27û
 ThreadingMixInSocketServer.ThreadingMixIn"builtins.object*¡
 process_request_thread2SocketServer.ThreadingMixIn.process_request_thread"
 None*D
@@ -193,13 +225,15 @@ $Union[builtins.unicode,builtins.str]$
 client_address`
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.intz27j27h
+builtins.int"builtins.intz27j27r`
+daemon_threads*SocketServer.ThreadingMixIn.daemon_threads
+builtins.bool"builtins.bool*27h
 ForkingTCPServerSocketServer.ForkingTCPServer"SocketServer.ForkingMixIn"SocketServer.TCPServerj27h
 ForkingUDPServerSocketServer.ForkingUDPServer"SocketServer.ForkingMixIn"SocketServer.UDPServerj27n
 ThreadingTCPServerSocketServer.ThreadingTCPServer"SocketServer.ThreadingMixIn"SocketServer.TCPServerj27n
 ThreadingUDPServerSocketServer.ThreadingUDPServer"SocketServer.ThreadingMixIn"SocketServer.UDPServerj27É
 ThreadingUnixStreamServer&SocketServer.ThreadingUnixStreamServer"SocketServer.ThreadingMixIn"SocketServer.UnixStreamServerj27â
-ThreadingUnixDatagramServer(SocketServer.ThreadingUnixDatagramServer"SocketServer.ThreadingMixIn"SocketServer.UnixDatagramServerj27˚
+ThreadingUnixDatagramServer(SocketServer.ThreadingUnixDatagramServer"SocketServer.ThreadingMixIn"SocketServer.UnixDatagramServerj27ı
 BaseRequestHandlerSocketServer.BaseRequestHandler"builtins.object*É
 __init__(SocketServer.BaseRequestHandler.__init__"
 None*L
@@ -222,9 +256,40 @@ $Union[builtins.unicode,builtins.str]$
 finish&SocketServer.BaseRequestHandler.finish"
 None*L
 selfB
-SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandlerz27j27^
-StreamRequestHandler!SocketServer.StreamRequestHandler"SocketServer.BaseRequestHandlerj27b
-DatagramRequestHandler#SocketServer.DatagramRequestHandler"SocketServer.BaseRequestHandlerj27*
+SocketServer.BaseRequestHandler"SocketServer.BaseRequestHandlerz27j27r?
+request'SocketServer.BaseRequestHandler.request
+Any*27rM
+client_address.SocketServer.BaseRequestHandler.client_address
+Any*27rh
+server&SocketServer.BaseRequestHandler.server2
+SocketServer.BaseServer"SocketServer.BaseServer*27ê
+StreamRequestHandler!SocketServer.StreamRequestHandler"SocketServer.BaseRequestHandlerj27rX
+rbufsize*SocketServer.StreamRequestHandler.rbufsize
+builtins.int"builtins.int*27rX
+wbufsize*SocketServer.StreamRequestHandler.wbufsize
+builtins.int"builtins.int*27rÑ
+timeout)SocketServer.StreamRequestHandler.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*27rx
+disable_nagle_algorithm9SocketServer.StreamRequestHandler.disable_nagle_algorithm
+builtins.bool"builtins.bool*27rG
+
+connection,SocketServer.StreamRequestHandler.connection
+Any*27rX
+rfile'SocketServer.StreamRequestHandler.rfile"
+typing.BinaryIO"typing.BinaryIO*27rX
+wfile'SocketServer.StreamRequestHandler.wfile"
+typing.BinaryIO"typing.BinaryIO*27†
+DatagramRequestHandler#SocketServer.DatagramRequestHandler"SocketServer.BaseRequestHandlerj27rA
+packet*SocketServer.DatagramRequestHandler.packet
+Any*27rA
+socket*SocketServer.DatagramRequestHandler.socket
+Any*27rZ
+rfile)SocketServer.DatagramRequestHandler.rfile"
+typing.BinaryIO"typing.BinaryIO*27rZ
+wfile)SocketServer.DatagramRequestHandler.wfile"
+typing.BinaryIO"typing.BinaryIO*27*
 syssys *27*,
 
 SocketTypesocket.SocketType
