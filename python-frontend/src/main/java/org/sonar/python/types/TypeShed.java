@@ -58,7 +58,6 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.STR;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
-import static org.sonar.python.types.TypeShedThirdParties.commonSymbols;
 import static org.sonar.python.types.TypeShedThirdParties.getModuleSymbols;
 
 public class TypeShed {
@@ -73,6 +72,7 @@ public class TypeShed {
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
   private static final String CUSTOM_THIRD_PARTY = "custom/";
   private static final String PROTOBUF = "protobuf/";
+  private static final String PROTOBUF_THIRD_PARTY = "protobuf/stubs/";
   private static final String BUILTINS_FQN = "builtins";
   private static final String BUILTINS_PREFIX = BUILTINS_FQN + ".";
   // Those fundamentals builtins symbols need not to be ambiguous for the frontend to work properly
@@ -96,7 +96,7 @@ public class TypeShed {
   public static Map<String, Symbol> builtinSymbols() {
     if ((TypeShed.builtins == null)) {
       supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
-      Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN);
+      Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN, false);
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
@@ -271,16 +271,13 @@ public class TypeShed {
       modulesInProgress.remove(moduleName);
       return customSymbols;
     }
-    Map<String, Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName);
+    Map<String, Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName, false);
     if (!symbolsFromProtobuf.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return symbolsFromProtobuf;
     }
-    Map<String, Symbol> thirdPartySymbols = getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols);
-    if (thirdPartySymbols.isEmpty()) {
-      thirdPartySymbols = commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
-        getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols), moduleName);
-    }
+
+    Map<String, Symbol> thirdPartySymbols = getSymbolsFromProtobufModule(moduleName, true);
     modulesInProgress.remove(moduleName);
     return thirdPartySymbols;
   }
@@ -311,8 +308,9 @@ public class TypeShed {
     return false;
   }
 
-  private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName) {
-    InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
+  private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName, boolean isThirdParty) {
+    String protobufDir = isThirdParty ? PROTOBUF_THIRD_PARTY : PROTOBUF;
+    InputStream resource = TypeShed.class.getResourceAsStream(protobufDir + moduleName + ".protobuf");
     if (resource == null) {
       return Collections.emptyMap();
     }

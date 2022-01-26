@@ -82,7 +82,7 @@ public class FullyQualifiedNameTest {
       "from flask import redirect as flask_redirect",
       "flask_redirect()"
     );
-    assertNameAndQualifiedName(tree, "flask_redirect", "werkzeug.utils.redirect");
+    assertNameAndQualifiedName(tree, "flask_redirect", "flask.redirect");
   }
 
   @Test
