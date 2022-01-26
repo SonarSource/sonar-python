@@ -81,6 +81,7 @@ message ClassSymbol {
   bool is_protocol = 11;
   optional string metaclass_name = 12;
   repeated string valid_for = 13;
+  repeated VarSymbol attributes = 14;
 }
 
 message ModuleSymbol {

@@ -103,3 +103,12 @@ else:
 common_var: bool
 
 alias = common_overloaded_function
+
+class ClassWithFields:
+    common_field: str
+    if sys.version_info >= (3, 8):
+        field_unique_38: int
+        field_multiple_defs: str
+    else:
+        field_unique_36: int
+        field_multiple_defs: int

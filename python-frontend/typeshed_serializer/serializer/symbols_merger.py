@@ -74,8 +74,8 @@ def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict
     return merged_modules
 
 
-def merge_vars(current_module, handled_vars, version):
-    for var in current_module.vars:
+def merge_vars(module_or_class, handled_vars, version):
+    for var in module_or_class.vars:
         if var.fullname not in handled_vars:
             # doesn't exist: we add it
             handled_vars[var.fullname] = [MergedVarSymbol(var, [version])]
@@ -95,10 +95,12 @@ def merge_classes(current_module, handled_classes, version):
         if mod_class.fullname not in handled_classes:
             functions = {}
             overloaded_functions = {}
+            variables = {}
             merge_functions(mod_class, functions, version)
             merge_overloaded_functions(mod_class, overloaded_functions, version)
+            merge_vars(mod_class, variables, version)
             handled_classes[mod_class.fullname] = [MergedClassSymbol(mod_class, functions,
-                                                                     overloaded_functions, [version])]
+                                                                     overloaded_functions, variables, [version])]
         else:
             # merge
             compared = handled_classes[mod_class.fullname]
@@ -106,16 +108,20 @@ def merge_classes(current_module, handled_classes, version):
                 if elem.class_symbol == mod_class:
                     functions = elem.methods
                     overloaded_functions = elem.overloaded_methods
+                    variables = elem.vars
                     merge_functions(mod_class, functions, version)
                     merge_overloaded_functions(mod_class, overloaded_functions, version)
+                    merge_vars(mod_class, variables, version)
                     elem.valid_for.append(version)
                     break
             else:
                 functions = {}
                 overloaded_functions = {}
+                variables = {}
                 merge_functions(mod_class, functions, version)
                 merge_overloaded_functions(mod_class, overloaded_functions, version)
-                compared.append(MergedClassSymbol(mod_class, functions, overloaded_functions, [version]))
+                merge_vars(mod_class, variables, version)
+                compared.append(MergedClassSymbol(mod_class, functions, overloaded_functions, variables, [version]))
 
 
 def merge_overloaded_functions(module_or_class, handled_overloaded_funcs, version):
