@@ -1,5 +1,6 @@
 import sys
 from typing import overload
+from sys import flags as my_flags
 
 if sys.version_info >= (3, 8):
     class SomeClassUnique38:
