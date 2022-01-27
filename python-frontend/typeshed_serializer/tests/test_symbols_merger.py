@@ -205,7 +205,7 @@ def test_actual_module_merge(fake_module_36_38):
     assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
 
     all_vars = merged_fakemodule_module.vars
-    assert len(all_vars) == 6
+    assert len(all_vars) == 7
     common_var = all_vars['fakemodule.common_var']
     assert len(common_var) == 1
     assert common_var[0].valid_for == ["36", "38"]
@@ -327,3 +327,13 @@ def assert_abc_merged_module(merged_modules, expected_valid_for):
         assert f[0].valid_for == expected_valid_for
     assert len(abc_merged_symbol.overloaded_functions) == 0
 
+
+def test_alias(fake_module_36_38):
+    fake_module_36 = symbols.ModuleSymbol(fake_module_36_38[0])
+    fake_module_38 = symbols.ModuleSymbol(fake_module_36_38[1])
+    merged_modules = symbols_merger.merge_modules({"fakemodule"}, {"36": {"fakemodule": fake_module_36},
+                                                                   "38": {"fakemodule": fake_module_38}})
+    merged_fakemodule_module = merged_modules['fakemodule']
+    sys_flags = merged_fakemodule_module.vars["sys.flags"][0].var_symbol
+    assert sys_flags is not None
+    assert sys_flags.name == "my_flags"

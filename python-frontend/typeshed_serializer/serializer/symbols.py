@@ -182,8 +182,8 @@ class ParameterSymbol:
 
 
 class OverloadedFunctionSymbol:
-    def __init__(self, overloaded_func_def: mpn.OverloadedFuncDef):
-        self.name = overloaded_func_def.name
+    def __init__(self, overloaded_func_def: mpn.OverloadedFuncDef, name: str = None):
+        self.name = overloaded_func_def.name if name is None else name
         self.fullname = overloaded_func_def.fullname
         self.definitions = []
         for item in overloaded_func_def.items:
@@ -218,8 +218,8 @@ class OverloadedFunctionSymbol:
 
 
 class FunctionSymbol:
-    def __init__(self, func_def: mpn.FuncDef, decorators=None):
-        self.name = func_def.name
+    def __init__(self, func_def: mpn.FuncDef, decorators=None, name: str = None):
+        self.name = func_def.name if name is None else name
         self.fullname = func_def.fullname
         self.return_type = extract_return_type(func_def)
         self.parameters = extract_parameters(func_def)
@@ -262,8 +262,8 @@ class FunctionSymbol:
 
 
 class ClassSymbol:
-    def __init__(self, type_info: mpn.TypeInfo):
-        self.name = type_info.name
+    def __init__(self, type_info: mpn.TypeInfo, name: str = None):
+        self.name = type_info.name if name is None else name
         self.fullname = type_info.fullname
         self.super_classes = []
         self.methods = []
@@ -336,8 +336,8 @@ class VarSymbol:
         self.type = type_descriptor
 
     @classmethod
-    def from_var(cls, var: mpn.Var):
-        return cls(var.name, var.fullname, type_descriptor=TypeDescriptor(var.type) if var.type else None)
+    def from_var(cls, var: mpn.Var, name: str = None):
+        return cls(var.name if name is None else name, var.fullname, type_descriptor=TypeDescriptor(var.type) if var.type else None)
 
     def __eq__(self, other):
         return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()
@@ -363,13 +363,13 @@ class ModuleSymbol:
             name = mypy_file.names.get(key)
             symbol_table_node = name.node
             if isinstance(symbol_table_node, mpn.FuncDef):
-                self.functions.append(FunctionSymbol(symbol_table_node))
+                self.functions.append(FunctionSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
-                self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node))
+                self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.TypeInfo):
-                self.classes.append(ClassSymbol(symbol_table_node))
+                self.classes.append(ClassSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in DEFAULT_EXPORTED_VARS:
-                self.vars.append(VarSymbol.from_var(symbol_table_node))
+                self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.MypyFile):
                 module_name = symbol_table_node.fullname
                 if module_name != "builtins":
