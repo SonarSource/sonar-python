@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -35,12 +36,16 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.SelfSymbolImpl;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.symbols.Usage.Kind.PARAMETER;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
@@ -66,7 +71,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static void checkPositionalParameters(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
     int self = 0;
-    if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+    if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR) && !isCalledAsClassMethod((QualifiedExpression) callExpression.callee())) {
       self = 1;
     }
     Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionSymbol);
@@ -99,6 +104,27 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       }
       addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
     }
+  }
+
+  private static boolean isCalledAsClassMethod(QualifiedExpression callee) {
+    return TreeUtils.getSymbolFromTree(callee.qualifier())
+      .filter(ArgumentNumberCheck::isFirstParameterOfClassMethod)
+      .isPresent();
+  }
+
+  private static boolean isFirstParameterOfClassMethod(Symbol symbol) {
+    return symbol instanceof SelfSymbolImpl && isParamOfClassMethod(symbol);
+  }
+
+  private static boolean isParamOfClassMethod(Symbol symbol) {
+    return symbol.usages().stream().anyMatch(usage -> usage.kind() == PARAMETER && isParamOfClassMethod(usage.tree()));
+  }
+
+  private static boolean isParamOfClassMethod(Tree tree) {
+    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
+    return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(functionDef))
+      .filter(functionSymbol -> functionSymbol.decorators().stream().anyMatch(dec -> dec.equals("classmethod")))
+      .isPresent();
   }
 
   private static Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault(FunctionSymbol functionSymbol) {
