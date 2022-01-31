@@ -27,12 +27,17 @@ import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_EXPRESSION;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
 public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
   public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
+  private static final int MAX_LINE_LENGTH = 80;
 
   private Set<Tree> ignored = new HashSet<>();
 
@@ -58,11 +63,36 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
       && statements.size() == 1
       && statements.get(0).is(Tree.Kind.IF_STMT)) {
       IfStatement singleIfChild = (IfStatement) statements.get(0);
-      if (singleIfChild.isElif() || singleIfChild.elseBranch() != null || !singleIfChild.elifBranches().isEmpty()) {
+      if (isException(singleIfChild, ifStatement)) {
         return;
       }
       addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement.keyword(), "enclosing");
     }
     super.visitIfStatement(ifStatement);
+  }
+
+  private static boolean isException(IfStatement singleIfChild, IfStatement enclosingIfStatement) {
+    return singleIfChild.isElif()
+      || singleIfChild.elseBranch() != null
+      || !singleIfChild.elifBranches().isEmpty()
+      || wouldCauseLongLineLength(singleIfChild, enclosingIfStatement)
+      || singleIfChild.condition().is(ASSIGNMENT_EXPRESSION)
+      || enclosingIfStatement.condition().is(ASSIGNMENT_EXPRESSION)
+      || hasCommentsBetweenEnclosingAndChildIf(singleIfChild, enclosingIfStatement);
+  }
+
+  private static boolean hasCommentsBetweenEnclosingAndChildIf(IfStatement singleIfChild, IfStatement enclosingIfStatement) {
+    return TreeUtils.tokens(enclosingIfStatement).stream()
+      .anyMatch(token -> !token.trivia().isEmpty() && token.trivia().get(0).token().line() < singleIfChild.firstToken().line());
+  }
+
+  private static boolean wouldCauseLongLineLength(IfStatement singleIfChild, IfStatement enclosingIf) {
+    int childConditionLength = lastColumn(singleIfChild) - singleIfChild.condition().firstToken().column();
+    return (lastColumn(enclosingIf) + childConditionLength) > MAX_LINE_LENGTH;
+  }
+
+  private static int lastColumn(IfStatement ifStatement) {
+    Token lastToken = ifStatement.condition().lastToken();
+    return lastToken.column() + lastToken.value().length();
   }
 }
