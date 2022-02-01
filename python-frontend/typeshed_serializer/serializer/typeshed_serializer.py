@@ -28,6 +28,8 @@ STDLIB_PATH = "../resources/typeshed/stdlib"
 STUBS_PATH = "../resources/typeshed/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
+CUSTOM_STUBS_PATH = "../resources/custom"
+SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 
 
 def get_options(python_version=(3, 8)):
@@ -83,6 +85,12 @@ def walk_typeshed_third_parties(opt: options.Options = get_options()):
     return build_result, source_paths
 
 
+def walk_custom_stubs(opt: options.Options = get_options()):
+    source_list, source_paths = get_sources(CUSTOM_STUBS_PATH, False)
+    build_result = build.build(source_list, opt)
+    return build_result, source_paths
+
+
 def get_sources(relative_path: str, generate_python2: bool):
     source_list = []
     source_paths = set()
@@ -118,7 +126,21 @@ def serialize_typeshed_stdlib(output_dir_name="output", python_version=(3, 8), i
     build_result, _ = walk_typeshed_stdlib(opt)
     for file in build_result.files:
         module_symbol = symbols.ModuleSymbol(build_result.files.get(file))
-        symbols.save_module(module_symbol, is_debug=is_debug, debug_dir=output_dir_name)
+        symbols.save_module(module_symbol, "stdlib_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
+
+
+def serialize_custom_stubs(output_dir_name="output", python_version=(3, 8), is_debug=False):
+    path = os.path.join(CURRENT_PATH, CUSTOM_STUBS_PATH)
+    opt = get_options(python_version)
+    build_result, _ = walk_custom_stubs(opt)
+    for file in build_result.files:
+        if file == SONAR_CUSTOM_BASE_STUB_MODULE:
+            continue
+        current_file = build_result.files.get(file)
+        if not current_file.path.startswith(path):
+            continue
+        module_symbol = symbols.ModuleSymbol(current_file)
+        symbols.save_module(module_symbol, "custom_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
 
 
 def serialize_typeshed_stdlib_multiple_python_version():
@@ -129,14 +151,16 @@ def serialize_typeshed_stdlib_multiple_python_version():
 
 
 def save_merged_symbols(is_debug=False, is_third_parties=False):
+    dir_name = "third_party_protobuf" if is_third_parties else "stdlib_protobuf"
     merged_modules = symbols_merger.merge_multiple_python_versions(is_third_parties)
     for mod in merged_modules:
-        symbols.save_module(merged_modules[mod], is_debug=is_debug, debug_dir="output_merge", is_stdlib=not is_third_parties)
+        symbols.save_module(merged_modules[mod], dir_name, is_debug=is_debug, debug_dir="output_merge")
 
 
 def main():
     save_merged_symbols()
     save_merged_symbols(is_third_parties=True)
+    serialize_custom_stubs()
 
 
 if __name__ == '__main__':
