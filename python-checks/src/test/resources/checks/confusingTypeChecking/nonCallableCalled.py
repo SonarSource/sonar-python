@@ -1,4 +1,5 @@
-from typing import Set, FrozenSet, Union
+from typing import Set, FrozenSet, Union, Coroutine
+import asyncio
 
 def empty_union(x: Union['A', 'B']):
   x()
@@ -29,3 +30,10 @@ class CallableBase:
 def with_isinstance(x: Base):
   if isinstance(x, CallableBase):
     x()
+
+
+async def bar(func: Coroutine):
+  func() # it's technically possible to call a Coroutine, although it won't behave as a normal function
+  await asyncio.gather(
+    func()
+  )

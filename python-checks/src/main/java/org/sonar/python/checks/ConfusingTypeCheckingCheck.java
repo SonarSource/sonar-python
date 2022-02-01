@@ -63,7 +63,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
     @Override
     public boolean isNonCallableType(InferredType type) {
-      return containsDeclaredType(type) && !type.declaresMember("__call__");
+      return containsDeclaredType(type) && !type.declaresMember("__call__") && !type.mustBeOrExtend("typing.Coroutine");
     }
 
     @Override
