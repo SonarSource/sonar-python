@@ -22,7 +22,7 @@ package org.sonar.python.semantic;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Name;
 
-public class SelfSymbolImpl extends SymbolImpl {
+class SelfSymbolImpl extends SymbolImpl {
 
   private final Scope classScope;
 

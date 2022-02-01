@@ -42,7 +42,6 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.semantic.SelfSymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Usage.Kind.PARAMETER;
@@ -108,14 +107,12 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static boolean isCalledAsClassMethod(QualifiedExpression callee) {
     return TreeUtils.getSymbolFromTree(callee.qualifier())
-      .filter(ArgumentNumberCheck::isFirstParameterOfClassMethod)
+      .filter(ArgumentNumberCheck::isParamOfClassMethod)
       .isPresent();
   }
 
-  private static boolean isFirstParameterOfClassMethod(Symbol symbol) {
-    return symbol instanceof SelfSymbolImpl && isParamOfClassMethod(symbol);
-  }
-
+  // no need to check that's the first parameter (i.e. cls)
+  // the assumption is that another method can be called only using the first parameter of a class method
   private static boolean isParamOfClassMethod(Symbol symbol) {
     return symbol.usages().stream().anyMatch(usage -> usage.kind() == PARAMETER && isParamOfClassMethod(usage.tree()));
   }
