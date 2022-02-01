@@ -1,0 +1,3 @@
+from SonarPythonAnalyzerFakeStub import CustomStubBase
+
+class PKCS1v15(CustomStubBase): ...
