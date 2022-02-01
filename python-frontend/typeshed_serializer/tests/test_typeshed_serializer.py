@@ -36,6 +36,15 @@ def test_serialize_typeshed_stdlib(typeshed_stdlib):
     assert symbols.save_module.call_count == len(typeshed_stdlib.files)
 
 
+def test_serialize_custom_stubs(typeshed_custom_stubs):
+    typeshed_serializer.walk_custom_stubs = Mock(return_value=(typeshed_custom_stubs, set()))
+    symbols.save_module = Mock()
+    typeshed_serializer.serialize_custom_stubs()
+    assert typeshed_serializer.walk_custom_stubs.call_count == 1
+    # Not every files from "typeshed_custom_stubs" build are serialized, as some are builtins
+    assert symbols.save_module.call_count == 50
+
+
 def test_all_third_parties_are_serialized(typeshed_third_parties):
     stub_modules = set()
     for stub_folder in typeshed_serializer.THIRD_PARTIES_STUBS:

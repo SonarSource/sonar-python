@@ -33,6 +33,7 @@ CURRENT_PATH = os.path.dirname(__file__)
 logger = logging.getLogger(__name__)
 
 DEFAULT_EXPORTED_VARS = ["__name__", "__doc__", "__file__", "__package__"]
+SONAR_CUSTOM_BASE_CLASS = "SonarPythonAnalyzerFakeStub.CustomStubBase"
 
 
 class ParamKind(Enum):
@@ -337,7 +338,8 @@ class VarSymbol:
 
     @classmethod
     def from_var(cls, var: mpn.Var, name: str = None):
-        return cls(var.name if name is None else name, var.fullname, type_descriptor=TypeDescriptor(var.type) if var.type else None)
+        return cls(var.name if name is None else name, var.fullname,
+                   type_descriptor=TypeDescriptor(var.type) if var.type else None)
 
     def __eq__(self, other):
         return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()
@@ -361,6 +363,9 @@ class ModuleSymbol:
         self.vars = []
         for key in mypy_file.names:
             name = mypy_file.names.get(key)
+            if name.fullname == SONAR_CUSTOM_BASE_CLASS:
+                # Ignore custom stub name
+                continue
             symbol_table_node = name.node
             if isinstance(symbol_table_node, mpn.FuncDef):
                 self.functions.append(FunctionSymbol(symbol_table_node, name=key))
@@ -528,10 +533,10 @@ def extract_return_type(func_def: mpn.FuncDef):
     return TypeDescriptor(func_type.ret_type)
 
 
-def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], is_debug=False, debug_dir="output", is_stdlib=True):
+def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], dir_name="stdlib_protobuf",
+                is_debug=False, debug_dir="output"):
     ms_pb = ms.to_proto()
-    save_dir = "../../src/main/resources/org/sonar/python/types/protobuf" if not is_debug else f"../{debug_dir}"
-    save_dir = save_dir if is_stdlib else os.path.join(save_dir, "stubs")
+    save_dir = f"../../src/main/resources/org/sonar/python/types/{dir_name}" if not is_debug else f"../{debug_dir}"
     save_string = ms_pb.SerializeToString() if not is_debug else str(ms_pb)
     open_mode = "wb" if not is_debug else "w"
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)

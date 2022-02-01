@@ -34,6 +34,13 @@ def typeshed_stdlib():
 
 
 @pytest.fixture(scope="session")
+def typeshed_custom_stubs():
+    build_result, _ = typeshed_serializer.walk_custom_stubs()
+    assert len(build_result.errors) == 0
+    return build_result
+
+
+@pytest.fixture(scope="session")
 def fake_module_36_38():
     fake_module_path = os.path.join(os.path.dirname(__file__), "resources/fakemodule.pyi")
     typeshed_serializer.load_single_module = Mock(return_value=build.BuildSource(fake_module_path, "fakemodule"))
