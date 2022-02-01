@@ -39,6 +39,9 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
   private static final int MAX_LINE_LENGTH = 80;
 
+  // consider 'and' plus 2 surrounding spaces
+  private static final int AND_LENGTH = 5;
+
   private Set<Tree> ignored = new HashSet<>();
 
   @Override
@@ -88,7 +91,7 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
 
   private static boolean wouldCauseLongLineLength(IfStatement singleIfChild, IfStatement enclosingIf) {
     int childConditionLength = lastColumn(singleIfChild) - singleIfChild.condition().firstToken().column();
-    return (lastColumn(enclosingIf) + childConditionLength) > MAX_LINE_LENGTH;
+    return (lastColumn(enclosingIf) + childConditionLength) + AND_LENGTH > MAX_LINE_LENGTH;
   }
 
   private static int lastColumn(IfStatement ifStatement) {

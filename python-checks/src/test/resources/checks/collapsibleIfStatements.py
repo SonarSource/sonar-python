@@ -70,3 +70,7 @@ if cond1:
   # comment specific to cond2
   if cond2:
     ...
+
+if blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:
+  if bluuuuuu:
+    ...
