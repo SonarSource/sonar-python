@@ -90,6 +90,10 @@ def methods():
       def static_meth(p1, p2): pass
       def foo(p1): pass
       foo(42)
+      @classmethod
+      def bar_class_method(cls):
+        cls.bar_instance_method(cls)
+      def bar_instance_method(self): pass
 
     A.class_meth(42) # FN {{'class_meth' expects 2 positional arguments, but 1 was provided}}
 
