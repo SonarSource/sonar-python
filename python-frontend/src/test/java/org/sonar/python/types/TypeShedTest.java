@@ -265,6 +265,15 @@ public class TypeShedTest {
   }
 
   @Test
+  public void package_lxml_reexported_symbol_fqn() {
+    Map<String, Symbol> lxmlEtreeSymbols = symbolsForModule("lxml.etree");
+    Symbol elementTreeSymbol = lxmlEtreeSymbols.get("ElementTree");
+    assertThat(elementTreeSymbol.kind()).isEqualTo(Kind.CLASS);
+    // FIXME: Original FQN is "xml.etree.ElementTree.ElementTree" and we should be able to retrieve it somehow
+    assertThat(elementTreeSymbol.fullyQualifiedName()).isEqualTo("lxml.etree.ElementTree");
+  }
+
+  @Test
   public void package_sqlite3_connect_type_in_ambiguous_symbol() {
     Map<String, Symbol> djangoSymbols = symbolsForModule("sqlite3");
     Symbol requestSymbol = djangoSymbols.get("connect");
