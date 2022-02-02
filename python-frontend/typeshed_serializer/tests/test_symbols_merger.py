@@ -21,7 +21,7 @@
 from unittest.mock import Mock
 
 from serializer import symbols, symbols_merger
-from serializer.symbols import MergedModuleSymbol
+from serializer.symbols import MergedModuleSymbol, TypeKind
 
 
 def test_build_multiple_python_version(typeshed_stdlib):
@@ -235,8 +235,9 @@ def test_actual_module_merge(fake_module_36_38):
     alias = all_vars['fakemodule.alias']
     assert len(alias) == 1
     alias_symbol = alias[0].var_symbol
-    assert alias_symbol.type.fully_qualified_name is None
-    assert alias_symbol.type.is_unknown is True
+    assert alias_symbol.type.fully_qualified_name == "builtins.function"
+    assert alias_symbol.type.kind == TypeKind.CALLABLE
+    assert alias_symbol.type.pretty_printed_name == "CallableType[builtins.function]"
 
     imported_sys = all_vars['sys']
     assert len(imported_sys) == 1

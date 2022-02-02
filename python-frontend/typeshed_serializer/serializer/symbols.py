@@ -135,6 +135,12 @@ class TypeDescriptor:
             self.kind = TypeKind.TYPED_DICT
             # TODO: check in items for key/type mapping
             self.pretty_printed_name = "TypedDict"
+        elif isinstance(_type, mpt.Overloaded):
+            self.kind = TypeKind.CALLABLE
+            fallback = TypeDescriptor(_type.fallback)
+            self.fully_qualified_name = fallback.fully_qualified_name
+            self.args.append(fallback)
+            self.pretty_printed_name = f"CallableType[{fallback.pretty_printed_name}]"
         else:
             # this can happen when there is a var symbol assigned to an overload symbol
             self.is_unknown = True

@@ -528,6 +528,15 @@ public class TypeShedTest {
   }
 
   @Test
+  public void overloaded_function_alias_has_function_annotated_type()  {
+    Map<String, Symbol> gettextModule = symbolsForModule("gettext");
+    Symbol translation = gettextModule.get("translation");
+    Symbol catalog = gettextModule.get("Catalog");
+    assertThat(translation.kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(catalog.annotatedTypeName()).isEqualTo("function");
+  }
+
+  @Test
   public void stubFilesSymbols_third_party_symbols_should_not_be_null() {
     // six modules contain ambiguous symbols that only contain class symbols
     // however third party symbols don't have validForPythonVersions field set
