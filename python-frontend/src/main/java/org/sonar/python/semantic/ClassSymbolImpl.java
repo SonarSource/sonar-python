@@ -73,11 +73,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(classDef.name().name(), fullyQualifiedName);
     this.setKind(Kind.CLASS);
-    String fileId = null;
-    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
-      Path path = pathOf(pythonFile);
-      fileId = path != null ? path.toString() : pythonFile.toString();
-    }
+    Path path = pathOf(pythonFile);
+    String fileId = path != null ? path.toString() : pythonFile.toString();
     hasDecorators = !classDef.decorators().isEmpty();
     classDefinitionLocation = locationInFile(classDef.name(), fileId);
   }
