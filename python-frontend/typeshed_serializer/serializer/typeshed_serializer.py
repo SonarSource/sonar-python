@@ -37,6 +37,7 @@ def get_options(python_version=(3, 8)):
     # Setting incremental to false to avoid issues with mypy caching
     opt.incremental = False
     opt.python_version = python_version
+    opt.platform = "linux"
     return opt
 
 
