@@ -71,7 +71,7 @@ f_exc_typetypes.FrameType.f_exc_type
 typing._T_co"typing.Iterator*J
 selfB
 typing.Iterable[typing._T_co]
-typing._T_co"typing.Iterable0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310ò
+typing._T_co"typing.Iterable0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310´
 Signalssignal.Signals"enum.IntEnumHj35j36j37j38j39j310rX
 SIGABRTsignal.Signals.SIGABRT
 builtins.int"builtins.int*35*36*37*38*39*310rX
@@ -80,6 +80,8 @@ f_exc_typetypes.FrameType.f_exc_type
 SIGBUSsignal.Signals.SIGBUS
 builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGCHLDsignal.Signals.SIGCHLD
+builtins.int"builtins.int*35*36*37*38*39*310rV
+SIGCLDsignal.Signals.SIGCLD
 builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGCONTsignal.Signals.SIGCONT
 builtins.int"builtins.int*35*36*37*38*39*310rV
@@ -103,9 +105,17 @@ f_exc_typetypes.FrameType.f_exc_type
 builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGPIPEsignal.Signals.SIGPIPE
 builtins.int"builtins.int*35*36*37*38*39*310rX
+SIGPOLLsignal.Signals.SIGPOLL
+builtins.int"builtins.int*35*36*37*38*39*310rV
+SIGPWRsignal.Signals.SIGPWR
+builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGPROFsignal.Signals.SIGPROF
 builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGQUITsignal.Signals.SIGQUIT
+builtins.int"builtins.int*35*36*37*38*39*310rZ
+SIGRTMAXsignal.Signals.SIGRTMAX
+builtins.int"builtins.int*35*36*37*38*39*310rZ
+SIGRTMINsignal.Signals.SIGRTMIN
 builtins.int"builtins.int*35*36*37*38*39*310rX
 SIGSEGVsignal.Signals.SIGSEGV
 builtins.int"builtins.int*35*36*37*38*39*310rX
@@ -148,7 +158,99 @@ f_exc_typetypes.FrameType.f_exc_type
 SIG_UNBLOCKsignal.Sigmasks.SIG_UNBLOCK
 builtins.int"builtins.int*35*36*37*38*39*310ra
 SIG_SETMASKsignal.Sigmasks.SIG_SETMASK
-builtins.int"builtins.int*35*36*37*38*39*310_
+builtins.int"builtins.int*35*36*37*38*39*310º
+struct_siginfosignal.struct_siginfo"builtins.tuple*ð
+__init__signal.struct_siginfo.__init__"
+None*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*\
+sequenceN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterablez35z36z37z38z39z310*´
+si_signosignal.struct_siginfo.si_signo"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*²
+si_codesignal.struct_siginfo.si_code"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*´
+si_errnosignal.struct_siginfo.si_errno"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*°
+si_pidsignal.struct_siginfo.si_pid"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*°
+si_uidsignal.struct_siginfo.si_uid"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*¶
+	si_statussignal.struct_siginfo.si_status"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310*²
+si_bandsignal.struct_siginfo.si_band"
+builtins.int"builtins.int*Â
+self·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int0:property`z35z36z37z38z39z310j35j36j37j38j39j310_
 alarmsignal.alarm"
 builtins.int"builtins.int*&
 time
@@ -306,6 +408,34 @@ sigpendingsignal.sigpending"
 signal.Signals"signal.Signals"signal._SIGNUM*Z
 __sigsetN
 typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterablez35z36z37z38z39z310ÿ
+sigtimedwaitsignal.sigtimedwait"µ
+mUnion[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+None*Z
+sigsetN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterable*-
+timeout 
+builtins.float"builtins.floatz35z36z37z38z39z310Ð
+sigwaitinfosignal.sigwaitinfo"·
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*Z
+sigsetN
+typing.Iterable[builtins.int]
 builtins.int"builtins.int"typing.Iterablez35z36z37z38z39z310¬
 	strsignalsignal.strsignal"D
 Union[builtins.str,None]
@@ -367,7 +497,9 @@ sigpendingsignal.sigpending"
 SIGCHLDsignal.SIGCHLD 
 signal.Signals"signal.Signals*35*36*37*38*39*310*9
 SIGCLDsignal.SIGCLD
-builtins.int"builtins.int*27*;
+builtins.int"builtins.int*27*R
+SIGCLDsignal.SIGCLD 
+signal.Signals"signal.Signals*35*36*37*38*39*310*;
 SIGCONTsignal.SIGCONT
 builtins.int"builtins.int*27*T
 SIGCONTsignal.SIGCONT 
@@ -413,21 +545,29 @@ sigpendingsignal.sigpending"
 SIGPIPEsignal.SIGPIPE 
 signal.Signals"signal.Signals*35*36*37*38*39*310*;
 SIGPOLLsignal.SIGPOLL
-builtins.int"builtins.int*27*;
+builtins.int"builtins.int*27*T
+SIGPOLLsignal.SIGPOLL 
+signal.Signals"signal.Signals*35*36*37*38*39*310*;
 SIGPROFsignal.SIGPROF
 builtins.int"builtins.int*27*T
 SIGPROFsignal.SIGPROF 
 signal.Signals"signal.Signals*35*36*37*38*39*310*9
 SIGPWRsignal.SIGPWR
-builtins.int"builtins.int*27*;
+builtins.int"builtins.int*27*R
+SIGPWRsignal.SIGPWR 
+signal.Signals"signal.Signals*35*36*37*38*39*310*;
 SIGQUITsignal.SIGQUIT
 builtins.int"builtins.int*27*T
 SIGQUITsignal.SIGQUIT 
 signal.Signals"signal.Signals*35*36*37*38*39*310*=
 SIGRTMAXsignal.SIGRTMAX
-builtins.int"builtins.int*27*=
+builtins.int"builtins.int*27*V
+SIGRTMAXsignal.SIGRTMAX 
+signal.Signals"signal.Signals*35*36*37*38*39*310*=
 SIGRTMINsignal.SIGRTMIN
-builtins.int"builtins.int*27*;
+builtins.int"builtins.int*27*V
+SIGRTMINsignal.SIGRTMIN 
+signal.Signals"signal.Signals*35*36*37*38*39*310*;
 SIGSEGVsignal.SIGSEGV
 builtins.int"builtins.int*27*T
 SIGSEGVsignal.SIGSEGV 
