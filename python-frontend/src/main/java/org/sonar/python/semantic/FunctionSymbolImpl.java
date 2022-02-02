@@ -46,7 +46,6 @@ import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
-import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -78,12 +77,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isAsynchronous = functionDef.asyncKeyword() != null;
     hasDecorators = !functionDef.decorators().isEmpty();
     decorators = decorators(functionDef);
-    String fileId = null;
-    isStub = isTypeShedFile(pythonFile);
-    if (!isStub) {
-      Path path = pathOf(pythonFile);
-      fileId = path != null ? path.toString() : pythonFile.toString();
-    }
+    isStub = false;
+    String fileId = Optional.ofNullable(pathOf(pythonFile)).map(Path::toString).orElse(pythonFile.toString());
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
   }
 
@@ -336,10 +331,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isKeywordVariadic = isKeywordVariadic;
       this.isPositionalVariadic = isPositionalVariadic;
     }
-  }
-
-  public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
-    annotatedReturnTypeName = annotatedTypeName(returnTypeAnnotation);
   }
 
   private String annotatedTypeName(@Nullable TypeAnnotation typeAnnotation) {

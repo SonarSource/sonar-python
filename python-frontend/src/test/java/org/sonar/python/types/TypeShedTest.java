@@ -507,19 +507,6 @@ public class TypeShedTest {
   }
 
   @Test
-  public void typeshed_common_symbols() {
-    SymbolImpl a1 = new SymbolImpl("a", "mod.a");
-    SymbolImpl a2 = new SymbolImpl("a", "mod.a");
-    SymbolImpl b = new SymbolImpl("b", "mod.b");
-    Map<String, Symbol> python2Symbols = new HashMap<>();
-    python2Symbols.put("a", a1);
-    python2Symbols.put("b", b);
-    Map<String, Symbol> python3Symbols = Collections.singletonMap("a", a2);
-    Collection<Symbol> symbols = TypeShedThirdParties.commonSymbols(python2Symbols, python3Symbols, "mod").values();
-    assertThat(symbols).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "a"), tuple(Kind.OTHER, "b"));
-  }
-
-  @Test
   public void symbol_from_submodule_access() {
     Map<String, Symbol> os = symbolsForModule("os");
     SymbolImpl path = (SymbolImpl) os.get("path");

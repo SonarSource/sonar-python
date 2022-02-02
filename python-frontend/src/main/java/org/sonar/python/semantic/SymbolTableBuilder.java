@@ -87,7 +87,6 @@ import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
-import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
@@ -99,7 +98,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
-  private static final List<String> BASE_MODULES = Arrays.asList("", "typing", "typing_extensions");
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -132,9 +130,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     createAmbiguousSymbols();
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
-    if (!isTypeShedFile(pythonFile)) {
-      TypeInference.inferTypes(fileInput, pythonFile);
-    }
+    TypeInference.inferTypes(fileInput, pythonFile);
   }
 
   private static class SymbolToUpdate {
@@ -273,11 +269,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       createScope(tree, null);
       enterScope(tree);
       moduleScope = currentScope();
-      if (!SymbolUtils.isTypeShedFile(pythonFile) || !BASE_MODULES.contains(pythonFile.fileName())) {
-        Map<String, Symbol> typeShedSymbols = TypeShed.builtinSymbols();
-        for (String name : BuiltinSymbols.all()) {
-          currentScope().createBuiltinSymbol(name, typeShedSymbols);
-        }
+      Map<String, Symbol> typeShedSymbols = TypeShed.builtinSymbols();
+      for (String name : BuiltinSymbols.all()) {
+        currentScope().createBuiltinSymbol(name, typeShedSymbols);
       }
       super.visitFileInput(tree);
     }
@@ -684,7 +678,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           functionSymbolImpl.setParametersWithType(parameters);
         }
         TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
-        if (typeAnnotation != null && !isTypeShedFile(pythonFile)) {
+        if (typeAnnotation != null) {
           functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation));
         }
       }

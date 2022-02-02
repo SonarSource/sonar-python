@@ -57,7 +57,6 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.TypeShed;
-import org.sonar.python.types.TypeShedPythonFile;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -90,11 +89,6 @@ public class SymbolUtils {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
-    if (isBuiltinTypeshedFile(pythonFile) && "str".equals(classSymbol.fullyQualifiedName())) {
-      classSymbol.addSuperClass(symbolsByName.get("object"));
-      classSymbol.addSuperClass(symbolsByName.get("Sequence"));
-      return;
-    }
     ArgList argList = classDef.args();
     if (argList == null) {
       return;
@@ -126,34 +120,8 @@ public class SymbolUtils {
       if ("typing.Generic".equals(argumentSymbol.fullyQualifiedName())) {
         classSymbol.setSupportsGenerics(true);
       }
-      Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
-      if (normalizedArgumentSymbol != null) {
-        classSymbol.addSuperClass(normalizedArgumentSymbol);
-      }
+      classSymbol.addSuperClass(argumentSymbol);
     }
-  }
-
-  /**
-   * Hardcoding some 'typing' module symbols to avoid incomplete type hierarchy for type 'str'
-   */
-  @CheckForNull
-  private static Symbol normalizeSymbol(Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
-    if (isTypeShedFile(pythonFile) && (symbol.name().equals("Protocol") || symbol.name().equals("Generic"))) {
-      // ignore Protocol and Generic to avoid having incomplete type hierarchies
-      return null;
-    }
-    if (isTypingFile(pythonFile) && symbol.name().equals("_Collection")) {
-      return symbolsByName.get("Collection");
-    }
-    return symbol;
-  }
-
-  private static boolean isBuiltinTypeshedFile(PythonFile pythonFile) {
-    return isTypeShedFile(pythonFile) && pythonFile.fileName().isEmpty();
-  }
-
-  private static boolean isTypingFile(PythonFile pythonFile) {
-    return isTypeShedFile(pythonFile) && pythonFile.fileName().equals("typing");
   }
 
   @CheckForNull
@@ -220,10 +188,6 @@ public class SymbolUtils {
     } catch (InvalidPathException e) {
       return null;
     }
-  }
-
-  public static boolean isTypeShedFile(PythonFile pythonFile) {
-    return pythonFile instanceof TypeShedPythonFile;
   }
 
   /**

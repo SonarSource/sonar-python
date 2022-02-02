@@ -66,10 +66,6 @@ public class TypeShed {
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
 
-  private static final String THIRD_PARTY_2AND3 = "typeshed/third_party/2and3/";
-  private static final String THIRD_PARTY_2 = "typeshed/third_party/2/";
-  private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
-  private static final String CUSTOM_THIRD_PARTY = "custom/";
   private static final String PROTOBUF_CUSTOM_STUBS = "custom_protobuf/";
   private static final String PROTOBUF = "stdlib_protobuf/";
   private static final String PROTOBUF_THIRD_PARTY = "third_party_protobuf/";
