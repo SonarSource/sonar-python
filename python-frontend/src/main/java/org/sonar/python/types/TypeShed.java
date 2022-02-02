@@ -75,6 +75,14 @@ public class TypeShed {
   private static final Set<String> BUILTINS_TO_DISAMBIGUATE = new HashSet<>(
     Arrays.asList(INT, FLOAT, COMPLEX, STR, BuiltinTypes.SET, DICT, LIST, TUPLE, NONE_TYPE, BOOL, "type", "super", "frozenset", "memoryview"));
 
+  // This is needed for some Python 2 modules whose name differ from their Python 3 counterpart by capitalization only.
+  private static final Map<String, String> MODULES_TO_DISAMBIGUATE = new HashMap<>();
+  static {
+    MODULES_TO_DISAMBIGUATE.put("ConfigParser", "2@ConfigParser");
+    MODULES_TO_DISAMBIGUATE.put("Queue", "2@Queue");
+    MODULES_TO_DISAMBIGUATE.put("SocketServer", "2@SocketServer");
+  }
+
   static {
     BUILTINS_TO_DISAMBIGUATE.addAll(BuiltinSymbols.EXCEPTIONS);
   }
@@ -305,7 +313,8 @@ public class TypeShed {
   }
 
   private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName, String dirName) {
-    InputStream resource = TypeShed.class.getResourceAsStream(dirName + moduleName + ".protobuf");
+    String fileName = MODULES_TO_DISAMBIGUATE.getOrDefault(moduleName, moduleName);
+    InputStream resource = TypeShed.class.getResourceAsStream(dirName + fileName + ".protobuf");
     if (resource == null) {
       return Collections.emptyMap();
     }

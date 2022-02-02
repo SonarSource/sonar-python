@@ -534,4 +534,44 @@ public class TypeShedTest {
     symbolsForModule("six");
     assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
   }
+
+  @Test
+  public void modules_whose_name_differ_by_capitalization_only() {
+    // Python 2, import SocketServer
+    setPythonVersions(PythonVersionUtils.fromString("2.7"));
+    Map<String, Symbol> socketServer = symbolsForModule("SocketServer");
+    assertThat(socketServer).isNotEmpty();
+    SymbolImpl baseServer = (SymbolImpl) socketServer.get("BaseServer");
+    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
+
+    // Python 2, import socketserver
+    socketServer = symbolsForModule("socketserver");
+    assertThat(socketServer).isEmpty();
+
+    // Python 3, import SocketServer
+    setPythonVersions(PythonVersionUtils.fromString("3.10"));
+    socketServer = symbolsForModule("SocketServer");
+    assertThat(socketServer).isEmpty();
+
+    // Python 3, import socketserver
+    socketServer = symbolsForModule("socketserver");
+    assertThat(socketServer).isNotEmpty();
+    baseServer = (SymbolImpl) socketServer.get("BaseServer");
+    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
+
+    // Unknown Python version, import SocketServer
+    // in this case we assume Python2 module is imported
+    setPythonVersions();
+    socketServer = symbolsForModule("SocketServer");
+    assertThat(socketServer).isNotEmpty();
+    baseServer = (SymbolImpl) socketServer.get("BaseServer");
+    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
+
+    // Unknown Python version, import socketserver
+    // in this case we assume Python3 module is imported
+    socketServer = symbolsForModule("socketserver");
+    assertThat(socketServer).isNotEmpty();
+    baseServer = (SymbolImpl) socketServer.get("BaseServer");
+    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
+  }
 }
