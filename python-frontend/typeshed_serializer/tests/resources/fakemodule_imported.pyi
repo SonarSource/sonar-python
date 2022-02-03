@@ -1,0 +1,6 @@
+def common_imported_func():
+    ...
+
+
+def _private_func():
+    ...

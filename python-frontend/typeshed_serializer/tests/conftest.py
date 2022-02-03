@@ -19,12 +19,14 @@
 #
 
 import os
-from unittest.mock import Mock
 
 import pytest
 from mypy import build
 
 from serializer import typeshed_serializer, symbols_merger
+from serializer.typeshed_serializer import get_options
+
+CURRENT_PATH = os.path.dirname(__file__)
 
 
 @pytest.fixture(scope="session")
@@ -42,13 +44,29 @@ def typeshed_custom_stubs():
 
 @pytest.fixture(scope="session")
 def fake_module_36_38():
-    fake_module_path = os.path.join(os.path.dirname(__file__), "resources/fakemodule.pyi")
-    typeshed_serializer.load_single_module = Mock(return_value=build.BuildSource(fake_module_path, "fakemodule"))
-    fake_module_36 = typeshed_serializer.build_single_module('fakemodule', python_version=(3, 6))
-    fake_module_38 = typeshed_serializer.build_single_module('fakemodule', python_version=(3, 8))
-    return [fake_module_36, fake_module_38]
+    modules = {
+        "fakemodule": os.path.join(CURRENT_PATH, "resources/fakemodule.pyi"),
+        "fakemodule_imported": os.path.join(CURRENT_PATH, "resources/fakemodule_imported.pyi")
+    }
+    model_36 = build_modules(modules, python_version=(3, 6))
+    model_38 = build_modules(modules, python_version=(3, 8))
+    return [model_36.get("fakemodule"), model_38.get("fakemodule")]
 
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():
     return symbols_merger.merge_multiple_python_versions(is_third_parties=True)
+
+
+def build_modules(modules: dict[str, str], python_version=(3, 8)):
+    opt = get_options(python_version)
+    module_sources = []
+    for module_fqn in modules.keys():
+        module_sources.append(load_single_module(modules.get(module_fqn), module_fqn))
+    build_result = build.build(module_sources, opt)
+    return build_result.files
+
+
+def load_single_module(module_path: str, module_fqn):
+    module_source = build.BuildSource(module_path, module_fqn)
+    return module_source

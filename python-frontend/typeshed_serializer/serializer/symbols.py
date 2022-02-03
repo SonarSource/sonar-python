@@ -367,8 +367,21 @@ class ModuleSymbol:
         self.functions = []
         self.overloaded_functions = []
         self.vars = []
+        private_imports = set()
+        for elem in mypy_file.imports:
+            # imports without aliases are considered private in Typeshed convention
+            if isinstance(elem, mpn.Import):
+                for _id, alias in elem.ids:
+                    if _id != alias:
+                        private_imports.add(_id)
+            if isinstance(elem, mpn.ImportFrom):
+                for _id, alias in elem.names:
+                    if _id != alias:
+                        private_imports.add(_id)
         for key in mypy_file.names:
             name = mypy_file.names.get(key)
+            if key in private_imports and not name.fullname.startswith(mypy_file.fullname):
+                continue
             if name.fullname == SONAR_CUSTOM_BASE_CLASS:
                 # Ignore custom stub name
                 continue

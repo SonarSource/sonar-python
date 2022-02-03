@@ -41,29 +41,6 @@ def get_options(python_version=(3, 8)):
     return opt
 
 
-def build_single_module(module_fqn: str, category="stdlib", python_version=(3, 8)):
-    opt = get_options(python_version)
-    module_source = load_single_module(module_fqn, category)
-    build_result = build.build([module_source], opt)
-    built_file = build_result.files.get(module_fqn)
-    return built_file
-
-
-def load_single_module(module_fqn: str, category="stdlib"):
-    module_path = module_fqn
-    if '.' in module_fqn:
-        module_path = module_fqn.replace('.', "/")
-    if os.path.isfile(path := os.path.join(CURRENT_PATH,
-                                           f"../resources/typeshed/{category}/{module_path}.pyi")):
-        module_source = build.BuildSource(path, module_fqn)
-    elif os.path.isfile(path := os.path.join(CURRENT_PATH,
-                                             f"../resources/typeshed/{category}/{module_path}/__init__.pyi")):
-        module_source = build.BuildSource(path, module_fqn)
-    else:
-        raise FileNotFoundError(f"No stub found for module {module_fqn}")
-    return module_source
-
-
 def walk_typeshed_stdlib(opt: options.Options = get_options()):
     generate_python2_stdlib = opt.python_version < (3, 0)
     relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
