@@ -33,6 +33,27 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
     type: n1-standard-8
     use_ssd: true
 
+generate_typeshed_task:
+  gke_container:
+    dockerfile: .cirrus/python-env.Dockerfile
+    builder_image_project: language-team
+    builder_image_name: docker-builder-lt-v1
+    cluster_name: cirrus-ci-lt-cluster
+    zone: us-central1-a
+    namespace: default
+    cpu: 2
+    memory: 2G
+  skip: "!changesInclude('python-frontend/typeshed_serializer/*', 'python-frontend/src/protobuf/symbols.proto')"
+  env:
+    GITHUB_TOKEN: ENCRYPTED[!f458126aa9ed2ac526f220c5acb51dd9cc255726b34761a56fc78d4294c11089502a882888cef0ca7dd4085e72e611a5!]
+  maven_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  build_script:
+    - git submodule update --init
+    - source cirrus-env BUILD
+    - mvn clean install -DgenerateTypeshed
+  cleanup_before_cache_script: cleanup_maven_repository
+
 build_task:
   gke_container:
     dockerfile: .cirrus/python-env.Dockerfile
@@ -70,7 +91,7 @@ build_win_task:
     folder: ~/.m2/repository
   build_script:
     - git submodule update --init
-    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test -DskipTypeshed=true
+    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test
   cleanup_before_cache_script: cleanup_maven_repository
 
 ws_scan_task:
@@ -89,7 +110,7 @@ ws_scan_task:
   whitesource_script:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
-    - mvn clean install -DskipTests -DskipTypeshed -Denforcer.skip=true -Dskip.its=true
+    - mvn clean install -DskipTests -Denforcer.skip=true -Dskip.its=true
     - source ws_scan.sh
   allow_failures: "true"
   always:
