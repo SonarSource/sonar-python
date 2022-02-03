@@ -1,91 +1,5 @@
 
-multiprocessing.dummyê
-QueueQueue.Queue"builtins.object*ô
-__init__Queue.Queue.__init__"
-None*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queue*+
-maxsize
-builtins.int"builtins.int z27*n
-	task_doneQueue.Queue.task_done"
-None*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27*d
-joinQueue.Queue.join"
-None*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27*z
-qsizeQueue.Queue.qsize"
-builtins.int"builtins.int*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27*|
-emptyQueue.Queue.empty"
-builtins.bool"builtins.bool*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27*z
-fullQueue.Queue.full"
-builtins.bool"builtins.bool*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27*Ç
-putQueue.Queue.put"
-None*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queue*
-item
-Queue._T*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*à
-
-put_nowaitQueue.Queue.put_nowait"
-None*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queue*
-item
-Queue._Tz27*Ó
-getQueue.Queue.get"
-Queue._T*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queue*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*t
-
-get_nowaitQueue.Queue.get_nowait"
-Queue._T*<
-self2
-Queue.Queue[Queue._T]
-Queue._T"Queue.Queuez27Pj27r+
-maxsizeQueue.Queue.maxsize
-Any*27r'
-mutexQueue.Queue.mutex
-Any*27r/
-	not_emptyQueue.Queue.not_empty
-Any*27r-
-not_fullQueue.Queue.not_full
-Any*27r9
-all_tasks_doneQueue.Queue.all_tasks_done
-Any*27r=
-unfinished_tasksQueue.Queue.unfinished_tasks
-Any*27rT
-queueQueue.Queue.queue4
-collections.deque[Any]
-Any"collections.deque*27°
+multiprocessing.dummy°
 DummyProcess"multiprocessing.dummy.DummyProcess"threading.Thread*á
 __init__+multiprocessing.dummy.DummyProcess.__init__"
 None*R
@@ -313,145 +227,7 @@ put_nowaitqueue.Queue.put_nowait"
 unfinished_tasksqueue.Queue.unfinished_tasks
 builtins.int"builtins.int*35*36*37*38*39*310r<
 queuequeue.Queue.queue
-Any*35*36*37*38*39*310Ø
-Iterabletyping.Iterable"builtins.object*·
-__iter__typing.Iterable.__iter__"B
-typing.Iterator[typing._T_co]
-typing._T_co"typing.Iterator*J
-selfB
-typing.Iterable[typing._T_co]
-typing._T_co"typing.Iterable0:abstractmethod@z35z36z37z38z39z3108PXj35j36j37j38j39j310í
-Mappingtyping.Mapping"typing.Collection*Â
-__getitem__typing.Mapping.__getitem__"
-typing._VT_co*e
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mapping*
-k
-
-typing._KT0:abstractmethod@z35z36z37z38z39z310*≥
-itemstyping.Mapping.items"ë
-3typing.AbstractSet[Tuple[typing._KT,typing._VT_co]]F
-Tuple[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.AbstractSet*g
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mappingz35z36z37z38z39z310*„
-keystyping.Mapping.keys"D
-typing.AbstractSet[typing._KT]
-
-typing._KT"typing.AbstractSet*g
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mappingz35z36z37z38z39z310*Î
-valuestyping.Mapping.values"H
- typing.ValuesView[typing._VT_co]
-typing._VT_co"typing.ValuesView*g
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mappingz35z36z37z38z39z310*Ù
-__contains__typing.Mapping.__contains__"
-builtins.bool"builtins.bool*e
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mapping*'
-o"
-builtins.object"builtins.objectz35z36z37z38z39z3102ﬂ
-gettyping.Mapping.getÂ
-gettyping.Mapping.get":
-Union[typing._VT_co,None]
-typing._VT_co
-None*g
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mapping*
-key
-
-typing._KT0:overloadX¬
-gettyping.Mapping.get"D
-Union[typing._VT_co,typing._T]
-typing._VT_co
-	typing._T*g
-self]
-(typing.Mapping[typing._KT,typing._VT_co]
-
-typing._KT
-typing._VT_co"typing.Mapping*
-key
-
-typing._KT*Q
-defaultD
-Union[typing._VT_co,typing._T]
-typing._VT_co
-	typing._T0:overloadX"35"36"37"38"39"310Pj35j36j37j38j39j310¬
-Sequencetyping.Sequence"typing.Collection"typing.Reversible*å
-indextyping.Sequence.index"
-builtins.int"builtins.int*L
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*
-value
-Any*)
-start
-builtins.int"builtins.int *(
-stop
-builtins.int"builtins.int z35z36z37z38z39z310*∑
-counttyping.Sequence.count"
-builtins.int"builtins.int*L
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*
-value
-Anyz35z36z37z38z39z310*⁄
-__contains__typing.Sequence.__contains__"
-builtins.bool"builtins.bool*J
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*'
-x"
-builtins.object"builtins.objectz35z36z37z38z39z310*Õ
-__iter__typing.Sequence.__iter__"B
-typing.Iterator[typing._T_co]
-typing._T_co"typing.Iterator*J
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequencez35z36z37z38z39z310*’
-__reversed__typing.Sequence.__reversed__"B
-typing.Iterator[typing._T_co]
-typing._T_co"typing.Iterator*J
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequencez35z36z37z38z39z3102ï
-__getitem__typing.Sequence.__getitem__À
-__getitem__typing.Sequence.__getitem__"
-typing._T_co*J
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*!
-i
-builtins.int"builtins.int0:overload:abstractmethod@XÅ
-__getitem__typing.Sequence.__getitem__"B
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*J
-selfB
-typing.Sequence[typing._T_co]
-typing._T_co"typing.Sequence*%
-s 
-builtins.slice"builtins.slice0:overload:abstractmethod@X"35"36"37"38"39"310Pj35j36j37j38j39j310ï
+Any*35*36*37*38*39*310ï
 Arraymultiprocessing.dummy.Array"(
 array.array[Any]
 Any"array.array*
@@ -503,14 +279,4 @@ typing._KT*Q
 freeze_support$multiprocessing.dummy.freeze_support"
 Nonez27z35z36z37z38z39z310Q
 shutdownmultiprocessing.dummy.shutdown"
-Nonez27z35z36z37z38z39z310*-
-arrayarray *27*35*36*37*38*39*310*5
-	threading	threading *27*35*36*37*38*39*310*1
-weakrefweakref *27*35*36*37*38*39*310*R
-Any
-typing.Any"
-builtins.object"builtins.object*27*35*36*37*38*39*310*d
-Optionaltyping.Optional*
-typing._SpecialForm"typing._SpecialForm*27*35*36*37*38*39*310*`
-Callabletyping.Callable*
-typing._SpecialForm"typing._SpecialForm*35*36*37*38*39*310
+Nonez27z35z36z37z38z39z310
