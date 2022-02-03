@@ -168,9 +168,16 @@ def test_actual_module_merge(fake_module_36_38):
 
     functions_dict = merged_fakemodule_module.functions
     assert len(functions_dict) == 5
+
     common_function_symbols = functions_dict['fakemodule.common_function']
     assert len(common_function_symbols) == 1
     assert common_function_symbols[0].valid_for == ["36", "38"]
+
+    common_function_wildcard_imported = functions_dict['fakemodule_imported.common_imported_func']
+    assert len(common_function_wildcard_imported) == 1
+    assert common_function_wildcard_imported[0].valid_for == ["36", "38"]
+
+    assert 'fakemodule_imported._private_func' not in functions_dict
 
     function_unique_36 = functions_dict['fakemodule.function_unique_36']
     assert len(function_unique_36) == 1
@@ -239,9 +246,9 @@ def test_actual_module_merge(fake_module_36_38):
     assert alias_symbol.type.kind == TypeKind.CALLABLE
     assert alias_symbol.type.pretty_printed_name == "CallableType[builtins.function]"
 
-    imported_sys = all_vars['sys']
-    assert len(imported_sys) == 1
-    assert imported_sys[0].var_symbol.is_imported_module is True
+    imported_math = all_vars['math']
+    assert len(imported_math) == 1
+    assert imported_math[0].var_symbol.is_imported_module is True
 
     fakemodule_class_with_fields_symbols = classes_dict['fakemodule.ClassWithFields']
     assert len(fakemodule_class_with_fields_symbols) == 1
@@ -317,7 +324,7 @@ def assert_abc_merged_module(merged_modules, expected_valid_for):
     assert isinstance(abc_merged_symbol, MergedModuleSymbol)
     assert abc_merged_symbol.fullname == "abc"
     assert ([c for c in abc_merged_symbol.classes]
-            == ['_typeshed.SupportsWrite', 'typing.TypeVar', 'abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
+            == ['abc.ABCMeta', 'abc.abstractproperty', 'abc.ABC'])
     for merged_class_proto in abc_merged_symbol.classes.values():
         assert len(merged_class_proto) == 1
         assert merged_class_proto[0].valid_for == expected_valid_for

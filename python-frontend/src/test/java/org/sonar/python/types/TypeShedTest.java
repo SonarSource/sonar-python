@@ -195,14 +195,18 @@ public class TypeShedTest {
   @Test
   public void package_relative_import() {
     Map<String, Symbol> osSymbols = symbolsForModule("os");
-    Symbol sysSymbol = osSymbols.get("sys");
-    assertThat(sysSymbol.kind()).isEqualTo(Kind.OTHER);
-    Set<String> sysExportedSymbols = symbolsForModule("sys").keySet();
-    assertThat(((SymbolImpl) sysSymbol).getChildrenSymbolByName().values()).extracting(Symbol::name).containsAll(sysExportedSymbols);
+    // The "import sys" is not part of the exported API (private import) in Typeshed
+    // See: https://github.com/python/typeshed/blob/master/CONTRIBUTING.md#conventions
+    assertThat(osSymbols).doesNotContainKey("sys");
 
-    Symbol timesResult = osSymbols.get("times_result");
-    assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
-    assertThat(timesResult.fullyQualifiedName()).isEqualTo("os.times_result");
+    Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
+    Symbol completeStatementFunction = sqlite3Symbols.get("complete_statement");
+    assertThat(completeStatementFunction.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(completeStatementFunction.fullyQualifiedName()).isEqualTo("sqlite3.dbapi2.complete_statement");
+    Set<String> sqlite3Dbapi2Symbols = symbolsForModule("sqlite3.dbapi2").keySet();
+    // Python names with a leading underscore are not imported when using wildcard imports
+    sqlite3Dbapi2Symbols.removeIf(s -> s.startsWith("_"));
+    assertThat(sqlite3Symbols.keySet()).containsAll(sqlite3Dbapi2Symbols);
 
     Map<String, Symbol> requestsSymbols = symbolsForModule("requests");
     Symbol requestSymbol = requestsSymbols.get("request");
@@ -296,8 +300,7 @@ public class TypeShedTest {
     Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"), tuple(Kind.OTHER, "annoy.Literal"),
-        tuple(Kind.CLASS, "annoy.Sized"), tuple(Kind.FUNCTION, "annoy.overload"), tuple(Kind.OTHER, "annoy.Protocol"));
+      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"));
 
     ClassSymbol vector = (ClassSymbol) deserializedAnnoySymbols.get("annoy._Vector");
     assertThat(vector.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)

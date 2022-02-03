@@ -1,6 +1,8 @@
 import sys
+import math as math
 from typing import overload
 from sys import flags as my_flags
+from fakemodule_imported import *
 
 if sys.version_info >= (3, 8):
     class SomeClassUnique38:

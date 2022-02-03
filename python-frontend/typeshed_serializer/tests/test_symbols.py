@@ -30,12 +30,12 @@ def test_module_symbol(typeshed_stdlib):
     abc_module = typeshed_stdlib.files.get("abc")
     module_symbol = symbols.ModuleSymbol(abc_module)
     assert module_symbol.fullname == "abc"
-    assert len(module_symbol.classes) == 5
+    assert len(module_symbol.classes) == 3
     assert len(module_symbol.functions) == 4
 
     pb_module = module_symbol.to_proto()
     assert pb_module.fully_qualified_name == "abc"
-    assert len(pb_module.classes) == 5
+    assert len(pb_module.classes) == 3
     assert len(pb_module.functions) == 4
     imported_modules = [imported_module for imported_module in pb_module.vars if
                         imported_module.is_imported_module is True]
@@ -45,9 +45,8 @@ def test_module_symbol(typeshed_stdlib):
     pb_module = symbols.ModuleSymbol(os_module).to_proto()
     imported_modules = [imported_module for imported_module in pb_module.vars if
                         imported_module.is_imported_module is True]
-    assert len(imported_modules) == 3
+    assert len(imported_modules) == 2
     imported_modules = map(lambda m: (m.fully_qualified_name, m.name), imported_modules)
-    assert ("sys", "sys") in imported_modules
     assert ("os.path", "_path") in imported_modules
     assert ("os.path", "path") in imported_modules
 
