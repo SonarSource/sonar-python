@@ -32,6 +32,8 @@ CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 
 
+# this is a test comment to trigger protobuf generation
+
 def get_options(python_version=(3, 8)):
     opt = options.Options()
     # Setting incremental to false to avoid issues with mypy caching
