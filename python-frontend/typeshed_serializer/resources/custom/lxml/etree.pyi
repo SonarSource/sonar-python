@@ -1,7 +1,7 @@
 from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-from xml.etree.ElementTree import ElementTree
-from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import ElementTree as ElementTree
+from xml.etree.ElementTree import Element as Element
 
 from typing import Any, List, Iterator
 

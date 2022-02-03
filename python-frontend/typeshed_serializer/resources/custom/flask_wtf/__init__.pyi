@@ -1,1 +1,1 @@
-from .csrf import CSRFProtect
+from .csrf import CSRFProtect as CSRFProtect
