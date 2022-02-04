@@ -82,6 +82,8 @@ build_task:
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
+    - mvn -f python-frontend/pom.xml protobuf:compile-python@generate-protobuf-python-sources
+    - tox -c python-frontend/typeshed_serializer/tox.ini -e test
     - regular_mvn_build_deploy_analyze
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
