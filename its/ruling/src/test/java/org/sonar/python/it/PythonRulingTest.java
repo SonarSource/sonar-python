@@ -22,7 +22,6 @@ package org.sonar.python.it;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.locator.FileLocation;
-import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Collections;
@@ -33,19 +32,14 @@ import org.sonarsource.analyzer.commons.ProfileGenerator;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 public class PythonRulingTest {
 
-  private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
-  private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
   public static final String PROJECT_KEY = "project";
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
-    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-    .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"))
-    .build();
+  public static final Orchestrator ORCHESTRATOR = getOrchestrator();
 
   @BeforeClass
   public static void prepare_quality_profile() {

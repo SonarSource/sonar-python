@@ -139,9 +139,33 @@ ruling_task:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/ruling
-    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V
+    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest
   cleanup_before_cache_script: cleanup_maven_repository
- 
+
+
+extended_ruling_task:
+  depends_on:
+    - build
+  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  gke_container:
+    <<: *CONTAINER_DEFINITION
+    cpu: 4
+    memory: 8G
+  env:
+    CIRRUS_CLONE_DEPTH: 10
+    SONARSOURCE_QA: true
+  maven_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  submodules_script:
+    - git submodule update --init
+  ruling_script:
+    - source cirrus-env QA
+    - source set_maven_build_version $BUILD_NUMBER
+    - cd its/ruling
+    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonExtendedRulingTest
+  cleanup_before_cache_script: cleanup_maven_repository
+
+
 promote_task:
   depends_on:
     - ruling
