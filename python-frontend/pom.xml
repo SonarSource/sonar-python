@@ -154,15 +154,6 @@
                   <goal>exec</goal>
                 </goals>
               </execution>
-              <execution>
-                <id>tox -e serialize</id>
-                <phase>generate-resources</phase>
-                <goals><goal>exec</goal></goals>
-                <configuration>
-                  <executable>tox</executable>
-                  <arguments>-e serialize</arguments>
-                </configuration>
-              </execution>
             </executions>
           </plugin>
           <plugin>
