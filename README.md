@@ -19,8 +19,9 @@ In order for it to work properly it needs to have Python runtime and [Typeshed](
 
 ### Profiles
 
-- `mvn clean install` : avoid running [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer) tests and build only Java maven modules
-- `mvn clean install -DgenerateTypeshed`: execute full build, run tests for [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer)
+- `mvn clean install` : execute full build, run tests for [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer)
+- `mvn clean install -DskipTypeshed`: avoid running [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer) tests and build only Java maven modules
+
 ## License
 
 Copyright 2011-2022 SonarSource.
