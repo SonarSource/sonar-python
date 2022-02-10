@@ -33,7 +33,7 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
     type: n1-standard-8
     use_ssd: true
 
-build_task:
+build_container_definition: &BUILD_CONTAINER_DEFINITION
   gke_container:
     dockerfile: .cirrus/python-env.Dockerfile
     builder_image_project: language-team
@@ -43,6 +43,9 @@ build_task:
     namespace: default
     cpu: 2
     memory: 2G
+
+build_task:
+  <<: *BUILD_CONTAINER_DEFINITION
   env:
     GITHUB_TOKEN: ENCRYPTED[!f458126aa9ed2ac526f220c5acb51dd9cc255726b34761a56fc78d4294c11089502a882888cef0ca7dd4085e72e611a5!]
     # analysis on next
@@ -76,10 +79,7 @@ build_win_task:
 ws_scan_task:
   depends_on:
     - build
-  gke_container:
-    <<: *CONTAINER_DEFINITION
-    cpu: 2
-    memory: 2G
+  <<: *BUILD_CONTAINER_DEFINITION
   # run only on master and long-term branches
   only_if: $CIRRUS_USER_COLLABORATOR == 'true' && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
   env:
