@@ -165,6 +165,8 @@ def type_annotations():
   def my_other_func(arg: Awaitable[bool]): ... # OK
   x: Awaitable[bool] # OK
   Awaitable[None]
+  from collections import Set
+  CustomSet = Set[str]
 
 def decorated_classes():
   import enum

@@ -57,7 +57,7 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     }
     if (subscriptionObject instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) subscriptionObject).symbol();
-      if (symbol == null || isTypingSymbol(symbol)) {
+      if (symbol == null || isTypingOrCollectionsSymbol(symbol)) {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
@@ -81,10 +81,10 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     return String.format("Fix this code; this expression does not have a \"%s\" method.", missingMethod);
   }
 
-  private static boolean isTypingSymbol(Symbol symbol) {
+  private static boolean isTypingOrCollectionsSymbol(Symbol symbol) {
     String fullyQualifiedName = symbol.fullyQualifiedName();
     // avoid FP for typing symbols like 'Awaitable[None]'
-    return fullyQualifiedName != null && fullyQualifiedName.startsWith("typing");
+    return fullyQualifiedName != null && (fullyQualifiedName.startsWith("typing") || fullyQualifiedName.startsWith("collections"));
   }
 
   private static boolean canHaveMethod(Symbol symbol, String requiredMethod, @Nullable String classRequiredMethod) {
