@@ -225,6 +225,7 @@ public final class CheckList {
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
       TempFileCreationCheck.class,
+      ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyParametersCheck.class,
       TooManyReturnsCheck.class,
