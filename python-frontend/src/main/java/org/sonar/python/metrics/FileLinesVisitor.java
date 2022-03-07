@@ -146,6 +146,11 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     }
   }
 
+  public static boolean containsNoSonarComment(Trivia trivia){
+    String commentLine = getContents(trivia.token().value());
+    return commentLine.contains("NOSONAR");
+  }
+
   @Override
   public void leaveFile() {
     // account for the docstring lines

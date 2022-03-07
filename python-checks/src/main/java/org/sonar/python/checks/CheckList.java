@@ -186,6 +186,7 @@ public final class CheckList {
       NonStringInAllPropertyCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
+      NoSonarCommentCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
