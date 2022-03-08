@@ -22,11 +22,13 @@ package com.sonar.python.it.plugin;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.Tests.getMeasureAsInt;
+import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
@@ -52,12 +54,11 @@ public class NoSonarTest {
 
   @Test
   public void test_nosonar() {
-    assertThat(getProjectMeasureAsInt("violations")).isEqualTo(1);
-  }
-
-  /* Helper methods */
-
-  private Integer getProjectMeasureAsInt(String metricKey) {
-    return getMeasureAsInt(PROJECT_KEY, metricKey);
+    List<Issues.Issue> issues = issues(PROJECT_KEY);
+    assertThat(issues).hasSize(2);
+    assertThat(issues.get(0).getRule()).isEqualTo("python:PrintStatementUsage");
+    assertThat(issues.get(0).getLine()).isEqualTo(1);
+    assertThat(issues.get(1).getRule()).isEqualTo("python:NoSonar");
+    assertThat(issues.get(1).getLine()).isEqualTo(2);
   }
 }

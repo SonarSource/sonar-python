@@ -31,15 +31,15 @@ import java.util.stream.Collectors;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures.ComponentWsResponse;
 import org.sonarqube.ws.Measures.Measure;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
+import org.sonarqube.ws.client.issues.SearchRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
 
-import static com.sonar.orchestrator.container.Server.ADMIN_LOGIN;
-import static com.sonar.orchestrator.container.Server.ADMIN_PASSWORD;
 import static java.lang.Double.parseDouble;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -123,10 +123,6 @@ public final class Tests {
     return newWsClient(null, null);
   }
 
-  static WsClient newAdminWsClient() {
-    return newWsClient(ADMIN_LOGIN, ADMIN_PASSWORD);
-  }
-
   static WsClient newWsClient(String login, String password) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(ORCHESTRATOR.getServer().getUrl())
@@ -134,4 +130,7 @@ public final class Tests {
       .build());
   }
 
+  static List<Issues.Issue> issues(String projectKey) {
+    return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(projectKey))).getIssuesList();
+  }
 }
