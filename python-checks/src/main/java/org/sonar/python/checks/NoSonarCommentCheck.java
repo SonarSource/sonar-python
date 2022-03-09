@@ -32,7 +32,7 @@ import static org.sonar.python.metrics.FileLinesVisitor.containsNoSonarComment;
 
 public class NoSonarCommentCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Is //NOSONAR used to exclude false-positive or to hide real quality flaw ?";
+  private static final String MESSAGE = "Is //NOSONAR used to exclude false-positive or to hide real quality flaw?";
 
   @Override
   public void initialize(Context context) {
