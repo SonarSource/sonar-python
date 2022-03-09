@@ -1,0 +1,23 @@
+<p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def do_something(a, b):  # `a` is unused
+  return compute(b)
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def do_something(b):
+  return compute(b)
+</pre>
+<h2>Exceptions</h2>
+<p>Functions in classes that override a class or implement interfaces are ignored.</p>
+<pre>
+class Parent(object):
+  def get_value(self, a, b):
+    return compute(a + b);
+
+class Child(Patent):
+  def get_value(self, a, b):
+    return compute(b)
+</pre>
+
