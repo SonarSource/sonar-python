@@ -46,7 +46,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     }
     if (negatedExpr.is(Tree.Kind.COMPARISON)) {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
-      if(binaryExp.leftOperand().getKind() != Tree.Kind.COMPARISON && binaryExp.rightOperand().getKind() != Tree.Kind.COMPARISON ) {
+      if(!(binaryExp.leftOperand().getKind().equals(Tree.Kind.COMPARISON)  || binaryExp.rightOperand().getKind().equals(Tree.Kind.COMPARISON))) {
         ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(((BinaryExpression) negatedExpr).operator())));
       }
     }
@@ -55,13 +55,27 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   private static String oppositeOperator(Token operator){
     String s;
     switch (operator.value()){
-      case ">"  : s = "<=";     break;
-      case ">=" : s = "<";      break;
-      case "<"  : s = ">=";     break;
-      case "<=" : s = ">";      break;
-      case "==" : s = "!=";     break;
-      case "!=" : s = "==";     break;
-      default   : s = "unknown";break;
+      case ">"  :
+        s = "<=";
+        break;
+      case ">=" :
+        s = "<";
+        break;
+      case "<"  :
+        s = ">=";
+        break;
+      case "<=" :
+        s = ">";
+        break;
+      case "==" :
+        s = "!=";
+        break;
+      case "!=" :
+        s = "==";
+        break;
+      default   :
+        s = "unknown";
+        break;
     }
     return s;
   }
