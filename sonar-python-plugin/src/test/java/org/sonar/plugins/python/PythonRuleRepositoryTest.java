@@ -25,8 +25,13 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.utils.Version;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,6 +61,19 @@ public class PythonRuleRepositoryTest {
       assertThat(rule.htmlDescription()).isNotEmpty();
       rule.params().forEach(p -> assertThat(p.description()).isNotEmpty());
     }
+  }
+
+  @Test
+  public void owaspSecurityStandard() {
+    RulesDefinition.Repository repository_9_3 = buildRepository(9, 3);
+    RulesDefinition.Rule s4721_9_3 = repository_9_3.rule("S4721");
+    assertThat(s4721_9_3).isNotNull();
+    assertThat(s4721_9_3.securityStandards()).contains("owaspTop10-2021:a3");
+
+    RulesDefinition.Repository repository_9_2 = buildRepository(9, 2);
+    RulesDefinition.Rule s4721_9_2 = repository_9_2.rule("S4721");
+    assertThat(s4721_9_2).isNotNull();
+    assertThat(s4721_9_2.securityStandards()).doesNotContain("owaspTop10-2021:a3");
   }
 
   private List<String> nonAbstractCheckFiles() throws IOException {
@@ -98,7 +116,12 @@ public class PythonRuleRepositoryTest {
   }
 
   private static RulesDefinition.Repository buildRepository() {
-    PythonRuleRepository ruleRepository = new PythonRuleRepository();
+    return buildRepository(9, 3);
+  }
+
+  private static RulesDefinition.Repository buildRepository(int majorVersion, int minorVersion) {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
+    PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.REPOSITORY_KEY);
