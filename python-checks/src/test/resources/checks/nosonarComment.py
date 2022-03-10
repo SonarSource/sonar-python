@@ -1,5 +1,6 @@
 def divide(numerator, denominator):
-# Noncompliant@+1
+# NonCompliant@+1
+# Noncompliant@+1 {{Is #NOSONAR used to exclude false-positive or to hide real quality flaw?}}
     return numerator / denominator              # NOSONAR denominator value might be 0
 #                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # Noncompliant@+1
