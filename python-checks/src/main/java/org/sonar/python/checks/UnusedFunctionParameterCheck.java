@@ -19,15 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -36,36 +31,26 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.SymbolUtils;
 
 @Rule(key = "S1172")
-public class UnusedFunctionParametersCheck extends PythonSubscriptionCheck {
+public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove the unused function parameter \"%s\".";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkFunctionParameter(ctx, ((FunctionDef) ctx.syntaxNode()), ((FunctionDef) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkFunctionParameter(ctx, ((FunctionDef) ctx.syntaxNode())));
   }
 
-  private static void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef, Set<Symbol> symbols) {
-    if (CheckUtils.isCallingLocalsFunction(functionDef) || maybeOverridingMethod(functionDef) || isInterfaceMethod(functionDef)) {
+  private static void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef) {
+    if (CheckUtils.containsCallToLocalsFunction(functionDef) || maybeOverridingMethod(functionDef) || isInterfaceMethod(functionDef)) {
       return;
     }
 
-    symbols.stream()
-      .map(UnusedFunctionParametersCheck::getUnusedParameter)
-      .filter(Objects::nonNull)
+    functionDef.localVariables().stream()
+      .filter(symbol -> !"self".equals(symbol.name()))
+      .map(Symbol::usages)
+      .filter(usages -> usages.size() == 1 && usages.get(0).tree().parent().is(Kind.PARAMETER))
+      .map(usages -> (Parameter) usages.get(0).tree().parent())
       .forEach(param -> ctx.addIssue(param, String.format(MESSAGE, param.name().name())));
-  }
-
-  @CheckForNull
-  private static Parameter getUnusedParameter(Symbol symbol) {
-    if ("self".equals(symbol.name())) {
-      return null;
-    }
-    List<Usage> usages = symbol.usages();
-    if (usages.size() == 1 && usages.get(0).tree().parent().is(Kind.PARAMETER)) {
-      return (Parameter) usages.get(0).tree().parent();
-    }
-    return null;
   }
 
   private static boolean isInterfaceMethod(FunctionDef functionDef) {

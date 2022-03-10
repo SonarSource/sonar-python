@@ -22,11 +22,11 @@ package org.sonar.python.checks;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnusedFunctionParametersCheckTest {
+public class UnusedFunctionParameterCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/unusedFunctionParameters.py", new UnusedFunctionParametersCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/unusedFunctionParameter.py", new UnusedFunctionParameterCheck());
   }
 
 }

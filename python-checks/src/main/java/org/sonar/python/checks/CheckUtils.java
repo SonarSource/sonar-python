@@ -96,7 +96,7 @@ public class CheckUtils {
     return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().value());
   }
 
-  public static boolean isCallingLocalsFunction(Tree tree) {
+  public static boolean containsCallToLocalsFunction(Tree tree) {
     return TreeUtils.hasDescendant(tree, t -> t.is(Tree.Kind.CALL_EXPR) && calleeHasNameLocals(((CallExpression) t)));
   }
 

@@ -52,7 +52,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
     // https://docs.python.org/3/library/functions.html#locals
-    if (CheckUtils.isCallingLocalsFunction(functionTree)) {
+    if (CheckUtils.containsCallToLocalsFunction(functionTree)) {
       return;
     }
     symbols.stream()
