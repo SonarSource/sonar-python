@@ -23,14 +23,10 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
-import java.util.List;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonarqube.ws.Issues.Issue;
-import org.sonarqube.ws.client.issues.SearchRequest;
 
-import static com.sonar.python.it.plugin.Tests.newWsClient;
-import static java.util.Collections.singletonList;
+import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintReportTest {
@@ -82,10 +78,6 @@ public class PylintReportTest {
     final String projectKey = "pylint_project_multiple_reports";
     analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "pylint-report.txt, rule-unknown.txt");
     assertThat(issues(projectKey)).hasSize(8);
-  }
-
-  private static List<Issue> issues(String projectKey) {
-    return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(projectKey))).getIssuesList();
   }
 
   private static BuildResult analyseProjectWithReport(String projectKey, String property, String reportPaths) {

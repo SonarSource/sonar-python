@@ -27,10 +27,8 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
-import org.sonarqube.ws.client.issues.SearchRequest;
 
-import static com.sonar.python.it.plugin.Tests.newWsClient;
-import static java.util.Collections.singletonList;
+import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Flake8ReportTest {
@@ -48,7 +46,7 @@ public class Flake8ReportTest {
       SonarScanner.create()
         .setProjectDir(new File("projects/flake8_project")));
 
-    List<Issues.Issue> issues = issues();
+    List<Issues.Issue> issues = issues(PROJECT);
     assertThat(issues).hasSize(5);
     Issues.Issue issue = issues.get(0);
     assertThat(issue.getComponent()).isEqualTo("flake8_project:src/file1.py");
@@ -68,7 +66,4 @@ public class Flake8ReportTest {
     assertThat(issue.getEffort()).isEqualTo("5min");
   }
 
-  private static List<Issues.Issue> issues() {
-    return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
-  }
 }
