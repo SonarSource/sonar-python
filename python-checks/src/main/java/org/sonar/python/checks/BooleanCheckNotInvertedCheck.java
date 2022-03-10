@@ -46,11 +46,11 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     while (negatedExpr.is(Tree.Kind.PARENTHESIZED)) {
       negatedExpr = ((ParenthesizedExpression) negatedExpr).expression();
     }
-    if (negatedExpr.is(Tree.Kind.COMPARISON)) {
+    if(negatedExpr.is(Tree.Kind.COMPARISON)) {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
-      // Don't raise warning with "not a == b == c" because a != b == c is not equivalent
-      if (!(binaryExp.leftOperand().getKind().equals(Tree.Kind.COMPARISON) || binaryExp.rightOperand().getKind().equals(Tree.Kind.COMPARISON))) {
-        ctx.addIssue(original, String.format(MESSAGE, oppositeOperator((binaryExp.operator()))));
+      // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
+      if(!binaryExp.leftOperand().is(Tree.Kind.COMPARISON)) {
+        ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(binaryExp.operator())));
       }
     } else if(negatedExpr.is(Tree.Kind.IN) || negatedExpr.is(Tree.Kind.IS) ) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
@@ -64,15 +64,15 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
 
   private static String oppositeOperator(Token operator, Expression expr){
     String s = operator.value();
-    if(expr.getKind() == Tree.Kind.IS && ((IsExpression) expr).notToken() != null){
-        s = s + " not";
-    } else if(expr.getKind() == Tree.Kind.IN && ((InExpression) expr).notToken() != null){
-        s = "not " + s;
+    if(expr.is(Tree.Kind.IS) && ((IsExpression) expr).notToken() != null){
+      s = s + " not";
+    } else if(expr.is(Tree.Kind.IN) && ((InExpression) expr).notToken() != null){
+      s = "not " + s;
     }
     return oppositeOperatorString(s);
   }
 
-  private static String oppositeOperatorString(String stringOperator){
+  static String oppositeOperatorString(String stringOperator){
     switch (stringOperator){
       case ">"  :
         return "<=";
@@ -95,7 +95,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       case "not in":
         return "in";
       default   :
-        return "unknown";
+        throw new IllegalArgumentException("Unknown comparison operator : " + stringOperator);
     }
   }
 }

@@ -19,13 +19,33 @@
  */
 package org.sonar.python.checks;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BooleanCheckNotInvertedCheckTest {
 
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/booleanCheckNotInverted.py", new BooleanCheckNotInvertedCheck());
+  }
+
+  @Test
+  public void operatorStringTest() {
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("==")).isEqualTo("!=");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("!=")).isEqualTo("==");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("<")).isEqualTo(">=");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("<=")).isEqualTo(">");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString(">")).isEqualTo("<=");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString(">=")).isEqualTo("<");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("is")).isEqualTo("is not");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("is not")).isEqualTo("is");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("in")).isEqualTo("not in");
+    assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("not in")).isEqualTo("in");
+
+    Assertions.assertThatThrownBy(() -> BooleanCheckNotInvertedCheck.oppositeOperatorString("-")).isInstanceOf(IllegalArgumentException.class);
+    Assertions.assertThatThrownBy(() -> BooleanCheckNotInvertedCheck.oppositeOperatorString("*")).isInstanceOf(IllegalArgumentException.class);
   }
 }
