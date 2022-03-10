@@ -45,7 +45,7 @@ public class UnusedFunctionParametersCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkFunctionParameter(ctx, ((FunctionDef) ctx.syntaxNode()), ((FunctionDef) ctx.syntaxNode()).localVariables()));
   }
 
-  private void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef, Set<Symbol> symbols) {
+  private static void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef, Set<Symbol> symbols) {
     if (CheckUtils.isCallingLocalsFunction(functionDef) || maybeOverridingMethod(functionDef) || isInterfaceMethod(functionDef)) {
       return;
     }
@@ -81,7 +81,7 @@ public class UnusedFunctionParametersCheck extends PythonSubscriptionCheck {
   private static boolean maybeOverridingMethod(FunctionDef functionDef) {
     if (functionDef.isMethodDefinition() && !SymbolUtils.isPrivateName(functionDef.name().name())) {
       ClassDef classDef = CheckUtils.getParentClassDef(functionDef);
-      return classDef != null && classDef.args() != null && !classDef.args().arguments().isEmpty();
+      return classDef != null && classDef.args() != null;
     }
     return false;
   }

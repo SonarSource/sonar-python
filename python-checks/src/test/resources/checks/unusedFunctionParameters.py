@@ -46,5 +46,9 @@ class AnotherChild(UnknownParent):
         return compute(b)
 
 class ClassWithoutArgs:
-    def do_something(self, a, b): # Noncompliant
+    def do_something(self, a, b):  # Noncompliant
+        return compute(b)
+
+class ClassWithoutArgs2():
+    def do_something(self, a, b):  # Noncompliant
         return compute(b)
