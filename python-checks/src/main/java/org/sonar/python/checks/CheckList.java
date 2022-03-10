@@ -242,6 +242,7 @@ public final class CheckList {
       UnreadPrivateMethodsCheck.class,
       UnsafeHttpMethodsCheck.class,
       UndefinedSymbolsCheck.class,
+      UnusedFunctionParameterCheck.class,
       UnusedLocalVariableCheck.class,
       UnusedNestedDefinitionCheck.class,
       UnverifiedHostnameCheck.class,

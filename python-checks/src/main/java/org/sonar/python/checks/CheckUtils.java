@@ -20,12 +20,17 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.tree.TreeUtils;
 
 public class CheckUtils {
 
@@ -65,6 +70,7 @@ public class CheckUtils {
       leftLeaf.firstToken().value().equals(rightLeaf.firstToken().value());
   }
 
+  @CheckForNull
   public static ClassDef getParentClassDef(Tree tree) {
     Tree current = tree.parent();
     while (current != null) {
@@ -88,5 +94,14 @@ public class CheckUtils {
       return false;
     }
     return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().value());
+  }
+
+  public static boolean containsCallToLocalsFunction(Tree tree) {
+    return TreeUtils.hasDescendant(tree, t -> t.is(Tree.Kind.CALL_EXPR) && calleeHasNameLocals(((CallExpression) t)));
+  }
+
+  private static boolean calleeHasNameLocals(CallExpression callExpression) {
+    Expression callee = callExpression.callee();
+    return callee.is(Tree.Kind.NAME) && "locals".equals(((Name) callee).name());
   }
 }
