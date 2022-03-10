@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.InExpression;
+import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -46,38 +48,54 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     }
     if (negatedExpr.is(Tree.Kind.COMPARISON)) {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
-      if(!(binaryExp.leftOperand().getKind().equals(Tree.Kind.COMPARISON)  || binaryExp.rightOperand().getKind().equals(Tree.Kind.COMPARISON))) {
-        ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(((BinaryExpression) negatedExpr).operator())));
+      // Don't raise warning with "not a == b == c" because a != b == c is not equivalent
+      if (!(binaryExp.leftOperand().getKind().equals(Tree.Kind.COMPARISON) || binaryExp.rightOperand().getKind().equals(Tree.Kind.COMPARISON))) {
+        ctx.addIssue(original, String.format(MESSAGE, oppositeOperator((binaryExp.operator()))));
       }
+    } else if(negatedExpr.is(Tree.Kind.IN) || negatedExpr.is(Tree.Kind.IS) ) {
+      BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
+      ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(isInExpr.operator(), isInExpr)));
     }
   }
 
   private static String oppositeOperator(Token operator){
-    String s;
-    switch (operator.value()){
-      case ">"  :
-        s = "<=";
-        break;
-      case ">=" :
-        s = "<";
-        break;
-      case "<"  :
-        s = ">=";
-        break;
-      case "<=" :
-        s = ">";
-        break;
-      case "==" :
-        s = "!=";
-        break;
-      case "!=" :
-        s = "==";
-        break;
-      default   :
-        s = "unknown";
-        break;
-    }
-    return s;
+    return oppositeOperatorString(operator.value());
   }
 
+  private static String oppositeOperator(Token operator, Expression expr){
+    String s = operator.value();
+    if(expr.getKind() == Tree.Kind.IS && ((IsExpression) expr).notToken() != null){
+        s = s + " not";
+    } else if(expr.getKind() == Tree.Kind.IN && ((InExpression) expr).notToken() != null){
+        s = "not " + s;
+    }
+    return oppositeOperatorString(s);
+  }
+
+  private static String oppositeOperatorString(String stringOperator){
+    switch (stringOperator){
+      case ">"  :
+        return "<=";
+      case ">=" :
+        return "<";
+      case "<"  :
+        return ">=";
+      case "<=" :
+        return ">";
+      case "==" :
+        return "!=";
+      case "!=" :
+        return "==";
+      case "is" :
+        return "is not";
+      case "is not":
+        return "is";
+      case "in" :
+        return "not in";
+      case "not in":
+        return "in";
+      default   :
+        return "unknown";
+    }
+  }
 }
