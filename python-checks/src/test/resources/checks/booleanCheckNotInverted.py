@@ -39,7 +39,8 @@ t = not (a is b)  # Noncompliant {{Use the opposite operator ("is not") instead.
 #   ^^^^^^^^^^^^
 u = not (a is not b)  # Noncompliant {{Use the opposite operator ("is") instead.}}
 #   ^^^^^^^^^^^^^^^^
-v = not (a is (not b))  # Noncompliant
+v = not (a is (not b))  # Noncompliant {{Use the opposite operator ("is not") instead.}}
+#   ^^^^^^^^^^^^^^^^^^
 x = a is not (not b)
 
 list_ = [0, 2, 3]
