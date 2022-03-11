@@ -81,6 +81,7 @@ public final class CheckList {
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
       BooleanExpressionInExceptCheck.class,
+      BooleanCheckNotInvertedCheck.class,
       BreakContinueOutsideLoopCheck.class,
       BuiltinShadowingAssignmentCheck.class,
       CaughtExceptionsCheck.class,
