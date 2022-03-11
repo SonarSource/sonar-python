@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 
 @Rule(key = "S1940")
@@ -38,21 +38,21 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.NOT, ctx -> checkNotOutsideParentheses(ctx, (UnaryExpression) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Kind.NOT, ctx -> checkNotExpression(ctx, (UnaryExpression) ctx.syntaxNode()));
   }
 
-  private static void checkNotOutsideParentheses(SubscriptionContext ctx, UnaryExpression original) {
+  private static void checkNotExpression(SubscriptionContext ctx, UnaryExpression original) {
     Expression negatedExpr = original.expression();
-    while (negatedExpr.is(Tree.Kind.PARENTHESIZED)) {
+    while (negatedExpr.is(Kind.PARENTHESIZED)) {
       negatedExpr = ((ParenthesizedExpression) negatedExpr).expression();
     }
-    if(negatedExpr.is(Tree.Kind.COMPARISON)) {
+    if(negatedExpr.is(Kind.COMPARISON)) {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
-      if(!binaryExp.leftOperand().is(Tree.Kind.COMPARISON)) {
+      if(!binaryExp.leftOperand().is(Kind.COMPARISON)) {
         ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(binaryExp.operator())));
       }
-    } else if(negatedExpr.is(Tree.Kind.IN) || negatedExpr.is(Tree.Kind.IS) ) {
+    } else if(negatedExpr.is(Kind.IN, Kind.IS) ) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
       ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(isInExpr.operator(), isInExpr)));
     }
@@ -64,9 +64,9 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
 
   private static String oppositeOperator(Token operator, Expression expr){
     String s = operator.value();
-    if(expr.is(Tree.Kind.IS) && ((IsExpression) expr).notToken() != null){
+    if(expr.is(Kind.IS) && ((IsExpression) expr).notToken() != null){
       s = s + " not";
-    } else if(expr.is(Tree.Kind.IN) && ((InExpression) expr).notToken() != null){
+    } else if(expr.is(Kind.IN) && ((InExpression) expr).notToken() != null){
       s = "not " + s;
     }
     return oppositeOperatorString(s);

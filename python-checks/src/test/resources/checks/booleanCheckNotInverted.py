@@ -26,10 +26,10 @@ o = not a == b  # Noncompliant
 
 m = not a == b == 1
 
-n = not (not (a == b))  # Noncompliant
-
-p = not (1 == a == b) == 2 # Noncompliant
-
+n = not (not (a == b))  # Noncompliant {{Use the opposite operator ("!=") instead.}}
+#        ^^^^^^^^^^^^
+p = not (1 == a == b) == 2 # Noncompliant {{Use the opposite operator ("!=") instead.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^
 q = not (a == 1) == b == c == (d and e)
 
 r = not (a and 1) == b == c == (d and e)
@@ -37,8 +37,8 @@ s = a is not b
 
 t = not (a is b)  # Noncompliant {{Use the opposite operator ("is not") instead.}}
 #   ^^^^^^^^^^^^
-u = not (a is not b)  # Noncompliant
-
+u = not (a is not b)  # Noncompliant {{Use the opposite operator ("is") instead.}}
+#   ^^^^^^^^^^^^^^^^
 v = not (a is (not b))  # Noncompliant
 x = a is not (not b)
 
