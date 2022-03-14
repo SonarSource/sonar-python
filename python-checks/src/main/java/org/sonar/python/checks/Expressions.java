@@ -74,6 +74,26 @@ public class Expressions {
     }
   }
 
+  // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
+  public static boolean isTruthy(@Nullable Expression expression) {
+    if (expression == null) {
+      return false;
+    }
+    switch (expression.getKind()) {
+      case NAME:
+        return "True".equals(((Name) expression).name());
+      case STRING_LITERAL:
+      case NUMERIC_LITERAL:
+      case LIST_LITERAL:
+      case TUPLE:
+      case SET_LITERAL:
+      case DICTIONARY_LITERAL:
+        return !isFalsy(expression);
+      default:
+        return false;
+    }
+  }
+
   public static Expression singleAssignedValue(Name name) {
     Symbol symbol = name.symbol();
     if (symbol == null) {

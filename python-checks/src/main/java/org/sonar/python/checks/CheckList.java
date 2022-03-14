@@ -100,6 +100,7 @@ public final class CheckList {
       ComparisonToNoneCheck.class,
       ConfusingTypeCheckingCheck.class,
       ConfusingWalrusCheck.class,
+      ConsistentReturnCheck.class,
       ConstantConditionCheck.class,
       CorsCheck.class,
       CsrfDisabledCheck.class,

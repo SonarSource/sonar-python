@@ -36,6 +36,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.checks.Expressions.isFalsy;
+import static org.sonar.python.checks.Expressions.isTruthy;
 import static org.sonar.python.checks.Expressions.removeParentheses;
 import static org.sonar.python.checks.Expressions.unescape;
 import static org.sonar.python.checks.Expressions.unescapeString;
@@ -70,13 +71,38 @@ public class ExpressionsTest {
 
     assertThat(isFalsy(exp("[x]"))).isFalse();
     assertThat(isFalsy(exp("[]"))).isTrue();
-    assertThat(isFalsy(exp("(x)"))).isFalse();
+    assertThat(isFalsy(exp("(x,)"))).isFalse();
     assertThat(isFalsy(exp("()"))).isTrue();
     assertThat(isFalsy(exp("{x:y}"))).isFalse();
     assertThat(isFalsy(exp("{x}"))).isFalse();
     assertThat(isFalsy(exp("{}"))).isTrue();
 
     assertThat(isFalsy(exp("x.y"))).isFalse();
+  }
+
+  @Test
+  public void truthy() {
+    assertThat(isTruthy(null)).isFalse();
+
+    assertThat(isTruthy(exp("True"))).isTrue();
+    assertThat(isTruthy(exp("False"))).isFalse();
+    assertThat(isTruthy(exp("x"))).isFalse();
+    assertThat(isTruthy(exp("None"))).isFalse();
+
+    assertThat(isTruthy(exp("0"))).isFalse();
+    assertThat(isTruthy(exp("1"))).isTrue();
+    assertThat(isTruthy(exp("42"))).isTrue();
+
+    assertThat(isTruthy(exp("''"))).isFalse();
+    assertThat(isTruthy(exp("'0'"))).isTrue();
+
+    assertThat(isTruthy(exp("[x]"))).isTrue();
+    assertThat(isTruthy(exp("[]"))).isFalse();
+    assertThat(isTruthy(exp("(x,)"))).isTrue();
+    assertThat(isTruthy(exp("()"))).isFalse();
+    assertThat(isTruthy(exp("{x:y}"))).isTrue();
+    assertThat(isTruthy(exp("{x}"))).isTrue();
+    assertThat(isTruthy(exp("{}"))).isFalse();
   }
 
   @Test
