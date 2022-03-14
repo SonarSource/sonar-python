@@ -56,11 +56,11 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
     Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT);
 
-  private Set<Integer> noSonar = new HashSet<>();
-  private Set<Integer> linesOfCode = new HashSet<>();
-  private Set<Integer> linesOfComments = new HashSet<>();
-  private Set<Integer> linesOfDocstring = new HashSet<>();
-  private Set<Integer> executableLines = new HashSet<>();
+  private final Set<Integer> noSonar = new HashSet<>();
+  private final Set<Integer> linesOfCode = new HashSet<>();
+  private final Set<Integer> linesOfComments = new HashSet<>();
+  private final Set<Integer> linesOfDocstring = new HashSet<>();
+  private final Set<Integer> executableLines = new HashSet<>();
   private int statements = 0;
   private int classDefs = 0;
 
@@ -101,15 +101,21 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     }
   }
 
-  private void handleDocString(@Nullable StringLiteral docstring) {
+  protected void handleDocString(@Nullable StringLiteral docstring) {
+    linesOfDocstring.addAll(countDocstringLines(docstring));
+  }
+
+  public static Set<Integer> countDocstringLines(@Nullable StringLiteral docstring) {
+    Set<Integer> lines = new HashSet<>();
     if (docstring != null) {
       for (Tree stringElement : docstring.children()) {
         TokenLocation location = new TokenLocation(stringElement.firstToken());
         for (int line = location.startLine(); line <= location.endLine(); line++) {
-          linesOfDocstring.add(line);
+          lines.add(line);
         }
       }
     }
+    return lines;
   }
 
   /**
@@ -121,18 +127,24 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
       return;
     }
 
+    linesOfCode.addAll(tokenLineNumbers(token));
+
+    for (Trivia trivia : token.trivia()) {
+      visitComment(trivia, token);
+    }
+  }
+
+  public static Set<Integer> tokenLineNumbers(Token token) {
+    Set<Integer> lines = new HashSet<>();
     if (!token.type().equals(PythonTokenType.DEDENT) && !token.type().equals(PythonTokenType.INDENT) && !token.type().equals(PythonTokenType.NEWLINE)) {
       // Handle all the lines of the token
       String[] tokenLines = token.value().split("\n", -1);
       int tokenLine = token.line();
       for (int line = tokenLine; line < tokenLine + tokenLines.length; line++) {
-        linesOfCode.add(line);
+        lines.add(line);
       }
     }
-
-    for (Trivia trivia : token.trivia()) {
-      visitComment(trivia, token);
-    }
+    return lines;
   }
 
   private void visitComment(Trivia trivia, Token parentToken) {

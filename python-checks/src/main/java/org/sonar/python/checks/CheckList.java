@@ -229,6 +229,7 @@ public final class CheckList {
       TempFileCreationCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
+      TooManyLinesInFunctionCheck.class,
       TooManyParametersCheck.class,
       TooManyReturnsCheck.class,
       TrailingCommentCheck.class,
