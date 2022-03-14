@@ -14,6 +14,6 @@ h = ~(a and not b)
 i = not a and ~b
 
 j = not (not (a is not b))  # Noncompliant {{Use the ("not") operator just once or not at all.?}}
-#   ^^^^^^^^^^^^^^^^^^^^^
+#   ^^^^^^^^^^^^^^^^^^^^^^
 
 k = not (~a)
