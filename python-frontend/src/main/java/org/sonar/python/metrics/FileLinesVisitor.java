@@ -127,14 +127,14 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
       return;
     }
 
-    linesOfCode.addAll(countTokenLines(token));
+    linesOfCode.addAll(tokenLineNumbers(token));
 
     for (Trivia trivia : token.trivia()) {
       visitComment(trivia, token);
     }
   }
 
-  public static Set<Integer> countTokenLines(Token token) {
+  public static Set<Integer> tokenLineNumbers(Token token) {
     Set<Integer> lines = new HashSet<>();
     if (!token.type().equals(PythonTokenType.DEDENT) && !token.type().equals(PythonTokenType.INDENT) && !token.type().equals(PythonTokenType.NEWLINE)) {
       // Handle all the lines of the token

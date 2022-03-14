@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -31,7 +32,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.sonar.python.metrics.FileLinesVisitor.countDocstringLines;
-import static org.sonar.python.metrics.FileLinesVisitor.countTokenLines;
+import static org.sonar.python.metrics.FileLinesVisitor.tokenLineNumbers;
 
 @Rule(key = "S138")
 public class TooManyLinesInFunctionCheck extends PythonSubscriptionCheck {
@@ -82,13 +83,12 @@ public class TooManyLinesInFunctionCheck extends PythonSubscriptionCheck {
       while (!stack.isEmpty()) {
         Tree currentElement = stack.pop();
         if (currentElement.is(Tree.Kind.TOKEN)) {
-          linesOfCode.addAll(countTokenLines((Token) currentElement));
+          linesOfCode.addAll(tokenLineNumbers((Token) currentElement));
         }
-        for (int i = currentElement.children().size() - 1; i >= 0; i--) {
-          if (currentElement.children().get(i) != null) {
-            stack.push(currentElement.children().get(i));
-          }
-        }
+
+        currentElement.children()
+          .stream().filter(Objects::nonNull)
+          .forEach(stack::push);
       }
     }
   }
