@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.types.InferredTypes;
 
 
 @Rule(key = "S2761")
@@ -33,6 +34,7 @@ import org.sonar.plugins.python.api.tree.UnaryExpression;
 public class DoublePrefixOperatorCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use the (\"%s\") operator just once or not at all.?";
+  private static final String MESSAGE_NOT = "Use the \"bool()\" builtin function instead of calling \"not\" twice.";
 
   @Override
   public void initialize(Context context) {
@@ -42,12 +44,26 @@ public class DoublePrefixOperatorCheck extends PythonSubscriptionCheck {
 
   private static void doubleInversionCheck(SubscriptionContext ctx, UnaryExpression original) {
     Expression invertedExpr = original.expression();
+    boolean doubleInversionFollowed = true;
     while (invertedExpr.is(Tree.Kind.PARENTHESIZED)) {
+      doubleInversionFollowed = false;
       invertedExpr = ((ParenthesizedExpression) invertedExpr).expression();
     }
+
     if(invertedExpr.is(Tree.Kind.NOT, Tree.Kind.BITWISE_COMPLEMENT) && original.is(invertedExpr.getKind())) {
-      ctx.addIssue(original, String.format(MESSAGE, original.operator().value()));
+      if(doubleInversionFollowed){
+        if(invertedExpr.is(Tree.Kind.NOT)){
+          ctx.addIssue(original, MESSAGE_NOT);
+        }else{
+          // Inferred BITWISE_COMPLEMENT; type() allows to get the type inside parentheses
+          if(((UnaryExpression) invertedExpr).expression().type() == InferredTypes.INT){
+            ctx.addIssue(original, String.format(MESSAGE, original.operator().value()));
+          }
+          // Overloaded __invert__ should not raise any warning
+        }
+      }else{
+        ctx.addIssue(original, String.format(MESSAGE, original.operator().value()));
+      }
     }
   }
 }
-
