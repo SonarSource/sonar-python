@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Objects;
+import javax.annotation.Nullable;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
@@ -37,10 +38,11 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.ClassDefImpl;
 
-import javax.annotation.Nullable;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
+import static org.sonar.python.PythonTestUtils.getLastDescendant;
+import static org.sonar.python.PythonTestUtils.lastFunctionSymbolWithName;
+import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -143,15 +145,51 @@ public class SymbolUtilsTest {
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
     FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
     assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo2)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo3)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo3)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo4)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo4)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo5)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
+    assertThat(SymbolUtils.canOverrideMethod(foo5_override)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo6)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo7)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo7)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo8)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo8)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
+    assertThat(SymbolUtils.canOverrideMethod(foo_int)).isTrue();
+
+    assertThat(SymbolUtils.canOverrideMethod(null)).isFalse();
+    String[] strings = {
+      "class F:",
+      "  def foo9(): pass",
+      "class F:",
+      "  def foo9(): pass",
+      "  def bar9(): pass",
+      "class G(F):",
+      "  def foo9(): pass",
+      "  def bar9(): pass"
+    };
+    FunctionSymbol bar9 = lastFunctionSymbolWithName("bar9", strings);
+    assertThat(SymbolUtils.canOverrideMethod(bar9)).isTrue();
+
+    FunctionSymbol foo9 = lastFunctionSymbolWithName("foo9", strings);
+    assertThat(SymbolUtils.canOverrideMethod(foo9)).isTrue();
+
+    // coverage
+
+    FunctionDef functionDef = getLastDescendant(parse("def foo10(): ..."), t -> t.is(Tree.Kind.FUNCDEF));
+    FunctionSymbolImpl foo10 = new FunctionSymbolImpl(functionDef, "mod.foo", pythonFile("mod.py"));
+    foo10.setOwner(new SymbolImpl("some", "some"));
+    assertThat(SymbolUtils.canOverrideMethod(foo10)).isFalse();
+
+
   }
 
   @Nullable
