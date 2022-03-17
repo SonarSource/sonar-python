@@ -1,11 +1,11 @@
 def start():
     a = 1
-    # b = not not a  # Noncompliant {{Use the "bool()" builtin function instead of calling "not" twice.}}
-    # #   ^^^^^^^^^
-    #
-    # c = ~~a  # Noncompliant {{Use the ("~") operator just once or not at all.?}}
-    # #   ^^^
-    # d = not (not (not (not a)))  # Noncompliant 3
+    b = not not a  # Noncompliant {{Use the "bool()" builtin function instead of calling "not" twice.}}
+    #   ^^^^^^^^^
+
+    c = ~~a  # Noncompliant {{Use the ("~") operator just once or not at all.?}}
+    #   ^^^
+    d = not (not (not (not a)))  # Noncompliant 3
 
     e = ~~~~~a  # Noncompliant
     f = ~(((((~a)))))  # Noncompliant {{Use the ("~") operator just once or not at all.?}}
