@@ -335,6 +335,28 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.nameFromExpression(lastExpression("a == b"))).isNullOrEmpty();
   }
 
+  @Test
+  public void test_textFromComments(){
+    FileInput parsed1 = parse("");
+    Token token1 = parsed1.firstToken();
+    FileInput parsed2 = parse("# Copyright 1000\n");
+    Token token2 = parsed2.firstToken();
+    FileInput parsed3 = parse("# Copyright 1000\n #Copyright 1001\n");
+    Token token3 = parsed3.firstToken();
+
+    assertThat(TreeUtils.groupTrivias(token1)).isEmpty();
+    assertThat(TreeUtils.getTextFromComments(new ArrayList<>())).isEqualTo("");
+    assertThat(TreeUtils.groupTrivias(token2)).isNotEmpty();
+    assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token2).get(0))).isEqualTo("Copyright 1000\n");
+    assertThat(TreeUtils.groupTrivias(token3)).isNotEmpty();
+    assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token3).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\n");
+
+    assertThat(TreeUtils.isOneWord(" ")).isFalse();
+    assertThat(TreeUtils.isOneWord("Function")).isTrue();
+    assertThat(TreeUtils.isOneWord("Function 1")).isFalse();
+    assertThat(TreeUtils.isOneWord("Function 1\n Function 2")).isFalse();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

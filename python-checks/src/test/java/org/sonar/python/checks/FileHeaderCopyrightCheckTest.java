@@ -25,10 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class FileHeaderCopyrightCheckTest {
 
   @Test
-  public void test() {
+  public void test_copyright() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "Copyright FOO\n";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_compliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndComments.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndCommentsSpaced.py", fileHeaderCopyrightCheck);
   }
 
   @Test
@@ -36,13 +38,14 @@ public class FileHeaderCopyrightCheckTest {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "Copyright FOO";
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NoHeader_NonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileButCopyright.py", fileHeaderCopyrightCheck);
   }
 
   @Test
-  public void test_noncompliant_noheader() {
-    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "Copyright FOO";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NoHeader_NonCompliant.py", fileHeaderCopyrightCheck);
+  public void test_NoCopyright(){
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_None.py", new FileHeaderCopyrightCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
   }
 
   @Test
@@ -70,19 +73,6 @@ public class FileHeaderCopyrightCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightComment.py", fileHeaderCopyrightCheck);
   }
 
-  @Test
-  public void test_copyrightWithComment() {
-    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "Copyright FOO\n";
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndComments.py", fileHeaderCopyrightCheck);
-  }
-
-  @Test
-  public void test_copyrightWithCommentSpaced() {
-    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "Copyright FOO\n";
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndCommentsSpaced.py", fileHeaderCopyrightCheck);
-  }
 
   @Test
   public void test_copyright_docstring() {
@@ -105,7 +95,6 @@ public class FileHeaderCopyrightCheckTest {
       "You should have received a copy of the GNU Lesser General Public License\n" +
       "along with this program; if not, write to the Free Software Foundation,\n" +
       "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n";
-
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightDocstring.py", fileHeaderCopyrightCheck);
   }
 
@@ -118,22 +107,4 @@ public class FileHeaderCopyrightCheckTest {
       "mailto:contact AT sonarsource DOT com\n";
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyrightDocstring_NonCompliant.py", fileHeaderCopyrightCheck);
   }
-
-  @Test
-  public void test_emptyFileNoCopyright(){
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
-  }
-
-  @Test
-  public void test_emptyFileButCopyright(){
-    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "Copyright 2022\n";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileButCopyright.py", fileHeaderCopyrightCheck);
-  }
-
-  @Test
-  public void test_NoCopyright(){
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_None.py", new FileHeaderCopyrightCheck());
-  }
-
 }

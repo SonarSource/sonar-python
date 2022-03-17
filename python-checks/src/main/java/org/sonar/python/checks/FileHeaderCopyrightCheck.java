@@ -19,17 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+
+import static org.sonar.python.tree.TreeUtils.getTextFromComments;
+import static org.sonar.python.tree.TreeUtils.groupTrivias;
 
 @Rule(key = "S1451")
 public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
@@ -44,26 +48,53 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     type = "TEXT")
   public String headerFormat = DEFAULT_HEADER_FORMAT;
 
+  @RuleProperty(
+    key = "isRegularExpression",
+    description = "Whether the headerFormat is a regular expression",
+    defaultValue = "false")
+  public boolean isRegularExpression = false;
+  private Pattern searchPattern = null;
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      // Can there be no firstToken ?
-      Token token = ctx.syntaxNode().firstToken();
-      List<List<Trivia>> groupedTrivias = groupTrivias(token);
-      String retrievedString;
-      if(!groupedTrivias.isEmpty()){
-        retrievedString = getTextFromComments(groupedTrivias.get(0));
-      }else{
-        retrievedString= getDocstringLines(ctx.syntaxNode());
+      if (isRegularExpression) {
+        if (searchPattern == null) {
+          try {
+            searchPattern = Pattern.compile(headerFormat, Pattern.DOTALL);
+          } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("[" + getClass().getSimpleName() + "] Unable to compile the regular expression: " + headerFormat, e);
+          }
+        }
       }
-      if(!headerFormat.isEmpty() && !retrievedString.startsWith(headerFormat)){
-        ctx.addFileIssue(MESSAGE);
+
+      Token token = ctx.syntaxNode().firstToken();
+      String retrievedText = getDocstringLines(ctx.syntaxNode());
+      if(retrievedText.equals("")){
+        List<List<Trivia>> groupedTrivias = groupTrivias(token);
+        if(!groupedTrivias.isEmpty()){
+          retrievedText = getTextFromComments(groupedTrivias.get(0));
+        }
+      }
+
+      if (isRegularExpression) {
+        checkRegularExpression(ctx, retrievedText);
+      } else {
+        if(!headerFormat.isEmpty() && !retrievedText.startsWith(headerFormat)){
+          ctx.addFileIssue(MESSAGE);
+        }
       }
     });
   }
 
-  private String getDocstringLines(Tree token){
+  private void checkRegularExpression(SubscriptionContext ctx, String fileContent) {
+    Matcher matcher = searchPattern.matcher(fileContent);
+    if (!matcher.find() || matcher.start() != 0) {
+      ctx.addFileIssue(MESSAGE);
+    }
+  }
+
+  private static String getDocstringLines(Tree token){
     StringLiteral docstring = ((FileInput)token).docstring();
     if(docstring != null){
       return docstring.firstToken().value()
@@ -72,58 +103,5 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
       // Remove any white space after \n, but not another \n itself nor carriage-return
     }
     return "";
-  }
-
-  private static List<List<Trivia>> groupTrivias(Token token) {
-    List<List<Trivia>> result = new ArrayList<>();
-    List<Trivia> currentGroup = null;
-    for (Trivia trivia : token.trivia()) {
-      currentGroup = handleOneLineComment(result, currentGroup, trivia);
-    }
-    if (currentGroup != null) {
-      result.add(currentGroup);
-    }
-    return result;
-  }
-
-  private static String getTextFromComments(List<Trivia> triviaGroup) {
-    StringBuilder commentTextSB = new StringBuilder();
-    for (Trivia trivia : triviaGroup) {
-      String value = trivia.value();
-      while (value.startsWith("#") || value.startsWith(" #")) {
-        value = value.substring(1);
-      }
-      if (value.startsWith(" ")) {
-        value = value.substring(1);
-      }
-      if (triviaGroup.size() == 1) {
-        value = value.trim();
-      }
-      if (!isOneWord(value)) {
-        commentTextSB.append(value);
-        commentTextSB.append("\n");
-      }
-    }
-    return commentTextSB.toString();
-  }
-
-  private static boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
-  }
-
-
-  private static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
-    List<Trivia> newTriviaGroup = currentGroup;
-    if (currentGroup == null) {
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    } else if (currentGroup.get(currentGroup.size() - 1).token().line() + 1 == trivia.token().line()) {
-      newTriviaGroup.add(trivia);
-    } else {
-      result.add(currentGroup);
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    }
-    return newTriviaGroup;
   }
 }

@@ -1,7 +1,7 @@
-# Copyright FOO
+ # Copyright FOO
 
-# Hello
-# Here I am
+# Hello there
+# Another comment
 
 def fun():
   if expression:

@@ -44,7 +44,13 @@ public class PythonRulingTest {
   @BeforeClass
   public static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
-      .add("CommentRegularExpression", "message", "The regular expression matches this comment");
+      .add("CommentRegularExpression", "message", "The regular expression matches this comment")
+      .add("S1451","headerFormat" , "Copyright 2004 by Harry Zuzan. All rights reserved.\n" +
+        "Copyright 2016 by Adam Kurkiewicz. All rights reserved.\n" +
+        "This file is part of the Biopython distribution and governed by your\n" +
+        "choice of the \"Biopython License Agreement\" or the \"BSD 3-Clause License\".\n" +
+        "Please see the LICENSE file that should have been included as part of this\n" +
+        "package.\n");
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));

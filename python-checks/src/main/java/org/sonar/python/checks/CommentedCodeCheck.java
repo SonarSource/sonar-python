@@ -20,10 +20,8 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -36,6 +34,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.sonar.python.tree.TreeUtils.groupTrivias;
+import static org.sonar.python.tree.TreeUtils.isOneWord;
 
 @Rule(key = "S125")
 public class CommentedCodeCheck extends PythonSubscriptionCheck {
@@ -108,10 +109,6 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return commentTextSB.toString();
   }
 
-  private static boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
-  }
-
   private static boolean isEmpty(String text) {
     return text.matches("\\s*");
   }
@@ -138,32 +135,5 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     }
     Statement statement = fileInput.statements().statements().get(0);
     return statement.is(Tree.Kind.EXPRESSION_STMT) || statement.is(Tree.Kind.ANNOTATED_ASSIGNMENT);
-  }
-
-  private static List<List<Trivia>> groupTrivias(Token token) {
-    List<List<Trivia>> result = new ArrayList<>();
-    List<Trivia> currentGroup = null;
-    for (Trivia trivia : token.trivia()) {
-      currentGroup = handleOneLineComment(result, currentGroup, trivia);
-    }
-    if (currentGroup != null) {
-      result.add(currentGroup);
-    }
-    return result;
-  }
-
-  private static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
-    List<Trivia> newTriviaGroup = currentGroup;
-    if (currentGroup == null) {
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    } else if (currentGroup.get(currentGroup.size() - 1).token().line() + 1 == trivia.token().line()) {
-      newTriviaGroup.add(trivia);
-    } else {
-      result.add(currentGroup);
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    }
-    return newTriviaGroup;
   }
 }
