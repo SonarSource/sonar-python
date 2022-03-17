@@ -126,8 +126,8 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getSymbolFromTree(null)).isEmpty();
 
     Expression expression = lastExpression(
-            "x = 42",
-            "x");
+      "x = 42",
+      "x");
     assertThat(TreeUtils.getSymbolFromTree(expression)).contains(((HasSymbol) expression).symbol());
 
     expression = lastExpression("foo()");
@@ -146,8 +146,7 @@ public class TreeUtilsTest {
     fileInput = PythonTestUtils.parse(
       "class A:",
       "    pass",
-      "A = 42"
-    );
+      "A = 42");
     classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
     assertThat(TreeUtils.getClassSymbolFromDef(classDef)).isNull();
   }
@@ -172,8 +171,7 @@ public class TreeUtilsTest {
     fileInput = PythonTestUtils.parse(
       "def foo():",
       "    pass",
-      "foo = 42"
-    );
+      "foo = 42");
     functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(TreeUtils.getFunctionSymbolFromDef(functionDef)).isNull();
   }
@@ -223,8 +221,7 @@ public class TreeUtilsTest {
     functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     List<AnyParameter> parameters = functionDef.parameters().all();
     assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(
-      Arrays.asList(parameters.get(0), parameters.get(2)
-    ));
+      Arrays.asList(parameters.get(0), parameters.get(2)));
   }
 
   @Test
@@ -236,8 +233,7 @@ public class TreeUtilsTest {
       "    if x:",
       "        def bar(self, x): return 1",
       "    else:",
-      "        def baz(self, x, y): return x + y"
-    );
+      "        def baz(self, x, y): return x + y");
 
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
     List<FunctionDef> functionDefs = PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
@@ -251,8 +247,7 @@ public class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     classDef = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
     FunctionDef fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
 
@@ -263,8 +258,7 @@ public class TreeUtilsTest {
   public void test_nthArgumentOrKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
-      "foo(1, 2, p2 = 3)"
-    );
+      "foo(1, 2, p2 = 3)");
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
     assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
@@ -280,8 +274,7 @@ public class TreeUtilsTest {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
       "args = [1, 2, 3]",
-      "foo(*args)"
-    );
+      "foo(*args)");
 
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
@@ -292,8 +285,7 @@ public class TreeUtilsTest {
   public void test_nthArgumentOrKeyword_no_positional() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1 = 2, p2 = 3): ...",
-      "foo(0, p2 = 4)"
-    );
+      "foo(0, p2 = 4)");
 
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
@@ -304,8 +296,7 @@ public class TreeUtilsTest {
   public void test_argumentByKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
-      "foo(p1 = 1, p2 = 2)"
-    );
+      "foo(p1 = 1, p2 = 2)");
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.argumentByKeyword("p1", callExpr.arguments());
     assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
@@ -336,20 +327,24 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_textFromComments(){
+  public void test_textFromComments() {
     FileInput parsed1 = parse("");
     Token token1 = parsed1.firstToken();
     FileInput parsed2 = parse("# Copyright 1000\n");
     Token token2 = parsed2.firstToken();
     FileInput parsed3 = parse("# Copyright 1000\n #Copyright 1001\n");
     Token token3 = parsed3.firstToken();
+    FileInput parsed4 = parse("# Copyright 1000\n #Copyright 1001\n #Copyright 1002\n");
+    Token token4 = parsed4.firstToken();
 
     assertThat(TreeUtils.groupTrivias(token1)).isEmpty();
-    assertThat(TreeUtils.getTextFromComments(new ArrayList<>())).isEqualTo("");
+    assertThat(TreeUtils.getTextFromComments(new ArrayList<>())).isEmpty();
     assertThat(TreeUtils.groupTrivias(token2)).isNotEmpty();
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token2).get(0))).isEqualTo("Copyright 1000\n");
     assertThat(TreeUtils.groupTrivias(token3)).isNotEmpty();
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token3).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\n");
+    assertThat(TreeUtils.groupTrivias(token4)).isNotEmpty();
+    assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token4).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\nCopyright 1002\n");
 
     assertThat(TreeUtils.isOneWord(" ")).isFalse();
     assertThat(TreeUtils.isOneWord("Function")).isTrue();

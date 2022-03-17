@@ -28,24 +28,37 @@ public class FileHeaderCopyrightCheckTest {
   public void test_copyright() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "Copyright FOO\n";
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_compliant.py", fileHeaderCopyrightCheck);
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndComments.py", fileHeaderCopyrightCheck);
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightAndCommentsSpaced.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyright.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyrightAndComments.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyrightAndCommentsSpaced.py", fileHeaderCopyrightCheck);
+  }
+
+  @Test
+  public void test_example() {
+    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
+    fileHeaderCopyrightCheck.headerFormat = "Copyright 2004 by Harry Zuzan. All rights reserved.\n" +
+      "Copyright 2016 by Adam Kurkiewicz. All rights reserved.\n" +
+      "This file is part of the Biopython distribution and governed by your\n" +
+      "choice of the \"Biopython License Agreement\" or the \"BSD 3-Clause License\".\n" +
+      "Please see the LICENSE file that should have been included as part of this\n" +
+      "package.\n";
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyrightTest.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/docstring2.py", fileHeaderCopyrightCheck);
   }
 
   @Test
   public void test_noncompliant() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "Copyright FOO";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NonCompliant.py", fileHeaderCopyrightCheck);
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NoHeader_NonCompliant.py", fileHeaderCopyrightCheck);
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileButCopyright.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/copyrightNonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/noHeaderNonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/emptyFileButCopyright.py", fileHeaderCopyrightCheck);
   }
 
   @Test
-  public void test_NoCopyright(){
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_None.py", new FileHeaderCopyrightCheck());
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyright_emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
+  public void test_NoCopyright() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/headerNoCopyright.py", new FileHeaderCopyrightCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
   }
 
   @Test
@@ -70,9 +83,8 @@ public class FileHeaderCopyrightCheckTest {
       "along with this program; if not, write to the Free Software Foundation,\n" +
       "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n" +
       "\n";
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightComment.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyrightComment.py", fileHeaderCopyrightCheck);
   }
-
 
   @Test
   public void test_copyright_docstring() {
@@ -95,7 +107,7 @@ public class FileHeaderCopyrightCheckTest {
       "You should have received a copy of the GNU Lesser General Public License\n" +
       "along with this program; if not, write to the Free Software Foundation,\n" +
       "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n";
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/fileCopyrightDocstring.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/docstring.py", fileHeaderCopyrightCheck);
   }
 
   @Test
@@ -105,6 +117,16 @@ public class FileHeaderCopyrightCheckTest {
       "SonarQube, open source software quality management tool.\n" +
       "Copyright (C) 2008-2018 SonarSource\n" +
       "mailto:contact AT sonarsource DOT com\n";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyrightDocstring_NonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/docstringNonCompliant.py", fileHeaderCopyrightCheck);
+  }
+
+  @Test
+  public void test_searchPattern() {
+    FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
+    fileHeaderCopyrightCheck.headerFormat = "^Copyright[ ]20[0-9]{2}\\nAll[ ]rights[ ]reserved[.]\\n";
+    fileHeaderCopyrightCheck.isRegularExpression = true;
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/copyrightNonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternNonCompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/searchPattern.py", fileHeaderCopyrightCheck);
   }
 }

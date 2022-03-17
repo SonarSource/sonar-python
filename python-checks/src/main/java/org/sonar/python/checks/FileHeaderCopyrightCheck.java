@@ -58,33 +58,38 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      if (isRegularExpression) {
-        if (searchPattern == null) {
-          try {
-            searchPattern = Pattern.compile(headerFormat, Pattern.DOTALL);
-          } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[" + getClass().getSimpleName() + "] Unable to compile the regular expression: " + headerFormat, e);
-          }
+      if (isRegularExpression && searchPattern == null) {
+        try {
+          searchPattern = Pattern.compile(headerFormat, Pattern.DOTALL);
+        } catch (IllegalArgumentException e) {
+          throw new IllegalArgumentException("[" + getClass().getSimpleName() + "] Unable to compile the regular expression: " + headerFormat, e);
         }
       }
 
-      Token token = ctx.syntaxNode().firstToken();
-      String retrievedText = getDocstringLines(ctx.syntaxNode());
-      if(retrievedText.equals("")){
-        List<List<Trivia>> groupedTrivias = groupTrivias(token);
-        if(!groupedTrivias.isEmpty()){
-          retrievedText = getTextFromComments(groupedTrivias.get(0));
-        }
-      }
+      String retrievedText = getHeaderText(ctx);
 
       if (isRegularExpression) {
         checkRegularExpression(ctx, retrievedText);
       } else {
-        if(!headerFormat.isEmpty() && !retrievedText.startsWith(headerFormat)){
+        if (!headerFormat.isEmpty() && !retrievedText.startsWith(headerFormat)) {
           ctx.addFileIssue(MESSAGE);
         }
       }
     });
+  }
+
+  private String getHeaderText(SubscriptionContext ctx){
+    FileInput tok = (FileInput)ctx.syntaxNode();
+    if(tok.docstring() != null && tok.firstToken().line() == 1){
+      return getDocstringLines(ctx.syntaxNode());
+    }else{
+      Token token = ctx.syntaxNode().firstToken();
+      List<List<Trivia>> groupedTrivias = groupTrivias(token);
+      if (!groupedTrivias.isEmpty()) {
+        return getTextFromComments(groupedTrivias.get(0));
+      }
+    }
+    return "";
   }
 
   private void checkRegularExpression(SubscriptionContext ctx, String fileContent) {

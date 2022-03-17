@@ -35,8 +35,8 @@ import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
+import static org.sonar.python.tree.TreeUtils.getTextFromComments;
 import static org.sonar.python.tree.TreeUtils.groupTrivias;
-import static org.sonar.python.tree.TreeUtils.isOneWord;
 
 @Rule(key = "S125")
 public class CommentedCodeCheck extends PythonSubscriptionCheck {
@@ -89,24 +89,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   }
 
   private static String getTextForParsing(List<Trivia> triviaGroup) {
-    StringBuilder commentTextSB = new StringBuilder();
-    for (Trivia trivia : triviaGroup) {
-      String value = trivia.value();
-      while (value.startsWith("#") || value.startsWith(" #")) {
-        value = value.substring(1);
-      }
-      if (value.startsWith(" ")) {
-        value = value.substring(1);
-      }
-      if (triviaGroup.size() == 1) {
-        value = value.trim();
-      }
-      if (!isOneWord(value)) {
-        commentTextSB.append(value);
-        commentTextSB.append("\n");
-      }
-    }
-    return commentTextSB.toString();
+    return getTextFromComments(triviaGroup);
   }
 
   private static boolean isEmpty(String text) {
