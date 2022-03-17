@@ -35,7 +35,7 @@ public class FileHeaderCopyrightCheckTest {
   public void test_noncompliant() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "Copyright FOO";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_Noncompliant.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/fileCopyright_NonCompliant.py", fileHeaderCopyrightCheck);
   }
 
   @Test
