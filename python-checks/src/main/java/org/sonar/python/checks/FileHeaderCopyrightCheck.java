@@ -78,10 +78,10 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private String getHeaderText(SubscriptionContext ctx) {
-    FileInput tok = (FileInput) ctx.syntaxNode();
-    if (tok.docstring() != null && tok.firstToken().line() == 1) {
-      return getDocstringLines(ctx.syntaxNode());
+  private static String getHeaderText(SubscriptionContext ctx) {
+    StringLiteral tokenDoc = ((FileInput) ctx.syntaxNode()).docstring();
+    if (tokenDoc != null && tokenDoc.firstToken().line() == 1) {
+      return getDocstringLines(tokenDoc);
     } else {
       Token token = ctx.syntaxNode().firstToken();
       List<List<Trivia>> groupedTrivias = groupTrivias(token);
@@ -99,14 +99,10 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static String getDocstringLines(Tree token) {
-    StringLiteral docstring = ((FileInput) token).docstring();
-    if (docstring != null) {
-      return docstring.firstToken().value()
-        .replace("\"\"\"", "")
-        .replaceAll("\\n[^\\S\\r\\n]+", "\n");
-      // Remove any white space after \n, but not another \n itself nor carriage-return
-    }
-    return "";
+  private static String getDocstringLines(StringLiteral docstring) {
+    return docstring.firstToken().value()
+      .replace("\"\"\"", "")
+      .replaceAll("\\n[^\\S\\r\\n]+", "\n");
+    // Remove any white space after \n, but not another \n itself nor carriage-return
   }
 }
