@@ -20,10 +20,12 @@
 package org.sonar.python.checks;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Collections;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
@@ -140,7 +142,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_misplaced_copyright_searchPattern(){
+  public void test_misplaced_copyright_searchPattern() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.isRegularExpression = true;
     fileHeaderCopyrightCheck.headerFormat = "Copyright[ ]20[0-9]{2}";
@@ -150,12 +152,14 @@ public class FileHeaderCopyrightCheckTest {
   @Test
   public void test_searchPattern_exception() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "**";//"^Copyright[ ]20[0-9]{2}\\nAll[ ]rights[ ]reserved[.]\\n";
+    fileHeaderCopyrightCheck.headerFormat = "**";
     fileHeaderCopyrightCheck.isRegularExpression = true;
-
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/checks/fileHeaderCopyright/searchPatternThrowsError.py"));
-    IllegalArgumentException e = Assert.assertThrows(IllegalArgumentException.class, () -> SubscriptionVisitor.analyze(Collections.singletonList(fileHeaderCopyrightCheck), context));
-    Assertions.assertThatThrownBy(() -> SubscriptionVisitor.analyze(Collections.singletonList(fileHeaderCopyrightCheck), context)).isInstanceOf(IllegalArgumentException.class);
+    Collection<PythonSubscriptionCheck> check = Collections.singletonList(fileHeaderCopyrightCheck);
+
+    Assertions.assertThatThrownBy(() -> SubscriptionVisitor.analyze(check, context)).isInstanceOf(IllegalArgumentException.class);
+
+    IllegalArgumentException e = Assert.assertThrows(IllegalArgumentException.class, () -> SubscriptionVisitor.analyze(check, context));
     Assertions.assertThat(e.getMessage()).isEqualTo("[FileHeaderCopyrightCheck] Unable to compile the regular expression: **");
   }
 }

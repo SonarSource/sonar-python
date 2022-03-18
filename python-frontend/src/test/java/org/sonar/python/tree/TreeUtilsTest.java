@@ -332,10 +332,12 @@ public class TreeUtilsTest {
     Token token1 = parsed1.firstToken();
     FileInput parsed2 = parse("# Copyright 1000\n");
     Token token2 = parsed2.firstToken();
-    FileInput parsed3 = parse("# Copyright 1000\n #Copyright 1001\n");
+    FileInput parsed3 = parse(" # Copyright 1000\n #Copyright 1001\n");
     Token token3 = parsed3.firstToken();
     FileInput parsed4 = parse("# Copyright 1000\n #Copyright 1001\n #Copyright 1002\n");
     Token token4 = parsed4.firstToken();
+    FileInput parsed5 = parse(" # ");
+    Token token5 = parsed5.firstToken();
 
     assertThat(TreeUtils.groupTrivias(token1)).isEmpty();
     assertThat(TreeUtils.getTextFromComments(new ArrayList<>())).isEmpty();
@@ -345,11 +347,21 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token3).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\n");
     assertThat(TreeUtils.groupTrivias(token4)).isNotEmpty();
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token4).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\nCopyright 1002\n");
+    assertThat(TreeUtils.groupTrivias(token5)).isNotEmpty();
+    assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token5).get(0))).isEqualTo("\n");
 
     assertThat(TreeUtils.isOneWord(" ")).isFalse();
     assertThat(TreeUtils.isOneWord("Function")).isTrue();
     assertThat(TreeUtils.isOneWord("Function 1")).isFalse();
     assertThat(TreeUtils.isOneWord("Function 1\n Function 2")).isFalse();
+  }
+
+  @Test
+  public void test_handleOneLineComment() {
+    FileInput parsed1 = PythonTestUtils.parse("#Copyright 1000#\n"," \n","  #Copyright 1001\n");
+    Token token1 = parsed1.firstToken();
+
+    assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token1).get(0))).isEqualTo("Copyright 1000#\n");
   }
 
   private static boolean isOuterFunction(Tree tree) {
