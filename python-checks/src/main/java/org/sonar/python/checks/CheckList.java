@@ -252,6 +252,7 @@ public final class CheckList {
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
       UselessStatementCheck.class,
+      UseOfEmptyReturnValueCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,
