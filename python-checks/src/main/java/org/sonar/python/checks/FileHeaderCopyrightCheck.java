@@ -78,11 +78,11 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private String getHeaderText(SubscriptionContext ctx){
-    FileInput tok = (FileInput)ctx.syntaxNode();
-    if(tok.docstring() != null && tok.firstToken().line() == 1){
+  private String getHeaderText(SubscriptionContext ctx) {
+    FileInput tok = (FileInput) ctx.syntaxNode();
+    if (tok.docstring() != null && tok.firstToken().line() == 1) {
       return getDocstringLines(ctx.syntaxNode());
-    }else{
+    } else {
       Token token = ctx.syntaxNode().firstToken();
       List<List<Trivia>> groupedTrivias = groupTrivias(token);
       if (!groupedTrivias.isEmpty()) {
@@ -99,9 +99,9 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static String getDocstringLines(Tree token){
-    StringLiteral docstring = ((FileInput)token).docstring();
-    if(docstring != null){
+  private static String getDocstringLines(Tree token) {
+    StringLiteral docstring = ((FileInput) token).docstring();
+    if (docstring != null) {
       return docstring.firstToken().value()
         .replace("\"\"\"", "")
         .replaceAll("\\n[^\\S\\r\\n]+", "\n");
