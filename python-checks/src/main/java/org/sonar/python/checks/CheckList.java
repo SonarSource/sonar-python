@@ -112,6 +112,7 @@ public final class CheckList {
       DictionaryDuplicateKeyCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
+      DoublePrefixOperatorCheck.class,
       DuplicateArgumentCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
