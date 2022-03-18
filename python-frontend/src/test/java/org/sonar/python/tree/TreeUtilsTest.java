@@ -334,10 +334,12 @@ public class TreeUtilsTest {
     Token token2 = parsed2.firstToken();
     FileInput parsed3 = parse(" # Copyright 1000\n #Copyright 1001\n");
     Token token3 = parsed3.firstToken();
-    FileInput parsed4 = parse("# Copyright 1000\n #Copyright 1001\n #Copyright 1002\n");
+    FileInput parsed4 = parse("\r# Copyright 1000\n #Copyright 1001\n #Copyright 1002\n");
     Token token4 = parsed4.firstToken();
     FileInput parsed5 = parse(" # ");
     Token token5 = parsed5.firstToken();
+    FileInput parsed6 = parse("a=10");
+    Token token6 = parsed6.firstToken();
 
     assertThat(TreeUtils.groupTrivias(token1)).isEmpty();
     assertThat(TreeUtils.getTextFromComments(new ArrayList<>())).isEmpty();
@@ -349,6 +351,7 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token4).get(0))).isEqualTo("Copyright 1000\nCopyright 1001\nCopyright 1002\n");
     assertThat(TreeUtils.groupTrivias(token5)).isNotEmpty();
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token5).get(0))).isEqualTo("\n");
+    assertThat(TreeUtils.groupTrivias(token6)).isEmpty();
 
     assertThat(TreeUtils.isOneWord(" ")).isFalse();
     assertThat(TreeUtils.isOneWord("Function")).isTrue();
