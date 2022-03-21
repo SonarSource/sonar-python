@@ -346,7 +346,7 @@ public class TreeUtils {
   }
 
   public static boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
+    return text.matches("\\s*[\\w/\\-]+\\s*+#*+\n*");
   }
 
   public static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {

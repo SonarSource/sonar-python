@@ -367,6 +367,15 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getTextFromComments(TreeUtils.groupTrivias(token1).get(0))).isEqualTo("Copyright 1000#\n");
   }
 
+  @Test
+  public void test_isOneWord(){
+    FileInput parsed1 = PythonTestUtils.parse("#Copyright 1000#\n"," \n","  #Copyright 1001\n");
+    Token token1 = parsed1.firstToken();
+
+    assertThat(TreeUtils.isOneWord(" Copyright                             \n")).isTrue();
+    assertThat(TreeUtils.isOneWord(" Copyright                                                        \n\n\n\n\n\n\n\n\n")).isTrue();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }
