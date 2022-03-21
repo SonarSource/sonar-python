@@ -249,6 +249,21 @@ public class SymbolUtils {
     return Optional.empty();
   }
 
+  public static boolean canBeAnOverridingMethod(@Nullable FunctionSymbol functionSymbol) {
+    if (functionSymbol == null) return true;
+    Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
+    if (owner == null || owner.kind() != CLASS) return false;
+    ClassSymbol classSymbol = (ClassSymbol) owner;
+    if (classSymbol.hasUnresolvedTypeHierarchy()) return true;
+    for (Symbol superClass : classSymbol.superClasses()) {
+      if (superClass.is(CLASS)) {
+        boolean canHaveMember = ((ClassSymbol) superClass).canHaveMember(functionSymbol.name());
+        if (canHaveMember) return true;
+      }
+    }
+    return false;
+  }
+
   public static Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
     String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
     String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
