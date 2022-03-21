@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
@@ -28,12 +27,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Trivia;
-
-import static org.sonar.python.tree.TreeUtils.getTextFromComments;
-import static org.sonar.python.tree.TreeUtils.groupTrivias;
 
 @Rule(key = "S1451")
 public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
@@ -81,15 +75,9 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
   private static String getHeaderText(SubscriptionContext ctx) {
     StringLiteral tokenDoc = ((FileInput) ctx.syntaxNode()).docstring();
     if (tokenDoc != null && tokenDoc.firstToken().line() == 1) {
-      return getDocstringLines(tokenDoc);
-    } else {
-      Token token = ctx.syntaxNode().firstToken();
-      List<List<Trivia>> groupedTrivias = groupTrivias(token);
-      if (!groupedTrivias.isEmpty()) {
-        return getTextFromComments(groupedTrivias.get(0));
-      }
+      return tokenDoc.firstToken().value();
     }
-    return "";
+    return ctx.pythonFile().content();
   }
 
   private void checkRegularExpression(SubscriptionContext ctx, String fileContent) {
@@ -99,10 +87,4 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static String getDocstringLines(StringLiteral docstring) {
-    return docstring.firstToken().value()
-      .replace("\"\"\"", "")
-      .replaceAll("\\n[^\\S\\r\\n]+", "\n");
-    // Remove any white space after \n, but not another \n itself nor carriage-return
-  }
 }

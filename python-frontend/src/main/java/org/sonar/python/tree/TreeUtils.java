@@ -50,7 +50,6 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
@@ -310,57 +309,5 @@ public class TreeUtils {
     TokenLocation firstToken = new TokenLocation(tree.firstToken());
     TokenLocation lastToken = new TokenLocation(tree.lastToken());
     return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
-  }
-
-  public static List<List<Trivia>> groupTrivias(Token token) {
-    List<List<Trivia>> result = new ArrayList<>();
-    List<Trivia> currentGroup = null;
-    for (Trivia trivia : token.trivia()) {
-      currentGroup = handleOneLineComment(result, currentGroup, trivia);
-    }
-    if (currentGroup != null) {
-      result.add(currentGroup);
-    }
-    return result;
-  }
-
-  public static String getTextFromComments(List<Trivia> triviaGroup) {
-    StringBuilder commentTextSB = new StringBuilder();
-    for (Trivia trivia : triviaGroup) {
-      String value = trivia.value();
-      while (value.startsWith("#") || value.startsWith(" #")) {
-        value = value.substring(1);
-      }
-      if (value.startsWith(" ")) {
-        value = value.substring(1);
-      }
-      if (triviaGroup.size() == 1) {
-        value = value.trim();
-      }
-      if (!isOneWord(value)) {
-        commentTextSB.append(value);
-        commentTextSB.append("\n");
-      }
-    }
-    return commentTextSB.toString();
-  }
-
-  public static boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*+#*+\n*");
-  }
-
-  public static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
-    List<Trivia> newTriviaGroup = currentGroup;
-    if (currentGroup == null) {
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    } else if (currentGroup.get(currentGroup.size() - 1).token().line() + 1 == trivia.token().line()) {
-      newTriviaGroup.add(trivia);
-    } else {
-      result.add(currentGroup);
-      newTriviaGroup = new ArrayList<>();
-      newTriviaGroup.add(trivia);
-    }
-    return newTriviaGroup;
   }
 }
