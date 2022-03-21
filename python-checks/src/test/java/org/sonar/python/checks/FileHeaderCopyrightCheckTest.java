@@ -39,6 +39,7 @@ public class FileHeaderCopyrightCheckTest {
     fileHeaderCopyrightCheck.headerFormat = "# Copyright FOO\n";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyright.py", fileHeaderCopyrightCheck);
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyrightAndComments.py", fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/commentAndDocstring.py", fileHeaderCopyrightCheck);
   }
 
   @Test
