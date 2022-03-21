@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -32,6 +33,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.SymbolUtils;
@@ -61,8 +64,9 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   private static boolean isException(FunctionDef functionDef) {
     FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
     return CheckUtils.containsCallToLocalsFunction(functionDef) ||
-      SymbolUtils.canOverrideMethod(functionSymbol) ||
+      SymbolUtils.canBeAnOverridingMethod(functionSymbol) ||
       isInterfaceMethod(functionDef) ||
+      isNotImplemented(functionDef) ||
       !functionDef.decorators().isEmpty() ||
       isSpecialMethod(functionDef) ||
       hasNonCallUsages(functionSymbol);
@@ -72,6 +76,16 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     return functionDef.body().statements().stream()
       .allMatch(statement -> statement.is(Kind.PASS_STMT, Kind.RAISE_STMT)
         || (statement.is(Kind.EXPRESSION_STMT) && isStringExpressionOrEllipsis((ExpressionStatement) statement)));
+  }
+
+  // Note that this will also exclude method containing only a return statement that returns nothing
+  private static boolean isNotImplemented(FunctionDef functionDef) {
+    List<Statement> statements = functionDef.body().statements();
+    if (statements.size() != 1) return false;
+    if (!statements.get(0).is(Kind.RETURN_STMT)) return false;
+    ReturnStatement returnStatement = (ReturnStatement) statements.get(0);
+    return returnStatement.expressions().stream().allMatch(retValue ->
+      TreeUtils.getSymbolFromTree(retValue).filter(s -> "NotImplemented".equals(s.fullyQualifiedName())).isPresent());
   }
 
   private static boolean isStringExpressionOrEllipsis(ExpressionStatement stmt) {

@@ -82,20 +82,18 @@ def some_fun(x, y): # Noncompliant
 
 some_fun(1, 1)
 
-class HistoryAccessor:
-    def _get_hist_file_name(self, profile='default'):
-        return Path(locate_profile(profile)) / "history.sqlite"
-
-class HistoryManager(HistoryAccessor):
-    def _get_hist_file_name(self, profile=None):
-        profile_dir = self.shell.profile_dir.location
-        return Path(profile_dir) / "history.sqlite"
-
 def ambiguous_f(x): # Noncompliant
     print("foo")
 
 def ambiguous_f(x):
     return x + 1
+
+
+def not_implemented(r1, r2, r3): # OK
+    return NotImplemented
+
+def returning_none(r1): # OK
+    return
 
 # coverage
 
@@ -116,3 +114,10 @@ class MyFoo:
         print("foo")
     def bar(self):
         self.meth(42)
+
+
+import zope.interface
+
+class IFoo(zope.interface.Interface):
+    def bar(q, r=None):
+        """bar foo bar"""

@@ -145,27 +145,27 @@ public class SymbolUtilsTest {
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
     FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
     assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo2)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo2)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo3)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo3)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo3)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo4)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo4)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo4)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo5)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo5)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
-    assertThat(SymbolUtils.canOverrideMethod(foo5_override)).isTrue();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo5_override)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo6)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo6)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo7)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo7)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo7)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo8)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo8)).isTrue();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo8)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
-    assertThat(SymbolUtils.canOverrideMethod(foo_int)).isTrue();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo_int)).isTrue();
 
-    assertThat(SymbolUtils.canOverrideMethod(null)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(null)).isTrue();
     String[] strings = {
       "class F:",
       "  def foo9(): pass",
@@ -177,17 +177,17 @@ public class SymbolUtilsTest {
       "  def bar9(): pass"
     };
     FunctionSymbol bar9 = lastFunctionSymbolWithName("bar9", strings);
-    assertThat(SymbolUtils.canOverrideMethod(bar9)).isTrue();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(bar9)).isTrue();
 
     FunctionSymbol foo9 = lastFunctionSymbolWithName("foo9", strings);
-    assertThat(SymbolUtils.canOverrideMethod(foo9)).isTrue();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo9)).isTrue();
 
     // coverage
 
     FunctionDef functionDef = getLastDescendant(parse("def foo10(): ..."), t -> t.is(Tree.Kind.FUNCDEF));
     FunctionSymbolImpl foo10 = new FunctionSymbolImpl(functionDef, "mod.foo", pythonFile("mod.py"));
     foo10.setOwner(new SymbolImpl("some", "some"));
-    assertThat(SymbolUtils.canOverrideMethod(foo10)).isFalse();
+    assertThat(SymbolUtils.canBeAnOverridingMethod(foo10)).isFalse();
 
 
   }

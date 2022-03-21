@@ -249,8 +249,8 @@ public class SymbolUtils {
     return Optional.empty();
   }
 
-  public static boolean canOverrideMethod(@Nullable FunctionSymbol functionSymbol) {
-    if (functionSymbol == null) return false;
+  public static boolean canBeAnOverridingMethod(@Nullable FunctionSymbol functionSymbol) {
+    if (functionSymbol == null) return true;
     Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
     if (owner == null || owner.kind() != CLASS) return false;
     ClassSymbol classSymbol = (ClassSymbol) owner;
