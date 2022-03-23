@@ -52,6 +52,7 @@ import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyGroupCheck;
+import org.sonar.python.checks.regex.EmptyAlternativeCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
@@ -121,6 +122,7 @@ public final class CheckList {
       DynamicCodeExecutionCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
+      EmptyAlternativeCheck.class,
       EmptyGroupCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
