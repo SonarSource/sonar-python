@@ -18,7 +18,7 @@ def non_compliant(input):
 
     re.match("|mandatory|-optional", input)              # Noncompliant
     re.match("(mandatory|(|O|o|)ptional|)", input)       # Noncompliant
-    re.match("(|mandatory|optional)?", input)            # Noncompliant
+    re.match("(|mandatory|optional)?", input)            # Noncompliant {{Remove this empty alternative.}}
 #              ^
     re.match("mandatory(-optional|){2}", input)          # Noncompliant
 #                                ^
