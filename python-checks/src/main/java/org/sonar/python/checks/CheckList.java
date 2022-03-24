@@ -52,16 +52,17 @@ import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
-import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
-import org.sonar.python.checks.regex.RegexComplexityCheck;
-import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
-import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
+import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
+import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
+import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
+import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 
 public final class CheckList {
 
@@ -241,6 +242,7 @@ public final class CheckList {
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
       UndefinedNameAllPropertyCheck.class,
+      UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
