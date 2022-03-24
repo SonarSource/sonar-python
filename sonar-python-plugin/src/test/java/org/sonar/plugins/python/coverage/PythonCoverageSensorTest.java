@@ -307,7 +307,7 @@ public class PythonCoverageSensorTest {
     File file = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
     String message = "Invalid directory path in 'source' element: " + file.getPath();
     assertThat(logTester.logs(LoggerLevel.WARN)).contains(message);
-    verify(analysisWarnings, times(1)).addUnique(eq("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message));
+    verify(analysisWarnings, times(1)).addUnique("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message);
   }
 
   @Test

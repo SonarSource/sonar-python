@@ -77,7 +77,7 @@ public abstract class PythonReportSensor implements Sensor {
         // try absolute path
         File file = new File(reportPath);
         if (!file.exists()) {
-          String formattedMessage = String.format("No report was found for %s using pattern %s.", reportPathPropertyKey, reportPath);
+          String formattedMessage = String.format("No report was found for %s using pattern %s", reportPathPropertyKey, reportPath);
           LOG.warn(formattedMessage);
           analysisWarnings.addUnique(formattedMessage);
         } else {
