@@ -57,6 +57,7 @@ import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
+import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
@@ -187,6 +188,7 @@ public final class CheckList {
       MissingNewlineAtEndOfFileCheck.class,
       ModifiedParameterValueCheck.class,
       ModuleNameCheck.class,
+      MultipleWhitespaceCheck.class,
       NeedlessPassCheck.class,
       NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
