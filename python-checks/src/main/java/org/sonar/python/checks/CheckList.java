@@ -65,6 +65,7 @@ import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationChe
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
+import org.sonar.python.checks.regex.VerboseRegexCheck;
 
 public final class CheckList {
 
@@ -261,6 +262,7 @@ public final class CheckList {
       UselessParenthesisCheck.class,
       UselessStatementCheck.class,
       UseOfEmptyReturnValueCheck.class,
+      VerboseRegexCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,
