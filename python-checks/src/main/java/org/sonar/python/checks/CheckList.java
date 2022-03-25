@@ -64,6 +64,7 @@ import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
+import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 
 public final class CheckList {
 
@@ -245,6 +246,7 @@ public final class CheckList {
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
       UndefinedNameAllPropertyCheck.class,
+      UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
