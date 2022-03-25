@@ -58,7 +58,7 @@ public abstract class PythonReportSensor implements Sensor {
     String reportPathPropertyKey = reportPathKey();
     String reportPath = conf.get(reportPathPropertyKey).orElse(defaultReportPath());
     try {
-      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathPropertyKey, reportPath);
+      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathPropertyKey, reportPath, analysisWarnings);
       processReports(context, reports);
     } catch (Exception e) {
       LOG.warn("Cannot read report '{}', the following exception occurred: {}", reportPath, e.getMessage());
@@ -66,7 +66,7 @@ public abstract class PythonReportSensor implements Sensor {
     }
   }
 
-  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String reportPath) {
+  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String reportPath, AnalysisWarningsWrapper analysisWarnings) {
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 
     FileProvider provider = new FileProvider(new File(baseDirPath), reportPath);
@@ -77,7 +77,9 @@ public abstract class PythonReportSensor implements Sensor {
         // try absolute path
         File file = new File(reportPath);
         if (!file.exists()) {
-          LOG.warn("No report was found for {} using pattern {}", reportPathPropertyKey, reportPath);
+          String formattedMessage = String.format("No report was found for %s using pattern %s", reportPathPropertyKey, reportPath);
+          LOG.warn(formattedMessage);
+          analysisWarnings.addUnique(formattedMessage);
         } else {
           matchingFiles.add(file);
         }
