@@ -23,9 +23,9 @@ def non_compliant():
     # TODO : Issue #217 in sonar-analyzer-commons : Using the comment flag leads to false positves in SingleCharCharacterClassFinder #217
     #  The three lines below produce FP due to the flag X which allows comments in a regex and which removes the whitespaces of the
     #  character class.
-    changed = re.compile(r'[ \t  ]', re.X)  # Noncompliant {{Replace this character class by the character itself.}}
-    changed = re.compile(r'[ \t]', re.X)  # Noncompliant {{Replace this character class by the character itself.}}
-    changed = re.match(r'[ \t]', input, re.X)  # Noncompliant {{Replace this character class by the character itself.}}
+    # changed = re.compile(r'[ \t  ]', re.X)  # Noncompliant {{Replace this character class by the character itself.}}
+    # changed = re.compile(r'[ \t]', re.X)  # Noncompliant {{Replace this character class by the character itself.}}
+    # changed = re.match(r'[ \t]', input, re.X)  # Noncompliant {{Replace this character class by the character itself.}}
 
 def compliant():
     input = "abcdefghijklmnopqa"
@@ -35,7 +35,7 @@ def compliant():
     changed = re.match(r"^|$", input)
     changed = re.match(r"|", input)
     changed = re.match(r"[\[a\]]", input)
-    # Special characters do not raise warning
+    # # Special characters do not raise warning
     changed = re.match(r"a[.]a", input)
     changed = re.match(r"a[*]a", input)
     changed = re.match(r"a[+]a", input)
@@ -50,3 +50,12 @@ def compliant():
     changed = re.match(r"a a", input)
 
     changed = re.compile(r'[ \t # comment]', re.X)
+
+    changed = re.compile(r'[ \t  ]', re.X)
+    changed = re.compile(r'[ \t]', re.X)
+    changed = re.match(r'[ \t]', input, re.X)
+
+    # TODO : False Negatives. We deactivated the SingleCharCharacterClassFinder whenever the flag X or VERBOSE is set.
+    changed = re.compile(r'[\t]', re.X)
+    changed = re.compile(r'[a]', re.VERBOSE)
+    changed = re.match(r'[b][c]', input, re.M | re.X)

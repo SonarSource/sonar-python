@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks.regex;
 
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 import org.sonarsource.analyzer.commons.regex.finders.SingleCharCharacterClassFinder;
 
 @Rule(key = "S6397")
@@ -29,6 +32,20 @@ public class SingleCharCharacterClassCheck extends AbstractRegexCheck {
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
-    new SingleCharCharacterClassFinder(this::addIssue).visit(regexParseResult);
+    Symbol calleeSymbol = regexFunctionCall.calleeSymbol();
+    if (calleeSymbol == null || calleeSymbol.fullyQualifiedName() == null) {
+      return;
+    }
+    boolean containsComment = false;
+    String functionFqn = calleeSymbol.fullyQualifiedName();
+    if (functionFqn != null && lookedUpFunctions().containsKey(functionFqn)) {
+      FlagSet flagSet = getFlagSet(regexFunctionCall, functionFqn);
+      if (flagSet.contains(Pattern.COMMENTS)) {
+        containsComment = true;
+      }
+    }
+    if(!containsComment){
+      new SingleCharCharacterClassFinder(this::addIssue).visit(regexParseResult);
+    }
   }
 }
