@@ -19,6 +19,8 @@ def non_compliant():
     #                     ^
     changed = re.match(r"([\[])", input)  # Noncompliant {{Replace this character class by the character itself.}}
     #                      ^^
+    changed = re.match(r'[b][c]', input, re.M) # Noncompliant 2
+
 
     # TODO : Issue #217 in sonar-analyzer-commons : Using the comment flag leads to false positves in SingleCharCharacterClassFinder #217
     #  The three lines below produce FP due to the flag X which allows comments in a regex and which removes the whitespaces of the

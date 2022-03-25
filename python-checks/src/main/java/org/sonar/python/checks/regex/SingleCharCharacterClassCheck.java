@@ -33,11 +33,8 @@ public class SingleCharCharacterClassCheck extends AbstractRegexCheck {
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
     Symbol calleeSymbol = regexFunctionCall.calleeSymbol();
-    if (calleeSymbol == null || calleeSymbol.fullyQualifiedName() == null) {
-      return;
-    }
     boolean containsComment = false;
-    String functionFqn = calleeSymbol.fullyQualifiedName();
+    String functionFqn = calleeSymbol == null ? null : calleeSymbol.fullyQualifiedName();
     if (functionFqn != null && lookedUpFunctions().containsKey(functionFqn)) {
       FlagSet flagSet = getFlagSet(regexFunctionCall, functionFqn);
       if (flagSet.contains(Pattern.COMMENTS)) {
