@@ -30,4 +30,6 @@ def compliant():
 
     # coverage
     re.match("up", input)
-    re.sub("(ab)", r"a", "")
+    pattern = r"a"
+    re.sub("(ab)", pattern, "")
+    re.sub("(a)", r"[\?]", "")
