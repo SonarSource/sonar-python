@@ -52,15 +52,16 @@ import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
-import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.GroupReplacementCheck;
+import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
-import org.sonar.python.checks.regex.RegexComplexityCheck;
-import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
-import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
+import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
+import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
+import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 
 public final class CheckList {
@@ -141,6 +142,7 @@ public final class CheckList {
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
+      GroupReplacementCheck.class,
       GraphemeClustersInClassesCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,

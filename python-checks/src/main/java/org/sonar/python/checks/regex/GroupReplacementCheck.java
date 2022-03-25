@@ -20,7 +20,6 @@
 package org.sonar.python.checks.regex;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +31,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -64,35 +62,9 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
   }
 
   private void checkReplacement(CallExpression tree, Set<CapturingGroupTree> groups) {
-    List<Integer> groupNumber = groups.stream().map(CapturingGroupTree::getGroupNumber).collect(Collectors.toList());
-
-    List<Integer> references = collectReferences(tree);
-
-    if(references.isEmpty()){
-      return;
-    }
-//    stArg = tree.arguments();
-//    listArg.stream().filter(x ->x.is(Tree.Kind.GROUP_PATTERN))
-//      .map(groupPatt -> groupPatt.firstTo)
-
-
-//
-//    CheckUtils.resolvedArgumentLiteral(tree, "replacement", 1).ifPresent(
-//      replacement -> {
-//        List<Integer> references = collectReferences(replacement.value());
-//        references.removeIf(reference -> groups.stream().anyMatch(group -> group.getGroupNumber() == reference));
-//        if (!references.isEmpty()) {
-//          List<String> stringReferences = references.stream().map(String::valueOf).collect(Collectors.toList());
-//          newIssue(replacement, String.format(MESSAGE, references.size() == 1 ? "" : "s", String.join(", ", stringReferences)));
-//        }
-//      }
-//    );
-  }
-
-  private static List<Integer> collectReferences(CallExpression tree) {
-    RegularArgument regArg = nthArgumentOrKeyword(1, null, tree.arguments());
+    RegularArgument regArg = nthArgumentOrKeyword(1, "replacement", tree.arguments());
     if(regArg == null){
-      return Collections.emptyList();
+      return;
     }
     if(regArg.expression().is(Tree.Kind.STRING_LITERAL)){
       StringLiteral expression = (StringLiteral) regArg.expression();
@@ -100,19 +72,9 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
       references.removeIf(reference -> groups.stream().anyMatch(group -> group.getGroupNumber() == reference));
       if (!references.isEmpty()) {
         List<String> stringReferences = references.stream().map(String::valueOf).collect(Collectors.toList());
-        newIssue(replacement, String.format(MESSAGE, references.size() == 1 ? "" : "s", String.join(", ", stringReferences)));
+        regexContext.addIssue(expression, String.format(MESSAGE, references.size() == 1 ? "" : "s", String.join(", ", stringReferences)));
       }
     }
-
-    Matcher match = REFERENCE_PATTERN.matcher(replacement);
-    List<Integer> references = new ArrayList<>();
-    while (match.find()) {
-      // extract reference number out of one of the possible 3 groups of the regex
-      for (int i = 1; i <= 3; i++) {
-        Optional.ofNullable(match.group(i)).map(Integer::valueOf).filter(ref -> ref != 0).ifPresent(references::add);
-      }
-    }
-    return references;
   }
 
   private static List<Integer> collectReferences(String replacement) {
@@ -126,15 +88,6 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
     }
     return references;
   }
-
-//  public static Optional<LiteralTree> resolvedArgumentLiteral(CallExpression call, String name, int position) {
-//    return argumentValue(call, name, position).map(CheckUtils::assignedValue)
-//      .filter(LiteralTree.class::isInstance).map(LiteralTree.class::cast);
-//  }
-//
-//  public static Optional<ExpressionTree> argumentValue(CallExpression call, String name, int position) {
-//    return argument(call, name, position).map(CallArgumentTree::value);
-//  }
 
   static class GroupFinder extends RegexBaseVisitor {
 
