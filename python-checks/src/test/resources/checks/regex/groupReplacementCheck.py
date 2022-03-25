@@ -27,3 +27,7 @@ def compliant():
     re.sub("(a)", r"\1", "")
     re.sub("(a)(b)", r"\1 \2", "")
     re.sub("(a(b))", r"\1 \2", "")
+
+    # coverage
+    re.match("up", input)
+    re.sub("(ab)", r"a", "")
