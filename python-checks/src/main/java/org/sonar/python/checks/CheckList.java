@@ -66,6 +66,7 @@ import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
+import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 
 public final class CheckList {
 
@@ -235,6 +236,7 @@ public final class CheckList {
       StringLiteralDuplicationCheck.class,
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
+      SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
