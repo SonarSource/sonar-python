@@ -5,6 +5,7 @@ def non_compliant():
     input = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
     changed = re.match(r"[0]", input)  # Noncompliant {{Replace this character class by the character itself.}}
     #                     ^
+
     changed = re.match(r"[B]", input)  # Noncompliant {{Replace this character class by the character itself.}}
     #                     ^
     changed = re.match(r"[ ]", input)  # Noncompliant {{Replace this character class by the character itself.}}
@@ -31,6 +32,7 @@ def non_compliant():
 
 def compliant():
     input = "abcdefghijklmnopqa"
+    changed = re.match(re.escape("test"), input)
     changed = re.match(r"[abc]", input)
     changed = re.match(r"[a-c]", input)
     changed = re.match(r"ab|cd", input)
