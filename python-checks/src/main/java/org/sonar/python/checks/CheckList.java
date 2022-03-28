@@ -55,6 +55,7 @@ import org.sonar.python.checks.regex.EmptyGroupCheck;
 import org.sonar.python.checks.regex.EmptyAlternativeCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
+import org.sonar.python.checks.regex.GroupReplacementCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
@@ -151,6 +152,7 @@ public final class CheckList {
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
       GraphemeClustersInClassesCheck.class,
+      GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
