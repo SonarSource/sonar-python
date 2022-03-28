@@ -33,3 +33,4 @@ def compliant():
     pattern = r"a"
     re.sub("(ab)", pattern, "")
     re.sub("(a)", r"[\?]", "")
+    re.sub("(A)")
