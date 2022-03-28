@@ -51,18 +51,25 @@ import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
+import org.sonar.python.checks.regex.EmptyGroupCheck;
+import org.sonar.python.checks.regex.EmptyAlternativeCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.GroupReplacementCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
+import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
+import org.sonar.python.checks.regex.SingleCharCharacterClassCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
+import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
+import org.sonar.python.checks.regex.VerboseRegexCheck;
+import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 
 public final class CheckList {
 
@@ -121,6 +128,8 @@ public final class CheckList {
       DynamicCodeExecutionCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
+      EmptyAlternativeCheck.class,
+      EmptyGroupCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
       EmptyStringRepetitionCheck.class,
@@ -183,6 +192,7 @@ public final class CheckList {
       MissingNewlineAtEndOfFileCheck.class,
       ModifiedParameterValueCheck.class,
       ModuleNameCheck.class,
+      MultipleWhitespaceCheck.class,
       NeedlessPassCheck.class,
       NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
@@ -223,6 +233,7 @@ public final class CheckList {
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
       SingleCharacterAlternationCheck.class,
+      SingleCharCharacterClassCheck.class,
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
@@ -231,6 +242,7 @@ public final class CheckList {
       StringLiteralDuplicationCheck.class,
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
+      SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
@@ -243,6 +255,7 @@ public final class CheckList {
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
       UndefinedNameAllPropertyCheck.class,
+      UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
@@ -257,6 +270,7 @@ public final class CheckList {
       UselessParenthesisCheck.class,
       UselessStatementCheck.class,
       UseOfEmptyReturnValueCheck.class,
+      VerboseRegexCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,

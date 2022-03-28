@@ -237,7 +237,7 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
 
     String expectedLogMessage = String.format(
-      "Cannot resolve the file path '%sabsolute%ssources%snot_exist.py' of the coverage report, the file does not exist in all <source>.",
+      "Cannot resolve the file path '%sabsolute%ssources%snot_exist.py' of the coverage report, the file does not exist in all 'source'.",
       currentFileSeparator,
       currentFileSeparator,
       currentFileSeparator);
@@ -298,6 +298,16 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
+  }
+
+  @Test
+  public void should_warn_if_source_is_not_directory() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_source_invalid_directory.xml");
+    coverageSensor.execute(context);
+    File file = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
+    String message = "Invalid directory path in 'source' element: " + file.getPath();
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains(message);
+    verify(analysisWarnings, times(1)).addUnique("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message);
   }
 
   @Test

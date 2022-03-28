@@ -36,7 +36,8 @@ def compliant():
     changed = re.sub(r"x+", "It's", input)
     changed = re.sub(r"[\\]", "It's", input)
     changed = re.sub(r"", "It's", input)
-    changed = re.match(r"Bob is", input)
+    changed = re.sub(r"Bob is", "It's", input, flags=re.IGNORECASE)
+    changed = re.sub(r"Bob is", "It's", input, 1, re.IGNORECASE)
 
 def coverage(input):
     re.match(r"Bob is", input)

@@ -21,6 +21,7 @@ package org.sonar.python.checks.regex;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.regex.PythonRegexIssueLocation;
@@ -44,7 +45,11 @@ public class StringReplaceCheck extends AbstractRegexCheck {
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression callExpression) {
     RegexTree regex = regexParseResult.getResult();
-    if (!regexParseResult.hasSyntaxErrors() && isPlainString(regex)) {
+    if (regexParseResult.hasSyntaxErrors() || regex.activeFlags().contains(Pattern.CASE_INSENSITIVE)) {
+      return;
+    }
+
+    if (isPlainString(regex)) {
       regexContext.addIssue(callExpression.callee(), MESSAGE)
         .secondary(PythonRegexIssueLocation.preciseLocation(regex, SECONDARY_MESSAGE));
     }

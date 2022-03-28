@@ -84,13 +84,13 @@ public class PythonCoverageSensor implements Sensor {
     }
   }
 
-  private static List<File> getCoverageReports(String baseDir, Configuration config) {
+  private List<File> getCoverageReports(String baseDir, Configuration config) {
     if (!config.hasKey(REPORT_PATHS_KEY)) {
-      return getReports(config, baseDir, REPORT_PATHS_KEY, DEFAULT_REPORT_PATH);
+      return getReports(config, baseDir, REPORT_PATHS_KEY, DEFAULT_REPORT_PATH, analysisWarnings);
     }
 
     return Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
-      .flatMap(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path).stream())
+      .flatMap(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path, analysisWarnings).stream())
       .collect(Collectors.toList());
   }
 
@@ -108,12 +108,17 @@ public class PythonCoverageSensor implements Sensor {
       .collect(Collectors.toCollection(LinkedHashSet::new));
   }
 
-  private static Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
+  private Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
     Map<InputFile, NewCoverage> coverageMeasures = new HashMap<>();
     try {
       CoberturaParser parser = new CoberturaParser();
       parser.parseReport(report, context, coverageMeasures);
+      if (!parser.errors().isEmpty()) {
+        String parseErrors = String.join("%n", parser.errors());
+        analysisWarnings.addUnique(String.format("The following error(s) occurred while trying to import coverage report:%n%s", parseErrors));
+      }
     } catch (EmptyReportException e) {
+      analysisWarnings.addUnique(String.format("The coverage report '%s' has been ignored because it seems to be empty.", report));
       LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
     } catch (XMLStreamException e) {
       throw new IllegalStateException("Error parsing the report '" + report + "'", e);
