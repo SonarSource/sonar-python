@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks.regex;
 
+import java.util.Optional;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
@@ -29,7 +31,11 @@ public class MultipleWhitespaceCheck extends AbstractRegexCheck {
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
-    new MultipleWhitespaceFinder(this::addIssue).visit(regexParseResult);
+    Optional.ofNullable(regexFunctionCall.calleeSymbol())
+      .flatMap(symbol -> Optional.ofNullable(symbol.fullyQualifiedName()))
+      .filter(fqn -> lookedUpFunctions().containsKey(fqn))
+      .filter(fqn -> !regexParseResult.getResult().activeFlags().contains(Pattern.COMMENTS))
+      .ifPresent(fqn -> new MultipleWhitespaceFinder(this::addIssue).visit(regexParseResult));
   }
 }
 
