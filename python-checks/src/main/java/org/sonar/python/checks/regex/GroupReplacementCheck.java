@@ -78,9 +78,8 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
     List<Integer> references = new ArrayList<>();
     while (match.find()) {
       // extract reference number out of one of the possible 2 groups of the regex
-      for (int i = 1; i <= 2; i++) {
-        Optional.ofNullable(match.group(i)).map(Integer::valueOf).filter(ref -> ref != 0).ifPresent(references::add);
-      }
+      Optional.ofNullable(match.group(1)).map(Integer::valueOf).filter(ref -> ref != 0).ifPresent(references::add);
+      Optional.ofNullable(match.group(2)).map(Integer::valueOf).filter(ref -> ref != 0).ifPresent(references::add);
     }
     return references;
   }
