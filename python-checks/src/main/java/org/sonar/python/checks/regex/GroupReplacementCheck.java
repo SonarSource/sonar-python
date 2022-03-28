@@ -20,7 +20,7 @@
 package org.sonar.python.checks.regex;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,18 +40,15 @@ import org.sonarsource.analyzer.commons.regex.ast.RegexBaseVisitor;
 
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
-
 @Rule(key = "S6328")
 public class GroupReplacementCheck extends AbstractRegexCheck {
 
   private static final String MESSAGE = "Referencing non-existing group%s: %s.";
-  private static final Pattern REFERENCE_PATTERN = Pattern.compile("\\$(\\d+)|\\$\\{(\\d+)}|\\\\(\\d+)");
+  private static final Pattern REFERENCE_PATTERN = Pattern.compile("\\\\(\\d+)|\\\\g<(\\d+)>");
 
   @Override
   protected Map<String, Integer> lookedUpFunctions() {
-    Map<String, Integer> result = new HashMap<>();
-    result.put("re.sub", 4);
-    return result;
+    return Collections.singletonMap("re.sub", 4);
   }
 
   @Override
@@ -63,10 +60,9 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
 
   private void checkReplacement(CallExpression tree, Set<CapturingGroupTree> groups) {
     RegularArgument regArg = nthArgumentOrKeyword(1, "replacement", tree.arguments());
-    if(regArg == null){
-      return;
-    }
-    if(regArg.expression().is(Tree.Kind.STRING_LITERAL)){
+    if (regArg == null) return;
+
+    if (regArg.expression().is(Tree.Kind.STRING_LITERAL)) {
       StringLiteral expression = (StringLiteral) regArg.expression();
       List<Integer> references = collectReferences(expression.trimmedQuotesValue());
       references.removeIf(reference -> groups.stream().anyMatch(group -> group.getGroupNumber() == reference));
@@ -81,8 +77,8 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
     Matcher match = REFERENCE_PATTERN.matcher(replacement);
     List<Integer> references = new ArrayList<>();
     while (match.find()) {
-      // extract reference number out of one of the possible 3 groups of the regex
-      for (int i = 1; i <= 3; i++) {
+      // extract reference number out of one of the possible 2 groups of the regex
+      for (int i = 1; i <= 2; i++) {
         Optional.ofNullable(match.group(i)).map(Integer::valueOf).filter(ref -> ref != 0).ifPresent(references::add);
       }
     }
@@ -100,4 +96,3 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
     }
   }
 }
-
