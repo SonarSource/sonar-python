@@ -62,6 +62,7 @@ import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierCheck;
 import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationCheck;
+import org.sonar.python.checks.regex.SingleCharCharacterClassCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
@@ -228,6 +229,7 @@ public final class CheckList {
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
       SingleCharacterAlternationCheck.class,
+      SingleCharCharacterClassCheck.class,
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
