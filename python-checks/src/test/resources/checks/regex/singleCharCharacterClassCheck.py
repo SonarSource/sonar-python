@@ -53,6 +53,7 @@ def compliant():
     changed = re.match(r'[ \t]', input, re.X)
 
     # TODO : False Negatives. We deactivated the SingleCharCharacterClassFinder whenever the flag X or VERBOSE is set.
+    # see https://github.com/SonarSource/sonar-analyzer-commons/issues/217
     changed = re.compile(r'[\t]', re.X)
     changed = re.compile(r'[a]', re.VERBOSE)
     changed = re.match(r'[b][c]', input, re.M | re.X)

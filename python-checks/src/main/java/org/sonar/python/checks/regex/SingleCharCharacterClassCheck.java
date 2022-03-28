@@ -34,7 +34,7 @@ public class SingleCharCharacterClassCheck extends AbstractRegexCheck {
     Optional.ofNullable(regexFunctionCall.calleeSymbol())
       .flatMap(symbol -> Optional.ofNullable(symbol.fullyQualifiedName()))
       .filter(fqn -> lookedUpFunctions().containsKey(fqn))
-      .filter(fqn -> !getFlagSet(regexFunctionCall, fqn).contains(Pattern.COMMENTS))
+      .filter(fqn -> !regexParseResult.getResult().activeFlags().contains(Pattern.COMMENTS))
       .ifPresent(fqn -> new SingleCharCharacterClassFinder(this::addIssue).visit(regexParseResult));
   }
 }

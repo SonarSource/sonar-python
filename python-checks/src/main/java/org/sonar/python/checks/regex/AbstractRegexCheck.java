@@ -142,7 +142,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  protected FlagSet getFlagSet(CallExpression callExpression, String functionFqn) {
+  private FlagSet getFlagSet(CallExpression callExpression, String functionFqn) {
     HashSet<QualifiedExpression> flags = new HashSet<>();
     getFlagsArgValue(callExpression, lookedUpFunctions().get(functionFqn)).ifPresent(f -> flags.addAll(extractFlagExpressions(f)));
     FlagSet flagSet = new FlagSet();
