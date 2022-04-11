@@ -121,3 +121,7 @@ import zope.interface
 class IFoo(zope.interface.Interface):
     def bar(q, r=None):
         """bar foo bar"""
+
+
+def test_using_fixture(my_fixture):
+    assert do_something() == expected()
