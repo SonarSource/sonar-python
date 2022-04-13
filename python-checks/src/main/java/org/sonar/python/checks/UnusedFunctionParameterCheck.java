@@ -52,7 +52,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef) {
-    if (isException(functionDef)) return;
+    if (isException(ctx, functionDef)) return;
     functionDef.localVariables().stream()
       .filter(symbol -> !"self".equals(symbol.name()))
       .map(Symbol::usages)
@@ -61,7 +61,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       .forEach(param -> ctx.addIssue(param, String.format(MESSAGE, param.name().name())));
   }
 
-  private static boolean isException(FunctionDef functionDef) {
+  private static boolean isException(SubscriptionContext ctx, FunctionDef functionDef) {
     FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
     return CheckUtils.containsCallToLocalsFunction(functionDef) ||
       SymbolUtils.canBeAnOverridingMethod(functionSymbol) ||
@@ -69,7 +69,8 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       isNotImplemented(functionDef) ||
       !functionDef.decorators().isEmpty() ||
       isSpecialMethod(functionDef) ||
-      hasNonCallUsages(functionSymbol);
+      hasNonCallUsages(functionSymbol) ||
+      isTestFunction(ctx, functionDef);
   }
 
   private static boolean isInterfaceMethod(FunctionDef functionDef) {
@@ -101,6 +102,14 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(functionSymbol)
       .filter(fs -> fs.usages().stream().anyMatch(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION && !isFunctionCall(usage)))
       .isPresent();
+  }
+
+  private static boolean isTestFunction(SubscriptionContext ctx, FunctionDef functionDef) {
+    String fileName = ctx.pythonFile().fileName();
+    if (fileName.startsWith("conftest") || fileName.startsWith("test")) {
+      return true;
+    }
+    return functionDef.name().name().startsWith("test");
   }
 
   private static boolean isFunctionCall(Usage usage) {
