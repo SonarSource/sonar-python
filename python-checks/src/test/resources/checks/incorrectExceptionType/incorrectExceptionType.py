@@ -142,3 +142,14 @@ def raise_with_str_concat():
 
 def raise_builtin_exception_with_fqn_null():
   raise IOError()
+
+
+def no_fp_on_nonlocal_variables(x):
+    exception = None
+    def do_something():
+        nonlocal exception
+        if foo():
+            exception = ValueError("Hello")
+    do_something()
+    if exception:
+        raise exception

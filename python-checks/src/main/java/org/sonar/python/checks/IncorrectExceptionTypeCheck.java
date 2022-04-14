@@ -46,15 +46,18 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
         return;
       }
       Expression raisedExpression = raiseStatement.expressions().get(0);
-      if (!raisedExpression.type().canBeOrExtend(BASE_EXCEPTION)) {
-        ctx.addIssue(raiseStatement, MESSAGE);
-        return;
-      }
       Symbol symbol = null;
       if (raisedExpression instanceof HasSymbol) {
         symbol = ((HasSymbol) raisedExpression).symbol();
       } else if (raisedExpression.is(Tree.Kind.CALL_EXPR)) {
         symbol = ((CallExpression) raisedExpression).calleeSymbol();
+      }
+      if (hasGlobalOrNonLocalUsage(symbol)) {
+        return;
+      }
+      if (!raisedExpression.type().canBeOrExtend(BASE_EXCEPTION)) {
+        ctx.addIssue(raiseStatement, MESSAGE);
+        return;
       }
       if (!mayInheritFromBaseException(symbol)) {
         ctx.addIssue(raiseStatement, MESSAGE);
@@ -76,5 +79,9 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
     }
     // to handle other builtins like 'NotImplemented'
     return !BuiltinSymbols.all().contains(symbol.fullyQualifiedName());
+  }
+
+  private static boolean hasGlobalOrNonLocalUsage(@Nullable Symbol symbol) {
+    return symbol != null && symbol.usages().stream().anyMatch(s -> s.tree().parent().is(Tree.Kind.GLOBAL_STMT, Tree.Kind.NONLOCAL_STMT));
   }
 }
