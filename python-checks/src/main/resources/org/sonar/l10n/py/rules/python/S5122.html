@@ -23,11 +23,11 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>, that act
   allowing any domain (do not use * wildcard nor blindly return the <code>Origin</code> header content without any checks). </li>
 </ul>
 <h2>Sensitive Code Example</h2>
-<p>Django</p>
+<p>Django:</p>
 <pre>
 CORS_ORIGIN_ALLOW_ALL = True # Sensitive
 </pre>
-<p>Flask</p>
+<p>Flask:</p>
 <pre>
 from flask import Flask
 from flask_cors import CORS
@@ -35,18 +35,31 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "True"}}) # Sensitive
 </pre>
+<p>User-controlled origin:</p>
+<pre>
+origin = request.headers['ORIGIN']
+resp = Response()
+resp.headers['Access-Control-Allow-Origin'] = origin # Sensitive
+</pre>
 <h2>Compliant Solution</h2>
-<p>Django</p>
+<p>Django:</p>
 <pre>
 CORS_ORIGIN_ALLOW_ALL = False # Compliant
 </pre>
-<p>Flask</p>
+<p>Flask:</p>
 <pre>
 from flask import Flask
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}}) # Compliant
+</pre>
+<p>User-controlled origin validated with an allow-list:</p>
+<pre>
+origin = request.headers['ORIGIN']
+resp = Response()
+if origin in TRUSTED_ORIGINS:
+   resp.headers['Access-Control-Allow-Origin'] = origin
 </pre>
 <h2>See</h2>
 <ul>
@@ -59,8 +72,8 @@ CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}}) # Compl
   Misconfiguration </li>
   <li> <a href="https://www.owasp.org/index.php/HTML5_Security_Cheat_Sheet#Cross_Origin_Resource_Sharing">OWASP HTML5 Security Cheat Sheet</a> - Cross
   Origin Resource Sharing </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/346.html">MITRE, CWE-346</a> - Origin Validation Error </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/942.html">MITRE, CWE-942</a> - Overly Permissive Cross-domain Whitelist </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/346">MITRE, CWE-346</a> - Origin Validation Error </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/942">MITRE, CWE-942</a> - Overly Permissive Cross-domain Whitelist </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 
