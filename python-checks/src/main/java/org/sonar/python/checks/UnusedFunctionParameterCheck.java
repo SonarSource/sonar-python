@@ -54,11 +54,15 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   private static void checkFunctionParameter(SubscriptionContext ctx, FunctionDef functionDef) {
     if (isException(ctx, functionDef)) return;
     functionDef.localVariables().stream()
-      .filter(symbol -> !"self".equals(symbol.name()))
+      .filter(symbol -> !isIgnoredSymbolName(symbol.name()))
       .map(Symbol::usages)
       .filter(usages -> usages.size() == 1 && usages.get(0).tree().parent().is(Kind.PARAMETER))
       .map(usages -> (Parameter) usages.get(0).tree().parent())
       .forEach(param -> ctx.addIssue(param, String.format(MESSAGE, param.name().name())));
+  }
+
+  private static boolean isIgnoredSymbolName(String symbolName) {
+    return "self".equals(symbolName) || symbolName.startsWith("_");
   }
 
   private static boolean isException(SubscriptionContext ctx, FunctionDef functionDef) {
