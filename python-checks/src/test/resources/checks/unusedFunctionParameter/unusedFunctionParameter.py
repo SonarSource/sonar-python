@@ -125,3 +125,8 @@ class IFoo(zope.interface.Interface):
 
 def test_using_fixture(my_fixture):
     assert do_something() == expected()
+
+
+def lambda_handler(_event, _context):
+    print("foo")
+
