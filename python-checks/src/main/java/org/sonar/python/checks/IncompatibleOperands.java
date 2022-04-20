@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 
@@ -90,6 +91,11 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
 
     IncompatibleOperandsVisitor(SubscriptionContext context) {
       this.context = context;
+    }
+
+    @Override
+    public void visitTypeAnnotation(TypeAnnotation tree) {
+      // avoid raising FPs on type annotations
     }
 
     @Override
