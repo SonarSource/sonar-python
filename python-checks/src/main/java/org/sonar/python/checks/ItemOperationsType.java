@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 public abstract class ItemOperationsType extends PythonSubscriptionCheck {
@@ -47,7 +48,7 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
 
   private void checkSubscription(SubscriptionContext ctx) {
     SubscriptionExpression subscriptionExpression = (SubscriptionExpression) ctx.syntaxNode();
-    if (isWithinTypeAnnotation(subscriptionExpression)) {
+    if (isWithinTypeAnnotation(subscriptionExpression) || isTypeSubscription(subscriptionExpression.object())) {
       return;
     }
     Map<LocationInFile, String> secondaries = new HashMap<>();
@@ -67,6 +68,11 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
     if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", secondaries)) {
       reportIssue(subscriptionExpression, subscriptionObject, "__getitem__", ctx, secondaries);
     }
+  }
+
+  // Avoid FPs on alias with type generics like `alias = type[Foo]`
+  private static boolean isTypeSubscription(Expression subscriptionObject) {
+    return getSymbolFromTree(subscriptionObject).filter(symbol -> "type".equals(symbol.fullyQualifiedName())).isPresent();
   }
 
   private static boolean isWithinTypeAnnotation(SubscriptionExpression subscriptionExpression) {

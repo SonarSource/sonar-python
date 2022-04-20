@@ -189,3 +189,6 @@ def python3_9():
   from asyncio import Future
   class A(Future[TSource]): ...
 
+
+def python3_10():
+  type_alias = type[Exception]
