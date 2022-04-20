@@ -78,3 +78,7 @@ def builtin_compliant():
   myvar += 2
 
   not myvar # coverage
+
+
+def type_annotations():
+  mode: "OpenBinaryMode" | "OpenTextMode"
