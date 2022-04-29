@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -51,8 +52,8 @@ import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
-import org.sonar.python.checks.regex.EmptyGroupCheck;
 import org.sonar.python.checks.regex.EmptyAlternativeCheck;
+import org.sonar.python.checks.regex.EmptyGroupCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.GroupReplacementCheck;
@@ -67,9 +68,9 @@ import org.sonar.python.checks.regex.ReluctantQuantifierWithEmptyContinuationChe
 import org.sonar.python.checks.regex.SingleCharCharacterClassCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
+import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
-import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 
 public final class CheckList {
 
@@ -224,6 +225,7 @@ public final class CheckList {
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       RobustCipherAlgorithmCheck.class,
+      S3BucketVersioningCheck.class,
       SameBranchCheck.class,
       SameConditionCheck.class,
       SecureCookieCheck.class,
