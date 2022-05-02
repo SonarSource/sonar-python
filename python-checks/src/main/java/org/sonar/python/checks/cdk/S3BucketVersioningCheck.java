@@ -24,7 +24,6 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -43,15 +42,16 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
   public void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    Symbol nodeSymbol = node.calleeSymbol();
-    if (nodeSymbol != null && "aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())) {
-      Optional<RegularArgument> version = getVersionArgument(node.arguments());
-      if (version.isPresent()) {
-        version.filter(a -> "False".equals(a.expression().firstToken().value())).ifPresent(v -> ctx.addIssue(v, MESSAGE));
-      } else {
-        ctx.addIssue(node.callee(), MESSAGE);
+    Optional.ofNullable(node.calleeSymbol()).ifPresent(nodeSymbol -> {
+      if ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())) {
+        Optional<RegularArgument> version = getVersionArgument(node.arguments());
+        if (version.isPresent()) {
+          version.filter(a -> "False".equals(a.expression().firstToken().value())).ifPresent(v -> ctx.addIssue(v, MESSAGE));
+        } else {
+          ctx.addIssue(node.callee(), MESSAGE);
+        }
       }
-    }
+    });
   }
 
   private static Optional<RegularArgument> getVersionArgument(List<Argument> args) {
