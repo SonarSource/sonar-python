@@ -5,7 +5,7 @@ a = int(10)
 bucket = s3.Bucket(self, "MyUnversionedBucket", versioned=False) # Noncompliant
                                               # ^^^^^^^^^^^^^^^
 
-# Noncompliant@+1 {{Make sure using unversioned S3 bucket is safe here. Omitting "versioned=True" disables S3 bucket versioning. Make sure it is safe here.}}
+# Noncompliant@+1 {{Make sure using unversioned S3 bucket is safe here. Omitting 'versioned=True' disables S3 bucket versioning. Make sure it is safe here.}}
 bucket = s3.Bucket(self, "MyUnversionedBucket")
 #        ^^^^^^^^^
 
