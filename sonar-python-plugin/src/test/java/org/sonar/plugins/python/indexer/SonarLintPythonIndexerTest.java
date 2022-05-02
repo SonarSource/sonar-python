@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -42,6 +44,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -165,6 +168,25 @@ public class SonarLintPythonIndexerTest {
     assertThat(modAddSymbol).isNotNull();
   }
 
+  @Test
+  public void test_indexer_non_python_file() {
+    testNonPythonFile("txt");
+    testNonPythonFile(null);
+  }
+
+  private void testNonPythonFile(@Nullable String language) {
+    ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
+    DefaultInputFile txtFile = createInputFile("non_python.txt", language);
+    when(moduleFileEvent.getTarget()).thenReturn(txtFile);
+    try {
+      pythonIndexer.process(moduleFileEvent);
+    } catch (RecognitionException exception) {
+      fail("Non Python files should not be parsed.");
+    }
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("non_python")).isNull();
+  }
+
   private InputFile inputFile(String name) {
     DefaultInputFile inputFile = createInputFile(name);
     context.fileSystem().add(inputFile);
@@ -172,11 +194,15 @@ public class SonarLintPythonIndexerTest {
   }
 
   private DefaultInputFile createInputFile(String name) {
+    return createInputFile(name, Python.KEY);
+  }
+
+  private DefaultInputFile createInputFile(String name, String languageKey) {
     return TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setType(InputFile.Type.MAIN)
-      .setLanguage(Python.KEY)
+      .setLanguage(languageKey)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
       .build();
   }

@@ -98,6 +98,11 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   public void process(ModuleFileEvent moduleFileEvent) {
     InputFile target = moduleFileEvent.getTarget();
+    String language = target.language();
+    if (language == null || !language.equals(Python.KEY)) {
+      LOG.debug("Module file event for " + target + " has been ignored because it's not a Python file.");
+      return;
+    }
     ModuleFileEvent.Type type = moduleFileEvent.getType();
     if (type.equals(ModuleFileEvent.Type.DELETED) || type.equals(ModuleFileEvent.Type.MODIFIED)) {
       removeFile(target);
