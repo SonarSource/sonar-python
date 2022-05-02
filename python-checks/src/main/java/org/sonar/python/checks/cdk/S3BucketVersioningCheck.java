@@ -42,7 +42,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
   public void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    if (node.calleeSymbol() != null && !"aws_cdk.aws_s3.Bucket".equals(node.calleeSymbol().fullyQualifiedName())) {
+    if (node.calleeSymbol() == null || !"aws_cdk.aws_s3.Bucket".equals(node.calleeSymbol().fullyQualifiedName())) {
       return;
     }
     Optional<RegularArgument> version = getVersionArgument(node.arguments());
@@ -55,6 +55,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
   private static Optional<RegularArgument> getVersionArgument(List<Argument> args) {
     return args.stream()
+      .filter(RegularArgument.class::isInstance)
       .map(RegularArgument.class::cast)
       .filter(a -> a.keywordArgument() != null)
       .filter(a -> "versioned".equals(a.keywordArgument().name()))
