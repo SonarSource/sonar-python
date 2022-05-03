@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
@@ -29,6 +31,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
 
@@ -37,7 +40,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Make sure an unversioned S3 bucket is safe here.";
   public static final String MESSAGE_OMITTING = "Omitting the \"versioned\" argument disables S3 bucket versioning. Make sure it is safe here.";
-  public static final String MESSAGE_SECONDARY = "Propagated setting";
+  public static final String MESSAGE_SECONDARY = "Propagated setting.";
 
   @Override
   public void initialize(Context context) {
@@ -51,8 +54,12 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .ifPresent(nodeSymbol -> {
         Optional<RegularArgument> version = getVersionArgument(node.arguments());
         if (version.isPresent()) {
-          version.filter(a -> isExpressionFalse(ctx, a.expression(), false))
-            .ifPresent(v -> ctx.addIssue(v, MESSAGE));
+          version.map(regArg -> isExpressionFalse(regArg.expression()))
+            .filter(trees -> !trees.isEmpty())
+            .ifPresent(trees -> {
+              PreciseIssue issue = ctx.addIssue(trees.get(0).parent(), MESSAGE);
+              trees.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), MESSAGE_SECONDARY));
+            });
         } else {
           ctx.addIssue(node.callee(), MESSAGE_OMITTING);
         }
@@ -67,24 +74,25 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .findAny();
   }
 
-  private static boolean isExpressionFalse(SubscriptionContext ctx, Expression expression, boolean secondary) {
-    if (Optional.ofNullable(expression.firstToken()).filter(token -> isFalse(token.value())).isPresent()) {
-      if (secondary) {
-        ctx.addIssue(expression.parent(), MESSAGE_SECONDARY);
-      }
-      return true;
-    }
-    if (expression.is(Tree.Kind.NAME)) {
+  private static List<Tree> isExpressionFalse(Expression expression) {
+    List<Tree> trees = new ArrayList<>();
+    if (Optional.ofNullable(expression.firstToken()).filter(S3BucketVersioningCheck::isFalse).isPresent()) {
+      trees.add(expression);
+    } else if (expression.is(Tree.Kind.NAME)) {
       Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
-      if (singleAssignedValue == null) {
-        return isFalse(expression.firstToken().value());
+      if (singleAssignedValue != null) {
+        trees.add(expression);
+        List<Tree> subTrees = isExpressionFalse(singleAssignedValue);
+        if (subTrees.isEmpty()) {
+          return Collections.emptyList();
+        }
+        trees.addAll(subTrees);
       }
-      return isExpressionFalse(ctx, singleAssignedValue, true);
     }
-    return false;
+    return trees;
   }
 
-  private static boolean isFalse(String value) {
-    return "False".equals(value);
+  private static boolean isFalse(Token token) {
+    return "False".equals(token.value());
   }
 }
