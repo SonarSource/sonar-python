@@ -66,7 +66,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isExpressionFalse(Expression expression) {
-    if (expression.firstToken() != null && "False".equals(expression.firstToken().value())){
+    if(Optional.ofNullable(expression.firstToken()).filter(exp -> "False".equals(exp.value())).isPresent()){
       return true;
     }
     if (expression.is(Tree.Kind.NAME)) {
