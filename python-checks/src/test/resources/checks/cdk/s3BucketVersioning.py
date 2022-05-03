@@ -1,42 +1,45 @@
 from aws_cdk import aws_s3 as s3
 
-a = int(10)
+bucket = s3.Bucket(self, "MyUnversionedBucket", versioned=False)  # Noncompliant
+#                                               ^^^^^^^^^^^^^^^
 
-bucket = s3.Bucket(self, "MyUnversionedBucket", versioned=False) # Noncompliant
-                                              # ^^^^^^^^^^^^^^^
-
-# Noncompliant@+1 {{Make sure using unversioned S3 bucket is safe here. Omitting 'versioned=True' disables S3 bucket versioning. Make sure it is safe here.}}
+# Noncompliant@+1 {{Omitting the "versioned" argument disables S3 bucket versioning. Make sure it is safe here.}}
 bucket = s3.Bucket(self, "MyUnversionedBucket")
 #        ^^^^^^^^^
 
-bucket_versioning = False
+bucket_versioning = False  # Noncompliant
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=bucket_versioning # Noncompliant
-                   # highlight `versioned=bucket_versioning` as 2st location
+                   versioned=bucket_versioning  # Noncompliant {{Make sure an unversioned S3 bucket is safe here.}}
+                #  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
                    )
 
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=True      # Compliant
+                   versioned=True  # Compliant
                    )
 
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=unresolved_var      # Compliant
+                   versioned=unresolved_var  # Compliant
                    )
 
-second_versioning = bucket_versioning
+bucket_versioning1 = False  # Noncompliant {{Propagated setting}}
+second_versioning = bucket_versioning1
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=second_versioning # Noncompliant
+                   versioned=second_versioning  # Noncompliant {{Make sure an unversioned S3 bucket is safe here.}}
+                #  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
                    )
 
 third_versioning = True
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=third_versioning # Compliant
+                   versioned=third_versioning  # Compliant
                    )
 
 bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=True # Compliant
-                   )
-bucket = s3.Bucket(self, "MyUnversionedBucket",
-                   versioned=s3.Bucket(self, "InsideBucket") # Noncompliant
+                   versioned=True  # Compliant
                    )
 
+value = "FALSE"
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=value # Compliant
+                   )
+
+a = function_call_for_coverage(10)

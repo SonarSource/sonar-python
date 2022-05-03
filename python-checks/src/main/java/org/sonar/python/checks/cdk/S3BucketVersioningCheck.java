@@ -35,8 +35,9 @@ import org.sonar.python.checks.Expressions;
 @Rule(key = "S6252")
 public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
-  public static final String MESSAGE = "Make sure using unversioned S3 bucket is safe here. Omitting 'versioned=True' disables S3 bucket" +
-    " versioning. Make sure it is safe here.";
+  public static final String MESSAGE = "Make sure an unversioned S3 bucket is safe here.";
+  public static final String MESSAGE_OMITTING = "Omitting the \"versioned\" argument disables S3 bucket versioning. Make sure it is safe here.";
+  public static final String MESSAGE_SECONDARY = "Propagated setting";
 
   @Override
   public void initialize(Context context) {
@@ -45,16 +46,17 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
 
   public void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(node.calleeSymbol()).ifPresent(nodeSymbol -> {
-      if ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())) {
+    Optional.ofNullable(node.calleeSymbol())
+      .filter(nodeSymbol -> ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())))
+      .ifPresent(nodeSymbol -> {
         Optional<RegularArgument> version = getVersionArgument(node.arguments());
         if (version.isPresent()) {
-          version.filter(a -> isExpressionFalse(a.expression())).ifPresent(v -> ctx.addIssue(v, MESSAGE));
+          version.filter(a -> isExpressionFalse(ctx, a.expression(), false))
+            .ifPresent(v -> ctx.addIssue(v, MESSAGE));
         } else {
-          ctx.addIssue(node.callee(), MESSAGE);
+          ctx.addIssue(node.callee(), MESSAGE_OMITTING);
         }
-      }
-    });
+      });
   }
 
   private static Optional<RegularArgument> getVersionArgument(List<Argument> args) {
@@ -65,17 +67,24 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .findAny();
   }
 
-  private static boolean isExpressionFalse(Expression expression) {
-    if(Optional.ofNullable(expression.firstToken()).filter(exp -> "False".equals(exp.value())).isPresent()){
+  private static boolean isExpressionFalse(SubscriptionContext ctx, Expression expression, boolean secondary) {
+    if (Optional.ofNullable(expression.firstToken()).filter(token -> isFalse(token.value())).isPresent()) {
+      if (secondary) {
+        ctx.addIssue(expression.parent(), MESSAGE_SECONDARY);
+      }
       return true;
     }
     if (expression.is(Tree.Kind.NAME)) {
       Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
       if (singleAssignedValue == null) {
-        return "False".equals(expression.firstToken().value());
+        return isFalse(expression.firstToken().value());
       }
-      return isExpressionFalse(singleAssignedValue);
+      return isExpressionFalse(ctx, singleAssignedValue, true);
     }
     return false;
+  }
+
+  private static boolean isFalse(String value) {
+    return "False".equals(value);
   }
 }
