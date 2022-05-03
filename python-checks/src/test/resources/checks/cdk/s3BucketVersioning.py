@@ -32,3 +32,11 @@ third_versioning = True
 bucket = s3.Bucket(self, "MyUnversionedBucket",
                    versioned=third_versioning # Compliant
                    )
+
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=True # Compliant
+                   )
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=s3.Bucket(self, "InsideBucket") # Noncompliant
+                   )
+
