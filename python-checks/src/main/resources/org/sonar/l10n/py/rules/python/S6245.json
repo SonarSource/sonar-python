@@ -1,0 +1,31 @@
+{
+  "title": "Disabling server-side encryption of S3 buckets is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [
+    "aws",
+    "cwe",
+    "owasp-a6",
+    "owasp-a3"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6245",
+  "sqKey": "S6245",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      311
+    ],
+    "OWASP": [
+      "A3",
+      "A6"
+    ],
+    "CIS": [
+      "2.1.1"
+    ],
+    "OWASP Top 10 2021": [
+      "A4",
+      "A5"
+    ]
+  }
+}
