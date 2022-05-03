@@ -10,8 +10,8 @@ bucket = s3.Bucket(self, "MyUnversionedBucket")
 #        ^^^^^^^^^
 
 bucket_versioning = False
-bucket = s3.Bucket(self, "MyUnversionedBucket", # FN : Argument resolving is missing
-                   versioned=bucket_versioning
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=bucket_versioning # Noncompliant
                    # highlight `versioned=bucket_versioning` as 2st location
                    )
 
@@ -21,4 +21,14 @@ bucket = s3.Bucket(self, "MyUnversionedBucket",
 
 bucket = s3.Bucket(self, "MyUnversionedBucket",
                    versioned=unresolved_var      # Compliant
+                   )
+
+second_versioning = bucket_versioning
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=second_versioning # Noncompliant
+                   )
+
+third_versioning = True
+bucket = s3.Bucket(self, "MyUnversionedBucket",
+                   versioned=third_versioning # Compliant
                    )

@@ -26,8 +26,11 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 
 @Rule(key = "S6252")
 public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
@@ -46,7 +49,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       if ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())) {
         Optional<RegularArgument> version = getVersionArgument(node.arguments());
         if (version.isPresent()) {
-          version.filter(a -> "False".equals(a.expression().firstToken().value())).ifPresent(v -> ctx.addIssue(v, MESSAGE));
+          version.filter(a -> isExpressionFalse(a.expression())).ifPresent(v -> ctx.addIssue(v, MESSAGE));
         } else {
           ctx.addIssue(node.callee(), MESSAGE);
         }
@@ -60,5 +63,19 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .filter(a -> a.keywordArgument() != null)
       .filter(a -> "versioned".equals(a.keywordArgument().name()))
       .findAny();
+  }
+
+  private static boolean isExpressionFalse(Expression expression) {
+    if (expression.firstToken() != null && "False".equals(expression.firstToken().value())){
+      return true;
+    }
+    if (expression.is(Tree.Kind.NAME)) {
+      Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
+      if (singleAssignedValue == null) {
+        return "False".equals(expression.firstToken().value());
+      }
+      return isExpressionFalse(singleAssignedValue);
+    }
+    return false;
   }
 }
