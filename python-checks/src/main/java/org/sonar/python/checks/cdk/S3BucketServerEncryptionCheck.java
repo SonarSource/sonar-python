@@ -19,12 +19,10 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -42,10 +40,9 @@ import org.sonar.python.checks.Expressions;
 @Rule(key = "S6245")
 public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
 
-  public static final String MESSAGE_OMITTING = "Omitting 'encryption' and 'encryption_key' disables server-side encryption. Make sure it is safe here.";
-  public static final String MESSAGE_INCORRECT_TYPE = "Choose another compatible type of encryption";
-  public static final String MESSAGE_SECONDARY = "Propagated settings.";
-  private static final Set<String> AUTHORIZED_ENCRYPTION_TYPES = new HashSet<>(Arrays.asList("KMS", "S3_MANAGED", "KMS_MANAGED"));
+  public static final String MESSAGE = "Objects in the bucket are not encrypted. Make sure it is safe here.";
+  public static final String MESSAGE_OMITTING = "Omitting 'encryption' disables server-side encryption. Make sure it is safe here.";
+  public static final String MESSAGE_SECONDARY = "Propagated setting.";
 
   @Override
   public void initialize(Context context) {
@@ -58,11 +55,19 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
       .filter(nodeSymbol -> "aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName()))
       .ifPresent(nodeSymbol -> {
         List<RegularArgument> args = getEncryptionArguments(node.arguments());
-        if (!isCorrectlyEncrypted(args)) {
-          PreciseIssue issue = ctx.addIssue(node.callee(), MESSAGE_OMITTING);
-          secondaryLocationExpression(args).stream()
-            .skip(1)
-            .forEach(arg -> issue.secondary(arg.parent(), MESSAGE_SECONDARY));
+        Optional<RegularArgument> optEncryptionType = args.stream().filter(a -> "encryption".equals(getArgumentName(a))).findFirst();
+        Optional<RegularArgument> optEncryptionKey = args.stream().filter(a -> "encryption_key".equals(getArgumentName(a))).findFirst();
+        if (optEncryptionType.isPresent()) {
+          optEncryptionType.map(regArg -> propagatedSensitiveExpressions(regArg.expression()))
+            .filter(trees -> !trees.isEmpty())
+            .ifPresent(trees -> {
+              PreciseIssue issue = ctx.addIssue(trees.get(0).parent(), MESSAGE);
+              trees.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), MESSAGE_SECONDARY));
+            });
+        } else {
+          if (!optEncryptionKey.isPresent()) {
+            ctx.addIssue(node.callee(), MESSAGE_OMITTING);
+          }
         }
       });
   }
@@ -83,43 +88,35 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
     return keyword.name();
   }
 
-  private static boolean isCorrectlyEncrypted(List<RegularArgument> args) {
-    Optional<RegularArgument> optEncryptionType = args.stream().filter(a -> "encryption".equals(getArgumentName(a))).findFirst();
-    Optional<RegularArgument> optEncryptionKey = args.stream().filter(a -> "encryption_key".equals(getArgumentName(a))).findFirst();
-
-    if (optEncryptionKey.isPresent()) {
-      return !optEncryptionType.isPresent() || "KMS".equals(optEncryptionType.get().expression().lastToken().value());
-    } else {
-      if (optEncryptionType.isPresent()) {
-        Expression expression = rootExpression(optEncryptionType.get().expression());
-        Symbol symbol = ((QualifiedExpression) expression).symbol();
-        if (symbol != null) {
-          String fullName = symbol.fullyQualifiedName();
-          if (fullName == null) {
-            return false;
-          }
-          String[] split = fullName.split("\\.");
-          String encryptionType = split[split.length - 1];
-          boolean identifierIsCorrect = "aws_cdk.aws_s3.BucketEncryption".equals(fullName.split("." + encryptionType)[0]);
-          return identifierIsCorrect && AUTHORIZED_ENCRYPTION_TYPES.contains(encryptionType);
-        }
-      }
-      return false;
-    }
-  }
-
-  private static Expression rootExpression(Expression expression) {
+  private static List<Tree> propagatedSensitiveExpressions(Expression expression) {
+    List<Tree> trees = new ArrayList<>();
     if (expression.is(Tree.Kind.NAME)) {
       Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
       if (singleAssignedValue != null) {
-        return rootExpression(singleAssignedValue);
+        trees.add(expression);
+        List<Tree> subTrees = propagatedSensitiveExpressions(singleAssignedValue);
+        if (subTrees.isEmpty()) {
+          return Collections.emptyList();
+        }
+        trees.addAll(subTrees);
       }
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      if (isUnencrypted(expression)) {
+        trees.add(expression);
+      } else {
+        return Collections.emptyList();
+      }
+    } else {
+      trees.add(expression);
     }
-    return expression;
+    return trees;
   }
 
-  private static List<Tree> secondaryLocationExpression() {
-
-    return Collections.emptyList();
+  private static boolean isUnencrypted(Expression expression) {
+    Symbol symbol = ((QualifiedExpression) expression).symbol();
+    if(symbol == null){
+      return false;
+    }
+    return "aws_cdk.aws_s3.BucketEncryption.UNENCRYPTED".equals(symbol.fullyQualifiedName());
   }
 }
