@@ -1,5 +1,6 @@
 from aws_cdk import aws_s3 as s3
 
+bucket = s3.Bucket(self,"MyUnencryptedBucket") # NonCompliant
 bucket = s3.Bucket(self,"MyUnencryptedBucket", encryption=s3.BucketEncryption.UNENCRYPTED) # NonCompliant {{Omitting 'encryption' and 'encryption_key' disables server-side encryption. Make sure it is safe here.}}
 #        ^^^^^^^^^
 
@@ -27,6 +28,7 @@ bucket = s3.Bucket(self,"MyEncryptedBucket",
                    encryption=type_KMS          # Compliant
                    )
 
+my_encryption_key2 = aws_cdk.aws_kms.IKey()
 bucket = s3.Bucket(self,"MyEncryptedBucket",    # NonCompliant
                    encryption=s3.BucketEncryption.S3_MANAGED,
-                    encryption_key=my_encryption_key)
+                    encryption_key=my_encryption_key2)

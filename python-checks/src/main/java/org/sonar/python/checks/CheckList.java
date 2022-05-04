@@ -22,7 +22,9 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
+import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
@@ -227,6 +229,7 @@ public final class CheckList {
       ReturnYieldOutsideFunctionCheck.class,
       RobustCipherAlgorithmCheck.class,
       S3BucketBlockPublicAccessCheck.class,
+      S3BucketServerEncryptionCheck.class,
       S3BucketVersioningCheck.class,
       SameBranchCheck.class,
       SameConditionCheck.class,

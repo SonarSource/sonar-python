@@ -20,6 +20,7 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,8 @@ import org.sonar.python.checks.Expressions;
 public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE_OMITTING = "Omitting 'encryption' and 'encryption_key' disables server-side encryption. Make sure it is safe here.";
-
+  public static final String MESSAGE_INCORRECT_TYPE = "Choose another compatible type of encryption";
+  public static final String MESSAGE_SECONDARY = "Propagated settings.";
   private static final Set<String> AUTHORIZED_ENCRYPTION_TYPES = new HashSet<>(Arrays.asList("KMS", "S3_MANAGED", "KMS_MANAGED"));
 
   @Override
@@ -52,27 +54,38 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
 
   public void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(node.calleeSymbol()).ifPresent(nodeSymbol -> {
-      if ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName())) {
+    Optional.ofNullable(node.calleeSymbol())
+      .filter(nodeSymbol -> "aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName()))
+      .ifPresent(nodeSymbol -> {
         List<RegularArgument> args = getEncryptionArguments(node.arguments());
         if (!isCorrectlyEncrypted(args)) {
-          ctx.addIssue(node.callee(), MESSAGE_OMITTING);
+          PreciseIssue issue = ctx.addIssue(node.callee(), MESSAGE_OMITTING);
+          secondaryLocationExpression(args).stream()
+            .skip(1)
+            .forEach(arg -> issue.secondary(arg.parent(), MESSAGE_SECONDARY));
         }
-      }
-    });
+      });
   }
 
   private static List<RegularArgument> getEncryptionArguments(List<Argument> args) {
     return args.stream()
       .map(RegularArgument.class::cast)
       .filter(a -> a.keywordArgument() != null)
-      .filter(a -> "encryption".equals(a.keywordArgument().name()) || "encryption_key".equals(a.keywordArgument().name()))
+      .filter(a -> "encryption".equals(getArgumentName(a)) || "encryption_key".equals(getArgumentName(a)))
       .collect(Collectors.toList());
   }
 
+  private static String getArgumentName(RegularArgument argument) {
+    Name keyword = argument.keywordArgument();
+    if (keyword == null) {
+      return "";
+    }
+    return keyword.name();
+  }
+
   private static boolean isCorrectlyEncrypted(List<RegularArgument> args) {
-    Optional<RegularArgument> optEncryptionType = args.stream().filter(a -> "encryption".equals(a.keywordArgument().name())).findFirst();
-    Optional<RegularArgument> optEncryptionKey = args.stream().filter(a -> "encryption_key".equals(a.keywordArgument().name())).findFirst();
+    Optional<RegularArgument> optEncryptionType = args.stream().filter(a -> "encryption".equals(getArgumentName(a))).findFirst();
+    Optional<RegularArgument> optEncryptionKey = args.stream().filter(a -> "encryption_key".equals(getArgumentName(a))).findFirst();
 
     if (optEncryptionKey.isPresent()) {
       return !optEncryptionType.isPresent() || "KMS".equals(optEncryptionType.get().expression().lastToken().value());
@@ -82,6 +95,9 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
         Symbol symbol = ((QualifiedExpression) expression).symbol();
         if (symbol != null) {
           String fullName = symbol.fullyQualifiedName();
+          if (fullName == null) {
+            return false;
+          }
           String[] split = fullName.split("\\.");
           String encryptionType = split[split.length - 1];
           boolean identifierIsCorrect = "aws_cdk.aws_s3.BucketEncryption".equals(fullName.split("." + encryptionType)[0]);
@@ -100,5 +116,10 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
       }
     }
     return expression;
+  }
+
+  private static List<Tree> secondaryLocationExpression() {
+
+    return Collections.emptyList();
   }
 }
