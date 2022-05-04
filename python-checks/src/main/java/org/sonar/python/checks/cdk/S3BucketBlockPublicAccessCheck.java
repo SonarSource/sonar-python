@@ -45,6 +45,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     "ignore_public_acls",
     "block_public_policy",
     "restrict_public_buckets");
+    
   @Override
   void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
     Optional<ArgumentTrace> publicReadAccess = getArgument(ctx, bucket, "public_read_access");
