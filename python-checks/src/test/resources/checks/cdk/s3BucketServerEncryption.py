@@ -44,3 +44,6 @@ def create_bucket():
                        encryption_key=my_encryption_key2)
 
 bucket = s3.Bucket(self, "MyEncryptedBucket", encryption="UNENCRYPTED")  # NonCompliant
+
+coverage = s3.Bucket(self, "bucket", public_read_acces=False, enforce_ssl=None) # NonCompliant
+coverage1 = s3.Bucket(self,"bucket",encryption=b) # Compliant

@@ -82,10 +82,8 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
 
   private static String getArgumentName(RegularArgument argument) {
     Name keyword = argument.keywordArgument();
-    if (keyword == null) {
-      return "";
-    }
-    return keyword.name();
+    return Optional.ofNullable(keyword)
+      .map(Name::name).orElse("");
   }
 
   private static List<Tree> propagatedSensitiveExpressions(Expression expression) {
@@ -114,9 +112,8 @@ public class S3BucketServerEncryptionCheck extends PythonSubscriptionCheck {
 
   private static boolean isUnencrypted(Expression expression) {
     Symbol symbol = ((QualifiedExpression) expression).symbol();
-    if(symbol == null){
-      return false;
-    }
-    return "aws_cdk.aws_s3.BucketEncryption.UNENCRYPTED".equals(symbol.fullyQualifiedName());
+    return Optional.ofNullable(symbol)
+      .map(s -> "aws_cdk.aws_s3.BucketEncryption.UNENCRYPTED".equals(s.fullyQualifiedName()))
+      .orElse(false);
   }
 }
