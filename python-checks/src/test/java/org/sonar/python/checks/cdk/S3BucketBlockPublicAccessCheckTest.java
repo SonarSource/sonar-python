@@ -19,24 +19,14 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Optional;
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.CallExpression;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-@Rule(key = "S6252")
-public class S3BucketVersioningCheck extends AbstractS3BucketCheck {
+public class S3BucketBlockPublicAccessCheckTest {
 
-  public static final String MESSAGE = "Make sure an unversioned S3 bucket is safe here.";
-  public static final String MESSAGE_OMITTING = "Omitting the \"versioned\" argument disables S3 bucket versioning. Make sure it is safe here.";
-
-  @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> version = getArgument(ctx, bucket, "versioned");
-    if (version.isPresent()) {
-      version.get().addIssueIf(AbstractS3BucketCheck::isFalse, MESSAGE);
-    } else {
-      ctx.addIssue(bucket.callee(), MESSAGE_OMITTING);
-    }
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/s3BucketBlockPublicAccessCheck.py", new S3BucketBlockPublicAccessCheck());
   }
+
 }
