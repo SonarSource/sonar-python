@@ -54,7 +54,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .ifPresent(nodeSymbol -> {
         Optional<RegularArgument> version = getVersionArgument(node.arguments());
         if (version.isPresent()) {
-          version.map(regArg -> treesOfFalseExpression(regArg.expression()))
+          version.map(regArg -> propagatedSensitiveExpressions(regArg.expression()))
             .filter(trees -> !trees.isEmpty())
             .ifPresent(trees -> {
               PreciseIssue issue = ctx.addIssue(trees.get(0).parent(), MESSAGE);
@@ -74,7 +74,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       .findAny();
   }
 
-  private static List<Tree> treesOfFalseExpression(Expression expression) {
+  private static List<Tree> propagatedSensitiveExpressions(Expression expression) {
     List<Tree> trees = new ArrayList<>();
     if (Optional.ofNullable(expression.firstToken()).filter(S3BucketVersioningCheck::isFalse).isPresent()) {
       trees.add(expression);
@@ -82,7 +82,7 @@ public class S3BucketVersioningCheck extends PythonSubscriptionCheck {
       Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
       if (singleAssignedValue != null) {
         trees.add(expression);
-        List<Tree> subTrees = treesOfFalseExpression(singleAssignedValue);
+        List<Tree> subTrees = propagatedSensitiveExpressions(singleAssignedValue);
         if (subTrees.isEmpty()) {
           return Collections.emptyList();
         }
