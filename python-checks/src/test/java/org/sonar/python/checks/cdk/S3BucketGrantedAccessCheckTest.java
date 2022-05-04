@@ -22,7 +22,7 @@ package org.sonar.python.checks.cdk;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class S3BucketGrantedAccessTest {
+public class S3BucketGrantedAccessCheckTest {
 
   @Test
   public void test() {
