@@ -67,12 +67,12 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     blockPublicAccess.trace().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
       .filter(S3BucketBlockPublicAccessCheck::isBlockPublicAccessConstructor)
       .findAny()
-      .ifPresent(pbaConstructor -> visitBlockPublicAccessConstructor(ctx, pbaConstructor));
+      .ifPresent(bpaConstructor -> visitBlockPublicAccessConstructor(ctx, bpaConstructor));
   }
 
-  private static void visitBlockPublicAccessConstructor(SubscriptionContext ctx, CallExpression pbaConstructor) {
+  private static void visitBlockPublicAccessConstructor(SubscriptionContext ctx, CallExpression bpaConstructor) {
     BLOCK_PUBLIC_ACCESS_ARGUMENTS.stream()
-      .map(args -> getArgument(ctx, pbaConstructor, args))
+      .map(args -> getArgument(ctx, bpaConstructor, args))
       .filter(Optional::isPresent)
       .map(Optional::get)
       .collect(Collectors.toList())
