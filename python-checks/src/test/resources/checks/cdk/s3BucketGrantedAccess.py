@@ -2,6 +2,8 @@ from aws_cdk import aws_s3 as s3, aws_s3_deployment as s3deploy
 
 
 bucket = s3.Bucket(self, "bucket")  # Compliant by default
+# bucket.grant_public_access() # NonCompliant
+
 
 bucket = s3.Bucket(self, "bucket",
                    access_control=s3.BucketAccessControl.PRIVATE       # Compliant
@@ -42,5 +44,3 @@ s3deploy.BucketDeployment(self, "Deploy3",
                           destination_bucket=bucket_to_deploy,
                           access_control=s3.BucketAccessControl.PRIVATE       # Compliant
                           )
-
-
