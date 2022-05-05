@@ -15,11 +15,11 @@ class NonCompliantStack(Stack):
         bucket = s3.Bucket(self, "PublicAccessOnlyBlockAcls",
                            block_public_access=s3.BlockPublicAccess.BLOCK_ACLS)
 
-        block_public_access = s3.BlockPublicAccess.BLOCK_ACLS
-    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
+        public_access_only_block_acls_by_reference = s3.BlockPublicAccess.BLOCK_ACLS
+    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
         bucket = s3.Bucket(self, "PublicAccessOnlyBlockAclsByReference",
-                           block_public_access=block_public_access)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
-    #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           block_public_access=public_access_only_block_acls_by_reference)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+    #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         bucket = s3.Bucket(self, "AllowPublicReadAccess",
                            public_read_access=True)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
@@ -47,21 +47,21 @@ class NonCompliantStack(Stack):
                            #   ^^^^^^^^^^^^^^^^^^^^^^^^^
                                restrict_public_buckets=True))
 
-        blockPublicAccess = s3.BlockPublicAccess(
+        referenced_unblock_public_accesses = s3.BlockPublicAccess(
             block_public_acls=True,
             ignore_public_acls=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
             block_public_policy=True,
             restrict_public_buckets=True)
 
         bucket = s3.Bucket(self, "ReferencedUnblockPublicAccesses",
-                           block_public_access=blockPublicAccess)
+                           block_public_access=referenced_unblock_public_accesses)
 
-        block_public_acls = False
-    #   ^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
+        referenced_value_unblock_public_accesses = False
+    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
         bucket = s3.Bucket(self, "ReferencedValueUnblockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
-                               block_public_acls=block_public_acls,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
-                           #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               block_public_acls=referenced_value_unblock_public_accesses,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+                           #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                                ignore_public_acls=True,
                                block_public_policy=True,
                                restrict_public_buckets=True))
@@ -81,20 +81,26 @@ class CompliantStack(Stack):
                                block_public_policy=True,
                                restrict_public_buckets=True))
 
-        blockPublicAccess = s3.BlockPublicAccess(
+        referenced_block_public_accesses = s3.BlockPublicAccess(
             block_public_acls=True,
             ignore_public_acls=True,
             block_public_policy=True,
             restrict_public_buckets=True)
 
         bucket = s3.Bucket(self, "ReferencedBlockPublicAccesses",
-                           block_public_access=blockPublicAccess)
+                           block_public_access=referenced_block_public_accesses)
 
-        unusedBlockPublicAccess = s3.BlockPublicAccess(
+        unused_block_public_access = s3.BlockPublicAccess(
             block_public_acls=True,
             ignore_public_acls=False,
             block_public_policy=True,
             restrict_public_buckets=True)
 
         bucket = s3.Bucket(self, "UnresolvedReferencedBlockPublicAccesses",
-                           block_public_access=unknownblockPublicAccess)
+                           block_public_access=unknown_block_public_access)
+
+        loop_a = loop_b
+        loop_b = loop_a
+
+        bucket = s3.Bucket(self, "LoopReferenceBlockPublicAccess",
+                           block_public_access=loop_a)

@@ -76,18 +76,18 @@ public abstract class AbstractS3BucketCheck extends PythonSubscriptionCheck {
     }
 
     private static ArgumentTrace build(SubscriptionContext ctx, RegularArgument argument) {
-      return new ArgumentTrace(ctx, buildTrace(argument.expression()));
-    }
-    private static List<Expression> buildTrace(Expression expression) {
       List<Expression> trace = new ArrayList<>();
+      buildTrace(argument.expression(), trace);
+      return new ArgumentTrace(ctx, trace);
+    }
+    private static void buildTrace(Expression expression, List<Expression> trace) {
       trace.add(expression);
       if (expression.is(Tree.Kind.NAME)) {
         Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
-        if (singleAssignedValue != null) {
-          trace.addAll(buildTrace(singleAssignedValue));
+        if (singleAssignedValue != null && !trace.contains(singleAssignedValue)) {
+          buildTrace(singleAssignedValue, trace);
         }
       }
-      return trace;
     }
 
     public void addIssue(String primaryMessage) {
