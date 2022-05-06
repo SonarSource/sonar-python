@@ -19,9 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -41,10 +39,7 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
   void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
     Optional<ArgumentTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
     if (optEncryptionType.isPresent()) {
-      optEncryptionType.ifPresent(argumentTrace -> {
-        List<Expression> list = argumentTrace.trace();
-        argumentTrace.addIssueIf(isUnencrypted(list.get(list.size() - 1)), MESSAGE);
-      });
+      optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
     } else {
       Optional<ArgumentTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
       if (!optEncryptionKey.isPresent()) {
@@ -53,8 +48,8 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
     }
   }
 
-  protected Predicate<Expression> isUnencrypted(Expression expression) {
-    return exp -> Optional.of(expression)
+  protected static boolean isUnencrypted(Expression expression) {
+    return Optional.of(expression)
       .filter(QualifiedExpression.class::isInstance)
       .map(QualifiedExpressionImpl.class::cast)
       .map(QualifiedExpression::symbol)
