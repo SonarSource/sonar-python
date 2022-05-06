@@ -44,4 +44,4 @@ def create_bucket():
                        encryption_key=my_encryption_key2)
 
 
-coverage = s3.Bucket(self, "bucket", encryption=b)  # Compliant
+coverage = s3.Bucket(self, "bucket", encryption=unresolved_reference)  # Compliant
