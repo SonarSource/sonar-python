@@ -51,10 +51,10 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
   private void checkAWSImport(SubscriptionContext ctx) {
     ImportFrom imports = (ImportFrom) ctx.syntaxNode();
     Optional.ofNullable(imports.module())
-      .flatMap(dottedName -> dottedName.names().stream()
+      .filter(dottedName -> dottedName.names()
+        .stream()
         .map(Name::name)
-        .filter("aws_cdk"::equals)
-        .findAny())
+        .anyMatch("aws_cdk"::equals))
       .ifPresent(n -> isAwsCdkImported = true);
   }
 
