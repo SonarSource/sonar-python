@@ -29,4 +29,9 @@ public class S3BucketGrantedAccessCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/s3BucketGrantedAccess.py", new S3BucketGrantedAccessCheck());
   }
 
+  @Test
+  public void noImport() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/cdk/s3BucketGrantedAccess_noImport.py", new S3BucketGrantedAccessCheck());
+  }
+
 }

@@ -2,7 +2,17 @@ from aws_cdk import aws_s3 as s3, aws_s3_deployment as s3deploy
 
 
 bucket = s3.Bucket(self, "bucket")  # Compliant by default
-# bucket.grant_public_access() # NonCompliant
+bucket.grant_public_access()  # NonCompliant
+
+def grant_noncompliant():
+    s1 = s3.Bucket(self, "BucketToDeploy")
+    s2 = s1
+    s2.grant_public_access()  # NonCompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^
+
+    foo = Foo()
+    # FP : due to the fact we check whether aws_cdk is imported and the below function is called
+    foo.grant_public_access() # NonCompliant
 
 
 bucket = s3.Bucket(self, "bucket",
@@ -44,3 +54,4 @@ s3deploy.BucketDeployment(self, "Deploy3",
                           destination_bucket=bucket_to_deploy,
                           access_control=s3.BucketAccessControl.PRIVATE       # Compliant
                           )
+

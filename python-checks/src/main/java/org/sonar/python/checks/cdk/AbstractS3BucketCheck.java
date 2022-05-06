@@ -37,14 +37,14 @@ import org.sonar.python.checks.Expressions;
 
 public abstract class AbstractS3BucketCheck extends PythonSubscriptionCheck {
 
-  private static final String S3_BUCKET_FQN = "aws_cdk.aws_s3.Bucket";
+  protected static final String S3_BUCKET_FQN = "aws_cdk.aws_s3.Bucket";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::visitNode);
   }
 
-  private void visitNode(SubscriptionContext ctx) {
+  protected void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(node.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
@@ -80,6 +80,7 @@ public abstract class AbstractS3BucketCheck extends PythonSubscriptionCheck {
       buildTrace(argument.expression(), trace);
       return new ArgumentTrace(ctx, trace);
     }
+
     private static void buildTrace(Expression expression, List<Expression> trace) {
       trace.add(expression);
       if (expression.is(Tree.Kind.NAME)) {

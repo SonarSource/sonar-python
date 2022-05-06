@@ -19,38 +19,66 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ImportFrom;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
-import static org.sonar.python.checks.cdk.AbstractS3BucketCheck.getArgument;
-
 @Rule(key = "S6265")
-public class S3BucketGrantedAccessCheck extends PythonSubscriptionCheck {
+public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
+  private static final String S3_BUCKET_DEPLOYMENT_FQN = "aws_cdk.aws_s3_deployment.BucketDeployment";
+  private static final List<String> S3_BUCKET_FQNS = Arrays.asList(S3_BUCKET_FQN, S3_BUCKET_DEPLOYMENT_FQN);
+  private boolean isAwsCdkImported = false;
   private static final String S3_BUCKET_PRIVATE_ACCESS_POLICY = "aws_cdk.aws_s3.BucketAccessControl.PRIVATE";
   public static final String MESSAGE = "Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.";
 
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> isAwsCdkImported = false);
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, this::checkAWSImport);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::visitNode);
   }
 
-  public void visitNode(SubscriptionContext ctx) {
+  private void checkAWSImport(SubscriptionContext ctx) {
+    ImportFrom imports = (ImportFrom) ctx.syntaxNode();
+    DottedName moduleName = imports.module();
+    if (moduleName != null && moduleName.names().stream().map(Name::name).anyMatch("aws_cdk"::equals)) {
+      isAwsCdkImported = true;
+    }
+  }
+
+  @Override
+  protected void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(node.calleeSymbol())
-      .filter(nodeSymbol -> ("aws_cdk.aws_s3.Bucket".equals(nodeSymbol.fullyQualifiedName()))
-        || "aws_cdk.aws_s3_deployment.BucketDeployment".equals(nodeSymbol.fullyQualifiedName()))
-      .ifPresent(nodeSymbol -> {
-        Optional<AbstractS3BucketCheck.ArgumentTrace> accessParameter = getArgument(ctx, node, "access_control");// getAccessControlArgument(node.arguments());
-        accessParameter.ifPresent(argument -> argument.addIssueIf(this::isNotPrivate, MESSAGE));
-      });
+    Optional<Symbol> symbol = Optional.ofNullable(node.calleeSymbol());
+
+    symbol
+      .map(Symbol::fullyQualifiedName)
+      .filter(S3_BUCKET_FQNS::contains)
+      .ifPresent(s -> visitBucketConstructor(ctx, node));
+
+    if (isAwsCdkImported) {
+      symbol
+        .map(Symbol::name)
+        .filter("grant_public_access"::equals)
+        .ifPresent(s -> ctx.addIssue(node.callee(), MESSAGE));
+    }
+  }
+
+  @Override
+  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
+    getArgument(ctx, bucket, "access_control")
+      .ifPresent(argument -> argument.addIssueIf(this::isNotPrivate, MESSAGE));
   }
 
   protected boolean isNotPrivate(Expression expression) {
@@ -62,4 +90,5 @@ public class S3BucketGrantedAccessCheck extends PythonSubscriptionCheck {
       .map(s -> !S3_BUCKET_PRIVATE_ACCESS_POLICY.equals(s))
       .orElse(false);
   }
+
 }
