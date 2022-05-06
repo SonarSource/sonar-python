@@ -26,7 +26,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
@@ -51,10 +50,12 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
   private void checkAWSImport(SubscriptionContext ctx) {
     ImportFrom imports = (ImportFrom) ctx.syntaxNode();
-    DottedName moduleName = imports.module();
-    if (moduleName != null && moduleName.names().stream().map(Name::name).anyMatch("aws_cdk"::equals)) {
-      isAwsCdkImported = true;
-    }
+    Optional.ofNullable(imports.module())
+      .flatMap(dottedName -> dottedName.names().stream()
+        .map(Name::name)
+        .filter("aws_cdk"::equals)
+        .findAny())
+      .ifPresent(n -> isAwsCdkImported = true);
   }
 
   @Override
