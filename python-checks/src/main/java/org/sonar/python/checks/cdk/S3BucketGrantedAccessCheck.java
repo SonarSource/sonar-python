@@ -35,12 +35,15 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S6265")
 public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
-  public static final String MESSAGE = "Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.";
-  
+  public static final String MESSAGE_POLICY = "Make sure granting %s access is safe here.";
+  public static final String MESSAGE_GRANT = "Make sure allowing unrestricted access to objects from this bucket is safe here.";
   private static final String S3_BUCKET_DEPLOYMENT_FQN = "aws_cdk.aws_s3_deployment.BucketDeployment";
+  private static final String S3_BUCKET_AUTHENTICATED_READ = "aws_cdk.aws_s3.BucketAccessControl.AUTHENTICATED_READ";
+  private static final String S3_BUCKET_PUBLIC_READ = "aws_cdk.aws_s3.BucketAccessControl.PUBLIC_READ";
+  private static final String S3_BUCKET_PUBLIC_READ_WRITE = "aws_cdk.aws_s3.BucketAccessControl.PUBLIC_READ_WRITE";
   private static final List<String> S3_BUCKET_FQNS = Arrays.asList(S3_BUCKET_FQN, S3_BUCKET_DEPLOYMENT_FQN);
-  private static final String S3_BUCKET_PRIVATE_ACCESS_POLICY = "aws_cdk.aws_s3.BucketAccessControl.PRIVATE";
-  
+  private static final List<String> S3_BUCKET_SENSITIVE_POLICIES = Arrays.asList(S3_BUCKET_AUTHENTICATED_READ, S3_BUCKET_PUBLIC_READ, S3_BUCKET_PUBLIC_READ_WRITE);
+
   private boolean isAwsCdkImported = false;
 
   @Override
@@ -74,24 +77,31 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
       symbol
         .map(Symbol::name)
         .filter("grant_public_access"::equals)
-        .ifPresent(s -> ctx.addIssue(node.callee(), MESSAGE));
+        .ifPresent(s -> ctx.addIssue(node.callee(), MESSAGE_GRANT));
     }
   }
 
   @Override
   void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
     getArgument(ctx, bucket, "access_control")
-      .ifPresent(argument -> argument.addIssueIf(this::isNotPrivate, MESSAGE));
+      .ifPresent(argument -> argument.addIssueIf(this::isSensitivePolicy, getSensitivePolicyMessage(argument)));
   }
 
-  protected boolean isNotPrivate(Expression expression) {
+  protected boolean isSensitivePolicy(Expression expression) {
     return Optional.ofNullable(expression)
       .filter(QualifiedExpression.class::isInstance)
       .map(QualifiedExpression.class::cast)
       .map(QualifiedExpression::symbol)
       .map(Symbol::fullyQualifiedName)
-      .filter(s -> !S3_BUCKET_PRIVATE_ACCESS_POLICY.equals(s))
+      .filter(S3_BUCKET_SENSITIVE_POLICIES::contains)
       .isPresent();
+  }
+
+  private static String getSensitivePolicyMessage(ArgumentTrace argumentTrace){
+    Expression lastExpression = argumentTrace.trace()
+      .get(argumentTrace.trace().size()-1);
+    String attribute = ((QualifiedExpression) lastExpression).name().name();
+    return String.format(MESSAGE_POLICY, attribute);
   }
 
 }

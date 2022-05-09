@@ -7,32 +7,39 @@ bucket.grant_public_access()  # NonCompliant
 def grant_noncompliant():
     s1 = s3.Bucket(self, "BucketToDeploy")
     s2 = s1
-    s2.grant_public_access()  # NonCompliant
+    s2.grant_public_access()  # NonCompliant {{Make sure allowing unrestricted access to objects from this bucket is safe here.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^
 
     foo = Foo()
     # FP : due to the fact we check whether aws_cdk is imported and the below function is called
-    foo.grant_public_access() # NonCompliant
+    foo.grant_public_access() # NonCompliant {{Make sure allowing unrestricted access to objects from this bucket is safe here.}}
 
+bucket = s3.Bucket(self, "bucket",
+                   access_control=s3.bar.WHAT_EVER       # Compliant
+                   )
 
 bucket = s3.Bucket(self, "bucket",
                    access_control=s3.BucketAccessControl.PRIVATE       # Compliant
                    )
 
 bucket = s3.Bucket(self, "bucket",
-                   access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # NonCompliant {{Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.}}
+                   access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # NonCompliant {{Make sure granting PUBLIC_READ_WRITE access is safe here.}}
 #                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                    )
 
 bucket = s3.Bucket(self, "bucket",
-                   access_control=s3.BucketAccessControl.PUBLIC_READ     # NonCompliant
+                   access_control=s3.BucketAccessControl.PUBLIC_READ     # NonCompliant {{Make sure granting PUBLIC_READ access is safe here.}}
+                   )
+
+bucket = s3.Bucket(self, "bucket",
+                   access_control=s3.BucketAccessControl.AUTHENTICATED_READ     # NonCompliant {{Make sure granting AUTHENTICATED_READ access is safe here.}}
                    )
 
 def create_public_bucket():
     control1 = s3.BucketAccessControl.PUBLIC_READ
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
     bucket = s3.Bucket(self, "bucket",
-                       access_control=control1     # NonCompliant {{Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.}}
+                       access_control=control1     # NonCompliant {{Make sure granting PUBLIC_READ access is safe here.}}
 #                      ^^^^^^^^^^^^^^^^^^^^^^^
                        )
 
@@ -46,7 +53,7 @@ s3deploy.BucketDeployment(self, "Deploy",                                   # Co
 
 s3deploy.BucketDeployment(self, "Deploy2",
                           destination_bucket=bucket_to_deploy,
-                          access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # NonCompliant
+                          access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # NonCompliant {{Make sure granting PUBLIC_READ_WRITE access is safe here.}}
 #                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                           )
 
