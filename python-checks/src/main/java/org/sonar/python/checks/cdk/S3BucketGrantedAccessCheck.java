@@ -35,11 +35,13 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S6265")
 public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
+  public static final String MESSAGE = "Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.";
+  
   private static final String S3_BUCKET_DEPLOYMENT_FQN = "aws_cdk.aws_s3_deployment.BucketDeployment";
   private static final List<String> S3_BUCKET_FQNS = Arrays.asList(S3_BUCKET_FQN, S3_BUCKET_DEPLOYMENT_FQN);
-  private boolean isAwsCdkImported = false;
   private static final String S3_BUCKET_PRIVATE_ACCESS_POLICY = "aws_cdk.aws_s3.BucketAccessControl.PRIVATE";
-  public static final String MESSAGE = "Make sure granting access to [AllUsers|AuthenticatedUsers] group is safe here.";
+  
+  private boolean isAwsCdkImported = false;
 
   @Override
   public void initialize(Context context) {
@@ -88,8 +90,8 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
       .map(QualifiedExpression.class::cast)
       .map(QualifiedExpression::symbol)
       .map(Symbol::fullyQualifiedName)
-      .map(s -> !S3_BUCKET_PRIVATE_ACCESS_POLICY.equals(s))
-      .orElse(false);
+      .filter(s -> !S3_BUCKET_PRIVATE_ACCESS_POLICY.equals(s))
+      .isPresent();
   }
 
 }
