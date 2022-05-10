@@ -29,7 +29,7 @@ itself.</p>
 <h2>Sensitive Code Example</h2>
 <p>Server-side encryption is not used:</p>
 <pre>
-bucket = s3.Bucket(self,"MyUnencryptedBucket",
+bucket = s3.Bucket(self,"bucket",
     encryption=s3.BucketEncryption.UNENCRYPTED       # Sensitive
 )
 </pre>
@@ -38,14 +38,14 @@ bucket is unencrypted.</p>
 <h2>Compliant Solution</h2>
 <p>Server-side encryption with Amazon S3-Managed Keys is used:</p>
 <pre>
-bucket = s3.Bucket(self,"MyEncryptedBucket",
-    encryption=s3.BucketEncryption.S3_MANAGED       # Compliant
+bucket = s3.Bucket(self,"bucket",
+    encryption=s3.BucketEncryption.S3_MANAGED
 )
 
 # Alternatively with a KMS key managed by the user.
 
-bucket = s3.Bucket(self,"MyEncryptedBucket",
-    encryptionKey=access_key                        # Compliant
+bucket = s3.Bucket(self,"bucket",
+    encryptionKey=access_key
 )
 </pre>
 <h2>See</h2>
@@ -59,7 +59,6 @@ bucket = s3.Bucket(self,"MyEncryptedBucket",
   Misconfiguration </li>
   <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html">AWS documentation</a> - Protecting data using
   server-side encryption </li>
-  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.BucketEncryption.html">CDK documentation</a> - BucketEncryption class
-  </li>
+  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.BucketEncryption.html">AWS CDK version 2</a> - BucketEncryption </li>
 </ul>
 

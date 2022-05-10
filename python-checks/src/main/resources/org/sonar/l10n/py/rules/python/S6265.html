@@ -19,15 +19,11 @@ context of canned ACL, set it to <code>PRIVATE</code> (the default one), and if 
 <p>All users (ie: anyone in the world authenticated or not) have read and write permissions with the <code>PUBLIC_READ_WRITE</code> access
 control:</p>
 <pre>
-bucket = s3.Bucket(self,
-    "bucket",
+bucket = s3.Bucket(self, "bucket",
     access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Sensitive
 )
 
-# Another example
-s3deploy.BucketDeployment(self,
-    "DeployWebsite",
-    ...,
+s3deploy.BucketDeployment(self, "DeployWebsite",
     access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Sensitive
 )
 </pre>

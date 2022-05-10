@@ -10,15 +10,15 @@ bucket.</p>
 <p>It’s recommended to enable S3 versioning and thus to have the possibility to retrieve and restore different versions of an object.</p>
 <h2>Sensitive Code Example</h2>
 <pre>
-bucket = s3.Bucket(self, "MyUnversionedBucket",
+bucket = s3.Bucket(self, "bucket",
     versioned=False       # Sensitive
 )
 </pre>
 <p>The default value of <code>versioned</code> is <code>False</code> so the absence of this parameter is also sensitive.</p>
 <h2>Compliant Solution</h2>
 <pre>
-bucket = s3.Bucket(self, "MyVersionedBucket",
-    versioned=True       # Compliant
+bucket = s3.Bucket(self, "bucket",
+    versioned=True
 )
 </pre>
 <h2>See</h2>
@@ -27,7 +27,7 @@ bucket = s3.Bucket(self, "MyVersionedBucket",
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
   Misconfiguration </li>
   <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html">AWS documentation</a> - Using versioning in S3 buckets </li>
-  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html#versioned">CDK documentation</a> - Using versioning in S3
+  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html#versioned">AWS CDK version 2</a> - Using versioning in S3
   buckets </li>
 </ul>
 

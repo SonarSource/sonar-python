@@ -31,7 +31,7 @@ public policies can still affect the S3 bucket.</p>
 <h2>Sensitive Code Example</h2>
 <p>By default, when not set, the <code>block_public_access</code> is fully deactivated (nothing is blocked):</p>
 <pre>
-bucket = s3.bucket(self,
+bucket = s3.Bucket(self,
     "bucket"        # Sensitive
 )
 </pre>
@@ -40,7 +40,7 @@ bucket = s3.bucket(self,
 bucket = s3.Bucket(self,
     "bucket",
     block_public_access=s3.BlockPublicAccess(
-        block_public_acls=False,       # NonCompliant should be TRUE
+        block_public_acls=False,       # Sensitive
         ignore_public_acls=True,
         block_public_policy=True,
         restrict_public_buckets=True
@@ -49,38 +49,22 @@ bucket = s3.Bucket(self,
 </pre>
 <p>The attribute <code>BLOCK_ACLS</code> only blocks and ignores public ACLs:</p>
 <pre>
-bucket = s3.bucket(self,
+bucket = s3.Bucket(self,
     "bucket",
-    block_public_access=s3.BlockPublicAccess.BLOCK_ACLS     # NonCompliant
+    block_public_access=s3.BlockPublicAccess.BLOCK_ACLS     # Sensitive
 )
-</pre>
-<p>The <code>public_read_access</code> boolean property can grant the public read access to all objects in the bucket (by default False) :</p>
-<pre>
-bucket = s3.bucket(self,
-    "bucket",
-    public_read_access=True     # NonCompliant
-)
-</pre>
-<p>The same setting can be achieved through the function <code>grant_public_access()</code>:</p>
-<pre>
-bucket = s3.bucket(self,
-    "bucket",
-    ...
-)
-
-bucket.grant_public_access() # NonCompliant
 </pre>
 <h2>Compliant Solution</h2>
 <p>This <code>block_public_access</code> blocks public ACLs and policies, ignores existing public ACLs and restricts existing public policies:</p>
 <pre>
-bucket = s3.bucket(self,
-    "blockedBucket",
+bucket = s3.Bucket(self,
+    "bucket",
     block_public_access=s3.BlockPublicAccess.BLOCK_ALL # Compliant
 )
 </pre>
 <p>A similar configuration to the one above can obtained by setting all parameters of the <code>block_public_access</code></p>
 <pre>
-bucket = s3.Bucket(self, "MyBlockedBucket",
+bucket = s3.Bucket(self, "bucket",
     block_public_access=s3.BlockPublicAccess(       # Compliant
         block_public_acls=True,
         ignore_public_acls=True,
