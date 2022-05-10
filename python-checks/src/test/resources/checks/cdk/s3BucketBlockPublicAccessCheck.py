@@ -21,15 +21,6 @@ class NonCompliantStack(Stack):
                            block_public_access=public_access_only_block_acls_by_reference)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
     #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        bucket = s3.Bucket(self, "AllowPublicReadAccess",
-                           public_read_access=True)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
-
-        public_read_access = True
-    #   ^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
-        bucket = s3.Bucket(self, "AllowPublicReadAccessByReference",
-                           public_read_access=public_read_access)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
-    #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
         bucket = s3.Bucket(self, "SingleUnblockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
                                block_public_acls=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}

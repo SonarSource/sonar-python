@@ -29,7 +29,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6281")
@@ -48,12 +47,6 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     
   @Override
   void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> publicReadAccess = getArgument(ctx, bucket, "public_read_access");
-    if (publicReadAccess.isPresent()) {
-      publicReadAccess.get().addIssueIf(S3BucketBlockPublicAccessCheck::isTrue, MESSAGE);
-      return;
-    }
-
     Optional<ArgumentTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
     if (blockPublicAccess.isPresent()) {
       checkBlockPublicAccess(ctx, blockPublicAccess.get());
@@ -92,10 +85,6 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
 
   private static boolean isBlockPublicAccessConstructor(CallExpression expression) {
     return Optional.ofNullable(expression.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(BLOCK_PUBLIC_ACCESS_FQN::equals).isPresent();
-  }
-
-  private static boolean isTrue(Expression expression) {
-    return Optional.ofNullable(expression.firstToken()).map(Token::value).filter("True"::equals).isPresent();
   }
 
 }
