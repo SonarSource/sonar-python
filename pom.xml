@@ -70,6 +70,7 @@
 
   <properties>
     <license.title>SonarQube Python Plugin</license.title>
+
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
@@ -96,6 +97,14 @@
     <sslr.version>1.23</sslr.version>
     <protobuf.version>3.17.3</protobuf.version>
     <woodstox.version>6.2.7</woodstox.version>
+
+    <!-- Advertise minimal required JRE version -->
+    <jre.min.version>11</jre.min.version>
+
+    <!-- JDK Build versions -->
+    <jdk.min.version>11</jdk.min.version>
+    <jdk.source.version>11</jdk.source.version>
+    <jdk.target.version>11</jdk.target.version>
   </properties>
 
   <dependencyManagement>
@@ -242,17 +251,6 @@
       <id>its</id>
       <properties>
         <skip.its>false</skip.its>
-      </properties>
-    </profile>
-
-    <profile>
-      <!-- Use javac's release flag for Java 9 and higher -->
-      <id>java9+</id>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-      <properties>
-        <maven.compiler.release>8</maven.compiler.release>
       </properties>
     </profile>
   </profiles>
