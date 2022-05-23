@@ -57,6 +57,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.reporting.PythonQuickFix;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.sonarlint.plugin.api.SonarLintRuntime;
@@ -187,13 +188,14 @@ public class PythonScanner extends Scanner {
 
       // TODO Add quickfix for one rule
       if (ruleKey.rule().equals("S2710") && isInSonarLint(context)) {
+        IssueWithQuickFix issue = (IssueWithQuickFix) preciseIssue;
         IssueLocation.PythonTextEdit text = IssueLocation.PythonTextEdit
           .insertAtPosition(preciseIssue.primaryLocation(), "cls, ");
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
           .addTextEdit(text)
           .build();
-        preciseIssue.addQuickFix(quickFix);
-        handleQuickFixes(ruleKey, newIssue, preciseIssue.getQuickFixes());
+        issue.addQuickFix(quickFix);
+        handleQuickFixes(ruleKey, newIssue, issue.getQuickFixes());
       }
 
       newIssue.save();
