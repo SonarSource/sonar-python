@@ -110,7 +110,7 @@ public class PythonScanner extends Scanner {
       }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
-      LOG.error("Unable to parse file: " + inputFile.toString());
+      LOG.error("Unable to parse file: " + inputFile);
       LOG.error(e.getMessage());
       context.newAnalysisError()
         .onFile(inputFile)
@@ -146,7 +146,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void processException(Exception e, InputFile file) {
-    LOG.warn("Unable to analyze file: " + file.toString(), e);
+    LOG.warn("Unable to analyze file: " + file, e);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
@@ -184,17 +184,7 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      // TODO Add quickfix for one rule
-      if (ruleKey.rule().equals("S2710") && isInSonarLint(context)) {
-        IssueWithQuickFix issue = (IssueWithQuickFix) preciseIssue;
-        IssueLocation.PythonTextEdit text = IssueLocation.PythonTextEdit
-          .insertAtPosition(preciseIssue.primaryLocation(), "cls, ");
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
-          .addTextEdit(text)
-          .build();
-        issue.addQuickFix(quickFix);
-        handleQuickFixes(ruleKey, newIssue, issue.getQuickFixes());
-      }
+      handleQuickFixes(ruleKey, newIssue, preciseIssue);
 
       newIssue.save();
     }
@@ -264,9 +254,13 @@ public class PythonScanner extends Scanner {
       .save();
   }
 
-  private void handleQuickFixes(RuleKey ruleKey, NewIssue newIssue, List<PythonQuickFix> quickFixes) {
-    // TEST isSonarLintContext && isQuickFixCompatible
-    addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+  private void handleQuickFixes(RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
+    if (isInSonarLint(context) && preciseIssue instanceof IssueWithQuickFix) {
+      List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
+      if (!quickFixes.isEmpty()){
+        addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+      }
+    }
   }
 
   public boolean isSonarLintContext(org.sonar.api.Plugin.Context context) {
@@ -291,9 +285,8 @@ public class PythonScanner extends Scanner {
           .forEach(edit::addTextEdit);
         newQuickFix.addInputFileEdit(edit);
         sonarLintIssue.addQuickFix(newQuickFix);
-        LOG.error("Quickfix created");
       }
-
+    // TODO : is this try/catch still necessary ?
     } catch (RuntimeException e) {
       // We still want to report the issue if we did not manage to create a quick fix.
       LOG.warn(String.format("Could not report quick fixes for rule: %s. %s: %s", ruleKey, e.getClass().getName(), e.getMessage()));
