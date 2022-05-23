@@ -19,11 +19,9 @@
  */
 package org.sonar.python.checks.utils;
 
-
 import com.google.common.base.Preconditions;
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +43,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonCheckVerifier {
-//  private final List<Supplier<List<PythonQuickFix>>> quickFixes = new ArrayList<>();
   private PythonCheckVerifier() {
   }
 
@@ -56,7 +53,6 @@ public class PythonCheckVerifier {
     }
     return context.getIssues();
   }
-
 
   public static void verify(String path, PythonCheck check) {
     verify(Collections.singletonList(path), check);
@@ -93,40 +89,19 @@ public class PythonCheckVerifier {
   }
 
   private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context) {
-    // Added
-    List<PreciseIssue> issues = new ArrayList<>();
-//    List<PythonQuickFix> quickFixes = new ArrayList<>();
-
     for (PreciseIssue issue : scanFileForIssues(check, context)) {
       if (!issue.check().equals(check)) {
         throw new IllegalStateException("Verifier support only one kind of issue " + issue.check() + " != " + check);
       }
       Integer cost = issue.cost();
       addPreciseIssue(file.toPath(), multiFileVerifier, issue).withGap(cost == null ? null : (double) cost);
-
-      // Added
-      issues.add(issue);
     }
 
     for (Token token : TreeUtils.tokens(context.rootTree())) {
-      // Added
-//      PreciseIssue issue = tokenPartOfIssue(token, issues);
-//      if (issue != null){
-//        IssueLocation.PythonTextEdit text = new IssueLocation.PythonTextEdit(token, "Error").insertBefore(token, "cls, ");
-//        PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument")
-//          .addTextEdit(text)
-//          .build();
-//        quickFixes.add(quickFix);
-//      }
-
       for (Trivia trivia : token.trivia()) {
         multiFileVerifier.addComment(file.toPath(), trivia.token().line(), trivia.token().column() + 1, trivia.value(), 1, 0);
       }
     }
-
-    // Added
-    // TODO : Connect the quickfixes to PythonScanner
-//    this.quickFixes.add(() -> quickFixes);
   }
 
   private static MultiFileVerifier.Issue addPreciseIssue(Path path, MultiFileVerifier verifier, PreciseIssue preciseIssue) {
@@ -142,7 +117,6 @@ public class PythonCheckVerifier {
       return verifier.reportIssue(path, message).onLine(location.startLine());
     }
 
-
     MultiFileVerifier.Issue issueBuilder = verifier.reportIssue(path, message)
       .onRange(location.startLine(), location.startLineOffset() + 1, location.endLine(), location.endLineOffset());
     for (IssueLocation secondary : preciseIssue.secondaryLocations()) {
@@ -150,27 +124,5 @@ public class PythonCheckVerifier {
     }
     return issueBuilder;
   }
-
-  private static boolean isQuickFixAvailable(PreciseIssue preciseIssue){
-//    Issue issue = ((Issue) preciseIssue);
-//    String ruleDescription = issue.ruleKey().at
-
-    return false;
-  }
-
-  private static PreciseIssue tokenPartOfIssue(Token token, List<PreciseIssue> issues){
-    IssueLocation issueLoc;
-    int line = token.line();
-    int startCol = token.column();
-    for(PreciseIssue i : issues){
-      issueLoc = i.primaryLocation();
-      if(issueLoc.startLine() == line && (i.primaryLocation().startLineOffset() <= startCol && startCol <= issueLoc.endLineOffset())){
-        return i;
-      }
-    }
-    return null;
-  }
-
-
 
 }

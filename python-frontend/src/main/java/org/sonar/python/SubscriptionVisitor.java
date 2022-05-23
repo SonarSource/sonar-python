@@ -48,7 +48,6 @@ import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.regex.PythonAnalyzerRegexSource;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
-import org.sonar.python.reporting.PythonQuickFix;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.RegexParser;
@@ -152,10 +151,6 @@ public class SubscriptionVisitor {
       PythonCheck.PreciseIssue newIssue = new IssueWithQuickFix(check, issueLocation);
       pythonVisitorContext.addIssue(newIssue);
       return newIssue;
-    }
-
-    private void addQuickFix(PythonCheck.PreciseIssue issue, PythonQuickFix quickFix){
-
     }
 
     @Override

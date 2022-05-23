@@ -76,8 +76,6 @@ public class PythonScanner extends Scanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
 
-  // private final List<Supplier<List<PythonQuickFix>>> quickFixes = new ArrayList<>();
-
   private InputFile inputFile;
 
   public PythonScanner(
@@ -268,12 +266,7 @@ public class PythonScanner extends Scanner {
 
   private void handleQuickFixes(RuleKey ruleKey, NewIssue newIssue, List<PythonQuickFix> quickFixes) {
     // TEST isSonarLintContext && isQuickFixCompatible
-
-    // if (isQuickFixCompatible) {
     addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
-    // } else {
-    // newIssue.setQuickFixAvailable(true);
-    // }
   }
 
   public boolean isSonarLintContext(org.sonar.api.Plugin.Context context) {

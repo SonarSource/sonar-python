@@ -19,19 +19,11 @@
  */
 package org.sonar.plugins.python.api;
 
-import com.sonar.sslr.api.TokenType;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.TextRange;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.TokenLocation;
-import org.sonar.python.tree.TokenImpl;
-import org.sonar.python.tree.TriviaImpl;
 
 public abstract class IssueLocation {
 
@@ -212,132 +204,19 @@ public abstract class IssueLocation {
 
   }
 
-  public static class PythonTextEdit extends PreciseIssueLocation{
+  public static class PythonTextEdit extends PreciseIssueLocation {
 
-    public PythonTextEdit(Token onlyToken, @Nullable String message){
-      super(onlyToken, message);
-    }
-
-    public PythonTextEdit(PreciseIssueLocation preciseIssueLocation, String text){
-      super(PythonTextEdit.fromPreciseIssue(preciseIssueLocation), text);
-    }
-    private static LocationInFile fromPreciseIssue(PreciseIssueLocation issueLocation){
-      return new LocationInFile(issueLocation.fileId, issueLocation.startLine, issueLocation.startLineOffset, issueLocation.endLine, issueLocation.endLineOffset);
-    }
-
-
-    public PythonTextEdit(LocationInFile location, String addition){
+    public PythonTextEdit(LocationInFile location, String addition) {
       super(location, addition);
     }
 
-    public static PythonTextEdit insertAtPosition(IssueLocation issueLocation, String addition){
+    public static PythonTextEdit insertAtPosition(IssueLocation issueLocation, String addition) {
       LocationInFile location = atBeginningOfIssue((PreciseIssueLocation) issueLocation);
       return new PythonTextEdit(location, addition);
     }
-    private static LocationInFile atBeginningOfIssue(PreciseIssueLocation issue){
+
+    private static LocationInFile atBeginningOfIssue(PreciseIssueLocation issue) {
       return new LocationInFile(issue.fileId, issue.startLine, issue.startLineOffset, issue.startLine, issue.startLineOffset);
     }
-
-
-    public void insertAfter(Token token, String text){}
-
-    public void insertAfterRange(TextRange textRange, String text){}
-
-//    public PythonTextEdit insertBefore(Tree tree, String addition){
-////      Token firstToken = tree.firstToken();
-////      if (firstToken == null) {
-////        throw new IllegalStateException("Trying to insert a quick fix before a Tree without token.");
-////      }
-////      return insertAtPosition(firstToken.line(), firstToken.column(), addition);
-//    }
-
-
-    public PythonTextEdit insertBefore(Token token, String text){
-//      return new PythonTextEdit(token, text);
-      Token newToken = new Token() {
-        @Override
-        public void accept(TreeVisitor visitor) {
-          token.accept(visitor);
-        }
-
-        @Override
-        public boolean is(Kind... kinds) {
-          return token.is(kinds);
-        }
-
-        @Override
-        public Token firstToken() {
-          return token.firstToken();
-        }
-
-        @Override
-        public Token lastToken() {
-          return token.lastToken();
-        }
-
-        @Override
-        public Tree parent() {
-          //TODO
-          return token.parent();
-        }
-
-        @Override
-        public List<Tree> children() {
-          //TODO
-          return token.children();
-        }
-
-        @Override
-        public Kind getKind() {
-          //TODO
-          return token.getKind();
-        }
-
-        @Override
-        public String value() {
-          return text + token.value();
-        }
-
-        @Override
-        public int line() {
-          return token.line();
-        }
-
-        @Override
-        public int column() {
-          return token.column() - text.length();
-        }
-
-        @Override
-        public List<Trivia> trivia() {
-          List<Trivia> trivias = new ArrayList<>();
-          com.sonar.sslr.api.Token tokenToAdd =com.sonar.sslr.api.Token.builder()
-            .setValueAndOriginalValue(text)
-            .setColumn(token.column()-text.length())
-            .setLine(token.line())
-            .build();
-          trivias.add(new TriviaImpl(new TokenImpl(tokenToAdd)));
-          trivias.addAll(token.trivia());
-          return trivias;
-        }
-
-        @Override
-        public TokenType type() {
-          return token.type();
-        }
-      };
-      return new PythonTextEdit(newToken, message());
-    }
-
-    public void insertBeforeRange(TextRange textRange, String text){}
-
-    public void remove(Token token){}
-
-    public void removeRange(TextRange textRange){}
-
-    public void replace(Token token, String text){}
-
-    public void replaceRange(TextRange textRange, String text) {}
-
   }
 }

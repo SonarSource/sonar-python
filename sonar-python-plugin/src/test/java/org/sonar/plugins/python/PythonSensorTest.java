@@ -97,7 +97,6 @@ public class PythonSensorTest {
 
   private static final String FILE_1 = "file1.py";
   private static final String FILE_2 = "file2.py";
-
   private static final String FILE_QUICKFIX = "file_quickfix.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
@@ -186,8 +185,8 @@ public class PythonSensorTest {
 
     assertThat(context.allIssues()).hasSize(1);
 
-//    String msg = "number of TypeOfText for the highlighting of keyword 'def'";
-//    assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
+    // String msg = "number of TypeOfText for the highlighting of keyword 'def'";
+    // assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
     assertThat(context.allAnalysisErrors()).isEmpty();
 
@@ -231,7 +230,6 @@ public class PythonSensorTest {
     sonarFile.setLanguage(Language.PYTHON);
 
     context.fileSystem().add(sonarFile);
-
     sensor().execute(context);
 
     assertThat(context.allIssues()).hasSize(1);
@@ -246,7 +244,6 @@ public class PythonSensorTest {
     assertThat(quickfix.inputFileEdits()).hasSize(1);
 
     List<TextEdit> textEdits = quickfix.inputFileEdits().get(0).textEdits();
-
     assertThat(textEdits).hasSize(1);
     assertThat(textEdits.get(0).newText()).isEqualTo("cls, ");
 
