@@ -203,20 +203,4 @@ public abstract class IssueLocation {
     }
 
   }
-
-  public static class PythonTextEdit extends PreciseIssueLocation {
-
-    public PythonTextEdit(LocationInFile location, String addition) {
-      super(location, addition);
-    }
-
-    public static PythonTextEdit insertAtPosition(IssueLocation issueLocation, String addition) {
-      LocationInFile location = atBeginningOfIssue((PreciseIssueLocation) issueLocation);
-      return new PythonTextEdit(location, addition);
-    }
-
-    private static LocationInFile atBeginningOfIssue(PreciseIssueLocation issue) {
-      return new LocationInFile(issue.fileId, issue.startLine, issue.startLineOffset, issue.startLine, issue.startLineOffset);
-    }
-  }
 }

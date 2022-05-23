@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -35,7 +34,8 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.reporting.PythonQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2710")
@@ -95,12 +95,15 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
       IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameterName,
         String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
 
-      IssueLocation.PythonTextEdit text = IssueLocation.PythonTextEdit
+      PythonTextEdit text = PythonTextEdit
         .insertAtPosition(issue.primaryLocation(), "cls, ");
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
         .addTextEdit(text)
         .build();
       issue.addQuickFix(quickFix);
+
+      // newquickfix(message).insertbefore(token, text).addOnIssue(issue);
+
     }
   }
 

@@ -42,8 +42,6 @@ import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.TextPointer;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.DefaultTextPointer;
-import org.sonar.api.batch.fs.internal.DefaultTextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -81,6 +79,8 @@ import org.sonarsource.sonarlint.core.client.api.common.Language;
 import org.sonarsource.sonarlint.core.client.api.common.QuickFix;
 import org.sonarsource.sonarlint.core.client.api.common.TextEdit;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.ClientInputFile;
+import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextPointer;
+import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextRange;
 import org.sonarsource.sonarlint.core.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.container.analysis.filesystem.SonarLintInputFile;
 
@@ -182,12 +182,8 @@ public class PythonSensorTest {
 
     String key = "moduleKey:file1.py";
     assertThat(context.measure(key, CoreMetrics.NCLOC)).isNull();
-
     assertThat(context.allIssues()).hasSize(1);
-
-    // String msg = "number of TypeOfText for the highlighting of keyword 'def'";
-    // assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
-
+    assertThat(context.highlightingTypeAt(key, 15, 2)).isEmpty();
     assertThat(context.allAnalysisErrors()).isEmpty();
 
     assertThat(PythonScanner.getWorkingDirectory(context)).isNull();
@@ -249,7 +245,7 @@ public class PythonSensorTest {
 
     DefaultTextRange textRange = new DefaultTextRange(new DefaultTextPointer(4, 13),
       new DefaultTextPointer(4, 13));
-    assertThat(textEdits.get(0).range()).hasToString(textRange.toString());
+    assertThat(textEdits.get(0).range()).isEqualTo(textRange);
   }
 
   @Test

@@ -58,7 +58,8 @@ import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.reporting.PythonQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.sonarlint.plugin.api.SonarLintRuntime;
 import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
@@ -75,8 +76,6 @@ public class PythonScanner extends Scanner {
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
-
-  private InputFile inputFile;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -98,7 +97,6 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void scanFile(InputFile inputFile) {
-    this.inputFile = inputFile;
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
@@ -184,7 +182,7 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      handleQuickFixes(ruleKey, newIssue, preciseIssue);
+      handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
 
       newIssue.save();
     }
@@ -254,10 +252,10 @@ public class PythonScanner extends Scanner {
       .save();
   }
 
-  private void handleQuickFixes(RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
+  private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
     if (isInSonarLint(context) && preciseIssue instanceof IssueWithQuickFix) {
       List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
-      if (!quickFixes.isEmpty()){
+      if (!quickFixes.isEmpty()) {
         addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
       }
     }
@@ -286,14 +284,15 @@ public class PythonScanner extends Scanner {
         newQuickFix.addInputFileEdit(edit);
         sonarLintIssue.addQuickFix(newQuickFix);
       }
-    // TODO : is this try/catch still necessary ?
+      // TODO : is this try/catch still necessary ?
     } catch (RuntimeException e) {
       // We still want to report the issue if we did not manage to create a quick fix.
       LOG.warn(String.format("Could not report quick fixes for rule: %s. %s: %s", ruleKey, e.getClass().getName(), e.getMessage()));
     }
   }
 
-  private static TextRange rangeFromTextSpan(InputFile file, IssueLocation.PythonTextEdit pythonTextEdit) {
-    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
+  private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
+    IssueLocation issue = pythonTextEdit.issueLocation;
+    return file.newRange(issue.startLine(), issue.startLineOffset(), issue.endLine(), issue.endLineOffset());
   }
 }

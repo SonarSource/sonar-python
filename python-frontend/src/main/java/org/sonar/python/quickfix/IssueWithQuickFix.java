@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.python.reporting.PythonQuickFix;
 
 public class IssueWithQuickFix extends PythonCheck.PreciseIssue {
 

@@ -17,18 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.reporting;
+package org.sonar.python.quickfix;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.sonar.plugins.python.api.IssueLocation;
 
 public class PythonQuickFix {
   private final String description;
-  private final List<IssueLocation.PythonTextEdit> textEdits;
+  private final List<PythonTextEdit> textEdits;
 
-  private PythonQuickFix(String description, List<IssueLocation.PythonTextEdit> textEdits) {
+  private PythonQuickFix(String description, List<PythonTextEdit> textEdits) {
     this.description = description;
     this.textEdits = textEdits;
   }
@@ -37,7 +36,7 @@ public class PythonQuickFix {
     return description;
   }
 
-  public List<IssueLocation.PythonTextEdit> getTextEdits() {
+  public List<PythonTextEdit> getTextEdits() {
     return textEdits;
   }
 
@@ -47,22 +46,21 @@ public class PythonQuickFix {
 
   public static class Builder {
     private final String description;
-    private final List<IssueLocation.PythonTextEdit> textEdits = new ArrayList<>();
+    private final List<PythonTextEdit> textEdits = new ArrayList<>();
 
     private Builder(String description) {
       this.description = description;
     }
 
-    public Builder addTextEdit(IssueLocation.PythonTextEdit... textEdit) {
+    public Builder addTextEdit(PythonTextEdit... textEdit) {
       textEdits.addAll(Arrays.asList(textEdit));
       return this;
     }
 
-    public Builder addTextEdits(List<IssueLocation.PythonTextEdit> textEdits) {
+    public Builder addTextEdits(List<PythonTextEdit> textEdits) {
       this.textEdits.addAll(textEdits);
       return this;
     }
-
     public PythonQuickFix build() {
       return new PythonQuickFix(description, textEdits);
     }
