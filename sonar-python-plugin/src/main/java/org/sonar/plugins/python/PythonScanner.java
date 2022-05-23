@@ -41,6 +41,7 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -56,7 +57,12 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.reporting.PythonQuickFix;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonarsource.sonarlint.plugin.api.SonarLintRuntime;
+import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
+import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
+import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
 public class PythonScanner extends Scanner {
 
@@ -69,6 +75,9 @@ public class PythonScanner extends Scanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
 
+  // private final List<Supplier<List<PythonQuickFix>>> quickFixes = new ArrayList<>();
+
+  private InputFile inputFile;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -90,13 +99,16 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void scanFile(InputFile inputFile) {
+    this.inputFile = inputFile;
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
-      saveMeasures(inputFile, visitorContext);
+      if (!isInSonarLint(context)) {
+        saveMeasures(inputFile, visitorContext);
+      }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.toString());
@@ -118,7 +130,7 @@ public class PythonScanner extends Scanner {
     SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
-    if (visitorContext.rootTree() != null) {
+    if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
@@ -126,7 +138,11 @@ public class PythonScanner extends Scanner {
 
   // visible for testing
   static File getWorkingDirectory(SensorContext context) {
-    return context.runtime().getProduct().equals(SonarProduct.SONARLINT) ? null : context.fileSystem().workDir();
+    return isInSonarLint(context) ? null : context.fileSystem().workDir();
+  }
+
+  private static boolean isInSonarLint(SensorContext context) {
+    return context.runtime().getProduct().equals(SonarProduct.SONARLINT);
   }
 
   @Override
@@ -168,6 +184,18 @@ public class PythonScanner extends Scanner {
         secondaryLocationsFlow.addFirst(primaryLocation);
         newIssue.addFlow(secondaryLocationsFlow);
       }
+
+      // TODO Add quickfix for one rule
+      if (ruleKey.rule().equals("S2710") && isInSonarLint(context)) {
+        IssueLocation.PythonTextEdit text = IssueLocation.PythonTextEdit
+          .insertAtPosition(preciseIssue.primaryLocation(), "cls, ");
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
+          .addTextEdit(text)
+          .build();
+        preciseIssue.addQuickFix(quickFix);
+        handleQuickFixes(ruleKey, newIssue, preciseIssue.getQuickFixes());
+      }
+
       newIssue.save();
     }
   }
@@ -234,5 +262,50 @@ public class PythonScanner extends Scanner {
       .forMetric(metric)
       .on(inputFile)
       .save();
+  }
+
+  private void handleQuickFixes(RuleKey ruleKey, NewIssue newIssue, List<PythonQuickFix> quickFixes) {
+    // TEST isSonarLintContext && isQuickFixCompatible
+
+    // if (isQuickFixCompatible) {
+    addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+    // } else {
+    // newIssue.setQuickFixAvailable(true);
+    // }
+  }
+
+  public boolean isSonarLintContext(org.sonar.api.Plugin.Context context) {
+    return context.getRuntime().getProduct() == SonarProduct.SONARLINT;
+  }
+
+  public boolean isQuickFixCompatible(org.sonar.api.Plugin.Context context) {
+    return isSonarLintContext(context) && ((SonarLintRuntime) context.getRuntime()).getSonarLintPluginApiVersion().isGreaterThanOrEqual(Version.parse("6.3"));
+  }
+
+  private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {
+    try {
+      for (PythonQuickFix quickFix : quickFixes) {
+        NewQuickFix newQuickFix = sonarLintIssue.newQuickFix()
+          .message(quickFix.getDescription());
+
+        NewInputFileEdit edit = newQuickFix.newInputFileEdit().on(inputFile);
+
+        quickFix.getTextEdits().stream()
+          .map(pythonTextEdit -> edit.newTextEdit().at(rangeFromTextSpan(inputFile, pythonTextEdit))
+            .withNewText(pythonTextEdit.message()))
+          .forEach(edit::addTextEdit);
+        newQuickFix.addInputFileEdit(edit);
+        sonarLintIssue.addQuickFix(newQuickFix);
+        LOG.error("Quickfix created");
+      }
+
+    } catch (RuntimeException e) {
+      // We still want to report the issue if we did not manage to create a quick fix.
+      LOG.warn(String.format("Could not report quick fixes for rule: %s. %s: %s", ruleKey, e.getClass().getName(), e.getMessage()));
+    }
+  }
+
+  private static TextRange rangeFromTextSpan(InputFile file, IssueLocation.PythonTextEdit pythonTextEdit) {
+    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
   }
 }

@@ -24,6 +24,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.reporting.PythonQuickFix;
 
 public interface PythonCheck {
 
@@ -36,6 +37,8 @@ public interface PythonCheck {
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
+    // TODO NEED TO HIDE, should not be in the public api for now
+    private final List<PythonQuickFix> quickFixes = new ArrayList<>();
 
     public PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
@@ -79,6 +82,14 @@ public interface PythonCheck {
 
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
+    }
+
+    public void addQuickFix(PythonQuickFix quickFix){
+      this.quickFixes.add(quickFix);
+    }
+
+    public List<PythonQuickFix> getQuickFixes() {
+      return quickFixes;
     }
 
     public PythonCheck check() {

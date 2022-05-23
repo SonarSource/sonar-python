@@ -93,7 +93,7 @@
     <sonar.version>9.3.0.51899</sonar.version>
     <sonar.orchestrator.version>3.36.0.63</sonar.orchestrator.version>
     <sonar-analyzer-commons.version>1.24.0.965</sonar-analyzer-commons.version>
-    <sonarlint-core.version>6.0.0.32513</sonarlint-core.version>
+    <sonarlint-core.version>6.3.0.36253</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
     <protobuf.version>3.17.3</protobuf.version>
     <woodstox.version>6.2.7</woodstox.version>
@@ -221,6 +221,12 @@
         <groupId>org.sonarsource.sonarlint.core</groupId>
         <artifactId>sonarlint-plugin-api</artifactId>
         <version>${sonarlint-core.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonarsource.sonarlint.core</groupId>
+        <artifactId>sonarlint-plugin-api</artifactId>
+        <version>${sonarlint.plugin.api.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
