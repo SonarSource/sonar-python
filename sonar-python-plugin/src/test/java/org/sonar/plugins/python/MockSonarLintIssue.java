@@ -135,4 +135,5 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   public boolean isQuickFixAvailable() {
     return isQuickFixAvailable;
   }
+
 }
