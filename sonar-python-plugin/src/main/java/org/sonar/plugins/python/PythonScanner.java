@@ -180,7 +180,9 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+      if (isInSonarLint(context)) {
+        handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+      }
 
       newIssue.save();
     }
@@ -251,13 +253,10 @@ public class PythonScanner extends Scanner {
   }
 
   private static void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
-    Optional.of(newIssue)
-      .filter(NewSonarLintIssue.class::isInstance)
-      .flatMap(x -> Optional.of(preciseIssue)
-        .filter(IssueWithQuickFix.class::isInstance)).ifPresent(y -> {
+    if (newIssue instanceof NewSonarLintIssue && preciseIssue instanceof IssueWithQuickFix) {
       List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
       addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
-    });
+    }
   }
 
   private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {
