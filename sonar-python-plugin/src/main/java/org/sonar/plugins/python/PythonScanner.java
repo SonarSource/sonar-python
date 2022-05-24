@@ -251,10 +251,13 @@ public class PythonScanner extends Scanner {
   }
 
   private static void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
-    if (newIssue instanceof NewSonarLintIssue && preciseIssue instanceof IssueWithQuickFix) {
+    Optional.of(newIssue)
+      .filter(NewSonarLintIssue.class::isInstance)
+      .flatMap(x -> Optional.of(preciseIssue)
+        .filter(IssueWithQuickFix.class::isInstance)).ifPresent(y -> {
       List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
       addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
-    }
+    });
   }
 
   private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {

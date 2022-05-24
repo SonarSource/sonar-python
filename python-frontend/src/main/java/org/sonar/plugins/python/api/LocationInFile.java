@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+
 public class LocationInFile {
   private final String fileId;
   private final int startLine;
@@ -26,7 +29,7 @@ public class LocationInFile {
   private final int endLine;
   private final int endLineOffset;
 
-  public LocationInFile(String fileId, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+  public LocationInFile(@Nullable String fileId, int startLine, int startLineOffset, int endLine, int endLineOffset) {
     this.fileId = fileId;
     this.startLine = startLine;
     this.startLineOffset = startLineOffset;
@@ -34,6 +37,7 @@ public class LocationInFile {
     this.endLineOffset = endLineOffset;
   }
 
+  @CheckForNull
   public String fileId() {
     return fileId;
   }
