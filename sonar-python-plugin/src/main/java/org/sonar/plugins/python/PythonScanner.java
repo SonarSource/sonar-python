@@ -41,7 +41,6 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -61,7 +60,6 @@ import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonarsource.sonarlint.plugin.api.SonarLintRuntime;
 import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
@@ -140,10 +138,6 @@ public class PythonScanner extends Scanner {
 
   private static boolean isInSonarLint(SensorContext context) {
     return context.runtime().getProduct().equals(SonarProduct.SONARLINT);
-  }
-
-  public boolean isQuickFixCompatible(SensorContext context) {
-    return isInSonarLint(context) && ((SonarLintRuntime) context.runtime()).getSonarLintPluginApiVersion().isGreaterThanOrEqual(Version.parse("6.3"));
   }
 
   @Override
@@ -256,10 +250,10 @@ public class PythonScanner extends Scanner {
       .save();
   }
 
-  private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
+  private static void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
     if (newIssue instanceof NewSonarLintIssue && preciseIssue instanceof IssueWithQuickFix) {
       List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
-        addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+      addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
     }
   }
 

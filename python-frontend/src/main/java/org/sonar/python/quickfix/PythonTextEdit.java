@@ -36,7 +36,11 @@ public class PythonTextEdit {
   }
 
   private static LocationInFile startOf(IssueLocation location) {
-    return new LocationInFile(location.fileId(), location.startLine(), location.startLineOffset(), location.startLine(), location.startLineOffset());
+    if (location.fileId() == null) {
+      return new LocationInFile("StartOfLoc", location.startLine(), location.startLineOffset(), location.startLine(), location.startLineOffset());
+    } else {
+      return new LocationInFile(location.fileId(), location.startLine(), location.startLineOffset(), location.startLine(), location.startLineOffset());
+    }
   }
 
   public String replacementText() {
