@@ -142,6 +142,10 @@ public class PythonScanner extends Scanner {
     return context.runtime().getProduct().equals(SonarProduct.SONARLINT);
   }
 
+  public boolean isQuickFixCompatible(SensorContext context) {
+    return isInSonarLint(context) && ((SonarLintRuntime) context.runtime()).getSonarLintPluginApiVersion().isGreaterThanOrEqual(Version.parse("6.3"));
+  }
+
   @Override
   protected void processException(Exception e, InputFile file) {
     LOG.warn("Unable to analyze file: " + file, e);
@@ -253,20 +257,10 @@ public class PythonScanner extends Scanner {
   }
 
   private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
-    if (isInSonarLint(context) && preciseIssue instanceof IssueWithQuickFix) {
+    if (newIssue instanceof NewSonarLintIssue && preciseIssue instanceof IssueWithQuickFix) {
       List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
-      if (!quickFixes.isEmpty()) {
         addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
-      }
     }
-  }
-
-  public boolean isSonarLintContext(org.sonar.api.Plugin.Context context) {
-    return context.getRuntime().getProduct() == SonarProduct.SONARLINT;
-  }
-
-  public boolean isQuickFixCompatible(org.sonar.api.Plugin.Context context) {
-    return isSonarLintContext(context) && ((SonarLintRuntime) context.getRuntime()).getSonarLintPluginApiVersion().isGreaterThanOrEqual(Version.parse("6.3"));
   }
 
   private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {
@@ -279,7 +273,7 @@ public class PythonScanner extends Scanner {
 
         quickFix.getTextEdits().stream()
           .map(pythonTextEdit -> edit.newTextEdit().at(rangeFromTextSpan(inputFile, pythonTextEdit))
-            .withNewText(pythonTextEdit.message()))
+            .withNewText(pythonTextEdit.replacementText()))
           .forEach(edit::addTextEdit);
         newQuickFix.addInputFileEdit(edit);
         sonarLintIssue.addQuickFix(newQuickFix);

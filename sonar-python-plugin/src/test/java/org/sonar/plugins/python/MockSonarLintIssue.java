@@ -33,6 +33,7 @@ import org.sonarsource.sonarlint.core.analyzer.sensor.DefaultSonarLintIssue;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
+// This class was copied from sonar-java
 public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   private final DefaultSonarLintIssue parent = new DefaultSonarLintIssue(null, null, null);
   private final SensorContextTester context;

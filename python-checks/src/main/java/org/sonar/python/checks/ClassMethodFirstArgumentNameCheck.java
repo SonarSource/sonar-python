@@ -101,9 +101,6 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
         .addTextEdit(text)
         .build();
       issue.addQuickFix(quickFix);
-
-      // newquickfix(message).insertbefore(token, text).addOnIssue(issue);
-
     }
   }
 

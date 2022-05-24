@@ -27,16 +27,16 @@ public class PythonTextEdit {
   public final IssueLocation issueLocation;
 
   public PythonTextEdit(LocationInFile location, String replacementText) {
-    this.issueLocation = IssueLocation.preciseLocation(location, addition);
+    this.issueLocation = IssueLocation.preciseLocation(location, replacementText);
   }
 
   public static PythonTextEdit insertAtPosition(IssueLocation issueLocation, String addition) {
-    LocationInFile location = atBeginningOfIssue(issueLocation);
+    LocationInFile location = startOf(issueLocation);
     return new PythonTextEdit(location, addition);
   }
 
-  private static LocationInFile atBeginningOfIssue(IssueLocation issue) {
-    return new LocationInFile(issue.fileId(), issue.startLine(), issue.startLineOffset(), issue.startLine(), issue.startLineOffset());
+  private static LocationInFile startOf(IssueLocation location) {
+    return new LocationInFile(location.fileId(), location.startLine(), location.startLineOffset(), location.startLine(), location.startLineOffset());
   }
 
   public String replacementText() {
