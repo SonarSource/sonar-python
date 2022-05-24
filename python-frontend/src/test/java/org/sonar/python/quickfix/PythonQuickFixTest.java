@@ -54,9 +54,4 @@ public class PythonQuickFixTest {
     assertThat(quickFix1.getTextEdits().get(1)).isEqualTo(textEdit2);
     assertThat(quickFix1.getDescription()).isEqualTo("Second Quickfix");
   }
-
-  @Test
-  public void multiple_quickfixes() {
-
-  }
 }
