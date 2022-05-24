@@ -26,7 +26,7 @@ public class PythonTextEdit {
 
   public final IssueLocation issueLocation;
 
-  public PythonTextEdit(LocationInFile location, String addition) {
+  public PythonTextEdit(LocationInFile location, String replacementText) {
     this.issueLocation = IssueLocation.preciseLocation(location, addition);
   }
 
@@ -39,7 +39,7 @@ public class PythonTextEdit {
     return new LocationInFile(issue.fileId(), issue.startLine(), issue.startLineOffset(), issue.startLine(), issue.startLineOffset());
   }
 
-  public String message() {
+  public String replacementText() {
     return issueLocation.message();
   }
 }
