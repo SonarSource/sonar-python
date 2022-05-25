@@ -17,17 +17,17 @@ env:
   CIRRUS_SHELL: bash
 
 container_definition: &CONTAINER_DEFINITION
-  image: gcr.io/language-team/base:latest
-  cluster_name: cirrus-ci-lt-cluster
-  zone: us-central1-a
+  image: eu.gcr.io/release-engineering-ci-prod/base:j11-latest
+  cluster_name: cirrus-ci
+  zone: europe-west4-b
   namespace: default
 
 win_vm_definition: &WINDOWS_VM_DEFINITION
   gce_instance:
-    image_project: language-team
-    image_family: lt-base-windows
+    image_project: release-engineering-ci-prod
+    image_family: lt-base-windows-jdk11
     platform: windows
-    zone: us-central1-a
+    zone: europe-west4-b
     preemptible: false
     disk: 128
     type: n1-standard-8
@@ -36,16 +36,20 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
 build_container_definition: &BUILD_CONTAINER_DEFINITION
   gke_container:
     dockerfile: .cirrus/python-env.Dockerfile
-    builder_image_project: language-team
-    builder_image_name: docker-builder-lt-v1
-    cluster_name: cirrus-ci-lt-cluster
-    zone: us-central1-a
+    builder_image_project: release-engineering-ci-prod
+    builder_image_name: family/docker-builder
+    cluster_name: cirrus-ci
+    zone: europe-west4-b
     namespace: default
     cpu: 2
     memory: 2G
 
+only_sonarsource_qa: &ONLY_SONARSOURCE_QA
+  only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api' )
+
 build_task:
   <<: *BUILD_CONTAINER_DEFINITION
+  <<: *ONLY_SONARSOURCE_QA
   env:
     GITHUB_TOKEN: ENCRYPTED[!f458126aa9ed2ac526f220c5acb51dd9cc255726b34761a56fc78d4294c11089502a882888cef0ca7dd4085e72e611a5!]
     # analysis on next
@@ -67,21 +71,21 @@ build_task:
 
 build_win_task:
   <<: *WINDOWS_VM_DEFINITION
-  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  <<: *ONLY_SONARSOURCE_QA
   maven_cache:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
   build_script:
     - git submodule update --init
-    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test -DskipTypeshed=true
-  cleanup_before_cache_script: cleanup_maven_repository
+    - source cirrus-env CI
+    - mvn.cmd package -DskipTypeshed=true
 
 ws_scan_task:
   depends_on:
     - build
   <<: *BUILD_CONTAINER_DEFINITION
   # run only on master and long-term branches
-  only_if: $CIRRUS_USER_COLLABORATOR == 'true' && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
+  only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
   env:
     WS_APIKEY: ENCRYPTED[!3929c6148b9dfc751a2d17c590b15d755f82cd9c108f2de5f24a5b32f2a0c26144e921fab7e2c959fc2824d6d6d1550d!]
   maven_cache:
@@ -99,7 +103,7 @@ ws_scan_task:
 plugin_qa_task:
   depends_on:
     - build
-  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  <<: *ONLY_SONARSOURCE_QA
   gke_container:
     <<: *CONTAINER_DEFINITION
     cpu: 3
@@ -122,7 +126,7 @@ plugin_qa_task:
 ruling_task:
   depends_on:
     - build
-  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  <<: *ONLY_SONARSOURCE_QA
   gke_container:
     <<: *CONTAINER_DEFINITION
     cpu: 4
@@ -141,11 +145,10 @@ ruling_task:
     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest
   cleanup_before_cache_script: cleanup_maven_repository
 
-
 extended_ruling_task:
   depends_on:
     - build
-  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  <<: *ONLY_SONARSOURCE_QA
   gke_container:
     <<: *CONTAINER_DEFINITION
     cpu: 4
@@ -164,13 +167,12 @@ extended_ruling_task:
     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonExtendedRulingTest
   cleanup_before_cache_script: cleanup_maven_repository
 
-
 promote_task:
   depends_on:
     - ruling
     - plugin_qa
     - ws_scan
-  only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
+  <<: *ONLY_SONARSOURCE_QA
   gke_container:
     <<: *CONTAINER_DEFINITION
     cpu: 1
