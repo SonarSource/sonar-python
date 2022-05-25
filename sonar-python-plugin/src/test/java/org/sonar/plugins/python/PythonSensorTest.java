@@ -83,6 +83,7 @@ import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextP
 import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextRange;
 import org.sonarsource.sonarlint.core.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.container.analysis.filesystem.SonarLintInputFile;
+import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -195,38 +196,8 @@ public class PythonSensorTest {
     context = Mockito.spy(context);
     when(context.newIssue()).thenReturn(new MockSonarLintIssue(context));
 
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
-        .setName("First argument to class methods should follow naming convention")
-        .build())
-      .build();
-
-    String pathToQuickFixTestFile = "src/test/resources/org/sonar/plugins/python/sensor/" + FILE_QUICKFIX;
-    File file = new File(pathToQuickFixTestFile);
-    String content = Files.readString(file.toPath());
-
-    ClientInputFile clientFile = mock(ClientInputFile.class);
-
-    when(clientFile.relativePath()).thenReturn(pathToQuickFixTestFile);
-    when(clientFile.getPath()).thenReturn(file.getAbsolutePath());
-    when(clientFile.uri()).thenReturn(file.getAbsoluteFile().toURI());
-    when(clientFile.contents()).thenReturn(content);
-
-    Function<SonarLintInputFile, FileMetadata.Metadata> metadataGenerator = x -> {
-      try {
-        return new FileMetadata().readMetadata(new FileInputStream(file), StandardCharsets.UTF_8, file.toURI(), null);
-      } catch (FileNotFoundException e) {
-        throw new RuntimeException(e);
-      }
-    };
-
-    SonarLintInputFile sonarFile = new SonarLintInputFile(clientFile, metadataGenerator);
-    sonarFile.setType(Type.MAIN);
-    sonarFile.setLanguage(Language.PYTHON);
-
-    context.fileSystem().add(sonarFile);
-    sensor().execute(context);
+    activate_rule_S2710();
+    setup_quickfix_sensor();
 
     assertThat(context.allIssues()).hasSize(1);
 
@@ -246,6 +217,30 @@ public class PythonSensorTest {
     DefaultTextRange textRange = new DefaultTextRange(new DefaultTextPointer(4, 13),
       new DefaultTextPointer(4, 13));
     assertThat(textEdits.get(0).range()).isEqualTo(textRange);
+  }
+
+  @Test
+  public void test_execute_on_sonarlint_quickfix_broken() throws IOException {
+    context.setRuntime(SONARLINT_RUNTIME);
+    context = Mockito.spy(context);
+    when(context.newIssue()).thenReturn(new MockSonarLintIssue(context) {
+      @Override
+      public NewQuickFix newQuickFix() {
+        throw new RuntimeException("Exception message");
+      }
+    });
+
+    activate_rule_S2710();
+    setup_quickfix_sensor();
+
+    Collection<Issue> issues = context.allIssues();
+    assertThat(issues).hasSize(1);
+    MockSonarLintIssue issue = (MockSonarLintIssue) issues.iterator().next();
+
+    assertThat(issue.quickFixes).isEmpty();
+    assertThat(issue.getSaved()).isTrue();
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
   }
 
   @Test
@@ -667,4 +662,39 @@ public class PythonSensorTest {
     return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
   }
 
+  private void activate_rule_S2710(){
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
+        .setName("First argument to class methods should follow naming convention")
+        .build())
+      .build();
+  }
+  private void setup_quickfix_sensor() throws IOException {
+    String pathToQuickFixTestFile = "src/test/resources/org/sonar/plugins/python/sensor/" + FILE_QUICKFIX;
+    File file = new File(pathToQuickFixTestFile);
+    String content = Files.readString(file.toPath());
+
+    ClientInputFile clientFile = mock(ClientInputFile.class);
+
+    when(clientFile.relativePath()).thenReturn(pathToQuickFixTestFile);
+    when(clientFile.getPath()).thenReturn(file.getAbsolutePath());
+    when(clientFile.uri()).thenReturn(file.getAbsoluteFile().toURI());
+    when(clientFile.contents()).thenReturn(content);
+
+    Function<SonarLintInputFile, FileMetadata.Metadata> metadataGenerator = x -> {
+      try {
+        return new FileMetadata().readMetadata(new FileInputStream(file), StandardCharsets.UTF_8, file.toURI(), null);
+      } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+      }
+    };
+
+    SonarLintInputFile sonarFile = new SonarLintInputFile(clientFile, metadataGenerator);
+    sonarFile.setType(Type.MAIN);
+    sonarFile.setLanguage(Language.PYTHON);
+
+    context.fileSystem().add(sonarFile);
+    sensor().execute(context);
+  }
 }
