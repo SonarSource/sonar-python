@@ -153,9 +153,7 @@ public class PythonScanner extends Scanner {
         .forRule(ruleKey);
 
       Integer cost = preciseIssue.cost();
-      if (cost != null) {
-        newIssue.gap(cost.doubleValue());
-      }
+      Optional.ofNullable(cost).ifPresent(c -> newIssue.gap(c.doubleValue()));
 
       NewIssueLocation primaryLocation = newLocation(inputFile, newIssue, preciseIssue.primaryLocation());
       newIssue.at(primaryLocation);
@@ -180,7 +178,9 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+      if (isInSonarLint(context)) {
+        handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+      }
 
       newIssue.save();
     }

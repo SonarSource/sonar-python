@@ -137,4 +137,8 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
     return isQuickFixAvailable;
   }
 
+  protected boolean getSaved(){
+    return saved;
+  }
+
 }
