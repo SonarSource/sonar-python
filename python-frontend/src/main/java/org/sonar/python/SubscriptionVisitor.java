@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.regex.PythonAnalyzerRegexSource;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
@@ -147,7 +148,7 @@ public class SubscriptionVisitor {
     }
 
     private PythonCheck.PreciseIssue addIssue(IssueLocation issueLocation) {
-      PythonCheck.PreciseIssue newIssue = new PythonCheck.PreciseIssue(check, issueLocation);
+      PythonCheck.PreciseIssue newIssue = new IssueWithQuickFix(check, issueLocation);
       pythonVisitorContext.addIssue(newIssue);
       return newIssue;
     }

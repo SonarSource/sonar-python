@@ -33,6 +33,9 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2710")
@@ -89,7 +92,16 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
       return;
     }
     if (!classParameterNames().contains(parameterName.name())) {
-      ctx.addIssue(parameterName, String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
+      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameterName,
+        String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
+
+      PythonTextEdit text = PythonTextEdit
+        .insertBefore(parameterName, "cls, ");
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
+        .addTextEdit(text)
+        .build();
+      issue.addQuickFix(quickFix);
     }
   }
+
 }

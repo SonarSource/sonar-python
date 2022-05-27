@@ -56,7 +56,13 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
+import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
+import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
 public class PythonScanner extends Scanner {
 
@@ -68,7 +74,6 @@ public class PythonScanner extends Scanner {
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
-
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -96,10 +101,12 @@ public class PythonScanner extends Scanner {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
-      saveMeasures(inputFile, visitorContext);
+      if (!isInSonarLint(context)) {
+        saveMeasures(inputFile, visitorContext);
+      }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
-      LOG.error("Unable to parse file: " + inputFile.toString());
+      LOG.error("Unable to parse file: " + inputFile);
       LOG.error(e.getMessage());
       context.newAnalysisError()
         .onFile(inputFile)
@@ -118,7 +125,7 @@ public class PythonScanner extends Scanner {
     SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
-    if (visitorContext.rootTree() != null) {
+    if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
@@ -126,12 +133,16 @@ public class PythonScanner extends Scanner {
 
   // visible for testing
   static File getWorkingDirectory(SensorContext context) {
-    return context.runtime().getProduct().equals(SonarProduct.SONARLINT) ? null : context.fileSystem().workDir();
+    return isInSonarLint(context) ? null : context.fileSystem().workDir();
+  }
+
+  private static boolean isInSonarLint(SensorContext context) {
+    return context.runtime().getProduct().equals(SonarProduct.SONARLINT);
   }
 
   @Override
   protected void processException(Exception e, InputFile file) {
-    LOG.warn("Unable to analyze file: " + file.toString(), e);
+    LOG.warn("Unable to analyze file: " + file, e);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
@@ -168,6 +179,9 @@ public class PythonScanner extends Scanner {
         secondaryLocationsFlow.addFirst(primaryLocation);
         newIssue.addFlow(secondaryLocationsFlow);
       }
+
+      handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+
       newIssue.save();
     }
   }
@@ -234,5 +248,38 @@ public class PythonScanner extends Scanner {
       .forMetric(metric)
       .on(inputFile)
       .save();
+  }
+
+  private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
+    if (isInSonarLint(context) && newIssue instanceof NewSonarLintIssue && preciseIssue instanceof IssueWithQuickFix) {
+      List<PythonQuickFix> quickFixes = ((IssueWithQuickFix) preciseIssue).getQuickFixes();
+      addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+    }
+  }
+
+  private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {
+    try {
+      for (PythonQuickFix quickFix : quickFixes) {
+        NewQuickFix newQuickFix = sonarLintIssue.newQuickFix()
+          .message(quickFix.getDescription());
+
+        NewInputFileEdit edit = newQuickFix.newInputFileEdit().on(inputFile);
+
+        quickFix.getTextEdits().stream()
+          .map(pythonTextEdit -> edit.newTextEdit().at(rangeFromTextSpan(inputFile, pythonTextEdit))
+            .withNewText(pythonTextEdit.replacementText()))
+          .forEach(edit::addTextEdit);
+        newQuickFix.addInputFileEdit(edit);
+        sonarLintIssue.addQuickFix(newQuickFix);
+      }
+      // TODO : is this try/catch still necessary ?
+    } catch (RuntimeException e) {
+      // We still want to report the issue if we did not manage to create a quick fix.
+      LOG.warn(String.format("Could not report quick fixes for rule: %s. %s: %s", ruleKey, e.getClass().getName(), e.getMessage()));
+    }
+  }
+
+  private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
+    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
   }
 }

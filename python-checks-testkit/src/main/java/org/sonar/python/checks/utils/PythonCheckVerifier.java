@@ -43,7 +43,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonCheckVerifier {
-
   private PythonCheckVerifier() {
   }
 
@@ -54,7 +53,6 @@ public class PythonCheckVerifier {
     }
     return context.getIssues();
   }
-
 
   public static void verify(String path, PythonCheck check) {
     verify(Collections.singletonList(path), check);
@@ -118,7 +116,6 @@ public class PythonCheckVerifier {
     if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
       return verifier.reportIssue(path, message).onLine(location.startLine());
     }
-
 
     MultiFileVerifier.Issue issueBuilder = verifier.reportIssue(path, message)
       .onRange(location.startLine(), location.startLineOffset() + 1, location.endLine(), location.endLineOffset());
