@@ -27,26 +27,26 @@ import org.sonar.plugins.python.api.PythonCheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class IssueWithQuickFixTest {
 
   @Test
-  public void test(){
+  public void test() {
     PythonCheck check = Mockito.mock(PythonCheck.class);
-    LocationInFile loc1 = new LocationInFile(null, 1,7,10,10);
+    LocationInFile loc1 = new LocationInFile("null", 1, 7, 10, 10);
     IssueLocation issueLocation = IssueLocation.preciseLocation(loc1, "location");
+
     IssueWithQuickFix issue = new IssueWithQuickFix(check, issueLocation);
-    
+
     assertThat(issue.getQuickFixes()).isEmpty();
 
-    PythonTextEdit textEdit = new PythonTextEdit(loc1, "This is the replacement text");
+    PythonTextEdit textEdit = Mockito.mock(PythonTextEdit.class);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New Quickfix")
-        .addTextEdit()
-          .build();
-    
+      .addTextEdit(textEdit)
+      .build();
+
     issue.addQuickFix(quickFix);
     issue.addQuickFix(quickFix);
-    
+
     assertThat(issue.getQuickFixes()).containsExactly(quickFix, quickFix);
   }
 

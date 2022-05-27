@@ -153,7 +153,9 @@ public class PythonScanner extends Scanner {
         .forRule(ruleKey);
 
       Integer cost = preciseIssue.cost();
-      Optional.ofNullable(cost).ifPresent(c -> newIssue.gap(c.doubleValue()));
+      if (cost != null) {
+        newIssue.gap(cost.doubleValue());
+      }
 
       NewIssueLocation primaryLocation = newLocation(inputFile, newIssue, preciseIssue.primaryLocation());
       newIssue.at(primaryLocation);
@@ -280,7 +282,6 @@ public class PythonScanner extends Scanner {
   }
 
   private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
-    IssueLocation issue = pythonTextEdit.issueLocation;
-    return file.newRange(issue.startLine(), issue.startLineOffset(), issue.endLine(), issue.endLineOffset());
+    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
   }
 }

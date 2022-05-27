@@ -57,10 +57,6 @@ public class PythonQuickFix {
       return this;
     }
 
-    public Builder addTextEdits(List<PythonTextEdit> textEdits) {
-      this.textEdits.addAll(textEdits);
-      return this;
-    }
     public PythonQuickFix build() {
       return new PythonQuickFix(description, textEdits);
     }

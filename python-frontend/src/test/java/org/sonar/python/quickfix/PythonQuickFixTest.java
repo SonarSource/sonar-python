@@ -19,10 +19,7 @@
  */
 package org.sonar.python.quickfix;
 
-import java.util.Arrays;
 import org.junit.Test;
-import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.LocationInFile;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,27 +27,11 @@ public class PythonQuickFixTest {
 
   @Test
   public void test() {
-    PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix("New quickfix");
-    String message = "This is a replacement text";
-    LocationInFile loc1 = new LocationInFile(null, 1, 7, 10, 10);
+    PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
 
-    IssueLocation issueLocation1 = IssueLocation.preciseLocation(loc1, "message");
-    PythonTextEdit textEdit = PythonTextEdit.insertAtPosition(issueLocation1, message);
-
-    PythonQuickFix quickFix = builder.addTextEdit(textEdit).build();
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix").addTextEdit(textEdit).build();
 
     assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
     assertThat(quickFix.getDescription()).isEqualTo("New quickfix");
-
-    LocationInFile loc2 = new LocationInFile(null, 14, 7, 17, 7);
-    IssueLocation issueLocation2 = IssueLocation.preciseLocation(loc2, "message");
-    PythonTextEdit textEdit2 = PythonTextEdit.insertAtPosition(issueLocation2, message);
-    PythonQuickFix quickFix1 = PythonQuickFix.newQuickFix("Second Quickfix")
-      .addTextEdits(Arrays.asList(textEdit, textEdit2))
-      .build();
-
-    assertThat(quickFix1.getTextEdits()).hasSize(2);
-    assertThat(quickFix1.getTextEdits().get(1)).isEqualTo(textEdit2);
-    assertThat(quickFix1.getDescription()).isEqualTo("Second Quickfix");
   }
 }

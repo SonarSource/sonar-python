@@ -96,7 +96,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
         String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
 
       PythonTextEdit text = PythonTextEdit
-        .insertAtPosition(issue.primaryLocation(), "cls, ");
+        .insertBefore(parameterName, "cls, ");
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
         .addTextEdit(text)
         .build();

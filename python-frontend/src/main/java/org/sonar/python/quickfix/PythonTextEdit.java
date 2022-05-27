@@ -19,27 +19,47 @@
  */
 package org.sonar.python.quickfix;
 
-import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class PythonTextEdit {
 
-  public final IssueLocation issueLocation;
+  private final String message;
+  private final int startLine;
+  private final int startLineOffset;
+  private final int endLine;
+  private final int endLineOffset;
 
-  public PythonTextEdit(LocationInFile location, String replacementText) {
-    this.issueLocation = IssueLocation.preciseLocation(location, replacementText);
+  public PythonTextEdit(String message, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+    this.message = message;
+    this.startLine = startLine;
+    this.startLineOffset = startLineOffset;
+    this.endLine = endLine;
+    this.endLineOffset = endLineOffset;
   }
 
   public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
-    LocationInFile location = startOf(issueLocation);
-    return new PythonTextEdit(location, addition);
-  }
-
-  private static LocationInFile startOf(IssueLocation location) {
-    return new LocationInFile(location.fileId(), location.startLine(), location.startLineOffset(), location.startLine(), location.startLineOffset());
+    Token token = tree.firstToken();
+    return new PythonTextEdit(textToInsert, token.line(), token.column(), token.line(), token.column());
   }
 
   public String replacementText() {
-    return issueLocation.message();
+    return message;
+  }
+
+  public int startLine() {
+    return startLine;
+  }
+
+  public int startLineOffset() {
+    return startLineOffset;
+  }
+
+  public int endLine() {
+    return endLine;
+  }
+
+  public int endLineOffset() {
+    return endLineOffset;
   }
 }

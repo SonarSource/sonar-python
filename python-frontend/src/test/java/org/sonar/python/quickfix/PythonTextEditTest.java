@@ -20,28 +20,32 @@
 package org.sonar.python.quickfix;
 
 import org.junit.Test;
-import org.sonar.plugins.python.api.IssueLocation;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.tree.Token;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 public class PythonTextEditTest {
 
   @Test
-  public void test(){
-    String message = "This is a replacement text";
-    LocationInFile loc1 = new LocationInFile(null, 1,7,10,10);
-    LocationInFile loc2 = new LocationInFile(null, 1,7,1,7);
+  public void test() {
+    String replacementText = "This is a replacement text";
+    LocationInFile finalLocation = new LocationInFile("null", 1, 7, 1, 7);
 
-    IssueLocation issueLocation1 = IssueLocation.preciseLocation(loc1, "message");
-    PythonTextEdit textEdit = PythonTextEdit.insertAtPosition(issueLocation1, message);
+    Token token = Mockito.mock(Token.class);
+    when(token.line()).thenReturn(1);
+    when(token.column()).thenReturn(7);
+    when(token.firstToken()).thenReturn(token);
+    when(token.lastToken()).thenReturn(token);
 
-    IssueLocation correctLocation = IssueLocation.preciseLocation(loc2, message);
+    PythonTextEdit textEdit = PythonTextEdit.insertBefore(token, replacementText);
 
-    assertThat(textEdit.replacementText()).isEqualTo(message);
-    assertThat(textEdit.issueLocation.startLine()).isEqualTo(correctLocation.startLine());
-    assertThat(textEdit.issueLocation.startLineOffset()).isEqualTo(correctLocation.startLineOffset());
-    assertThat(textEdit.issueLocation.endLine()).isEqualTo(correctLocation.endLine());
-    assertThat(textEdit.issueLocation.endLineOffset()).isEqualTo(correctLocation.endLineOffset());
+    assertThat(textEdit.replacementText()).isEqualTo(replacementText);
+    assertThat(textEdit.startLine()).isEqualTo(1);
+    assertThat(textEdit.startLineOffset()).isEqualTo(7);
+    assertThat(textEdit.endLine()).isEqualTo(1);
+    assertThat(textEdit.endLineOffset()).isEqualTo(7);
   }
 }
