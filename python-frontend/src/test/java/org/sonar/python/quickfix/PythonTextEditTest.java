@@ -21,7 +21,6 @@ package org.sonar.python.quickfix;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.Token;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,7 +31,6 @@ public class PythonTextEditTest {
   @Test
   public void test() {
     String replacementText = "This is a replacement text";
-    LocationInFile finalLocation = new LocationInFile("null", 1, 7, 1, 7);
 
     Token token = Mockito.mock(Token.class);
     when(token.line()).thenReturn(1);
