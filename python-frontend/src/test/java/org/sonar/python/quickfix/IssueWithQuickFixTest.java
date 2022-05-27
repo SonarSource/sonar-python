@@ -47,8 +47,7 @@ public class IssueWithQuickFixTest {
     issue.addQuickFix(quickFix);
     issue.addQuickFix(quickFix);
     
-    assertThat(issue.getQuickFixes()).hasSize(2);
-    assertThat(issue.getQuickFixes().get(0)).isEqualTo(quickFix);
+    assertThat(issue.getQuickFixes()).containsExactly(quickFix, quickFix);
   }
 
 }

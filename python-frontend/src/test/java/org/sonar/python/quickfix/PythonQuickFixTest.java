@@ -39,8 +39,7 @@ public class PythonQuickFixTest {
 
     PythonQuickFix quickFix = builder.addTextEdit(textEdit).build();
 
-    assertThat(quickFix.getTextEdits()).hasSize(1);
-    assertThat(quickFix.getTextEdits().get(0)).isEqualTo(textEdit);
+    assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
     assertThat(quickFix.getDescription()).isEqualTo("New quickfix");
 
     LocationInFile loc2 = new LocationInFile(null, 14, 7, 17, 7);

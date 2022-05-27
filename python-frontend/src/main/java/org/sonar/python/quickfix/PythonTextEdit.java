@@ -30,7 +30,7 @@ public class PythonTextEdit {
     this.issueLocation = IssueLocation.preciseLocation(location, replacementText);
   }
 
-  public static PythonTextEdit insertAtPosition(IssueLocation issueLocation, String addition) {
+  public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
     LocationInFile location = startOf(issueLocation);
     return new PythonTextEdit(location, addition);
   }
