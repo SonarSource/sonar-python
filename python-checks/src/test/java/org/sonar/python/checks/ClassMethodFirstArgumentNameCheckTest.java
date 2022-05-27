@@ -19,14 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import org.junit.Test;
-import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.python.checks.utils.PythonQuickFixVerifier;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ClassMethodFirstArgumentNameCheckTest {
 
@@ -34,24 +29,13 @@ public class ClassMethodFirstArgumentNameCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/classMethodFirstArgumentNameCheck.py", new ClassMethodFirstArgumentNameCheck());
 
-    String codeWithIssue = "class A():\n\n" +
+    String codeWithIssue = "class A():\n" +
       "    @classmethod\n" +
-      "    def area(bob, length, width):\n" +
-      "        return length*width\n";
-    String codeFixed = "class A():\n\n" +
+      "    def area(bob): pass";
+    String codeFixed = "class A():\n" +
       "    @classmethod\n" +
-      "    def area(cls, bob, length, width):\n" +
-      "        return length*width\n";
+      "    def area(cls, bob): pass";
 
-    List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
-      .getIssuesWithQuickFix(codeWithIssue, new ClassMethodFirstArgumentNameCheck());
-
-    assertThat(issues).hasSize(1);
-    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
-
-    assertThat(issue.getQuickFixes()).hasSize(1);
-
-    String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
-    assertThat(codeQFApplied).isEqualTo(codeFixed);
+    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed);
   }
 }

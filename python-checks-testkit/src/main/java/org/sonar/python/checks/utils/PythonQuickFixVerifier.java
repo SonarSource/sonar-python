@@ -36,8 +36,23 @@ import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PythonQuickFixVerifier {
   private PythonQuickFixVerifier() {
+  }
+
+  public static void verify(PythonCheck check, String codeWithIssue, String codeFixed) {
+    List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
+      .getIssuesWithQuickFix(codeWithIssue, check);
+
+    assertThat(issues).hasSize(1);
+    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+
+    assertThat(issue.getQuickFixes()).hasSize(1);
+
+    String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
+    assertThat(codeQFApplied).isEqualTo(codeFixed);
   }
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
@@ -66,7 +81,7 @@ public class PythonQuickFixVerifier {
     String replacement = loc.message();
     int start = convertPositionToIndex(codeWithIssue, loc.startLine(), loc.startLineOffset());
     int end = convertPositionToIndex(codeWithIssue, loc.endLine(), loc.endLineOffset());
-    return codeWithIssue.substring(0, start + 1) + replacement + codeWithIssue.substring(end + 1);
+    return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
   }
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {
@@ -76,7 +91,7 @@ public class PythonQuickFixVerifier {
       currentIndex = fileContent.indexOf("\n", currentIndex + 1);
       currentLine++;
     }
-    return currentIndex + lineOffset;
+    return currentIndex + lineOffset + 1;
   }
 
   private static class PythonQuickFixFile implements PythonFile {
