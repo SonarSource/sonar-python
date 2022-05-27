@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.python.checks.utils.PythonQuickFixVerifier;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 
 public class ClassMethodFirstArgumentNameCheckTest {
 

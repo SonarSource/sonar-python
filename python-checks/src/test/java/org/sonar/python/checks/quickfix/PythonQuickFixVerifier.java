@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks.utils;
+package org.sonar.python.checks.quickfix;
 
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
@@ -42,9 +42,14 @@ public class PythonQuickFixVerifier {
   private PythonQuickFixVerifier() {
   }
 
+  public static void verifyNoQuickFix(PythonCheck check, String code){
+    List<PythonCheck.PreciseIssue> issuesWithQuickFix = PythonQuickFixVerifier.getIssuesWithQuickFix(check, code);
+    assertThat(issuesWithQuickFix).isEmpty();
+  }
+
   public static void verify(PythonCheck check, String codeWithIssue, String codeFixed) {
     List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
-      .getIssuesWithQuickFix(codeWithIssue, check);
+      .getIssuesWithQuickFix(check, codeWithIssue);
 
     assertThat(issues).hasSize(1);
     IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
@@ -63,7 +68,7 @@ public class PythonQuickFixVerifier {
     return context.getIssues();
   }
 
-  public static List<PreciseIssue> getIssuesWithQuickFix(String codeWithIssue, PythonCheck check) {
+  public static List<PreciseIssue> getIssuesWithQuickFix(PythonCheck check,String codeWithIssue) {
     PythonParser parser = PythonParser.create();
     PythonQuickFixFile pythonFile = new PythonQuickFixFile(codeWithIssue);
     AstNode astNode = parser.parse(pythonFile.content());

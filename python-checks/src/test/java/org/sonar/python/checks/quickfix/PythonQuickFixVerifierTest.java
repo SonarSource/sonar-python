@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks.utils;
+package org.sonar.python.checks.quickfix;
 
-import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.python.checks.ClassMethodFirstArgumentNameCheck;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
@@ -42,6 +42,7 @@ public class PythonQuickFixVerifierTest {
     String codeFixed = "def vol():\n" +
       "    return length*width*depth\n";
 
+    PythonQuickFixVerifier.verifyNoQuickFix(check, codeWithIssue);
     LocationInFile loc = new LocationInFile(null, 2, 23, 2, 23);
     String replacement = "*depth";
     IssueLocation issueLocation = IssueLocation.preciseLocation(loc, replacement);
@@ -54,12 +55,19 @@ public class PythonQuickFixVerifierTest {
     String fixApply = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
     assertThat(fixApply).isEqualTo(codeFixed);
 
-    List<PythonCheck.PreciseIssue> issuesWithQuickFix = PythonQuickFixVerifier.getIssuesWithQuickFix(codeWithIssue, check);
-    assertThat(issuesWithQuickFix).isEmpty();
-
     // For coverage purposes
     PythonSubscriptionCheck subscriptionCheck = mock(PythonSubscriptionCheck.class);
-    issuesWithQuickFix = PythonQuickFixVerifier.getIssuesWithQuickFix(codeWithIssue, subscriptionCheck);
-    assertThat(issuesWithQuickFix).isEmpty();
+    PythonQuickFixVerifier.verifyNoQuickFix(subscriptionCheck, codeWithIssue);
+  }
+
+  @Test
+  public void test_verify(){
+    String codeWithIssue = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(bob): pass";
+    String codeFixed = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(cls, bob): pass";
+    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed);
   }
 }
