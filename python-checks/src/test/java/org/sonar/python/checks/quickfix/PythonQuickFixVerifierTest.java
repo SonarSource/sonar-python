@@ -20,54 +20,97 @@
 package org.sonar.python.checks.quickfix;
 
 import org.junit.Test;
-import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.python.checks.ClassMethodFirstArgumentNameCheck;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
 public class PythonQuickFixVerifierTest {
 
   @Test
-  public void test() {
-    PythonCheck check = mock(PythonCheck.class);
-    String codeWithIssue = "def vol():\n" +
-      "    return length*width\n";
-    String codeFixed = "def vol():\n" +
-      "    return length*width*depth\n";
-
-    PythonQuickFixVerifier.verifyNoQuickFix(check, codeWithIssue);
-    LocationInFile loc = new LocationInFile(null, 2, 23, 2, 23);
-    String replacement = "*depth";
-    IssueLocation issueLocation = IssueLocation.preciseLocation(loc, replacement);
-    IssueWithQuickFix issue = new IssueWithQuickFix(check, issueLocation);
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Testing verifier")
-      .addTextEdit(PythonTextEdit.insertAtPosition(issueLocation, replacement))
-      .build();
-    issue.addQuickFix(quickFix);
-
-    String fixApply = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
-    assertThat(fixApply).isEqualTo(codeFixed);
-
-    // For coverage purposes
-    PythonSubscriptionCheck subscriptionCheck = mock(PythonSubscriptionCheck.class);
-    PythonQuickFixVerifier.verifyNoQuickFix(subscriptionCheck, codeWithIssue);
+  public void no_issue_found() {
+    PythonCheck check = new SimpleCheck();
+    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a,b,c", ""))
+      .isInstanceOf(AssertionError.class)
+      .hasMessage("[Number of issues] Expected 1 issue but found 0");
   }
 
   @Test
-  public void test_verify(){
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def area(bob): pass";
-    String codeFixed = "class A():\n" +
-      "    @classmethod\n" +
-      "    def area(cls, bob): pass";
-    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed);
+  public void more_than_one_issue_raised() {
+    PythonCheck check = new SimpleCheck();
+    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a=10;b=3", ""))
+      .isInstanceOf(AssertionError.class)
+      .hasMessage("[Number of issues] Expected 1 issue but found 2");
+  }
+
+  @Test
+  public void one_issue_raised_no_quickfix() {
+    PythonCheck check = new SimpleCheckNoQuickFix();
+
+    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a=10", ""))
+      .isInstanceOf(AssertionError.class)
+      .hasMessage("[Number of quickfixes] Expected 1 quickfix but found 0");
+  }
+
+  @Test
+  public void one_issue_one_qf_wrong_fix() {
+    SimpleCheck simpleCheck = new SimpleCheck();
+    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(simpleCheck, "a=10", "a==10"))
+      .isInstanceOf(AssertionError.class)
+      .hasMessageContaining("[Application of the quickfix] The code with the quickfix applied is not the expected result : a!=10 instead of a==10");
+  }
+
+  @Test
+  public void test_verify() {
+    PythonQuickFixVerifier.verify(new SimpleCheck(), "a=10", "a!=10");
+  }
+
+  @Test
+  public void test_multiple_lines() {
+    PythonQuickFixVerifier.verify(new SimpleCheck(), "b \na=10", "b \na!=10");
+  }
+
+  @Test
+  public void test_coverage() {
+    // PythonCheck is not an instance of PythonSubscriptionCheck
+    PythonCheck check = mock(PythonCheck.class);
+    String codeWithIssue = "def vol():\n" +
+      "    return length*width\n";
+
+    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, codeWithIssue, ""))
+      .isInstanceOf(AssertionError.class)
+      .hasMessage("[Number of issues] Expected 1 issue but found 0");
+    ;
+  }
+
+  private class SimpleCheck extends PythonSubscriptionCheck {
+
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> {
+        AssignmentStatement assignment = ((AssignmentStatement) ctx.syntaxNode());
+        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(assignment.equalTokens().get(0), "");
+
+        PythonTextEdit text = PythonTextEdit
+          .insertAtPosition(issue.primaryLocation(), "!");
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add '!' here.")
+          .addTextEdit(text)
+          .build();
+        issue.addQuickFix(quickFix);
+      });
+    }
+  }
+
+  private class SimpleCheckNoQuickFix extends PythonSubscriptionCheck {
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> ctx.addIssue(ctx.syntaxNode(), ""));
+    }
   }
 }

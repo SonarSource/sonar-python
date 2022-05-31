@@ -42,22 +42,26 @@ public class PythonQuickFixVerifier {
   private PythonQuickFixVerifier() {
   }
 
-  public static void verifyNoQuickFix(PythonCheck check, String code){
-    List<PythonCheck.PreciseIssue> issuesWithQuickFix = PythonQuickFixVerifier.getIssuesWithQuickFix(check, code);
-    assertThat(issuesWithQuickFix).isEmpty();
-  }
-
   public static void verify(PythonCheck check, String codeWithIssue, String codeFixed) {
     List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
       .getIssuesWithQuickFix(check, codeWithIssue);
 
-    assertThat(issues).hasSize(1);
+    assertThat(issues)
+      .as("Number of issues")
+      .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
+      .hasSize(1);
     IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
 
-    assertThat(issue.getQuickFixes()).hasSize(1);
+    assertThat(issue.getQuickFixes())
+      .as("Number of quickfixes")
+      .overridingErrorMessage("Expected 1 quickfix but found %d", issue.getQuickFixes().size())
+      .hasSize(1);
 
     String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
-    assertThat(codeQFApplied).isEqualTo(codeFixed);
+    assertThat(codeQFApplied)
+      .as("Application of the quickfix")
+      .overridingErrorMessage("The code with the quickfix applied is not the expected result : %s instead of %s", codeQFApplied, codeFixed)
+      .isEqualTo(codeFixed);
   }
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
@@ -68,7 +72,7 @@ public class PythonQuickFixVerifier {
     return context.getIssues();
   }
 
-  public static List<PreciseIssue> getIssuesWithQuickFix(PythonCheck check,String codeWithIssue) {
+  private static List<PreciseIssue> getIssuesWithQuickFix(PythonCheck check, String codeWithIssue) {
     PythonParser parser = PythonParser.create();
     PythonQuickFixFile pythonFile = new PythonQuickFixFile(codeWithIssue);
     AstNode astNode = parser.parse(pythonFile.content());
@@ -81,7 +85,8 @@ public class PythonQuickFixVerifier {
     return scanFileForIssues(check, visitorContext);
   }
 
-  public static String applyQuickFix(String codeWithIssue, IssueWithQuickFix issueWithQuickFix) {
+  private static String applyQuickFix(String codeWithIssue, IssueWithQuickFix issueWithQuickFix) {
+    assertThat(issueWithQuickFix.getQuickFixes()).hasSize(1);
     IssueLocation loc = issueWithQuickFix.getQuickFixes().get(0).getTextEdits().get(0).issueLocation;
     String replacement = loc.message();
     int start = convertPositionToIndex(codeWithIssue, loc.startLine(), loc.startLineOffset());
@@ -91,12 +96,12 @@ public class PythonQuickFixVerifier {
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {
     int currentLine = 1;
-    int currentIndex = -1;
+    int currentIndex = 0;
     while (currentLine < line) {
-      currentIndex = fileContent.indexOf("\n", currentIndex + 1);
+      currentIndex = fileContent.indexOf("\n", currentIndex) + 1;
       currentLine++;
     }
-    return currentIndex + lineOffset + 1;
+    return currentIndex + lineOffset;
   }
 
   private static class PythonQuickFixFile implements PythonFile {
