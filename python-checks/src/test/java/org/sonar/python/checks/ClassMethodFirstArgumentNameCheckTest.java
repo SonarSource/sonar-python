@@ -21,11 +21,21 @@ package org.sonar.python.checks;
 
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 
 public class ClassMethodFirstArgumentNameCheckTest {
 
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/classMethodFirstArgumentNameCheck.py", new ClassMethodFirstArgumentNameCheck());
+
+    String codeWithIssue = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(bob): pass";
+    String codeFixed = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(cls, bob): pass";
+
+    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed);
   }
 }
