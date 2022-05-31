@@ -20,7 +20,6 @@
 package org.sonar.python.checks.quickfix;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -74,19 +73,6 @@ public class PythonQuickFixVerifierTest {
   @Test
   public void test_multiple_lines() {
     PythonQuickFixVerifier.verify(new SimpleCheck(), "b \na=10", "b \na!=10");
-  }
-
-  @Test
-  public void test_coverage() {
-    // PythonCheck is not an instance of PythonSubscriptionCheck
-    PythonCheck check = Mockito.mock(PythonCheck.class);
-    String codeWithIssue = "def vol():\n" +
-      "    return length*width\n";
-
-    assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, codeWithIssue, ""))
-      .isInstanceOf(AssertionError.class)
-      .hasMessage("[Number of issues] Expected 1 issue but found 0");
-    ;
   }
 
   private class SimpleCheck extends PythonSubscriptionCheck {
