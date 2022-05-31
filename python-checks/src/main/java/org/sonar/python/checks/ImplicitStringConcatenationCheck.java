@@ -27,6 +27,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S5799")
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
@@ -58,17 +61,17 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
     List<StringElement> stringElements = stringLiteral.stringElements();
     for (int i = 1; i < stringElements.size(); i++) {
       StringElement current = stringElements.get(i);
-      StringElement previous = stringElements.get(i-1);
+      StringElement previous = stringElements.get(i - 1);
       if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
         continue;
       }
       if (current.firstToken().line() == previous.firstToken().line()) {
-        ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null), previous);
         // Only raise 1 issue per string literal
         return;
       }
       if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
-        ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null), previous);
         return;
       }
     }
@@ -89,5 +92,32 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
     return first.isTripleQuoted() == second.isTripleQuoted() &&
       first.value().charAt(first.value().length() - 1) == second.value().charAt(second.value().length() - 1);
   }
-}
 
+  private static boolean isInFunctionOrArrayOrTupleOrExpression(StringElement token) {
+    Tree t = token;
+    while (t.parent() != null && t.parent().is(Tree.Kind.STRING_LITERAL)) {
+      t = t.parent();
+    }
+    return t.parent().is(Tree.Kind.ARG_LIST, Tree.Kind.PARAMETER_LIST, Tree.Kind.TUPLE, Tree.Kind.EXPRESSION_LIST);
+  }
+
+  private static void createQuickFix(PreciseIssue issueRaised, StringElement token) {
+    IssueWithQuickFix issue = (IssueWithQuickFix) issueRaised;
+
+    if (isInFunctionOrArrayOrTupleOrExpression(token)) {
+      PythonTextEdit text = PythonTextEdit
+        .insertAfter(token, ",");
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add the comma between string or byte tokens explicit.")
+        .addTextEdit(text)
+        .build();
+      issue.addQuickFix(quickFix);
+    }
+
+    PythonTextEdit text = PythonTextEdit
+      .insertAfter(token, "+");
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Make the addition sign between string or byte tokens explicit.")
+      .addTextEdit(text)
+      .build();
+    issue.addQuickFix(quickFix);
+  }
+}
