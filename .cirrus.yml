@@ -76,6 +76,7 @@ build_win_task:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
   build_script:
+    - git config --global core.autocrlf input
     - git submodule update --init
     - source cirrus-env CI
     - mvn.cmd package -DskipTypeshed=true
