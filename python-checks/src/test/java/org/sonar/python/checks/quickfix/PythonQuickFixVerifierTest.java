@@ -20,10 +20,6 @@
 package org.sonar.python.checks.quickfix;
 
 import org.junit.Test;
-<<<<<<< HEAD
-=======
-import org.mockito.Mockito;
->>>>>>> e033f543 (SONARPY-1034: Add verifier support for testing quick-fixes)
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;

@@ -58,17 +58,6 @@ public class PythonQuickFixVerifier {
       .overridingErrorMessage("Expected %d quickfix but found %d", codesFixed.length, issue.getQuickFixes().size())
       .hasSize(codesFixed.length);
 
-    // int indexQF = 0;
-    // while (indexQF < codesFixed.length) {
-    // String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue, indexQF);
-    // assertThat(codeQFApplied)
-    // .as("Application of the quickfix")
-    // .overridingErrorMessage("The code with the quickfix applied is not the expected result : %s instead of %s", codeQFApplied,
-    // codesFixed[indexQF])
-    // .isEqualTo(codesFixed[indexQF]);
-    // indexQF++;
-    // }
-
     IntStream.range(0, codesFixed.length).forEach(index -> {
       String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue, index);
       assertThat(codeQFApplied)
