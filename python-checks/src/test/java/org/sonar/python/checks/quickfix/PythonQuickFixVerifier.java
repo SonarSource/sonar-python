@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -59,7 +60,7 @@ public class PythonQuickFixVerifier {
       .hasSize(codesFixed.length);
 
     IntStream.range(0, codesFixed.length).forEach(index -> {
-      String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue, index);
+      String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue.getQuickFixes().get(index));
       assertThat(codeQFApplied)
         .as("Application of the quickfix")
         .overridingErrorMessage("The code with the quickfix applied is not the expected result : %s instead of %s", codeQFApplied, codesFixed[index])
@@ -89,11 +90,11 @@ public class PythonQuickFixVerifier {
     return scanFileForIssues(check, visitorContext);
   }
 
-  private static String applyQuickFix(String codeWithIssue, IssueWithQuickFix issueWithQuickFix, int indexQF) {
-    PythonTextEdit loc = issueWithQuickFix.getQuickFixes().get(indexQF).getTextEdits().get(0);
-    String replacement = loc.replacementText();
-    int start = convertPositionToIndex(codeWithIssue, loc.startLine(), loc.startLineOffset());
-    int end = convertPositionToIndex(codeWithIssue, loc.endLine(), loc.endLineOffset());
+  private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
+    PythonTextEdit textEdit = quickFix.getTextEdits().get(0);
+    String replacement = textEdit.replacementText();
+    int start = convertPositionToIndex(codeWithIssue, textEdit.startLine(), textEdit.startLineOffset());
+    int end = convertPositionToIndex(codeWithIssue, textEdit.endLine(), textEdit.endLineOffset());
     return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
   }
 

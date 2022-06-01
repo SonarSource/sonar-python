@@ -26,15 +26,15 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ImplicitStringConcatenationCheckTest {
 
+  private static final PythonCheck check = new ImplicitStringConcatenationCheck();
+
   @Test
   public void test() {
-    PythonCheck check = new ImplicitStringConcatenationCheck();
     PythonCheckVerifier.verify("src/test/resources/checks/implicitStringConcatenation.py", check);
   }
 
   @Test
   public void simple_expression_quickfix() {
-    PythonCheck check = new ImplicitStringConcatenationCheck();
     String codeWithIssue = "a = '1' '2'";
     String codeFixed1 = "a = '1'+ '2'";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1);
@@ -47,7 +47,6 @@ public class ImplicitStringConcatenationCheckTest {
 
   @Test
   public void complex_expression_quickfix() {
-    PythonCheck check = new ImplicitStringConcatenationCheck();
     String codeWithIssue = "def a():\n" +
       "    b = ['1' '2']\n";
     String codeFixed1 = "def a():\n" +

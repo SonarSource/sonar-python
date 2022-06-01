@@ -29,13 +29,15 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+
+import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
 
 @Rule(key = "S5799")
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_SINGLE_LINE = "Merge these implicitly concatenated strings; or did you forget a comma?";
   private static final String MESSAGE_MULTIPLE_LINES = "Add a \"+\" operator to make the string concatenation explicit; or did you forget a comma?";
+  private static final String MESSAGE_SECONDARY = "Should it be concatenated with the previous element?";
   // Column beyond which we assume the concatenation to be done intentionally for readability
   private static final int MAX_COLUMN = 65;
   // Won't report on line ending or starting with either \n, spaces or any punctuation
@@ -66,12 +68,12 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         continue;
       }
       if (current.firstToken().line() == previous.firstToken().line()) {
-        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null), previous);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), MESSAGE_SECONDARY), previous);
         // Only raise 1 issue per string literal
         return;
       }
       if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
-        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null), previous);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), MESSAGE_SECONDARY), previous);
         return;
       }
     }
@@ -101,22 +103,18 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
     return t.parent().is(Tree.Kind.ARG_LIST, Tree.Kind.EXPRESSION_LIST, Tree.Kind.PARAMETER_LIST, Tree.Kind.TUPLE);
   }
 
-  private static void createQuickFix(PreciseIssue issueRaised, StringElement token) {
+  private static void createQuickFix(PreciseIssue issueRaised, StringElement stringElement) {
     IssueWithQuickFix issue = (IssueWithQuickFix) issueRaised;
 
-    if (isInFunctionOrArrayOrTupleOrExpression(token)) {
-      PythonTextEdit text = PythonTextEdit
-        .insertAfter(token, ",");
-      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add the comma between string or byte tokens explicit.")
-        .addTextEdit(text)
+    if (isInFunctionOrArrayOrTupleOrExpression(stringElement)) {
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add the comma between string or byte tokens.")
+        .addTextEdit(insertAfter(stringElement, ","))
         .build();
       issue.addQuickFix(quickFix);
     }
 
-    PythonTextEdit text = PythonTextEdit
-      .insertAfter(token, "+");
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Make the addition sign between string or byte tokens explicit.")
-      .addTextEdit(text)
+      .addTextEdit(insertAfter(stringElement, "+"))
       .build();
     issue.addQuickFix(quickFix);
   }
