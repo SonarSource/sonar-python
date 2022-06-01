@@ -72,6 +72,8 @@ build_task:
 build_win_task:
   <<: *WINDOWS_VM_DEFINITION
   <<: *ONLY_SONARSOURCE_QA
+  depends_on:
+    - build
   maven_cache:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
@@ -79,6 +81,7 @@ build_win_task:
     - git config --global core.autocrlf input
     - git submodule update --init
     - source cirrus-env CI
+    - unset SONARSOURCE_QA
     - mvn.cmd package -DskipTypeshed=true
 
 ws_scan_task:
