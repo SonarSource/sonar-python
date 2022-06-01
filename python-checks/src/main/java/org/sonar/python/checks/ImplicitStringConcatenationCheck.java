@@ -95,10 +95,10 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
 
   private static boolean isInFunctionOrArrayOrTupleOrExpression(StringElement token) {
     Tree t = token;
-    while (t.parent() != null && t.parent().is(Tree.Kind.STRING_LITERAL)) {
+    while (t.parent().is(Tree.Kind.STRING_LITERAL)) {
       t = t.parent();
     }
-    return t.parent().is(Tree.Kind.ARG_LIST, Tree.Kind.PARAMETER_LIST, Tree.Kind.TUPLE, Tree.Kind.EXPRESSION_LIST);
+    return t.parent().is(Tree.Kind.ARG_LIST, Tree.Kind.EXPRESSION_LIST, Tree.Kind.PARAMETER_LIST, Tree.Kind.TUPLE);
   }
 
   private static void createQuickFix(PreciseIssue issueRaised, StringElement token) {
