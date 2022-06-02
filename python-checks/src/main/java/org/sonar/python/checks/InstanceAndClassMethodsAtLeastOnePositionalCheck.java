@@ -31,15 +31,31 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.quickfix.PythonTextEdit.insertBefore;
 
 @Rule(key="S5719")
 public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubscriptionCheck {
 
   private static final List<String> KNOWN_CLASS_METHODS = Arrays.asList("__new__", "__init_subclass__");
+
+  private enum MethodIssueType {
+    CLASS_METHOD("Add a class parameter", "cls"),
+    REGULAR_METHOD("Add a \"self\" or class parameter", "self", "cls");
+
+    private final String message;
+    private final List<String> insertions;
+
+    MethodIssueType(String message, String... insertions) {
+      this.message = message;
+      this.insertions = Arrays.asList(insertions);
+    }
+  }
 
   private static boolean isUsageInClassBody(Usage usage, ClassDef classDef) {
     // We want all usages that are not function declarations and their closes parent is the class definition
@@ -65,9 +81,8 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
 
     List<String> decoratorNames = functionDef.decorators()
       .stream()
-      .map(decorator ->
-        TreeUtils.decoratorNameFromExpression(decorator.expression())
-      ).filter(Objects::nonNull).collect(Collectors.toList());
+      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .filter(Objects::nonNull).collect(Collectors.toList());
 
     if (decoratorNames.contains("staticmethod")) {
       return;
@@ -75,9 +90,21 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
 
     String name = functionSymbol.name();
     if (KNOWN_CLASS_METHODS.contains(name) || decoratorNames.contains("classmethod")) {
-      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a class parameter");
+      addIssue(ctx, functionDef, MethodIssueType.CLASS_METHOD);
     } else {
-      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a \"self\" or class parameter");
+      addIssue(ctx, functionDef, MethodIssueType.REGULAR_METHOD);
+    }
+  }
+
+  private static void addIssue(SubscriptionContext ctx, FunctionDef functionDef, MethodIssueType type) {
+    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(),
+      type.message);
+
+    for (String insertion : type.insertions) {
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", insertion))
+        .addTextEdit(insertBefore(functionDef.rightPar(), insertion))
+        .build();
+      issue.addQuickFix(quickFix);
     }
   }
 
