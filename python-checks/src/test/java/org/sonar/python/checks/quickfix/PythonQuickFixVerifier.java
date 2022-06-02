@@ -63,7 +63,7 @@ public class PythonQuickFixVerifier {
       .hasSize(codesFixed.length);
 
     List<String> appliedQuickFix = issue.getQuickFixes().stream()
-      .map(quickFix ->  applyQuickFix(codeWithIssue, quickFix))
+      .map(quickFix -> applyQuickFix(codeWithIssue, quickFix))
       .collect(Collectors.toList());
 
     assertThat(appliedQuickFix)
@@ -98,29 +98,48 @@ public class PythonQuickFixVerifier {
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
     List<PythonTextEdit> sortedEdits = sortTextEdits(quickFix.getTextEdits());
     String codeBeingFixed = codeWithIssue;
-    for(PythonTextEdit edit: sortedEdits){
+    for (PythonTextEdit edit : sortedEdits) {
       codeBeingFixed = applyTextEdit(codeBeingFixed, edit);
     }
     return codeBeingFixed;
   }
 
-  private static String applyTextEdit(String codeWithIssue, PythonTextEdit textEdit){
+  private static String applyTextEdit(String codeWithIssue, PythonTextEdit textEdit) {
     String replacement = textEdit.replacementText();
     int start = convertPositionToIndex(codeWithIssue, textEdit.startLine(), textEdit.startLineOffset());
     int end = convertPositionToIndex(codeWithIssue, textEdit.endLine(), textEdit.endLineOffset());
     return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
   }
 
-  private static List<PythonTextEdit> sortTextEdits(List<PythonTextEdit> pythonTextEdits){
-//    checkNoCollision(pythonTextEdits);
+  private static List<PythonTextEdit> sortTextEdits(List<PythonTextEdit> pythonTextEdits) {
+    checkNoCollision(pythonTextEdits);
     ArrayList<PythonTextEdit> list = new ArrayList<>(pythonTextEdits);
     list.sort(Comparator.comparingInt(PythonTextEdit::startLine).thenComparing(PythonTextEdit::startLineOffset));
     Collections.reverse(list);
     return Collections.unmodifiableList(list);
   }
 
-  private static void checkNoCollision(List<PythonTextEdit> pythonTextEdits){
+  private static void checkNoCollision(List<PythonTextEdit> pythonTextEdits) throws IllegalArgumentException {
+    for (int i = 0; i < pythonTextEdits.size(); i++) {
+      PythonTextEdit edit = pythonTextEdits.get(i);
+      for (int j = i + 1; j < pythonTextEdits.size(); j++) {
+        PythonTextEdit edit2 = pythonTextEdits.get(j);
+        if (isInBound(edit2, edit)) {
+          throw new IllegalArgumentException("There is a collision between the range of the quickfixes.");
+        }
+      }
+    }
+  }
 
+  private static boolean isInBound(PythonTextEdit toCheck, PythonTextEdit reference) {
+    if (reference.startLine() <= toCheck.startLine() && toCheck.startLine() <= reference.endLine()) {
+      return (reference.startLine() == toCheck.startLine() && reference.startLineOffset() <= toCheck.startLineOffset()) &&
+        (toCheck.endLine() == toCheck.endLine() && toCheck.endLineOffset() <= reference.endLineOffset());
+    } else if (reference.startLine() <= toCheck.endLine() && toCheck.endLine() <= reference.endLine()) {
+      return reference.startLine() == toCheck.startLine() && (reference.startLineOffset() <= toCheck.startLineOffset() ||
+        toCheck.endLineOffset() <= reference.endLineOffset());
+    }
+    return false;
   }
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {

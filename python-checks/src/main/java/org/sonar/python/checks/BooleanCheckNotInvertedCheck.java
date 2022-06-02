@@ -115,9 +115,9 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
 
     PythonTextEdit replaceEdit;
     if (toReplace.is(Kind.IS) && ((IsExpressionImpl) toReplace).notToken() != null) {
-        replaceEdit = replaceAt(((IsExpressionImpl) toReplace).notToken(), "");
+      replaceEdit = replaceAt(((IsExpressionImpl) toReplace).notToken(), "");
     } else if (toReplace.is(Kind.IN) && ((InExpressionImpl) toReplace).notToken() != null) {
-        replaceEdit = replaceAt(((InExpressionImpl) toReplace).notToken(), "");
+      replaceEdit = replaceAt(((InExpressionImpl) toReplace).notToken(), "");
     } else {
       replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
     }
