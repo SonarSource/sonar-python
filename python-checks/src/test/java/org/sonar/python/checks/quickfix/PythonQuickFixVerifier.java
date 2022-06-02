@@ -22,7 +22,9 @@ package org.sonar.python.checks.quickfix;
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -67,7 +69,7 @@ public class PythonQuickFixVerifier {
     assertThat(appliedQuickFix)
       .as("Application of the quickfix")
       .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n%s\nExpected result:\n%s", Arrays.asList(codesFixed), appliedQuickFix)
+        "Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
 
   }
@@ -94,11 +96,31 @@ public class PythonQuickFixVerifier {
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
-    PythonTextEdit textEdit = quickFix.getTextEdits().get(0);
+    List<PythonTextEdit> sortedEdits = sortTextEdits(quickFix.getTextEdits());
+    String codeBeingFixed = codeWithIssue;
+    for(PythonTextEdit edit: sortedEdits){
+      codeBeingFixed = applyTextEdit(codeBeingFixed, edit);
+    }
+    return codeBeingFixed;
+  }
+
+  private static String applyTextEdit(String codeWithIssue, PythonTextEdit textEdit){
     String replacement = textEdit.replacementText();
     int start = convertPositionToIndex(codeWithIssue, textEdit.startLine(), textEdit.startLineOffset());
     int end = convertPositionToIndex(codeWithIssue, textEdit.endLine(), textEdit.endLineOffset());
     return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
+  }
+
+  private static List<PythonTextEdit> sortTextEdits(List<PythonTextEdit> pythonTextEdits){
+//    checkNoCollision(pythonTextEdits);
+    ArrayList<PythonTextEdit> list = new ArrayList<>(pythonTextEdits);
+    list.sort(Comparator.comparingInt(PythonTextEdit::startLine).thenComparing(PythonTextEdit::startLineOffset));
+    Collections.reverse(list);
+    return Collections.unmodifiableList(list);
+  }
+
+  private static void checkNoCollision(List<PythonTextEdit> pythonTextEdits){
+
   }
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {

@@ -43,10 +43,20 @@ public class PythonTextEdit {
     return new PythonTextEdit(textToInsert, token.line(), token.column(), token.line(), token.column());
   }
 
+
   public static PythonTextEdit insertAfter(Tree tree, String textToInsert) {
     Token token = tree.firstToken();
     int lengthToken = token.value().length();
     return new PythonTextEdit(textToInsert, token.line(), token.column() + lengthToken, token.line(), token.column() + lengthToken);
+  }
+
+  public static PythonTextEdit replaceAt(Tree toReplace, String replacementText) {
+    Token token = toReplace.firstToken();
+    return new PythonTextEdit(replacementText, token.line(), token.column(), token.line(), token.column() +token.value().length());
+  }
+
+  public static PythonTextEdit remove(Tree toRemove) {
+    return replaceAt(toRemove, "");
   }
 
   public String replacementText() {

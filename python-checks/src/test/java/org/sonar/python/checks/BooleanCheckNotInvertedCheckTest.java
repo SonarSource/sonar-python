@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,5 +48,36 @@ public class BooleanCheckNotInvertedCheckTest {
 
     Assertions.assertThatThrownBy(() -> BooleanCheckNotInvertedCheck.oppositeOperatorString("-")).isInstanceOf(IllegalArgumentException.class);
     Assertions.assertThatThrownBy(() -> BooleanCheckNotInvertedCheck.oppositeOperatorString("*")).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  public void test_quickfix() {
+    String codeWithIssue = "a = not(b == c)";
+    String codeFixed = "a = (b != c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b != c)";
+    codeFixed = "a =  (b == c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b < c)";
+    codeFixed = "a =  (b >= c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b is c)";
+    codeFixed = "a =  (b is not c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b is not c)";
+    codeFixed = "a =  (b is  c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b in c)";
+    codeFixed = "a =  (b not in c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = not (b not in c)";
+    codeFixed = "a =  (b  in c)";
+    PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
   }
 }

@@ -68,4 +68,47 @@ public class PythonTextEditTest {
     assertThat(textEdit.endLine()).isEqualTo(1);
     assertThat(textEdit.endLineOffset()).isEqualTo(12);
   }
+
+  @Test
+  public void replace() {
+    String tokenValue = "token";
+    String replacementText = "This is a replacement text";
+
+    Token token = Mockito.mock(Token.class);
+    when(token.line()).thenReturn(1);
+    when(token.column()).thenReturn(7);
+    when(token.firstToken()).thenReturn(token);
+    when(token.lastToken()).thenReturn(token);
+
+    when(token.value()).thenReturn(tokenValue);
+
+    PythonTextEdit textEdit = PythonTextEdit.replaceAt(token, replacementText);
+
+    assertThat(textEdit.replacementText()).isEqualTo(replacementText);
+    assertThat(textEdit.startLine()).isEqualTo(1);
+    assertThat(textEdit.startLineOffset()).isEqualTo(7);
+    assertThat(textEdit.endLine()).isEqualTo(1);
+    assertThat(textEdit.endLineOffset()).isEqualTo(12);
+  }
+
+  @Test
+  public void remove() {
+    String tokenValue = "token";
+
+    Token token = Mockito.mock(Token.class);
+    when(token.line()).thenReturn(1);
+    when(token.column()).thenReturn(7);
+    when(token.firstToken()).thenReturn(token);
+    when(token.lastToken()).thenReturn(token);
+
+    when(token.value()).thenReturn(tokenValue);
+
+    PythonTextEdit textEdit = PythonTextEdit.remove(token);
+
+    assertThat(textEdit.replacementText()).isEmpty();
+    assertThat(textEdit.startLine()).isEqualTo(1);
+    assertThat(textEdit.startLineOffset()).isEqualTo(7);
+    assertThat(textEdit.endLine()).isEqualTo(1);
+    assertThat(textEdit.endLineOffset()).isEqualTo(12);
+  }
 }
