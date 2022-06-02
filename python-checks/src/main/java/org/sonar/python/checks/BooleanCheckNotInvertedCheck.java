@@ -113,11 +113,21 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   private static void createQuickFix(PreciseIssue preciseIssue, String oppositeOperator, BinaryExpression toReplace, Tree toRemove) {
     IssueWithQuickFix issue = (IssueWithQuickFix) preciseIssue;
 
-    PythonTextEdit replaceEdit;
-    if (toReplace.is(Kind.IS) && ((IsExpressionImpl) toReplace).notToken() != null) {
-      replaceEdit = replaceAt(((IsExpressionImpl) toReplace).notToken(), "");
-    } else if (toReplace.is(Kind.IN) && ((InExpressionImpl) toReplace).notToken() != null) {
-      replaceEdit = replaceAt(((InExpressionImpl) toReplace).notToken(), "");
+    PythonTextEdit replaceEdit = null;
+    if (toReplace.is(Kind.IS)) {
+      Token token = ((IsExpressionImpl) toReplace).notToken();
+      if (token != null) {
+        replaceEdit = replaceAt(token, "");
+      } else {
+        replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
+      }
+    } else if (toReplace.is(Kind.IN)) {
+      Token token = ((InExpressionImpl) toReplace).notToken();
+      if (token != null) {
+        replaceEdit = replaceAt(token, "");
+      } else {
+        replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
+      }
     } else {
       replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
     }
