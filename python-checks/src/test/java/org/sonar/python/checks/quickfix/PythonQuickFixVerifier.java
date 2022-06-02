@@ -21,8 +21,10 @@ package org.sonar.python.checks.quickfix;
 
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
@@ -32,6 +34,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -42,7 +45,7 @@ public class PythonQuickFixVerifier {
   private PythonQuickFixVerifier() {
   }
 
-  public static void verify(PythonCheck check, String codeWithIssue, String codeFixed) {
+  public static void verify(PythonCheck check, String codeWithIssue, String... codesFixed) {
     List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
       .getIssuesWithQuickFix(check, codeWithIssue);
 
@@ -54,14 +57,19 @@ public class PythonQuickFixVerifier {
 
     assertThat(issue.getQuickFixes())
       .as("Number of quickfixes")
-      .overridingErrorMessage("Expected 1 quickfix but found %d", issue.getQuickFixes().size())
-      .hasSize(1);
+      .overridingErrorMessage("Expected %d quickfix but found %d", codesFixed.length, issue.getQuickFixes().size())
+      .hasSize(codesFixed.length);
 
-    String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue);
-    assertThat(codeQFApplied)
+    List<String> appliedQuickFix = issue.getQuickFixes().stream()
+      .map(quickFix ->  applyQuickFix(codeWithIssue, quickFix))
+      .collect(Collectors.toList());
+
+    assertThat(appliedQuickFix)
       .as("Application of the quickfix")
-      .overridingErrorMessage("The code with the quickfix applied is not the expected result : %s instead of %s", codeQFApplied, codeFixed)
-      .isEqualTo(codeFixed);
+      .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
+        "Applied QuickFixes are:\n%s\nExpected result:\n%s", Arrays.asList(codesFixed), appliedQuickFix)
+      .isEqualTo(Arrays.asList(codesFixed));
+
   }
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
@@ -85,12 +93,11 @@ public class PythonQuickFixVerifier {
     return scanFileForIssues(check, visitorContext);
   }
 
-  private static String applyQuickFix(String codeWithIssue, IssueWithQuickFix issueWithQuickFix) {
-    assertThat(issueWithQuickFix.getQuickFixes()).hasSize(1);
-    PythonTextEdit loc = issueWithQuickFix.getQuickFixes().get(0).getTextEdits().get(0);
-    String replacement = loc.replacementText();
-    int start = convertPositionToIndex(codeWithIssue, loc.startLine(), loc.startLineOffset());
-    int end = convertPositionToIndex(codeWithIssue, loc.endLine(), loc.endLineOffset());
+  private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
+    PythonTextEdit textEdit = quickFix.getTextEdits().get(0);
+    String replacement = textEdit.replacementText();
+    int start = convertPositionToIndex(codeWithIssue, textEdit.startLine(), textEdit.startLineOffset());
+    int end = convertPositionToIndex(codeWithIssue, textEdit.endLine(), textEdit.endLineOffset());
     return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
   }
 

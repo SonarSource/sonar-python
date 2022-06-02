@@ -20,12 +20,40 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ImplicitStringConcatenationCheckTest {
 
+  private static final PythonCheck check = new ImplicitStringConcatenationCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/implicitStringConcatenation.py", new ImplicitStringConcatenationCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/implicitStringConcatenation.py", check);
   }
+
+  @Test
+  public void simple_expression_quickfix() {
+    String codeWithIssue = "a = '1' '2'";
+    String codeFixed1 = "a = '1'+ '2'";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1);
+
+    codeWithIssue = "a = ['1' '2']";
+    codeFixed1 = "a = ['1', '2']";
+    String codeFixed2 = "a = ['1'+ '2']";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
+  @Test
+  public void complex_expression_quickfix() {
+    String codeWithIssue = "def a():\n" +
+      "    b = ['1' '2']\n";
+    String codeFixed1 = "def a():\n" +
+      "    b = ['1', '2']\n";
+    String codeFixed2 = "def a():\n" +
+      "    b = ['1'+ '2']\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
 }
