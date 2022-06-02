@@ -21,9 +21,10 @@ package org.sonar.python.checks.quickfix;
 
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
