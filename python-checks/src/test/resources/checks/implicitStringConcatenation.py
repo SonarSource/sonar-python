@@ -61,7 +61,7 @@ def prefixes():
 
 def different_quotes():
   ["""1""" """2"""]  # Noncompliant
-#  ^^^^^^^ ^^^^^^^< {{Should it be concatenated with the previous element?}}
+#  ^^^^^^^ ^^^^^^^<
   "1" '2' # Ok
   "1" """
   2""" # Ok. Even if strange
