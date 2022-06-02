@@ -20,15 +20,41 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
 
+  private final PythonCheck check = new InstanceAndClassMethodsAtLeastOnePositionalCheck();
   @Test
   public void test() {
-    PythonCheckVerifier.verify(
-      "src/test/resources/checks/instanceAndClassMethodAtLeastOnePositional.py",
-      new InstanceAndClassMethodsAtLeastOnePositionalCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/instanceAndClassMethodAtLeastOnePositional.py", check);
   }
 
+  @Test
+  public void class_method_quickfix() {
+    String codeWithIssue = "class Foo():\n" +
+      "    @classmethod\n" +
+      "    def bar(): pass";
+    String fixedCodeWithClassParameter = "class Foo():\n" +
+      "    @classmethod\n" +
+      "    def bar(cls): pass";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCodeWithClassParameter);
+  }
+
+  @Test
+  public void regular_method_quickfix() {
+    String codeWithIssue = "class Foo():\n" +
+      "    def bar(): pass";
+    String fixedCodeWithSelfParameter = "class Foo():\n" +
+      "    def bar(self): pass";
+    String fixedCodeWithClassParameter = "class Foo():\n" +
+      "    def bar(cls): pass";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue,
+      fixedCodeWithSelfParameter,
+      fixedCodeWithClassParameter);
+  }
 }
