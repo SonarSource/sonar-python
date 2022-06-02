@@ -59,13 +59,15 @@ public class PythonQuickFixVerifier {
       .overridingErrorMessage("Expected %d quickfix but found %d", codesFixed.length, issue.getQuickFixes().size())
       .hasSize(codesFixed.length);
 
-    IntStream.range(0, codesFixed.length).forEach(index -> {
-      String codeQFApplied = PythonQuickFixVerifier.applyQuickFix(codeWithIssue, issue.getQuickFixes().get(index));
-      assertThat(codeQFApplied)
-        .as("Application of the quickfix")
-        .overridingErrorMessage("The code with the quickfix applied is not the expected result : %s instead of %s", codeQFApplied, codesFixed[index])
-        .isEqualTo(codesFixed[index]);
-    });
+    List<String> appliedQuickFix = issue.getQuickFixes().stream()
+      .map(quickFix ->  applyQuickFix(codeWithIssue, quickFix))
+      .collect(Collectors.toList());
+
+    assertThat(appliedQuickFix)
+      .as("Application of the quickfix")
+      .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
+        "Applied QuickFixes are:\n%s\nExpected result:\n%s", Arrays.asList(codesFixed), appliedQuickFix)
+      .isEqualTo(Arrays.asList(codesFixed));
 
   }
 
