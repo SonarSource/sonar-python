@@ -53,31 +53,31 @@ public class BooleanCheckNotInvertedCheckTest {
   @Test
   public void test_quickfix() {
     String codeWithIssue = "a = not(b == c)";
-    String codeFixed = "a = (b != c)";
+    String codeFixed = "a = b != c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b != c)";
-    codeFixed = "a =  (b == c)";
+    codeFixed = "a = b == c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b < c)";
-    codeFixed = "a =  (b >= c)";
+    codeFixed = "a = b >= c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b is c)";
-    codeFixed = "a =  (b is not c)";
+    codeFixed = "a = b is not c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b is not c)";
-    codeFixed = "a =  (b is  c)";
+    codeFixed = "a = b is c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b in c)";
-    codeFixed = "a =  (b not in c)";
+    codeFixed = "a = b not in c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (b not in c)";
-    codeFixed = "a =  (b  in c)";
+    codeFixed = "a = b in c";
     PythonQuickFixVerifier.verify(new BooleanCheckNotInvertedCheck(), codeWithIssue, codeFixed);
   }
 }

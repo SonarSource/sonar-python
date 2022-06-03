@@ -124,22 +124,66 @@ public class PythonQuickFixVerifier {
       PythonTextEdit edit = pythonTextEdits.get(i);
       for (int j = i + 1; j < pythonTextEdits.size(); j++) {
         PythonTextEdit edit2 = pythonTextEdits.get(j);
-        if (isInBound(edit2, edit)) {
+        if (oneEnclosedByTheOther(edit2, edit)) {
           throw new IllegalArgumentException("There is a collision between the range of the quickfixes.");
         }
       }
     }
   }
 
-  private static boolean isInBound(PythonTextEdit toCheck, PythonTextEdit reference) {
-    if (reference.startLine() <= toCheck.startLine() && toCheck.startLine() <= reference.endLine()) {
-      return (reference.startLine() == toCheck.startLine() && reference.startLineOffset() <= toCheck.startLineOffset()) &&
-        (toCheck.endLine() == toCheck.endLine() && toCheck.endLineOffset() <= reference.endLineOffset());
-    } else if (reference.startLine() <= toCheck.endLine() && toCheck.endLine() <= reference.endLine()) {
-      return reference.startLine() == toCheck.startLine() && (reference.startLineOffset() <= toCheck.startLineOffset() ||
-        toCheck.endLineOffset() <= reference.endLineOffset());
+  private static boolean oneEnclosedByTheOther(PythonTextEdit toCheck, PythonTextEdit reference) {
+    if (onSameLine(toCheck, reference)) {
+      // If on same line, we need to check that the bounds of toCheck are not contained in reference bounds
+      return !(toCheck.endLineOffset() < reference.startLineOffset() || toCheck.startLineOffset() > reference.endLineOffset());
+    } else {
+      if (compactOnDifferentLines(toCheck, reference)) {
+        return false;
+      } else if (isCompact(toCheck)) {
+        return isSecondInFirst(toCheck, reference);
+      } else if (isCompact(reference)) {
+        return isSecondInFirst(reference, toCheck);
+      } else {
+        // Both edits exploded on different lines
+        if (noLineIntersection(toCheck, reference)) {
+          return false;
+        } else {
+          // There is an intersection between edits, only need to check valid case
+          if (reference.startLine() == toCheck.endLine()) {
+            return !(toCheck.endLineOffset() < reference.startLineOffset());
+          } else if (reference.endLine() == toCheck.startLine()) {
+            return !(reference.endLineOffset() < toCheck.startLineOffset());
+          }
+        }
+      }
     }
+    // All other cases are invalid and will cause an intersection
+    return true;
+  }
+
+  private static boolean onSameLine(PythonTextEdit check, PythonTextEdit ref) {
+    return ref.startLine() == ref.endLine() && ref.endLine() == check.startLine() && check.startLine() == check.endLine();
+  }
+
+  private static boolean compactOnDifferentLines(PythonTextEdit check, PythonTextEdit ref) {
+    return ref.startLine() == ref.endLine() && check.startLine() == check.endLine() && ref.endLine() != check.startLine();
+  }
+
+  private static boolean isCompact(PythonTextEdit check) {
+    return check.startLine() == check.endLine();
+  }
+
+  private static boolean isSecondInFirst(PythonTextEdit toCheck, PythonTextEdit reference) {
+    if (reference.startLine() == toCheck.startLine()) {
+      return reference.startLineOffset() <= toCheck.endLineOffset();
+    } else if (reference.endLine() == toCheck.startLine()) {
+      return toCheck.startLineOffset() < reference.endLineOffset();
+    }
+    // No intersection
     return false;
+  }
+
+  private static boolean noLineIntersection(PythonTextEdit check, PythonTextEdit ref) {
+    return check.endLine() < ref.startLine() || check.startLine() > ref.endLine();
   }
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {

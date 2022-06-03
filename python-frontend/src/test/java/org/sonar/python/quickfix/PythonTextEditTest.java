@@ -82,7 +82,7 @@ public class PythonTextEditTest {
 
     when(token.value()).thenReturn(tokenValue);
 
-    PythonTextEdit textEdit = PythonTextEdit.replaceAt(token, replacementText);
+    PythonTextEdit textEdit = PythonTextEdit.replace(token, replacementText);
 
     assertThat(textEdit.replacementText()).isEqualTo(replacementText);
     assertThat(textEdit.startLine()).isEqualTo(1);

@@ -28,17 +28,11 @@ import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
-import org.sonar.python.tree.InExpressionImpl;
-import org.sonar.python.tree.IsExpressionImpl;
-
-import static org.sonar.python.quickfix.PythonTextEdit.remove;
-import static org.sonar.python.quickfix.PythonTextEdit.replaceAt;
 
 @Rule(key = "S1940")
 public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
@@ -60,12 +54,16 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
       if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
         String oppositeOperator = oppositeOperator(binaryExp.operator());
-        createQuickFix(ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)), oppositeOperator, binaryExp, original);
+
+        IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+        createQuickFix(issue, oppositeOperator, binaryExp, negatedExpr);
       }
     } else if (negatedExpr.is(Kind.IN, Kind.IS)) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
       String oppositeOperator = oppositeOperator(isInExpr.operator(), isInExpr);
-      createQuickFix(ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)), oppositeOperator, isInExpr, original);
+
+      IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+      createQuickFix(issue, oppositeOperator, isInExpr, negatedExpr);
     }
   }
 
@@ -110,32 +108,17 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void createQuickFix(PreciseIssue preciseIssue, String oppositeOperator, BinaryExpression toReplace, Tree toRemove) {
-    IssueWithQuickFix issue = (IssueWithQuickFix) preciseIssue;
-
-    PythonTextEdit replaceEdit = null;
-    if (toReplace.is(Kind.IS)) {
-      Token token = ((IsExpressionImpl) toReplace).notToken();
-      if (token != null) {
-        replaceEdit = replaceAt(token, "");
-      } else {
-        replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
-      }
-    } else if (toReplace.is(Kind.IN)) {
-      Token token = ((InExpressionImpl) toReplace).notToken();
-      if (token != null) {
-        replaceEdit = replaceAt(token, "");
-      } else {
-        replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
-      }
-    } else {
-      replaceEdit = replaceAt(toReplace.operator(), oppositeOperator);
-    }
+  private static void createQuickFix(IssueWithQuickFix issue, String oppositeOperator, BinaryExpression toUse, Expression toReplace) {
+    PythonTextEdit replaceEdit = getReplaceEdit(toUse, toReplace, oppositeOperator);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Use %s instead", oppositeOperator))
-      .addTextEdit(replaceEdit, remove(toRemove))
+      .addTextEdit(replaceEdit)
       .build();
     issue.addQuickFix(quickFix);
   }
 
+  private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, Expression toReplace, String oppositeOperator) {
+    return PythonTextEdit.replaceChildren(toReplace.parent().parent().children(),
+      toUse.leftOperand().firstToken().value() + " " + oppositeOperator + " " + toUse.rightOperand().firstToken().value());
+  }
 }
