@@ -19,6 +19,7 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.Arrays;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.tree.Token;
@@ -110,5 +111,34 @@ public class PythonTextEditTest {
     assertThat(textEdit.startLineOffset()).isEqualTo(7);
     assertThat(textEdit.endLine()).isEqualTo(1);
     assertThat(textEdit.endLineOffset()).isEqualTo(12);
+  }
+
+  @Test
+  public void replaceChildren() {
+    // Parsing 'a  = (b and c)'
+    String tokenValue1 = "(";
+    String tokenValue2 = ")";
+
+    Token token1 = Mockito.mock(Token.class);
+    Token token2 = Mockito.mock(Token.class);
+
+    when(token1.line()).thenReturn(1);
+    when(token1.column()).thenReturn(4);
+    when(token2.line()).thenReturn(1);
+    when(token2.column()).thenReturn(12);
+
+    when(token1.firstToken()).thenReturn(token1);
+    when(token2.lastToken()).thenReturn(token2);
+
+    when(token1.value()).thenReturn(tokenValue1);
+    when(token2.value()).thenReturn(tokenValue2);
+
+    PythonTextEdit textEdit = PythonTextEdit.replaceChildren(Arrays.asList(token1, token2), "b and c");
+
+    assertThat(textEdit.replacementText()).isEqualTo("b and c");
+    assertThat(textEdit.startLine()).isEqualTo(1);
+    assertThat(textEdit.startLineOffset()).isEqualTo(4);
+    assertThat(textEdit.endLine()).isEqualTo(1);
+    assertThat(textEdit.endLineOffset()).isEqualTo(13);
   }
 }
