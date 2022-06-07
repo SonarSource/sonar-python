@@ -19,7 +19,6 @@
  */
 package org.sonar.python.quickfix;
 
-import java.util.List;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -56,9 +55,9 @@ public class PythonTextEdit {
     return new PythonTextEdit(replacementText, token.line(), token.column(), last.line(), last.column() + last.value().length());
   }
 
-  public static PythonTextEdit replaceChildren(List<Tree> trees, String replacementText) {
-    Token first = trees.get(0).firstToken();
-    Token last = trees.get(trees.size() - 1).lastToken();
+  public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
+    Token first =start.firstToken();
+    Token last = end.lastToken();
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }
 

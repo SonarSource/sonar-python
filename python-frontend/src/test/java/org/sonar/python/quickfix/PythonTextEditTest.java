@@ -19,7 +19,6 @@
  */
 package org.sonar.python.quickfix;
 
-import java.util.Arrays;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.tree.Token;
@@ -115,7 +114,7 @@ public class PythonTextEditTest {
 
   @Test
   public void replaceChildren() {
-    // Parsing 'a  = (b and c)'
+    // Parsing 'a = (b and c)'
     String tokenValue1 = "(";
     String tokenValue2 = ")";
 
@@ -133,7 +132,7 @@ public class PythonTextEditTest {
     when(token1.value()).thenReturn(tokenValue1);
     when(token2.value()).thenReturn(tokenValue2);
 
-    PythonTextEdit textEdit = PythonTextEdit.replaceChildren(Arrays.asList(token1, token2), "b and c");
+    PythonTextEdit textEdit = PythonTextEdit.replaceRange(token1, token2, "b and c");
 
     assertThat(textEdit.replacementText()).isEqualTo("b and c");
     assertThat(textEdit.startLine()).isEqualTo(1);

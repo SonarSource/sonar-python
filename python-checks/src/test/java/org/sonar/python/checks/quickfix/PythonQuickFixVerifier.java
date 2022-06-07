@@ -172,11 +172,11 @@ public class PythonQuickFixVerifier {
     return check.startLine() == check.endLine();
   }
 
-  private static boolean isSecondInFirst(PythonTextEdit toCheck, PythonTextEdit reference) {
-    if (reference.startLine() == toCheck.startLine()) {
-      return reference.startLineOffset() <= toCheck.endLineOffset();
-    } else if (reference.endLine() == toCheck.startLine()) {
-      return toCheck.startLineOffset() < reference.endLineOffset();
+  private static boolean isSecondInFirst(PythonTextEdit second, PythonTextEdit first) {
+    if (first.startLine() == second.startLine()) {
+      return first.startLineOffset() <= second.endLineOffset();
+    } else if (first.endLine() == second.startLine()) {
+      return second.startLineOffset() < first.endLineOffset();
     }
     // No intersection
     return false;

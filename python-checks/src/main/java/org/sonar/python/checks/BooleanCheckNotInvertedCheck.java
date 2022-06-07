@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -28,6 +29,7 @@ import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.quickfix.IssueWithQuickFix;
@@ -118,7 +120,8 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   }
 
   private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, Expression toReplace, String oppositeOperator) {
-    return PythonTextEdit.replaceChildren(toReplace.parent().parent().children(),
+    List<Tree> children = toReplace.parent().parent().children();
+    return PythonTextEdit.replaceRange(children.get(0), children.get(children.size() - 1),
       toUse.leftOperand().firstToken().value() + " " + oppositeOperator + " " + toUse.rightOperand().firstToken().value());
   }
 }
