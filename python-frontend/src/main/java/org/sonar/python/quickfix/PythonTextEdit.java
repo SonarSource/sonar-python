@@ -49,6 +49,22 @@ public class PythonTextEdit {
     return new PythonTextEdit(textToInsert, token.line(), token.column() + lengthToken, token.line(), token.column() + lengthToken);
   }
 
+  public static PythonTextEdit replace(Tree toReplace, String replacementText) {
+    Token token = toReplace.firstToken();
+    Token last = token.lastToken();
+    return new PythonTextEdit(replacementText, token.line(), token.column(), last.line(), last.column() + last.value().length());
+  }
+
+  public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
+    Token first =start.firstToken();
+    Token last = end.lastToken();
+    return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
+  }
+
+  public static PythonTextEdit remove(Tree toRemove) {
+    return replace(toRemove, "");
+  }
+
   public String replacementText() {
     return message;
   }

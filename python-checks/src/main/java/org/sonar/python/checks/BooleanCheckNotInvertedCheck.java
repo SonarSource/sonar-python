@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -28,8 +29,12 @@ import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S1940")
 public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
@@ -46,56 +51,77 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     while (negatedExpr.is(Kind.PARENTHESIZED)) {
       negatedExpr = ((ParenthesizedExpression) negatedExpr).expression();
     }
-    if(negatedExpr.is(Kind.COMPARISON)) {
+    if (negatedExpr.is(Kind.COMPARISON)) {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
-      if(!binaryExp.leftOperand().is(Kind.COMPARISON)) {
-        ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(binaryExp.operator())));
+      if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
+        String oppositeOperator = oppositeOperator(binaryExp.operator());
+
+        IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+        createQuickFix(issue, oppositeOperator, binaryExp, negatedExpr);
       }
-    } else if(negatedExpr.is(Kind.IN, Kind.IS) ) {
+    } else if (negatedExpr.is(Kind.IN, Kind.IS)) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
-      ctx.addIssue(original, String.format(MESSAGE, oppositeOperator(isInExpr.operator(), isInExpr)));
+      String oppositeOperator = oppositeOperator(isInExpr.operator(), isInExpr);
+
+      IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+      createQuickFix(issue, oppositeOperator, isInExpr, negatedExpr);
     }
   }
 
-  private static String oppositeOperator(Token operator){
+  private static String oppositeOperator(Token operator) {
     return oppositeOperatorString(operator.value());
   }
 
-  private static String oppositeOperator(Token operator, Expression expr){
+  private static String oppositeOperator(Token operator, Expression expr) {
     String s = operator.value();
-    if(expr.is(Kind.IS) && ((IsExpression) expr).notToken() != null){
+    if (expr.is(Kind.IS) && ((IsExpression) expr).notToken() != null) {
       s = s + " not";
-    } else if(expr.is(Kind.IN) && ((InExpression) expr).notToken() != null){
+    } else if (expr.is(Kind.IN) && ((InExpression) expr).notToken() != null) {
       s = "not " + s;
     }
     return oppositeOperatorString(s);
   }
 
-  static String oppositeOperatorString(String stringOperator){
-    switch (stringOperator){
-      case ">"  :
+  static String oppositeOperatorString(String stringOperator) {
+    switch (stringOperator) {
+      case ">":
         return "<=";
-      case ">=" :
+      case ">=":
         return "<";
-      case "<"  :
+      case "<":
         return ">=";
-      case "<=" :
+      case "<=":
         return ">";
-      case "==" :
+      case "==":
         return "!=";
-      case "!=" :
+      case "!=":
         return "==";
-      case "is" :
+      case "is":
         return "is not";
       case "is not":
         return "is";
-      case "in" :
+      case "in":
         return "not in";
       case "not in":
         return "in";
-      default   :
+      default:
         throw new IllegalArgumentException("Unknown comparison operator : " + stringOperator);
     }
+  }
+
+  private static void createQuickFix(IssueWithQuickFix issue, String oppositeOperator, BinaryExpression toUse, Expression toReplace) {
+    PythonTextEdit replaceEdit = getReplaceEdit(toUse, toReplace, oppositeOperator);
+
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Use %s instead", oppositeOperator))
+      .addTextEdit(replaceEdit)
+      .build();
+    issue.addQuickFix(quickFix);
+  }
+
+  private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, Expression toReplace, String oppositeOperator) {
+    List<Tree> children = toReplace.parent().parent().children();
+    return PythonTextEdit.replaceRange(children.get(0), children.get(children.size() - 1),
+      toUse.leftOperand().firstToken().value() + " " + oppositeOperator + " " + toUse.rightOperand().firstToken().value());
   }
 }

@@ -22,7 +22,9 @@ package org.sonar.python.checks.quickfix;
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -61,13 +63,13 @@ public class PythonQuickFixVerifier {
       .hasSize(codesFixed.length);
 
     List<String> appliedQuickFix = issue.getQuickFixes().stream()
-      .map(quickFix ->  applyQuickFix(codeWithIssue, quickFix))
+      .map(quickFix -> applyQuickFix(codeWithIssue, quickFix))
       .collect(Collectors.toList());
 
     assertThat(appliedQuickFix)
       .as("Application of the quickfix")
       .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n%s\nExpected result:\n%s", Arrays.asList(codesFixed), appliedQuickFix)
+        "Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
 
   }
@@ -94,11 +96,94 @@ public class PythonQuickFixVerifier {
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
-    PythonTextEdit textEdit = quickFix.getTextEdits().get(0);
+    List<PythonTextEdit> sortedEdits = sortTextEdits(quickFix.getTextEdits());
+    String codeBeingFixed = codeWithIssue;
+    for (PythonTextEdit edit : sortedEdits) {
+      codeBeingFixed = applyTextEdit(codeBeingFixed, edit);
+    }
+    return codeBeingFixed;
+  }
+
+  private static String applyTextEdit(String codeWithIssue, PythonTextEdit textEdit) {
     String replacement = textEdit.replacementText();
     int start = convertPositionToIndex(codeWithIssue, textEdit.startLine(), textEdit.startLineOffset());
     int end = convertPositionToIndex(codeWithIssue, textEdit.endLine(), textEdit.endLineOffset());
     return codeWithIssue.substring(0, start) + replacement + codeWithIssue.substring(end);
+  }
+
+  private static List<PythonTextEdit> sortTextEdits(List<PythonTextEdit> pythonTextEdits) {
+    checkNoCollision(pythonTextEdits);
+    ArrayList<PythonTextEdit> list = new ArrayList<>(pythonTextEdits);
+    list.sort(Comparator.comparingInt(PythonTextEdit::startLine).thenComparing(PythonTextEdit::startLineOffset));
+    Collections.reverse(list);
+    return Collections.unmodifiableList(list);
+  }
+
+  private static void checkNoCollision(List<PythonTextEdit> pythonTextEdits) throws IllegalArgumentException {
+    for (int i = 0; i < pythonTextEdits.size(); i++) {
+      PythonTextEdit edit = pythonTextEdits.get(i);
+      for (int j = i + 1; j < pythonTextEdits.size(); j++) {
+        PythonTextEdit edit2 = pythonTextEdits.get(j);
+        if (oneEnclosedByTheOther(edit2, edit)) {
+          throw new IllegalArgumentException("There is a collision between the range of the quickfixes.");
+        }
+      }
+    }
+  }
+
+  private static boolean oneEnclosedByTheOther(PythonTextEdit toCheck, PythonTextEdit reference) {
+    if (onSameLine(toCheck, reference)) {
+      // If on same line, we need to check that the bounds of toCheck are not contained in reference bounds
+      return !(toCheck.endLineOffset() < reference.startLineOffset() || toCheck.startLineOffset() > reference.endLineOffset());
+    } else {
+      if (compactOnDifferentLines(toCheck, reference)) {
+        return false;
+      } else if (isCompact(toCheck)) {
+        return isSecondInFirst(toCheck, reference);
+      } else if (isCompact(reference)) {
+        return isSecondInFirst(reference, toCheck);
+      } else {
+        // Both edits exploded on different lines
+        if (noLineIntersection(toCheck, reference)) {
+          return false;
+        } else {
+          // There is an intersection between edits, only need to check valid case
+          if (reference.startLine() == toCheck.endLine()) {
+            return !(toCheck.endLineOffset() < reference.startLineOffset());
+          } else if (reference.endLine() == toCheck.startLine()) {
+            return !(reference.endLineOffset() < toCheck.startLineOffset());
+          }
+        }
+      }
+    }
+    // All other cases are invalid and will cause an intersection
+    return true;
+  }
+
+  private static boolean onSameLine(PythonTextEdit check, PythonTextEdit ref) {
+    return ref.startLine() == ref.endLine() && ref.endLine() == check.startLine() && check.startLine() == check.endLine();
+  }
+
+  private static boolean compactOnDifferentLines(PythonTextEdit check, PythonTextEdit ref) {
+    return ref.startLine() == ref.endLine() && check.startLine() == check.endLine() && ref.endLine() != check.startLine();
+  }
+
+  private static boolean isCompact(PythonTextEdit check) {
+    return check.startLine() == check.endLine();
+  }
+
+  private static boolean isSecondInFirst(PythonTextEdit second, PythonTextEdit first) {
+    if (first.startLine() == second.startLine()) {
+      return first.startLineOffset() <= second.endLineOffset();
+    } else if (first.endLine() == second.startLine()) {
+      return second.startLineOffset() < first.endLineOffset();
+    }
+    // No intersection
+    return false;
+  }
+
+  private static boolean noLineIntersection(PythonTextEdit check, PythonTextEdit ref) {
+    return check.endLine() < ref.startLine() || check.startLine() > ref.endLine();
   }
 
   private static int convertPositionToIndex(String fileContent, int line, int lineOffset) {
