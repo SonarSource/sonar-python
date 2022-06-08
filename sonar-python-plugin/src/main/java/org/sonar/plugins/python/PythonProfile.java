@@ -41,40 +41,42 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
   static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
   static final String SECURITY_RULES_CLASS_NAME = "com.sonar.plugins.security.api.PythonRules";
   static final String SECURITY_RULE_KEYS_METHOD_NAME = "getRuleKeys";
-  static final String SECURITY_RULE_REPO_METHOD_NAME = "getRepositoryKey";
+  static final String DBD_RULES_CLASS_NAME = "com.sonarsource.plugins.dbd.api.PythonRules";
+  static final String DBD_RULE_KEYS_METHOD_NAME = "getDataflowBugDetectionRuleKeys";
+  static final String GET_REPOSITORY_KEY = "getRepositoryKey";
+
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, Python.KEY);
     BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION);
-    getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME)
+    getSecurityRuleKeys()
+      .forEach(key -> profile.activateRule(key.repository(), key.rule()));
+    getDataflowBugDetectionRuleKeys()
       .forEach(key -> profile.activateRule(key.repository(), key.rule()));
     profile.done();
   }
 
-  // Visible for testing
-  static Set<RuleKey> getSecurityRuleKeys(String className, String ruleKeysMethodName, String ruleRepoMethodName) {
-    try {
+  static Set<RuleKey> getSecurityRuleKeys() {
+    return getExternalRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, "security");
+  }
 
+  static Set<RuleKey> getDataflowBugDetectionRuleKeys() {
+    return getExternalRuleKeys(DBD_RULES_CLASS_NAME, DBD_RULE_KEYS_METHOD_NAME, "dataflow bug detection");
+  }
+
+  @SuppressWarnings("unchecked")
+  static Set<RuleKey> getExternalRuleKeys(String className, String ruleKeysMethodName, String rulesCategory) {
+    try {
       Class<?> rulesClass = Class.forName(className);
       Method getRuleKeysMethod = rulesClass.getMethod(ruleKeysMethodName);
       Set<String> ruleKeys = (Set<String>) getRuleKeysMethod.invoke(null);
-      Method getRepositoryKeyMethod = rulesClass.getMethod(ruleRepoMethodName);
+      Method getRepositoryKeyMethod = rulesClass.getMethod(GET_REPOSITORY_KEY);
       String repositoryKey = (String) getRepositoryKeyMethod.invoke(null);
       return ruleKeys.stream().map(k -> RuleKey.of(repositoryKey, k)).collect(Collectors.toSet());
-
-    } catch (ClassNotFoundException e) {
-      LOG.debug(className + " is not found, " + securityRuleMessage(e));
-    } catch (NoSuchMethodException e) {
-      LOG.debug("Method not found on " + className +", " + securityRuleMessage(e));
-    } catch (IllegalAccessException | InvocationTargetException e) {
-      LOG.debug(e.getClass().getSimpleName() + ": " + securityRuleMessage(e));
+    } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+      LOG.debug(String.format("[%s], no %s rules added to Sonar way Python profile: %s", e.getClass().getSimpleName(), rulesCategory, e.getMessage()));
     }
-
     return Collections.emptySet();
-  }
-
-  private static String securityRuleMessage(Exception e) {
-    return "no security rules added to Sonar way Python profile: " + e.getMessage();
   }
 }
