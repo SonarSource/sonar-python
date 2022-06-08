@@ -19,23 +19,30 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.AssignmentStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
@@ -65,15 +72,29 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
    * Bottom-up approach, keeping track of which variables will be read by successor elements.
    */
   private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
-                                  Set<Symbol> readSymbols, FunctionDef functionDef) {
+    Set<Symbol> readSymbols, FunctionDef functionDef) {
 
     DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
       .stream()
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
-      .forEach(unnecessaryAssignment ->
-        ctx.addIssue(unnecessaryAssignment.element, String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name())));
+      .forEach(unnecessaryAssignment -> {
+        IssueWithQuickFix issue;
+        Optional<Token> separatorToken =
+          Optional.of(unnecessaryAssignment.element)
+            .filter(AssignmentStatementImpl.class::isInstance)
+            .map(x -> ((AssignmentStatementImpl) x).separator())
+            .filter(x -> !Objects.equals(x.value(), "\n"));
+        if (separatorToken.isPresent()) {
+          issue = (IssueWithQuickFix) ctx.addIssue(unnecessaryAssignment.element.firstToken(), separatorToken.get(),
+            String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name()));
+        } else {
+          issue = (IssueWithQuickFix) ctx.addIssue(unnecessaryAssignment.element,
+            String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name()));
+        }
+        createQuickFix(issue, unnecessaryAssignment.element);
+      });
   }
 
   private static boolean isMultipleAssignement(Tree element) {
@@ -137,5 +158,13 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
+  }
+
+  private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
+    PythonTextEdit edit = PythonTextEdit.removeDeadStore(unnecessaryAssignment);
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the line(s)")
+      .addTextEdit(edit)
+      .build();
+    issue.addQuickFix(quickFix);
   }
 }

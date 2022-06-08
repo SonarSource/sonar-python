@@ -19,6 +19,7 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.List;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -56,13 +57,32 @@ public class PythonTextEdit {
   }
 
   public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
-    Token first =start.firstToken();
+    Token first = start.firstToken();
     Token last = end.lastToken();
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }
 
   public static PythonTextEdit remove(Tree toRemove) {
     return replace(toRemove, "");
+  }
+
+  public static PythonTextEdit removeDeadStore(Tree tree) {
+    List<Tree> childrenOfParent = tree.parent().children();
+    if (childrenOfParent.size() == 1) {
+      return remove(tree);
+    }
+
+    Token first = tree.firstToken();
+    int i = childrenOfParent.indexOf(tree);
+    // Replace from the end of the previous token (will also remove the separator and trailing whitespaces)
+    if (i == childrenOfParent.size() - 1) {
+      Token previous = childrenOfParent.get(i - 1).lastToken();
+      return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(), first.line(), first.column() + first.value().length());
+    }
+
+    // Remove until the next token
+    Token next = childrenOfParent.get(i + 1).firstToken();
+    return new PythonTextEdit("", first.line(), first.column(), next.line(), next.column());
   }
 
   public String replacementText() {

@@ -319,3 +319,6 @@ def match_statement_no_fp(value):
     case a.CONST:
         a = 42
   print(a)
+
+def dead_store(): unused = 24; unused = 42; print(unused); # NonCompliant
+#                 ^^^^^^^^^^^^

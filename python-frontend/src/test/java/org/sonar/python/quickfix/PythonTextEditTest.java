@@ -19,6 +19,7 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.Arrays;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.tree.Token;
@@ -137,6 +138,36 @@ public class PythonTextEditTest {
     assertThat(textEdit.replacementText()).isEqualTo("b and c");
     assertThat(textEdit.startLine()).isEqualTo(1);
     assertThat(textEdit.startLineOffset()).isEqualTo(4);
+    assertThat(textEdit.endLine()).isEqualTo(1);
+    assertThat(textEdit.endLineOffset()).isEqualTo(13);
+  }
+
+  @Test
+  public void removeDeadStore() {
+    // Parsing 'b = 1;a = 1; a = 2'
+    String tokenValue1 = "b = 1;";
+    String tokenValue2 = "a = 1; ";
+
+    Token token1 = Mockito.mock(Token.class);
+    Token token2 = Mockito.mock(Token.class);
+    Token token3 = Mockito.mock(Token.class);
+
+    when(token2.line()).thenReturn(1);
+    when(token2.column()).thenReturn(6);
+    when(token3.line()).thenReturn(1);
+    when(token3.column()).thenReturn(13);
+
+    when(token2.firstToken()).thenReturn(token2);
+    when(token3.firstToken()).thenReturn(token3);
+
+    when(token2.parent()).thenReturn(token2);
+    when(token2.parent().children()).thenReturn(Arrays.asList(token1, token2, token3));
+
+    PythonTextEdit textEdit = PythonTextEdit.removeDeadStore(token2);
+
+    assertThat(textEdit.replacementText()).isEmpty();
+    assertThat(textEdit.startLine()).isEqualTo(1);
+    assertThat(textEdit.startLineOffset()).isEqualTo(6);
     assertThat(textEdit.endLine()).isEqualTo(1);
     assertThat(textEdit.endLineOffset()).isEqualTo(13);
   }
