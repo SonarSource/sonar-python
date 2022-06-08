@@ -19,7 +19,6 @@
  */
 package org.sonar.python.quickfix;
 
-import java.util.List;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -64,25 +63,6 @@ public class PythonTextEdit {
 
   public static PythonTextEdit remove(Tree toRemove) {
     return replace(toRemove, "");
-  }
-
-  public static PythonTextEdit removeDeadStore(Tree tree) {
-    List<Tree> childrenOfParent = tree.parent().children();
-    if (childrenOfParent.size() == 1) {
-      return remove(tree);
-    }
-
-    Token first = tree.firstToken();
-    int i = childrenOfParent.indexOf(tree);
-    if (i == childrenOfParent.size() - 1) {
-      Token previous = childrenOfParent.get(i - 1).lastToken();
-      first = tree.lastToken();
-      // Replace from the end of the previous token (will also remove the separator and trailing whitespaces) until the end of the current token
-      return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(), first.line(), first.column() + first.value().length());
-    }
-    Token next = childrenOfParent.get(i + 1).firstToken();
-    // Remove from the start of the current tokenuntil the next token
-    return new PythonTextEdit("", first.line(), first.column(), next.line(), next.column());
   }
 
   public String replacementText() {

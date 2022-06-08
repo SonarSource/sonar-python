@@ -19,7 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -42,10 +42,10 @@ import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
-import org.sonar.python.tree.AssignmentStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
+import static org.sonar.python.quickfix.PythonTextEdit.remove;
 
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {
@@ -80,18 +80,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
       .forEach(unnecessaryAssignment -> {
-        IssueWithQuickFix issue;
-        Optional<Token> separatorToken = Optional.of(unnecessaryAssignment.element)
-          .filter(AssignmentStatementImpl.class::isInstance)
-          .map(x -> ((AssignmentStatementImpl) x).separator())
-          .filter(x -> !Objects.equals(x.value(), "\n"));
-        if (separatorToken.isPresent()) {
-          issue = (IssueWithQuickFix) ctx.addIssue(unnecessaryAssignment.element.firstToken(), separatorToken.get(),
-            String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name()));
-        } else {
-          issue = (IssueWithQuickFix) ctx.addIssue(unnecessaryAssignment.element,
-            String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name()));
-        }
+        Tree element = unnecessaryAssignment.element;
+        String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
+        IssueWithQuickFix issue = (IssueWithQuickFix) separatorToken(element)
+          .map(separator -> ctx.addIssue(element.firstToken(), separator, message))
+          .orElseGet(() -> ctx.addIssue(element, message));
         createQuickFix(issue, unnecessaryAssignment.element);
       });
   }
@@ -159,8 +152,34 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
   }
 
+  private static Optional<Token> separatorToken(Tree element) {
+    if (element instanceof AssignmentStatement) {
+      Token seperator = ((AssignmentStatement) element).separator();
+      return "\n".equals(seperator.value()) ? Optional.empty() : Optional.of(seperator);
+    }
+    return Optional.empty();
+  }
+
+  private static PythonTextEdit removeDeadStore(Tree tree) {
+    List<Tree> childrenOfParent = tree.parent().children();
+    if (childrenOfParent.size() == 1) {
+      return remove(tree);
+    }
+    Token first = tree.firstToken();
+    int i = childrenOfParent.indexOf(tree);
+    if (i == childrenOfParent.size() - 1) {
+      Token previous = childrenOfParent.get(i - 1).lastToken();
+      first = tree.lastToken();
+      // Replace from the end of the previous token (will also remove the separator and trailing whitespaces) until the end of the current token
+      return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(), first.line(), first.column() + first.value().length());
+    }
+    Token next = childrenOfParent.get(i + 1).firstToken();
+    // Remove from the start of the current tokenuntil the next token
+    return new PythonTextEdit("", first.line(), first.column(), next.line(), next.column());
+  }
+
   private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
-    PythonTextEdit edit = PythonTextEdit.removeDeadStore(unnecessaryAssignment);
+    PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the line(s)")
       .addTextEdit(edit)
       .build();

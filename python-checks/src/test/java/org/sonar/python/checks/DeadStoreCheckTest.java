@@ -39,21 +39,34 @@ public class DeadStoreCheckTest {
       "    x = 42\n" +
       "    x = 0\n" +
       "    print(x)";
-    String codeWithIssueSpace = "def foo():\n" +
-      "    x = 42 \n" +
+    String codeFixed = "def foo():\n" +
       "    x = 0\n" +
       "    print(x)";
-    String codeWithIssueSemiColon = "def foo():\n" +
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void semicolon() {
+    String codeWithIssue = "def foo():\n" +
       "    x = 42 ;\n" +
       "    x = 0\n" +
       "    print(x)";
     String codeFixed = "def foo():\n" +
       "    x = 0\n" +
       "    print(x)";
-
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verify(check, codeWithIssueSpace, codeFixed);
-    PythonQuickFixVerifier.verify(check, codeWithIssueSemiColon, codeFixed);
+  }
+
+  @Test
+  public void space() {
+    String codeWithIssue = "def foo():\n" +
+      "    x = 42 \n" +
+      "    x = 0\n" +
+      "    print(x)";
+    String codeFixed = "def foo():\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
@@ -92,7 +105,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void complex() {
+  public void unused_after_reassignment() {
     String codeWithIssue = "def tuple_assign():\n" +
       "    c = foo()\n" +
       "    print(c)\n" +
