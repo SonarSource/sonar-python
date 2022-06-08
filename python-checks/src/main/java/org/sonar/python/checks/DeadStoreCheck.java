@@ -81,11 +81,10 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
       .forEach(unnecessaryAssignment -> {
         IssueWithQuickFix issue;
-        Optional<Token> separatorToken =
-          Optional.of(unnecessaryAssignment.element)
-            .filter(AssignmentStatementImpl.class::isInstance)
-            .map(x -> ((AssignmentStatementImpl) x).separator())
-            .filter(x -> !Objects.equals(x.value(), "\n"));
+        Optional<Token> separatorToken = Optional.of(unnecessaryAssignment.element)
+          .filter(AssignmentStatementImpl.class::isInstance)
+          .map(x -> ((AssignmentStatementImpl) x).separator())
+          .filter(x -> !Objects.equals(x.value(), "\n"));
         if (separatorToken.isPresent()) {
           issue = (IssueWithQuickFix) ctx.addIssue(unnecessaryAssignment.element.firstToken(), separatorToken.get(),
             String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name()));

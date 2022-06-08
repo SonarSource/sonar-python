@@ -74,14 +74,14 @@ public class PythonTextEdit {
 
     Token first = tree.firstToken();
     int i = childrenOfParent.indexOf(tree);
-    // Replace from the end of the previous token (will also remove the separator and trailing whitespaces)
     if (i == childrenOfParent.size() - 1) {
       Token previous = childrenOfParent.get(i - 1).lastToken();
+      first = tree.lastToken();
+      // Replace from the end of the previous token (will also remove the separator and trailing whitespaces) until the end of the current token
       return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(), first.line(), first.column() + first.value().length());
     }
-
-    // Remove until the next token
     Token next = childrenOfParent.get(i + 1).firstToken();
+    // Remove from the start of the current tokenuntil the next token
     return new PythonTextEdit("", first.line(), first.column(), next.line(), next.column());
   }
 
