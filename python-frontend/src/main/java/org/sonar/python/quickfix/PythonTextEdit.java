@@ -56,7 +56,7 @@ public class PythonTextEdit {
   }
 
   public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
-    Token first = start.firstToken();
+    Token first =start.firstToken();
     Token last = end.lastToken();
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }
