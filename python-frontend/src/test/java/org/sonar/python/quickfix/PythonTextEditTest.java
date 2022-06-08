@@ -171,4 +171,72 @@ public class PythonTextEditTest {
     assertThat(textEdit.endLine()).isEqualTo(1);
     assertThat(textEdit.endLineOffset()).isEqualTo(13);
   }
+
+  @Test
+  public void removeDeadStore_lastvalue() {
+    // Parsing "def f():\n" +
+    //      "    a= foo()\n" +
+    //      "    print(a)" +
+    //      "    a= foo()\n";
+
+    String lastValue = "    a= foo()";
+    String previousValue = "    print(a)";
+
+    Token previous = Mockito.mock(Token.class);
+    Token last = Mockito.mock(Token.class);
+
+    when(last.line()).thenReturn(4);
+    when(last.column()).thenReturn(4);
+    when(previous.line()).thenReturn(3);
+    when(previous.column()).thenReturn(4);
+
+    when(last.firstToken()).thenReturn(last);
+    when(previous.firstToken()).thenReturn(previous);
+
+    when(last.parent()).thenReturn(last);
+    when(last.parent().children()).thenReturn(Arrays.asList(previous, last));
+    when(previous.lastToken()).thenReturn(previous);
+    when(last.lastToken()).thenReturn(last);
+
+    when(last.value()).thenReturn(lastValue);
+    when(previous.value()).thenReturn(previousValue);
+
+    PythonTextEdit textEdit = PythonTextEdit.removeDeadStore(last);
+
+    assertThat(textEdit.replacementText()).isEmpty();
+    assertThat(textEdit.startLine()).isEqualTo(3);
+    assertThat(textEdit.startLineOffset()).isEqualTo(16);
+    assertThat(textEdit.endLine()).isEqualTo(4);
+    assertThat(textEdit.endLineOffset()).isEqualTo(16);
+  }
+
+  @Test
+  public void removeDeadStore_onechildren() {
+    // Parsing  def used_inside_conditional():
+    //    x = 10
+    //    if p:
+    //      print(x)
+    //    else:
+    //      x = 11 # Noncompliant
+
+    String lastValue = "x = 11";
+
+    Token last = Mockito.mock(Token.class);
+
+    when(last.line()).thenReturn(6);
+    when(last.column()).thenReturn(8);
+    when(last.firstToken()).thenReturn(last);
+    when(last.lastToken()).thenReturn(last);
+    when(last.parent()).thenReturn(last);
+    when(last.parent().children()).thenReturn(Arrays.asList(last));
+    when(last.value()).thenReturn(lastValue);
+
+    PythonTextEdit textEdit = PythonTextEdit.removeDeadStore(last);
+
+    assertThat(textEdit.replacementText()).isEmpty();
+    assertThat(textEdit.startLine()).isEqualTo(6);
+    assertThat(textEdit.startLineOffset()).isEqualTo(8);
+    assertThat(textEdit.endLine()).isEqualTo(6);
+    assertThat(textEdit.endLineOffset()).isEqualTo(14);
+  }
 }
