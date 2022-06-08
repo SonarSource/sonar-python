@@ -22,6 +22,9 @@ package org.sonar.python.quickfix;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
+/**
+ * For internal use only. Can not be used outside SonarPython analyzer.
+ */
 public class PythonTextEdit {
 
   private final String message;
@@ -38,25 +41,37 @@ public class PythonTextEdit {
     this.endLineOffset = endLineOffset;
   }
 
+  /**
+   * Insert a line with the same offset as the given tree, before the given tree.
+   * Offset is applied to multiline insertions.
+   */
+  public static PythonTextEdit insertLineBefore(Tree tree, String textToInsert) {
+    String lineOffset = " ".repeat(tree.firstToken().column());
+    String textWithOffset = textToInsert.replace("\n", "\n" + lineOffset);
+    return insertBefore(tree, textWithOffset);
+  }
+
   public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
     Token token = tree.firstToken();
-    return new PythonTextEdit(textToInsert, token.line(), token.column(), token.line(), token.column());
+    return insertAtPosition(token.line(), token.column(), textToInsert);
   }
 
   public static PythonTextEdit insertAfter(Tree tree, String textToInsert) {
     Token token = tree.firstToken();
     int lengthToken = token.value().length();
-    return new PythonTextEdit(textToInsert, token.line(), token.column() + lengthToken, token.line(), token.column() + lengthToken);
+    return insertAtPosition(token.line(), token.column() + lengthToken, textToInsert);
+  }
+
+  private static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
+    return new PythonTextEdit(textToInsert, line, column, line, column);
   }
 
   public static PythonTextEdit replace(Tree toReplace, String replacementText) {
-    Token token = toReplace.firstToken();
-    Token last = token.lastToken();
-    return new PythonTextEdit(replacementText, token.line(), token.column(), last.line(), last.column() + last.value().length());
+    return replaceRange(toReplace, toReplace, replacementText);
   }
 
   public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
-    Token first =start.firstToken();
+    Token first = start.firstToken();
     Token last = end.lastToken();
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }

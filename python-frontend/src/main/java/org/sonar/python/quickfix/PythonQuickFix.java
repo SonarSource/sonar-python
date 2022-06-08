@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * For internal use only. Can not be used outside SonarPython analyzer.
+ */
 public class PythonQuickFix {
   private final String description;
   private final List<PythonTextEdit> textEdits;
