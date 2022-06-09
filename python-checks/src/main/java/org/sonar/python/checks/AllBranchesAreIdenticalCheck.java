@@ -21,17 +21,26 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.AssignmentStatementImpl;
+import org.sonar.python.tree.IfStatementImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.collections.ListUtils;
 
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
@@ -63,6 +72,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     issue.secondary(issueLocation(ifStmt.body()));
     ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
     issue.secondary(issueLocation(ifStmt.elseBranch().body()));
+    createQuickFix((IssueWithQuickFix) issue, ifStmt, ifStmt.body().statements());
   }
 
   private static IssueLocation issueLocation(StatementList body) {
@@ -78,6 +88,11 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
+      if (conditionalExpression instanceof AssignmentStatementImpl){
+        createQuickFixConditional((IssueWithQuickFix) issue, ((AssignmentStatementImpl) conditionalExpression.parent()).assignedValue(), conditionalExpression.trueExpression());
+      } else{
+        createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression, conditionalExpression.trueExpression());
+      }
     }
   }
 
@@ -111,4 +126,66 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     }
     return unwrappedExpression;
   }
+
+  private static void createQuickFixConditional(IssueWithQuickFix issue, Tree tree, Expression toKeep) {
+    String content =toKeep.children().stream().map(s -> s.firstToken().value()).reduce("", (a,b)-> a+b);
+    PythonTextEdit edit = PythonTextEdit.replace(tree, content);
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the if statement")
+      .addTextEdit(edit)
+      .build();
+    issue.addQuickFix(quickFix);
+  }
+  private static void createQuickFix(IssueWithQuickFix issue, Tree tree, List<Statement> statements) {
+    IfStatementImpl ifStatement = (IfStatementImpl) tree;
+
+    Token firstBodyToken = statements.get(0).firstToken();
+    Token keyword = ifStatement.keyword();
+    Statement lastStatement = ListUtils.getLast(statements);
+
+    int firstLine = firstBodyToken.line();
+    int lastLine = lastStatement.lastToken().line();
+
+    Optional<ElseClause> elseBranch = Optional.ofNullable(ifStatement.elseBranch());
+    Optional<Integer> lineElseBranch = elseBranch
+      .map(Tree::firstToken)
+      .map(Token::line);
+
+    // lastLine is one line further if there is another if block enclosed
+    if(lastStatement.lastToken().column() == 0){
+      lastLine--;
+    }
+
+    PythonQuickFix.Builder quickFixBuilder = PythonQuickFix.newQuickFix("Remove the if statement");
+
+    // Remove the if line
+    quickFixBuilder.addTextEdit(new PythonTextEdit("", keyword.line(), keyword.column(), firstBodyToken.line(), firstBodyToken.column()));
+
+    // Remove indent from the second line until the last statement
+    for (int line = firstLine + 1; line <= lastLine; line++) {
+      quickFixBuilder.addTextEdit(editIndentAtLine(line));
+    }
+
+    // Remove else branch
+    elseBranch.ifPresent(branch -> quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch)));
+
+    // Remove the indent on the else line
+    if(ifStatement.elifBranches().isEmpty()){
+      lineElseBranch.ifPresent(lineElse ->
+      quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
+    }
+
+    // Take care of the elif branches, the elif branch goes up to the next else or elif branch
+    for(IfStatement branch : ifStatement.elifBranches()){
+      int lineElifBranch = branch.firstToken().line();
+      quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch))
+        .addTextEdit(editIndentAtLine(lineElifBranch));
+    }
+
+    issue.addQuickFix(quickFixBuilder.build());
+  }
+
+  private static PythonTextEdit editIndentAtLine(int line){
+    return new PythonTextEdit("", line, 0, line, 4);
+  }
+
 }
