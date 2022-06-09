@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
-import org.sonar.python.tree.AssignmentStatementImpl;
 import org.sonar.python.tree.IfStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.collections.ListUtils;
@@ -88,11 +87,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
-      if (conditionalExpression instanceof AssignmentStatementImpl){
-        createQuickFixConditional((IssueWithQuickFix) issue, ((AssignmentStatementImpl) conditionalExpression.parent()).assignedValue(), conditionalExpression.trueExpression());
-      } else{
-        createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression, conditionalExpression.trueExpression());
-      }
+      createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression, conditionalExpression.trueExpression());
     }
   }
 
@@ -128,13 +123,14 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   }
 
   private static void createQuickFixConditional(IssueWithQuickFix issue, Tree tree, Expression toKeep) {
-    String content =toKeep.children().stream().map(s -> s.firstToken().value()).reduce("", (a,b)-> a+b);
+    String content = toKeep.children().stream().map(s -> s.firstToken().value()).reduce("", (a, b) -> a + b);
     PythonTextEdit edit = PythonTextEdit.replace(tree, content);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the if statement")
       .addTextEdit(edit)
       .build();
     issue.addQuickFix(quickFix);
   }
+
   private static void createQuickFix(IssueWithQuickFix issue, Tree tree, List<Statement> statements) {
     IfStatementImpl ifStatement = (IfStatementImpl) tree;
 
@@ -151,7 +147,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       .map(Token::line);
 
     // lastLine is one line further if there is another if block enclosed
-    if(lastStatement.lastToken().column() == 0){
+    if (lastStatement.lastToken().column() == 0) {
       lastLine--;
     }
 
@@ -169,13 +165,12 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     elseBranch.ifPresent(branch -> quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch)));
 
     // Remove the indent on the else line
-    if(ifStatement.elifBranches().isEmpty()){
-      lineElseBranch.ifPresent(lineElse ->
-      quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
+    if (ifStatement.elifBranches().isEmpty()) {
+      lineElseBranch.ifPresent(lineElse -> quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
     }
 
     // Take care of the elif branches, the elif branch goes up to the next else or elif branch
-    for(IfStatement branch : ifStatement.elifBranches()){
+    for (IfStatement branch : ifStatement.elifBranches()) {
       int lineElifBranch = branch.firstToken().line();
       quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch))
         .addTextEdit(editIndentAtLine(lineElifBranch));
@@ -184,7 +179,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     issue.addQuickFix(quickFixBuilder.build());
   }
 
-  private static PythonTextEdit editIndentAtLine(int line){
+  private static PythonTextEdit editIndentAtLine(int line) {
     return new PythonTextEdit("", line, 0, line, 4);
   }
 
