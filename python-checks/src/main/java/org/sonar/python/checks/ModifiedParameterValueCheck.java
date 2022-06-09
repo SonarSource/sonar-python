@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -45,21 +46,27 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPOUND_ASSIGNMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.DEL_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
+import static org.sonar.python.quickfix.PythonTextEdit.insertLineBefore;
+import static org.sonar.python.quickfix.PythonTextEdit.replace;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nonTupleParameters;
 
 @Rule(key = "S5717")
 public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
 
+  private static final String MESSAGE = "Change this default value to \"None\" and initialize this parameter inside the function/method.";
   private static final String MODIFIED_SECONDARY = "The parameter is modified.";
   private static final String ASSIGNED_SECONDARY = "The parameter is stored in another object.";
 
@@ -113,14 +120,53 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
       if (TreeUtils.firstAncestorOfKind(functionDef, FUNCDEF) != null) {
         return;
       }
+
       for (Parameter parameter : nonTupleParameters(functionDef)) {
-        Map<Tree, String> mutations = getMutations(parameter);
-        if (!mutations.isEmpty()) {
-          PreciseIssue preciseIssue = ctx.addIssue(parameter, "Change this default value to \"None\" and initialize this parameter inside the function/method.");
-          mutations.keySet().forEach(t -> preciseIssue.secondary(t, mutations.get(t)));
+        Expression defaultValue = parameter.defaultValue();
+        if (defaultValue == null) {
+          continue;
         }
+
+        getSymbolFromTree(parameter.name())
+          .filter(symbol -> !isUsingMemoization(symbol))
+          .ifPresent(paramSymbol -> {
+            Map<Tree, String> mutations = getMutations(defaultValue, paramSymbol);
+            if (!mutations.isEmpty()) {
+              IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameter, MESSAGE);
+              mutations.keySet().forEach(t -> issue.secondary(t, mutations.get(t)));
+
+              getQuickFix(functionDef, defaultValue, paramSymbol)
+                .ifPresent(issue::addQuickFix);
+            }
+          }
+        );
       }
     });
+  }
+
+  // We use "\n" systematically, the IDE will decide which one to use,
+  // therefore suppressing java:S3457 (Printf-style format strings should be used correctly)
+  @SuppressWarnings("java:S3457")
+  private static Optional<PythonQuickFix> getQuickFix(FunctionDef functionDef, Expression defaultValue, Symbol paramSymbol) {
+    Tree firstStatement = functionDef.body().statements().get(0);
+    String paramName = paramSymbol.name();
+
+    return parameterInitialization(defaultValue).map(
+      paramInit -> PythonQuickFix.newQuickFix("Initialize this parameter inside the function/method")
+        .addTextEdit(replace(defaultValue, "None"))
+        .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s()\n", paramName, paramInit)))
+        .build()
+    );
+  }
+
+  private static Optional<String> parameterInitialization(Expression defaultValue) {
+    if (defaultValue.is(CALL_EXPR)) {
+      CallExpression call = (CallExpression) defaultValue;
+      return Optional.ofNullable(call.calleeSymbol())
+        .map(symbol -> call.callee().is(QUALIFIED_EXPR) ? symbol.fullyQualifiedName() : symbol.name());
+    } else {
+      return Optional.ofNullable(defaultValueType(defaultValue));
+    }
   }
 
   @CheckForNull
@@ -137,19 +183,9 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     return symbol.name().contains("cache") || symbol.name().contains("memo");
   }
 
-  private static Map<Tree, String> getMutations(Parameter parameter) {
-    Expression defaultValue = parameter.defaultValue();
-    if (defaultValue == null) {
-      return Collections.emptyMap();
-    }
-
-    Optional<Symbol> paramSymbol = getSymbolFromTree(parameter.name());
-    if (!paramSymbol.isPresent() || isUsingMemoization(paramSymbol.get())) {
-      return Collections.emptyMap();
-    }
-
+  private static Map<Tree, String> getMutations(Expression defaultValue, Symbol paramSymbol) {
     if (!defaultValue.type().canOnlyBe(BuiltinTypes.NONE_TYPE)) {
-      List<Tree> attributeSet = getAttributeSet(paramSymbol.get());
+      List<Tree> attributeSet = getAttributeSet(paramSymbol);
       if (!attributeSet.isEmpty()) {
         return attributeSet.stream().collect(Collectors.toMap(tree -> tree, tree -> MODIFIED_SECONDARY));
       }
@@ -160,18 +196,19 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
       return Collections.emptyMap();
     }
     Map<Tree, String> mutations = new HashMap<>();
-    for (Usage usage : paramSymbol.get().usages()) {
+    for (Usage usage : paramSymbol.usages()) {
       getKindOfWriteUsage(paramSymbol, defaultValueType, typeMutatingMethods, usage).ifPresent(s -> mutations.put(usage.tree().parent(), s));
     }
     return mutations;
   }
 
-  private static Optional<String> getKindOfWriteUsage(Optional<Symbol> paramSymbol, @Nullable String defaultValueType, Set<String> typeMutatingMethods, Usage usage) {
+  private static Optional<String> getKindOfWriteUsage(Symbol paramSymbol, @Nullable String defaultValueType, Set<String> typeMutatingMethods, Usage usage) {
     Tree parent = usage.tree().parent();
     if (parent.is(QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) parent;
-      return getSymbolFromTree(qualifiedExpression.qualifier()).equals(paramSymbol) && isMutatingMethod(typeMutatingMethods, qualifiedExpression.name().name()) ?
-        Optional.of(MODIFIED_SECONDARY) : Optional.empty();
+
+      return getSymbolFromTree(qualifiedExpression.qualifier()).filter(paramSymbol::equals).isPresent()
+        && isMutatingMethod(typeMutatingMethods, qualifiedExpression.name().name()) ? Optional.of(MODIFIED_SECONDARY) : Optional.empty();
     }
     if (isUsedInDelStatement(usage.tree()) ||
       isUsedInLhsOfAssignment(usage.tree(), exp -> isAccessingExpression(exp, usage.tree())) ||

@@ -29,115 +29,80 @@ import static org.mockito.Mockito.when;
 public class PythonTextEditTest {
 
   @Test
-  public void test() {
-    String replacementText = "This is a replacement text";
+  public void insertBefore() {
+    String textToInsert = "This is a replacement text";
+    Token token = mockToken("token", 1, 7);
 
-    Token token = Mockito.mock(Token.class);
-    when(token.line()).thenReturn(1);
-    when(token.column()).thenReturn(7);
-    when(token.firstToken()).thenReturn(token);
-    when(token.lastToken()).thenReturn(token);
-
-    PythonTextEdit textEdit = PythonTextEdit.insertBefore(token, replacementText);
-
-    assertThat(textEdit.replacementText()).isEqualTo(replacementText);
-    assertThat(textEdit.startLine()).isEqualTo(1);
-    assertThat(textEdit.startLineOffset()).isEqualTo(7);
-    assertThat(textEdit.endLine()).isEqualTo(1);
-    assertThat(textEdit.endLineOffset()).isEqualTo(7);
+    PythonTextEdit textEdit = PythonTextEdit.insertBefore(token, textToInsert);
+    assertThat(textEdit.replacementText()).isEqualTo(textToInsert);
+    assertTextEditLocation(textEdit, 1, 7, 1, 7);
   }
 
   @Test
-  public void insert_after() {
-    String tokenValue = "token";
-    String replacementText = "This is a replacement text";
+  public void insertAfter() {
+    String textToInsert = "This is a replacement text";
+    Token token = mockToken("token", 1, 7);
 
-    Token token = Mockito.mock(Token.class);
-    when(token.line()).thenReturn(1);
-    when(token.column()).thenReturn(7);
-    when(token.firstToken()).thenReturn(token);
-    when(token.lastToken()).thenReturn(token);
-
-    when(token.value()).thenReturn(tokenValue);
-
-    PythonTextEdit textEdit = PythonTextEdit.insertAfter(token, replacementText);
-
-    assertThat(textEdit.replacementText()).isEqualTo(replacementText);
-    assertThat(textEdit.startLine()).isEqualTo(1);
-    assertThat(textEdit.startLineOffset()).isEqualTo(12);
-    assertThat(textEdit.endLine()).isEqualTo(1);
-    assertThat(textEdit.endLineOffset()).isEqualTo(12);
+    PythonTextEdit textEdit = PythonTextEdit.insertAfter(token, textToInsert);
+    assertThat(textEdit.replacementText()).isEqualTo(textToInsert);
+    assertTextEditLocation(textEdit, 1, 12, 1, 12);
   }
 
   @Test
   public void replace() {
-    String tokenValue = "token";
     String replacementText = "This is a replacement text";
-
-    Token token = Mockito.mock(Token.class);
-    when(token.line()).thenReturn(1);
-    when(token.column()).thenReturn(7);
-    when(token.firstToken()).thenReturn(token);
-    when(token.lastToken()).thenReturn(token);
-
-    when(token.value()).thenReturn(tokenValue);
+    Token token = mockToken("token", 1, 7);
 
     PythonTextEdit textEdit = PythonTextEdit.replace(token, replacementText);
-
     assertThat(textEdit.replacementText()).isEqualTo(replacementText);
-    assertThat(textEdit.startLine()).isEqualTo(1);
-    assertThat(textEdit.startLineOffset()).isEqualTo(7);
-    assertThat(textEdit.endLine()).isEqualTo(1);
-    assertThat(textEdit.endLineOffset()).isEqualTo(12);
+    assertTextEditLocation(textEdit, 1, 7, 1, 12);
   }
 
   @Test
   public void remove() {
-    String tokenValue = "token";
-
-    Token token = Mockito.mock(Token.class);
-    when(token.line()).thenReturn(1);
-    when(token.column()).thenReturn(7);
-    when(token.firstToken()).thenReturn(token);
-    when(token.lastToken()).thenReturn(token);
-
-    when(token.value()).thenReturn(tokenValue);
+    Token token = mockToken("token", 1, 7);
 
     PythonTextEdit textEdit = PythonTextEdit.remove(token);
-
     assertThat(textEdit.replacementText()).isEmpty();
-    assertThat(textEdit.startLine()).isEqualTo(1);
-    assertThat(textEdit.startLineOffset()).isEqualTo(7);
-    assertThat(textEdit.endLine()).isEqualTo(1);
-    assertThat(textEdit.endLineOffset()).isEqualTo(12);
+    assertTextEditLocation(textEdit, 1, 7, 1, 12);
   }
 
   @Test
-  public void replaceChildren() {
+  public void replaceRange() {
     // Parsing 'a = (b and c)'
-    String tokenValue1 = "(";
-    String tokenValue2 = ")";
-
-    Token token1 = Mockito.mock(Token.class);
-    Token token2 = Mockito.mock(Token.class);
-
-    when(token1.line()).thenReturn(1);
-    when(token1.column()).thenReturn(4);
-    when(token2.line()).thenReturn(1);
-    when(token2.column()).thenReturn(12);
-
-    when(token1.firstToken()).thenReturn(token1);
-    when(token2.lastToken()).thenReturn(token2);
-
-    when(token1.value()).thenReturn(tokenValue1);
-    when(token2.value()).thenReturn(tokenValue2);
+    Token token1 = mockToken("(", 1, 4);
+    Token token2 = mockToken(")", 1, 12);
 
     PythonTextEdit textEdit = PythonTextEdit.replaceRange(token1, token2, "b and c");
-
     assertThat(textEdit.replacementText()).isEqualTo("b and c");
-    assertThat(textEdit.startLine()).isEqualTo(1);
-    assertThat(textEdit.startLineOffset()).isEqualTo(4);
-    assertThat(textEdit.endLine()).isEqualTo(1);
-    assertThat(textEdit.endLineOffset()).isEqualTo(13);
+    assertTextEditLocation(textEdit, 1, 4, 1, 13);
+  }
+
+  @Test
+  public void insertLineBefore() {
+      Token token = mockToken("tree", 1, 4);
+
+      PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent\n");
+      assertThat(textEdit.replacementText()).isEqualTo("firstLine\n        secondLineWithIndent\n    ");
+      assertTextEditLocation(textEdit, 1, 4, 1, 4);
+  }
+
+  private void assertTextEditLocation(PythonTextEdit textEdit, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+    assertThat(textEdit.startLine()).isEqualTo(startLine);
+    assertThat(textEdit.startLineOffset()).isEqualTo(startLineOffset);
+    assertThat(textEdit.endLine()).isEqualTo(endLine);
+    assertThat(textEdit.endLineOffset()).isEqualTo(endLineOffset);
+  }
+
+  private static Token mockToken(String value, int line, int column) {
+    Token token = Mockito.mock(Token.class);
+    when(token.firstToken()).thenReturn(token);
+    when(token.lastToken()).thenReturn(token);
+
+    when(token.value()).thenReturn(value);
+    when(token.line()).thenReturn(line);
+    when(token.column()).thenReturn(column);
+
+    return token;
   }
 }
