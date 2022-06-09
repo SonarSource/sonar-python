@@ -20,12 +20,99 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class DeadStoreCheckTest {
 
+  private final PythonCheck check = new DeadStoreCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/deadStore.py", new DeadStoreCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/deadStore.py", check);
+  }
+
+  @Test
+  public void quickfix() {
+    String codeWithIssue = "def foo():\n" +
+      "    x = 42\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    String codeFixed = "def foo():\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void semicolon() {
+    String codeWithIssue = "def foo():\n" +
+      "    x = 42 ;\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    String codeFixed = "def foo():\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void space() {
+    String codeWithIssue = "def foo():\n" +
+      "    x = 42 \n" +
+      "    x = 0\n" +
+      "    print(x)";
+    String codeFixed = "def foo():\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void quickfix_after_non_issue() {
+    String codeWithIssue = "def foo():\n" +
+      "    a = 1\n" +
+      "    x = 10 ;\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    String codeFixed = "def foo():\n" +
+      "    a = 1\n" +
+      "    x = 0\n" +
+      "    print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void quickfix_oneline() {
+    String codeWithIssue = "def dead_store(): unused = 24; unused = 42; print(unused)";
+    String codeFixed = "def dead_store(): unused = 42; print(unused)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void quickfix_in_condition() {
+    String codeWithIssue = "def simple_conditional():\n" +
+      "    x = 10 # Noncompliant\n" +
+      "    if p:\n" +
+      "        x = 11\n" +
+      "        print(x)";
+    String codeFixed = "def simple_conditional():\n" +
+      "    if p:\n" +
+      "        x = 11\n" +
+      "        print(x)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void unused_after_reassignment() {
+    String codeWithIssue = "def tuple_assign():\n" +
+      "    c = foo()\n" +
+      "    print(c)\n" +
+      "    c = foo()\n";
+    String codeFixed = "def tuple_assign():\n" +
+      "    c = foo()\n" +
+      "    print(c)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }
