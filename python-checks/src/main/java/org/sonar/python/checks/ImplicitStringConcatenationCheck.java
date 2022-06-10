@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 
-import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
+import static org.sonar.python.quickfix.PythonTextEdit.replaceRange;
 
 @Rule(key = "S5799")
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
@@ -67,12 +67,12 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         continue;
       }
       if (current.firstToken().line() == previous.firstToken().line()) {
-        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null), previous);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null), previous, current);
         // Only raise 1 issue per string literal
         return;
       }
       if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
-        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null), previous);
+        createQuickFix(ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null), previous, current);
         return;
       }
     }
@@ -94,26 +94,31 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
       first.value().charAt(first.value().length() - 1) == second.value().charAt(second.value().length() - 1);
   }
 
-  private static boolean isInFunctionOrArrayOrTupleOrExpression(StringElement token) {
+  private static boolean isInFunctionOrArrayOrTupleOrExpressionOrSet(StringElement token) {
     Tree t = token;
     while (t.parent().is(Tree.Kind.STRING_LITERAL)) {
       t = t.parent();
     }
-    return t.parent().is(Tree.Kind.ARG_LIST, Tree.Kind.EXPRESSION_LIST, Tree.Kind.PARAMETER_LIST, Tree.Kind.TUPLE);
+    Tree parent = t.parent();
+
+    return parent.is(Tree.Kind.EXPRESSION_LIST, Tree.Kind.PLUS, Tree.Kind.REGULAR_ARGUMENT,
+      Tree.Kind.SET_LITERAL, Tree.Kind.TUPLE);
   }
 
-  private static void createQuickFix(PreciseIssue issueRaised, StringElement stringElement) {
+  private static void createQuickFix(PreciseIssue issueRaised, StringElement start, StringElement end) {
     IssueWithQuickFix issue = (IssueWithQuickFix) issueRaised;
+    String textStart = start.value();
+    String textEnd = end.value();
 
-    if (isInFunctionOrArrayOrTupleOrExpression(stringElement)) {
+    if (isInFunctionOrArrayOrTupleOrExpressionOrSet(start)) {
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add the comma between string or byte tokens.")
-        .addTextEdit(insertAfter(stringElement, ","))
+        .addTextEdit(replaceRange(start, end, textStart + ", " + textEnd))
         .build();
       issue.addQuickFix(quickFix);
     }
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Make the addition sign between string or byte tokens explicit.")
-      .addTextEdit(insertAfter(stringElement, "+"))
+      .addTextEdit(replaceRange(start, end, textStart + " + " + textEnd))
       .build();
     issue.addQuickFix(quickFix);
   }
