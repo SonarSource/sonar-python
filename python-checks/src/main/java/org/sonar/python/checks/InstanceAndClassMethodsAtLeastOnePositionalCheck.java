@@ -99,10 +99,10 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
   private static void addIssue(SubscriptionContext ctx, FunctionDef functionDef, MethodIssueType type) {
     IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(),
       type.message);
-    String seperator = functionDef.parameters() == null ? "" : ", ";
+    String separator = functionDef.parameters() == null ? "" : ", ";
     for (String insertion : type.insertions) {
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", insertion))
-        .addTextEdit(insertAfter(functionDef.leftPar(), insertion + seperator))
+        .addTextEdit(insertAfter(functionDef.leftPar(), insertion + separator))
         .build();
       issue.addQuickFix(quickFix);
     }
