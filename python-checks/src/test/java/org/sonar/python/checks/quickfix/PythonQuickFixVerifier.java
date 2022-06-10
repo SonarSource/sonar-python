@@ -131,6 +131,8 @@ public class PythonQuickFixVerifier {
     }
   }
 
+  // Returns true if the range of one edit crosses the range of the other. If one end of both edits is the same point,
+  // we should return false
   private static boolean oneEnclosedByTheOther(PythonTextEdit toCheck, PythonTextEdit reference) {
     if (onSameLine(toCheck, reference)) {
       // If on same line, we need to check that the bounds of toCheck are not contained in reference bounds
@@ -149,9 +151,9 @@ public class PythonQuickFixVerifier {
         } else {
           // There is an intersection between edits, only need to check valid case
           if (reference.startLine() == toCheck.endLine()) {
-            return !(toCheck.endLineOffset() < reference.startLineOffset());
+            return !(toCheck.endLineOffset() <= reference.startLineOffset());
           } else if (reference.endLine() == toCheck.startLine()) {
-            return !(reference.endLineOffset() < toCheck.startLineOffset());
+            return !(reference.endLineOffset() <= toCheck.startLineOffset());
           }
         }
       }
@@ -172,11 +174,13 @@ public class PythonQuickFixVerifier {
     return check.startLine() == check.endLine();
   }
 
-  private static boolean isSecondInFirst(PythonTextEdit second, PythonTextEdit first) {
+  // Returns true if there is an intersection between the ranges
+  // The first parameter is a compact edit, i.e., the edit is only one one line
+  private static boolean isSecondInFirst(PythonTextEdit first, PythonTextEdit second) {
     if (first.startLine() == second.startLine()) {
-      return first.startLineOffset() <= second.endLineOffset();
-    } else if (first.endLine() == second.startLine()) {
       return second.startLineOffset() < first.endLineOffset();
+    } else if (first.endLine() == second.endLine()) {
+      return first.startLineOffset() < second.endLineOffset();
     }
     // No intersection
     return false;

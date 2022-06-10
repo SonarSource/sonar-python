@@ -75,3 +75,6 @@ a = (1 if x else 1) if cond else (1 if x else 1) # Noncompliant
 
 a = ((1 if x else 1) if cond else (1 if x else 1)) if other else (1 if x else (1 if y else 1 if z else 1)) # Noncompliant
 #     ^>          ^>               ^>          ^>  ^^             ^<           ^<          ^<          ^<
+
+a = 1 if (x and y) else 1 # Noncompliant
+
