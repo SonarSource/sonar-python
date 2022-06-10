@@ -87,7 +87,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
-      createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression, conditionalExpression.trueExpression());
+      createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression);
     }
   }
 
@@ -122,9 +122,13 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     return unwrappedExpression;
   }
 
-  private static void createQuickFixConditional(IssueWithQuickFix issue, Tree tree, Expression toKeep) {
-    String content = toKeep.children().stream().map(s -> s.firstToken().value()).reduce("", (a, b) -> a + b);
-    PythonTextEdit edit = PythonTextEdit.replace(tree, content);
+  private static void createQuickFixConditional(IssueWithQuickFix issue, Tree tree) {
+    List<Tree> children = tree.children();
+    Token lastTokenOfFirst = children.get(0).lastToken();
+    Token lastTokenOfConditional = children.get(children.size() - 1).lastToken();
+    PythonTextEdit edit = new PythonTextEdit("", lastTokenOfFirst.line(), lastTokenOfFirst.column(),
+      lastTokenOfConditional.line(), lastTokenOfConditional.column());
+
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the if statement")
       .addTextEdit(edit)
       .build();

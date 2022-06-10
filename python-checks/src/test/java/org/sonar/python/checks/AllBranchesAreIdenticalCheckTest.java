@@ -109,7 +109,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void mutiple_conditional_statements(){
+  public void multiple_conditional_statements(){
     String codeWithIssue = "a = 1 if x else 1 if y else 1 if z else 1";
     String codeFixed = "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
@@ -166,6 +166,13 @@ public class AllBranchesAreIdenticalCheckTest {
       "    doSomething()\n"+
       "    doSomething()\n" +
       "    doOneMoreThing()\n";;
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void test_complex_condition(){
+    String codeWithIssue = "a = do_something(a, b, c, do_something_else(d)) if x else do_something(a, b, c, do_something_else(d))";
+    String codeFixed = "a = do_something(a, b, c, do_something_else(d))";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }
