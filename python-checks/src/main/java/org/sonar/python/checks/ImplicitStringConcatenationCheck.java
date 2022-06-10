@@ -100,8 +100,9 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
       t = t.parent();
     }
     Tree parent = t.parent();
-    return parent.is(Tree.Kind.ARG_LIST, Tree.Kind.EXPRESSION_LIST, Tree.Kind.PARAMETER_LIST,
-      Tree.Kind.PLUS, Tree.Kind.REGULAR_ARGUMENT, Tree.Kind.SET_LITERAL, Tree.Kind.TUPLE);
+
+    return parent.is(Tree.Kind.EXPRESSION_LIST, Tree.Kind.PLUS, Tree.Kind.REGULAR_ARGUMENT,
+      Tree.Kind.SET_LITERAL, Tree.Kind.TUPLE);
   }
 
   private static void createQuickFix(PreciseIssue issueRaised, StringElement start, StringElement end) {

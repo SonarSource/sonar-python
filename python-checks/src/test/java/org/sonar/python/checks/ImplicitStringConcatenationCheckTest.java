@@ -89,4 +89,15 @@ public class ImplicitStringConcatenationCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
 
+  @Test
+  public void parameters2() {
+    String codeWithIssue = "def a():\n" +
+      "    foo('1' '2', '3')\n";
+    String codeFixed1 = "def a():\n" +
+      "    foo('1', '2', '3')\n";
+    String codeFixed2 = "def a():\n" +
+      "    foo('1' + '2', '3')\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
 }
