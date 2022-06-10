@@ -37,7 +37,7 @@ import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.quickfix.PythonTextEdit.insertBefore;
+import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
 
 @Rule(key="S5719")
 public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubscriptionCheck {
@@ -99,10 +99,10 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
   private static void addIssue(SubscriptionContext ctx, FunctionDef functionDef, MethodIssueType type) {
     IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(),
       type.message);
-
+    String seperator = functionDef.parameters() == null ? "" : ", ";
     for (String insertion : type.insertions) {
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", insertion))
-        .addTextEdit(insertBefore(functionDef.rightPar(), insertion))
+        .addTextEdit(insertAfter(functionDef.leftPar(), insertion + seperator))
         .build();
       issue.addQuickFix(quickFix);
     }
