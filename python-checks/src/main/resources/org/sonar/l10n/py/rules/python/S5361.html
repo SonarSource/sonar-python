@@ -6,20 +6,20 @@ exactly the same thing as <code>re.sub</code> without the performance drawback o
 or pattern.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-input = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
-changed = re.sub("Bob is", "It's", input) # Noncompliant
-changed = re.sub("\.\.\.", ";", changed) # Noncompliant
+init = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
+changed = re.sub(r"Bob is", "It's", init) # Noncompliant
+changed = re.sub(r"\.\.\.", ";", changed) # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-input = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
-changed = str.replace("Bob is", "It's", input)
-changed = str.replace("...", ";", changed)
+init = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
+changed = init.replace("Bob is", "It's")
+changed = changed.replace("...", ";")
 </pre>
 <p>Or, with a regex:</p>
 <pre>
-input = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
-changed = re.sub(r"\w*\sis", "It's", input)
+init = "Bob is a Bird... Bob is a Plane... Bob is Superman!"
+changed = re.sub(r"\w*\sis", "It's", init)
 changed = re.sub(r"\.{3}", ";", changed)
 </pre>
 
