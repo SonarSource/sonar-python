@@ -36,12 +36,12 @@ public class ImplicitStringConcatenationCheckTest {
   @Test
   public void simple_expression_quickfix() {
     String codeWithIssue = "a = '1' '2'";
-    String codeFixed1 = "a = '1'+ '2'";
+    String codeFixed1 = "a = '1' + '2'";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1);
 
     codeWithIssue = "a = ['1' '2']";
     codeFixed1 = "a = ['1', '2']";
-    String codeFixed2 = "a = ['1'+ '2']";
+    String codeFixed2 = "a = ['1' + '2']";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
 
@@ -52,7 +52,40 @@ public class ImplicitStringConcatenationCheckTest {
     String codeFixed1 = "def a():\n" +
       "    b = ['1', '2']\n";
     String codeFixed2 = "def a():\n" +
-      "    b = ['1'+ '2']\n";
+      "    b = ['1' + '2']\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
+  @Test
+  public void concat_expression() {
+    String codeWithIssue = "def a():\n" +
+      "    b = ['1'+'2' '3'+'4']\n";
+    String codeFixed1 = "def a():\n" +
+      "    b = ['1'+'2', '3'+'4']\n";
+    String codeFixed2 = "def a():\n" +
+      "    b = ['1'+'2' + '3'+'4']\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
+  @Test
+  public void sets() {
+    String codeWithIssue = "def a():\n" +
+      "    {'1' '2', '3'}\n";
+    String codeFixed1 = "def a():\n" +
+      "    {'1', '2', '3'}\n";
+    String codeFixed2 = "def a():\n" +
+      "    {'1' + '2', '3'}\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+  }
+
+  @Test
+  public void parameters() {
+    String codeWithIssue = "def a():\n" +
+      "    print('1' '2', '3')\n";
+    String codeFixed1 = "def a():\n" +
+      "    print('1', '2', '3')\n";
+    String codeFixed2 = "def a():\n" +
+      "    print('1' + '2', '3')\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
 
