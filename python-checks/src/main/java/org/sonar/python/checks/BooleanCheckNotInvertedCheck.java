@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,6 +34,7 @@ import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1940")
 public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
@@ -58,14 +58,14 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
         String oppositeOperator = oppositeOperator(binaryExp.operator());
 
         IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
-        createQuickFix(issue, oppositeOperator, binaryExp, negatedExpr);
+        createQuickFix(issue, oppositeOperator, binaryExp, original);
       }
     } else if (negatedExpr.is(Kind.IN, Kind.IS)) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
       String oppositeOperator = oppositeOperator(isInExpr.operator(), isInExpr);
 
       IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
-      createQuickFix(issue, oppositeOperator, isInExpr, negatedExpr);
+      createQuickFix(issue, oppositeOperator, isInExpr, original);
     }
   }
 
@@ -110,8 +110,8 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void createQuickFix(IssueWithQuickFix issue, String oppositeOperator, BinaryExpression toUse, Expression toReplace) {
-    PythonTextEdit replaceEdit = getReplaceEdit(toUse, toReplace, oppositeOperator);
+  private static void createQuickFix(IssueWithQuickFix issue, String oppositeOperator, BinaryExpression toUse, UnaryExpression notAncestor) {
+    PythonTextEdit replaceEdit = getReplaceEdit(toUse, oppositeOperator, notAncestor);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Use %s instead", oppositeOperator))
       .addTextEdit(replaceEdit)
@@ -119,9 +119,28 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     issue.addQuickFix(quickFix);
   }
 
-  private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, Expression toReplace, String oppositeOperator) {
-    List<Tree> children = toReplace.parent().parent().children();
-    return PythonTextEdit.replaceRange(children.get(0), children.get(children.size() - 1),
-      toUse.leftOperand().firstToken().value() + " " + oppositeOperator + " " + toUse.rightOperand().firstToken().value());
+  private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, String oppositeOperator, UnaryExpression notAncestor) {
+    return PythonTextEdit.replace(notAncestor, getNewExpression(toUse, oppositeOperator));
+  }
+
+  private static String getNewExpression(BinaryExpression toUse, String oppositeOperator) {
+    return getText(toUse.leftOperand()) + " " + oppositeOperator + " " + getText(toUse.rightOperand());
+  }
+
+  private static String getText(Tree tree) {
+    return TreeUtils.tokens(tree).stream()
+      .map(Token::value)
+      .reduce("", (acc, currentChar) -> isSpaceNotNeeded(acc, currentChar) ? (acc + currentChar) : (acc + " " + currentChar));
+  }
+
+  @SuppressWarnings("java:S125")
+  private static boolean isSpaceNotNeeded(String acc, String toAdd) {
+    // Heuristic telling when a space is not needed: 1) after a space, after opening parenthesis or bracket;
+    // 2) if the accumulator is ending with anything other than a comma and that an opening parenthesis is to be added;
+    // 3) if the accumulator is ending with anything other than a space and that an opening bracket is to be added
+    // 4) if a specific character is added : such as closing parenthesis or bracket, or a comma.
+    return acc.isBlank() || acc.endsWith("(") || acc.endsWith("[")
+      || (!acc.endsWith(",") && "(".equals(toAdd)) || (!acc.endsWith(" ") && "[".equals(toAdd))
+      || "]".equals(toAdd) || ")".equals(toAdd) || ",".equals(toAdd);
   }
 }

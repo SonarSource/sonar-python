@@ -50,3 +50,21 @@ z = not (1 not in list_)  # Noncompliant
 # Both cases below are handled by RSPEC-2761
 ## x = not(not 1) # Noncompliant
 ## t = a is not(not b) # Noncompliant
+
+def func():
+    if not a == 2:     #Noncompliant
+#      ^^^^^^^^^^
+        b = 10
+    return "item1" "item2"
+
+def func1():
+    if not a == 2 and b == 9:   # Noncompliant
+#      ^^^^^^^^^^
+        b = 10
+    return "item1" "item2"
+
+def func2():
+    if a != 2 and not b == 9:   # Noncompliant
+#                 ^^^^^^^^^^
+        b = 10
+    return "item1" "item2"
