@@ -153,11 +153,10 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static Optional<Token> separatorToken(Tree element) {
-    if (element instanceof AssignmentStatement) {
-      Token seperator = ((AssignmentStatement) element).separator();
-      return "\n".equals(seperator.value()) ? Optional.empty() : Optional.of(seperator);
-    }
-    return Optional.empty();
+    return Optional.of(element)
+      .filter(AssignmentStatement.class::isInstance)
+      .map(e -> ((AssignmentStatement) e).separator())
+      .filter(sep -> !"\n".equals(sep.value()));
   }
 
   private static PythonTextEdit removeDeadStore(Tree tree) {
@@ -180,7 +179,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
     PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the line(s)")
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the unused statement")
       .addTextEdit(edit)
       .build();
     issue.addQuickFix(quickFix);

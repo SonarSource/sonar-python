@@ -115,4 +115,19 @@ public class DeadStoreCheckTest {
       "    print(c)\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
+
+  @Test
+  public void comment() {
+    String codeWithIssue = "" +
+      "def assignment_expression():\n" +
+      "  foo(a:=3) # Noncompliant\n" +
+      "# ^^^^^^^^^\n" +
+      "  a = 2\n" +
+      "  print(a)";
+    String codeFixed = "" +
+      "def assignment_expression():\n" +
+      "  a = 2\n" +
+      "  print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
 }

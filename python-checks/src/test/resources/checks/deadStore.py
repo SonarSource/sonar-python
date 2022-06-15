@@ -322,3 +322,8 @@ def match_statement_no_fp(value):
 
 def dead_store(): unused = 24; unused = 42; print(unused); # NonCompliant
 #                 ^^^^^^^^^^^^
+
+def ab():
+    a = foo()
+    print(a)
+    a = foo() # Noncompliant
