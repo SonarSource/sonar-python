@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class AllBranchesAreIdenticalCheckTest {
 
-  private PythonCheck check = new AllBranchesAreIdenticalCheck();
+  private final PythonCheck check = new AllBranchesAreIdenticalCheck();
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/allBranchesAreIdentical.py", check);
@@ -113,6 +113,10 @@ public class AllBranchesAreIdenticalCheckTest {
     String codeWithIssue = "a = 1 if x else 1 if y else 1 if z else 1";
     String codeFixed = "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+
+    codeWithIssue = "a = (1 if x else 1) if cond else 1";
+    codeFixed = "a = (1 if x else 1)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
@@ -173,6 +177,34 @@ public class AllBranchesAreIdenticalCheckTest {
   public void test_complex_condition(){
     String codeWithIssue = "a = do_something(a, b, c, do_something_else(d)) if x else do_something(a, b, c, do_something_else(d))";
     String codeFixed = "a = do_something(a, b, c, do_something_else(d))";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void test_remove(){
+    String codeWithIssue = ""+
+      "if b == 0:\n" +
+      "    doSomething()\n" +
+      "else:\n" +
+      "    doSomething()\n" +
+      "\n" +
+      "a = 1";
+    String codeFixed = ""+
+      "doSomething()\n" +
+      "a = 1";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+
+    codeWithIssue = ""+
+      "if b == 0:\n" +
+      "    doSomething()\n" +
+      "else:\n" +
+      "    doSomething()\n" +
+      "\n" +
+      "\n" +
+      "a = 1";
+    codeFixed = ""+
+      "doSomething()\n" +
+      "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }

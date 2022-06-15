@@ -54,7 +54,8 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   }
 
   private static void handleIfStatement(IfStatement ifStmt, SubscriptionContext ctx) {
-    if (ifStmt.elseBranch() == null) {
+    ElseClause elseBranch = ifStmt.elseBranch();
+    if (elseBranch == null) {
       return;
     }
     StatementList body = ifStmt.body();
@@ -64,13 +65,13 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
         return;
       }
     }
-    if (!CheckUtils.areEquivalent(body, ifStmt.elseBranch().body())) {
+    if (!CheckUtils.areEquivalent(body, elseBranch.body())) {
       return;
     }
     PreciseIssue issue = ctx.addIssue(ifStmt.keyword(), "Remove this if statement or edit its code blocks so that they're not all the same.");
     issue.secondary(issueLocation(ifStmt.body()));
     ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
-    issue.secondary(issueLocation(ifStmt.elseBranch().body()));
+    issue.secondary(issueLocation(elseBranch.body()));
     createQuickFix((IssueWithQuickFix) issue, ifStmt, ifStmt.body().statements());
   }
 
@@ -126,8 +127,9 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     List<Tree> children = tree.children();
     Token lastTokenOfFirst = children.get(0).lastToken();
     Token lastTokenOfConditional = children.get(children.size() - 1).lastToken();
-    PythonTextEdit edit = new PythonTextEdit("", lastTokenOfFirst.line(), lastTokenOfFirst.column(),
-      lastTokenOfConditional.line(), lastTokenOfConditional.column());
+    // Keep the first statement and remove the rest
+    PythonTextEdit edit = new PythonTextEdit("", lastTokenOfFirst.line(), lastTokenOfFirst.column() + lastTokenOfFirst.value().length(),
+      lastTokenOfConditional.line(), lastTokenOfConditional.column() + lastTokenOfConditional.value().length());
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the if statement")
       .addTextEdit(edit)
@@ -168,8 +170,8 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     // Remove else branch
     elseBranch.ifPresent(branch -> quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch)));
 
-    // Remove the indent on the else line
-    if (ifStatement.elifBranches().isEmpty()) {
+    // Remove the indent on the else line if it doesn't start at column 0
+    if (ifStatement.elifBranches().isEmpty() && elseBranch.map(b -> b.firstToken().column()).orElse(0) != 0) {
       lineElseBranch.ifPresent(lineElse -> quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
     }
 
