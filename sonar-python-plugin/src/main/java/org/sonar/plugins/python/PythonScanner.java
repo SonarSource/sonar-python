@@ -101,9 +101,7 @@ public class PythonScanner extends Scanner {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
-      if (!isInSonarLint(context)) {
-        saveMeasures(inputFile, visitorContext);
-      }
+      saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile);
@@ -220,26 +218,29 @@ public class PythonScanner extends Scanner {
     FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
-    Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
-    saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
-    saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
-    saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
-    saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
-    saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
+    if (!isInSonarLint(context)) {
+      cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
 
-    FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
-    for (int line : linesOfCode) {
-      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
+      saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
+      saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
+      saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
+      saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
+      saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
+      saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
+      saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
+
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
+      for (int line : linesOfCode) {
+        fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      }
+      for (int line : fileLinesVisitor.getExecutableLines()) {
+        fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
+      }
+      fileLinesContext.save();
     }
-    for (int line : fileLinesVisitor.getExecutableLines()) {
-      fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
-    }
-    fileLinesContext.save();
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
