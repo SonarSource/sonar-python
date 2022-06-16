@@ -192,17 +192,20 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     return new PythonTextEdit("", line, 0, line, 4);
   }
 
-  private static void removeElseBranch(PythonQuickFix.Builder builder, ElseClause elseBranch){
+  private static void removeElseBranch(PythonQuickFix.Builder builder, ElseClause elseBranch) {
     List<Tree> children = elseBranch.children();
     Collections.reverse(children);
+    // Find the last child that is not a "dedent" token, so that the original spacing is kept
     Optional<Tree> lastValidTree = children.stream()
       .sequential()
-      .filter(tree -> !tree.is(Tree.Kind.TOKEN) || ((Token) tree).type()!= DEDENT)
+      .filter(tree -> !(Optional.of(tree).filter(Token.class::isInstance)
+        .map(t -> ((Token) t).type())
+        .map(DEDENT::equals).orElse(false)))
       .findFirst();
 
     lastValidTree.ifPresent(tree -> {
       List<Token> tokens = TreeUtils.tokens(tree);
-      PythonTextEdit edit = PythonTextEdit.replaceRange(elseBranch.firstToken(), tokens.get(tokens.size()-1), "");
+      PythonTextEdit edit = PythonTextEdit.replaceRange(elseBranch.firstToken(), tokens.get(tokens.size() - 1), "");
       builder.addTextEdit(edit);
     });
   }
