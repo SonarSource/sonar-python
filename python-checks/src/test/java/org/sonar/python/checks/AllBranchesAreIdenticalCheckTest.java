@@ -115,7 +115,7 @@ public class AllBranchesAreIdenticalCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = (1 if x else 1) if cond else 1";
-    codeFixed = "a = (1 if x else 1)";
+    codeFixed = "a = (1 if x else 1)";  // SONARPY-1047
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -187,7 +187,7 @@ public class AllBranchesAreIdenticalCheckTest {
       "    doSomething()\n" +
       "else:\n" +
       "    doSomething()\n" +
-      "\n" +
+      "\n" +  // blank line should not be removed: SONARPY-1048
       "a = 1";
     String codeFixed = ""+
       "doSomething()\n" +
