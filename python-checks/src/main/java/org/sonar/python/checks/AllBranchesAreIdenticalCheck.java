@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
@@ -40,6 +41,8 @@ import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.IfStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.collections.ListUtils;
+
+import static org.sonar.python.api.PythonTokenType.DEDENT;
 
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
@@ -164,29 +167,43 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
 
     // Remove indent from the second line until the last statement
     for (int line = firstLine + 1; line <= lastLine; line++) {
-      quickFixBuilder.addTextEdit(editIndentAtLine(line));
+      quickFixBuilder.addTextEdit(removeOneIndentAtLine(line));
     }
 
     // Remove else branch
-    elseBranch.ifPresent(branch -> quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch)));
+    elseBranch.ifPresent(branch -> removeElseBranch(quickFixBuilder, branch));
 
     // Remove the indent on the else line if it doesn't start at column 0
     if (ifStatement.elifBranches().isEmpty() && elseBranch.map(b -> b.firstToken().column()).orElse(0) != 0) {
-      lineElseBranch.ifPresent(lineElse -> quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
+      lineElseBranch.ifPresent(lineElse -> quickFixBuilder.addTextEdit(removeOneIndentAtLine(lineElse)));
     }
 
     // Take care of the elif branches, the elif branch goes up to the next else or elif branch
     for (IfStatement branch : ifStatement.elifBranches()) {
       int lineElifBranch = branch.firstToken().line();
       quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch))
-        .addTextEdit(editIndentAtLine(lineElifBranch));
+        .addTextEdit(removeOneIndentAtLine(lineElifBranch));
     }
 
     issue.addQuickFix(quickFixBuilder.build());
   }
 
-  private static PythonTextEdit editIndentAtLine(int line) {
+  private static PythonTextEdit removeOneIndentAtLine(int line) {
     return new PythonTextEdit("", line, 0, line, 4);
   }
 
+  private static void removeElseBranch(PythonQuickFix.Builder builder, ElseClause elseBranch){
+    List<Tree> children = elseBranch.children();
+    Collections.reverse(children);
+    Optional<Tree> lastValidTree = children.stream()
+      .sequential()
+      .filter(tree -> !tree.is(Tree.Kind.TOKEN) || ((Token) tree).type()!= DEDENT)
+      .findFirst();
+
+    lastValidTree.ifPresent(tree -> {
+      List<Token> tokens = TreeUtils.tokens(tree);
+      PythonTextEdit edit = PythonTextEdit.replaceRange(elseBranch.firstToken(), tokens.get(tokens.size()-1), "");
+      builder.addTextEdit(edit);
+    });
+  }
 }

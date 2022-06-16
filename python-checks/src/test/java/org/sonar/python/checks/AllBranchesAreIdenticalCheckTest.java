@@ -90,12 +90,15 @@ public class AllBranchesAreIdenticalCheckTest {
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "        doOneMoreThing()\n" +
+      "        a = 10\n"+
       "    else:\n" +
       "        doSomething()\n" +
-      "        doOneMoreThing()\n";
+      "        doOneMoreThing()\n"+
+      "        a = 10\n";
     String codeFixed = "def func():\n" +
       "    doSomething()\n" +
-      "    doOneMoreThing()\n";
+      "    doOneMoreThing()\n" +
+      "    a = 10\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -144,10 +147,10 @@ public class AllBranchesAreIdenticalCheckTest {
       "        doOneMoreThing()\n"+
       "    else:\n" +
       "        doSomething()\n"+
-      "        doOneMoreThing()\n";;
+      "        doOneMoreThing()\n";
     String codeFixed = "def func():\n" +
       "    doSomething()\n"+
-      "    doOneMoreThing()\n";;
+      "    doOneMoreThing()\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -165,11 +168,13 @@ public class AllBranchesAreIdenticalCheckTest {
       "    else:\n" +
       "        doSomething()\n"+
       "        doSomething()\n" +
-      "        doOneMoreThing()\n";;
+      "        doOneMoreThing()\n" +
+      "    a = 10";
     String codeFixed = "def func():\n" +
       "    doSomething()\n"+
       "    doSomething()\n" +
-      "    doOneMoreThing()\n";;
+      "    doOneMoreThing()\n" +
+      "    a = 10";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -191,6 +196,7 @@ public class AllBranchesAreIdenticalCheckTest {
       "a = 1";
     String codeFixed = ""+
       "doSomething()\n" +
+      "\n" +
       "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
@@ -204,6 +210,8 @@ public class AllBranchesAreIdenticalCheckTest {
       "a = 1";
     codeFixed = ""+
       "doSomething()\n" +
+      "\n" +
+      "\n" +
       "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
