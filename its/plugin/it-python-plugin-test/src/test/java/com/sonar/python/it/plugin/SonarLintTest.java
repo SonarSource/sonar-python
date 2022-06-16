@@ -86,7 +86,8 @@ public class SonarLintTest {
   public void should_raise_issues() throws IOException {
     ClientInputFile inputFile = prepareInputFile("foo.py",
       "def fooBar():\n"
-        + "  `1` \n",
+        + "  `1` \n"
+        + "  `1` #NOSONAR\n",
       false);
 
     List<Issue> issues = new ArrayList<>();
