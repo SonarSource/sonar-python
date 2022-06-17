@@ -175,7 +175,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void comment_after_should_not_be_remove(){
+  public void comment_after_should_not_be_removed(){
     String codeWithIssue = "" +
       "def ab():\n" +
       "    a = 42\n" +
@@ -190,4 +190,23 @@ public class DeadStoreCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
+  @Test
+  public void space_comment_after_should_not_be_removed(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    b = 1\n" +
+      "    a = 42\n" +
+      "\n"+
+      "    # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    b = 1\n" +
+      "    \n"+
+      "    # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
 }

@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.TokenType;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.IntStream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -231,16 +231,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static int indexOfFirstIndent(List<Tree> children) {
-    for (int j = 0; j < children.size(); j++) {
-      // Look for the first indent
-      Optional<TokenType> isIndent = Optional.of(children.get(j))
+    return IntStream.range(0, children.size())
+      .filter(i -> Optional.of(children.get(i))
         .filter(Token.class::isInstance)
         .map(t -> ((Token) t).type())
-        .filter(t -> t == PythonTokenType.INDENT);
-      if (isIndent.isPresent()) {
-        return j;
-      }
-    }
-    return -1;
+        .filter(t -> t == PythonTokenType.INDENT)
+        .isPresent())
+      .findFirst().orElseThrow(() -> new IllegalArgumentException("An indent is expected here."));
   }
 }
