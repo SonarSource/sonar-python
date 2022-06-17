@@ -117,17 +117,60 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void comment() {
+  public void end_of_line_comments_should_be_removed() {
     String codeWithIssue = "" +
       "def assignment_expression():\n" +
-      "  foo(a:=3) # Noncompliant\n" +
-      "# ^^^^^^^^^\n" +
-      "  a = 2\n" +
-      "  print(a)";
+      "    foo(a:=3) # Comment 1\n" +
+      "# Comment 2\n" +
+      "    a = 2\n" +
+      "    print(a)";
     String codeFixed = "" +
       "def assignment_expression():\n" +
-      "  a = 2\n" +
-      "  print(a)";
+      "    # Comment 2\n" +
+      "    a = 2\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void no_separator_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo()";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void one_separator_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo();";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void two_separators_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo();\n";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }

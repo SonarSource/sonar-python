@@ -323,7 +323,7 @@ def match_statement_no_fp(value):
 def dead_store(): unused = 24; unused = 42; print(unused); # NonCompliant
 #                 ^^^^^^^^^^^^
 
-def ab():
+def no_separator_after_deadstore():
     a = foo()
     print(a)
     a = foo() # Noncompliant
