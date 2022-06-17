@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import com.sonar.sslr.api.TokenType;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
@@ -87,7 +89,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
           .map(separator -> ctx.addIssue(element.firstToken(), separator, message))
           .orElseGet(() -> ctx.addIssue(element, message));
 
-           createQuickFix(issue, element);
+        createQuickFix(issue, element);
       });
   }
 
@@ -169,44 +171,76 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  private static PythonTextEdit removeDeadStore(Tree currentTree, Optional<Token> tokenSeparator) {
+  private static PythonTextEdit removeDeadStore(Tree currentTree) {
+    Optional<Token> tokenSeparator = separatorTokenOfElement(currentTree);
     List<Tree> childrenOfParent = currentTree.parent().children();
+
     if (childrenOfParent.size() == 1) {
       return remove(currentTree);
     }
 
-    Token current = currentTree.firstToken();
-    int i = childrenOfParent.indexOf(currentTree);
-    if (i == childrenOfParent.size() - 1) {
-      Tree previousTree = childrenOfParent.get(i - 1);
+    Token currentFirstToken = currentTree.firstToken();
+    int indexOfCurrentTree = childrenOfParent.indexOf(currentTree);
+
+    // If the tree to remove is the last one, we remove from the end of the previous tree until the end of the current one
+    if (indexOfCurrentTree == childrenOfParent.size() - 1) {
+      Tree previousTree = childrenOfParent.get(indexOfCurrentTree - 1);
       Optional<Token> previousSep = separatorTokenOfElement(previousTree);
       Token previous = previousSep.orElse(previousTree.lastToken());
-      current = tokenSeparator.orElse(currentTree.lastToken());
-      // Replace from the end of the previous token until the end of the current token
-      return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(),
-        current.line(), current.column() + current.value().length());
+      currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
+      return removeFromEndOfTillEndOf(previous, currentFirstToken);
     }
 
-    // If the next tree is more than 1 line after the current tree, we only remove the separator
+    // If the first tree is noncompliant and the next tree is not on the same line
+    if (indexOfCurrentTree == 0 && childrenOfParent.get(0).lastToken().line() != childrenOfParent.get(1).firstToken().line()) {
+      List<Tree> children = currentTree.parent().parent().children();
+      int indexFirstIndent = indexOfFirstIndent(children);
+
+      // Retrieve the last token of the last parent tree
+      Token previousToken = children.get(indexFirstIndent - 1).lastToken();
+      currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
+      return removeFromEndOfTillEndOf(previousToken, currentFirstToken);
+    }
+
+    // If the next tree is more than 1 line after the currentFirstToken tree, we only remove the separator
     Token next;
     int currentLine = currentTree.lastToken().line();
-    int nextLine = childrenOfParent.get(i + 1).firstToken().line();
+    int nextLine = childrenOfParent.get(indexOfCurrentTree + 1).firstToken().line();
     if (nextLine > currentLine + 1) {
       next = tokenSeparator.orElse(currentTree.lastToken());
-      // Remove from the start of the current token until after the separator
-      return new PythonTextEdit("", current.line(), current.column(), next.line(), next.column() + next.value().length());
+      // Remove from the start of the currentFirstToken token until after the separator
+      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column() + next.value().length());
     } else {
-      next = childrenOfParent.get(i + 1).firstToken();
-      // Remove from the start of the current token until the next token
-      return new PythonTextEdit("", current.line(), current.column(), next.line(), next.column());
+      // Remove from the start of the currentFirstToken token until the next token
+      next = childrenOfParent.get(indexOfCurrentTree + 1).firstToken();
+      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column());
     }
   }
 
   private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
-    PythonTextEdit edit = removeDeadStore(unnecessaryAssignment, separatorTokenOfElement(unnecessaryAssignment));
+    PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the unused statement")
       .addTextEdit(edit)
       .build();
     issue.addQuickFix(quickFix);
+  }
+
+  private static PythonTextEdit removeFromEndOfTillEndOf(Token first, Token last) {
+    return new PythonTextEdit("", first.line(), first.column() + first.value().length(),
+      last.line(), last.column() + last.value().length());
+  }
+
+  private static int indexOfFirstIndent(List<Tree> children) {
+    for (int j = 0; j < children.size(); j++) {
+      // Look for the first indent
+      Optional<TokenType> isIndent = Optional.of(children.get(j))
+        .filter(Token.class::isInstance)
+        .map(t -> ((Token) t).type())
+        .filter(t -> t == PythonTokenType.INDENT);
+      if (isIndent.isPresent()) {
+        return j;
+      }
+    }
+    return -1;
   }
 }
