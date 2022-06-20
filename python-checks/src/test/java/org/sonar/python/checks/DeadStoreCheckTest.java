@@ -126,7 +126,7 @@ public class DeadStoreCheckTest {
       "    print(a)";
     String codeFixed = "" +
       "def assignment_expression():\n" +
-      "# Comment 2\n" +
+      "    # Comment 2\n" +
       "    a = 2\n" +
       "    print(a)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
@@ -184,7 +184,7 @@ public class DeadStoreCheckTest {
       "    print(a)";
     String codeFixed = "" +
       "def ab():\n" +
-      "    # This is an important comment\n" +
+      "        # This is an important comment\n" +
       "    a = 43\n" +
       "    print(a)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
@@ -206,6 +206,23 @@ public class DeadStoreCheckTest {
       "    \n"+
       "    # This is an important comment\n" +
       "    a = 43\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void deadstore_one_branch(){
+    String codeWithIssue = "" +
+      "def a():\n" +
+      "    x = 42\n" +
+      "    if x:\n" +
+      "        x = 43\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def a():\n" +
+      "    x = 42\n" +
+      "    if x:\n" +
+      "        pass\n" +
       "    print(a)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }

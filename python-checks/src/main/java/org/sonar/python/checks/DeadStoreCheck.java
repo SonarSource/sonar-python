@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.IntStream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -33,14 +32,13 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
@@ -48,7 +46,6 @@ import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
-import static org.sonar.python.quickfix.PythonTextEdit.remove;
 
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {
@@ -163,9 +160,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static Optional<Token> separatorTokenOfElement(Tree element) {
     if (element.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.EXPRESSION_STMT)) {
-      Token separator = element.is(Tree.Kind.ASSIGNMENT_STMT)
-        ? ((AssignmentStatement) element).separator()
-        : ((ExpressionStatement) element).separator();
+      Token separator = ((Statement) element).separator();
       return Optional.ofNullable(separator);
     }
     return Optional.empty();
@@ -176,7 +171,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     List<Tree> childrenOfParent = currentTree.parent().children();
 
     if (childrenOfParent.size() == 1) {
-      return remove(currentTree);
+      return PythonTextEdit.replace(currentTree, "pass");
     }
 
     Token currentFirstToken = currentTree.firstToken();
@@ -189,17 +184,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       Token previous = previousSep.orElse(previousTree.lastToken());
       currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
       return removeFromEndOfTillEndOf(previous, currentFirstToken);
-    }
-
-    // If the first tree is noncompliant and the next tree is not on the same line
-    if (indexOfCurrentTree == 0 && childrenOfParent.get(0).lastToken().line() != childrenOfParent.get(1).firstToken().line()) {
-      List<Tree> children = currentTree.parent().parent().children();
-      int indexFirstIndent = indexOfFirstIndent(children);
-
-      // Retrieve the last token of the last parent tree
-      Token previousToken = children.get(indexFirstIndent - 1).lastToken();
-      currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
-      return removeFromEndOfTillEndOf(previousToken, currentFirstToken);
     }
 
     // If the next tree is more than 1 line after the currentFirstToken tree, we only remove the separator
@@ -228,15 +212,5 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static PythonTextEdit removeFromEndOfTillEndOf(Token first, Token last) {
     return new PythonTextEdit("", first.line(), first.column() + first.value().length(),
       last.line(), last.column() + last.value().length());
-  }
-
-  private static int indexOfFirstIndent(List<Tree> children) {
-    return IntStream.range(0, children.size())
-      .filter(i -> Optional.of(children.get(i))
-        .filter(Token.class::isInstance)
-        .map(t -> ((Token) t).type())
-        .filter(t -> t == PythonTokenType.INDENT)
-        .isPresent())
-      .findFirst().orElseThrow(() -> new IllegalArgumentException("An indent is expected here."));
   }
 }

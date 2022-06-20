@@ -198,7 +198,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     return true;
   }
 
-  public static String getContents(String comment) {
+  private static String getContents(String comment) {
     // Comment always starts with "#"
     return comment.substring(comment.indexOf('#'));
   }
