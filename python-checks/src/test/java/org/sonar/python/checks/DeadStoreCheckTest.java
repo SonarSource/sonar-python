@@ -115,4 +115,115 @@ public class DeadStoreCheckTest {
       "    print(c)\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
+
+  @Test
+  public void end_of_line_comments_should_be_removed() {
+    String codeWithIssue = "" +
+      "def assignment_expression():\n" +
+      "    foo(a:=3) # Comment 1\n" +
+      "# Comment 2\n" +
+      "    a = 2\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def assignment_expression():\n" +
+      "    # Comment 2\n" +
+      "    a = 2\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void no_separator_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo()";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void one_separator_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo();";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void two_separators_found(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n" +
+      "    a = foo();\n";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    a = foo()\n" +
+      "    print(a)\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void comment_after_should_not_be_removed(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    a = 42\n" +
+      "    # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "        # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void space_comment_after_should_not_be_removed(){
+    String codeWithIssue = "" +
+      "def ab():\n" +
+      "    b = 1\n" +
+      "    a = 42\n" +
+      "\n"+
+      "    # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def ab():\n" +
+      "    b = 1\n" +
+      "    \n"+
+      "    # This is an important comment\n" +
+      "    a = 43\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void deadstore_one_branch(){
+    String codeWithIssue = "" +
+      "def a():\n" +
+      "    x = 42\n" +
+      "    if x:\n" +
+      "        x = 43\n" +
+      "    print(a)";
+    String codeFixed = "" +
+      "def a():\n" +
+      "    x = 42\n" +
+      "    if x:\n" +
+      "        pass\n" +
+      "    print(a)";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
 }

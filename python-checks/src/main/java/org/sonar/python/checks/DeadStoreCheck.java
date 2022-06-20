@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
@@ -45,7 +46,6 @@ import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
-import static org.sonar.python.quickfix.PythonTextEdit.remove;
 
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {
@@ -82,10 +82,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .forEach(unnecessaryAssignment -> {
         Tree element = unnecessaryAssignment.element;
         String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
-        IssueWithQuickFix issue = (IssueWithQuickFix) separatorToken(element)
+        IssueWithQuickFix issue = (IssueWithQuickFix) separatorTokenForIssue(element)
           .map(separator -> ctx.addIssue(element.firstToken(), separator, message))
           .orElseGet(() -> ctx.addIssue(element, message));
-        createQuickFix(issue, unnecessaryAssignment.element);
+
+        createQuickFix(issue, element);
       });
   }
 
@@ -152,37 +153,64 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
   }
 
-  private static Optional<Token> separatorToken(Tree element) {
-    if (element instanceof AssignmentStatement) {
-      Token seperator = ((AssignmentStatement) element).separator();
-      return "\n".equals(seperator.value()) ? Optional.empty() : Optional.of(seperator);
+  private static Optional<Token> separatorTokenForIssue(Tree element) {
+    return separatorTokenOfElement(element)
+      .filter(sep -> !"\n".equals(sep.value()));
+  }
+
+  private static Optional<Token> separatorTokenOfElement(Tree element) {
+    if (element.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.EXPRESSION_STMT)) {
+      Token separator = ((Statement) element).separator();
+      return Optional.ofNullable(separator);
     }
     return Optional.empty();
   }
 
-  private static PythonTextEdit removeDeadStore(Tree tree) {
-    List<Tree> childrenOfParent = tree.parent().children();
+  private static PythonTextEdit removeDeadStore(Tree currentTree) {
+    Optional<Token> tokenSeparator = separatorTokenOfElement(currentTree);
+    List<Tree> childrenOfParent = currentTree.parent().children();
+
     if (childrenOfParent.size() == 1) {
-      return remove(tree);
+      return PythonTextEdit.replace(currentTree, "pass");
     }
-    Token current = tree.firstToken();
-    int i = childrenOfParent.indexOf(tree);
-    if (i == childrenOfParent.size() - 1) {
-      Token previous = childrenOfParent.get(i - 1).lastToken();
-      current = tree.lastToken();
-      // Replace from the end of the previous token (will also remove the separator and trailing whitespaces) until the end of the current token
-      return new PythonTextEdit("", previous.line(), previous.column() + previous.value().length(), current.line(), current.column() + current.value().length());
+
+    Token currentFirstToken = currentTree.firstToken();
+    int indexOfCurrentTree = childrenOfParent.indexOf(currentTree);
+
+    // If the tree to remove is the last one, we remove from the end of the previous tree until the end of the current one
+    if (indexOfCurrentTree == childrenOfParent.size() - 1) {
+      Tree previousTree = childrenOfParent.get(indexOfCurrentTree - 1);
+      Optional<Token> previousSep = separatorTokenOfElement(previousTree);
+      Token previous = previousSep.orElse(previousTree.lastToken());
+      currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
+      return removeFromEndOfTillEndOf(previous, currentFirstToken);
     }
-    Token next = childrenOfParent.get(i + 1).firstToken();
-    // Remove from the start of the current tokenuntil the next token
-    return new PythonTextEdit("", current.line(), current.column(), next.line(), next.column());
+
+    // If the next tree is more than 1 line after the currentFirstToken tree, we only remove the separator
+    Token next;
+    int currentLine = currentTree.lastToken().line();
+    int nextLine = childrenOfParent.get(indexOfCurrentTree + 1).firstToken().line();
+    if (nextLine > currentLine + 1) {
+      next = tokenSeparator.orElse(currentTree.lastToken());
+      // Remove from the start of the currentFirstToken token until after the separator
+      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column() + next.value().length());
+    } else {
+      // Remove from the start of the currentFirstToken token until the next token
+      next = childrenOfParent.get(indexOfCurrentTree + 1).firstToken();
+      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column());
+    }
   }
 
   private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
     PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the line(s)")
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the unused statement")
       .addTextEdit(edit)
       .build();
     issue.addQuickFix(quickFix);
+  }
+
+  private static PythonTextEdit removeFromEndOfTillEndOf(Token first, Token last) {
+    return new PythonTextEdit("", first.line(), first.column() + first.value().length(),
+      last.line(), last.column() + last.value().length());
   }
 }
