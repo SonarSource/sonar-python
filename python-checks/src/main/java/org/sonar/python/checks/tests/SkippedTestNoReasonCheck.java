@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -53,7 +54,7 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private void checkQualifiedExpression(SubscriptionContext ctx, Decorator decorator, String name) {
+  private static void checkQualifiedExpression(SubscriptionContext ctx, Decorator decorator, String name) {
     if (decorator.expression().is(Tree.Kind.QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) decorator.expression();
 
@@ -68,22 +69,22 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkDecoratorCallExpressionWithEmptyStringArg(SubscriptionContext ctx, Decorator decorator, String name) {
+  private static void checkDecoratorCallExpressionWithEmptyStringArg(SubscriptionContext ctx, Decorator decorator, String name) {
     if (!decorator.expression().is(Tree.Kind.CALL_EXPR)) return;
 
     CallExpression callExpression = (CallExpression) decorator.expression();
     checkCallExpressionWithNoArgsOrEmptyStringArg(ctx, callExpression, name);
   }
 
-  private void checkCallExpressionWithNoArgsOrEmptyStringArg(SubscriptionContext ctx, CallExpression callExpression, String name) {
-    if (!callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) return;
+  private static void checkCallExpressionWithNoArgsOrEmptyStringArg(SubscriptionContext ctx, CallExpression callExpression, String name) {
+    Symbol symbol = (callExpression.calleeSymbol());
+    if (symbol == null) {
+      return;
+    }
 
-    if (((QualifiedExpression) callExpression.callee()).symbol() == null) return;
-    Symbol symbol = ((QualifiedExpression) callExpression.callee()).symbol();
-    if (symbol == null) return;
     if (!name.equals(symbol.fullyQualifiedName())) return;
 
-    if (callExpression.arguments() == null || callExpression.arguments().isEmpty()) {
+    if (callExpression.arguments().isEmpty()) {
       ctx.addIssue(callExpression, MESSAGE);
       return;
     }

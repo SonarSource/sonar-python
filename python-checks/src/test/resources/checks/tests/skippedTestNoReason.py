@@ -26,6 +26,10 @@ class UsingPytest():
     def test_pytest_mark_skip_no_reason():
         assert 1 == 2
 
+    @skip()
+    def test_skip_symbol_not_defined_ok():
+        assert 1 == 2
+
     @pytest.mark.skip("")  # Noncompliant {{Provide a reason for skipping this test.}}
 #                     ^^
     def test_pytest_mark_skip_empty_reason():
@@ -39,3 +43,8 @@ class UsingPytest():
     def test_skipped_empty_reason():
         pytest.skip("")  # Noncompliant {{Provide a reason for skipping this test.}}
 #                   ^^
+
+    @["abc"]()
+    def test_pytest_mark_skip_no_reason_list_literal():
+        assert 1 == 2
+

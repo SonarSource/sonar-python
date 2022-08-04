@@ -28,4 +28,9 @@ public class SkippedTestNoReasonCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/skippedTestNoReason.py", new SkippedTestNoReasonCheck());
   }
+
+  @Test
+  public void testWithImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tests/skippedTestNoReasonWithImport.py", new SkippedTestNoReasonCheck());
+  }
 }
