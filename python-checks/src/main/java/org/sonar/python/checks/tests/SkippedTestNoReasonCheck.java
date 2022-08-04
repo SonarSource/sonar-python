@@ -21,6 +21,7 @@ package org.sonar.python.checks.tests;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -56,8 +57,10 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     if (decorator.expression().is(Tree.Kind.QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) decorator.expression();
 
-      if (qualifiedExpression.symbol() == null) return;
-      if (!name.equals(qualifiedExpression.symbol().fullyQualifiedName())) return;
+      Symbol symbol = qualifiedExpression.symbol();
+
+      if (symbol == null) return;
+      if (!name.equals(symbol.fullyQualifiedName())) return;
 
       if (decorator.arguments() == null) {
         ctx.addIssue(decorator, MESSAGE);
@@ -75,10 +78,12 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
   private void checkCallExpressionWithNoArgsOrEmptyStringArg(SubscriptionContext ctx, CallExpression callExpression, String name) {
     if (!callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) return;
 
-    if (((QualifiedExpression) ((CallExpression) callExpression).callee()).symbol() == null) return;
-    if (!name.equals(((QualifiedExpression) ((CallExpression) callExpression).callee()).symbol().fullyQualifiedName())) return;
+    if (((QualifiedExpression) callExpression.callee()).symbol() == null) return;
+    Symbol symbol = ((QualifiedExpression) callExpression.callee()).symbol();
+    if (symbol == null) return;
+    if (!name.equals(symbol.fullyQualifiedName())) return;
 
-    if (callExpression.arguments() == null || callExpression.arguments().size() == 0) {
+    if (callExpression.arguments() == null || callExpression.arguments().isEmpty()) {
       ctx.addIssue(callExpression, MESSAGE);
       return;
     }
