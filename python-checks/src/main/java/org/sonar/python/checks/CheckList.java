@@ -76,6 +76,7 @@ import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
+import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 
 public final class CheckList {
 
@@ -245,6 +246,7 @@ public final class CheckList {
       SillyIdentityCheck.class,
       SingleCharacterAlternationCheck.class,
       SingleCharCharacterClassCheck.class,
+      SkippedTestNoReasonCheck.class,
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
