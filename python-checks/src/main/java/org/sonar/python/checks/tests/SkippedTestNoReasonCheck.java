@@ -1,0 +1,119 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2022 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.checks.tests;
+
+import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
+
+@Rule(key = "S1607")
+public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
+
+  private static final String MESSAGE = "Provide a reason for skipping this test.";
+
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.DECORATOR, ctx -> {
+      Decorator decorator = (Decorator) ctx.syntaxNode();
+
+      checkDecoratorSkipWithoutReason(ctx, decorator, "unittest.case.skip");
+      checkDecoratorSkipWithoutReason(ctx, decorator, "pytest.mark.skip");
+    });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+
+      checkCallExpressionSkipWithNoOrEmptyReason(ctx, callExpression, "pytest.skip");
+    });
+  }
+
+  private static void checkDecoratorSkipWithoutReason(SubscriptionContext ctx, Decorator decorator, String decoratorSkipName) {
+    Expression expression = decorator.expression();
+    Symbol symbol = getSymbolFromExpression(expression);
+
+    if (symbol == null) {
+      return;
+    }
+
+    if (!decoratorSkipName.equals(symbol.fullyQualifiedName())) {
+      return;
+    }
+
+    checkNoOrEmptyReason(ctx, decorator, decorator.arguments());
+  }
+
+  private static Symbol getSymbolFromExpression(Expression expression) {
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return ((QualifiedExpression) expression).symbol();
+    }
+
+    if (expression.is(Tree.Kind.CALL_EXPR)) {
+      return ((CallExpression) expression).calleeSymbol();
+    }
+
+    return null;
+  }
+
+  private static void checkCallExpressionSkipWithNoOrEmptyReason(SubscriptionContext ctx, CallExpression callExpression, String name) {
+    Symbol symbol = (callExpression.calleeSymbol());
+    if (symbol == null) {
+      return;
+    }
+
+    if (!name.equals(symbol.fullyQualifiedName())) {
+      return;
+    }
+
+    checkNoOrEmptyReason(ctx, callExpression, callExpression.argumentList());
+  }
+
+  private static void checkNoOrEmptyReason(SubscriptionContext ctx, Tree node, ArgList args) {
+    if (args == null) {
+      ctx.addIssue(node, MESSAGE);
+      return;
+    }
+
+    Argument arg = args.arguments().get(0);
+    if (!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+      return;
+    }
+
+    RegularArgument regularArg = (RegularArgument) arg;
+    if (!regularArg.expression().is(Tree.Kind.STRING_LITERAL)) {
+      return;
+    }
+
+    StringLiteral stringLiteral = (StringLiteral) regularArg.expression();
+
+    if (stringLiteral.trimmedQuotesValue().equals("")) {
+      ctx.addIssue(stringLiteral, MESSAGE);
+    }
+  }
+}
