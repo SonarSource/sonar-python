@@ -25,7 +25,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -60,8 +59,13 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
 
       Symbol symbol = qualifiedExpression.symbol();
 
-      if (symbol == null) return;
-      if (!name.equals(symbol.fullyQualifiedName())) return;
+      if (symbol == null) {
+        return;
+      }
+
+      if (!name.equals(symbol.fullyQualifiedName())) {
+        return;
+      }
 
       if (decorator.arguments() == null) {
         ctx.addIssue(decorator, MESSAGE);
@@ -82,7 +86,9 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (!name.equals(symbol.fullyQualifiedName())) return;
+    if (!name.equals(symbol.fullyQualifiedName())) {
+      return;
+    }
 
     if (callExpression.arguments().isEmpty()) {
       ctx.addIssue(callExpression, MESSAGE);
@@ -90,10 +96,14 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     }
 
     Argument arg = callExpression.arguments().get(0);
-    if(!arg.is(Tree.Kind.REGULAR_ARGUMENT)) return;
+    if(!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+      return;
+    }
 
     RegularArgument regularArg = (RegularArgument) arg;
-    if(!regularArg.expression().is(Tree.Kind.STRING_LITERAL)) return;
+    if(!regularArg.expression().is(Tree.Kind.STRING_LITERAL)) {
+      return;
+    }
 
     StringLiteral stringLiteral = (StringLiteral) regularArg.expression();
 
