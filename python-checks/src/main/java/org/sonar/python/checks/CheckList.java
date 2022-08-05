@@ -75,6 +75,7 @@ import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
+import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 
@@ -258,6 +259,7 @@ public final class CheckList {
       StrongCryptographicKeysCheck.class,
       SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
+      ImplicitlySkippedTestCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyLinesInFunctionCheck.class,
