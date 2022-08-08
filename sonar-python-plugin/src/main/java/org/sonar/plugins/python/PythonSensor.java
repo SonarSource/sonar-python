@@ -19,14 +19,12 @@
  */
 package org.sonar.plugins.python;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
@@ -42,17 +40,11 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVersionUtils;
-import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.checks.CheckList;
-import org.sonar.python.parser.PythonParser;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
@@ -113,8 +105,8 @@ public final class PythonSensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
-    List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
-    List<InputFile> testFiles = getInputFiles(Type.TEST, context);
+    List<InputFile> pythonFiles = getInputFiles(context);
+    List<InputFile> mainFiles = pythonFiles.stream().filter(f -> f.type() == Type.MAIN).collect(Collectors.toList());
     Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
     if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
@@ -123,16 +115,13 @@ public final class PythonSensor implements Sensor {
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
-    scanner.execute(mainFiles, context);
+    scanner.execute(pythonFiles, context);
     durationReport.stop();
-    if (!testFiles.isEmpty()) {
-      new TestHighlightingScanner(context).execute(testFiles, context);
-    }
   }
 
-  private static List<InputFile> getInputFiles(InputFile.Type type, SensorContext context) {
+  private static List<InputFile> getInputFiles(SensorContext context) {
     FilePredicates p = context.fileSystem().predicates();
-    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasType(type), p.hasLanguage(Python.KEY)));
+    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(Python.KEY)));
     List<InputFile> list = new ArrayList<>();
     it.forEach(list::add);
     return Collections.unmodifiableList(list);
@@ -149,40 +138,5 @@ public final class PythonSensor implements Sensor {
           .orElse(null)))
       .appendMeasurementCost()
       .start("PythonSensor");
-  }
-
-  private static class TestHighlightingScanner extends Scanner {
-
-    private static final Logger LOG = Loggers.get(TestHighlightingScanner.class);
-    private final PythonParser parser = PythonParser.create();
-
-    TestHighlightingScanner(SensorContext context) {
-      super(context);
-    }
-
-    @Override
-    protected String name() {
-      return "test sources highlighting";
-    }
-
-    @Override
-    protected void scanFile(InputFile inputFile) throws IOException {
-      try {
-        PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-        AstNode astNode = parser.parse(pythonFile.content());
-        FileInput parse = new PythonTreeMaker().fileInput(astNode);
-        // omitting package and symbols info as it's not required for highlighting
-        PythonVisitorContext visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), "", ProjectLevelSymbolTable.empty());
-        new PythonHighlighter(context, inputFile).scanFile(visitorContext);
-      } catch (RecognitionException e) {
-        LOG.error("Unable to parse file: " + inputFile.toString());
-        LOG.error(e.getMessage());
-      }
-    }
-
-    @Override
-    protected void processException(Exception e, InputFile file) {
-      LOG.warn("Unable to highlight test file: " + file.toString(), e);
-    }
   }
 }

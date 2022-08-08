@@ -39,4 +39,9 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
       }
     });
   }
+
+  @Override
+  public CheckScope scope() {
+    return CheckScope.ALL;
+  }
 }

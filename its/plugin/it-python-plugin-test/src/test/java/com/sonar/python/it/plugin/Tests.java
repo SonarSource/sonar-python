@@ -70,6 +70,7 @@ public final class Tests {
     // Custom rules plugin
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-test-rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))

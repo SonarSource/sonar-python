@@ -99,6 +99,7 @@ public class PythonSensorTest {
   private static final String FILE_1 = "file1.py";
   private static final String FILE_2 = "file2.py";
   private static final String FILE_QUICKFIX = "file_quickfix.py";
+  private static final String FILE_TEST_FILE = "test_file.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
 
@@ -418,6 +419,26 @@ public class PythonSensorTest {
     assertThat(context.allIssues()).hasSize(1);
   }
 
+
+  @Test
+  public void test_issues_on_test_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    InputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile);
+  }
+
   @Test
   public void test_test_file_highlighting() throws IOException {
     activeRules = new ActiveRulesBuilder().build();
@@ -448,9 +469,8 @@ public class PythonSensorTest {
     context.fileSystem().add(inputFile2);
     context.fileSystem().add(inputFile3);
     sensor().execute(context);
-    assertThat(logTester.logs()).contains("Starting test sources highlighting");
     assertThat(logTester.logs()).contains("Unable to parse file: parse_error.py");
-    assertThat(logTester.logs()).contains("Unable to highlight test file: file2.py");
+    assertThat(logTester.logs()).contains("Unable to analyze file: file2.py");
     assertThat(context.highlightingTypeAt(inputFile1.key(), 1, 2)).isNotEmpty();
   }
 
@@ -638,16 +658,24 @@ public class PythonSensorTest {
   }
 
   private InputFile inputFile(String name) {
-    DefaultInputFile inputFile = createInputFile(name);
+    return inputFile(name, Type.MAIN);
+  }
+
+  private InputFile inputFile(String name, Type fileType) {
+    DefaultInputFile inputFile = createInputFile(name, fileType);
     context.fileSystem().add(inputFile);
     return inputFile;
   }
 
   private DefaultInputFile createInputFile(String name) {
+    return createInputFile(name, Type.MAIN);
+  }
+
+  private DefaultInputFile createInputFile(String name, Type fileType) {
     return TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(UTF_8)
-      .setType(Type.MAIN)
+      .setType(fileType)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), UTF_8))
       .build();

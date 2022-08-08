@@ -125,4 +125,11 @@ public class PythonCheckTest {
     assertThat(secondSecondaryLocation.endLine()).isEqualTo(4);
     assertThat(secondSecondaryLocation.endLineOffset()).isEqualTo(5);
   }
+
+
+  @Test
+  public void test_scope() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {};
+    assertThat(check.scope()).isEqualTo(PythonCheck.CheckScope.MAIN);
+  }
 }

@@ -84,11 +84,6 @@ public class MetricsTest {
   }
 
   @Test
-  public void test_files_highlighted() {
-    assertThat(buildResult.getLogs()).contains("Starting test sources highlighting");
-  }
-
-  @Test
   public void project_level() {
     // Size
     assertThat(getProjectMeasureAsInt(NCLOC)).isEqualTo(6);
