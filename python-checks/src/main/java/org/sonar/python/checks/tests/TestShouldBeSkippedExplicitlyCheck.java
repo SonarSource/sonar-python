@@ -171,6 +171,7 @@ public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck 
 
       computeAssertStatementsValues(result, statement, isBeforeReturnNode);
       computeCallExpression(result, statement, isBeforeReturnNode);
+
       if (statement.is(Tree.Kind.IF_STMT) && isBeforeReturnNode && !result.returnParentNodes.contains(statement)) {
         result.isReturnNodeFirstConditionalStatement = false;
       }
