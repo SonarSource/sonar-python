@@ -1,3 +1,22 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2022 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package org.sonar.python.checks.tests;
 
 import java.util.Arrays;
@@ -95,12 +114,15 @@ public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck 
   private static void analyzeFunction(ReturnStatement returnStatement, ReturnAnalyze returnAnalyze) {
     // look for the function
     Tree parent = returnStatement;
+    boolean hasFoundFunction = false;
+
     do {
       returnAnalyze.returnParentNodes.add(parent);
 
       if (parent.is(Tree.Kind.FUNCDEF)) {
         returnAnalyze.functionDef = (FunctionDef) parent;
         returnAnalyze.functionNameStartWithTest = returnAnalyze.functionDef.name().name().startsWith("test");
+        hasFoundFunction = true;
       } else if (parent.is(Tree.Kind.IF_STMT)) {
         returnAnalyze.isInIfStatement = true;
         if (hasACallStatementInIfStatement((IfStatement) parent)) {
@@ -109,7 +131,7 @@ public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck 
       }
 
       parent = parent.parent();
-    } while(parent != null);
+    } while(parent != null && !hasFoundFunction);
   }
 
   private static boolean hasACallStatementInIfStatement(IfStatement ifStatement) {
@@ -136,7 +158,9 @@ public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck 
   }
 
   private static void analyzeStatements(ReturnAnalyze returnAnalyze) {
-    analyzeStatements(returnAnalyze.functionDef.body(), returnAnalyze, true);
+    if (returnAnalyze.functionDef != null) {
+      analyzeStatements(returnAnalyze.functionDef.body(), returnAnalyze, true);
+    }
   }
 
   private static void analyzeStatements(StatementList statements, ReturnAnalyze result, boolean isBeforeReturnNode) {

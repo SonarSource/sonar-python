@@ -125,3 +125,5 @@ class MyTest(unittest.TestCase):
             return  # OK, no assertions in the test (avoid FPs)
         else:
             foo()
+
+return
