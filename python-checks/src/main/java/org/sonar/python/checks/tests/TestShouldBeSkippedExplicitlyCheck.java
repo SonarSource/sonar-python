@@ -21,10 +21,13 @@ package org.sonar.python.checks.tests;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -37,7 +40,7 @@ import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.checks.FunctionUsingLoopVariableCheck;
 
 @Rule(key = "S5918")
 public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck {
@@ -45,204 +48,89 @@ public class TestShouldBeSkippedExplicitlyCheck extends PythonSubscriptionCheck 
   private static final String MESSAGE = "Skip this test explicitly.";
   private static final Set<String> supportedAssertMethods = new HashSet<>(Arrays.asList("assertEqual", "assertNotEqual", "assertTrue",
     "assertFalse", "assertIs", "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn", "assertNotIn", "assertIsInstance",
-    "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertAlmostEqual", "assertNotAlmostEqual", "assertGreater",
-    "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches", "assertNotRegexpMatches", "assertItemsEqual",
-    "assertDictContainsSubset"));
-
-  private static class ReturnAnalyze {
-    final Set<Tree> returnParentNodes = new HashSet<>();
-
-    boolean functionNameStartWithTest = false;
-    boolean isInIfStatement = false;
-    boolean isInConditionWithCallingStatement = false;
-    boolean hasAnAssertStatementBefore = false;
-    boolean hasAnyAssertStatement = false;
-    boolean hasACallExpressionBefore = false;
-    boolean isReturnNodeFirstConditionalStatement = true;
-
-    FunctionDef functionDef = null;
-  }
+    "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertRaisesRegex", "assertAlmostEqual", "assertNotAlmostEqual",
+    "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches", "assertNotRegexpMatches",
+    "assertItemsEqual", "assertDictContainsSubset"));
+  private static final Tree.Kind[] literalsKind = {Tree.Kind.STRING_LITERAL, Tree.Kind.NUMERIC_LITERAL, Tree.Kind.LIST_LITERAL,
+    Tree.Kind.BOOLEAN_LITERAL_PATTERN, Tree.Kind.NUMERIC_LITERAL_PATTERN, Tree.Kind.NONE_LITERAL_PATTERN, Tree.Kind.STRING_LITERAL_PATTERN,
+    Tree.Kind.SET_LITERAL, Tree.Kind.DICTIONARY_LITERAL};
 
   @Override
   public void initialize(Context context) {
-    // Look for invalid return in test methods
-    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, ctx -> {
-      ReturnStatement returnStatement = (ReturnStatement) ctx.syntaxNode();
-      ReturnAnalyze analyzeResult = analyze(returnStatement);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
 
-      if (isTheReturnAnIssue(analyzeResult)) {
+      if (!functionDef.name().name().startsWith("test")) {
+        return;
+      }
+
+      ReturnStatement returnStatement = getReturnStatementInIfFirstStatement(functionDef);
+      if (returnStatement == null) {
+        return;
+      }
+
+      // check there is an assert like statement in the function
+      if (isOrContainAssertStatement(functionDef)) {
         ctx.addIssue(returnStatement, MESSAGE);
       }
     });
   }
 
-  private static boolean isTheReturnAnIssue(ReturnAnalyze analyzeResult) {
-    if (!analyzeResult.functionNameStartWithTest) {
-      return false;
-    }
-    // Not in an if statement, out of scope (detected by S1763)
-    if (!analyzeResult.isInIfStatement) {
-      return false;
-    }
-    if (analyzeResult.hasAnAssertStatementBefore) {
-      return false;
-    }
-    if (!analyzeResult.hasAnyAssertStatement) {
-      return false;
-    }
-    if (analyzeResult.hasACallExpressionBefore) {
-      return false;
-    }
-    if (!analyzeResult.isInConditionWithCallingStatement) {
-      return false;
-    }
-    if (!analyzeResult.isReturnNodeFirstConditionalStatement) {
-      return false;
-    }
-    return true;
-  }
+  private static ReturnStatement getReturnStatementInIfFirstStatement(FunctionDef functionDef) {
+    // check first non assignment statement is an if with a return
+    for (Statement statement : functionDef.body().statements()) {
+      // skip literal assignment expression
+      if (statement.is(Tree.Kind.ASSIGNMENT_STMT) && ((AssignmentStatement) statement).assignedValue().is(literalsKind)) {
+        continue;
+      }
 
-  private static ReturnAnalyze analyze(ReturnStatement returnStatement) {
-    ReturnAnalyze returnAnalyze = new ReturnAnalyze();
-
-    analyzeFunction(returnStatement, returnAnalyze);
-    analyzeStatements(returnAnalyze);
-
-    return returnAnalyze;
-  }
-
-  private static void analyzeFunction(ReturnStatement returnStatement, ReturnAnalyze returnAnalyze) {
-    // look for the function
-    Tree parent = returnStatement;
-    boolean hasFoundFunction = false;
-
-    do {
-      returnAnalyze.returnParentNodes.add(parent);
-
-      if (parent.is(Tree.Kind.FUNCDEF)) {
-        returnAnalyze.functionDef = (FunctionDef) parent;
-        returnAnalyze.functionNameStartWithTest = returnAnalyze.functionDef.name().name().startsWith("test");
-        hasFoundFunction = true;
-      } else if (parent.is(Tree.Kind.IF_STMT)) {
-        returnAnalyze.isInIfStatement = true;
-        if (hasACallStatementInIfStatement((IfStatement) parent)) {
-          returnAnalyze.isInConditionWithCallingStatement = true;
+      if (statement.is(Tree.Kind.IF_STMT)) {
+        IfStatement ifStatement = (IfStatement) statement;
+        List<Statement> statements = ifStatement.body().statements();
+        if (!statements.isEmpty() && statements.get(0).is(Tree.Kind.RETURN_STMT)) {
+          return (ReturnStatement) statements.get(0);
         }
       }
 
-      parent = parent.parent();
-    } while(parent != null && !hasFoundFunction);
+      return null;
+    }
+    return null;
   }
 
-  private static boolean hasACallStatementInIfStatement(IfStatement ifStatement) {
-    return isACallExpression(ifStatement.condition());
+  private static boolean isOrContainAssertStatement(Tree node) {
+    AssertOrCallAssertVisitor assertOrCallAssertVisitor = new AssertOrCallAssertVisitor();
+    node.accept(assertOrCallAssertVisitor);
+    return assertOrCallAssertVisitor.hasACallToAssert || assertOrCallAssertVisitor.hasANativeAssert;
   }
 
-  private static boolean isACallExpression(Expression expression) {
-    if (expression.is(Tree.Kind.CALL_EXPR)) {
-      return true;
+  static class AssertOrCallAssertVisitor extends BaseTreeVisitor {
+    boolean hasANativeAssert = false;
+    boolean hasACallToAssert = false;
+
+    @Override
+    public void visitAssertStatement(AssertStatement pyAssertStatementTree) {
+      hasANativeAssert = true;
+      super.visitAssertStatement(pyAssertStatementTree);
     }
 
-    if (expression.is(Tree.Kind.NOT)) {
-      UnaryExpression unaryExpression = (UnaryExpression) expression;
-      return isACallExpression(unaryExpression.expression());
+    @Override
+    public void visitQualifiedExpression(QualifiedExpression pyQualifiedExpressionTree) {
+      if (tryGetName(pyQualifiedExpressionTree.qualifier()).equals("self")
+        && supportedAssertMethods.contains(pyQualifiedExpressionTree.name().name())) {
+        hasACallToAssert = true;
+      }
+      super.visitQualifiedExpression(pyQualifiedExpressionTree);
     }
 
-    if (expression.is(Tree.Kind.BITWISE_AND, Tree.Kind.BITWISE_OR, Tree.Kind.BITWISE_XOR, Tree.Kind.BITWISE_COMPLEMENT,
-      Tree.Kind.AND, Tree.Kind.OR)) {
-      BinaryExpression binaryExpression = (BinaryExpression) expression;
-      return isACallExpression(binaryExpression.leftOperand()) || isACallExpression(binaryExpression.rightOperand());
-    }
+    private static String tryGetName(Expression expression) {
+      String result = "";
 
-    return false;
-  }
-
-  private static void analyzeStatements(ReturnAnalyze returnAnalyze) {
-    if (returnAnalyze.functionDef != null) {
-      analyzeStatements(returnAnalyze.functionDef.body(), returnAnalyze, true);
-    }
-  }
-
-  private static void analyzeStatements(StatementList statements, ReturnAnalyze result, boolean isBeforeReturnNode) {
-    for (Statement statement : statements.statements()) {
-      if (result.returnParentNodes.contains(statement)) {
-        isBeforeReturnNode = false;
+      if (expression.is(Tree.Kind.NAME)) {
+        result = ((Name) expression).name();
       }
 
-      computeAssertStatementsValues(result, statement, isBeforeReturnNode);
-      computeCallExpression(result, statement, isBeforeReturnNode);
-      if (statement.is(Tree.Kind.IF_STMT) && isBeforeReturnNode && !result.returnParentNodes.contains(statement)) {
-        result.isReturnNodeFirstConditionalStatement = false;
-      }
-
-      // looking for inner statement list in IF/ELSIF/ELSE to do recursive calls
-      analyseIfStatementList(result, statement, isBeforeReturnNode);
+      return result;
     }
   }
 
-  private static void analyseIfStatementList(ReturnAnalyze result, Statement statement, boolean isBeforeReturnNode) {
-    if (statement.is(Tree.Kind.IF_STMT)) {
-      IfStatement ifStatement = (IfStatement) statement;
-      analyzeStatements(ifStatement.body(), result, isBeforeReturnNode);
-
-      for (IfStatement elifStatement : ifStatement.elifBranches()) {
-        analyzeStatements(elifStatement.body(), result, isBeforeReturnNode);
-      }
-
-      ElseClause elseClause = ifStatement.elseBranch();
-      if (elseClause != null) {
-        analyzeStatements(elseClause.body(), result, isBeforeReturnNode);
-      }
-    }
-  }
-
-  private static void computeAssertStatementsValues(ReturnAnalyze result, Statement statement, boolean isBeforeReturnNode) {
-    if (isAnAssertStatement(statement)) {
-      if (isBeforeReturnNode) {
-        result.hasAnAssertStatementBefore = true;
-      }
-      result.hasAnyAssertStatement = true;
-    }
-  }
-
-  private static void computeCallExpression(ReturnAnalyze result, Statement statement, boolean isBeforeReturnNode) {
-    if (statement.is(Tree.Kind.EXPRESSION_STMT) && isBeforeReturnNode) {
-      ExpressionStatement expressionStatement = (ExpressionStatement) statement;
-      for (Expression expression : expressionStatement.expressions()) {
-        if (expression.is(Tree.Kind.CALL_EXPR)) {
-          result.hasACallExpressionBefore = true;
-          break;
-        }
-      }
-    }
-  }
-
-  private static boolean isAnAssertStatement(Statement statement) {
-    // Native assert statement
-    if (statement.is(Tree.Kind.ASSERT_STMT)) {
-      return true;
-    }
-
-    // Pytest self.assertXXX methods
-    if (statement.is(Tree.Kind.EXPRESSION_STMT) && ((ExpressionStatement) statement).expressions().size() == 1) {
-      Expression expression = ((ExpressionStatement) statement).expressions().get(0);
-      if (expression.is(Tree.Kind.CALL_EXPR) && ((CallExpression) expression).callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) ((CallExpression) expression).callee();
-        return tryGetName(qualifiedExpression.qualifier()).equals("self")
-          && supportedAssertMethods.contains(qualifiedExpression.name().name());
-      }
-    }
-
-    return false;
-  }
-
-  private static String tryGetName(Expression expression) {
-    String result = "";
-
-    if (expression.is(Tree.Kind.NAME)) {
-      result = ((Name) expression).name();
-    }
-
-    return result;
-  }
 }

@@ -5,6 +5,17 @@ def external_resource_available(): return False
 
 def foo(): return 42
 
+def test_empty_function():
+    x = 8
+
+def test_statement_before():
+    x = 43
+    if not external_resource_available():
+        return  # Noncompliant {{Skip this test explicitly.}}
+    if x == 42:
+        assert foo() == 42
+
+
 # For Pytest, we should make sure we don't raise FPs for other test frameworks
 # For instance by checking "pytest" is present in the imports
 def test_something():
@@ -71,7 +82,15 @@ def test_uses_variable():
         x = 44
     assert foo() == x
 
-def test_uses_variable_binary():
+def test_uses_variable_binary_left():
+    x = 42
+    if external_resource_available() and x == 42:
+        return  # Noncompliant {{Skip this test explicitly.}}
+    else:
+        x = 43
+    assert foo() == x
+
+def test_uses_variable_binary_right():
     x = 42
     if x == 42 and external_resource_available():
         return  # Noncompliant {{Skip this test explicitly.}}
@@ -125,5 +144,17 @@ class MyTest(unittest.TestCase):
             return  # OK, no assertions in the test (avoid FPs)
         else:
             foo()
+
+def test_image_dataset_from_directory_errors(self):
+    if PIL is None:
+      return  # Noncompliant {{Skip this test explicitly.}}
+#     ^^^^^^
+
+    directory = self._prepare_directory(num_classes=3, count=5)
+
+    with self.assertRaisesRegex(ValueError, '`labels` argument should be'):
+      _ = image_dataset.image_dataset_from_directory(
+          directory, labels=None)
+
 
 return
