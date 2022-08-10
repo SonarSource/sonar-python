@@ -19,6 +19,9 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -28,7 +31,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -38,19 +41,23 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Provide a reason for skipping this test.";
 
+  private static final Set<String> skipDecoratorsFQN = new HashSet<>(List.of("unittest.case.skip", "pytest.mark.skip"));
+  private static final Set<String> skipCallExpressionsFQN = new HashSet<>(List.of("pytest.skip"));
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.DECORATOR, ctx -> {
       Decorator decorator = (Decorator) ctx.syntaxNode();
-
-      checkDecoratorSkipWithoutReason(ctx, decorator, "unittest.case.skip");
-      checkDecoratorSkipWithoutReason(ctx, decorator, "pytest.mark.skip");
+      for (String skipDecoratorFQN : skipDecoratorsFQN) {
+        checkDecoratorSkipWithoutReason(ctx, decorator, skipDecoratorFQN);
+      }
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-
-      checkCallExpressionSkipWithNoOrEmptyReason(ctx, callExpression, "pytest.skip");
+      for (String skipCallExpressionFQN : skipCallExpressionsFQN) {
+        checkCallExpressionSkipWithNoOrEmptyReason(ctx, callExpression, skipCallExpressionFQN);
+      }
     });
   }
 
@@ -70,8 +77,8 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
   }
 
   private static Symbol getSymbolFromExpression(Expression expression) {
-    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return ((QualifiedExpression) expression).symbol();
+    if (expression instanceof HasSymbol) {
+      return ((HasSymbol) expression).symbol();
     }
 
     if (expression.is(Tree.Kind.CALL_EXPR)) {

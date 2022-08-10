@@ -3,6 +3,13 @@ import pytest
 
 
 class MyTest(unittest.TestCase):
+    # Comment about why this test should be skipped.
+    # Potentially we may further decide to not raise this as an issue, considering that the developer actively want to have the reason
+    # in comment rather than in the skip method/decorator.
+    @unittest.skip  # Noncompliant {{Provide a reason for skipping this test.}}
+#   ^^^^^^^^^^^^^^
+    def test_unittest_skip_reason_in_comment_above(self):
+        self.assertEqual(1 / 0, 99)
 
     @unittest.skip  # Noncompliant {{Provide a reason for skipping this test.}}
 #   ^^^^^^^^^^^^^^
@@ -48,6 +55,10 @@ class UsingPytest():
 
     @pytest.mark.skip("")  # Noncompliant {{Provide a reason for skipping this test.}}
 #                     ^^
+    def test_pytest_mark_skip_empty_reason():
+        assert 1 == 2
+
+    @pytest.mark.skip("not required")
     def test_pytest_mark_skip_empty_reason():
         assert 1 == 2
 
