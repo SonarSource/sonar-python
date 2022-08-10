@@ -20,8 +20,10 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -61,6 +63,10 @@ public abstract class SillyEquality extends PythonSubscriptionCheck {
       }
       checkIncompatibleTypes(ctx, binaryExpression);
     });
+  }
+
+  public static Map<String, String> builtinsTypeCategory() {
+    return Collections.unmodifiableMap(BUILTINS_TYPE_CATEGORY);
   }
 
   private void checkIncompatibleTypes(SubscriptionContext ctx, BinaryExpression binaryExpression) {
