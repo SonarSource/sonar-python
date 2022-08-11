@@ -48,20 +48,16 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.DECORATOR, ctx -> {
       Decorator decorator = (Decorator) ctx.syntaxNode();
-      for (String skipDecoratorFQN : skipDecoratorsFQN) {
-        checkDecoratorSkipWithoutReason(ctx, decorator, skipDecoratorFQN);
-      }
+      checkDecoratorSkipWithoutReason(ctx, decorator);
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      for (String skipCallExpressionFQN : skipCallExpressionsFQN) {
-        checkCallExpressionSkipWithNoOrEmptyReason(ctx, callExpression, skipCallExpressionFQN);
-      }
+      checkCallExpressionSkipWithNoOrEmptyReason(ctx, callExpression);
     });
   }
 
-  private static void checkDecoratorSkipWithoutReason(SubscriptionContext ctx, Decorator decorator, String decoratorSkipName) {
+  private static void checkDecoratorSkipWithoutReason(SubscriptionContext ctx, Decorator decorator) {
     Expression expression = decorator.expression();
     Symbol symbol = getSymbolFromExpression(expression);
 
@@ -69,7 +65,7 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (!decoratorSkipName.equals(symbol.fullyQualifiedName())) {
+    if (!skipDecoratorsFQN.contains(symbol.fullyQualifiedName())) {
       return;
     }
 
@@ -88,13 +84,13 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  private static void checkCallExpressionSkipWithNoOrEmptyReason(SubscriptionContext ctx, CallExpression callExpression, String name) {
+  private static void checkCallExpressionSkipWithNoOrEmptyReason(SubscriptionContext ctx, CallExpression callExpression) {
     Symbol symbol = (callExpression.calleeSymbol());
     if (symbol == null) {
       return;
     }
 
-    if (!name.equals(symbol.fullyQualifiedName())) {
+    if (!skipCallExpressionsFQN.contains(symbol.fullyQualifiedName())) {
       return;
     }
 
