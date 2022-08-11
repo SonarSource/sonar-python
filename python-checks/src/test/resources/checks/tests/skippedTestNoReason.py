@@ -11,6 +11,10 @@ class MyTest(unittest.TestCase):
     def test_unittest_skip_reason_in_comment_above(self):
         self.assertEqual(1 / 0, 99)
 
+    @staticmethod
+    def test_decorator_not_for_test(self):
+        self.assertEqual(1 / 0, 99)
+
     @unittest.skip  # Noncompliant {{Provide a reason for skipping this test.}}
 #   ^^^^^^^^^^^^^^
     def test_unittest_skip_no_reason(self):
