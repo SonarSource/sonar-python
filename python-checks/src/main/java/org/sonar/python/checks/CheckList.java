@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
@@ -76,6 +75,7 @@ import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
+import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 
 public final class CheckList {
@@ -211,6 +211,7 @@ public final class CheckList {
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
       NoSonarCommentCheck.class,
+      NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
