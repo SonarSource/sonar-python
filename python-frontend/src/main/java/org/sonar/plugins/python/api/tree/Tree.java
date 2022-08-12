@@ -116,6 +116,10 @@ public interface Tree {
 
     IMPORT_NAME(DottedName.class),
 
+    /**
+     * @deprecated Not essential as there are already IMPORT_NAME and IMPORT_FROM
+     */
+    @Deprecated
     IMPORT_STMT(DottedName.class),
 
     KEYWORD_PATTERN(KeywordPattern.class),
