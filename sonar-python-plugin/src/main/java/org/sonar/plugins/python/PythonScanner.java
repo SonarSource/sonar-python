@@ -140,10 +140,7 @@ public class PythonScanner extends Scanner {
     if (checkScope == PythonCheck.CheckScope.ALL) {
       return true;
     }
-    if (checkScope == PythonCheck.CheckScope.MAIN) {
-      return fileType == InputFile.Type.MAIN;
-    }
-    return fileType == InputFile.Type.TEST;
+    return fileType == InputFile.Type.MAIN;
   }
 
   // visible for testing

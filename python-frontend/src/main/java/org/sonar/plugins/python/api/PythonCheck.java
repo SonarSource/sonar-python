@@ -88,7 +88,6 @@ public interface PythonCheck {
 
   enum CheckScope {
     MAIN,
-    TEST,
     ALL
   }
 
