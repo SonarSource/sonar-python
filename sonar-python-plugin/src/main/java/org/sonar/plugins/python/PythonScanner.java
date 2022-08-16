@@ -97,11 +97,14 @@ public class PythonScanner extends Scanner {
   protected void scanFile(InputFile inputFile) {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
+    InputFile.Type fileType = inputFile.type();
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
-      saveMeasures(inputFile, visitorContext);
+      if (fileType == InputFile.Type.MAIN) {
+        saveMeasures(inputFile, visitorContext);
+      }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile);
@@ -114,6 +117,9 @@ public class PythonScanner extends Scanner {
     }
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
+      if (!isCheckApplicable(check, fileType)) {
+        continue;
+      }
       if (check instanceof PythonSubscriptionCheck) {
         checksBasedOnTree.add((PythonSubscriptionCheck) check);
       } else {
@@ -127,6 +133,14 @@ public class PythonScanner extends Scanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
+  }
+
+  boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
+    PythonCheck.CheckScope checkScope = pythonCheck.scope();
+    if (checkScope == PythonCheck.CheckScope.ALL) {
+      return true;
+    }
+    return fileType == InputFile.Type.MAIN;
   }
 
   // visible for testing

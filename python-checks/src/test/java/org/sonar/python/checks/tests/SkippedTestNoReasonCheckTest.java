@@ -20,7 +20,10 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SkippedTestNoReasonCheckTest {
 
@@ -32,6 +35,11 @@ public class SkippedTestNoReasonCheckTest {
   @Test
   public void testWithImport() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/skippedTestNoReasonWithImport.py", new SkippedTestNoReasonCheck());
+  }
+
+  @Test
+  public void test_scope() {
+    assertThat(new SkippedTestNoReasonCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 
 }

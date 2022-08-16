@@ -57,6 +57,11 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
     });
   }
 
+  @Override
+  public CheckScope scope() {
+    return CheckScope.ALL;
+  }
+
   private static void checkDecoratorSkipWithoutReason(SubscriptionContext ctx, Decorator decorator) {
     Expression expression = decorator.expression();
     Symbol symbol = getSymbolFromExpression(expression);

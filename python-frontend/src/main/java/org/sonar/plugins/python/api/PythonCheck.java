@@ -85,4 +85,13 @@ public interface PythonCheck {
       return check;
     }
   }
+
+  enum CheckScope {
+    MAIN,
+    ALL
+  }
+
+  default CheckScope scope() {
+    return CheckScope.MAIN;
+  }
 }
