@@ -87,6 +87,11 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
     });
   }
 
+  @Override
+  public CheckScope scope() {
+    return CheckScope.ALL;
+  }
+
   // Only raises issue when the (non-test) method is not used inside the class
   private static void checkSuspiciousFunctionsUsages(SubscriptionContext ctx, Map<FunctionSymbol, FunctionDef> suspiciousFunctionsAndDefinitions, Set<Tree> allDefinitions) {
     suspiciousFunctionsAndDefinitions.forEach((s, d) -> {
