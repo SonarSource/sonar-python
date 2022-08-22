@@ -1,4 +1,3 @@
-from tensorflow.python.framework import test_util
 from tensorflow.python.platform import test
 
 # Specific test file : we are using a different test library from unittest, which should not raise issues
@@ -7,9 +6,7 @@ class ExceptionsTest(test.TestCase):
     if not __debug__:
       return
 
-    with self.assertRaisesRegexp(AssertionError, 'test message'):
-      exceptions.assert_stmt(False, expression_with_side_effects)
-    self.assertListEqual(side_effect_trace, [tracer])
+    self.assertEqual("5", 5)
 
   def test_mandatory_issue(self):
     x = 5

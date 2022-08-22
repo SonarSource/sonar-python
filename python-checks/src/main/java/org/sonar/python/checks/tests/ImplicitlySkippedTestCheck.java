@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.IfStatement;
@@ -48,10 +50,11 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Skip this test explicitly.";
 
   private static final List<TestFramework> testFrameworks = new ArrayList<>();
+  private static final TestFramework emptyFramework = new TestFramework("", new ArrayList<>(), new HashSet<>());
 
   static {
     // Unit Test method source : https://docs.python.org/2/library/unittest.html#assert-methods
-    testFrameworks.add(new TestFramework("UnitTest", Arrays.asList("unittest", "TestCase"), new HashSet<>(Arrays.asList("assertEqual",
+    testFrameworks.add(new TestFramework("unittest", Arrays.asList("unittest", "TestCase"), new HashSet<>(Arrays.asList("assertEqual",
       "assertNotEqual", "assertTrue", "assertFalse", "assertIs", "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn",
       "assertNotIn", "assertIsInstance", "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertAlmostEqual",
       "assertNotAlmostEqual", "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches",
@@ -121,20 +124,20 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean containsAssertion(FunctionDef functionDef) {
-    List<String> parentClasses = getParentClassFromFunctionDef(functionDef);
-    AssertionVisitor assertVisitor = new AssertionVisitor(parentClasses);
+    Optional<TestFramework> testFramework = getParentClassTestFrameworkFromFunctionDef(functionDef);
+    AssertionVisitor assertVisitor = new AssertionVisitor(testFramework.orElse(emptyFramework).supportedAssertMethods);
     functionDef.accept(assertVisitor);
     return assertVisitor.hasAnAssert;
   }
 
-  private static List<String> getParentClassFromFunctionDef(FunctionDef functionDef) {
+  private static Optional<TestFramework> getParentClassTestFrameworkFromFunctionDef(FunctionDef functionDef) {
     List<String> libraries = new ArrayList<>();
     ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(functionDef, Tree.Kind.CLASSDEF);
     if (classDef != null) {
       libraries.addAll(getInheritedClassesFQN(classDef));
     }
 
-    return libraries;
+    return testFrameworks.stream().filter(testFramework -> testFramework.matchAnyProvidedClasses(libraries)).findFirst();
   }
 
   private static List<String> getInheritedClassesFQN(ClassDef classDefinition) {
@@ -158,10 +161,10 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
 
   static class AssertionVisitor extends BaseTreeVisitor {
     boolean hasAnAssert = false;
-    List<String> parentClasses;
+    Set<String> supportedMethods;
 
-    public AssertionVisitor(List<String> parentClasses) {
-      this.parentClasses = parentClasses;
+    public AssertionVisitor(Set<String> supportedMethods) {
+      this.supportedMethods = supportedMethods;
     }
 
     @Override
@@ -171,17 +174,15 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
-      if (qualifiedExpression.qualifier().is(Tree.Kind.NAME) && "self".equals(((Name) qualifiedExpression.qualifier()).name())
-        && isMethodFromTestFramework(qualifiedExpression.name().name())) {
-        hasAnAssert = true;
+    public void visitCallExpression(CallExpression callExpression) {
+      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
+        if (qualifiedExpression.qualifier().is(Tree.Kind.NAME) && "self".equals(((Name) qualifiedExpression.qualifier()).name())
+          && supportedMethods.contains(qualifiedExpression.name().name())) {
+          hasAnAssert = true;
+        }
       }
-      super.visitQualifiedExpression(qualifiedExpression);
-    }
-
-    private boolean isMethodFromTestFramework(String methodName) {
-      return testFrameworks.stream()
-        .anyMatch(testFramework -> testFramework.matchAnyProvidedClasses(parentClasses) && testFramework.supportedAssertMethods.contains(methodName));
+      super.visitCallExpression(callExpression);
     }
   }
 }

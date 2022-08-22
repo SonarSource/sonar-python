@@ -6,10 +6,6 @@ def external_resource_available(): return False
 
 def foo(): return 42
 
-
-def test_empty_function():
-    x = 8
-
 def test_statement_before():
     x = 43
     if not external_resource_available():
@@ -23,18 +19,15 @@ def test_something():
     else:
         assert foo() == 42
 
-
 def test_unconditional_return():
     return  # Out of scope (detected by S1763)
     assert 1 != 2
-
 
 def test_skip():
     if not external_resource_available():
         pytest.skip("prerequisite not met")  # OK
     else:
         assert foo() == 42
-
 
 def test_ok():
     assert 1 != 2
@@ -43,13 +36,11 @@ def test_ok():
     else:
         assert foo() == 42
 
-
 def test_some_function():
     if not external_resource_available():
         return  # OK, no assertions: might not be an actual test
     else:
         print("Hello")
-
 
 def not_a_test():
     if not external_resource_available():
@@ -57,10 +48,8 @@ def not_a_test():
     else:
         assert foo() == 42
 
-
 def helper_test():
     assert 1 != 2
-
 
 # No issue should be raised if another method is called before the return (except in the "if" condition)
 # As it might be a helper method performing assertions.
@@ -69,7 +58,6 @@ def test_uses_helper():
     if not external_resource_available():
         return  # OK, call to "helper_test" before
     assert foo() == 42
-
 
 def test_uses_variable():
     x = 42
@@ -118,10 +106,8 @@ def test_conditional_skip_not_first_statement():
         return  # Accepted FN
     assert foo() == x
 
-
 # Unittest
 class MyTest(unittest.TestCase):
-
     def test_something(self):
         if not external_resource_available():
             return  # Noncompliant {{Skip this test explicitly.}}
@@ -131,8 +117,7 @@ class MyTest(unittest.TestCase):
 
     def test_something(self):
         if not external_resource_available():
-            return  # Noncompliant {{Skip this test explicitly.}}
-#           ^^^^^^
+            return
         else:
             self.assertEqual
 
@@ -156,16 +141,13 @@ class MyTest(unittest.TestCase):
             foo()
 
 class MyTestReg(unittest.TestCase):
-    def test_image_dataset_from_directory_errors(self):
+    def test_fail_regexp_in_with(self):
         if PIL is None:
           return  # Noncompliant {{Skip this test explicitly.}}
 #         ^^^^^^
 
-        directory = self._prepare_directory(num_classes=3, count=5)
-
         with self.assertRaisesRegexp(ValueError, '`labels` argument should be'):
-          _ = image_dataset.image_dataset_from_directory(
-              directory, labels=None)
+          _ = ""
 
 # Other testing library
 class MyFakeTest(faketest.TestCase):
@@ -185,24 +167,16 @@ class MyFakeTest(faketest.TestCase):
 
 # Multiple inheritance with specified class name
 class TestRemoveDirectory(CommandTestMixin, unittest.TestCase):
-    def test_simple_exception(self):
+    def test_assert_in_subfunction(self):
         if runtime.platformType == "posix":
             return # Noncompliant {{Skip this test explicitly.}}
 #           ^^^^^^
-        def fail(dir):
-            raise RuntimeError("oh noes")
-        self.patch(utils, 'rmdirRecursive', fail)
-        self.make_command(fs.RemoveDirectory, dict(
-            dir='workdir',
-        ), True)
-        d = self.run_command()
 
-        def check(_):
+        def check():
             self.assertIn({'rc': -1}, self.get_updates(), self.builder.show())
-        d.addCallback(check)
-        return d
+        check()
 
-# Common functionality.
+# Test heriting from the unittest framework through an additional layer of class
 class customTestClass(unittest.TestCase):
     def setUp(self) -> None:
         ...
@@ -216,11 +190,7 @@ class inheritingFromTestClass(customTestClass):
         else:
             self.assertEqual(foo(), 42)
 
-    with self.assertRaisesRegex(ValueError, '`labels` argument should be'):
-      _ = image_dataset.image_dataset_from_directory(
-          directory, labels=None)
-
-# Cover edge case where classSymbol will be null (cannot be resolved), accepted FN
+# Cover edge case where classSymbol will be null (cannot be resolved : conditional definition), accepted FN
 if x == 32:
     class myTestClass(unittest.TestCase):
         def testmethod(self):
