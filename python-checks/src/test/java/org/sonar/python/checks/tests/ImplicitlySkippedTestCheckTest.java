@@ -20,7 +20,10 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ImplicitlySkippedTestCheckTest {
 
@@ -38,4 +41,10 @@ public class ImplicitlySkippedTestCheckTest {
   public void testAnotherLibrary() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/implicitlySkippedTestAnotherLibrary.py", new ImplicitlySkippedTestCheck());
   }
+
+  @Test
+  public void test_scope() {
+    assertThat(new ImplicitlySkippedTestCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
+  }
+
 }

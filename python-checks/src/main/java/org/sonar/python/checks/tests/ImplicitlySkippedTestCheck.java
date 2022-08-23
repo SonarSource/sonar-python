@@ -101,6 +101,11 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
     });
   }
 
+  @Override
+  public CheckScope scope() {
+    return CheckScope.ALL;
+  }
+
   private static ReturnStatement getReturnStatementFromFirstIfStatement(FunctionDef functionDef) {
     // check first non assignment statement is an if with a return
     for (Statement statement : functionDef.body().statements()) {
