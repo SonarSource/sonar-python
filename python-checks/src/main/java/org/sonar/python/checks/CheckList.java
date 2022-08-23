@@ -75,6 +75,7 @@ import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
+import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
@@ -126,6 +127,7 @@ public final class CheckList {
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
       DebugModeCheck.class,
+      DedicatedAssertionCheck.class,
       DictionaryDuplicateKeyCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
