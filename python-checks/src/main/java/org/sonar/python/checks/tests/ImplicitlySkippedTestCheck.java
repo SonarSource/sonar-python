@@ -21,9 +21,9 @@ package org.sonar.python.checks.tests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
@@ -50,7 +50,6 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Skip this test explicitly.";
 
   private static final List<TestFramework> testFrameworks = new ArrayList<>();
-  private static final TestFramework emptyFramework = new TestFramework("", new ArrayList<>(), new HashSet<>());
 
   static {
     // Unit Test method source : https://docs.python.org/2/library/unittest.html#assert-methods
@@ -124,20 +123,24 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean containsAssertion(FunctionDef functionDef) {
-    Optional<TestFramework> testFramework = getParentClassTestFrameworkFromFunctionDef(functionDef);
-    AssertionVisitor assertVisitor = new AssertionVisitor(testFramework.orElse(emptyFramework).supportedAssertMethods);
+    Set<String> supportedAssertMethods = getParentClassTestFrameworkFromFunctionDef(functionDef);
+    AssertionVisitor assertVisitor = new AssertionVisitor(supportedAssertMethods);
     functionDef.accept(assertVisitor);
     return assertVisitor.hasAnAssert;
   }
 
-  private static Optional<TestFramework> getParentClassTestFrameworkFromFunctionDef(FunctionDef functionDef) {
+  private static Set<String> getParentClassTestFrameworkFromFunctionDef(FunctionDef functionDef) {
     List<String> libraries = new ArrayList<>();
     ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(functionDef, Tree.Kind.CLASSDEF);
     if (classDef != null) {
       libraries.addAll(getInheritedClassesFQN(classDef));
     }
 
-    return testFrameworks.stream().filter(testFramework -> testFramework.matchAnyProvidedClasses(libraries)).findFirst();
+    return testFrameworks.stream()
+      .filter(testFramework -> testFramework.matchAnyProvidedClasses(libraries))
+      .findFirst()
+      .map(t -> t.supportedAssertMethods)
+      .orElseGet(Collections::emptySet);
   }
 
   private static List<String> getInheritedClassesFQN(ClassDef classDefinition) {

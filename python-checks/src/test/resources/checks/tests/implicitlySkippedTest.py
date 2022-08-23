@@ -6,6 +6,10 @@ def external_resource_available(): return False
 
 def foo(): return 42
 
+# Covering "empty" function case (literal assignment ignored)
+def test_empty_function():
+    x = 8
+
 def test_statement_before():
     x = 43
     if not external_resource_available():
@@ -148,6 +152,8 @@ class MyTestReg(unittest.TestCase):
 
         with self.assertRaisesRegexp(ValueError, '`labels` argument should be'):
           _ = ""
+        d = myTestClass()
+        d.test() # covering case of qualified expression other than self
 
 # Other testing library
 class MyFakeTest(faketest.TestCase):
