@@ -20,12 +20,20 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AssertOnDissimilarTypesCheckTest {
 
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnDissimilarTypes.py", new AssertOnDissimilarTypesCheck());
+  }
+
+  @Test
+  public void test_scope() {
+    assertThat(new AssertOnDissimilarTypesCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 }

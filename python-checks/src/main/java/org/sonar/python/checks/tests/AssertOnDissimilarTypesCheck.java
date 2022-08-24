@@ -115,7 +115,7 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
   }
 
   private static Optional<AssignmentStatement> getLastAssignment(Expression expr) {
-    if (!expr.is(Tree.Kind.NAME) || !((Name) expr).isVariable()) {
+    if (!expr.is(Tree.Kind.NAME)) {
       return Optional.empty();
     }
 
@@ -124,15 +124,11 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       return Optional.empty();
     }
 
-    Usage lastAssignment = null;
-    for (Usage usage : symbol.usages()) {
-      if (usage.kind() == Usage.Kind.ASSIGNMENT_LHS ||usage.kind() == Usage.Kind.COMPOUND_ASSIGNMENT_LHS) {
-        lastAssignment = usage;
-      }
-      if (usage == ((Name) expr).usage()) {
-        break;
-      }
-    }
+    Usage lastAssignment = symbol.usages().stream()
+      .takeWhile(usage -> usage != ((Name) expr).usage())
+      .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
+      .reduce((first, second) -> second)
+      .orElse(null);
 
     return Optional.ofNullable(lastAssignment)
       .map(assignment -> (AssignmentStatement) TreeUtils.firstAncestorOfKind(assignment.tree(), Tree.Kind.ASSIGNMENT_STMT));

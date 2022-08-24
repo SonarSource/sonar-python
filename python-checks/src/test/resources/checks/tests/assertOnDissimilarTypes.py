@@ -6,6 +6,12 @@ class A:
 class B:
     pass
 
+class C:
+    pass
+
+class D:
+    pass
+
 class ClassWithEq:
     def __eq__(self, other):
         pass
@@ -16,6 +22,7 @@ class ClassWithNe:
 
 class MyTest(unittest.TestCase):
   def test_assert_is_non_compliant(self):
+    self.assertEqual(first="string", second=True) # Noncompliant
     myString = "toto"
     myInt = 3
     a = A()
@@ -37,6 +44,7 @@ class MyTest(unittest.TestCase):
     a = A()
     b = a
     c = None
+
     self.assertIs() # OK
     self.assertIs(a, A()) # OK
     self.assertIs(a, a) # OK
@@ -51,6 +59,11 @@ class MyTest(unittest.TestCase):
     self.assertIs(42, 0) # OK
 
   def test_assert_equal_non_compliant(self):
+    ab = A()
+    cd = C()
+    if x == 42:
+        ab = B()
+        cd = D()
     myString = "toto"
     myInt = 3
     a = A()
@@ -59,6 +72,8 @@ class MyTest(unittest.TestCase):
     classWithNe = ClassWithNe()
     mydict = {"x": a}
 
+    self.assertEqual(a, ab)
+    self.assertEqual("string", True) # Noncompliant
     self.assertEqual(A(), []) # Noncompliant
     self.assertEqual(A(), ()) # Noncompliant
     self.assertEqual(A(), {}) # Noncompliant
@@ -72,6 +87,11 @@ class MyTest(unittest.TestCase):
     self.assertEqual(a, 42.42) # Noncompliant
     self.assertEqual(a, 42j) # Noncompliant
     self.assertEqual('foo'.partition('f'), "42") # Noncompliant
+
+    # Test with UnionType argument for error message without type indication
+    self.assertEqual(5, ab) # Noncompliant {{Change this assertion to not compare dissimilar types.}}
+    self.assertEqual(ab, 5) # Noncompliant {{Change this assertion to not compare dissimilar types.}}
+    self.assertEqual(ab, cd) # Noncompliant {{Change this assertion to not compare dissimilar types.}}
 
     self.assertEqual(acos(1), "0") # OK
 
@@ -108,6 +128,12 @@ class MyTest(unittest.TestCase):
     self.assertEqual(classWithEq, 5) # OK
     self.assertEqual(classWithEq, 42.42) # OK
     self.assertEqual(classWithEq, 42j) # OK
+    self.assertEqual(myString, classWithEq) # OK
+    self.assertEqual("string", classWithEq) # OK
+    self.assertEqual(myInt, classWithEq) # OK
+    self.assertEqual(5, classWithEq) # OK
+    self.assertEqual(42.42, classWithEq) # OK
+    self.assertEqual(42j, classWithEq) # OK
     self.assertEqual('foo'.partition('f'), classWithEq) # OK
     self.assertEqual(A(), None) # OK
     self.assertEqual(None, A()) # OK
@@ -115,3 +141,12 @@ class MyTest(unittest.TestCase):
     self.assertEqual(set([1, 2]), frozenset([1, 2])) # OK
     self.assertEqual({}, collections.OrderedDict()) # OK
 
+  def test_other(self):
+    *a, = 1, 2 # test unpacking argument instead of regular argument
+    b = 5
+    b += 1 # test compound assignment
+    self.assertTrue(5 == 3)
+    self.assertEqual(5)
+    self.assertEqual(*a, 5)
+    self.assertEqual(5, *a)
+    self.assertEqual("5", b)
