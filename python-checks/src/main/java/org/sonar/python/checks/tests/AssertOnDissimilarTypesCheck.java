@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.checks.SillyEquality;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 
@@ -144,8 +143,8 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean checkArgumentsCantBeEqual(Expression left, Expression right) {
-    String leftCategory = builtinTypeCategory(left.type());
-    String rightCategory = builtinTypeCategory(right.type());
+    String leftCategory = InferredTypes.getBuiltinCategory(left.type());
+    String rightCategory = InferredTypes.getBuiltinCategory(right.type());
     boolean leftCanImplementEqOrNe = canImplementEqOrNe(left);
     boolean rightCanImplementEqOrNe = canImplementEqOrNe(right);
 
@@ -157,12 +156,6 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       || (leftCategory != null && rightCategory != null)
       || (leftCategory != null && !rightCanImplementEqOrNe)
       || (rightCategory != null && !leftCanImplementEqOrNe);
-  }
-
-  private static String builtinTypeCategory(InferredType inferredType) {
-    return SillyEquality.builtinsTypeCategory().keySet().stream()
-      .filter(inferredType::canOnlyBe)
-      .map(SillyEquality.builtinsTypeCategory()::get).findFirst().orElse(null);
   }
 
   private static boolean canImplementEqOrNe(Expression expression) {

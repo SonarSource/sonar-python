@@ -206,9 +206,10 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     @Override
     String builtinTypeCategory(InferredType inferredType) {
       // inferredType will always contain a declared type because of the check done inside 'areIdentityComparableOrNone'
-      return BUILTINS_TYPE_CATEGORY.keySet().stream()
+      Map<String, String> builtinsTypeCategory = InferredTypes.getBuiltinsTypeCategory();
+      return builtinsTypeCategory.keySet().stream()
         .filter(typeName -> typeSymbols(inferredType).stream().map(Symbol::fullyQualifiedName).allMatch(typeName::equals))
-        .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
+        .map(builtinsTypeCategory::get).findFirst().orElse(null);
     }
 
     @Override

@@ -23,6 +23,7 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -43,9 +44,7 @@ public class SillyEqualityCheck extends SillyEquality {
   @CheckForNull
   @Override
   String builtinTypeCategory(InferredType inferredType) {
-    return BUILTINS_TYPE_CATEGORY.keySet().stream()
-      .filter(inferredType::canOnlyBe)
-      .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
+    return InferredTypes.getBuiltinCategory(inferredType);
   }
 
   @Override

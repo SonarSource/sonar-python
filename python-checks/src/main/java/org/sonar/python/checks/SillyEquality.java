@@ -20,38 +20,18 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
 public abstract class SillyEquality extends PythonSubscriptionCheck {
 
   private static final HashSet<String> CONSIDERED_OPERATORS = new HashSet<>(Arrays.asList("==", "!="));
-  protected static final HashMap<String, String> BUILTINS_TYPE_CATEGORY = new HashMap<>();
-
-  private static final String NUMBER = "number";
-
-  static {
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.STR, BuiltinTypes.STR);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.INT, NUMBER);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.FLOAT, NUMBER);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.COMPLEX, NUMBER);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.BOOL, NUMBER);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.LIST, BuiltinTypes.LIST);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.SET, BuiltinTypes.SET);
-    BUILTINS_TYPE_CATEGORY.put("frozenset", BuiltinTypes.SET);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.DICT, BuiltinTypes.DICT);
-    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.TUPLE, BuiltinTypes.TUPLE);
-  }
 
   @Override
   public void initialize(Context context) {
@@ -63,10 +43,6 @@ public abstract class SillyEquality extends PythonSubscriptionCheck {
       }
       checkIncompatibleTypes(ctx, binaryExpression);
     });
-  }
-
-  public static Map<String, String> builtinsTypeCategory() {
-    return Collections.unmodifiableMap(BUILTINS_TYPE_CATEGORY);
   }
 
   private void checkIncompatibleTypes(SubscriptionContext ctx, BinaryExpression binaryExpression) {

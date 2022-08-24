@@ -92,7 +92,6 @@ public class InferredTypes {
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
   private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
 
-
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(Collections.singletonList(BuiltinTypes.COMPLEX)));
@@ -101,6 +100,22 @@ public class InferredTypes {
     // str <=> bytes equivalence only for Python2
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.STR, new HashSet<>(Arrays.asList(UNICODE, BYTES)));
     HARDCODED_COMPATIBLE_TYPES.put(BYTES, new HashSet<>(Collections.singletonList(BuiltinTypes.STR)));
+  }
+
+  protected static final Map<String, String> BUILTINS_TYPE_CATEGORY = new HashMap<>();
+  private static final String NUMBER = "number";
+
+  static {
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.STR, BuiltinTypes.STR);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.INT, NUMBER);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.FLOAT, NUMBER);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.COMPLEX, NUMBER);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.BOOL, NUMBER);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.LIST, BuiltinTypes.LIST);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.SET, BuiltinTypes.SET);
+    BUILTINS_TYPE_CATEGORY.put("frozenset", BuiltinTypes.SET);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.DICT, BuiltinTypes.DICT);
+    BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.TUPLE, BuiltinTypes.TUPLE);
   }
 
   private InferredTypes() {
@@ -345,5 +360,15 @@ public class InferredTypes {
       return ((UnionType) type).types().stream().anyMatch(InferredTypes::containsDeclaredType);
     }
     return false;
+  }
+
+  public static String getBuiltinCategory(InferredType inferredType) {
+    return BUILTINS_TYPE_CATEGORY.keySet().stream()
+      .filter(inferredType::canOnlyBe)
+      .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
+  }
+
+  public static Map<String, String> getBuiltinsTypeCategory() {
+    return Collections.unmodifiableMap(BUILTINS_TYPE_CATEGORY);
   }
 }
