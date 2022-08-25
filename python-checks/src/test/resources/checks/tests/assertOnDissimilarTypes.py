@@ -22,16 +22,20 @@ class ClassWithNe:
 
 class MyTest(unittest.TestCase):
   def test_assert_is_non_compliant(self):
-    self.assertEqual(first="string", second=True) # Noncompliant
     myString = "toto"
     myInt = 3
     a = A()
-#   ^^^^^^^> {{Last assignment of "a"}}
     b = B()
-#   ^^^^^^^> {{Last assignment of "b"}}
+    aInd = A()
+#   ^^^^^^^^^^> {{Last assignment of "aInd"}}
+    bInd = B()
+#   ^^^^^^^^^^> {{Last assignment of "bInd"}}
 
-    self.assertIs(a, b) # Noncompliant {{Change this assertion to not compare dissimilar types (A and B).}}
-#                 ^^^^
+    self.assertIs(aInd, bInd) # Noncompliant {{Change this assertion to not compare dissimilar types (A and B).}}
+#                 ^^^^^^^^^^
+    aInd = A()
+    self.assertEqual(first="string", second=True) # Noncompliant
+    self.assertIs(msg="my message", first="myString", second=a) # Noncompliant
     self.assertIs(a, myString) # Noncompliant
     self.assertIs(a, "string") # Noncompliant
     self.assertIs(a, myInt) # Noncompliant
@@ -147,6 +151,7 @@ class MyTest(unittest.TestCase):
     b += 1 # test compound assignment
     self.assertTrue(5 == 3)
     self.assertEqual(5)
+    self.assertEqual()
     self.assertEqual(*a, 5)
     self.assertEqual(5, *a)
     self.assertEqual("5", b)

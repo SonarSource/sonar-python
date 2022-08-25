@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -48,6 +49,8 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_SECONDARY = "Last assignment of \"%s\"";
   private static final Set<String> assertToCheckEquality = Set.of("assertEqual", "assertNotEqual");
   private static final Set<String> assertToCheckIdentity = Set.of("assertIs", "assertIsNot");
+  private static final String FIRST_ARG_KEYWORD = "first";
+  private static final String SECOND_ARG_KEYWORD = "second";
 
   @Override
   public void initialize(Context context) {
@@ -81,18 +84,20 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
     }
 
     List<Argument> arguments = args.arguments();
-    if (!(arguments.size() >= 2 && arguments.get(0).is(Tree.Kind.REGULAR_ARGUMENT) && arguments.get(1).is(Tree.Kind.REGULAR_ARGUMENT))) {
+    RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, FIRST_ARG_KEYWORD, arguments);
+    RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, SECOND_ARG_KEYWORD, arguments);
+    if (firstArg == null || secondArg == null) {
       return;
     }
 
-    Expression left = ((RegularArgument) arguments.get(0)).expression();
-    Expression right = ((RegularArgument) arguments.get(1)).expression();
-    if (!checkArgumentsCantBeIdentical(left, right)) {
+    Expression left = firstArg.expression();
+    Expression right = secondArg.expression();
+    if (canArgumentsBeIdentical(left, right)) {
       return;
     } else if (isAnAssertIdentity) {
       shouldRaise = true;
     }
-    if (isAnAssertEquality && checkArgumentsCantBeEqual(left, right)) {
+    if (isAnAssertEquality && !canArgumentsBeEqual(left, right)) {
       shouldRaise = true;
     }
 
@@ -125,6 +130,7 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
     }
 
     Usage lastAssignment = symbol.usages().stream()
+      .sorted(Comparator.comparingInt(u -> u.tree().firstToken().line()))
       .takeWhile(usage -> usage != ((Name) expr).usage())
       .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
       .reduce((first, second) -> second)
@@ -134,24 +140,24 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       .map(assignment -> (AssignmentStatement) TreeUtils.firstAncestorOfKind(assignment.tree(), Tree.Kind.ASSIGNMENT_STMT));
   }
 
-  private static boolean checkArgumentsCantBeIdentical(Expression left, Expression right) {
-    return !left.type().isIdentityComparableWith(right.type()) && !left.type().canOnlyBe(NONE_TYPE) && !right.type().canOnlyBe(NONE_TYPE);
+  private static boolean canArgumentsBeIdentical(Expression left, Expression right) {
+    return left.type().isIdentityComparableWith(right.type()) || left.type().canOnlyBe(NONE_TYPE) || right.type().canOnlyBe(NONE_TYPE);
   }
 
-  private static boolean checkArgumentsCantBeEqual(Expression left, Expression right) {
+  private static boolean canArgumentsBeEqual(Expression left, Expression right) {
     String leftCategory = InferredTypes.getBuiltinCategory(left.type());
     String rightCategory = InferredTypes.getBuiltinCategory(right.type());
     boolean leftCanImplementEqOrNe = canImplementEqOrNe(left);
     boolean rightCanImplementEqOrNe = canImplementEqOrNe(right);
 
     if ((leftCategory != null && leftCategory.equals(rightCategory))) {
-      return false;
+      return true;
     }
 
-    return (!leftCanImplementEqOrNe && !rightCanImplementEqOrNe)
-      || (leftCategory != null && rightCategory != null)
-      || (leftCategory != null && !rightCanImplementEqOrNe)
-      || (rightCategory != null && !leftCanImplementEqOrNe);
+    return (leftCanImplementEqOrNe || rightCanImplementEqOrNe)
+      && (leftCategory == null || rightCategory == null)
+      && (leftCategory == null || rightCanImplementEqOrNe)
+      && (rightCategory == null || leftCanImplementEqOrNe);
   }
 
   private static boolean canImplementEqOrNe(Expression expression) {
