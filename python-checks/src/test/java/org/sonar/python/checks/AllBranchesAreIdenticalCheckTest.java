@@ -45,17 +45,18 @@ public class AllBranchesAreIdenticalCheckTest {
       "    doSomething()\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
+
   @Test
   public void quickfix_semicolons() {
     String codeWithIssue =
       "def func():\n" +
-        "    if b == 0:\n" +
-        "        doSomething(); doOneMoreThing()\n"+
-        "    else:\n" +
-        "        doSomething(); doOneMoreThing()\n";
+      "    if b == 0:\n" +
+      "        doSomething(); doOneMoreThing()\n"+
+      "    else:\n" +
+      "        doSomething(); doOneMoreThing()\n";
     String codeFixed =
       "def func():\n" +
-        "    doSomething(); doOneMoreThing()\n";
+      "    doSomething(); doOneMoreThing()\n";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -63,12 +64,12 @@ public class AllBranchesAreIdenticalCheckTest {
   public void if_enclosed() {
     String codeWithIssue =
       "def func():\n" +
-        "    if b == 0:\n" +
-        "        if a == 1:\n"+
-        "            doSomething()\n"+
-        "    else:\n" +
-        "        if a == 1:\n"+
-        "            doSomething()\n";
+      "    if b == 0:\n" +
+      "        if a == 1:\n"+
+      "            doSomething()\n"+
+      "    else:\n" +
+      "        if a == 1:\n"+
+      "            doSomething()\n";
     String codeFixed =
       "def func():\n" +
       "    if a == 1:\n"+
@@ -78,10 +79,62 @@ public class AllBranchesAreIdenticalCheckTest {
 
 
   @Test
-  public void oneline(){
+  public void oneline() {
     String codeWithIssue = "a = 1 if x else 1";
     String codeFixed = "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_in_first_condition() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if foo():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_right_hand() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if 1 == 2 and foo():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_left_hand() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if foo() and 1 == 2:\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_parenthesis() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if 1 == 3 or (foo() and 1 == 2):\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_in_elif_condition() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if b == 0:\n" +
+        "    doSomething()\n" +
+        "elif bar():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
   }
 
   @Test
@@ -96,6 +149,23 @@ public class AllBranchesAreIdenticalCheckTest {
     String codeFixed = "def func():\n" +
       "    doSomething()\n" +
       "    doOneMoreThing()\n";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void comments() {
+    String codeWithIssue = "if a == 0:\n" +
+      "    # true branch comment1\n" +
+      "    doSomething()  # true branch comment2\n" +
+      "    # true branch comment3\n" +
+      "else:\n" +
+      "    # false branch comment1\n" +
+      "    doSomething()  # false branch comment2\n" +
+      "    # false branch comment3\n";
+
+    String codeFixed = "doSomething()  # false branch comment2\n" +
+      "    # false branch comment3\n";
+
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -115,8 +185,16 @@ public class AllBranchesAreIdenticalCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = (1 if x else 1) if cond else 1";
-    codeFixed = "a = (1 if x else 1)";  // SONARPY-1047
+    codeFixed = "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void wrapped_conditional_statements(){
+    PythonQuickFixVerifier.verify(check,
+      "a = (1 if x else 1)",
+      "a = (1)"
+    );
   }
 
   @Test
@@ -187,10 +265,11 @@ public class AllBranchesAreIdenticalCheckTest {
       "    doSomething()\n" +
       "else:\n" +
       "    doSomething()\n" +
-      "\n" +  // blank line should not be removed: SONARPY-1048
+      "\n" +
       "a = 1";
     String codeFixed = ""+
       "doSomething()\n" +
+      "\n" +
       "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
@@ -204,6 +283,8 @@ public class AllBranchesAreIdenticalCheckTest {
       "a = 1";
     codeFixed = ""+
       "doSomething()\n" +
+      "\n" +
+      "\n" +
       "a = 1";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }

@@ -55,8 +55,12 @@ public class PythonQuickFix {
       this.description = description;
     }
 
-    public Builder addTextEdit(PythonTextEdit... textEdit) {
-      textEdits.addAll(Arrays.asList(textEdit));
+    public Builder addTextEdit(PythonTextEdit... textEdits) {
+      return addTextEdit(Arrays.asList(textEdits));
+    }
+
+    public Builder addTextEdit(List<PythonTextEdit> textEdits) {
+      this.textEdits.addAll(textEdits);
       return this;
     }
 
