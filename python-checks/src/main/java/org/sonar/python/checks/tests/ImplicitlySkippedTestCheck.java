@@ -19,22 +19,15 @@
  */
 package org.sonar.python.checks.tests;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
@@ -42,43 +35,15 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.tests.UnittestUtils;
 
 @Rule(key = "S5918")
 public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Skip this test explicitly.";
 
-  private static final List<TestFramework> testFrameworks = new ArrayList<>();
-
-  static {
-    // Unit Test method source : https://docs.python.org/2/library/unittest.html#assert-methods
-    testFrameworks.add(new TestFramework("unittest", Arrays.asList("unittest", "TestCase"), new HashSet<>(Arrays.asList("assertEqual",
-      "assertNotEqual", "assertTrue", "assertFalse", "assertIs", "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn",
-      "assertNotIn", "assertIsInstance", "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertAlmostEqual",
-      "assertNotAlmostEqual", "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches",
-      "assertNotRegexpMatches", "assertItemsEqual", "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
-      "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual"))));
-  }
-
   private static final Tree.Kind[] literalsKind = {Tree.Kind.STRING_LITERAL, Tree.Kind.NUMERIC_LITERAL, Tree.Kind.LIST_LITERAL,
     Tree.Kind.BOOLEAN_LITERAL_PATTERN, Tree.Kind.NUMERIC_LITERAL_PATTERN, Tree.Kind.NONE_LITERAL_PATTERN, Tree.Kind.STRING_LITERAL_PATTERN};
-
-  static class TestFramework {
-    String name;
-    List<String> keywords;
-    Set<String> supportedAssertMethods;
-
-    public TestFramework(String name, List<String> keywords, Set<String> supportedAssertMethods) {
-      this.name = name;
-      this.keywords = keywords;
-      this.supportedAssertMethods = supportedAssertMethods;
-    }
-
-    public boolean matchAnyProvidedClasses(List<String> classes) {
-      return classes.stream().anyMatch(parentClass -> keywords.stream().allMatch(parentClass::contains));
-    }
-  }
 
   @Override
   public void initialize(Context context) {
@@ -128,43 +93,11 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean containsAssertion(FunctionDef functionDef) {
-    Set<String> supportedAssertMethods = getParentClassTestFrameworkFromFunctionDef(functionDef);
+    Set<String> supportedAssertMethods = UnittestUtils.isWithinUnittestTestCase(functionDef) ?
+      UnittestUtils.ASSERTIONS_METHODS : Collections.emptySet();
     AssertionVisitor assertVisitor = new AssertionVisitor(supportedAssertMethods);
     functionDef.accept(assertVisitor);
     return assertVisitor.hasAnAssert;
-  }
-
-  private static Set<String> getParentClassTestFrameworkFromFunctionDef(FunctionDef functionDef) {
-    List<String> libraries = new ArrayList<>();
-    ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(functionDef, Tree.Kind.CLASSDEF);
-    if (classDef != null) {
-      libraries.addAll(getInheritedClassesFQN(classDef));
-    }
-
-    return testFrameworks.stream()
-      .filter(testFramework -> testFramework.matchAnyProvidedClasses(libraries))
-      .findFirst()
-      .map(t -> t.supportedAssertMethods)
-      .orElseGet(Collections::emptySet);
-  }
-
-  private static List<String> getInheritedClassesFQN(ClassDef classDefinition) {
-    return getParentClasses(TreeUtils.getClassSymbolFromDef(classDefinition)).stream()
-      .map(Symbol::fullyQualifiedName)
-      .collect(Collectors.toList());
-  }
-
-  private static List<Symbol> getParentClasses(ClassSymbol classSymbol) {
-    List<Symbol> superclasses = new ArrayList<>();
-    if (classSymbol != null) {
-      for (Symbol symbol : classSymbol.superClasses()) {
-        superclasses.add(symbol);
-        if (symbol instanceof ClassSymbol) {
-          superclasses.addAll(getParentClasses((ClassSymbol) symbol));
-        }
-      }
-    }
-    return superclasses;
   }
 
   static class AssertionVisitor extends BaseTreeVisitor {

@@ -47,9 +47,11 @@ import org.sonar.plugins.python.api.tree.WhileStatement;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class TreeUtilsTest {
 
@@ -150,6 +152,39 @@ public class TreeUtilsTest {
     );
     classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
     assertThat(TreeUtils.getClassSymbolFromDef(classDef)).isNull();
+  }
+
+  @Test
+  public void test_getParentClassesFQN() {
+    String code = "class A:\n  def foo(): pass";
+    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).isEmpty();
+
+    code = "class B: ...\nclass A(B):\n  def foo(): pass";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactlyInAnyOrder("mod1.B");
+
+    code = "class B: ...\nclass C: ...\nclass A(B,C):\n  def foo(): pass";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactlyInAnyOrder("mod1.B", "mod1.C");
+
+    code = "class B: ...\nclass C(B): ...\nclass A(C):\n  def foo(): pass";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactlyInAnyOrder("mod1.B", "mod1.C");
+
+    code = "if cond:\n  class A:...\nelse:\n  class A: pass";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).isEmpty();
+
+    code = "import b \nclass A(b.B): ...";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactly("b.B");
   }
 
   @Test(expected = IllegalStateException.class)
