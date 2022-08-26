@@ -19,12 +19,21 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
+import org.sonarsource.analyzer.commons.collections.ListUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.parse;
 
 public class PythonTextEditTest {
 
@@ -80,11 +89,47 @@ public class PythonTextEditTest {
 
   @Test
   public void insertLineBefore() {
-      Token token = mockToken("tree", 1, 4);
+    Token token = mockToken("tree", 1, 4);
 
-      PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent\n");
-      assertThat(textEdit.replacementText()).isEqualTo("firstLine\n        secondLineWithIndent\n    ");
-      assertTextEditLocation(textEdit, 1, 4, 1, 4);
+    PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent\n");
+    assertThat(textEdit.replacementText()).isEqualTo("firstLine\n        secondLineWithIndent\n    ");
+    assertTextEditLocation(textEdit, 1, 4, 1, 4);
+  }
+
+  @Test
+  public void shiftLeft() {
+    FileInput file = parse(
+      "def foo():",
+      "    a = 1; b = 2",
+      " # comment",
+      "    c = 2"
+    );
+    StatementList functionBody = ((FunctionDef) PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF))).body();
+
+    List<PythonTextEdit> textEdits = PythonTextEdit.shiftLeft(functionBody);
+    assertThat(textEdits).hasSize(2);
+    textEdits.forEach(textEdit -> {
+      assertThat(textEdit.startLineOffset()).isZero();
+      assertThat(textEdit.replacementText()).isEmpty();
+      assertThat(textEdit.endLineOffset()).isEqualTo(4);
+    });
+  }
+
+  @Test
+  public void removeUntil() {
+    FileInput file = parse(
+      "def foo():",
+      "    a = 1",
+      " # comment",
+      "    b = 2"
+    );
+
+    StatementList functionBody = ((FunctionDef) PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF))).body();
+    Statement lastStatement = ListUtils.getLast(functionBody.statements());
+
+    PythonTextEdit textEdit = PythonTextEdit.removeUntil(functionBody, lastStatement);
+    assertThat(textEdit.replacementText()).isEmpty();
+    assertTextEditLocation(textEdit, 2, 4, 4, 4);
   }
 
   private void assertTextEditLocation(PythonTextEdit textEdit, int startLine, int startLineOffset, int endLine, int endLineOffset) {

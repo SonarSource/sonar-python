@@ -44,6 +44,9 @@ import static org.sonar.python.quickfix.PythonTextEdit.removeUntil;
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
 
+  private static final String IF_STATEMENT_MESSAGE = "Remove this if statement or edit its code blocks so that they're not all the same.";
+  private static final String CONDITIONAL_MESSAGE = "This conditional expression returns the same value whether the condition is \"true\" or \"false\".";
+
   private static final List<ConditionalExpression> ignoreList = new ArrayList<>();
 
   @Override
@@ -68,12 +71,12 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     if (!CheckUtils.areEquivalent(body, elseBranch.body())) {
       return;
     }
-    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), "Remove this if statement or edit its code blocks so that they're not all the same.");
+    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
     issue.secondary(issueLocation(ifStmt.body()));
     ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
     issue.secondary(issueLocation(elseBranch.body()));
     if (!hasSideEffect(ifStmt)) {
-      issue.addQuickFix(computeQuickFixForIfStatement(ifStmt));
+      issue.addQuickFix(computeQuickFixForIfStatement(ifStmt, elseBranch));
     }
   }
 
@@ -87,7 +90,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       return;
     }
     if (areIdentical(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
-      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
+      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_MESSAGE);
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
       issue.addQuickFix(computeQuickFixForConditional(conditionalExpression));
@@ -145,17 +148,15 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     return falseExpression;
   }
 
-  private static PythonQuickFix computeQuickFixForIfStatement(IfStatement ifStatement) {
+  private static PythonQuickFix computeQuickFixForIfStatement(IfStatement ifStatement, ElseClause elseClause) {
     PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix("Remove the if statement");
 
-    StatementList bodyStatements = ifStatement.elseBranch().body();
-
     // Remove everything from if keyword to the last branch's body
-    builder.addTextEdit(PythonTextEdit.removeUntil(ifStatement.keyword(), bodyStatements));
+    builder.addTextEdit(PythonTextEdit.removeUntil(ifStatement.keyword(), elseClause.body()));
 
     // Shift all body statements to the left
     // Skip first shift because already done by upper if statement removal
-    PythonTextEdit.shiftLeft(bodyStatements).stream()
+    PythonTextEdit.shiftLeft(elseClause.body()).stream()
       .skip(1)
       .forEach(builder::addTextEdit);
 
