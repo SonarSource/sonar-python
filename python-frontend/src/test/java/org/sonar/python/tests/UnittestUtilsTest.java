@@ -63,4 +63,9 @@ public class UnittestUtilsTest  {
     tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.ELLIPSIS));
     assertThat(UnittestUtils.isWithinUnittestTestCase(tree)).isFalse();
   }
+
+  @Test
+  public void all_methods() {
+    assertThat(UnittestUtils.allMethods()).hasSize(59);
+  }
 }

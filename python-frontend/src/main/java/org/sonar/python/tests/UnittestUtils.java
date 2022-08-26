@@ -20,6 +20,8 @@
 package org.sonar.python.tests;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -32,12 +34,35 @@ public class UnittestUtils {
 
   }
 
+  // All methods of unittest https://docs.python.org/3/library/unittest.html#unittest.TestCase
+  public static final Set<String> UNITTEST_RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
+    "subTest", "debug");
+
   public static final Set<String> ASSERTIONS_METHODS = Set.of("assertEqual",
     "assertNotEqual", "assertTrue", "assertFalse", "assertIs", "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn",
     "assertNotIn", "assertIsInstance", "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertAlmostEqual",
     "assertNotAlmostEqual", "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches",
     "assertNotRegexpMatches", "assertItemsEqual", "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
-    "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual");
+    "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual", "assertRaisesRegex", "assertWarns", "assertWarnsRegex",
+    "assertLogs", "assertNoLogs", "assertRegex", "assertNotRegex", "assertCountEqual");
+
+  public static final Set<String> UTIL_METHODS = Set.of("addTypeEqualityFunc", "fail", "failureException", "longMessage", "maxDiff");
+
+  public static final Set<String> UNITTEST_GATHER_INFO = Set.of("countTestCases", "defaultTestResult", "id", "shortDescription", "addCleanup",
+    "doCleanups", "addClassCleanup", "doClassCleanups");
+
+  private static final Set<String> ALL_METHODS = new HashSet<>();
+
+  static {
+    ALL_METHODS.addAll(UNITTEST_RUN_METHODS);
+    ALL_METHODS.addAll(UTIL_METHODS);
+    ALL_METHODS.addAll(UNITTEST_GATHER_INFO);
+    ALL_METHODS.addAll(ASSERTIONS_METHODS);
+  }
+
+  public static Set<String> allMethods() {
+    return Collections.unmodifiableSet(ALL_METHODS);
+  }
 
   public static boolean isWithinUnittestTestCase(Tree tree) {
     List<String> parentClassesFQN = new ArrayList<>();
