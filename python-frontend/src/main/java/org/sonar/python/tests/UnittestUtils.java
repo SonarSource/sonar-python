@@ -34,7 +34,9 @@ public class UnittestUtils {
 
   }
 
-  // All methods of unittest https://docs.python.org/3/library/unittest.html#unittest.TestCase
+  // Methods of unittest are the union of Python 2 and Python 3 methods:
+  // https://docs.python.org/2/library/unittest.html#unittest.TestCase
+  // https://docs.python.org/3/library/unittest.html#unittest.TestCase
   public static final Set<String> RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
     "subTest", "debug");
 
