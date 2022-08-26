@@ -35,7 +35,7 @@ public class UnittestUtils {
   }
 
   // All methods of unittest https://docs.python.org/3/library/unittest.html#unittest.TestCase
-  public static final Set<String> UNITTEST_RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
+  public static final Set<String> RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
     "subTest", "debug");
 
   public static final Set<String> ASSERTIONS_METHODS = Set.of("assertEqual",
@@ -48,15 +48,15 @@ public class UnittestUtils {
 
   public static final Set<String> UTIL_METHODS = Set.of("addTypeEqualityFunc", "fail", "failureException", "longMessage", "maxDiff");
 
-  public static final Set<String> UNITTEST_GATHER_INFO = Set.of("countTestCases", "defaultTestResult", "id", "shortDescription", "addCleanup",
+  public static final Set<String> GATHER_INFO_METHODS = Set.of("countTestCases", "defaultTestResult", "id", "shortDescription", "addCleanup",
     "doCleanups", "addClassCleanup", "doClassCleanups");
 
   private static final Set<String> ALL_METHODS = new HashSet<>();
 
   static {
-    ALL_METHODS.addAll(UNITTEST_RUN_METHODS);
+    ALL_METHODS.addAll(RUN_METHODS);
     ALL_METHODS.addAll(UTIL_METHODS);
-    ALL_METHODS.addAll(UNITTEST_GATHER_INFO);
+    ALL_METHODS.addAll(GATHER_INFO_METHODS);
     ALL_METHODS.addAll(ASSERTIONS_METHODS);
   }
 
