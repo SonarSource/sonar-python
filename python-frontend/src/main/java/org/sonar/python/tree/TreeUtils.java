@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -140,6 +141,27 @@ public class TreeUtils {
     }
 
     return null;
+  }
+
+  public static List<String> getParentClassesFQN(ClassDef classDef) {
+    return getParentClasses(TreeUtils.getClassSymbolFromDef(classDef)).stream()
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
+  }
+
+  private static List<Symbol> getParentClasses(@Nullable ClassSymbol classSymbol) {
+    List<Symbol> superClasses = new ArrayList<>();
+    if (classSymbol == null) {
+      return superClasses;
+    }
+    for (Symbol symbol : classSymbol.superClasses()) {
+      superClasses.add(symbol);
+      if (symbol instanceof ClassSymbol) {
+        superClasses.addAll(getParentClasses((ClassSymbol) symbol));
+      }
+    }
+    return superClasses;
   }
 
   @CheckForNull
