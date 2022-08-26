@@ -167,7 +167,8 @@ public class PythonTextEdit {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     PythonTextEdit that = (PythonTextEdit) o;
-    return startLine == that.startLine && startLineOffset == that.startLineOffset && endLine == that.endLine && endLineOffset == that.endLineOffset && Objects.equals(message, that.message);
+    return startLine == that.startLine && startLineOffset == that.startLineOffset && endLine == that.endLine
+      && endLineOffset == that.endLineOffset && Objects.equals(message, that.message);
   }
 
   @Override
