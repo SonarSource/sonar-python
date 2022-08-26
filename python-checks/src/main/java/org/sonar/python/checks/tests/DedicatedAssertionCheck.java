@@ -164,9 +164,6 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
 
   private static void checkAssertEqualOrNotEqual(CallExpression callExpression, SubscriptionContext ctx, boolean isAssertEqual) {
     List<Argument> arguments = callExpression.arguments();
-    if (arguments.size() < 2) {
-      return;
-    }
     RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, FIRST, arguments);
     RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, SECOND, arguments);
     if (firstArg == null || secondArg == null) {
@@ -189,9 +186,6 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
 
   private static void checkAssertAlmostEqualOrNot(CallExpression callExpression, SubscriptionContext ctx, String methodName) {
     List<Argument> arguments = callExpression.arguments();
-    if (arguments.size() < 2) {
-      return;
-    }
     RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, FIRST, arguments);
     RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, SECOND, arguments);
     if (firstArg == null || secondArg == null) {
