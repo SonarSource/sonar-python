@@ -134,10 +134,16 @@ public class PythonTextEditTest {
 
   @Test
   public void equals() {
-    PythonTextEdit edit = PythonTextEdit.removeRange(0, 0, 1, 1);
+    PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
     assertThat(edit.equals(edit)).isTrue();
     assertThat(edit.equals(null)).isFalse();
     assertThat(edit.equals(new Object())).isFalse();
+
+    assertThat(edit.equals(new PythonTextEdit("",1, 0, 1, 1))).isFalse();
+    assertThat(edit.equals(new PythonTextEdit("",0, 1, 1, 1))).isFalse();
+    assertThat(edit.equals(new PythonTextEdit("",0, 0, 0, 1))).isFalse();
+    assertThat(edit.equals(new PythonTextEdit("",0, 0, 1, 0))).isFalse();
+    assertThat(edit.equals(new PythonTextEdit("a", 0, 0, 1, 1))).isFalse();
   }
 
   private void assertTextEditLocation(PythonTextEdit textEdit, int startLine, int startLineOffset, int endLine, int endLineOffset) {
