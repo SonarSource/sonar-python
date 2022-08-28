@@ -31,31 +31,21 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionIf;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.SetLiteral;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
-import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.AND;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NOT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.OR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
+import static org.sonar.python.checks.CheckUtils.isConstant;
+import static org.sonar.python.checks.CheckUtils.isImmutableConstant;
 
 @Rule(key = "S5797")
 public class ConstantConditionCheck extends PythonVisitorCheck {
@@ -98,15 +88,6 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
     checkExpression(condition);
   }
 
-  private static boolean isConstant(Expression condition) {
-    return isImmutableConstant(condition) || isConstantCollectionLiteral(condition);
-  }
-
-  private static boolean isImmutableConstant(Expression condition) {
-    return TreeUtils.isBooleanLiteral(condition) ||
-      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE, LAMBDA, GENERATOR_EXPR);
-  }
-
   private static Expression getConstantBooleanExpression(Expression condition) {
     if (condition.is(AND, OR)) {
       BinaryExpression binaryExpression = (BinaryExpression) condition;
@@ -121,28 +102,6 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       return ((UnaryExpression) condition).expression();
     }
     return null;
-  }
-
-  private static boolean isConstantCollectionLiteral(Expression condition) {
-    switch (condition.getKind()) {
-      case LIST_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements().expressions());
-      case DICTIONARY_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((DictionaryLiteral) condition).elements());
-      case SET_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((SetLiteral) condition).elements());
-      case TUPLE:
-        return isAlwaysEmptyOrNonEmptyCollection(((Tuple) condition).elements());
-      default:
-        return false;
-    }
-  }
-
-  private static boolean isAlwaysEmptyOrNonEmptyCollection(List<? extends Tree> elements) {
-    if (elements.isEmpty()) {
-      return true;
-    }
-    return elements.stream().anyMatch(element -> !element.is(UNPACKING_EXPR));
   }
 
   /**

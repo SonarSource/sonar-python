@@ -26,11 +26,22 @@ import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 
 public class CheckUtils {
 
@@ -103,5 +114,36 @@ public class CheckUtils {
   private static boolean calleeHasNameLocals(CallExpression callExpression) {
     Expression callee = callExpression.callee();
     return callee.is(Tree.Kind.NAME) && "locals".equals(((Name) callee).name());
+  }
+
+  public static boolean isConstant(Expression condition) {
+    return isImmutableConstant(condition) || isConstantCollectionLiteral(condition);
+  }
+
+  public static boolean isImmutableConstant(Expression condition) {
+    return TreeUtils.isBooleanLiteral(condition) ||
+      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE, LAMBDA, GENERATOR_EXPR);
+  }
+
+  private static boolean isConstantCollectionLiteral(Expression condition) {
+    switch (condition.getKind()) {
+      case LIST_LITERAL:
+        return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements().expressions());
+      case DICTIONARY_LITERAL:
+        return isAlwaysEmptyOrNonEmptyCollection(((DictionaryLiteral) condition).elements());
+      case SET_LITERAL:
+        return isAlwaysEmptyOrNonEmptyCollection(((SetLiteral) condition).elements());
+      case TUPLE:
+        return isAlwaysEmptyOrNonEmptyCollection(((Tuple) condition).elements());
+      default:
+        return false;
+    }
+  }
+
+  private static boolean isAlwaysEmptyOrNonEmptyCollection(List<? extends Tree> elements) {
+    if (elements.isEmpty()) {
+      return true;
+    }
+    return elements.stream().anyMatch(element -> !element.is(UNPACKING_EXPR));
   }
 }
