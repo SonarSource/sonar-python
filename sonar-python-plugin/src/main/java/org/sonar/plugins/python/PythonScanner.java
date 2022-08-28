@@ -126,7 +126,7 @@ public class PythonScanner extends Scanner {
         check.scanFile(visitorContext);
       }
     }
-    SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
+    SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext, indexer.projectLevelSymbolTable().typeShed());
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {

@@ -65,24 +65,18 @@ public class InferredTypes {
   public static final InferredType INT = runtimeBuiltinType(BuiltinTypes.INT);
   public static final InferredType DECL_INT = declaredBuiltinType(BuiltinTypes.INT);
   public static final InferredType FLOAT = runtimeBuiltinType(BuiltinTypes.FLOAT);
-  public static final InferredType DECL_FLOAT = declaredBuiltinType(BuiltinTypes.FLOAT);
   public static final InferredType COMPLEX = runtimeBuiltinType(BuiltinTypes.COMPLEX);
-  public static final InferredType DECL_COMPLEX = declaredBuiltinType(BuiltinTypes.COMPLEX);
 
   public static final InferredType STR = runtimeBuiltinType(BuiltinTypes.STR);
   public static final InferredType DECL_STR = declaredBuiltinType(BuiltinTypes.STR);
 
   public static final InferredType SET = runtimeBuiltinType(BuiltinTypes.SET);
-  public static final InferredType DECL_SET = declaredBuiltinType(BuiltinTypes.SET);
   public static final InferredType DICT = runtimeBuiltinType(BuiltinTypes.DICT);
-  public static final InferredType DECL_DICT = declaredBuiltinType(BuiltinTypes.DICT);
   public static final InferredType LIST = runtimeBuiltinType(BuiltinTypes.LIST);
   public static final InferredType DECL_LIST = declaredBuiltinType(BuiltinTypes.LIST);
   public static final InferredType TUPLE = runtimeBuiltinType(BuiltinTypes.TUPLE);
-  public static final InferredType DECL_TUPLE = declaredBuiltinType(BuiltinTypes.TUPLE);
 
   public static final InferredType NONE = runtimeBuiltinType(BuiltinTypes.NONE_TYPE);
-  public static final InferredType DECL_NONE = declaredBuiltinType(BuiltinTypes.NONE_TYPE);
 
   public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
   public static final InferredType DECL_BOOL = declaredBuiltinType(BuiltinTypes.BOOL);
@@ -110,8 +104,8 @@ public class InferredTypes {
     return AnyType.ANY;
   }
 
-  static InferredType runtimeBuiltinType(String fullyQualifiedName) {
-    return new RuntimeType(fullyQualifiedName);
+  public static InferredType runtimeBuiltinType(String fullyQualifiedName) {
+    return new RuntimeType(fullyQualifiedName, new TypeShed());
   }
 
   private static InferredType declaredBuiltinType(String fullyQualifiedName) {
@@ -136,8 +130,8 @@ public class InferredTypes {
     return types.reduce(InferredTypes::or).orElse(anyType());
   }
 
-  public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation) {
-    Map<String, Symbol> builtins = TypeShed.builtinSymbols();
+  public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation, TypeShed typeShed) {
+    Map<String, Symbol> builtins = typeShed.builtinSymbols();
     DeclaredType declaredType = declaredTypeFromTypeAnnotation(typeAnnotation.expression(), builtins);
     if (declaredType == null) {
       return InferredTypes.anyType();
@@ -145,23 +139,23 @@ public class InferredTypes {
     return declaredType;
   }
 
-  public static InferredType fromTypeshedTypeAnnotation(TypeAnnotation typeAnnotation) {
-    Map<String, Symbol> builtins = TypeShed.builtinSymbols();
+  public static InferredType fromTypeshedTypeAnnotation(TypeAnnotation typeAnnotation, TypeShed typeShed) {
+    Map<String, Symbol> builtins = typeShed.builtinSymbols();
     return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
   }
 
-  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
+  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type, TypeShed typeShed) {
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
-        return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
+        return typeName.isEmpty() ? anyType() : runtimeType(typeShed.symbolWithFQN(typeName));
       case TYPE_ALIAS:
-        return fromTypeshedProtobuf(type.getArgs(0));
+        return fromTypeshedProtobuf(type.getArgs(0), typeShed);
       case CALLABLE:
         // this should be handled as a function type - see SONARPY-953
         return anyType();
       case UNION:
-        return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
+        return union(type.getArgsList().stream().map(t -> fromTypeshedProtobuf(t, typeShed)));
       case TUPLE:
         return InferredTypes.TUPLE;
       case NONE:

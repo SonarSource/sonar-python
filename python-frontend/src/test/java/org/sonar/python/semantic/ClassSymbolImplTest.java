@@ -40,6 +40,8 @@ import static org.sonar.python.PythonTestUtils.parse;
 
 public class ClassSymbolImplTest {
 
+  private TypeShed typeShed = new TypeShed();
+
   @Test
   public void hasUnresolvedTypeHierarchy() {
     ClassSymbolImpl a = new ClassSymbolImpl("x", null);
@@ -161,8 +163,8 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl c = new ClassSymbolImpl("c", "mod2.c");
     assertThat(a.isOrExtends(c)).isFalse();
 
-    assertThat(new ClassSymbolImpl("foo", "foo").isOrExtends(TypeShed.typeShedClass("object"))).isTrue();
-    assertThat(a.isOrExtends(TypeShed.typeShedClass("object"))).isTrue();
+    assertThat(new ClassSymbolImpl("foo", "foo").isOrExtends(typeShed.typeShedClass("object"))).isTrue();
+    assertThat(a.isOrExtends(typeShed.typeShedClass("object"))).isTrue();
   }
 
   @Test
@@ -238,7 +240,7 @@ public class ClassSymbolImplTest {
       "has_decorators: true\n" +
       "has_metaclass: true\n" +
       "metaclass_name: \"abc.ABCMeta\"";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod", typeShed);
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
     assertThat(classSymbol.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
@@ -262,7 +264,7 @@ public class ClassSymbolImplTest {
         "  }\n" +
         "  has_decorators: true\n" +
         "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod", typeShed);
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isTrue();
   }
@@ -283,7 +285,7 @@ public class ClassSymbolImplTest {
       "  has_decorators: true\n" +
       "  is_class_method: true\n" +
       "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod", typeShed);
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
   }
@@ -304,7 +306,7 @@ public class ClassSymbolImplTest {
         "  has_decorators: true\n" +
         "  is_static: true\n" +
         "}";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod", typeShed);
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
   }
@@ -334,7 +336,7 @@ public class ClassSymbolImplTest {
         "    fully_qualified_name: \"mod.A.foo\"\n" +
         "  }\n" +
         "}\n";
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod", typeShed);
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
     assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("27", "39");

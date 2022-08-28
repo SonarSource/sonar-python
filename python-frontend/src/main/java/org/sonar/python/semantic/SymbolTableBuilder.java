@@ -84,7 +84,6 @@ import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeInference;
-import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
@@ -269,9 +268,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       createScope(tree, null);
       enterScope(tree);
       moduleScope = currentScope();
-      Map<String, Symbol> typeShedSymbols = TypeShed.builtinSymbols();
       for (String name : BuiltinSymbols.all()) {
-        currentScope().createBuiltinSymbol(name, typeShedSymbols);
+        currentScope().createBuiltinSymbol(name, projectLevelSymbolTable.typeShed().builtinSymbols());
       }
       super.visitFileInput(tree);
     }
@@ -359,7 +357,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
-          importedModuleSymbols = TypeShed.symbolsForModule(moduleName).values().stream()
+          importedModuleSymbols = projectLevelSymbolTable.typeShed().symbolsForModule(moduleName).values().stream()
             .map(importedSymbol -> currentScope().copySymbol(importedSymbol.name(), importedSymbol)).collect(Collectors.toSet());
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
@@ -675,11 +673,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (functionSymbol != null) {
         FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
         if (parameters != null) {
-          functionSymbolImpl.setParametersWithType(parameters);
+          functionSymbolImpl.setParametersWithType(parameters, projectLevelSymbolTable.typeShed());
         }
         TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
         if (typeAnnotation != null) {
-          functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation));
+          functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation, projectLevelSymbolTable.typeShed()));
         }
       }
       super.visitFunctionDef(functionDef);

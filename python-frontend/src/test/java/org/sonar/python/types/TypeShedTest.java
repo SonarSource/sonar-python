@@ -23,8 +23,6 @@ import com.google.protobuf.TextFormat;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,37 +45,38 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.sonar.python.types.TypeShed.symbolsForModule;
 
 public class TypeShedTest {
 
   @org.junit.Rule
   public LogTester logTester = new LogTester();
+  
+  private TypeShed typeShed;
 
   @Before
   public void setPythonVersions() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
-    TypeShed.resetBuiltinSymbols();
+    typeShed = new TypeShed();
   }
 
   private void setPythonVersions(Set<PythonVersionUtils.Version> pythonVersions) {
     ProjectPythonVersion.setCurrentVersions(pythonVersions);
-    TypeShed.resetBuiltinSymbols();
+    typeShed = new TypeShed();
   }
 
   @Test
   public void classes() {
-    ClassSymbol intClass = TypeShed.typeShedClass("int");
+    ClassSymbol intClass = typeShed.typeShedClass("int");
     assertThat(intClass.superClasses()).extracting(Symbol::name).containsExactly("object");
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(intClass.usages()).isEmpty();
     assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
-    assertThat(TypeShed.typeShedClass("bool").superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("int");
+    assertThat(typeShed.typeShedClass("bool").superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("int");
   }
 
   @Test
   public void str() {
-    ClassSymbol strClass = TypeShed.typeShedClass("str");
+    ClassSymbol strClass = typeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.AMBIGUOUS, "Sequence"));
     // python 3.9 support
@@ -85,13 +84,13 @@ public class TypeShedTest {
     assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
 
     setPythonVersions(PythonVersionUtils.fromString("3.8"));
-    strClass = TypeShed.typeShedClass("str");
+    strClass = typeShed.typeShedClass("str");
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
     assertThat(strClass.resolveMember("removeprefix")).isEmpty();
     assertThat(strClass.resolveMember("removesuffix")).isEmpty();
 
     setPythonVersions(PythonVersionUtils.fromString("2.7"));
-    strClass = TypeShed.typeShedClass("str");
+    strClass = typeShed.typeShedClass("str");
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"), tuple(Kind.CLASS, "basestring"));
 
@@ -100,23 +99,23 @@ public class TypeShedTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void not_a_class() {
-    TypeShed.typeShedClass("repr");
+    typeShed.typeShedClass("repr");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void unknown_name() {
-    TypeShed.typeShedClass("xxx");
+    typeShed.typeShedClass("xxx");
   }
 
   @Test
   public void none_type() {
-    ClassSymbol noneType = TypeShed.typeShedClass("NoneType");
+    ClassSymbol noneType = typeShed.typeShedClass("NoneType");
     assertThat(noneType.superClasses()).isEmpty();
   }
 
   @Test
   public void typing_module() {
-    Map<String, Symbol> symbols = symbolsForModule("typing");
+    Map<String, Symbol> symbols = typeShed.symbolsForModule("typing");
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Kind.CLASS);
@@ -126,89 +125,89 @@ public class TypeShedTest {
 
   @Test
   public void stdlib_symbols() {
-    Map<String, Symbol> mathSymbols = symbolsForModule("math");
+    Map<String, Symbol> mathSymbols = typeShed.symbolsForModule("math");
     Symbol acosSymbol = mathSymbols.get("acos");
     assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("math", "math.acos")).isSameAs(acosSymbol);
+    assertThat( typeShed.symbolWithFQN("math", "math.acos")).isSameAs(acosSymbol);
     assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> threadingSymbols = symbolsForModule("threading");
+    Map<String, Symbol> threadingSymbols = typeShed.symbolsForModule("threading");
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Kind.CLASS);
     assertThat(threadingSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> imaplibSymbols = symbolsForModule("imaplib");
+    Map<String, Symbol> imaplibSymbols = typeShed.symbolsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
     assertThat(imaplibSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
   }
 
   @Test
   public void third_party_symbols() {
-    Map<String, Symbol> emojiSymbols = symbolsForModule("emoji");
+    Map<String, Symbol> emojiSymbols = typeShed.symbolsForModule("emoji");
     Symbol emojizeSymbol = emojiSymbols.get("emojize");
     assertThat(emojizeSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
+    assertThat(typeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
   }
 
   @Test
   public void should_resolve_packages() {
-    assertThat(symbolsForModule("urllib")).isNotEmpty();
-    assertThat(symbolsForModule("ctypes")).isNotEmpty();
-    assertThat(symbolsForModule("email")).isNotEmpty();
-    assertThat(symbolsForModule("json")).isNotEmpty();
-    assertThat(symbolsForModule("docutils")).isNotEmpty();
-    assertThat(symbolsForModule("ctypes.util")).isNotEmpty();
-    assertThat(symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("urllib")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("ctypes")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("email")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("json")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("docutils")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("ctypes.util")).isNotEmpty();
+    assertThat(typeShed.symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
     // resolved but still empty
-    assertThat(symbolsForModule("cryptography")).isEmpty();
-    assertThat(symbolsForModule("kazoo")).isEmpty();
+    assertThat(typeShed.symbolsForModule("cryptography")).isEmpty();
+    assertThat(typeShed.symbolsForModule("kazoo")).isEmpty();
   }
 
   @Test
   public void package_symbols() {
-    Map<String, Symbol> cursesSymbols = symbolsForModule("curses");
+    Map<String, Symbol> cursesSymbols = typeShed.symbolsForModule("curses");
     Symbol wrapperSymbol = cursesSymbols.get("wrapper");
     assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) wrapperSymbol).declaredReturnType()).isEqualTo(AnyType.ANY);
-    assertThat(TypeShed.symbolWithFQN("curses", "curses.wrapper")).isSameAs(wrapperSymbol);
+    assertThat(typeShed.symbolWithFQN("curses", "curses.wrapper")).isSameAs(wrapperSymbol);
   }
 
   @Test
   public void package_submodules_symbols() {
-    Map<String, Symbol> asciiSymbols = symbolsForModule("curses.ascii");
+    Map<String, Symbol> asciiSymbols = typeShed.symbolsForModule("curses.ascii");
     Symbol isalnumSymbol = asciiSymbols.get("isalnum");
     assertThat(isalnumSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) isalnumSymbol).declaredReturnType().canOnlyBe("bool")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("curses.ascii", "curses.ascii.isalnum")).isSameAs(isalnumSymbol);
+    assertThat(typeShed.symbolWithFQN("curses.ascii", "curses.ascii.isalnum")).isSameAs(isalnumSymbol);
   }
 
   @Test
   public void package_inner_submodules_symbols() {
-    Map<String, Symbol> driverSymbols = symbolsForModule("lib2to3.pgen2.driver");
+    Map<String, Symbol> driverSymbols = typeShed.symbolsForModule("lib2to3.pgen2.driver");
     Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
     // There is a small difference between Python 2 and Python 3 symbols: Python 2 uses Text instead of str
     assertThat(loadGrammarSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
-    assertThat(TypeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar")).isSameAs(loadGrammarSymbol);
+    assertThat(typeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar")).isSameAs(loadGrammarSymbol);
   }
 
   @Test
   public void package_relative_import() {
-    Map<String, Symbol> osSymbols = symbolsForModule("os");
+    Map<String, Symbol> osSymbols = typeShed.symbolsForModule("os");
     // The "import sys" is not part of the exported API (private import) in Typeshed
-    // See: https://github.com/python/typeshed/blob/master/CONTRIBUTING.md#conventions
+    // See: https://github.com/python/ typeShed/blob/master/CONTRIBUTING.md#conventions
     assertThat(osSymbols).doesNotContainKey("sys");
 
-    Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
+    Map<String, Symbol> sqlite3Symbols = typeShed.symbolsForModule("sqlite3");
     Symbol completeStatementFunction = sqlite3Symbols.get("complete_statement");
     assertThat(completeStatementFunction.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(completeStatementFunction.fullyQualifiedName()).isEqualTo("sqlite3.dbapi2.complete_statement");
-    Set<String> sqlite3Dbapi2Symbols = symbolsForModule("sqlite3.dbapi2").keySet();
+    Set<String> sqlite3Dbapi2Symbols = typeShed.symbolsForModule("sqlite3.dbapi2").keySet();
     // Python names with a leading underscore are not imported when using wildcard imports
     sqlite3Dbapi2Symbols.removeIf(s -> s.startsWith("_"));
     assertThat(sqlite3Symbols.keySet()).containsAll(sqlite3Dbapi2Symbols);
 
-    Map<String, Symbol> requestsSymbols = symbolsForModule("requests");
+    Map<String, Symbol> requestsSymbols = typeShed.symbolsForModule("requests");
     Symbol requestSymbol = requestsSymbols.get("request");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");
@@ -216,25 +215,25 @@ public class TypeShedTest {
 
   @Test
   public void package_member_fqn_points_to_original_fqn() {
-    Map<String, Symbol> symbols = symbolsForModule("flask");
+    Map<String, Symbol> symbols = typeShed.symbolsForModule("flask");
     Symbol targetSymbol = symbols.get("Response");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
-    assertThat(TypeShed.symbolWithFQN("flask", "flask.Response")).isSameAs(targetSymbol);
+    assertThat(typeShed.symbolWithFQN("flask", "flask.Response")).isSameAs(targetSymbol);
   }
 
 
   @Test
   public void package_member_ambigous_symbol_common_fqn() {
-    Map<String, Symbol> symbols = symbolsForModule("io");
+    Map<String, Symbol> symbols = typeShed.symbolsForModule("io");
     Symbol targetSymbol = symbols.get("FileIO");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("io.FileIO");
-    assertThat(TypeShed.symbolWithFQN("io", "io.FileIO")).isSameAs(targetSymbol);
+    assertThat(typeShed.symbolWithFQN("io", "io.FileIO")).isSameAs(targetSymbol);
   }
 
   @Test
   public void two_exported_symbols_with_same_local_names() {
-    Map<String, Symbol> osSymbols = symbolsForModule("os");
-    Map<String, Symbol> posixSymbols = symbolsForModule("posix");
+    Map<String, Symbol> osSymbols = typeShed.symbolsForModule("os");
+    Map<String, Symbol> posixSymbols = typeShed.symbolsForModule("posix");
     Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
     Symbol setupSymbolFromOs = osSymbols.get("stat_result");
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
@@ -245,7 +244,7 @@ public class TypeShedTest {
 
   @Test
   public void package_django() {
-    Map<String, Symbol> djangoSymbols = symbolsForModule("django.http");
+    Map<String, Symbol> djangoSymbols = typeShed.symbolsForModule("django.http");
     Symbol responseSymbol = djangoSymbols.get("HttpResponse");
     assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(responseSymbol.fullyQualifiedName()).isEqualTo("django.http.response.HttpResponse");
@@ -253,16 +252,16 @@ public class TypeShedTest {
 
   @Test
   public void return_type_hints() {
-    Map<String, Symbol> symbols = symbolsForModule("typing");
+    Map<String, Symbol> symbols = typeShed.symbolsForModule("typing");
     assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("tuple");
-    symbols = symbolsForModule("flask_mail");
+    symbols = typeShed.symbolsForModule("flask_mail");
     ClassSymbol mail = (ClassSymbol) symbols.get("Mail");
     assertThat(((FunctionSymbol) mail.declaredMembers().stream().iterator().next()).annotatedReturnTypeName()).isNull();
   }
 
   @Test
   public void package_django_class_property_type() {
-    Map<String, Symbol> djangoSymbols = symbolsForModule("django.http.request");
+    Map<String, Symbol> djangoSymbols = typeShed.symbolsForModule("django.http.request");
     Symbol requestSymbol = djangoSymbols.get("HttpRequest");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(((ClassSymbol) requestSymbol).declaredMembers().iterator().next().annotatedTypeName()).isEqualTo("django.http.request.QueryDict");
@@ -270,7 +269,7 @@ public class TypeShedTest {
 
   @Test
   public void package_lxml_reexported_symbol_fqn() {
-    Map<String, Symbol> lxmlEtreeSymbols = symbolsForModule("lxml.etree");
+    Map<String, Symbol> lxmlEtreeSymbols = typeShed.symbolsForModule("lxml.etree");
     Symbol elementTreeSymbol = lxmlEtreeSymbols.get("ElementTree");
     assertThat(elementTreeSymbol.kind()).isEqualTo(Kind.CLASS);
     // FIXME: Original FQN is "xml.etree.ElementTree.ElementTree" and we should be able to retrieve it somehow
@@ -279,17 +278,17 @@ public class TypeShedTest {
 
   @Test
   public void package_sqlite3_connect_type_in_ambiguous_symbol() {
-    Map<String, Symbol> djangoSymbols = symbolsForModule("sqlite3");
+    Map<String, Symbol> djangoSymbols = typeShed.symbolsForModule("sqlite3");
     Symbol requestSymbol = djangoSymbols.get("connect");
     assertThat(((FunctionSymbolImpl) ((((AmbiguousSymbolImpl) requestSymbol).alternatives()).toArray()[0])).annotatedReturnTypeName()).isEqualTo("sqlite3.dbapi2.Connection");
   }
 
   @Test
   public void stub_files_symbols() {
-    Collection<Symbol> mathSymbols = symbolsForModule("math").values();
-    Collection<Symbol> djangoHttpSymbols = symbolsForModule("django.http").values();
+    Collection<Symbol> mathSymbols = typeShed.symbolsForModule("math").values();
+    Collection<Symbol> djangoHttpSymbols = typeShed.symbolsForModule("django.http").values();
 
-    Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
+    Collection<Symbol> symbols = typeShed.stubFilesSymbols();
     assertThat(symbols)
       .containsAll(mathSymbols)
       .containsAll(djangoHttpSymbols);
@@ -297,7 +296,7 @@ public class TypeShedTest {
 
   @Test
   public void deserialize_annoy_protobuf() {
-    Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
+    Map<String, Symbol> deserializedAnnoySymbols = typeShed.symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy._Vector"), tuple(Kind.CLASS, "annoy.AnnoyIndex"));
@@ -337,10 +336,10 @@ public class TypeShedTest {
 
   @Test
   public void deserialize_nonexistent_or_incorrect_protobuf() {
-    assertThat(symbolsForModule("NOT_EXISTENT")).isEmpty();
-    assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
+    assertThat(typeShed.symbolsForModule("NOT_EXISTENT")).isEmpty();
+    assertThat(typeShed.getSymbolsFromProtobufModule(null)).isEmpty();
     InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
-    assertThat(TypeShed.deserializedModule("mod", targetStream)).isNull();
+    assertThat( typeShed.deserializedModule("mod", targetStream)).isNull();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Error while deserializing protobuf for module mod");
   }
 
@@ -363,7 +362,7 @@ public class TypeShedTest {
       "  fully_qualified_name: \"mod.D\"\n" +
       "  super_classes: \"NOT_EXISTENT\"\n" +
       "}");
-    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    Map<String, Symbol> symbols = typeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
 
@@ -416,7 +415,7 @@ public class TypeShedTest {
       "    is_overload: true\n" +
       "  }\n" +
       "}\n");
-    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    Map<String, Symbol> symbols =  typeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.FUNCTION, "mod.foo"), tuple(Kind.AMBIGUOUS, "mod.bar"));
     AmbiguousSymbol ambiguousSymbol = (AmbiguousSymbol) symbols.get("bar");
@@ -426,7 +425,7 @@ public class TypeShedTest {
 
   @Test
   public void overloaded_functions() {
-    Symbol map = TypeShed.builtinSymbols().get("map");
+    Symbol map =  typeShed.builtinSymbols().get("map");
     assertThat(map.is(Kind.AMBIGUOUS)).isTrue();
     assertThat(((SymbolImpl) map).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39", "310");
     ClassSymbol python3Symbol = (ClassSymbol) ((AmbiguousSymbol) map).alternatives().stream().filter(s -> s.is(Kind.CLASS)).findFirst().get();
@@ -441,24 +440,24 @@ public class TypeShedTest {
   @Test
   public void pythonVersions() {
     // unknown version
-    Symbol range = TypeShed.builtinSymbols().get("range");
+    Symbol range =  typeShed.builtinSymbols().get("range");
     assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27", "35", "36", "37", "38", "39", "310");
     assertThat(range.kind()).isEqualTo(Kind.AMBIGUOUS);
 
     // python 2
     setPythonVersions(PythonVersionUtils.fromString("2.7"));
-    range = TypeShed.builtinSymbols().get("range");
+    range =  typeShed.builtinSymbols().get("range");
     assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("27");
     assertThat(range.kind()).isEqualTo(Kind.FUNCTION);
 
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.8"));
-    range = TypeShed.builtinSymbols().get("range");
+    range =  typeShed.builtinSymbols().get("range");
     assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
-    ClassSymbol intSymbol = TypeShed.typeShedClass("int");
+    ClassSymbol intSymbol =  typeShed.typeShedClass("int");
     assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
 
     setPythonVersions(PythonVersionUtils.allVersions());
@@ -467,10 +466,10 @@ public class TypeShedTest {
   @Test
   public void symbolWithFQN_should_be_consistent() {
     // smtplib imports typing.Sequence only in Python3, hence typing.Sequence has kind CLASS
-    symbolsForModule("smtplib");
-    Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
+    typeShed.symbolsForModule("smtplib");
+    Symbol sequence =  typeShed.symbolWithFQN("typing.Sequence");
     assertThat(sequence.kind()).isEqualTo(Kind.AMBIGUOUS);
-    Map<String, Symbol> typing = symbolsForModule("typing");
+    Map<String, Symbol> typing = typeShed.symbolsForModule("typing");
     assertThat(sequence).isSameAs(typing.get("Sequence"));
   }
 
@@ -496,43 +495,43 @@ public class TypeShedTest {
         "  name: \"bar\"\n" +
         "  fully_qualified_name: \"mod.bar\"\n" +
         "}\n");
-    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    Map<String, Symbol> symbols =  typeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName, Symbol::annotatedTypeName)
       .containsExactlyInAnyOrder(tuple(Kind.OTHER, "mod.foo", "str"), tuple(Kind.OTHER, "mod.bar", null));
   }
 
   @Test
   public void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
-    // populate typeshed symbols cache by importing socket module
-    symbolsForModule("socket");
-    Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
+    // populate  typeShed symbols cache by importing socket module
+    typeShed.symbolsForModule("socket");
+    Collection<Symbol> symbols =  typeShed.stubFilesSymbols();
     assertThat(symbols).noneMatch(s -> s.is(Kind.AMBIGUOUS) && ((AmbiguousSymbol) s).alternatives().stream().allMatch(a -> a.is(Kind.CLASS)));
   }
 
   @Test
   public void symbol_from_submodule_access() {
-    Map<String, Symbol> os = symbolsForModule("os");
+    Map<String, Symbol> os = typeShed.symbolsForModule("os");
     SymbolImpl path = (SymbolImpl) os.get("path");
     Symbol samefile = path.getChildrenSymbolByName().get("samefile");
     assertThat(samefile).isNotNull();
     assertThat(samefile.fullyQualifiedName()).isEqualTo("os.path.samefile");
 
-    Map<String, Symbol> osPath = symbolsForModule("os.path");
+    Map<String, Symbol> osPath = typeShed.symbolsForModule("os.path");
     Symbol samefileFromSubModule = osPath.get("samefile");
     assertThat(samefileFromSubModule).isSameAs(samefile);
   }
 
   @Test
-  public void typeshed_private_modules_should_not_affect_fqn()  {
-    Map<String, Symbol> socketModule = symbolsForModule("socket");
-    ClassSymbol socket = (ClassSymbol) TypeShed.disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) socketModule.get("socket")).alternatives());
+  public void  typeShed_private_modules_should_not_affect_fqn()  {
+    Map<String, Symbol> socketModule = typeShed.symbolsForModule("socket");
+    ClassSymbol socket = (ClassSymbol)  typeShed.disambiguateWithLatestPythonSymbol(((AmbiguousSymbol) socketModule.get("socket")).alternatives());
     assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
     assertThat(socket.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
   }
 
   @Test
   public void overloaded_function_alias_has_function_annotated_type()  {
-    Map<String, Symbol> gettextModule = symbolsForModule("gettext");
+    Map<String, Symbol> gettextModule = typeShed.symbolsForModule("gettext");
     Symbol translation = gettextModule.get("translation");
     Symbol catalog = gettextModule.get("Catalog");
     assertThat(translation.kind()).isEqualTo(Kind.AMBIGUOUS);
@@ -543,30 +542,30 @@ public class TypeShedTest {
   public void stubFilesSymbols_third_party_symbols_should_not_be_null() {
     // six modules contain ambiguous symbols that only contain class symbols
     // however third party symbols don't have validForPythonVersions field set
-    symbolsForModule("six");
-    assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
+    typeShed.symbolsForModule("six");
+    assertThat( typeShed.stubFilesSymbols()).doesNotContainNull();
   }
 
   @Test
   public void modules_whose_name_differ_by_capitalization_only() {
     // Python 2, import SocketServer
     setPythonVersions(PythonVersionUtils.fromString("2.7"));
-    Map<String, Symbol> socketServer = symbolsForModule("SocketServer");
+    Map<String, Symbol> socketServer = typeShed.symbolsForModule("SocketServer");
     assertThat(socketServer).isNotEmpty();
     SymbolImpl baseServer = (SymbolImpl) socketServer.get("BaseServer");
     assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
 
     // Python 2, import socketserver
-    socketServer = symbolsForModule("socketserver");
+    socketServer = typeShed.symbolsForModule("socketserver");
     assertThat(socketServer).isEmpty();
 
     // Python 3, import SocketServer
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
-    socketServer = symbolsForModule("SocketServer");
+    socketServer = typeShed.symbolsForModule("SocketServer");
     assertThat(socketServer).isEmpty();
 
     // Python 3, import socketserver
-    socketServer = symbolsForModule("socketserver");
+    socketServer = typeShed.symbolsForModule("socketserver");
     assertThat(socketServer).isNotEmpty();
     baseServer = (SymbolImpl) socketServer.get("BaseServer");
     assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");
@@ -574,14 +573,14 @@ public class TypeShedTest {
     // Unknown Python version, import SocketServer
     // in this case we assume Python2 module is imported
     setPythonVersions();
-    socketServer = symbolsForModule("SocketServer");
+    socketServer = typeShed.symbolsForModule("SocketServer");
     assertThat(socketServer).isNotEmpty();
     baseServer = (SymbolImpl) socketServer.get("BaseServer");
     assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
 
     // Unknown Python version, import socketserver
     // in this case we assume Python3 module is imported
-    socketServer = symbolsForModule("socketserver");
+    socketServer = typeShed.symbolsForModule("socketserver");
     assertThat(socketServer).isNotEmpty();
     baseServer = (SymbolImpl) socketServer.get("BaseServer");
     assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("35", "36", "37", "38", "39", "310");

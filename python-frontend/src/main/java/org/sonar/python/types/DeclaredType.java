@@ -41,6 +41,7 @@ public class DeclaredType implements InferredType {
   private final List<DeclaredType> typeArgs;
   private Set<Symbol> alternativeTypeSymbols;
   private String builtinFullyQualifiedName;
+  private TypeShed typeShed;
 
   public DeclaredType(Symbol typeClass, List<DeclaredType> typeArgs) {
     this.typeClass = typeClass;
@@ -48,17 +49,25 @@ public class DeclaredType implements InferredType {
     alternativeTypeSymbols = resolveAlternativeSymbols(typeClass, typeArgs);
   }
 
-  private static Set<Symbol> resolveAlternativeSymbols(Symbol typeClass, List<DeclaredType> typeArgs) {
+
+  private TypeShed typeShed() {
+    if (typeShed == null) {
+      typeShed = new TypeShed();
+    }
+    return typeShed;
+  }
+
+  private Set<Symbol> resolveAlternativeSymbols(Symbol typeClass, List<DeclaredType> typeArgs) {
     Set<Symbol> symbols = new HashSet<>();
     if ("typing.Optional".equals(typeClass.fullyQualifiedName()) && typeArgs.size() == 1) {
-      Symbol noneType = TypeShed.typeShedClass(BuiltinTypes.NONE_TYPE);
+      Symbol noneType = typeShed().typeShedClass(BuiltinTypes.NONE_TYPE);
       symbols.add(noneType);
       DeclaredType argType = typeArgs.get(0);
       symbols.addAll(resolveAlternativeSymbols(argType.getTypeClass(), argType.typeArgs));
     } else if ("typing.Union".equals(typeClass.fullyQualifiedName())) {
       symbols.addAll(typeArgs.stream().flatMap(arg -> resolveAlternativeSymbols(arg.getTypeClass(), arg.typeArgs).stream()).collect(Collectors.toSet()));
     } else if ("typing.Text".equals(typeClass.fullyQualifiedName())) {
-      symbols.add(TypeShed.typeShedClass("str"));
+      symbols.add(typeShed().typeShedClass("str"));
     } else {
       symbols.add(typeClass);
     }
@@ -159,7 +168,7 @@ public class DeclaredType implements InferredType {
   public Symbol getTypeClass() {
     if (typeClass == null) {
       // the value is recomputed each time instead of storing it to avoid consistency problem when 'sonar.python.version' property is changed
-      return TypeShed.typeShedClass(builtinFullyQualifiedName);
+      return typeShed().typeShedClass(builtinFullyQualifiedName);
     }
     return typeClass;
   }

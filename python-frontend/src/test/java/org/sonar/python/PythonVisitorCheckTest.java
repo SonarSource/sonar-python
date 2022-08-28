@@ -133,12 +133,12 @@ public class PythonVisitorCheckTest {
   @Test
   public void stubFilesSymbols() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(FILE);
-
+    TypeShed typeShed = new TypeShed();
     SymbolsRecordingCheck check = new SymbolsRecordingCheck();
     check.scanFile(context);
-    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context, typeShed);
 
-    assertThat(check.symbols).isEqualTo(TypeShed.stubFilesSymbols());
+    assertThat(check.symbols).isEqualTo(typeShed.stubFilesSymbols());
   }
 
   private static class TestPythonCheck extends PythonVisitorCheck {

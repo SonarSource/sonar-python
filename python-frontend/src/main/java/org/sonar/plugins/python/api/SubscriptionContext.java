@@ -51,6 +51,9 @@ public interface SubscriptionContext {
   @Beta
   Collection<Symbol> stubFilesSymbols();
 
+  @Beta
+  Symbol builtinSymbol(String symbolName);
+
   /**
    * Returns null in case of Sonarlint context
    */

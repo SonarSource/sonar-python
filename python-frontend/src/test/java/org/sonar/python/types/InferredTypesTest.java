@@ -23,7 +23,6 @@ import com.google.protobuf.TextFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.junit.Test;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -55,9 +54,10 @@ import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.InferredTypes.typeName;
 import static org.sonar.python.types.InferredTypes.typeSymbols;
-import static org.sonar.python.types.TypeShed.typeShedClass;
 
 public class InferredTypesTest {
+
+  private final TypeShed typeShed = new TypeShed();
 
   @Test
   public void test_runtimeType() {
@@ -81,7 +81,7 @@ public class InferredTypesTest {
     assertThat(declaredType.canBeOrExtend("a2.b")).isTrue();
     assertThat(declaredType.canOnlyBe("a1.b")).isFalse();
 
-    assertThat(fromTypeAnnotation(typeAnnotation("x: unknown"))).isEqualTo(anyType());
+    assertThat(fromTypeAnnotation(typeAnnotation("x: unknown"), typeShed)).isEqualTo(anyType());
   }
 
   @Test
@@ -139,29 +139,29 @@ public class InferredTypesTest {
       "from typing import DefaultDict",
       "l : DefaultDict[int, str]"
     );
-    InferredType type = fromTypeAnnotation(typeAnnotation);
+    InferredType type = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(typeName(type)).isEqualTo("DefaultDict[int, str]");
 
     typeAnnotation = typeAnnotation(
       "from typing import Deque",
       "l : Deque[int]"
     );
-    type = fromTypeAnnotation(typeAnnotation);
+    type = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(typeName(type)).isEqualTo("Deque[int]");
 
     typeAnnotation = typeAnnotation(
       "from typing import List",
       "l : List"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.LIST);
-    assertThat(((DeclaredType) fromTypeAnnotation(typeAnnotation)).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.LIST);
+    assertThat(((DeclaredType) fromTypeAnnotation(typeAnnotation, typeShed)).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
   }
 
   private void assertAliasedTypeAnnotation(String type, String... code) {
     TypeAnnotation typeAnnotation = typeAnnotation(code);
-    ClassSymbol typeClass = typeShedClass(type);
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(runtimeType(typeClass));
-    assertThat(typeSymbols(fromTypeAnnotation(typeAnnotation))).containsExactly(typeClass);
+    ClassSymbol typeClass = typeShed.typeShedClass(type);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(runtimeType(typeClass));
+    assertThat(typeSymbols(fromTypeAnnotation(typeAnnotation, typeShed))).containsExactly(typeClass);
   }
 
   @Test
@@ -170,8 +170,8 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[int, str]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
-    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("int", "str");
@@ -180,8 +180,8 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[int, str, bool]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
-    declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("int", "str", "bool");
@@ -190,8 +190,8 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[Union[int, str], bool]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
-    declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("int", "str", "bool");
@@ -200,8 +200,8 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[bool]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.BOOL);
-    declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.BOOL);
+    declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("bool");
@@ -213,8 +213,8 @@ public class InferredTypesTest {
       "from typing import Annotated",
       "x : Annotated[str, y]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(STR);
-    assertThat(fromTypeAnnotation(typeAnnotation)).isEqualTo(DECL_STR);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(STR);
+    assertThat(fromTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(DECL_STR);
   }
 
   @Test
@@ -223,8 +223,8 @@ public class InferredTypesTest {
       "from typing import Text",
       "l : Text"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(STR);
-    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(STR);
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("str");
@@ -235,8 +235,8 @@ public class InferredTypesTest {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "l : None"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(NONE);
-    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(NONE);
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("NoneType");
@@ -248,8 +248,8 @@ public class InferredTypesTest {
       "from typing import Optional",
       "l : Optional[int]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, NONE));
-    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.or(InferredTypes.INT, NONE));
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("NoneType", "int");
@@ -258,8 +258,8 @@ public class InferredTypesTest {
       "from typing import Optional",
       "l : Optional[int, str]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.anyType());
-    declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.anyType());
+    declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("typing.Optional");
@@ -268,8 +268,8 @@ public class InferredTypesTest {
       "from typing import Optional",
       "l : Optional[int, unknown_symbol]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.anyType());
-    declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation, typeShed)).isEqualTo(InferredTypes.anyType());
+    declaredType = fromTypeAnnotation(typeAnnotation, typeShed);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("typing.Optional");
@@ -277,13 +277,13 @@ public class InferredTypesTest {
 
   @Test
   public void test_typeSymbol() {
-    ClassSymbol str = typeShedClass("str");
+    ClassSymbol str = typeShed.typeShedClass("str");
     assertThat(InferredTypes.typeSymbols(STR)).containsExactly(str);
 
     ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
     assertThat(InferredTypes.typeSymbols(new RuntimeType(a))).containsExactly(a);
 
-    assertThat(InferredTypes.typeSymbols(or(STR, INT))).containsExactlyInAnyOrder(str, typeShedClass("int"));
+    assertThat(InferredTypes.typeSymbols(or(STR, INT))).containsExactlyInAnyOrder(str, typeShed.typeShedClass("int"));
     assertThat(InferredTypes.typeSymbols(InferredTypes.anyType())).isEmpty();
 
     assertThat(InferredTypes.typeSymbols(declaredType(str))).containsExactly(str);
@@ -303,16 +303,16 @@ public class InferredTypesTest {
 
   @Test
   public void test_typeLocation() {
-    assertThat(InferredTypes.typeClassLocation(STR)).isNull();
-
-    LocationInFile locationA = new LocationInFile("foo.py", 1, 1, 1, 1);
-    RuntimeType aType = new RuntimeType(new ClassSymbolImpl("A", "mod.A", locationA));
-    assertThat(InferredTypes.typeClassLocation(aType)).isEqualTo(locationA);
-
-    LocationInFile locationB = new LocationInFile("foo.py", 1, 2, 1, 2);
-    RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB));
-    assertThat(InferredTypes.typeClassLocation(or(aType, bType))).isNull();
-    assertThat(InferredTypes.typeClassLocation(InferredTypes.anyType())).isNull();
+//    assertThat(InferredTypes.typeClassLocation(STR)).isNull();
+//
+//    LocationInFile locationA = new LocationInFile("foo.py", 1, 1, 1, 1);
+//    RuntimeType aType = new RuntimeType(new ClassSymbolImpl("A", "mod.A", locationA));
+//    assertThat(InferredTypes.typeClassLocation(aType)).isEqualTo(locationA);
+//
+//    LocationInFile locationB = new LocationInFile("foo.py", 1, 2, 1, 2);
+//    RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB));
+//    assertThat(InferredTypes.typeClassLocation(or(aType, bType))).isNull();
+//    assertThat(InferredTypes.typeClassLocation(InferredTypes.anyType())).isNull();
   }
 
   @Test
@@ -362,10 +362,10 @@ public class InferredTypesTest {
     assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
   }
 
-  private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
+  private InferredType protobufType(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.Type.Builder builder = SymbolsProtos.Type.newBuilder();
     TextFormat.merge(protobuf, builder);
-    return fromTypeshedProtobuf(builder.build());
+    return fromTypeshedProtobuf(builder.build(), typeShed);
   }
 
   private TypeAnnotation typeAnnotation(String... code) {

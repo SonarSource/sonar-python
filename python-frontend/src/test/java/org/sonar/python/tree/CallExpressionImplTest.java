@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
@@ -50,6 +51,8 @@ import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.typeName;
 
 public class CallExpressionImplTest {
+
+  private final TypeShed typeShed = new TypeShed();
 
   @Test
   public void constructor_type() {

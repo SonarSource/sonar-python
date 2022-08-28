@@ -70,6 +70,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private boolean isDjangoView = false;
   private boolean hasReadDeclaredReturnType = false;
 
+  @Nullable
+  private final TypeShed typeShed;
+
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
     setKind(Kind.FUNCTION);
@@ -80,17 +83,18 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isStub = false;
     String fileId = Optional.ofNullable(pathOf(pythonFile)).map(Path::toString).orElse(pythonFile.toString());
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
+    this.typeShed = null;
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, String moduleName) {
-    this(functionSymbolProto, null, functionSymbolProto.getValidForList(), moduleName);
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, String moduleName, TypeShed typeShed) {
+    this(functionSymbolProto, null, functionSymbolProto.getValidForList(), moduleName, typeShed);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, String moduleName) {
-    this(functionSymbolProto, containerClassFqn, functionSymbolProto.getValidForList(), moduleName);
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, String moduleName, TypeShed typeShed) {
+    this(functionSymbolProto, containerClassFqn, functionSymbolProto.getValidForList(), moduleName, typeShed);
   }
 
-  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, List<String> validFor, String moduleName) {
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, List<String> validFor, String moduleName, TypeShed typeShed) {
     super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName(), moduleName, functionSymbolProto.getName(), containerClassFqn));
     setKind(Kind.FUNCTION);
     isInstanceMethod = containerClassFqn != null && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
@@ -117,7 +121,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         declaredType = anyType();
       }
       ParameterImpl parameter = new ParameterImpl(parameterSymbol.getName(), declaredType, null, parameterSymbol.getHasDefault(), parameterState,
-        isKeywordVariadic, isPositionalVariadic, parameterSymbol.getTypeAnnotation(), null);
+        isKeywordVariadic, isPositionalVariadic, parameterSymbol.getTypeAnnotation(), null, typeShed);
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
@@ -125,6 +129,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isStub = true;
     isDjangoView = false;
     this.validForPythonVersions = new HashSet<>(validFor);
+    this.typeShed = typeShed;
   }
 
   public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, String symbolName) {
@@ -138,11 +143,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = functionDescriptor.definitionLocation();
     // TODO: Will no longer be true once SONARPY-647 is fixed
     isStub = false;
+    this.typeShed = null;
   }
 
-  public void setParametersWithType(ParameterList parametersList) {
+  public void setParametersWithType(ParameterList parametersList, TypeShed typeShed) {
     this.parameters.clear();
-    createParameterNames(parametersList.all(), functionDefinitionLocation == null ? null : functionDefinitionLocation.fileId());
+    createParameterNames(parametersList.all(), functionDefinitionLocation == null ? null : functionDefinitionLocation.fileId(), typeShed);
   }
 
   public void addParameter(ParameterImpl parameter) {
@@ -172,7 +178,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isStub = functionSymbol.isStub();
     isDjangoView = functionSymbolImpl.isDjangoView();
     validForPythonVersions = functionSymbolImpl.validForPythonVersions;
-
+    typeShed = functionSymbolImpl.typeShed;
   }
 
   @Override
@@ -200,7 +206,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     return decoratorNames;
   }
 
-  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
+  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId, TypeShed typeShed) {
     ParameterState parameterState = new ParameterState();
     parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
       .filter(p -> p.is(Tree.Kind.PARAMETER))
@@ -211,20 +217,20 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     );
     for (AnyParameter anyParameter : parameterTrees) {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
-        addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
+        addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState, typeShed);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, parameterState, false, false, null, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), null, false, parameterState, false, false, null, locationInFile(anyParameter, fileId), typeShed));
       }
     }
   }
 
-  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState) {
+  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState, TypeShed typeShed) {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      ParameterType parameterType = getParameterType(parameter);
+      ParameterType parameterType = getParameterType(parameter, typeShed);
       this.parameters.add(new ParameterImpl(parameterName.name(), parameterType.inferredType, annotatedTypeName(parameter.typeAnnotation()), parameter.defaultValue() != null,
-        parameterState, parameterType.isKeywordVariadic, parameterType.isPositionalVariadic, null, locationInFile(parameter, fileId)));
+        parameterState, parameterType.isKeywordVariadic, parameterType.isPositionalVariadic, null, locationInFile(parameter, fileId), typeShed));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -241,7 +247,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
   }
 
-  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
+  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter, TypeShed typeShed) {
     InferredType inferredType = InferredTypes.anyType();
     boolean isPositionalVariadic = false;
     boolean isKeywordVariadic = false;
@@ -262,7 +268,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     } else {
       TypeAnnotation typeAnnotation = parameter.typeAnnotation();
       if (typeAnnotation != null) {
-        inferredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
+        inferredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation, typeShed) : fromTypeAnnotation(typeAnnotation, typeShed);
       }
     }
     return new ParameterType(inferredType, isKeywordVariadic, isPositionalVariadic);
@@ -315,7 +321,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public InferredType declaredReturnType() {
     if (!hasReadDeclaredReturnType && protobufReturnType != null) {
-      declaredReturnType = InferredTypes.fromTypeshedProtobuf(protobufReturnType);
+      if (typeShed == null) {
+        throw new IllegalStateException();
+      }
+      declaredReturnType = InferredTypes.fromTypeshedProtobuf(protobufReturnType, typeShed);
       hasReadDeclaredReturnType = true;
     }
     return declaredReturnType;
@@ -380,8 +389,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final LocationInFile location;
     private boolean hasReadDeclaredType = false;
 
+    private final TypeShed typeShed;
+
     ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
-      ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
+      ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic,
+      @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location, TypeShed typeShed) {
+
       this.name = name;
       this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
@@ -392,9 +405,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.location = location;
       this.protobufType = protobufType;
       this.annotatedTypeName = annotatedTypeName;
+      this.typeShed = typeShed;
     }
 
-    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor) {
+    public ParameterImpl(FunctionDescriptor.Parameter parameterDescriptor, TypeShed typeShed) {
       this.name = parameterDescriptor.name();
       this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
       this.isPositionalVariadic = parameterDescriptor.isPositionalVariadic();
@@ -403,6 +417,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
       this.location = parameterDescriptor.location();
       this.annotatedTypeName = parameterDescriptor.annotatedType();
+      this.typeShed = typeShed;
     }
 
     @Override
@@ -414,7 +429,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public InferredType declaredType() {
       if (!hasReadDeclaredType && protobufType != null) {
-        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType);
+        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType, typeShed);
         hasReadDeclaredType = true;
       }
       return declaredType;

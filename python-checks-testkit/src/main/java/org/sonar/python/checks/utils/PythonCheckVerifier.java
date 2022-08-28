@@ -37,6 +37,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.TypeShed;
 import org.sonarsource.analyzer.commons.checks.verifier.MultiFileVerifier;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -46,10 +47,10 @@ public class PythonCheckVerifier {
   private PythonCheckVerifier() {
   }
 
-  private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
+  private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context, TypeShed typeShed) {
     check.scanFile(context);
     if (check instanceof PythonSubscriptionCheck) {
-      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
+      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context, typeShed);
     }
     return context.getIssues();
   }
@@ -83,13 +84,13 @@ public class PythonCheckVerifier {
       PythonVisitorContext context = baseDir != null
         ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable)
         : TestPythonVisitorRunner.createContext(file);
-      addFileIssues(check, multiFileVerifier, file, context);
+      addFileIssues(check, multiFileVerifier, file, context, projectLevelSymbolTable.typeShed());
     }
     return multiFileVerifier;
   }
 
-  private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context) {
-    for (PreciseIssue issue : scanFileForIssues(check, context)) {
+  private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context, TypeShed typeShed) {
+    for (PreciseIssue issue : scanFileForIssues(check, context, typeShed)) {
       if (!issue.check().equals(check)) {
         throw new IllegalStateException("Verifier support only one kind of issue " + issue.check() + " != " + check);
       }

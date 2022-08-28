@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.ClassDefImpl;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
@@ -48,6 +49,8 @@ import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class SymbolUtilsTest {
+
+  private final TypeShed typeShed = new TypeShed();
 
   @Test
   public void package_name_by_file() {

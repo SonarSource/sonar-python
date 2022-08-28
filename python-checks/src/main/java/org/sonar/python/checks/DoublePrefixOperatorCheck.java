@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S2761")
 
@@ -55,7 +54,7 @@ public class DoublePrefixOperatorCheck extends PythonSubscriptionCheck {
         if (invertedExpr.is(Tree.Kind.NOT)) {
           ctx.addIssue(original, MESSAGE_NOT);
         } else {
-          if (((UnaryExpression) invertedExpr).expression().type() == InferredTypes.INT) {
+          if (((UnaryExpression) invertedExpr).expression().type().canOnlyBe("int")) {
             ctx.addIssue(original, String.format(MESSAGE, original.operator().value()));
           }
         }

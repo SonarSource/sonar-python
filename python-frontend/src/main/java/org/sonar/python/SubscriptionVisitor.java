@@ -61,8 +61,14 @@ public class SubscriptionVisitor {
   private Tree currentElement;
   private final HashMap<String, RegexParseResult> regexCache = new HashMap<>();
 
+  @Nullable
+  private final TypeShed typeShed;
+
   public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
-    SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
+    analyze(checks, pythonVisitorContext, null);
+  }
+  public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext, @Nullable TypeShed typeShed) {
+    SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext, typeShed);
     FileInput rootTree = pythonVisitorContext.rootTree();
     if (rootTree != null) {
       subscriptionVisitor.scan(rootTree);
@@ -70,8 +76,9 @@ public class SubscriptionVisitor {
     }
   }
 
-  private SubscriptionVisitor(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
+  private SubscriptionVisitor(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext, @Nullable TypeShed typeShed) {
     this.pythonVisitorContext = pythonVisitorContext;
+    this.typeShed = typeShed;
     for (PythonSubscriptionCheck check : checks) {
       check.initialize((elementType, consumer) -> {
         List<SubscriptionContextImpl> elementConsumers = consumers.computeIfAbsent(elementType, c -> new ArrayList<>());
@@ -160,7 +167,18 @@ public class SubscriptionVisitor {
 
     @Override
     public Collection<Symbol> stubFilesSymbols() {
-      return TypeShed.stubFilesSymbols();
+      if (typeShed == null) {
+        throw new IllegalStateException();
+      }
+      return typeShed.stubFilesSymbols();
+    }
+
+    @Override
+    public Symbol builtinSymbol(String symbolName) {
+      if (typeShed == null) {
+        throw new IllegalStateException();
+      }
+      return typeShed.typeShedClass(symbolName);
     }
 
     @Override

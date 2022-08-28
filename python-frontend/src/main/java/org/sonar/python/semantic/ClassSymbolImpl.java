@@ -47,9 +47,9 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isPrivateName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
-import static org.sonar.python.types.TypeShed.symbolsFromProtobufDescriptors;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
@@ -70,6 +70,9 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private String metaclassFQN = null;
   private boolean supportsGenerics = false;
 
+  @Nullable
+  private final TypeShed typeShed;
+
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(classDef.name().name(), fullyQualifiedName);
     this.setKind(Kind.CLASS);
@@ -77,6 +80,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     String fileId = path != null ? path.toString() : pythonFile.toString();
     hasDecorators = !classDef.decorators().isEmpty();
     classDefinitionLocation = locationInFile(classDef.name(), fileId);
+    typeShed = null;
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
@@ -86,20 +90,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = false;
     metaclassFQN = null;
     supportsGenerics = false;
+    typeShed = null;
     setKind(Kind.CLASS);
   }
 
-  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, LocationInFile location) {
-    super(name, fullyQualifiedName);
-    classDefinitionLocation = location;
-    hasDecorators = false;
-    hasMetaClass = false;
-    metaclassFQN = null;
-    supportsGenerics = false;
-    setKind(Kind.CLASS);
-  }
-
-  public ClassSymbolImpl(ClassDescriptor classDescriptor, String symbolName) {
+  public ClassSymbolImpl(ClassDescriptor classDescriptor, String symbolName, TypeShed typeShed) {
     super(symbolName, classDescriptor.fullyQualifiedName());
     setKind(Kind.CLASS);
     classDefinitionLocation = classDescriptor.definitionLocation();
@@ -108,6 +103,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     metaclassFQN = classDescriptor.metaclassFQN();
     supportsGenerics = classDescriptor.supportsGenerics();
     hasSuperClassWithoutSymbol = classDescriptor.hasSuperClassWithoutDescriptor();
+    this.typeShed = typeShed;
   }
 
   public static ClassSymbol copyFrom(String name, ClassSymbol classSymbol) {
@@ -123,10 +119,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
     validForPythonVersions = ((ClassSymbolImpl) classSymbol).validForPythonVersions;
     superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
+    typeShed = ((ClassSymbolImpl) classSymbol).typeShed;
     setKind(Kind.CLASS);
   }
 
-  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName) {
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName, TypeShed typeShed) {
     super(classSymbolProto.getName(), TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName(), moduleName, classSymbolProto.getName()));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
@@ -149,13 +146,14 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName);
+      Set<Symbol> symbols = typeShed.symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName);
       classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(classMembers);
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList()));
     superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
+    this.typeShed = typeShed;
   }
 
   private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {
@@ -202,7 +200,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   public List<Symbol> superClasses() {
     // In case of symbols coming from TypeShed protobuf, we resolve superclasses lazily
     if (!hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty()) {
-      superClassesFqns.stream().map(SymbolUtils::typeshedSymbolWithFQN).forEach(this::addSuperClass);
+      if (typeShed == null) {
+        throw new IllegalStateException("Typeshed cannot be null");
+      }
+      superClassesFqns.stream().map(fqn -> typeshedSymbolWithFQN(fqn, typeShed)).forEach(this::addSuperClass);
     }
     hasAlreadyReadSuperClasses = true;
     return Collections.unmodifiableList(superClasses);

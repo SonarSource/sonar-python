@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -35,12 +36,17 @@ class RuntimeType implements InferredType {
   private Set<String> typeClassSuperClassesFQN = null;
   private Set<String> typeClassMembersFQN = null;
 
+  @Nullable
+  private final TypeShed typeShed;
+
   RuntimeType(ClassSymbol typeClass) {
     this.typeClass = typeClass;
+    typeShed = null;
   }
 
-  RuntimeType(String builtinFullyQualifiedName) {
+  RuntimeType(String builtinFullyQualifiedName, TypeShed typeShed) {
     this.builtinFullyQualifiedName = builtinFullyQualifiedName;
+    this.typeShed = typeShed;
   }
 
   @Override
@@ -138,7 +144,10 @@ class RuntimeType implements InferredType {
 
   public ClassSymbol getTypeClass() {
     if (typeClass == null) {
-      return TypeShed.typeShedClass(builtinFullyQualifiedName);
+      if (typeShed == null) {
+        throw new IllegalStateException();
+      }
+      return typeShed.typeShedClass(builtinFullyQualifiedName);
     }
     return typeClass;
   }

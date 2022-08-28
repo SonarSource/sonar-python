@@ -150,7 +150,7 @@ public class DescriptorUtils {
   private static ClassSymbolImpl createClassSymbol(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable, Map<Descriptor, Symbol> createdSymbolsByDescriptor,
     Map<String, Symbol> createdSymbolByFqn, String symbolName) {
     ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl((ClassDescriptor) descriptor, symbolName);
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl((ClassDescriptor) descriptor, symbolName, projectLevelSymbolTable.typeShed());
     createdSymbolsByDescriptor.put(descriptor, classSymbol);
     createdSymbolByFqn.put(descriptor.fullyQualifiedName(), classSymbol);
     addSuperClasses(classSymbol, classDescriptor, projectLevelSymbolTable, createdSymbolsByDescriptor, createdSymbolByFqn);
@@ -181,7 +181,7 @@ public class DescriptorUtils {
             return createdSymbolsByFqn.get(superClassFqn);
           }
           Symbol symbol = projectLevelSymbolTable.getSymbol(superClassFqn, null, createdSymbolsByDescriptor, createdSymbolsByFqn);
-          symbol = symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn);
+          symbol = symbol != null ? symbol : typeshedSymbolWithFQN(superClassFqn, projectLevelSymbolTable.typeShed());
           createdSymbolsByFqn.put(superClassFqn, symbol);
           return symbol;
         }
@@ -200,7 +200,7 @@ public class DescriptorUtils {
   private static void addParameters(FunctionSymbolImpl functionSymbol, FunctionDescriptor functionDescriptor,
                                     ProjectLevelSymbolTable projectLevelSymbolTable, Map<Descriptor, Symbol> createdSymbolsByDescriptor, Map<String, Symbol> createdSymbolsByFqn) {
     functionDescriptor.parameters().stream().map(parameterDescriptor -> {
-      FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(parameterDescriptor);
+      FunctionSymbolImpl.ParameterImpl parameter = new FunctionSymbolImpl.ParameterImpl(parameterDescriptor, projectLevelSymbolTable.typeShed());
       setParameterType(parameter, parameterDescriptor.annotatedType(), projectLevelSymbolTable, createdSymbolsByDescriptor, createdSymbolsByFqn);
       return parameter;
     }).forEach(functionSymbol::addParameter);
@@ -218,7 +218,7 @@ public class DescriptorUtils {
       Symbol typeSymbol = existingSymbol != null ? existingSymbol : projectLevelSymbolTable.getSymbol(annotatedType, null, createdSymbolsByDescriptor, createdSymbolsByFqn);
       String annotatedTypeName = parameter.annotatedTypeName();
       if (typeSymbol == null && annotatedTypeName != null) {
-        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName);
+        typeSymbol = typeshedSymbolWithFQN(annotatedTypeName, projectLevelSymbolTable.typeShed());
       }
       declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }

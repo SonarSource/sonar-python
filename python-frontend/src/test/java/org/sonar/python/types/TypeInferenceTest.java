@@ -324,7 +324,7 @@ public class TypeInferenceTest {
   public void builtin_function_types() {
     assertThat(lastExpression("all([1, 2, 3])").type()).isEqualTo(BOOL);
     assertThat(lastExpression("round(42)").type()).isEqualTo(AnyType.ANY);
-    Symbol classSymbolRange = ((AmbiguousSymbol) TypeShed.builtinSymbols().get("range"))
+    Symbol classSymbolRange = ((AmbiguousSymbol) new TypeShed().builtinSymbols().get("range"))
       .alternatives().stream()
       .filter(symbol -> symbol.is(Symbol.Kind.CLASS))
       .findFirst().get();

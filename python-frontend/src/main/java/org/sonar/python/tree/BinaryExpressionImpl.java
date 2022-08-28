@@ -30,15 +30,15 @@ import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.INT;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
-import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 
 public class BinaryExpressionImpl extends PyTree implements BinaryExpression, HasTypeDependencies {
@@ -122,8 +122,8 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
     if (is(Kind.PLUS)) {
       InferredType leftType = leftOperand.type();
       InferredType rightType = rightOperand.type();
-      if (leftType.equals(INT) && rightType.equals(INT)) {
-        return INT;
+      if (leftType.canOnlyBe(INT) && rightType.canOnlyBe(INT)) {
+        return leftType;
       }
       if (leftType.equals(STR) && rightType.equals(STR)) {
         return STR;
@@ -146,8 +146,8 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
 
   private static boolean shouldReturnDeclaredInt(InferredType leftType, InferredType rightType) {
     return (leftType.equals(DECL_INT) && rightType.equals(DECL_INT)) ||
-      (leftType.equals(INT) && rightType.equals(DECL_INT)) ||
-      (leftType.equals(DECL_INT) && rightType.equals(INT));
+      (leftType.canOnlyBe(INT) && rightType.equals(DECL_INT)) ||
+      (leftType.equals(DECL_INT) && rightType.canOnlyBe(INT));
   }
 
   @Override

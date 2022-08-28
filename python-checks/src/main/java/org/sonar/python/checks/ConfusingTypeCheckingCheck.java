@@ -38,7 +38,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
@@ -180,7 +179,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     if (!containsDeclaredType(type)) {
       return;
     }
-    if (!type.isCompatibleWith(InferredTypes.runtimeType(TypeShed.typeShedClass("BaseException")))) {
+    if (!type.isCompatibleWith(InferredTypes.runtimeType(ctx.builtinSymbol("BaseException")))) {
       String expressionName = nameFromExpression(raisedExpression) != null ? String.format("\"%s\"", nameFromExpression(raisedExpression)) : "this expression";
       String typeName = typeName(type);
       ctx.addIssue(raiseStatement, String.format("Fix this \"raise\" statement; Previous type checks suggest that %s has type \"%s\" and is not an exception.",

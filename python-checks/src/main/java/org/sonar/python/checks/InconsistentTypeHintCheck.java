@@ -51,12 +51,14 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
   private static void checkAnnotatedAssignment(SubscriptionContext ctx, AnnotatedAssignment annotatedAssignment, Expression assignedExpression) {
     InferredType inferredType = assignedExpression.type();
     TypeAnnotation annotation = annotatedAssignment.annotation();
-    InferredType expectedType = InferredTypes.fromTypeAnnotation(annotation);
+    // TODO: avoid recreating typeshed
+    TypeShed typeShed = new TypeShed();
+    InferredType expectedType = InferredTypes.fromTypeAnnotation(annotation, typeShed);
     if (expectedType.mustBeOrExtend("typing.TypedDict")) {
       // Avoid FPs for TypedDict
       return;
     }
-    if (!inferredType.isCompatibleWith(expectedType) || isTypeUsedInsteadOfInstance(assignedExpression, expectedType)) {
+    if (!inferredType.isCompatibleWith(expectedType) || isTypeUsedInsteadOfInstance(assignedExpression, expectedType, typeShed)) {
       String inferredTypeName = InferredTypes.typeName(inferredType);
       String inferredTypeNameMessage = inferredTypeName != null ? String.format(" instead of \"%s\"", inferredTypeName) : "";
       String nameFromExpression = TreeUtils.nameFromExpression(annotatedAssignment.variable());
@@ -70,12 +72,12 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isTypeUsedInsteadOfInstance(Expression assignedExpression, InferredType expectedType) {
+  private static boolean isTypeUsedInsteadOfInstance(Expression assignedExpression, InferredType expectedType, TypeShed typeShed) {
     if (assignedExpression.is(Tree.Kind.NAME)) {
       Name name = (Name) assignedExpression;
       Symbol symbol = name.symbol();
       return symbol != null && symbol.is(Symbol.Kind.CLASS) &&
-        !expectedType.isCompatibleWith(InferredTypes.runtimeType(TypeShed.typeShedClass("type")));
+        !expectedType.isCompatibleWith(InferredTypes.runtimeType(typeShed.typeShedClass("type")));
     }
     return false;
   }

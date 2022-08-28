@@ -40,7 +40,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
-import org.sonar.python.types.TypeShed;
 
 class Scope {
 
@@ -183,7 +182,7 @@ class Scope {
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
-      Collection<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName).values();
+      Collection<Symbol> standardLibrarySymbols = projectLevelSymbolTable.typeShed().symbolsForModule(fullyQualifiedName).values();
       if (!standardLibrarySymbols.isEmpty()) {
         SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
         standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
@@ -198,7 +197,7 @@ class Scope {
     String symbolName = nameTree.name();
     Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName, symbolName);
     if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
-      globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
+      globalSymbol = projectLevelSymbolTable.typeShed().symbolWithFQN(fromModuleName, fullyQualifiedName);
       globalSymbol = globalSymbol != null ? copySymbol(symbolName, globalSymbol) : null;
     }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {

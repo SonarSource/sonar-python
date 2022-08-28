@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,6 +43,9 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public class FunctionSymbolTest {
+
+
+  private final TypeShed typeShed = new TypeShed();
 
   @Test
   public void arity() {
@@ -285,7 +289,7 @@ public class FunctionSymbolTest {
       "  name: \"p4\"\n" +
       "  kind: VAR_KEYWORD\n" +
       "}";
-    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod", typeShed);
     assertThat(functionSymbol.name()).isEqualTo("fn");
     assertThat(functionSymbol.fullyQualifiedName()).isEqualTo("mod.fn");
     assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.NONE);
@@ -334,7 +338,7 @@ public class FunctionSymbolTest {
     String protobuf =
       "name: \"fn\"\n" +
       "fully_qualified_name: \"mod.fn\"\n";
-    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
+    FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod", typeShed);
     assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.anyType());
     assertThat(functionSymbol.annotatedReturnTypeName()).isNull();
   }

@@ -41,6 +41,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
@@ -50,6 +51,8 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
+
+  private final TypeShed typeShed;
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -61,6 +64,7 @@ public class ProjectLevelSymbolTable {
 
   public ProjectLevelSymbolTable() {
     this.globalDescriptorsByModuleName = new HashMap<>();
+    this.typeShed = new TypeShed();
   }
 
   private ProjectLevelSymbolTable(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
@@ -71,6 +75,7 @@ public class ProjectLevelSymbolTable {
       Set<Descriptor> globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
       globalDescriptorsByModuleName.put(moduleName, globalDescriptors);
     });
+    this.typeShed = new TypeShed();
   }
 
   public void removeModule(String packageName, String fileName) {
@@ -161,6 +166,10 @@ public class ProjectLevelSymbolTable {
 
   public boolean isDjangoView(@Nullable String fqn) {
     return djangoViewsFQN.contains(fqn);
+  }
+
+  public TypeShed typeShed() {
+    return typeShed;
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {

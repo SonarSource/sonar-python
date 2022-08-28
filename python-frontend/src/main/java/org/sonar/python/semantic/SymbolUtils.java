@@ -264,10 +264,10 @@ public class SymbolUtils {
     return false;
   }
 
-  public static Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
+  public static Symbol typeshedSymbolWithFQN(String fullyQualifiedName, TypeShed typeShed) {
     String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
     String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
-    Symbol symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
+    Symbol symbol = typeShed.symbolWithFQN(fullyQualifiedName);
     return symbol == null ? new SymbolImpl(localName, fullyQualifiedName) : ((SymbolImpl) symbol).copyWithoutUsages();
   }
 
