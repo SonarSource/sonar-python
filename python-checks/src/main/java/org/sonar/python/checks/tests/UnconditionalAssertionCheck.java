@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
@@ -38,7 +39,10 @@ import org.sonar.python.checks.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.python.checks.CheckUtils.isClassOrFunction;
+import static org.sonar.python.checks.CheckUtils.isConstant;
 
 @Rule(key = "S5914")
 public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
@@ -90,21 +94,29 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     });
   }
 
+  /**
+   * `assert False` or `assert 0` is often used to make a test fail.
+   * Usually it is better to use another assertion or throw an AssertionException.
+   * However, this rule is not intended to check this best practice.
+   */
   private static boolean isAssertFalse(Expression expression) {
     if (expression.is(NAME)) {
       return "False".equals(((Name) expression).name());
+    }
+    if (expression.is(NUMERIC_LITERAL)) {
+      return ((NumericLiteral) expression).valueAsLong() == 0;
     }
     return false;
   }
 
   private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
-    if (isConstant(arg)) {
+    if (isUnconditional(arg)) {
       ctx.addIssue(call, NONE_MESSAGE);
     }
   }
 
   private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
-    if (isConstant(arg)) {
+    if (isUnconditional(arg)) {
       ctx.addIssue(arg, BOOLEAN_MESSAGE);
     }
   }
@@ -115,28 +127,27 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isConstant(RegularArgument argument) {
-    Expression resolvedArg = resolveArgument(argument);
-    return CheckUtils.isConstant(resolvedArg) || isClassOrFunctionExpression(resolvedArg);
-  }
-
-  private static boolean isClassOrFunctionExpression(Expression expression) {
-    if (!(expression instanceof HasSymbol)) {
-      return false;
-    }
-    Symbol symbol = ((HasSymbol) expression).symbol();
-    return symbol != null && isClassOrFunction(symbol);
-  }
-
-  private Expression resolveArgument(RegularArgument argument) {
+  private boolean isUnconditional(RegularArgument argument) {
     Expression expression = argument.expression();
+    if (isConstant(expression)) {
+      return true;
+    }
+
+    if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
+      Symbol symbol = ((HasSymbol) expression).symbol();
+      if (symbol != null && isClassOrFunction(symbol)) {
+        return true;
+      }
+    }
+
     if (expression.is(NAME)) {
       Set<Expression> valuesAtLocation = reachingDefinitionsAnalysis.valuesAtLocation(((Name) expression));
       if (valuesAtLocation.size() == 1) {
-        return valuesAtLocation.iterator().next();
+        return CheckUtils.isImmutableConstant(valuesAtLocation.iterator().next());
       }
     }
-    return expression;
+
+    return false;
   }
 
   @Override

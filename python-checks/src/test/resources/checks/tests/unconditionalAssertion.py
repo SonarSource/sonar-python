@@ -24,6 +24,19 @@ class ConstantTrueFalseTests(unittest.TestCase):
         # Same for assertFalse
         self.assertFalse(True)  # Noncompliant
 
+
+    def test_constant_assert_true_with_literal(self):
+        immutable_value = True
+        foo(immutable_value)
+        self.assertTrue(immutable_value)  # Noncompliant
+
+        list_object = []
+        foo(list_object)
+        self.assertTrue(list_object)  # Compliant because the object can be changed
+
+
+
+
     def test_assert_statement(self):
         """The assert statement should be analyzed the same way as unittest.assertTrue with one exception.
 
@@ -36,7 +49,13 @@ class ConstantTrueFalseTests(unittest.TestCase):
 
         assert (1, "message")  # Ok. Issue raised by RSPEC-5905
 
-        assert False # Compliant. Often used to fail unit tests
+    def test_assert_statement_used_for_test_failure(self):
+        """Assert False or Assert 0 is often used to make a test fail.
+        Usually it is better to use another assertion or throw an AssertionException.
+        However, this rule is not intended to check this best practice."""
+        # Should be raised by another rule
+        assert False
+        assert 0
 
 
     def test_constant_assert_true_with_unpacking(self):
