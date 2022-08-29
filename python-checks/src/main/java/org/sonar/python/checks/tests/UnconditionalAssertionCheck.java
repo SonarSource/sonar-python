@@ -91,7 +91,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isAssertFalse(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
+    if (expression.is(NAME)) {
       return "False".equals(((Name) expression).name());
     }
     return false;
@@ -109,7 +109,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkIsAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg, String message) {
+  private static void checkIsAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg, String message) {
     if (CheckUtils.isConstantCollectionLiteral(arg.expression())) {
       ctx.addIssue(call.callee(), message).secondary(arg, IS_SECONDARY_MESSAGE);
     }
