@@ -74,6 +74,7 @@ import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
+import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
@@ -94,6 +95,7 @@ public final class CheckList {
       AnchorPrecedenceCheck.class,
       ArgumentNumberCheck.class,
       ArgumentTypeCheck.class,
+      AssertOnDissimilarTypesCheck.class,
       AssertOnTupleLiteralCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,

@@ -38,11 +38,15 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.DICT;
+import static org.sonar.python.types.InferredTypes.FLOAT;
 import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.LIST;
 import static org.sonar.python.types.InferredTypes.NONE;
+import static org.sonar.python.types.InferredTypes.SET;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -50,6 +54,8 @@ import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.fromTypeshedProtobuf;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
+import static org.sonar.python.types.InferredTypes.getBuiltinCategory;
+import static org.sonar.python.types.InferredTypes.getBuiltinsTypeCategory;
 import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
@@ -153,7 +159,7 @@ public class InferredTypesTest {
       "from typing import List",
       "l : List"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.LIST);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(LIST);
     assertThat(((DeclaredType) fromTypeAnnotation(typeAnnotation)).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
   }
 
@@ -360,6 +366,20 @@ public class InferredTypesTest {
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
     assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
+  }
+
+  @Test
+  public void test_builtin_category() {
+    assertThat(getBuiltinCategory(STR)).isEqualTo(BuiltinTypes.STR);
+    assertThat(getBuiltinCategory(INT)).isEqualTo("number");
+    assertThat(getBuiltinCategory(COMPLEX)).isEqualTo("number");
+    assertThat(getBuiltinCategory(FLOAT)).isEqualTo("number");
+    assertThat(getBuiltinCategory(DICT)).isEqualTo(BuiltinTypes.DICT);
+    assertThat(getBuiltinCategory(LIST)).isEqualTo(BuiltinTypes.LIST);
+    assertThat(getBuiltinCategory(SET)).isEqualTo(BuiltinTypes.SET);
+    assertThat(getBuiltinCategory(TUPLE)).isEqualTo(BuiltinTypes.TUPLE);
+    assertThat(getBuiltinsTypeCategory()).isNotNull();
+    assertThat(getBuiltinsTypeCategory()).isNotEmpty();
   }
 
   private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {

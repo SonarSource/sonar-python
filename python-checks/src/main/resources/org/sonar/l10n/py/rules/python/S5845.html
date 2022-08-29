@@ -1,0 +1,39 @@
+<p>Calling <code>unittest</code> methods <code>assertEqual</code>, <code>assertNotEqual</code>, <code>assertIs</code> or <code>assertIsNot</code> on
+objects of incompatible types will always fail or always succeed.</p>
+<p>For methods <code>assertEqual</code> and <code>assertNotEqual</code>, arguments' types are incompatible if:</p>
+<pre>
+they are unrelated builtin types such as string and integer.
+</pre>
+<pre>
+they are instances of unrelated classes which do not implement ``++__eq__++`` or ``++__ne__++`` (if a class implements one of these methods it could compare to any other type it wants).
+</pre>
+<p>As for methods <code>assertIs</code> and <code>assertIsNot</code>, if arguments' types are different it is not possible for them to point to the
+same object, thus <code>assertIs</code> will always fail and <code>assertIsNot</code> will always succeed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+import unittest
+class A(): ...
+class MyTest(unittest.TestCase):
+  def test_something(self):
+    a = A()
+    mydict = {"x": a}
+    self.assertEqual(a, "x")  # Noncompliant
+    self.assertIs(a, "x")  # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+import unittest
+class A(): ...
+class MyTest(unittest.TestCase):
+  def test_something(self):
+    a = A()
+    mydict = {"x": a}
+    self.assertEqual(a, mydict["x"])  # OK
+    self.assertIs(a, mydict["x"])  # OK
+</pre>
+<h2>See</h2>
+<ul>
+  <li> {rule:python:S2159} Silly equality checks should not be made </li>
+  <li> {rule:python:S3403} Identity operators should not be used with dissimilar types </li>
+</ul>
+
