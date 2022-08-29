@@ -40,13 +40,15 @@ public class UnittestUtils {
   public static final Set<String> RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
     "subTest", "debug");
 
-  public static final Set<String> ASSERTIONS_METHODS = Set.of("assertEqual",
-    "assertNotEqual", "assertTrue", "assertFalse", "assertIs", "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn",
-    "assertNotIn", "assertIsInstance", "assertNotIsInstance", "assertRaises", "assertRaisesRegexp", "assertAlmostEqual",
-    "assertNotAlmostEqual", "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual", "assertRegexpMatches",
-    "assertNotRegexpMatches", "assertItemsEqual", "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
-    "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual", "assertRaisesRegex", "assertWarns", "assertWarnsRegex",
+  public static final Set<String> RAISE_METHODS = Set.of("assertRaises", "assertRaisesRegexp", "assertRaisesRegex");
+
+  public static final Set<String> ASSERTIONS_METHODS = Set.of("assertEqual", "assertNotEqual", "assertTrue", "assertFalse", "assertIs",
+    "assertIsNot", "assertIsNone", "assertIsNotNone", "assertIn", "assertNotIn", "assertIsInstance", "assertNotIsInstance",
+    "assertAlmostEqual", "assertNotAlmostEqual", "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual",
+    "assertRegexpMatches", "assertNotRegexpMatches", "assertItemsEqual", "assertDictContainsSubset", "assertMultiLineEqual",
+    "assertSequenceEqual", "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual", "assertWarns", "assertWarnsRegex",
     "assertLogs", "assertNoLogs", "assertRegex", "assertNotRegex", "assertCountEqual");
+
 
   public static final Set<String> UTIL_METHODS = Set.of("addTypeEqualityFunc", "fail", "failureException", "longMessage", "maxDiff");
 
@@ -54,16 +56,23 @@ public class UnittestUtils {
     "doCleanups", "addClassCleanup", "doClassCleanups");
 
   private static final Set<String> ALL_METHODS = new HashSet<>();
+  private static final Set<String> ALL_ASSERT_METHODS = new HashSet<>();
 
   static {
     ALL_METHODS.addAll(RUN_METHODS);
     ALL_METHODS.addAll(UTIL_METHODS);
     ALL_METHODS.addAll(GATHER_INFO_METHODS);
     ALL_METHODS.addAll(ASSERTIONS_METHODS);
+    ALL_METHODS.addAll(RAISE_METHODS);
+    ALL_ASSERT_METHODS.addAll(ASSERTIONS_METHODS);
+    ALL_ASSERT_METHODS.addAll(RAISE_METHODS);
   }
 
   public static Set<String> allMethods() {
     return Collections.unmodifiableSet(ALL_METHODS);
+  }
+  public static Set<String> allAssertMethods() {
+    return Collections.unmodifiableSet(ALL_ASSERT_METHODS);
   }
 
   public static boolean isWithinUnittestTestCase(Tree tree) {

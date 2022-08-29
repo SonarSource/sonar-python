@@ -21,7 +21,6 @@ package org.sonar.python.checks.tests;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -32,27 +31,24 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.python.tests.PytestUtils;
+import org.sonar.python.tests.UnittestUtils;
 
 @Rule(key = "S5915")
 public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_MULTIPLE_STATEMENT = "Don’t perform an assertion here; An exception is expected to be raised before its execution.";
   private static final String MESSAGE_SINGLE_STATEMENT = "Refactor this test; if this assertion’s argument raises an exception, the assertion will never get executed.";
-  private static final String MESSAGE_SECONDARY = "test";
-  private static final Set<String> raiseStatements = Set.of("pytest.raises", "self.assertRaises");
+  private static final String MESSAGE_SECONDARY = null;
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, ctx -> {
       WithStatement withStatement = (WithStatement) ctx.syntaxNode();
-      if (!isWithStatementARaise(withStatement)) {
+      if (!isWithStatementItemARaise(withStatement)) {
         return;
       }
 
       List<Statement> statements = withStatement.statements().statements();
-      if (statements.isEmpty()) {
-        return;
-      }
-
       Statement statement = statements.get(statements.size()-1);
       if (isAnAssert(statement)) {
         ctx.addIssue(statement, statements.size() > 1 ? MESSAGE_MULTIPLE_STATEMENT : MESSAGE_SINGLE_STATEMENT)
@@ -61,16 +57,22 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
     });
   }
 
-  public boolean isWithStatementARaise(WithStatement withStatement) {
+  public boolean isWithStatementItemARaise(WithStatement withStatement) {
     return withStatement.withItems().stream()
       .filter(withItem -> withItem.test().is(Tree.Kind.CALL_EXPR))
       .map(withItem -> ((CallExpression) withItem.test()).callee())
       .filter(callee -> callee.is(Tree.Kind.QUALIFIED_EXPR))
       .map(QualifiedExpression.class::cast)
-      .filter(PytestUtils::isARaiseCall) // TODO : add UnittestUtils call
-      .filter(callee -> callee.qualifier().is(Tree.Kind.NAME))
-      .map(callee -> ((Name) callee.qualifier()).name() + "." + callee.name().name())
-      .anyMatch(raiseStatements::contains);
+      .anyMatch(callee -> isPytestRaise(callee) || isUnittestRaise(callee));
+  }
+
+  public boolean isPytestRaise(QualifiedExpression callee) {
+    return PytestUtils.isPytest(callee) && PytestUtils.RAISE_METHODS.contains(callee.name().name());
+  }
+
+  public boolean isUnittestRaise(QualifiedExpression callee) {
+    return callee.qualifier().is(Tree.Kind.NAME) && ((Name) callee.qualifier()).name().equals("self")
+      && UnittestUtils.isWithinUnittestTestCase(callee) && UnittestUtils.RAISE_METHODS.contains(callee.name().name());
   }
 
   public boolean isAnAssert(Statement statement) {
@@ -85,8 +87,15 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
       .anyMatch(expressions ->
         expressions.stream()
           .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
-          .map(CallExpression.class::cast)
-          .anyMatch(TestFrameworkUtils::isAnAssertOfAnySupportedTestFramework)
+          .map(expression -> ((CallExpression) expression).callee())
+          .filter(callee -> callee.is(Tree.Kind.QUALIFIED_EXPR))
+          .map(QualifiedExpression.class::cast)
+          .anyMatch(this::isUnittestAssert)
       );
+  }
+
+  public boolean isUnittestAssert(QualifiedExpression callee) {
+    return callee.qualifier().is(Tree.Kind.NAME) && ((Name) callee.qualifier()).name().equals("self")
+      && UnittestUtils.isWithinUnittestTestCase(callee) && UnittestUtils.allAssertMethods().contains(callee.name().name());
   }
 }

@@ -53,7 +53,36 @@ def test_if_stmt_nok():
             foo()
         assert bar() == 42  # Noncompliant
 
-# Unittest
+def test_multiple_items_1():
+    with pytest.raises(ZeroDivisionError), foo():
+        assert bar() == 42  # Noncompliant
+
+def test_multiple_items_2():
+    with foo(), pytest.raises(ZeroDivisionError):
+        assert bar() == 42  # Noncompliant
+
+def test_multiple_items_3():
+    with foo(), bar():
+        assert bar() == 42
+
+def test_multiple_items_4():
+    with pytest.raises(ZeroDivisionError), pytest.raises(TypeError):
+        assert bar() == 42  # Noncompliant
+
+def test_multiple_statements():
+    with pytest.raises(ZeroDivisionError):
+        a = 5, b = 3
+
+# Edge case
+def test_not_valid_assert_method():
+    with pytest.random(ZeroDivisionError):
+        a = 5
+
+def test_not_pytest_lib():
+    with pytestrandom.raises(ZeroDivisionError):
+        a = 5
+
+## Unittest
 class MyTest(unittest.TestCase):
     def test_something(self):
         with self.assertRaises(ZeroDivisionError):
@@ -64,3 +93,28 @@ class MyTest(unittest.TestCase):
         with self.assertRaises(ZeroDivisionError):
             foo()
             self.assertEqual(bar(), 42)  # Noncompliant
+
+    # Edge case
+    def test_raise_callee_qualifier_not_a_name(self):
+        with foo().assertRaisesRandom():
+            self.assertEqual(bar(), 42)
+
+    def test_raise_callee_qualifier_not_self(self):
+        with foo.assertRaisesRandom():
+            self.assertEqual(bar(), 42)
+
+    def test_not_valid_raise_method(self):
+        with self.assertRaisesRandom(ZeroDivisionError):
+            self.assertEqual(bar(), 42)
+
+    def test_not_valid_assert_method(self):
+        with self.assertRaises(ZeroDivisionError):
+            self.assertEqualRandom(bar(), 42)
+
+    def test_assert_callee_qualifier_not_a_name(self):
+        with self.assertRaises(ZeroDivisionError):
+            foo().assertEqual(bar(), 42)
+
+    def test_assert_callee_qualifier_not_self(self):
+        with self.assertRaises(ZeroDivisionError):
+            foo.assertEqual(bar(), 42)

@@ -1,5 +1,5 @@
 import unittest
-from tensorflow.python.platform import pytest
+from tensorflow.python.platform import pytestfake
 
 class MyTest(unittest.TestCase):
     def test_something(self):
@@ -13,5 +13,5 @@ class MyTest(unittest.TestCase):
 
     # NOT pytest
     def test_non_compliant_basic():
-        with pytest.raises(ZeroDivisionError):
+        with pytestfake.raises(ZeroDivisionError):
             assert bar() == 42
