@@ -155,3 +155,4 @@ class MyTest(unittest.TestCase):
     self.assertEqual(*a, 5)
     self.assertEqual(5, *a)
     self.assertEqual("5", b)
+    a.assertEqual("string", True)

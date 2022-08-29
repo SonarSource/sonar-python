@@ -33,6 +33,11 @@ public class AssertOnDissimilarTypesCheckTest {
   }
 
   @Test
+  public void testAnotherLibrary() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnDissimilarTypesAnotherLibrary.py", new AssertOnDissimilarTypesCheck());
+  }
+
+  @Test
   public void test_scope() {
     assertThat(new AssertOnDissimilarTypesCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
