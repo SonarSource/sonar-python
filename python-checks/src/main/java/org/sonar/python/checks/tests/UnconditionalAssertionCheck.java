@@ -45,15 +45,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
   private static final List<String> BOOLEAN_ASSERTIONS = List.of("assertTrue", "assertFalse");
   private static final List<String> NONE_ASSERTIONS = List.of("assertIsNone", "assertIsNotNone");
-
   private static final List<String> IS_ASSERTIONS = List.of("assertIs", "assertIsNot");
+
   private static final String BOOLEAN_MESSAGE = "Replace this expression; its boolean value is constant.";
   private static final String NONE_MESSAGE = "Remove this identity assertion; its value is constant.";
-
   private static final String IS_MESSAGE = "Replace this \"assertIs\" call with an \"assertEqual\" call.";
   private static final String IS_NOT_MESSAGE = "Replace this \"assertIsNot\" call with an \"assertNotEqual\" call.";
   private static final String IS_SECONDARY_MESSAGE = "This expression creates a new object every time.";
-
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
@@ -93,8 +91,14 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   }
 
   private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
-    if (CheckUtils.isConstant(resolveArgument(arg))) {
+    if (isConstant(arg)) {
       ctx.addIssue(call, NONE_MESSAGE);
+    }
+  }
+
+  private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
+    if (isConstant(arg)) {
+      ctx.addIssue(arg, BOOLEAN_MESSAGE);
     }
   }
 
@@ -104,11 +108,9 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
-    Expression resolvedArg = resolveArgument(arg);
-    if (CheckUtils.isConstant(resolvedArg) || isClassOrFunctionExpression(resolvedArg)) {
-      ctx.addIssue(arg, BOOLEAN_MESSAGE);
-    }
+  private boolean isConstant(RegularArgument argument) {
+    Expression resolvedArg = resolveArgument(argument);
+    return CheckUtils.isConstant(resolvedArg) || isClassOrFunctionExpression(resolvedArg);
   }
 
   private static boolean isClassOrFunctionExpression(Expression expression) {
@@ -129,7 +131,6 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
     return expression;
   }
-
 
   @Override
   public CheckScope scope() {
