@@ -22,6 +22,8 @@ package org.sonar.python.checks;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -44,6 +46,8 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 
 public class CheckUtils {
+
+  private static final List<String> ACCEPTED_DECORATORS = List.of("overload", "staticmethod", "classmethod");
 
   private CheckUtils() {
 
@@ -125,7 +129,7 @@ public class CheckUtils {
       condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE, LAMBDA, GENERATOR_EXPR);
   }
 
-  private static boolean isConstantCollectionLiteral(Expression condition) {
+  public static boolean isConstantCollectionLiteral(Expression condition) {
     switch (condition.getKind()) {
       case LIST_LITERAL:
         return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements().expressions());
@@ -138,6 +142,20 @@ public class CheckUtils {
       default:
         return false;
     }
+  }
+
+
+
+
+  public static boolean isClassOrFunction(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.CLASS)) {
+      return true;
+    }
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
+      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
+    }
+    return false;
   }
 
   private static boolean isAlwaysEmptyOrNonEmptyCollection(List<? extends Tree> elements) {

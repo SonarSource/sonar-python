@@ -19,8 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -44,6 +42,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NOT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.OR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
+import static org.sonar.python.checks.CheckUtils.isClassOrFunction;
 import static org.sonar.python.checks.CheckUtils.isConstant;
 import static org.sonar.python.checks.CheckUtils.isImmutableConstant;
 
@@ -51,7 +50,6 @@ import static org.sonar.python.checks.CheckUtils.isImmutableConstant;
 public class ConstantConditionCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Replace this expression; used as a condition it will always be constant.";
-  private static final List<String> ACCEPTED_DECORATORS = Arrays.asList("overload", "staticmethod", "classmethod");
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   @Override
@@ -164,17 +162,6 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       String type = symbol.is(Symbol.Kind.CLASS) ? "Class" : "Function";
       issue.secondary(locationInFile, String.format("%s definition.", type));
     }
-  }
-
-  private static boolean isClassOrFunction(Symbol symbol) {
-    if (symbol.is(Symbol.Kind.CLASS)) {
-      return true;
-    }
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
-      // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
-      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
-    }
-    return false;
   }
 
   private static LocationInFile locationForClassOrFunction(Symbol symbol) {

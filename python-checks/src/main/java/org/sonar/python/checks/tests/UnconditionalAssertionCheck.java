@@ -20,7 +20,6 @@
 package org.sonar.python.checks.tests;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -30,6 +29,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -38,7 +38,7 @@ import org.sonar.python.checks.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
-import static org.sonar.python.checks.CheckUtils.isConstant;
+import static org.sonar.python.checks.CheckUtils.isClassOrFunction;
 
 @Rule(key = "S5914")
 public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
@@ -52,11 +52,8 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
   private static final String IS_MESSAGE = "Replace this \"assertIs\" call with an \"assertEqual\" call.";
   private static final String IS_NOT_MESSAGE = "Replace this \"assertIsNot\" call with an \"assertNotEqual\" call.";
+  private static final String IS_SECONDARY_MESSAGE = "This expression creates a new object every time.";
 
-  private static final Map<List<String>, String> ASSERTION_MESSAGE_MAP = Map.of(
-    BOOLEAN_ASSERTIONS, BOOLEAN_MESSAGE,
-    NONE_ASSERTIONS, NONE_MESSAGE
-  );
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
@@ -83,24 +80,43 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
       String name = symbol.name();
       List<Argument> arguments = call.arguments();
 
-      ASSERTION_MESSAGE_MAP.entrySet().stream()
-        .filter(e -> e.getKey().contains(name))
-        .findFirst()
-        .ifPresent(e -> checkAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "testValue", arguments), e.getValue()));
-
-      if (IS_ASSERTIONS.contains(name)) {
+      if (BOOLEAN_ASSERTIONS.contains(name)) {
+        checkBooleanAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "testValue", arguments));
+      } else if (NONE_ASSERTIONS.contains(name)) {
+        checkNoneAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "testValue", arguments));
+      } else if (IS_ASSERTIONS.contains(name)) {
         String message = "assertIs".equals(name) ? IS_MESSAGE : IS_NOT_MESSAGE;
-        checkAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "firstValue", arguments), message);
-        checkAssertion(ctx, TreeUtils.nthArgumentOrKeyword(1, "secondValue", arguments), message);
+        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "firstValue", arguments), message);
+        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(1, "secondValue", arguments), message);
       }
     });
   }
 
-
-  private void checkAssertion(SubscriptionContext ctx, RegularArgument arg, String message) {
-    if (isConstant(resolveArgument(arg))) {
-      ctx.addIssue(arg, message);
+  private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
+    if (CheckUtils.isConstant(resolveArgument(arg))) {
+      ctx.addIssue(call, NONE_MESSAGE);
     }
+  }
+
+  private void checkIsAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg, String message) {
+    if (CheckUtils.isConstantCollectionLiteral(resolveArgument(arg))) {
+      ctx.addIssue(call.callee(), message).secondary(arg, IS_SECONDARY_MESSAGE);
+    }
+  }
+
+  private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
+    Expression resolvedArg = resolveArgument(arg);
+    if (CheckUtils.isConstant(resolvedArg) || isClassOrFunctionExpression(resolvedArg)) {
+      ctx.addIssue(arg, BOOLEAN_MESSAGE);
+    }
+  }
+
+  private static boolean isClassOrFunctionExpression(Expression expression) {
+    if (!(expression instanceof HasSymbol)) {
+      return false;
+    }
+    Symbol symbol = ((HasSymbol) expression).symbol();
+    return symbol != null && isClassOrFunction(symbol);
   }
 
   private Expression resolveArgument(RegularArgument argument) {

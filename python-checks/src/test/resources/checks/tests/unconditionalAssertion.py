@@ -10,7 +10,7 @@ class ConstantTrueFalseTests(unittest.TestCase):
     def test_constant_assert_true_with_literal(self):
         """assertTrue and assertFalse called on literals will always succeed or always fail."""
         self.assertTrue(True)  # Noncompliant {{Replace this expression; its boolean value is constant.}}
-                      # ^^^^
+    #                   ^^^^
         self.assertTrue(False)  # Noncompliant
         self.assertTrue(42)  # Noncompliant
         self.assertTrue('a string')  # Noncompliant
@@ -27,7 +27,6 @@ class ConstantTrueFalseTests(unittest.TestCase):
 
         # Same for assertFalse
         self.assertFalse(True)  # Noncompliant
-        # ...
 
     def test_assert_statement(self):
         """The assert statement should be analyzed the same way as unittest.assertTrue with one exception.
@@ -36,7 +35,8 @@ class ConstantTrueFalseTests(unittest.TestCase):
         only by RSPEC-5905 "Assert should not be called on a tuple literal". This is a very common mistake
         and having a dedicated rule will make it easier for developer to understand the issue.
         """
-        assert True # Noncompliant
+        assert True # Noncompliant {{Replace this expression; its boolean value is constant.}}
+    #          ^^^^
 
         assert (1, "message")  # Ok. Issue raised by RSPEC-5905
 
@@ -57,6 +57,28 @@ class ConstantTrueFalseTests(unittest.TestCase):
         self.assertTrue({**di})  # False Negative. We don't check the size of unpacked iterables
         self.assertTrue({2:3, **di})  # Noncompliant
 
+
+    def test_constant_assert_true_with_module_and_functions(self):
+        self.assertTrue(round)  # False Negative.
+        self.assertTrue(unittest)  # False Negative.
+
+
+    def test_constant_assert_true_with_class_and_methods_and_properties(self):
+        class MyClass:
+            def mymethod(self):
+                if self.mymethod:
+                    pass
+
+            @property
+            def myprop(self):
+                pass
+
+        myinstance = MyClass()
+        self.assertTrue(MyClass)  # Noncompliant
+        self.assertTrue(MyClass.mymethod)   # Noncompliant
+        self.assertTrue(myinstance.mymethod)   # Noncompliant
+        self.assertTrue(myinstance.myprop)   # Ok
+        self.assertTrue(myinstance)   # Ok
 
     def test_constant_assert_true_with_generators_and_lambdas(self):
         lamb = lambda: None
@@ -94,7 +116,8 @@ class ConstantNoneTests(unittest.TestCase):
     """Rule S5914 should raise issues on cases where S5727 raises."""
     def test_constant_assert_none(self):
         myNone = None
-        self.assertIsNone(myNone)  # Noncompliant
+        self.assertIsNone(myNone)  # Noncompliant {{Remove this identity assertion; its value is constant.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^
         self.assertIsNotNone(myNone)  # Noncompliant
 
     def test_ignore_annotations(self):
@@ -110,7 +133,6 @@ class ConstantNoneTests(unittest.TestCase):
 class ConstantNewObjectTests(unittest.TestCase):
     """Rule S5914 should raise issues on cases where S5796 raises."""
     def helper_constant_assert_new_objects(self, param):
-        self.assertIs(param, [1, 2, 3])  # Noncompliant {{Replace this "assertIs" call with an "assertEqual" call.}}
-        self.assertIsNot(param, [1, 2, 3])  # Noncompliant {{Replace this "assertIsNot" call with an "assertNotEqual" call.}}
-        self.assertIs([1, 2, 3], param)  # Noncompliant
-
+        self.assertIs(param, [1, 2, 3])  # Noncompliant
+        self.assertIsNot(param, [1, 2, 3])  # Noncompliant
+        self.assertIsNot([1, 2, 3], param)  # Noncompliant
