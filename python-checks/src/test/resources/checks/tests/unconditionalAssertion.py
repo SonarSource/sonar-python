@@ -1,9 +1,5 @@
 import unittest
 
-#
-# RSPEC_5797: Constants should not be used as conditions
-#
-
 class ConstantTrueFalseTests(unittest.TestCase):
     """Rule S5914 should raise issues on cases where S5797 raises."""
 
@@ -39,6 +35,8 @@ class ConstantTrueFalseTests(unittest.TestCase):
     #          ^^^^
 
         assert (1, "message")  # Ok. Issue raised by RSPEC-5905
+
+        assert False # Compliant. Often used to fail unit tests
 
 
     def test_constant_assert_true_with_unpacking(self):

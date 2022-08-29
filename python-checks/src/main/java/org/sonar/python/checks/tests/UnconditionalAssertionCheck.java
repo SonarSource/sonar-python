@@ -63,7 +63,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> {
       AssertStatement assertStatement = (AssertStatement) ctx.syntaxNode();
       Expression condition = assertStatement.condition();
-      if (!condition.is(Tree.Kind.TUPLE) && CheckUtils.isConstant(condition)) {
+      if (!condition.is(Tree.Kind.TUPLE) && !isAssertFalse(condition) && CheckUtils.isConstant(condition)) {
         ctx.addIssue(condition, BOOLEAN_MESSAGE);
       }
     });
@@ -90,6 +90,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     });
   }
 
+  private static boolean isAssertFalse(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return "False".equals(((Name) expression).name());
+    }
+    return false;
+  }
+
   private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
     if (isConstant(arg)) {
       ctx.addIssue(call, NONE_MESSAGE);
@@ -103,7 +110,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   }
 
   private void checkIsAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg, String message) {
-    if (CheckUtils.isConstantCollectionLiteral(resolveArgument(arg))) {
+    if (CheckUtils.isConstantCollectionLiteral(arg.expression())) {
       ctx.addIssue(call.callee(), message).secondary(arg, IS_SECONDARY_MESSAGE);
     }
   }
