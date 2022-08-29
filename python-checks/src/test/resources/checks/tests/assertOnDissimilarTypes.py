@@ -61,6 +61,7 @@ class MyTest(unittest.TestCase):
     self.assertIs(42, 42) # OK
     self.assertIs("my string", "another string") # OK
     self.assertIs(42, 0) # OK
+    self.assertIs(msg="my message", first=a, second=a) # OK
 
   def test_assert_equal_non_compliant(self):
     ab = A()

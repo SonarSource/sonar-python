@@ -62,8 +62,8 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       }
 
       QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-      if (!(qualifiedExpression.qualifier().is(Tree.Kind.NAME) && ((Name) qualifiedExpression.qualifier()).name().equals("self"))
-       && !UnittestUtils.isWithinUnittestTestCase(qualifiedExpression)) {
+      if ((!(qualifiedExpression.qualifier().is(Tree.Kind.NAME) && ((Name) qualifiedExpression.qualifier()).name().equals("self")))
+       || !UnittestUtils.isWithinUnittestTestCase(qualifiedExpression)) {
         return;
       }
 
@@ -74,7 +74,6 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
   private static void checkArguments(SubscriptionContext ctx, CallExpression callExpression, QualifiedExpression qualifiedExpression) {
     boolean isAnAssertIdentity = assertToCheckIdentity.contains(qualifiedExpression.name().name());
     boolean isAnAssertEquality = assertToCheckEquality.contains(qualifiedExpression.name().name());
-    boolean shouldRaise = false;
 
     if (!isAnAssertEquality && !isAnAssertIdentity) {
       return;
@@ -94,16 +93,12 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
 
     Expression left = firstArg.expression();
     Expression right = secondArg.expression();
+
     if (canArgumentsBeIdentical(left, right)) {
       return;
-    } else if (isAnAssertIdentity) {
-      shouldRaise = true;
-    }
-    if (isAnAssertEquality && !canArgumentsBeEqual(left, right)) {
-      shouldRaise = true;
     }
 
-    if (shouldRaise) {
+    if (isAnAssertIdentity || !canArgumentsBeEqual(left, right)) {
       PreciseIssue issue = ctx.addIssue(args, message(left, right));
       getLastAssignment(left).ifPresent(assign -> issue.secondary(assign, String.format(MESSAGE_SECONDARY, ((Name)left).name())));
       getLastAssignment(right).ifPresent(assign -> issue.secondary(assign, String.format(MESSAGE_SECONDARY, ((Name)right).name())));
