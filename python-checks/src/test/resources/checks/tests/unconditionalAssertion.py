@@ -49,6 +49,9 @@ class ConstantTrueFalseTests(unittest.TestCase):
 
         assert (1, "message")  # Ok. Issue raised by RSPEC-5905
 
+        assert 1  # Noncompliant
+        assert "foo"  # Noncompliant
+
     def test_assert_statement_used_for_test_failure(self):
         """Assert False or Assert 0 is often used to make a test fail.
         Usually it is better to use another assertion or throw an AssertionException.
