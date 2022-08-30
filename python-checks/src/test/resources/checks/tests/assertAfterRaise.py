@@ -82,11 +82,45 @@ def test_not_pytest_lib():
     with pytestrandom.raises(ZeroDivisionError):
         a = 5
 
-# FP
-def test_assert_assertion_error():
+# Not raising issue in case of AssertionError raise, assuming the user is willing to write such test
+def test_assert_assertion_error_unittest_1():
+    error = float('nan')
+    with self.assertRaises(AssertionError):
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_unittest_2():
     error = float('nan')
     with self.assertRaisesRegexp(AssertionError, "nan not less than 1.0"):
-      self.assertLess(error, 1.0) # Noncompliant
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_unittest_3():
+    error = float('nan')
+    with self.assertRaisesRegex(AssertionError, "nan not less than 1.0"):
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_unittest_4():
+    error = float('nan')
+    with self.assertRaisesRegex(regex="nan not less than 1.0", exception=AssertionError):
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_pytest_1():
+    error = float('nan')
+    with pytest.raises(AssertionError):
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_pytest_2():
+    error = float('nan')
+    with pytest.raises(expected_exception=AssertionError):
+      self.assertLess(error, 1.0)
+
+def test_assert_assertion_error_pytest_and_native_assert():
+    error = float('nan')
+    with pytest.raises(AssertionError):
+      assert error < 1.0
+
+def test_assert_assertion_error_unresolvable_error():
+    with self.assertRaises(errors.OutOfRangeError):
+      self.assertEqual(b"test", self.evaluate(next_element())) # Noncompliant
 
 ## Unittest
 class MyTest(unittest.TestCase):

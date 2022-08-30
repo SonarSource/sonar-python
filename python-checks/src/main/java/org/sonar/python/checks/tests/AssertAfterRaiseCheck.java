@@ -27,10 +27,10 @@ import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
@@ -43,7 +43,10 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_SINGLE_STATEMENT = "Refactor this test; if this assertion’s argument raises an exception, the assertion will never get executed.";
   private static final String MESSAGE_SECONDARY = "An exception is expected to be raised in this block.";
 
-  public static final String PYTEST_RAISE_CALL = "pytest.raises";
+  private static final String ASSERTION_ERROR = "AssertionError";
+  private static final String PYTEST_RAISE_CALL = "pytest.raises";
+  private static final String PYTEST_ARG_EXCEPTION = "expected_exception";
+  private static final String UNITTEST_ARG_EXCEPTION = "exception";
 
   @Override
   public void initialize(Context context) {
@@ -65,25 +68,36 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   public boolean isWithStatementItemARaise(WithStatement withStatement) {
     return withStatement.withItems().stream()
       .filter(withItem -> withItem.test().is(Tree.Kind.CALL_EXPR))
-      .map(withItem -> ((CallExpression) withItem.test()).callee())
-      .anyMatch(callee -> isPytestRaise(callee) || isUnittestRaise(callee));
+      .map(withItem -> (CallExpression) withItem.test())
+      .anyMatch(callExpression -> isValidPytestRaise(callExpression) || isValidUnittestRaise(callExpression));
   }
 
-  public boolean isPytestRaise(Expression expr) {
-    return TreeUtils.getSymbolFromTree(expr)
-      .stream()
+  public boolean isValidPytestRaise(CallExpression callExpression) {
+    return Optional.of(callExpression).stream()
+      .filter(call -> isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, PYTEST_ARG_EXCEPTION, call.arguments())))
+      .map(call -> TreeUtils.getSymbolFromTree(call.callee()))
+      .filter(Optional::isPresent)
+      .map(Optional::get)
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
       .anyMatch(fqn -> fqn.contains(PYTEST_RAISE_CALL));
   }
 
-  public boolean isUnittestRaise(Expression expression) {
-    return Optional.of(expression).stream()
-      .filter(expr -> expr.is(Tree.Kind.QUALIFIED_EXPR))
-      .map(QualifiedExpression.class::cast)
-      .anyMatch(qualifiedExpression -> qualifiedExpression.qualifier().is(Tree.Kind.NAME)
-        && ((Name) qualifiedExpression.qualifier()).name().equals("self")
-        && UnittestUtils.RAISE_METHODS.contains(qualifiedExpression.name().name()));
+  public boolean isValidUnittestRaise(CallExpression callExpression) {
+    return Optional.of(callExpression).stream()
+      .filter(call -> isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, UNITTEST_ARG_EXCEPTION, call.arguments())))
+      .filter(call -> call.callee().is(Tree.Kind.QUALIFIED_EXPR))
+      .map(call -> (QualifiedExpression) call.callee())
+      .anyMatch(callee -> callee.qualifier().is(Tree.Kind.NAME)
+        && ((Name) callee.qualifier()).name().equals("self")
+        && UnittestUtils.RAISE_METHODS.contains(callee.name().name()));
+  }
+
+  public boolean isNotAssertionErrorArgument(RegularArgument regularArgument) {
+    return Optional.ofNullable(regularArgument).stream()
+      .filter(Objects::nonNull)
+      .map(arg -> TreeUtils.getSymbolFromTree(arg.expression()))
+      .anyMatch(optSym -> optSym.isEmpty() || !ASSERTION_ERROR.equals(optSym.get().fullyQualifiedName()));
   }
 
   public boolean isAnAssert(Statement statement) {
