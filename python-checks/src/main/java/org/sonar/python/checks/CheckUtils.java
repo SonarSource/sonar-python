@@ -22,8 +22,6 @@ package org.sonar.python.checks;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -46,8 +44,6 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 
 public class CheckUtils {
-
-  private static final List<String> ACCEPTED_DECORATORS = List.of("overload", "staticmethod", "classmethod");
 
   private CheckUtils() {
 
@@ -132,33 +128,19 @@ public class CheckUtils {
   public static boolean isConstantCollectionLiteral(Expression condition) {
     switch (condition.getKind()) {
       case LIST_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements().expressions());
+        return doesNotContainUnpackingExpression(((ListLiteral) condition).elements().expressions());
       case DICTIONARY_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((DictionaryLiteral) condition).elements());
+        return doesNotContainUnpackingExpression(((DictionaryLiteral) condition).elements());
       case SET_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((SetLiteral) condition).elements());
+        return doesNotContainUnpackingExpression(((SetLiteral) condition).elements());
       case TUPLE:
-        return isAlwaysEmptyOrNonEmptyCollection(((Tuple) condition).elements());
+        return doesNotContainUnpackingExpression(((Tuple) condition).elements());
       default:
         return false;
     }
   }
 
-
-
-
-  public static boolean isClassOrFunction(Symbol symbol) {
-    if (symbol.is(Symbol.Kind.CLASS)) {
-      return true;
-    }
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
-      // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
-      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
-    }
-    return false;
-  }
-
-  private static boolean isAlwaysEmptyOrNonEmptyCollection(List<? extends Tree> elements) {
+  private static boolean doesNotContainUnpackingExpression(List<? extends Tree> elements) {
     if (elements.isEmpty()) {
       return true;
     }

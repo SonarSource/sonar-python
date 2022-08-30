@@ -24,6 +24,7 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
@@ -41,7 +42,6 @@ import org.sonar.python.tree.TreeUtils;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
-import static org.sonar.python.checks.CheckUtils.isClassOrFunction;
 import static org.sonar.python.checks.CheckUtils.isConstant;
 
 @Rule(key = "S5914")
@@ -57,6 +57,8 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   private static final String IS_NOT_MESSAGE = "Replace this \"assertIsNot\" call with an \"assertNotEqual\" call.";
   private static final String IS_SECONDARY_MESSAGE = "This expression creates a new object every time.";
 
+  private static final List<String> ACCEPTED_DECORATORS = List.of("overload", "staticmethod", "classmethod");
+
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   @Override
@@ -67,7 +69,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> {
       AssertStatement assertStatement = (AssertStatement) ctx.syntaxNode();
       Expression condition = assertStatement.condition();
-      if (!condition.is(Tree.Kind.TUPLE) && !isAssertFalse(condition) && CheckUtils.isConstant(condition)) {
+      if (!condition.is(Tree.Kind.TUPLE) && !isFalseOrZeroLiteral(condition) && CheckUtils.isConstant(condition)) {
         ctx.addIssue(condition, BOOLEAN_MESSAGE);
       }
     });
@@ -83,13 +85,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
       List<Argument> arguments = call.arguments();
 
       if (BOOLEAN_ASSERTIONS.contains(name)) {
-        checkBooleanAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "testValue", arguments));
+        checkBooleanAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "expr", arguments));
       } else if (NONE_ASSERTIONS.contains(name)) {
-        checkNoneAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "testValue", arguments));
+        checkNoneAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "expr", arguments));
       } else if (IS_ASSERTIONS.contains(name)) {
         String message = "assertIs".equals(name) ? IS_MESSAGE : IS_NOT_MESSAGE;
-        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "firstValue", arguments), message);
-        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(1, "secondValue", arguments), message);
+        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "first", arguments), message);
+        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(1, "second", arguments), message);
       }
     });
   }
@@ -99,7 +101,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
    * Usually it is better to use another assertion or throw an AssertionException.
    * However, this rule is not intended to check this best practice.
    */
-  private static boolean isAssertFalse(Expression expression) {
+  private static boolean isFalseOrZeroLiteral(Expression expression) {
     if (expression.is(NAME)) {
       return "False".equals(((Name) expression).name());
     }
@@ -147,6 +149,17 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
       }
     }
 
+    return false;
+  }
+
+  private static boolean isClassOrFunction(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.CLASS)) {
+      return true;
+    }
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
+      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
+    }
     return false;
   }
 
