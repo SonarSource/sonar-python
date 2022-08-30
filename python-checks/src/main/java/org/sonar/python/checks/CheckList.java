@@ -80,6 +80,7 @@ import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
+import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 
 public final class CheckList {
 
@@ -274,6 +275,7 @@ public final class CheckList {
       ReferencedBeforeAssignmentCheck.class,
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
+      UnconditionalAssertionCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
