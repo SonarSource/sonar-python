@@ -5,12 +5,12 @@ import pytest
 class MyTest(test.TestCase):
     def test_something(self):
         with self.assertRaises(ZeroDivisionError):
-            assert bar() == 42
+            assert bar() == 42 # Noncompliant
 
     def test_something_2(self):
         with self.assertRaises(ZeroDivisionError):
             foo()
-            assert bar() == 42
+            assert bar() == 42 # Noncompliant
 
     def test_non_compliant_basic():
         with pytest.raises(ZeroDivisionError):
@@ -18,7 +18,7 @@ class MyTest(test.TestCase):
 
 def test_assert_not_unittest():
     with pytest.raises(ZeroDivisionError):
-        self.assertEqual(bar(), 42)
+        self.assertEqual(bar(), 42) # Noncompliant
 
 def test_assert_not_self():
     with pytest.raises(ZeroDivisionError):

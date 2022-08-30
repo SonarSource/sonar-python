@@ -39,7 +39,7 @@ public class AssertAfterRaiseCheckTest {
   }
 
   @Test
-  public void testWithAnotherLibraryPytest() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseAnotherLibraryPytest.py", new AssertAfterRaiseCheck());
+  public void testImportPytestAs() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseImportPytestAs.py", new AssertAfterRaiseCheck());
   }
 }

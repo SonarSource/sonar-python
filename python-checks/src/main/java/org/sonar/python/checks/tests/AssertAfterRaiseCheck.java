@@ -20,25 +20,30 @@
 package org.sonar.python.checks.tests;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.tests.PytestUtils;
 import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5915")
 public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_MULTIPLE_STATEMENT = "Don’t perform an assertion here; An exception is expected to be raised before its execution.";
   private static final String MESSAGE_SINGLE_STATEMENT = "Refactor this test; if this assertion’s argument raises an exception, the assertion will never get executed.";
-  private static final String MESSAGE_SECONDARY = null;
+  private static final String MESSAGE_SECONDARY = "An exception is expected to be raised in this block.";
+
+  public static final String PYTEST_RAISE_CALL = "pytest.raises";
 
   @Override
   public void initialize(Context context) {
@@ -61,18 +66,24 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
     return withStatement.withItems().stream()
       .filter(withItem -> withItem.test().is(Tree.Kind.CALL_EXPR))
       .map(withItem -> ((CallExpression) withItem.test()).callee())
-      .filter(callee -> callee.is(Tree.Kind.QUALIFIED_EXPR))
-      .map(QualifiedExpression.class::cast)
       .anyMatch(callee -> isPytestRaise(callee) || isUnittestRaise(callee));
   }
 
-  public boolean isPytestRaise(QualifiedExpression callee) {
-    return PytestUtils.isPytest(callee) && PytestUtils.RAISE_METHODS.contains(callee.name().name());
+  public boolean isPytestRaise(Expression expr) {
+    return TreeUtils.getSymbolFromTree(expr)
+      .stream()
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .anyMatch(fqn -> fqn.contains(PYTEST_RAISE_CALL));
   }
 
-  public boolean isUnittestRaise(QualifiedExpression callee) {
-    return callee.qualifier().is(Tree.Kind.NAME) && ((Name) callee.qualifier()).name().equals("self")
-      && UnittestUtils.isWithinUnittestTestCase(callee) && UnittestUtils.RAISE_METHODS.contains(callee.name().name());
+  public boolean isUnittestRaise(Expression expression) {
+    return Optional.of(expression).stream()
+      .filter(expr -> expr.is(Tree.Kind.QUALIFIED_EXPR))
+      .map(QualifiedExpression.class::cast)
+      .anyMatch(qualifiedExpression -> qualifiedExpression.qualifier().is(Tree.Kind.NAME)
+        && ((Name) qualifiedExpression.qualifier()).name().equals("self")
+        && UnittestUtils.RAISE_METHODS.contains(qualifiedExpression.name().name()));
   }
 
   public boolean isAnAssert(Statement statement) {
@@ -96,6 +107,6 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
 
   public boolean isUnittestAssert(QualifiedExpression callee) {
     return callee.qualifier().is(Tree.Kind.NAME) && ((Name) callee.qualifier()).name().equals("self")
-      && UnittestUtils.isWithinUnittestTestCase(callee) && UnittestUtils.allAssertMethods().contains(callee.name().name());
+       && UnittestUtils.allAssertMethods().contains(callee.name().name());
   }
 }

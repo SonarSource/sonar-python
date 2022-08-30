@@ -9,7 +9,7 @@ def bar(): return 42
 # Pytest
 def test_base_case_multiple_statement():
     with pytest.raises(ZeroDivisionError):
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{An exception is expected to be raised in this block.}}
         foo()
         assert bar() == 42  # Noncompliant {{Don’t perform an assertion here; An exception is expected to be raised before its execution.}}
 #       ^^^^^^^^^^^^^^^^^^
@@ -81,6 +81,12 @@ def test_not_valid_assert_method():
 def test_not_pytest_lib():
     with pytestrandom.raises(ZeroDivisionError):
         a = 5
+
+# FP
+def test_assert_assertion_error():
+    error = float('nan')
+    with self.assertRaisesRegexp(AssertionError, "nan not less than 1.0"):
+      self.assertLess(error, 1.0) # Noncompliant
 
 ## Unittest
 class MyTest(unittest.TestCase):
