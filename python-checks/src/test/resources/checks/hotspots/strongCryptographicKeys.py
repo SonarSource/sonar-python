@@ -12,6 +12,7 @@ def cryptography():
     dsa.generate_private_key(key_size=key_length) # Compliant
     dsa.generate_private_key(999) # Noncompliant
     dsa.generate_private_key(65537, 1024) # Noncompliant
+    rsa.generate_private_key(65537, 2048) # Compliant
     dsa.generate_private_key(key_size=1024L) # Noncompliant
     # Test non integer literal for coverage
     dsa.generate_private_key(key_size=3.14)
