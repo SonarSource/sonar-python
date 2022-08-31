@@ -20,7 +20,9 @@
 package org.sonar.python.checks.tests;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -85,15 +87,19 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
       List<Argument> arguments = call.arguments();
 
       if (BOOLEAN_ASSERTIONS.contains(name)) {
-        checkBooleanAssertion(ctx, TreeUtils.nthArgumentOrKeyword(0, "expr", arguments));
+        checkAssertion(arg -> checkBooleanAssertion(ctx, arg), 0, "expr", arguments);
       } else if (NONE_ASSERTIONS.contains(name)) {
-        checkNoneAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "expr", arguments));
+        checkAssertion(arg -> checkNoneAssertion(ctx, call, arg),0, "expr", arguments);
       } else if (IS_ASSERTIONS.contains(name)) {
         String message = "assertIs".equals(name) ? IS_MESSAGE : IS_NOT_MESSAGE;
-        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(0, "first", arguments), message);
-        checkIsAssertion(ctx, call, TreeUtils.nthArgumentOrKeyword(1, "second", arguments), message);
+        checkAssertion(arg -> checkIsAssertion(ctx, call, arg, message), 0, "first", arguments);
+        checkAssertion(arg -> checkIsAssertion(ctx, call, arg, message),1, "second", arguments);
       }
     });
+  }
+
+  private static void checkAssertion(Consumer<RegularArgument> checkConsumer, int argPosition, String keyword, List<Argument> arguments) {
+    Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argPosition, keyword, arguments)).ifPresent(checkConsumer);
   }
 
   /**

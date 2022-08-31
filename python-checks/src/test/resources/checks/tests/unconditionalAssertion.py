@@ -123,7 +123,8 @@ class ConstantTrueFalseTests(unittest.TestCase):
         an_int = 0  # Overwrite all previus values
         self.assertTrue(an_int)  # Noncompliant
 
-
+    def test_empty_assertion(self):
+        self.assertTrue()
 
 #
 # RSPEC_5727: Comparison to None should not be constant
