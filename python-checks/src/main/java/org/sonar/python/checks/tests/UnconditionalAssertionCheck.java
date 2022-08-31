@@ -98,7 +98,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private void checkAssertion(Consumer<RegularArgument> checkConsumer, int argPosition, String keyword, List<Argument> arguments) {
+  private static void checkAssertion(Consumer<RegularArgument> checkConsumer, int argPosition, String keyword, List<Argument> arguments) {
     Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argPosition, keyword, arguments)).ifPresent(checkConsumer);
   }
 
