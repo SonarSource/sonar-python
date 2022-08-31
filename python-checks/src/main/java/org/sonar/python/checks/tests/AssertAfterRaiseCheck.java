@@ -74,23 +74,24 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
 
   public boolean isValidPytestRaise(CallExpression callExpression) {
     return Optional.of(callExpression).stream()
-      .filter(call -> isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, PYTEST_ARG_EXCEPTION, call.arguments())))
       .map(call -> TreeUtils.getSymbolFromTree(call.callee()))
       .filter(Optional::isPresent)
       .map(Optional::get)
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
-      .anyMatch(fqn -> fqn.contains(PYTEST_RAISE_CALL));
+      .anyMatch(fqn -> fqn.contains(PYTEST_RAISE_CALL))
+    && isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, PYTEST_ARG_EXCEPTION, callExpression.arguments()));
   }
 
   public boolean isValidUnittestRaise(CallExpression callExpression) {
     return Optional.of(callExpression).stream()
-      .filter(call -> isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, UNITTEST_ARG_EXCEPTION, call.arguments())))
       .filter(call -> call.callee().is(Tree.Kind.QUALIFIED_EXPR))
       .map(call -> (QualifiedExpression) call.callee())
-      .anyMatch(callee -> callee.qualifier().is(Tree.Kind.NAME)
+      .anyMatch(
+        callee -> callee.qualifier().is(Tree.Kind.NAME)
         && ((Name) callee.qualifier()).name().equals("self")
-        && UnittestUtils.RAISE_METHODS.contains(callee.name().name()));
+        && UnittestUtils.RAISE_METHODS.contains(callee.name().name()))
+      && isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, UNITTEST_ARG_EXCEPTION, callExpression.arguments()));
   }
 
   public boolean isNotAssertionErrorArgument(RegularArgument regularArgument) {

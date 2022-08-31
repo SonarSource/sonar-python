@@ -136,11 +136,11 @@ class MyTest(unittest.TestCase):
 
     # Edge case
     def test_raise_callee_qualifier_not_a_name(self):
-        with foo().assertRaisesRandom():
+        with foo().assertRaisesRandom(ZeroDivisionError):
             self.assertEqual(bar(), 42)
 
     def test_raise_callee_qualifier_not_self(self):
-        with foo.assertRaisesRandom():
+        with foo.assertRaisesRandom(ZeroDivisionError):
             self.assertEqual(bar(), 42)
 
     def test_not_valid_raise_method(self):
