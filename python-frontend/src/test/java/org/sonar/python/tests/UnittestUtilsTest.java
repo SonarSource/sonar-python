@@ -68,4 +68,9 @@ public class UnittestUtilsTest  {
   public void all_methods() {
     assertThat(UnittestUtils.allMethods()).hasSize(59);
   }
+
+  @Test
+  public void all_assert_methods() {
+    assertThat(UnittestUtils.allAssertMethods()).hasSize(38);
+  }
 }

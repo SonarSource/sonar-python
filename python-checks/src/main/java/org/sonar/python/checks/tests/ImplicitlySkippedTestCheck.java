@@ -94,7 +94,7 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
 
   private static boolean containsAssertion(FunctionDef functionDef) {
     Set<String> supportedAssertMethods = UnittestUtils.isWithinUnittestTestCase(functionDef) ?
-      UnittestUtils.ASSERTIONS_METHODS : Collections.emptySet();
+      UnittestUtils.allAssertMethods() : Collections.emptySet();
     AssertionVisitor assertVisitor = new AssertionVisitor(supportedAssertMethods);
     functionDef.accept(assertVisitor);
     return assertVisitor.hasAnAssert;
