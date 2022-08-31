@@ -12,6 +12,7 @@ def builtin_noncompliant(p):
     x = complex(1)
   x > "1" # Noncompliant {{Fix this invalid ">" operation between incompatible types.}}
   "1" < x # Noncompliant
+  0.1 << 24  # Noncompliant {{Fix this invalid "<<" operation between incompatible types (float and int).}}
 
 
 def builtin_compliant():
@@ -21,6 +22,7 @@ def builtin_compliant():
   d1 = dict()
   d2 = dict()
   r = d1 | d2
+  0xE << 24
 
 
 def custom_noncompliant():
