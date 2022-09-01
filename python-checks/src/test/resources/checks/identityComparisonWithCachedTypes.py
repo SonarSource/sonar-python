@@ -148,3 +148,4 @@ def comparison_to_none():
     "str" is not None
     "str" is None
     123 is None
+    None is "str"
