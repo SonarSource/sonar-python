@@ -28,4 +28,11 @@ public class UnusedLocalVariableCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariable.py", new UnusedLocalVariableCheck());
   }
+
+  @Test
+  public void custom() {
+    UnusedLocalVariableCheck check = new UnusedLocalVariableCheck();
+    check.format = "(_|myignore)";
+    PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariableCustom.py", check);
+  }
 }

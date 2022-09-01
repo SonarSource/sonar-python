@@ -21,7 +21,9 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
+import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -39,10 +41,20 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
+  private static final String DEFAULT = "(_[a-zA-Z0-9_]*|dummy|unused|ignored)";
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
+
+  @RuleProperty(
+    key = "regex",
+    description = "Regular expression used to identify variable name to ignore.",
+    defaultValue = DEFAULT
+  )
+  public String format = DEFAULT;
+  private Pattern pattern;
 
   @Override
   public void initialize(Context context) {
+    pattern = Pattern.compile(format);
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((FunctionDef) ctx.syntaxNode()).localVariables()));
     context.registerSyntaxNodeConsumer(Kind.DICT_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((DictCompExpression) ctx.syntaxNode()).localVariables()));
     context.registerSyntaxNodeConsumer(Kind.LIST_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
@@ -50,13 +62,13 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
   }
 
-  private static void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
+  private void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
     // https://docs.python.org/3/library/functions.html#locals
     if (CheckUtils.containsCallToLocalsFunction(functionTree)) {
       return;
     }
     symbols.stream()
-      .filter(s -> !"_".equals(s.name()))
+      .filter(s -> !pattern.matcher(s.name()).matches())
       .filter(UnusedLocalVariableCheck::hasOnlyBindingUsages)
       .forEach(symbol ->
         symbol.usages().stream()
