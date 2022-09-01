@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -55,6 +56,7 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
   private static final String IS = "#is#";
   private static final String IS_NOT = "#is-not#";
   private static final String IN = "#in#";
+  private static final String NOT_IN = "#not-in#";
 
   private static final String FIRST = "first";
   private static final String SECOND = "second";
@@ -62,23 +64,25 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
   private static final String ROUND = "round";
   private static final String IS_INSTANCE = "isinstance";
 
-  private static final Map<String, String> ASSERT_TRUE_SUGGESTIONS = Map.of(
-    "==", ASSERT_EQUAL,
-    "!=", ASSERT_NOT_EQUAL,
-    ">", "assertGreater",
-    ">=", "assertGreaterEqual",
-    "<", "assertLess",
-    "<=", "assertLessEqual",
-    IN, "assertIn",
-    IS, "assertIs",
-    IS_NOT, "assertIsNot",
-    IS_INSTANCE, "assertIsInstance"
+  private static final Map<String, String> ASSERT_TRUE_SUGGESTIONS = Map.ofEntries(
+    Map.entry("==", ASSERT_EQUAL),
+    Map.entry("!=", ASSERT_NOT_EQUAL),
+    Map.entry(">", "assertGreater"),
+    Map.entry(">=", "assertGreaterEqual"),
+    Map.entry("<", "assertLess"),
+    Map.entry("<=", "assertLessEqual"),
+    Map.entry(IN, "assertIn"),
+    Map.entry(NOT_IN, "assertNotIn"),
+    Map.entry(IS, "assertIs"),
+    Map.entry(IS_NOT, "assertIsNot"),
+    Map.entry(IS_INSTANCE, "assertIsInstance")
   );
 
   private static final Map<String, String> ASSERT_FALSE_SUGGESTIONS = Map.of(
     "==", ASSERT_NOT_EQUAL,
     "!=", ASSERT_EQUAL,
     IN, "assertNotIn",
+    NOT_IN, "assertIn",
     IS, "assertIsNot",
     IS_NOT, "assertIs",
     IS_INSTANCE, "assertNotIsInstance"
@@ -151,7 +155,7 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
       }
       dedicatedAssertion = suggestions.get(binaryExpression.operator().value());
     } else if (expression.is(Tree.Kind.IN)) {
-      dedicatedAssertion = suggestions.get(IN);
+      dedicatedAssertion = ((InExpression) expression).notToken() == null ? suggestions.get(IN) : suggestions.get(NOT_IN);
     } else if (expression.is(Tree.Kind.IS)) {
       dedicatedAssertion = ((IsExpression) expression).notToken() == null ? suggestions.get(IS) : suggestions.get(IS_NOT);
     } else if (isCallTo(IS_INSTANCE, expression)) {
