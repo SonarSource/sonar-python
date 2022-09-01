@@ -77,7 +77,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
   private static void handleReturnStatement(SubscriptionContext ctx, ReturnStatement retStmt) {
     if (retStmt.expressions().size() == 1) {
       Expression expr = retStmt.expressions().get(0);
-      if ((expr.is(Tree.Kind.PARENTHESIZED) || (expr.is(Tree.Kind.TUPLE) && !((Tuple) expr).elements().isEmpty()))
+      if ((isParenthesisWithoutAssignmentInside(expr) || (expr.is(Tree.Kind.TUPLE) && !((Tuple) expr).elements().isEmpty()))
         && expr.firstToken().line() == expr.lastToken().line()) {
         ctx.addIssue(expr, String.format(MESSAGE, "return"));
       }
@@ -86,7 +86,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
 
   private static void handleNotOperator(SubscriptionContext ctx, UnaryExpression unary) {
     Expression negatedExpr = unary.expression();
-    if (negatedExpr.is(Tree.Kind.PARENTHESIZED)) {
+    if (isParenthesisWithoutAssignmentInside(negatedExpr)) {
       negatedExpr = ((ParenthesizedExpression) negatedExpr).expression();
       if (negatedExpr.is(Tree.Kind.COMPARISON) || !(negatedExpr instanceof BinaryExpression)) {
         ctx.addIssue(negatedExpr, String.format(MESSAGE, "not"));
@@ -118,9 +118,13 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
   }
 
   private static void checkExpr(Expression expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
-    if ((expr.is(Tree.Kind.PARENTHESIZED) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
+    if ((isParenthesisWithoutAssignmentInside(expr) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
       && expr.firstToken().line() == expr.lastToken().line()) {
       ctx.addIssue(expr, String.format(MESSAGE, keyword));
     }
+  }
+
+  private static boolean isParenthesisWithoutAssignmentInside(Expression expr) {
+    return expr.is(Tree.Kind.PARENTHESIZED) && !((ParenthesizedExpression) expr).expression().is(Tree.Kind.ASSIGNMENT_EXPRESSION);
   }
 }
