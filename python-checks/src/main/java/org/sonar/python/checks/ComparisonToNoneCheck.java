@@ -29,6 +29,8 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.python.checks.CheckUtils.isNone;
+
 @Rule(key = "S5727")
 public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
 
@@ -65,10 +67,6 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
   private static void addIssue(SubscriptionContext ctx, Tree tree, String comparisonKind, boolean result) {
     String resultAsString = result ? "True" : "False";
     ctx.addIssue(tree, String.format("Remove this %s; it will always be %s.", comparisonKind, resultAsString));
-  }
-
-  private static boolean isNone(InferredType type) {
-    return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
   }
 
   private static boolean cannotBeNone(InferredType type) {
