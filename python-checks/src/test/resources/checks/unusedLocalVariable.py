@@ -62,6 +62,14 @@ def for_loops():
         do_something()
     for _myVaR in range(10):
         do_something()
+    for _customVar in range(10):
+        do_something()
+    for m_myVaR in range(10): # Noncompliant
+        do_something()
+    for m_ in range(10): # Noncompliant
+        do_something()
+    for m_dummy in range(10): # Noncompliant
+        do_something()
     for dummy in range(10):
         do_something()
     for unused in range(10):
