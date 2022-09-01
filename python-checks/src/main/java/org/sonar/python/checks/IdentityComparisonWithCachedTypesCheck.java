@@ -50,16 +50,26 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     context.registerSyntaxNodeConsumer(Tree.Kind.IS, IdentityComparisonWithCachedTypesCheck::checkIsComparison);
   }
 
-  private static void checkIsComparison(SubscriptionContext subscriptionContext) {
-    IsExpression isExpr = (IsExpression) subscriptionContext.syntaxNode();
+  private static void checkIsComparison(SubscriptionContext ctx) {
+    IsExpression isExpr = (IsExpression) ctx.syntaxNode();
+
+    // Comparison to none is checked by S5727
+    if (isComparisonToNone(isExpr)) {
+      return;
+    }
+
     if (isUnsuitableOperand(isExpr.leftOperand()) || isUnsuitableOperand(isExpr.rightOperand())) {
       Token notToken = isExpr.notToken();
       if (notToken == null) {
-        subscriptionContext.addIssue(isExpr.operator(), MESSAGE_IS);
+        ctx.addIssue(isExpr.operator(), MESSAGE_IS);
       } else {
-        subscriptionContext.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
       }
     }
+  }
+
+  private static boolean isComparisonToNone(IsExpression isExpr) {
+    return CheckUtils.isNone(isExpr.leftOperand().type()) || CheckUtils.isNone(isExpr.rightOperand().type());
   }
 
   /**

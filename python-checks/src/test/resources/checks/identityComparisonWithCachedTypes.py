@@ -143,3 +143,9 @@ def noncompliant_even_if_it_works_with_cpython(param):
 def default_param(param=(0, 1)):
     print(param is (0, 1))  # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #           ^^
+
+def comparison_to_none():
+    "str" is not None
+    "str" is None
+    123 is None
+    None is "str"

@@ -33,6 +33,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.tree.TreeUtils;
 
@@ -145,5 +147,9 @@ public class CheckUtils {
       return true;
     }
     return elements.stream().anyMatch(element -> !element.is(UNPACKING_EXPR));
+  }
+
+  public static boolean isNone(InferredType type) {
+    return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
   }
 }
