@@ -222,20 +222,20 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
    * Flask config assignment should not raise an issue except an assignment to `SECRET_KEY`
    * See SONARPY-1061 for more context
    */
-  private boolean isFlaskConfigAssignment(Expression expression) {
+  private static boolean isFlaskConfigAssignment(Expression expression) {
     if (expression.parent().is(Kind.ASSIGNMENT_STMT)) {
       AssignmentStatement assignment = (AssignmentStatement) expression.parent();
-       return assignment.lhsExpressions().stream()
-         .map(ExpressionList::expressions)
-         .flatMap(Collection::stream)
-         .anyMatch(this::isFlaskConfigSubscription);
+      return assignment.lhsExpressions().stream()
+        .map(ExpressionList::expressions)
+        .flatMap(Collection::stream)
+        .anyMatch(HardCodedCredentialsCheck::isFlaskConfigSubscription);
     }
     return Optional.ofNullable(TreeUtils.firstAncestorOfKind(expression, Kind.SUBSCRIPTION))
-      .filter(this::isFlaskConfigSubscription)
+      .filter(HardCodedCredentialsCheck::isFlaskConfigSubscription)
       .isPresent();
   }
 
-  private boolean isFlaskConfigSubscription(Tree tree) {
+  private static boolean isFlaskConfigSubscription(Tree tree) {
     if (tree.is(Kind.SUBSCRIPTION)) {
       return getSubscriptionFqn((SubscriptionExpression) tree)
         .filter(FLASK_CONFIG_ASSIGNMENT_FQN::equals)
