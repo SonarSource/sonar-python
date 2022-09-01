@@ -29,9 +29,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 
-@Rule(key = HardcodedIPCheck.CHECK_KEY)
+@Rule(key = "S1313")
 public class HardcodedIPCheck extends PythonSubscriptionCheck {
-  public static final String CHECK_KEY = "S1313";
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
 
@@ -48,6 +47,17 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   private static final Pattern IPV6_LOOPBACK = Pattern.compile("[0:]++0*+1");
   private static final Pattern IPV6_NON_ROUTABLE = Pattern.compile("[0:]++");
 
+  private static final List<String> RESERVED_IP_PREFIXES = List.of(
+    "192.0.2.",
+    "198.51.100.",
+    "203.0.113.",
+    "2001:db8:",
+    "127.",
+    "2.5.",
+    "255.255.255.255",
+    "0.0.0.0"
+  );
+
   String message = "Make sure using this hardcoded IP address \"%s\" is safe here.";
 
   @Override
@@ -61,7 +71,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
       Matcher matcher = IPV4_URL_REGEX.matcher(content);
       if (matcher.matches()) {
         String ip = matcher.group("ipv4");
-        if (isValidIPV4(ip) && !isIPV4Exception(ip)) {
+        if (isValidIPV4(ip) && !isReservedIP(ip)) {
           ctx.addIssue(stringLiteral, String.format(message, ip));
         }
       } else {
@@ -106,15 +116,8 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     return validUncompressed || validCompressed;
   }
 
-  private static boolean isIPV4Exception(String ip) {
-    return ip.startsWith("127.")
-      || "255.255.255.255".equals(ip)
-      || "0.0.0.0".equals(ip)
-      || ip.startsWith("2.5.");
-  }
-
   private static boolean isIPV6Exception(String ip) {
-    return IPV6_LOOPBACK.matcher(ip).matches() || IPV6_NON_ROUTABLE.matcher(ip).matches();
+    return isReservedIP(ip) || IPV6_LOOPBACK.matcher(ip).matches() || IPV6_NON_ROUTABLE.matcher(ip).matches();
   }
 
   private static int getCompressionSeparatorCount(String str) {
@@ -123,6 +126,10 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
       ++count;
     }
     return count;
+  }
+
+  private static boolean isReservedIP(String ip) {
+    return RESERVED_IP_PREFIXES.stream().anyMatch(ip::startsWith);
   }
 
 }

@@ -47,8 +47,6 @@ version = "1.0.0.0-1" # Compliant - suffixed
 "1080:0:0:0:8:200C:131.107.129" # Compliant - not valid IPv6
 "1080:0:0:0:8:200C:417A:131.107" # Compliant - not valid IPv6
 
-"http://[2001:db8:1f70::999:de8:7648:6e8]" # Noncompliant {{Make sure using this hardcoded IP address "2001:db8:1f70::999:de8:7648:6e8" is safe here.}}
-"http://[2001:db8:1f70::999:de8:7648:6e8]:100/" # Noncompliant
 url = "https://[3FFE:1A05:510:1111:0:5EFE:131.107.129.8]:8080/" # Noncompliant
 #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -68,6 +66,20 @@ url = "https://[3FFE:1A05:510:1111:0:5EFE:131.107.129.8]:8080/" # Noncompliant
 "http://[::0]:100/"
 "0000:0000:0000:0000:0000:0000:0000:0000"
 ''
+
+# RFC 3849
+"2001:db8:1f70::999:de8:7648:6e8"
+"2001:db8:1f70::777:de8:ad2:6e8"
+"http://[2001:db8:1f70::999:de8:7648:6e8]:100/"
+
+# RFC 3849
+"192.0.2.13"
+"192.0.2.108"
+"198.51.100.23"
+"198.51.100.83"
+"203.0.113.7"
+"203.0.113.42"
+
 '''http://123.1.1.1'''  # Noncompliant [[triple quoted but not multiline]]
 
 '''123.1.1.1
