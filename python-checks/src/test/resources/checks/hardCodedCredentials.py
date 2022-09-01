@@ -13,6 +13,8 @@ import psycopg2
 import pgdb
 import pg
 
+from flask import Flask
+
 # default words list: password,passwd,pwd,passphrase
 
 secret_key = '1234567890123456'
@@ -220,3 +222,10 @@ module.fail_json(msg="Password parameter is missing."
 jim = User(username='jimcarry',password="password88") # Compliant
 conn = pymssql.connect(server='yourserver', user='yourusername@yourserver',
              password='yourpassword', database='yourdatabase') # Compliant
+
+def test_flask():
+    app = Flask(__name__)
+    app.config["SECRET_KEY"] = "foo"  # Noncompliant
+    app.config["SECURITY_PASSWORD_HASH"] = "sha512_crypt"  # Compliant
+    a, app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant
+    app.config["SECURITY_PASSWORD_HASH"], app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant

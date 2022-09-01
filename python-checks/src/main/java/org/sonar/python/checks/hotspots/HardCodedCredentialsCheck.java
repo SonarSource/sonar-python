@@ -21,6 +21,7 @@ package org.sonar.python.checks.hotspots;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,7 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -62,6 +64,9 @@ import org.sonar.python.tree.TreeUtils;
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_CREDENTIAL_WORDS = "password,passwd,pwd,passphrase";
+
+  private static final String FLASK_CONFIG_ASSIGNMENT_FQN = "flask.app.Flask.config";
+  private static final String FLASK_CONFIG_CREDENTIAL_KEY = "SECRET_KEY";
 
   @RuleProperty(
     key = "credentialWords",
@@ -194,13 +199,56 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (stringLiteral.stringElements().stream().anyMatch(StringElement::isInterpolated)) {
       return;
     }
-    String matchedCredential = matchedCredential(stringLiteral.trimmedQuotesValue(), literalPatterns());
+
+    String literalValue = stringLiteral.trimmedQuotesValue();
+
+    if (isFlaskConfigAssignment(stringLiteral)) {
+      if (FLASK_CONFIG_CREDENTIAL_KEY.equals(literalValue)) {
+        ctx.addIssue(stringLiteral, String.format(MESSAGE, FLASK_CONFIG_CREDENTIAL_KEY));
+      }
+      return;
+    }
+
+    String matchedCredential = matchedCredential(literalValue, literalPatterns());
     if (matchedCredential != null) {
       ctx.addIssue(stringLiteral, String.format(MESSAGE, matchedCredential));
     }
     if (isURLWithCredentials(stringLiteral)) {
       ctx.addIssue(stringLiteral, "Review this hard-coded URL, which may contain a credential.");
     }
+  }
+
+  /**
+   * Flask config assignment should not raise an issue except an assignment to `SECRET_KEY`
+   * See SONARPY-1061 for more context
+   */
+  private boolean isFlaskConfigAssignment(Expression expression) {
+    if (expression.parent().is(Kind.ASSIGNMENT_STMT)) {
+      AssignmentStatement assignment = (AssignmentStatement) expression.parent();
+       return assignment.lhsExpressions().stream()
+         .map(ExpressionList::expressions)
+         .flatMap(Collection::stream)
+         .anyMatch(this::isFlaskConfigSubscription);
+    }
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(expression, Kind.SUBSCRIPTION))
+      .filter(this::isFlaskConfigSubscription)
+      .isPresent();
+  }
+
+  private boolean isFlaskConfigSubscription(Tree tree) {
+    if (tree.is(Kind.SUBSCRIPTION)) {
+      return getSubscriptionFqn((SubscriptionExpression) tree)
+        .filter(FLASK_CONFIG_ASSIGNMENT_FQN::equals)
+        .isPresent();
+    }
+    return false;
+  }
+
+  private static Optional<String> getSubscriptionFqn(SubscriptionExpression subscription) {
+    return Optional.of(subscription.object())
+      .filter(QualifiedExpression.class::isInstance)
+      .map(qualifier -> ((QualifiedExpression) qualifier).name().symbol())
+      .map(Symbol::fullyQualifiedName);
   }
 
   private static boolean isDocString(StringLiteral stringLiteral) {
@@ -255,7 +303,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private void checkAssignedValue(AssignmentStatement assignmentStatement, String matchedCredential, SubscriptionContext ctx) {
     Expression assignedValue = assignmentStatement.assignedValue();
-    if (isSuspiciousStringLiteral(assignedValue)) {
+    if (isSuspiciousStringLiteral(assignedValue) && !isFlaskConfigAssignment(assignedValue) ) {
       ctx.addIssue(assignmentStatement, String.format(MESSAGE, matchedCredential));
     }
   }
