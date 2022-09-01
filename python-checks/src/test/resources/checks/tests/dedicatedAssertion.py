@@ -20,21 +20,23 @@ class SomeTest(unittest.TestCase):
         self.assertTrue(isinstance(a,b)) # Noncompliant {{Consider using "assertIsInstance" instead.}}
 
     def assert_false_on_comparisons(self):
-       a = 42
-       b = foo()
-       self.assertFalse(a == b)  # Noncompliant {{Consider using "assertNotEqual" instead.}}
-       self.assertFalse(a != b)  # Noncompliant {{Consider using "assertEqual" instead.}}
+        a = 42
+        b = foo()
+        self.assertFalse(a == b)  # Noncompliant {{Consider using "assertNotEqual" instead.}}
+        self.assertFalse(a != b)  # Noncompliant {{Consider using "assertEqual" instead.}}
 
     def assert_false_on_comparisons(self):
-       self.assertFalse(isinstance(a, b))  # Noncompliant {{Consider using "assertNotIsInstance" instead.}}
+        self.assertFalse(isinstance(a, b))  # Noncompliant {{Consider using "assertNotIsInstance" instead.}}
 
     def assert_true_on_is_expression(self):
-       self.assertTrue(a is b)  # Noncompliant {{Consider using "assertIs" instead.}}
-       self.assertTrue(a is not b)  # Noncompliant {{Consider using "assertIsNot" instead.}}
+        self.assertTrue(a is b)  # Noncompliant {{Consider using "assertIs" instead.}}
+        self.assertTrue(a is not b)  # Noncompliant {{Consider using "assertIsNot" instead.}}
 
     def assert_true_or_false_on_in_expression(self):
         self.assertTrue(a in b)  # Noncompliant {{Consider using "assertIn" instead.}}
+        self.assertTrue(a not in b) # Noncompliant {{Consider using "assertNotIn" instead.}}
         self.assertFalse(a in b)  # Noncompliant {{Consider using "assertNotIn" instead.}}
+        self.assertFalse(a not in b)  # Noncompliant {{Consider using "assertIn" instead.}}
 
     def assert_equal_on_boolean_literal(self):
         self.assertEqual(a, True)  # Noncompliant {{Consider using "assertTrue" instead.}}
