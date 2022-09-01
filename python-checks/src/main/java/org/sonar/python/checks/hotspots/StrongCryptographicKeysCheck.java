@@ -20,20 +20,21 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
@@ -67,7 +68,6 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
   private abstract static class CryptoAPICheck {
-    private static final int CURVE_ARGUMENT_POSITION = 0;
 
     abstract int getKeySizeArgumentPosition();
 
@@ -77,93 +77,40 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
 
     abstract String getExponentKeywordName();
 
-    private boolean isNonCompliantKeySizeArgument(Argument argument, int index) {
-      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
-        return false;
-      }
-      RegularArgument regularArgument = ((RegularArgument) argument);
-      Name keyword = regularArgument.keywordArgument();
-      if (keyword == null) {
-        return index == getKeySizeArgumentPosition() && isLessThan2048(regularArgument.expression());
-      }
-      return keyword.name().equals(getKeySizeKeywordName()) && isLessThan2048(regularArgument.expression());
+    private static boolean isLessThan2048(RegularArgument argument) {
+      return isLessThan(argument.expression(), 2048);
     }
 
-    private boolean isNonCompliantExponentArgument(Argument argument, int index) {
-      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
-        return false;
-      }
-      RegularArgument regularArgument = ((RegularArgument) argument);
-      Name keyword = regularArgument.keywordArgument();
-      if (keyword == null) {
-        return index == getExponentArgumentPosition() && isLessThan65537(regularArgument.expression());
-      }
-      return keyword.name().equals(getExponentKeywordName()) && isLessThan65537(regularArgument.expression());
+    private static boolean isLessThan65537(RegularArgument argument) {
+      return isLessThan(argument.expression(), 65537);
     }
 
-    private static boolean isLessThan2048(Expression expression) {
+    private static boolean isLessThan(Expression expression, int number) {
       try {
-        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < 2048;
+        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < number;
       } catch (NumberFormatException nfe) {
         return false;
       }
-    }
-
-    private static boolean isLessThan65537(Expression expression) {
-      try {
-        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < 65537;
-      } catch (NumberFormatException nfe) {
-        return false;
-      }
-    }
-
-    private static boolean isNonCompliantCurveArgument(Argument argument, int index) {
-      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
-        return false;
-      }
-      RegularArgument regularArgument = ((RegularArgument) argument);
-      Name keyword = regularArgument.keywordArgument();
-      if (keyword == null) {
-        return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(regularArgument.expression());
-      }
-      return keyword.name().equals("curve") && isNonCompliantCurve(regularArgument.expression());
-    }
-
-    private static boolean isNonCompliantCurve(Expression expression) {
-      if (!expression.is(Kind.QUALIFIED_EXPR)) {
-        return false;
-      }
-      QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
-      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
-        if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
-          return false;
-        }
-        return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
-      }
-      return false;
     }
 
     void checkArguments(SubscriptionContext ctx, List<Argument> arguments) {
-      int index = 0;
-      for (Argument argument : arguments) {
-        if (isNonCompliantKeySizeArgument(argument, index)) {
-          ctx.addIssue(argument, "Use a key length of at least 2048 bits.");
-        }
+      argument(getKeySizeArgumentPosition(), getKeySizeKeywordName(), arguments)
+        .filter(CryptoAPICheck::isLessThan2048)
+        .ifPresent(arg -> ctx.addIssue(arg, "Use a key length of at least 2048 bits."));
 
-        if (isNonCompliantExponentArgument(argument, index)) {
-          ctx.addIssue(argument, "Use a public key exponent of at least 65537.");
-        }
-
-        if (this instanceof CryptographyModuleCheck && isNonCompliantCurveArgument(argument, index)) {
-          ctx.addIssue(argument, "Use a key length of at least 224 bits.");
-        }
-      }
+      argument(getExponentArgumentPosition(), getExponentKeywordName(), arguments)
+        .filter(CryptoAPICheck::isLessThan65537)
+        .ifPresent(arg -> ctx.addIssue(arg, "Use a public key exponent of at least 65537."));
     }
+  }
 
+  public static Optional<RegularArgument> argument(int argPosition, String keyword, List<Argument> arguments) {
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argPosition, keyword, arguments));
   }
 
   private static class CryptographyModuleCheck extends CryptoAPICheck {
+
+    private static final int CURVE_ARGUMENT_POSITION = 0;
 
     @Override
     protected int getKeySizeArgumentPosition() {
@@ -183,6 +130,30 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     @Override
     protected String getExponentKeywordName() {
       return "public_exponent";
+    }
+
+    @Override
+    void checkArguments(SubscriptionContext ctx, List<Argument> arguments) {
+      super.checkArguments(ctx, arguments);
+
+      argument(CURVE_ARGUMENT_POSITION, "curve", arguments)
+        .filter(arg -> isNonCompliantCurve(arg.expression()))
+        .ifPresent(arg -> ctx.addIssue(arg, "Use a key length of at least 224 bits."));
+    }
+
+    private static boolean isNonCompliantCurve(Expression expression) {
+      if (!expression.is(Kind.QUALIFIED_EXPR)) {
+        return false;
+      }
+      QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
+      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
+        Symbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
+        if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
+          return false;
+        }
+        return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
+      }
+      return false;
     }
   }
 
