@@ -133,3 +133,18 @@ a = (10, 5)
 my_tuple_list = [('foo', 'bar')]
 if ('foo', 'bar') in my_tuple_list:
 	print("True")
+
+# SONARPY-1021 should not raise issues on assignment expression (walrus operator)
+if (x := 3):
+    ...
+if not (x := 3):
+    ...
+x = [(y := 3) for num in numbers if value > 0]
+yield (x := 3)
+assert (x := 3)
+while (x := 3):
+    pass
+
+def fooWalrus(val):
+    return (x := val)
+
