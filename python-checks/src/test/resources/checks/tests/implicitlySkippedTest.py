@@ -174,6 +174,22 @@ class ReturnWithValue(unittest.TestCase):
 #         ^^^^^^^^
         assert foo() == x
 
+    # Other Edge case
+    def test_return_qualifier_not_name(self):
+        if x is None:
+          return foo().skipTest() # Noncompliant
+        assert foo() == x
+
+    def test_return_qualifier_not_self(self):
+        if x is None:
+          return my.skipTest() # Noncompliant
+        assert foo() == x
+
+    def test_return_not_skip_test(self):
+        if x is None:
+          return self.skipOther() # Noncompliant
+        assert foo() == x
+
 # Other testing library
 class MyFakeTest(faketest.TestCase):
     # With an assert method which name exist in unittest
