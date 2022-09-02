@@ -40,7 +40,6 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
@@ -836,6 +835,22 @@ public class ProjectLevelSymbolTableTest {
     FunctionSymbolImpl bar = ((FunctionSymbolImpl) symbolByName.get("bar"));
     assertThat(foo.isDjangoView()).isTrue();
     assertThat(bar.isDjangoView()).isFalse();
+  }
+
+  /**
+   * The variable `foo` which is assigned in the decorator of the function should belong to the global scope not the function scope
+   */
+  @Test
+  public void function_decorator_symbol() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "@foo := bar",
+      "def function(): pass"
+    );
+    assertThat(fileInput.globalVariables()).hasSize(2);
+    assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactly("foo", "function");
+
+    FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
+    assertThat(functionDef.localVariables()).isEmpty();
   }
 
 }
