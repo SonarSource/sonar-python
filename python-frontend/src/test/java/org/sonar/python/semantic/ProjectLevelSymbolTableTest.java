@@ -846,8 +846,8 @@ public class ProjectLevelSymbolTableTest {
       "@foo := bar",
       "def function(): pass"
     );
-    assertThat(fileInput.globalVariables()).hasSize(2);
-    assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactly("foo", "function");
+    assertThat(fileInput.globalVariables()).extracting(Symbol::name)
+      .containsExactlyInAnyOrder("foo", "function");
 
     FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
     assertThat(functionDef.localVariables()).isEmpty();
