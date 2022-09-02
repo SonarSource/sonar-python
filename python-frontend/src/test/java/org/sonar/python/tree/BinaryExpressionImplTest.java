@@ -39,6 +39,7 @@ public class BinaryExpressionImplTest {
   @Test
   public void type() {
     assertThat(lastExpression("42 + 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("42 + 0xABC").type()).isEqualTo(INT);
     assertThat(lastExpression("'foo' + 'bar'").type()).isEqualTo(STR);
     assertThat(lastExpression("True + False").type()).isEqualTo(InferredTypes.anyType());
     assertThat(lastExpression("42 + ''").type()).isEqualTo(InferredTypes.anyType());

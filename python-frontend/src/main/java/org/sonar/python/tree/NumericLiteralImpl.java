@@ -90,6 +90,9 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
     if (valueAsStringLowerCase.contains("j")) {
       return InferredTypes.COMPLEX;
     }
+    if (valueAsStringLowerCase.startsWith("0x")) {
+      return InferredTypes.INT;
+    }
     if (valueAsString.contains(".") || valueAsStringLowerCase.contains("e")) {
       return InferredTypes.FLOAT;
     }
