@@ -19,14 +19,13 @@
  */
 package org.sonar.python.quickfix;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.tree.TreeUtils;
 
 /**
  * For internal use only. Can not be used outside SonarPython analyzer.
@@ -100,30 +99,12 @@ public class PythonTextEdit {
    * Take care about child statements by collecting all child tokens and shift each line once.
    */
   private static List<PythonTextEdit> shiftLeft(Tree tree, int offset) {
-    return tokens(tree).stream()
+    return TreeUtils.tokens(tree).stream()
       .filter(token -> token.column() >= offset)
       .map(Token::line)
       .distinct()
       .map(line -> removeRange(line, 0, line, offset))
       .collect(Collectors.toList());
-  }
-
-  /**
-   * Collect all tokens of a given tree including all tokens from its children
-   */
-  private static List<Token> tokens(Tree tree) {
-    List<Token> tokens = new ArrayList<>();
-    tree.children().forEach(child -> {
-      if (child.is(Tree.Kind.TOKEN)) {
-        tokens.add((Token) child);
-        ((Token) child).trivia().stream()
-          .map(Trivia::token)
-          .forEach(tokens::add);
-      } else {
-        tokens.addAll(tokens(child));
-      }
-    });
-    return tokens;
   }
 
   public static PythonTextEdit removeRange(int startLine, int startColumn, int endLine, int endColumn) {

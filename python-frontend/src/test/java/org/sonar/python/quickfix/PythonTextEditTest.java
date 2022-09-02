@@ -139,11 +139,27 @@ public class PythonTextEditTest {
     assertThat(edit.equals(null)).isFalse();
     assertThat(edit.equals(new Object())).isFalse();
 
+    assertThat(edit.equals(new PythonTextEdit("", 0, 0, 1, 1))).isTrue();
     assertThat(edit.equals(new PythonTextEdit("",1, 0, 1, 1))).isFalse();
     assertThat(edit.equals(new PythonTextEdit("",0, 1, 1, 1))).isFalse();
     assertThat(edit.equals(new PythonTextEdit("",0, 0, 0, 1))).isFalse();
     assertThat(edit.equals(new PythonTextEdit("",0, 0, 1, 0))).isFalse();
     assertThat(edit.equals(new PythonTextEdit("a", 0, 0, 1, 1))).isFalse();
+  }
+
+  @Test
+  public void test_hashCode() {
+    PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
+    assertThat(edit)
+      .hasSameHashCodeAs(edit)
+      .hasSameHashCodeAs(new PythonTextEdit("", 0, 0, 1, 1))
+      .doesNotHaveSameHashCodeAs(new Object())
+      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",1, 0, 1, 1))
+      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 1, 1, 1))
+      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 0, 0, 1))
+      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 0, 1, 0))
+      .doesNotHaveSameHashCodeAs(new PythonTextEdit("a", 0, 0, 1, 1))
+    ;
   }
 
   private void assertTextEditLocation(PythonTextEdit textEdit, int startLine, int startLineOffset, int endLine, int endLineOffset) {

@@ -155,7 +155,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     builder.addTextEdit(PythonTextEdit.removeUntil(ifStatement.keyword(), elseClause.body()));
 
     // Shift all body statements to the left
-    // Skip first shift because already done by upper if statement removal
+    // Skip first shift because already done by removeUntil of the if statement
     PythonTextEdit.shiftLeft(elseClause.body()).stream()
       .skip(1)
       .forEach(builder::addTextEdit);
