@@ -23,7 +23,8 @@ j = 5 / 5 # Noncompliant
 k = 5 - 5 # Noncompliant
 l = 5 + 5
 m = 5 * 5
-n = 3 << 3 # Noncompliant
+n = 3 << 3
+n = 3 >> 3 # Noncompliant
 o = 3 & 3 # Noncompliant
 p = 3 ^ 3 # Noncompliant
 q = 3 | 3 # Noncompliant
@@ -59,3 +60,12 @@ def no_issues_within_try_except():
     foo(c)
   except ValueError:
     return c / c
+
+# Accepted FP : we don't detect the override of - operator which does not guarantee anymore the prediction of the result
+# Example with - operator acting like a + operator
+class xint(int):
+    def __sub__(self, other):
+        return xint(self + other)
+
+xval = xint(3)
+xval = xval - xval # Noncompliant

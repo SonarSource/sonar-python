@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
@@ -35,7 +34,7 @@ import org.sonar.python.tree.TreeUtils;
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscriptionCheck {
 
   private static final List<Tree.Kind> kinds = Arrays.asList(Tree.Kind.MINUS, Tree.Kind.DIVISION, Tree.Kind.FLOOR_DIVISION, Tree.Kind.MODULO,
-    Tree.Kind.SHIFT_EXPR, Tree.Kind.BITWISE_AND, Tree.Kind.BITWISE_OR, Tree.Kind.BITWISE_XOR, Tree.Kind.AND, Tree.Kind.OR, Tree.Kind.COMPARISON, Tree.Kind.IS, Tree.Kind.IN);
+    Tree.Kind.SHIFT_EXPR, Tree.Kind.BITWISE_AND, Tree.Kind.BITWISE_OR, Tree.Kind.BITWISE_XOR, Tree.Kind.AND, Tree.Kind.OR, Tree.Kind.COMPARISON, Tree.Kind.IS,Tree.Kind.IN);
 
   @Override
   public void initialize(Context context) {
@@ -47,7 +46,7 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
     Expression leftOperand = binaryExpression.leftOperand();
     Expression rightOperand = binaryExpression.rightOperand();
     Token operator = binaryExpression.operator();
-    if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator) && !isException(leftOperand)) {
+    if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !"<<".equals(operator.value()) && !isException(leftOperand)) {
       ctx.addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator.value() + "\".")
         .secondary(leftOperand, "");
     }
@@ -57,9 +56,5 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
     // Avoid raising issue if operands are function calls or within try/except blocks
     return leftOperand.is(Tree.Kind.CALL_EXPR) || TreeUtils.hasDescendant(leftOperand, t -> t.is(Tree.Kind.CALL_EXPR))
       || TreeUtils.firstAncestorOfKind(leftOperand, Tree.Kind.TRY_STMT) != null;
-  }
-
-  private static boolean isLeftShiftBy1(Expression leftOperand, Token operator) {
-    return "<<".equals(operator.value()) && leftOperand.is(Tree.Kind.NUMERIC_LITERAL) && ((NumericLiteral) leftOperand).valueAsLong() == 1;
   }
 }
