@@ -20,12 +20,10 @@
 package org.sonar.plugins.python.api.cfg;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -274,7 +272,7 @@ public class ControlFlowGraphTest {
   public void for_statement() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, END], elem = 2) in collection:",
+      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
       "  for_body(succ = [cond_block], elem = 1)"
     );
   }
@@ -283,7 +281,7 @@ public class ControlFlowGraphTest {
   public void for_statement_else() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, else_body], elem = 2) in collection:",
+      "for cond_block(succ = [for_body, else_body], elem = 1) in collection:",
       "  for_body(succ = [cond_block], elem = 1)",
       "else:",
       "  else_body(succ = [END], elem = 1)"
@@ -307,7 +305,7 @@ public class ControlFlowGraphTest {
   public void continue_statement_in_for() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, END], elem = 2) in collection:",
+      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
       "  for_body(succ = [cond_block], elem = 2, syntSucc = after_continue)",
       "  continue",
       "  after_continue(succ = [cond_block], elem = 1)"

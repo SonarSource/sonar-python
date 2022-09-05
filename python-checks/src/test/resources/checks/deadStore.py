@@ -327,3 +327,28 @@ def no_separator_after_deadstore():
     a = foo()
     print(a)
     a = foo() # Noncompliant
+
+
+def assignment_expression_in_for_loop_definition_1():
+    for _ in (var := 2):
+        print(var)
+
+
+def assignment_expression_in_for_loop_definition_2():
+    for _ in (var := 2):
+        ...
+    print(var)
+
+
+def assignment_expression_in_for_loop_definition_3():
+    (var := 2)
+    print (var)
+    for _ in (var := 2):  # Noncompliant
+    #        ^^^^^^^^^^
+        ...
+
+def complex_loop():
+    value = [[1, 1]]
+    for value in value:
+        ...
+
