@@ -81,6 +81,14 @@ public class UnittestUtils {
     if (classDef != null) {
       parentClassesFQN.addAll(TreeUtils.getParentClassesFQN(classDef));
     }
-    return parentClassesFQN.stream().anyMatch(parentClass -> parentClass.contains("unittest") && parentClass.contains("TestCase"));
+    return parentClassesFQN.stream().anyMatch(UnittestUtils::isUnitTestClass);
+  }
+
+  public static boolean isInheritingFromUnittest(ClassDef classDef) {
+    return TreeUtils.getParentClassesFQN(classDef).stream().anyMatch(UnittestUtils::isUnitTestClass);
+  }
+
+  private static boolean isUnitTestClass(String name) {
+    return name.contains("unittest") && name.contains("TestCase");
   }
 }

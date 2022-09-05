@@ -21,7 +21,9 @@ package org.sonar.python.tests;
 
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -62,6 +64,34 @@ public class UnittestUtilsTest  {
     fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.ELLIPSIS));
     assertThat(UnittestUtils.isWithinUnittestTestCase(tree)).isFalse();
+  }
+
+  @Test
+  public void test_isInheritingFromUnittest() {
+    String code = "import unittest\nclass A(unittest.TestCase):  ...";
+    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(UnittestUtils.isInheritingFromUnittest(classDef)).isTrue();
+
+    code = "import unittest\nclass A(unittest.case.TestCase):  ...";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(UnittestUtils.isInheritingFromUnittest(classDef)).isTrue();
+
+    code = "import random_wrapper\nclass A(random_wrapper.unittest.TestCase):  ...";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(UnittestUtils.isInheritingFromUnittest(classDef)).isTrue();
+
+    code = "import random\nclass A(random.TestCase):  ...";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(UnittestUtils.isInheritingFromUnittest(classDef)).isFalse();
+
+    code = "import unittest\nclass A(unittest.other):  ...";
+    fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(UnittestUtils.isInheritingFromUnittest(classDef)).isFalse();
   }
 
   @Test
