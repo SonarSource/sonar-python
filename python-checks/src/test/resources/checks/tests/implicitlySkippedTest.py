@@ -155,6 +155,41 @@ class MyTestReg(unittest.TestCase):
         d = myTestClass()
         d.test() # covering case of qualified expression other than self
 
+class ReturnWithValue(unittest.TestCase):
+    def test_return_skip_unittest(self):
+        if x is None:
+          return self.skipTest("skipping test reason") # Noncompliant {{Remove this return, it is not needed to skip the test.}}
+#         ^^^^^^
+        assert foo() == x
+
+    def test_return_skip_pytest(self):
+        if x is None:
+          return pytest.skip("skipping test reason") # Noncompliant {{Remove this return, it is not needed to skip the test.}}
+#         ^^^^^^
+        assert foo() == x
+
+    def test_return_value(self):
+        if x is None:
+          return 5 # Noncompliant {{Skip this test explicitly.}}
+#         ^^^^^^^^
+        assert foo() == x
+
+    # Other Edge case
+    def test_return_qualifier_not_name(self):
+        if x is None:
+          return foo().skipTest() # Noncompliant
+        assert foo() == x
+
+    def test_return_qualifier_not_self(self):
+        if x is None:
+          return my.skipTest() # Noncompliant
+        assert foo() == x
+
+    def test_return_not_skip_test(self):
+        if x is None:
+          return self.skipOther() # Noncompliant
+        assert foo() == x
+
 # Other testing library
 class MyFakeTest(faketest.TestCase):
     # With an assert method which name exist in unittest
