@@ -51,6 +51,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
+import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -291,6 +292,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(tree);
       super.visitDictCompExpression(tree);
       leaveScope();
+    }
+
+    /**
+     * The scope of the decorator should be the parent scope of the function or class to which the decorator is assigned.
+     * So we have to leave the function or class scope, visit the decorator and enter the previous scope.
+     * See <a href="https://sonarsource.atlassian.net/browse/SONARPY-990">SONARPY-990</a>
+     */
+    @Override
+    public void visitDecorator(Decorator tree) {
+      leaveScope();
+      super.visitDecorator(tree);
+      enterScope(tree.parent());
     }
 
     @Override

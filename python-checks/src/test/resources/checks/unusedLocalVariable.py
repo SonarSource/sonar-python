@@ -103,3 +103,8 @@ def no_fp_f_string_conditional_expr(p):
 def no_fp_f_string_conditional_expr_2(p):
     x = 42 # OK
     f"something {x if p != 0 else 0} something"
+
+@var := decortor
+def f():
+    pass
+print(var)
