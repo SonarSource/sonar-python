@@ -314,7 +314,6 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
-    //List<Tree> conditionElements = Stream.concat(forStatement.testExpressions().stream(), forStatement.expressions().stream()).collect(Collectors.toList());
     PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement.expressions(), forStatement.body(), forStatement.elseClause(), successor);
     forStatement.testExpressions().forEach(beforeForStmt::addElement);
     return beforeForStmt;
