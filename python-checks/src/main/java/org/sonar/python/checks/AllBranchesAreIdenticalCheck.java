@@ -21,28 +21,31 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
-import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
-import org.sonar.python.tree.IfStatementImpl;
 import org.sonar.python.tree.TreeUtils;
-import org.sonarsource.analyzer.commons.collections.ListUtils;
+
+import static org.sonar.python.quickfix.PythonTextEdit.removeUntil;
 
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
+
+  private static final String IF_STATEMENT_MESSAGE = "Remove this if statement or edit its code blocks so that they're not all the same.";
+  private static final String CONDITIONAL_MESSAGE = "This conditional expression returns the same value whether the condition is \"true\" or \"false\".";
 
   private static final List<ConditionalExpression> ignoreList = new ArrayList<>();
 
@@ -68,11 +71,13 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     if (!CheckUtils.areEquivalent(body, elseBranch.body())) {
       return;
     }
-    PreciseIssue issue = ctx.addIssue(ifStmt.keyword(), "Remove this if statement or edit its code blocks so that they're not all the same.");
+    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
     issue.secondary(issueLocation(ifStmt.body()));
     ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
     issue.secondary(issueLocation(elseBranch.body()));
-    createQuickFix((IssueWithQuickFix) issue, ifStmt, ifStmt.body().statements());
+    if (!hasSideEffect(ifStmt)) {
+      issue.addQuickFix(computeQuickFixForIfStatement(ifStmt, elseBranch));
+    }
   }
 
   private static IssueLocation issueLocation(StatementList body) {
@@ -85,10 +90,10 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       return;
     }
     if (areIdentical(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
-      PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
+      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_MESSAGE);
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
-      createQuickFixConditional((IssueWithQuickFix) issue, conditionalExpression);
+      issue.addQuickFix(computeQuickFixForConditional(conditionalExpression));
     }
   }
 
@@ -123,70 +128,61 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     return unwrappedExpression;
   }
 
-  private static void createQuickFixConditional(IssueWithQuickFix issue, Tree tree) {
-    List<Tree> children = tree.children();
-    Token lastTokenOfFirst = children.get(0).lastToken();
-    Token lastTokenOfConditional = children.get(children.size() - 1).lastToken();
-    // Keep the first statement and remove the rest
-    PythonTextEdit edit = new PythonTextEdit("", lastTokenOfFirst.line(), lastTokenOfFirst.column() + lastTokenOfFirst.value().length(),
-      lastTokenOfConditional.line(), lastTokenOfConditional.column() + lastTokenOfConditional.value().length());
-
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the if statement")
-      .addTextEdit(edit)
+  /**
+   * Remove everything from the conditional expect the last false expression statement.
+   */
+  private static PythonQuickFix computeQuickFixForConditional(ConditionalExpression conditional) {
+    return PythonQuickFix.newQuickFix("Remove the if statement")
+      .addTextEdit(removeUntil(conditional.firstToken(), lastFalseExpression(conditional)))
       .build();
-    issue.addQuickFix(quickFix);
   }
 
-  private static void createQuickFix(IssueWithQuickFix issue, Tree tree, List<Statement> statements) {
-    IfStatementImpl ifStatement = (IfStatementImpl) tree;
-
-    Token firstBodyToken = statements.get(0).firstToken();
-    Token keyword = ifStatement.keyword();
-    Statement lastStatement = ListUtils.getLast(statements);
-
-    int firstLine = firstBodyToken.line();
-    int lastLine = lastStatement.lastToken().line();
-
-    Optional<ElseClause> elseBranch = Optional.ofNullable(ifStatement.elseBranch());
-    Optional<Integer> lineElseBranch = elseBranch
-      .map(Tree::firstToken)
-      .map(Token::line);
-
-    // lastLine is one line further if there is another if block enclosed
-    if (lastStatement.lastToken().column() == 0) {
-      lastLine--;
+  /**
+   * Conditional can be nested. To compute a proper quick fix we need to know the last false expression.
+   */
+  private static Tree lastFalseExpression(ConditionalExpression conditional) {
+    Tree falseExpression = conditional.falseExpression();
+    if (falseExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+      return lastFalseExpression((ConditionalExpression) conditional.falseExpression());
     }
-
-    PythonQuickFix.Builder quickFixBuilder = PythonQuickFix.newQuickFix("Remove the if statement");
-
-    // Remove the if line
-    quickFixBuilder.addTextEdit(new PythonTextEdit("", keyword.line(), keyword.column(), firstBodyToken.line(), firstBodyToken.column()));
-
-    // Remove indent from the second line until the last statement
-    for (int line = firstLine + 1; line <= lastLine; line++) {
-      quickFixBuilder.addTextEdit(editIndentAtLine(line));
-    }
-
-    // Remove else branch
-    elseBranch.ifPresent(branch -> quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch)));
-
-    // Remove the indent on the else line if it doesn't start at column 0
-    if (ifStatement.elifBranches().isEmpty() && elseBranch.map(b -> b.firstToken().column()).orElse(0) != 0) {
-      lineElseBranch.ifPresent(lineElse -> quickFixBuilder.addTextEdit(editIndentAtLine(lineElse)));
-    }
-
-    // Take care of the elif branches, the elif branch goes up to the next else or elif branch
-    for (IfStatement branch : ifStatement.elifBranches()) {
-      int lineElifBranch = branch.firstToken().line();
-      quickFixBuilder.addTextEdit(PythonTextEdit.remove(branch))
-        .addTextEdit(editIndentAtLine(lineElifBranch));
-    }
-
-    issue.addQuickFix(quickFixBuilder.build());
+    return falseExpression;
   }
 
-  private static PythonTextEdit editIndentAtLine(int line) {
-    return new PythonTextEdit("", line, 0, line, 4);
+  private static PythonQuickFix computeQuickFixForIfStatement(IfStatement ifStatement, ElseClause elseClause) {
+    PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix("Remove the if statement");
+
+    // Remove everything from if keyword to the last branch's body
+    builder.addTextEdit(PythonTextEdit.removeUntil(ifStatement.keyword(), elseClause.body()));
+
+    // Shift all body statements to the left
+    // Skip first shift because already done by removeUntil of the if statement
+    PythonTextEdit.shiftLeft(elseClause.body()).stream()
+      .skip(1)
+      .forEach(builder::addTextEdit);
+
+    return builder.build();
   }
 
+  private static boolean hasSideEffect(IfStatement ifStatement) {
+    if (containsPossibleSideEffect(ifStatement.condition())) {
+      return true;
+    }
+    return ifStatement.elifBranches().stream()
+      .map(IfStatement::condition)
+      .anyMatch(AllBranchesAreIdenticalCheck::containsPossibleSideEffect);
+  }
+
+  private static boolean containsPossibleSideEffect(Expression expression) {
+    if (expression.is(Tree.Kind.CALL_EXPR)) {
+      return true;
+    }
+    if (expression instanceof BinaryExpression) {
+      BinaryExpression binaryExpression = (BinaryExpression) expression;
+      return containsPossibleSideEffect(binaryExpression.leftOperand()) || containsPossibleSideEffect(binaryExpression.rightOperand());
+    }
+    if (expression instanceof ParenthesizedExpression) {
+      return containsPossibleSideEffect(((ParenthesizedExpression) expression).expression());
+    }
+    return false;
+  }
 }

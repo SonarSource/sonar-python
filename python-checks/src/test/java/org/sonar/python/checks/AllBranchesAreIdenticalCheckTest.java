@@ -34,108 +34,187 @@ public class AllBranchesAreIdenticalCheckTest {
 
   @Test
   public void quickfix_one_statement() {
-    String codeWithIssue =
+    String noncompliant =
       "def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "    else:\n" +
       "        doSomething()\n";
-    String codeFixed =
+    String fixed =
       "def func():\n" +
       "    doSomething()\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
+
   @Test
   public void quickfix_semicolons() {
-    String codeWithIssue =
+    String noncompliant =
       "def func():\n" +
-        "    if b == 0:\n" +
-        "        doSomething(); doOneMoreThing()\n"+
-        "    else:\n" +
-        "        doSomething(); doOneMoreThing()\n";
-    String codeFixed =
+      "    if b == 0:\n" +
+      "        doSomething(); doOneMoreThing()\n"+
+      "    else:\n" +
+      "        doSomething(); doOneMoreThing()\n";
+    String fixed =
       "def func():\n" +
-        "    doSomething(); doOneMoreThing()\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+      "    doSomething(); doOneMoreThing()\n";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void if_enclosed() {
-    String codeWithIssue =
+    String noncompliant =
       "def func():\n" +
-        "    if b == 0:\n" +
-        "        if a == 1:\n"+
-        "            doSomething()\n"+
-        "    else:\n" +
-        "        if a == 1:\n"+
-        "            doSomething()\n";
-    String codeFixed =
+      "    if b == 0:\n" +
+      "        if a == 1:\n"+
+      "            doSomething()\n"+
+      "    else:\n" +
+      "        if a == 1:\n"+
+      "            doSomething()\n";
+    String fixed =
       "def func():\n" +
       "    if a == 1:\n"+
       "        doSomething()\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
 
   @Test
-  public void oneline(){
-    String codeWithIssue = "a = 1 if x else 1";
-    String codeFixed = "a = 1";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  public void oneline() {
+    String noncompliant = "a = 1 if x else 1";
+    String fixed = "a = 1";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_in_first_condition() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if foo():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_right_hand() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if 1 == 2 and foo():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_left_hand() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if foo() and 1 == 2:\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_within_operator_parenthesis() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if 1 == 3 or (foo() and 1 == 2):\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
+  }
+
+  @Test
+  public void no_quick_fix_with_side_effect_in_elif_condition() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(check,
+      "if b == 0:\n" +
+        "    doSomething()\n" +
+        "elif bar():\n" +
+        "    doSomething()\n" +
+        "else:\n" +
+        "    doSomething()\n"
+    );
   }
 
   @Test
   public void test_multiple_statement(){
-    String codeWithIssue ="def func():\n" +
+    String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "        doOneMoreThing()\n" +
       "    else:\n" +
       "        doSomething()\n" +
       "        doOneMoreThing()\n";
-    String codeFixed = "def func():\n" +
+    String fixed = "def func():\n" +
       "    doSomething()\n" +
       "    doOneMoreThing()\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
+  }
+
+  @Test
+  public void comments() {
+    String noncompliant = "if a == 0:\n" +
+      "    # true branch comment1\n" +
+      "    doSomething()  # true branch comment2\n" +
+      "    # true branch comment3\n" +
+      "else:\n" +
+      "    # false branch comment1\n" +
+      "    doSomething()  # false branch comment2\n" +
+      "    # false branch comment3\n";
+
+    // We only keep comments of the else branch
+    String fixed = "doSomething()  # false branch comment2\n" +
+      "    # false branch comment3\n";
+
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void lambda(){
-    String codeWithIssue = "a = (lambda x: x+1\n" +
+    String noncompliant = "a = (lambda x: x+1\n" +
       "     if x > 0 # Noncompliant\n" +
       "     else x+1)";
-    String codeFixed = "a = (lambda x: x+1)";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String fixed = "a = (lambda x: x+1)";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void multiple_conditional_statements(){
-    String codeWithIssue = "a = 1 if x else 1 if y else 1 if z else 1";
-    String codeFixed = "a = 1";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String noncompliant = "a = 1 if x else 1 if y else 1 if z else 1";
+    String fixed = "a = 1";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
 
-    codeWithIssue = "a = (1 if x else 1) if cond else 1";
-    codeFixed = "a = (1 if x else 1)";  // SONARPY-1047
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    noncompliant = "a = (1 if x else 1) if cond else 1";
+    fixed = "a = 1";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
+  }
+
+  @Test
+  public void wrapped_conditional_expression(){
+    PythonQuickFixVerifier.verify(check,
+      "a = (1 if x else 1)",
+      "a = (1)"
+    );
   }
 
   @Test
   public void test_elseif(){
-    String codeWithIssue ="def func():\n" +
+    String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "    elif b == 1:\n" +
       "        doSomething()\n" +
       "    else:\n" +
       "        doSomething()\n";
-    String codeFixed = "def func():\n" +
+    String fixed = "def func():\n" +
       "    doSomething()\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void test_elseif_multiple(){
-    String codeWithIssue ="def func():\n" +
+    String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "        doOneMoreThing()\n"+
@@ -145,15 +224,15 @@ public class AllBranchesAreIdenticalCheckTest {
       "    else:\n" +
       "        doSomething()\n"+
       "        doOneMoreThing()\n";;
-    String codeFixed = "def func():\n" +
+    String fixed = "def func():\n" +
       "    doSomething()\n"+
       "    doOneMoreThing()\n";;
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void test_elseif_more(){
-    String codeWithIssue ="def func():\n" +
+    String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
       "        doSomething()\n" +
@@ -166,35 +245,36 @@ public class AllBranchesAreIdenticalCheckTest {
       "        doSomething()\n"+
       "        doSomething()\n" +
       "        doOneMoreThing()\n";;
-    String codeFixed = "def func():\n" +
+    String fixed = "def func():\n" +
       "    doSomething()\n"+
       "    doSomething()\n" +
       "    doOneMoreThing()\n";;
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void test_complex_condition(){
-    String codeWithIssue = "a = do_something(a, b, c, do_something_else(d)) if x else do_something(a, b, c, do_something_else(d))";
-    String codeFixed = "a = do_something(a, b, c, do_something_else(d))";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String noncompliant = "a = do_something(a, b, c, do_something_else(d)) if x else do_something(a, b, c, do_something_else(d))";
+    String fixed = "a = do_something(a, b, c, do_something_else(d))";
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
   public void test_remove(){
-    String codeWithIssue = ""+
+    String noncompliant = ""+
       "if b == 0:\n" +
       "    doSomething()\n" +
       "else:\n" +
       "    doSomething()\n" +
-      "\n" +  // blank line should not be removed: SONARPY-1048
+      "\n" +
       "a = 1";
-    String codeFixed = ""+
+    String fixed = ""+
       "doSomething()\n" +
+      "\n" +
       "a = 1";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
 
-    codeWithIssue = ""+
+    noncompliant = ""+
       "if b == 0:\n" +
       "    doSomething()\n" +
       "else:\n" +
@@ -202,9 +282,26 @@ public class AllBranchesAreIdenticalCheckTest {
       "\n" +
       "\n" +
       "a = 1";
-    codeFixed = ""+
+    fixed = ""+
       "doSomething()\n" +
+      "\n" +
+      "\n" +
       "a = 1";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
+
+    noncompliant = ""+
+      "def foo():\n" +
+      "    if a == b:\n" +
+      "        doSomething()\n" +
+      "    else:\n" +
+      "        doSomething()\n" +
+      "    doSomethingElse()\n";
+
+    fixed = ""+
+      "def foo():\n" +
+      "    doSomething()\n" +
+      "    doSomethingElse()\n";
+
+    PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 }

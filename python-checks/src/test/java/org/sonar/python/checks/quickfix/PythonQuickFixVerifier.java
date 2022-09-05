@@ -74,6 +74,22 @@ public class PythonQuickFixVerifier {
 
   }
 
+  public static void verifyNoQuickFixes(PythonCheck check, String codeWithIssue) {
+    List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
+      .getIssuesWithQuickFix(check, codeWithIssue);
+
+    assertThat(issues)
+      .as("Number of issues")
+      .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
+      .hasSize(1);
+    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+
+    assertThat(issue.getQuickFixes())
+      .as("Number of quick fixes")
+      .overridingErrorMessage("Expected no quick fixes for the issue but found %d", issue.getQuickFixes().size())
+      .isEmpty();
+  }
+
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
     if (check instanceof PythonSubscriptionCheck) {

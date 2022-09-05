@@ -19,8 +19,13 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 /**
  * For internal use only. Can not be used outside SonarPython analyzer.
@@ -76,6 +81,44 @@ public class PythonTextEdit {
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }
 
+  /**
+   * Shift body statements to be on same level as the parent statement
+   * Filter out text edits which apply on the same line which could show up with multiple statements on the same line
+   */
+  public static List<PythonTextEdit> shiftLeft(StatementList statementList) {
+    int offset = statementList.firstToken().column() - statementList.parent().firstToken().column();
+    return statementList.statements().stream()
+      .map(statement -> shiftLeft(statement, offset))
+      .flatMap(List::stream)
+      .distinct()
+      .collect(Collectors.toList());
+  }
+
+  /**
+   * Shift single statement of a statement list by the given offset.
+   * Take care about child statements by collecting all child tokens and shift each line once.
+   */
+  private static List<PythonTextEdit> shiftLeft(Tree tree, int offset) {
+    return TreeUtils.tokens(tree).stream()
+      .filter(token -> token.column() >= offset)
+      .map(Token::line)
+      .distinct()
+      .map(line -> removeRange(line, 0, line, offset))
+      .collect(Collectors.toList());
+  }
+
+  public static PythonTextEdit removeRange(int startLine, int startColumn, int endLine, int endColumn) {
+    return new PythonTextEdit("", startLine, startColumn, endLine, endColumn);
+  }
+
+  /**
+   * Remove range including the start token until the beginning of the end tree's first token.
+   * This is useful to remove and shift multiple statement over multiple lines.
+   */
+  public static PythonTextEdit removeUntil(Tree start, Tree until) {
+    return removeRange(start.firstToken().line(), start.firstToken().column(), until.firstToken().line(), until.firstToken().column());
+  }
+
   public static PythonTextEdit remove(Tree toRemove) {
     return replace(toRemove, "");
   }
@@ -98,5 +141,19 @@ public class PythonTextEdit {
 
   public int endLineOffset() {
     return endLineOffset;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PythonTextEdit that = (PythonTextEdit) o;
+    return startLine == that.startLine && startLineOffset == that.startLineOffset && endLine == that.endLine
+      && endLineOffset == that.endLineOffset && Objects.equals(message, that.message);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(message, startLine, startLineOffset, endLine, endLineOffset);
   }
 }
