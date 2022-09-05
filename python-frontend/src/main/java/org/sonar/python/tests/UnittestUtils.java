@@ -55,8 +55,6 @@ public class UnittestUtils {
   public static final Set<String> GATHER_INFO_METHODS = Set.of("countTestCases", "defaultTestResult", "id", "shortDescription", "addCleanup",
     "doCleanups", "addClassCleanup", "doClassCleanups");
 
-  public static final String SKIP_METHOD = "skipTest";
-
   private static final Set<String> ALL_METHODS = new HashSet<>();
   private static final Set<String> ALL_ASSERT_METHODS = new HashSet<>();
 

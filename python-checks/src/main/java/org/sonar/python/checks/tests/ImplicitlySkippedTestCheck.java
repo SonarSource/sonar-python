@@ -105,24 +105,22 @@ public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {
     return expressions.stream()
       .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
       .map(CallExpression.class::cast)
+      .filter(callExpr -> callExpr.callee().is(Tree.Kind.QUALIFIED_EXPR))
+      .map(callExpr -> (QualifiedExpression) callExpr.callee())
       .anyMatch(callExpr -> isPytestSkip(callExpr) || isUnittestSkip(callExpr));
   }
 
-  private static boolean isPytestSkip(CallExpression callExpression) {
-    return Optional.of(callExpression).stream()
-      .filter(callExpr -> callExpr.callee().is(Tree.Kind.QUALIFIED_EXPR))
-      .map(callExpr -> (QualifiedExpression) callExpr.callee())
-      .map(qualifiedExpression -> qualifiedExpression.name().symbol())
+  private static boolean isPytestSkip(QualifiedExpression qualifiedExpression) {
+    return Optional.of(qualifiedExpression).stream()
+      .map(qualifExpr -> qualifExpr.name().symbol())
       .filter(Objects::nonNull)
       .anyMatch(symbol -> "pytest.skip".equals(symbol.fullyQualifiedName()));
   }
 
-  private static boolean isUnittestSkip(CallExpression callExpression) {
-    return Optional.of(callExpression).stream()
-      .filter(callExpr -> callExpr.callee().is(Tree.Kind.QUALIFIED_EXPR))
-      .map(callExpr -> (QualifiedExpression) callExpr.callee())
+  private static boolean isUnittestSkip(QualifiedExpression qualifiedExpression) {
+    return Optional.of(qualifiedExpression).stream()
       .anyMatch(qualifExpr -> qualifExpr.qualifier().is(Tree.Kind.NAME) && "self".equals(((Name) qualifExpr.qualifier()).name())
-        && UnittestUtils.SKIP_METHOD.equals(qualifExpr.name().name()));
+        && "skipTest".equals(qualifExpr.name().name()));
   }
 
   private static boolean containsAssertion(FunctionDef functionDef) {
