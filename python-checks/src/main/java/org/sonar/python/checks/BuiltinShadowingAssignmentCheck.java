@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,40 +34,13 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-import org.sonarsource.analyzer.commons.collections.SetUtils;
+import org.sonar.python.types.TypeShed;
 
 @Rule(key = "S5806")
 public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Rename this variable; it shadows a builtin.";
   public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
-
-  private static final Set<String> BUILTIN_FUNCTIONS = Set.of(
-    "abs", "all", "any", "bin", "bool", "bytearray", "bytes", "callable", "chr", "classmethod", "compile", "complex",
-    "delattr", "dict", "dir", "divmod", "enumerate", "eval", "filter", "float", "format", "frozenset", "getattr", "globals",
-    "hasattr", "hash", "help", "hex", "id", "input", "int", "isinstance", "issubclass", "iter", "len", "list", "locals",
-    "map", "max", "memoryview", "min", "next", "object", "oct", "open", "ord", "pow", "print", "property", "range", "repr",
-    "reversed", "round", "set", "setattr", "slice", "sorted", "staticmethod", "str", "sum", "super", "tuple", "type", "vars",
-    "zip"
-  );
-
-  private static final Set<String> BUILTIN_EXCEPTIONS = Set.of(
-    "ArithmeticError", "AssertionError", "AttributeError", "BaseException", "BufferError", "BytesWarning", "DeprecationWarning",
-    "EOFError", "EnvironmentError", "Exception", "FloatingPointError", "FutureWarning", "GeneratorExit", "IOError",
-    "ImportError", "ImportWarning", "IndentationError", "IndexError", "KeyError", "KeyboardInterrupt", "LookupError",
-    "MemoryError", "NameError", "NotImplementedError", "OSError", "OverflowError", "PendingDeprecationWarning",
-    "ReferenceError", "RuntimeError", "RuntimeWarning", "StopIteration", "SyntaxError", "SyntaxWarning", "SystemError",
-    "SystemExit", "TabError", "TypeError", "UnboundLocalError", "UnicodeDecodeError", "UnicodeEncodeError", "UnicodeError",
-    "UnicodeTranslateError", "UnicodeWarning", "UserWarning", "ValueError", "Warning", "ZeroDivisionError"
-  );
-
-  private static final Set<String> BUILTIN_CONSTANTS = Set.of(
-    "Ellipsis", "False", "None", "NotImplemented", "True", "__debug__", "__doc__", "__import__", "__name__", "__package__",
-    "copyright", "credits", "license"
-  );
-
-  private static final Set<String> BUILTINS = SetUtils.concat(BUILTIN_FUNCTIONS, BUILTIN_EXCEPTIONS, BUILTIN_CONSTANTS);
-
   private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
 
   @Override
@@ -130,6 +102,6 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isBuiltInName(Name name) {
-    return BUILTINS.contains(name.name());
+    return TypeShed.builtinSymbols().containsKey(name.name());
   }
 }
