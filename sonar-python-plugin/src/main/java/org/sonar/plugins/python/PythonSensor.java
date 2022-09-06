@@ -98,8 +98,7 @@ public final class PythonSensor implements Sensor {
   public void describe(SensorDescriptor descriptor) {
     descriptor
       .onlyOnLanguage(Python.KEY)
-      .name("Python Sensor")
-      .onlyOnFileType(Type.MAIN);
+      .name("Python Sensor");
   }
 
   @Override
