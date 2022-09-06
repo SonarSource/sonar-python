@@ -27,8 +27,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -301,7 +299,7 @@ public class ControlFlowGraphBuilder {
     return block;
   }
 
-  private PythonCfgBlock buildLoop(Tree branchingTree, List<Tree> conditionElements, StatementList body, @Nullable ElseClause elseClause, PythonCfgBlock successor) {
+  private PythonCfgBlock buildLoop(Tree branchingTree, List<Expression> conditionElements, StatementList body, @Nullable ElseClause elseClause, PythonCfgBlock successor) {
     PythonCfgBlock afterLoopBlock = successor;
     if (elseClause != null) {
       afterLoopBlock = build(elseClause.body().statements(), createSimpleBlock(successor));
@@ -316,8 +314,7 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
-    List<Tree> conditionElements = Stream.concat(forStatement.testExpressions().stream(), forStatement.expressions().stream()).collect(Collectors.toList());
-    PythonCfgBlock beforeForStmt = buildLoop(forStatement, conditionElements, forStatement.body(), forStatement.elseClause(), successor);
+    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement.expressions(), forStatement.body(), forStatement.elseClause(), successor);
     forStatement.testExpressions().forEach(beforeForStmt::addElement);
     return beforeForStmt;
   }
