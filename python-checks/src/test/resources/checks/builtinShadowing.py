@@ -30,3 +30,7 @@ def safe():
 def redefine():
     global __doc__
     __doc__ = 42
+
+def iPython():
+    display = 42
+
