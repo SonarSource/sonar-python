@@ -347,7 +347,7 @@ def assignment_expression_in_for_loop_definition_3():
     #        ^^^^^^^^^^
         ...
 
-def complex_loop():
+def override_loop_var():
     value = [[1, 1]]
     for value in value:
         ...
