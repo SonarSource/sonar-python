@@ -24,14 +24,22 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CommentedCodeCheckTest {
 
+  private final CommentedCodeCheck check = new CommentedCodeCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/commentedCode.py", new CommentedCodeCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/commentedCode.py", check);
+  }
+
+  @Test
+  public void custom() {
+    check.exception = "\\w+(fmt|py\\w+):.*";
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/commentedCodeCustom.py", check);
   }
 
   @Test
   public void test_encoding() {
-    PythonCheckVerifier.verify("src/test/resources/checks/commentedCodeEncoding.py", new CommentedCodeCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/commentedCodeEncoding.py", check);
   }
 
 }

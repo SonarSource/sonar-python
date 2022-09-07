@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -43,10 +44,24 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   public static final String MESSAGE = "Remove this commented out code.";
   // Regex coming from https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
   private static final Pattern ENCODING_PATTERN = Pattern.compile(".*?coding[:=][ \\t]*([-_.a-zA-Z0-9]+)\n");
+  private static final Pattern SINGLE_WORD_PATTERN = Pattern.compile("\\s*[\\w/\\-]+\\s*#*\n*");
+  private static final Pattern IS_EMPTY_PATTERN = Pattern.compile("\\s*");
+
+  private static final String DEFAULT_EXCEPTION_PATTERN = "(fmt|py\\w+):.*";
   private static final PythonParser parser = PythonParser.create();
+
+  private Pattern exceptionPattern;
+
+  @RuleProperty(
+    key = "exception",
+    description = "Regular expression used to ignore commented out code. Only a full match is excluded.",
+    defaultValue = "" + DEFAULT_EXCEPTION_PATTERN)
+  public String exception = DEFAULT_EXCEPTION_PATTERN;
 
   @Override
   public void initialize(Context context) {
+    exceptionPattern = Pattern.compile(exception);
+
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token token = (Token) ctx.syntaxNode();
       List<List<Trivia>> groupedTrivias = groupTrivias(token);
@@ -77,17 +92,17 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void checkTriviaGroup(List<Trivia> triviaGroup, SubscriptionContext ctx) {
+  private void checkTriviaGroup(List<Trivia> triviaGroup, SubscriptionContext ctx) {
     String text = getTextForParsing(triviaGroup);
     if (isEmpty(text)) {
       return;
     }
-    if (isTextParsedAsCode(text) && !isEncoding(triviaGroup.get(0).token().line(), text)) {
+    if (isTextParsedAsCode(text) && !isEncoding(triviaGroup.get(0), text)) {
       ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
     }
   }
 
-  private static String getTextForParsing(List<Trivia> triviaGroup) {
+  private String getTextForParsing(List<Trivia> triviaGroup) {
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
       String value = trivia.value();
@@ -100,7 +115,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
       if (triviaGroup.size() == 1) {
         value = value.trim();
       }
-      if (!isOneWord(value)) {
+      if (!(isOneWord(value) || isException(value))) {
         commentTextSB.append(value);
         commentTextSB.append("\n");
       }
@@ -108,18 +123,22 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return commentTextSB.toString();
   }
 
+  private boolean isException(String text) {
+    return exceptionPattern.matcher(text).matches();
+  }
+
   private static boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
+    return SINGLE_WORD_PATTERN.matcher(text).matches();
   }
 
   private static boolean isEmpty(String text) {
-    return text.matches("\\s*");
+    return IS_EMPTY_PATTERN.matcher(text).matches();
   }
 
   // "source code encoding" comments (e.g. # coding=utf8) should be excluded (SONARPY-465)
   // Note that encoding must be on line 1 or 2
-  private static boolean isEncoding(int line, String text) {
-    return line < 3 && ENCODING_PATTERN.matcher(text).matches();
+  private static boolean isEncoding(Trivia trivia, String text) {
+    return trivia.token().line() < 3 && ENCODING_PATTERN.matcher(text).matches();
   }
 
   private static boolean isTextParsedAsCode(String text) {
