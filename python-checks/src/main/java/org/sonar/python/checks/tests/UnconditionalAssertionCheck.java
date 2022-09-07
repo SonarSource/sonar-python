@@ -143,8 +143,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
     if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
       Symbol symbol = ((HasSymbol) expression).symbol();
-      if (symbol != null && isClassOrFunction(symbol)) {
-        return true;
+      if (symbol != null) {
+        if (isClassOrFunction(symbol)) {
+          return true;
+        }
+        if (symbol.usages().stream().anyMatch(usage -> usage.tree().parent().is(Tree.Kind.NONLOCAL_STMT))) {
+          return false;
+        }
       }
     }
 
