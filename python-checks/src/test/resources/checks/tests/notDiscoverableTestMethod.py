@@ -219,3 +219,10 @@ class MyTestClass(MyParentTestClass):
 
     @pytest.fixture
     def inAfterFixture(): ...
+
+# Edge case
+class EdgeCaseLookingLikeUnittest1(unittest.fake):
+    def testMethod(): ...
+
+class EdgeCaseLookingLikeUnittest2(fake.TestCase):
+    def testMethod(): ...
