@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -32,36 +34,13 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import org.sonar.python.types.TypeShed;
 
-@Rule(key = BuiltinShadowingAssignmentCheck.CHECK_KEY)
+@Rule(key = "S5806")
 public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
-
-  public static final String CHECK_KEY = "S5806";
 
   public static final String MESSAGE = "Rename this variable; it shadows a builtin.";
   public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
-
-  private final Set<String> reservedNames = new HashSet<>(Arrays.asList(
-    "ArithmeticError", "AssertionError", "AttributeError", "BaseException", "BufferError", "BytesWarning", "DeprecationWarning",
-    "EOFError", "Ellipsis", "EnvironmentError", "Exception", "False", "FloatingPointError", "FutureWarning", "GeneratorExit",
-    "IOError", "ImportError", "ImportWarning", "IndentationError", "IndexError", "KeyError", "KeyboardInterrupt", "LookupError",
-    "MemoryError", "NameError", "None", "NotImplemented", "NotImplementedError", "OSError", "OverflowError", "PendingDeprecationWarning",
-    "ReferenceError", "RuntimeError", "RuntimeWarning", "StopIteration", "SyntaxError", "SyntaxWarning", "SystemError", "SystemExit",
-    "TabError", "True", "TypeError", "UnboundLocalError", "UnicodeDecodeError", "UnicodeEncodeError", "UnicodeError", "UnicodeTranslateError",
-    "UnicodeWarning", "UserWarning", "ValueError", "Warning", "ZeroDivisionError", "__IPYTHON__", "__debug__", "__doc__", "__import__",
-    "__name__", "__package__", "abs", "all", "any", "bin", "bool", "bytearray", "bytes", "callable", "chr", "classmethod", "compile",
-    "complex", "copyright", "credits", "delattr", "dict", "dir", "display", "divmod", "enumerate", "eval", "filter", "float", "format",
-    "frozenset", "get_ipython", "getattr", "globals", "hasattr", "hash", "help", "hex", "id", "input", "int", "isinstance", "issubclass",
-    "iter", "len", "license", "list", "locals", "map", "max", "memoryview", "min", "next", "object", "oct", "open", "ord", "pow", "print",
-    "property", "range", "repr", "reversed", "round", "set", "setattr", "slice", "sorted", "staticmethod", "str", "sum", "super", "tuple",
-    "type", "vars", "zip"
-  ));
-
   private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
 
   @Override
@@ -123,6 +102,6 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isBuiltInName(Name name) {
-    return reservedNames.contains(name.name());
+    return TypeShed.builtinSymbols().containsKey(name.name());
   }
 }
