@@ -117,3 +117,21 @@ return a
 '''
 
 # TODO: something
+
+# Noncompliant@+1
+a = 1  # a = 1
+
+
+# Ignore line matching the exception regex
+
+# fmt: off
+# pylint: disable=line-too-long
+
+# pyformat: enable
+# pyformat: disable
+
+# Only a full match is excluded
+# Noncompliant@+2
+
+# abcfmt: off
+# abcpylint: disable=line-too-long
