@@ -164,7 +164,7 @@ public class PythonSensorTest {
 
     assertThat(descriptor.name()).isEqualTo("Python Sensor");
     assertThat(descriptor.languages()).containsOnly("py");
-    assertThat(descriptor.type()).isEqualTo(Type.MAIN);
+    assertThat(descriptor.type()).isNull();
   }
 
   @Test
