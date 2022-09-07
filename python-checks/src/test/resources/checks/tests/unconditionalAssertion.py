@@ -157,3 +157,32 @@ class ConstantNewObjectTests(unittest.TestCase):
         self.assertIs(param, [1, 2, 3])  # Noncompliant
         self.assertIsNot(param, [1, 2, 3])  # Noncompliant
         self.assertIsNot([1, 2, 3], param)  # Noncompliant
+
+# SONARPY-1102 : Fix FP on S5914 for nonlocal variables
+# The "nonlocal" keyword define that the variable we want to use is the same one as defined in upper scope.
+# In case of nonlocal variable assignment, our current Dataflow Analysis does not allow us to detect a changing variable
+# Chosen solution is to ignore variable for which there is a nonlocal assignment somewhere
+class NonLocalTest(unittest.TestCase):
+    def test_nonlocal_variables(self):
+        class NonLocalCallClass:
+            def close(self):
+                nonlocal socket_closed
+                socket_closed = True
+        socket_closed = False
+        x = SomeClass()
+        x.close()
+        self.assertTrue(socket_closed)
+
+    def test_nonlocal_variables_unused(self):
+        class NonLocalCallClass:
+            def close(self):
+                nonlocal socket_closed
+                socket_closed = True
+        socket_closed = False
+        # Accepted FN : we don't detect that the nonlocal assignment is never called
+        self.assertTrue(socket_closed)
+
+# Covering edge case
+class EdgeCase(unittest.TestCase):
+    def test_nonlocal_variables(self):
+        self.assertTrue(undefined_variable)

@@ -49,9 +49,9 @@ import static org.sonar.python.checks.CheckUtils.isConstant;
 @Rule(key = "S5914")
 public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> BOOLEAN_ASSERTIONS = List.of("assertTrue", "assertFalse");
-  private static final List<String> NONE_ASSERTIONS = List.of("assertIsNone", "assertIsNotNone");
-  private static final List<String> IS_ASSERTIONS = List.of("assertIs", "assertIsNot");
+  private static final Set<String> BOOLEAN_ASSERTIONS = Set.of("assertTrue", "assertFalse");
+  private static final Set<String> NONE_ASSERTIONS = Set.of("assertIsNone", "assertIsNotNone");
+  private static final Set<String> IS_ASSERTIONS = Set.of("assertIs", "assertIsNot");
 
   private static final String BOOLEAN_MESSAGE = "Replace this expression; its boolean value is constant.";
   private static final String NONE_MESSAGE = "Remove this identity assertion; its value is constant.";
@@ -59,7 +59,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   private static final String IS_NOT_MESSAGE = "Replace this \"assertIsNot\" call with an \"assertNotEqual\" call.";
   private static final String IS_SECONDARY_MESSAGE = "This expression creates a new object every time.";
 
-  private static final List<String> ACCEPTED_DECORATORS = List.of("overload", "staticmethod", "classmethod");
+  private static final Set<String> ACCEPTED_DECORATORS = Set.of("overload", "staticmethod", "classmethod");
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
@@ -143,8 +143,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
     if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
       Symbol symbol = ((HasSymbol) expression).symbol();
-      if (symbol != null && isClassOrFunction(symbol)) {
-        return true;
+      if (symbol != null) {
+        if (isClassOrFunction(symbol)) {
+          return true;
+        }
+        if (hasAnyNonlocalStatement(symbol)) {
+          return false;
+        }
       }
     }
 
@@ -156,6 +161,11 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
 
     return false;
+  }
+
+  private static boolean hasAnyNonlocalStatement(Symbol symbol) {
+    return symbol.usages().stream()
+      .anyMatch(usage -> usage.tree().parent().is(Tree.Kind.NONLOCAL_STMT));
   }
 
   private static boolean isClassOrFunction(Symbol symbol) {
