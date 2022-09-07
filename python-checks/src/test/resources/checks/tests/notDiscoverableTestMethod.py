@@ -96,7 +96,7 @@ class MyChildTest(MyParentTest):
         self.some_helper()
         ...
 
-    def method_not_in_parent(self):
+    def method_not_in_parent(self): # Noncompliant
         ...
 
 
@@ -157,3 +157,72 @@ class TestMain(unittest.TestCase):
 
     def _not_a_test(self):
         ...
+
+# SONARPY-1101 Fix FP on S5899 for helper methods
+# We ignore helper methods which have arguments excluding the Pytest's fixtures, considering they are real helper methods not to be reported
+# We also ignore methods which have some decorators
+@pytest.fixture
+def outFixture(): ...
+
+class MyParentTestClass(unittest.TestCase):
+    @pytest.fixture
+    def parentFixture(): ...
+
+class MyTestClass(MyParentTestClass):
+    @pytest.fixture
+    def inFixture(): ...
+
+    def helper_method_with_argument(self, arg): ...
+
+    def helper_method_with_arguments(self, arg1, arg2): ...
+
+    def helper_method_with_only_self(self): # Noncompliant
+        ...
+
+    def helper_method_with_no_argument(): # Noncompliant
+        ...
+
+    def helper_method_with_self_and_in_fixture(self, inFixture): # Noncompliant
+        ...
+
+    def helper_method_with_self_and_in_after_fixture(self, inAfterFixture): # Noncompliant
+        ...
+
+    def helper_method_with_self_and_out_fixture(self, outFixture): # Noncompliant
+        ...
+
+    #Accepted FN : we do not check fixture coming from parent class
+    def helper_method_with_self_and_parent_fixture(self, parentFixture):
+        ...
+
+    def helper_method_with_only_in_fixture(inFixture): # Noncompliant
+        ...
+
+    def helper_method_with_only_in_after_fixture(inAfterFixture): # Noncompliant
+        ...
+
+    def helper_method_with_only_out_fixture(outFixture): # Noncompliant
+        ...
+
+    def helper_method_with_self_in_fixture_and_argument(self, inFixture, arg):
+        ...
+
+    def helper_method_with_self_out_fixture_and_argument(self, outFixture, arg):
+        ...
+
+    def helper_method_with_self_parent_fixture_and_argument(self, parentFixture, arg):
+        ...
+
+    @custom_decorator
+    def helper_method_with_decorator():
+        ...
+
+    @pytest.fixture
+    def inAfterFixture(): ...
+
+# Edge case
+class EdgeCaseLookingLikeUnittest1(unittest.fake):
+    def testMethod(): ...
+
+class EdgeCaseLookingLikeUnittest2(fake.TestCase):
+    def testMethod(): ...
