@@ -1,5 +1,7 @@
-<p>Classes subclassing <code>unittest.TestCase</code> are considered test cases. Methods within the class will be discovered by the test runner if
-their name starts with “`test`”. If a method intended to be a test does not respect this convention, it will not be executed.</p>
+<p>Classes subclassing only <code>unittest.TestCase</code> are considered test cases, otherwise they might be mixins.</p>
+<p>As classes subclassing <code>unittest.TestCase</code> will be executed as tests, they should define test methods and not be used as "abstract"
+parent helper. Methods within the class will be discovered by the test runner if their name starts with <code>test</code>. If a method intended to be
+a test does not respect this convention, it will not be executed.</p>
 <p>This rule raises an issue when a method is not discoverable as a test and is never used within its test case class.</p>
 <p>This rule will not raise if:</p>
 <ul>
