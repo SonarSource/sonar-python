@@ -27,6 +27,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
+import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -49,6 +50,7 @@ import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
+@DependedUpon("PythonSensor")
 public final class PythonSensor implements Sensor {
 
   private static final String PERFORMANCE_MEASURE_PROPERTY = "sonar.python.performance.measure";
