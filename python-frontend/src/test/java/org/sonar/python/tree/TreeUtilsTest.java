@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.PassStatement;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
@@ -368,6 +369,30 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.nameFromExpression(lastExpression("self.my_var"))).isNullOrEmpty();
     assertThat(TreeUtils.nameFromExpression(lastExpression("my_call()"))).isNullOrEmpty();
     assertThat(TreeUtils.nameFromExpression(lastExpression("a == b"))).isNullOrEmpty();
+  }
+
+  @Test
+  public void test_fullyQualifiedNameFromQualifiedExpression() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "from third_party_lib import (element as alias)",
+      "a = alias.attribute"
+    );
+    QualifiedExpression qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attribute");
+
+    fileInput = PythonTestUtils.parse(
+      "from third_party_lib import (element as alias)",
+      "a = alias().attribute"
+    );
+    qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attribute");
+
+    fileInput = PythonTestUtils.parse(
+      "from third_party_lib import (element as alias)",
+      "a = alias.attr"
+    );
+    qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attr");
   }
 
   private static boolean isOuterFunction(Tree tree) {

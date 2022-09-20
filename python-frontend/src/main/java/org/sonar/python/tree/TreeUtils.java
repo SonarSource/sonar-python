@@ -323,6 +323,33 @@ public class TreeUtils {
     return null;
   }
 
+  public static String fullyQualifiedNameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    String exprName = qualifiedExpression.name().name();
+    Expression qualifier = qualifiedExpression.qualifier();
+    String nameOfQualifier = fullyQualifiedNameFromExpression(qualifier);
+    if (nameOfQualifier != null) {
+      exprName = nameOfQualifier + "." + exprName;
+    } else {
+      exprName = null;
+    }
+    return exprName;
+  }
+
+  @CheckForNull
+  public static String fullyQualifiedNameFromExpression(Expression expression) {
+    if (expression.is(Kind.NAME)) {
+      Symbol symbol = ((Name) expression).symbol();
+      return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
+    }
+    if (expression.is(Kind.QUALIFIED_EXPR)) {
+      return fullyQualifiedNameFromQualifiedExpression((QualifiedExpression) expression);
+    }
+    if (expression.is(Kind.CALL_EXPR)) {
+      return fullyQualifiedNameFromExpression(((CallExpression) expression).callee());
+    }
+    return null;
+  }
+
   @CheckForNull
   public static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
     if (fileId == null) {

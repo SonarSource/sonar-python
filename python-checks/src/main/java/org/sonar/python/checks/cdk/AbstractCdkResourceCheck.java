@@ -31,10 +31,12 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
+import org.sonar.python.tree.TreeUtils;
 
 public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
@@ -114,6 +116,17 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
   protected static boolean isFalse(Expression expression) {
     return Optional.ofNullable(expression.firstToken()).map(Token::value).filter("False"::equals).isPresent();
+  }
+
+  protected static boolean isNone(Expression expression) {
+    return expression.is(Tree.Kind.NONE);
+  }
+
+  protected static boolean isFqnValue(Expression expression, String fqnValue) {
+    return Optional.of(expression)
+      .filter(expr -> expr.is(Tree.Kind.QUALIFIED_EXPR)).map(QualifiedExpression.class::cast)
+      .filter(qualifiedExpression -> TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression).equals(fqnValue))
+      .isPresent();
   }
 
 }
