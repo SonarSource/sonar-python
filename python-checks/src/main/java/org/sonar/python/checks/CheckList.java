@@ -26,6 +26,7 @@ import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
+import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -74,8 +75,8 @@ import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
-import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertAfterRaiseCheck;
+import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
@@ -279,6 +280,7 @@ public final class CheckList {
       RegexLookaheadCheck.class,
       UnconditionalAssertionCheck.class,
       UndefinedNameAllPropertyCheck.class,
+      UnencryptedEbsVolumeCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
