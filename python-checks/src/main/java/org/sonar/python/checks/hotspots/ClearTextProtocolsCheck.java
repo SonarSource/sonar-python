@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
+import org.sonar.python.checks.cdk.ClearTextProtocolsCheckPart;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5332")
@@ -70,6 +71,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> handleAssignmentStatement((AssignmentStatement) ctx.syntaxNode(), ctx));
+
+    new ClearTextProtocolsCheckPart().initialize(context);
   }
 
   private static void handleAssignmentStatement(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
