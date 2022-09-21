@@ -42,11 +42,7 @@ import org.sonar.python.tree.TreeUtils;
 
 public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
-  private Map<String, BiConsumer<SubscriptionContext, CallExpression>> fqnCallConsumers;
-
-  protected AbstractCdkResourceCheck() {
-    fqnCallConsumers = new HashMap<>();
-  }
+  private final Map<String, BiConsumer<SubscriptionContext, CallExpression>> fqnCallConsumers = new HashMap<>();
 
   @Override
   public void initialize(SubscriptionCheck.Context context) {
