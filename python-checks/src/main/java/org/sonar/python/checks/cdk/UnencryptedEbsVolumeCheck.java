@@ -20,8 +20,6 @@
 package org.sonar.python.checks.cdk;
 
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.CallExpression;
 
 @Rule(key = "S6275")
 public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
@@ -30,15 +28,10 @@ public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
   private static final String OMITTING_MESSAGE = "Omitting \"encrypted\" disables volumes encryption. Make sure it is safe here.";
 
   @Override
-  protected String resourceFqn() {
-    return "aws_cdk.aws_ec2.Volume";
-  }
-
-  @Override
-  protected void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    getArgument(ctx, resourceConstructor, "encrypted").ifPresentOrElse(
-      argumentTrace -> argumentTrace.addIssueIf(AbstractCdkResourceCheck::isFalse, PRIMARY_MESSAGE),
-      () -> ctx.addIssue(resourceConstructor.callee(), OMITTING_MESSAGE)
-    );
+  protected void registerFqnConsumer() {
+    checkFqn("aws_cdk.aws_ec2.Volume", (ctx, volume) ->
+      getArgument(ctx, volume, "encrypted").ifPresentOrElse(
+        argumentTrace -> argumentTrace.addIssueIf(AbstractCdkResourceCheck::isFalse, PRIMARY_MESSAGE),
+      () -> ctx.addIssue(volume.callee(), OMITTING_MESSAGE)));
   }
 }
