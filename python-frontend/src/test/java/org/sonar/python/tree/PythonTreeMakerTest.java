@@ -884,6 +884,7 @@ public class PythonTreeMakerTest extends RuleTest {
     Decorator decorator = decorators.get(0);
     assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo");
+    assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isEqualTo("foo");
     assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
 
     functionDef = funcDef("@foo.bar(1)\ndef func(x): pass");
@@ -893,6 +894,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
     assertThat(decorator.name().names().get(1).name()).isEqualTo("bar");
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo.bar");
+    assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isEqualTo("foo.bar");
     assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
 
     functionDef = funcDef("@buttons[\"hello\"].clicked.connect\ndef func(x): pass");
@@ -901,6 +903,7 @@ public class PythonTreeMakerTest extends RuleTest {
     decorator = decorators.get(0);
     assertThat(decorator.name().names()).isEmpty();
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isNull();
+    assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isNull();
     assertThat(decorator.expression().is(Kind.QUALIFIED_EXPR)).isTrue();
 
     functionDef = funcDef("@hello() or bye()\ndef func(x): pass");

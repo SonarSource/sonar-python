@@ -26,6 +26,7 @@ import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
+import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
@@ -280,6 +281,7 @@ public final class CheckList {
       RegexLookaheadCheck.class,
       UnconditionalAssertionCheck.class,
       UndefinedNameAllPropertyCheck.class,
+      UnencryptedSqsQueueCheck.class,
       UnencryptedEbsVolumeCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
