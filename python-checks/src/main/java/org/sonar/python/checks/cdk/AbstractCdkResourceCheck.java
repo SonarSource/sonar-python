@@ -123,6 +123,12 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
       }
     }
 
+    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage, CallExpression call) {
+      if (hasExpression(predicate)) {
+        ctx.addIssue(call.callee(), primaryMessage);
+      }
+    }
+
     public boolean hasExpression(Predicate<Expression> predicate) {
       return trace.stream().anyMatch(predicate);
     }
@@ -140,8 +146,8 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     return expression.is(Tree.Kind.NONE);
   }
 
-  protected static boolean isFqnValue(Expression expression, String fqnValue) {
-    return Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+  protected static Predicate<Expression> isFqn(String fqnValue) {
+    return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
       .filter(fqnValue::equals)
       .isPresent();
   }

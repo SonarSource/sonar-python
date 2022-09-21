@@ -47,7 +47,7 @@ public class UnencryptedSqsQueueCheck extends PythonSubscriptionCheck {
     protected void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor) {
       getArgument(ctx, resourceConstructor, "encryption").ifPresentOrElse(
         argumentTrace -> {
-          argumentTrace.addIssueIf(argTrace -> AbstractCdkResourceCheck.isFqnValue(argTrace, "aws_cdk.aws_sqs.QueueEncryption.UNENCRYPTED"), UNENCRYPTED_MESSAGE);
+          argumentTrace.addIssueIf(isFqn("aws_cdk.aws_sqs.QueueEncryption.UNENCRYPTED"), UNENCRYPTED_MESSAGE);
           argumentTrace.addIssueIf(AbstractCdkResourceCheck::isNone, NONE_MESSAGE);
         },
         () -> ctx.addIssue(resourceConstructor.callee(), OMITTING_MESSAGE)
