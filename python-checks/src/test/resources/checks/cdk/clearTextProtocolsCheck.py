@@ -1,4 +1,4 @@
-from aws_cdk import aws_elasticloadbalancingv2 as elbv2
+import aws_cdk.aws_elasticloadbalancingv2 as elbv2
 
 
 class LoadBalancerStack(Stack):
