@@ -21,8 +21,11 @@ package org.sonar.python.checks.cdk;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionCheck;
@@ -39,22 +42,38 @@ import org.sonar.python.tree.TreeUtils;
 
 public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
+  private final Map<String, BiConsumer<SubscriptionContext, CallExpression>> fqnCallConsumers = new HashMap<>();
+
   @Override
   public void initialize(SubscriptionCheck.Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::visitNode);
+    registerFqnConsumer();
   }
 
   protected void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(node.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(resourceFqn()::equals)
-      .ifPresent(s -> visitResourceConstructor(ctx, node));
+      .map(fqn -> fqnCallConsumers.getOrDefault(fqn, null))
+      .ifPresent(consumer -> consumer.accept(ctx, node));
   }
 
-  protected abstract String resourceFqn();
+  // TODO should be abstract when resourceFqn and visitResourceConstructor are dropped
+  protected void registerFqnConsumer() {
+    checkFqn(resourceFqn(), this::visitResourceConstructor);
+  }
 
-  protected abstract void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor);
+  protected void checkFqn(String fqn, BiConsumer<SubscriptionContext, CallExpression> consumer) {
+    fqnCallConsumers.put(fqn, consumer);
+  }
+
+  protected String resourceFqn() {
+    throw new UnsupportedOperationException("Override at least resourceFqn or registerFqnConsumer");
+  }
+
+  protected void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor) {
+    throw new UnsupportedOperationException("When using resourceFqn override this method");
+  }
 
   protected static Optional<ArgumentTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     return callExpression.arguments().stream()
