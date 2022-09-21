@@ -26,6 +26,6 @@ public class UnencryptedSqsQueueCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/unencryptedSqsQueueCheckTest.py", new UnencryptedSqsQueueCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/unencryptedSqsQueueCheck.py", new UnencryptedSqsQueueCheck());
   }
 }

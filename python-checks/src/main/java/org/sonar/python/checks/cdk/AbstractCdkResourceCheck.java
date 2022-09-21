@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -123,9 +122,8 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
   }
 
   protected static boolean isFqnValue(Expression expression, String fqnValue) {
-    return Optional.of(expression)
-      .filter(expr -> expr.is(Tree.Kind.QUALIFIED_EXPR)).map(QualifiedExpression.class::cast)
-      .filter(qualifiedExpression -> TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression).equals(fqnValue))
+    return Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+      .filter(fqnValue::equals)
       .isPresent();
   }
 
