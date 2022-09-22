@@ -19,13 +19,13 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -50,21 +50,19 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected void checkDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    Map<String, ArgumentTrace> map = getArguments(ctx, resourceConstructor,
-      List.of(ARG_ENCRYPTED, ARG_ENCRYPTION_KEY));
-    ArgumentTrace argEncrypted = map.get(ARG_ENCRYPTED);
-    ArgumentTrace argEncryptionKey = map.get(ARG_ENCRYPTION_KEY);
+    Optional<ArgumentTrace> argEncrypted = getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
+    Optional<ArgumentTrace> argEncryptionKey = getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
 
-    if (argEncrypted == null && argEncryptionKey == null) {
+    if (argEncrypted.isEmpty() && argEncryptionKey.isEmpty()) {
       ctx.addIssue(resourceConstructor.callee(), DB_OMITTING_MESSAGE);
-    } else if (argEncrypted == null) {
-      argEncryptionKey.addIssueIf(AbstractCdkResourceCheck::isNone, UNENCRYPTED_MESSAGE);
-    } else if (argEncryptionKey == null) {
-      argEncrypted.addIssueIf(AbstractCdkResourceCheck::isFalse, UNENCRYPTED_MESSAGE);
+    } else if (argEncrypted.isEmpty()) {
+      argEncryptionKey.get().addIssueIf(AbstractCdkResourceCheck::isNone, UNENCRYPTED_MESSAGE);
+    } else if (argEncryptionKey.isEmpty()) {
+      argEncrypted.get().addIssueIf(AbstractCdkResourceCheck::isFalse, UNENCRYPTED_MESSAGE);
     } else {
-      if (argEncryptionKey.hasExpression(AbstractCdkResourceCheck::isNone)
-        && argEncrypted.hasExpression(AbstractCdkResourceCheck::isFalse)) {
-        argEncrypted.addIssue(UNENCRYPTED_MESSAGE);
+      if (argEncryptionKey.get().hasExpression(AbstractCdkResourceCheck::isNone)
+        && argEncrypted.get().hasExpression(AbstractCdkResourceCheck::isFalse)) {
+        argEncrypted.get().addIssue(UNENCRYPTED_MESSAGE);
       }
     }
   }
@@ -78,14 +76,17 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
 
   protected boolean isEngineAurora(SubscriptionContext ctx, CallExpression resourceConstructor) {
     return getArgument(ctx, resourceConstructor, "engine")
-      .filter(argumentTrace ->
-        argumentTrace.hasExpression(expression ->
-          Optional.of(expression)
-            .filter(expr -> expr.is(Tree.Kind.STRING_LITERAL)).map(StringLiteral.class::cast)
-            .filter(stringLiteral -> stringLiteral.trimmedQuotesValue().toLowerCase(Locale.ROOT).startsWith("aurora"))
-            .isPresent()
-        )
-      ).isPresent();
+      .filter(argumentTrace -> argumentTrace.hasExpression(startsWith("aurora"))).isPresent();
+  }
+
+  protected Predicate<Expression> startsWith(String expected) {
+    return e -> getStringValue(e).filter(str -> str.startsWith(expected)).isPresent();
+  }
+
+  protected Optional<String> getStringValue(Expression expression) {
+    return Optional.of(expression)
+      .filter(expr -> expr.is(Tree.Kind.STRING_LITERAL)).map(StringLiteral.class::cast)
+      .map(str -> str.trimmedQuotesValue().toLowerCase(Locale.ROOT));
   }
 }
 
