@@ -50,6 +50,7 @@ class NetworkListenerStack(Stack):
         elbv2.NetworkListener(protocol=elbv2.Protocol.TLS)
         elbv2.NetworkListener(protocol=elbv2.Protocol.TLS, certificates=[])
         elbv2.NetworkListener(certificates=[certificate])
+        elbv2.NetworkListener(certificates=certificates)
 
         lb = elbv2.NetworkLoadBalancer()
         lb.add_listener(protocol=elbv2.Protocol.TCP)  # Noncompliant

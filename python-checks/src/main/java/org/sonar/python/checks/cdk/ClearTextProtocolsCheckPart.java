@@ -98,14 +98,14 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   /**
    * @return Predicate which tests if expression is a string and is listed in sensitive transport protocol list
    */
-  private Predicate<Expression> isSensitiveTransportProtocol() {
+  private static Predicate<Expression> isSensitiveTransportProtocol() {
     return expression -> getStringValue(expression).filter(TRANSPORT_PROTOCOLS::contains).isPresent();
   }
 
   /**
    * @return Predicate which tests if expression is a FQN and is listed in sensitive transport protocol FQN list
    */
-  private Predicate<Expression> isSensitiveTransportProtocolFqn() {
+  private static Predicate<Expression> isSensitiveTransportProtocolFqn() {
     return expression -> Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
       .filter(TRANSPORT_PROTOCOL_FQNS::contains).isPresent();
   }
@@ -113,18 +113,18 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   /**
    * @return Predicate which tests if expression is empty list literal
    */
-  private Predicate<Expression> isEmpty() {
+  private static Predicate<Expression> isEmpty() {
     return expression -> expression.is(Tree.Kind.LIST_LITERAL) && ((ListLiteral) expression).elements().expressions().isEmpty();
   }
 
   /**
    * @return Predicate which tests if expression is an integer and is in sensitive port list
    */
-  private Predicate<Expression> isHttpProtocolPort() {
+  private static Predicate<Expression> isHttpProtocolPort() {
     return expression -> getIntValue(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
   }
 
-  private Optional<String> getStringValue(Expression expression) {
+  private static Optional<String> getStringValue(Expression expression) {
     try {
       return Optional.of(((StringLiteral) expression).trimmedQuotesValue());
     } catch (ClassCastException e) {
@@ -132,7 +132,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     }
   }
 
-  private Optional<Integer> getIntValue(Expression expression) {
+  private static Optional<Integer> getIntValue(Expression expression) {
     try {
       return Optional.of((int)((NumericLiteral) expression).valueAsLong());
     } catch (ClassCastException e) {
