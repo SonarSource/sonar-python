@@ -84,6 +84,14 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
       .findAny();
   }
 
+  protected static Map<String, ArgumentTrace> getArguments(SubscriptionContext ctx, CallExpression callExpression, List<String> argumentsName) {
+    Map<String, ArgumentTrace> result = new HashMap<>();
+    for (String argumentName : argumentsName) {
+      getArgument(ctx, callExpression, argumentName).ifPresent(arg -> result.put(argumentName, arg));
+    }
+    return result;
+  }
+
   static class ArgumentTrace {
 
     private static final String TAIL_MESSAGE = "Propagated setting.";
