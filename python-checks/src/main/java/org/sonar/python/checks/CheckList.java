@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
@@ -138,6 +139,7 @@ public final class CheckList {
       DictionaryDuplicateKeyCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
+      DisabledRDSEncryptionCheck.class,
       DoublePrefixOperatorCheck.class,
       DuplicateArgumentCheck.class,
       DuplicatedMethodFieldNamesCheck.class,

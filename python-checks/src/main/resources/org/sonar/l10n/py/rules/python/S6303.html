@@ -1,0 +1,90 @@
+<p>Amazon Relational Database Service (RDS) allows to easily host and manage a relational database in the cloud. RDS databases can be encrypted,
+ensuring the security of data-at-rest. In the case that adversaries gain physical access to the storage medium they are not able to access the
+data.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> The database contains sensitive data that could cause harm when leaked. </li>
+  <li> There are compliance requirements for the service to store data encrypted. </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>It’s recommended to encrypt databases that contain sensitive information. Encryption and decryption are handled transparently by RDS, so no further
+modifications to the application are necessary.</p>
+<h2>Sensitive Code Example</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseCluster.html">aws_cdk.aws_rds.DatabaseCluster</a> and <a
+href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseInstance.html">aws_cdk.aws_rds.DatabaseInstance</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_rds as rds
+)
+
+class DatabaseStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        rds.DatabaseCluster( # Sensitive, unencrypted by default
+            self,
+            "example"
+        )
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBCluster.html">aws_cdk.aws_rds.CfnDBCluster</a> and <a
+href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_rds as rds
+)
+
+class DatabaseStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        rds.CfnDBCluster( # Sensitive, unencrypted by default
+            self,
+            "example"
+        )
+</pre>
+<h2>Compliant Solution</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseCluster.html">aws_cdk.aws_rds.DatabaseCluster</a> and <a
+href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseInstance.html">aws_cdk.aws_rds.DatabaseInstance</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_rds as rds
+)
+
+class DatabaseStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        rds.DatabaseCluster(
+            self,
+            "example",
+            storage_encrypted=True
+        )
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBCluster.html">aws_cdk.aws_rds.CfnDBCluster</a> and <a
+href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_rds as rds
+)
+
+class DatabaseStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        rds.CfnDBCluster(
+            self,
+            "example",
+            storage_encrypted=True
+        )
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
+  <li> <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">OWASP Top 10 2021 Category A4</a> - Insecure Design </li>
+  <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>
+  <li> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html">AWS Documentation</a> - Encrypting Amazon RDS
+  resources </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data
+  Exposure </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/311">MITRE, CWE-311</a> - Missing Encryption of Sensitive Data </li>
+</ul>
+
