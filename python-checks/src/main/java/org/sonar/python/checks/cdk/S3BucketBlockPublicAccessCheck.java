@@ -69,7 +69,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
       .filter(Optional::isPresent)
       .map(Optional::get)
       .collect(Collectors.toList())
-      .forEach(argumentTrace -> argumentTrace.addIssueIf(AbstractS3BucketCheck::isFalse, MESSAGE));
+      .forEach(argumentTrace -> argumentTrace.addIssueIf(isFalse(), MESSAGE));
   }
 
   private static boolean blocksAclsOnly(Expression expression) {

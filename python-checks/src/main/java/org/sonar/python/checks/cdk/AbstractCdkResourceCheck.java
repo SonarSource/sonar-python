@@ -138,12 +138,12 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     }
   }
 
-  protected static boolean isFalse(Expression expression) {
-    return Optional.ofNullable(expression.firstToken()).map(Token::value).filter("False"::equals).isPresent();
+  protected static Predicate<Expression> isFalse() {
+    return expression -> Optional.ofNullable(expression.firstToken()).map(Token::value).filter("False"::equals).isPresent();
   }
 
-  protected static boolean isNone(Expression expression) {
-    return expression.is(Tree.Kind.NONE);
+  protected static Predicate<Expression> isNone() {
+    return expression -> expression.is(Tree.Kind.NONE);
   }
 
   protected static Predicate<Expression> isFqn(String fqnValue) {

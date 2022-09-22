@@ -19,19 +19,14 @@
  */
 package org.sonar.python.checks.cdk;
 
-import org.sonar.check.Rule;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-@Rule(key = "S6275")
-public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
+public class DisabledEFSEncryptionCheckTest {
 
-  private static final String PRIMARY_MESSAGE = "Make sure that using unencrypted volumes is safe here.";
-  private static final String OMITTING_MESSAGE = "Omitting \"encrypted\" disables volumes encryption. Make sure it is safe here.";
-
-  @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_ec2.Volume", (ctx, volume) ->
-      getArgument(ctx, volume, "encrypted").ifPresentOrElse(
-        argumentTrace -> argumentTrace.addIssueIf(isFalse(), PRIMARY_MESSAGE),
-      () -> ctx.addIssue(volume.callee(), OMITTING_MESSAGE)));
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/disabledEFSEncryption.py", new DisabledEFSEncryptionCheck());
   }
+
 }

@@ -21,17 +21,23 @@ package org.sonar.python.checks.cdk;
 
 import org.sonar.check.Rule;
 
-@Rule(key = "S6275")
-public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
+@Rule(key = "S6332")
+public class DisabledEFSEncryptionCheck extends AbstractCdkResourceCheck {
 
-  private static final String PRIMARY_MESSAGE = "Make sure that using unencrypted volumes is safe here.";
-  private static final String OMITTING_MESSAGE = "Omitting \"encrypted\" disables volumes encryption. Make sure it is safe here.";
+  private static final String MESSAGE = "Make sure that using unencrypted file systems is safe here.";
+  private static final String OMITTING_MESSAGE = "Omitting \"encrypted\" disables EFS encryption. Make sure it is safe here.";
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_ec2.Volume", (ctx, volume) ->
-      getArgument(ctx, volume, "encrypted").ifPresentOrElse(
-        argumentTrace -> argumentTrace.addIssueIf(isFalse(), PRIMARY_MESSAGE),
-      () -> ctx.addIssue(volume.callee(), OMITTING_MESSAGE)));
+    checkFqn("aws_cdk.aws_efs.FileSystem", (ctx, fileSystem) ->
+      getArgument(ctx, fileSystem, "encrypted").ifPresent(
+        encrypted -> encrypted.addIssueIf(isFalse(), MESSAGE)
+      ));
+
+    checkFqn("aws_cdk.aws_efs.CfnFileSystem", (ctx, fileSystem) ->
+      getArgument(ctx, fileSystem, "encrypted").ifPresentOrElse(
+        encrypted -> encrypted.addIssueIf(isFalse().or(isNone()), MESSAGE),
+        () -> ctx.addIssue(fileSystem.callee(), OMITTING_MESSAGE)
+      ));
   }
 }

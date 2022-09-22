@@ -22,13 +22,14 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
-import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
+import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -137,6 +138,7 @@ public final class CheckList {
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
       DictionaryDuplicateKeyCheck.class,
+      DisabledEFSEncryptionCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
       DisabledRDSEncryptionCheck.class,
