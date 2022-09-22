@@ -56,12 +56,12 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
     if (argEncrypted.isEmpty() && argEncryptionKey.isEmpty()) {
       ctx.addIssue(resourceConstructor.callee(), DB_OMITTING_MESSAGE);
     } else if (argEncrypted.isEmpty()) {
-      argEncryptionKey.get().addIssueIf(AbstractCdkResourceCheck::isNone, UNENCRYPTED_MESSAGE);
+      argEncryptionKey.get().addIssueIf(isNone(), UNENCRYPTED_MESSAGE);
     } else if (argEncryptionKey.isEmpty()) {
-      argEncrypted.get().addIssueIf(AbstractCdkResourceCheck::isFalse, UNENCRYPTED_MESSAGE);
+      argEncrypted.get().addIssueIf(isFalse(), UNENCRYPTED_MESSAGE);
     } else {
-      if (argEncryptionKey.get().hasExpression(AbstractCdkResourceCheck::isNone)
-        && argEncrypted.get().hasExpression(AbstractCdkResourceCheck::isFalse)) {
+      if (argEncryptionKey.get().hasExpression(isNone())
+        && argEncrypted.get().hasExpression(isFalse())) {
         argEncrypted.get().addIssue(UNENCRYPTED_MESSAGE);
       }
     }
@@ -69,7 +69,7 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
 
   protected void checkCfnDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
     getArgument(ctx, resourceConstructor, ARG_ENCRYPTED).ifPresentOrElse(
-      argumentTrace -> argumentTrace.addIssueIf(AbstractCdkResourceCheck::isFalse, UNENCRYPTED_MESSAGE),
+      argumentTrace -> argumentTrace.addIssueIf(isFalse(), UNENCRYPTED_MESSAGE),
       () -> ctx.addIssue(resourceConstructor.callee(), CFNDB_OMITTING_MESSAGE)
     );
   }

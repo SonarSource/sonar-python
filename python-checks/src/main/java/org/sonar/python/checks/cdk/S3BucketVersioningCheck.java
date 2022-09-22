@@ -34,7 +34,7 @@ public class S3BucketVersioningCheck extends AbstractS3BucketCheck {
   void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
     Optional<ArgumentTrace> version = getArgument(ctx, bucket, "versioned");
     if (version.isPresent()) {
-      version.get().addIssueIf(AbstractS3BucketCheck::isFalse, MESSAGE);
+      version.get().addIssueIf(isFalse(), MESSAGE);
     } else {
       ctx.addIssue(bucket.callee(), MESSAGE_OMITTING);
     }
