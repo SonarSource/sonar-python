@@ -25,8 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ClearTextProtocolsCheckPartTest {
 
   @Test
-  public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck.py", new ClearTextProtocolsCheckPart());
+  public void elb() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elb.py", new ClearTextProtocolsCheckPart());
+  }
+  @Test
+  public void elbv2() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elbv2.py", new ClearTextProtocolsCheckPart());
   }
 
 }
