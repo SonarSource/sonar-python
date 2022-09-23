@@ -1,5 +1,6 @@
 import aws_cdk.aws_elasticloadbalancing as elb
 
+elb.CfnLoadBalancer(listeners=[{*unkpacking_expression}])
 
 class LoadBalancerListenerStack(Stack):
     def __init__(self, app: App, id: str) -> None:
@@ -34,3 +35,7 @@ class CfnLoadBalancerStack(Stack):
         elb.CfnLoadBalancer.ListenersProperty(protocol="ssl")
         elb.CfnLoadBalancer.ListenersProperty(protocol=protocol)
         elb.CfnLoadBalancer.ListenersProperty()
+
+        elb.CfnLoadBalancer(listeners=[{"protocol": "http"}])  # Noncompliant
+        elb.CfnLoadBalancer(listeners=[{"protocol": "https"}])
+        elb.CfnLoadBalancer(listeners=[{**unkpacking_expression}])
