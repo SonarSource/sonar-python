@@ -47,10 +47,13 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_opensearchservice.Domain",
       checkDomain("encryption_at_rest", "aws_cdk.aws_opensearchservice.EncryptionAtRestOptions", OPENSEARCH));
+
     checkFqn("aws_cdk.aws_opensearchservice.CfnDomain",
       checkDomain("encryption_at_rest_options", "aws_cdk.aws_opensearchservice.CfnDomain.EncryptionAtRestOptionsProperty", OPENSEARCH));
+
     checkFqn("aws_cdk.aws_elasticsearch.Domain",
       checkDomain("encryption_at_rest", "aws_cdk.aws_elasticsearch.EncryptionAtRestOptions", ELASTICSEARCH));
+
     checkFqn("aws_cdk.aws_elasticsearch.CfnDomain",
       checkDomain("encryption_at_rest_options", "aws_cdk.aws_elasticsearch.CfnDomain.EncryptionAtRestOptionsProperty", ELASTICSEARCH));
   }
