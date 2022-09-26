@@ -51,12 +51,12 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   /**
    * Constant wrapper of sensitive protocols and ports of AWS::ElasticLoadBalancing
    */
-  private static final class Elb {
-    static final Set<String> TRANSPORT_PROTOCOL_FQNS = Set.of(
+  private static class Elb {
+    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
       prefix("LoadBalancingProtocol.TCP"),
       prefix("LoadBalancingProtocol.HTTP")
     );
-    static final Set<String> TRANSPORT_PROTOCOLS = Set.of("http", "tcp");
+    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("http", "tcp");
 
     static String prefix(String lbName) {
       return "aws_cdk.aws_elasticloadbalancing." + lbName;
@@ -66,14 +66,14 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   /**
    * Constant wrapper of sensitive protocols and ports of AWS::ElasticLoadBalancingV2
    */
-  private static final class Elbv2 {
-    static final String HTTP_PROTOCOL_FQN = prefix("ApplicationProtocol.HTTP");
-    static final Set<String> TRANSPORT_PROTOCOL_FQNS = Set.of(
+  private static class Elbv2 {
+    static final String SENSITIVE_HTTP_PROTOCOL_FQN = prefix("ApplicationProtocol.HTTP");
+    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
       prefix("Protocol.TCP"),
       prefix("Protocol.UDP"),
       prefix("Protocol.TCP_UDP")
     );
-    static final Set<String> TRANSPORT_PROTOCOLS = Set.of("HTTP", "TCP", "UDP", "TCP_UDP");
+    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("HTTP", "TCP", "UDP", "TCP_UDP");
 
     static String prefix(String lbName) {
       return "aws_cdk.aws_elasticloadbalancingv2." + lbName;
@@ -96,7 +96,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // or `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.HTTP`.
     checkFqns(List.of(Elb.prefix("LoadBalancerListener"), Elb.prefix("LoadBalancer.add_listener")), (ctx, call) ->
       getArgument(ctx, call, EXTERNAL_PROTOCOL).ifPresent(
-        protocol -> protocol.addIssueIf(isSensitiveTransportProtocolFqn(Elb.TRANSPORT_PROTOCOL_FQNS), MESSAGE)));
+        protocol -> protocol.addIssueIf(isSensitiveTransportProtocolFqn(Elb.SENSITIVE_TRANSPORT_PROTOCOL_FQNS), MESSAGE)));
 
 
     // Raise an issue if LoadBalancer is instantiated with a `listeners` property set to a nonempty sequence
@@ -118,7 +118,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // Raise an issue if a CfnLoadBalancer is instantiated with the `protocol` argument set to `http` or `tcp`.
     checkFqn(Elb.prefix("CfnLoadBalancer.ListenersProperty"), (ctx, call) ->
       getArgument(ctx, call, PROTOCOL).ifPresent(
-        protocol -> protocol.addIssueIf(isSensitiveTransportProtocol(Elb.TRANSPORT_PROTOCOLS), MESSAGE)));
+        protocol -> protocol.addIssueIf(isSensitiveTransportProtocol(Elb.SENSITIVE_TRANSPORT_PROTOCOLS), MESSAGE)));
 
 
     // Raise an issue if a `ApplicationListener` is instantiated or `add_listener` is called on an `ApplicationLoadBalancer` object
@@ -126,7 +126,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // or if is not set and the `port` argument set to 80,8080,8000, or 8008.
     checkFqns(List.of(Elbv2.prefix("ApplicationListener"), Elbv2.prefix("ApplicationLoadBalancer.add_listener")), (ctx, call) ->
       getArgument(ctx, call, PROTOCOL).ifPresentOrElse(
-        protocol -> protocol.addIssueIf(isFqn(Elbv2.HTTP_PROTOCOL_FQN), MESSAGE),
+        protocol -> protocol.addIssueIf(isFqn(Elbv2.SENSITIVE_HTTP_PROTOCOL_FQN), MESSAGE),
         () -> getArgument(ctx, call, "port").ifPresent(
           port -> port.addIssueIf(isHttpProtocolPort(), MESSAGE, call))));
 
@@ -136,7 +136,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // or `aws_cdk.aws_elasticloadbalancingv2.Protocol.TCP_UDP` or if is not set and the `certificates` is an empty list or missing.
     checkFqns(List.of(Elbv2.prefix("NetworkListener"), Elbv2.prefix("NetworkLoadBalancer.add_listener")), (ctx, call) ->
       getArgument(ctx, call, PROTOCOL).ifPresentOrElse(
-        protocol -> protocol.addIssueIf(isSensitiveTransportProtocolFqn(Elbv2.TRANSPORT_PROTOCOL_FQNS), MESSAGE),
+        protocol -> protocol.addIssueIf(isSensitiveTransportProtocolFqn(Elbv2.SENSITIVE_TRANSPORT_PROTOCOL_FQNS), MESSAGE),
         () -> getArgument(ctx, call, "certificates").ifPresentOrElse(
           certificates ->  certificates.addIssueIf(isEmpty(), MESSAGE, call),
           () -> ctx.addIssue(call, MESSAGE))));
@@ -145,15 +145,15 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // Raise an issue if a `CfnListener` is instantiated with the `protocol` property set to `HTTP`, `TCP`, `UDP`, or `TCP_UDP`
     checkFqn(Elbv2.prefix("CfnListener"), (ctx, call) ->
       getArgument(ctx, call, PROTOCOL).ifPresent(
-        protocol -> protocol.addIssueIf(isSensitiveTransportProtocol(Elbv2.TRANSPORT_PROTOCOLS), MESSAGE)));
+        protocol -> protocol.addIssueIf(isSensitiveTransportProtocol(Elbv2.SENSITIVE_TRANSPORT_PROTOCOLS), MESSAGE)));
   }
 
   private static void checkLoadBalancerListenerDict(SubscriptionContext ctx, DictionaryLiteral dict) {
-    checkKeyValuePair(ctx, dict, EXTERNAL_PROTOCOL, isSensitiveTransportProtocolFqn(Elb.TRANSPORT_PROTOCOL_FQNS));
+    checkKeyValuePair(ctx, dict, EXTERNAL_PROTOCOL, isSensitiveTransportProtocolFqn(Elb.SENSITIVE_TRANSPORT_PROTOCOL_FQNS));
   }
 
   private static void checkCfnLoadBalancerListenerDict(SubscriptionContext ctx, DictionaryLiteral dict) {
-    checkKeyValuePair(ctx, dict, PROTOCOL, isSensitiveTransportProtocol(Elb.TRANSPORT_PROTOCOLS));
+    checkKeyValuePair(ctx, dict, PROTOCOL, isSensitiveTransportProtocol(Elb.SENSITIVE_TRANSPORT_PROTOCOLS));
   }
 
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, String key, Predicate<Expression> expected) {
