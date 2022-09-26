@@ -80,24 +80,17 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
       .map(RegularArgument.class::cast)
       .filter(regularArgument -> regularArgument.keywordArgument() != null)
       .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
-      .map(regularArgument -> ArgumentTrace.build(ctx, regularArgument))
+      .map(regularArgument -> ArgumentTrace.build(ctx, regularArgument.expression()))
       .findAny();
   }
 
-  static class ArgumentTrace {
-
-    private static final String TAIL_MESSAGE = "Propagated setting.";
-
-    private final SubscriptionContext ctx;
-    private final List<Expression> trace;
-
-    ArgumentTrace(SubscriptionContext ctx, List<Expression> trace) {
-      this.ctx = ctx;
-      this.trace = Collections.unmodifiableList(trace);
-    }
-
-    protected static ArgumentTrace build(SubscriptionContext ctx, RegularArgument argument) {
-      return ArgumentTrace.build(ctx, argument.expression());
+  /**
+   * For compatibility with other classes and branches.
+   * TODO Can be removed at the end of the sprint to reduce complexity.
+   */
+  static class ArgumentTrace extends ExpressionTrace {
+    private ArgumentTrace(SubscriptionContext ctx, List<Expression> trace) {
+      super(ctx, trace);
     }
 
     protected static ArgumentTrace build(SubscriptionContext ctx, Expression expression) {
@@ -105,8 +98,26 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
       buildTrace(expression, trace);
       return new ArgumentTrace(ctx, trace);
     }
+  }
 
-    private static void buildTrace(Expression expression, List<Expression> trace) {
+  static class ExpressionTrace {
+
+    private static final String TAIL_MESSAGE = "Propagated setting.";
+
+    private final SubscriptionContext ctx;
+    private final List<Expression> trace;
+
+    private ExpressionTrace(SubscriptionContext ctx, List<Expression> trace) {
+      this.ctx = ctx;
+      this.trace = Collections.unmodifiableList(trace);
+    }
+    protected static ExpressionTrace build(SubscriptionContext ctx, Expression expression) {
+      List<Expression> trace = new ArrayList<>();
+      buildTrace(expression, trace);
+      return new ExpressionTrace(ctx, trace);
+    }
+
+    static void buildTrace(Expression expression, List<Expression> trace) {
       trace.add(expression);
       if (expression.is(Tree.Kind.NAME)) {
         Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
@@ -135,6 +146,10 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
     public boolean hasExpression(Predicate<Expression> predicate) {
       return trace.stream().anyMatch(predicate);
+    }
+
+    public Optional<Expression> getExpression(Predicate<Expression> predicate) {
+      return trace.stream().filter(predicate).findFirst();
     }
 
     public List<Expression> trace() {
