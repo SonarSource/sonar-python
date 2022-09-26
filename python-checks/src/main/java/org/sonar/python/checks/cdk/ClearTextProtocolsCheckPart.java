@@ -43,7 +43,8 @@ import org.sonar.python.tree.TreeUtils;
 public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
   private static final String LB_MESSAGE = "Make sure that using network protocols without an SSL/TLS underlay is safe here.";
-  private static final String REPLICATION_GROUP_MESSAGE = "Make sure that disabling transit encryption is safe here.";
+  private static final String ELASTICACHE_MESSAGE = "Make sure that disabling transit encryption is safe here.";
+  private static final String KINESIS_MESSAGE = "Make sure that disabling stream encryption is safe here.";
 
   private static final String OMITTING_MESSAGE = "Omitting `%s` causes %s encryption to be disabled. Make sure it is safe here.";
 
@@ -80,6 +81,14 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
     static String prefix(String lbName) {
       return "aws_cdk.aws_elasticloadbalancingv2." + lbName;
+    }
+  }
+
+  private static class Kinesis {
+
+    static final String SENSITIVE_STREAM_ENCRYPTION_FQN = prefix("StreamEncryption.UNENCRYPTED");
+    static String prefix(String lbName) {
+      return "aws_cdk.aws_kinesis." + lbName;
     }
   }
 
@@ -155,8 +164,22 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // property is missing or set to `False`
     checkFqn("aws_cdk.aws_elasticache.CfnReplicationGroup", (ctx, call) ->
       getArgument(ctx, call, "transit_encryption_enabled").ifPresentOrElse(
-        transitEncryption -> transitEncryption.addIssueIf(isFalse(), REPLICATION_GROUP_MESSAGE),
+        transitEncryption -> transitEncryption.addIssueIf(isFalse(), ELASTICACHE_MESSAGE),
         () -> ctx.addIssue(call.callee(), String.format(OMITTING_MESSAGE, "transit_encryption_enabled", "transit"))));
+
+
+    // Raise an issue if a `aws_cdk.aws_kinesis.CfnStream` is instantiated with the `stream_encryption`
+    // property is missing or set to `Nonce`
+    checkFqn(Kinesis.prefix("CfnStream"), (ctx, call) ->
+      getArgument(ctx, call, "stream_encryption").ifPresentOrElse(
+        streamEncryption -> streamEncryption.addIssueIf(isNone(), KINESIS_MESSAGE),
+        () -> ctx.addIssue(call.callee(), String.format(OMITTING_MESSAGE, "stream_encryption", "stream"))));
+
+    // Raise an issue if a `aws_cdk.aws_kinesis.Stream` is instantiated with the `encryption`
+    // property is set to `aws_cdk.aws_kinesis.StreamEncryption.UNENCRYPTED`
+    checkFqn(Kinesis.prefix("Stream"), (ctx, call) ->
+      getArgument(ctx, call, "encryption").ifPresent(
+        encryption -> encryption.addIssueIf(isFqn(Kinesis.SENSITIVE_STREAM_ENCRYPTION_FQN), KINESIS_MESSAGE)));
   }
 
   private static void checkLoadBalancerListenerDict(SubscriptionContext ctx, DictionaryLiteral dict) {

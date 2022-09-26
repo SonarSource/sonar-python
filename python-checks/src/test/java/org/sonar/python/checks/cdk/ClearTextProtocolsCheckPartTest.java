@@ -41,4 +41,8 @@ public class ClearTextProtocolsCheckPartTest {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elasticache.py", check);
   }
 
+  @Test
+  public void kinesis() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_kinesis.py", check);
+  }
 }
