@@ -20,17 +20,29 @@
 package org.sonar.python.checks.cdk;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ClearTextProtocolsCheckPartTest {
 
+  final PythonCheck check = new ClearTextProtocolsCheckPart();
+
   @Test
   public void elb() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elb.py", new ClearTextProtocolsCheckPart());
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elb.py", check);
   }
   @Test
   public void elbv2() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elbv2.py", new ClearTextProtocolsCheckPart());
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elbv2.py", check);
   }
 
+  @Test
+  public void elasticache() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_elasticache.py", check);
+  }
+
+  @Test
+  public void kinesis() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/clearTextProtocolsCheck_kinesis.py", check);
+  }
 }
