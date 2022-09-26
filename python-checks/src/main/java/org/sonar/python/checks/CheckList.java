@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
+import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
@@ -140,6 +141,7 @@ public final class CheckList {
       DedicatedAssertionCheck.class,
       DictionaryDuplicateKeyCheck.class,
       DisabledEFSEncryptionCheck.class,
+      DisabledESDomainEncryptionCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
       DisabledRDSEncryptionCheck.class,

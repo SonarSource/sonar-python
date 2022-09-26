@@ -97,8 +97,12 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     }
 
     protected static ArgumentTrace build(SubscriptionContext ctx, RegularArgument argument) {
+      return ArgumentTrace.build(ctx, argument.expression());
+    }
+
+    protected static ArgumentTrace build(SubscriptionContext ctx, Expression expression) {
       List<Expression> trace = new ArrayList<>();
-      buildTrace(argument.expression(), trace);
+      buildTrace(expression, trace);
       return new ArgumentTrace(ctx, trace);
     }
 
