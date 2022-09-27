@@ -1,11 +1,8 @@
-<p>Older versions of SSL/TLS protocol like "SSLv3" have been proven to be insecure.</p>
-<p>This rule raises an issue when an SSL/TLS context is created with an insecure protocol version, i.e. when one of the following constants is
-detected in the code:</p>
-<ul>
-  <li> <code>OpenSSL.SSL.SSLv3_METHOD</code> (Use instead <code>OpenSSL.SSL.TLSv1_2_METHOD</code>) </li>
-  <li> <code>ssl.PROTOCOL_SSLv3</code> (Use instead <code>ssl.PROTOCOL_TLSv1_2</code>) </li>
-</ul>
-<p>Protocol versions different from TLSv1.2 and TLSv1.3 are considered insecure.</p>
+<p>This rule raises an issue when an insecure TLS protocol version (i.e. a protocol different from "TLSv1.2", "TLSv1.3", "DTLSv1.2", or "DTLSv1.3") is
+used or allowed.</p>
+<p>It is recommended to enforce TLS 1.2 as the minimum protocol version and to disallow older versions like TLS 1.0. Failure to do so could open the
+door to downgrade attacks: a malicious actor who is able to intercept the connection could modify the requested protocol version and downgrade it to a
+less secure version.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 from OpenSSL import SSL
@@ -17,16 +14,65 @@ import ssl
 
 ssl.SSLContext(ssl.PROTOCOL_SSLv3) # Noncompliant
 </pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_apigateway/DomainName.html">aws_cdk.aws_apigateway.DomainName</a>:</p>
+<pre>
+from aws_cdk.aws_apigateway import DomainName, SecurityPolicy
+class ExampleStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        DomainName(self, "example",
+            domain_name="example.com",
+            certificate=certificate,
+            security_policy=SecurityPolicy.TLS_1_0 # Noncompliant
+        )
+</pre>
+<p>For <a
+href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/CfnDomain.html">aws_cdk.aws_opensearchservice.CfnDomain</a>:</p>
+<pre>
+from aws_cdk.aws_opensearchservice import CfnDomain, EngineVersion
+class ExampleStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        CfnDomain(self, "example",
+            version=EngineVersion.OPENSEARCH_1_3
+        ) # Noncompliant: enables TLS 1.0 which is a deprecated version of the protocol
+</pre>
 <h2>Compliant Solution</h2>
 <pre>
 from OpenSSL import SSL
 
-SSL.Context(SSL.TLSv1_2_METHOD)  # Compliant
+SSL.Context(SSL.TLSv1_2_METHOD)
 </pre>
 <pre>
 import ssl
 
-ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) # Compliant
+ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_apigateway/DomainName.html">aws_cdk.aws_apigateway.DomainName</a>:</p>
+<pre>
+from aws_cdk.aws_apigateway import DomainName, SecurityPolicy
+class ExampleStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        DomainName(self, "example",
+            domain_name="example.com",
+            certificate=certificate,
+            security_policy=SecurityPolicy.TLS_1_2
+        )
+</pre>
+<p>For <a
+href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/CfnDomain.html">aws_cdk.aws_opensearchservice.CfnDomain</a>:</p>
+<pre>
+from aws_cdk.aws_opensearchservice import CfnDomain, EngineVersion
+class ExampleStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        CfnDomain(self, "example",
+            version=EngineVersion.OPENSEARCH_1_3
+            domain_endpoint_options=CfnDomain.DomainEndpointOptionsProperty(
+                tls_security_policy="Policy-Min-TLS-1-2-2019-07" # Compliant
+            )
+        )
 </pre>
 <h2>See</h2>
 <ul>
@@ -46,5 +92,7 @@ ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) # Compliant
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
   <li> <a href="https://github.com/ssllabs/research/wiki/SSL-and-TLS-Deployment-Best-Practices#22-use-secure-protocols">SSL and TLS Deployment Best
   Practices - Use secure protocols</a> </li>
+  <li> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-custom-domain-tls-version.html">Amazon API Gateway</a> -
+  Choosing a minimum TLS version </li>
 </ul>
 

@@ -27,14 +27,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
@@ -88,7 +93,7 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
    * For compatibility with other classes and branches.
    * TODO Can be removed at the end of the sprint to reduce complexity.
    */
-  static class ArgumentTrace extends ExpressionTrace {
+  public static class ArgumentTrace extends ExpressionTrace {
     private ArgumentTrace(SubscriptionContext ctx, List<Expression> trace) {
       super(ctx, trace);
     }
@@ -169,6 +174,44 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
       .filter(fqnValue::equals)
       .isPresent();
+  }
+
+  protected static Predicate<Expression> isString(String str) {
+    return expression ->  Optional.of(expression)
+      .filter(expr -> expr.is(Tree.Kind.STRING_LITERAL)).map(StringLiteral.class::cast)
+      .filter(stringLiteral -> stringLiteral.trimmedQuotesValue().equals(str))
+      .isPresent();
+  }
+
+  protected static Predicate<Expression> isDictionaryWithKeyValue(SubscriptionContext ctx, String key, String val) {
+    return expression -> expression.is(Tree.Kind.DICTIONARY_LITERAL)
+      && asDictionaryKeyValuePairs(expression)
+      .filter(isKey(key))
+      .allMatch(isKeyValueString(ctx, val));
+  }
+
+  private static Stream<KeyValuePair> asDictionaryKeyValuePairs(Expression expression) {
+    return asDictionaryElements(expression)
+      .filter(element -> element.is(Tree.Kind.KEY_VALUE_PAIR)).map(KeyValuePair.class::cast);
+  }
+
+  private static Stream<DictionaryLiteralElement> asDictionaryElements(Expression expression) {
+    return Optional.of(expression)
+      .filter(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)).map(DictionaryLiteral.class::cast)
+      .map(DictionaryLiteral::elements)
+      .orElse(Collections.emptyList()).stream();
+  }
+
+  private static Predicate<KeyValuePair> isKey(String keyName) {
+    return keyValuePair -> Optional.of(keyValuePair)
+      .map(KeyValuePair::key)
+      .filter(key -> key.is(Tree.Kind.STRING_LITERAL)).map(StringLiteral.class::cast)
+      .filter(string -> string.trimmedQuotesValue().equals(keyName))
+      .isPresent();
+  }
+
+  private static Predicate<KeyValuePair> isKeyValueString(SubscriptionContext ctx, String str) {
+    return keyValuePair -> ArgumentTrace.build(ctx, keyValuePair.value()).hasExpression(isString(str));
   }
 
 }

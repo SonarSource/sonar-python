@@ -21,12 +21,19 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.checks.cdk.AbstractCdkResourceCheck;
 
 @Rule(key = "S4423")
 public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
@@ -52,9 +59,84 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
         ctx.addIssue(pyNameTree, "Change this code to use a stronger protocol.");
       }
     });
+
+    new WeakTlsVersionProtocolCheck().initialize(context);
   }
 
   private static boolean isWeakProtocol(@Nullable Symbol symbol) {
     return symbol != null && WEAK_PROTOCOL_CONSTANTS.contains(symbol.fullyQualifiedName());
+  }
+
+  static class WeakTlsVersionProtocolCheck extends AbstractCdkResourceCheck {
+    private static final String ENFORCE_MESSAGE = "Change this code to enforce TLS 1.2 or above.";
+    private static final String OMITTING_MESSAGE = "Omitting \"tls_security_policy\" enables a deprecated version of TLS. Set it to enforce TLS 1.2 or above.";
+
+    // api gateway
+    private static final String APIGATEWAY_FQN = "aws_cdk.aws_apigateway";
+    private static final String APIGATEWAYV2_FQN = "aws_cdk.aws_apigatewayv2";
+
+    // OpenSearch & ElasticSearch
+    private static final String OPENSEARCH_FQN = "aws_cdk.aws_opensearchservice";
+    private static final String ELASTICSEARCH_FQN = "aws_cdk.aws_elasticsearch";
+    private static final String TLS_SECURITY_POLICY = "tls_security_policy";
+    private static final String SENSITIVE_TLS_SECURITY_POLICY = "Policy-Min-TLS-1-0-2019-07";
+
+    @Override
+    protected void registerFqnConsumer() {
+      // Api gateway
+      checkFqn(APIGATEWAY_FQN + ".DomainName", checkDomainName(isFqn(APIGATEWAY_FQN + ".SecurityPolicy.TLS_1_0")));
+      checkFqn(APIGATEWAYV2_FQN + ".DomainName", checkDomainName(isFqn(APIGATEWAYV2_FQN + ".SecurityPolicy.TLS_1_0")));
+      checkFqn(APIGATEWAY_FQN + ".CfnDomainName", checkDomainName(isString("TLS_1_0")));
+
+      // OpenSearch & ElasticSearch
+      checkFqn(OPENSEARCH_FQN + ".Domain", checkDomain(isFqn(OPENSEARCH_FQN + ".TLSSecurityPolicy.TLS_1_0")));
+      checkFqn(ELASTICSEARCH_FQN + ".Domain", checkDomain(isFqn(ELASTICSEARCH_FQN + ".TLSSecurityPolicy.TLS_1_0")));
+      checkFqn(OPENSEARCH_FQN + ".CfnDomain", checkCfnDomain(OPENSEARCH_FQN + ".CfnDomain.DomainEndpointOptionsProperty"));
+      checkFqn(ELASTICSEARCH_FQN + ".CfnDomain", checkCfnDomain(ELASTICSEARCH_FQN + ".CfnDomain.DomainEndpointOptionsProperty"));
+    }
+
+    private static BiConsumer<SubscriptionContext, CallExpression> checkDomainName(Predicate<Expression> predicateIssue) {
+      return (ctx, callExpression) -> getArgument(ctx, callExpression, "security_policy").ifPresent(
+        argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE)
+      );
+    }
+
+    private static BiConsumer<SubscriptionContext, CallExpression> checkDomain(Predicate<Expression> predicateIssue) {
+      return (ctx, callExpression) -> getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
+        argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE),
+        () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+      );
+    }
+
+    private static BiConsumer<SubscriptionContext, CallExpression> checkCfnDomain(String domainOptionName) {
+      return (ctx, callExpression) -> getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
+        argTrace -> argTrace.addIssueIf(isSensitiveOptionTls(ctx, domainOptionName).or(isSensitiveDictionaryTls(ctx)), ENFORCE_MESSAGE),
+        () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+      );
+    }
+
+    private static Predicate<Expression> isSensitiveOptionTls(SubscriptionContext ctx, String domainOptionName) {
+      return expression -> {
+        if (!isFqn(domainOptionName).test(expression)) {
+          return false;
+        }
+        if (!expression.is(Tree.Kind.CALL_EXPR)) {
+          return true;
+        }
+
+        Optional<ArgumentTrace> argTrace = getArgument(ctx, (CallExpression) expression, TLS_SECURITY_POLICY);
+        if (argTrace.isEmpty()) {
+          return true;
+        }
+
+        return argTrace.filter(trace -> trace.hasExpression(isString(SENSITIVE_TLS_SECURITY_POLICY))).isPresent();
+      };
+    }
+
+    private static Predicate<Expression> isSensitiveDictionaryTls(SubscriptionContext ctx) {
+      return expression -> Optional.of(expression)
+          .filter(isDictionaryWithKeyValue(ctx, TLS_SECURITY_POLICY, SENSITIVE_TLS_SECURITY_POLICY))
+          .isPresent();
+    }
   }
 }

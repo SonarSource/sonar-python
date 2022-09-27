@@ -88,6 +88,7 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
     };
   }
 
+  // TODO : refactor below to use new available method 'isDictionaryWithKeyValue' in AbstractCdkResourceCheck
   private static Predicate<Expression> isSensitiveOptionDict(SubscriptionContext ctx) {
     return expression -> expression.is(Tree.Kind.DICTIONARY_LITERAL)
       && asDictionaryKeyValuePairs(expression)
