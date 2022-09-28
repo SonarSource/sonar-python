@@ -29,6 +29,10 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkPredicate.isSensitiveMethod;
+import static org.sonar.python.checks.cdk.CdkPredicate.isStringValue;
+
 public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   private static final String ENFORCE_MESSAGE = "Change this code to enforce TLS 1.2 or above.";
   private static final String OMITTING_MESSAGE = "Omitting \"tls_security_policy\" enables a deprecated version of TLS. Set it to enforce TLS 1.2 or above.";
@@ -58,20 +62,20 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomainName(Predicate<Expression> predicateIssue) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, "security_policy").ifPresent(
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "security_policy").ifPresent(
       argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomain(Predicate<Expression> predicateIssue) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
       argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkCfnDomain(String domainOptionName) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
       argTrace -> argTrace.addIssueIf(isSensitiveMethod(ctx, domainOptionName, TLS_SECURITY_POLICY, isStringValue(SENSITIVE_TLS_SECURITY_POLICY))
         .or(isSensitiveDictionaryTls(ctx)), ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
@@ -86,8 +90,8 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static Predicate<DictionaryLiteral> hasDictionaryKeyValue(SubscriptionContext ctx, String key, Predicate<Expression> expected) {
-    return dict -> dict.elements().stream().map(ClearTextProtocolsCheckPart::getKeyValuePair).filter(Objects::nonNull)
-      .map(pair -> ClearTextProtocolsCheckPart.ResolvedKeyValuePair.build(ctx, pair))
+    return dict -> dict.elements().stream().map(CdkUtils::getKeyValuePair).filter(Objects::nonNull)
+      .map(pair -> CdkUtils.ResolvedKeyValuePair.build(ctx, pair))
       .filter(pair -> pair.key.hasExpression(isStringValue(key)))
       .allMatch(pair -> pair.value.hasExpression(expected));
   }

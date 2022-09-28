@@ -29,6 +29,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.tree.QualifiedExpressionImpl;
 
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6245")
 public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
 
@@ -38,17 +40,16 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
 
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
-    return (ctx, bucket) -> {
-      Optional<ExpressionTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
-      if (optEncryptionType.isPresent()) {
-        optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
-      } else {
-        Optional<ExpressionTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
-        if (!optEncryptionKey.isPresent()) {
-          ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
-        }
-      }
-    };
+    return (ctx, bucket) -> getArgument(ctx, bucket, "encryption")
+      .ifPresentOrElse(
+        encryption -> encryption.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE),
+        () -> checkEncryptionKey(ctx, bucket));
+  }
+
+  private static void checkEncryptionKey(SubscriptionContext ctx, CallExpression bucket) {
+    if (getArgument(ctx, bucket, "encryption_key").isEmpty()) {
+      ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+    }
   }
 
   protected static boolean isUnencrypted(Expression expression) {

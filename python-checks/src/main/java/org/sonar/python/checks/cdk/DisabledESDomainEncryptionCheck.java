@@ -34,6 +34,10 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkPredicate.isSensitiveMethod;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6308")
 public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   private static final String OMITTING_MESSAGE = "Omitting %s causes encryption of data at rest to be disabled for this %s domain." +
@@ -74,19 +78,8 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
     return String.format(UNENCRYPTED_MESSAGE, engine);
   }
 
-  // TODO : refactor to replace this method with new available method 'isSensitiveOption' in AbstractCdkResourceCheck
   private static Predicate<Expression> isSensitiveOptionObj(SubscriptionContext ctx, String argFqnMethod) {
-    return expr -> {
-      if (!isFqn(argFqnMethod).test(expr)) {
-        return false;
-      }
-      if (!expr.is(Tree.Kind.CALL_EXPR)) {
-        return true;
-      }
-
-      return getArgument(ctx, (CallExpression) expr, ENABLED)
-        .filter(argEnabledTrace -> !argEnabledTrace.hasExpression(isFalse())).isEmpty();
-    };
+    return isSensitiveMethod(ctx, argFqnMethod, ENABLED, isFalse());
   }
 
   // TODO : refactor below to use new available method 'isDictionaryWithKeyValue' in AbstractCdkResourceCheck
@@ -118,6 +111,6 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   private static Predicate<KeyValuePair> isValueFalse(SubscriptionContext ctx) {
-    return keyValuePair -> ExpressionTrace.build(ctx, keyValuePair.value()).hasExpression(isFalse());
+    return keyValuePair -> CdkUtils.ExpressionTrace.build(ctx, keyValuePair.value()).hasExpression(isFalse());
   }
 }

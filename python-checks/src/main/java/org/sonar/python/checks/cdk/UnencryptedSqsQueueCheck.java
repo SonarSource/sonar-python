@@ -23,6 +23,10 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6330")
 public class UnencryptedSqsQueueCheck extends AbstractCdkResourceCheck {
   private static final String UNENCRYPTED_MESSAGE = "Setting \"encryption\" to \"QueueEncryption.UNENCRYPTED\" disables SQS queues encryption. Make sure it is safe here.";

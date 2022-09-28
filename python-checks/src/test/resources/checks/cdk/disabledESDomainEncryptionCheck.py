@@ -24,6 +24,7 @@ class DomainStack(Stack):
         aws_os.Domain(encryption_at_rest={"enabled": False}) # NonCompliant
         aws_os.Domain(encryption_at_rest={}) # NonCompliant
         aws_os.Domain(encryption_at_rest={"another_key": False}) # NonCompliant
+
         aws_os.Domain(encryption_at_rest=encryptionRestOptionDictionaryBad) # NonCompliant
         aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions(enabled=not_encrypted)) # NonCompliant
         aws_os.Domain(encryption_at_rest={"enabled": not_encrypted}) # NonCompliant

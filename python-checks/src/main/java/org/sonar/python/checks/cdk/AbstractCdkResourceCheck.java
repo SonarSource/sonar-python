@@ -19,10 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -33,13 +30,11 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
@@ -65,117 +60,6 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     fqnCallConsumers.put(fqn, consumer);
   }
 
-  protected static Optional<ExpressionTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
-    return callExpression.arguments().stream()
-      .map(RegularArgument.class::cast)
-      .filter(regularArgument -> regularArgument.keywordArgument() != null)
-      .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
-      .map(regularArgument -> ExpressionTrace.build(ctx, regularArgument.expression()))
-      .findAny();
-  }
 
-  static class ExpressionTrace {
-
-    private static final String TAIL_MESSAGE = "Propagated setting.";
-
-    private final SubscriptionContext ctx;
-    private final List<Expression> trace;
-
-    private ExpressionTrace(SubscriptionContext ctx, List<Expression> trace) {
-      this.ctx = ctx;
-      this.trace = Collections.unmodifiableList(trace);
-    }
-    protected static ExpressionTrace build(SubscriptionContext ctx, Expression expression) {
-      List<Expression> trace = new ArrayList<>();
-      buildTrace(expression, trace);
-      return new ExpressionTrace(ctx, trace);
-    }
-
-    static void buildTrace(Expression expression, List<Expression> trace) {
-      trace.add(expression);
-      if (expression.is(Tree.Kind.NAME)) {
-        Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
-        if (singleAssignedValue != null && !trace.contains(singleAssignedValue)) {
-          buildTrace(singleAssignedValue, trace);
-        }
-      }
-    }
-
-    public void addIssue(String primaryMessage) {
-      PreciseIssue issue = ctx.addIssue(trace.get(0).parent(), primaryMessage);
-      trace.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), TAIL_MESSAGE));
-    }
-
-    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage) {
-      if (hasExpression(predicate)) {
-        addIssue(primaryMessage);
-      }
-    }
-
-    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage, CallExpression call) {
-      if (hasExpression(predicate)) {
-        ctx.addIssue(call.callee(), primaryMessage);
-      }
-    }
-
-    public boolean hasExpression(Predicate<Expression> predicate) {
-      return trace.stream().anyMatch(predicate);
-    }
-
-    public Optional<Expression> getExpression(Predicate<Expression> predicate) {
-      return trace.stream().filter(predicate).findFirst();
-    }
-
-    public List<Expression> trace() {
-      return trace;
-    }
-  }
-
-  protected static Predicate<Expression> isFalse() {
-    return expression -> Optional.ofNullable(expression.firstToken()).map(Token::value).filter("False"::equals).isPresent();
-  }
-
-  protected static Predicate<Expression> isNone() {
-    return expression -> expression.is(Tree.Kind.NONE);
-  }
-
-  protected static Predicate<Expression> isFqn(String fqnValue) {
-    return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
-      .filter(fqnValue::equals)
-      .isPresent();
-  }
-
-  protected static Optional<String> getStringValue(Expression expression) {
-    try {
-      return Optional.of(((StringLiteral) expression).trimmedQuotesValue());
-    } catch (ClassCastException e) {
-      return Optional.empty();
-    }
-  }
-
-  /**
-   * @return Predicate which tests if expression is a string and is equal the expected value
-   */
-  protected static Predicate<Expression> isStringValue(String expectedValue) {
-    return expression -> getStringValue(expression).filter(expectedValue::equals).isPresent();
-  }
-
-  protected static Predicate<Expression> isSensitiveMethod(SubscriptionContext ctx, String methodFqn, String argName, Predicate<Expression> sensitiveValuePredicate) {
-    return expression -> {
-      if (!isFqn(methodFqn).test(expression)) {
-        return false;
-      }
-      if (!expression.is(Tree.Kind.CALL_EXPR)) {
-        return true;
-      }
-
-      Optional<AbstractCdkResourceCheck.ExpressionTrace> argTrace = getArgument(ctx, (CallExpression) expression, argName);
-      if (argTrace.isEmpty()) {
-        return true;
-      }
-
-      return argTrace.filter(trace -> trace.hasExpression(sensitiveValuePredicate)).isPresent();
-    };
-  }
 
 }

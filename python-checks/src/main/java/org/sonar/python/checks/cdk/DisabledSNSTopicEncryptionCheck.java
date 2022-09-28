@@ -24,6 +24,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6327")
 public class DisabledSNSTopicEncryptionCheck extends AbstractCdkResourceCheck {
   private static final String OMITTING_MESSAGE = "Omitting \"%s\" disables SNS topics encryption. Make sure it is safe here.";
@@ -38,8 +41,7 @@ public class DisabledSNSTopicEncryptionCheck extends AbstractCdkResourceCheck {
     return (ctx, callExpression) -> getArgument(ctx, callExpression, argMasterKeyName)
       .ifPresentOrElse(
         argMasterKey -> argMasterKey.addIssueIf(isNone(), omittingMessage(argMasterKeyName)),
-        () -> ctx.addIssue(callExpression.callee(), omittingMessage(argMasterKeyName))
-      );
+        () -> ctx.addIssue(callExpression.callee(), omittingMessage(argMasterKeyName)));
   }
 
   private static String omittingMessage(String argName) {

@@ -21,6 +21,9 @@ package org.sonar.python.checks.cdk;
 
 import org.sonar.check.Rule;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6319")
 public class UnencryptedSageMakerNotebookCheck extends AbstractCdkResourceCheck {
   private static final String OMITTING_MESSAGE = "Omitting kms_key_id disables encryption of SageMaker notebook instances. Make sure it is safe here.";

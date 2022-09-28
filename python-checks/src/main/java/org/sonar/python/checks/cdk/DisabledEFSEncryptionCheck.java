@@ -21,6 +21,9 @@ package org.sonar.python.checks.cdk;
 
 import org.sonar.check.Rule;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+
 @Rule(key = "S6332")
 public class DisabledEFSEncryptionCheck extends AbstractCdkResourceCheck {
 
@@ -30,12 +33,12 @@ public class DisabledEFSEncryptionCheck extends AbstractCdkResourceCheck {
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_efs.FileSystem", (ctx, fileSystem) ->
-      getArgument(ctx, fileSystem, "encrypted").ifPresent(
+      CdkUtils.getArgument(ctx, fileSystem, "encrypted").ifPresent(
         encrypted -> encrypted.addIssueIf(isFalse(), MESSAGE)
       ));
 
     checkFqn("aws_cdk.aws_efs.CfnFileSystem", (ctx, fileSystem) ->
-      getArgument(ctx, fileSystem, "encrypted").ifPresentOrElse(
+      CdkUtils.getArgument(ctx, fileSystem, "encrypted").ifPresentOrElse(
         encrypted -> encrypted.addIssueIf(isFalse().or(isNone()), MESSAGE),
         () -> ctx.addIssue(fileSystem.callee(), OMITTING_MESSAGE)
       ));

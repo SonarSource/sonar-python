@@ -34,6 +34,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6265")
 public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
@@ -67,9 +69,13 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
   @Override
   protected void visitNode(SubscriptionContext ctx) {
-    super.visitNode(ctx);
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Optional<Symbol> symbol = Optional.ofNullable(node.calleeSymbol());
+
+    symbol
+      .map(Symbol::fullyQualifiedName)
+      .filter(S3_BUCKET_FQNS::contains)
+      .ifPresent(s -> visitBucketConstructor().accept(ctx, node));
 
     if (isAwsCdkImported) {
       symbol
@@ -95,7 +101,7 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
       .isPresent();
   }
 
-  private static String getSensitivePolicyMessage(ExpressionTrace argumentTrace){
+  private static String getSensitivePolicyMessage(CdkUtils.ExpressionTrace argumentTrace){
     Expression lastExpression = argumentTrace.trace()
       .get(argumentTrace.trace().size()-1);
     String attribute = ((QualifiedExpression) lastExpression).name().name();

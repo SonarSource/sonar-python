@@ -32,6 +32,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6281")
 public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
 
@@ -49,7 +52,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> {
-      Optional<ExpressionTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
+      Optional<CdkUtils.ExpressionTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
       if (blockPublicAccess.isPresent()) {
         checkBlockPublicAccess(ctx, blockPublicAccess.get());
       } else {
@@ -58,7 +61,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     };
   }
 
-  private static void checkBlockPublicAccess(SubscriptionContext ctx, ExpressionTrace blockPublicAccess) {
+  private static void checkBlockPublicAccess(SubscriptionContext ctx, CdkUtils.ExpressionTrace blockPublicAccess) {
     blockPublicAccess.addIssueIf(S3BucketBlockPublicAccessCheck::blocksAclsOnly, MESSAGE);
     blockPublicAccess.trace().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
       .filter(S3BucketBlockPublicAccessCheck::isBlockPublicAccessConstructor)

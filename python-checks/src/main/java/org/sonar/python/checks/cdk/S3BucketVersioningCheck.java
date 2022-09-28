@@ -19,11 +19,13 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6252")
 public class S3BucketVersioningCheck extends AbstractS3BucketCheck {
@@ -33,13 +35,9 @@ public class S3BucketVersioningCheck extends AbstractS3BucketCheck {
 
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
-    return (ctx, bucket) -> {
-      Optional<ExpressionTrace> version = getArgument(ctx, bucket, "versioned");
-      if (version.isPresent()) {
-        version.get().addIssueIf(isFalse(), MESSAGE);
-      } else {
-        ctx.addIssue(bucket.callee(), MESSAGE_OMITTING);
-      }
-    };
+    return (ctx, bucket) ->
+      getArgument(ctx, bucket, "versioned").ifPresentOrElse(
+        version -> version.addIssueIf(isFalse(), MESSAGE),
+        () -> ctx.addIssue(bucket.callee(), MESSAGE_OMITTING));
   }
 }
