@@ -24,16 +24,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -46,7 +42,7 @@ public class CdkUtils {
   private CdkUtils() {
   }
 
-  public static Optional<Integer> getIntValue(Expression expression) {
+  public static Optional<Integer> getInt(Expression expression) {
     try {
       return Optional.of((int)((NumericLiteral) expression).valueAsLong());
     } catch (ClassCastException e) {
@@ -54,7 +50,7 @@ public class CdkUtils {
     }
   }
 
-  public static Optional<String> getStringValue(Expression expression) {
+  public static Optional<String> getString(Expression expression) {
     try {
       return Optional.of(((StringLiteral) expression).trimmedQuotesValue());
     } catch (ClassCastException e) {
@@ -71,14 +67,11 @@ public class CdkUtils {
       .findAny();
   }
 
-  public static Optional<ListLiteral> getArgumentList(SubscriptionContext ctx, CallExpression call, String argumentName) {
-    return getArgument(ctx, call, argumentName)
-      .flatMap(arg -> arg.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL)))
-      .map(ListLiteral.class::cast);
-
+  public static Optional<ResolvedKeyValuePair> getKeyValuePair(SubscriptionContext ctx, DictionaryLiteralElement element) {
+    return element.is(Tree.Kind.KEY_VALUE_PAIR) ? Optional.of(ResolvedKeyValuePair.build(ctx, (KeyValuePair) element)) : Optional.empty();
   }
 
-  public static class ExpressionTrace {
+  static class ExpressionTrace {
 
     private static final String TAIL_MESSAGE = "Propagated setting.";
 
@@ -89,6 +82,7 @@ public class CdkUtils {
       this.ctx = ctx;
       this.trace = Collections.unmodifiableList(trace);
     }
+
     protected static ExpressionTrace build(SubscriptionContext ctx, Expression expression) {
       List<Expression> trace = new ArrayList<>();
       buildTrace(expression, trace);
@@ -133,29 +127,6 @@ public class CdkUtils {
     public List<Expression> trace() {
       return trace;
     }
-  }
-
-  // ---------------------------------------------------------------------------------------
-  // Dictionary related utils
-  // ---------------------------------------------------------------------------------------
-
-  @CheckForNull
-  public static KeyValuePair getKeyValuePair(DictionaryLiteralElement element) {
-    return element.is(Tree.Kind.KEY_VALUE_PAIR) ? (KeyValuePair) element : null;
-  }
-
-  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
-    return getListElements(ctx, listeners).stream()
-      .map(elm -> elm.getExpression(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)))
-      .flatMap(Optional::stream)
-      .map(DictionaryLiteral.class::cast)
-      .collect(Collectors.toList());
-  }
-
-  private static List<ExpressionTrace> getListElements(SubscriptionContext ctx, ListLiteral list) {
-    return list.elements().expressions().stream()
-      .map(expression -> ExpressionTrace.build(ctx, expression))
-      .collect(Collectors.toList());
   }
 
   /**

@@ -21,11 +21,11 @@ package org.sonar.python.checks.cdk;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
@@ -37,9 +37,8 @@ import org.sonar.python.tree.TreeUtils;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
-import static org.sonar.python.checks.cdk.CdkPredicate.isStringValue;
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
-import static org.sonar.python.checks.cdk.CdkUtils.getArgumentList;
 
 public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
@@ -116,16 +115,16 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // that contains a dict with an `external_protocol` entry set to `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.TCP`
     // or `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.HTTP`.
     checkFqn(Elb.prefix("LoadBalancer"), (ctx, call) ->
-      getArgumentList(ctx, call, LISTENERS).ifPresent(
-        listeners -> CdkUtils.getDictionaryInList(ctx, listeners)
+      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
+        listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkLoadBalancerListenerDict(ctx, dict))));
 
 
     // Raise an issue if a CfnLoadBalancer is instantiated with a `listeners` property set to a Sequence
     // that contains a dict with a `protocol` argument set to `http` or `tcp`.
     checkFqn(Elb.prefix("CfnLoadBalancer"), (ctx, call) ->
-      getArgumentList(ctx, call, LISTENERS).ifPresent(
-        listeners -> CdkUtils.getDictionaryInList(ctx, listeners)
+      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
+        listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkCfnLoadBalancerListenerDict(ctx, dict))));
 
     // Raise an issue if a CfnLoadBalancer is instantiated with the `protocol` argument set to `http` or `tcp`.
@@ -192,15 +191,41 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, String key, Predicate<Expression> expected) {
-    dict.elements().stream().map(CdkUtils::getKeyValuePair).filter(Objects::nonNull)
-      .map(pair -> CdkUtils.ResolvedKeyValuePair.build(ctx, pair))
-      .filter(pair -> pair.key.hasExpression(isStringValue(key)))
+    dict.elements().stream()
+      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
+      .flatMap(Optional::stream)
+      .filter(pair -> pair.key.hasExpression(isString(key)))
       .forEach(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
+  }
+
+  // ---------------------------------------------------------------------------------------
+  // Rule related utils
+  // ---------------------------------------------------------------------------------------
+
+  public static Optional<ListLiteral> getArgumentAsList(SubscriptionContext ctx, CallExpression call, String argumentName) {
+    return getArgument(ctx, call, argumentName)
+      .flatMap(arg -> arg.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL)))
+      .map(ListLiteral.class::cast);
+
+  }
+
+  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
+    return getListElements(ctx, listeners).stream()
+      .map(elm -> elm.getExpression(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)))
+      .flatMap(Optional::stream)
+      .map(DictionaryLiteral.class::cast)
+      .collect(Collectors.toList());
+  }
+
+  private static List<CdkUtils.ExpressionTrace> getListElements(SubscriptionContext ctx, ListLiteral list) {
+    return list.elements().expressions().stream()
+      .map(expression -> CdkUtils.ExpressionTrace.build(ctx, expression))
+      .collect(Collectors.toList());
   }
 
 
   // ---------------------------------------------------------------------------------------
-  // General predicates
+  // Rule related predicates
   // ---------------------------------------------------------------------------------------
 
   /**
@@ -210,15 +235,11 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     return expression -> expression.is(Tree.Kind.LIST_LITERAL) && ((ListLiteral) expression).elements().expressions().isEmpty();
   }
 
-  // ---------------------------------------------------------------------------------------
-  // Rule related predicates
-  // ---------------------------------------------------------------------------------------
-
   /**
    * @return Predicate which tests if expression is a string and is listed in sensitive transport protocol list
    */
   private static Predicate<Expression> isSensitiveTransportProtocol(Collection<String> transportProtocols) {
-    return expression -> CdkUtils.getStringValue(expression).filter(transportProtocols::contains).isPresent();
+    return expression -> CdkUtils.getString(expression).filter(transportProtocols::contains).isPresent();
   }
 
   /**
@@ -233,7 +254,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
    * @return Predicate which tests if expression is an integer and is in sensitive port list
    */
   private static Predicate<Expression> isHttpProtocolPort() {
-    return expression -> CdkUtils.getIntValue(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
+    return expression -> CdkUtils.getInt(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
   }
 
 
