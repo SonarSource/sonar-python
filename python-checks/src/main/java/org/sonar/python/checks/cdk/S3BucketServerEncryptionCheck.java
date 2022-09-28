@@ -39,11 +39,11 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> {
-      Optional<ArgumentTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
+      Optional<ExpressionTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
       if (optEncryptionType.isPresent()) {
         optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
       } else {
-        Optional<ArgumentTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
+        Optional<ExpressionTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
         if (!optEncryptionKey.isPresent()) {
           ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
         }

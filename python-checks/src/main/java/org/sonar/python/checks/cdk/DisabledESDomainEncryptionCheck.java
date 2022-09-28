@@ -118,6 +118,6 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   private static Predicate<KeyValuePair> isValueFalse(SubscriptionContext ctx) {
-    return keyValuePair -> ArgumentTrace.build(ctx, keyValuePair.value()).hasExpression(isFalse());
+    return keyValuePair -> ExpressionTrace.build(ctx, keyValuePair.value()).hasExpression(isFalse());
   }
 }

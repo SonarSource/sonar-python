@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -49,9 +50,9 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
   @Override
   public void initialize(Context context) {
+    super.initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> isAwsCdkImported = false);
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, this::checkAWSImport);
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::visitNode);
   }
 
   private void checkAWSImport(SubscriptionContext ctx) {
@@ -66,13 +67,9 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
 
   @Override
   protected void visitNode(SubscriptionContext ctx) {
+    super.visitNode(ctx);
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Optional<Symbol> symbol = Optional.ofNullable(node.calleeSymbol());
-
-    symbol
-      .map(Symbol::fullyQualifiedName)
-      .filter(S3_BUCKET_FQNS::contains)
-      .ifPresent(s -> visitBucketConstructor().accept(ctx, node));
 
     if (isAwsCdkImported) {
       symbol
@@ -85,11 +82,11 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> getArgument(ctx, bucket, "access_control")
-      .ifPresent(argument -> argument.addIssueIf(this::isSensitivePolicy, getSensitivePolicyMessage(argument)));
+      .ifPresent(argument -> argument.addIssueIf(isSensitivePolicy(), getSensitivePolicyMessage(argument)));
   }
 
-  protected boolean isSensitivePolicy(Expression expression) {
-    return Optional.ofNullable(expression)
+  protected static Predicate<Expression> isSensitivePolicy() {
+    return expression -> Optional.ofNullable(expression)
       .filter(QualifiedExpression.class::isInstance)
       .map(QualifiedExpression.class::cast)
       .map(QualifiedExpression::symbol)
@@ -98,7 +95,7 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
       .isPresent();
   }
 
-  private static String getSensitivePolicyMessage(ArgumentTrace argumentTrace){
+  private static String getSensitivePolicyMessage(ExpressionTrace argumentTrace){
     Expression lastExpression = argumentTrace.trace()
       .get(argumentTrace.trace().size()-1);
     String attribute = ((QualifiedExpression) lastExpression).name().name();

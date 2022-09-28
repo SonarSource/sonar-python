@@ -49,7 +49,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> {
-      Optional<ArgumentTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
+      Optional<ExpressionTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
       if (blockPublicAccess.isPresent()) {
         checkBlockPublicAccess(ctx, blockPublicAccess.get());
       } else {
@@ -58,7 +58,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     };
   }
 
-  private static void checkBlockPublicAccess(SubscriptionContext ctx, ArgumentTrace blockPublicAccess) {
+  private static void checkBlockPublicAccess(SubscriptionContext ctx, ExpressionTrace blockPublicAccess) {
     blockPublicAccess.addIssueIf(S3BucketBlockPublicAccessCheck::blocksAclsOnly, MESSAGE);
     blockPublicAccess.trace().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
       .filter(S3BucketBlockPublicAccessCheck::isBlockPublicAccessConstructor)

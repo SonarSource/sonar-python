@@ -65,29 +65,13 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
     fqnCallConsumers.put(fqn, consumer);
   }
 
-  protected static Optional<ArgumentTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
+  protected static Optional<ExpressionTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     return callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
       .filter(regularArgument -> regularArgument.keywordArgument() != null)
       .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
-      .map(regularArgument -> ArgumentTrace.build(ctx, regularArgument.expression()))
+      .map(regularArgument -> ExpressionTrace.build(ctx, regularArgument.expression()))
       .findAny();
-  }
-
-  /**
-   * For compatibility with other classes and branches.
-   * TODO Can be removed at the end of the sprint to reduce complexity.
-   */
-  public static class ArgumentTrace extends ExpressionTrace {
-    private ArgumentTrace(SubscriptionContext ctx, List<Expression> trace) {
-      super(ctx, trace);
-    }
-
-    protected static ArgumentTrace build(SubscriptionContext ctx, Expression expression) {
-      List<Expression> trace = new ArrayList<>();
-      buildTrace(expression, trace);
-      return new ArgumentTrace(ctx, trace);
-    }
   }
 
   static class ExpressionTrace {
@@ -185,7 +169,7 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
         return true;
       }
 
-      Optional<AbstractCdkResourceCheck.ArgumentTrace> argTrace = getArgument(ctx, (CallExpression) expression, argName);
+      Optional<AbstractCdkResourceCheck.ExpressionTrace> argTrace = getArgument(ctx, (CallExpression) expression, argName);
       if (argTrace.isEmpty()) {
         return true;
       }

@@ -26,8 +26,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6303")
 public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
@@ -50,8 +48,8 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected void checkDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    Optional<ArgumentTrace> argEncrypted = getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
-    Optional<ArgumentTrace> argEncryptionKey = getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
+    Optional<ExpressionTrace> argEncrypted = getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
+    Optional<ExpressionTrace> argEncryptionKey = getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
 
     if (argEncrypted.isEmpty() && argEncryptionKey.isEmpty()) {
       ctx.addIssue(resourceConstructor.callee(), DB_OMITTING_MESSAGE);
