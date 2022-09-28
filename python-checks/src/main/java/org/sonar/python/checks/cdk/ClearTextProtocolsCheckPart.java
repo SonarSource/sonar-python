@@ -201,14 +201,6 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   // General expression utils
   // ---------------------------------------------------------------------------------------
 
-  private static Optional<String> getStringValue(Expression expression) {
-    try {
-      return Optional.of(((StringLiteral) expression).trimmedQuotesValue());
-    } catch (ClassCastException e) {
-      return Optional.empty();
-    }
-  }
-
   private static Optional<Integer> getIntValue(Expression expression) {
     try {
       return Optional.of((int)((NumericLiteral) expression).valueAsLong());
@@ -229,7 +221,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   // ---------------------------------------------------------------------------------------
 
   @CheckForNull
-  private static KeyValuePair getKeyValuePair(DictionaryLiteralElement element) {
+  public static KeyValuePair getKeyValuePair(DictionaryLiteralElement element) {
     return element.is(Tree.Kind.KEY_VALUE_PAIR) ? (KeyValuePair) element : null;
   }
 
@@ -250,13 +242,6 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   // ---------------------------------------------------------------------------------------
   // General predicates
   // ---------------------------------------------------------------------------------------
-
-  /**
-   * @return Predicate which tests if expression is a string and is equal the expected value
-   */
-  private static Predicate<Expression> isStringValue(String expectedValue) {
-    return expression -> getStringValue(expression).filter(expectedValue::equals).isPresent();
-  }
 
   /**
    * @return Predicate which tests if expression is empty list literal

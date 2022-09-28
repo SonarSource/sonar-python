@@ -36,11 +36,11 @@ public class WeakSSLProtocolCheckTest {
 
   @Test
   public void test_apigateway() {
-    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocolCheck_apigateway.py", new WeakSSLProtocolCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_apigateway.py", new WeakSSLProtocolCheck());
   }
 
   @Test
   public void test_elasticopensearch() {
-    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocolCheck_ElasticOpenSearch.py", new WeakSSLProtocolCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_elastic_and_open_search.py", new WeakSSLProtocolCheck());
   }
 }
