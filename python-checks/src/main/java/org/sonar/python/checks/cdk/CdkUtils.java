@@ -43,7 +43,7 @@ import org.sonar.python.checks.Expressions;
 
 public class CdkUtils {
 
-  public CdkUtils() {
+  private CdkUtils() {
   }
 
   public static Optional<Integer> getIntValue(Expression expression) {
