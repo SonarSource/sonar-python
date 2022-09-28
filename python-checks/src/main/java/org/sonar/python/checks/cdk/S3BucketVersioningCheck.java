@@ -20,6 +20,7 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -31,12 +32,14 @@ public class S3BucketVersioningCheck extends AbstractS3BucketCheck {
   public static final String MESSAGE_OMITTING = "Omitting the \"versioned\" argument disables S3 bucket versioning. Make sure it is safe here.";
 
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> version = getArgument(ctx, bucket, "versioned");
-    if (version.isPresent()) {
-      version.get().addIssueIf(isFalse(), MESSAGE);
-    } else {
-      ctx.addIssue(bucket.callee(), MESSAGE_OMITTING);
-    }
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> {
+      Optional<ArgumentTrace> version = getArgument(ctx, bucket, "versioned");
+      if (version.isPresent()) {
+        version.get().addIssueIf(isFalse(), MESSAGE);
+      } else {
+        ctx.addIssue(bucket.callee(), MESSAGE_OMITTING);
+      }
+    };
   }
 }

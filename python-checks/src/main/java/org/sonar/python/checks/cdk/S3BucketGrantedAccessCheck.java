@@ -22,6 +22,7 @@ package org.sonar.python.checks.cdk;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -71,7 +72,7 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
     symbol
       .map(Symbol::fullyQualifiedName)
       .filter(S3_BUCKET_FQNS::contains)
-      .ifPresent(s -> visitBucketConstructor(ctx, node));
+      .ifPresent(s -> visitBucketConstructor().accept(ctx, node));
 
     if (isAwsCdkImported) {
       symbol
@@ -82,8 +83,8 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
   }
 
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    getArgument(ctx, bucket, "access_control")
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> getArgument(ctx, bucket, "access_control")
       .ifPresent(argument -> argument.addIssueIf(this::isSensitivePolicy, getSensitivePolicyMessage(argument)));
   }
 

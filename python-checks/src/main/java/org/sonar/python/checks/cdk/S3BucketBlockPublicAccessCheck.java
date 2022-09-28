@@ -22,6 +22,7 @@ package org.sonar.python.checks.cdk;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -46,13 +47,15 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     "restrict_public_buckets");
     
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
-    if (blockPublicAccess.isPresent()) {
-      checkBlockPublicAccess(ctx, blockPublicAccess.get());
-    } else {
-      ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
-    }
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> {
+      Optional<ArgumentTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
+      if (blockPublicAccess.isPresent()) {
+        checkBlockPublicAccess(ctx, blockPublicAccess.get());
+      } else {
+        ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+      }
+    };
   }
 
   private static void checkBlockPublicAccess(SubscriptionContext ctx, ArgumentTrace blockPublicAccess) {
@@ -86,5 +89,4 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
   private static boolean isBlockPublicAccessConstructor(CallExpression expression) {
     return Optional.ofNullable(expression.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(BLOCK_PUBLIC_ACCESS_FQN::equals).isPresent();
   }
-
 }

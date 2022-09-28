@@ -59,21 +59,10 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
       .ifPresent(consumer -> consumer.accept(ctx, node));
   }
 
-  // TODO should be abstract when resourceFqn and visitResourceConstructor are dropped
-  protected void registerFqnConsumer() {
-    checkFqn(resourceFqn(), this::visitResourceConstructor);
-  }
+  protected abstract void registerFqnConsumer();
 
   protected void checkFqn(String fqn, BiConsumer<SubscriptionContext, CallExpression> consumer) {
     fqnCallConsumers.put(fqn, consumer);
-  }
-
-  protected String resourceFqn() {
-    throw new UnsupportedOperationException("Override at least resourceFqn or registerFqnConsumer");
-  }
-
-  protected void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    throw new UnsupportedOperationException("When using resourceFqn override this method");
   }
 
   protected static Optional<ArgumentTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {

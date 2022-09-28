@@ -20,6 +20,7 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -36,16 +37,18 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
   public static final String OMITTING_MESSAGE = "Omitting 'encryption' disables server-side encryption. Make sure it is safe here.";
 
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
-    if (optEncryptionType.isPresent()) {
-      optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
-    } else {
-      Optional<ArgumentTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
-      if (!optEncryptionKey.isPresent()) {
-        ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> {
+      Optional<ArgumentTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
+      if (optEncryptionType.isPresent()) {
+        optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
+      } else {
+        Optional<ArgumentTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
+        if (!optEncryptionKey.isPresent()) {
+          ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+        }
       }
-    }
+    };
   }
 
   protected static boolean isUnencrypted(Expression expression) {
