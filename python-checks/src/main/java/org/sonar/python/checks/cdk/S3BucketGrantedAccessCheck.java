@@ -19,11 +19,9 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -45,8 +43,8 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
   private static final String S3_BUCKET_AUTHENTICATED_READ = "aws_cdk.aws_s3.BucketAccessControl.AUTHENTICATED_READ";
   private static final String S3_BUCKET_PUBLIC_READ = "aws_cdk.aws_s3.BucketAccessControl.PUBLIC_READ";
   private static final String S3_BUCKET_PUBLIC_READ_WRITE = "aws_cdk.aws_s3.BucketAccessControl.PUBLIC_READ_WRITE";
-  private static final List<String> S3_BUCKET_FQNS = Arrays.asList(S3_BUCKET_FQN, S3_BUCKET_DEPLOYMENT_FQN);
-  private static final List<String> S3_BUCKET_SENSITIVE_POLICIES = Arrays.asList(S3_BUCKET_AUTHENTICATED_READ, S3_BUCKET_PUBLIC_READ, S3_BUCKET_PUBLIC_READ_WRITE);
+  private static final List<String> S3_BUCKET_FQNS = List.of(S3_BUCKET_FQN, S3_BUCKET_DEPLOYMENT_FQN);
+  private static final List<String> S3_BUCKET_SENSITIVE_POLICIES = List.of(S3_BUCKET_AUTHENTICATED_READ, S3_BUCKET_PUBLIC_READ, S3_BUCKET_PUBLIC_READ_WRITE);
 
   private boolean isAwsCdkImported = false;
 
@@ -88,17 +86,7 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> getArgument(ctx, bucket, "access_control")
-      .ifPresent(argument -> argument.addIssueIf(isSensitivePolicy(), getSensitivePolicyMessage(argument)));
-  }
-
-  protected static Predicate<Expression> isSensitivePolicy() {
-    return expression -> Optional.ofNullable(expression)
-      .filter(QualifiedExpression.class::isInstance)
-      .map(QualifiedExpression.class::cast)
-      .map(QualifiedExpression::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(S3_BUCKET_SENSITIVE_POLICIES::contains)
-      .isPresent();
+      .ifPresent(argument -> argument.addIssueIf(CdkPredicate.isFqnOf(S3_BUCKET_SENSITIVE_POLICIES), getSensitivePolicyMessage(argument)));
   }
 
   private static String getSensitivePolicyMessage(CdkUtils.ExpressionTrace argumentTrace){

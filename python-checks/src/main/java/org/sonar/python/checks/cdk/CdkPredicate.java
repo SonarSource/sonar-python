@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -57,6 +58,15 @@ public class CdkPredicate {
   public static Predicate<Expression> isFqn(String fqnValue) {
     return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
       .filter(fqnValue::equals)
+      .isPresent();
+  }
+
+  /**
+   * @return Predicate which tests if expression is a fully qualified name (FQN) and part of the FQN list
+   */
+  public static Predicate<Expression> isFqnOf(Collection<String> fqnValues) {
+    return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+      .filter(fqnValues::contains)
       .isPresent();
   }
 

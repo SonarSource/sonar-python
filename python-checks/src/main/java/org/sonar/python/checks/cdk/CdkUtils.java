@@ -58,6 +58,9 @@ public class CdkUtils {
     }
   }
 
+  /**
+   * Resolve a particular argument of a call or get an empty optional if the argument is not set.
+   */
   protected static Optional<ExpressionTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     return callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
@@ -67,10 +70,20 @@ public class CdkUtils {
       .findAny();
   }
 
+  /**
+   * Resolve the key and value of a dictionary element or get an empty optional if the element is an UnpackingExpression.
+   */
   public static Optional<ResolvedKeyValuePair> getKeyValuePair(SubscriptionContext ctx, DictionaryLiteralElement element) {
     return element.is(Tree.Kind.KEY_VALUE_PAIR) ? Optional.of(ResolvedKeyValuePair.build(ctx, (KeyValuePair) element)) : Optional.empty();
   }
 
+  /**
+   * The expression trace reflects the complete flow of a value across the code.
+   * It serves as a resolution path from the use of the expression up to the value assignment.
+   * For example, if the value of an argument expression did not occur directly in the function call, the value can be traced back.
+   * The trace allows on the one hand to check the assigned value
+   * and on the other hand to display the assignment path of the relevant value when creating an issue.
+   */
   static class ExpressionTrace {
 
     private static final String TAIL_MESSAGE = "Propagated setting.";

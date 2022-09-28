@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -38,9 +39,9 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_rds.DatabaseCluster", this::checkDatabaseArguments);
-    checkFqn("aws_cdk.aws_rds.DatabaseInstance", this::checkDatabaseArguments);
-    checkFqn("aws_cdk.aws_rds.CfnDBCluster", this::checkCfnDatabaseArguments);
+    checkFqns(List.of("aws_cdk.aws_rds.DatabaseCluster", "aws_cdk.aws_rds.DatabaseInstance", "aws_cdk.aws_rds.CfnDBCluster"),
+      this::checkDatabaseArguments);
+
     checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) -> {
       if (!isEngineAurora(subscriptionContext, callExpression)) {
         checkCfnDatabaseArguments(subscriptionContext, callExpression);

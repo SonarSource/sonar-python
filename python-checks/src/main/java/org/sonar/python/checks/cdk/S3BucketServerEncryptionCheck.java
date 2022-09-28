@@ -19,16 +19,12 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.python.tree.QualifiedExpressionImpl;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6245")
@@ -42,7 +38,7 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> getArgument(ctx, bucket, "encryption")
       .ifPresentOrElse(
-        encryption -> encryption.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE),
+        encryption -> encryption.addIssueIf(isFqn(S3_BUCKET_UNENCRYPTED_FQN), MESSAGE),
         () -> checkEncryptionKey(ctx, bucket));
   }
 
@@ -50,15 +46,5 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
     if (getArgument(ctx, bucket, "encryption_key").isEmpty()) {
       ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
     }
-  }
-
-  protected static boolean isUnencrypted(Expression expression) {
-    return Optional.of(expression)
-      .filter(QualifiedExpression.class::isInstance)
-      .map(QualifiedExpressionImpl.class::cast)
-      .map(QualifiedExpression::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(S3_BUCKET_UNENCRYPTED_FQN::equals)
-      .isPresent();
   }
 }

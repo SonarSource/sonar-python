@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -43,7 +42,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
 
   private static final String BLOCK_PUBLIC_ACCESS_FQN = "aws_cdk.aws_s3.BlockPublicAccess";
   private static final String BLOCK_ACLS_FQN = BLOCK_PUBLIC_ACCESS_FQN + ".BLOCK_ACLS";
-  private static final List<String> BLOCK_PUBLIC_ACCESS_ARGUMENTS = Arrays.asList(
+  private static final List<String> BLOCK_PUBLIC_ACCESS_ARGUMENTS = List.of(
     "block_public_acls",
     "ignore_public_acls",
     "block_public_policy",

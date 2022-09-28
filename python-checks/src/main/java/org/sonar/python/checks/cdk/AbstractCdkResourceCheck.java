@@ -19,23 +19,24 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
-
+/**
+ * Since most CDK related checks check arguments of method calls or object initializations,
+ * this abstract class can be used to register CallExpression consumers for various fully qualified names.
+ * For this purpose the method {@link #checkFqn(String, BiConsumer)} or {@link #checkFqns(Collection, BiConsumer)}
+ * must be called in the {@link #registerFqnConsumer()} method which has to be implemented.
+ */
 public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
   private final Map<String, BiConsumer<SubscriptionContext, CallExpression>> fqnCallConsumers = new HashMap<>();
@@ -56,8 +57,18 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
   protected abstract void registerFqnConsumer();
 
+  /**
+   * Register a consumer for a single FQN
+   */
   protected void checkFqn(String fqn, BiConsumer<SubscriptionContext, CallExpression> consumer) {
     fqnCallConsumers.put(fqn, consumer);
+  }
+
+  /**
+   * Register a consumer for multiple FQNs
+   */
+  protected void checkFqns(Collection<String> suffixes, BiConsumer<SubscriptionContext, CallExpression> consumer) {
+    suffixes.forEach(suffix -> checkFqn(suffix, consumer));
   }
 
 

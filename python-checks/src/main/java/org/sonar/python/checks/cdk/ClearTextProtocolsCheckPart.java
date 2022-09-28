@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -94,12 +93,6 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
   private static final Set<Integer> HTTP_PROTOCOL_PORTS = Set.of(80, 8080, 8000, 8008);
 
-  /**
-   * Register a consumer for multiple FQNs
-   */
-  private void checkFqns(Collection<String> suffixes, BiConsumer<SubscriptionContext, CallExpression> consumer) {
-    suffixes.forEach(suffix -> checkFqn(suffix, consumer));
-  }
 
   @Override
   protected void registerFqnConsumer() {
