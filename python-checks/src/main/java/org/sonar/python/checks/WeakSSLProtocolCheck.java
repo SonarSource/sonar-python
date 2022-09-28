@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.checks.cdk.WeakSSLProtocolCheckPart;
 
 @Rule(key = "S4423")
 public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
@@ -52,6 +53,8 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
         ctx.addIssue(pyNameTree, "Change this code to use a stronger protocol.");
       }
     });
+
+    new WeakSSLProtocolCheckPart().initialize(context);
   }
 
   private static boolean isWeakProtocol(@Nullable Symbol symbol) {

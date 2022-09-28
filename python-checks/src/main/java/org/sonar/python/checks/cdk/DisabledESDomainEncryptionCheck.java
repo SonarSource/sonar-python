@@ -74,6 +74,7 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
     return String.format(UNENCRYPTED_MESSAGE, engine);
   }
 
+  // TODO : refactor to replace this method with new available method 'isSensitiveOption' in AbstractCdkResourceCheck
   private static Predicate<Expression> isSensitiveOptionObj(SubscriptionContext ctx, String argFqnMethod) {
     return expr -> {
       if (!isFqn(argFqnMethod).test(expr)) {
@@ -88,6 +89,7 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
     };
   }
 
+  // TODO : refactor below to use new available method 'isDictionaryWithKeyValue' in AbstractCdkResourceCheck
   private static Predicate<Expression> isSensitiveOptionDict(SubscriptionContext ctx) {
     return expression -> expression.is(Tree.Kind.DICTIONARY_LITERAL)
       && asDictionaryKeyValuePairs(expression)

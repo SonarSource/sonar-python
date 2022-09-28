@@ -80,13 +80,7 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected Predicate<Expression> startsWith(String expected) {
-    return e -> getStringValue(e).filter(str -> str.startsWith(expected)).isPresent();
-  }
-
-  protected Optional<String> getStringValue(Expression expression) {
-    return Optional.of(expression)
-      .filter(expr -> expr.is(Tree.Kind.STRING_LITERAL)).map(StringLiteral.class::cast)
-      .map(str -> str.trimmedQuotesValue().toLowerCase(Locale.ROOT));
+    return e -> getStringValue(e).filter(str -> str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
   }
 }
 
