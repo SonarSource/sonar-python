@@ -19,9 +19,8 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -68,12 +67,12 @@ public class CdkUtils {
   /**
    * Resolve a particular argument of a call or get an empty optional if the argument is not set.
    */
-  protected static Optional<ExpressionTrace> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
+  protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     return callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
       .filter(regularArgument -> regularArgument.keywordArgument() != null)
       .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
-      .map(regularArgument -> ExpressionTrace.build(ctx, regularArgument.expression()))
+      .map(regularArgument -> ExpressionFlow.build(ctx, regularArgument.expression()))
       .findAny();
   }
 
@@ -85,43 +84,43 @@ public class CdkUtils {
   }
 
   /**
-   * The expression trace reflects the complete flow of a value across the code.
+   * The expression flow represents the propagation of an expression.
    * It serves as a resolution path from the use of the expression up to the value assignment.
-   * For example, if the value of an argument expression did not occur directly in the function call, the value can be traced back.
-   * The trace allows on the one hand to check the assigned value
+   * For example, if the value of an argument expression did not occur directly in the function call, the value can be tracked back.
+   * The flow allows on the one hand to check the assigned value
    * and on the other hand to display the assignment path of the relevant value when creating an issue.
    */
-  static class ExpressionTrace {
+  static class ExpressionFlow {
 
     private static final String TAIL_MESSAGE = "Propagated setting.";
 
     private final SubscriptionContext ctx;
-    private final List<Expression> trace;
+    private final Deque<Expression> locations;
 
-    private ExpressionTrace(SubscriptionContext ctx, List<Expression> trace) {
+    private ExpressionFlow(SubscriptionContext ctx, Deque<Expression> locations) {
       this.ctx = ctx;
-      this.trace = Collections.unmodifiableList(trace);
+      this.locations = locations;
     }
 
-    protected static ExpressionTrace build(SubscriptionContext ctx, Expression expression) {
-      List<Expression> trace = new ArrayList<>();
-      buildTrace(expression, trace);
-      return new ExpressionTrace(ctx, trace);
+    protected static ExpressionFlow build(SubscriptionContext ctx, Expression expression) {
+      Deque<Expression> locations = new LinkedList<>();
+      resolveLocations(expression, locations);
+      return new ExpressionFlow(ctx, locations);
     }
 
-    static void buildTrace(Expression expression, List<Expression> trace) {
-      trace.add(expression);
+    static void resolveLocations(Expression expression, Deque<Expression> locations) {
+      locations.add(expression);
       if (expression.is(Tree.Kind.NAME)) {
         Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
-        if (singleAssignedValue != null && !trace.contains(singleAssignedValue)) {
-          buildTrace(singleAssignedValue, trace);
+        if (singleAssignedValue != null && !locations.contains(singleAssignedValue)) {
+          resolveLocations(singleAssignedValue, locations);
         }
       }
     }
 
     public void addIssue(String primaryMessage) {
-      PythonCheck.PreciseIssue issue = ctx.addIssue(trace.get(0).parent(), primaryMessage);
-      trace.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), TAIL_MESSAGE));
+      PythonCheck.PreciseIssue issue = ctx.addIssue(locations.getFirst().parent(), primaryMessage);
+      locations.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), TAIL_MESSAGE));
     }
 
     public void addIssueIf(Predicate<Expression> predicate, String primaryMessage) {
@@ -137,15 +136,15 @@ public class CdkUtils {
     }
 
     public boolean hasExpression(Predicate<Expression> predicate) {
-      return trace.stream().anyMatch(predicate);
+      return locations.stream().anyMatch(predicate);
     }
 
     public Optional<Expression> getExpression(Predicate<Expression> predicate) {
-      return trace.stream().filter(predicate).findFirst();
+      return locations.stream().filter(predicate).findFirst();
     }
 
-    public List<Expression> trace() {
-      return trace;
+    public Deque<Expression> locations() {
+      return locations;
     }
   }
 
@@ -154,16 +153,16 @@ public class CdkUtils {
    */
   static class ResolvedKeyValuePair {
 
-    final ExpressionTrace key;
-    final ExpressionTrace value;
+    final ExpressionFlow key;
+    final ExpressionFlow value;
 
-    private ResolvedKeyValuePair(ExpressionTrace key, ExpressionTrace value) {
+    private ResolvedKeyValuePair(ExpressionFlow key, ExpressionFlow value) {
       this.key = key;
       this.value = value;
     }
 
     static ResolvedKeyValuePair build(SubscriptionContext ctx, KeyValuePair pair) {
-      return new ResolvedKeyValuePair(ExpressionTrace.build(ctx, pair.key()), ExpressionTrace.build(ctx, pair.value()));
+      return new ResolvedKeyValuePair(ExpressionFlow.build(ctx, pair.key()), ExpressionFlow.build(ctx, pair.value()));
     }
   }
 }

@@ -210,9 +210,9 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
       .collect(Collectors.toList());
   }
 
-  private static List<CdkUtils.ExpressionTrace> getListElements(SubscriptionContext ctx, ListLiteral list) {
+  private static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
     return list.elements().expressions().stream()
-      .map(expression -> CdkUtils.ExpressionTrace.build(ctx, expression))
+      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
       .collect(Collectors.toList());
   }
 

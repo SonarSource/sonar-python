@@ -65,7 +65,7 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomain(String encryptionArgName, String argFqnMethod, String engine) {
     return (ctx, callExpression) -> getArgument(ctx, callExpression, encryptionArgName)
       .ifPresentOrElse(
-        argEncryptedTrace -> argEncryptedTrace.addIssueIf(isSensitiveOptionObj(ctx, argFqnMethod).or(isSensitiveOptionDict(ctx)), unencryptedMessage(engine)),
+        flow -> flow.addIssueIf(isSensitiveOptionObj(ctx, argFqnMethod).or(isSensitiveOptionDict(ctx)), unencryptedMessage(engine)),
         () -> ctx.addIssue(callExpression.callee(), omittingMessage(encryptionArgName, engine))
       );
   }
@@ -117,6 +117,6 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   private static Predicate<KeyValuePair> isValueFalse(SubscriptionContext ctx) {
-    return keyValuePair -> CdkUtils.ExpressionTrace.build(ctx, keyValuePair.value()).hasExpression(isFalse());
+    return keyValuePair -> CdkUtils.ExpressionFlow.build(ctx, keyValuePair.value()).hasExpression(isFalse());
   }
 }

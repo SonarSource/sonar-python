@@ -63,20 +63,20 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomainName(Predicate<Expression> predicateIssue) {
     return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "security_policy").ifPresent(
-      argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE)
+      flow -> flow.addIssueIf(predicateIssue, ENFORCE_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomain(Predicate<Expression> predicateIssue) {
     return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
-      argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE),
+      flow -> flow.addIssueIf(predicateIssue, ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkCfnDomain(String domainOptionName) {
     return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
-      argTrace -> argTrace.addIssueIf(isSensitiveOptionObj(ctx, domainOptionName)
+      flow -> flow.addIssueIf(isSensitiveOptionObj(ctx, domainOptionName)
         .or(isSensitiveDictionaryTls(ctx)), ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
