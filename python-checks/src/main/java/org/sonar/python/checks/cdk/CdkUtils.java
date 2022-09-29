@@ -58,6 +58,13 @@ public class CdkUtils {
     }
   }
 
+  public static Optional<CallExpression> getCall(Expression expression, String fqn) {
+    if (expression.is(Tree.Kind.CALL_EXPR) && CdkPredicate.isFqn(fqn).test(expression)) {
+      return Optional.of((CallExpression) expression);
+    }
+    return Optional.empty();
+  }
+
   /**
    * Resolve a particular argument of a call or get an empty optional if the argument is not set.
    */

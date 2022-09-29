@@ -29,8 +29,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
-import static org.sonar.python.checks.cdk.CdkPredicate.isSensitiveMethod;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 
 public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   private static final String ENFORCE_MESSAGE = "Change this code to enforce TLS 1.2 or above.";
@@ -75,10 +76,20 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkCfnDomain(String domainOptionName) {
     return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
-      argTrace -> argTrace.addIssueIf(isSensitiveMethod(ctx, domainOptionName, TLS_SECURITY_POLICY, isString(SENSITIVE_TLS_SECURITY_POLICY))
+      argTrace -> argTrace.addIssueIf(isSensitiveOptionObj(ctx, domainOptionName)
         .or(isSensitiveDictionaryTls(ctx)), ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
+  }
+
+  /**
+   * @return Predicate which tests if the expression is the expected object initialization
+   * and if the expected argument is set to a sensitive policy or missing
+   */
+  private static Predicate<Expression> isSensitiveOptionObj(SubscriptionContext ctx, String fqn) {
+    return expression -> getCall(expression, fqn)
+      .map(call -> getArgument(ctx, call, TLS_SECURITY_POLICY)).stream()
+      .anyMatch(policy -> policy.isEmpty() || policy.filter(flow -> flow.hasExpression(isString(SENSITIVE_TLS_SECURITY_POLICY))).isPresent());
   }
 
   private static Predicate<Expression> isSensitiveDictionaryTls(SubscriptionContext ctx) {

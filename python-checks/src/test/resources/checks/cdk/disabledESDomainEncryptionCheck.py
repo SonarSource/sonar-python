@@ -17,8 +17,8 @@ class DomainStack(Stack):
 
         # Sensitive test cases
         aws_os.Domain() # NonCompliant{{Omitting encryption_at_rest causes encryption of data at rest to be disabled for this OpenSearch domain. Make sure it is safe here.}}
-        aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions) # NonCompliant{{Make sure that using unencrypted OpenSearch domains is safe here.}}
-        aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions()) # NonCompliant
+        aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions)
+        aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions()) # NonCompliant {{Make sure that using unencrypted OpenSearch domains is safe here.}}
         aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions(enabled=False)) # NonCompliant{{Make sure that using unencrypted OpenSearch domains is safe here.}}
         aws_os.Domain(encryption_at_rest=encryptionRestOptionMethodBad) # NonCompliant
         aws_os.Domain(encryption_at_rest={"enabled": False}) # NonCompliant
@@ -29,7 +29,7 @@ class DomainStack(Stack):
         aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions(enabled=not_encrypted)) # NonCompliant
         aws_os.Domain(encryption_at_rest={"enabled": not_encrypted}) # NonCompliant
         aws_es.Domain() # NonCompliant{{Omitting encryption_at_rest causes encryption of data at rest to be disabled for this Elasticsearch domain. Make sure it is safe here.}}
-        aws_es.Domain(encryption_at_rest=aws_es.EncryptionAtRestOptions) # NonCompliant{{Make sure that using unencrypted Elasticsearch domains is safe here.}}
+        aws_es.Domain(encryption_at_rest=aws_es.EncryptionAtRestOptions)
 
         # Compliant test cases
         aws_os.Domain(encryption_at_rest=aws_os.EncryptionAtRestOptions(enabled=True))
@@ -57,7 +57,7 @@ class CfnDomainStack(Stack):
         # Sensitive test cases
         aws_os.CfnDomain() # NonCompliant{{Omitting encryption_at_rest_options causes encryption of data at rest to be disabled for this OpenSearch domain. Make sure it is safe here.}}
         aws_os.CfnDomain(encryption_at_rest_options=aws_os.CfnDomain.EncryptionAtRestOptionsProperty()) # NonCompliant{{Make sure that using unencrypted OpenSearch domains is safe here.}}
-        aws_os.CfnDomain(encryption_at_rest_options=aws_os.CfnDomain.EncryptionAtRestOptionsProperty) # NonCompliant
+        aws_os.CfnDomain(encryption_at_rest_options=aws_os.CfnDomain.EncryptionAtRestOptionsProperty)
         aws_os.CfnDomain(encryption_at_rest_options=aws_os.CfnDomain.EncryptionAtRestOptionsProperty(enabled=False)) # NonCompliant{{Make sure that using unencrypted OpenSearch domains is safe here.}}
         aws_os.CfnDomain(encryption_at_rest_options=encryptionRestOptionPropertyMethodBad) # NonCompliant
         aws_os.CfnDomain(encryption_at_rest_options={"enabled": False}) # NonCompliant

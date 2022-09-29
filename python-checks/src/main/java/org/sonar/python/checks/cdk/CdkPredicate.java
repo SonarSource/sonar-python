@@ -23,14 +23,10 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-
-import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 public class CdkPredicate {
 
@@ -82,26 +78,6 @@ public class CdkPredicate {
    */
   public static Predicate<Expression> startsWith(String expected) {
     return expression -> CdkUtils.getString(expression).filter(str -> str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
-  }
-
-  // TODO refactor this overloaded predicate method
-  // FIXME we should not raise on a FQN which is not a method call when we want to check for a sensitive method call
-  public static Predicate<Expression> isSensitiveMethod(SubscriptionContext ctx, String methodFqn, String argName, Predicate<Expression> sensitiveValuePredicate) {
-    return expression -> {
-      if (!isFqn(methodFqn).test(expression)) {
-        return false;
-      }
-      if (!expression.is(Tree.Kind.CALL_EXPR)) {
-        return true;
-      }
-
-      Optional<CdkUtils.ExpressionTrace> argTrace = getArgument(ctx, (CallExpression) expression, argName);
-      if (argTrace.isEmpty()) {
-        return true;
-      }
-
-      return argTrace.filter(trace -> trace.hasExpression(sensitiveValuePredicate)).isPresent();
-    };
   }
 
 }

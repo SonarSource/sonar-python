@@ -35,8 +35,8 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
-import static org.sonar.python.checks.cdk.CdkPredicate.isSensitiveMethod;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 
 @Rule(key = "S6308")
 public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
@@ -78,8 +78,14 @@ public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
     return String.format(UNENCRYPTED_MESSAGE, engine);
   }
 
+  /**
+   * @return Predicate which tests if the expression is the expected object initialization
+   * and if the expected argument is set to false or missing
+   */
   private static Predicate<Expression> isSensitiveOptionObj(SubscriptionContext ctx, String argFqnMethod) {
-    return isSensitiveMethod(ctx, argFqnMethod, ENABLED, isFalse());
+    return expression -> getCall(expression, argFqnMethod)
+      .map(call -> getArgument(ctx, call, ENABLED)).stream()
+      .anyMatch(enabled -> enabled.isEmpty() || enabled.filter(flow -> flow.hasExpression(isFalse())).isPresent());
   }
 
   // TODO : refactor below to use new available method 'isDictionaryWithKeyValue' in AbstractCdkResourceCheck
