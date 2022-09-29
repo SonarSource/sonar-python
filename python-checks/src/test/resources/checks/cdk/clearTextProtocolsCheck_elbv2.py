@@ -6,7 +6,7 @@ class ApplicationListenerStack(Stack):
         lb = elbv2.ApplicationLoadBalancer()
         # Noncompliant@+1 {{Make sure that using network protocols without an SSL/TLS underlay is safe here.}}
         lb.add_listener(port=80)
-      # ^^^^^^^^^^^^^^^
+      #                 ^^^^^^^
         lb.add_listener(port=8080)  # Noncompliant
 
         # Noncompliant@+1 {{Make sure that using network protocols without an SSL/TLS underlay is safe here.}}
