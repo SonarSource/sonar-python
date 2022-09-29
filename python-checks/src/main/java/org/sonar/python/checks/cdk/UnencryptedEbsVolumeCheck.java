@@ -21,6 +21,9 @@ package org.sonar.python.checks.cdk;
 
 import org.sonar.check.Rule;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6275")
 public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
 

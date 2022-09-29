@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.function.BiConsumer;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 
@@ -27,14 +28,9 @@ public abstract class AbstractS3BucketCheck extends AbstractCdkResourceCheck {
   protected static final String S3_BUCKET_FQN = "aws_cdk.aws_s3.Bucket";
 
   @Override
-  protected String resourceFqn() {
-    return S3_BUCKET_FQN;
+  protected void registerFqnConsumer() {
+    checkFqn(S3_BUCKET_FQN, this.visitBucketConstructor());
   }
 
-  @Override
-  protected void visitResourceConstructor(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    visitBucketConstructor(ctx, resourceConstructor);
-  }
-
-  abstract void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket);
+  abstract BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor();
 }

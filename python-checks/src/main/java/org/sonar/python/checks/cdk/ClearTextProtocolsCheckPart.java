@@ -21,24 +21,23 @@ package org.sonar.python.checks.cdk;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
-import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
@@ -94,12 +93,6 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
   private static final Set<Integer> HTTP_PROTOCOL_PORTS = Set.of(80, 8080, 8000, 8008);
 
-  /**
-   * Register a consumer for multiple FQNs
-   */
-  private void checkFqns(Collection<String> suffixes, BiConsumer<SubscriptionContext, CallExpression> consumer) {
-    suffixes.forEach(suffix -> checkFqn(suffix, consumer));
-  }
 
   @Override
   protected void registerFqnConsumer() {
@@ -115,7 +108,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // that contains a dict with an `external_protocol` entry set to `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.TCP`
     // or `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.HTTP`.
     checkFqn(Elb.prefix("LoadBalancer"), (ctx, call) ->
-      getArgumentList(ctx, call, LISTENERS).ifPresent(
+      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
         listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkLoadBalancerListenerDict(ctx, dict))));
 
@@ -123,7 +116,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // Raise an issue if a CfnLoadBalancer is instantiated with a `listeners` property set to a Sequence
     // that contains a dict with a `protocol` argument set to `http` or `tcp`.
     checkFqn(Elb.prefix("CfnLoadBalancer"), (ctx, call) ->
-      getArgumentList(ctx, call, LISTENERS).ifPresent(
+      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
         listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkCfnLoadBalancerListenerDict(ctx, dict))));
 
@@ -191,41 +184,25 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, String key, Predicate<Expression> expected) {
-    dict.elements().stream().map(ClearTextProtocolsCheckPart::getKeyValuePair).filter(Objects::nonNull)
-      .map(pair -> ResolvedKeyValuePair.build(ctx, pair))
-      .filter(pair -> pair.key.hasExpression(isStringValue(key)))
+    dict.elements().stream()
+      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
+      .flatMap(Optional::stream)
+      .filter(pair -> pair.key.hasExpression(isString(key)))
       .forEach(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
-  }
-
-  // ---------------------------------------------------------------------------------------
-  // General expression utils
-  // ---------------------------------------------------------------------------------------
-
-  private static Optional<Integer> getIntValue(Expression expression) {
-    try {
-      return Optional.of((int)((NumericLiteral) expression).valueAsLong());
-    } catch (ClassCastException e) {
-      return Optional.empty();
-    }
-  }
-
-  private static Optional<ListLiteral> getArgumentList(SubscriptionContext ctx, CallExpression call, String argumentName) {
-    return getArgument(ctx, call, argumentName)
-      .flatMap(arg -> arg.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL)))
-      .map(ListLiteral.class::cast);
-
   }
 
   // ---------------------------------------------------------------------------------------
   // Rule related utils
   // ---------------------------------------------------------------------------------------
 
-  @CheckForNull
-  public static KeyValuePair getKeyValuePair(DictionaryLiteralElement element) {
-    return element.is(Tree.Kind.KEY_VALUE_PAIR) ? (KeyValuePair) element : null;
+  public static Optional<ListLiteral> getArgumentAsList(SubscriptionContext ctx, CallExpression call, String argumentName) {
+    return getArgument(ctx, call, argumentName)
+      .flatMap(arg -> arg.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL)))
+      .map(ListLiteral.class::cast);
+
   }
 
-  private static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
+  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
     return getListElements(ctx, listeners).stream()
       .map(elm -> elm.getExpression(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)))
       .flatMap(Optional::stream)
@@ -233,14 +210,15 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
       .collect(Collectors.toList());
   }
 
-  private static List<ExpressionTrace> getListElements(SubscriptionContext ctx, ListLiteral list) {
+  private static List<CdkUtils.ExpressionTrace> getListElements(SubscriptionContext ctx, ListLiteral list) {
     return list.elements().expressions().stream()
-      .map(expression -> ExpressionTrace.build(ctx, expression))
+      .map(expression -> CdkUtils.ExpressionTrace.build(ctx, expression))
       .collect(Collectors.toList());
   }
 
+
   // ---------------------------------------------------------------------------------------
-  // General predicates
+  // Rule related predicates
   // ---------------------------------------------------------------------------------------
 
   /**
@@ -250,15 +228,11 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     return expression -> expression.is(Tree.Kind.LIST_LITERAL) && ((ListLiteral) expression).elements().expressions().isEmpty();
   }
 
-  // ---------------------------------------------------------------------------------------
-  // Rule related predicates
-  // ---------------------------------------------------------------------------------------
-
   /**
    * @return Predicate which tests if expression is a string and is listed in sensitive transport protocol list
    */
   private static Predicate<Expression> isSensitiveTransportProtocol(Collection<String> transportProtocols) {
-    return expression -> getStringValue(expression).filter(transportProtocols::contains).isPresent();
+    return expression -> CdkUtils.getString(expression).filter(transportProtocols::contains).isPresent();
   }
 
   /**
@@ -273,24 +247,8 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
    * @return Predicate which tests if expression is an integer and is in sensitive port list
    */
   private static Predicate<Expression> isHttpProtocolPort() {
-    return expression -> getIntValue(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
+    return expression -> CdkUtils.getInt(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
   }
 
-  /**
-   * Dataclass to store a resolved KeyValuePair structure
-   */
-  static class ResolvedKeyValuePair {
 
-    final ExpressionTrace key;
-    final ExpressionTrace value;
-
-    private ResolvedKeyValuePair(ExpressionTrace key, ExpressionTrace value) {
-      this.key = key;
-      this.value = value;
-    }
-
-    static ResolvedKeyValuePair build(SubscriptionContext ctx, KeyValuePair pair) {
-      return new ResolvedKeyValuePair(ExpressionTrace.build(ctx, pair.key()), ExpressionTrace.build(ctx, pair.value()));
-    }
-  }
 }

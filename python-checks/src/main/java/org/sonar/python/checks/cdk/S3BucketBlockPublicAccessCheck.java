@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -31,6 +31,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6281")
 public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
 
@@ -39,23 +42,25 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
 
   private static final String BLOCK_PUBLIC_ACCESS_FQN = "aws_cdk.aws_s3.BlockPublicAccess";
   private static final String BLOCK_ACLS_FQN = BLOCK_PUBLIC_ACCESS_FQN + ".BLOCK_ACLS";
-  private static final List<String> BLOCK_PUBLIC_ACCESS_ARGUMENTS = Arrays.asList(
+  private static final List<String> BLOCK_PUBLIC_ACCESS_ARGUMENTS = List.of(
     "block_public_acls",
     "ignore_public_acls",
     "block_public_policy",
     "restrict_public_buckets");
     
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
-    if (blockPublicAccess.isPresent()) {
-      checkBlockPublicAccess(ctx, blockPublicAccess.get());
-    } else {
-      ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
-    }
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> {
+      Optional<CdkUtils.ExpressionTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
+      if (blockPublicAccess.isPresent()) {
+        checkBlockPublicAccess(ctx, blockPublicAccess.get());
+      } else {
+        ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+      }
+    };
   }
 
-  private static void checkBlockPublicAccess(SubscriptionContext ctx, ArgumentTrace blockPublicAccess) {
+  private static void checkBlockPublicAccess(SubscriptionContext ctx, CdkUtils.ExpressionTrace blockPublicAccess) {
     blockPublicAccess.addIssueIf(S3BucketBlockPublicAccessCheck::blocksAclsOnly, MESSAGE);
     blockPublicAccess.trace().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
       .filter(S3BucketBlockPublicAccessCheck::isBlockPublicAccessConstructor)
@@ -86,5 +91,4 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
   private static boolean isBlockPublicAccessConstructor(CallExpression expression) {
     return Optional.ofNullable(expression.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(BLOCK_PUBLIC_ACCESS_FQN::equals).isPresent();
   }
-
 }

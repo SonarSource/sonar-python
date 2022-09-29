@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -28,6 +27,10 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkPredicate.isSensitiveMethod;
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 
 public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   private static final String ENFORCE_MESSAGE = "Change this code to enforce TLS 1.2 or above.";
@@ -48,7 +51,7 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
     // Api gateway
     checkFqn(APIGATEWAY_FQN + "DomainName", checkDomainName(isFqn(APIGATEWAY_FQN + "SecurityPolicy.TLS_1_0")));
     checkFqn(APIGATEWAYV2_FQN + "DomainName", checkDomainName(isFqn(APIGATEWAYV2_FQN + "SecurityPolicy.TLS_1_0")));
-    checkFqn(APIGATEWAY_FQN + "CfnDomainName", checkDomainName(isStringValue("TLS_1_0")));
+    checkFqn(APIGATEWAY_FQN + "CfnDomainName", checkDomainName(isString("TLS_1_0")));
 
     // OpenSearch & ElasticSearch
     checkFqn(OPENSEARCH_FQN + "Domain", checkDomain(isFqn(OPENSEARCH_FQN + "TLSSecurityPolicy.TLS_1_0")));
@@ -58,21 +61,21 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomainName(Predicate<Expression> predicateIssue) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, "security_policy").ifPresent(
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "security_policy").ifPresent(
       argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkDomain(Predicate<Expression> predicateIssue) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, TLS_SECURITY_POLICY).ifPresentOrElse(
       argTrace -> argTrace.addIssueIf(predicateIssue, ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkCfnDomain(String domainOptionName) {
-    return (ctx, callExpression) -> getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
-      argTrace -> argTrace.addIssueIf(isSensitiveMethod(ctx, domainOptionName, TLS_SECURITY_POLICY, isStringValue(SENSITIVE_TLS_SECURITY_POLICY))
+    return (ctx, callExpression) -> CdkUtils.getArgument(ctx, callExpression, "domain_endpoint_options").ifPresentOrElse(
+      argTrace -> argTrace.addIssueIf(isSensitiveMethod(ctx, domainOptionName, TLS_SECURITY_POLICY, isString(SENSITIVE_TLS_SECURITY_POLICY))
         .or(isSensitiveDictionaryTls(ctx)), ENFORCE_MESSAGE),
       () -> ctx.addIssue(callExpression.callee(), OMITTING_MESSAGE)
     );
@@ -81,14 +84,15 @@ public class WeakSSLProtocolCheckPart extends AbstractCdkResourceCheck {
   private static Predicate<Expression> isSensitiveDictionaryTls(SubscriptionContext ctx) {
     return expression -> Optional.of(expression)
       .filter(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)).map(DictionaryLiteral.class::cast)
-      .filter(hasDictionaryKeyValue(ctx, TLS_SECURITY_POLICY, isStringValue(SENSITIVE_TLS_SECURITY_POLICY)))
+      .filter(hasDictionaryKeyValue(ctx, TLS_SECURITY_POLICY, isString(SENSITIVE_TLS_SECURITY_POLICY)))
       .isPresent();
   }
 
   private static Predicate<DictionaryLiteral> hasDictionaryKeyValue(SubscriptionContext ctx, String key, Predicate<Expression> expected) {
-    return dict -> dict.elements().stream().map(ClearTextProtocolsCheckPart::getKeyValuePair).filter(Objects::nonNull)
-      .map(pair -> ClearTextProtocolsCheckPart.ResolvedKeyValuePair.build(ctx, pair))
-      .filter(pair -> pair.key.hasExpression(isStringValue(key)))
+    return dict -> dict.elements().stream()
+      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
+      .flatMap(Optional::stream)
+      .filter(pair -> pair.key.hasExpression(isString(key)))
       .allMatch(pair -> pair.value.hasExpression(expected));
   }
 }

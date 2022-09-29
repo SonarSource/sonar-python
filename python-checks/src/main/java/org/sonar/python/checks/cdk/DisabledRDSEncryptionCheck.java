@@ -19,15 +19,15 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Locale;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.Tree;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
+import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
+import static org.sonar.python.checks.cdk.CdkPredicate.startsWith;
 
 @Rule(key = "S6303")
 public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
@@ -39,9 +39,9 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_rds.DatabaseCluster", this::checkDatabaseArguments);
-    checkFqn("aws_cdk.aws_rds.DatabaseInstance", this::checkDatabaseArguments);
-    checkFqn("aws_cdk.aws_rds.CfnDBCluster", this::checkCfnDatabaseArguments);
+    checkFqns(List.of("aws_cdk.aws_rds.DatabaseCluster", "aws_cdk.aws_rds.DatabaseInstance", "aws_cdk.aws_rds.CfnDBCluster"),
+      this::checkDatabaseArguments);
+
     checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) -> {
       if (!isEngineAurora(subscriptionContext, callExpression)) {
         checkCfnDatabaseArguments(subscriptionContext, callExpression);
@@ -50,8 +50,8 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected void checkDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    Optional<ArgumentTrace> argEncrypted = getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
-    Optional<ArgumentTrace> argEncryptionKey = getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
+    Optional<CdkUtils.ExpressionTrace> argEncrypted = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
+    Optional<CdkUtils.ExpressionTrace> argEncryptionKey = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
 
     if (argEncrypted.isEmpty() && argEncryptionKey.isEmpty()) {
       ctx.addIssue(resourceConstructor.callee(), DB_OMITTING_MESSAGE);
@@ -68,19 +68,15 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected void checkCfnDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    getArgument(ctx, resourceConstructor, ARG_ENCRYPTED).ifPresentOrElse(
+    CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTED).ifPresentOrElse(
       argumentTrace -> argumentTrace.addIssueIf(isFalse(), UNENCRYPTED_MESSAGE),
       () -> ctx.addIssue(resourceConstructor.callee(), CFNDB_OMITTING_MESSAGE)
     );
   }
 
   protected boolean isEngineAurora(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    return getArgument(ctx, resourceConstructor, "engine")
+    return CdkUtils.getArgument(ctx, resourceConstructor, "engine")
       .filter(argumentTrace -> argumentTrace.hasExpression(startsWith("aurora"))).isPresent();
-  }
-
-  protected Predicate<Expression> startsWith(String expected) {
-    return e -> getStringValue(e).filter(str -> str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
   }
 }
 

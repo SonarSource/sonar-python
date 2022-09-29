@@ -19,14 +19,13 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Optional;
+import java.util.function.BiConsumer;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.python.tree.QualifiedExpressionImpl;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6245")
 public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
@@ -36,25 +35,16 @@ public class S3BucketServerEncryptionCheck extends AbstractS3BucketCheck {
   public static final String OMITTING_MESSAGE = "Omitting 'encryption' disables server-side encryption. Make sure it is safe here.";
 
   @Override
-  void visitBucketConstructor(SubscriptionContext ctx, CallExpression bucket) {
-    Optional<ArgumentTrace> optEncryptionType = getArgument(ctx, bucket, "encryption");
-    if (optEncryptionType.isPresent()) {
-      optEncryptionType.ifPresent(argumentTrace -> argumentTrace.addIssueIf(S3BucketServerEncryptionCheck::isUnencrypted, MESSAGE));
-    } else {
-      Optional<ArgumentTrace> optEncryptionKey = getArgument(ctx, bucket, "encryption_key");
-      if (!optEncryptionKey.isPresent()) {
-        ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
-      }
-    }
+  BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
+    return (ctx, bucket) -> getArgument(ctx, bucket, "encryption")
+      .ifPresentOrElse(
+        encryption -> encryption.addIssueIf(isFqn(S3_BUCKET_UNENCRYPTED_FQN), MESSAGE),
+        () -> checkEncryptionKey(ctx, bucket));
   }
 
-  protected static boolean isUnencrypted(Expression expression) {
-    return Optional.of(expression)
-      .filter(QualifiedExpression.class::isInstance)
-      .map(QualifiedExpressionImpl.class::cast)
-      .map(QualifiedExpression::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(S3_BUCKET_UNENCRYPTED_FQN::equals)
-      .isPresent();
+  private static void checkEncryptionKey(SubscriptionContext ctx, CallExpression bucket) {
+    if (getArgument(ctx, bucket, "encryption_key").isEmpty()) {
+      ctx.addIssue(bucket.callee(), OMITTING_MESSAGE);
+    }
   }
 }
