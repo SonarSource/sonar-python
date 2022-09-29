@@ -51,7 +51,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
   @Override
   BiConsumer<SubscriptionContext, CallExpression> visitBucketConstructor() {
     return (ctx, bucket) -> {
-      Optional<CdkUtils.ExpressionTrace> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
+      Optional<CdkUtils.ExpressionFlow> blockPublicAccess = getArgument(ctx, bucket, "block_public_access");
       if (blockPublicAccess.isPresent()) {
         checkBlockPublicAccess(ctx, blockPublicAccess.get());
       } else {
@@ -60,9 +60,9 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
     };
   }
 
-  private static void checkBlockPublicAccess(SubscriptionContext ctx, CdkUtils.ExpressionTrace blockPublicAccess) {
+  private static void checkBlockPublicAccess(SubscriptionContext ctx, CdkUtils.ExpressionFlow blockPublicAccess) {
     blockPublicAccess.addIssueIf(S3BucketBlockPublicAccessCheck::blocksAclsOnly, MESSAGE);
-    blockPublicAccess.trace().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
+    blockPublicAccess.locations().stream().filter(CallExpression.class::isInstance).map(CallExpression.class::cast)
       .filter(S3BucketBlockPublicAccessCheck::isBlockPublicAccessConstructor)
       .findAny()
       .ifPresent(bpaConstructor -> visitBlockPublicAccessConstructor(ctx, bpaConstructor));
@@ -74,7 +74,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
       .filter(Optional::isPresent)
       .map(Optional::get)
       .collect(Collectors.toList())
-      .forEach(argumentTrace -> argumentTrace.addIssueIf(isFalse(), MESSAGE));
+      .forEach(flow -> flow.addIssueIf(isFalse(), MESSAGE));
   }
 
   private static boolean blocksAclsOnly(Expression expression) {

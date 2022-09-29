@@ -34,7 +34,7 @@ public class UnencryptedEbsVolumeCheck extends AbstractCdkResourceCheck {
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_ec2.Volume", (ctx, volume) ->
       getArgument(ctx, volume, "encrypted").ifPresentOrElse(
-        argumentTrace -> argumentTrace.addIssueIf(isFalse(), PRIMARY_MESSAGE),
+        flow -> flow.addIssueIf(isFalse(), PRIMARY_MESSAGE),
       () -> ctx.addIssue(volume.callee(), OMITTING_MESSAGE)));
   }
 }

@@ -43,9 +43,9 @@ public class UnencryptedSqsQueueCheck extends AbstractCdkResourceCheck {
 
   protected void checkQueue(SubscriptionContext ctx, CallExpression resourceConstructor) {
     getArgument(ctx, resourceConstructor, "encryption").ifPresentOrElse(
-      argumentTrace -> {
-        argumentTrace.addIssueIf(isFqn("aws_cdk.aws_sqs.QueueEncryption.UNENCRYPTED"), UNENCRYPTED_MESSAGE);
-        argumentTrace.addIssueIf(isNone(), NONE_MESSAGE);
+      flow -> {
+        flow.addIssueIf(isFqn("aws_cdk.aws_sqs.QueueEncryption.UNENCRYPTED"), UNENCRYPTED_MESSAGE);
+        flow.addIssueIf(isNone(), NONE_MESSAGE);
       },
       () -> ctx.addIssue(resourceConstructor.callee(), OMITTING_MESSAGE)
     );
@@ -53,7 +53,7 @@ public class UnencryptedSqsQueueCheck extends AbstractCdkResourceCheck {
 
   protected void checkCfnQueue(SubscriptionContext ctx, CallExpression resourceConstructor) {
     getArgument(ctx, resourceConstructor, "kms_master_key_id").ifPresentOrElse(
-      argumentTrace -> argumentTrace.addIssueIf(isNone(), CFN_NONE_MESSAGE),
+      flow -> flow.addIssueIf(isNone(), CFN_NONE_MESSAGE),
       () -> ctx.addIssue(resourceConstructor.callee(), CFN_OMITTING_MESSAGE)
     );
   }

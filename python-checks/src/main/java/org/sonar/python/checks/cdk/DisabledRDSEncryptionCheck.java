@@ -50,8 +50,8 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
   }
 
   protected void checkDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
-    Optional<CdkUtils.ExpressionTrace> argEncrypted = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
-    Optional<CdkUtils.ExpressionTrace> argEncryptionKey = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
+    Optional<CdkUtils.ExpressionFlow> argEncrypted = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTED);
+    Optional<CdkUtils.ExpressionFlow> argEncryptionKey = CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTION_KEY);
 
     if (argEncrypted.isEmpty() && argEncryptionKey.isEmpty()) {
       ctx.addIssue(resourceConstructor.callee(), DB_OMITTING_MESSAGE);
@@ -69,14 +69,14 @@ public class DisabledRDSEncryptionCheck extends AbstractCdkResourceCheck {
 
   protected void checkCfnDatabaseArguments(SubscriptionContext ctx, CallExpression resourceConstructor) {
     CdkUtils.getArgument(ctx, resourceConstructor, ARG_ENCRYPTED).ifPresentOrElse(
-      argumentTrace -> argumentTrace.addIssueIf(isFalse(), UNENCRYPTED_MESSAGE),
+      flow -> flow.addIssueIf(isFalse(), UNENCRYPTED_MESSAGE),
       () -> ctx.addIssue(resourceConstructor.callee(), CFNDB_OMITTING_MESSAGE)
     );
   }
 
   protected boolean isEngineAurora(SubscriptionContext ctx, CallExpression resourceConstructor) {
     return CdkUtils.getArgument(ctx, resourceConstructor, "engine")
-      .filter(argumentTrace -> argumentTrace.hasExpression(startsWith("aurora"))).isPresent();
+      .filter(flow -> flow.hasExpression(startsWith("aurora"))).isPresent();
   }
 }
 

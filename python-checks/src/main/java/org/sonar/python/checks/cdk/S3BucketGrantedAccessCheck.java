@@ -26,7 +26,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -89,10 +88,8 @@ public class S3BucketGrantedAccessCheck extends AbstractS3BucketCheck {
       .ifPresent(argument -> argument.addIssueIf(CdkPredicate.isFqnOf(S3_BUCKET_SENSITIVE_POLICIES), getSensitivePolicyMessage(argument)));
   }
 
-  private static String getSensitivePolicyMessage(CdkUtils.ExpressionTrace argumentTrace){
-    Expression lastExpression = argumentTrace.trace()
-      .get(argumentTrace.trace().size()-1);
-    String attribute = ((QualifiedExpression) lastExpression).name().name();
+  private static String getSensitivePolicyMessage(CdkUtils.ExpressionFlow flow){
+    String attribute = ((QualifiedExpression) flow.locations().getLast()).name().name();
     return String.format(MESSAGE_POLICY, attribute);
   }
 
