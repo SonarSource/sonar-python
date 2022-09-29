@@ -47,7 +47,7 @@ class CfnOpenSearchStack(Stack):
 
         # Sensitive test case
         opensearch.CfnDomain() # Noncompliant
-        opensearch.CfnDomain(domain_endpoint_options=opensearch.CfnDomain.DomainEndpointOptionsProperty) # Noncompliant
+        opensearch.CfnDomain(domain_endpoint_options=opensearch.CfnDomain.DomainEndpointOptionsProperty)
         opensearch.CfnDomain(domain_endpoint_options=opensearch.CfnDomain.DomainEndpointOptionsProperty()) # Noncompliant
         opensearch.CfnDomain(domain_endpoint_options=opensearch.CfnDomain.DomainEndpointOptionsProperty(tls_security_policy="Policy-Min-TLS-1-0-2019-07")) # Noncompliant
         opensearch.CfnDomain(domain_endpoint_options=opensearch.CfnDomain.DomainEndpointOptionsProperty(tls_security_policy=str_tls_10)) # Noncompliant
