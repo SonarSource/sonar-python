@@ -55,11 +55,11 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
    * Constant wrapper of sensitive protocols and ports of AWS::ElasticLoadBalancing
    */
   private static class Elb {
-    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
+    private static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
       prefix("LoadBalancingProtocol.TCP"),
       prefix("LoadBalancingProtocol.HTTP")
     );
-    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("http", "tcp");
+    private static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("http", "tcp");
 
     static String prefix(String lbName) {
       return "aws_cdk.aws_elasticloadbalancing." + lbName;
@@ -70,13 +70,13 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
    * Constant wrapper of sensitive protocols and ports of AWS::ElasticLoadBalancingV2
    */
   private static class Elbv2 {
-    static final String SENSITIVE_HTTP_PROTOCOL_FQN = prefix("ApplicationProtocol.HTTP");
-    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
+    private static final String SENSITIVE_HTTP_PROTOCOL_FQN = prefix("ApplicationProtocol.HTTP");
+    private static final Set<String> SENSITIVE_TRANSPORT_PROTOCOL_FQNS = Set.of(
       prefix("Protocol.TCP"),
       prefix("Protocol.UDP"),
       prefix("Protocol.TCP_UDP")
     );
-    static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("HTTP", "TCP", "UDP", "TCP_UDP");
+    private static final Set<String> SENSITIVE_TRANSPORT_PROTOCOLS = Set.of("HTTP", "TCP", "UDP", "TCP_UDP");
 
     static String prefix(String lbName) {
       return "aws_cdk.aws_elasticloadbalancingv2." + lbName;
@@ -85,7 +85,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
   private static class Kinesis {
 
-    static final String SENSITIVE_STREAM_ENCRYPTION_FQN = prefix("StreamEncryption.UNENCRYPTED");
+    private static final String SENSITIVE_STREAM_ENCRYPTION_FQN = prefix("StreamEncryption.UNENCRYPTED");
     static String prefix(String lbName) {
       return "aws_cdk.aws_kinesis." + lbName;
     }
@@ -133,7 +133,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
       getArgument(ctx, call, PROTOCOL).ifPresentOrElse(
         protocol -> protocol.addIssueIf(isFqn(Elbv2.SENSITIVE_HTTP_PROTOCOL_FQN), LB_MESSAGE),
         () -> getArgument(ctx, call, "port").ifPresent(
-          port -> port.addIssueIf(isHttpProtocolPort(), LB_MESSAGE, call))));
+          port -> port.addIssueIf(isSensitiveHttpProtocolPort(), LB_MESSAGE))));
 
 
     // Raise an issue if a `NetworkListener` is instantiated or `add_listener` is called on an `NetworkLoadBalancer` object
@@ -246,7 +246,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   /**
    * @return Predicate which tests if expression is an integer and is in sensitive port list
    */
-  private static Predicate<Expression> isHttpProtocolPort() {
+  private static Predicate<Expression> isSensitiveHttpProtocolPort() {
     return expression -> CdkUtils.getInt(expression).filter(HTTP_PROTOCOL_PORTS::contains).isPresent();
   }
 
