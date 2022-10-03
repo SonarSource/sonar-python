@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
@@ -63,6 +64,13 @@ public class CdkUtils {
   public static Optional<CallExpression> getCall(Expression expression, String fqn) {
     if (expression.is(Tree.Kind.CALL_EXPR) && CdkPredicate.isFqn(fqn).test(expression)) {
       return Optional.of((CallExpression) expression);
+    }
+    return Optional.empty();
+  }
+
+  public static Optional<DictionaryLiteral> getDictionary(Expression expression) {
+    if (expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
+      return Optional.of((DictionaryLiteral) expression);
     }
     return Optional.empty();
   }

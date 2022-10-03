@@ -22,6 +22,7 @@ package org.sonar.python.checks.cdk;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
@@ -71,6 +72,34 @@ public class CdkPredicate {
    */
   public static Predicate<Expression> isString(String expectedValue) {
     return expression -> CdkUtils.getString(expression).filter(expectedValue::equals).isPresent();
+  }
+
+  /**
+   * @return Predicate which tests if expression is a string and is equal to any of the expected values
+   */
+  public static Predicate<Expression> isString(Set<String> expectedValues) {
+    return expression -> CdkUtils.getString(expression).filter(expectedValues::contains).isPresent();
+  }
+
+  /**
+   * @return Predicate which tests if expression is a string literal
+   */
+  public static Predicate<Expression> isStringLiteral() {
+    return expression -> expression.is(Tree.Kind.STRING_LITERAL);
+  }
+
+  /**
+   * @return Predicate which tests if expression is a number literal
+   */
+  public static Predicate<Expression> isNumericLiteral() {
+    return expression -> expression.is(Tree.Kind.NUMERIC_LITERAL);
+  }
+
+  /**
+   * @return Predicate which tests if expression is a list literal
+   */
+  public static Predicate<Expression> isListLiteral() {
+    return expression -> expression.is(Tree.Kind.LIST_LITERAL);
   }
 
   /**
