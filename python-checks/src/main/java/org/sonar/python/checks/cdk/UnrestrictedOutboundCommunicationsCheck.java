@@ -42,7 +42,7 @@ public class UnrestrictedOutboundCommunicationsCheck extends AbstractCdkResource
     });
   }
 
-  private boolean isArgumentTrue(Expression expression) {
+  private static boolean isArgumentTrue(Expression expression) {
     if (expression != null && expression.is(Tree.Kind.NAME)) {
       Name name = (Name) expression;
       if (name.name().equals("True")) {
