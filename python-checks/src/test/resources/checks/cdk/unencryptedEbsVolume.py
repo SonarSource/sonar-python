@@ -22,6 +22,8 @@ class NonCompliantStack(Stack):
         # Noncompliant@+1
         Volume(self, "unencrypted-explicit", availability_zone="eu-west-1a", size=Size.gibibytes(1), encrypted=False)
 
+        volume_args = {"encrypted": False}
+        Volume(self, **volume_args)  # FN
 
 class CompliantStack(Stack):
 
@@ -33,3 +35,6 @@ class CompliantStack(Stack):
 
         encrypted = True
         Volume(self, encrypted=encrypted)
+
+        volume_args = {"encrypted": True}
+        Volume(self, **volume_args)

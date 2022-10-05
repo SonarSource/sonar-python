@@ -21,10 +21,12 @@ package org.sonar.python.checks.cdk;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -34,6 +36,7 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
 
 public class CdkUtils {
@@ -68,12 +71,19 @@ public class CdkUtils {
    * Resolve a particular argument of a call or get an empty optional if the argument is not set.
    */
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
-    return callExpression.arguments().stream()
+    List<Argument> arguments = callExpression.arguments();
+    Optional<ExpressionFlow> argument = arguments.stream()
+      .filter(RegularArgument.class::isInstance)
       .map(RegularArgument.class::cast)
       .filter(regularArgument -> regularArgument.keywordArgument() != null)
       .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
       .map(regularArgument -> ExpressionFlow.build(ctx, regularArgument.expression()))
       .findAny();
+
+    if (argument.isEmpty() && arguments.stream().anyMatch(UnpackingExpression.class::isInstance)) {
+      return Optional.of(new UnresolvedExpressionFlow(ctx));
+    }
+    return argument;
   }
 
   /**
@@ -145,6 +155,19 @@ public class CdkUtils {
 
     public Deque<Expression> locations() {
       return locations;
+    }
+  }
+
+  /**
+   * In the case of unpacking expression, we cannot generate flows at the moment.
+   * However, to avoid a wrong interpretation of the unpacked expression in the context of absent arguments,
+   * an alternative dummy must be returned, which should not lead to false positives.
+   * The resolving of such expressions can be improved by <a href="https://sonarsource.atlassian.net/browse/SONARPY-1164">SONARPY-1164</a> if necessary.
+   */
+  static class UnresolvedExpressionFlow extends ExpressionFlow {
+
+    private UnresolvedExpressionFlow(SubscriptionContext ctx) {
+      super(ctx, new LinkedList<>());
     }
   }
 
