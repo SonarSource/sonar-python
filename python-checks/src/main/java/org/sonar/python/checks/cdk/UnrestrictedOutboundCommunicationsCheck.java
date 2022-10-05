@@ -20,38 +20,36 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.Expressions;
-import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6463")
 public class UnrestrictedOutboundCommunicationsCheck extends AbstractCdkResourceCheck {
+
+  public static final String OMITTING_MESSAGE = "Omitting \"allow_all_outbound\" enables unrestricted outbound communications. Make sure it is safe here.";
+  public static final String UNRESTRICTED_MESSAGE = "Make sure that allowing unrestricted outbound communications is safe here.";
+
   @Override
   protected void registerFqnConsumer() {
-    checkFqns(List.of("aws_cdk.aws_ec2.SecurityGroup", "aws_cdk.aws_ec2.SecurityGroup.from_security_group_id"), (subscriptionContext, callExpression) -> {
-      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(3, "allow_all_outbound", callExpression.arguments());
-      if (argument == null) {
-        subscriptionContext.addIssue(callExpression, "Omitting \"allow_all_outbound\" enables unrestricted outbound communications. Make sure it is safe here.");
-      } else if (isArgumentTrue(argument.expression())) {
-        subscriptionContext.addIssue(argument, "Make sure that allowing unrestricted outbound communications is safe here.");
-      }
-    });
+    checkFqns(List.of("aws_cdk.aws_ec2.SecurityGroup", "aws_cdk.aws_ec2.SecurityGroup.from_security_group_id"), (subscriptionContext, callExpression) ->
+      getArgument(subscriptionContext, callExpression, "allow_all_outbound").ifPresentOrElse(
+        argument -> argument.addIssueIf(isTrue(), UNRESTRICTED_MESSAGE),
+        () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+      )
+    );
   }
 
-  private static boolean isArgumentTrue(Expression expression) {
-    if (expression != null && expression.is(Tree.Kind.NAME)) {
-      Name name = (Name) expression;
-      if (name.name().equals("True")) {
-        return true;
-      } else {
-        Expression assignedValue = Expressions.singleAssignedValue(name);
-        return isArgumentTrue(assignedValue);
-      }
-    }
-    return false;
+  public static Predicate<Expression> isTrue() {
+    return expression -> Optional.ofNullable(expression)
+      .filter(Name.class::isInstance)
+      .map(Name.class::cast)
+      .map(Name::name)
+      .filter("True"::equals)
+      .isPresent();
   }
 }
