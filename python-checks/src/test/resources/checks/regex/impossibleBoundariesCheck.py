@@ -26,9 +26,7 @@ def non_compliant(input):
     re.match(r'a\n\Ab', input, re.MULTILINE)  # Noncompliant
 
     # False positives because the end delimiter does not capture the newlines (SONARPHP-1238)
-    re.match(r'a$(\n)', input)  # Noncompliant
     re.match(r'a$./s', input)  # Noncompliant
-    re.match(r'a\Z(\n)', input)  # Noncompliant
 
 
 def probably_non_compliant(input):
@@ -78,3 +76,6 @@ def compliant(input):
     re.match(r'a$\nb', input, re.MULTILINE)
     re.match(r'a\n^b', input, re.MULTILINE)
     re.compile(r"(\d+)(\s+.*)$                         # score, vulgar components", re.VERBOSE)
+    re.match(r'a$(\n)', input)
+    re.match(r'a\Z(\n)', input)
+

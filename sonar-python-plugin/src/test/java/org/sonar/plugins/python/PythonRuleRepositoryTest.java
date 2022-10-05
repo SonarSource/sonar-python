@@ -76,6 +76,19 @@ public class PythonRuleRepositoryTest {
     assertThat(s4721_9_2.securityStandards()).doesNotContain("owaspTop10-2021:a3");
   }
 
+  @Test
+  public void psiDssSecurityStandard() {
+    RulesDefinition.Repository repository_9_5 = buildRepository(9, 5);
+    RulesDefinition.Rule s4792_9_5 = repository_9_5.rule("S4792");
+    assertThat(s4792_9_5).isNotNull();
+    assertThat(s4792_9_5.securityStandards()).contains("pciDss-3.2:10.1", "pciDss-3.2:10.2", "pciDss-3.2:10.3", "pciDss-4.0:10.2");
+
+    RulesDefinition.Repository repository_9_4 = buildRepository(9, 4);
+    RulesDefinition.Rule s4792_9_4 = repository_9_4.rule("S4792");
+    assertThat(s4792_9_4).isNotNull();
+    assertThat(s4792_9_4.securityStandards()).doesNotContain("pciDss-3.2:10.1", "pciDss-3.2:10.2", "pciDss-3.2:10.3", "pciDss-4.0:10.2");
+  }
+
   private List<String> nonAbstractCheckFiles() throws IOException {
     return Files.walk(new File("../python-checks/src/main/java/org/sonar/python/checks").toPath())
       .filter(Files::isRegularFile)

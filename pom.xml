@@ -92,7 +92,8 @@
     <mockito.version>3.9.0</mockito.version>
     <sonar.version>9.3.0.51899</sonar.version>
     <sonar.orchestrator.version>3.36.0.63</sonar.orchestrator.version>
-    <sonar-analyzer-commons.version>1.24.0.965</sonar-analyzer-commons.version>
+    <sonar.api.version>9.11.0.290</sonar.api.version>
+    <sonar-analyzer-commons.version>1.28.0.1058</sonar-analyzer-commons.version>
     <sonarlint-core.version>6.3.0.36253</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
     <protobuf.version>3.19.2</protobuf.version>
@@ -238,9 +239,9 @@
 
       <!-- provided dependencies -->
       <dependency>
-        <groupId>org.sonarsource.sonarqube</groupId>
+        <groupId>org.sonarsource.api.plugin</groupId>
         <artifactId>sonar-plugin-api</artifactId>
-        <version>${sonar.version}</version>
+        <version>${sonar.api.version}</version>
         <scope>provided</scope>
       </dependency>
     </dependencies>

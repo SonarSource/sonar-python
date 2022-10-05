@@ -21,6 +21,8 @@ package org.sonar.plugins.python;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
@@ -96,6 +98,11 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   }
 
   @Override
+  public NewIssue addFlow(Iterable<NewIssueLocation> flowLocations, FlowType flowType, @Nullable String flowDescription) {
+    throw new IllegalStateException("Not supposed to be tested");
+  }
+
+  @Override
   public NewIssueLocation newLocation() {
     return parent.newLocation();
   }
@@ -105,6 +112,11 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
     // save() is final in DefaultSonarLintIssue
     this.saved = true;
     context.allIssues().add(this);
+  }
+
+  @Override
+  public NewIssue setRuleDescriptionContextKey(@Nullable String ruleDescriptionContextKey) {
+    throw new IllegalStateException("Not supposed to be tested");
   }
 
   @Override
@@ -132,9 +144,14 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
     throw new IllegalStateException("Not supposed to be tested");
   }
 
-  // @Override in SonarQube 9.2
+  @Override
   public boolean isQuickFixAvailable() {
     return isQuickFixAvailable;
+  }
+
+  @Override
+  public Optional<String> ruleDescriptionContextKey() {
+    throw new IllegalStateException("Not supposed to be tested");
   }
 
   protected boolean getSaved(){

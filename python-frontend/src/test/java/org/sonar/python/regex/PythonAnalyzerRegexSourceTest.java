@@ -28,6 +28,7 @@ import org.sonarsource.analyzer.commons.regex.RegexParser;
 import org.sonarsource.analyzer.commons.regex.RegexSource;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterTree;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
 import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
 
@@ -35,6 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.regex.RegexParserTestUtils.assertKind;
 import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 import static org.sonar.python.regex.RegexParserTestUtils.makeSource;
+import static org.sonar.python.regex.RegexParserTestUtils.parseRegex;
 
 public class PythonAnalyzerRegexSourceTest {
 
@@ -89,6 +91,14 @@ public class PythonAnalyzerRegexSourceTest {
     assertCharacterLocation(items.get(2), 'b', 3, 0, 1);
     assertCharacterLocation(items.get(3), 'c', 3, 1, 2);
     assertCharacterLocation(items.get(6), 'd', 4, 0, 1);
+  }
+
+  @Test
+  public void test_location_on_regex_opener() {
+    RegexParseResult regex = parseRegex("r'/(?(1|2)ab|cd|ef)/'");
+    RegexSyntaxElement openingQuote = regex.openingQuote();
+    LocationInFile locationInFile = ((PythonAnalyzerRegexSource) openingQuote.getSource()).locationInFileFor(openingQuote.getRange());
+    assertLocation(2,9,10, locationInFile);
   }
 
   private static void assertCharacterLocation(RegexTree tree, char expected, int line, int startLineOffset, int endLineOffset) {
