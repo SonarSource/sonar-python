@@ -33,6 +33,7 @@ import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
 import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
 import org.sonar.python.checks.cdk.UnencryptedSageMakerNotebookCheck;
 import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
+import org.sonar.python.checks.cdk.UnrestrictedOutboundCommunicationsCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -298,6 +299,7 @@ public final class CheckList {
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
       UnreadPrivateMethodsCheck.class,
+      UnrestrictedOutboundCommunicationsCheck.class,
       UnsafeHttpMethodsCheck.class,
       UndefinedSymbolsCheck.class,
       UnusedFunctionParameterCheck.class,
