@@ -76,3 +76,6 @@ def compliant(input):
     re.match(r'a$\nb', input, re.MULTILINE)
     re.match(r'a\n^b', input, re.MULTILINE)
     re.compile(r"(\d+)(\s+.*)$                         # score, vulgar components", re.VERBOSE)
+    re.match(r'a$(\n)', input)
+    re.match(r'a\Z(\n)', input)
+
