@@ -382,14 +382,6 @@ public class InferredTypesTest {
     assertThat(getBuiltinsTypeCategory()).isNotEmpty();
   }
 
-  @Test
-  public void special_form_should_be_treated_as_any() {
-    assertThat(lastExpression(
-      "import collections.abc as collections_abc",
-      "collections_abc.Callable" // has type typing._SpecialForm
-    ).type()).isEqualTo(anyType());
-  }
-
   private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.Type.Builder builder = SymbolsProtos.Type.newBuilder();
     TextFormat.merge(protobuf, builder);

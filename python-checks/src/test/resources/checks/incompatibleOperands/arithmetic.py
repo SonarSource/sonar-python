@@ -71,10 +71,6 @@ def builtin_noncompliant():
 
   -'1'  # Noncompliant
 
-  from queue import Queue
-  q = Queue()
-  q.maxsize + 'other' # Noncompliant
-
 
 def builtin_compliant():
   1 + int("1")
