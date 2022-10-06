@@ -22,16 +22,12 @@ package org.sonar.python.tree;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.SymbolImpl;
-import org.sonar.python.types.InferredTypes;
 
 public class QualifiedExpressionImpl extends PyTree implements QualifiedExpression {
   private final Name name;
@@ -72,12 +68,5 @@ public class QualifiedExpressionImpl extends PyTree implements QualifiedExpressi
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(qualifier, dotToken, name).collect(Collectors.toList());
-  }
-
-  @Override
-  public InferredType type() {
-    Symbol symbol = name.symbol();
-    if (symbol == null) return InferredTypes.anyType();
-    return ((SymbolImpl) symbol).inferredType();
   }
 }

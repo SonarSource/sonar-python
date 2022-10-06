@@ -600,25 +600,4 @@ public class TypeInferenceTest {
       "  x"
     ).type()).isEqualTo(anyType());
   }
-
-  @Test
-  public void typeshed_attributes() {
-    assertThat(lastExpression(
-      "def f():",
-      "  e = OSError()",
-      "  e.errno.bit_length()"
-    ).type()).isEqualTo(INT);
-  }
-
-  @Test
-  public void user_defined_attributes() {
-    assertThat(lastExpression(
-      "class Foo:",
-      "  attr: int",
-      "def f():",
-      "  e = Foo()",
-      "  e.attr.bit_length()"
-    ).type()).isEqualTo(anyType());
-  }
-
 }

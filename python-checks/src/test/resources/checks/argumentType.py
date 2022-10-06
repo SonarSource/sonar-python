@@ -207,9 +207,3 @@ def duck_typing_no_member():
 
   a_function(Parent())  # OK, still duck type compatible with ChildA
   another_function(Parent())  # Noncompliant
-
-
-def special_form_types():
-  import collections.abc as collections_abc
-  class A: ...
-  isinstance(A(), collections_abc.Callable) # OK
