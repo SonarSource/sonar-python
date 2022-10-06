@@ -164,6 +164,10 @@ public class CdkUtils {
     public Deque<Expression> locations() {
       return locations;
     }
+
+    public Expression getLast() {
+      return locations().getLast();
+    }
   }
 
   /**

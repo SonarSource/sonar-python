@@ -350,3 +350,21 @@ ec2.CfnSecurityGroup( # not a call expression
         ec2.CfnSecurityGroup.IngressProperty
     ]
 )
+ec2.CfnSecurityGroup( # not provided with toPort
+    security_group_ingress=[
+        {
+            "ipProtocol":"6",
+            "cidrIpv6":"::/0",
+            "fromPort":22
+        }
+    ]
+)
+ec2.CfnSecurityGroup( # not provided with fromPort
+    security_group_ingress=[
+        {
+            "ipProtocol":"6",
+            "cidrIpv6":"::/0",
+            "toPort":22
+        }
+    ]
+)
