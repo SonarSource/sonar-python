@@ -28,9 +28,11 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -38,6 +40,8 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
 
 public class CdkUtils {
 
@@ -63,6 +67,17 @@ public class CdkUtils {
   public static Optional<CallExpression> getCall(Expression expression, String fqn) {
     if (expression.is(Tree.Kind.CALL_EXPR) && CdkPredicate.isFqn(fqn).test(expression)) {
       return Optional.of((CallExpression) expression);
+    }
+    return Optional.empty();
+  }
+
+  public static Optional<ListLiteral> getListExpression(ExpressionFlow expression) {
+    return expression.getExpression(isListLiteral()).map(ListLiteral.class::cast);
+  }
+
+  public static Optional<DictionaryLiteral> getDictionary(Expression expression) {
+    if (expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
+      return Optional.of((DictionaryLiteral) expression);
     }
     return Optional.empty();
   }
@@ -155,6 +170,10 @@ public class CdkUtils {
 
     public Deque<Expression> locations() {
       return locations;
+    }
+
+    public Expression getLast() {
+      return locations().getLast();
     }
   }
 
