@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 /**
  * Since most CDK related checks check arguments of method calls or object initializations,
@@ -49,8 +50,8 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
 
   protected void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(node.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
+    Optional.of(node)
+      .map(TreeUtils::fullyQualifiedNameFromExpression)
       .map(fqn -> fqnCallConsumers.getOrDefault(fqn, null))
       .ifPresent(consumer -> consumer.accept(ctx, node));
   }

@@ -372,6 +372,21 @@ public class TreeUtilsTest {
   }
 
   @Test
+  public void test_fullyQualifiedNameFromExpression() {
+    // check resolving from typeshed stub
+    FileInput fileInput = PythonTestUtils.parse(
+      "import aws_cdk.aws_ec2 as ec2",
+      "class Test:",
+      "    def test_connections_attribute(var):",
+      "        obj = ec2.Instance()",
+      "        conn = obj.connections",
+      "        conn.allow_from()"
+    );
+    CallExpression callExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.fullyQualifiedNameFromExpression(callExpression)).isEqualTo("aws_cdk.aws_ec2.Connections.allow_from");
+  }
+
+  @Test
   public void test_fullyQualifiedNameFromQualifiedExpression() {
     FileInput fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",

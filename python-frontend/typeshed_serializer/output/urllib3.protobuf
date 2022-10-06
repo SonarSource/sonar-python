@@ -1,0 +1,43 @@
+fully_qualified_name: "urllib3"
+classes {
+  name: "PoolManager"
+  fully_qualified_name: "urllib3.poolmanager.PoolManager"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "urlopen"
+    fully_qualified_name: "urllib3.poolmanager.PoolManager.urlopen"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+  }
+  methods {
+    name: "request"
+    fully_qualified_name: "urllib3.poolmanager.PoolManager.request"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+  }
+}
+vars {
+  name: "poolmanager"
+  fully_qualified_name: "urllib3.poolmanager"
+  is_imported_module: true
+}

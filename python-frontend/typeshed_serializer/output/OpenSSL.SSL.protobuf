@@ -1,0 +1,46 @@
+fully_qualified_name: "OpenSSL.SSL"
+classes {
+  name: "Context"
+  fully_qualified_name: "OpenSSL.SSL.Context"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "set_verify"
+    fully_qualified_name: "OpenSSL.SSL.Context.set_verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "OpenSSL.SSL.Context"
+        fully_qualified_name: "OpenSSL.SSL.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}
+vars {
+  name: "VERIFY_NONE"
+  fully_qualified_name: "OpenSSL.SSL.VERIFY_NONE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

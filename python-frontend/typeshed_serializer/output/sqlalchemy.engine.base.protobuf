@@ -1,0 +1,75 @@
+fully_qualified_name: "sqlalchemy.engine.base"
+classes {
+  name: "Connection"
+  fully_qualified_name: "sqlalchemy.engine.base.Connection"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "execute"
+    fully_qualified_name: "sqlalchemy.engine.base.Connection.execute"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "Engine"
+  fully_qualified_name: "sqlalchemy.engine.base.Engine"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "connect"
+    fully_qualified_name: "sqlalchemy.engine.base.Engine.connect"
+    return_annotation {
+      pretty_printed_name: "sqlalchemy.engine.base.Connection"
+      fully_qualified_name: "sqlalchemy.engine.base.Connection"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlalchemy.engine.base.Engine"
+        fully_qualified_name: "sqlalchemy.engine.base.Engine"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "execute"
+    fully_qualified_name: "sqlalchemy.engine.base.Engine.execute"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+  }
+}

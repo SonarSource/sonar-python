@@ -33,4 +33,9 @@ public class UnrestrictedAdministrationCheckTest {
   public void test_CfnSecurityGroupIngress() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedAdministration_CfnSecurityGroupIngress.py", new UnrestrictedAdministrationCheck());
   }
+
+  @Test
+  public void test_Connections() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedAdministration_Connections.py", new UnrestrictedAdministrationCheck());
+  }
 }

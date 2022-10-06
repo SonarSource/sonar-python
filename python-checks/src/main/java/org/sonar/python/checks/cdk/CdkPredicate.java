@@ -19,15 +19,20 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 public class CdkPredicate {
 
@@ -114,6 +119,69 @@ public class CdkPredicate {
    */
   public static Predicate<Expression> startsWith(String expected) {
     return expression -> CdkUtils.getString(expression).filter(str -> str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
+  }
+
+  public static Predicate<Expression> isCallExpression() {
+    return expression -> expression.is(Tree.Kind.CALL_EXPR);
+  }
+
+  // Predicate on a Expression that is expected to be a CallExpression with a specific argument (name/pos) on which predicates are applicable
+  @SafeVarargs
+  public static Predicate<Expression> hasArgument(String name, int pos, Predicate<Expression>... predicates) {
+    return expression -> {
+      if (!expression.is(Tree.Kind.CALL_EXPR)) {
+        return false;
+      }
+
+      return getArgument(null, (CallExpression) expression, name, pos)
+        .filter(flow -> flow.hasExpression(Arrays.stream(predicates).reduce(x -> true, Predicate::and))).isPresent();
+    };
+  }
+
+  @SafeVarargs
+  public static Predicate<Expression> hasArgument(String name, Predicate<Expression>... predicates) {
+    return hasArgument(name, -1, predicates);
+  }
+
+  public static Predicate<Expression> hasIntervalArguments(String argNameMin, int argPosMin, String argNameMax, int argPosMax, Collection<Long> values) {
+    return expression -> {
+      if (!expression.is(Tree.Kind.CALL_EXPR)) {
+        return false;
+      }
+
+      Optional<Long> minVal = getArgumentAsLong((CallExpression) expression, argNameMin, argPosMin);
+      Optional<Long> maxVal = getArgumentAsLong((CallExpression) expression, argNameMax, argPosMax);
+
+      if (minVal.isEmpty() || maxVal.isEmpty()) {
+        return false;
+      }
+
+      return anyValueInInterval(values, minVal.get(), maxVal.get());
+    };
+  }
+
+  public static Predicate<Expression> hasIntervalArguments(String argNameMin, String argNameMax, Collection<Long> values) {
+    return hasIntervalArguments(argNameMin, -1, argNameMax, -1, values);
+  }
+
+  private static Optional<Long> getArgumentAsLong(CallExpression callExpression, String argName, int argPos) {
+    return getArgument(null, callExpression, argName, argPos)
+      .flatMap(flow -> flow.getExpression(isNumericLiteral()))
+      .map(NumericLiteral.class::cast)
+      .map(NumericLiteral::valueAsLong);
+  }
+
+  private static boolean anyValueInInterval(Collection<Long> values, long min, long max) {
+    for (long val : values) {
+      if (min <= val && val <= max) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static Predicate<Expression> isNumeric(Set<Long> vals) {
+    return expression -> expression.is(Tree.Kind.NUMERIC_LITERAL) && vals.contains(((NumericLiteral) expression).valueAsLong());
   }
 
 }

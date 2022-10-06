@@ -54,6 +54,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.types.RuntimeType;
 
 public class TreeUtils {
   private TreeUtils() {
@@ -338,8 +339,12 @@ public class TreeUtils {
   @CheckForNull
   public static String fullyQualifiedNameFromExpression(Expression expression) {
     if (expression.is(Kind.NAME)) {
-      Symbol symbol = ((Name) expression).symbol();
-      return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
+      if (expression.type() instanceof RuntimeType) {
+        return ((RuntimeType) expression.type()).getTypeClass().fullyQualifiedName();
+      } else {
+        Symbol symbol = ((Name) expression).symbol();
+        return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
+      }
     }
     if (expression.is(Kind.QUALIFIED_EXPR)) {
       return fullyQualifiedNameFromQualifiedExpression((QualifiedExpression) expression);

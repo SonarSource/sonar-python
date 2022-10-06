@@ -1,0 +1,122 @@
+fully_qualified_name: "django.http.request"
+classes {
+  name: "HttpRequest"
+  fully_qualified_name: "django.http.request.HttpRequest"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  attributes {
+    name: "GET"
+    fully_qualified_name: "django.http.request.HttpRequest.GET"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+  attributes {
+    name: "POST"
+    fully_qualified_name: "django.http.request.HttpRequest.POST"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+  attributes {
+    name: "COOKIES"
+    fully_qualified_name: "django.http.request.HttpRequest.COOKIES"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+  attributes {
+    name: "META"
+    fully_qualified_name: "django.http.request.HttpRequest.META"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+  attributes {
+    name: "FILES"
+    fully_qualified_name: "django.http.request.HttpRequest.FILES"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "django.http.request.HttpRequest.headers"
+    type_annotation {
+      pretty_printed_name: "django.http.request.QueryDict"
+      fully_qualified_name: "django.http.request.QueryDict"
+    }
+  }
+}
+classes {
+  name: "QueryDict"
+  fully_qualified_name: "django.http.request.QueryDict"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "get"
+    fully_qualified_name: "django.http.request.QueryDict.get"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "django.http.request.QueryDict"
+        fully_qualified_name: "django.http.request.QueryDict"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "django.http.request.QueryDict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "django.http.request.QueryDict"
+        fully_qualified_name: "django.http.request.QueryDict"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}

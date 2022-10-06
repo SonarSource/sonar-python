@@ -1,0 +1,54 @@
+fully_qualified_name: "sqlalchemy.orm.query"
+classes {
+  name: "Query"
+  fully_qualified_name: "sqlalchemy.orm.query.Query"
+  super_classes: "SonarPythonAnalyzerFakeStub.CustomStubBase"
+  methods {
+    name: "from_statement"
+    fully_qualified_name: "sqlalchemy.orm.query.Query.from_statement"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+  }
+  methods {
+    name: "filter"
+    fully_qualified_name: "sqlalchemy.orm.query.Query.filter"
+    return_annotation {
+      pretty_printed_name: "sqlalchemy.orm.query.Query"
+      fully_qualified_name: "sqlalchemy.orm.query.Query"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlalchemy.orm.query.Query"
+        fully_qualified_name: "sqlalchemy.orm.query.Query"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}
