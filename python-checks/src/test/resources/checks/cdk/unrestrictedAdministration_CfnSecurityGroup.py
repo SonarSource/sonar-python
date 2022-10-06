@@ -6,7 +6,7 @@ ec2.CfnSecurityGroup(self, "cfn-based-security-group", group_description="cfn ba
     security_group_ingress=[
         ec2.CfnSecurityGroup.IngressProperty(
             ip_protocol="6",
-            cidr_ip="0.0.0.0/0", # Noncompliant
+            cidr_ip="0.0.0.0/0", # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
             from_port=22,
             to_port=22
         )
@@ -18,7 +18,7 @@ ec2.CfnSecurityGroup(
     security_group_ingress=[
         ec2.CfnSecurityGroup.IngressProperty(
             ip_protocol="-1",
-            cidr_ip="0.0.0.0/0" # Noncompliant
+            cidr_ip="0.0.0.0/0" # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
         )
     ]
 )

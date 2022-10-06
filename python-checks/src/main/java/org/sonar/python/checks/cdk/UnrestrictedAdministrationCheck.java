@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +32,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 
-import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isNumericLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
@@ -43,7 +42,7 @@ import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 import static org.sonar.python.checks.cdk.CdkUtils.getDictionary;
 
-@Rule(key="S6321")
+@Rule(key = "S6321")
 public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
   private static final String MESSAGE = "Change this IP range to a subset of trusted IP addresses.";
 
@@ -64,25 +63,21 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_ec2.CfnSecurityGroup", UnrestrictedAdministrationCheck::checkCfnSecurityGroup);
-    checkFqn("aws_cdk.aws_ec2.CfnSecurityGroupIngress", UnrestrictedAdministrationCheck::checkCfnSecurityGroupIngress);
+    checkFqn("aws_cdk.aws_ec2.CfnSecurityGroupIngress", (ctx, callExpression) -> checkCallCfnSecuritySensitive(new Call(ctx, callExpression)));
   }
 
   // Checks methods
   private static void checkCfnSecurityGroup(SubscriptionContext ctx, CallExpression callExpression) {
     getArgument(ctx, callExpression, "security_group_ingress")
-      .flatMap(flow -> flow.getExpression(isListLiteral()).map(ListLiteral.class::cast))
-      .ifPresent(list -> list.elements().expressions()
-        // Process each expression in the Python list
-        .forEach(expression -> {
-          CdkUtils.ExpressionFlow flow = CdkUtils.ExpressionFlow.build(ctx, expression);
-          raiseIssueIfIngressPropertyCallWithSensitiveArgument(ctx, flow.getLast());
-          raiseIssueIfDictionaryWithSensitiveArgument(ctx, flow.getLast());
-        })
-      );
-  }
-
-  private static void checkCfnSecurityGroupIngress(SubscriptionContext ctx, CallExpression callExpression) {
-    checkCallCfnSecuritySensitive(new Call(ctx, callExpression));
+      .flatMap(CdkUtils::getListExpression)
+      .map(list -> list.elements().expressions())
+      .orElse(Collections.emptyList())
+      .stream()
+      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
+      .forEach(flow -> {
+        raiseIssueIfIngressPropertyCallWithSensitiveArgument(ctx, flow.getLast());
+        raiseIssueIfDictionaryWithSensitiveArgument(ctx, flow.getLast());
+      });
   }
 
   // Methods to handle call expressions
@@ -102,7 +97,7 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
   private static boolean isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(Call call) {
     return call.hasArgument(IP_PROTOCOL, isString(SENSITIVE_PROTOCOL))
       && (call.hasArgument(CIDR_IP, isString(EMPTY_IPV4)) || call.hasArgument(CIDR_IPV6, isString(EMPTY_IPV6)))
-      && call.inInterval("from_port", "to_port", ADMIN_PORTS);
+      && call.hasSensitivePortRange("from_port", "to_port");
   }
 
   private static boolean isCallWithArgumentInvalidProtocolEmptyIpAddress(Call call) {
@@ -124,19 +119,19 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
   }
 
   private static boolean isDictionaryWithAttributeBadProtocolEmptyIpAddressAdminPort(DictionaryAsMap map) {
-    return map.is(IPPROTOCOL, isString(SENSITIVE_PROTOCOL))
-      && (map.is(CIDRIP, isString(EMPTY_IPV4)) || map.is(CIDRIPV6, isString(EMPTY_IPV6)))
-      && map.inInterval("fromPort", "toPort", ADMIN_PORTS);
+    return map.hasKeyValuePair(IPPROTOCOL, isString(SENSITIVE_PROTOCOL))
+      && (map.hasKeyValuePair(CIDRIP, isString(EMPTY_IPV4)) || map.hasKeyValuePair(CIDRIPV6, isString(EMPTY_IPV6)))
+      && map.hasSensitivePortRange("fromPort", "toPort");
   }
 
   private static boolean isDictionaryWithAttributeInvalidProtocolEmptyIpAddress(DictionaryAsMap map) {
-    return map.is(IPPROTOCOL, isString(ANY_PROTOCOL))
-      && (map.is(CIDRIP, isString(EMPTY_IPV4)) || map.is(CIDRIPV6, isString(EMPTY_IPV6)));
+    return map.hasKeyValuePair(IPPROTOCOL, isString(ANY_PROTOCOL))
+      && (map.hasKeyValuePair(CIDRIP, isString(EMPTY_IPV4)) || map.hasKeyValuePair(CIDRIPV6, isString(EMPTY_IPV6)));
   }
 
   // Class to handle Dictionary elements as a Map of ResolvedKeyValuePair, useful in case we need to refer to several elements and not only looking for a specific one.
   // The keys are all resolved String in CdkUtils.ResolvedKeyValuePair.key
-  static class DictionaryAsMap implements CompareInterval {
+  static class DictionaryAsMap {
     Map<String, CdkUtils.ResolvedKeyValuePair> map = new HashMap<>();
 
     public static DictionaryAsMap build(SubscriptionContext ctx, DictionaryLiteral dictionary) {
@@ -153,7 +148,7 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
       return dict;
     }
 
-    public boolean is(String key, Predicate<Expression> valuePredicate) {
+    public boolean hasKeyValuePair(String key, Predicate<Expression> valuePredicate) {
       return map.containsKey(key) && map.get(key).value.hasExpression(valuePredicate);
     }
 
@@ -170,14 +165,25 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
       }
     }
 
-    public Optional<Long> asLong(String name) {
+    public Optional<Long> getArgumentAsLong(String name) {
       return get(name, isNumericLiteral())
         .map(NumericLiteral.class::cast)
         .map(NumericLiteral::valueAsLong);
     }
+
+    boolean hasSensitivePortRange(String minName, String maxName) {
+      Optional<Long> min = getArgumentAsLong(minName);
+      Optional<Long> max = getArgumentAsLong(maxName);
+
+      if (min.isEmpty() || max.isEmpty()) {
+        return false;
+      }
+
+      return isInInterval(min.get(), max.get(), ADMIN_PORTS);
+    }
   }
 
-  static class Call implements CompareInterval {
+  static class Call {
     SubscriptionContext ctx;
     CallExpression callExpression;
 
@@ -190,36 +196,31 @@ public class UnrestrictedAdministrationCheck extends AbstractCdkResourceCheck {
       return getArgument(ctx, callExpression, name).filter(flow -> flow.hasExpression(predicate)).isPresent();
     }
 
-    public Optional<Long> asLong(String name) {
+    public Optional<Long> getArgumentAsLong(String name) {
       return getArgument(ctx, callExpression, name)
         .flatMap(flow -> flow.getExpression(isNumericLiteral()))
         .map(NumericLiteral.class::cast)
         .map(NumericLiteral::valueAsLong);
     }
-  }
 
-  // Define the inInterval method used by both Call and DictionaryAsMap classes
-  interface CompareInterval {
-    Optional<Long> asLong(String name);
-
-    default boolean inInterval(String minName, String maxName, long[] numbers) {
-      Optional<Long> min = asLong(minName);
-      Optional<Long> max = asLong(maxName);
+    boolean hasSensitivePortRange(String minName, String maxName) {
+      Optional<Long> min = getArgumentAsLong(minName);
+      Optional<Long> max = getArgumentAsLong(maxName);
 
       if (min.isEmpty() || max.isEmpty()) {
         return false;
       }
 
-      return isInInterval(min.get(), max.get(), numbers);
+      return isInInterval(min.get(), max.get(), ADMIN_PORTS);
     }
+  }
 
-    private static boolean isInInterval(long min, long max, long[] numbers) {
-      for (long port : numbers) {
-        if (min <= port && port <= max) {
-          return true;
-        }
+  private static boolean isInInterval(long min, long max, long[] numbers) {
+    for (long port : numbers) {
+      if (min <= port && port <= max) {
+        return true;
       }
-      return false;
     }
+    return false;
   }
 }

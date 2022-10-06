@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -39,6 +40,8 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
 
 public class CdkUtils {
 
@@ -66,6 +69,10 @@ public class CdkUtils {
       return Optional.of((CallExpression) expression);
     }
     return Optional.empty();
+  }
+
+  public static Optional<ListLiteral> getListExpression(ExpressionFlow expression) {
+    return expression.getExpression(isListLiteral()).map(ListLiteral.class::cast);
   }
 
   public static Optional<DictionaryLiteral> getDictionary(Expression expression) {

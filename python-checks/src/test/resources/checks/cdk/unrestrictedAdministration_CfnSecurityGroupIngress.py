@@ -15,13 +15,13 @@ ec2.CfnSecurityGroupIngress(
 # Sensitive test cases
 ec2.CfnSecurityGroupIngress(
     ip_protocol="tcp",
-    cidr_ip="0.0.0.0/0", # Noncompliant
+    cidr_ip="0.0.0.0/0", # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
     from_port=22,
     to_port=22
 )
 ec2.CfnSecurityGroupIngress(
     ip_protocol="6",
-    cidr_ipv6="::/0", # Noncompliant
+    cidr_ipv6="::/0", # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
     from_port=22,
     to_port=22
 )
