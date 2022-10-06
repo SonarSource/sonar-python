@@ -140,7 +140,7 @@ class Scope {
           .collect(Collectors.toSet());
         return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
       default:
-        SymbolImpl copiedSymbol = new SymbolImpl(symbolName, symbol.fullyQualifiedName(), symbol.annotatedTypeName());
+        SymbolImpl copiedSymbol = ((SymbolImpl) symbol).copyWithoutUsages(symbolName);
         for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
           copiedSymbol.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
         }
