@@ -53,18 +53,20 @@ public class SymbolImpl implements Symbol {
   private Kind kind;
   private InferredType inferredType = InferredTypes.anyType();
   private String annotatedTypeName = null;
+
+  /**
+   * Represents type deserialized from typeshed or from a custom stub.
+   * This will be lazily converted to an InferredType
+   */
+  private SymbolsProtos.Type deserializedType = null;
+
+  private boolean hasReadDeserializedType = false;
+
   protected Set<String> validForPythonVersions = Collections.emptySet();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
-    this.kind = Kind.OTHER;
-  }
-
-  public SymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedTypeName) {
-    this.name = name;
-    this.fullyQualifiedName = fullyQualifiedName;
-    this.annotatedTypeName = annotatedTypeName;
     this.kind = Kind.OTHER;
   }
 
@@ -75,6 +77,7 @@ public class SymbolImpl implements Symbol {
     if (!fqn.isEmpty()) {
       this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
     }
+    this.deserializedType = varSymbol.getTypeAnnotation();
     this.validForPythonVersions = new HashSet<>(varSymbol.getValidForList());
     this.kind = Kind.OTHER;
   }
@@ -141,7 +144,24 @@ public class SymbolImpl implements Symbol {
     childrenSymbolByName.put(symbol.name(), symbol);
   }
 
+
+  /**
+   * Note that, for symbols that have been deserialized from protobuf, we compute their type lazily.
+   *
+   * <pre>
+   *   a_var : Foo
+   *   ...
+   *   class Foo: ...
+   * </pre>
+   *
+   * Here, {@code a_var} has type {@code Foo}, which is defined later.
+   * Hence, by resolving types lazily, we avoid having to topologically sort dependencies between types declaration and their usages.
+   */
   public InferredType inferredType() {
+    if (!hasReadDeserializedType && deserializedType != null) {
+      inferredType = InferredTypes.fromTypeshedProtobuf(deserializedType);
+      hasReadDeserializedType = true;
+    }
     return inferredType;
   }
 
@@ -159,7 +179,15 @@ public class SymbolImpl implements Symbol {
   }
 
   public SymbolImpl copyWithoutUsages() {
-    return new SymbolImpl(name(), fullyQualifiedName, annotatedTypeName);
+    return copyWithoutUsages(name());
+  }
+
+  public SymbolImpl copyWithoutUsages(String name) {
+    SymbolImpl copiedSymbol = new SymbolImpl(name, fullyQualifiedName());
+    copiedSymbol.annotatedTypeName = annotatedTypeName;
+    copiedSymbol.deserializedType = deserializedType;
+    copiedSymbol.hasReadDeserializedType = hasReadDeserializedType;
+    return copiedSymbol;
   }
 
   public void removeUsages() {
