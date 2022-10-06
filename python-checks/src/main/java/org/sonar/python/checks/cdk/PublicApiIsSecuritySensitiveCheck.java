@@ -19,11 +19,10 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Optional;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.StringLiteral;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6333")
 public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck {
@@ -32,18 +31,11 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_apigateway.CfnMethod",
-      (subscriptionContext, callExpression) -> CdkUtils.getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
-        argument -> argument.addIssueIf(isAuthorizationTypeNone(), SAFE_API_MESSAGE),
-        () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)));
-  }
-
-  private static Predicate<Expression> isAuthorizationTypeNone() {
-    return expression -> Optional.ofNullable(expression)
-      .filter(StringLiteral.class::isInstance)
-      .map(StringLiteral.class::cast)
-      .map(StringLiteral::trimmedQuotesValue)
-      .filter("NONE"::equals)
-      .isPresent();
+    checkFqn("aws_cdk.aws_apigateway.CfnMethod", (subscriptionContext, callExpression) ->
+      getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
+        argument -> argument.addIssueIf(isString("NONE"), SAFE_API_MESSAGE),
+        () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+      )
+    );
   }
 }
