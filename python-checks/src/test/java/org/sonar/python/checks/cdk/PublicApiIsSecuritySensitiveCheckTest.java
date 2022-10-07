@@ -28,7 +28,12 @@ public class PublicApiIsSecuritySensitiveCheckTest {
   final PythonCheck check = new PublicApiIsSecuritySensitiveCheck();
 
   @Test
-  public void test() {
+  public void testCfnMethod() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicApiIsSecuritySensitiveCfnMethodCheck.py", check);
+  }
+
+  @Test
+  public void testCfnRoute() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicApiIsSecuritySensitiveCfnRouteCheck.py", check);
   }
 }
