@@ -149,7 +149,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName, true);
       classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(classMembers);
