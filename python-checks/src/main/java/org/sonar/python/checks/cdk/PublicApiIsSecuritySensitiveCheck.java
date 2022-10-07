@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.List;
 import org.sonar.check.Rule;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
@@ -31,7 +32,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_apigateway.CfnMethod", (subscriptionContext, callExpression) ->
+    checkFqns(List.of("aws_cdk.aws_apigateway.CfnMethod", "aws_cdk.aws_apigatewayv2.CfnRoute"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
         argument -> argument.addIssueIf(isString("NONE"), SAFE_API_MESSAGE),
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)

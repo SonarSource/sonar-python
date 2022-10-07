@@ -1,7 +1,7 @@
 import aws_cdk.aws_apigateway as apigateway
 
 class PublicApiIsSecuritySensitiveCfnMethodCheck:
-    def __init__(self, vpc):
+    def __init__(self, auth_from_argument):
         apigateway.CfnMethod(
             self,
             "no-auth",
@@ -23,6 +23,12 @@ class PublicApiIsSecuritySensitiveCfnMethodCheck:
         apigateway.CfnMethod(
             self,
             "auth",
+            authorization_type=auth_from_argument  # Compliant
+        )
+
+        apigateway.CfnMethod(
+            self,
+            "auth",
             authorization_type="COGNITO_USER_POOLS"  # Compliant
         )
 
@@ -38,5 +44,16 @@ class PublicApiIsSecuritySensitiveCfnMethodCheck:
             "no-auth",
             authorization_type=auth_type_none  # NonCompliant{{Make sure that creating public APIs is safe here.}}
 #           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
 
+        apigateway.CfnMethod(
+            self,
+            "auth",
+            authorization_type=unknown
+        )
+
+        apigateway.CfnMethod(
+            self,
+            "auth",
+            authorization_type=getValue()
         )
