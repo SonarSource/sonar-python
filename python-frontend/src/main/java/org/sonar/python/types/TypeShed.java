@@ -208,7 +208,7 @@ public class TypeShed {
     return !intersection.isEmpty();
   }
 
-  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName) {
+  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass) {
     Set<Symbol> symbols = new HashSet<>();
     for (Object descriptor : protobufDescriptors) {
       if (descriptor instanceof SymbolsProtos.ClassSymbol) {
@@ -225,7 +225,7 @@ public class TypeShed {
       }
       if (descriptor instanceof SymbolsProtos.VarSymbol) {
         SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
-        SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName);
+        SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName, isFromClass);
         if (varSymbol.getIsImportedModule()) {
           Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName());
           moduleExportedSymbols.values().forEach(symbol::addChildSymbol);
@@ -355,7 +355,7 @@ public class TypeShed {
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName());
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName(), false);
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }

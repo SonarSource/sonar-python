@@ -70,14 +70,14 @@ public class SymbolImpl implements Symbol {
     this.kind = Kind.OTHER;
   }
 
-  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName) {
+  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName, boolean isFromClass) {
     this.name = varSymbol.getName();
     this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName(), moduleName, name);
     String fqn = varSymbol.getTypeAnnotation().getFullyQualifiedName();
     if (!fqn.isEmpty()) {
       this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
     }
-    this.deserializedType = varSymbol.getTypeAnnotation();
+    this.deserializedType = isFromClass ? varSymbol.getTypeAnnotation() : null;
     this.validForPythonVersions = new HashSet<>(varSymbol.getValidForList());
     this.kind = Kind.OTHER;
   }
