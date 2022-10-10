@@ -107,7 +107,6 @@ public class CdkUtils {
 
   public static Optional<ListLiteral> getArgumentAsList(SubscriptionContext ctx, CallExpression call, String argumentName) {
     return getArgument(ctx, call, argumentName).flatMap(CdkUtils::getList);
-
   }
 
   public static Optional<ListLiteral> getList(ExpressionFlow flow) {
@@ -115,16 +114,15 @@ public class CdkUtils {
       .map(ListLiteral.class::cast);
   }
 
+  public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
+    return list.elements().expressions().stream()
+      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
+      .collect(Collectors.toList());
+  }
+
   public static Optional<DictionaryLiteral> getDictionary(ExpressionFlow flow) {
     return flow.getExpression(e -> e.is(Tree.Kind.DICTIONARY_LITERAL))
       .map(DictionaryLiteral.class::cast);
-  }
-
-  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
-    return getListElements(ctx, listeners).stream()
-      .map(CdkUtils::getDictionary)
-      .flatMap(Optional::stream)
-      .collect(Collectors.toList());
   }
 
   public static Optional<ResolvedKeyValuePair> getDictionaryPair(SubscriptionContext ctx, DictionaryLiteral dict, String key) {
@@ -137,17 +135,18 @@ public class CdkUtils {
       .findFirst();
   }
 
+  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
+    return getListElements(ctx, listeners).stream()
+      .map(CdkUtils::getDictionary)
+      .flatMap(Optional::stream)
+      .collect(Collectors.toList());
+  }
+
   public static List<ResolvedKeyValuePair> resolveDictionary(SubscriptionContext ctx, DictionaryLiteral dict) {
     return dict.elements().stream()
       .map(e -> CdkUtils.getKeyValuePair(ctx, e))
       .flatMap(Optional::stream)
       .collect(Collectors.toUnmodifiableList());
-  }
-
-  public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
-    return list.elements().expressions().stream()
-      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
-      .collect(Collectors.toList());
   }
 
   /**
