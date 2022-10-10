@@ -20,12 +20,9 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isTrue;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6463")
@@ -42,14 +39,5 @@ public class UnrestrictedOutboundCommunicationsCheck extends AbstractCdkResource
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
       )
     );
-  }
-
-  public static Predicate<Expression> isTrue() {
-    return expression -> Optional.ofNullable(expression)
-      .filter(Name.class::isInstance)
-      .map(Name.class::cast)
-      .map(Name::name)
-      .filter("True"::equals)
-      .isPresent();
   }
 }
