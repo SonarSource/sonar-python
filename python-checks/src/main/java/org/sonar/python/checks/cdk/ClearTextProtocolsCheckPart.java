@@ -24,9 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
@@ -36,8 +34,9 @@ import org.sonar.python.tree.TreeUtils;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
-import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgumentAsList;
+import static org.sonar.python.checks.cdk.CdkUtils.getDictionaryInList;
 
 public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
 
@@ -184,38 +183,8 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, String key, Predicate<Expression> expected) {
-    dict.elements().stream()
-      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
-      .flatMap(Optional::stream)
-      .filter(pair -> pair.key.hasExpression(isString(key)))
-      .forEach(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
+    CdkUtils.getDictionaryPair(ctx, dict, key).ifPresent(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
   }
-
-  // ---------------------------------------------------------------------------------------
-  // Rule related utils
-  // ---------------------------------------------------------------------------------------
-
-  public static Optional<ListLiteral> getArgumentAsList(SubscriptionContext ctx, CallExpression call, String argumentName) {
-    return getArgument(ctx, call, argumentName)
-      .flatMap(arg -> arg.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL)))
-      .map(ListLiteral.class::cast);
-
-  }
-
-  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
-    return getListElements(ctx, listeners).stream()
-      .map(elm -> elm.getExpression(expr -> expr.is(Tree.Kind.DICTIONARY_LITERAL)))
-      .flatMap(Optional::stream)
-      .map(DictionaryLiteral.class::cast)
-      .collect(Collectors.toList());
-  }
-
-  private static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
-    return list.elements().expressions().stream()
-      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
-      .collect(Collectors.toList());
-  }
-
 
   // ---------------------------------------------------------------------------------------
   // Rule related predicates

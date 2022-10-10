@@ -26,6 +26,7 @@ import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
+import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
@@ -242,6 +243,7 @@ public final class CheckList {
       PredictableSaltCheck.class,
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
+      PrivilegePolicyCheck.class,
       ProcessSignallingCheck.class,
       PropertyAccessorParameterCountCheck.class,
       PseudoRandomCheck.class,

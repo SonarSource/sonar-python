@@ -24,6 +24,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -42,6 +45,7 @@ import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 
 public class CdkUtils {
 
@@ -101,6 +105,51 @@ public class CdkUtils {
     return argument;
   }
 
+  public static Optional<ListLiteral> getArgumentAsList(SubscriptionContext ctx, CallExpression call, String argumentName) {
+    return getArgument(ctx, call, argumentName).flatMap(CdkUtils::getList);
+
+  }
+
+  public static Optional<ListLiteral> getList(ExpressionFlow flow) {
+    return flow.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL))
+      .map(ListLiteral.class::cast);
+  }
+
+  public static Optional<DictionaryLiteral> getDictionary(ExpressionFlow flow) {
+    return flow.getExpression(e -> e.is(Tree.Kind.DICTIONARY_LITERAL))
+      .map(DictionaryLiteral.class::cast);
+  }
+
+  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
+    return getListElements(ctx, listeners).stream()
+      .map(CdkUtils::getDictionary)
+      .flatMap(Optional::stream)
+      .collect(Collectors.toList());
+  }
+
+  public static Optional<ResolvedKeyValuePair> getDictionaryPair(SubscriptionContext ctx, DictionaryLiteral dict, String key) {
+    return getDictionaryPair(CdkUtils.resolveDictionary(ctx, dict), key);
+  }
+
+  public static Optional<ResolvedKeyValuePair> getDictionaryPair(List<ResolvedKeyValuePair> pairs, String key) {
+    return pairs.stream()
+      .filter(pair -> pair.key.hasExpression(isString(key)))
+      .findFirst();
+  }
+
+  public static List<ResolvedKeyValuePair> resolveDictionary(SubscriptionContext ctx, DictionaryLiteral dict) {
+    return dict.elements().stream()
+      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
+      .flatMap(Optional::stream)
+      .collect(Collectors.toUnmodifiableList());
+  }
+
+  public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
+    return list.elements().expressions().stream()
+      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
+      .collect(Collectors.toList());
+  }
+
   /**
    * Resolve the key and value of a dictionary element or get an empty optional if the element is an UnpackingExpression.
    */
@@ -143,14 +192,15 @@ public class CdkUtils {
       }
     }
 
-    public void addIssue(String primaryMessage) {
+    public void addIssue(String primaryMessage, IssueLocation... secondaryLocations) {
       PythonCheck.PreciseIssue issue = ctx.addIssue(locations.getFirst().parent(), primaryMessage);
       locations.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), TAIL_MESSAGE));
+      Stream.of(secondaryLocations).forEach(issue::secondary);
     }
 
-    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage) {
+    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage, IssueLocation... secondaryLocations) {
       if (hasExpression(predicate)) {
-        addIssue(primaryMessage);
+        addIssue(primaryMessage, secondaryLocations);
       }
     }
 
@@ -205,6 +255,10 @@ public class CdkUtils {
 
     static ResolvedKeyValuePair build(SubscriptionContext ctx, KeyValuePair pair) {
       return new ResolvedKeyValuePair(ExpressionFlow.build(ctx, pair.key()), ExpressionFlow.build(ctx, pair.value()));
+    }
+
+    public ExpressionFlow value() {
+      return value;
     }
   }
 }
