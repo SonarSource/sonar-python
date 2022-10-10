@@ -43,6 +43,13 @@ public class CdkPredicate {
   }
 
   /**
+   * @return Predicate which tests if expression is boolean literal and is set to `true`
+   */
+  public static Predicate<Expression> isTrue() {
+    return expression -> Optional.ofNullable(expression.firstToken()).map(Token::value).filter("True"::equals).isPresent();
+  }
+
+  /**
    * @return Predicate which tests if expression is `none`
    */
   public static Predicate<Expression> isNone() {

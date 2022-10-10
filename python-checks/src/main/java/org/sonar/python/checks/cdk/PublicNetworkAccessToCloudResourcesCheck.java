@@ -19,24 +19,18 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.List;
 import org.sonar.check.Rule;
 
-import static org.sonar.python.checks.cdk.CdkPredicate.isTrue;
-import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
-
-@Rule(key = "S6463")
-public class UnrestrictedOutboundCommunicationsCheck extends AbstractCdkResourceCheck {
-
-  public static final String OMITTING_MESSAGE = "Omitting \"allow_all_outbound\" enables unrestricted outbound communications. Make sure it is safe here.";
-  public static final String UNRESTRICTED_MESSAGE = "Make sure that allowing unrestricted outbound communications is safe here.";
+@Rule(key = "S6329")
+public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourceCheck {
+  private static final String ERROR_MESSAGE = "Make sure allowing public network access is safe here.";
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqns(List.of("aws_cdk.aws_ec2.SecurityGroup", "aws_cdk.aws_ec2.SecurityGroup.from_security_group_id"), (subscriptionContext, callExpression) ->
-      getArgument(subscriptionContext, callExpression, "allow_all_outbound").ifPresentOrElse(
-        argument -> argument.addIssueIf(isTrue(), UNRESTRICTED_MESSAGE),
-        () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+    checkFqn("aws_cdk.aws_dms.CfnReplicationInstance", (subscriptionContext, callExpression) ->
+      CdkUtils.getArgument(subscriptionContext, callExpression, "publicly_accessible").ifPresentOrElse(
+        argument -> argument.addIssueIf(CdkPredicate.isTrue(), ERROR_MESSAGE),
+        () -> subscriptionContext.addIssue(callExpression, ERROR_MESSAGE)
       )
     );
   }
