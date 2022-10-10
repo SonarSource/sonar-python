@@ -20,23 +20,44 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6333")
 public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck {
-  private static final String SAFE_API_MESSAGE = "Make sure that creating public APIs is safe here.";
+  private static final String ERROR_MESSAGE = "Make sure that creating public APIs is safe here.";
   private static final String OMITTING_MESSAGE = "Omitting \"authorization_type\" disables authentication. Make sure it is safe here.";
 
   @Override
   protected void registerFqnConsumer() {
     checkFqns(List.of("aws_cdk.aws_apigateway.CfnMethod", "aws_cdk.aws_apigatewayv2.CfnRoute"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
-        argument -> argument.addIssueIf(isString("NONE"), SAFE_API_MESSAGE),
+        argument -> argument.addIssueIf(isString("NONE"), ERROR_MESSAGE),
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
       )
     );
+    checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
+      getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
+        argument -> argument.addIssueIf(isAuthorizationTypeNone(), ERROR_MESSAGE),
+        () -> {}
+      )
+    );
+  }
+
+  private static Predicate<Expression> isAuthorizationTypeNone() {
+    return expression -> Optional.of(expression)
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
+      .filter(Objects::nonNull)
+      .filter(symbol-> "aws_cdk.aws_apigateway.AuthorizationType.NONE".equals(symbol.fullyQualifiedName()))
+      .isPresent();
   }
 }

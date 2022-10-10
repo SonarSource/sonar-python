@@ -36,4 +36,9 @@ public class PublicApiIsSecuritySensitiveCheckTest {
   public void testCfnRoute() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicApiIsSecuritySensitiveCfnRouteCheck.py", check);
   }
+
+  @Test
+  public void testRestApi() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicApiIsSecuritySensitiveRestApiCheck.py", check);
+  }
 }
