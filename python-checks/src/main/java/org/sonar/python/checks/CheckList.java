@@ -27,6 +27,7 @@ import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
+import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
@@ -247,6 +248,7 @@ public final class CheckList {
       PseudoRandomCheck.class,
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
+      PublicNetworkAccessToCloudResourcesCheck.class,
       RaiseOutsideExceptCheck.class,
       RedundantJumpCheck.class,
       RedundantRegexAlternativesCheck.class,

@@ -1,0 +1,195 @@
+<p>Enabling public network access to cloud resources can affect an organization’s ability to protect its data or internal operations from data theft
+or disruption.</p>
+<p>Depending on the component, inbound access from the Internet can be enabled via:</p>
+<ul>
+  <li> a boolean value that explicitly allows access to the public network. </li>
+  <li> the assignment of a public IP address. </li>
+  <li> database firewall rules that allow public IP ranges. </li>
+</ul>
+<p>Deciding to allow public access may happen for various reasons such as for quick maintenance, time saving, or by accident.</p>
+<p>This decision increases the likelihood of attacks on the organization, such as:</p>
+<ul>
+  <li> data breaches. </li>
+  <li> intrusions into the infrastructure to permanently steal from it. </li>
+  <li> and various malicious traffic, such as DDoS attacks. </li>
+</ul>
+<h2>Ask Yourself Whether</h2>
+<p>This cloud resource:</p>
+<ul>
+  <li> should be publicly accessible to any Internet user. </li>
+  <li> requires inbound traffic from the Internet to function properly. </li>
+</ul>
+<p>There is a risk if you answered no to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>Avoid publishing cloud services on the Internet unless they are intended to be publicly accessible, such as customer portals or e-commerce
+sites.</p>
+<p>Use private networks (and associated private IP addresses) and VPC peering or other secure communication tunnels to communicate with other cloud
+components.</p>
+<p>The goal is to prevent the component from intercepting traffic coming in via the public IP address. If the cloud resource does not support the
+absence of a public IP address, assign a public IP address to it, but do not create listeners for the public IP address.</p>
+<h2>Sensitive Code Example</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/Instance.html">aws_cdk.aws_ec2.Instance</a> and similar constructs:</p>
+<pre>
+from aws_cdk import aws_ec2 as ec2
+
+ec2.Instance(
+    self,
+    "vpc_subnet_public",
+    instance_type=nano_t2,
+    machine_image=ec2.MachineImage.latest_amazon_linux(),
+    vpc=vpc,
+    vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC) # Sensitive
+)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnInstance.html">aws_cdk.aws_ec2.CfnInstance</a>:</p>
+<pre>
+from aws_cdk import aws_ec2 as ec2
+
+ec2.CfnInstance(
+    self,
+    "cfn_public_exposed",
+    instance_type="t2.micro",
+    image_id="ami-0ea0f26a6d50850c5",
+    network_interfaces=[
+        ec2.CfnInstance.NetworkInterfaceProperty(
+            device_index="0",
+            associate_public_ip_address=True, # Sensitive
+            delete_on_termination=True,
+            subnet_id=vpc.select_subnets(subnet_type=ec2.SubnetType.PUBLIC).subnet_ids[0]
+        )
+    ]
+)
+</pre>
+<p>For <a
+href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_dms/CfnReplicationInstance.html">aws_cdk.aws_dms.CfnReplicationInstance</a>:</p>
+<pre>
+from aws_cdk import aws_dms as dms
+
+rep_instance = dms.CfnReplicationInstance(
+    self,
+    "explicit_public",
+    replication_instance_class="dms.t2.micro",
+    allocated_storage=5,
+    publicly_accessible=True, # Sensitive
+    replication_subnet_group_identifier=subnet_group.replication_subnet_group_identifier,
+    vpc_security_group_ids=[vpc.vpc_default_security_group]
+)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_rds/CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
+<pre>
+from aws_cdk import aws_rds as rds
+from aws_cdk import aws_ec2 as ec2
+
+rds_subnet_group_public = rds.CfnDBSubnetGroup(
+    self,
+    "public_subnet",
+    db_subnet_group_description="Subnets",
+    subnet_ids=vpc.select_subnets(
+        subnet_type=ec2.SubnetType.PUBLIC
+    ).subnet_ids
+)
+
+rds.CfnDBInstance(
+    self,
+    "public-public-subnet",
+    engine="postgres",
+    master_username="foobar",
+    master_user_password="12345678",
+    db_instance_class="db.r5.large",
+    allocated_storage="200",
+    iops=1000,
+    db_subnet_group_name=rds_subnet_group_public.ref,
+    publicly_accessible=True, # Sensitive
+    vpc_security_groups=[sg.security_group_id]
+)
+</pre>
+<h2>Compliant Solution</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/Instance.html">aws_cdk.aws_ec2.Instance</a>:</p>
+<pre>
+from aws_cdk import aws_ec2 as ec2
+
+ec2.Instance(
+    self,
+    "vpc_subnet_private",
+    instance_type=nano_t2,
+    machine_image=ec2.MachineImage.latest_amazon_linux(),
+    vpc=vpc,
+    vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT)
+)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnInstance.html">aws_cdk.aws_ec2.CfnInstance</a>:</p>
+<pre>
+from aws_cdk import aws_ec2 as ec2
+
+ec2.CfnInstance(
+    self,
+    "cfn_private",
+    instance_type="t2.micro",
+    image_id="ami-0ea0f26a6d50850c5",
+    network_interfaces=[
+        ec2.CfnInstance.NetworkInterfaceProperty(
+            device_index="0",
+            associate_public_ip_address=False, # Compliant
+            delete_on_termination=True,
+            subnet_id=vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT).subnet_ids[0]
+        )
+    ]
+)
+</pre>
+<p>For <a
+href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_dms/CfnReplicationInstance.html">aws_cdk.aws_dms.CfnReplicationInstance</a>:</p>
+<pre>
+from aws_cdk import aws_dms as dms
+
+rep_instance = dms.CfnReplicationInstance(
+    self,
+    "explicit_private",
+    replication_instance_class="dms.t2.micro",
+    allocated_storage=5,
+    publicly_accessible=False,
+    replication_subnet_group_identifier=subnet_group.replication_subnet_group_identifier,
+    vpc_security_group_ids=[vpc.vpc_default_security_group]
+)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_rds/CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
+<pre>
+from aws_cdk import aws_rds as rds
+from aws_cdk import aws_ec2 as ec2
+
+rds_subnet_group_private = rds.CfnDBSubnetGroup(
+    self,
+    "private_subnet",
+    db_subnet_group_description="Subnets",
+    subnet_ids=vpc.select_subnets(
+        subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
+    ).subnet_ids
+)
+
+rds.CfnDBInstance(
+    self,
+    "private-private-subnet",
+    engine="postgres",
+    master_username="foobar",
+    master_user_password="12345678",
+    db_instance_class="db.r5.large",
+    allocated_storage="200",
+    iops=1000,
+    db_subnet_group_name=rds_subnet_group_private.ref,
+    publicly_accessible=False,
+    vpc_security_groups=[sg.security_group_id]
+)
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP Top 10 2021 Category A1</a> - Broken Access Control </li>
+  <li> <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">AWS Documentation</a> - Amazon EC2 instance IP
+  addressing </li>
+  <li> <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.PublicPrivate.html">AWS Documentation</a> - Public and
+  private replication instances </li>
+  <li> <a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html">AWS Documentation</a> - VPC Peering </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/284">MITRE, CWE-284</a> - Improper Access Control </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/668">MITRE, CWE-668</a> - Exposure of Resource to Wrong Sphere </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Broken Access Control
+  </li>
+</ul>
+
