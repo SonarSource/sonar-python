@@ -35,7 +35,6 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
-import static org.sonar.python.checks.cdk.CdkUtils.getArgumentAsList;
 import static org.sonar.python.checks.cdk.CdkUtils.getDictionaryInList;
 
 public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
@@ -107,7 +106,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // that contains a dict with an `external_protocol` entry set to `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.TCP`
     // or `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.HTTP`.
     checkFqn(Elb.prefix("LoadBalancer"), (ctx, call) ->
-      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
+      getArgument(ctx, call, LISTENERS).flatMap(CdkUtils::getList).ifPresent(
         listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkLoadBalancerListenerDict(ctx, dict))));
 
@@ -115,7 +114,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // Raise an issue if a CfnLoadBalancer is instantiated with a `listeners` property set to a Sequence
     // that contains a dict with a `protocol` argument set to `http` or `tcp`.
     checkFqn(Elb.prefix("CfnLoadBalancer"), (ctx, call) ->
-      getArgumentAsList(ctx, call, LISTENERS).ifPresent(
+      getArgument(ctx, call, LISTENERS).flatMap(CdkUtils::getList).ifPresent(
         listeners -> getDictionaryInList(ctx, listeners)
           .forEach(dict -> checkCfnLoadBalancerListenerDict(ctx, dict))));
 

@@ -22,7 +22,6 @@ package org.sonar.python.checks.cdk;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -31,7 +30,6 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 import org.sonar.python.checks.cdk.CdkUtils.ResolvedKeyValuePair;
-import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
@@ -46,8 +44,8 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) -> {
-      @Nullable ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
-      CdkUtils.getArgumentAsList(ctx, call, "actions").ifPresent(actions -> {
+     ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
+      CdkUtils.getArgument(ctx, call, "actions").flatMap(CdkUtils::getList).ifPresent(actions -> {
         if (effect == null || effect.hasExpression(isFqn("aws_cdk.aws_iam.Effect.ALLOW"))) {
           checkWildcardAction(ctx, actions, effect);
         }
@@ -62,7 +60,7 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
       getPolicyFromJson(ctx, call).ifPresent(json -> {
         List<DictionaryLiteral> statements = CdkUtils.getDictionaryPair(ctx, json, "Statement")
-          .map(ResolvedKeyValuePair::value)
+          .map(pair -> pair.value)
           .flatMap(CdkUtils::getList)
           .map(list -> CdkUtils.getDictionaryInList(ctx, list))
           .orElse(Collections.emptyList());
@@ -74,11 +72,11 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
   private static void checkPolicyStatement(SubscriptionContext ctx, DictionaryLiteral statement) {
     List<ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
     CdkUtils.getDictionaryPair(pairs, "Effect")
-      .map(ResolvedKeyValuePair::value)
+      .map(pair -> pair.value)
       .filter(effect -> effect.hasExpression(isString("Allow")))
       .ifPresent(effect ->
         CdkUtils.getDictionaryPair(pairs, "Action")
-          .map(ResolvedKeyValuePair::value)
+          .map(pair -> pair.value)
           .ifPresent(action -> checkActionFromJson(ctx, action, effect)));
   }
 
@@ -103,14 +101,12 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
       });
   }
 
-
   private static IssueLocation secondaryLocation(ExpressionFlow flow) {
     return IssueLocation.preciseLocation(flow.locations().getLast().parent(), SECONDARY_MESSAGE);
   }
 
   private static Optional<DictionaryLiteral> getPolicyFromJson(SubscriptionContext ctx, CallExpression call) {
-    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "obj", call.arguments()))
-      .map(argument -> ExpressionFlow.build(ctx, argument.expression()))
+    return CdkUtils.getArgument(ctx, call, "obj", 0)
       .flatMap(CdkUtils::getDictionary);
   }
 }

@@ -29,17 +29,17 @@ public class PrivilegePolicyCheckTest {
 
   @Test
   public void policyStatement() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/PrivilegePolicyCheck/policyStatement.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/policyStatement.py", check);
   }
 
   @Test
   public void fromJson() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/PrivilegePolicyCheck/fromJson.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/fromJson.py", check);
   }
 
   @Test
   public void policyDocument() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/PrivilegePolicyCheck/policyDocument.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/policyDocument.py", check);
   }
 
 }

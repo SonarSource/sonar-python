@@ -31,3 +31,11 @@ iam.PolicyStatement.from_json({
     "Effect": "Allow",
     "Action": ["iam:GetAccountSummary", "*"],  # Noncompliant
 })
+
+action = ["*"]  # Noncompliant
+#         ^^^
+iam.PolicyStatement.from_json({
+    "Effect": "Allow",
+#   ^^^^^^^^^^^^^^^^^<
+    "Action": action,
+})
