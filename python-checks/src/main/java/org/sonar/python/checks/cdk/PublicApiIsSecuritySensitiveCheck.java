@@ -46,7 +46,9 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
     checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
         argument -> argument.addIssueIf(isAuthorizationTypeNone(), ERROR_MESSAGE),
-        () -> {}
+        () -> {
+          subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE);
+        }
       )
     );
   }

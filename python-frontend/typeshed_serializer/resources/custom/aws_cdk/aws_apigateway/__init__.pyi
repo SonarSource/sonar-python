@@ -1,10 +1,16 @@
 from SonarPythonAnalyzerFakeStub import CustomStubBase
+from typing import Optional
 
 class Resource(CustomStubBase):
-    def add_method(self, *args, **kwargs) -> None: ...
+    parent_resource: Resource
+    api: RestApi
 
-class IResource(CustomStubBase):
+    def add_method(self, *args, **kwargs) -> None: ...
+    def get_resource(self, *args, **kwargs) -> Resource: ...
     def add_resource(self, *args, **kwargs) -> Resource: ...
 
+
+# class IResource(CustomStubBase):
+
 class RestApi(CustomStubBase):
-    root: IResource
+    root: Resource

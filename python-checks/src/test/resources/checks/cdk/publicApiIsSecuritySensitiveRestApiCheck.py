@@ -1,5 +1,6 @@
 import aws_cdk.aws_apigateway as apigateway
 
+
 class PublicApiIsSecuritySensitiveRestApiCheck:
     def __init__(self, auth_from_argument):
         api = apigateway.RestApi(
@@ -44,6 +45,39 @@ class PublicApiIsSecuritySensitiveRestApiCheck:
             authorization_type=apigateway.AuthorizationType.NONE  # NonCompliant{{Make sure that creating public APIs is safe here.}}
         )
 
-        test.api.root.add_method(  # NonCompliant{{Omitting "authorization_type" disables authentication. Make sure it is safe here.}}
+        test.api.root.add_method(  # FN
             "DELETE"
+        )
+
+
+class PublicApiIsSecuritySensitiveRestApiSecureConstructorCheck:
+    def __init__(self, auth_from_argument):
+        api = apigateway.RestApi(
+            self,
+            "RestApiDefault",
+            default_method_options={"authorization_type": apigateway.AuthorizationType.IAM}
+        )
+
+        test = api.root.add_resource("test")
+        test.api.root.add_method(  # Compliant; secure default
+            "DELETE"
+        )
+
+class PublicApiIsSecuritySensitiveRestApiSecureAddResourceCallCheck:
+    def __init__(self, auth_from_argument):
+        api = apigateway.RestApi(
+            self,
+            "RestApiDefault"
+        )
+
+        opts = apigateway.MethodOptions(
+            authorization_type=apigateway.AuthorizationType.IAM
+        )
+
+        test = api.root.add_resource(
+            "test",
+            default_method_options=opts
+        )
+        test.add_method(  # Compliant because of default_method_options
+            "GET"
         )
