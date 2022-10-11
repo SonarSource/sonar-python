@@ -29,6 +29,7 @@ import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
 import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
 import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
+import org.sonar.python.checks.cdk.ResourceAccessPolicyCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
@@ -257,6 +258,7 @@ public final class CheckList {
       ReluctantQuantifierCheck.class,
       RegexCheck.class,
       ReluctantQuantifierWithEmptyContinuationCheck.class,
+      ResourceAccessPolicyCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       RobustCipherAlgorithmCheck.class,

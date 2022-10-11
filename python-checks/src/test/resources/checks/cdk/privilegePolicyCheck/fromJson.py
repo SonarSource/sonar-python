@@ -10,7 +10,7 @@ iam.PolicyStatement.from_json({
 iam.PolicyStatement.from_json({
     "Effect": "Allow",
     "Action": "*",  # Noncompliant
- #  ^^^^^^^^^^^^^
+ #            ^^^
 })
 
 iam.PolicyStatement.from_json({
@@ -24,11 +24,16 @@ iam.PolicyStatement.from_json({
 })
 
 iam.PolicyStatement.from_json({
-    "Action": ["*"],
+    "Action": ["*"],  # Noncompliant
 })
 
 iam.PolicyStatement.from_json({
     "Effect": "Allow",
+    "Action": ["iam:GetAccountSummary", "*"],  # Noncompliant
+})
+
+iam.PolicyStatement.from_json({
+    "Effect": "ALLOW",
     "Action": ["iam:GetAccountSummary", "*"],  # Noncompliant
 })
 

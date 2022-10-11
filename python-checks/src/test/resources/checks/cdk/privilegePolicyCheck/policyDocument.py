@@ -8,7 +8,7 @@ policy_document = {
             "Effect": "Allow",
         #   ^^^^^^^^^^^^^^^^^>  {{Related effect}}
             "Action": "*",  # Noncompliant {{Make sure granting all privileges is safe here.}}
-        #   ^^^^^^^^^^^^^
+        #             ^^^
             "Resource": ["arn:aws:iam:::user/*"]
         },
         {
