@@ -29,8 +29,10 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 
 
@@ -63,6 +65,17 @@ public class SymbolImplTest {
     Symbol obj = ((HasSymbol) qualifiedExpr.qualifier()).symbol();
     ((SymbolImpl) obj).removeUsages();
     assertThat(qualifiedExpr.symbol().usages()).isEmpty();
+  }
+
+  @Test
+  public void inferred_type_after_copy() {
+    SymbolImpl symbol = (SymbolImpl) ((HasSymbol) lastExpressionInFunction(
+      "e = OSError()",
+      "e.errno"
+    )).symbol();
+    assertThat(symbol.inferredType()).isEqualTo(InferredTypes.INT);
+    SymbolImpl copiedSymbol = symbol.copyWithoutUsages();
+    assertThat(copiedSymbol.inferredType()).isEqualTo(InferredTypes.INT);
   }
 
   private Map<String, Symbol> symbols(String... code) {
