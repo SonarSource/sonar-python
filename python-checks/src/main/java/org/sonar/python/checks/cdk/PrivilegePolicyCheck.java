@@ -92,8 +92,7 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
   }
 
   private static void checkWildcardAction(SubscriptionContext ctx, ListLiteral list, ExpressionFlow effect) {
-    CdkUtils.getListElements(ctx, list)
-      .stream()
+    CdkUtils.getListElements(ctx, list).stream()
       .filter(expr -> expr.hasExpression(isString("*")))
       .findFirst()
       .ifPresent(wildcard -> {
