@@ -19,17 +19,16 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck.Call;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.hasArgument;
 import static org.sonar.python.checks.cdk.CdkPredicate.hasIntervalArguments;
@@ -46,7 +45,7 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
   private static final String OTHER = "other";
   private static final String PORT_RANGE = "port_range";
   private static final Set<Long> ADMIN_PORTS = Set.of(22L, 3389L);
-  private static final List<String> CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES = List.of(
+  private static final Set<String> CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES = Set.of(
     "aws_cdk.aws_docdb.DatabaseCluster", "aws_cdk.aws_lambda_python_alpha.PythonFunction", "aws_cdk.aws_batch_alpha.ComputeEnvironment",
     "aws_cdk.aws_efs.FileSystem", "aws_cdk.aws_lambda_go_alpha.GoFunction", "aws_cdk.aws_ecs.ExternalService", "aws_cdk.aws_ecs.FargateService",
     "aws_cdk.aws_ecs.Cluster", "aws_cdk.aws_ecs.Ec2Service", "aws_cdk.aws_elasticsearch.Domain", "aws_cdk.aws_neptune_alpha.DatabaseCluster",
@@ -96,8 +95,12 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
     checkFqn("aws_cdk.aws_ec2.SecurityGroup.add_ingress_rule", checkPeerAndPortSensitivity("peer", "connection"));
   }
 
-  private static List<String> constructsWithPrefix(String prefix) {
-    return CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES.stream().map(str -> str + prefix).collect(Collectors.toList());
+  private static List<String> constructsWithPrefix(String suffix) {
+    List<String> result = new ArrayList<>();
+    for (String construct : CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES) {
+      result.add(construct + suffix);
+    }
+    return result;
   }
 
   private static void checkPeerAndDefaultPortInConstructorCall(SubscriptionContext ctx, CallExpression callExpression) {
@@ -126,8 +129,8 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkPeerAndPortSensitivity(String peerName, String portName) {
     return (ctx, callExpression) -> {
-      Call call = new Call(ctx, callExpression);
-      if (call.hasArgument(peerName, 0, IS_SENSITIVE_PEER) && call.hasArgument(portName, 1, IS_SENSITIVE_PORT)) {
+      if (getArgument(ctx, callExpression, peerName, 0).filter(flow -> flow.hasExpression(IS_SENSITIVE_PEER)).isPresent()
+       && getArgument(ctx, callExpression, portName, 1).filter(flow -> flow.hasExpression(IS_SENSITIVE_PORT)).isPresent()) {
         getArgument(ctx, callExpression, peerName, 0).ifPresent(flow -> flow.addIssue(MESSAGE_BAD_PEER));
       }
     };

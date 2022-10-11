@@ -339,6 +339,21 @@ public class TreeUtils {
   @CheckForNull
   public static String fullyQualifiedNameFromExpression(Expression expression) {
     if (expression.is(Kind.NAME)) {
+      Symbol symbol = ((Name) expression).symbol();
+      return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
+    }
+    if (expression.is(Kind.QUALIFIED_EXPR)) {
+      return fullyQualifiedNameFromQualifiedExpression((QualifiedExpression) expression);
+    }
+    if (expression.is(Kind.CALL_EXPR)) {
+      return fullyQualifiedNameFromExpression(((CallExpression) expression).callee());
+    }
+    return null;
+  }
+
+  @CheckForNull
+  public static String resolveFullyQualifiedNameWithInferredType(Expression expression) {
+    if (expression.is(Kind.NAME)) {
       if (expression.type() instanceof RuntimeType) {
         return ((RuntimeType) expression.type()).getTypeClass().fullyQualifiedName();
       } else {
@@ -347,10 +362,16 @@ public class TreeUtils {
       }
     }
     if (expression.is(Kind.QUALIFIED_EXPR)) {
-      return fullyQualifiedNameFromQualifiedExpression((QualifiedExpression) expression);
+      QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
+      String nameOfQualifier = resolveFullyQualifiedNameWithInferredType(qualifiedExpression.qualifier());
+      if (nameOfQualifier != null) {
+        return nameOfQualifier + "." + qualifiedExpression.name().name();
+      } else {
+        return null;
+      }
     }
     if (expression.is(Kind.CALL_EXPR)) {
-      return fullyQualifiedNameFromExpression(((CallExpression) expression).callee());
+      return resolveFullyQualifiedNameWithInferredType(((CallExpression) expression).callee());
     }
     return null;
   }

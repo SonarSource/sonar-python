@@ -33,7 +33,6 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck.Call;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isNumericLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
@@ -41,7 +40,6 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 import static org.sonar.python.checks.cdk.CdkUtils.getDictionary;
-import static org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck.isInInterval;
 
 public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkResourceCheck {
   private static final String MESSAGE = "Change this IP range to a subset of trusted IP addresses.";
@@ -63,7 +61,7 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_ec2.CfnSecurityGroup", UnrestrictedAdministrationCheckPartCfnSecurity::checkCfnSecurityGroup);
-    checkFqn("aws_cdk.aws_ec2.CfnSecurityGroupIngress", (ctx, callExpression) -> checkCallCfnSecuritySensitive(new Call(ctx, callExpression)));
+    checkFqn("aws_cdk.aws_ec2.CfnSecurityGroupIngress", UnrestrictedAdministrationCheckPartCfnSecurity::checkCallCfnSecuritySensitive);
   }
 
   // Checks methods
@@ -83,26 +81,27 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
   // Methods to handle call expressions
   private static void raiseIssueIfIngressPropertyCallWithSensitiveArgument(SubscriptionContext ctx, Expression expression) {
     getCall(expression, "aws_cdk.aws_ec2.CfnSecurityGroup.IngressProperty")
-      .map(callExpression -> new Call(ctx, callExpression))
-      .ifPresent(UnrestrictedAdministrationCheckPartCfnSecurity::checkCallCfnSecuritySensitive);
+      .ifPresent(callExpression -> checkCallCfnSecuritySensitive(ctx, callExpression));
   }
 
-  private static void checkCallCfnSecuritySensitive(Call call) {
-    if (isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(call) || isCallWithArgumentInvalidProtocolEmptyIpAddress(call)) {
-      getArgument(call.ctx, call.callExpression, CIDR_IP).ifPresent(flow -> flow.addIssue(MESSAGE));
-      getArgument(call.ctx, call.callExpression, CIDR_IPV6).ifPresent(flow -> flow.addIssue(MESSAGE));
+  private static void checkCallCfnSecuritySensitive(SubscriptionContext ctx, CallExpression callExpression) {
+    if (isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(callExpression) || isCallWithArgumentInvalidProtocolEmptyIpAddress(callExpression)) {
+      getArgument(ctx, callExpression, CIDR_IP).ifPresent(flow -> flow.addIssue(MESSAGE));
+      getArgument(ctx, callExpression, CIDR_IPV6).ifPresent(flow -> flow.addIssue(MESSAGE));
     }
   }
 
-  private static boolean isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(Call call) {
-    return call.hasArgument(IP_PROTOCOL, isString(SENSITIVE_PROTOCOL))
-      && (call.hasArgument(CIDR_IP, isString(EMPTY_IPV4)) || call.hasArgument(CIDR_IPV6, isString(EMPTY_IPV6)))
-      && call.hasSensitivePortRange("from_port", "to_port", ADMIN_PORTS);
+  private static boolean isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(CallExpression call) {
+    return getArgument(call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(SENSITIVE_PROTOCOL))).isPresent()
+      && (getArgument(call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
+        || getArgument(call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent())
+      && hasSensitivePortRange(call, "from_port", "to_port", ADMIN_PORTS);
   }
 
-  private static boolean isCallWithArgumentInvalidProtocolEmptyIpAddress(Call call) {
-    return call.hasArgument(IP_PROTOCOL, isString(ANY_PROTOCOL))
-      && (call.hasArgument(CIDR_IP, isString(EMPTY_IPV4)) || call.hasArgument(CIDR_IPV6, isString(EMPTY_IPV6)));
+  private static boolean isCallWithArgumentInvalidProtocolEmptyIpAddress(CallExpression call) {
+    return getArgument(call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(ANY_PROTOCOL))).isPresent()
+      && (getArgument(call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
+      || getArgument(call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent());
   }
 
   // Methods to handle dictionaries
@@ -181,5 +180,33 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
 
       return isInInterval(min.get(), max.get(), ADMIN_PORTS);
     }
+  }
+
+  // Utils method to work on arguments
+  private static Optional<Long> getArgumentAsLong(CallExpression callExpression, String name) {
+    return getArgument(null, callExpression, name)
+      .flatMap(flow -> flow.getExpression(isNumericLiteral()))
+      .map(NumericLiteral.class::cast)
+      .map(NumericLiteral::valueAsLong);
+  }
+
+  private static boolean hasSensitivePortRange(CallExpression callExpression, String minName, String maxName, long[] numbers) {
+    Optional<Long> min = getArgumentAsLong(callExpression, minName);
+    Optional<Long> max = getArgumentAsLong(callExpression, maxName);
+
+    if (min.isEmpty() || max.isEmpty()) {
+      return false;
+    }
+
+    return isInInterval(min.get(), max.get(), numbers);
+  }
+
+  public static boolean isInInterval(long min, long max, long[] numbers) {
+    for (long port : numbers) {
+      if (min <= port && port <= max) {
+        return true;
+      }
+    }
+    return false;
   }
 }

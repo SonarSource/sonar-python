@@ -372,7 +372,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_fullyQualifiedNameFromExpression() {
+  public void test_resolveFullyQualifiedNameWithInferredType() {
     // check resolving from typeshed stub
     FileInput fileInput = PythonTestUtils.parse(
       "import aws_cdk.aws_ec2 as ec2",
@@ -382,8 +382,25 @@ public class TreeUtilsTest {
       "        conn = obj.connections",
       "        conn.allow_from()"
     );
-    CallExpression callExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CALL_EXPR));
-    assertThat(TreeUtils.fullyQualifiedNameFromExpression(callExpression)).isEqualTo("aws_cdk.aws_ec2.Connections.allow_from");
+    Expression expression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.resolveFullyQualifiedNameWithInferredType(expression)).isEqualTo("aws_cdk.aws_ec2.Connections.allow_from");
+
+    fileInput = PythonTestUtils.parse(
+      "import aws_cdk.aws_ec2 as ec2",
+      "class Test:",
+      "    def test_connections_attribute(var):",
+      "        ec2.Instance().connections.allow_from()"
+    );
+    expression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.resolveFullyQualifiedNameWithInferredType(expression)).isEqualTo("aws_cdk.aws_ec2.Instance");
+
+    fileInput = PythonTestUtils.parse(
+      "class Test:",
+      "    def test_connections_attribute(var):",
+      "        \"5\".test()"
+    );
+    expression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
+    assertThat(TreeUtils.resolveFullyQualifiedNameWithInferredType(expression)).isNull();
   }
 
   @Test
