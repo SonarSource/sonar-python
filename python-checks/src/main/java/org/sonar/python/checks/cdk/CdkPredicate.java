@@ -115,14 +115,24 @@ public class CdkPredicate {
   }
 
   /**
+   * @return Predicate which tests if expression is a subscription expression
+   */
+  public static Predicate<Expression> isSubscriptionExpression() {
+    return expression -> expression.is(Tree.Kind.SUBSCRIPTION);
+  }
+
+  /**
+   * @return Predicate which tests if expression is a call expression
+   */
+  public static Predicate<Expression> isCallExpression() {
+    return expression -> expression.is(Tree.Kind.CALL_EXPR);
+  }
+
+  /**
    * @return Predicate which tests if expression is a string and starts with the expected value
    */
   public static Predicate<Expression> startsWith(String expected) {
     return expression -> CdkUtils.getString(expression).filter(str -> str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
-  }
-
-  public static Predicate<Expression> isCallExpression() {
-    return expression -> expression.is(Tree.Kind.CALL_EXPR);
   }
 
   // Predicate on a Expression that is expected to be a CallExpression with a specific argument (name/pos) on which predicates are applicable
