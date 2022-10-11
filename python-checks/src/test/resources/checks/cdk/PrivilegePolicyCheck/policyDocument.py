@@ -5,19 +5,21 @@ policy_document = {
     "Statement": [
         {
             "Sid": "AllowActionsList",
-            "Effect": "Allow",  # secondary location
-            "Action": "*",  # Noncompliant
+            "Effect": "Allow",
+        #   ^^^^^^^^^^^^^^^^^>  {{Related effect}}
+            "Action": "*",  # Noncompliant {{Make sure granting all privileges is safe here.}}
+        #   ^^^^^^^^^^^^^
             "Resource": ["arn:aws:iam:::user/*"]
         },
         {
             "Sid": "AllowActionsStar",
-            "Effect": "Allow",  # secondary location
+            "Effect": "Allow",
             "Action": ["*"],  # Noncompliant
             "Resource": ["arn:aws:iam:::user/*"]
         },
         {
             "Sid": "AllowSomeActions",
-            "Effect": "Allow",  # secondary location
+            "Effect": "Allow",
             "Action": ["iam:GetAccountSummary"],  # Compliant
             "Resource": ["arn:aws:iam:::user/*"]
         }
