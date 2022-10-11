@@ -36,3 +36,9 @@ iam.PolicyStatement(
     principals=[iam.AccountRootPrincipal()],
     resources=["*"]
 )
+
+iam.PolicyStatement(
+    effect=iam.Effect.DENY,
+    actions=["iam:CreatePolicyVersion"],
+    resources=["*"]
+)

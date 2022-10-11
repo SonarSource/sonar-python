@@ -35,3 +35,9 @@ iam.PolicyStatement.from_json({
     "Action": ["kms:*"],
     "Resource": "*"
 })
+
+iam.PolicyStatement.from_json({
+    "Effect": "DENY",
+    "Action": ["iam:CreatePolicyVersion"],
+    "Resource": "*"
+})
