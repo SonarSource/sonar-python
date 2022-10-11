@@ -24,6 +24,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -40,8 +43,10 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
+import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 
 public class CdkUtils {
 
@@ -83,7 +88,7 @@ public class CdkUtils {
   }
 
   /**
-   * Resolve a particular argument of a call or get an empty optional if the argument is not set.
+   * Resolve a particular argument of a call by keyword or get an empty optional if the argument is not set nor resolvable.
    */
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     List<Argument> arguments = callExpression.arguments();
@@ -99,6 +104,75 @@ public class CdkUtils {
       return Optional.of(new UnresolvedExpressionFlow(ctx));
     }
     return argument;
+  }
+
+  /**
+   * Resolve a particular argument of a call by keyword or position. Return an empty optional if the argument is not set nor resolvable.
+   */
+  public static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName, int argumentPosition) {
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argumentPosition, argumentName, callExpression.arguments()))
+      .map(argument -> ExpressionFlow.build(ctx, argument.expression()));
+  }
+
+  /**
+   * Returns a ListLiteral if the given expression flow origins of this kind
+   */
+  public static Optional<ListLiteral> getList(ExpressionFlow flow) {
+    return flow.getExpression(e -> e.is(Tree.Kind.LIST_LITERAL))
+      .map(ListLiteral.class::cast);
+  }
+
+  /**
+   * Creates flows for the individual elements of a list
+   */
+  public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
+    return list.elements().expressions().stream()
+      .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
+      .collect(Collectors.toList());
+  }
+
+  /**
+   * Returns a DictionaryLiteral if the given expression flow origins of this kind
+   */
+  public static Optional<DictionaryLiteral> getDictionary(ExpressionFlow flow) {
+    return flow.getExpression(e -> e.is(Tree.Kind.DICTIONARY_LITERAL))
+      .map(DictionaryLiteral.class::cast);
+  }
+
+  /**
+   * By resolving the individual dictionary elements, a key-value pair can be returned by a given key. The value is also a resolved flow.
+   */
+  public static Optional<ResolvedKeyValuePair> getDictionaryPair(SubscriptionContext ctx, DictionaryLiteral dict, String key) {
+    return getDictionaryPair(CdkUtils.resolveDictionary(ctx, dict), key);
+  }
+
+  /**
+   * A key-value pair can be returned by a given key. The value is also a resolved flow.
+   */
+  public static Optional<ResolvedKeyValuePair> getDictionaryPair(List<ResolvedKeyValuePair> pairs, String key) {
+    return pairs.stream()
+      .filter(pair -> pair.key.hasExpression(isString(key)))
+      .findFirst();
+  }
+
+  /**
+   * Collects all dictionary elements of a list as a return.
+   */
+  public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
+    return getListElements(ctx, listeners).stream()
+      .map(CdkUtils::getDictionary)
+      .flatMap(Optional::stream)
+      .collect(Collectors.toList());
+  }
+
+  /**
+   * Resolves all elements of a dictionary. All keys and values are resolved into flows.
+   */
+  public static List<ResolvedKeyValuePair> resolveDictionary(SubscriptionContext ctx, DictionaryLiteral dict) {
+    return dict.elements().stream()
+      .map(e -> CdkUtils.getKeyValuePair(ctx, e))
+      .flatMap(Optional::stream)
+      .collect(Collectors.toUnmodifiableList());
   }
 
   /**
@@ -143,14 +217,15 @@ public class CdkUtils {
       }
     }
 
-    public void addIssue(String primaryMessage) {
+    public void addIssue(String primaryMessage, IssueLocation... secondaryLocations) {
       PythonCheck.PreciseIssue issue = ctx.addIssue(locations.getFirst().parent(), primaryMessage);
       locations.stream().skip(1).forEach(expression -> issue.secondary(expression.parent(), TAIL_MESSAGE));
+      Stream.of(secondaryLocations).forEach(issue::secondary);
     }
 
-    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage) {
+    public void addIssueIf(Predicate<Expression> predicate, String primaryMessage, IssueLocation... secondaryLocations) {
       if (hasExpression(predicate)) {
-        addIssue(primaryMessage);
+        addIssue(primaryMessage, secondaryLocations);
       }
     }
 
