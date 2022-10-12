@@ -53,3 +53,10 @@ iam.PolicyStatement.from_json({
         'Condition': ''
     })
 
+iam.PolicyStatement.from_json({
+    'Action': ['iam:UpdateLoginProfile'],
+})
+
+iam.PolicyStatement.from_json({
+    'Resource': '*'
+})

@@ -44,22 +44,27 @@ public abstract class PolicyStatement {
     }
   }
 
+  @Nullable
   ExpressionFlow principals() {
     return getProperty(Properties.PRINCIPALS);
   }
 
+  @Nullable
   ExpressionFlow conditions() {
     return getProperty(Properties.CONDITIONS);
   }
 
+  @Nullable
   ExpressionFlow effect() {
     return getProperty(Properties.EFFECT);
   }
 
+  @Nullable
   ExpressionFlow actions() {
     return getProperty(Properties.ACTIONS);
   }
 
+  @Nullable
   ExpressionFlow resources() {
     return getProperty(Properties.RESOURCES);
   }
