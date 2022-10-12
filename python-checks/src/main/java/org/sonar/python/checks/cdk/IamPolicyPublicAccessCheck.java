@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isDictionaryLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
@@ -47,7 +48,7 @@ import static org.sonar.python.checks.cdk.CdkUtils.getListExpression;
 public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
 
   private static final String ISSUE_MESSAGE = "Make sure granting public access is safe here.";
-  private static final String SECONDARY_MESSAGE = "Access is set to \"ALLOW\" here";
+  private static final String SECONDARY_MESSAGE = "Access is set to \"ALLOW\" here.";
 
   private static final String IAM_EFFECT_ALLOW = "aws_cdk.aws_iam.Effect.ALLOW";
 
@@ -117,8 +118,7 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
     //  1) string literal "*",
     //  2) dictionary in the format of { "AWS": "*" } or { "AWS": ["99999", ..., "*", ....] }
     map.getFlow("Principal").ifPresent(principal -> {
-      principal.getExpression(isString("*"))
-        .ifPresent(sensitiveStarPrincipal -> raiseIssue(subscriptionContext, sensitiveStarPrincipal, sensitiveEffect.get()));
+      principal.addIssueIf(isString("*"), ISSUE_MESSAGE, IssueLocation.preciseLocation(sensitiveEffect.get(), SECONDARY_MESSAGE));
 
       principal.getExpression(expression -> expression.is(Tree.Kind.DICTIONARY_LITERAL))
         .map(DictionaryLiteral.class::cast)
@@ -149,18 +149,13 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
 
   private static Predicate<Expression> isSensitiveArnPrincipal() {
     return expression -> getCall(expression, "aws_cdk.aws_iam.ArnPrincipal")
-      .filter(callExpression -> !callExpression.arguments().isEmpty())
-      .map(callExpression -> callExpression.arguments().get(0))
-      .filter(argument -> argument.is(Tree.Kind.REGULAR_ARGUMENT))
-      .map(RegularArgument.class::cast)
+      .map(callExpression -> TreeUtils.nthArgumentOrKeyword(0, "arn", callExpression.arguments()))
       .map(RegularArgument::expression)
       .filter(isString("*"))
       .isPresent();
   }
 
   private static void raiseIssue(SubscriptionContext subscriptionContext, Tree primaryLocation, Tree secondaryLocation) {
-    subscriptionContext.addIssue(primaryLocation, ISSUE_MESSAGE)
-      .secondary(secondaryLocation, SECONDARY_MESSAGE);
-
+    subscriptionContext.addIssue(primaryLocation, ISSUE_MESSAGE).secondary(secondaryLocation, SECONDARY_MESSAGE);
   }
 }

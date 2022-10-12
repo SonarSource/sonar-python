@@ -93,7 +93,7 @@ iam.PolicyStatement.from_json({
     "Action": ["s3:*"],
     "Resource": bucket.arn_for_objects("*"),
     "Principal": "*" # Noncompliant
-                #^^^
+   #^^^^^^^^^^^^^^^^
 })
 
 iam.PolicyStatement.from_json({
@@ -186,7 +186,24 @@ policy_document = {
    "Action": ["kms:*"],
    "Resource": "*",
    "Principal": { "AWS" : iam.AccountRootPrincipal().arn } # Compliant
- }]
+ },
+ {
+   "Sid": "AccountRootPrincipal",
+   "Effect": "Deny",
+   "Action": ["kms:*"],
+   "Resource": "*",
+   "Principal": { "AWS" : "*" } # Compliant
+ },
+ {
+    "Sid": "AnyPrincipal",
+    "Effect": "Allow",
+             #^^^^^^^>
+    "Action": ["kms:*"],
+    "Resource": "*",
+    "Principal": "*" # Noncompliant
+   #^^^^^^^^^^^^^^^^
+  },
+ ]
 }
 
 iam.PolicyDocument.from_json(policy_document)
