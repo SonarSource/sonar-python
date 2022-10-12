@@ -45,7 +45,7 @@ class PublicApiIsSecuritySensitiveRestApiCheck:
             authorization_type=apigateway.AuthorizationType.NONE  # NonCompliant{{Make sure that creating public APIs is safe here.}}
         )
 
-        test.api.root.add_method(  # FN
+        test.api.root.add_method(  # NonCompliant{{Omitting "authorization_type" disables authentication. Make sure it is safe here.}}
             "DELETE"
         )
 
