@@ -90,10 +90,6 @@ public class CdkUtils {
   /**
    * Resolve a particular argument of a call by keyword or get an empty optional if the argument is not set nor resolvable.
    */
-  protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName, int argPos) {
-    return getArgument(ctx, callExpression, TreeUtils.nthArgumentOrKeyword(argPos, argumentName, callExpression.arguments()));
-  }
-
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
     return getArgument(ctx, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
   }

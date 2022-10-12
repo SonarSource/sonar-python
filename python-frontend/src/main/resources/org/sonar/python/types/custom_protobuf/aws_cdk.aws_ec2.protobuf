@@ -4,7 +4,7 @@
 all_tcpaws_cdk.aws_ec2.Port.all_tcp",
 aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.Port*6
 self,
-aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.PortÉ
+aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.PortÖ
 Connectionsaws_cdk.aws_ec2.Connections"*SonarPythonAnalyzerFakeStub.CustomStubBase*ð
 
 allow_from&aws_cdk.aws_ec2.Connections.allow_from"
@@ -16,6 +16,29 @@ allow_from&aws_cdk.aws_ec2.Connections.allow_from"
 
 port_range,
 aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.Port*
+description
+Any*î
+allow_from_any_ipv4/aws_cdk.aws_ec2.Connections.allow_from_any_ipv4"
+None*D
+self:
+aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.Connections*<
+
+port_range,
+aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.Port*
+description
+Any*Ì
+allow_default_port_from3aws_cdk.aws_ec2.Connections.allow_default_port_from"
+None*D
+self:
+aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.Connections*
+other
+Any*
+description
+Any*Ê
+ allow_default_port_from_any_ipv4<aws_cdk.aws_ec2.Connections.allow_default_port_from_any_ipv4"
+None*D
+self:
+aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.Connections*
 description
 AnyÙ
 BastionHostLinux aws_cdk.aws_ec2.BastionHostLinux"*SonarPythonAnalyzerFakeStub.CustomStubBaserw
@@ -29,7 +52,18 @@ port_range,
 aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.ConnectionsÓ
 LaunchTemplateaws_cdk.aws_ec2.LaunchTemplate"*SonarPythonAnalyzerFakeStub.CustomStubBaseru
 connections*aws_cdk.aws_ec2.LaunchTemplate.connections:
-aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.ConnectionsÐ
-SecurityGroupaws_cdk.aws_ec2.SecurityGroup"*SonarPythonAnalyzerFakeStub.CustomStubBasert
+aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.ConnectionsÛ
+SecurityGroupaws_cdk.aws_ec2.SecurityGroup"*SonarPythonAnalyzerFakeStub.CustomStubBase*ˆ
+add_ingress_rule.aws_cdk.aws_ec2.SecurityGroup.add_ingress_rule"
+None*H
+peer>
+aws_cdk.aws_ec2.SecurityGroup"aws_cdk.aws_ec2.SecurityGroup*<
+
+connection,
+aws_cdk.aws_ec2.Port"aws_cdk.aws_ec2.Port*
+description
+Any*
+remote_rule
+Anyrt
 connections)aws_cdk.aws_ec2.SecurityGroup.connections:
 aws_cdk.aws_ec2.Connections"aws_cdk.aws_ec2.Connections

@@ -54,7 +54,6 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.types.RuntimeType;
 
 public class TreeUtils {
   private TreeUtils() {
@@ -338,6 +337,12 @@ public class TreeUtils {
 
   @CheckForNull
   public static String fullyQualifiedNameFromExpression(Expression expression) {
+    if (expression instanceof HasSymbol) {
+      Symbol symbol = ((HasSymbol) expression).symbol();
+      if (symbol != null) {
+        return symbol.fullyQualifiedName();
+      }
+    }
     if (expression.is(Kind.NAME)) {
       Symbol symbol = ((Name) expression).symbol();
       return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
@@ -347,31 +352,6 @@ public class TreeUtils {
     }
     if (expression.is(Kind.CALL_EXPR)) {
       return fullyQualifiedNameFromExpression(((CallExpression) expression).callee());
-    }
-    return null;
-  }
-
-  @CheckForNull
-  public static String resolveFullyQualifiedNameWithInferredType(Expression expression) {
-    if (expression.is(Kind.NAME)) {
-      if (expression.type() instanceof RuntimeType) {
-        return ((RuntimeType) expression.type()).getTypeClass().fullyQualifiedName();
-      } else {
-        Symbol symbol = ((Name) expression).symbol();
-        return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
-      }
-    }
-    if (expression.is(Kind.QUALIFIED_EXPR)) {
-      QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
-      String nameOfQualifier = resolveFullyQualifiedNameWithInferredType(qualifiedExpression.qualifier());
-      if (nameOfQualifier != null) {
-        return nameOfQualifier + "." + qualifiedExpression.name().name();
-      } else {
-        return null;
-      }
-    }
-    if (expression.is(Kind.CALL_EXPR)) {
-      return resolveFullyQualifiedNameWithInferredType(((CallExpression) expression).callee());
     }
     return null;
   }

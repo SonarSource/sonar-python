@@ -5,9 +5,9 @@ class Test:
         # checking for 'connections' attribute of a specific object
         obj = ec2.Instance()
         obj.connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
-#                                  ^^^^^^^^^^^^^^^^^^^
+        #                          ^^^^^^^^^^^^^^^^^^^
         obj.connections.allow_from_any_ipv4(ec2.Port.all_tcp()) # Noncompliant{{Change this method for `allow_from` and set `other` to a subset of trusted IP addresses.}}
-#                       ^^^^^^^^^^^^^^^^^^^
+        #               ^^^^^^^^^^^^^^^^^^^
         obj.connections.allow_from_any_ipv4(ec2.Port.tcp(20))
 
         # checking on direct call on newly created object
@@ -24,22 +24,22 @@ class Test:
         connectionSensitiveDefault.allow_from_any_ipv4(ec2.Port.all_tcp()) # Noncompliant{{Change this method for `allow_from` and set `other` to a subset of trusted IP addresses.}}
         connectionCompliantDefault.allow_default_port_from_any_ipv4()
         connectionSensitiveDefault.allow_default_port_from_any_ipv4() # Noncompliant{{Change this method for `allow_from` and set `other` to a subset of trusted IP addresses.}}
-#                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        #                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         connectionCompliantDefault.allow_default_port_from(ec2.Peer.any_ipv4())
         connectionSensitiveDefault.allow_default_port_from(ec2.Peer.any_ipv4()) # Noncompliant{{Change this method for `allow_from` and set `other` to a subset of trusted IP addresses.}}
-#                                  ^^^^^^^^^^^^^^^^^^^^^^^
+        #                          ^^^^^^^^^^^^^^^^^^^^^^^
         connectionCompliantDefault.allow_default_port_from(ec2.Peer.ipv4("192.168.1.1/24"))
         connectionSensitiveDefault.allow_default_port_from(ec2.Peer.ipv4("192.168.1.1/24"))
 
         # checking on direct call on newly created object
         ec2.Connections(default_port=ec2.Port.all_tcp()).allow_default_port_from_any_ipv4() # Noncompliant{{Change this method for `allow_from` and set `other` to a subset of trusted IP addresses.}}
-#                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        #                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         ec2.Connections(default_port=ec2.Port.all_tcp()).allow_default_port_from(ec2.Peer.any_ipv4()) # Noncompliant
 
     def test_SecurityGroup(var):
         security_group = ec2.SecurityGroup()
         security_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant{{Change this IP range to a subset of trusted IP addresses.}}
-#                                       ^^^^^^^^^^^^^^^^^^^
+        #                               ^^^^^^^^^^^^^^^^^^^
         security_group.add_ingress_rule(peer=ec2.Peer.any_ipv4(), connection=ec2.Port.all_tcp()) # Noncompliant
         security_group.add_ingress_rule(connection=ec2.Port.all_tcp(), peer=ec2.Peer.any_ipv4()) # Noncompliant
 
@@ -96,50 +96,8 @@ class Test:
         conn.allow_from(ec2.Peer.ipv6(other="::/0"), ec2.Port.all_tcp())
 
     def test_all_supported_object_with_connections_attributes(var):
-        aws_cdk.aws_docdb.DatabaseCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda_python_alpha.PythonFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_batch_alpha.ComputeEnvironment().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_efs.FileSystem().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda_go_alpha.GoFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ecs.ExternalService().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ecs.FargateService().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ecs.Cluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ecs.Ec2Service().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_elasticsearch.Domain().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_neptune_alpha.DatabaseCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_eks.FargateCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_eks.Cluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_codebuild.PipelineProject().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_codebuild.Project().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseInstance().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseInstanceReadReplica().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.ServerlessClusterFromSnapshot().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseProxy().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseInstanceFromSnapshot().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.ServerlessCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_rds.DatabaseClusterFromSnapshot().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda_nodejs.NodejsFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_fsx.LustreFileSystem().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ec2.BastionHostLinux().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ec2.ClientVpnEndpoint().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ec2.Instance().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ec2.LaunchTemplate().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_ec2.SecurityGroup().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_kinesisfirehose_alpha.DeliveryStream().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_stepfunctions_tasks.SageMakerCreateTrainingJob().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_stepfunctions_tasks.SageMakerCreateModel().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_stepfunctions_tasks.EcsRunTask().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_redshift_alpha.Cluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_opensearchservice.Domain().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_secretsmanager.HostedRotation().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_msk_alpha.Cluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.triggers.TriggerFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_autoscaling.AutoScalingGroup().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_synthetics_alpha.Canary().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_cloudfront.experimental.EdgeFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda.Function().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda.DockerImageFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda.SingletonFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda.Alias().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
-        aws_cdk.aws_lambda.Version().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
+        import aws_cdk.aws_docdb as docdb
+        import aws_cdk.aws_lambda_python_alpha as aws_lambda_python_alpha
+
+        docdb.DatabaseCluster().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant
+        aws_lambda_python_alpha.PythonFunction().connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.all_tcp()) # Noncompliant

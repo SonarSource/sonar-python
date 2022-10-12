@@ -19,8 +19,6 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -45,21 +43,6 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
   private static final String OTHER = "other";
   private static final String PORT_RANGE = "port_range";
   private static final Set<Long> ADMIN_PORTS = Set.of(22L, 3389L);
-  private static final Set<String> CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES = Set.of(
-    "aws_cdk.aws_docdb.DatabaseCluster", "aws_cdk.aws_lambda_python_alpha.PythonFunction", "aws_cdk.aws_batch_alpha.ComputeEnvironment",
-    "aws_cdk.aws_efs.FileSystem", "aws_cdk.aws_lambda_go_alpha.GoFunction", "aws_cdk.aws_ecs.ExternalService", "aws_cdk.aws_ecs.FargateService",
-    "aws_cdk.aws_ecs.Cluster", "aws_cdk.aws_ecs.Ec2Service", "aws_cdk.aws_elasticsearch.Domain", "aws_cdk.aws_neptune_alpha.DatabaseCluster",
-    "aws_cdk.aws_eks.FargateCluster", "aws_cdk.aws_eks.Cluster", "aws_cdk.aws_codebuild.PipelineProject", "aws_cdk.aws_codebuild.Project",
-    "aws_cdk.aws_rds.DatabaseInstance", "aws_cdk.aws_rds.DatabaseInstanceReadReplica", "aws_cdk.aws_rds.DatabaseCluster",
-    "aws_cdk.aws_rds.ServerlessClusterFromSnapshot", "aws_cdk.aws_rds.DatabaseProxy", "aws_cdk.aws_rds.DatabaseInstanceFromSnapshot",
-    "aws_cdk.aws_rds.ServerlessCluster", "aws_cdk.aws_rds.DatabaseClusterFromSnapshot", "aws_cdk.aws_lambda_nodejs.NodejsFunction",
-    "aws_cdk.aws_fsx.LustreFileSystem", "aws_cdk.aws_ec2.BastionHostLinux", "aws_cdk.aws_ec2.ClientVpnEndpoint", "aws_cdk.aws_ec2.Instance",
-    "aws_cdk.aws_ec2.LaunchTemplate", "aws_cdk.aws_ec2.SecurityGroup", "aws_cdk.aws_kinesisfirehose_alpha.DeliveryStream",
-    "aws_cdk.aws_stepfunctions_tasks.SageMakerCreateTrainingJob", "aws_cdk.aws_stepfunctions_tasks.SageMakerCreateModel",
-    "aws_cdk.aws_stepfunctions_tasks.EcsRunTask", "aws_cdk.aws_redshift_alpha.Cluster", "aws_cdk.aws_opensearchservice.Domain",
-    "aws_cdk.aws_secretsmanager.HostedRotation", "aws_cdk.aws_msk_alpha.Cluster", "aws_cdk.triggers.TriggerFunction", "aws_cdk.aws_autoscaling.AutoScalingGroup",
-    "aws_cdk.aws_synthetics_alpha.Canary", "aws_cdk.aws_cloudfront.experimental.EdgeFunction", "aws_cdk.aws_lambda.Function",
-    "aws_cdk.aws_lambda.DockerImageFunction", "aws_cdk.aws_lambda.SingletonFunction", "aws_cdk.aws_lambda.Alias", "aws_cdk.aws_lambda.Version");
 
   // Predicates to detect sensitive arguments
   private static final Predicate<Expression> IS_SENSITIVE_PROTOCOL =
@@ -81,10 +64,6 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
 
   @Override
   protected void registerFqnConsumer() {
-    // Any constructs with 'connections' attributes
-    checkFqns(constructsWithPrefix(".connections.allow_from"), checkPeerAndPortSensitivity(OTHER, PORT_RANGE));
-    checkFqns(constructsWithPrefix(".connections.allow_from_any_ipv4"), checkPortSensitivity(PORT_RANGE));
-
     // aws_cdk.aws_ec2.Connections "allow from" methods call
     checkFqn("aws_cdk.aws_ec2.Connections.allow_from", checkPeerAndPortSensitivity(OTHER, PORT_RANGE));
     checkFqn("aws_cdk.aws_ec2.Connections.allow_from_any_ipv4", checkPortSensitivity(PORT_RANGE));
@@ -93,14 +72,6 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
 
     // SecurityGroup.add_ingress_rule
     checkFqn("aws_cdk.aws_ec2.SecurityGroup.add_ingress_rule", checkPeerAndPortSensitivity("peer", "connection"));
-  }
-
-  private static List<String> constructsWithPrefix(String suffix) {
-    List<String> result = new ArrayList<>();
-    for (String construct : CONSTRUCTS_WITH_CONNECTIONS_ATTRIBUTES) {
-      result.add(construct + suffix);
-    }
-    return result;
   }
 
   private static void checkPeerAndDefaultPortInConstructorCall(SubscriptionContext ctx, CallExpression callExpression) {

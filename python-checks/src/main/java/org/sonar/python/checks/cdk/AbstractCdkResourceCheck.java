@@ -51,7 +51,7 @@ public abstract class AbstractCdkResourceCheck extends PythonSubscriptionCheck {
   protected void visitNode(SubscriptionContext ctx) {
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Optional.of(node)
-      .map(TreeUtils::resolveFullyQualifiedNameWithInferredType)
+      .map(TreeUtils::fullyQualifiedNameFromExpression)
       .map(fqn -> fqnCallConsumers.getOrDefault(fqn, null))
       .ifPresent(consumer -> consumer.accept(ctx, node));
   }
