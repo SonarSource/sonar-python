@@ -10,7 +10,5 @@ class Resource(CustomStubBase):
     def add_resource(self, *args, **kwargs) -> Resource: ...
 
 
-# class IResource(CustomStubBase):
-
 class RestApi(CustomStubBase):
     root: Resource

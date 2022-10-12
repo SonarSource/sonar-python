@@ -42,7 +42,7 @@ def test_serialize_custom_stubs(typeshed_custom_stubs):
     typeshed_serializer.serialize_custom_stubs()
     assert typeshed_serializer.walk_custom_stubs.call_count == 1
     # Not every files from "typeshed_custom_stubs" build are serialized, as some are builtins
-    assert symbols.save_module.call_count == 78
+    assert symbols.save_module.call_count == 79
 
 
 def test_all_third_parties_are_serialized(typeshed_third_parties):
