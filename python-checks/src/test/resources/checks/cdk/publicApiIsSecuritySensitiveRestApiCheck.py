@@ -59,9 +59,12 @@ class PublicApiIsSecuritySensitiveRestApiSecureConstructorCheck:
         )
 
         test = api.root.add_resource("test")
+        test.add_method("GET")  # Compliant; secure default
         test.api.root.add_method(  # Compliant; secure default
             "DELETE"
         )
+        test_child = test.add_resource("test_child")
+        test_child.parent_resource.add_method("HEAD")   # Compliant; secure default
 
 class PublicApiIsSecuritySensitiveRestApiSecureAddResourceCallCheck:
     def __init__(self, auth_from_argument):

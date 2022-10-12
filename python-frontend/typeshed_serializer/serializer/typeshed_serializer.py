@@ -136,8 +136,8 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 
 def main():
-    # save_merged_symbols()
-    # save_merged_symbols(is_third_parties=True)
+    save_merged_symbols()
+    save_merged_symbols(is_third_parties=True)
     serialize_custom_stubs()
 
 
