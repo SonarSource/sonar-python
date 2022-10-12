@@ -186,7 +186,6 @@ public class SymbolImpl implements Symbol {
     SymbolImpl copiedSymbol = new SymbolImpl(name, fullyQualifiedName());
     copiedSymbol.annotatedTypeName = annotatedTypeName;
     copiedSymbol.deserializedType = deserializedType;
-    copiedSymbol.hasReadDeserializedType = hasReadDeserializedType;
     return copiedSymbol;
   }
 
