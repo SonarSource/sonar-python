@@ -91,33 +91,28 @@ public class UnrestrictedAdministrationCheckPartConnections extends AbstractCdkR
     flowObj.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_ec2.Connections")))
       .map(CallExpression.class::cast)
       .flatMap(callExpr -> getArgument(ctx, callExpr, "default_port"))
-      .ifPresent(flow -> {
-        if (flow.hasExpression(IS_SENSITIVE_PORT)) {
-          ctx.addIssue(getMethodExpression(callExpression), MESSAGE_BAD_METHOD);
-        }
-      });
+      .filter(flow -> flow.hasExpression(IS_SENSITIVE_PORT))
+      .ifPresent(flow -> ctx.addIssue(getMethodPrimaryLocation(callExpression), MESSAGE_BAD_METHOD));
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkPeerAndPortSensitivity(String peerName, String portName) {
-    return (ctx, callExpression) -> {
-      if (getArgument(ctx, callExpression, peerName, 0).filter(flow -> flow.hasExpression(IS_SENSITIVE_PEER)).isPresent()
-       && getArgument(ctx, callExpression, portName, 1).filter(flow -> flow.hasExpression(IS_SENSITIVE_PORT)).isPresent()) {
-        getArgument(ctx, callExpression, peerName, 0).ifPresent(flow -> flow.addIssue(MESSAGE_BAD_PEER));
-      }
-    };
+    return (ctx, callExpression) ->
+      getArgument(ctx, callExpression, peerName, 0)
+        .filter(flow -> flow.hasExpression(IS_SENSITIVE_PEER))
+        .flatMap(flow -> getArgument(ctx, callExpression, portName, 1))
+        .filter(flow -> flow.hasExpression(IS_SENSITIVE_PORT))
+        .flatMap(flow -> getArgument(ctx, callExpression, peerName, 0))
+        .ifPresent(flow -> flow.addIssue(MESSAGE_BAD_PEER));
   }
 
   private static BiConsumer<SubscriptionContext, CallExpression> checkPortSensitivity(String portName) {
     return (ctx, callExpression) ->
-      getArgument(ctx, callExpression, portName, 0).ifPresent(
-        flow -> {
-          if(flow.hasExpression(IS_SENSITIVE_PORT)) {
-            ctx.addIssue(getMethodExpression(callExpression), MESSAGE_BAD_METHOD);
-          }
-        });
+      getArgument(ctx, callExpression, portName, 0)
+        .filter(flow -> flow.hasExpression(IS_SENSITIVE_PORT))
+        .ifPresent(flow -> ctx.addIssue(getMethodPrimaryLocation(callExpression), MESSAGE_BAD_METHOD));
   }
 
-  private static Expression getMethodExpression(CallExpression callExpression) {
+  private static Expression getMethodPrimaryLocation(CallExpression callExpression) {
     Expression expression = callExpression.callee();
     if(expression.is(Tree.Kind.QUALIFIED_EXPR)) {
       return ((QualifiedExpression) expression).name();
