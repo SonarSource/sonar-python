@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +26,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -47,7 +45,6 @@ import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 
@@ -191,64 +188,6 @@ public class CdkUtils {
    */
   public static Optional<ResolvedKeyValuePair> getKeyValuePair(SubscriptionContext ctx, DictionaryLiteralElement element) {
     return element.is(Tree.Kind.KEY_VALUE_PAIR) ? Optional.of(ResolvedKeyValuePair.build(ctx, (KeyValuePair) element)) : Optional.empty();
-  }
-
-
-  //--------------------------------------------------
-  //-------------- AWS IAM related utils -------------
-  //--------------------------------------------------
-
-  public static boolean hasNotAllowEffect(@Nullable ExpressionFlow effect) {
-    // default is allow effect
-    if (effect == null) {
-      return false;
-    }
-    return !effect.hasExpression(isFqn("aws_cdk.aws_iam.Effect.ALLOW").or(isJsonString("allow")));
-  }
-
-  /**
-   * In the JSON representation of the PolicyStatement the values are case-insensitive
-   */
-  private static Predicate<Expression> isJsonString(String expectedValue) {
-    return expression -> CdkUtils.getString(expression).filter(expectedValue::equalsIgnoreCase).isPresent();
-  }
-
-  /**
-   * Examines a list to see if it contains a string that reflects a wildcard and returns this expression as flow.
-   */
-  private static Optional<ExpressionFlow> getWildcardInList(SubscriptionContext ctx, ListLiteral list) {
-    return CdkUtils.getListElements(ctx, list).stream()
-      .filter(expr -> expr.hasExpression(isString("*")))
-      .findFirst();
-  }
-
-  /**
-   * Examines if the flow contains a string that reflects a wildcard and returns this expression as flow.
-   */
-  public static Optional<ExpressionFlow> getWildcard(SubscriptionContext ctx, ExpressionFlow json) {
-    if (json.hasExpression(isString("*"))) {
-      return Optional.of(json);
-    } else {
-      return CdkUtils.getList(json).flatMap(list -> CdkUtils.getWildcardInList(ctx, list));
-    }
-  }
-
-  /**
-   * Return the json object as dictionary from a form_json call
-   */
-  public static Optional<DictionaryLiteral> getObjectFromJson(SubscriptionContext ctx, CallExpression call) {
-    return CdkUtils.getArgument(ctx, call, "obj", 0).flatMap(CdkUtils::getDictionary);
-  }
-
-  /**
-   * Return a list of PolicyStatement json representation from a PolicyDocument.from_json call
-   */
-  public static List<DictionaryLiteral> getPolicyStatements(SubscriptionContext ctx, DictionaryLiteral json) {
-    return CdkUtils.getDictionaryPair(ctx, json, "Statement")
-      .map(pair -> pair.value)
-      .flatMap(CdkUtils::getList)
-      .map(list -> CdkUtils.getDictionaryInList(ctx, list))
-      .orElse(Collections.emptyList());
   }
 
   /**

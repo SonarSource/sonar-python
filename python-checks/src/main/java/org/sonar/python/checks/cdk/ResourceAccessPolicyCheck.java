@@ -20,7 +20,6 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.List;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -38,32 +37,32 @@ public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) -> {
       ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
-      if (hasOnlyKmsActions(ctx, call) || CdkUtils.hasNotAllowEffect(effect)) {
+      if (hasOnlyKmsActions(ctx, call) || CdkIamUtils.hasNotAllowEffect(effect)) {
         return;
       }
 
       CdkUtils.getArgument(ctx, call, "resources")
-        .flatMap(resources -> CdkUtils.getWildcard(ctx, resources))
+        .flatMap(resources -> CdkIamUtils.getWildcard(ctx, resources))
         .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
     });
 
     checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkUtils.getObjectFromJson(ctx, call).ifPresent(statement -> checkPolicyStatement(ctx, statement)));
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(statement -> checkPolicyStatement(ctx, statement)));
 
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkUtils.getPolicyStatements(ctx, json)
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
         .forEach(statement -> checkPolicyStatement(ctx, statement))));
   }
 
   private static void checkPolicyStatement(SubscriptionContext ctx, DictionaryLiteral statement) {
     List<CdkUtils.ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
     ExpressionFlow effect = CdkUtils.getDictionaryValue(pairs, "Effect").orElse(null);
-    if (hasOnlyKmsActions(ctx, pairs) || CdkUtils.hasNotAllowEffect(effect)) {
+    if (hasOnlyKmsActions(ctx, pairs) || CdkIamUtils.hasNotAllowEffect(effect)) {
       return;
     }
 
     CdkUtils.getDictionaryValue(pairs, "Resource")
-      .flatMap(action -> CdkUtils.getWildcard(ctx, action))
+      .flatMap(action -> CdkIamUtils.getWildcard(ctx, action))
       .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
   }
 
@@ -87,7 +86,7 @@ public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
       .allMatch(flow -> flow.hasExpression(CdkPredicate.startsWith("kms:")));
   }
 
-  private static void reportWildcardResourceAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, @Nullable ExpressionFlow effect) {
+  private static void reportWildcardResourceAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, ExpressionFlow effect) {
     PreciseIssue issue = ctx.addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));
