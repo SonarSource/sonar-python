@@ -22,34 +22,32 @@ package org.sonar.python.checks.cdk;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
-import org.sonar.python.checks.cdk.CdkUtils.ResolvedKeyValuePair;
 
-@Rule(key = "S6302")
-public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
+@Rule(key = "S6304")
+public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
 
-  private static final String MESSAGE = "Make sure granting all privileges is safe here.";
+  private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
 
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) -> {
       ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
-
-      if (CdkIamUtils.hasNotAllowEffect(effect)) {
+      if (hasOnlyKmsActions(ctx, call) || CdkIamUtils.hasNotAllowEffect(effect)) {
         return;
       }
 
-      CdkUtils.getArgument(ctx, call, "actions")
+      CdkUtils.getArgument(ctx, call, "resources")
         .flatMap(resources -> CdkIamUtils.getWildcard(ctx, resources))
-        .ifPresent(wildcard -> reportWildcardActionAndEffect(ctx, wildcard, effect));
+        .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
     });
 
-
     checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(ctx, json)));
-
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(statement -> checkPolicyStatement(ctx, statement)));
 
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
       CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
@@ -57,19 +55,38 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
   }
 
   private static void checkPolicyStatement(SubscriptionContext ctx, DictionaryLiteral statement) {
-    List<ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
-
+    List<CdkUtils.ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
     ExpressionFlow effect = CdkUtils.getDictionaryValue(pairs, "Effect").orElse(null);
-    if (CdkIamUtils.hasNotAllowEffect(effect)) {
+    if (hasOnlyKmsActions(ctx, pairs) || CdkIamUtils.hasNotAllowEffect(effect)) {
       return;
     }
 
-    CdkUtils.getDictionaryValue(pairs, "Action")
+    CdkUtils.getDictionaryValue(pairs, "Resource")
       .flatMap(action -> CdkIamUtils.getWildcard(ctx, action))
-      .ifPresent(wildcard -> reportWildcardActionAndEffect(ctx, wildcard, effect));
+      .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
   }
 
-  private static void reportWildcardActionAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, ExpressionFlow effect) {
+
+  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, CallExpression call) {
+    return CdkUtils.getArgument(ctx, call, "actions").flatMap(CdkUtils::getList)
+      .filter(actions -> hasOnlyKmsActions(ctx, actions))
+      .isPresent();
+  }
+
+  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, List<CdkUtils.ResolvedKeyValuePair> json) {
+    return CdkUtils.getDictionaryValue(json, "Action")
+      .flatMap(CdkUtils::getList)
+      .filter(actions -> hasOnlyKmsActions(ctx, actions))
+      .isPresent();
+  }
+
+  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, ListLiteral actions) {
+    return CdkUtils.getListElements(ctx, actions)
+      .stream()
+      .allMatch(flow -> flow.hasExpression(CdkPredicate.startsWith("kms:")));
+  }
+
+  private static void reportWildcardResourceAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, ExpressionFlow effect) {
     PreciseIssue issue = ctx.addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));

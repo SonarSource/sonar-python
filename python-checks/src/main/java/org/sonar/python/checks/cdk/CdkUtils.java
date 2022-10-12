@@ -156,6 +156,14 @@ public class CdkUtils {
   }
 
   /**
+   * Return a resolved dictionary value by a given key
+   */
+  public static Optional<ExpressionFlow> getDictionaryValue(List<ResolvedKeyValuePair> pairs, String key) {
+    return getDictionaryPair(pairs, key)
+      .map(pair -> pair.value);
+  }
+
+  /**
    * Collects all dictionary elements of a list as a return.
    */
   public static List<DictionaryLiteral> getDictionaryInList(SubscriptionContext ctx, ListLiteral listeners) {
@@ -249,6 +257,10 @@ public class CdkUtils {
 
     public Expression getLast() {
       return locations().getLast();
+    }
+
+    public IssueLocation asSecondaryLocation(String message) {
+      return IssueLocation.preciseLocation(getLast().parent(), message);
     }
   }
 
