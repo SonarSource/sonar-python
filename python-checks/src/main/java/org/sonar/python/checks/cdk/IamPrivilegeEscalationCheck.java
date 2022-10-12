@@ -19,24 +19,29 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
+import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
 
 @Rule(key = "S6317")
 public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
 
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
-
-  private static final String SENSITIVE_EFFECT = "aws_cdk.aws_iam.Effect.ALLOW";
-  private static final String SENSITIVE_RESOURCE_REGEX = "arn:[^:]*:[^:]*:[^:]*:[^:]*:(role|user|group)/\\*";
+  private static final String SECONDARY_MESSAGE = "Permissions are granted on all resources.";
+  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:(role|user|group)/\\*)");
 
   private static final Set<String> SENSITIVE_ACTIONS = Set.of(
     "iam:CreatePolicyVersion",
@@ -67,47 +72,79 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
     "lambda:UpdateFunctionCode"
   );
 
-  private static final Map<Set<String>, String> ATTACK_VECTOR_NAMES = Map.of(
-    Set.of("iam:CreatePolicyVersion"), "Create Policy Version",
-    Set.of("iam:SetDefaultPolicyVersion"), "Set Default Policy Version",
-    Set.of("iam:CreateAccessKey"), "Create AccessKey",
-    Set.of("iam:CreateLoginProfile"), "Create Login Profile",
-    Set.of("iam:UpdateLoginProfile"), "Update Login Profile ",
-    Set.of("iam:AttachUserPolicy"), "Attach User Policy",
-    Set.of("iam:AttachGroupPolicy"), "Attach Group Policy",
-    Set.of("iam:AttachRolePolicy", "sts:AssumeRole"), "Attach Role Policy"
-
+  private static final Map<String, String> ATTACK_VECTOR_NAMES = Map.of(
+    "iam:CreatePolicyVersion", "Create Policy Version",
+    "iam:SetDefaultPolicyVersion", "Set Default Policy Version",
+    "iam:CreateAccessKey", "Create AccessKey",
+    "iam:CreateLoginProfile", "Create Login Profile",
+    "iam:UpdateLoginProfile", "Update Login Profile ",
+    "iam:AttachUserPolicy", "Attach User Policy",
+    "iam:AttachGroupPolicy", "Attach Group Policy",
+    "iam:AttachRolePolicy", "Attach Role Policy",
+    "sts:AssumeRole", "Attach Role Policy"
   );
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (subscriptionContext, callExpression) -> {
-      boolean isSensitiveEffect = CdkUtils.getArgument(subscriptionContext, callExpression, "effect")
-        .map(expressionFlow -> expressionFlow.hasExpression(CdkPredicate.isFqn(SENSITIVE_EFFECT)))
-        .orElse(true);
+    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
+      checkPolicyStatement(PolicyStatement.build(ctx, call)));
 
-      Optional<CdkUtils.ExpressionFlow> sensitiveAction = CdkUtils.getArgument(subscriptionContext, callExpression, "actions")
-        .flatMap(CdkUtils::getList)
-        .flatMap(listLiteral -> CdkUtils.getListElements(subscriptionContext, listLiteral).stream()
-          .filter(expressionFlow -> expressionFlow.hasExpression(isString(SENSITIVE_ACTIONS)))
-          .findAny());
+    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json ->
+        checkPolicyStatement(PolicyStatement.build(ctx, json))));
 
-      Optional<CdkUtils.ExpressionFlow> resources = CdkUtils.getArgument(subscriptionContext, callExpression, "resources")
-        .flatMap(CdkUtils::getList)
-        .flatMap(listLiteral -> CdkUtils.getListElements(subscriptionContext, listLiteral).stream()
-          .filter(expressionFlow -> expressionFlow.hasExpression(isSensitiveResource()))
-          .findAny());
-
-      if (isSensitiveEffect && sensitiveAction.isPresent() && resources.isPresent()) {
-        resources.get().addIssue(ISSUE_MESSAGE_FORMAT);
-      }
-
-
-    });
+    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
+        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
   }
 
-  private static Predicate<Expression> isSensitiveResource() {
-    return isString("*").or(
-      expression -> CdkUtils.getString(expression).filter(string -> string.matches(SENSITIVE_RESOURCE_REGEX)).isPresent());
+  private static void checkPolicyStatement(PolicyStatement policyStatement) {
+    ExpressionFlow actions = policyStatement.actions();
+    ExpressionFlow resources = policyStatement.resources();
+
+    if (actions == null
+      || resources == null
+      || policyStatement.principals() != null
+      || policyStatement.conditions() != null
+      || CdkIamUtils.hasNotAllowEffect(policyStatement.effect())
+    ) {
+      return;
+    }
+
+    ExpressionFlow sensitiveAction = getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
+    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, isString(SENSITIVE_RESOURCE_PATTERN));
+
+    if (sensitiveAction != null && sensitiveResource != null) {
+      reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);
+    }
+  }
+
+  private static ExpressionFlow getSensitiveExpression(ExpressionFlow expression, Predicate<Expression> predicate) {
+    if (expression.hasExpression(predicate)) {
+      return expression;
+    } else {
+      List<ExpressionFlow> listElements = CdkUtils.getList(expression)
+        .map(list -> CdkUtils.getListElements(expression.ctx(), list))
+        .orElse(Collections.emptyList());
+
+      return listElements.stream()
+        .filter(expressionFlow -> expressionFlow.hasExpression(predicate))
+        .findAny()
+        .orElse(null);
+    }
+  }
+
+  private static Optional<String> getAttackVectorName(ExpressionFlow sensitiveAction) {
+    return sensitiveAction.getExpression(isStringLiteral())
+      .map(StringLiteral.class::cast)
+      .map(StringLiteral::trimmedQuotesValue)
+      .map(action -> ATTACK_VECTOR_NAMES.getOrDefault(action, null));
+  }
+
+  private static void reportSensitiveActionAndResource(ExpressionFlow sensitiveAction, ExpressionFlow resources) {
+    String attackVectorName =  getAttackVectorName(sensitiveAction).orElse("");
+    String message = String.format(ISSUE_MESSAGE_FORMAT, attackVectorName);
+    IssueLocation secondary = sensitiveAction.asSecondaryLocation(SECONDARY_MESSAGE);
+    resources.addIssue(message, secondary);
   }
 }

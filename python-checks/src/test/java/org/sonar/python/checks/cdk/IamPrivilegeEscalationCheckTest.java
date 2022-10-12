@@ -20,13 +20,25 @@
 package org.sonar.python.checks.cdk;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IamPrivilegeEscalationCheckTest {
 
+  PythonCheck check = new IamPrivilegeEscalationCheck();
   @Test
-  public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation.py", new IamPrivilegeEscalationCheck());
+  public void policyStatement() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/policyStatement.py", check);
+  }
+
+  @Test
+  public void fromJson() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/fromJson.py", check);
+  }
+
+  @Test
+  public void policyDocument() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/policyDocument.py", check);
   }
 
 }

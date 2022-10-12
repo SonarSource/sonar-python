@@ -25,6 +25,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -91,6 +92,13 @@ public class CdkPredicate {
    */
   public static Predicate<Expression> isString(Set<String> expectedValues) {
     return expression -> CdkUtils.getString(expression).filter(expectedValues::contains).isPresent();
+  }
+
+  /**
+   * @return Predicate which tests if expression is a string matches the pattern
+   */
+  public static Predicate<Expression> isString(Pattern pattern) {
+    return expression -> CdkUtils.getString(expression).filter(string -> pattern.matcher(string).find()).isPresent();
   }
 
   /**
