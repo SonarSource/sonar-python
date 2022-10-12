@@ -33,5 +33,7 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
         () -> subscriptionContext.addIssue(callExpression, ERROR_MESSAGE)
       )
     );
+
+    checkFqn("aws_cdk.aws_rds.DatabaseInstance", (ctx, call) -> {});
   }
 }
