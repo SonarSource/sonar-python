@@ -68,19 +68,8 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
       .ifPresent(principals -> {
         Optional<Expression> allowSetting = effect.flatMap(expressionFlow -> expressionFlow.getExpression(isFqn(IAM_EFFECT_ALLOW)));
         if (effect.isEmpty() || allowSetting.isPresent()) {
-          checkPrincipals(subscriptionContext, allowSetting.orElse(null), principals);
-        }
-      });
-  }
-
-  private static void checkPrincipals(SubscriptionContext ctx, @Nullable Expression effect, ListLiteral principals) {
-    getListElements(ctx, principals).stream()
-      .filter(expressionFlow -> expressionFlow.hasExpression(isSensitivePrincipal()))
-      .forEach(sensitivePrincipal -> {
-        if (effect != null) {
-          sensitivePrincipal.addIssue(ISSUE_MESSAGE, IssueLocation.preciseLocation(effect, SECONDARY_MESSAGE));
-        } else {
-          sensitivePrincipal.addIssue(ISSUE_MESSAGE);
+          getListElements(subscriptionContext, principals)
+            .forEach(principalElement -> raiseIssueIf(principalElement, isSensitivePrincipal(), allowSetting.orElse(null)));
         }
       });
   }
