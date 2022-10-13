@@ -26,6 +26,12 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isCallExpression;
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
+import static org.sonar.python.checks.cdk.CdkPredicate.isTrue;
+import static org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
+import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+
 @Rule(key = "S6329")
 public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourceCheck {
 
@@ -36,8 +42,8 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
   @Override
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_dms.CfnReplicationInstance", (subscriptionContext, callExpression) ->
-      CdkUtils.getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(
-        argument -> argument.addIssueIf(CdkPredicate.isTrue(), MESSAGE),
+      getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(
+        argument -> argument.addIssueIf(isTrue(), MESSAGE),
         () -> subscriptionContext.addIssue(callExpression, MESSAGE)
       )
     );
@@ -45,18 +51,19 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     checkFqn("aws_cdk.aws_rds.DatabaseInstance", PublicNetworkAccessToCloudResourcesCheck::checkDatabaseInstance);
 
     checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) ->
-      CdkUtils.getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresent(
-        argument -> argument.addIssueIf(CdkPredicate.isTrue(), MESSAGE)
+      getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresent(
+        argument -> argument.addIssueIf(isTrue(), MESSAGE)
       )
     );
   }
 
   private static void checkDatabaseInstance(SubscriptionContext ctx, CallExpression call) {
-    Optional<CdkUtils.ExpressionFlow> vpcSubnets = CdkUtils.getArgument(ctx, call, "vpc_subnets");
+    Optional<ExpressionFlow> vpcSubnets = getArgument(ctx, call, "vpc_subnets");
 
-    Optional<CdkUtils.ExpressionFlow> subnetType = vpcSubnets.flatMap(flow ->
-      CdkUtils.getCall(flow.getLast(), "aws_cdk.aws_ec2.SubnetSelection")
-        .flatMap(subnetSelection -> CdkUtils.getArgument(flow.ctx(), subnetSelection, "subnet_type")));
+    Optional<ExpressionFlow> subnetType = vpcSubnets
+      .flatMap(flow -> flow.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_ec2.SubnetSelection"))))
+      .map(CallExpression.class::cast)
+      .flatMap(subnetSelection -> getArgument(ctx, subnetSelection, "subnet_type"));
 
     if (subnetType.filter(isSafeSubnetSelection()).isPresent()) {
       return;
@@ -66,21 +73,20 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     //  - vpcSubnets is public and publicly_accessible is true
     //  - vpcSubnets is unknown and publicly_accessible is true
     //  - vpcSubnets is public and publicly_accessible is not set
-    Optional<CdkUtils.ExpressionFlow> publiclyAccessible = CdkUtils.getArgument(ctx, call, PUBLICLY_ACCESSIBLE_ARG_NAME);
-    publiclyAccessible.ifPresentOrElse(access -> access.addIssueIf(CdkPredicate.isTrue(), MESSAGE),
+    getArgument(ctx, call, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(access -> access.addIssueIf(isTrue(), MESSAGE),
       () -> subnetType.filter(isPublicSubnetSelection()).ifPresent(subnets -> subnets.addIssue(MESSAGE)));
   }
 
   /**
    * The `vpc_subnets` is safe if it is an `SubnetSelection` object with `subnet_type` of type `SubnetType` and not `PUBLIC`
    */
-  private static Predicate<CdkUtils.ExpressionFlow> isSafeSubnetSelection() {
+  private static Predicate<ExpressionFlow> isSafeSubnetSelection() {
     return subnetType -> SAFE_SUBNET_TYPES.stream()
-      .anyMatch(safeType -> subnetType.hasExpression(CdkPredicate.isFqn("aws_cdk.aws_ec2.SubnetType." + safeType)));
+      .anyMatch(safeType -> subnetType.hasExpression(isFqn("aws_cdk.aws_ec2.SubnetType." + safeType)));
   }
 
-  private static Predicate<CdkUtils.ExpressionFlow> isPublicSubnetSelection() {
-    return subnetType -> subnetType.hasExpression(CdkPredicate.isFqn("aws_cdk.aws_ec2.SubnetType.PUBLIC"));
+  private static Predicate<ExpressionFlow> isPublicSubnetSelection() {
+    return subnetType -> subnetType.hasExpression(isFqn("aws_cdk.aws_ec2.SubnetType.PUBLIC"));
   }
 
 }

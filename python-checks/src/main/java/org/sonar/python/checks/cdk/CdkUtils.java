@@ -267,10 +267,6 @@ public class CdkUtils {
     public IssueLocation asSecondaryLocation(String message) {
       return IssueLocation.preciseLocation(getLast().parent(), message);
     }
-
-    public SubscriptionContext ctx() {
-      return ctx;
-    }
   }
 
   /**
