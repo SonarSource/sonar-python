@@ -68,7 +68,7 @@ iam.PolicyStatement(
 iam.PolicyStatement(
     effect=iam.Effect.ALLOW,
     actions=["iam:CreateAccessKey"],
-    resources=["*"]  # Noncompliant {{This policy is vulnerable to the "Create AccessKey" privilege escalation vector. Remove permissions or restrict the set of resources they apply to.}}
+    resources=["*"]  # Noncompliant {{This policy is vulnerable to the "Create Access Key" privilege escalation vector. Remove permissions or restrict the set of resources they apply to.}}
 )
 
 iam.PolicyStatement(

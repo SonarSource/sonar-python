@@ -41,7 +41,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
   private static final String SECONDARY_MESSAGE = "Permissions are granted on all resources.";
-  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:(role|user|group)/\\*)");
+  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:.*(role|user|group)/\\*)");
 
   private static final Set<String> SENSITIVE_ACTIONS = Set.of(
     "iam:CreatePolicyVersion",
@@ -75,7 +75,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   private static final Map<String, String> ATTACK_VECTOR_NAMES = Map.of(
     "iam:CreatePolicyVersion", "Create Policy Version",
     "iam:SetDefaultPolicyVersion", "Set Default Policy Version",
-    "iam:CreateAccessKey", "Create AccessKey",
+    "iam:CreateAccessKey", "Create Access Key",
     "iam:CreateLoginProfile", "Create Login Profile",
     "iam:UpdateLoginProfile", "Update Login Profile ",
     "iam:AttachUserPolicy", "Attach User Policy",
@@ -112,7 +112,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
     }
 
     ExpressionFlow sensitiveAction = getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
-    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, isString(SENSITIVE_RESOURCE_PATTERN));
+    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, CdkPredicate.matches(SENSITIVE_RESOURCE_PATTERN));
 
     if (sensitiveAction != null && sensitiveResource != null) {
       reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);

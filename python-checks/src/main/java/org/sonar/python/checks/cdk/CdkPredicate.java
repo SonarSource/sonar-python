@@ -97,7 +97,7 @@ public class CdkPredicate {
   /**
    * @return Predicate which tests if expression is a string matches the pattern
    */
-  public static Predicate<Expression> isString(Pattern pattern) {
+  public static Predicate<Expression> matches(Pattern pattern) {
     return expression -> CdkUtils.getString(expression).filter(string -> pattern.matcher(string).find()).isPresent();
   }
 
