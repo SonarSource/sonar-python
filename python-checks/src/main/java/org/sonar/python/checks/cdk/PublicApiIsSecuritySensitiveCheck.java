@@ -32,20 +32,20 @@ import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6333")
 public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck {
-  private static final String ERROR_MESSAGE = "Make sure that creating public APIs is safe here.";
+  private static final String MESSAGE = "Make sure that creating public APIs is safe here.";
   private static final String OMITTING_MESSAGE = "Omitting \"authorization_type\" disables authentication. Make sure it is safe here.";
 
   @Override
   protected void registerFqnConsumer() {
     checkFqns(List.of("aws_cdk.aws_apigateway.CfnMethod", "aws_cdk.aws_apigatewayv2.CfnRoute"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "authorization_type").ifPresentOrElse(
-        argument -> argument.addIssueIf(isString("NONE"), ERROR_MESSAGE),
+        argument -> argument.addIssueIf(isString("NONE"), MESSAGE),
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
       )
     );
     checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "authorization_type").ifPresent(
-        argument -> argument.addIssueIf(isAuthorizationTypeNone(), ERROR_MESSAGE)
+        argument -> argument.addIssueIf(isAuthorizationTypeNone(), MESSAGE)
       )
     );
   }
