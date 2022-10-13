@@ -45,7 +45,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
   private static final String MESSAGE = "Make sure that creating public APIs is safe here.";
   private static final String OMITTING_MESSAGE = "Omitting \"authorization_type\" disables authentication. Make sure it is safe here.";
   private static final String AUTHORIZATION_TYPE = "authorization_type";
-  public static final String AUTHORIZATION_TYPE_NONE = "aws_cdk.aws_apigateway.AuthorizationType.NONE";
+  private static final String AUTHORIZATION_TYPE_NONE = "aws_cdk.aws_apigateway.AuthorizationType.NONE";
 
   private Set<String> safeMethods = new HashSet<>();
 
@@ -61,8 +61,8 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
       getArgument(subscriptionContext, callExpression, "default_method_options").ifPresent(
         argument -> {
           if (isNotSetToNone(subscriptionContext, argument)) {
-            // if invocation of RestApi() or Resource.add_resource() is with the safe default, and it's in method,
-            // then the method's full qualified name is stored in safeMethods
+            // if invocation of RestApi() or Resource.add_resource() is with the safe default, and it's in the method,
+            // then store the method's full qualified name in safeMethods
             enclosingMethodFqn(callExpression).ifPresent(fqn -> safeMethods.add(fqn));
           }
         }
@@ -73,7 +73,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
         argument -> argument.addIssueIf(isFqn(AUTHORIZATION_TYPE_NONE), MESSAGE),
         () -> enclosingMethodFqn(callExpression).filter(fqn -> safeMethods.contains(fqn)).ifPresentOrElse(fqn -> {}, () ->
           // if the invocation of Resource.add_method() is without explicit authorization_type argument,
-          // and not in the scope of safeMethod the call is considered unsafe
+          // and it's not in the scope of safeMethod the call, then it's considered unsafe
           // this is the best possible approximation for now
           subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
         )
