@@ -337,12 +337,6 @@ public class TreeUtils {
 
   @CheckForNull
   public static String fullyQualifiedNameFromExpression(Expression expression) {
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
-      if (symbol != null) {
-        return symbol.fullyQualifiedName();
-      }
-    }
     if (expression.is(Kind.NAME)) {
       Symbol symbol = ((Name) expression).symbol();
       return symbol != null ? symbol.fullyQualifiedName() : ((Name) expression).name();
