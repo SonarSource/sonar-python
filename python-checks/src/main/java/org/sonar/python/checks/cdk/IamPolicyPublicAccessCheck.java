@@ -43,6 +43,7 @@ import static org.sonar.python.checks.cdk.CdkUtils.getDictionaryPair;
 import static org.sonar.python.checks.cdk.CdkUtils.getList;
 import static org.sonar.python.checks.cdk.CdkUtils.getListElements;
 import static org.sonar.python.checks.cdk.CdkUtils.getListExpression;
+import static org.sonar.python.checks.cdk.CdkUtils.resolveDictionary;
 
 @Rule(key = "S6270")
 public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
@@ -117,10 +118,10 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
   }
 
   private static void checkJsonEntry(SubscriptionContext subscriptionContext, DictionaryLiteral dictionaryLiteral) {
-    CdkUtils.DictionaryAsMap map = CdkUtils.DictionaryAsMap.build(subscriptionContext, dictionaryLiteral);
+    List<CdkUtils.ResolvedKeyValuePair> resolvedKeyValuePairs = resolveDictionary(subscriptionContext, dictionaryLiteral);
 
-    Optional<CdkUtils.ExpressionFlow> effect = map.getFlow("Effect");
-    Expression effectSetting = effect.flatMap(expressionFlow -> expressionFlow.getExpression(isString("Allow"))).orElse(null);
+    Optional<CdkUtils.ResolvedKeyValuePair> effect = getDictionaryPair(resolvedKeyValuePairs, "Effect");
+    Expression effectSetting = effect.flatMap(expressionFlow -> expressionFlow.value.getExpression(isString("Allow"))).orElse(null);
 
     if (effect.isPresent() && effectSetting == null) {
       // "Effect" is defined, and it is not equal to "Allow"
@@ -130,7 +131,7 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
     // Given an entry under the key "Principal", we want to raise an issue if the value is either
     //  1) string literal "*",
     //  2) dictionary in the format of { "AWS": "*" } or { "AWS": ["99999", ..., "*", ....] }
-    map.getFlow("Principal").ifPresent(principal -> {
+    getDictionaryPair(resolvedKeyValuePairs, "Principal").map(pair -> pair.value).ifPresent(principal -> {
       raiseIssueIf(principal, isString("*"), effectSetting);
 
       getDictionary(principal)
