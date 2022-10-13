@@ -21,16 +21,24 @@ package org.sonar.python.checks.cdk;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
+import static org.sonar.python.checks.cdk.CdkUtils.getDictionary;
+import static org.sonar.python.checks.cdk.CdkUtils.getDictionaryPair;
 
 @Rule(key = "S6333")
 public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck {
@@ -52,7 +60,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
     checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
       enclosingMethodFqn(callExpression).filter(fqn -> safeMethods.contains(fqn)).ifPresentOrElse(fqn -> {}, () ->
         getArgument(subscriptionContext, callExpression, AUTHORIZATION_TYPE).ifPresentOrElse(
-          argument -> argument.addIssueIf(isAuthorizationTypeNone(), MESSAGE),
+          argument -> argument.addIssueIf(isFqn(AUTHORIZATION_TYPE_NONE), MESSAGE),
           () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
         )));
     checkFqns(List.of("aws_cdk.aws_apigateway.RestApi", "aws_cdk.aws_apigateway.Resource.add_resource"), (subscriptionContext, callExpression) ->
@@ -87,7 +95,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
       .isPresent();
   }
   private static Predicate<Expression> isNotNoneValue() {
-    return CdkPredicate.isFqn(AUTHORIZATION_TYPE_NONE).negate();
+    return isFqn(AUTHORIZATION_TYPE_NONE).negate();
   }
 
   private static boolean isSafeAuthorisationArgument(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow expression) {
@@ -95,16 +103,6 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
       .flatMap(expr -> getArgument(subscriptionContext, (CallExpression) expr, AUTHORIZATION_TYPE))
       .filter(expr -> expr.hasExpression(isFqn(AUTHORIZATION_TYPE_NONE)))
       .isEmpty();
-  }
-
-  private static Predicate<Expression> isAuthorizationTypeNone() {
-    return expression -> Optional.of(expression)
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol)
-      .filter(Objects::nonNull)
-      .filter(symbol-> AUTHORIZATION_TYPE_NONE.equals(symbol.fullyQualifiedName()))
-      .isPresent();
   }
 
   public static Predicate<Expression> isCallExpression() {
