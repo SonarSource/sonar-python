@@ -57,19 +57,26 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
       )
     );
-    checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
-      enclosingMethodFqn(callExpression).filter(fqn -> safeMethods.contains(fqn)).ifPresentOrElse(fqn -> {}, () ->
-        getArgument(subscriptionContext, callExpression, AUTHORIZATION_TYPE).ifPresentOrElse(
-          argument -> argument.addIssueIf(isFqn(AUTHORIZATION_TYPE_NONE), MESSAGE),
-          () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
-        )));
     checkFqns(List.of("aws_cdk.aws_apigateway.RestApi", "aws_cdk.aws_apigateway.Resource.add_resource"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "default_method_options").ifPresent(
         argument -> {
           if (isNotSetToNone(subscriptionContext, argument)) {
+            // if invocation of RestApi() or Resource.add_resource() is with the safe default, and it's in method,
+            // then the method's full qualified name is stored in safeMethods
+            // in current scanner implementation it's impossible to backtrack all previous method executions
             enclosingMethodFqn(callExpression).ifPresent(fqn -> safeMethods.add(fqn));
           }
         }
+      )
+    );
+    checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
+      enclosingMethodFqn(callExpression).filter(fqn -> safeMethods.contains(fqn)).ifPresentOrElse(fqn -> {}, () ->
+        getArgument(subscriptionContext, callExpression, AUTHORIZATION_TYPE).ifPresentOrElse(
+          argument -> argument.addIssueIf(isFqn(AUTHORIZATION_TYPE_NONE), MESSAGE),
+          // if the invocation of Resource.add_method() is not in the scope of safeMethod
+          // the call without explicit authorization_type argument is considered unsafe
+          () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
+        )
       )
     );
   }
