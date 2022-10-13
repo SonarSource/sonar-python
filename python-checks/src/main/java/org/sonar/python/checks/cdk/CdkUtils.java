@@ -91,14 +91,19 @@ public class CdkUtils {
    * Resolve a particular argument of a call by keyword or get an empty optional if the argument is not set nor resolvable.
    */
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
+    return getArgument(ctx, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
+  }
+
+  protected static Optional<ExpressionFlow> getArgument(CallExpression callExpression, String argumentName) {
+    // ctx not required as long as we don't try to raise an issue with ExpressionFlow
+    return getArgument(null, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
+  }
+
+  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, RegularArgument regArg) {
     List<Argument> arguments = callExpression.arguments();
-    Optional<ExpressionFlow> argument = arguments.stream()
-      .filter(RegularArgument.class::isInstance)
-      .map(RegularArgument.class::cast)
-      .filter(regularArgument -> regularArgument.keywordArgument() != null)
-      .filter(regularArgument -> argumentName.equals(regularArgument.keywordArgument().name()))
-      .map(regularArgument -> ExpressionFlow.build(ctx, regularArgument.expression()))
-      .findAny();
+    Optional<ExpressionFlow> argument = Optional.ofNullable(regArg)
+      .map(RegularArgument::expression)
+      .map(expression -> ExpressionFlow.build(ctx, expression));
 
     if (argument.isEmpty() && arguments.stream().anyMatch(UnpackingExpression.class::isInstance)) {
       return Optional.of(new UnresolvedExpressionFlow(ctx));
