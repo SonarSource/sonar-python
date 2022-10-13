@@ -60,7 +60,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
     checkFqns(List.of("aws_cdk.aws_apigateway.RestApi", "aws_cdk.aws_apigateway.Resource.add_resource"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "default_method_options").ifPresent(
         argument -> {
-          if (isNotSetToNone(subscriptionContext, argument)) {
+          if (isSafe(subscriptionContext, argument)) {
             // if invocation of RestApi() or Resource.add_resource() is with the safe default, and it's in the method,
             // then store the method's full qualified name in safeMethods
             enclosingMethodFqn(callExpression).ifPresent(fqn -> safeMethods.add(fqn));
@@ -89,27 +89,24 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
       .map(Symbol::fullyQualifiedName);
   }
 
-  private static boolean isNotSetToNone(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow argument) {
-    return isSafeDictionaryAuthorisationKey(subscriptionContext, argument.getLast())
-      || isSafeAuthorisationArgument(subscriptionContext, argument);
+  private static boolean isSafe(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow argument) {
+    return !(isUnsafeSafeDictionaryAuthorisationKey(subscriptionContext, argument.getLast())
+      || isUnsafeAuthorisationArgument(subscriptionContext, argument));
   }
 
 
-  private static boolean isSafeDictionaryAuthorisationKey(SubscriptionContext ctx, Expression expression) {
+  private static boolean isUnsafeSafeDictionaryAuthorisationKey(SubscriptionContext ctx, Expression expression) {
     return getDictionary(expression)
       .flatMap(dictionary -> getDictionaryPair(ctx, dictionary, AUTHORIZATION_TYPE))
-      .filter(element -> isNotNoneValue().test(element.value.getLast()))
+      .filter(element -> isFqn(AUTHORIZATION_TYPE_NONE).test(element.value.getLast()))
       .isPresent();
   }
-  private static Predicate<Expression> isNotNoneValue() {
-    return isFqn(AUTHORIZATION_TYPE_NONE).negate();
-  }
 
-  private static boolean isSafeAuthorisationArgument(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow expression) {
+  private static boolean isUnsafeAuthorisationArgument(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow expression) {
     return expression.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_apigateway.MethodOptions")))
       .flatMap(expr -> getArgument(subscriptionContext, (CallExpression) expr, AUTHORIZATION_TYPE))
       .filter(expr -> expr.hasExpression(isFqn(AUTHORIZATION_TYPE_NONE)))
-      .isEmpty();
+      .isPresent();
   }
 
   public static Predicate<Expression> isCallExpression() {
