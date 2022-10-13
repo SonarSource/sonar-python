@@ -20,10 +20,8 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -48,9 +46,7 @@ import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
-import static org.sonar.python.checks.cdk.CdkPredicate.isNumericLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
-import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
 
 public class CdkUtils {
 
