@@ -31,9 +31,10 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) ->
-      CdkUtils.getArgument(subscriptionContext, callExpression, "publicly_accessible").ifPresent(
-        argument -> argument.addIssueIf(CdkPredicate.isTrue(), MESSAGE)
+    checkFqn("aws_cdk.aws_dms.CfnReplicationInstance", (subscriptionContext, callExpression) ->
+      CdkUtils.getArgument(subscriptionContext, callExpression, "publicly_accessible").ifPresentOrElse(
+        argument -> argument.addIssueIf(CdkPredicate.isTrue(), MESSAGE),
+        () -> subscriptionContext.addIssue(callExpression, MESSAGE)
       )
     );
 
@@ -56,6 +57,12 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
       publiclyAccessible.ifPresentOrElse(access -> access.addIssueIf(CdkPredicate.isTrue(), MESSAGE),
         () -> subnetType.filter(isPublicSubnetSelection()).ifPresent(subnets -> subnets.addIssue(MESSAGE)));
     });
+
+    checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) ->
+      CdkUtils.getArgument(subscriptionContext, callExpression, "publicly_accessible").ifPresent(
+        argument -> argument.addIssueIf(CdkPredicate.isTrue(), MESSAGE)
+      )
+    );
   }
 
   /**
