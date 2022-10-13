@@ -115,13 +115,6 @@ public class CdkPredicate {
   }
 
   /**
-   * @return Predicate which tests if expression is a dictionary literal
-   */
-  public static Predicate<Expression> isDictionaryLiteral() {
-    return expression -> expression.is(Tree.Kind.DICTIONARY_LITERAL);
-  }
-
-  /**
    * @return Predicate which tests if expression is a string and starts with the expected value
    */
   public static Predicate<Expression> startsWith(String expected) {

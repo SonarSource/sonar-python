@@ -12,6 +12,13 @@ iam.PolicyStatement(
              #^^^^^^^^^^^^^^^^^^^
 )
 
+iam.PolicyStatement( # {{Access is set to "ALLOW" here as default}}
+  sid="AllowAnyPrincipal",
+  actions=["s3:*"],
+  resources=[bucket.arn_for_objects("*")],
+  principals=[iam.StarPrincipal()] # Noncompliant {{Make sure granting public access is safe here.}}
+)
+
 iam.PolicyStatement(
   sid="AllowAnyPrincipal",
   effect=iam.Effect.ALLOW,
@@ -39,7 +46,7 @@ iam.PolicyStatement(
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
   principals=[iam.AccountRootPrincipal(), iam.ArnPrincipal("*")] # Noncompliant
-                                         #^^^^^^^^^^^^^^^^^^^^^
+             #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 )
 
 # PolicyStatement constructor with ALLOW effect and non-sensitive principals
@@ -108,12 +115,20 @@ iam.PolicyStatement.from_json({
 
 iam.PolicyStatement.from_json({
     "Sid": "AllowAnyPrincipal",
+    "Action": ["s3:*"],
+    "Resource": bucket.arn_for_objects("*"),
+    "Principal": { "AWS" : "*"} # Noncompliant
+                  #^^^^^^^^^^^
+})
+
+iam.PolicyStatement.from_json({
+    "Sid": "AllowAnyPrincipal",
     "Effect": "Allow",
              #^^^^^^^>
     "Action": ["s3:*"],
     "Resource": bucket.arn_for_objects("*"),
     "Principal": { "AWS" : [ "*", "9999999" ]} # Noncompliant
-                            #^^^
+                            #^^^^^^^^^^^^^^
 })
 
 # PolicyStatement from_json, non-sensitive effect
@@ -147,11 +162,8 @@ iam.PolicyDocument.from_json({
    "Action": ["kms:*"],
    "Resource": "*",
    "Principal": {
-     "AWS": [
-       "*", # Noncompliant
-      #^^^
-       "999999999999"
-     ],
+     "AWS": ["*", "999999999999"], # Noncompliant
+            #^^^^^^^^^^^^^^^^^^^
    }
  },
  {
@@ -173,11 +185,8 @@ policy_document = {
    "Action": ["kms:*"],
    "Resource": "*",
    "Principal": {
-     "AWS": [
-       "*", # Noncompliant
-      #^^^
-       "999999999999"
-     ],
+     "AWS": ["*", "999999999999"], # Noncompliant
+            #^^^^^^^^^^^^^^^^^^^
    }
  },
  {
@@ -198,6 +207,13 @@ policy_document = {
     "Sid": "AnyPrincipal",
     "Effect": "Allow",
              #^^^^^^^>
+    "Action": ["kms:*"],
+    "Resource": "*",
+    "Principal": "*" # Noncompliant
+   #^^^^^^^^^^^^^^^^
+  },
+  {
+    "Sid": "AnyPrincipal",
     "Action": ["kms:*"],
     "Resource": "*",
     "Principal": "*" # Noncompliant
