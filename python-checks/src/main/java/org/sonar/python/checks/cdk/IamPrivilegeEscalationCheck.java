@@ -34,6 +34,7 @@ import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
+import static org.sonar.python.checks.cdk.CdkPredicate.matches;
 
 @Rule(key = "S6317")
 public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
@@ -41,7 +42,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
   private static final String SECONDARY_MESSAGE = "Permissions are granted on all resources.";
-  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:.*(role|user|group)/\\*)");
+  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:.*:(role|user|group)/\\*)");
 
   private static final Set<String> SENSITIVE_ACTIONS = Set.of(
     "iam:CreatePolicyVersion",
@@ -112,7 +113,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
     }
 
     ExpressionFlow sensitiveAction = getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
-    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, CdkPredicate.matches(SENSITIVE_RESOURCE_PATTERN));
+    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, matches(SENSITIVE_RESOURCE_PATTERN));
 
     if (sensitiveAction != null && sensitiveResource != null) {
       reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);
