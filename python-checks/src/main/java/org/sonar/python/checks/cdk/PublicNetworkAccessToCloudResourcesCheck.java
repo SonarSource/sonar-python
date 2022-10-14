@@ -20,7 +20,6 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -38,14 +37,12 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isCallExpression;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqnOf;
 import static org.sonar.python.checks.cdk.CdkPredicate.isListLiteral;
-import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkPredicate.isSubscriptionExpression;
 import static org.sonar.python.checks.cdk.CdkPredicate.isTrue;
 import static org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 import static org.sonar.python.checks.cdk.CdkUtils.getDictionary;
 import static org.sonar.python.checks.cdk.CdkUtils.getDictionaryPair;
-import static org.sonar.python.checks.cdk.CdkUtils.resolveDictionary;
 
 @Rule(key = "S6329")
 public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourceCheck {
@@ -53,7 +50,7 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
   private static final String SUBNET_TYPE = "subnet_type";
   private static final String ASSOCIATE_PUBLIC_IP_ADDRESS = "associate_public_ip_address";
 
-  private static final String ERROR_MESSAGE = "Make sure allowing public network access is safe here.";
+  private static final String MESSAGE = "Make sure allowing public network access is safe here.";
 
   private static final String SENSITIVE_SUBNET = "aws_cdk.aws_ec2.SubnetType.PUBLIC";
   private static final Set<String> SAFE_SUBNET_TYPES = Set.of("ISOLATED", "PRIVATE_ISOLATED", "PRIVATE", "PRIVATE_WITH_NAT");
@@ -64,8 +61,8 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
   protected void registerFqnConsumer() {
     checkFqn("aws_cdk.aws_dms.CfnReplicationInstance", (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(
-        argument -> argument.addIssueIf(isTrue(), ERROR_MESSAGE),
-        () -> subscriptionContext.addIssue(callExpression, ERROR_MESSAGE)
+        argument -> argument.addIssueIf(isTrue(), MESSAGE),
+        () -> subscriptionContext.addIssue(callExpression, MESSAGE)
       )
     );
 
@@ -73,7 +70,7 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
 
     checkFqn("aws_cdk.aws_rds.CfnDBInstance", (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresent(
-        argument -> argument.addIssueIf(isTrue(), ERROR_MESSAGE)
+        argument -> argument.addIssueIf(isTrue(), MESSAGE)
       )
     );
 
@@ -81,8 +78,10 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     checkFqn("aws_cdk.aws_ec2.CfnInstance", PublicNetworkAccessToCloudResourcesCheck::checkCfnInstance);
   }
 
-  /* Methods to work on aws_cdk.aws_ec2.Instance objects */
-  // Check this expression : aws_cdk.aws_ec2.Instance(vpc_subnets=*sensitive subnet*)
+  /**
+   * Check that a CallExpression (supposedly an aws_cdk.aws_ec2.Instance() call) has a sensitive 'vpc_subnets' argument
+   * <pre>aws_cdk.aws_ec2.Instance(vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC))</pre>
+   */
   private static void checkInstance(SubscriptionContext ctx, CallExpression callExpression) {
     getArgument(ctx, callExpression, "vpc_subnets")
       .ifPresent(flow -> {
@@ -91,17 +90,23 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
       });
   }
 
-  // Check the *sensitive subnet* as a specific CallExpression : 'aws_cdk.aws_ec2.SubnetSelection(subnet_type=aws_cdk.aws_ec2.SubnetType.PUBLIC)'
+  /**
+   * Check that the provided ExpressionFlow lead to a sensitive CallExpression of aws_cdk.aws_ec2.SubnetSelection
+   * <pre>aws_cdk.aws_ec2.SubnetSelection(subnet_type=aws_cdk.aws_ec2.SubnetType.PUBLIC)</pre>
+   */
   private static void checkVpcSubnetAsSensitiveSubnetSelectionCall(SubscriptionContext ctx, CdkUtils.ExpressionFlow flow) {
     flow.getExpression(isFqn("aws_cdk.aws_ec2.SubnetSelection"))
       .filter(expression -> expression.is(Tree.Kind.CALL_EXPR)).map(CallExpression.class::cast)
       .ifPresent(callExpression ->
         getArgument(ctx, callExpression, SUBNET_TYPE)
           .flatMap(flowArg -> flowArg.getExpression(isFqn(SENSITIVE_SUBNET)))
-          .ifPresent(expr -> ctx.addIssue(callExpression.parent(), ERROR_MESSAGE)));
+          .ifPresent(expr -> ctx.addIssue(callExpression.parent(), MESSAGE)));
   }
 
-  // Check the *sensitive subnet* as a specific DictionaryLiteral : '{"subnet_type" : aws_cdk.aws_ec2.SubnetType.PUBLIC}'
+  /**
+   * Check that the provided ExpressionFlow lead to a DictionaryLiteral with a sensitive 'subnet_type' attribute
+   * <pre>{"subnet_type" : aws_cdk.aws_ec2.SubnetType.PUBLIC}}</pre>
+   */
   private static void checkVpcSubnetAsSensitiveDictionary(SubscriptionContext ctx, CdkUtils.ExpressionFlow flow) {
     getDictionary(flow)
       .flatMap(dictionary -> getDictionaryPair(ctx, dictionary, SUBNET_TYPE))
@@ -109,8 +114,18 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
       .ifPresent(expression -> raiseIssueOnParent(ctx, expression, Tree.Kind.REGULAR_ARGUMENT));
   }
 
-  /* Methods to work on aws_cdk.aws_ec2.CfnInstance objects */
-  // Check this expression : 'aws_cdk.aws_ec2.CfnInstance(network_interfaces=[*Sensitive network interface*])'
+  /**
+   * Check that a CallExpression (supposedly an aws_cdk.aws_ec2.checkCfnInstance() call) has a sensitive 'network_interfaces' argument.
+   * Also check if a valid and compliant subnet_id is provided, in which case this CallExpression is not considered as sensitive.
+   * <pre>
+   *  aws_cdk.aws_ec2.CfnInstance(network_interfaces=[aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True)]) # Sensitive
+   *  aws_cdk.aws_ec2.CfnInstance(network_interfaces=[{"associate_public_ip_address" : True}]) # Sensitive
+   *  aws_cdk.aws_ec2.CfnInstance(network_interfaces=[aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True,
+   *    subnet_id=aws_cdk.aws_ec2.Vpc.select_subnets(subnet_type=aws_cdk.aws_ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0])]) # Compliant
+   *  aws_cdk.aws_ec2.CfnInstance(network_interfaces=[{"associate_public_ip_address" : True,
+   *    "subnet_id" : aws_cdk.aws_ec2.Vpc.select_subnets(subnet_type=aws_cdk.aws_ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0]}]) # Compliant
+   * </pre>
+   */
   private static void checkCfnInstance(SubscriptionContext ctx, CallExpression callExpression) {
     getArgument(ctx, callExpression, "network_interfaces")
       .flatMap(flow -> flow.getExpression(isListLiteral())).map(ListLiteral.class::cast)
@@ -122,8 +137,14 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
       });
   }
 
-  // Check the *Sensitive network interface* as a specific CallExpression :
-  // 'aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True, subnet_id=*sensitive_or_no_subnet*)'
+  /**
+   * Check that the provided ExpressionFlow lead to a sensitive CallExpression of aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty
+   * <pre>
+   *   aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True) # Sensitive
+   *   aws_cdk.aws_ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True,
+   *     subnet_id=aws_cdk.aws_ec2.Vpc.select_subnets(subnet_type=aws_cdk.aws_ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0])] # Compliant
+   * </pre>
+   */
   private static void checkNetworkInterfacesCallExpression(SubscriptionContext ctx, Expression expression) {
     Optional.of(expression)
       .filter(isCallExpression()).map(CallExpression.class::cast)
@@ -137,49 +158,67 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
 
     if (associatedPublicIpAddress.filter(flow -> flow.hasExpression(isTrue())).isPresent()
       && subnetId.filter(PublicNetworkAccessToCloudResourcesCheck::hasPrivateSubnetDefined).isEmpty()) {
-      associatedPublicIpAddress.get().addIssue(ERROR_MESSAGE);
+      associatedPublicIpAddress.get().addIssue(MESSAGE);
     }
   }
 
-  // Check the *Sensitive network interface* as a specific DictionaryLiteral : '{"associate_public_ip_address" : True, "subnet_id" : *sensitive_or_no_subnet*}'
+  /**
+   * Check that the provided ExpressionFlow lead to a DictionaryLiteral with a sensitive associate_public_ip_address/subnet_id
+   * <pre>
+   *   {"associate_public_ip_address" : True} # Sensitive
+   *   {"associate_public_ip_address" : True, "subnet_id" : ec2.Vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0]} #Compliant
+   * </pre>
+   */
   private static void checkNetworkInterfacesDictionary(SubscriptionContext ctx, Expression expression) {
-    List<CdkUtils.ResolvedKeyValuePair> elements = getDictionary(expression)
-      .map(dictionary -> resolveDictionary(ctx, dictionary))
-      .orElse(Collections.emptyList());
-
-    Optional<CdkUtils.ResolvedKeyValuePair> associatedPublicIpAddress = elements.stream().filter(el -> el.key.hasExpression(isString(ASSOCIATE_PUBLIC_IP_ADDRESS))).findFirst();
-    Optional<CdkUtils.ExpressionFlow> subnetId = elements.stream().filter(element -> element.key.hasExpression(isString("subnet_id"))).map(el -> el.value).findFirst();
-
-    if(associatedPublicIpAddress.filter(keyValuePair -> keyValuePair.value.hasExpression(isTrue())).isPresent()
-      && subnetId.filter(PublicNetworkAccessToCloudResourcesCheck::hasPrivateSubnetDefined).isEmpty()) {
-      associatedPublicIpAddress.get().key.getExpression(isString(ASSOCIATE_PUBLIC_IP_ADDRESS)).ifPresent(
-        expr -> raiseIssueOnParent(ctx, expr, Tree.Kind.KEY_VALUE_PAIR)
-      );
-    }
+    getDictionary(expression)
+      .map(dictionaryLiteral -> UnrestrictedAdministrationCheckPartCfnSecurity.DictionaryAsMap.build(ctx, dictionaryLiteral))
+      .ifPresent(dictionaryAsMap -> {
+        if (dictionaryAsMap.hasKeyValuePair(ASSOCIATE_PUBLIC_IP_ADDRESS, isTrue())
+          && dictionaryAsMap.getValue("subnet_id").filter(PublicNetworkAccessToCloudResourcesCheck::hasPrivateSubnetDefined).isEmpty()) {
+          dictionaryAsMap.getKeyString(ASSOCIATE_PUBLIC_IP_ADDRESS).ifPresent(expr -> raiseIssueOnParent(ctx, expr, Tree.Kind.KEY_VALUE_PAIR));
+        }
+      });
   }
 
-  // Check the if the provided subnet is compliant : 'ec2.Vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0]'
+  /**
+   * Check that the provided ExpressionFlow has a compliant (private subnet_type) CallExpression over aws_cdk.aws_ec2.Vpc.select_subnets() method.
+   * <pre>aws_cdk.aws_ec2.Vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_ISOLATED).subnet_ids[0]</pre>
+   */
   private static boolean hasPrivateSubnetDefined(CdkUtils.ExpressionFlow subnetId) {
     return subnetId.getExpression(isSubscriptionExpression())
       .map(SubscriptionExpression.class::cast).map(SubscriptionExpression::object)
-      .filter(expression -> expression.is(Tree.Kind.QUALIFIED_EXPR)).map(QualifiedExpression.class::cast)
       .filter(PublicNetworkAccessToCloudResourcesCheck::isCompliantSubnet)
       .isPresent();
   }
 
-  private static boolean isCompliantSubnet(QualifiedExpression qualifiedExpression) {
-    return Optional.of(qualifiedExpression)
-      .filter(qualExpr -> qualExpr.name().name().equals("subnet_ids"))
-      .map(QualifiedExpression::qualifier)
-      .filter(expression -> expression.is(Tree.Kind.CALL_EXPR)).map(CallExpression.class::cast)
-      .filter(isFqn("aws_cdk.aws_ec2.Vpc.select_subnets"))
-      .flatMap(callExpression -> getArgument(null, callExpression, SUBNET_TYPE))
+  private static boolean isCompliantSubnet(Expression expression) {
+    Optional<CallExpression> callExpression = getCallSelectSubnets(expression);
+
+    return callExpression
+      .flatMap(call -> getArgument(null, call, SUBNET_TYPE))
       .filter(flow -> flow.hasExpression(isFqnOf(COMPLIANT_SUBNETS)))
       .isPresent();
   }
 
+  private static Optional<CallExpression> getCallSelectSubnets(Expression expression) {
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      Expression qualifier = ((QualifiedExpression) expression).qualifier();
+      CdkUtils.ExpressionFlow flow = CdkUtils.ExpressionFlow.build(null, qualifier);
+      return flow.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_ec2.Vpc.select_subnets")))
+        .map(CallExpression.class::cast);
+    }
+    if (expression.is(Tree.Kind.NAME)) {
+      CdkUtils.ExpressionFlow flow = CdkUtils.ExpressionFlow.build(null, expression);
+      return flow.getExpression(isQualifiedExpression()).map(QualifiedExpression.class::cast)
+        .map(qualifiedExpression -> CdkUtils.ExpressionFlow.build(null, qualifiedExpression.qualifier()))
+        .flatMap(flow2 -> flow2.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_ec2.Vpc.select_subnets"))))
+        .map(CallExpression.class::cast);
+    }
+    return Optional.empty();
+  }
+
   private static void raiseIssueOnParent(SubscriptionContext ctx, Expression expression, Tree.Kind kind) {
-    ctx.addIssue(Optional.ofNullable(TreeUtils.firstAncestorOfKind(expression, kind)).orElse(expression), ERROR_MESSAGE);
+    ctx.addIssue(Optional.ofNullable(TreeUtils.firstAncestorOfKind(expression, kind)).orElse(expression), MESSAGE);
   }
 
   private static void checkDatabaseInstance(SubscriptionContext ctx, CallExpression call) {
@@ -188,7 +227,7 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     Optional<ExpressionFlow> subnetType = vpcSubnets
       .flatMap(flow -> flow.getExpression(isCallExpression().and(isFqn("aws_cdk.aws_ec2.SubnetSelection"))))
       .map(CallExpression.class::cast)
-      .flatMap(subnetSelection -> getArgument(ctx, subnetSelection, "subnet_type"));
+      .flatMap(subnetSelection -> getArgument(ctx, subnetSelection, SUBNET_TYPE));
 
     if (subnetType.filter(isSafeSubnetSelection()).isPresent()) {
       return;
@@ -198,8 +237,8 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     //  - vpcSubnets is public and publicly_accessible is true
     //  - vpcSubnets is unknown and publicly_accessible is true
     //  - vpcSubnets is public and publicly_accessible is not set
-    getArgument(ctx, call, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(access -> access.addIssueIf(isTrue(), ERROR_MESSAGE),
-      () -> subnetType.filter(isPublicSubnetSelection()).ifPresent(subnets -> subnets.addIssue(ERROR_MESSAGE)));
+    getArgument(ctx, call, PUBLICLY_ACCESSIBLE_ARG_NAME).ifPresentOrElse(access -> access.addIssueIf(isTrue(), MESSAGE),
+      () -> subnetType.filter(isPublicSubnetSelection()).ifPresent(subnets -> subnets.addIssue(MESSAGE)));
   }
 
   /**
@@ -211,7 +250,10 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
   }
 
   private static Predicate<ExpressionFlow> isPublicSubnetSelection() {
-    return subnetType -> subnetType.hasExpression(isFqn("aws_cdk.aws_ec2.SubnetType.PUBLIC"));
+    return subnetType -> subnetType.hasExpression(isFqn(SENSITIVE_SUBNET));
   }
 
+  public static Predicate<Expression> isQualifiedExpression() {
+    return expression -> expression.is(Tree.Kind.QUALIFIED_EXPR);
+  }
 }
