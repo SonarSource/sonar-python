@@ -253,7 +253,7 @@ public class PublicNetworkAccessToCloudResourcesCheck extends AbstractCdkResourc
     return subnetType -> subnetType.hasExpression(isFqn(SENSITIVE_SUBNET));
   }
 
-  public static Predicate<Expression> isQualifiedExpression() {
+  private static Predicate<Expression> isQualifiedExpression() {
     return expression -> expression.is(Tree.Kind.QUALIFIED_EXPR);
   }
 }

@@ -164,10 +164,7 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
     }
 
     public Optional<CdkUtils.ExpressionFlow> getValue(String key) {
-      if (!map.containsKey(key)) {
-        return Optional.empty();
-      }
-      return Optional.of(map.get(key).value);
+      return Optional.ofNullable(map.get(key)).map(keyValuePair -> keyValuePair.value);
     }
 
     public void addIssue(String key, String message) {

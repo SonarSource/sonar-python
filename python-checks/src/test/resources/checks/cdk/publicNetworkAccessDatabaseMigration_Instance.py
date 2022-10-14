@@ -15,9 +15,9 @@ class Test(Stack):
 
         # Sensitive
         ec2.Instance(vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)) # Noncompliant{{Make sure allowing public network access is safe here.}}
-        #            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         ec2.Instance(vpc_subnets={"subnet_type" : ec2.SubnetType.PUBLIC}) # Noncompliant
-        #            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         # Compliant
         ec2.Instance(vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT))
@@ -46,11 +46,11 @@ class Test(Stack):
 
         # Sensitive
         ec2.CfnInstance(network_interfaces=[ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True)]) # Noncompliant{{Make sure allowing public network access is safe here.}}
-        #                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         ec2.CfnInstance(network_interfaces=[{"associate_public_ip_address" : True}]) # Noncompliant
-        #                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         ec2.CfnInstance(network_interfaces=[ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True, subnet_id=ec2.Vpc.select_subnets(subnet_type=ec2.SubnetType.PUBLIC).subnet_ids[0])]) # Noncompliant
-        #                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         ec2.CfnInstance(network_interfaces=[{"associate_public_ip_address" : True, "subnet_id" : ec2.Vpc.select_subnets(subnet_type=ec2.SubnetType.PUBLIC).subnet_ids[0]}]) # Noncompliant
         ec2.CfnInstance(network_interfaces=[ec2.CfnInstance.NetworkInterfaceProperty(associate_public_ip_address=True, subnet_id=ec2.Vpc.select_subnets(subnet_type="random value").subnet_ids[0])]) # Noncompliant
         ec2.CfnInstance(network_interfaces=[{"associate_public_ip_address" : True, "subnet_id" : ec2.Vpc.select_subnets(subnet_type="random value")}]) # Noncompliant
