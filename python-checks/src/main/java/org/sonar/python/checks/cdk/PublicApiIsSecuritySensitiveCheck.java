@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -48,6 +49,12 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
   private static final String AUTHORIZATION_TYPE_NONE = "aws_cdk.aws_apigateway.AuthorizationType.NONE";
 
   private final Set<String> safeMethods = new HashSet<>();
+
+  @Override
+  public void scanFile(PythonVisitorContext visitorContext) {
+    super.scanFile(visitorContext);
+    safeMethods.clear();
+  }
 
   @Override
   protected void registerFqnConsumer() {
