@@ -57,8 +57,8 @@ rds_subnet_group_private = rds.CfnDBSubnetGroup(
 )
 
 rds.CfnDBInstance(
-    publicly_accessible=True, # Noncompliant
-    db_subnet_group_name=rds_subnet_group_private.ref # FP, see SONARPY-1172
+    publicly_accessible=True, # Ok
+    db_subnet_group_name=rds_subnet_group_private.ref
 )
 
 rds.CfnDBInstance(
@@ -68,4 +68,34 @@ rds.CfnDBInstance(
 
 rds.CfnDBInstance(
     db_subnet_group_name=unknown_subnet_group_name # Ok, publicly_accessible is not `True`
+)
+
+rds.CfnDBInstance(
+    publicly_accessible=True, # Noncompliant
+    db_subnet_group_name=unknown_subnet_group_name.whatever
+)
+
+rds_subnet_group_unknown = rds.CfnDBSubnetGroup()
+
+rds.CfnDBInstance(
+    publicly_accessible=True, # Noncompliant
+    db_subnet_group_name=rds_subnet_group_unknown.ref
+)
+
+rds_subnet_group_unknown_with_subnet_ids = rds.CfnDBSubnetGroup(
+    subnet_ids=unknown_vpc.whatever
+)
+
+rds.CfnDBInstance(
+    publicly_accessible=True, # Noncompliant
+    db_subnet_group_name=rds_subnet_group_unknown_with_subnet_ids.ref
+)
+
+rds_subnet_group_unknown_with_subnet_ids_from_variable = rds.CfnDBSubnetGroup(
+    subnet_ids=get_subnets_from_somewhere.subnet_ids
+)
+
+rds.CfnDBInstance(
+    publicly_accessible=True, # Noncompliant
+    db_subnet_group_name=rds_subnet_group_unknown_with_subnet_ids_from_variable.ref
 )
