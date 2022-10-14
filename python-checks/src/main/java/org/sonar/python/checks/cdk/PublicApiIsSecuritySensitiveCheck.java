@@ -47,7 +47,7 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
   private static final String AUTHORIZATION_TYPE = "authorization_type";
   private static final String AUTHORIZATION_TYPE_NONE = "aws_cdk.aws_apigateway.AuthorizationType.NONE";
 
-  private Set<String> safeMethods = new HashSet<>();
+  private final Set<String> safeMethods = new HashSet<>();
 
   @Override
   protected void registerFqnConsumer() {
@@ -57,21 +57,23 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
         () -> subscriptionContext.addIssue(callExpression.callee(), OMITTING_MESSAGE)
       )
     );
+
     checkFqns(List.of("aws_cdk.aws_apigateway.RestApi", "aws_cdk.aws_apigateway.Resource.add_resource"), (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, "default_method_options").ifPresent(
         argument -> {
-          if (isSafe(subscriptionContext, argument)) {
+          if (isArgumentSafe(subscriptionContext, argument)) {
             // if invocation of RestApi() or Resource.add_resource() is with the safe default, and it's in the method,
             // then store the method's full qualified name in safeMethods
-            enclosingMethodFqn(callExpression).ifPresent(fqn -> safeMethods.add(fqn));
+            enclosingMethodFqn(callExpression).ifPresent(safeMethods::add);
           }
         }
       )
     );
+
     checkFqn("aws_cdk.aws_apigateway.Resource.add_method", (subscriptionContext, callExpression) ->
       getArgument(subscriptionContext, callExpression, AUTHORIZATION_TYPE).ifPresentOrElse(
         argument -> argument.addIssueIf(isFqn(AUTHORIZATION_TYPE_NONE), MESSAGE),
-        () -> enclosingMethodFqn(callExpression).filter(fqn -> safeMethods.contains(fqn)).ifPresentOrElse(fqn -> {}, () ->
+        () -> enclosingMethodFqn(callExpression).filter(fqn -> !safeMethods.contains(fqn)).ifPresent(fnq ->
           // if the invocation of Resource.add_method() is without explicit authorization_type argument,
           // and it's not in the scope of safeMethod the call, then it's considered unsafe
           // this is the best possible approximation for now
@@ -89,11 +91,10 @@ public class PublicApiIsSecuritySensitiveCheck extends AbstractCdkResourceCheck 
       .map(Symbol::fullyQualifiedName);
   }
 
-  private static boolean isSafe(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow argument) {
+  private static boolean isArgumentSafe(SubscriptionContext subscriptionContext, CdkUtils.ExpressionFlow argument) {
     return !(isUnsafeSafeDictionaryAuthorisationKey(subscriptionContext, argument.getLast())
       || isUnsafeAuthorisationArgument(subscriptionContext, argument));
   }
-
 
   private static boolean isUnsafeSafeDictionaryAuthorisationKey(SubscriptionContext ctx, Expression expression) {
     return getDictionary(expression)
