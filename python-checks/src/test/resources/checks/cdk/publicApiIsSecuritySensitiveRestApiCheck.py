@@ -127,12 +127,26 @@ class PublicApiIsSecuritySensitiveRestApiSecureAddResourceCallCheck:
             authorization_type=apigateway.AuthorizationType.IAM  # Compliant
         )
 
-class PublicApiIsSecuritySensitiveRestApiUnsecureConstructorCheck:
-    def __init__(self, auth_from_argument):
+class PublicApiIsSecuritySensitiveRestApiUnsecureConstructorDictionary:
+    def __init__(self):
         api = apigateway.RestApi(
             self,
             "RestApiDefault",
             default_method_options={"authorization_type": apigateway.AuthorizationType.NONE}
+        )
+
+        test = api.root.add_resource("test")
+        test.add_method("GET")  # NonCompliant{{Omitting "authorization_type" disables authentication. Make sure it is safe here.}}
+
+class PublicApiIsSecuritySensitiveRestApiUnsecureConstructorMethodOptions:
+    def __init__(self):
+        opts = apigateway.MethodOptions(
+            authorization_type=apigateway.AuthorizationType.NONE
+        )
+        api = apigateway.RestApi(
+            self,
+            "RestApiDefault",
+            default_method_options=opts
         )
 
         test = api.root.add_resource("test")
