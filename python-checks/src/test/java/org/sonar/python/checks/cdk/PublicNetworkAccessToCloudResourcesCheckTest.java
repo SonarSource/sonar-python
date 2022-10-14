@@ -36,4 +36,9 @@ public class PublicNetworkAccessToCloudResourcesCheckTest {
   public void testDatabaseInstance() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicNetworkAccessDatabaseInstance.py", check);
   }
+
+  @Test
+  public void testInstance() {
+    PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicNetworkAccessDatabaseMigration_Instance.py", check);
+  }
 }

@@ -158,6 +158,15 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
       return map.get(key).value.getExpression(valuePredicate);
     }
 
+    public Optional<Expression> getKeyString(String key) {
+      return Optional.ofNullable(map.get(key))
+        .flatMap(keyValuePair -> keyValuePair.key.getExpression(isStringLiteral()));
+    }
+
+    public Optional<CdkUtils.ExpressionFlow> getValue(String key) {
+      return Optional.ofNullable(map.get(key)).map(keyValuePair -> keyValuePair.value);
+    }
+
     public void addIssue(String key, String message) {
       if (map.containsKey(key)) {
         map.get(key).value.addIssue(message);

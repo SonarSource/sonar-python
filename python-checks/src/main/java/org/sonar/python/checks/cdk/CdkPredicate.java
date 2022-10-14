@@ -122,6 +122,10 @@ public class CdkPredicate {
     return expression -> expression.is(Tree.Kind.LIST_LITERAL);
   }
 
+  public static Predicate<Expression> isSubscriptionExpression() {
+    return expression -> expression.is(Tree.Kind.SUBSCRIPTION);
+  }
+
   /**
    * @return Predicate which tests if expression is a string and starts with the expected value
    */
