@@ -10,6 +10,18 @@ disclosures.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>It’s recommended to restrict API access to authorized entities, unless the API offers a non-sensitive service designed to be public.</p>
 <h2>Sensitive Code Example</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_apigateway/Resource.html">aws_cdk.aws_apigateway.Resource</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_apigateway as apigateway
+)
+
+resource = api.root.add_resource("example")
+resource.add_method(
+    "GET",
+    authorization_type=apigateway.AuthorizationType.NONE  # Sensitive
+)
+</pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.CfnRoute.html">aws_cdk.aws_apigatewayv2.CfnRoute</a>:</p>
 <pre>
 from aws_cdk import (
@@ -25,6 +37,27 @@ apigateway.CfnRoute(
 )
 </pre>
 <h2>Compliant Solution</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_apigateway/Resource.html">aws_cdk.aws_apigateway.Resource</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_apigateway as apigateway
+)
+
+opts = apigateway.MethodOptions(
+    authorization_type=apigateway.AuthorizationType.IAM
+)
+resource = api.root.add_resource(
+    "example",
+    default_method_options=opts
+)
+resource.add_method(
+    "POST",
+    authorization_type=apigateway.AuthorizationType.IAM
+)
+resource.add_method(  # authorization_type is inherited from the Resource's configured default_method_options
+    "POST"
+)
+</pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.CfnRoute.html">aws_cdk.aws_apigatewayv2.CfnRoute</a>:</p>
 <pre>
 from aws_cdk import (
