@@ -26,6 +26,7 @@ import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
+import org.sonar.python.checks.cdk.IamPrivilegeEscalationCheck;
 import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
 import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
@@ -192,6 +193,7 @@ public final class CheckList {
       HashingDataCheck.class,
       HttpOnlyCookieCheck.class,
       IamPolicyPublicAccessCheck.class,
+      IamPrivilegeEscalationCheck.class,
       IgnoredParameterCheck.class,
       IgnoredSystemExitCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
