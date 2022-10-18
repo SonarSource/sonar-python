@@ -26,6 +26,19 @@ iam.PolicyStatement(
 )
 
 iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    actions=["iam:CreatePolicyVersion"],
+    resources=["arn:a:b:c:d:role/foo-bar-*"]
+)
+
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    actions=["iam:CreatePolicyVersion"],
+    resources=["arn:a:b:*:d:role/foo-bar"]
+)
+
+
+iam.PolicyStatement(
     effect=iam.Effect.DENY,
     actions=["iam:CreatePolicyVersion"],
     resources=["*"]  # Ok
