@@ -42,7 +42,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
   private static final String SECONDARY_MESSAGE = "Permissions are granted on all resources.";
-  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(\\*)|(arn:.*:(role|user|group)/\\*)");
+  private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(^\\*$)|(arn:.*:(role|user|group)/\\*)");
 
   private static final Set<String> SENSITIVE_ACTIONS = Set.of(
     "iam:CreatePolicyVersion",
