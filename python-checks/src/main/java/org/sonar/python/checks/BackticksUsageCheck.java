@@ -21,14 +21,30 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.ReprExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
-@Rule(key = BackticksUsageCheck.CHECK_KEY)
+@Rule(key = "BackticksUsage")
 public class BackticksUsageCheck extends PythonSubscriptionCheck {
-  public static final String CHECK_KEY = "BackticksUsage";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.REPR, ctx -> ctx.addIssue(ctx.syntaxNode(), "Use \"repr\" instead."));
+    context.registerSyntaxNodeConsumer(Tree.Kind.REPR, ctx -> {
+      ReprExpression node = (ReprExpression) ctx.syntaxNode();
+      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(node, "Use \"repr\" instead.");
+
+      PythonTextEdit text1 = PythonTextEdit
+              .replace(node.openingBacktick(), "repr(");
+      PythonTextEdit text2 = PythonTextEdit
+              .replace(node.closingBacktick(), ")");
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Replace backtick with \"repr()\".")
+              .addTextEdit(text1)
+              .addTextEdit(text2)
+              .build();
+      issue.addQuickFix(quickFix);
+    });
   }
 }

@@ -20,13 +20,24 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class BackticksUsageCheckTest {
 
   @Test
-  public void test() {
+  public void testCheck() {
     PythonCheckVerifier.verify("src/test/resources/checks/backticksUsage.py", new BackticksUsageCheck());
   }
 
+  @Test
+  public void testQuickFix() {
+    String codeWithIssue = "def foo():\n" +
+            "    `num`\n" +
+            "    foo()";
+    String codeFixed = "def foo():\n" +
+            "    repr(num)\n" +
+            "    foo()";
+    PythonQuickFixVerifier.verify(new BackticksUsageCheck(), codeWithIssue, codeFixed);
+  }
 }
