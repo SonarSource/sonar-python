@@ -26,16 +26,48 @@ import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 public class ClassMethodFirstArgumentNameCheckTest {
 
   @Test
-  public void test() {
+  public void testRule() {
     PythonCheckVerifier.verify("src/test/resources/checks/classMethodFirstArgumentNameCheck.py", new ClassMethodFirstArgumentNameCheck());
-
+  }
+  @Test
+  public void testQuickFix() {
     String codeWithIssue = "class A():\n" +
       "    @classmethod\n" +
-      "    def area(bob): pass";
-    String codeFixed = "class A():\n" +
+      "    def area(bob, alice):\n" +
+      "        print(bob)\n";
+    String codeFixed1 = "class A():\n" +
       "    @classmethod\n" +
-      "    def area(cls, bob): pass";
+      "    def area(cls, bob, alice):\n" +
+      "        print(bob)\n";
+    String codeFixed2 = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(cls, alice):\n" +
+      "        print(cls)\n";
 
-    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
+  }
+
+  @Test
+  public void testQuickFixMultiline() {
+    String codeWithIssue = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(bob," +
+      "        alice\n" +
+      "    ):\n" +
+      "        print(bob)\n";
+    String codeFixed1 = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(cls, bob," +
+      "        alice\n" +
+      "    ):\n" +
+      "        print(bob)\n";
+    String codeFixed2 = "class A():\n" +
+      "    @classmethod\n" +
+      "    def area(cls," +
+      "        alice\n" +
+      "    ):\n" +
+      "        print(cls)\n";
+
+    PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
 }

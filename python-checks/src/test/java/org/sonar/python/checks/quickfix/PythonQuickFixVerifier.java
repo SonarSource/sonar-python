@@ -67,11 +67,9 @@ public class PythonQuickFixVerifier {
       .collect(Collectors.toList());
 
     assertThat(appliedQuickFix)
-      .as("Application of the quickfix")
-      .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
+      .as("The code with the quickfix applied is not the expected result.\n" +
+        "\"Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
-
   }
 
   public static void verifyNoQuickFixes(PythonCheck check, String codeWithIssue) {
