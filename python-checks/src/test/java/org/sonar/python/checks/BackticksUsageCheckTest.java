@@ -40,4 +40,15 @@ public class BackticksUsageCheckTest {
             "    foo()";
     PythonQuickFixVerifier.verify(new BackticksUsageCheck(), codeWithIssue, codeFixed);
   }
+
+  @Test
+  public void testQuickFixMultiline() {
+    String codeWithIssue = "def bar():\n" +
+            "    print(`1\n" +
+            "    + 2`)";
+    String codeFixed = "def bar():\n" +
+            "    print(repr(1\n" +
+            "    + 2))";
+    PythonQuickFixVerifier.verify(new BackticksUsageCheck(), codeWithIssue, codeFixed);
+  }
 }
