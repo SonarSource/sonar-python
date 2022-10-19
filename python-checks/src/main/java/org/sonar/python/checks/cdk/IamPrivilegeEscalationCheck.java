@@ -19,16 +19,12 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
@@ -112,26 +108,11 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
       return;
     }
 
-    ExpressionFlow sensitiveAction = getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
-    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, matches(SENSITIVE_RESOURCE_PATTERN));
+    ExpressionFlow sensitiveAction = CdkIamUtils.getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
+    ExpressionFlow sensitiveResource = CdkIamUtils.getSensitiveExpression(resources, matches(SENSITIVE_RESOURCE_PATTERN));
 
     if (sensitiveAction != null && sensitiveResource != null) {
       reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);
-    }
-  }
-
-  private static ExpressionFlow getSensitiveExpression(ExpressionFlow expression, Predicate<Expression> predicate) {
-    if (expression.hasExpression(predicate)) {
-      return expression;
-    } else {
-      List<ExpressionFlow> listElements = CdkUtils.getList(expression)
-        .map(list -> CdkUtils.getListElements(expression.ctx(), list))
-        .orElse(Collections.emptyList());
-
-      return listElements.stream()
-        .filter(expressionFlow -> expressionFlow.hasExpression(predicate))
-        .findAny()
-        .orElse(null);
     }
   }
 

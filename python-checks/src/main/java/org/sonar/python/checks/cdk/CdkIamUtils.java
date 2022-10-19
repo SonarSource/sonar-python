@@ -90,4 +90,19 @@ public class CdkIamUtils {
       .map(list -> CdkUtils.getDictionaryInList(ctx, list))
       .orElse(Collections.emptyList());
   }
+
+  public static CdkUtils.ExpressionFlow getSensitiveExpression(CdkUtils.ExpressionFlow expression, Predicate<Expression> predicate) {
+    if (expression.hasExpression(predicate)) {
+      return expression;
+    } else {
+      List<CdkUtils.ExpressionFlow> listElements = CdkUtils.getList(expression)
+        .map(list -> CdkUtils.getListElements(expression.ctx(), list))
+        .orElse(Collections.emptyList());
+
+      return listElements.stream()
+        .filter(expressionFlow -> expressionFlow.hasExpression(predicate))
+        .findAny()
+        .orElse(null);
+    }
+  }
 }
