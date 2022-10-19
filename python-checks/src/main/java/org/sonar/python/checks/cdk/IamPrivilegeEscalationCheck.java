@@ -33,7 +33,7 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.matches;
 
 @Rule(key = "S6317")
-public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
+public class IamPrivilegeEscalationCheck extends AbstractIamPolicyStatementCheck {
 
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
@@ -82,20 +82,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   );
 
   @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
-      checkPolicyStatement(PolicyStatement.build(ctx, call)));
-
-    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json ->
-        checkPolicyStatement(PolicyStatement.build(ctx, json))));
-
-    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
-  }
-
-  private static void checkPolicyStatement(PolicyStatement policyStatement) {
+  protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     ExpressionFlow actions = policyStatement.actions();
     ExpressionFlow resources = policyStatement.resources();
 
@@ -103,13 +90,12 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
       || resources == null
       || policyStatement.principals() != null
       || policyStatement.conditions() != null
-      || CdkIamUtils.hasNotAllowEffect(policyStatement.effect())
     ) {
       return;
     }
 
-    ExpressionFlow sensitiveAction = CdkIamUtils.getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
-    ExpressionFlow sensitiveResource = CdkIamUtils.getSensitiveExpression(resources, matches(SENSITIVE_RESOURCE_PATTERN));
+    ExpressionFlow sensitiveAction = getSensitiveExpression(actions, isString(SENSITIVE_ACTIONS));
+    ExpressionFlow sensitiveResource = getSensitiveExpression(resources, matches(SENSITIVE_RESOURCE_PATTERN));
 
     if (sensitiveAction != null && sensitiveResource != null) {
       reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);

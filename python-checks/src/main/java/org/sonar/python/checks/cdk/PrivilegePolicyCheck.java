@@ -25,36 +25,21 @@ import org.sonar.check.Rule;
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 
 @Rule(key = "S6302")
-public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
+public class PrivilegePolicyCheck extends AbstractIamPolicyStatementCheck {
 
   private static final String MESSAGE = "Make sure granting all privileges is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
 
   @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
-      checkPolicyStatement(PolicyStatement.build(ctx, call)));
-
-
-    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(PolicyStatement.build(ctx, json))));
-
-
-    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
-  }
-
-  private static void checkPolicyStatement(PolicyStatement policyStatement) {
-    CdkUtils.ExpressionFlow effect = policyStatement.effect();
+  protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     CdkUtils.ExpressionFlow action = policyStatement.actions();
 
-    if (action == null || CdkIamUtils.hasNotAllowEffect(effect)) {
+    if (action == null) {
       return;
     }
 
-    Optional.ofNullable(CdkIamUtils.getSensitiveExpression(action, isWildcard()))
-      .ifPresent(wildcard -> reportWildcardActionAndEffect(wildcard, effect));
+    Optional.ofNullable(getSensitiveExpression(action, isWildcard()))
+      .ifPresent(wildcard -> reportWildcardActionAndEffect(wildcard, policyStatement.effect()));
   }
 
   private static void reportWildcardActionAndEffect(CdkUtils.ExpressionFlow wildcard, CdkUtils.ExpressionFlow effect) {

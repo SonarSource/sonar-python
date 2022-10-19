@@ -20,49 +20,31 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Optional;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 
 @Rule(key = "S6304")
-public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
+public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
 
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
 
   @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
-      checkPolicyStatement(PolicyStatement.build(ctx, call)));
-
-    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(PolicyStatement.build(ctx, json))));
-
-    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
-  }
-
-  private static void checkPolicyStatement(PolicyStatement policyStatement) {
-    CdkUtils.ExpressionFlow effect = policyStatement.effect();
+  protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     CdkUtils.ExpressionFlow actions = policyStatement.actions();
     CdkUtils.ExpressionFlow resources = policyStatement.resources();
 
-    if (resources == null || CdkIamUtils.hasNotAllowEffect(effect) || hasOnlyKmsActions(actions)) {
+    if (resources == null || actions == null || hasOnlyKmsActions(actions)) {
       return;
     }
 
-    Optional.ofNullable(CdkIamUtils.getSensitiveExpression(resources, isWildcard()))
-      .ifPresent(wildcard -> reportWildcardResourceAndEffect(wildcard, effect));
+    Optional.ofNullable(getSensitiveExpression(resources, isWildcard()))
+      .ifPresent(wildcard -> reportWildcardResourceAndEffect(wildcard, policyStatement.effect()));
   }
 
-  private static boolean hasOnlyKmsActions(@Nullable ExpressionFlow actions) {
-    if (actions == null) {
-      return false;
-    }
-
+  private static boolean hasOnlyKmsActions(ExpressionFlow actions) {
     return CdkUtils.getListElements(actions).stream()
       .allMatch(flow -> flow.hasExpression(CdkPredicate.startsWith("kms:")));
   }

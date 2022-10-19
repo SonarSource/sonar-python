@@ -31,29 +31,42 @@ import org.sonar.plugins.python.api.tree.Expression;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
 
-public class CdkIamUtils {
+public abstract class AbstractIamPolicyStatementCheck extends AbstractCdkResourceCheck {
 
-  private CdkIamUtils() {
+  @Override
+  protected void registerFqnConsumer() {
+    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
+      checkPolicyStatement(PolicyStatement.build(ctx, call)));
+
+    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
+      getObjectFromJson(ctx, call).ifPresent(json ->
+        checkPolicyStatementFromJson(PolicyStatement.build(ctx, json))));
+
+    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
+      getObjectFromJson(ctx, call).ifPresent(json -> getPolicyStatements(ctx, json)
+        .forEach(statement -> checkPolicyStatementFromJson(PolicyStatement.build(ctx, statement)))));
   }
 
-  public static boolean hasNotAllowEffect(@Nullable CdkUtils.ExpressionFlow effect) {
+  protected void checkPolicyStatement(PolicyStatement policyStatement) {
+    if (hasAllowEffect(policyStatement.effect())) {
+      checkAllowingPolicyStatement(policyStatement);
+    }
+  }
+
+  protected void checkPolicyStatementFromJson(PolicyStatement policyStatementFormJson) {
+    checkPolicyStatement(policyStatementFormJson);
+  }
+
+  protected static boolean hasAllowEffect(@Nullable CdkUtils.ExpressionFlow effect) {
     // default is allow effect
     if (effect == null) {
-      return false;
+      return true;
     }
-    return !effect.hasExpression(isFqn("aws_cdk.aws_iam.Effect.ALLOW").or(isJsonString("allow")));
+    return effect.hasExpression(isFqn("aws_cdk.aws_iam.Effect.ALLOW").or(isJsonAllow()));
   }
 
-  /**
-   * In the JSON representation of the PolicyStatement the values are case-insensitive
-   */
-  private static Predicate<Expression> isJsonString(String expectedValue) {
-    return expression -> CdkUtils.getString(expression).filter(expectedValue::equalsIgnoreCase).isPresent();
-  }
+  protected abstract void checkAllowingPolicyStatement(PolicyStatement policyStatement);
 
-  /**
-   * Return the json object as dictionary from a form_json call
-   */
   public static Optional<DictionaryLiteral> getObjectFromJson(SubscriptionContext ctx, CallExpression call) {
     return CdkUtils.getArgument(ctx, call, "obj", 0).flatMap(CdkUtils::getDictionary);
   }
@@ -83,4 +96,10 @@ public class CdkIamUtils {
         .orElse(null);
     }
   }
+
+  private static Predicate<Expression> isJsonAllow() {
+    return expression -> CdkUtils.getString(expression).filter("allow"::equalsIgnoreCase).isPresent();
+  }
+
+
 }

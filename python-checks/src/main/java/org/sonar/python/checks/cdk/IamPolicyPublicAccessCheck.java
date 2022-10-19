@@ -33,44 +33,31 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 
 @Rule(key = "S6270")
-public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
+public class IamPolicyPublicAccessCheck extends AbstractIamPolicyStatementCheck {
 
   private static final String ISSUE_MESSAGE = "Make sure granting public access is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect.";
 
   @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
-      checkPolicyStatement(PolicyStatement.build(ctx, call)));
-
-    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json ->
-        checkPolicyStatementJson(PolicyStatement.build(ctx, json))));
-
-    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatementJson(PolicyStatement.build(ctx, statement)))));
-  }
-
-  private static void checkPolicyStatement(PolicyStatement policyStatement) {
-    CdkUtils.ExpressionFlow effect = policyStatement.effect();
+  protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     CdkUtils.ExpressionFlow principals = policyStatement.principals();
 
-    if (principals == null || CdkIamUtils.hasNotAllowEffect(effect)) {
+    if (principals == null) {
       return;
     }
 
     CdkUtils.getListExpression(principals)
       .map(list -> CdkUtils.getListElements(principals.ctx(), list))
       .orElse(Collections.emptyList())
-      .forEach(principalElement -> raiseIssueIf(principalElement, isSensitivePrincipal().or(isSensitiveArnPrincipal()), effect));
+      .forEach(principalElement -> raiseIssueIf(principalElement, isSensitivePrincipal().or(isSensitiveArnPrincipal()), policyStatement.effect()));
   }
 
-  private static void checkPolicyStatementJson(PolicyStatement policyStatement) {
+  @Override
+  protected void checkPolicyStatementFromJson(PolicyStatement policyStatement) {
     CdkUtils.ExpressionFlow effect = policyStatement.effect();
     CdkUtils.ExpressionFlow principals = policyStatement.principals();
 
-    if (principals == null || CdkIamUtils.hasNotAllowEffect(effect)) {
+    if (principals == null || !hasAllowEffect(effect)) {
       return;
     }
 
@@ -78,7 +65,7 @@ public class IamPolicyPublicAccessCheck extends AbstractCdkResourceCheck {
 
     CdkUtils.getDictionary(principals)
       .flatMap(innerDict -> CdkUtils.getDictionaryPair(principals.ctx(), innerDict,"AWS"))
-      .map(aws -> CdkIamUtils.getSensitiveExpression(aws.value, isString("*")))
+      .map(aws -> getSensitiveExpression(aws.value, isString("*")))
       .ifPresent(sensitiveAwsPrincipal -> raiseIssueIf(sensitiveAwsPrincipal, isString("*"), effect));
   }
 
