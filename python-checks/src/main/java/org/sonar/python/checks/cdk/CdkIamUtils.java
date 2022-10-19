@@ -28,10 +28,8 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqn;
-import static org.sonar.python.checks.cdk.CdkPredicate.isString;
 
 public class CdkIamUtils {
 
@@ -51,26 +49,6 @@ public class CdkIamUtils {
    */
   private static Predicate<Expression> isJsonString(String expectedValue) {
     return expression -> CdkUtils.getString(expression).filter(expectedValue::equalsIgnoreCase).isPresent();
-  }
-
-  /**
-   * Examines a list to see if it contains a string that reflects a wildcard and returns this expression as flow.
-   */
-  private static Optional<CdkUtils.ExpressionFlow> getWildcardInList(SubscriptionContext ctx, ListLiteral list) {
-    return CdkUtils.getListElements(ctx, list).stream()
-      .filter(expr -> expr.hasExpression(isString("*")))
-      .findFirst();
-  }
-
-  /**
-   * Examines if the flow contains a string that reflects a wildcard and returns this expression as flow.
-   */
-  public static Optional<CdkUtils.ExpressionFlow> getWildcard(SubscriptionContext ctx, CdkUtils.ExpressionFlow json) {
-    if (json.hasExpression(isString("*"))) {
-      return Optional.of(json);
-    } else {
-      return CdkUtils.getList(json).flatMap(list -> CdkIamUtils.getWildcardInList(ctx, list));
-    }
   }
 
   /**

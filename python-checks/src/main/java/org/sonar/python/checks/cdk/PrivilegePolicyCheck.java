@@ -19,12 +19,10 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.List;
+import java.util.Optional;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
-import org.sonar.python.checks.cdk.CdkUtils.ResolvedKeyValuePair;
+
+import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 
 @Rule(key = "S6302")
 public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
@@ -34,43 +32,33 @@ public class PrivilegePolicyCheck extends AbstractCdkResourceCheck {
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) -> {
-      ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
-
-      if (CdkIamUtils.hasNotAllowEffect(effect)) {
-        return;
-      }
-
-      CdkUtils.getArgument(ctx, call, "actions")
-        .flatMap(resources -> CdkIamUtils.getWildcard(ctx, resources))
-        .ifPresent(wildcard -> reportWildcardActionAndEffect(ctx, wildcard, effect));
-    });
+    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
+      checkPolicyStatement(PolicyStatement.build(ctx, call)));
 
 
     checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(ctx, json)));
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(PolicyStatement.build(ctx, json))));
 
 
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
       CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(ctx, statement))));
+        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
   }
 
-  private static void checkPolicyStatement(SubscriptionContext ctx, DictionaryLiteral statement) {
-    List<ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
+  private static void checkPolicyStatement(PolicyStatement policyStatement) {
+    CdkUtils.ExpressionFlow effect = policyStatement.effect();
+    CdkUtils.ExpressionFlow action = policyStatement.actions();
 
-    ExpressionFlow effect = CdkUtils.getDictionaryValue(pairs, "Effect").orElse(null);
-    if (CdkIamUtils.hasNotAllowEffect(effect)) {
+    if (action == null || CdkIamUtils.hasNotAllowEffect(effect)) {
       return;
     }
 
-    CdkUtils.getDictionaryValue(pairs, "Action")
-      .flatMap(action -> CdkIamUtils.getWildcard(ctx, action))
-      .ifPresent(wildcard -> reportWildcardActionAndEffect(ctx, wildcard, effect));
+    Optional.ofNullable(CdkIamUtils.getSensitiveExpression(action, isWildcard()))
+      .ifPresent(wildcard -> reportWildcardActionAndEffect(wildcard, effect));
   }
 
-  private static void reportWildcardActionAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, ExpressionFlow effect) {
-    PreciseIssue issue = ctx.addIssue(wildcard.getLast(), MESSAGE);
+  private static void reportWildcardActionAndEffect(CdkUtils.ExpressionFlow wildcard, CdkUtils.ExpressionFlow effect) {
+    PreciseIssue issue = wildcard.ctx().addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));
     }

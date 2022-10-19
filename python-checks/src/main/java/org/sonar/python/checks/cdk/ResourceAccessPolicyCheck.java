@@ -27,6 +27,8 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
+import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
+
 @Rule(key = "S6304")
 public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
 
@@ -42,7 +44,7 @@ public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
       }
 
       CdkUtils.getArgument(ctx, call, "resources")
-        .flatMap(resources -> CdkIamUtils.getWildcard(ctx, resources))
+        .map(resources -> CdkIamUtils.getSensitiveExpression(resources, isWildcard()))
         .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
     });
 
@@ -62,7 +64,7 @@ public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
     }
 
     CdkUtils.getDictionaryValue(pairs, "Resource")
-      .flatMap(action -> CdkIamUtils.getWildcard(ctx, action))
+      .map(resource -> CdkIamUtils.getSensitiveExpression(resource, isWildcard()))
       .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
   }
 
