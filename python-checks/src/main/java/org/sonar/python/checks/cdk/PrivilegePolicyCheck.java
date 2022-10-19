@@ -20,6 +20,7 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
@@ -42,7 +43,7 @@ public class PrivilegePolicyCheck extends AbstractIamPolicyStatementCheck {
       .ifPresent(wildcard -> reportWildcardActionAndEffect(wildcard, policyStatement.effect()));
   }
 
-  private static void reportWildcardActionAndEffect(CdkUtils.ExpressionFlow wildcard, CdkUtils.ExpressionFlow effect) {
+  private static void reportWildcardActionAndEffect(CdkUtils.ExpressionFlow wildcard, @Nullable CdkUtils.ExpressionFlow effect) {
     PreciseIssue issue = wildcard.ctx().addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));

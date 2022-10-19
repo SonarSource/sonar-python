@@ -42,3 +42,13 @@ iam.PolicyStatement(
     actions=["iam:CreatePolicyVersion"],
     resources=["*"]
 )
+
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    actions=["iam:CreatePolicyVersion", "kms:*"],
+)
+
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    resources=["*"]
+)

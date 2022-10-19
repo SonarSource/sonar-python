@@ -19,8 +19,12 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Locale;
 import java.util.Optional;
+import java.util.function.Predicate;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
@@ -45,11 +49,14 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
   }
 
   private static boolean hasOnlyKmsActions(ExpressionFlow actions) {
-    return CdkUtils.getListElements(actions).stream()
-      .allMatch(flow -> flow.hasExpression(CdkPredicate.startsWith("kms:")));
+    return getSensitiveExpression(actions, notStartsWith("kms:")) == null;
   }
 
-  private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, ExpressionFlow effect) {
+  public static Predicate<Expression> notStartsWith(String expected) {
+    return expression -> CdkUtils.getString(expression).filter(str -> !str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
+  }
+
+  private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, @Nullable ExpressionFlow effect) {
     PreciseIssue issue = wildcard.ctx().addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));

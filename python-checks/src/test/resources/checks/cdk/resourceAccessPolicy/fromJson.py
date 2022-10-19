@@ -41,3 +41,15 @@ iam.PolicyStatement.from_json({
     "Action": ["iam:CreatePolicyVersion"],
     "Resource": "*"
 })
+
+iam.PolicyStatement.from_json({
+    "Effect": "Allow",
+    "Action": "ecr:GetAuthorizationToken",
+    "Resource": "*"  # Noncompliant
+})
+
+iam.PolicyStatement.from_json({
+    "Effect": "Allow",
+    "Action": "kms:foo",
+    "Resource": "*"
+})
