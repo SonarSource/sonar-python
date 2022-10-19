@@ -170,5 +170,26 @@ public class ModifiedParameterValueCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
   }
 
+  @Test
+  public void no_quickfix_non_empty_literal_dict() {
+    String codeWithIssue = "def literal_dict(param={'foo': 'bar'}):\n" +
+      "    param.pop('a')";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_literal_list() {
+    String codeWithIssue = "def literal_dict(param=[100]):\n" +
+      "    param.append('a')";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_call() {
+    String codeWithIssue = "def literal_dict(param=A('foo')):\n" +
+      "    param.attr = 'bar'";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
 
 }

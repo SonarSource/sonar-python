@@ -38,8 +38,10 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -54,7 +56,9 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPOUND_ASSIGNMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.DEL_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -151,7 +155,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     Tree firstStatement = functionDef.body().statements().get(0);
     String paramName = paramSymbol.name();
 
-    return parameterInitialization(defaultValue).map(
+    return Optional.ofNullable(parameterInitialization(defaultValue)).map(
       paramInit -> PythonQuickFix.newQuickFix("Initialize this parameter inside the function/method")
         .addTextEdit(replace(defaultValue, "None"))
         .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s()\n", paramName, paramInit)))
@@ -159,14 +163,22 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     );
   }
 
-  private static Optional<String> parameterInitialization(Expression defaultValue) {
+  @CheckForNull
+  private static String parameterInitialization(Expression defaultValue) {
     if (defaultValue.is(CALL_EXPR)) {
       CallExpression call = (CallExpression) defaultValue;
+      if (!call.arguments().isEmpty()) {
+        return null;
+      }
       return Optional.ofNullable(call.calleeSymbol())
-        .map(symbol -> call.callee().is(QUALIFIED_EXPR) ? symbol.fullyQualifiedName() : symbol.name());
-    } else {
-      return Optional.ofNullable(defaultValueType(defaultValue));
+        .map(symbol -> call.callee().is(QUALIFIED_EXPR) ? symbol.fullyQualifiedName() : symbol.name())
+        .orElse(null);
+    } else if (defaultValue.is(DICTIONARY_LITERAL)) {
+      return ((DictionaryLiteral) defaultValue).elements().isEmpty() ? "dict" : null;
+    } else if (defaultValue.is(LIST_LITERAL)) {
+      return ((ListLiteral) defaultValue).elements().expressions().isEmpty() ? "list" : null;
     }
+    return null;
   }
 
   @CheckForNull
