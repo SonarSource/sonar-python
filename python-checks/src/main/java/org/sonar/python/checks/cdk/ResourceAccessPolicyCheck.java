@@ -19,12 +19,9 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.List;
+import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
@@ -37,59 +34,41 @@ public class ResourceAccessPolicyCheck extends AbstractCdkResourceCheck {
 
   @Override
   protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) -> {
-      ExpressionFlow effect = CdkUtils.getArgument(ctx, call, "effect").orElse(null);
-      if (hasOnlyKmsActions(ctx, call) || CdkIamUtils.hasNotAllowEffect(effect)) {
-        return;
-      }
-
-      CdkUtils.getArgument(ctx, call, "resources")
-        .map(resources -> CdkIamUtils.getSensitiveExpression(resources, isWildcard()))
-        .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
-    });
+    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
+      checkPolicyStatement(PolicyStatement.build(ctx, call)));
 
     checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(statement -> checkPolicyStatement(ctx, statement)));
+      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> checkPolicyStatement(PolicyStatement.build(ctx, json))));
 
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
       CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(ctx, statement))));
+        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
   }
 
-  private static void checkPolicyStatement(SubscriptionContext ctx, DictionaryLiteral statement) {
-    List<CdkUtils.ResolvedKeyValuePair> pairs = CdkUtils.resolveDictionary(ctx, statement);
-    ExpressionFlow effect = CdkUtils.getDictionaryValue(pairs, "Effect").orElse(null);
-    if (hasOnlyKmsActions(ctx, pairs) || CdkIamUtils.hasNotAllowEffect(effect)) {
+  private static void checkPolicyStatement(PolicyStatement policyStatement) {
+    CdkUtils.ExpressionFlow effect = policyStatement.effect();
+    CdkUtils.ExpressionFlow actions = policyStatement.actions();
+    CdkUtils.ExpressionFlow resources = policyStatement.resources();
+
+    if (resources == null || CdkIamUtils.hasNotAllowEffect(effect) || hasOnlyKmsActions(actions)) {
       return;
     }
 
-    CdkUtils.getDictionaryValue(pairs, "Resource")
-      .map(resource -> CdkIamUtils.getSensitiveExpression(resource, isWildcard()))
-      .ifPresent(wildcard -> reportWildcardResourceAndEffect(ctx, wildcard, effect));
+    Optional.ofNullable(CdkIamUtils.getSensitiveExpression(resources, isWildcard()))
+      .ifPresent(wildcard -> reportWildcardResourceAndEffect(wildcard, effect));
   }
 
+  private static boolean hasOnlyKmsActions(@Nullable ExpressionFlow actions) {
+    if (actions == null) {
+      return false;
+    }
 
-  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, CallExpression call) {
-    return CdkUtils.getArgument(ctx, call, "actions").flatMap(CdkUtils::getList)
-      .filter(actions -> hasOnlyKmsActions(ctx, actions))
-      .isPresent();
-  }
-
-  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, List<CdkUtils.ResolvedKeyValuePair> json) {
-    return CdkUtils.getDictionaryValue(json, "Action")
-      .flatMap(CdkUtils::getList)
-      .filter(actions -> hasOnlyKmsActions(ctx, actions))
-      .isPresent();
-  }
-
-  private static boolean hasOnlyKmsActions(SubscriptionContext ctx, ListLiteral actions) {
-    return CdkUtils.getListElements(ctx, actions)
-      .stream()
+    return CdkUtils.getListElements(actions).stream()
       .allMatch(flow -> flow.hasExpression(CdkPredicate.startsWith("kms:")));
   }
 
-  private static void reportWildcardResourceAndEffect(SubscriptionContext ctx, ExpressionFlow wildcard, ExpressionFlow effect) {
-    PreciseIssue issue = ctx.addIssue(wildcard.getLast(), MESSAGE);
+  private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, ExpressionFlow effect) {
+    PreciseIssue issue = wildcard.ctx().addIssue(wildcard.getLast(), MESSAGE);
     if (effect != null) {
       issue.secondary(effect.asSecondaryLocation(SECONDARY_MESSAGE));
     }

@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -133,6 +134,15 @@ public class CdkUtils {
   public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
     return list.elements().expressions().stream()
       .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
+      .collect(Collectors.toList());
+  }
+
+  public static List<CdkUtils.ExpressionFlow> getListElements(ExpressionFlow flow) {
+    return getList(flow)
+      .map(list -> list.elements().expressions())
+      .orElse(Collections.emptyList())
+      .stream()
+      .map(expression -> CdkUtils.ExpressionFlow.build(flow.ctx(), expression))
       .collect(Collectors.toList());
   }
 
