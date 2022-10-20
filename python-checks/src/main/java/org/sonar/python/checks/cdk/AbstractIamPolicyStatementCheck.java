@@ -67,14 +67,14 @@ public abstract class AbstractIamPolicyStatementCheck extends AbstractCdkResourc
 
   protected abstract void checkAllowingPolicyStatement(PolicyStatement policyStatement);
 
-  public static Optional<DictionaryLiteral> getObjectFromJson(SubscriptionContext ctx, CallExpression call) {
+  protected static Optional<DictionaryLiteral> getObjectFromJson(SubscriptionContext ctx, CallExpression call) {
     return CdkUtils.getArgument(ctx, call, "obj", 0).flatMap(CdkUtils::getDictionary);
   }
 
   /**
    * Return a list of PolicyStatement json representation from a PolicyDocument.from_json call
    */
-  public static List<DictionaryLiteral> getPolicyStatements(SubscriptionContext ctx, DictionaryLiteral json) {
+  protected static List<DictionaryLiteral> getPolicyStatements(SubscriptionContext ctx, DictionaryLiteral json) {
     return CdkUtils.getDictionaryPair(ctx, json, "Statement")
       .map(pair -> pair.value)
       .flatMap(CdkUtils::getList)
@@ -82,7 +82,7 @@ public abstract class AbstractIamPolicyStatementCheck extends AbstractCdkResourc
       .orElse(Collections.emptyList());
   }
 
-  public static CdkUtils.ExpressionFlow getSensitiveExpression(CdkUtils.ExpressionFlow expression, Predicate<Expression> predicate) {
+  protected static CdkUtils.ExpressionFlow getSensitiveExpression(CdkUtils.ExpressionFlow expression, Predicate<Expression> predicate) {
     if (expression.hasExpression(predicate)) {
       return expression;
     } else {
