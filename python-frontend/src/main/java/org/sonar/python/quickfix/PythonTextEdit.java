@@ -176,4 +176,15 @@ public class PythonTextEdit {
   public int hashCode() {
     return Objects.hash(message, startLine, startLineOffset, endLine, endLineOffset);
   }
+
+  @Override
+  public String toString() {
+    return "PythonTextEdit{" +
+      "message='" + message + '\'' +
+      ", startLine=" + startLine +
+      ", startLineOffset=" + startLineOffset +
+      ", endLine=" + endLine +
+      ", endLineOffset=" + endLineOffset +
+      '}';
+  }
 }

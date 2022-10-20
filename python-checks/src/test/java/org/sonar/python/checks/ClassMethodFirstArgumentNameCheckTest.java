@@ -20,8 +20,10 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class ClassMethodFirstArgumentNameCheckTest {
 
@@ -32,113 +34,128 @@ public class ClassMethodFirstArgumentNameCheckTest {
 
   @Test
   public void testQuickFix() {
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(bob, alice):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(cls, bob, alice):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(cls, alice):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(bob, alice):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(cls, bob, alice):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(cls, alice):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
 
   @Test
   public void testQuickFixMultiline() {
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(bob,\n" +
-      "            alice):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(cls,\n" +
-      "            bob,\n" +
-      "            alice):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(cls,\n" +
-      "            alice):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(bob,",
+      "            alice):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(cls,",
+      "            bob,",
+      "            alice):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(cls,",
+      "            alice):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
 
   @Test
   public void testQuickFixMultiline2() {
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob,\n" +
-      "            alice):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls,\n" +
-      "            bob,\n" +
-      "            alice):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls,\n" +
-      "            alice):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob,",
+      "            alice):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls,",
+      "            bob,",
+      "            alice):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls,",
+      "            alice):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
 
   @Test
   public void testQuickFixMultiline3() {
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls, bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls, alice\n" +
-      "    ):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls, bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls, alice",
+      "    ):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
 
   @Test
   public void testQuickFixMultiline4() {
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls, bob\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls\n" +
-      "    ):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob",
+      "    ):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls, bob",
+      "    ):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls",
+      "    ):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(new ClassMethodFirstArgumentNameCheck(), codeWithIssue, codeFixed1, codeFixed2);
   }
@@ -147,24 +164,27 @@ public class ClassMethodFirstArgumentNameCheckTest {
   public void testQuickFixMultilineCustomClassParameterNames() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "xxx";
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            xxx, bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            xxx, alice\n" +
-      "    ):\n" +
-      "        print(xxx)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            xxx, bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            xxx, alice",
+      "    ):",
+      "        print(xxx)");
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
@@ -173,24 +193,27 @@ public class ClassMethodFirstArgumentNameCheckTest {
   public void testQuickFixMultilineEmptyClassParameterNames() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "";
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed1 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls, bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
-    String codeFixed2 = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            cls, alice\n" +
-      "    ):\n" +
-      "        print(cls)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed1 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls, bob, alice",
+      "    ):",
+      "        print(bob)");
+    String codeFixed2 = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            cls, alice",
+      "    ):",
+      "        print(cls)");
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
@@ -199,12 +222,13 @@ public class ClassMethodFirstArgumentNameCheckTest {
   public void testQuickFixDescriptions() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "xxx";
-    String codeWithIssue = "class A():\n" +
-      "    @classmethod\n" +
-      "    def long_function_name(\n" +
-      "            bob, alice\n" +
-      "    ):\n" +
-      "        print(bob)\n";
+    String codeWithIssue = code(
+      "class A():",
+      "    @classmethod",
+      "    def long_function_name(",
+      "            bob, alice",
+      "    ):",
+      "        print(bob)");
 
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
       "Add 'xxx' as the first argument.",

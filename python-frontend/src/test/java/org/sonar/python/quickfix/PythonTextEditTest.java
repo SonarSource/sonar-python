@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -130,6 +131,24 @@ public class PythonTextEditTest {
     PythonTextEdit textEdit = PythonTextEdit.removeUntil(functionBody, lastStatement);
     assertThat(textEdit.replacementText()).isEmpty();
     assertTextEditLocation(textEdit, 2, 4, 4, 4);
+  }
+
+  @Test
+  public void testRenameAllUsages() {
+    FileInput file = parse(
+      "def foo(bar):",
+      "    print(bar)",
+      " # comment",
+      "    b = 2"
+    );
+    Parameter parameter = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.PARAMETER));
+
+    List<PythonTextEdit> textEdits = PythonTextEdit.renameAllUsages(parameter.name(), "xxx");
+
+    assertThat(textEdits).containsExactly(
+      new PythonTextEdit("xxx", 1, 8, 1, 11),
+      new PythonTextEdit("xxx", 2, 10, 2, 13)
+    );
   }
 
   @Test
