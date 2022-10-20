@@ -205,11 +205,14 @@ public class PythonSensorTest {
     Issue issue = context.allIssues().iterator().next();
 
     List<DefaultQuickFix> quickFixes = ((MockSonarLintIssue) issue).quickFixes;
-    assertThat(quickFixes).hasSize(1);
+    assertThat(quickFixes).hasSize(2);
 
     QuickFix quickfix = quickFixes.get(0);
     assertThat(quickfix.message()).isEqualTo("Add 'cls' as the first argument.");
     assertThat(quickfix.inputFileEdits()).hasSize(1);
+    QuickFix quickfix2 = quickFixes.get(1);
+    assertThat(quickfix2.message()).isEqualTo("Rename 'bob' to 'cls'");
+    assertThat(quickfix2.inputFileEdits()).hasSize(1);
 
     List<TextEdit> textEdits = quickfix.inputFileEdits().get(0).textEdits();
     assertThat(textEdits).hasSize(1);
@@ -512,8 +515,9 @@ public class PythonSensorTest {
 
     activeRules = new ActiveRulesBuilder().build();
     context.setSettings(new MapSettings().setProperty("sonar.internal.analysis.failFast", "true"));
+    PythonSensor sensor = sensor();
 
-    assertThatThrownBy(() -> sensor().execute(context))
+    assertThatThrownBy(() -> sensor.execute(context))
       .isInstanceOf(IllegalStateException.class)
       .hasCauseInstanceOf(FileNotFoundException.class);
   }
@@ -554,8 +558,8 @@ public class PythonSensorTest {
     sensor().execute(context);
     assertThat(context.allIssues()).hasSize(1);
     String log = String.join("\n", logTester.logs());
-    assertThat(log).contains("Parse error at line 2");
-    assertThat(log).doesNotContain("java.lang.NullPointerException");
+    assertThat(log).contains("Parse error at line 2")
+      .doesNotContain("java.lang.NullPointerException");
     assertThat(context.allAnalysisErrors()).hasSize(1);
     AnalysisError analysisError = context.allAnalysisErrors().iterator().next();
     assertThat(analysisError.inputFile().filename()).isEqualTo("parse_error.py");

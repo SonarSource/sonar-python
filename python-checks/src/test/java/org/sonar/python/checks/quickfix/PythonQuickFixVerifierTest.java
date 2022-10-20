@@ -62,11 +62,11 @@ public class PythonQuickFixVerifierTest {
     SimpleCheck simpleCheck = new SimpleCheck();
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(simpleCheck, "a=10", "a==10"))
       .isInstanceOf(AssertionError.class)
-      .hasMessageContaining("[Application of the quickfix] The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n" +
+      .hasMessageContaining("[The code with the quickfix applied is not the expected result.\n" +
+        "\"Applied QuickFixes are:\n" +
         "[a!=10]\n" +
         "Expected result:\n" +
-        "[a==10]");
+        "[a==10]] expected:<[\"a[=]=10\"]> but was:<[\"a[!]=10\"]>");
   }
 
   @Test
