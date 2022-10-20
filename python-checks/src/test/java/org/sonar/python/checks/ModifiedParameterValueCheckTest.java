@@ -171,6 +171,18 @@ public class ModifiedParameterValueCheckTest {
   }
 
   @Test
+  public void literal_list_quickfix() {
+    String codeWithIssue = "def literal_dict(param=[]):\n" +
+      "    param.append('a')";
+    String fixedCode = "def literal_dict(param=None):\n" +
+      "    if param is None:\n" +
+      "        param = list()\n" +
+      "    param.append('a')";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
   public void no_quickfix_non_empty_literal_dict() {
     String codeWithIssue = "def literal_dict(param={'foo': 'bar'}):\n" +
       "    param.pop('a')";
