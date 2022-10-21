@@ -120,16 +120,25 @@ public class ImplicitStringConcatenationCheckTest {
   @Test
   public void multiline_list_with_comment() {
     String codeWithIssue = code("a = [",
-      "  '1' # comment",
-      "  '2'",
-      "]");
+      "  'a',",
+      "  'b',",
+      "  'c',",
+      "  'd'  # A comment",
+      "  'e', # Another comment",
+      "  'f']");
     String codeFixed1 = code("a = [",
-      "  '1', # comment",
-      "  '2'",
-      "]");
+      "  'a',",
+      "  'b',",
+      "  'c',",
+      "  'd',  # A comment",
+      "  'e', # Another comment",
+      "  'f']");
     String codeFixed2 = code("a = [",
-      "  '1' + '2'",
-      "]");
+      "  'a',",
+      "  'b',",
+      "  'c',",
+      "  'd' + 'e', # Another comment",
+      "  'f']");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
   }
 }
