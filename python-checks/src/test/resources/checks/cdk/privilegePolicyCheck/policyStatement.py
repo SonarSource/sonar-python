@@ -29,4 +29,6 @@ iam.PolicyStatement(
   #                                ^^^
 )
 
-
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+)

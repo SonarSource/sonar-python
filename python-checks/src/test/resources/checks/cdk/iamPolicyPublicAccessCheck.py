@@ -5,7 +5,7 @@ from aws_cdk import aws_iam as iam
 iam.PolicyStatement(
   sid="AllowAnyPrincipal",
   effect=iam.Effect.ALLOW, # {{Access is set to "ALLOW" here.}}
-        #^^^^^^^^^^^^^^^^>
+# ^^^^^^^^^^^^^^^^^^^^^^^>
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
   principals=[iam.StarPrincipal()] # Noncompliant {{Make sure granting public access is safe here.}}
@@ -22,7 +22,7 @@ iam.PolicyStatement( # {{Access is set to "ALLOW" here as default}}
 iam.PolicyStatement(
   sid="AllowAnyPrincipal",
   effect=iam.Effect.ALLOW,
-        #^^^^^^^^^^^^^^^^>
+# ^^^^^^^^^^^^^^^^^^^^^^^>
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
   principals=[iam.AnyPrincipal()] # Noncompliant {{Make sure granting public access is safe here.}}
@@ -32,7 +32,7 @@ iam.PolicyStatement(
 iam.PolicyStatement(
   sid="AllowAnyPrincipal",
   effect=iam.Effect.ALLOW,
-        #^^^^^^^^^^^^^^^^>
+# ^^^^^^^^^^^^^^^^^^^^^^^>
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
   principals=[iam.ArnPrincipal("*")] # Noncompliant
@@ -42,7 +42,7 @@ iam.PolicyStatement(
 iam.PolicyStatement(
   sid="AllowAnyPrincipal",
   effect=iam.Effect.ALLOW,
-        #^^^^^^^^^^^^^^^^>
+# ^^^^^^^^^^^^^^^^^^^^^^^>
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
   principals=[iam.AccountRootPrincipal(), iam.ArnPrincipal("*")] # Noncompliant
@@ -96,7 +96,7 @@ iam.PolicyStatement(
 iam.PolicyStatement.from_json({
     "Sid": "AllowAnyPrincipal",
     "Effect": "Allow",
-             #^^^^^^^>
+  # ^^^^^^^^^^^^^^^^^>
     "Action": ["s3:*"],
     "Resource": bucket.arn_for_objects("*"),
     "Principal": "*" # Noncompliant
@@ -106,7 +106,7 @@ iam.PolicyStatement.from_json({
 iam.PolicyStatement.from_json({
     "Sid": "AllowAnyPrincipal",
     "Effect": "Allow",
-             #^^^^^^^>
+  # ^^^^^^^^^^^^^^^^^>
     "Action": ["s3:*"],
     "Resource": bucket.arn_for_objects("*"),
     "Principal": { "AWS" : "*"} # Noncompliant
@@ -124,7 +124,7 @@ iam.PolicyStatement.from_json({
 iam.PolicyStatement.from_json({
     "Sid": "AllowAnyPrincipal",
     "Effect": "Allow",
-             #^^^^^^^>
+  # ^^^^^^^^^^^^^^^^^>
     "Action": ["s3:*"],
     "Resource": bucket.arn_for_objects("*"),
     "Principal": { "AWS" : [ "*", "9999999" ]} # Noncompliant
@@ -158,7 +158,7 @@ iam.PolicyDocument.from_json({
  "Statement": [{
    "Sid": "AnyPrincipal",
    "Effect": "Allow",
-            #^^^^^^^>
+ # ^^^^^^^^^^^^^^^^^>
    "Action": ["kms:*"],
    "Resource": "*",
    "Principal": {
@@ -181,7 +181,7 @@ policy_document = {
  "Statement": [{
    "Sid": "AnyPrincipal",
    "Effect": "Allow",
-            #^^^^^^^>
+ # ^^^^^^^^^^^^^^^^^>
    "Action": ["kms:*"],
    "Resource": "*",
    "Principal": {
@@ -206,7 +206,7 @@ policy_document = {
  {
     "Sid": "AnyPrincipal",
     "Effect": "Allow",
-             #^^^^^^^>
+  # ^^^^^^^^^^^^^^^^^>
     "Action": ["kms:*"],
     "Resource": "*",
     "Principal": "*" # Noncompliant

@@ -87,6 +87,10 @@ public class CdkPredicate {
     return expression -> CdkUtils.getString(expression).filter(expectedValue::equals).isPresent();
   }
 
+  public static Predicate<Expression> isWildcard() {
+    return isString("*");
+  }
+
   /**
    * @return Predicate which tests if expression is a string and is equal to any of the expected values
    */

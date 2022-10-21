@@ -19,16 +19,12 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
@@ -37,7 +33,7 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isStringLiteral;
 import static org.sonar.python.checks.cdk.CdkPredicate.matches;
 
 @Rule(key = "S6317")
-public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
+public class IamPrivilegeEscalationCheck extends AbstractIamPolicyStatementCheck {
 
   private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
     "Remove permissions or restrict the set of resources they apply to.";
@@ -86,20 +82,7 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
   );
 
   @Override
-  protected void registerFqnConsumer() {
-    checkFqn("aws_cdk.aws_iam.PolicyStatement", (ctx, call) ->
-      checkPolicyStatement(PolicyStatement.build(ctx, call)));
-
-    checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json ->
-        checkPolicyStatement(PolicyStatement.build(ctx, json))));
-
-    checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      CdkIamUtils.getObjectFromJson(ctx, call).ifPresent(json -> CdkIamUtils.getPolicyStatements(ctx, json)
-        .forEach(statement -> checkPolicyStatement(PolicyStatement.build(ctx, statement)))));
-  }
-
-  private static void checkPolicyStatement(PolicyStatement policyStatement) {
+  protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     ExpressionFlow actions = policyStatement.actions();
     ExpressionFlow resources = policyStatement.resources();
 
@@ -107,7 +90,6 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
       || resources == null
       || policyStatement.principals() != null
       || policyStatement.conditions() != null
-      || CdkIamUtils.hasNotAllowEffect(policyStatement.effect())
     ) {
       return;
     }
@@ -117,21 +99,6 @@ public class IamPrivilegeEscalationCheck extends AbstractCdkResourceCheck {
 
     if (sensitiveAction != null && sensitiveResource != null) {
       reportSensitiveActionAndResource(sensitiveAction, sensitiveResource);
-    }
-  }
-
-  private static ExpressionFlow getSensitiveExpression(ExpressionFlow expression, Predicate<Expression> predicate) {
-    if (expression.hasExpression(predicate)) {
-      return expression;
-    } else {
-      List<ExpressionFlow> listElements = CdkUtils.getList(expression)
-        .map(list -> CdkUtils.getListElements(expression.ctx(), list))
-        .orElse(Collections.emptyList());
-
-      return listElements.stream()
-        .filter(expressionFlow -> expressionFlow.hasExpression(predicate))
-        .findAny()
-        .orElse(null);
     }
   }
 
