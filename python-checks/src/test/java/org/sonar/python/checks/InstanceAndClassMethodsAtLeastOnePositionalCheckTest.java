@@ -55,11 +55,11 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
 
     String fixedCodeWithSelfParameter = "" +
       "class Foo():\n" +
-      "    def bar(self): pass";
+      "    def bar(cls): pass";
 
     String fixedCodeWithClassParameter = "" +
       "class Foo():\n" +
-      "    def bar(cls): pass";
+      "    def bar(self): pass";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue,
       fixedCodeWithSelfParameter,

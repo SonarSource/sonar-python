@@ -46,7 +46,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
 
   private enum MethodIssueType {
     CLASS_METHOD("Add a class parameter", "cls"),
-    REGULAR_METHOD("Add a \"self\" or class parameter", "self", "cls");
+    REGULAR_METHOD("Add a \"self\" or class parameter", "cls", "self");
 
     private final String message;
     private final List<String> insertions;
@@ -101,7 +101,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
       type.message);
     String separator = functionDef.parameters() == null ? "" : ", ";
     for (String insertion : type.insertions) {
-      PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", insertion))
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Add '%s' as the first parameter.", insertion))
         .addTextEdit(insertAfter(functionDef.leftPar(), insertion + separator))
         .build();
       issue.addQuickFix(quickFix);
