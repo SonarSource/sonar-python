@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 
+import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
 import static org.sonar.python.quickfix.PythonTextEdit.replaceRange;
 
 @Rule(key = "S5799")
@@ -112,7 +113,7 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
 
     if (isInFunctionOrArrayOrTupleOrExpressionOrSet(start)) {
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add the comma between string or byte tokens.")
-        .addTextEdit(replaceRange(start, end, textStart + ", " + textEnd))
+        .addTextEdit(insertAfter(start, ","))
         .build();
       issue.addQuickFix(quickFix);
     }
