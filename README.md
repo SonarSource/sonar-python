@@ -10,17 +10,63 @@
 
 ## Building the project
 
-Maven build is generating protobuf messages for Typeshed symbols from a python script (see [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer)).
-In order for it to work properly it needs to have Python runtime and [Typeshed](https://github.com/python/typeshed) available.
+### Fast/minimal build
 
-### Prerequisites
+**Prerequisites:**
+- JDK 11
+- Maven 3.0.0 or newer
+
+The easiest way to build the Project is by running:
+
+`mvn clean install -DskipTypeshed`
+
+It builds only Java Maven modules, run tests, and install jar locally.
+The Python interpreter is not required in that case.
+
+### Full build
+
+**Prerequisites:**
+- JDK 11
+- Maven 3.0.0 or newer
+- Python 3.9 or newer
+- [tox](https://tox.readthedocs.io/en/latest/) - `pip install tox`
 - Run `git submodule update --init` to retrieve [Typeshed](https://github.com/python/typeshed) as a Git submodule
-- Make sure to have Python 3.9 and [tox](https://tox.readthedocs.io/en/latest/) installed and available in PATH
 
-### Profiles
+All above should be available in PATH.
 
-- `mvn clean install` : execute full build, run tests for [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer)
-- `mvn clean install -DskipTypeshed`: avoid running [typeshed_serializer](https://github.com/SonarSource/sonar-python/tree/master/python-frontend/typeshed_serializer) tests and build only Java maven modules
+To execute full build just run:
+
+`mvn clean install`
+
+The full build executes [Typeshed](https://github.com/python/typeshed). 
+It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 
+(for Python libraries, e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html)).
+This helps in types interference and providing better rules.  
+
+## How to contribute
+
+### Configuration
+
+First, please configure your IDE:
+https://github.com/SonarSource/sonar-developer-toolset.
+
+### Rule annotation
+
+Each new implemented rule should have `@Rule(key = "S0000")` annotation on the class level.
+The number of the rule can be find here: https://sonarsource.github.io/rspec/#/rspec/?lang=python.
+The key needs to be unique in the whole project.
+
+### Expectations:
+- working on separate branch and creating PR when it's finish
+- clean coded, well tested solution 
+- fix all issues reported by SonarLint
+- 100% code coverage for new changes (if possible). It can be checked on CI build.
+
+### Before push
+
+Please check if all files have a license header.
+If not, the `mvn install` will fail with `Some files do not have the expected license header` message.
+To fix that please execute: `mvn license:format`.
 
 ## License
 
