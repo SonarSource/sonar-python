@@ -45,6 +45,7 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -61,6 +62,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.SET_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
 import static org.sonar.python.quickfix.PythonTextEdit.insertLineBefore;
 import static org.sonar.python.quickfix.PythonTextEdit.replace;
@@ -177,6 +179,8 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
       return ((DictionaryLiteral) defaultValue).elements().isEmpty() ? "dict" : null;
     } else if (defaultValue.is(LIST_LITERAL)) {
       return ((ListLiteral) defaultValue).elements().expressions().isEmpty() ? "list" : null;
+    } else if (defaultValue.is(SET_LITERAL)) {
+      return ((SetLiteral) defaultValue).elements().isEmpty() ? "set" : null;
     }
     return null;
   }
