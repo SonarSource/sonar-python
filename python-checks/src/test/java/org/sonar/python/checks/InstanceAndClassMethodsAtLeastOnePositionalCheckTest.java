@@ -64,6 +64,9 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue,
       fixedCodeWithSelfParameter,
       fixedCodeWithClassParameter);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Add 'cls' as the first parameter.",
+      "Add 'self' as the first parameter.");
   }
 
   @Test
