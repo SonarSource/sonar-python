@@ -53,8 +53,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
 
   private List<String> classParameterNames() {
     if (classParameterNamesList == null) {
-      classParameterNamesList = Stream.of(classParameterNames
-        .split(","))
+      classParameterNamesList = Stream.of(classParameterNames.split(","))
         .map(String::trim)
         .collect(Collectors.toList());
     }
