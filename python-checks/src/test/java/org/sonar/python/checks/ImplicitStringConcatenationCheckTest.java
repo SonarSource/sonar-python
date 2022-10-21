@@ -45,6 +45,10 @@ public class ImplicitStringConcatenationCheckTest {
     codeFixed1 = "a = ['1', '2']";
     String codeFixed2 = "a = ['1' + '2']";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1, codeFixed2);
+
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Add the comma between string or byte tokens.",
+      "Make the addition sign between string or byte tokens explicit.");
   }
 
   @Test
