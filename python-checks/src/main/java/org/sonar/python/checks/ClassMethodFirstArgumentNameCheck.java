@@ -54,7 +54,8 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
   private List<String> classParameterNames() {
     if (classParameterNamesList == null) {
       classParameterNamesList = Stream.of(classParameterNames.split(","))
-        .map(String::trim).collect(Collectors.toList());
+        .map(String::trim)
+        .collect(Collectors.toList());
     }
     return classParameterNamesList;
   }
@@ -94,14 +95,49 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
     if (!classParameterNames().contains(parameterName.name())) {
       IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameterName,
         String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
-
-      PythonTextEdit text = PythonTextEdit
-        .insertBefore(parameterName, "cls, ");
-      PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add 'cls' as the first argument.")
-        .addTextEdit(text)
-        .build();
-      issue.addQuickFix(quickFix);
+      
+      issue.addQuickFix(addClsAsTheFirstArgument(parameterName));
+      issue.addQuickFix(renameTheFirstArgument(parameterName));
     }
   }
+  
+  private PythonQuickFix addClsAsTheFirstArgument(Name parameterName) {
+    String newName = newName();
+    PythonTextEdit text;
+    if (isSecondArgInNewLine(parameterName)) {
+      int indent = secondArgIndent(parameterName);
+      text = PythonTextEdit.insertBefore(parameterName, newName + ",\n" + " ".repeat(indent));
+    } else {
+      text = PythonTextEdit.insertBefore(parameterName, newName + ", ");
+    }
+    return PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", newName))
+      .addTextEdit(text)
+      .build();
+  }
 
+  private static boolean isSecondArgInNewLine(Name parameterName) {
+    List<Tree> parameterListChildren = parameterName.parent().parent().children();
+    if(parameterListChildren.size() >= 2) {
+      Tree secondArg = parameterListChildren.get(2);
+      return parameterName.firstToken().line() != secondArg.firstToken().line();
+    }
+    return false;
+  }
+  private static int secondArgIndent(Name parameterName) {
+    List<Tree> parameterListChildren = parameterName.parent().parent().children();
+    Tree secondArg = parameterListChildren.get(2);
+    return secondArg.firstToken().column();
+  }
+
+  private PythonQuickFix renameTheFirstArgument(Name parameterName) {
+    String newName = newName();
+
+    return PythonQuickFix.newQuickFix(String.format("Rename '%s' to '%s'", parameterName.name(), newName))
+      .addTextEdit(PythonTextEdit.renameAllUsages(parameterName, newName))
+      .build();
+  }
+
+  private String newName() {
+    return classParameterNames().get(0).isEmpty() ? "cls" : classParameterNames().get(0);
+  }
 }

@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
@@ -67,11 +68,9 @@ public class PythonQuickFixVerifier {
       .collect(Collectors.toList());
 
     assertThat(appliedQuickFix)
-      .as("Application of the quickfix")
-      .overridingErrorMessage("The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
+      .as("The code with the quickfix applied is not the expected result.\n" +
+        "\"Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
-
   }
 
   public static void verifyNoQuickFixes(PythonCheck check, String codeWithIssue) {
@@ -88,6 +87,16 @@ public class PythonQuickFixVerifier {
       .as("Number of quick fixes")
       .overridingErrorMessage("Expected no quick fixes for the issue but found %d", issue.getQuickFixes().size())
       .isEmpty();
+  }
+
+  public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
+    Stream<String> descriptions = PythonQuickFixVerifier
+      .getIssuesWithQuickFix(check, codeWithIssue)
+      .stream().map(IssueWithQuickFix.class::cast)
+      .flatMap(issue -> issue.getQuickFixes().stream())
+      .map(PythonQuickFix::getDescription);
+
+    assertThat(descriptions).containsExactly(expectedMessages);
   }
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {

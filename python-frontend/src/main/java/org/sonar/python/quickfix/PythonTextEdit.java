@@ -19,9 +19,14 @@
  */
 package org.sonar.python.quickfix;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -123,6 +128,21 @@ public class PythonTextEdit {
     return replace(toRemove, "");
   }
 
+  /**
+   * Returns a list of all replacements for the symbol to new name.
+   * If there is no usages empty list is returned.
+   */
+  public static List<PythonTextEdit> renameAllUsages(HasSymbol node, String newName) {
+    Symbol symbol = node.symbol();
+    List<Usage> usages = symbol != null ? symbol.usages() : Collections.emptyList();
+    List<PythonTextEdit> result = new LinkedList<>();
+    for(Usage usage: usages) {
+      PythonTextEdit text = PythonTextEdit.replace(usage.tree().firstToken(), newName);
+      result.add(text);
+    }
+    return result;
+  }
+
   public String replacementText() {
     return message;
   }
@@ -155,5 +175,16 @@ public class PythonTextEdit {
   @Override
   public int hashCode() {
     return Objects.hash(message, startLine, startLineOffset, endLine, endLineOffset);
+  }
+
+  @Override
+  public String toString() {
+    return "PythonTextEdit{" +
+      "message='" + message + '\'' +
+      ", startLine=" + startLine +
+      ", startLineOffset=" + startLineOffset +
+      ", endLine=" + endLine +
+      ", endLineOffset=" + endLineOffset +
+      '}';
   }
 }
