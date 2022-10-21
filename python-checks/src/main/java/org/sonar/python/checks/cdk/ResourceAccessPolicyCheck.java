@@ -53,7 +53,8 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
   }
 
   public static Predicate<Expression> notStartsWith(String expected) {
-    return expression -> CdkUtils.getString(expression).filter(str -> !str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
+    return expression -> CdkUtils.getString(expression)
+      .filter(str -> !str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
   }
 
   private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, @Nullable ExpressionFlow effect) {

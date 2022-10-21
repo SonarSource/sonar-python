@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFqnOf;
-import static org.sonar.python.checks.cdk.CdkPredicate.isString;
+import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 
 @Rule(key = "S6270")
@@ -49,7 +49,7 @@ public class IamPolicyPublicAccessCheck extends AbstractIamPolicyStatementCheck 
     CdkUtils.getListExpression(principals)
       .map(list -> CdkUtils.getListElements(principals.ctx(), list))
       .orElse(Collections.emptyList())
-      .forEach(principalElement -> raiseIssueIf(principalElement, isSensitivePrincipal().or(isSensitiveArnPrincipal()), policyStatement.effect()));
+      .forEach(principalElement -> raiseIssueIf(principalElement, isSensitivePrincipal(), policyStatement.effect()));
   }
 
   @Override
@@ -61,23 +61,24 @@ public class IamPolicyPublicAccessCheck extends AbstractIamPolicyStatementCheck 
       return;
     }
 
-    raiseIssueIf(principals, isString("*"), effect);
+    raiseIssueIf(principals, isWildcard(), effect);
 
     CdkUtils.getDictionary(principals)
-      .flatMap(innerDict -> CdkUtils.getDictionaryPair(principals.ctx(), innerDict,"AWS"))
-      .map(aws -> getSensitiveExpression(aws.value, isString("*")))
-      .ifPresent(sensitiveAwsPrincipal -> raiseIssueIf(sensitiveAwsPrincipal, isString("*"), effect));
+      .flatMap(innerDict -> CdkUtils.getDictionaryPair(principals.ctx(), innerDict, "AWS"))
+      .map(aws -> getSensitiveExpression(aws.value, isWildcard()))
+      .ifPresent(sensitiveAwsPrincipal -> raiseIssueIf(sensitiveAwsPrincipal, isWildcard(), effect));
   }
 
   private static Predicate<Expression> isSensitivePrincipal() {
-    return isFqnOf(List.of("aws_cdk.aws_iam.StarPrincipal", "aws_cdk.aws_iam.AnyPrincipal"));
+    return isFqnOf(List.of("aws_cdk.aws_iam.StarPrincipal", "aws_cdk.aws_iam.AnyPrincipal"))
+      .or(isSensitiveArnPrincipal());
   }
 
   private static Predicate<Expression> isSensitiveArnPrincipal() {
     return expression -> getCall(expression, "aws_cdk.aws_iam.ArnPrincipal")
       .map(callExpression -> TreeUtils.nthArgumentOrKeyword(0, "arn", callExpression.arguments()))
       .map(RegularArgument::expression)
-      .filter(isString("*"))
+      .filter(isWildcard())
       .isPresent();
   }
 

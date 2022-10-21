@@ -39,11 +39,11 @@ public abstract class AbstractIamPolicyStatementCheck extends AbstractCdkResourc
       checkPolicyStatement(PolicyStatement.build(ctx, call)));
 
     checkFqn("aws_cdk.aws_iam.PolicyStatement.from_json", (ctx, call) ->
-      getObjectFromJson(ctx, call).ifPresent(json ->
+      getDictionaryFromJson(ctx, call).ifPresent(json ->
         checkPolicyStatementFromJson(PolicyStatement.build(ctx, json))));
 
     checkFqn("aws_cdk.aws_iam.PolicyDocument.from_json", (ctx, call) ->
-      getObjectFromJson(ctx, call).ifPresent(json -> getPolicyStatements(ctx, json)
+      getDictionaryFromJson(ctx, call).ifPresent(json -> getPolicyStatements(ctx, json)
         .forEach(statement -> checkPolicyStatementFromJson(PolicyStatement.build(ctx, statement)))));
   }
 
@@ -67,7 +67,7 @@ public abstract class AbstractIamPolicyStatementCheck extends AbstractCdkResourc
 
   protected abstract void checkAllowingPolicyStatement(PolicyStatement policyStatement);
 
-  protected static Optional<DictionaryLiteral> getObjectFromJson(SubscriptionContext ctx, CallExpression call) {
+  protected static Optional<DictionaryLiteral> getDictionaryFromJson(SubscriptionContext ctx, CallExpression call) {
     return CdkUtils.getArgument(ctx, call, "obj", 0).flatMap(CdkUtils::getDictionary);
   }
 
