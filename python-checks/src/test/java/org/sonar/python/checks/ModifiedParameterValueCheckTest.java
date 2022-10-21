@@ -170,5 +170,56 @@ public class ModifiedParameterValueCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
   }
 
+  @Test
+  public void literal_list_quickfix() {
+    String codeWithIssue = "def literal_dict(param=[]):\n" +
+      "    param.append('a')";
+    String fixedCode = "def literal_dict(param=None):\n" +
+      "    if param is None:\n" +
+      "        param = list()\n" +
+      "    param.append('a')";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void set_quickfix() {
+    String codeWithIssue = "def literal_dict(param=set()):\n" +
+      "    param.add('a')";
+    String fixedCode = "def literal_dict(param=None):\n" +
+      "    if param is None:\n" +
+      "        param = set()\n" +
+      "    param.add('a')";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_literal_dict() {
+    String codeWithIssue = "def literal_dict(param={'foo': 'bar'}):\n" +
+      "    param.pop('a')";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_literal_list() {
+    String codeWithIssue = "def literal_dict(param=[100]):\n" +
+      "    param.append('a')";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_call() {
+    String codeWithIssue = "def literal_dict(param=A('foo')):\n" +
+      "    param.attr = 'bar'";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void no_quickfix_non_empty_set() {
+    String codeWithIssue = "def literal_dict(param={'foo'}):\n" +
+      "    param.attr = 'bar'";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
 
 }
