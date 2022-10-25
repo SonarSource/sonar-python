@@ -59,7 +59,7 @@ and needs to be unique in the whole project.
 
 ### Expectations:
 - Commit message should be prefixed with the ticket number.
-- Working on separate branch and creating PR when it's finish.
+- Working on separate branch and creating PR when it's finished.
 - Clean coded, well tested solution, quality gate should pass.
 - Fix all issues reported by [SonarQube Next](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython) instance.
 - 95% or more code coverage for new changes (if possible). It can be checked on CI build.
