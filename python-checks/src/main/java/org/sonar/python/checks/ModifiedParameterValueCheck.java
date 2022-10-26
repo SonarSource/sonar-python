@@ -160,7 +160,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(parameterInitialization(defaultValue)).map(
       paramInit -> PythonQuickFix.newQuickFix("Initialize this parameter inside the function/method")
         .addTextEdit(replace(defaultValue, "None"))
-        .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s()\n", paramName, paramInit)))
+        .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s()", paramName, paramInit)))
         .build()
     );
   }
