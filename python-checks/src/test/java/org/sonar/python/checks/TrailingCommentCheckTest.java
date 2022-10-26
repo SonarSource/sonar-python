@@ -37,7 +37,7 @@ public class TrailingCommentCheckTest {
     String code = "print(1) # More than one word";
     String fixedCode = code(
       "# More than one word",
-      "print(1) "
+      "print(1)"
       );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
   }
@@ -50,7 +50,7 @@ public class TrailingCommentCheckTest {
     );
     String fixedCode = code(
       "# More Words",
-      "print(1) ",
+      "print(1)",
       "print(\"aaa\")"
     );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
@@ -67,7 +67,7 @@ public class TrailingCommentCheckTest {
     String fixedCode = code(
       "def func(self):",
       "    #Some comment",
-      "    if a==b: ",
+      "    if a==b:",
       "        return None",
       "    self.bar()"
     );
@@ -86,7 +86,7 @@ public class TrailingCommentCheckTest {
       "def func(self):",
       "    if a==b:",
       "        #This should not happen",
-      "        return None ",
+      "        return None",
       "    self.bar()"
     );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
@@ -103,7 +103,7 @@ public class TrailingCommentCheckTest {
     String fixedCode = code(
       "SOMEVAR = [",
       "  # comment more than one word",
-      "  'asd', 'asd', ",
+      "  'asd', 'asd',",
       "  'asdpj'",
       "]"
     );
@@ -122,7 +122,7 @@ public class TrailingCommentCheckTest {
     String fixedCode = code(
       "changes = sa.Table('foo', bar,",
       "    # yet another comment",
-      "    sa.Column('id', sa.Integer), ",
+      "    sa.Column('id', sa.Integer),",
       "    # some comment",
       "    sa.Column('name', sa.String(256)),",
       "    )"
@@ -138,7 +138,7 @@ public class TrailingCommentCheckTest {
     );
     String fixedCode = code(
       "# a comment",
-      "toto = (state, None, ",
+      "toto = (state, None,",
       "        [foo(b) for b in bar])"
     );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
@@ -162,7 +162,7 @@ public class TrailingCommentCheckTest {
       "         SomeClass(workdir='wkdir',",
       "                      command=['cmd',",
       "                               # note extra param",
-      "                               'foo'], ",
+      "                               'foo'],",
       "                      env=some.method(",
       "                          r'sf',",
       "                          l='l', p='p', i='i'))",
@@ -182,7 +182,7 @@ public class TrailingCommentCheckTest {
     String fixedCode = code(
       "var = (some.method(arg1, arg2)",
       "        # Missing on some platforms?",
-      "        if hasattr(umath, 'nextafter')  ",
+      "        if hasattr(umath, 'nextafter')",
       "        else float64_ma.huge)"
     );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
@@ -196,12 +196,10 @@ public class TrailingCommentCheckTest {
     );
     String fixedCode = code(
       "#some comment",
-      "with errstate(over='ignore'): ",
+      "with errstate(over='ignore'):",
       "    if bar:",
       "        print(\"hello\")"
     );
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
   }
-
-
 }

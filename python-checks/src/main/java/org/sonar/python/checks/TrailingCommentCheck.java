@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import com.sonar.sslr.api.GenericTokenType;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -69,10 +70,15 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
   }
 
   private static void addQuickFix(IssueWithQuickFix issue, Token codeToken, Token commentToken) {
-    Tree firstToken = firstTokenInTheSameLineIgnoringIndent(codeToken, commentToken.line());
+    Tree firstToken = firstTokenInLineIgnoringIndent(codeToken, commentToken.line());
 
     PythonTextEdit insert = PythonTextEdit.insertLineBefore(firstToken, commentToken.value() + "\n");
-    PythonTextEdit remove = PythonTextEdit.remove(commentToken);
+    Tree lastToken = lastTokenInLineIgnoringComment(codeToken, commentToken.line());
+    PythonTextEdit remove = PythonTextEdit.removeRange(
+      commentToken.line(),
+      lastToken.lastToken().column() + lastToken.lastToken().value().length(),
+      commentToken.line(),
+      commentToken.column() + commentToken.value().length());
 
     PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE)
       .addTextEdit(List.of(insert, remove))
@@ -80,13 +86,23 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     issue.addQuickFix(fix);
   }
 
-  private static Tree firstTokenInTheSameLineIgnoringIndent(Token codeToken, int line) {
+  private static Tree firstTokenInLineIgnoringIndent(Token codeToken, int line) {
     List<Token> tokens = TreeUtils.tokens(TreeUtils.parent(codeToken, 5));
 
     return tokens.stream()
       .filter(t -> t.line() == line)
       .filter(t -> !t.type().equals(PythonTokenType.INDENT))
       .min(Comparator.comparingInt(Token::column))
+      .orElse(codeToken);
+  }
+
+  private static Tree lastTokenInLineIgnoringComment(Token codeToken, int line) {
+    List<Token> tokens = TreeUtils.tokens(TreeUtils.parent(codeToken, 5));
+
+    return tokens.stream()
+      .filter(t -> t.line() == line)
+      .filter(t -> !t.type().equals(GenericTokenType.EOF) && !t.type().equals(PythonTokenType.NEWLINE))
+      .max(Comparator.comparingInt(Token::column))
       .orElse(codeToken);
   }
 }
