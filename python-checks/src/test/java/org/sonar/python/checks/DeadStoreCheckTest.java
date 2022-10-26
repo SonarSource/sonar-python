@@ -124,12 +124,7 @@ public class DeadStoreCheckTest {
       "    print(c)",
       "    c = foo()",
       "");
-    String codeFixed = code(
-      "def tuple_assign():",
-      "    c = foo()",
-      "    print(c)",
-      "");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
@@ -140,12 +135,7 @@ public class DeadStoreCheckTest {
       "# Comment 2",
       "    a = 2",
       "    print(a)");
-    String codeFixed = code(
-      "def assignment_expression():",
-      "    # Comment 2",
-      "    a = 2",
-      "    print(a)");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
@@ -156,12 +146,7 @@ public class DeadStoreCheckTest {
       "    print(a)",
       "    a = foo()",
       "");
-    String codeFixed = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)",
-      "");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
@@ -171,11 +156,7 @@ public class DeadStoreCheckTest {
       "    a = foo()",
       "    print(a)",
       "    a = foo();");
-    String codeFixed = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)\n");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
@@ -184,12 +165,9 @@ public class DeadStoreCheckTest {
       "def ab():",
       "    a = foo()",
       "    print(a)",
-      "    a = foo();\n");
-    String codeFixed = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)\n");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+      "    a = foo();",
+      "");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
@@ -243,5 +221,15 @@ public class DeadStoreCheckTest {
       "        pass",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void side_effect_in_binary_op(){
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = 1 + foo()",
+      "    a = 2",
+      "    print(a)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 }

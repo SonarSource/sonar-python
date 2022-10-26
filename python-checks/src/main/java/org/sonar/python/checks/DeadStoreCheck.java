@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -31,7 +32,10 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -201,7 +205,24 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private static boolean hasPotentialSideEffect(Tree tree) {
+    switch (tree.getKind()) {
+      case ANNOTATED_ASSIGNMENT:
+        return SideEffectDetector.hasSideEffect(((AnnotatedAssignment) tree).assignedValue());
+      case ASSIGNMENT_STMT:
+        return SideEffectDetector.hasSideEffect(((AssignmentStatement) tree).assignedValue());
+      case EXPRESSION_STMT:
+        ExpressionStatement expressionStatement = (ExpressionStatement) tree;
+        return expressionStatement.expressions().stream().anyMatch(SideEffectDetector::hasSideEffect);
+      default:
+        return false;
+    }
+  }
+
   private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
+    if (hasPotentialSideEffect(unnecessaryAssignment)) {
+      return;
+    }
     PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the unused statement")
       .addTextEdit(edit)
@@ -212,5 +233,25 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static PythonTextEdit removeFromEndOfTillEndOf(Token first, Token last) {
     return new PythonTextEdit("", first.line(), first.column() + first.value().length(),
       last.line(), last.column() + last.value().length());
+  }
+
+  private static class SideEffectDetector extends BaseTreeVisitor {
+
+    private boolean sideEffect = false;
+
+    public static boolean hasSideEffect(@Nullable Expression expression) {
+      if (expression == null) {
+        return false;
+      }
+      SideEffectDetector detector = new SideEffectDetector();
+      detector.scan(expression);
+      return detector.sideEffect;
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      sideEffect = true;
+    }
+
   }
 }
