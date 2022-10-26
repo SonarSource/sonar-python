@@ -80,6 +80,18 @@ public class TreeUtilsTest {
   }
 
   @Test
+  public void testParent() {
+    String code = "" +
+      "while True:\n" +
+      "  while True:\n" +
+      "    pass";
+    WhileStatement outerWhile = (WhileStatement) parse(code).statements().statements().get(0);
+    WhileStatement innerWhile = (WhileStatement) outerWhile.body().statements().get(0);
+    PassStatement passStatement = (PassStatement) innerWhile.body().statements().get(0);
+    assertThat(TreeUtils.parent(passStatement, 4)).isEqualTo(outerWhile);
+  }
+
+  @Test
   public void first_ancestor() {
     String code = "" +
       "def outer():\n" +
