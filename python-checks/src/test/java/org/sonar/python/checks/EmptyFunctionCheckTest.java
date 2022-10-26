@@ -45,7 +45,13 @@ public class EmptyFunctionCheckTest {
     String raiseError = code("def my_function():",
       "  raise NotImplementedError()",
       "  pass");
-    PythonQuickFixVerifier.verify(check, codeWithIssue, addComment, raiseError);
+    PythonQuickFixVerifier.verify(check, codeWithIssue,
+      addComment,
+      raiseError);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Insert placeholder comment",
+      "Raise NotImplementedError()"
+      );
   }
 
   @Test
@@ -78,6 +84,10 @@ public class EmptyFunctionCheckTest {
       "    return NotImplemented",
       "    pass");
     PythonQuickFixVerifier.verify(check, codeWithIssue, addComment, raiseError);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Insert placeholder comment",
+      "Return NotImplemented constant"
+    );
   }
 
 }
