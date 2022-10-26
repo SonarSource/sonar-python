@@ -33,7 +33,7 @@ import org.sonar.python.quickfix.PythonTextEdit;
 public class TrailingWhitespaceCheck implements PythonCheck {
 
   private static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
-  private static final Pattern TRAILING_WS = Pattern.compile("\\s+$");
+  private static final Pattern TRAILING_WS = Pattern.compile("\\s\\s*+$");
 
   @Override
   public void scanFile(PythonVisitorContext ctx) {
