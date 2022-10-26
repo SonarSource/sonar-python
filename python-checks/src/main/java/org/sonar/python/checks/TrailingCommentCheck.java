@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -26,6 +28,11 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
@@ -47,17 +54,40 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousTokenLine = -1);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
-      Token pyToken = (Token) ctx.syntaxNode();
-      for (Trivia trivia : pyToken.trivia()) {
+      Token token = (Token) ctx.syntaxNode();
+      for (Trivia trivia : token.trivia()) {
         if (previousTokenLine == trivia.token().line()) {
           String comment = trivia.token().value();
           if (!pattern.matcher(comment).matches()) {
-            ctx.addIssue(trivia.token(), MESSAGE);
+            IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(trivia.token(), MESSAGE);
+            addQuickFix(issue, token, trivia.token());
           }
         }
       }
-      previousTokenLine = pyToken.line();
+      previousTokenLine = token.line();
     });
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Token codeToken, Token commentToken) {
+    Tree firstToken = firstTokenInTheSameLineIgnoringIndent(codeToken, commentToken.line());
+
+    PythonTextEdit insert = PythonTextEdit.insertLineBefore(firstToken, commentToken.value() + "\n");
+    PythonTextEdit remove = PythonTextEdit.remove(commentToken);
+
+    PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE)
+      .addTextEdit(List.of(insert, remove))
+      .build();
+    issue.addQuickFix(fix);
+  }
+
+  private static Tree firstTokenInTheSameLineIgnoringIndent(Token codeToken, int line) {
+    List<Token> tokens = TreeUtils.tokens(TreeUtils.parent(codeToken, 5));
+
+    return tokens.stream()
+      .filter(t -> t.line() == line)
+      .filter(t -> !t.type().equals(PythonTokenType.INDENT))
+      .min(Comparator.comparingInt(Token::column))
+      .orElse(codeToken);
   }
 }
 
