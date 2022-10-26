@@ -19,24 +19,36 @@
  */
 package org.sonar.python.checks;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S1131")
 public class TrailingWhitespaceCheck implements PythonCheck {
 
   private static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
-  private static final Pattern TRAILING_WS = Pattern.compile("\\s$");
+  private static final Pattern TRAILING_WS = Pattern.compile("\\s+$");
 
   @Override
   public void scanFile(PythonVisitorContext ctx) {
     String[] lines = ctx.pythonFile().content().split("\r\n|\n|\r", -1);
     for (int i = 0; i < lines.length; i++) {
-      if (TRAILING_WS.matcher(lines[i]).find()) {
-        ctx.addIssue(new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, i + 1)));
+      Matcher matcher = TRAILING_WS.matcher(lines[i]);
+      if (matcher.find()) {
+        int lineNumber = i + 1;
+        IssueWithQuickFix issue = new IssueWithQuickFix(this, IssueLocation.atLineLevel(MESSAGE, lineNumber));
+
+        issue.addQuickFix(PythonQuickFix.newQuickFix("Remove trailing whitespaces")
+            .addTextEdit(PythonTextEdit.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
+          .build());
+
+        ctx.addIssue(issue);
       }
     }
   }

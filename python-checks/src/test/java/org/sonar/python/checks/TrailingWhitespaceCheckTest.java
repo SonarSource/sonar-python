@@ -20,13 +20,77 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class TrailingWhitespaceCheckTest {
 
+  final PythonCheck check = new TrailingWhitespaceCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/trailingWhitespace.py", new TrailingWhitespaceCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/trailingWhitespace.py", check);
+  }
+
+  @Test
+  public void single_whitespace_at_end_of_line() {
+    String codeWithIssue = code(
+      "print(1) ",
+      "print(2)");
+    String fixedCode = code(
+      "print(1)",
+      "print(2)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void multiple_whitespace_at_end_of_line() {
+    String codeWithIssue = code(
+      "print(1)   ",
+      "print(2)");
+    String fixedCode = code(
+      "print(1)",
+      "print(2)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void single_whitespace_as_line() {
+    String codeWithIssue = code(
+      " ",
+      "print(1)");
+    String fixedCode = code(
+      "",
+      "print(1)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void multiple_whitespace_as_line() {
+    String codeWithIssue = code(
+      "   ",
+      "print(1)");
+    String fixedCode = code(
+      "",
+      "print(1)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
+  }
+
+  @Test
+  public void single_whitespace_at_end_of_file() {
+    String codeWithIssue = code(
+      "print(1) ");
+    String fixedCode = code(
+      "print(1)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
   }
 
 }
