@@ -47,6 +47,10 @@ public class PythonQuickFix {
     return new Builder(description);
   }
 
+  public static PythonQuickFix newQuickFix(String description, PythonTextEdit... textEdits) {
+    return newQuickFix(description).addTextEdit(textEdits).build();
+  }
+
   public static class Builder {
     private final String description;
     private final List<PythonTextEdit> textEdits = new ArrayList<>();
