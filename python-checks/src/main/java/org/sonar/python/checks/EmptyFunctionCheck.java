@@ -25,15 +25,27 @@ import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.quickfix.PythonTextEdit.insertLineBefore;
 
 @Rule(key = "S1186")
 public class EmptyFunctionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add a nested comment explaining why this %s is empty, or complete the implementation.";
-  private static final List<String> ABC_DECORATORS = Arrays.asList("abstractmethod", "abstractstaticmethod", "abstractproperty", "abstractclassmethod");
+  private static final List<String> ABC_DECORATORS = List.of("abstractmethod", "abstractstaticmethod", "abstractproperty", "abstractclassmethod");
+
+  private static final List<String> BINARY_MAGIC_METHODS = List.of("__add__", "__and__", "__cmp__", "__divmod__",
+    "__div__", "__eq__", "__floordiv__", "__ge__", "__gt__", "__iadd__", "__iand__", "__idiv__", "__ifloordiv__",
+    "__ilshift__", "__imod__", "__imul__", "__ior__", "__ipow__", "__irshift__", "__isub__", "__ixor__", "__le__",
+    "__lshift__", "__lt__", "__mod__", "__mul__", "__ne__", "__or__", "__pow__", "__radd__", "__rand__", "__rdiv__",
+    "__rfloordiv__", "__rlshift__", "__rmod__", "__rmul__", "__ror__", "__rpow__", "__rrshift__", "__rshift__", "__rsub__",
+    "__rxor__", "__sub__", "__xor__");
 
   @Override
   public void initialize(Context context) {
@@ -55,9 +67,24 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
           return;
         }
         String type = functionDef.isMethodDefinition() ? "method" : "function";
-        ctx.addIssue(functionDef.name(), String.format(MESSAGE, type));
+        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.name(), String.format(MESSAGE, type));
+        addQuickFixes(issue, functionDef, type);
       }
     });
+  }
+
+  private static void addQuickFixes(IssueWithQuickFix issue, FunctionDef functionDef, String functionType) {
+    Statement passStatement = functionDef.body().statements().get(0);
+    issue.addQuickFix(PythonQuickFix.newQuickFix("Insert placeholder comment",
+      insertLineBefore(passStatement, "# TODO document why this method is empty")));
+
+    if (functionType.equals("method") && BINARY_MAGIC_METHODS.contains(functionDef.name().name())) {
+      issue.addQuickFix(PythonQuickFix.newQuickFix("Return NotImplemented constant",
+        insertLineBefore(passStatement, "return NotImplemented")));
+    } else {
+      issue.addQuickFix(PythonQuickFix.newQuickFix("Raise NotImplementedError()",
+        insertLineBefore(passStatement, "raise NotImplementedError()")));
+    }
   }
 
   private static boolean hasCommentAbove(FunctionDef functionDef) {
