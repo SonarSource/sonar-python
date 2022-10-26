@@ -19,27 +19,26 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.GenericTokenType;
-import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+([^\\s]++|fmt.*|type.*)$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
+  private static final Pattern NON_WHITESPACE_PATTERN = Pattern.compile("\\S");
 
   @RuleProperty(
     key = "legalTrailingCommentPattern",
@@ -49,10 +48,15 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private int previousTokenLine;
 
+  private List<String> lines;
+
   @Override
   public void initialize(Context context) {
     Pattern pattern = Pattern.compile(legalCommentPattern);
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousTokenLine = -1);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      previousTokenLine = -1;
+      lines = ctx.pythonFile().content().lines().collect(Collectors.toList());
+    });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token token = (Token) ctx.syntaxNode();
@@ -61,7 +65,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
           String comment = trivia.token().value();
           if (!pattern.matcher(comment).matches()) {
             IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(trivia.token(), MESSAGE);
-            addQuickFix(issue, token, trivia.token());
+            addQuickFix(issue, trivia.token());
           }
         }
       }
@@ -69,41 +73,21 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Token codeToken, Token commentToken) {
-    Tree firstToken = firstTokenInLineIgnoringIndent(codeToken, commentToken.line());
-
-    PythonTextEdit insert = PythonTextEdit.insertLineBefore(firstToken, commentToken.value() + "\n");
-    Tree lastToken = lastTokenInLineIgnoringComment(codeToken, commentToken.line());
-    PythonTextEdit remove = PythonTextEdit.removeRange(
-      commentToken.line(),
-      lastToken.lastToken().column() + lastToken.lastToken().value().length(),
-      commentToken.line(),
-      commentToken.column() + commentToken.value().length());
+  private void addQuickFix(IssueWithQuickFix issue, Token commentToken) {
+    String line = lines.get(commentToken.column());
+    int column = 0;
+    Matcher matcher = NON_WHITESPACE_PATTERN.matcher(line);
+    if (matcher.matches()) {
+      column = matcher.start();
+    }
+    String indent = " ".repeat(column);
+    PythonTextEdit insert = new PythonTextEdit(indent + commentToken + "\n", commentToken.column(), 0, commentToken.column(), 0);
+    PythonTextEdit remove = PythonTextEdit.removeRange(commentToken.line(), line.indexOf(commentToken.value()), commentToken.line(), line.length());
 
     PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE)
       .addTextEdit(List.of(insert, remove))
       .build();
     issue.addQuickFix(fix);
-  }
-
-  private static Tree firstTokenInLineIgnoringIndent(Token codeToken, int line) {
-    List<Token> tokens = TreeUtils.tokens(TreeUtils.parent(codeToken, 5));
-
-    return tokens.stream()
-      .filter(t -> t.line() == line)
-      .filter(t -> !t.type().equals(PythonTokenType.INDENT))
-      .min(Comparator.comparingInt(Token::column))
-      .orElse(codeToken);
-  }
-
-  private static Tree lastTokenInLineIgnoringComment(Token codeToken, int line) {
-    List<Token> tokens = TreeUtils.tokens(TreeUtils.parent(codeToken, 5));
-
-    return tokens.stream()
-      .filter(t -> t.line() == line)
-      .filter(t -> !t.type().equals(GenericTokenType.EOF) && !t.type().equals(PythonTokenType.NEWLINE))
-      .max(Comparator.comparingInt(Token::column))
-      .orElse(codeToken);
   }
 }
 

@@ -82,16 +82,6 @@ public class TreeUtils {
     return firstAncestor(tree, t -> t.is(kinds));
   }
 
-  public static Tree parent(Tree tree, int maxDepth) {
-    Tree currentTree = tree;
-    for (int i = 0; i < maxDepth; i++) {
-      if (currentTree != null && currentTree.parent() != null) {
-        currentTree = currentTree.parent();
-      }
-    }
-    return currentTree;
-  }
-
   public static List<Token> tokens(Tree tree) {
     if (tree.is(Kind.TOKEN)) {
       return Collections.singletonList((Token) tree);
