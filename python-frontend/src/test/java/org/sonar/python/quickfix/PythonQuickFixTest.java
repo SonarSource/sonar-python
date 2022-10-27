@@ -26,12 +26,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonQuickFixTest {
 
   @Test
-  public void test() {
+  public void test_newQuickFix_builder() {
     PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix").addTextEdit(textEdit).build();
 
     assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
     assertThat(quickFix.getDescription()).isEqualTo("New quickfix");
+  }
+
+  @Test
+  public void test_newQuickFix() {
+    PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
+
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix", textEdit);
+
+    assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
   }
 }
