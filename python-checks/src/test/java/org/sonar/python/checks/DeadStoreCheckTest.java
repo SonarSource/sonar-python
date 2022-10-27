@@ -104,7 +104,7 @@ public class DeadStoreCheckTest {
   public void quickfix_in_condition() {
     String codeWithIssue = code(
       "def simple_conditional():",
-      "    x = 10 # Noncompliant",
+      "    x = 10",
       "    if p:",
       "        x = 11",
       "        print(x)");
@@ -117,9 +117,9 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void unused_after_reassignment() {
+  public void function_call_as_assigned_value() {
     String codeWithIssue = code(
-      "def tuple_assign():",
+      "def function_assign():",
       "    c = foo()",
       "    print(c)",
       "    c = foo()",
@@ -128,7 +128,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void end_of_line_comments_should_be_removed() {
+  public void assignment_expression_in_function_call() {
     String codeWithIssue = code(
       "def assignment_expression():",
       "    foo(a:=3) # Comment 1",
@@ -170,6 +170,7 @@ public class DeadStoreCheckTest {
     PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
+  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
   public void comment_after_should_not_be_removed(){
     String codeWithIssue = code(
@@ -186,6 +187,7 @@ public class DeadStoreCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
+  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
   public void space_comment_after_should_not_be_removed(){
     String codeWithIssue = code(
