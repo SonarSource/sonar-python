@@ -30,11 +30,15 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S4144")
 public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Update this function so that its implementation is not identical to %s on line %s.";
+  private static final String QUICK_FIX_MESSAGE = "Call %s inside this function.";
 
   @Override
   public void initialize(Context context) {
@@ -60,7 +64,8 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       if (CheckUtils.areEquivalent(originalBody, suspiciousBody)) {
         int line = originalMethod.name().firstToken().line();
         String message = String.format(MESSAGE, originalMethod.name().name(), line);
-        ctx.addIssue(suspiciousMethod.name(), message).secondary(originalMethod.name(), "Original");
+        PreciseIssue issue = ctx.addIssue(suspiciousMethod.name(), message).secondary(originalMethod.name(), "Original");
+        addQuickFix((IssueWithQuickFix) issue, originalMethod, suspiciousMethod);
         break;
       }
     }
@@ -83,6 +88,17 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
     return statementList.statements().get(first).firstToken().line() == statementList.statements().get(statementList.statements().size() - 1).lastToken().line();
   }
 
+  private static void addQuickFix(IssueWithQuickFix issue, FunctionDef originalMethod, FunctionDef suspiciousMethod) {
+    PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), "return " + originalMethod.name().name() + "()");
+
+    PythonQuickFix fix = PythonQuickFix
+      .newQuickFix(String.format(QUICK_FIX_MESSAGE, originalMethod.name().name()))
+      .addTextEdit(List.of(edit))
+      .build();
+
+    issue.addQuickFix(fix);
+  }
+
   private static class MethodVisitor extends BaseTreeVisitor {
 
     List<FunctionDef> methods = new ArrayList<>();
@@ -99,6 +115,5 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       }
       super.visitFunctionDef(functionDef);
     }
-
   }
 }

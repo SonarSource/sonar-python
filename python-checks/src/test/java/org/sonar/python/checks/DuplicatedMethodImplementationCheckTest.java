@@ -20,7 +20,10 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class DuplicatedMethodImplementationCheckTest {
 
@@ -29,4 +32,78 @@ public class DuplicatedMethodImplementationCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodImplementationCheck.py", new DuplicatedMethodImplementationCheck());
   }
 
+  @Test
+  public void testQuickFixSimple() {
+    String code = code(
+      "class clazz:",
+      "  def method(self):",
+      "    foo()",
+      "    bar()",
+      "",
+      "  def method2(self):",
+      "    foo()",
+      "    bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method(self):",
+      "    foo()",
+      "    bar()",
+      "",
+      "  def method2(self):",
+      "    return method()",
+      "");
+
+    PythonQuickFixVerifier.verify(new DuplicatedMethodImplementationCheck(), code, fixedCode);
+  }
+
+  @Test
+  public void testQuickFixWithIfExpression() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    return method_1()");
+
+    PythonQuickFixVerifier.verify(new DuplicatedMethodImplementationCheck(), code, fixedCode);
+  }
+
+  @Test
+  public void testQuickFixMessage() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyQuickFixMessages(new DuplicatedMethodImplementationCheck(), code, "Call method_1 inside this function.");
+  }
 }
