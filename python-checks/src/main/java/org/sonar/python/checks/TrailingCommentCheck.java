@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
@@ -38,7 +37,6 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+([^\\s]++|fmt.*|type.*)$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
-  private static final Pattern NON_WHITESPACE_PATTERN = Pattern.compile("\\S");
 
   @RuleProperty(
     key = "legalTrailingCommentPattern",
@@ -74,20 +72,30 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
   }
 
   private void addQuickFix(IssueWithQuickFix issue, Token commentToken) {
-    String line = lines.get(commentToken.column());
-    int column = 0;
-    Matcher matcher = NON_WHITESPACE_PATTERN.matcher(line);
-    if (matcher.matches()) {
-      column = matcher.start();
-    }
-    String indent = " ".repeat(column);
-    PythonTextEdit insert = new PythonTextEdit(indent + commentToken + "\n", commentToken.column(), 0, commentToken.column(), 0);
-    PythonTextEdit remove = PythonTextEdit.removeRange(commentToken.line(), line.indexOf(commentToken.value()), commentToken.line(), line.length());
+    String line = lines.get(commentToken.line() - 1);
+    String indent = calculateIndent(line);
+    PythonTextEdit insert = new PythonTextEdit(
+      indent + commentToken.value() + "\n",
+      commentToken.line(), 0,
+      commentToken.line(), 0);
+
+    int startColumnRemove = calculateStartColumnToRemove(commentToken, line);
+    PythonTextEdit remove = PythonTextEdit.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
 
     PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE)
-      .addTextEdit(List.of(insert, remove))
+      .addTextEdit(List.of(remove, insert))
       .build();
     issue.addQuickFix(fix);
+  }
+
+  private static String calculateIndent(String line) {
+    String lineWithoutIndent = line.stripLeading();
+    int column = line.indexOf(lineWithoutIndent);
+    return " ".repeat(column);
+  }
+
+  private static int calculateStartColumnToRemove(Token commentToken, String line) {
+    return line.substring(0, commentToken.column()).stripTrailing().length();
   }
 }
 
