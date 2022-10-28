@@ -30,14 +30,17 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
-@Rule(key = MissingDocstringCheck.CHECK_KEY)
+@Rule(key = "S1720")
 public class MissingDocstringCheck extends PythonSubscriptionCheck {
-
-  public static final String CHECK_KEY = "S1720";
 
   private static final String MESSAGE_NO_DOCSTRING = "Add a docstring to this %s.";
   private static final String MESSAGE_EMPTY_DOCSTRING = "The docstring for this %s should not be empty.";
+
+  private static final String EMPTY_DOCSTRING = "\"\"\" doc \"\"\"";
 
   private enum DeclarationType {
     MODULE("module"),
@@ -99,11 +102,13 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   private static void raiseIssue(Tree tree, String message, DeclarationType type, SubscriptionContext ctx) {
     String finalMessage = String.format(message, type.value);
+    PreciseIssue issue;
     if (type != DeclarationType.MODULE) {
-      ctx.addIssue(getNameNode(tree), finalMessage);
+      issue = ctx.addIssue(getNameNode(tree), finalMessage);
     } else {
-      ctx.addFileIssue(finalMessage);
+      issue = ctx.addFileIssue(finalMessage);
     }
+    addQuickFix((IssueWithQuickFix) issue, tree, type);
   }
 
   private static Name getNameNode(Tree tree) {
@@ -111,6 +116,22 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
       return ((FunctionDef) tree).name();
     }
     return ((ClassDef) tree).name();
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Tree tree, DeclarationType type) {
+    PythonQuickFix.Builder quickFix = PythonQuickFix.newQuickFix("Add docstring");
+
+    if (type == DeclarationType.MODULE) {
+      quickFix.addTextEdit(PythonTextEdit.insertAtPosition(1, 0, EMPTY_DOCSTRING));
+    } else if (type == DeclarationType.CLASS) {
+      ClassDef classDef = (ClassDef) tree;
+      quickFix.addTextEdit(PythonTextEdit.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));
+    } else {
+      FunctionDef functionDef = (FunctionDef) tree;
+      quickFix.addTextEdit(PythonTextEdit.insertLineAfter(functionDef.colon(), functionDef.body(), EMPTY_DOCSTRING));
+    }
+
+    issue.addQuickFix(quickFix.build());
   }
 
 }

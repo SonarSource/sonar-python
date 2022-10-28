@@ -56,10 +56,24 @@ public class PythonTextEdit {
    * Offset is applied to multiline insertions.
    */
   public static PythonTextEdit insertLineBefore(Tree tree, String textToInsert) {
-    String lineOffset = " ".repeat(tree.firstToken().column());
+    String lineOffset = offset(tree);
     textToInsert += "\n";
     String textWithOffset = textToInsert.replace("\n", "\n" + lineOffset);
     return insertBefore(tree, textWithOffset);
+  }
+
+  /**
+   * Insert a line with the same offset as the given tree, after the given tree.
+   * Offset is applied to multiline insertions and calculated by the reference tree.
+   */
+  public static PythonTextEdit insertLineAfter(Tree tree, Tree indentReference, String textToInsert) {
+    String lineOffset = offset(indentReference);
+    String textWithOffset = "\n" + lineOffset + textToInsert.replace("\n", "\n" + lineOffset);
+    return insertAfter(tree, textWithOffset);
+  }
+
+  private static String offset(Tree referenceTree) {
+    return " ".repeat(referenceTree.firstToken().column());
   }
 
   public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
@@ -73,7 +87,7 @@ public class PythonTextEdit {
     return insertAtPosition(token.line(), token.column() + lengthToken, textToInsert);
   }
 
-  private static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
+  public static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
     return new PythonTextEdit(textToInsert, line, column, line, column);
   }
 

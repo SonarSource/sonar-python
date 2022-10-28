@@ -22,6 +22,7 @@ package org.sonar.python.quickfix;
 import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -149,6 +150,28 @@ public class PythonTextEditTest {
       new PythonTextEdit("xxx", 1, 8, 1, 11),
       new PythonTextEdit("xxx", 2, 10, 2, 13)
     );
+  }
+
+  @Test
+  public void test_insertLineAfter_without_indent() {
+    FileInput file = parse("foo()");
+    CallExpression call = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.CALL_EXPR));
+
+    PythonTextEdit textEdit = PythonTextEdit.insertLineAfter(call, call, "bar");
+    assertThat(textEdit).isEqualTo(new PythonTextEdit("\nbar", 1,3,1,3));
+  }
+
+  @Test
+  public void test_insertLineAfter_with_indent() {
+    FileInput file = parse(
+      "def foo():",
+      "    pass"
+    );
+    FunctionDef functionDef = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF));
+    StatementList functionBody = functionDef.body();
+
+    PythonTextEdit textEdit = PythonTextEdit.insertLineAfter(functionDef.colon(), functionBody, "bar");
+    assertThat(textEdit).isEqualTo(new PythonTextEdit("\n    bar", 1,10,1,10));
   }
 
   @Test
