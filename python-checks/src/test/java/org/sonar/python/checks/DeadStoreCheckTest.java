@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
+
 public class DeadStoreCheckTest {
 
   private final PythonCheck check = new DeadStoreCheck();
@@ -35,51 +37,59 @@ public class DeadStoreCheckTest {
 
   @Test
   public void quickfix() {
-    String codeWithIssue = "def foo():\n" +
-      "    x = 42\n" +
-      "    x = 0\n" +
-      "    print(x)";
-    String codeFixed = "def foo():\n" +
-      "    x = 0\n" +
-      "    print(x)";
+    String codeWithIssue = code(
+      "def foo():",
+      "    x = 42",
+      "    x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    x = 0",
+      "    print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
   public void semicolon() {
-    String codeWithIssue = "def foo():\n" +
-      "    x = 42 ;\n" +
-      "    x = 0\n" +
-      "    print(x)";
-    String codeFixed = "def foo():\n" +
-      "    x = 0\n" +
-      "    print(x)";
+    String codeWithIssue = code(
+      "def foo():",
+      "    x = 42 ;",
+      "    x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    x = 0",
+      "    print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
   public void space() {
-    String codeWithIssue = "def foo():\n" +
-      "    x = 42 \n" +
-      "    x = 0\n" +
-      "    print(x)";
-    String codeFixed = "def foo():\n" +
-      "    x = 0\n" +
-      "    print(x)";
+    String codeWithIssue = code(
+      "def foo():",
+      "    x = 42 ",
+      "    x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    x = 0",
+      "    print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
   public void quickfix_after_non_issue() {
-    String codeWithIssue = "def foo():\n" +
-      "    a = 1\n" +
-      "    x = 10 ;\n" +
-      "    x = 0\n" +
-      "    print(x)";
-    String codeFixed = "def foo():\n" +
-      "    a = 1\n" +
-      "    x = 0\n" +
-      "    print(x)";
+    String codeWithIssue = code(
+      "def foo():",
+      "    a = 1",
+      "    x = 10 ;",
+      "    x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    a = 1",
+      "    x = 0",
+      "    print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -92,138 +102,136 @@ public class DeadStoreCheckTest {
 
   @Test
   public void quickfix_in_condition() {
-    String codeWithIssue = "def simple_conditional():\n" +
-      "    x = 10 # Noncompliant\n" +
-      "    if p:\n" +
-      "        x = 11\n" +
-      "        print(x)";
-    String codeFixed = "def simple_conditional():\n" +
-      "    if p:\n" +
-      "        x = 11\n" +
-      "        print(x)";
+    String codeWithIssue = code(
+      "def simple_conditional():",
+      "    x = 10",
+      "    if p:",
+      "        x = 11",
+      "        print(x)");
+    String codeFixed = code(
+      "def simple_conditional():",
+      "    if p:",
+      "        x = 11",
+      "        print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
-  public void unused_after_reassignment() {
-    String codeWithIssue = "def tuple_assign():\n" +
-      "    c = foo()\n" +
-      "    print(c)\n" +
-      "    c = foo()\n";
-    String codeFixed = "def tuple_assign():\n" +
-      "    c = foo()\n" +
-      "    print(c)\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  public void function_call_as_assigned_value() {
+    String codeWithIssue = code(
+      "def function_assign():",
+      "    c = foo()",
+      "    print(c)",
+      "    c = foo()",
+      "");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
-  public void end_of_line_comments_should_be_removed() {
-    String codeWithIssue = "" +
-      "def assignment_expression():\n" +
-      "    foo(a:=3) # Comment 1\n" +
-      "# Comment 2\n" +
-      "    a = 2\n" +
-      "    print(a)";
-    String codeFixed = "" +
-      "def assignment_expression():\n" +
-      "    # Comment 2\n" +
-      "    a = 2\n" +
-      "    print(a)";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  public void assignment_expression_in_function_call() {
+    String codeWithIssue = code(
+      "def assignment_expression():",
+      "    foo(a:=3) # Comment 1",
+      "# Comment 2",
+      "    a = 2",
+      "    print(a)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
   public void no_separator_found(){
-    String codeWithIssue = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n" +
-      "    a = foo()";
-    String codeFixed = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = foo()",
+      "    print(a)",
+      "    a = foo()",
+      "");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
   public void one_separator_found(){
-    String codeWithIssue = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n" +
-      "    a = foo();";
-    String codeFixed = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = foo()",
+      "    print(a)",
+      "    a = foo();");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
   @Test
   public void two_separators_found(){
-    String codeWithIssue = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n" +
-      "    a = foo();\n";
-    String codeFixed = "" +
-      "def ab():\n" +
-      "    a = foo()\n" +
-      "    print(a)\n";
-    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = foo()",
+      "    print(a)",
+      "    a = foo();",
+      "");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
+  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
   public void comment_after_should_not_be_removed(){
-    String codeWithIssue = "" +
-      "def ab():\n" +
-      "    a = 42\n" +
-      "    # This is an important comment\n" +
-      "    a = 43\n" +
-      "    print(a)";
-    String codeFixed = "" +
-      "def ab():\n" +
-      "        # This is an important comment\n" +
-      "    a = 43\n" +
-      "    print(a)";
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = 42",
+      "    # This is an important comment",
+      "    a = 43",
+      "    print(a)");
+    String codeFixed = code(
+      "def ab():",
+      "        # This is an important comment",
+      "    a = 43",
+      "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
+  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
   public void space_comment_after_should_not_be_removed(){
-    String codeWithIssue = "" +
-      "def ab():\n" +
-      "    b = 1\n" +
-      "    a = 42\n" +
+    String codeWithIssue = code(
+      "def ab():",
+      "    b = 1",
+      "    a = 42",
       "\n"+
-      "    # This is an important comment\n" +
-      "    a = 43\n" +
-      "    print(a)";
-    String codeFixed = "" +
-      "def ab():\n" +
-      "    b = 1\n" +
+      "    # This is an important comment",
+      "    a = 43",
+      "    print(a)");
+    String codeFixed = code(
+      "def ab():",
+      "    b = 1",
       "    \n"+
-      "    # This is an important comment\n" +
-      "    a = 43\n" +
-      "    print(a)";
+      "    # This is an important comment",
+      "    a = 43",
+      "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
   public void deadstore_one_branch(){
-    String codeWithIssue = "" +
-      "def a():\n" +
-      "    x = 42\n" +
-      "    if x:\n" +
-      "        x = 43\n" +
-      "    print(a)";
-    String codeFixed = "" +
-      "def a():\n" +
-      "    x = 42\n" +
-      "    if x:\n" +
-      "        pass\n" +
-      "    print(a)";
+    String codeWithIssue = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        x = 43",
+      "    print(a)");
+    String codeFixed = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        pass",
+      "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void side_effect_in_binary_op(){
+    String codeWithIssue = code(
+      "def ab():",
+      "    a = 1 + foo()",
+      "    a = 2",
+      "    print(a)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 }

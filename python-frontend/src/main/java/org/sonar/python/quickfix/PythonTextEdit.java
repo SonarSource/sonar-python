@@ -57,6 +57,7 @@ public class PythonTextEdit {
    */
   public static PythonTextEdit insertLineBefore(Tree tree, String textToInsert) {
     String lineOffset = offset(tree);
+    textToInsert += "\n";
     String textWithOffset = textToInsert.replace("\n", "\n" + lineOffset);
     return insertBefore(tree, textWithOffset);
   }

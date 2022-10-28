@@ -93,7 +93,7 @@ public class PythonTextEditTest {
   public void insertLineBefore() {
     Token token = mockToken("tree", 1, 4);
 
-    PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent\n");
+    PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent");
     assertThat(textEdit.replacementText()).isEqualTo("firstLine\n        secondLineWithIndent\n    ");
     assertTextEditLocation(textEdit, 1, 4, 1, 4);
   }

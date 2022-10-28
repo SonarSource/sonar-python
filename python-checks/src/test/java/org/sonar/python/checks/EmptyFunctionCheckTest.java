@@ -20,13 +20,74 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class EmptyFunctionCheckTest {
 
+  final PythonCheck check = new EmptyFunctionCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/emptyFunction.py", new EmptyFunctionCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/emptyFunction.py", check);
+  }
+
+  @Test
+  public void quick_fixes_for_function() {
+    String codeWithIssue = code("def my_function():",
+      "  pass");
+    String addComment = code("def my_function():",
+      "  # TODO document why this method is empty",
+      "  pass");
+    String raiseError = code("def my_function():",
+      "  raise NotImplementedError()",
+      "  pass");
+    PythonQuickFixVerifier.verify(check, codeWithIssue,
+      addComment,
+      raiseError);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Insert placeholder comment",
+      "Raise NotImplementedError()"
+      );
+  }
+
+  @Test
+  public void quick_fixes_for_method() {
+    String codeWithIssue = code("class my_class:",
+      "  def my_method():",
+      "    pass");
+    String addComment = code("class my_class:",
+      "  def my_method():",
+      "    # TODO document why this method is empty",
+      "    pass");
+    String raiseError = code("class my_class:",
+      "  def my_method():",
+      "    raise NotImplementedError()",
+      "    pass");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, addComment, raiseError);
+  }
+
+  @Test
+  public void quick_fixes_for_magic_binary_method() {
+    String codeWithIssue = code("class my_class:",
+      "  def __add__():",
+      "    pass");
+    String addComment = code("class my_class:",
+      "  def __add__():",
+      "    # TODO document why this method is empty",
+      "    pass");
+    String raiseError = code("class my_class:",
+      "  def __add__():",
+      "    return NotImplemented",
+      "    pass");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, addComment, raiseError);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue,
+      "Insert placeholder comment",
+      "Return NotImplemented constant"
+    );
   }
 
 }
