@@ -19,13 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
@@ -41,23 +47,59 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private int previousTokenLine;
 
+  private List<String> lines;
+
   @Override
   public void initialize(Context context) {
     Pattern pattern = Pattern.compile(legalCommentPattern);
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousTokenLine = -1);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      previousTokenLine = -1;
+      lines = null;
+    });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
-      Token pyToken = (Token) ctx.syntaxNode();
-      for (Trivia trivia : pyToken.trivia()) {
-        if (previousTokenLine == trivia.token().line()) {
-          String comment = trivia.token().value();
+      Token token = (Token) ctx.syntaxNode();
+      for (Trivia trivia : token.trivia()) {
+        Token commentToken = trivia.token();
+        if (previousTokenLine == commentToken.line()) {
+          String comment = commentToken.value();
           if (!pattern.matcher(comment).matches()) {
-            ctx.addIssue(trivia.token(), MESSAGE);
+            IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(commentToken, MESSAGE);
+            String line = getLines(ctx).get(commentToken.line() - 1);
+            addQuickFix(issue, commentToken, line);
           }
         }
       }
-      previousTokenLine = pyToken.line();
+      previousTokenLine = token.line();
     });
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Token commentToken, String line) {
+    String indent = calculateIndent(line);
+    PythonTextEdit insertComment = PythonTextEdit.insertAtPosition(commentToken.line(), 0, indent + commentToken.value() + "\n");
+
+    int startColumnRemove = calculateStartColumnToRemove(commentToken, line);
+    PythonTextEdit removeTrailingComment = PythonTextEdit.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
+
+    PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE, removeTrailingComment, insertComment);
+    issue.addQuickFix(fix);
+  }
+
+  private static String calculateIndent(String line) {
+    String lineWithoutIndent = line.stripLeading();
+    int column = line.indexOf(lineWithoutIndent);
+    return " ".repeat(column);
+  }
+
+  private List<String> getLines(SubscriptionContext ctx) {
+    if (lines == null) {
+      lines = ctx.pythonFile().content().lines().collect(Collectors.toList());
+    }
+    return lines;
+  }
+
+  private static int calculateStartColumnToRemove(Token commentToken, String line) {
+    return line.substring(0, commentToken.column()).stripTrailing().length();
   }
 }
 
