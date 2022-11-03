@@ -1,12 +1,12 @@
-<p>Amazon OpenSearch Service is a managed service to host OpenSearch instances. It replaces Elasticsearch Service, which has been deprecated. To
-harden domain (cluster) data in case of unauthorized access, OpenSearch provides data-at-rest encryption if the engine is OpenSearch or Elasticsearch
-with a version of 5.1 or above. Enabling encryption at rest will help protect:</p>
+<p>Amazon OpenSearch Service is a managed service to host OpenSearch instances. It replaces Elasticsearch Service, which has been deprecated.</p>
+<p>To harden domain (cluster) data in case of unauthorized access, OpenSearch provides data-at-rest encryption if the engine is OpenSearch (any
+version), or Elasticsearch with a version of 5.1 or above. Enabling encryption at rest will help protect:</p>
 <ul>
-  <li> Indices </li>
-  <li> Logs </li>
-  <li> Swap files </li>
-  <li> Data in the application directory </li>
-  <li> Automated snapshots </li>
+  <li> indices </li>
+  <li> logs </li>
+  <li> swap files </li>
+  <li> data in the application directory </li>
+  <li> automated snapshots </li>
 </ul>
 <p>Thus, adversaries cannot access the data if they gain physical access to the storage medium.</p>
 <h2>Ask Yourself Whether</h2>
@@ -16,8 +16,8 @@ with a version of 5.1 or above. Enabling encryption at rest will help protect:</
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to encrypt OpenSearch domains that contain sensitive information. OpenSearch handles encryption and decryption transparently, so
-no further modifications to the application are necessary.</p>
+<p>It is recommended to encrypt OpenSearch domains that contain sensitive information.</p>
+<p>OpenSearch handles encryption and decryption transparently, so no further modifications to the application are necessary.</p>
 <h2>Sensitive Code Example</h2>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/Domain.html">aws_cdk.aws_opensearchservice.Domain</a>:</p>
 <pre>
