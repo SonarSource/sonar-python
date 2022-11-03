@@ -36,7 +36,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void quickfix() {
+  public void assignment_on_single_line() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42",
@@ -50,7 +50,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void semicolon() {
+  public void assignment_with_semicolon_on_single_line() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42 ;",
@@ -64,7 +64,35 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void space() {
+  public void assignment_between_two_siblings() {
+    String codeWithIssue = code(
+      "def foo():",
+      "    y = 0; x = 42; x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    y = 0; x = 0",
+      "    print(x)");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void assignment_with_previous_element_on_line() {
+    String codeWithIssue = code(
+      "def foo():",
+      "    y = 0; x = 42",
+      "    x = 0",
+      "    print(x)");
+    String codeFixed = code(
+      "def foo():",
+      "    y = 0;",
+      "    x = 0",
+      "    print(x)");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void assignment_with_trailing_whitespace() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42 ",
@@ -78,11 +106,11 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void quickfix_after_non_issue() {
+  public void assignment_wrapped_by_elements_on_different_lines() {
     String codeWithIssue = code(
       "def foo():",
       "    a = 1",
-      "    x = 10 ;",
+      "    x = 10",
       "    x = 0",
       "    print(x)");
     String codeFixed = code(
@@ -94,14 +122,14 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void quickfix_oneline() {
+  public void all_statements_on_single_line() {
     String codeWithIssue = "def dead_store(): unused = 24; unused = 42; print(unused)";
     String codeFixed = "def dead_store(): unused = 42; print(unused)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
-  public void quickfix_in_condition() {
+  public void assignment_before_condition() {
     String codeWithIssue = code(
       "def simple_conditional():",
       "    x = 10",
@@ -138,39 +166,7 @@ public class DeadStoreCheckTest {
     PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 
-  @Test
-  public void no_separator_found(){
-    String codeWithIssue = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)",
-      "    a = foo()",
-      "");
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
-  }
 
-  @Test
-  public void one_separator_found(){
-    String codeWithIssue = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)",
-      "    a = foo();");
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
-  }
-
-  @Test
-  public void two_separators_found(){
-    String codeWithIssue = code(
-      "def ab():",
-      "    a = foo()",
-      "    print(a)",
-      "    a = foo();",
-      "");
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
-  }
-
-  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
   public void comment_after_should_not_be_removed(){
     String codeWithIssue = code(
@@ -181,27 +177,26 @@ public class DeadStoreCheckTest {
       "    print(a)");
     String codeFixed = code(
       "def ab():",
-      "        # This is an important comment",
+      "    # This is an important comment",
       "    a = 43",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
-  // TODO: The quick fix should remove indent before removed line (SONARPY-1191)
   @Test
-  public void space_comment_after_should_not_be_removed(){
+  public void new_line_after_assignment_should_not_be_removed(){
     String codeWithIssue = code(
       "def ab():",
       "    b = 1",
       "    a = 42",
-      "\n"+
+      "",
       "    # This is an important comment",
       "    a = 43",
       "    print(a)");
     String codeFixed = code(
       "def ab():",
       "    b = 1",
-      "    \n"+
+      "",
       "    # This is an important comment",
       "    a = 43",
       "    print(a)");
@@ -209,7 +204,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void deadstore_one_branch(){
+  public void assignment_on_branch(){
     String codeWithIssue = code(
       "def a():",
       "    x = 42",
@@ -226,12 +221,58 @@ public class DeadStoreCheckTest {
   }
 
   @Test
+  public void assignment_on_branch_with_multiple_elements(){
+    String codeWithIssue = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        x = 43",
+      "        a = 4",
+      "    print(a)");
+    String codeFixed = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        a = 4",
+      "    print(a)");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void assignment_on_branch_with_multiple_elements_on_same_line(){
+    String codeWithIssue = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        a = 4; x = 43",
+      "    print(a)");
+    String codeFixed = code(
+      "def a():",
+      "    x = 42",
+      "    if x:",
+      "        a = 4;",
+      "    print(a)");
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
   public void side_effect_in_binary_op(){
     String codeWithIssue = code(
       "def ab():",
       "    a = 1 + foo()",
       "    a = 2",
       "    print(a)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
+  public void chain_assignment() {
+    String codeWithIssue = code(
+      "def chain_assign():",
+        "    a = b = 42",
+        "    a = foo()",
+        "    print(a, b)"
+    );
     PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
   }
 }

@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -83,15 +82,25 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
-      .forEach(unnecessaryAssignment -> {
-        Tree element = unnecessaryAssignment.element;
-        String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
-        IssueWithQuickFix issue = (IssueWithQuickFix) separatorTokenForIssue(element)
-          .map(separator -> ctx.addIssue(element.firstToken(), separator, message))
-          .orElseGet(() -> ctx.addIssue(element, message));
+      .forEach(unnecessaryAssignment -> raiseIssue(ctx, unnecessaryAssignment));
+  }
 
-        createQuickFix(issue, element);
-      });
+  private static void raiseIssue(SubscriptionContext ctx, DeadStoreUtils.UnnecessaryAssignment unnecessaryAssignment) {
+    Tree element = unnecessaryAssignment.element;
+    String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
+    Token lastRelevantToken = getElementSeparatorOrLastToken(element);
+    PreciseIssue issue;
+    if ("\n".equals(lastRelevantToken.value())) {
+      issue = ctx.addIssue(element, message);
+    } else {
+      issue = ctx.addIssue(element.firstToken(), lastRelevantToken, message);
+    }
+
+    if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
+      ((IssueWithQuickFix) issue).addQuickFix(PythonQuickFix.newQuickFix("Remove the unused statement",
+        removeStatement((Statement) element)));
+    }
+
   }
 
   private static boolean isMultipleAssignement(Tree element) {
@@ -157,60 +166,81 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
   }
 
-  private static Optional<Token> separatorTokenForIssue(Tree element) {
-    return separatorTokenOfElement(element)
-      .filter(sep -> !"\n".equals(sep.value()));
-  }
+  private static PythonTextEdit removeStatement(Statement assignmentElement) {
+    Token firstTokenOfElement = assignmentElement.firstToken();
+    Token lastTokenOfElement = getElementSeparatorOrLastToken(assignmentElement);
+    Siblings siblings = Siblings.explore(assignmentElement);
 
-  private static Optional<Token> separatorTokenOfElement(Tree element) {
-    if (element.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.EXPRESSION_STMT)) {
-      Token separator = ((Statement) element).separator();
-      return Optional.ofNullable(separator);
-    }
-    return Optional.empty();
-  }
-
-  private static PythonTextEdit removeDeadStore(Tree currentTree) {
-    Optional<Token> tokenSeparator = separatorTokenOfElement(currentTree);
-    List<Tree> childrenOfParent = currentTree.parent().children();
-
-    if (childrenOfParent.size() == 1) {
-      return PythonTextEdit.replace(currentTree, "pass");
+    // Statement is the single element in the block
+    // Replace by `pass` keyword
+    if (siblings.previous == null && siblings.next == null) {
+      return PythonTextEdit.replace(assignmentElement, "pass");
     }
 
-    Token currentFirstToken = currentTree.firstToken();
-    int indexOfCurrentTree = childrenOfParent.indexOf(currentTree);
+    boolean hasPreviousElementOnLine = hasPreviousElementOnLine(firstTokenOfElement, siblings.previous);
+    boolean hasNextElementOnLine = hasNextElementOnLine(lastTokenOfElement, siblings.next);
 
-    // If the tree to remove is the last one, we remove from the end of the previous tree until the end of the current one
-    if (indexOfCurrentTree == childrenOfParent.size() - 1) {
-      Tree previousTree = childrenOfParent.get(indexOfCurrentTree - 1);
-      Optional<Token> previousSep = separatorTokenOfElement(previousTree);
-      Token previous = previousSep.orElse(previousTree.lastToken());
-      currentFirstToken = tokenSeparator.orElse(currentTree.lastToken());
-      return removeFromEndOfTillEndOf(previous, currentFirstToken);
-    }
-
-    // If the next tree is more than 1 line after the currentFirstToken tree, we only remove the separator
-    Token next;
-    int currentLine = currentTree.lastToken().line();
-    int nextLine = childrenOfParent.get(indexOfCurrentTree + 1).firstToken().line();
-    if (nextLine > currentLine + 1) {
-      next = tokenSeparator.orElse(currentTree.lastToken());
-      // Remove from the start of the currentFirstToken token until after the separator
-      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column() + next.value().length());
+    if (hasNextElementOnLine) {
+      // Statement is first element on the line or between at least two elements
+      // Remove from first token to last toke of element
+      Token firstNextToke = siblings.next.firstToken();
+      return PythonTextEdit.removeRange(firstTokenOfElement.line(), firstTokenOfElement.column(), firstNextToke.line(), firstNextToke.column());
+    } else if (hasPreviousElementOnLine) {
+      // Statement is last element on the line and has one or more previous element on the line
+      // Remove from last token or separator of previous element to avoid trailing white spaces
+      // Keep the line break to leave previous element on same line
+      Token lastPreviousToken = getElementSeparatorOrLastToken(siblings.previous);
+      return PythonTextEdit.removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfElement) - 1);
     } else {
-      // Remove from the start of the currentFirstToken token until the next token
-      next = childrenOfParent.get(indexOfCurrentTree + 1).firstToken();
-      return new PythonTextEdit("", currentFirstToken.line(), currentFirstToken.column(), next.line(), next.column());
+      // Statement is single element on the line
+      // Remove the entire line including indent and line break
+      return PythonTextEdit.removeRange(firstTokenOfElement.line(), 0, lastTokenOfElement.line(), getEndColumn(lastTokenOfElement));
     }
   }
 
-  private static boolean hasPotentialSideEffect(Tree tree) {
+  /**
+   * Statements can have a separator like semicolon. When handling ranges we want to take them into account.
+   */
+  private static Token getElementSeparatorOrLastToken(Tree tree) {
+    if (tree instanceof Statement) {
+      Token separator = ((Statement) tree).separator();
+      if (separator != null) {
+        return separator;
+      }
+    }
+    return tree.lastToken();
+  }
+
+  private static boolean hasPreviousElementOnLine(Token firstTokenOfElement, @Nullable Tree previousTree) {
+    return previousTree != null && firstTokenOfElement.line() == getElementSeparatorOrLastToken(previousTree.lastToken()).line();
+  }
+
+  private static boolean hasNextElementOnLine(Token lastTokenOfElement, @Nullable Tree nextTree) {
+    return nextTree != null && lastTokenOfElement.line() == nextTree.firstToken().line();
+  }
+
+  /**
+   * Token can be longer than a single character so we have to add the value length to determine the end column of the token
+   */
+  private static int getEndColumn(Token token) {
+    return token.column() + token.value().length();
+  }
+
+
+  private static boolean isExceptionForQuickFix(Statement tree) {
     switch (tree.getKind()) {
+      // foo:str = bar
       case ANNOTATED_ASSIGNMENT:
         return SideEffectDetector.hasSideEffect(((AnnotatedAssignment) tree).assignedValue());
+      // foo = bar or foo = bar = 1
       case ASSIGNMENT_STMT:
+        // TODO: SONARPY-1192 Provide quick fix for chained assignment
+        AssignmentStatement assignmentStatement = (AssignmentStatement) tree;
+        if(assignmentStatement.lhsExpressions().size() > 1) {
+          return true;
+        }
         return SideEffectDetector.hasSideEffect(((AssignmentStatement) tree).assignedValue());
+      // foo(bar:=3)
       case EXPRESSION_STMT:
         ExpressionStatement expressionStatement = (ExpressionStatement) tree;
         return expressionStatement.expressions().stream().anyMatch(SideEffectDetector::hasSideEffect);
@@ -219,20 +249,27 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void createQuickFix(IssueWithQuickFix issue, Tree unnecessaryAssignment) {
-    if (hasPotentialSideEffect(unnecessaryAssignment)) {
-      return;
-    }
-    PythonTextEdit edit = removeDeadStore(unnecessaryAssignment);
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Remove the unused statement")
-      .addTextEdit(edit)
-      .build();
-    issue.addQuickFix(quickFix);
-  }
+  /**
+   * Dataclass to possible direct siblings of a given tree
+   */
+  private static class Siblings {
 
-  private static PythonTextEdit removeFromEndOfTillEndOf(Token first, Token last) {
-    return new PythonTextEdit("", first.line(), first.column() + first.value().length(),
-      last.line(), last.column() + last.value().length());
+    private final Tree previous;
+    private final Tree next;
+
+    Siblings(@Nullable Tree previous, @Nullable Tree next)  {
+      this.previous = previous;
+      this.next = next;
+    }
+
+    static Siblings explore(Tree tree) {
+      List<Tree> siblings = tree.parent().children();
+      int indexOfTree = siblings.indexOf(tree);
+      return new Siblings(
+        indexOfTree > 0 ? siblings.get(indexOfTree - 1) : null,
+        indexOfTree < siblings.size() - 1 ? siblings.get(indexOfTree + 1) : null
+      );
+    }
   }
 
   private static class SideEffectDetector extends BaseTreeVisitor {
