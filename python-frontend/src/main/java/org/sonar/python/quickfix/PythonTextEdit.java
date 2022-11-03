@@ -73,7 +73,7 @@ public class PythonTextEdit {
     return insertAtPosition(token.line(), token.column() + lengthToken, textToInsert);
   }
 
-  private static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
+  public static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
     return new PythonTextEdit(textToInsert, line, column, line, column);
   }
 

@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
@@ -53,17 +54,19 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     Pattern pattern = Pattern.compile(legalCommentPattern);
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       previousTokenLine = -1;
-      lines = ctx.pythonFile().content().lines().collect(Collectors.toList());
+      lines = null;
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token token = (Token) ctx.syntaxNode();
       for (Trivia trivia : token.trivia()) {
-        if (previousTokenLine == trivia.token().line()) {
-          String comment = trivia.token().value();
+        Token commentToken = trivia.token();
+        if (previousTokenLine == commentToken.line()) {
+          String comment = commentToken.value();
           if (!pattern.matcher(comment).matches()) {
-            IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(trivia.token(), MESSAGE);
-            addQuickFix(issue, trivia.token());
+            IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(commentToken, MESSAGE);
+            String line = getLines(ctx).get(commentToken.line() - 1);
+            addQuickFix(issue, commentToken, line);
           }
         }
       }
@@ -71,20 +74,14 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private void addQuickFix(IssueWithQuickFix issue, Token commentToken) {
-    String line = lines.get(commentToken.line() - 1);
+  private static void addQuickFix(IssueWithQuickFix issue, Token commentToken, String line) {
     String indent = calculateIndent(line);
-    PythonTextEdit insert = new PythonTextEdit(
-      indent + commentToken.value() + "\n",
-      commentToken.line(), 0,
-      commentToken.line(), 0);
+    PythonTextEdit insertComment = PythonTextEdit.insertAtPosition(commentToken.line(), 0, indent + commentToken.value() + "\n");
 
     int startColumnRemove = calculateStartColumnToRemove(commentToken, line);
-    PythonTextEdit remove = PythonTextEdit.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
+    PythonTextEdit removeTrailingComment = PythonTextEdit.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
 
-    PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE)
-      .addTextEdit(List.of(remove, insert))
-      .build();
+    PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE, removeTrailingComment, insertComment);
     issue.addQuickFix(fix);
   }
 
@@ -92,6 +89,13 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     String lineWithoutIndent = line.stripLeading();
     int column = line.indexOf(lineWithoutIndent);
     return " ".repeat(column);
+  }
+
+  private List<String> getLines(SubscriptionContext ctx) {
+    if (lines == null) {
+      lines = ctx.pythonFile().content().lines().collect(Collectors.toList());
+    }
+    return lines;
   }
 
   private static int calculateStartColumnToRemove(Token commentToken, String line) {
