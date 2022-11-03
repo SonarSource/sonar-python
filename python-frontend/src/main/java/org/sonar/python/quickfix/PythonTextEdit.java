@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -137,6 +138,49 @@ public class PythonTextEdit {
    */
   public static PythonTextEdit removeUntil(Tree start, Tree until) {
     return removeRange(start.firstToken().line(), start.firstToken().column(), until.firstToken().line(), until.firstToken().column());
+  }
+
+  public static PythonTextEdit removeStatement(Statement statement) {
+    Token firstTokenOfStmt = statement.firstToken();
+    Token lastTokenOfStmt = TreeUtils.getTreeSeparatorOrLastToken(statement);
+
+    List<Tree> siblings = statement.parent().children();
+    int indexOfTree = siblings.indexOf(statement);
+    Tree previous = indexOfTree > 0 ? siblings.get(indexOfTree - 1) : null;
+    Tree next = indexOfTree < siblings.size() - 1 ? siblings.get(indexOfTree + 1) : null;
+
+    // Statement is the single element in the block
+    // Replace by `pass` keyword
+    if (previous == null && next == null) {
+      return PythonTextEdit.replace(statement, "pass");
+    }
+
+    boolean hasPreviousSiblingOnLine = previous != null && firstTokenOfStmt.line() == TreeUtils.getTreeSeparatorOrLastToken(previous.lastToken()).line();
+    boolean hasNextSiblingOnLine = next != null && lastTokenOfStmt.line() == next.firstToken().line();
+
+    if (hasNextSiblingOnLine) {
+      // Statement is first on the line or between at least two statements
+      // Remove from first token to last toke of statement
+      Token firstNextToken = next.firstToken();
+      return PythonTextEdit.removeRange(firstTokenOfStmt.line(), firstTokenOfStmt.column(), firstNextToken.line(), firstNextToken.column());
+    } else if (hasPreviousSiblingOnLine) {
+      // Statement is last on the line and has one or more previous statement on the line
+      // Remove from last token or separator of previous statement to avoid trailing white spaces
+      // Keep the line break to ensure elements on the next line don't get pushed to the current line
+      Token lastPreviousToken = TreeUtils.getTreeSeparatorOrLastToken(previous);
+      return PythonTextEdit.removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfStmt) - 1);
+    } else {
+      // Statement is single on the line
+      // Remove the entire line including indent and line break
+      return PythonTextEdit.removeRange(firstTokenOfStmt.line(), 0, lastTokenOfStmt.line(), getEndColumn(lastTokenOfStmt));
+    }
+  }
+
+  /**
+   * Token can be longer than a single character so we have to add the value length to determine the end column of the token
+   */
+  private static int getEndColumn(Token token) {
+    return token.column() + token.value().length();
   }
 
   public static PythonTextEdit remove(Tree toRemove) {

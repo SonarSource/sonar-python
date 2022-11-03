@@ -88,7 +88,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static void raiseIssue(SubscriptionContext ctx, DeadStoreUtils.UnnecessaryAssignment unnecessaryAssignment) {
     Tree element = unnecessaryAssignment.element;
     String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
-    Token lastRelevantToken = getElementSeparatorOrLastToken(element);
+    Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
     PreciseIssue issue;
     if ("\n".equals(lastRelevantToken.value())) {
       issue = ctx.addIssue(element, message);
@@ -98,7 +98,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
     if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
       ((IssueWithQuickFix) issue).addQuickFix(PythonQuickFix.newQuickFix("Remove the unused statement",
-        removeStatement((Statement) element)));
+        PythonTextEdit.removeStatement((Statement) element)));
     }
 
   }
@@ -164,66 +164,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
-  }
-
-  private static PythonTextEdit removeStatement(Statement assignmentElement) {
-    Token firstTokenOfElement = assignmentElement.firstToken();
-    Token lastTokenOfElement = getElementSeparatorOrLastToken(assignmentElement);
-    Siblings siblings = Siblings.explore(assignmentElement);
-
-    // Statement is the single element in the block
-    // Replace by `pass` keyword
-    if (siblings.previous == null && siblings.next == null) {
-      return PythonTextEdit.replace(assignmentElement, "pass");
-    }
-
-    boolean hasPreviousElementOnLine = hasPreviousElementOnLine(firstTokenOfElement, siblings.previous);
-    boolean hasNextElementOnLine = hasNextElementOnLine(lastTokenOfElement, siblings.next);
-
-    if (hasNextElementOnLine) {
-      // Statement is first element on the line or between at least two elements
-      // Remove from first token to last toke of element
-      Token firstNextToke = siblings.next.firstToken();
-      return PythonTextEdit.removeRange(firstTokenOfElement.line(), firstTokenOfElement.column(), firstNextToke.line(), firstNextToke.column());
-    } else if (hasPreviousElementOnLine) {
-      // Statement is last element on the line and has one or more previous element on the line
-      // Remove from last token or separator of previous element to avoid trailing white spaces
-      // Keep the line break to leave previous element on same line
-      Token lastPreviousToken = getElementSeparatorOrLastToken(siblings.previous);
-      return PythonTextEdit.removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfElement) - 1);
-    } else {
-      // Statement is single element on the line
-      // Remove the entire line including indent and line break
-      return PythonTextEdit.removeRange(firstTokenOfElement.line(), 0, lastTokenOfElement.line(), getEndColumn(lastTokenOfElement));
-    }
-  }
-
-  /**
-   * Statements can have a separator like semicolon. When handling ranges we want to take them into account.
-   */
-  private static Token getElementSeparatorOrLastToken(Tree tree) {
-    if (tree instanceof Statement) {
-      Token separator = ((Statement) tree).separator();
-      if (separator != null) {
-        return separator;
-      }
-    }
-    return tree.lastToken();
-  }
-
-  private static boolean hasPreviousElementOnLine(Token firstTokenOfElement, @Nullable Tree previousTree) {
-    return previousTree != null && firstTokenOfElement.line() == getElementSeparatorOrLastToken(previousTree.lastToken()).line();
-  }
-
-  private static boolean hasNextElementOnLine(Token lastTokenOfElement, @Nullable Tree nextTree) {
-    return nextTree != null && lastTokenOfElement.line() == nextTree.firstToken().line();
-  }
-
-  /**
-   * Token can be longer than a single character so we have to add the value length to determine the end column of the token
-   */
-  private static int getEndColumn(Token token) {
-    return token.column() + token.value().length();
   }
 
 
