@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -186,29 +185,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         return expressionStatement.expressions().stream().anyMatch(SideEffectDetector::hasSideEffect);
       default:
         return false;
-    }
-  }
-
-  /**
-   * Dataclass to possible direct siblings of a given tree
-   */
-  private static class Siblings {
-
-    private final Tree previous;
-    private final Tree next;
-
-    Siblings(@Nullable Tree previous, @Nullable Tree next)  {
-      this.previous = previous;
-      this.next = next;
-    }
-
-    static Siblings explore(Tree tree) {
-      List<Tree> siblings = tree.parent().children();
-      int indexOfTree = siblings.indexOf(tree);
-      return new Siblings(
-        indexOfTree > 0 ? siblings.get(indexOfTree - 1) : null,
-        indexOfTree < siblings.size() - 1 ? siblings.get(indexOfTree + 1) : null
-      );
     }
   }
 

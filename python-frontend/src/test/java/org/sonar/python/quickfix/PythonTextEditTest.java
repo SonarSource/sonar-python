@@ -106,7 +106,7 @@ public class PythonTextEditTest {
       " # comment",
       "    c = 2"
     );
-    StatementList functionBody = ((FunctionDef) PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF))).body();
+    StatementList functionBody = getFunctionBody(file);
 
     List<PythonTextEdit> textEdits = PythonTextEdit.shiftLeft(functionBody);
     assertThat(textEdits).hasSize(2);
@@ -126,7 +126,7 @@ public class PythonTextEditTest {
       "    b = 2"
     );
 
-    StatementList functionBody = ((FunctionDef) PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF))).body();
+    StatementList functionBody = getFunctionBody(file);
     Statement lastStatement = ListUtils.getLast(functionBody.statements());
 
     PythonTextEdit textEdit = PythonTextEdit.removeUntil(functionBody, lastStatement);
@@ -172,6 +172,57 @@ public class PythonTextEditTest {
 
     PythonTextEdit textEdit = PythonTextEdit.insertLineAfter(functionDef.colon(), functionBody, "bar");
     assertThat(textEdit).isEqualTo(new PythonTextEdit("\n    bar", 1,10,1,10));
+  }
+
+  @Test
+  public void removeStatement_with_single_statement_will_replace_with_pass() {
+    FileInput file = parse("def foo():",
+      "    a = 1");
+    StatementList functionBody = getFunctionBody(file);
+
+    PythonTextEdit textEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    assertThat(textEdit).isEqualTo(new PythonTextEdit("pass", 2, 4, 2, 9));
+  }
+
+  @Test
+  public void removeStatement_with_two_statement_will_remove_indent_and_line_breaks() {
+    FileInput file = parse("def foo():",
+      "    a = 1",
+      "    b = 2");
+    StatementList functionBody = getFunctionBody(file);
+
+    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 0, 2, 10));
+
+    PythonTextEdit secondTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(1));
+    assertThat(secondTextEdit).isEqualTo(new PythonTextEdit("", 3, 0, 3, 9));
+  }
+
+  @Test
+  public void removeStatement_with_statement_with_separator_will_remove_all() {
+    FileInput file = parse("def foo():",
+      "    a = 1;",
+      "    b = 2");
+    StatementList functionBody = getFunctionBody(file);
+
+    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 0, 2, 11));
+  }
+
+  @Test
+  public void removeStatement_with_tree_statement_on_same_line_will_not_remove_indent_nor_line_breaks() {
+    FileInput file = parse("def foo():",
+      "    a = 1; b = 2; c = 3;");
+    StatementList functionBody = getFunctionBody(file);
+
+    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 4, 2, 11));
+
+    PythonTextEdit secondTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(1));
+    assertThat(secondTextEdit).isEqualTo(new PythonTextEdit("", 2, 11, 2, 18));
+
+    PythonTextEdit thirdTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(2));
+    assertThat(thirdTextEdit).isEqualTo(new PythonTextEdit("", 2, 17, 2, 23));
   }
 
   @Test
@@ -221,5 +272,9 @@ public class PythonTextEditTest {
     when(token.column()).thenReturn(column);
 
     return token;
+  }
+
+  private static StatementList getFunctionBody(FileInput file) {
+    return ((FunctionDef) PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF))).body();
   }
 }
