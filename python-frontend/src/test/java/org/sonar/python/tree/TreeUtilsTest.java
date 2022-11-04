@@ -395,6 +395,21 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attr");
   }
 
+  @Test
+  public void test_getTreeSeparatorOrLastToken() {
+    FileInput fileInput = PythonTestUtils.parse("a = 1");
+    Token lastToken = TreeUtils.getTreeSeparatorOrLastToken(fileInput.statements().statements().get(0));
+    assertThat(lastToken.type().getName()).isEqualTo("NUMBER");
+
+    fileInput = PythonTestUtils.parse("a = 1;");
+    lastToken = TreeUtils.getTreeSeparatorOrLastToken(fileInput.statements().statements().get(0));
+    assertThat(lastToken.type().getName()).isEqualTo("SEMICOLON");
+
+    fileInput = PythonTestUtils.parse("a = 1", "");
+    lastToken = TreeUtils.getTreeSeparatorOrLastToken(fileInput.statements().statements().get(0));
+    assertThat(lastToken.type().getName()).isEqualTo("NEWLINE");
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

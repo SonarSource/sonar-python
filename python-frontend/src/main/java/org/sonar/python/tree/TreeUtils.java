@@ -48,6 +48,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -358,5 +359,18 @@ public class TreeUtils {
     TokenLocation firstToken = new TokenLocation(tree.firstToken());
     TokenLocation lastToken = new TokenLocation(tree.lastToken());
     return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
+  }
+
+  /**
+   * Statements can have a separator like semicolon. When handling ranges we want to take them into account.
+   */
+  public static Token getTreeSeparatorOrLastToken(Tree tree) {
+    if (tree instanceof Statement) {
+      Token separator = ((Statement) tree).separator();
+      if (separator != null) {
+        return separator;
+      }
+    }
+    return tree.lastToken();
   }
 }
