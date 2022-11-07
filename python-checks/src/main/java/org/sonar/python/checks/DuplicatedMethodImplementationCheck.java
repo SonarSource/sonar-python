@@ -21,12 +21,15 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -39,6 +42,8 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
 
   private static final String MESSAGE = "Update this function so that its implementation is not identical to %s on line %s.";
   private static final String QUICK_FIX_MESSAGE = "Call %s inside this function.";
+
+  private static final Set<String> ALLOWED_FIRST_ARG_NAMES = Set.of("self", "cls" ,"mcs", "metacls");
 
   @Override
   public void initialize(Context context) {
@@ -89,11 +94,28 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
   }
 
   private static void addQuickFix(IssueWithQuickFix issue, FunctionDef originalMethod, FunctionDef suspiciousMethod) {
-    PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), "return " + originalMethod.name().name() + "()");
+    ParameterList parameters = originalMethod.parameters();
+    if (parameters != null) {
+      List<AnyParameter> all = parameters.all();
+      if (all.size() == 1 && !ALLOWED_FIRST_ARG_NAMES.contains(all.get(0).firstToken().value())) {
+        return;
+      }
+      if (all.size() > 1) {
+        return;
+      }
+    }
+    boolean containsReturnStatement = originalMethod.body().statements().stream()
+      .anyMatch(s -> s.is(Tree.Kind.RETURN_STMT));
+    String replacementText = "";
+    if (containsReturnStatement) {
+      replacementText = replacementText + "return ";
+    }
+    replacementText = replacementText + originalMethod.name().name() + "()";
+    PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), replacementText);
 
     PythonQuickFix fix = PythonQuickFix
       .newQuickFix(String.format(QUICK_FIX_MESSAGE, originalMethod.name().name()))
-      .addTextEdit(List.of(edit))
+      .addTextEdit(edit)
       .build();
 
     issue.addQuickFix(fix);

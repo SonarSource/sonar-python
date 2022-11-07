@@ -27,9 +27,11 @@ import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class DuplicatedMethodImplementationCheckTest {
 
+  public static final DuplicatedMethodImplementationCheck CHECK = new DuplicatedMethodImplementationCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodImplementationCheck.py", new DuplicatedMethodImplementationCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodImplementationCheck.py", CHECK);
   }
 
   @Test
@@ -51,10 +53,35 @@ public class DuplicatedMethodImplementationCheckTest {
       "    bar()",
       "",
       "  def method2(self):",
+      "    method()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testQuickFixWithReturnedValue() {
+    String code = code(
+      "class clazz:",
+      "  def method(self):",
+      "    print(1)",
+      "    return 42",
+      "",
+      "  def method2(self):",
+      "    print(1)",
+      "    return 42",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method(self):",
+      "    print(1)",
+      "    return 42",
+      "",
+      "  def method2(self):",
       "    return method()",
       "");
 
-    PythonQuickFixVerifier.verify(new DuplicatedMethodImplementationCheck(), code, fixedCode);
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
   }
 
   @Test
@@ -82,9 +109,95 @@ public class DuplicatedMethodImplementationCheckTest {
       "      bar()",
       "",
       "  def method_2(self):",
-      "    return method_1()");
+      "    method_1()");
 
-    PythonQuickFixVerifier.verify(new DuplicatedMethodImplementationCheck(), code, fixedCode);
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testNoQuickFixWhenSomeArguments() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self, text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self, text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
+  }
+  @Test
+  public void testNoQuickFixWhenSomeArgumentsButNotSelf() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
+  }
+  @Test
+  public void testNoQuickFixWhenClassMethodAndClsAsFirstArg() {
+    String code = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    String fixedCode = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls):",
+      "    method_1()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testNoQuickFixWhenClassMethodWithArguments() {
+    String code = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls, text):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls, text):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
   }
 
   @Test
@@ -104,6 +217,6 @@ public class DuplicatedMethodImplementationCheckTest {
       "      bar()",
       "");
 
-    PythonQuickFixVerifier.verifyQuickFixMessages(new DuplicatedMethodImplementationCheck(), code, "Call method_1 inside this function.");
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, code, "Call method_1 inside this function.");
   }
 }
