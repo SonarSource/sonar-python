@@ -36,6 +36,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S4144")
 public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck {
@@ -44,6 +46,7 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
   private static final String QUICK_FIX_MESSAGE = "Call %s inside this function.";
 
   private static final Set<String> ALLOWED_FIRST_ARG_NAMES = Set.of("self", "cls" ,"mcs", "metacls");
+  private static final Set<String> CLASS_AND_STATIC_DECORATORS = Set.of("classmethod", "staticmethod");
 
   @Override
   public void initialize(Context context) {
@@ -108,7 +111,15 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       .anyMatch(s -> s.is(Tree.Kind.RETURN_STMT));
     String replacementText = "";
     if (containsReturnStatement) {
-      replacementText = replacementText + "return ";
+      replacementText = "return ";
+    }
+    if (isClassOrStaticMethod(originalMethod)) {
+      ClassDef methodClass = (ClassDef) TreeUtils.firstAncestorOfKind(originalMethod, Tree.Kind.CLASSDEF);
+      if (methodClass != null) {
+        replacementText = replacementText + methodClass.name().name() + ".";
+      }
+    } else {
+      replacementText = replacementText + "self.";
     }
     replacementText = replacementText + originalMethod.name().name() + "()";
     PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), replacementText);
@@ -119,6 +130,12 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       .build();
 
     issue.addQuickFix(fix);
+  }
+
+  private static boolean isClassOrStaticMethod(FunctionDef originalMethod) {
+    return originalMethod.decorators().stream()
+      .anyMatch(d -> d.expression() instanceof NameImpl
+        && CLASS_AND_STATIC_DECORATORS.contains(((NameImpl) d.expression()).name()));
   }
 
   private static class MethodVisitor extends BaseTreeVisitor {

@@ -53,7 +53,7 @@ public class DuplicatedMethodImplementationCheckTest {
       "    bar()",
       "",
       "  def method2(self):",
-      "    method()",
+      "    self.method()",
       "");
 
     PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
@@ -78,7 +78,7 @@ public class DuplicatedMethodImplementationCheckTest {
       "    return 42",
       "",
       "  def method2(self):",
-      "    return method()",
+      "    return self.method()",
       "");
 
     PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
@@ -109,7 +109,64 @@ public class DuplicatedMethodImplementationCheckTest {
       "      bar()",
       "",
       "  def method_2(self):",
-      "    method_1()");
+      "    self.method_1()");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testQuickFixWithWithoutArguments() {
+    String code = code(
+      "class clazz:",
+      "  def method_1():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method_1():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2():",
+      "    self.method_1()");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testQuickFixWithCustomDecorator() {
+    String code = code(
+      "class clazz:",
+      "  @some_decorator",
+      "  def method_1(self):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @some_decorator",
+      "  def method_2(self):",
+      "    print(10)",
+      "    print(20)",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  @some_decorator",
+      "  def method_1(self):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @some_decorator",
+      "  def method_2(self):",
+      "    self.method_1()",
+      "");
 
     PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
   }
@@ -176,7 +233,36 @@ public class DuplicatedMethodImplementationCheckTest {
       "",
       "  @classmethod",
       "  def method_2(cls):",
-      "    method_1()",
+      "    clazz.method_1()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testNoQuickFixForStaticMethod() {
+    String code = code(
+      "class clazz:",
+      "  @staticmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @staticmethod",
+      "  def method_2(cls):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    String fixedCode = code(
+      "class clazz:",
+      "  @staticmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @staticmethod",
+      "  def method_2(cls):",
+      "    clazz.method_1()",
       "");
 
     PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
