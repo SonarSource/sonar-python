@@ -21,20 +21,32 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S4144")
 public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Update this function so that its implementation is not identical to %s on line %s.";
+  private static final String QUICK_FIX_MESSAGE = "Call %s inside this function.";
+
+  private static final Set<String> ALLOWED_FIRST_ARG_NAMES = Set.of("self", "cls" ,"mcs", "metacls");
+  private static final Set<String> CLASS_AND_STATIC_DECORATORS = Set.of("classmethod", "staticmethod");
 
   @Override
   public void initialize(Context context) {
@@ -60,7 +72,8 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       if (CheckUtils.areEquivalent(originalBody, suspiciousBody)) {
         int line = originalMethod.name().firstToken().line();
         String message = String.format(MESSAGE, originalMethod.name().name(), line);
-        ctx.addIssue(suspiciousMethod.name(), message).secondary(originalMethod.name(), "Original");
+        PreciseIssue issue = ctx.addIssue(suspiciousMethod.name(), message).secondary(originalMethod.name(), "Original");
+        addQuickFix((IssueWithQuickFix) issue, originalMethod, suspiciousMethod);
         break;
       }
     }
@@ -83,6 +96,48 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
     return statementList.statements().get(first).firstToken().line() == statementList.statements().get(statementList.statements().size() - 1).lastToken().line();
   }
 
+  private static void addQuickFix(IssueWithQuickFix issue, FunctionDef originalMethod, FunctionDef suspiciousMethod) {
+    ParameterList parameters = originalMethod.parameters();
+    if (parameters != null) {
+      List<AnyParameter> all = parameters.all();
+      if (all.size() == 1 && !ALLOWED_FIRST_ARG_NAMES.contains(all.get(0).firstToken().value())) {
+        return;
+      }
+      if (all.size() > 1) {
+        return;
+      }
+    }
+    boolean containsReturnStatement = originalMethod.body().statements().stream()
+      .anyMatch(s -> s.is(Tree.Kind.RETURN_STMT));
+    String replacementText = "";
+    if (containsReturnStatement) {
+      replacementText = "return ";
+    }
+    if (isClassOrStaticMethod(originalMethod)) {
+      ClassDef methodClass = (ClassDef) TreeUtils.firstAncestorOfKind(originalMethod, Tree.Kind.CLASSDEF);
+      if (methodClass != null) {
+        replacementText = replacementText + methodClass.name().name() + ".";
+      }
+    } else {
+      replacementText = replacementText + "self.";
+    }
+    replacementText = replacementText + originalMethod.name().name() + "()";
+    PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), replacementText);
+
+    PythonQuickFix fix = PythonQuickFix
+      .newQuickFix(String.format(QUICK_FIX_MESSAGE, originalMethod.name().name()))
+      .addTextEdit(edit)
+      .build();
+
+    issue.addQuickFix(fix);
+  }
+
+  private static boolean isClassOrStaticMethod(FunctionDef originalMethod) {
+    return originalMethod.decorators().stream()
+      .anyMatch(d -> d.expression() instanceof NameImpl
+        && CLASS_AND_STATIC_DECORATORS.contains(((NameImpl) d.expression()).name()));
+  }
+
   private static class MethodVisitor extends BaseTreeVisitor {
 
     List<FunctionDef> methods = new ArrayList<>();
@@ -99,6 +154,5 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       }
       super.visitFunctionDef(functionDef);
     }
-
   }
 }

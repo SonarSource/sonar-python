@@ -20,13 +20,289 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class DuplicatedMethodImplementationCheckTest {
 
+  public static final DuplicatedMethodImplementationCheck CHECK = new DuplicatedMethodImplementationCheck();
+
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodImplementationCheck.py", new DuplicatedMethodImplementationCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodImplementationCheck.py", CHECK);
   }
 
+  @Test
+  public void testQuickFixSimple() {
+    String code = code(
+      "class clazz:",
+      "  def method(self):",
+      "    foo()",
+      "    bar()",
+      "",
+      "  def method2(self):",
+      "    foo()",
+      "    bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method(self):",
+      "    foo()",
+      "    bar()",
+      "",
+      "  def method2(self):",
+      "    self.method()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testQuickFixWithReturnedValue() {
+    String code = code(
+      "class clazz:",
+      "  def method(self):",
+      "    print(1)",
+      "    return 42",
+      "",
+      "  def method2(self):",
+      "    print(1)",
+      "    return 42",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method(self):",
+      "    print(1)",
+      "    return 42",
+      "",
+      "  def method2(self):",
+      "    return self.method()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testQuickFixWithIfExpression() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    self.method_1()");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testQuickFixWithWithoutArguments() {
+    String code = code(
+      "class clazz:",
+      "  def method_1():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  def method_1():",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2():",
+      "    self.method_1()");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testQuickFixWithCustomDecorator() {
+    String code = code(
+      "class clazz:",
+      "  @some_decorator",
+      "  def method_1(self):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @some_decorator",
+      "  def method_2(self):",
+      "    print(10)",
+      "    print(20)",
+      "");
+    String fixedCode = code(
+      "class clazz:",
+      "  @some_decorator",
+      "  def method_1(self):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @some_decorator",
+      "  def method_2(self):",
+      "    self.method_1()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testNoQuickFixWhenSomeArguments() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self, text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self, text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
+  }
+  @Test
+  public void testNoQuickFixWhenSomeArgumentsButNotSelf() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(text):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
+  }
+  @Test
+  public void testNoQuickFixWhenClassMethodAndClsAsFirstArg() {
+    String code = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    String fixedCode = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls):",
+      "    clazz.method_1()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+  @Test
+  public void testNoQuickFixForStaticMethod() {
+    String code = code(
+      "class clazz:",
+      "  @staticmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @staticmethod",
+      "  def method_2(cls):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    String fixedCode = code(
+      "class clazz:",
+      "  @staticmethod",
+      "  def method_1(cls):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @staticmethod",
+      "  def method_2(cls):",
+      "    clazz.method_1()",
+      "");
+
+    PythonQuickFixVerifier.verify(CHECK, code, fixedCode);
+  }
+
+  @Test
+  public void testNoQuickFixWhenClassMethodWithArguments() {
+    String code = code(
+      "class clazz:",
+      "  @classmethod",
+      "  def method_1(cls, text):",
+      "    print(10)",
+      "    print(20)",
+      "",
+      "  @classmethod",
+      "  def method_2(cls, text):",
+      "    print(10)",
+      "    print(20)",
+      "");
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK, code);
+  }
+
+  @Test
+  public void testQuickFixMessage() {
+    String code = code(
+      "class clazz:",
+      "  def method_1(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "",
+      "  def method_2(self):",
+      "    if cond:",
+      "      foo()",
+      "    else:",
+      "      bar()",
+      "");
+
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, code, "Call method_1 inside this function.");
+  }
 }

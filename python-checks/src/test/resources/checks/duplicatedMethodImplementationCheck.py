@@ -148,3 +148,29 @@ class clazz:
 
   def multiple_statements_one_line_dup(self): # exception for one line methods
     'doc'; foo(); bar()
+
+class class_with_class_methods():
+  @classmethod
+  def method_1(cls):
+    # ^^^^^^^^>
+    print(10)
+    print(20)
+
+  @classmethod
+  def method_2(cls):  # Noncompliant
+    # ^^^^^^^^
+    print(10)
+    print(20)
+
+  @classmethod
+  def foo(cls, first):
+    # ^^^>
+    print(30)
+    print(first)
+
+  @classmethod
+  def bar(cls, first):# Noncompliant
+    # ^^^
+    print(30)
+    print(first)
+
