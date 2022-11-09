@@ -496,6 +496,7 @@ public class PythonSensorTest {
       .setType(Type.MAIN)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), UTF_8))
+      .setStatus(InputFile.Status.ADDED)
       .build());
     when(inputFile.contents()).thenThrow(RuntimeException.class);
 
@@ -683,6 +684,7 @@ public class PythonSensorTest {
       .setType(fileType)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), UTF_8))
+      .setStatus(InputFile.Status.ADDED)
       .build();
   }
 

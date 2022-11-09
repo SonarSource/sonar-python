@@ -135,6 +135,19 @@ public class PythonScanner extends Scanner {
     }
   }
 
+  protected boolean scanFileWithoutParsing(InputFile inputFile) {
+    InputFile.Type fileType = inputFile.type();
+    for (PythonCheck check : checks.all()) {
+      if (!isCheckApplicable(check, fileType)) {
+        continue;
+      }
+      if (!check.scanWithoutParsing(inputFile)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
     PythonCheck.CheckScope checkScope = pythonCheck.scope();
     if (checkScope == PythonCheck.CheckScope.ALL) {
@@ -155,6 +168,11 @@ public class PythonScanner extends Scanner {
   @Override
   protected void processException(Exception e, InputFile file) {
     LOG.warn("Unable to analyze file: " + file, e);
+  }
+
+  @Override
+  protected boolean canBeScannedWithoutParsing(InputFile inputFile) {
+    return this.indexer.canBeScannedWithoutParsing(inputFile);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {

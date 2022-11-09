@@ -49,7 +49,13 @@ public abstract class Scanner {
         return;
       }
       try {
-        this.scanFile(file);
+        boolean successfullyScannedWithoutParsing = false;
+        if (canBeScannedWithoutParsing(file)) {
+          successfullyScannedWithoutParsing = this.scanFileWithoutParsing(file);
+        }
+        if (!successfullyScannedWithoutParsing) {
+          this.scanFile(file);
+        }
       } catch (Exception e) {
         this.processException(e, file);
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false)) {
@@ -67,5 +73,13 @@ public abstract class Scanner {
 
   protected abstract void scanFile(InputFile file) throws IOException;
 
+  protected boolean scanFileWithoutParsing(InputFile file) throws IOException {
+    return false;
+  }
+
   protected abstract void processException(Exception e, InputFile file);
+
+  protected boolean canBeScannedWithoutParsing(InputFile inputFile) {
+    return false;
+  }
 }

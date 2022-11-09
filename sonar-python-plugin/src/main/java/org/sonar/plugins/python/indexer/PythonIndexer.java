@@ -84,6 +84,10 @@ public abstract class PythonIndexer {
     return null;
   }
 
+  public boolean canBeScannedWithoutParsing(InputFile inputFile) {
+    return false;
+  }
+
   class GlobalSymbolsScanner extends Scanner {
 
     protected GlobalSymbolsScanner(SensorContext context) {
