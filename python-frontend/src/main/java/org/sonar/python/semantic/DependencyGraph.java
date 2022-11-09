@@ -1,0 +1,86 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2022 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.semantic;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class DependencyGraph {
+
+  private final Map<String, Set<String>> importsByModule;
+  private final Set<String> projectModulesFQN;
+  private final Map<String, Set<String>> dependentModules;
+
+  public DependencyGraph(Map<String, Set<String>> importsByModule, Set<String> projectModulesFQN) {
+    this.importsByModule = importsByModule;
+    this.projectModulesFQN = projectModulesFQN;
+    this.dependentModules = computeDependentModules();
+  }
+
+
+  public Map<String, Set<String>> dependentModules() {
+    return Collections.unmodifiableMap(dependentModules);
+  }
+
+  private Map<String, Set<String>> computeDependentModules() {
+    Map<String, Set<String>> result = new HashMap<>();
+    for (var entry : importsByModule.entrySet()) {
+      entry.getValue().forEach(importedModuleFQN -> {
+        if (projectModulesFQN.contains(importedModuleFQN)) {
+          result.computeIfAbsent(importedModuleFQN, x -> new HashSet<>()).add(entry.getKey());
+          return;
+        }
+        int endIndex = importedModuleFQN.lastIndexOf(".");
+        if (endIndex < 0) {
+          return;
+        }
+        String substring = importedModuleFQN.substring(0, endIndex);
+        if (projectModulesFQN.contains(substring)) {
+          result.computeIfAbsent(substring, x -> new HashSet<>()).add(entry.getKey());
+        }
+      });
+    }
+    return result;
+  }
+
+  public Set<String> impactedModules(List<String> modifiedModules) {
+    Set<String> impactedModules = new HashSet<>();
+    for (String modifiedModuleFQN : modifiedModules) {
+      recursivelyComputeImpactedModules(modifiedModuleFQN, impactedModules);
+    }
+    return impactedModules;
+  }
+
+  private void recursivelyComputeImpactedModules(String changedModule, Set<String> impactedModules) {
+    if (impactedModules.add(changedModule)) {
+      Set<String> transitivelyImpactedModules = dependentModules.get(changedModule);
+      if (transitivelyImpactedModules == null) {
+        return;
+      }
+      for (String transitivelyImpacted : transitivelyImpactedModules) {
+        recursivelyComputeImpactedModules(transitivelyImpacted, impactedModules);
+      }
+    }
+  }
+}
