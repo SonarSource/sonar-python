@@ -50,6 +50,7 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
+  private final Map<String, Set<String>> importsByModule = new HashMap<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -85,6 +86,7 @@ public class ProjectLevelSymbolTable {
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     fileInput.accept(symbolTableBuilder);
     Set<Descriptor> globalDescriptors = new HashSet<>();
+    importsByModule.put(fullyQualifiedModuleName, symbolTableBuilder.importedModulesFQN());
     for (Symbol globalVariable : fileInput.globalVariables()) {
       String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
       if (((fullyQualifiedVariableName != null) && !fullyQualifiedVariableName.startsWith(fullyQualifiedModuleName)) ||
@@ -157,6 +159,10 @@ public class ProjectLevelSymbolTable {
     Map<String, Symbol> createdSymbolsByFqn = new HashMap<>();
     return descriptors.stream()
       .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this, null, createdSymbolsByDescriptor, createdSymbolsByFqn)).collect(Collectors.toSet());
+  }
+
+  public Map<String, Set<String>> importsByModule() {
+    return Collections.unmodifiableMap(importsByModule);
   }
 
   public boolean isDjangoView(@Nullable String fqn) {

@@ -436,6 +436,74 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  public void test_imported_modules() {
+    FileInput tree = parseWithoutSymbols(
+      "import A"
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsExactly(Map.entry("mod", Set.of("A")));
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod2")).isNull();
+    assertThat(projectLevelSymbolTable.getSymbol("mod.A")).isNull();
+    assertThat(projectLevelSymbolTable.getSymbol("mod2.B")).isNull();
+
+    tree = parseWithoutSymbols(
+      "import A, B"
+    );
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod2.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(Map.entry("mod", Set.of("A")), Map.entry("mod2", Set.of("A", "B")));
+    assertThat(projectLevelSymbolTable.getSymbol("mod2.B")).isNull();
+
+    tree = parseWithoutSymbols(
+      "from C.D import foo, bar"
+    );
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod3.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
+      Map.entry("mod", Set.of("A")),
+      Map.entry("mod2", Set.of("A", "B")),
+      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar"))
+      );
+    assertThat(projectLevelSymbolTable.getSymbol("mod2.B")).isNull();
+
+
+    tree = parseWithoutSymbols(
+      "from E import *"
+    );
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod4.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
+      Map.entry("mod", Set.of("A")),
+      Map.entry("mod2", Set.of("A", "B")),
+      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod4", Set.of("E"))
+    );
+
+    tree = parseWithoutSymbols(
+      "from ..F import G"
+    );
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod5.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
+      Map.entry("mod", Set.of("A")),
+      Map.entry("mod2", Set.of("A", "B")),
+      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod4", Set.of("E")),
+      Map.entry("mod5", Collections.emptySet())
+    );
+
+    tree = parseWithoutSymbols(
+      "from ..F import G"
+    );
+    projectLevelSymbolTable.addModule(tree, "my_package.my_subpackage", pythonFile("mod6.py"));
+    assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
+      Map.entry("mod", Set.of("A")),
+      Map.entry("mod2", Set.of("A", "B")),
+      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod4", Set.of("E")),
+      Map.entry("mod5", Collections.emptySet()),
+      Map.entry("my_package.my_subpackage.mod6", Set.of("my_package.F", "my_package.F.G"))
+    );
+  }
+
+  @Test
   public void global_symbols() {
     FileInput tree = parseWithoutSymbols(
       "obj1 = 42",
