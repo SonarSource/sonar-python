@@ -36,14 +36,19 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.caching.PythonReadCacheImpl;
+import org.sonar.python.caching.PythonWriteCacheImpl;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
@@ -112,7 +117,13 @@ public final class PythonSensor implements Sensor {
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
-    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
+    CacheContext cacheContext;
+    if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
+      cacheContext = new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
+    } else {
+      cacheContext = new CacheContextImpl(false, null, null);
+    }
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles, cacheContext);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();

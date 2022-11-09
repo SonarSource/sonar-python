@@ -41,6 +41,8 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
@@ -412,6 +414,15 @@ public class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
     projectLevelSymbolTable.removeModule("", "mod.py");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
+  }
+
+  @Test
+  public void test_insert_entry() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", null);
+    projectLevelSymbolTable.insertEntry("mod", Set.of(variableDescriptor));
+    assertThat(projectLevelSymbolTable.descriptorsForModule("mod")).containsExactly(variableDescriptor);
+    assertThat(projectLevelSymbolTable.getSymbol("mod.x").name()).isEqualTo("x");
   }
 
   @Test

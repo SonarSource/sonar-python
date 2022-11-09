@@ -22,10 +22,14 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 
@@ -43,6 +47,17 @@ public final class TestUtils {
     } catch (IOException e) {
       throw new IllegalStateException("Cannot read " + file, e);
     }
+  }
+
+  public static DefaultInputFile createInputFile(File baseDir, String name, InputFile.Status status) {
+    return TestInputFileBuilder.create("moduleKey", name)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setStatus(status)
+      .setType(InputFile.Type.MAIN)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
+      .build();
   }
 
 }

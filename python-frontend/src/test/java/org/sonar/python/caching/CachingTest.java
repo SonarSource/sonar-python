@@ -102,7 +102,7 @@ public class CachingTest {
     Set<Descriptor> initialDescriptors = projectLevelSymbolTable.descriptorsForModule("mod");
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
     readCache.put(cacheKey, Caching.moduleDescriptor(initialDescriptors).toByteArray());
-    Set<Descriptor> retrievedDescriptorsOptional = caching.readProjectLevelSymbolTableEntry(cacheKey);
+    Set<Descriptor> retrievedDescriptorsOptional = caching.readProjectLevelSymbolTableEntry("mod");
     assertThat(retrievedDescriptorsOptional).isNotNull().usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(initialDescriptors);
   }
 
@@ -123,13 +123,14 @@ public class CachingTest {
     InputStream inputStream = mock(InputStream.class);
     when(inputStream.readAllBytes()).thenThrow(new IOException("Boom!"));
     PythonReadCacheImpl pythonReadCache = Mockito.spy(new PythonReadCacheImpl(readCache));
-    readCache.put("key", new byte[0]);
-    Mockito.when(pythonReadCache.read("key")).thenReturn(inputStream);
+    String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
+    readCache.put(cacheKey, new byte[0]);
+    Mockito.when(pythonReadCache.read(cacheKey)).thenReturn(inputStream);
 
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), pythonReadCache);
     Caching caching = new Caching(cacheContext);
-    assertThat(caching.readProjectLevelSymbolTableEntry("key")).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Unable to read data for key \"key\"");
+    assertThat(caching.readProjectLevelSymbolTableEntry("mod")).isNull();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Unable to read data for key: \"python:descriptors:mod\"");
   }
 
   @Test
@@ -143,7 +144,7 @@ public class CachingTest {
     Set<String> imports = Set.of("mod2", "pkg1.mod3", "pkg2.pkg3.mod4");
 
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + "mod";
-    caching.writeImportMapEntry("mod", imports);
+    caching.writeImportsMapEntry("mod", imports);
     Map<String, byte[]> data = writeCache.getData();
     Set<String> retrievedDescriptors = Arrays.stream(new String(data.get(cacheKey), StandardCharsets.UTF_8).split(";")).collect(Collectors.toSet());
     assertThat(retrievedDescriptors).containsExactlyInAnyOrderElementsOf(imports);
@@ -185,9 +186,9 @@ public class CachingTest {
 
 
     Caching caching = new Caching(cacheContext);
-    String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
-    readCache.put(cacheKey, new byte[] {42});
-    assertThat(caching.readProjectLevelSymbolTableEntry(cacheKey)).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to deserialize project level symbol table entry for key: python:descriptors:mod");
+    String module = "mod";
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", new byte[] {42});
+    assertThat(caching.readProjectLevelSymbolTableEntry(module)).isNull();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to deserialize project level symbol table entry for module: \"mod\"");
   }
 }

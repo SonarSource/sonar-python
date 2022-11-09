@@ -22,6 +22,7 @@ package org.sonar.python;
 import java.io.File;
 import java.util.List;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PythonCheckTest {
 
@@ -131,5 +133,11 @@ public class PythonCheckTest {
   public void test_scope() {
     PythonVisitorCheck check = new PythonVisitorCheck() {};
     assertThat(check.scope()).isEqualTo(PythonCheck.CheckScope.MAIN);
+  }
+
+  @Test
+  public void test_scanWithoutParsing() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {};
+    assertThat(check.scanWithoutParsing(mock(InputFile.class))).isTrue();
   }
 }

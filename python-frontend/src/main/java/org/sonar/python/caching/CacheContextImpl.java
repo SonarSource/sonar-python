@@ -25,9 +25,9 @@ import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
 public class CacheContextImpl implements CacheContext {
 
-  private boolean isCacheEnabled;
-  private PythonWriteCache writeCache;
-  private PythonReadCache readCache;
+  private final boolean isCacheEnabled;
+  private final PythonWriteCache writeCache;
+  private final PythonReadCache readCache;
 
   public CacheContextImpl(boolean isCacheEnabled, PythonWriteCache writeCache, PythonReadCache readCache) {
     this.isCacheEnabled = isCacheEnabled;

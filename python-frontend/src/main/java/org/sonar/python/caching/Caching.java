@@ -53,7 +53,7 @@ public class Caching {
     this.cacheContext = cacheContext;
   }
 
-  public void writeImportMapEntry(String moduleFqn, Set<String> imports) {
+  public void writeImportsMapEntry(String moduleFqn, Set<String> imports) {
     byte[] importData = String.join(";", imports).getBytes(StandardCharsets.UTF_8);
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     cacheContext.getWriteCache().write(cacheKey, importData);
@@ -65,14 +65,16 @@ public class Caching {
   }
 
   @CheckForNull
-  public Set<Descriptor> readProjectLevelSymbolTableEntry(String key) {
-    cacheContext.getReadCache().contains(key);
-    byte[] bytes = cacheContext.getReadCache().readBytes(key);
-    if (bytes != null) {
-      try {
-        return DescriptorUtils.deserializeProtobufDescriptors(bytes);
-      } catch (InvalidProtocolBufferException e) {
-        LOG.debug("Failed to deserialize project level symbol table entry for key: {}", key);
+  public Set<Descriptor> readProjectLevelSymbolTableEntry(String module) {
+    String key = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + module;
+    if (cacheContext.getReadCache().contains(key)) {
+      byte[] bytes = cacheContext.getReadCache().readBytes(key);
+      if (bytes != null) {
+        try {
+          return DescriptorUtils.deserializeProtobufDescriptors(bytes);
+        } catch (InvalidProtocolBufferException e) {
+          LOG.debug("Failed to deserialize project level symbol table entry for module: \"{}\"", module);
+        }
       }
     }
     return null;
@@ -83,7 +85,6 @@ public class Caching {
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     byte[] bytes = cacheContext.getReadCache().readBytes(cacheKey);
     if (bytes != null) {
-      cacheContext.getWriteCache().copyFromPrevious(cacheKey);
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
     return null;
@@ -91,7 +92,7 @@ public class Caching {
 
 
   // Visible for testing
-  static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
+  public static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
     List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
     List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();

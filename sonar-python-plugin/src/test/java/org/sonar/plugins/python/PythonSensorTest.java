@@ -31,11 +31,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -72,9 +74,14 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
+import org.sonar.plugins.python.indexer.TestReadCache;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonar.plugins.python.indexer.TestWriteCache;
+import org.sonar.python.caching.Caching;
 import org.sonar.python.checks.CheckList;
 
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.api.QuickFix;
 import org.sonarsource.sonarlint.core.analysis.api.TextEdit;
@@ -94,6 +101,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.sonar.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
+import static org.sonar.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 
 public class PythonSensorTest {
 
@@ -103,6 +112,8 @@ public class PythonSensorTest {
   private static final String FILE_TEST_FILE = "test_file.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
+  private static final String CUSTOM_REPOSITORY_KEY = "customKey";
+  private static final String CUSTOM_RULE_KEY = "key";
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
 
@@ -111,7 +122,7 @@ public class PythonSensorTest {
   private static final PythonCustomRuleRepository[] CUSTOM_RULES = {new PythonCustomRuleRepository() {
     @Override
     public String repositoryKey() {
-      return "customKey";
+      return CUSTOM_REPOSITORY_KEY;
     }
 
     @Override
@@ -122,7 +133,7 @@ public class PythonSensorTest {
   private static Path workDir;
 
   @Rule(
-    key = "key",
+    key = CUSTOM_RULE_KEY,
     name = "name",
     description = "desc",
     tags = {"bug"})
@@ -136,6 +147,11 @@ public class PythonSensorTest {
     @Override
     public void scanFile(PythonVisitorContext visitorContext) {
       // do nothing
+    }
+
+    @Override
+    public boolean scanWithoutParsing(InputFile inputFile) {
+      return false;
     }
   }
 
@@ -496,6 +512,7 @@ public class PythonSensorTest {
       .setType(Type.MAIN)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), UTF_8))
+      .setStatus(InputFile.Status.ADDED)
       .build());
     when(inputFile.contents()).thenThrow(RuntimeException.class);
 
@@ -637,6 +654,97 @@ public class PythonSensorTest {
     assertThat(new String(Files.readAllBytes(defaultPerformanceFile), UTF_8)).contains("\"PythonSensor\"");
   }
 
+
+  @Test
+  public void test_using_cache() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, FILE_COMPLEXITY_RULE_KEY))
+        .setParam("maximumFileComplexityThreshold", "2")
+        .build())
+      .build();
+
+    inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = new TestReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+
+  @Test
+  public void test_scan_without_parsing_fails() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, CUSTOM_RULE_KEY))
+        .build())
+      .build();
+
+    inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = new TestReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @Test
+  public void cache_not_enabled_for_older_api_version() {
+    SensorContextTester contextMock = spy(context);
+    SonarRuntime runtime = mock(SonarRuntime.class);
+    when(contextMock.runtime()).thenReturn(runtime);
+    when(runtime.getProduct()).thenReturn(SonarProduct.SONARQUBE);
+    when(runtime.getApiVersion()).thenReturn(Version.create(9, 6));
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .build();
+
+    inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = new TestReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+
+    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
+    sensor().execute(contextMock);
+
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
+
   private PythonSensor sensor() {
     return sensor(CUSTOM_RULES, null, analysisWarning);
   }
@@ -667,22 +775,29 @@ public class PythonSensorTest {
   }
 
   private InputFile inputFile(String name, Type fileType) {
-    DefaultInputFile inputFile = createInputFile(name, fileType);
+    DefaultInputFile inputFile = createInputFile(name, fileType, InputFile.Status.ADDED);
+    context.fileSystem().add(inputFile);
+    return inputFile;
+  }
+
+  private InputFile inputFile(String name, Type fileType, InputFile.Status status) {
+    DefaultInputFile inputFile = createInputFile(name, fileType, status);
     context.fileSystem().add(inputFile);
     return inputFile;
   }
 
   private DefaultInputFile createInputFile(String name) {
-    return createInputFile(name, Type.MAIN);
+    return createInputFile(name, Type.MAIN, InputFile.Status.ADDED);
   }
 
-  private DefaultInputFile createInputFile(String name, Type fileType) {
+  private DefaultInputFile createInputFile(String name, Type fileType, InputFile.Status status) {
     return TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(UTF_8)
       .setType(fileType)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), UTF_8))
+      .setStatus(status)
       .build();
   }
 
