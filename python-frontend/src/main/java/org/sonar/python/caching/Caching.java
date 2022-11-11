@@ -19,13 +19,22 @@
  */
 package org.sonar.python.caching;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.python.index.AmbiguousDescriptor;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 public class Caching {
 
@@ -45,11 +54,21 @@ public class Caching {
   }
 
   public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
-    // fixme
-  }
+    String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn;
+    cacheContext.getWriteCache().write(cacheKey, moduleDescriptor(descriptors).toByteArray());
+   }
 
   public Optional<Set<Descriptor>> readProjectLevelSymbolTableEntry(String moduleFqn) {
-    // fixme
+    cacheContext.getReadCache().contains(moduleFqn);
+    byte[] bytes = cacheContext.getReadCache().readBytes(moduleFqn);
+    if (bytes == null) {
+      return Optional.empty();
+    }
+    try {
+      return Optional.of(DescriptorUtils.deserializeProtobufDescriptors(bytes));
+    } catch (InvalidProtocolBufferException e) {
+      e.printStackTrace();
+    }
     return Optional.empty();
   }
 
@@ -62,5 +81,29 @@ public class Caching {
     } else {
       return Optional.empty();
     }
+  }
+
+  public static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
+    List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.AmbiguousDescriptor> ambiguousDescriptors = new ArrayList<>();
+    for (Descriptor descriptor : descriptors) {
+      if (descriptor.kind().equals(Descriptor.Kind.CLASS)) {
+        classDescriptors.add(((ClassDescriptor) descriptor).toProtobuf());
+      } else if (descriptor.kind().equals(Descriptor.Kind.FUNCTION)) {
+        functionDescriptors.add(((FunctionDescriptor) descriptor).toProtobuf());
+      } else if (descriptor.kind().equals(Descriptor.Kind.VARIABLE)) {
+        varDescriptors.add(((VariableDescriptor) descriptor).toProtobuf());
+      } else {
+        ambiguousDescriptors.add(((AmbiguousDescriptor) descriptor).toProtobuf());
+      }
+    }
+    return DescriptorsProtos.ModuleDescriptor.newBuilder()
+      .addAllClassDescriptors(classDescriptors)
+      .addAllFunctionDescriptors(functionDescriptors)
+      .addAllVarDescriptors(varDescriptors)
+      .addAllAmbiguousDescriptors(ambiguousDescriptors)
+      .build();
   }
 }
