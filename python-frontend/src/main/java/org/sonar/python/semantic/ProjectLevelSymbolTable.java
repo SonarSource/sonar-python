@@ -165,6 +165,10 @@ public class ProjectLevelSymbolTable {
     return Collections.unmodifiableMap(importsByModule);
   }
 
+  public Set<Descriptor> descriptorsForModule(String moduleName) {
+    return globalDescriptorsByModuleName.get(moduleName);
+  }
+
   public boolean isDjangoView(@Nullable String fqn) {
     return djangoViewsFQN.contains(fqn);
   }
