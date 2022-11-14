@@ -28,27 +28,28 @@ import java.util.Set;
 
 public class DependencyGraph {
 
-  private final Map<String, Set<String>> importsByModule;
-  private final Set<String> projectModulesFQN;
   private final Map<String, Set<String>> dependentModules;
 
-  public DependencyGraph(Map<String, Set<String>> importsByModule, Set<String> projectModulesFQN) {
-    this.importsByModule = importsByModule;
-    this.projectModulesFQN = projectModulesFQN;
-    this.dependentModules = computeDependentModules();
+  private DependencyGraph(Map<String, Set<String>> dependentModules) {
+    this.dependentModules = dependentModules;
   }
-
 
   public Map<String, Set<String>> dependentModules() {
     return Collections.unmodifiableMap(dependentModules);
   }
 
-  private Map<String, Set<String>> computeDependentModules() {
+  public static DependencyGraph from(Map<String, Set<String>> importsByModule, Set<String> projectModulesFQN) {
+    Map<String, Set<String>> dependentModules = computeDependentModules(importsByModule, projectModulesFQN);
+    return new DependencyGraph(dependentModules);
+  }
+
+  private static Map<String, Set<String>> computeDependentModules(Map<String, Set<String>> importsByModule, Set<String> projectModulesFQN) {
     Map<String, Set<String>> result = new HashMap<>();
     for (var entry : importsByModule.entrySet()) {
       entry.getValue().forEach(importedModuleFQN -> {
+        String dependentModule = entry.getKey();
         if (projectModulesFQN.contains(importedModuleFQN)) {
-          result.computeIfAbsent(importedModuleFQN, x -> new HashSet<>()).add(entry.getKey());
+          result.computeIfAbsent(importedModuleFQN, x -> new HashSet<>()).add(dependentModule);
           return;
         }
         int endIndex = importedModuleFQN.lastIndexOf(".");
@@ -57,7 +58,7 @@ public class DependencyGraph {
         }
         String substring = importedModuleFQN.substring(0, endIndex);
         if (projectModulesFQN.contains(substring)) {
-          result.computeIfAbsent(substring, x -> new HashSet<>()).add(entry.getKey());
+          result.computeIfAbsent(substring, x -> new HashSet<>()).add(dependentModule);
         }
       });
     }
@@ -73,7 +74,8 @@ public class DependencyGraph {
   }
 
   private void recursivelyComputeImpactedModules(String changedModule, Set<String> impactedModules) {
-    if (impactedModules.add(changedModule)) {
+    if (!impactedModules.contains(changedModule)) {
+      impactedModules.add(changedModule);
       Set<String> transitivelyImpactedModules = dependentModules.get(changedModule);
       if (transitivelyImpactedModules == null) {
         return;

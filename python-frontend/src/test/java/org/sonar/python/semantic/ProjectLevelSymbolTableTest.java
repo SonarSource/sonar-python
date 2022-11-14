@@ -462,7 +462,7 @@ public class ProjectLevelSymbolTableTest {
       Map.entry("mod", Set.of("A")),
       Map.entry("mod2", Set.of("A", "B")),
       Map.entry("mod3", Set.of("C.D.foo", "C.D.bar"))
-      );
+    );
     assertThat(projectLevelSymbolTable.getSymbol("mod2.B")).isNull();
 
 

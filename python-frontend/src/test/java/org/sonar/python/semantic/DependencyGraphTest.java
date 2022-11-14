@@ -37,7 +37,7 @@ public class DependencyGraphTest {
     importsByModule.put("mod3", Set.of("external", "external.other", "B"));
     importsByModule.put("mod4", Set.of("D.E.foo", "F.G.H"));
     Set<String> projectModulesFQN = Set.of("A", "B", "C", "D.E", "F.G.H");
-    DependencyGraph dependencyGraph = new DependencyGraph(importsByModule, projectModulesFQN);
+    DependencyGraph dependencyGraph = DependencyGraph.from(importsByModule, projectModulesFQN);
 
     Map<String, Set<String>> dependentModules = dependencyGraph.dependentModules();
 
@@ -58,7 +58,7 @@ public class DependencyGraphTest {
     importsByModule.put("mod3", Set.of("external", "B"));
     importsByModule.put("mod4", Set.of("D.E.foo", "F.G.H"));
     Set<String> projectModulesFQN = Set.of("A", "B", "C", "D.E", "F.G.H", "mod4");
-    DependencyGraph dependencyGraph = new DependencyGraph(importsByModule, projectModulesFQN);
+    DependencyGraph dependencyGraph = DependencyGraph.from(importsByModule, projectModulesFQN);
 
     Set<String> strings = dependencyGraph.impactedModules(List.of("D.E"));
     assertThat(strings).containsOnly("mod1", "mod4", "D.E");
@@ -70,7 +70,7 @@ public class DependencyGraphTest {
     importsByModule.put("mod1", Set.of("mod2"));
     importsByModule.put("mod2", Set.of("mod1"));
     Set<String> projectModulesFQN = Set.of("mod1", "mod2");
-    DependencyGraph dependencyGraph = new DependencyGraph(importsByModule, projectModulesFQN);
+    DependencyGraph dependencyGraph = DependencyGraph.from(importsByModule, projectModulesFQN);
 
     Set<String> strings = dependencyGraph.impactedModules(List.of("mod1"));
     assertThat(strings).containsOnly("mod1", "mod2");
