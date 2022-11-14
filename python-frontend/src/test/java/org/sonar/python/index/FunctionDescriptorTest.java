@@ -20,11 +20,16 @@
 package org.sonar.python.index;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastFunctionSymbol;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class FunctionDescriptorTest {
@@ -38,6 +43,7 @@ public class FunctionDescriptorTest {
     assertThat(functionDescriptor.isInstanceMethod()).isFalse();
     assertThat(functionDescriptor.isAsynchronous()).isFalse();
     assertThat(functionDescriptor.parameters()).hasSize(1);
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -49,6 +55,7 @@ public class FunctionDescriptorTest {
     assertThat(x.isKeywordOnly()).isFalse();
     assertThat(x.isPositionalOnly()).isFalse();
     assertThat(x.isVariadic()).isFalse();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -56,6 +63,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x=42): ...");
     FunctionDescriptor.Parameter x = functionDescriptor.parameters().get(0);
     assertThat(x.hasDefaultValue()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -63,6 +71,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.annotatedType()).isEqualTo("str");
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -70,6 +79,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x, /, y): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.isPositionalOnly()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -77,6 +87,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x, *, y): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(1);
     assertThat(parameter.isKeywordOnly()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -84,6 +95,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.annotatedType()).isEqualTo("str");
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -93,6 +105,7 @@ public class FunctionDescriptorTest {
     FunctionDescriptor.Parameter parameter2 = functionDescriptor.parameters().get(1);
     assertThat(parameter1.isVariadic()).isTrue();
     assertThat(parameter2.isVariadic()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -102,12 +115,14 @@ public class FunctionDescriptorTest {
       "def foo(x): ...");
     assertThat(functionDescriptor.hasDecorators()).isTrue();
     assertThat(functionDescriptor.decorators()).containsExactly("bar");
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
   public void asyncFunctions() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("async def foo(): ...");
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   @Test
@@ -116,6 +131,26 @@ public class FunctionDescriptorTest {
       "class A:",
       "  def foo(self): ...");
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
+  }
+
+  @Test
+  public void protobufSerializationWithoutLocationAndWithAnnotatedReturnType() {
+    // FIXME: Annotated type name is never set for regular project decorators (only Typeshed).
+    List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
+    parameters.add(new FunctionDescriptor.Parameter(null, "str", false, false, false, false, false, null));
+    FunctionDescriptor functionDescriptor = new FunctionDescriptor(
+      "foo",
+      "mod.foo",
+      parameters,
+      false,
+      false,
+      Collections.emptyList(),
+      false,
+      null,
+      "str"
+    );
+    assertFunctionDescriptors(functionDescriptor, fromProtobuf(toProtobuf(functionDescriptor)));
   }
 
   public static FunctionDescriptor lastFunctionDescriptor(String... code) {
@@ -127,5 +162,17 @@ public class FunctionDescriptorTest {
     assertThat(functionDescriptor.definitionLocation()).isNotNull();
     assertThat(functionDescriptor.definitionLocation()).isEqualTo(functionSymbol.definitionLocation());
     return functionDescriptor;
+  }
+
+  void assertFunctionDescriptors(FunctionDescriptor first, FunctionDescriptor second) {
+    assertThat(first.isAsynchronous()).isEqualTo(second.isAsynchronous());
+    assertThat(first.isInstanceMethod()).isEqualTo(second.isInstanceMethod());
+    assertThat(first.hasDecorators()).isEqualTo(second.hasDecorators());
+    assertThat(first.name()).isEqualTo(second.name());
+    assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
+    assertThat(first.annotatedReturnTypeName()).isEqualTo(second.annotatedReturnTypeName());
+    assertThat(first.decorators()).containsExactlyElementsOf(second.decorators());
+    assertThat(first.parameters()).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(second.parameters());
+    assertThat(first.definitionLocation()).usingRecursiveComparison().isEqualTo(second.definitionLocation());
   }
 }

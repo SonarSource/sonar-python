@@ -23,7 +23,7 @@ message LocationInFile {
 
 message AmbiguousDescriptor {
     string name = 1;
-    string fullyQualifiedName = 2;
+    optional string fullyQualifiedName = 2;
     repeated ClassDescriptor classDescriptors = 3;
     repeated FunctionDescriptor functionDescriptors = 4;
     repeated VarDescriptor varDescriptors = 5;

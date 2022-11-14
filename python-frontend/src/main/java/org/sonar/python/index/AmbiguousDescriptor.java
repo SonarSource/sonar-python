@@ -19,14 +19,10 @@
  */
 package org.sonar.python.index;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 public class AmbiguousDescriptor implements Descriptor {
 
@@ -38,15 +34,6 @@ public class AmbiguousDescriptor implements Descriptor {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.descriptors = descriptors;
-  }
-
-  public AmbiguousDescriptor(DescriptorsProtos.AmbiguousDescriptor ambiguousDescriptor) {
-    this.name = ambiguousDescriptor.getName();
-    this.fullyQualifiedName = ambiguousDescriptor.getFullyQualifiedName();
-    descriptors = new HashSet<>();
-    ambiguousDescriptor.getClassDescriptorsList().forEach(proto -> descriptors.add(new ClassDescriptor(proto)));
-    ambiguousDescriptor.getFunctionDescriptorsList().forEach(proto -> descriptors.add(new FunctionDescriptor(proto)));
-    ambiguousDescriptor.getVarDescriptorsList().forEach(proto -> descriptors.add(new VariableDescriptor(proto)));
   }
 
   @Override
@@ -96,40 +83,5 @@ public class AmbiguousDescriptor implements Descriptor {
       }
     }
     return alternatives;
-  }
-
-  public DescriptorsProtos.AmbiguousDescriptor toProtobuf() {
-    List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.VarDescriptor> variableDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
-    for (Descriptor descriptor : descriptors) {
-      if (descriptor.kind() == Kind.FUNCTION) {
-        functionDescriptors.add(((FunctionDescriptor) descriptor).toProtobuf());
-      } else if (descriptor.kind() == Kind.VARIABLE) {
-        variableDescriptors.add(((VariableDescriptor) descriptor).toProtobuf());
-      } else if (descriptor.kind() == Kind.CLASS) {
-        classDescriptors.add(((ClassDescriptor) descriptor).toProtobuf());
-      }
-    }
-    return DescriptorsProtos.AmbiguousDescriptor.newBuilder()
-      .setName(name)
-      .setFullyQualifiedName(fullyQualifiedName)
-      .addAllClassDescriptors(classDescriptors)
-      .addAllFunctionDescriptors(functionDescriptors)
-      .addAllVarDescriptors(variableDescriptors)
-      .build();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    AmbiguousDescriptor that = (AmbiguousDescriptor) o;
-    return descriptors.equals(that.descriptors) && name.equals(that.name) && fullyQualifiedName.equals(that.fullyQualifiedName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(descriptors, name, fullyQualifiedName);
   }
 }

@@ -164,13 +164,19 @@ public final class PythonTestUtils {
 
   public static FunctionSymbol lastFunctionSymbolWithName(String name, String... code) {
     FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
-    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals(name));;
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals(name));
     return TreeUtils.getFunctionSymbolFromDef(functionDef);
   }
 
   public static ClassSymbol lastClassSymbol(String... code) {
     FileInput fileInput = parse(new SymbolTableBuilder("package", PythonTestUtils.pythonFile("mod")), code);
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    return TreeUtils.getClassSymbolFromDef(classDef);
+  }
+
+  public static ClassSymbol lastClassSymbolWithName(String name, String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder("package", PythonTestUtils.pythonFile("mod")), code);
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF) && ((ClassDef) t).name().name().equals(name));
     return TreeUtils.getClassSymbolFromDef(classDef);
   }
 

@@ -29,20 +29,11 @@ public class CacheContextImpl implements CacheContext {
   private PythonWriteCache writeCache;
   private PythonReadCache readCache;
 
-
-  public CacheContextImpl() {
-    this.isCacheEnabled = false;
-    this.writeCache = null;
-    this.readCache = null;
-  }
-
-
   public CacheContextImpl(boolean isCacheEnabled, PythonWriteCache writeCache, PythonReadCache readCache) {
     this.isCacheEnabled = isCacheEnabled;
     this.writeCache = writeCache;
     this.readCache = readCache;
   }
-
 
   @Override
   public boolean isCacheEnabled() {

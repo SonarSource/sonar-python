@@ -23,10 +23,19 @@ import java.io.InputStream;
 import javax.annotation.CheckForNull;
 
 public interface PythonReadCache {
-  InputStream read(String var1);
+  /**
+   * Returns an input stream for the data cached with the provided {@code key}. It is the responsibility of the caller to close the stream.
+   */
+  InputStream read(String key);
 
+  /**
+   * @return the array of bytes stored for the given key, if any. {@code null} otherwise.
+   */
   @CheckForNull
-  byte[] readBytes(String var1);
+  byte[] readBytes(String key);
 
-  boolean contains(String var1);
+  /**
+   * Checks whether the cache contains the provided {@code key}.
+   */
+  boolean contains(String key);
 }

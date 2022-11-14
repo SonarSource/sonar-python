@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.python.api;
 
-import java.util.Objects;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
-
 public class LocationInFile {
   private final String fileId;
   private final int startLine;
@@ -35,14 +32,6 @@ public class LocationInFile {
     this.startLineOffset = startLineOffset;
     this.endLine = endLine;
     this.endLineOffset = endLineOffset;
-  }
-
-  public LocationInFile(DescriptorsProtos.LocationInFile locationInFileProto) {
-    fileId = locationInFileProto.getFileId();
-    startLine = locationInFileProto.getStartLine();
-    startLineOffset = locationInFileProto.getStartLineOffset();
-    endLine = locationInFileProto.getEndLine();
-    endLineOffset = locationInFileProto.getEndLineOffset();
   }
 
   public String fileId() {
@@ -63,29 +52,5 @@ public class LocationInFile {
 
   public int endLineOffset() {
     return endLineOffset;
-  }
-
-
-  public DescriptorsProtos.LocationInFile toProtobuf() {
-    return DescriptorsProtos.LocationInFile.newBuilder()
-      .setFileId(fileId)
-      .setStartLine(startLine)
-      .setStartLineOffset(startLineOffset)
-      .setEndLine(endLine)
-      .setEndLineOffset(endLineOffset)
-      .build();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    LocationInFile that = (LocationInFile) o;
-    return startLine == that.startLine && startLineOffset == that.startLineOffset && endLine == that.endLine && endLineOffset == that.endLineOffset && fileId.equals(that.fileId);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(fileId, startLine, startLineOffset, endLine, endLineOffset);
   }
 }

@@ -26,6 +26,8 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class VariableDescriptorTest {
@@ -37,6 +39,13 @@ public class VariableDescriptorTest {
       "x");
     // only typeshed symbols have it != null
     assertThat(x.annotatedType()).isNull();
+    assertVariableDescriptors(x, fromProtobuf(toProtobuf(x)));
+  }
+
+  @Test
+  public void protobufSerializationWithAnnotatedReturnType() {
+    VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", "str");
+    assertVariableDescriptors(variableDescriptor, fromProtobuf(toProtobuf(variableDescriptor)));
   }
 
   private VariableDescriptor lastVariableDescriptor(String... code) {
@@ -47,5 +56,11 @@ public class VariableDescriptorTest {
     assertThat(variableDescriptor.name()).isEqualTo(symbol.name());
     assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo(symbol.fullyQualifiedName());
     return variableDescriptor;
+  }
+
+  void assertVariableDescriptors(VariableDescriptor first, VariableDescriptor second) {
+    assertThat(first.name()).isEqualTo(second.name());
+    assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
+    assertThat(first.annotatedType()).isEqualTo(second.annotatedType());
   }
 }

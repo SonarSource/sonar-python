@@ -48,12 +48,12 @@ public class PythonReadCacheImpl implements PythonReadCache {
       try (var in = read(key)) {
         return in.readAllBytes();
       } catch (IOException e) {
-        throw new CacheReadException(String.format("Unable to read data for key '%s'", key), e);
+        LOG.debug("Unable to read data for key \"{}\"", key);
       }
     } else {
       LOG.trace(() -> String.format("Cache miss for key '%s'", key));
-      return null;
     }
+    return null;
   }
 
   @Override

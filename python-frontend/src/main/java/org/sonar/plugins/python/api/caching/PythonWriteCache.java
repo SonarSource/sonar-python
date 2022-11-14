@@ -19,12 +19,16 @@
  */
 package org.sonar.plugins.python.api.caching;
 
-import java.io.InputStream;
-
 public interface PythonWriteCache {
-  void write(String var1, InputStream var2);
+  /**
+   * Save a new entry in the cache.
+   * @throws {@code IllegalArgumentException} if the cache already contains the key.
+   */
+  void write(String key, byte[] data);
 
-  void write(String var1, byte[] var2);
-
-  void copyFromPrevious(String var1);
+  /**
+   * Copy a cached entry from the previous cache to the new one.
+   * @throws {@code IllegalArgumentException} if the previous cache doesn't contain given key or if this cache already contains the key.
+   */
+  void copyFromPrevious(String key);
 }

@@ -21,12 +21,9 @@ package org.sonar.python.index;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 public class FunctionDescriptor implements Descriptor {
 
@@ -43,7 +40,7 @@ public class FunctionDescriptor implements Descriptor {
   @Nullable
   private final String annotatedReturnTypeName;
 
-  private FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
+  public FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
     boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation, @Nullable String annotatedReturnTypeName) {
 
     this.name = name;
@@ -55,19 +52,6 @@ public class FunctionDescriptor implements Descriptor {
     this.hasDecorators = hasDecorators;
     this.definitionLocation = definitionLocation;
     this.annotatedReturnTypeName = annotatedReturnTypeName;
-  }
-
-  public FunctionDescriptor(DescriptorsProtos.FunctionDescriptor functionDescriptorProto) {
-    this.name = functionDescriptorProto.getName();
-    this.fullyQualifiedName = functionDescriptorProto.getFullyQualifiedName();
-    this.parameters = new ArrayList<>();
-    functionDescriptorProto.getParametersList().forEach(proto -> parameters.add(new Parameter(proto)));
-    this.isAsynchronous = functionDescriptorProto.getIsAsynchronous();
-    this.isInstanceMethod = functionDescriptorProto.getIsInstanceMethod();
-    this.decorators = new ArrayList<>(functionDescriptorProto.getDecoratorsList());
-    this.hasDecorators = functionDescriptorProto.getHasDecorators();
-    this.definitionLocation = new LocationInFile(functionDescriptorProto.getDefinitionLocation());
-    this.annotatedReturnTypeName = functionDescriptorProto.getAnnotatedReturnType();
   }
 
   @Override
@@ -138,17 +122,6 @@ public class FunctionDescriptor implements Descriptor {
       this.location = location;
     }
 
-    public Parameter(DescriptorsProtos.ParameterDescriptor parameterDescriptorProto) {
-      this.name = parameterDescriptorProto.getName();
-      this.annotatedType = parameterDescriptorProto.getAnnotatedType();
-      this.hasDefaultValue = parameterDescriptorProto.getHasDefaultValue();
-      this.isKeywordVariadic = parameterDescriptorProto.getIsKeywordVariadic();
-      this.isPositionalVariadic = parameterDescriptorProto.getIsPositionalVariadic();
-      this.isKeywordOnly = parameterDescriptorProto.getIsKeywordOnly();
-      this.isPositionalOnly = parameterDescriptorProto.getIsPositionalOnly();
-      this.location = new LocationInFile(parameterDescriptorProto.getDefinitionLocation());
-    }
-
     @CheckForNull
     public String name() {
       return name;
@@ -185,41 +158,6 @@ public class FunctionDescriptor implements Descriptor {
     @CheckForNull
     public LocationInFile location() {
       return location;
-    }
-
-    public DescriptorsProtos.ParameterDescriptor toProtobuf() {
-      DescriptorsProtos.ParameterDescriptor.Builder builder = DescriptorsProtos.ParameterDescriptor.newBuilder()
-        .setName(name)
-        .setAnnotatedType(annotatedType)
-        .setHasDefaultValue(hasDefaultValue)
-        .setIsKeywordVariadic(isKeywordVariadic)
-        .setIsPositionalVariadic(isPositionalVariadic)
-        .setIsKeywordOnly(isKeywordOnly)
-        .setIsPositionalOnly(isPositionalOnly);
-      if (location != null) {
-        builder.setDefinitionLocation(location.toProtobuf());
-      }
-      return builder.build();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      Parameter parameter = (Parameter) o;
-      return hasDefaultValue == parameter.hasDefaultValue &&
-        isKeywordVariadic == parameter.isKeywordVariadic &&
-        isPositionalVariadic == parameter.isPositionalVariadic &&
-        isKeywordOnly == parameter.isKeywordOnly &&
-        isPositionalOnly == parameter.isPositionalOnly &&
-        Objects.equals(name, parameter.name) &&
-        Objects.equals(annotatedType, parameter.annotatedType) &&
-        Objects.equals(location, parameter.location);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(name, annotatedType, hasDefaultValue, isKeywordVariadic, isPositionalVariadic, isKeywordOnly, isPositionalOnly, location);
     }
   }
 
@@ -284,40 +222,5 @@ public class FunctionDescriptor implements Descriptor {
       return new FunctionDescriptor(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators,
         hasDecorators, definitionLocation, annotatedReturnTypeName);
     }
-  }
-
-  public DescriptorsProtos.FunctionDescriptor toProtobuf() {
-    DescriptorsProtos.FunctionDescriptor.Builder builder = DescriptorsProtos.FunctionDescriptor.newBuilder()
-      .setName(name)
-      .setFullyQualifiedName(fullyQualifiedName)
-      .addAllParameters(parameters.stream().map(Parameter::toProtobuf).collect(Collectors.toList()))
-      .setIsAsynchronous(isAsynchronous)
-      .setIsInstanceMethod(isInstanceMethod)
-      .addAllDecorators(decorators)
-      .setHasDecorators(hasDecorators)
-      .setAnnotatedReturnType(annotatedReturnTypeName);
-    if (definitionLocation != null) {
-      builder.setDefinitionLocation(definitionLocation.toProtobuf());
-    }
-    return builder.build();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    FunctionDescriptor that = (FunctionDescriptor) o;
-    return isAsynchronous == that.isAsynchronous &&
-      isInstanceMethod == that.isInstanceMethod &&
-      hasDecorators == that.hasDecorators && name.equals(that.name) &&
-      Objects.equals(fullyQualifiedName, that.fullyQualifiedName) &&
-      parameters.equals(that.parameters) && decorators.equals(that.decorators) &&
-      Objects.equals(definitionLocation, that.definitionLocation) &&
-      Objects.equals(annotatedReturnTypeName, that.annotatedReturnTypeName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators, hasDecorators, definitionLocation, annotatedReturnTypeName);
   }
 }

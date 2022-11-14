@@ -25,8 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -36,12 +38,16 @@ import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
 
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
+
 public class Caching {
 
   private final CacheContext cacheContext;
 
-  public static final String INPORT_MAP_CACHE_KEY_PREFIX = "python_import_map:";
-  public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python_project_symbol_table:";
+  public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
+  public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
+
+  private static final Logger LOG = Loggers.get(Caching.class);
 
   public Caching(CacheContext cacheContext) {
     this.cacheContext = cacheContext;
@@ -49,54 +55,57 @@ public class Caching {
 
   public void writeImportMapEntry(String moduleFqn, Set<String> imports) {
     byte[] importData = String.join(";", imports).getBytes(StandardCharsets.UTF_8);
-    String cacheKey = INPORT_MAP_CACHE_KEY_PREFIX + moduleFqn;
+    String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     cacheContext.getWriteCache().write(cacheKey, importData);
   }
 
   public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn;
     cacheContext.getWriteCache().write(cacheKey, moduleDescriptor(descriptors).toByteArray());
-   }
-
-  public Optional<Set<Descriptor>> readProjectLevelSymbolTableEntry(String moduleFqn) {
-    cacheContext.getReadCache().contains(moduleFqn);
-    byte[] bytes = cacheContext.getReadCache().readBytes(moduleFqn);
-    if (bytes == null) {
-      return Optional.empty();
-    }
-    try {
-      return Optional.of(DescriptorUtils.deserializeProtobufDescriptors(bytes));
-    } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
-    }
-    return Optional.empty();
   }
 
-  public Optional<Set<String>> readImportMapEntry(String moduleFqn) {
-    String cacheKey = INPORT_MAP_CACHE_KEY_PREFIX + moduleFqn;
+  @CheckForNull
+  public Set<Descriptor> readProjectLevelSymbolTableEntry(String key) {
+    cacheContext.getReadCache().contains(key);
+    byte[] bytes = cacheContext.getReadCache().readBytes(key);
+    if (bytes != null) {
+      try {
+        return DescriptorUtils.deserializeProtobufDescriptors(bytes);
+      } catch (InvalidProtocolBufferException e) {
+        LOG.debug("Failed to deserialize project level symbol table entry for key: {}", key);
+      }
+    }
+    return null;
+  }
+
+  @CheckForNull
+  public Set<String> readImportMapEntry(String moduleFqn) {
+    String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     byte[] bytes = cacheContext.getReadCache().readBytes(cacheKey);
     if (bytes != null) {
       cacheContext.getWriteCache().copyFromPrevious(cacheKey);
-      return Optional.of(new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";"))));
-    } else {
-      return Optional.empty();
+      return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
+    return null;
   }
 
-  public static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
+
+  // Visible for testing
+  static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
     List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
     List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();
     List<DescriptorsProtos.AmbiguousDescriptor> ambiguousDescriptors = new ArrayList<>();
     for (Descriptor descriptor : descriptors) {
-      if (descriptor.kind().equals(Descriptor.Kind.CLASS)) {
-        classDescriptors.add(((ClassDescriptor) descriptor).toProtobuf());
-      } else if (descriptor.kind().equals(Descriptor.Kind.FUNCTION)) {
-        functionDescriptors.add(((FunctionDescriptor) descriptor).toProtobuf());
-      } else if (descriptor.kind().equals(Descriptor.Kind.VARIABLE)) {
-        varDescriptors.add(((VariableDescriptor) descriptor).toProtobuf());
+      Descriptor.Kind kind = descriptor.kind();
+      if (kind == Descriptor.Kind.CLASS) {
+        classDescriptors.add(toProtobuf(((ClassDescriptor) descriptor)));
+      } else if (kind == Descriptor.Kind.FUNCTION) {
+        functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
+      } else if (kind == Descriptor.Kind.VARIABLE) {
+        varDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
       } else {
-        ambiguousDescriptors.add(((AmbiguousDescriptor) descriptor).toProtobuf());
+        ambiguousDescriptors.add(toProtobuf((AmbiguousDescriptor) descriptor));
       }
     }
     return DescriptorsProtos.ModuleDescriptor.newBuilder()

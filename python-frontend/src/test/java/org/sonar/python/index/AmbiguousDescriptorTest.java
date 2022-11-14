@@ -19,8 +19,6 @@
  */
 package org.sonar.python.index;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -30,6 +28,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastSymbolFromDef;
 import static org.sonar.python.index.ClassDescriptorTest.lastClassDescriptor;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 
@@ -42,6 +42,18 @@ public class AmbiguousDescriptorTest {
       "class A: ...");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A");
+    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
+  }
+
+  @Test
+  public void test_ambiguous_descriptor_different_kinds() {
+    AmbiguousDescriptor ambiguousDescriptor = lastAmbiguousDescriptor(
+      "class A: ...",
+      "A: int = 42",
+      "def A(): ...");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
+    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
   }
 
   @Test
@@ -53,6 +65,7 @@ public class AmbiguousDescriptorTest {
     AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(firstAmbiguousSymbol, classDescriptor);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
+    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
   }
 
   @Test
@@ -86,5 +99,11 @@ public class AmbiguousDescriptorTest {
     assertThat(ambiguousDescriptor.name()).isEqualTo(ambiguousSymbol.name());
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo(ambiguousSymbol.fullyQualifiedName());
     return ambiguousDescriptor;
+  }
+
+  void assertAmbiguousDescriptors(AmbiguousDescriptor first, AmbiguousDescriptor second) {
+    assertThat(first.name()).isEqualTo(second.name());
+    assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
+    assertThat(first.alternatives()).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(second.alternatives());
   }
 }

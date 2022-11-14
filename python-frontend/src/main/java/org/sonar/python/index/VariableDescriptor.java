@@ -19,10 +19,8 @@
  */
 package org.sonar.python.index;
 
-import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 public class VariableDescriptor implements Descriptor {
   private final String name;
@@ -33,20 +31,6 @@ public class VariableDescriptor implements Descriptor {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedType = annotatedType;
-  }
-
-  public VariableDescriptor(DescriptorsProtos.VarDescriptor varDescriptorProto) {
-    this.name = varDescriptorProto.getName();
-    this.fullyQualifiedName = varDescriptorProto.hasFullyQualifiedName() ? varDescriptorProto.getFullyQualifiedName() : null;
-    this.annotatedType = varDescriptorProto.hasAnnotatedType() ? varDescriptorProto.getAnnotatedType() : null;
-  }
-
-  public DescriptorsProtos.VarDescriptor toProtobuf() {
-    return DescriptorsProtos.VarDescriptor.newBuilder()
-      .setName(name)
-      .setFullyQualifiedName(fullyQualifiedName)
-      .setAnnotatedType(annotatedType)
-      .build();
   }
 
   @Override
@@ -67,18 +51,5 @@ public class VariableDescriptor implements Descriptor {
   @CheckForNull
   public String annotatedType() {
     return annotatedType;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    VariableDescriptor that = (VariableDescriptor) o;
-    return name.equals(that.name) && Objects.equals(fullyQualifiedName, that.fullyQualifiedName) && Objects.equals(annotatedType, that.annotatedType);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, fullyQualifiedName, annotatedType);
   }
 }

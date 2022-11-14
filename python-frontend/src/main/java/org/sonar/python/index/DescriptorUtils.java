@@ -42,6 +42,7 @@ import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
 
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.types.InferredTypes.anyType;
 
@@ -66,7 +67,7 @@ public class DescriptorUtils {
     ClassDescriptor.ClassDescriptorBuilder classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
       .withName(classSymbol.name())
       .withFullyQualifiedName(classSymbol.fullyQualifiedName())
-      .withMembers(classSymbol.declaredMembers().stream().map(DescriptorUtils::descriptor).collect(Collectors.toList()))
+      .withMembers(classSymbol.declaredMembers().stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet()))
       .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).filter(Objects::nonNull).collect(Collectors.toList()))
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
@@ -232,10 +233,10 @@ public class DescriptorUtils {
   public static Set<Descriptor> deserializeProtobufDescriptors(byte[] bytes) throws InvalidProtocolBufferException {
     Set<Descriptor> descriptors = new HashSet<>();
     DescriptorsProtos.ModuleDescriptor moduleDescriptorProto = DescriptorsProtos.ModuleDescriptor.parseFrom(bytes);
-    moduleDescriptorProto.getClassDescriptorsList().forEach(proto -> descriptors.add(new ClassDescriptor(proto)));
-    moduleDescriptorProto.getFunctionDescriptorsList().forEach(proto -> descriptors.add(new FunctionDescriptor(proto)));
-    moduleDescriptorProto.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(new AmbiguousDescriptor(proto)));
-    moduleDescriptorProto.getVarDescriptorsList().forEach(proto -> descriptors.add(new VariableDescriptor(proto)));
+    moduleDescriptorProto.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
     return descriptors;
   }
 }

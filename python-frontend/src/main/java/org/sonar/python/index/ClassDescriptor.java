@@ -19,15 +19,11 @@
  */
 package org.sonar.python.index;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 public class ClassDescriptor implements Descriptor {
 
@@ -35,7 +31,7 @@ public class ClassDescriptor implements Descriptor {
   @Nullable
   private final String fullyQualifiedName;
   private final Collection<String> superClasses;
-  private final Collection<Descriptor> members;
+  private final Set<Descriptor> members;
   private final boolean hasDecorators;
   private final LocationInFile definitionLocation;
   private final boolean hasSuperClassWithoutDescriptor;
@@ -43,7 +39,7 @@ public class ClassDescriptor implements Descriptor {
   private final String metaclassFQN;
   private final boolean supportsGenerics;
 
-  public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Collection<Descriptor> members,
+  public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,
     @Nullable String metaclassFQN, boolean supportsGenerics) {
 
@@ -57,23 +53,6 @@ public class ClassDescriptor implements Descriptor {
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
     this.supportsGenerics = supportsGenerics;
-  }
-
-  public ClassDescriptor(DescriptorsProtos.ClassDescriptor classDescriptorProto) {
-    name = classDescriptorProto.getName();
-    fullyQualifiedName = classDescriptorProto.getFullyQualifiedName();
-    superClasses = new ArrayList<>(classDescriptorProto.getSuperClassesList());
-    definitionLocation = new LocationInFile(classDescriptorProto.getDefinitionLocation());
-    hasDecorators = classDescriptorProto.getHasDecorators();
-    hasSuperClassWithoutDescriptor = classDescriptorProto.getHasSuperClassWithoutDescriptor();
-    hasMetaClass = classDescriptorProto.getHasMetaClass();
-    metaclassFQN = classDescriptorProto.hasMetaClassFQN() ? classDescriptorProto.getMetaClassFQN() : null;
-    supportsGenerics = classDescriptorProto.getSupportsGenerics();
-    members = new ArrayList<>();
-    classDescriptorProto.getClassMembersList().forEach(proto -> members.add(new ClassDescriptor(proto)));
-    classDescriptorProto.getFunctionMembersList().forEach(proto -> members.add(new FunctionDescriptor(proto)));
-    classDescriptorProto.getAmbiguousMembersList().forEach(proto -> members.add(new AmbiguousDescriptor(proto)));
-    classDescriptorProto.getVarMembersList().forEach(proto -> members.add(new VariableDescriptor(proto)));
   }
 
   @Override
@@ -128,7 +107,7 @@ public class ClassDescriptor implements Descriptor {
     private String name;
     private String fullyQualifiedName;
     private Collection<String> superClasses = new HashSet<>();
-    private Collection<Descriptor> members = new HashSet<>();
+    private Set<Descriptor> members = new HashSet<>();
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
     private boolean hasSuperClassWithoutDescriptor = false;
@@ -151,7 +130,7 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
-    public ClassDescriptorBuilder withMembers(Collection<Descriptor> members) {
+    public ClassDescriptorBuilder withMembers(Set<Descriptor> members) {
       this.members = members;
       return this;
     }
@@ -190,64 +169,5 @@ public class ClassDescriptor implements Descriptor {
       return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation,
         hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics);
     }
-  }
-
-  public DescriptorsProtos.ClassDescriptor toProtobuf() {
-    List<DescriptorsProtos.FunctionDescriptor> functionMembers = new ArrayList<>();
-    List<DescriptorsProtos.VarDescriptor> variableMembers = new ArrayList<>();
-    List<DescriptorsProtos.AmbiguousDescriptor> ambiguousMembers = new ArrayList<>();
-    List<DescriptorsProtos.ClassDescriptor> classMembers = new ArrayList<>();
-    for (Descriptor member : members) {
-      if (member.kind().equals(Kind.FUNCTION)) {
-        functionMembers.add(((FunctionDescriptor) member).toProtobuf());
-      } else if (member.kind().equals(Kind.VARIABLE)) {
-        variableMembers.add(((VariableDescriptor) member).toProtobuf());
-      } else if (member.kind().equals(Kind.AMBIGUOUS)) {
-        ambiguousMembers.add(((AmbiguousDescriptor) member).toProtobuf());
-      } else {
-        classMembers.add(((ClassDescriptor) member).toProtobuf());
-      }
-    }
-    DescriptorsProtos.ClassDescriptor.Builder builder = DescriptorsProtos.ClassDescriptor.newBuilder()
-      .setName(name)
-      .setFullyQualifiedName(fullyQualifiedName)
-      .addAllSuperClasses(superClasses)
-      .addAllFunctionMembers(functionMembers)
-      .addAllVarMembers(variableMembers)
-      .addAllAmbiguousMembers(ambiguousMembers)
-      .addAllClassMembers(classMembers)
-      .setHasDecorators(hasDecorators)
-      .setHasSuperClassWithoutDescriptor(hasSuperClassWithoutDescriptor)
-      .setHasMetaClass(hasMetaClass)
-      .setSupportsGenerics(supportsGenerics);
-    if (definitionLocation != null) {
-      builder.setDefinitionLocation(definitionLocation.toProtobuf());
-    }
-    if (metaclassFQN != null) {
-      builder.setMetaClassFQN(metaclassFQN);
-    }
-    return builder.build();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ClassDescriptor that = (ClassDescriptor) o;
-    return hasDecorators == that.hasDecorators &&
-      hasSuperClassWithoutDescriptor == that.hasSuperClassWithoutDescriptor &&
-      hasMetaClass == that.hasMetaClass &&
-      supportsGenerics == that.supportsGenerics &&
-      name.equals(that.name) &&
-      Objects.equals(fullyQualifiedName, that.fullyQualifiedName) &&
-      superClasses.equals(that.superClasses) &&
-      members.equals(that.members) &&
-      Objects.equals(definitionLocation, that.definitionLocation) &&
-      Objects.equals(metaclassFQN, that.metaclassFQN);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation, hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics);
   }
 }

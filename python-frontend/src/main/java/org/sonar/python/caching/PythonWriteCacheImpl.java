@@ -19,7 +19,6 @@
  */
 package org.sonar.python.caching;
 
-import java.io.InputStream;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
@@ -29,11 +28,6 @@ public class PythonWriteCacheImpl implements PythonWriteCache {
 
   public PythonWriteCacheImpl(WriteCache writeCache) {
     this.writeCache = writeCache;
-  }
-
-  @Override
-  public void write(String key, InputStream data) {
-    this.writeCache.write(key, data);
   }
 
   @Override
