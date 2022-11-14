@@ -99,12 +99,17 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
+  private final Set<String> importedModulesFQN = new HashSet<>();
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
     filePath = null;
     projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     this.pythonFile = pythonFile;
+  }
+
+  public Set<String> importedModulesFQN() {
+    return Collections.unmodifiableSet(importedModulesFQN);
   }
 
   public SymbolTableBuilder(String packageName, PythonFile pythonFile) {
@@ -370,6 +375,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
       if (importFrom.isWildcardImport()) {
+        importedModulesFQN.add(moduleName);
         Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
           importedModuleSymbols = TypeShed.symbolsForModule(moduleName).values().stream()
@@ -397,6 +403,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
           targetModuleName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, targetModuleName);
+        } else {
+          importedModulesFQN.add(fullyQualifiedName);
         }
         Name alias = module.alias();
         if (targetModuleName != null) {
@@ -418,9 +426,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       }
       String resolvedPackageName = String.join(".", filePath.subList(0, filePath.size() - dottedPrefix.size()));
       if (moduleName == null) {
+        importedModulesFQN.add(resolvedPackageName);
         return resolvedPackageName;
       }
-      return resolvedPackageName.isEmpty() ? moduleName : (resolvedPackageName + "." + moduleName);
+      if (resolvedPackageName.isEmpty()) {
+        importedModulesFQN.add(moduleName);
+        return moduleName;
+      }
+      String resolvedModuleFQN = resolvedPackageName + "." + moduleName;
+      importedModulesFQN.add(resolvedModuleFQN);
+      return resolvedModuleFQN;
     }
 
     @Override
