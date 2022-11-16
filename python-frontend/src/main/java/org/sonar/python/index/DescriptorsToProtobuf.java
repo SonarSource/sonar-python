@@ -41,7 +41,7 @@ public class DescriptorsToProtobuf {
         functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
       } else if (kind == Descriptor.Kind.VARIABLE) {
         variableDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
-      } else if (descriptor.kind() == Descriptor.Kind.CLASS) {
+      } else {
         classDescriptors.add(toProtobuf((ClassDescriptor) descriptor));
       }
     }

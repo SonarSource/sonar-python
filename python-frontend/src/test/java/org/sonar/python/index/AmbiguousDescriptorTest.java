@@ -19,6 +19,8 @@
  */
 package org.sonar.python.index;
 
+import java.util.Collections;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -72,6 +74,13 @@ public class AmbiguousDescriptorTest {
   public void test_single_descriptor_illegal_argument() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def func(): ...");
     assertThatThrownBy(() -> AmbiguousDescriptor.create(functionDescriptor)).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  public void test_nested_ambiguous_descriptors_illegal_argument() {
+    AmbiguousDescriptor ambiguousDescriptor = new AmbiguousDescriptor("foo", "foo", Collections.emptySet());
+      Set<Descriptor> descriptors = Set.of(ambiguousDescriptor);
+    assertThatThrownBy(() -> new AmbiguousDescriptor("foo", "foo", descriptors)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
