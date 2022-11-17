@@ -136,7 +136,7 @@ public class FunctionDescriptorTest {
 
   @Test
   public void protobufSerializationWithoutLocationAndWithAnnotatedReturnType() {
-    // FIXME: Annotated type name is never set for regular project decorators (only Typeshed).
+    // FIXME: Annotated type name is never set for regular project decorators (only Typeshed) - SONARPY-1202
     List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
     parameters.add(new FunctionDescriptor.Parameter(null, "str", false, false, false, false, false, null));
     FunctionDescriptor functionDescriptor = new FunctionDescriptor(

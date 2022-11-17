@@ -228,8 +228,6 @@ public class DescriptorUtils {
     parameter.setDeclaredType(declaredType);
   }
 
-
-
   public static Set<Descriptor> deserializeProtobufDescriptors(byte[] bytes) throws InvalidProtocolBufferException {
     Set<Descriptor> descriptors = new HashSet<>();
     DescriptorsProtos.ModuleDescriptor moduleDescriptorProto = DescriptorsProtos.ModuleDescriptor.parseFrom(bytes);
