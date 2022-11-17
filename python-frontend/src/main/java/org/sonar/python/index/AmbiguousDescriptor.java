@@ -31,6 +31,9 @@ public class AmbiguousDescriptor implements Descriptor {
   private final String fullyQualifiedName;
 
   public AmbiguousDescriptor(String name, @Nullable String fullyQualifiedName, Set<Descriptor> descriptors) {
+    if (descriptors.stream().anyMatch(d -> d.kind().equals(Kind.AMBIGUOUS))) {
+      throw new IllegalArgumentException("Ambiguous descriptors should not be nested.");
+    }
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.descriptors = descriptors;

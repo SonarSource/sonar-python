@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+// Not necessary for Python but should still be declared to avoid name collisions
+// in the Protocol Buffers namespace and non-Python languages
+package protoblog;
+option java_outer_classname = "DescriptorsProtos";
+option java_package = "org.sonar.python.types.protobuf";
+
+message ModuleDescriptor {
+    repeated ClassDescriptor classDescriptors = 1;
+    repeated FunctionDescriptor functionDescriptors = 2;
+    repeated VarDescriptor varDescriptors = 3;
+    repeated AmbiguousDescriptor ambiguousDescriptors = 4;
+}
+
+message LocationInFile {
+    string fileId = 1;
+    int32 startLine = 2;
+    int32 startLineOffset = 3;
+    int32 endLine = 4;
+    int32 endLineOffset = 5;
+}
+
+message AmbiguousDescriptor {
+    string name = 1;
+    optional string fullyQualifiedName = 2;
+    repeated ClassDescriptor classDescriptors = 3;
+    repeated FunctionDescriptor functionDescriptors = 4;
+    repeated VarDescriptor varDescriptors = 5;
+}
+
+message ClassDescriptor {
+    string name = 1;
+    optional string fullyQualifiedName = 2;
+    repeated string superClasses = 3;
+    repeated FunctionDescriptor functionMembers = 4;
+    repeated VarDescriptor varMembers = 5;
+    repeated AmbiguousDescriptor ambiguousMembers = 6;
+    repeated ClassDescriptor classMembers = 7;
+    bool hasDecorators = 8;
+    LocationInFile definitionLocation = 9;
+    bool hasSuperClassWithoutDescriptor = 10;
+    bool hasMetaClass = 11;
+    optional string metaClassFQN = 12;
+    bool supportsGenerics = 13;
+}
+
+message ParameterDescriptor {
+    optional string name = 1;
+    optional string annotatedType = 2;
+    bool hasDefaultValue = 3;
+    bool isKeywordVariadic = 4;
+    bool isPositionalVariadic = 5;
+    bool isKeywordOnly = 6;
+    bool isPositionalOnly = 7;
+    optional LocationInFile definitionLocation = 8;
+}
+
+message FunctionDescriptor {
+    optional string name = 1;
+    optional string fullyQualifiedName = 2;
+    repeated ParameterDescriptor parameters = 3;
+    bool isAsynchronous = 4;
+    bool isInstanceMethod = 5;
+    repeated string decorators = 6;
+    bool hasDecorators = 7;
+    LocationInFile definitionLocation = 8;
+    optional string annotatedReturnType = 9;
+}
+
+message VarDescriptor {
+  string name = 1;
+  optional string fully_qualified_name = 2;
+  optional string annotatedType = 3;
+}
