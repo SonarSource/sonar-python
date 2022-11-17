@@ -40,7 +40,7 @@ public class FunctionDescriptor implements Descriptor {
   @Nullable
   private final String annotatedReturnTypeName;
 
-  private FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
+  public FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
     boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation, @Nullable String annotatedReturnTypeName) {
 
     this.name = name;

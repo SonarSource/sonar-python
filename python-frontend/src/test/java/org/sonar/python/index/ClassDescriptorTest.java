@@ -20,11 +20,16 @@
 package org.sonar.python.index;
 
 
+import java.util.Collections;
+import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastClassSymbol;
+import static org.sonar.python.PythonTestUtils.lastClassSymbolWithName;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 
 public class ClassDescriptorTest {
@@ -43,6 +48,7 @@ public class ClassDescriptorTest {
     FunctionDescriptor fooMethod = ((FunctionDescriptor) classDescriptor.members().iterator().next());
     assertThat(fooMethod.name()).isEqualTo("foo");
     assertThat(fooMethod.fullyQualifiedName()).isEqualTo("package.mod.A.foo");
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   @Test
@@ -51,6 +57,7 @@ public class ClassDescriptorTest {
       "class B: ...",
       "class A(B): ...");
     assertThat(classDescriptor.superClasses()).containsExactly("package.mod.B");
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   @Test
@@ -60,6 +67,7 @@ public class ClassDescriptorTest {
       "class A(foo()): ...");
     assertThat(classDescriptor.superClasses()).isEmpty();
     assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   @Test
@@ -69,6 +77,7 @@ public class ClassDescriptorTest {
       "class A(metaclass=B): ...");
     assertThat(classDescriptor.hasMetaClass()).isTrue();
     assertThat(classDescriptor.metaclassFQN()).isEqualTo("package.mod.B");
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   @Test
@@ -77,6 +86,7 @@ public class ClassDescriptorTest {
       "@foo",
       "class A: ...");
     assertThat(classDescriptor.hasDecorators()).isTrue();
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   @Test
@@ -85,10 +95,51 @@ public class ClassDescriptorTest {
       "from typing import Generic",
       "class A(Generic[str]): ...");
     assertThat(classDescriptor.supportsGenerics()).isTrue();
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
+  }
+
+  @Test
+  public void classDescriptorWithVariousMembers() {
+    ClassDescriptor classDescriptor = lastClassDescriptorWithName("A",
+      "class A:",
+      "  def foo(): ...",
+      "  foo = 42",
+      "  bar = 24",
+      "  qix = 42",
+      "  def qix(): ...",
+      "  class Nested: ..."
+    );
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
+  }
+
+  @Test
+  public void protobufSerializationWithoutLocationNorFQN() {
+    ClassDescriptor classDescriptor = new ClassDescriptor(
+      "foo",
+      null,
+      Collections.emptyList(),
+      Collections.emptySet(),
+      false,
+      null,
+      false,
+      false,
+      null,
+      false
+    );
+    assertClassDescriptors(classDescriptor, fromProtobuf(toProtobuf(classDescriptor)));
   }
 
   public static ClassDescriptor lastClassDescriptor(String... code) {
-    ClassSymbol classSymbol = lastClassSymbol(code);
+    return lastClassDescriptorWithName(null, code);
+  }
+
+  public static ClassDescriptor lastClassDescriptorWithName(@Nullable String name, String... code) {
+    ClassSymbol classSymbol;
+    if (name == null) {
+      classSymbol = lastClassSymbol(code);
+    } else {
+      classSymbol = lastClassSymbolWithName(name, code);
+    }
     ClassDescriptor classDescriptor = (ClassDescriptor) descriptor(classSymbol);
     assertThat(classDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
     assertThat(classDescriptor.name()).isEqualTo(classSymbol.name());
@@ -96,5 +147,18 @@ public class ClassDescriptorTest {
     assertThat(classDescriptor.definitionLocation()).isNotNull();
     assertThat(classDescriptor.definitionLocation()).isEqualTo(classSymbol.definitionLocation());
     return classDescriptor;
+  }
+
+  void assertClassDescriptors(ClassDescriptor first, ClassDescriptor second) {
+    assertThat(first.hasDecorators()).isEqualTo(second.hasDecorators());
+    assertThat(first.hasSuperClassWithoutDescriptor()).isEqualTo(second.hasSuperClassWithoutDescriptor());
+    assertThat(first.hasMetaClass()).isEqualTo(second.hasMetaClass());
+    assertThat(first.supportsGenerics()).isEqualTo(second.supportsGenerics());
+    assertThat(first.name()).isEqualTo(second.name());
+    assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
+    assertThat(first.superClasses()).isEqualTo(second.superClasses());
+    assertThat(first.members()).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(second.members());
+    assertThat(first.definitionLocation()).usingRecursiveComparison().isEqualTo(second.definitionLocation());
+    assertThat(first.metaclassFQN()).isEqualTo(second.metaclassFQN());
   }
 }

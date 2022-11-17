@@ -21,6 +21,7 @@ package org.sonar.python.index;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 
@@ -30,7 +31,7 @@ public class ClassDescriptor implements Descriptor {
   @Nullable
   private final String fullyQualifiedName;
   private final Collection<String> superClasses;
-  private final Collection<Descriptor> members;
+  private final Set<Descriptor> members;
   private final boolean hasDecorators;
   private final LocationInFile definitionLocation;
   private final boolean hasSuperClassWithoutDescriptor;
@@ -38,7 +39,7 @@ public class ClassDescriptor implements Descriptor {
   private final String metaclassFQN;
   private final boolean supportsGenerics;
 
-  public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Collection<Descriptor> members,
+  public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,
     @Nullable String metaclassFQN, boolean supportsGenerics) {
 
@@ -106,7 +107,7 @@ public class ClassDescriptor implements Descriptor {
     private String name;
     private String fullyQualifiedName;
     private Collection<String> superClasses = new HashSet<>();
-    private Collection<Descriptor> members = new HashSet<>();
+    private Set<Descriptor> members = new HashSet<>();
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
     private boolean hasSuperClassWithoutDescriptor = false;
@@ -129,7 +130,7 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
-    public ClassDescriptorBuilder withMembers(Collection<Descriptor> members) {
+    public ClassDescriptorBuilder withMembers(Set<Descriptor> members) {
       this.members = members;
       return this;
     }
