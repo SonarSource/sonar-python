@@ -74,15 +74,16 @@ import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.checks.CheckList;
-import org.sonarsource.sonarlint.core.analyzer.issue.DefaultQuickFix;
-import org.sonarsource.sonarlint.core.client.api.common.Language;
-import org.sonarsource.sonarlint.core.client.api.common.QuickFix;
-import org.sonarsource.sonarlint.core.client.api.common.TextEdit;
-import org.sonarsource.sonarlint.core.client.api.common.analysis.ClientInputFile;
-import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextPointer;
-import org.sonarsource.sonarlint.core.container.analysis.filesystem.DefaultTextRange;
-import org.sonarsource.sonarlint.core.container.analysis.filesystem.FileMetadata;
-import org.sonarsource.sonarlint.core.container.analysis.filesystem.SonarLintInputFile;
+
+import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
+import org.sonarsource.sonarlint.core.analysis.api.QuickFix;
+import org.sonarsource.sonarlint.core.analysis.api.TextEdit;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.DefaultTextPointer;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.DefaultTextRange;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.DefaultQuickFix;
+import org.sonarsource.sonarlint.core.commons.Language;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -218,9 +219,8 @@ public class PythonSensorTest {
     assertThat(textEdits).hasSize(1);
     assertThat(textEdits.get(0).newText()).isEqualTo("cls, ");
 
-    DefaultTextRange textRange = new DefaultTextRange(new DefaultTextPointer(4, 13),
-      new DefaultTextPointer(4, 13));
-    assertThat(textEdits.get(0).range()).isEqualTo(textRange);
+    org.sonarsource.sonarlint.core.commons.TextRange textRange = new org.sonarsource.sonarlint.core.commons.TextRange(4, 13, 4, 13);
+    assertThat(textEdits.get(0).range()).usingRecursiveComparison().isEqualTo(textRange);
   }
 
   @Test

@@ -30,8 +30,8 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
-import org.sonarsource.sonarlint.core.analyzer.issue.DefaultQuickFix;
-import org.sonarsource.sonarlint.core.analyzer.sensor.DefaultSonarLintIssue;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.DefaultQuickFix;
+import org.sonarsource.sonarlint.core.analysis.sonarapi.DefaultSonarLintIssue;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
