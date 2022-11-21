@@ -41,15 +41,16 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.sonarlint.core.StandaloneSonarLintEngineImpl;
-import org.sonarsource.sonarlint.core.client.api.common.ClientFileSystem;
-import org.sonarsource.sonarlint.core.client.api.common.Language;
-import org.sonarsource.sonarlint.core.client.api.common.LogOutput;
-import org.sonarsource.sonarlint.core.client.api.common.ModuleInfo;
-import org.sonarsource.sonarlint.core.client.api.common.analysis.ClientInputFile;
+import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
+import org.sonarsource.sonarlint.core.analysis.api.ClientModuleFileSystem;
+import org.sonarsource.sonarlint.core.analysis.api.ClientModuleInfo;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.Issue;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneAnalysisConfiguration;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneGlobalConfiguration;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneSonarLintEngine;
+import org.sonarsource.sonarlint.core.commons.IssueSeverity;
+import org.sonarsource.sonarlint.core.commons.Language;
+import org.sonarsource.sonarlint.core.commons.log.ClientLogOutput;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -66,7 +67,7 @@ public class SonarLintTest {
   @BeforeClass
   public static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
-      .addPlugin(Tests.PLUGIN_LOCATION.getFile().toURI().toURL())
+      .addPlugin(Tests.PLUGIN_LOCATION.getFile().toPath())
       .setSonarLintUserHome(TEMP.newFolder().toPath())
       .addEnabledLanguage(Language.PYTHON)
       .setLogOutput((formattedMessage, level) -> {
@@ -98,13 +99,13 @@ public class SonarLintTest {
         .setModuleKey("myModule")
         .build();
 
-    Map<LogOutput.Level, List<String>> logsByLevel = new HashMap<>();
-    LogOutput logOutput = (s, level) -> {
+    Map<ClientLogOutput.Level, List<String>> logsByLevel = new HashMap<>();
+    ClientLogOutput logOutput = (s, level) -> {
       List<String> logs = logsByLevel.getOrDefault(level, new ArrayList<>());
       logs.add(s);
       logsByLevel.putIfAbsent(level, logs);
     };
-    ClientFileSystem clientFileSystem = new ClientFileSystem() {
+    ClientModuleFileSystem clientFileSystem = new ClientModuleFileSystem() {
       @Override
       public Stream<ClientInputFile> files(String s, InputFile.Type type) {
         return Stream.of(inputFile);
@@ -115,13 +116,13 @@ public class SonarLintTest {
         return Stream.of(inputFile);
       }
     };
-    sonarlintEngine.declareModule(new ModuleInfo("myModule", clientFileSystem));
+    sonarlintEngine.declareModule(new ClientModuleInfo("myModule", clientFileSystem));
     sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
 
-    assertThat(logsByLevel.get(LogOutput.Level.WARN)).containsExactly("No workDir in SonarLint");
+    assertThat(logsByLevel.get(ClientLogOutput.Level.WARN)).containsExactly("No workDir in SonarLint");
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
-      tuple("python:BackticksUsage", 2, inputFile.getPath(), "BLOCKER"),
-      tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));
+      tuple("python:BackticksUsage", 2, inputFile.uri().getPath(), IssueSeverity.BLOCKER),
+      tuple("python:S1542", 1, inputFile.uri().getPath(), IssueSeverity.MAJOR));
   }
 
   private static ClientInputFile prepareInputFile(String relativePath, String content, final boolean isTest) throws IOException {
