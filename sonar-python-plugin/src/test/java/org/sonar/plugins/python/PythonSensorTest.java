@@ -687,6 +687,30 @@ public class PythonSensorTest {
     assertThat(context.allIssues()).isEmpty();
   }
 
+  @Test
+  public void test_scan_without_parsing_test_file() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
+    TestReadCache readCache = new TestReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+  }
 
   @Test
   public void test_scan_without_parsing_fails() {

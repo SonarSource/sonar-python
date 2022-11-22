@@ -49,12 +49,12 @@ public final class TestUtils {
     }
   }
 
-  public static DefaultInputFile createInputFile(File baseDir, String name, InputFile.Status status) {
+  public static DefaultInputFile createInputFile(File baseDir, String name, InputFile.Status status, InputFile.Type type) {
     return TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setStatus(status)
-      .setType(InputFile.Type.MAIN)
+      .setType(type)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
       .build();

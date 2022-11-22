@@ -86,8 +86,8 @@ public class SonarQubePythonIndexerTest {
 
   @Test
   public void test_single_file_modified() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -104,14 +104,14 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isTrue();
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Retrieving cached project level symbol table.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 1 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 1 out of 2 files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 1 out of 2 main files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
   }
 
   @Test
   public void test_modified_dependency() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -127,15 +127,15 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 1 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
   }
 
 
   @Test
   public void test_no_file_modified_missing_entry() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -146,14 +146,14 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
   @Test
   public void test_no_file_modified_missing_imports() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -169,14 +169,14 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
   @Test
   public void test_no_file_modified_missing_descriptors() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -190,14 +190,30 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
   @Test
+
+  public void test_test_files_not_using_cache() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
+
+    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+    moduleFileSystem = new TestModuleFileSystem(inputFiles);
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer.buildOnce(context);
+    projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isTrue();
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
+  }
+
+  @Test
   public void test_pr_analysis_disabled() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -212,8 +228,8 @@ public class SonarQubePythonIndexerTest {
 
   @Test
   public void test_disabled_cache() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED);
-    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME);
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
@@ -228,7 +244,7 @@ public class SonarQubePythonIndexerTest {
 
   @Test
   public void test_regular_scan_when_scan_without_parsing_fails()  {
-    List<InputFile> files = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME));
+    List<InputFile> files = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
     PythonIndexer.GlobalSymbolsScanner globalSymbolsScanner = spy(
       new SonarQubePythonIndexer(files, cacheContext). new GlobalSymbolsScanner(context)
     );

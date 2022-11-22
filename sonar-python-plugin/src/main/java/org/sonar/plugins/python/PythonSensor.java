@@ -110,7 +110,6 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> pythonFiles = getInputFiles(context);
-    List<InputFile> mainFiles = pythonFiles.stream().filter(f -> f.type() == Type.MAIN).collect(Collectors.toList());
     Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
     if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
@@ -123,7 +122,7 @@ public final class PythonSensor implements Sensor {
     } else {
       cacheContext = new CacheContextImpl(false, null, null);
     }
-    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles, cacheContext);
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();
