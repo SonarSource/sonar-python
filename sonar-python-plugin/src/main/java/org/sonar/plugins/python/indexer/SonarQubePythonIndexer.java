@@ -31,14 +31,14 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.python.caching.Caching;
+import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
-import static org.sonar.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
-import static org.sonar.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 
 public class SonarQubePythonIndexer extends PythonIndexer {
 

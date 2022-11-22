@@ -37,20 +37,22 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
-import org.sonar.python.caching.CacheContextImpl;
-import org.sonar.python.caching.Caching;
-import org.sonar.python.caching.PythonReadCacheImpl;
-import org.sonar.python.caching.PythonWriteCacheImpl;
+import org.sonar.plugins.python.caching.CacheContextImpl;
+import org.sonar.plugins.python.caching.PythonReadCacheImpl;
+import org.sonar.plugins.python.caching.PythonWriteCacheImpl;
+import org.sonar.plugins.python.caching.TestReadCache;
+import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
-import static org.sonar.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
-import static org.sonar.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 
 public class SonarQubePythonIndexerTest {
 
@@ -92,8 +94,8 @@ public class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    byte[] outdatedEntry = Caching.moduleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "main", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "mod", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
@@ -116,8 +118,8 @@ public class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    byte[] outdatedEntry = Caching.moduleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "main", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "mod", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
@@ -158,8 +160,8 @@ public class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    byte[] outdatedEntry = Caching.moduleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", outdatedEntry);
 

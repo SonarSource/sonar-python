@@ -17,28 +17,22 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.python.index.AmbiguousDescriptor;
-import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.python.index.DescriptorUtils;
-import org.sonar.python.index.FunctionDescriptor;
-import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
 
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 public class Caching {
 
@@ -61,7 +55,7 @@ public class Caching {
 
   public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn;
-    cacheContext.getWriteCache().write(cacheKey, moduleDescriptor(descriptors).toByteArray());
+    cacheContext.getWriteCache().write(cacheKey, toProtobufModuleDescriptor(descriptors).toByteArray());
   }
 
   @CheckForNull
@@ -71,7 +65,7 @@ public class Caching {
       byte[] bytes = cacheContext.getReadCache().readBytes(key);
       if (bytes != null) {
         try {
-          return DescriptorUtils.deserializeProtobufDescriptors(bytes);
+          return fromProtobuf(DescriptorsProtos.ModuleDescriptor.parseFrom(bytes));
         } catch (InvalidProtocolBufferException e) {
           LOG.debug("Failed to deserialize project level symbol table entry for module: \"{}\"", module);
         }
@@ -88,32 +82,5 @@ public class Caching {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
     return null;
-  }
-
-
-  // Visible for testing
-  public static DescriptorsProtos.ModuleDescriptor moduleDescriptor(Set<Descriptor> descriptors) {
-    List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.AmbiguousDescriptor> ambiguousDescriptors = new ArrayList<>();
-    for (Descriptor descriptor : descriptors) {
-      Descriptor.Kind kind = descriptor.kind();
-      if (kind == Descriptor.Kind.CLASS) {
-        classDescriptors.add(toProtobuf(((ClassDescriptor) descriptor)));
-      } else if (kind == Descriptor.Kind.FUNCTION) {
-        functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
-      } else if (kind == Descriptor.Kind.VARIABLE) {
-        varDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
-      } else {
-        ambiguousDescriptors.add(toProtobuf((AmbiguousDescriptor) descriptor));
-      }
-    }
-    return DescriptorsProtos.ModuleDescriptor.newBuilder()
-      .addAllClassDescriptors(classDescriptors)
-      .addAllFunctionDescriptors(functionDescriptors)
-      .addAllVarDescriptors(varDescriptors)
-      .addAllAmbiguousDescriptors(ambiguousDescriptors)
-      .build();
   }
 }

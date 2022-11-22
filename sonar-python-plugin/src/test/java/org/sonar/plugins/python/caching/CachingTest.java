@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
 
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,18 +35,20 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
-import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.index.DescriptorsToProtobuf;
+import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.protobuf.DescriptorsProtos;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
-import static org.sonar.python.PythonTestUtils.pythonFile;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
-import static org.sonar.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 
 public class CachingTest {
 
@@ -61,23 +64,16 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    FileInput tree = parseWithoutSymbols(
-      "class A: ...",
-      "class B(A): ...",
-      "def foo(): ...",
-      "x :int = 42",
-      "def bar(): ...",
-      "bar = 24"
-    );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
-
     Caching caching = new Caching(cacheContext);
-    Set<Descriptor> initialDescriptors = projectLevelSymbolTable.descriptorsForModule("mod");
+    Set<Descriptor> initialDescriptors = Set.of(
+      new ClassDescriptor("C", "mod.C", Collections.emptyList(), Collections.emptySet(), false, null, false, false, null, false),
+      new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
+      new VariableDescriptor("x", "mod.x", null)
+    );
     caching.writeProjectLevelSymbolTableEntry("mod", initialDescriptors);
     Map<String, byte[]> data = writeCache.getData();
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
-    Set<Descriptor> retrievedDescriptors = DescriptorUtils.deserializeProtobufDescriptors(data.get(cacheKey));
+    Set<Descriptor> retrievedDescriptors = fromProtobuf(DescriptorsProtos.ModuleDescriptor.parseFrom(data.get(cacheKey)));
     assertThat(cacheContext.isCacheEnabled()).isTrue();
     assertThat(retrievedDescriptors).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(initialDescriptors);
   }
@@ -91,17 +87,14 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    FileInput tree = parseWithoutSymbols(
-      "class A: ...",
-      "class B(A): ..."
-    );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
-
     Caching caching = new Caching(cacheContext);
-    Set<Descriptor> initialDescriptors = projectLevelSymbolTable.descriptorsForModule("mod");
+    Set<Descriptor> initialDescriptors = Set.of(
+      new ClassDescriptor("C", "mod.C", Collections.emptyList(), Collections.emptySet(), false, null, false, false, null, false),
+      new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
+      new VariableDescriptor("x", "mod.x", null)
+    );
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
-    readCache.put(cacheKey, Caching.moduleDescriptor(initialDescriptors).toByteArray());
+    readCache.put(cacheKey, DescriptorsToProtobuf.toProtobufModuleDescriptor(initialDescriptors).toByteArray());
     Set<Descriptor> retrievedDescriptorsOptional = caching.readProjectLevelSymbolTableEntry("mod");
     assertThat(retrievedDescriptorsOptional).isNotNull().usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(initialDescriptors);
   }

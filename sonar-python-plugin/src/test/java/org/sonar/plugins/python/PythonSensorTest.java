@@ -71,13 +71,12 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.caching.TestReadCache;
+import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
-import org.sonar.plugins.python.indexer.TestReadCache;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
-import org.sonar.plugins.python.indexer.TestWriteCache;
-import org.sonar.python.caching.Caching;
 import org.sonar.python.checks.CheckList;
 
 import org.sonar.python.index.DescriptorUtils;
@@ -101,8 +100,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.sonar.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
-import static org.sonar.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
+import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 
 public class PythonSensorTest {
 
@@ -675,7 +675,7 @@ public class PythonSensorTest {
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
     context.setPreviousCache(readCache);
@@ -728,7 +728,7 @@ public class PythonSensorTest {
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
     context.setPreviousCache(readCache);
@@ -760,7 +760,7 @@ public class PythonSensorTest {
     context.setCacheEnabled(true);
     context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
 
-    byte[] serializedSymbolTable = Caching.moduleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
     sensor().execute(contextMock);
