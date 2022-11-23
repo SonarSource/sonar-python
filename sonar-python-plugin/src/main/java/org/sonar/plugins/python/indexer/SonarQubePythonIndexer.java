@@ -37,15 +37,11 @@ import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
-import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
-import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
-
 public class SonarQubePythonIndexer extends PythonIndexer {
 
   private final List<InputFile> mainFiles;
   private final List<InputFile> testFiles;
-  private final Set<InputFile> skippableMainFiles;
-  private final Set<InputFile> skippableTestFiles;
+  private final Set<InputFile> skippableFiles;
   private final CacheContext cacheContext;
   private static final Logger LOG = Loggers.get(SonarQubePythonIndexer.class);
   /**
@@ -65,8 +61,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         testFiles.add(f);
       }
     });
-    this.skippableMainFiles = new HashSet<>();
-    this.skippableTestFiles = new HashSet<>();
+    this.skippableFiles = new HashSet<>();
     this.cacheContext = cacheContext;
   }
 
@@ -74,21 +69,21 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public void buildOnce(SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     LOG.debug("Input files for indexing: " + mainFiles);
-    boolean shouldUseCache = context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false) && cacheContext.isCacheEnabled();
-    if (!shouldUseCache) {
+    boolean shouldOptimizeAnalysis = context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false) && cacheContext.isCacheEnabled();
+    if (!shouldOptimizeAnalysis) {
       PerformanceMeasure.Duration duration = PerformanceMeasure.start("ProjectLevelSymbolTable");
       computeGlobalSymbols(mainFiles, context);
       duration.stop();
       return;
     }
-    computeProjectLevelSymbolTableUsingCache(context);
+    computeGlobalSymbolsUsingCache(context);
   }
 
-  private void computeProjectLevelSymbolTableUsingCache(SensorContext context) {
-    LOG.info("Retrieving cached project level symbol table.");
+  private void computeGlobalSymbolsUsingCache(SensorContext context) {
+    LOG.info("Using cached data to retrieve global symbols.");
     Caching caching = new Caching(cacheContext);
     Map<InputFile, String> inputFileToFQN = mainFiles.stream().collect(Collectors.toMap(f -> f, f -> SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename())));
-    // Compute deleted files here through diff with what was saved and include them to projectModuleFQNs / modifiedFiles
+    // TODO SONARPY-1196: Compute deleted files here through diff with what was saved and include them to projectModuleFQNs / modifiedFiles
     Set<String> projectModulesFQNs = new HashSet<>(inputFileToFQN.values());
     Map<String, Set<String>> importsByModule = new HashMap<>();
     List<InputFile> modifiedFiles = new ArrayList<>();
@@ -106,27 +101,22 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       }
       Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(currFQN);
       if (descriptors != null && imports != null) {
-        saveRetrievedDescriptors(currFQN, descriptors);
+        saveRetrievedDescriptors(currFQN, descriptors, caching);
       } else {
-        // failed to retrieve the data: consider the file as impactful
+        // Failed to retrieve some data: consider the file as impactful.
         impactfulFilesFQN.add(currFQN);
         modifiedFiles.add(inputFile);
       }
     }
-    DependencyGraph dependencyGraph = DependencyGraph.from(importsByModule, projectModulesFQNs);
-    Set<String> impactedModulesFQN = dependencyGraph.impactedModules(impactfulFilesFQN);
-    for (InputFile inputFile : mainFiles) {
-      if (!impactedModulesFQN.contains(inputFileToFQN.get(inputFile))) {
-        skippableMainFiles.add(inputFile);
-      }
-    }
-    for (InputFile inputFile : testFiles) {
-      if (inputFile.status().equals(InputFile.Status.SAME)) {
-        skippableTestFiles.add(inputFile);
-      }
-    }
-    LOG.info("Project level symbol table information needs to be computed for {} out of {} files.", impactfulFilesFQN.size(), mainFiles.size());
-    LOG.info("Regular analysis will be performed on {} out of {} main files.", mainFiles.size()  - skippableMainFiles.size(), mainFiles.size());
+    Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, projectModulesFQNs).impactedModules(impactfulFilesFQN);
+    mainFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(skippableFiles::add);
+    testFiles.stream().filter(f -> f.status().equals(InputFile.Status.SAME)).forEach(skippableFiles::add);
+    LOG.info(
+      "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
+      mainFiles.size() - impactfulFilesFQN.size(),
+      mainFiles.size()
+    );
+    LOG.info("Optimized analysis can be performed for {} out of {} files.", skippableFiles.size(), mainFiles.size() + testFiles.size());
     // Although we need to analyze all impacted files, we only need to recompute PST entries for modified files (no cross-file dependencies in the project symbol table)
     computeGlobalSymbols(modifiedFiles, context);
     saveGlobalSymbolsInCache(caching, inputFileToFQN, modifiedFiles);
@@ -140,11 +130,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
   }
 
-  private void saveRetrievedDescriptors(String currFQN, Set<Descriptor> descriptors) {
-    projectLevelSymbolTable().insertEntry(currFQN, descriptors);
-    // Save the entry in cache for next analysis
-    cacheContext.getWriteCache().copyFromPrevious(IMPORTS_MAP_CACHE_KEY_PREFIX + currFQN);
-    cacheContext.getWriteCache().copyFromPrevious(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + currFQN);
+  private void saveRetrievedDescriptors(String moduleFqn, Set<Descriptor> descriptors, Caching caching) {
+    projectLevelSymbolTable().insertEntry(moduleFqn, descriptors);
+    caching.copyFromPrevious(moduleFqn);
   }
 
   public void computeGlobalSymbols(List<InputFile> files, SensorContext context) {
@@ -154,6 +142,6 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   @Override
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
-    return skippableMainFiles.contains(inputFile) || skippableTestFiles.contains(inputFile);
+    return skippableFiles.contains(inputFile);
   }
 }

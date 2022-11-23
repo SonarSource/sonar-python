@@ -58,6 +58,11 @@ public class Caching {
     cacheContext.getWriteCache().write(cacheKey, toProtobufModuleDescriptor(descriptors).toByteArray());
   }
 
+  public void copyFromPrevious(String moduleFqn) {
+    cacheContext.getWriteCache().copyFromPrevious(IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn);
+    cacheContext.getWriteCache().copyFromPrevious(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn);
+  }
+
   @CheckForNull
   public Set<Descriptor> readProjectLevelSymbolTableEntry(String module) {
     String key = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + module;

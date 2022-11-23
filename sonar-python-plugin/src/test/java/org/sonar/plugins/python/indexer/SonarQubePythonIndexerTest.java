@@ -104,9 +104,9 @@ public class SonarQubePythonIndexerTest {
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isTrue();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Retrieving cached project level symbol table.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 1 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 1 out of 2 main files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Using cached data to retrieve global symbols.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Optimized analysis can be performed for 1 out of 2 files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
   }
 
@@ -128,8 +128,8 @@ public class SonarQubePythonIndexerTest {
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 1 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Optimized analysis can be performed for 0 out of 2 files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
   }
 
@@ -147,8 +147,8 @@ public class SonarQubePythonIndexerTest {
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Optimized analysis can be performed for 0 out of 2 files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
@@ -170,8 +170,8 @@ public class SonarQubePythonIndexerTest {
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Optimized analysis can be performed for 0 out of 2 files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
@@ -191,8 +191,8 @@ public class SonarQubePythonIndexerTest {
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Project level symbol table information needs to be computed for 2 out of 2 files.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Regular analysis will be performed on 2 out of 2 main files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Optimized analysis can be performed for 0 out of 2 files.");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("2/2 source files have been analyzed");
   }
 
