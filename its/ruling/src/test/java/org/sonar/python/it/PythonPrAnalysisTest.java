@@ -27,10 +27,12 @@ import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collection;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -55,9 +57,15 @@ public class PythonPrAnalysisTest {
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
   private final String scenario;
+  private final int expectedTotalFiles;
+  private final int expectedRecomputed;
+  private final int expectedSkipped;
 
-  public PythonPrAnalysisTest(String scenario) {
+  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped) {
     this.scenario = scenario;
+    this.expectedTotalFiles = expectedTotalFiles;
+    this.expectedRecomputed = expectedRecomputed;
+    this.expectedSkipped = expectedSkipped;
   }
 
   @BeforeClass
@@ -71,44 +79,84 @@ public class PythonPrAnalysisTest {
   }
 
   @Parameters(name = "{index}: {0}")
-  public static Object[] data() {
-    return new String[] {"newFile", "changeInImportedModule", "changeInParent", "changeInPackageInit", "changeInRelativeImport"};
+  public static Collection<Object[]> data() {
+    return List.of(new Object[][] {
+      // {<scenario>, <total files>, <recomputed>, <skipped>}
+      {"newFile", 10, 1, 9},
+      {"changeInImportedModule", 9, 2, 7},
+      {"changeInParent", 9, 3, 6},
+      {"changeInPackageInit", 9, 2, 7},
+      {"changeInRelativeImport", 9, 5, 4}}
+    );
   }
 
   @Test
-  public void pr_analysis() throws IOException {
-    File tempFile = temporaryFolder.newFolder();
+  @Ignore
+  public void pr_analysis_logs() throws IOException {
+    File tempDirectory = temporaryFolder.newFolder();
+    File litsDifferencesFile = FileLocation.of("target/differences").getFile();
 
     // Analyze base commit
-    FileUtils.copyDirectory(new File("../sources_pr_analysis", "baseCommit"), tempFile);
-
-    File litsDifferencesFile = FileLocation.of("target/differences").getFile();
-    SonarScanner build = prepareScanner(tempFile, PR_ANALYSIS_PROJECT_KEY, "baseCommit", litsDifferencesFile);
-    ORCHESTRATOR.executeBuild(build);
-
-    String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
-    assertThat(litsDifferences).isEmpty();
+    analyzeAndAssertBaseCommit(tempDirectory, litsDifferencesFile);
 
     // Analyze the changed branch
-    executePrAnalysisOnBranch(scenario, tempFile, litsDifferencesFile);
-  }
-
-  private BuildResult executePrAnalysisOnBranch(String scenario, File tempDirectory, File litsDifferencesFile) throws IOException {
-    FileUtils.copyDirectory(new File("../sources_pr_analysis", scenario), tempDirectory);
-
+    setUpChanges(tempDirectory, scenario);
     SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile)
       .setProperty("sonar.pullrequest.key", "1")
       .setProperty("sonar.pullrequest.branch", "incremental");
 
     BuildResult result = ORCHESTRATOR.executeBuild(build);
 
+    String expectedRecomputedLog = String.format("Project level symbol table information needs to be computed for %d out of %d files.",
+      expectedRecomputed, expectedTotalFiles);
+
+    String expectedRegularAnalysisLog = String.format("Regular analysis will be performed on %d out of %d files.",
+      expectedTotalFiles - expectedSkipped, expectedTotalFiles);
+
+    // TODO: Check logs
+    assertThat(result.getLogs())
+      .contains(expectedRecomputedLog)
+      .contains(expectedRegularAnalysisLog);
+  }
+
+  @Test
+  public void pr_analysis_issues() throws IOException {
+    File tempDirectory = temporaryFolder.newFolder();
+    File litsDifferencesFile = FileLocation.of("target/differences").getFile();
+
+    // Analyze base commit
+    analyzeAndAssertBaseCommit(tempDirectory, litsDifferencesFile);
+
+    // Analyze the changed branch
+
+    // By default, when performing branch analysis, the incremental analysis is disabled.
+    // Still, while testing, we want to run branch analysis, to take full advantage of LITS by comparing the total issues that are raised
+    // (if we set up a PR Analysis, LITS will fail comparing all the expected issues).
+    // Thus, in the test we perform branch analysis, and we manually enable incremental analysis for testing purposes.
+    setUpChanges(tempDirectory, scenario);
+    SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile)
+      .setProperty("sonar.python.skipUnchanged", "true")
+      .setProperty("sonar.analysisCache.enabled", "true");
+
+    ORCHESTRATOR.executeBuild(build);
+
     // Check expected issues
     String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
     assertThat(litsDifferences).isEmpty();
+  }
 
-    // TODO: Check logs
+  private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {
+    FileUtils.copyDirectory(new File("../sources_pr_analysis", "baseCommit"), tempFile);
 
-    return result;
+    SonarScanner build = prepareScanner(tempFile, PR_ANALYSIS_PROJECT_KEY, "baseCommit", litsDifferencesFile);
+    ORCHESTRATOR.executeBuild(build);
+
+    String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
+    assertThat(litsDifferences).isEmpty();
+  }
+
+  private void setUpChanges(File tempDirectory, String scenario) throws IOException {
+    FileUtils.copyDirectory(new File("../sources_pr_analysis", scenario), tempDirectory);
   }
 
   private SonarScanner prepareScanner(File path, String projectKey, String scenario, File litsDifferencesFile) throws IOException{

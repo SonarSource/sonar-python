@@ -20,6 +20,7 @@
 package org.sonar.python.it;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
@@ -35,13 +36,18 @@ public class RulingHelper {
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
   static Orchestrator getOrchestrator(Edition sonarEdition) {
-    return Orchestrator.builderEnv()
+    OrchestratorBuilder builder = Orchestrator.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
       .setEdition(sonarEdition)
       .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"))
-      .build();
+      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"));
+
+    if (sonarEdition != Edition.COMMUNITY) {
+      builder.activateLicense();
+    }
+
+    return builder.build();
   }
 
   static Orchestrator getOrchestrator() {
