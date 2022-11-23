@@ -134,9 +134,7 @@ public class PythonPrAnalysisTest {
     // (if we set up a PR Analysis, LITS will fail comparing all the expected issues).
     // Thus, in the test we perform branch analysis, and we manually enable incremental analysis for testing purposes.
     setUpChanges(tempDirectory, scenario);
-    SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile)
-      .setProperty("sonar.python.skipUnchanged", "true")
-      .setProperty("sonar.analysisCache.enabled", "true");
+    SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile).setProperty("sonar.python.skipUnchanged", "true");
 
     ORCHESTRATOR.executeBuild(build);
 
@@ -167,6 +165,7 @@ public class PythonPrAnalysisTest {
       .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
+      .setProperty("sonar.analysisCache.enabled", "true")
       .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected_pr_analysis/" + scenario).getFile().getAbsolutePath())
       .setProperty("sonar.lits.dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.cpd.exclusions", "**/*")
