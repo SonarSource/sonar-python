@@ -42,7 +42,6 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private final List<InputFile> mainFiles;
   private final List<InputFile> testFiles;
   private final Set<InputFile> skippableFiles;
-  @Nullable
   private final Caching caching;
   private final Map<InputFile, String> inputFileToFQN;
   private static final Logger LOG = Loggers.get(SonarQubePythonIndexer.class);
@@ -66,14 +65,15 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       }
     });
     this.skippableFiles = new HashSet<>();
-    this.caching = cacheContext.isCacheEnabled() ? new Caching(cacheContext) : null;
+    this.caching = new Caching(cacheContext);
   }
 
   @Override
   public void buildOnce(SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     LOG.debug("Input files for indexing: " + mainFiles);
-    boolean shouldOptimizeAnalysis = context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false) && caching != null;
+    boolean shouldOptimizeAnalysis = caching.isCacheEnabled()
+      && (context.canSkipUnchangedFiles() || context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false));
     if (!shouldOptimizeAnalysis) {
       PerformanceMeasure.Duration duration = PerformanceMeasure.start("ProjectLevelSymbolTable");
       computeGlobalSymbols(mainFiles, context);
@@ -131,17 +131,17 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public void computeGlobalSymbols(List<InputFile> files, SensorContext context) {
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
-    saveGlobalSymbolsInCache(files);
+    if (caching.isCacheEnabled()) {
+      saveGlobalSymbolsInCache(files);
+    }
   }
 
   private void saveGlobalSymbolsInCache(List<InputFile> files) {
-    if (caching != null) {
-      for (InputFile inputFile : files) {
-        String moduleFQN = inputFileToFQN.get(inputFile);
-        Set<Descriptor> descriptors = projectLevelSymbolTable().descriptorsForModule(moduleFQN);
-        caching.writeProjectLevelSymbolTableEntry(moduleFQN, descriptors);
-        caching.writeImportsMapEntry(moduleFQN, projectLevelSymbolTable().importsByModule().get(moduleFQN));
-      }
+    for (InputFile inputFile : files) {
+      String moduleFQN = inputFileToFQN.get(inputFile);
+      Set<Descriptor> descriptors = projectLevelSymbolTable().descriptorsForModule(moduleFQN);
+      caching.writeProjectLevelSymbolTableEntry(moduleFQN, descriptors);
+      caching.writeImportsMapEntry(moduleFQN, projectLevelSymbolTable().importsByModule().get(moduleFQN));
     }
   }
 

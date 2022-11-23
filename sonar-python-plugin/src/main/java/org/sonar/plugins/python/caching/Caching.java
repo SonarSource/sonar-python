@@ -88,4 +88,8 @@ public class Caching {
     }
     return null;
   }
+
+  public boolean isCacheEnabled() {
+    return cacheContext.isCacheEnabled();
+  }
 }
