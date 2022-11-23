@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.caching.DummyCache;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -118,7 +119,7 @@ public final class PythonSensor implements Sensor {
     if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
       cacheContext = new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
     } else {
-      cacheContext = new CacheContextImpl(false, null, null);
+      cacheContext = new CacheContextImpl(false, new DummyCache(), new DummyCache());
     }
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
