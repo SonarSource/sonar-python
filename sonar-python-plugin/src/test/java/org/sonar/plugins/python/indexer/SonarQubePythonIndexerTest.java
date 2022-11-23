@@ -96,10 +96,10 @@ public class SonarQubePythonIndexerTest {
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "main", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "mod", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", outdatedEntry);
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "moduleKey:main.py", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "moduleKey:mod.py", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:main.py", serializedSymbolTable);
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:mod.py", outdatedEntry);
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -120,10 +120,10 @@ public class SonarQubePythonIndexerTest {
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "main", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "mod", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", outdatedEntry);
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "moduleKey:main.py", String.join(";", List.of("mod")).getBytes(StandardCharsets.UTF_8));
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "moduleKey:mod.py", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:main.py", serializedSymbolTable);
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:mod.py", outdatedEntry);
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -162,8 +162,8 @@ public class SonarQubePythonIndexerTest {
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "main", serializedSymbolTable);
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", outdatedEntry);
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:main.py", serializedSymbolTable);
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "moduleKey:mod.py", outdatedEntry);
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
     pythonIndexer.buildOnce(context);

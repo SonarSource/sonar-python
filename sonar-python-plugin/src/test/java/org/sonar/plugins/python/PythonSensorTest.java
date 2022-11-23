@@ -670,14 +670,14 @@ public class PythonSensorTest {
         .build())
       .build();
 
-    inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    InputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
     TestReadCache readCache = new TestReadCache();
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -723,14 +723,14 @@ public class PythonSensorTest {
         .build())
       .build();
 
-    inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    InputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
     TestReadCache readCache = new TestReadCache();
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + "file2", String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "file2", serializedSymbolTable);
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);

@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
@@ -97,13 +96,13 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         modifiedFiles.add(inputFile);
         continue;
       }
-      Set<String> imports = caching.readImportMapEntry(currFQN);
+      Set<String> imports = caching.readImportMapEntry(inputFile.key());
       if (imports != null) {
         importsByModule.put(currFQN, imports);
       }
-      Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(currFQN);
+      Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.key());
       if (descriptors != null && imports != null) {
-        saveRetrievedDescriptors(currFQN, descriptors, caching);
+        saveRetrievedDescriptors(inputFile.key(), descriptors, caching);
       } else {
         // Failed to retrieve some data: consider the file as impactful.
         impactfulFilesFQN.add(currFQN);
@@ -123,9 +122,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     computeGlobalSymbols(modifiedFiles, context);
   }
 
-  private void saveRetrievedDescriptors(String moduleFqn, Set<Descriptor> descriptors, Caching caching) {
-    projectLevelSymbolTable().insertEntry(moduleFqn, descriptors);
-    caching.copyFromPrevious(moduleFqn);
+  private void saveRetrievedDescriptors(String fileKey, Set<Descriptor> descriptors, Caching caching) {
+    projectLevelSymbolTable().insertEntry(fileKey, descriptors);
+    caching.copyFromPrevious(fileKey);
   }
 
   public void computeGlobalSymbols(List<InputFile> files, SensorContext context) {
@@ -140,8 +139,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     for (InputFile inputFile : files) {
       String moduleFQN = inputFileToFQN.get(inputFile);
       Set<Descriptor> descriptors = projectLevelSymbolTable().descriptorsForModule(moduleFQN);
-      caching.writeProjectLevelSymbolTableEntry(moduleFQN, descriptors);
-      caching.writeImportsMapEntry(moduleFQN, projectLevelSymbolTable().importsByModule().get(moduleFQN));
+      caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
+      caching.writeImportsMapEntry(inputFile.key(), projectLevelSymbolTable().importsByModule().get(moduleFQN));
     }
   }
 
