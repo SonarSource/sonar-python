@@ -32,6 +32,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
@@ -46,6 +47,7 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
@@ -225,7 +227,25 @@ public class SonarQubePythonIndexerTest {
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Retrieving cached project level symbol table.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
+  }
+
+  @Test
+  public void test_pr_analysis_enabled() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+    moduleFileSystem = new TestModuleFileSystem(inputFiles);
+
+    SensorContext mockContext = spy(context);
+    when(mockContext.canSkipUnchangedFiles()).thenReturn(true);
+    context.settings().setProperty("sonar.python.skipUnchanged", false);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer.buildOnce(mockContext);
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Using cached data to retrieve global symbols.");
   }
 
   @Test
@@ -241,7 +261,7 @@ public class SonarQubePythonIndexerTest {
     pythonIndexer.buildOnce(context);
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Retrieving cached project level symbol table.");
+    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
   }
 
   @Test
