@@ -105,16 +105,7 @@ public class PythonPrAnalysisTest {
       .setProperty("sonar.pullrequest.branch", "incremental");
 
     BuildResult result = ORCHESTRATOR.executeBuild(build);
-
-    String expectedRecomputedLog = String.format("Cached information of global symbols will be used for %d out of %d main files. Global symbols will be recomputed for the remaining files.",
-      expectedTotalFiles - expectedRecomputed, expectedTotalFiles);
-
-    String expectedRegularAnalysisLog = String.format("Optimized analysis can be performed for %d out of %d files.",
-      expectedSkipped, expectedTotalFiles);
-
-    assertThat(result.getLogs())
-      .contains(expectedRecomputedLog)
-      .contains(expectedRegularAnalysisLog);
+    assertPrAnalysisLogs(result);
   }
 
   @Test
@@ -134,11 +125,24 @@ public class PythonPrAnalysisTest {
     setUpChanges(tempDirectory, scenario);
     SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile).setProperty("sonar.python.skipUnchanged", "true");
 
-    ORCHESTRATOR.executeBuild(build);
+    BuildResult result = ORCHESTRATOR.executeBuild(build);
 
     // Check expected issues
     String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
     assertThat(litsDifferences).isEmpty();
+    assertPrAnalysisLogs(result);
+  }
+
+  private void assertPrAnalysisLogs(BuildResult result) {
+    String expectedRecomputedLog = String.format("Cached information of global symbols will be used for %d out of %d main files. Global symbols will be recomputed for the remaining files.",
+      expectedTotalFiles - expectedRecomputed, expectedTotalFiles);
+
+    String expectedRegularAnalysisLog = String.format("Optimized analysis can be performed for %d out of %d files.",
+      expectedSkipped, expectedTotalFiles);
+
+    assertThat(result.getLogs())
+      .contains(expectedRecomputedLog)
+      .contains(expectedRegularAnalysisLog);
   }
 
   private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {
