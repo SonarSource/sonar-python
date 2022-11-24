@@ -83,15 +83,14 @@ public class PythonPrAnalysisTest {
     return List.of(new Object[][] {
       // {<scenario>, <total files>, <recomputed>, <skipped>}
       {"newFile", 10, 1, 9},
-      {"changeInImportedModule", 9, 2, 7},
-      {"changeInParent", 9, 3, 6},
-      {"changeInPackageInit", 9, 2, 7},
-      {"changeInRelativeImport", 9, 5, 4}}
+      {"changeInImportedModule", 9, 1, 7},
+      {"changeInParent", 9, 1, 6},
+      {"changeInPackageInit", 9, 1, 7},
+      {"changeInRelativeImport", 9, 2, 4}}
     );
   }
 
   @Test
-  @Ignore
   public void pr_analysis_logs() throws IOException {
     File tempDirectory = temporaryFolder.newFolder();
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
@@ -107,13 +106,12 @@ public class PythonPrAnalysisTest {
 
     BuildResult result = ORCHESTRATOR.executeBuild(build);
 
-    String expectedRecomputedLog = String.format("Project level symbol table information needs to be computed for %d out of %d files.",
-      expectedRecomputed, expectedTotalFiles);
+    String expectedRecomputedLog = String.format("Cached information of global symbols will be used for %d out of %d main files. Global symbols will be recomputed for the remaining files.",
+      expectedTotalFiles - expectedRecomputed, expectedTotalFiles);
 
-    String expectedRegularAnalysisLog = String.format("Regular analysis will be performed on %d out of %d files.",
-      expectedTotalFiles - expectedSkipped, expectedTotalFiles);
+    String expectedRegularAnalysisLog = String.format("Optimized analysis can be performed for %d out of %d files.",
+      expectedSkipped, expectedTotalFiles);
 
-    // TODO: Check logs
     assertThat(result.getLogs())
       .contains(expectedRecomputedLog)
       .contains(expectedRegularAnalysisLog);
@@ -165,7 +163,6 @@ public class PythonPrAnalysisTest {
       .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
-      .setProperty("sonar.analysisCache.enabled", "true")
       .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected_pr_analysis/" + scenario).getFile().getAbsolutePath())
       .setProperty("sonar.lits.dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.cpd.exclusions", "**/*")
