@@ -17,36 +17,39 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
-import org.sonar.plugins.python.api.caching.CacheContext;
+import java.io.InputStream;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
-public class CacheContextImpl implements CacheContext {
+public class DummyCache implements PythonReadCache, PythonWriteCache {
 
-  private boolean isCacheEnabled;
-  private PythonWriteCache writeCache;
-  private PythonReadCache readCache;
+  @Override
+  public InputStream read(String key) {
+    throw new IllegalArgumentException("No cache data available");
+  }
 
-  public CacheContextImpl(boolean isCacheEnabled, PythonWriteCache writeCache, PythonReadCache readCache) {
-    this.isCacheEnabled = isCacheEnabled;
-    this.writeCache = writeCache;
-    this.readCache = readCache;
+  @CheckForNull
+  @Override
+  public byte[] readBytes(String key) {
+    return null;
   }
 
   @Override
-  public boolean isCacheEnabled() {
-    return isCacheEnabled;
+  public boolean contains(String key) {
+    return false;
   }
 
   @Override
-  public PythonReadCache getReadCache() {
-    return readCache;
+  public void write(String key, byte[] data) {
+    throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
   }
 
   @Override
-  public PythonWriteCache getWriteCache() {
-    return writeCache;
+  public void copyFromPrevious(String key) {
+    throw new IllegalArgumentException("No cache data available");
   }
 }
+

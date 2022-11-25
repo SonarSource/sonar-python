@@ -22,6 +22,8 @@ package org.sonar.plugins.python.api;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -29,6 +31,11 @@ public interface PythonCheck {
 
 
   void scanFile(PythonVisitorContext visitorContext);
+
+  @Beta
+  default boolean scanWithoutParsing(InputFile inputFile) {
+    return true;
+  }
 
   class PreciseIssue {
 

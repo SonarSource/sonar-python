@@ -17,47 +17,45 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import javax.annotation.CheckForNull;
+import java.util.HashMap;
+import java.util.Map;
 import org.sonar.api.batch.sensor.cache.ReadCache;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.python.api.caching.PythonReadCache;
 
-public class PythonReadCacheImpl implements PythonReadCache {
-  private static final Logger LOG = Loggers.get(PythonReadCacheImpl.class);
-
-  private final ReadCache readCache;
-
-  public PythonReadCacheImpl(ReadCache readCache) {
-    this.readCache = readCache;
-  }
+public class TestReadCache implements ReadCache {
+  private final Map<String, byte[]> data = new HashMap<>();
 
   @Override
   public InputStream read(String key) {
-    return readCache.read(key);
-  }
-
-  @CheckForNull
-  @Override
-  public byte[] readBytes(String key) {
-    if (readCache.contains(key)) {
-      try (var in = read(key)) {
-        return in.readAllBytes();
-      } catch (IOException e) {
-        LOG.debug("Unable to read data for key \"{}\"", key);
-      }
-    } else {
-      LOG.trace(() -> String.format("Cache miss for key '%s'", key));
+    if (!data.containsKey(key)) {
+      throw new IllegalArgumentException(String.format("cache does not contain key \"%s\"", key));
     }
-    return null;
+    byte[] buf = data.get(key);
+    if (buf == null) {
+      return new ByteArrayInputStream(new byte[0]);
+    }
+    return new ByteArrayInputStream(buf);
   }
 
   @Override
   public boolean contains(String key) {
-    return readCache.contains(key);
+    return data.containsKey(key);
+  }
+
+  public TestReadCache put(String key, byte[] data) {
+    this.data.put(key, data);
+    return this;
+  }
+
+  public TestReadCache putAll(Map<String, byte[]> data) {
+    this.data.putAll(data);
+    return this;
+  }
+
+  public TestReadCache putAll(TestWriteCache writeCache) {
+    return this.putAll(writeCache.getData());
   }
 }

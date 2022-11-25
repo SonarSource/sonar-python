@@ -26,6 +26,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
@@ -39,7 +40,7 @@ public class VariableDescriptorTest {
       "x");
     // only typeshed symbols have it != null
     assertThat(x.annotatedType()).isNull();
-    assertVariableDescriptors(x, fromProtobuf(toProtobuf(x)));
+    assertDescriptorToProtobuf(x);
   }
 
   @Test
