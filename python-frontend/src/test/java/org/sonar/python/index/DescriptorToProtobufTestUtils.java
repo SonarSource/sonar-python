@@ -28,6 +28,7 @@ import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescr
 public class DescriptorToProtobufTestUtils {
 
   static void assertDescriptorToProtobuf(Descriptor descriptor) {
+    // This asserts that a descriptor will be retrieved unaltered after being serialized and deserialized as a protobuf module descriptor.
     assertThat(fromProtobuf(toProtobufModuleDescriptor(Set.of(descriptor)))).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(Set.of(descriptor));
   }
 }

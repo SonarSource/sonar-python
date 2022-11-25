@@ -46,16 +46,13 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public static final String SONAR_CAN_SKIP_UNCHANGED_FILES_KEY = "sonar.python.skipUnchanged";
   private static final Logger LOG = Loggers.get(SonarQubePythonIndexer.class);
 
-  private final List<InputFile> mainFiles;
-  private final List<InputFile> testFiles;
-  private final Set<InputFile> skippableFiles;
   private final Caching caching;
-  private final Map<InputFile, String> inputFileToFQN;
+  private final Set<InputFile> skippableFiles = new HashSet<>();
+  private final List<InputFile> mainFiles = new ArrayList<>();
+  private final List<InputFile> testFiles = new ArrayList<>();
+  private final Map<InputFile, String> inputFileToFQN = new HashMap<>();
 
   public SonarQubePythonIndexer(List<InputFile> inputFiles, CacheContext cacheContext) {
-    this.mainFiles = new ArrayList<>();
-    this.testFiles = new ArrayList<>();
-    this.inputFileToFQN = new HashMap<>();
     inputFiles.forEach(f -> {
       if (f.type().equals(InputFile.Type.MAIN)) {
         mainFiles.add(f);
@@ -64,7 +61,6 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         testFiles.add(f);
       }
     });
-    this.skippableFiles = new HashSet<>();
     this.caching = new Caching(cacheContext);
   }
 
@@ -104,6 +100,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
     Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, projectModulesFQNs).impactedModules(impactfulFilesFQN);
     mainFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(skippableFiles::add);
+    // No project level information is stored for test files. It is therefore impossible for a change in a test file to impact other files.
     testFiles.stream().filter(f -> f.status().equals(InputFile.Status.SAME)).forEach(skippableFiles::add);
     LOG.info(
       "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
@@ -111,7 +108,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       mainFiles.size()
     );
     LOG.info("Optimized analysis can be performed for {} out of {} files.", skippableFiles.size(), mainFiles.size() + testFiles.size());
-    // Although we need to analyze all impacted files, we only need to recompute PST entries for modified files (no cross-file dependencies in the project symbol table)
+    // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies in the project symbol table)
     computeGlobalSymbols(impactfulFiles, context);
   }
 

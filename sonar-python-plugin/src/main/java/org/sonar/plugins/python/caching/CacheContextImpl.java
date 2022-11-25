@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.caching;
 
+import org.sonar.api.SonarProduct;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
@@ -48,5 +51,12 @@ public class CacheContextImpl implements CacheContext {
   @Override
   public PythonWriteCache getWriteCache() {
     return writeCache;
+  }
+
+  public static CacheContextImpl of(SensorContext context) {
+    if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
+      return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
+    }
+    return new CacheContextImpl(false, new DummyCache(), new DummyCache());
   }
 }
