@@ -1,0 +1,3 @@
+
+class ParentException(NotImplementedError):
+    pass

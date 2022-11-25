@@ -44,8 +44,8 @@ public class PythonExtendedRulingTest {
   @BeforeClass
   public static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
-    String pythonProfile = profile("py", "python", ruleKeys);
-    loadProfile(ORCHESTRATOR, pythonProfile);
+    String pythonProfile = RulingHelper.profile("customProfile", "py", "python", ruleKeys);
+    RulingHelper.loadProfile(ORCHESTRATOR, pythonProfile);
   }
 
   @Test
@@ -180,32 +180,4 @@ public class PythonExtendedRulingTest {
     String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
     assertThat(litsDifferences).isEmpty();
   }
-
-  private static String profile(String language, String repositoryKey, List<String> ruleKeys) {
-    StringBuilder sb = new StringBuilder()
-      .append("<profile>")
-      .append("<name>").append("customProfile").append("</name>")
-      .append("<language>").append(language).append("</language>")
-      .append("<rules>");
-    ruleKeys.forEach(ruleKey -> {
-      sb.append("<rule>")
-        .append("<repositoryKey>").append(repositoryKey).append("</repositoryKey>")
-        .append("<key>").append(ruleKey).append("</key>")
-        .append("<priority>INFO</priority>")
-        .append("</rule>");
-    });
-
-    return sb
-      .append("</rules>")
-      .append("</profile>")
-      .toString();
-  }
-
-  private static void loadProfile(Orchestrator orchestrator, String profile) throws IOException {
-    File file = File.createTempFile("profile", ".xml");
-    Files.write(file.toPath(), profile.getBytes());
-    orchestrator.getServer().restoreProfile(FileLocation.of(file));
-    file.delete();
-  }
-
 }

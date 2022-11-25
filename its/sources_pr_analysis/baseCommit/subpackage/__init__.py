@@ -1,0 +1,2 @@
+class SubpackageException(NotImplementedError):
+    pass

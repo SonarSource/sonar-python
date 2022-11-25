@@ -20,9 +20,13 @@
 package org.sonar.python.it;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.OrchestratorBuilder;
+import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,13 +35,50 @@ public class RulingHelper {
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
-  static Orchestrator getOrchestrator() {
-    return Orchestrator.builderEnv()
+  static Orchestrator getOrchestrator(Edition sonarEdition) {
+    OrchestratorBuilder builder = Orchestrator.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
+      .setEdition(sonarEdition)
       .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"))
-      .build();
+      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.10.0.2181"));
+
+    if (sonarEdition != Edition.COMMUNITY) {
+      builder.activateLicense();
+    }
+
+    return builder.build();
+  }
+
+  static Orchestrator getOrchestrator() {
+    return getOrchestrator(Edition.COMMUNITY);
+  }
+
+  static String profile(String name, String language, String repositoryKey, List<String> ruleKeys) {
+    StringBuilder sb = new StringBuilder()
+      .append("<profile>")
+      .append("<name>").append(name).append("</name>")
+      .append("<language>").append(language).append("</language>")
+      .append("<rules>");
+    ruleKeys.forEach(ruleKey -> {
+      sb.append("<rule>")
+        .append("<repositoryKey>").append(repositoryKey).append("</repositoryKey>")
+        .append("<key>").append(ruleKey).append("</key>")
+        .append("<priority>INFO</priority>")
+        .append("</rule>");
+    });
+
+    return sb
+      .append("</rules>")
+      .append("</profile>")
+      .toString();
+  }
+
+  static void loadProfile(Orchestrator orchestrator, String profile) throws IOException {
+    File file = File.createTempFile("profile", ".xml");
+    Files.write(file.toPath(), profile.getBytes());
+    orchestrator.getServer().restoreProfile(FileLocation.of(file));
+    file.delete();
   }
 
   // TODO: SONARPY-984, read rules metadata instead of hardcoding this list

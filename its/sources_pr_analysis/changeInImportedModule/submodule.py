@@ -1,0 +1,3 @@
+
+class SubmoduleException(ValueError):
+    pass
