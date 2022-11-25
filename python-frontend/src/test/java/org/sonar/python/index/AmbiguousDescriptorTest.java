@@ -30,9 +30,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastSymbolFromDef;
 import static org.sonar.python.index.ClassDescriptorTest.lastClassDescriptor;
+import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 
 public class AmbiguousDescriptorTest {
@@ -44,7 +45,7 @@ public class AmbiguousDescriptorTest {
       "class A: ...");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A");
-    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
+    assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
   @Test
@@ -55,7 +56,7 @@ public class AmbiguousDescriptorTest {
       "def A(): ...");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
-    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
+    assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
   @Test
@@ -67,7 +68,7 @@ public class AmbiguousDescriptorTest {
     AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(firstAmbiguousSymbol, classDescriptor);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
-    assertAmbiguousDescriptors(ambiguousDescriptor, fromProtobuf(toProtobuf(ambiguousDescriptor)));
+    assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
   @Test
@@ -108,11 +109,5 @@ public class AmbiguousDescriptorTest {
     assertThat(ambiguousDescriptor.name()).isEqualTo(ambiguousSymbol.name());
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo(ambiguousSymbol.fullyQualifiedName());
     return ambiguousDescriptor;
-  }
-
-  void assertAmbiguousDescriptors(AmbiguousDescriptor first, AmbiguousDescriptor second) {
-    assertThat(first.name()).isEqualTo(second.name());
-    assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
-    assertThat(first.alternatives()).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(second.alternatives());
   }
 }

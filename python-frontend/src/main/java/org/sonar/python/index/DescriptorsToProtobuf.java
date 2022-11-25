@@ -31,6 +31,31 @@ public class DescriptorsToProtobuf {
 
   private DescriptorsToProtobuf() {}
 
+  public static DescriptorsProtos.ModuleDescriptor toProtobufModuleDescriptor(Set<Descriptor> descriptors) {
+    List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();
+    List<DescriptorsProtos.AmbiguousDescriptor> ambiguousDescriptors = new ArrayList<>();
+    for (Descriptor descriptor : descriptors) {
+      Descriptor.Kind kind = descriptor.kind();
+      if (kind == Descriptor.Kind.CLASS) {
+        classDescriptors.add(toProtobuf(((ClassDescriptor) descriptor)));
+      } else if (kind == Descriptor.Kind.FUNCTION) {
+        functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
+      } else if (kind == Descriptor.Kind.VARIABLE) {
+        varDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
+      } else {
+        ambiguousDescriptors.add(toProtobuf((AmbiguousDescriptor) descriptor));
+      }
+    }
+    return DescriptorsProtos.ModuleDescriptor.newBuilder()
+      .addAllClassDescriptors(classDescriptors)
+      .addAllFunctionDescriptors(functionDescriptors)
+      .addAllVarDescriptors(varDescriptors)
+      .addAllAmbiguousDescriptors(ambiguousDescriptors)
+      .build();
+  }
+
   public static DescriptorsProtos.AmbiguousDescriptor toProtobuf(AmbiguousDescriptor ambiguousDescriptor) {
     List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> variableDescriptors = new ArrayList<>();
@@ -165,6 +190,15 @@ public class DescriptorsToProtobuf {
       .setEndLine(locationInFile.endLine())
       .setEndLineOffset(locationInFile.endLineOffset())
       .build();
+  }
+
+  public static Set<Descriptor> fromProtobuf(DescriptorsProtos.ModuleDescriptor moduleDescriptorProto) {
+    Set<Descriptor> descriptors = new HashSet<>();
+    moduleDescriptorProto.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    moduleDescriptorProto.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    return descriptors;
   }
 
   public static AmbiguousDescriptor fromProtobuf(DescriptorsProtos.AmbiguousDescriptor ambiguousDescriptor) {

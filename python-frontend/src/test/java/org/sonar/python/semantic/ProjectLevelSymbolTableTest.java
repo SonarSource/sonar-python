@@ -20,6 +20,7 @@
 package org.sonar.python.semantic;
 
 import com.google.common.base.Functions;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +30,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
+import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -41,6 +44,9 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
@@ -412,6 +418,15 @@ public class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
     projectLevelSymbolTable.removeModule("", "mod.py");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
+  }
+
+  @Test
+  public void test_insert_entry() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", null);
+    projectLevelSymbolTable.insertEntry("mod", Set.of(variableDescriptor));
+    assertThat(projectLevelSymbolTable.descriptorsForModule("mod")).containsExactly(variableDescriptor);
+    assertThat(projectLevelSymbolTable.getSymbol("mod.x").name()).isEqualTo("x");
   }
 
   @Test
@@ -919,6 +934,26 @@ public class ProjectLevelSymbolTableTest {
 
     FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
     assertThat(functionDef.localVariables()).isEmpty();
+  }
+
+  @Test
+  public void descriptorsForModule() {
+    FileInput tree = PythonTestUtils.parseWithoutSymbols(
+      "class A: ...",
+      "class B(A): ...",
+      "def foo(): ...",
+      "x :int = 42",
+      "def bar(): ...",
+      "bar = 24"
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", PythonTestUtils.pythonFile("mod.py"));
+    Set<Symbol> symbols = projectLevelSymbolTable.getSymbolsFromModule("mod");
+    Set<Descriptor> retrievedDescriptors = projectLevelSymbolTable.descriptorsForModule("mod");
+    Set<Descriptor> recomputedDescriptors = new HashSet<>();
+    assertThat(symbols).isNotNull();
+    symbols.forEach(s -> recomputedDescriptors.add(DescriptorUtils.descriptor(s)));
+    assertThat(recomputedDescriptors).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(retrievedDescriptors);
   }
 
 }

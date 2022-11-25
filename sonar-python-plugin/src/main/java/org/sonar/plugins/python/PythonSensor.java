@@ -24,12 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -41,6 +39,8 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.caching.CacheContextImpl;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -105,14 +105,14 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> pythonFiles = getInputFiles(context);
-    List<InputFile> mainFiles = pythonFiles.stream().filter(f -> f.type() == Type.MAIN).collect(Collectors.toList());
     Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
     if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
-    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
+    CacheContext cacheContext = CacheContextImpl.of(context);
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();

@@ -227,14 +227,4 @@ public class DescriptorUtils {
     }
     parameter.setDeclaredType(declaredType);
   }
-
-  public static Set<Descriptor> deserializeProtobufDescriptors(byte[] bytes) throws InvalidProtocolBufferException {
-    Set<Descriptor> descriptors = new HashSet<>();
-    DescriptorsProtos.ModuleDescriptor moduleDescriptorProto = DescriptorsProtos.ModuleDescriptor.parseFrom(bytes);
-    moduleDescriptorProto.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    return descriptors;
-  }
 }

@@ -17,48 +17,47 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.CheckForNull;
 import org.sonar.api.batch.sensor.cache.ReadCache;
-import org.sonar.api.batch.sensor.cache.WriteCache;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
 
-public class TestWriteCache implements WriteCache {
+public class PythonReadCacheImpl implements PythonReadCache {
+  private static final Logger LOG = Loggers.get(PythonReadCacheImpl.class);
 
-  private final Map<String, byte[]> data = new HashMap<>();
-  private ReadCache readCache;
+  private final ReadCache readCache;
 
-  public TestWriteCache bind(ReadCache readCache) {
+  public PythonReadCacheImpl(ReadCache readCache) {
     this.readCache = readCache;
-    return this;
-  }
-
-  public Map<String, byte[]> getData() {
-    return data;
   }
 
   @Override
-  public void write(String key, InputStream data) {
-    try {
-      write(key, data.readAllBytes());
-    } catch (IOException e) {
-      throw new IllegalStateException("Failed to read stream", e);
+  public InputStream read(String key) {
+    return readCache.read(key);
+  }
+
+  @CheckForNull
+  @Override
+  public byte[] readBytes(String key) {
+    if (readCache.contains(key)) {
+      try (var in = read(key)) {
+        return in.readAllBytes();
+      } catch (IOException e) {
+        LOG.debug("Unable to read data for key: \"{}\"", key);
+      }
+    } else {
+      LOG.trace(() -> String.format("Cache miss for key '%s'", key));
     }
+    return null;
   }
 
   @Override
-  public void write(String key, byte[] data) {
-    if (this.data.containsKey(key)) {
-      throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
-    }
-    this.data.put(key, data);
-  }
-
-  @Override
-  public void copyFromPrevious(String key) {
-    write(key, readCache.read(key));
+  public boolean contains(String key) {
+    return readCache.contains(key);
   }
 }

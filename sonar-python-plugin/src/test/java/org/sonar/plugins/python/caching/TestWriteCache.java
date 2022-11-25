@@ -17,45 +17,48 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.caching;
+package org.sonar.plugins.python.caching;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import org.sonar.api.batch.sensor.cache.ReadCache;
+import org.sonar.api.batch.sensor.cache.WriteCache;
 
-public class TestReadCache implements ReadCache {
+public class TestWriteCache implements WriteCache {
+
   private final Map<String, byte[]> data = new HashMap<>();
+  private ReadCache readCache;
 
-  @Override
-  public InputStream read(String key) {
-    if (!data.containsKey(key)) {
-      throw new IllegalArgumentException(String.format("cache does not contain key \"%s\"", key));
-    }
-    byte[] buf = data.get(key);
-    if (buf == null) {
-      return new ByteArrayInputStream(new byte[0]);
-    }
-    return new ByteArrayInputStream(buf);
+  public TestWriteCache bind(ReadCache readCache) {
+    this.readCache = readCache;
+    return this;
+  }
+
+  public Map<String, byte[]> getData() {
+    return data;
   }
 
   @Override
-  public boolean contains(String key) {
-    return data.containsKey(key);
+  public void write(String key, InputStream data) {
+    try {
+      write(key, data.readAllBytes());
+    } catch (IOException e) {
+      throw new IllegalStateException("Failed to read stream", e);
+    }
   }
 
-  public TestReadCache put(String key, byte[] data) {
+  @Override
+  public void write(String key, byte[] data) {
+    if (this.data.containsKey(key)) {
+      throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
+    }
     this.data.put(key, data);
-    return this;
   }
 
-  public TestReadCache putAll(Map<String, byte[]> data) {
-    this.data.putAll(data);
-    return this;
-  }
-
-  public TestReadCache putAll(TestWriteCache writeCache) {
-    return this.putAll(writeCache.getData());
+  @Override
+  public void copyFromPrevious(String key) {
+    write(key, readCache.read(key));
   }
 }
