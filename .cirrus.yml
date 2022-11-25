@@ -183,6 +183,7 @@ pr_analysis_qa_task:
     cpu: 4
     memory: 8G
   env:
+    GITHUB_TOKEN: VAULT[development/github/token/licenses-ro token]
     CIRRUS_CLONE_DEPTH: 10
     SONARSOURCE_QA: true
   maven_cache:
