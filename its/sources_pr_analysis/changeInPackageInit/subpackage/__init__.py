@@ -1,0 +1,2 @@
+class SubpackageException(ValueError):
+    pass

@@ -1,0 +1,2 @@
+class RelativeImportParentException(ValueError):
+    pass
