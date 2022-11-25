@@ -19,7 +19,6 @@
  */
 package org.sonar.python.index;
 
-import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -40,9 +39,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.protobuf.DescriptorsProtos;
 
-import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.types.InferredTypes.anyType;
 
