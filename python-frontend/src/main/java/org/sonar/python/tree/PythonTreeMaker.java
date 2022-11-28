@@ -726,6 +726,7 @@ public class PythonTreeMaker {
         return exceptClause(except, getStatementListFromSuite(suite));
       })
       .collect(Collectors.toList());
+    checkExceptClauses(exceptClauseTrees);
     FinallyClause finallyClause = null;
     AstNode finallyNode = astNode.getFirstChild(PythonKeyword.FINALLY);
     if (finallyNode != null) {
@@ -742,6 +743,23 @@ public class PythonTreeMaker {
     }
     return new TryStatementImpl(tryKeyword, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite), body, suiteDedent(firstSuite),
       exceptClauseTrees, finallyClause, elseClauseTree);
+  }
+
+  public void checkExceptClauses(List<ExceptClause> excepts) {
+    if (excepts.isEmpty()) return;
+
+    boolean isFirstExceptGroup = excepts.get(0).starToken() != null;
+    for (ExceptClause except : excepts) {
+      boolean isCurrentExceptGroup = except.starToken() != null;
+      if (isFirstExceptGroup != isCurrentExceptGroup) {
+        recognitionException(except.exceptKeyword().line(), "Try statement cannot contain both except and except* clauses");
+        return;
+      }
+      if (isCurrentExceptGroup && except.exception() == null) {
+        recognitionException(except.exceptKeyword().line(), "Except* statement must specify the type of the expected exception");
+        return;
+      }
+    }
   }
 
   public WithStatement withStatement(AstNode astNode) {
@@ -785,12 +803,13 @@ public class PythonTreeMaker {
     Token colon = toPyToken(except.getNextSibling().getToken());
     AstNode suite = except.getNextSibling().getNextSibling();
     Token exceptKeyword = toPyToken(except.getFirstChild(PythonKeyword.EXCEPT).getToken());
+    Token star = except.getFirstChild(PythonPunctuator.MUL) == null ? null : toPyToken(except.getFirstChild(PythonPunctuator.MUL).getToken());
     Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
     Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
     Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
     if (exceptionNode == null) {
-      return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent);
+      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent);
     }
     AstNode asNode = except.getFirstChild(PythonKeyword.AS);
     AstNode commaNode = except.getFirstChild(PythonPunctuator.COMMA);
@@ -798,9 +817,9 @@ public class PythonTreeMaker {
       Expression exceptionInstance = expression(except.getLastChild(PythonGrammar.TEST));
       Token asNodeToken = asNode != null ? toPyToken(asNode.getToken()) : null;
       Token commaNodeToken = commaNode != null ? toPyToken(commaNode.getToken()) : null;
-      return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent, expression(exceptionNode), asNodeToken, commaNodeToken, exceptionInstance);
+      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode), asNodeToken, commaNodeToken, exceptionInstance);
     }
-    return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent, expression(exceptionNode));
+    return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode));
   }
 
 

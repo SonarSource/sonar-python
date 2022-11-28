@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 public class ExceptClauseImpl extends PyTree implements ExceptClause {
   private final Token exceptKeyword;
+  private final Token starToken;
   private final Token colon;
   private final Token newLine;
   private final Token indent;
@@ -44,8 +45,10 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   private final Token commaToken;
   private final Expression exceptionInstance;
 
-  public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
+  public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
+                          @Nullable Token dedent) {
     this.exceptKeyword = exceptKeyword;
+    this.starToken = starToken;
     this.colon = colon;
     this.newLine = newLine;
     this.indent = indent;
@@ -57,9 +60,10 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
     this.exceptionInstance = null;
   }
 
-  public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
-                          Expression exception, @Nullable Token asNode, @Nullable Token commaNode, Expression exceptionInstance) {
+  public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
+                          @Nullable Token dedent, Expression exception, @Nullable Token asNode, @Nullable Token commaNode, Expression exceptionInstance) {
     this.exceptKeyword = exceptKeyword;
+    this.starToken = starToken;
     this.colon = colon;
     this.newLine = newLine;
     this.indent = indent;
@@ -71,8 +75,10 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
     this.exceptionInstance = exceptionInstance;
   }
 
-  public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, Expression exception) {
+  public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
+                          @Nullable Token dedent, Expression exception) {
     this.exceptKeyword = exceptKeyword;
+    this.starToken = starToken;
     this.colon = colon;
     this.newLine = newLine;
     this.indent = indent;
@@ -87,6 +93,12 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   @Override
   public Token exceptKeyword() {
     return exceptKeyword;
+  }
+
+  @CheckForNull
+  @Override
+  public Token starToken() {
+    return starToken;
   }
 
   @Override
@@ -130,7 +142,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(exceptKeyword, exception, asKeyword, commaToken, exceptionInstance, colon, newLine, indent, body, dedent)
+    return Stream.of(exceptKeyword, starToken, exception, asKeyword, commaToken, exceptionInstance, colon, newLine, indent, body, dedent)
       .filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

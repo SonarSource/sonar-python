@@ -2575,6 +2575,36 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(unary.children()).hasSize(2);
   }
 
+  @Test
+  public void except_group() {
+    FileInput tree = parse("try:pass\nexcept* OSError:pass", treeMaker::fileInput);
+    TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    ExceptClause exceptClause = tryStatement.exceptClauses().get(0);
+    assertThat(exceptClause.starToken()).isNotNull();
+    assertThat(exceptClause.starToken().value()).isEqualTo("*");
+    assertThat(exceptClause.exception().is(Kind.NAME)).isTrue();
+    assertThat(exceptClause.exception().is(Kind.NAME)).isTrue();
+
+    try {
+      parse("try:pass\nexcept* OSError:pass\nexcept IOError:pass", treeMaker::fileInput);
+      fail("Parse of try except with a mix of except/except* should not be successful.");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(3);
+      assertThat(e.getMessage()).isEqualTo("Parse error at line 3: Try statement cannot contain both except and except* clauses.");
+      assertThat(e).hasMessage("Parse error at line 3: Try statement cannot contain both except and except* clauses.");
+    }
+
+    try {
+      parse("try:pass\nexcept*:pass", treeMaker::fileInput);
+      fail("Parse of try except with an except* and empty exception should not be successful.");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(2);
+      assertThat(e.getMessage()).isEqualTo("Parse error at line 2: Except* statement must specify the type of the expected exception.");
+      assertThat(e).hasMessage("Parse error at line 2: Except* statement must specify the type of the expected exception.");
+    }
+  }
+
   public String fileContent(File file) {
     try {
       return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);

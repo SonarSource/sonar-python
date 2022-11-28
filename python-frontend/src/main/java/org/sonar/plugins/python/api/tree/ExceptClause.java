@@ -39,6 +39,9 @@ public interface ExceptClause extends Tree {
   Token exceptKeyword();
 
   @CheckForNull
+  Token starToken();
+
+  @CheckForNull
   Expression exception();
 
   @CheckForNull

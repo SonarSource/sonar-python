@@ -41,7 +41,8 @@ public class TryStatementTest extends RuleTest {
       .matches("try : pass\nexcept e : pass\nelse : pass")
       .matches("try : pass\nexcept e : pass\nfinally : pass")
       .matches("try : pass\nexcept e : pass\nelse : pass\nfinally : pass")
-      .matches("try : pass\nfinally : pass");
+      .matches("try : pass\nfinally : pass")
+      .matches("try : pass\nexcept* e : pass");
   }
 
 }
