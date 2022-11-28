@@ -56,7 +56,6 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     inputFiles.forEach(f -> {
       if (f.type().equals(InputFile.Type.MAIN)) {
         mainFiles.add(f);
-        inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
       } else {
         testFiles.add(f);
       }
@@ -67,6 +66,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public void buildOnce(SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    mainFiles.forEach(f ->  inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename())));
     LOG.debug("Input files for indexing: " + mainFiles);
     if (shouldOptimizeAnalysis(context)) {
       computeGlobalSymbolsUsingCache(context);
