@@ -156,4 +156,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
     return skippableFiles.contains(inputFile);
   }
+
+  @Override
+  public CacheContext cacheContext() {
+    return caching.cacheContext();
+  }
 }

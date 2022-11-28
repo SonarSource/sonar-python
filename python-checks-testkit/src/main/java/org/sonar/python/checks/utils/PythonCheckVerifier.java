@@ -81,7 +81,7 @@ public class PythonCheckVerifier {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
       PythonVisitorContext context = baseDir != null
-        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable)
+        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, null)
         : TestPythonVisitorRunner.createContext(file);
       addFileIssues(check, multiFileVerifier, file, context);
     }

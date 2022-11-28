@@ -41,6 +41,7 @@ public abstract class SonarQubePythonFile implements PythonFile {
     return inputFile.filename();
   }
 
+  @Override
   public InputFile inputFile() {
     return inputFile;
   }

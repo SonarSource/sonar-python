@@ -92,4 +92,8 @@ public class Caching {
   public boolean isCacheEnabled() {
     return cacheContext.isCacheEnabled();
   }
+
+  public CacheContext cacheContext() {
+    return cacheContext;
+  }
 }

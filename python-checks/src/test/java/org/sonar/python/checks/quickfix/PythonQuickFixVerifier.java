@@ -28,6 +28,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.mockito.Mockito;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
@@ -115,7 +117,7 @@ public class PythonQuickFixVerifier {
 
     PythonVisitorContext visitorContext = new PythonVisitorContext(parse,
       pythonFile, null, "",
-      ProjectLevelSymbolTable.empty());
+      ProjectLevelSymbolTable.empty(), null);
 
     return scanFileForIssues(check, visitorContext);
   }
@@ -246,6 +248,11 @@ public class PythonQuickFixVerifier {
     @Override
     public URI uri() {
       return URI.create(this.fileName());
+    }
+
+    @Override
+    public InputFile inputFile() {
+      return Mockito.mock(InputFile.class);
     }
   }
 }

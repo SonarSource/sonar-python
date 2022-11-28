@@ -69,6 +69,7 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.caching.TestReadCache;
@@ -150,7 +151,7 @@ public class PythonSensorTest {
     }
 
     @Override
-    public boolean scanWithoutParsing(InputFile inputFile) {
+    public boolean scanWithoutParsing(PythonInputFileContext inputFile) {
       return false;
     }
   }

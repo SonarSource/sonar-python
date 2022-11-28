@@ -26,6 +26,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -138,6 +139,6 @@ public class PythonCheckTest {
   @Test
   public void test_scanWithoutParsing() {
     PythonVisitorCheck check = new PythonVisitorCheck() {};
-    assertThat(check.scanWithoutParsing(mock(InputFile.class))).isTrue();
+    assertThat(check.scanWithoutParsing(mock(PythonInputFileContext.class))).isTrue();
   }
 }

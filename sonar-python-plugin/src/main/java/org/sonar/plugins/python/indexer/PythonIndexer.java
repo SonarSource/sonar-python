@@ -32,6 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -87,6 +88,8 @@ public abstract class PythonIndexer {
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
     return false;
   }
+
+  public abstract CacheContext cacheContext();
 
   class GlobalSymbolsScanner extends Scanner {
 

@@ -26,48 +26,41 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
-public class PythonVisitorContext {
+public class PythonVisitorContext extends PythonInputFileContext {
 
   private final FileInput rootTree;
-  private final PythonFile pythonFile;
-  private File workingDirectory = null;
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
+    super(pythonFile, workingDirectory, null);
     this.rootTree = rootTree;
-    this.pythonFile = pythonFile;
-    this.workingDirectory = workingDirectory;
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile): new SymbolTableBuilder(pythonFile);
     symbolTableBuilder.visitFileInput(rootTree);
   }
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    super(pythonFile, workingDirectory, cacheContext);
     this.rootTree = rootTree;
-    this.pythonFile = pythonFile;
-    this.workingDirectory = workingDirectory;
     this.parsingException = null;
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
+    super(pythonFile, null, null);
     this.rootTree = null;
-    this.pythonFile = pythonFile;
     this.parsingException = parsingException;
   }
 
   public FileInput rootTree() {
     return rootTree;
-  }
-
-  public PythonFile pythonFile() {
-    return pythonFile;
   }
 
   public RecognitionException parsingException() {
@@ -80,10 +73,5 @@ public class PythonVisitorContext {
 
   public List<PreciseIssue> getIssues() {
     return issues;
-  }
-
-  @CheckForNull
-  public File workingDirectory() {
-    return workingDirectory;
   }
 }

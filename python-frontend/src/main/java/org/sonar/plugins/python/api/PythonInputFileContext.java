@@ -19,17 +19,33 @@
  */
 package org.sonar.plugins.python.api;
 
-import java.net.URI;
-import org.sonar.api.batch.fs.InputFile;
+import java.io.File;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.caching.CacheContext;
 
-public interface PythonFile {
+public class PythonInputFileContext {
 
-  String content();
+  private final PythonFile pythonFile;
+  private final File workingDirectory;
+  private final CacheContext cacheContext;
 
-  String fileName();
+  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
+    this.pythonFile = pythonFile;
+    this.workingDirectory = workingDirectory;
+    this.cacheContext = cacheContext;
+  }
 
-  URI uri();
+  public PythonFile pythonFile() {
+    return pythonFile;
+  }
 
-  InputFile inputFile();
+  public CacheContext cacheContext() {
+    return cacheContext;
+  }
 
+  @CheckForNull
+  public File workingDirectory() {
+    return workingDirectory;
+  }
 }
