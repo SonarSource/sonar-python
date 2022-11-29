@@ -1,0 +1,24 @@
+<p>Python 3.11 introduced <code>except*</code> and <code>ExceptionGroup</code>. While it’s possible to catch the ExceptionGroup and BaseExceptionGroup
+types with <code>except`</code>, a Runtime error will be raised when this is done with <code>except*</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+try:
+    ...
+except* ExceptionGroup:  # Noncompliant
+    pass
+
+try:
+    ...
+except* (TypeError, ExceptionGroup):  # Noncompliant
+    pass
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+try:
+    ...
+except ExceptionGroup:
+    pass
+</pre>
+<h2>See</h2>
+<p><a href="https://peps.python.org/pep-0654/#forbidden-combinations">PEP-654</a></p>
+
