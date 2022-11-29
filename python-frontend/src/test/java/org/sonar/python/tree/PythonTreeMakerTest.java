@@ -1345,6 +1345,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.elseClause()).isNull();
     assertThat(tryStatement.finallyClause()).isNull();
     assertThat(tryStatement.exceptClauses()).hasSize(1);
+    assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_CLAUSE);
     assertThat(tryStatement.exceptClauses().get(0).firstToken().value()).isEqualTo("except");
     assertThat(tryStatement.exceptClauses().get(0).lastToken().value()).isEqualTo("pass");
     assertThat(tryStatement.exceptClauses().get(0).exceptKeyword().value()).isEqualTo("except");
@@ -2581,6 +2582,7 @@ public class PythonTreeMakerTest extends RuleTest {
     TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses()).hasSize(1);
     ExceptClause exceptClause = tryStatement.exceptClauses().get(0);
+    assertThat(exceptClause.getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
     assertThat(exceptClause.starToken()).isNotNull();
     assertThat(exceptClause.starToken().value()).isEqualTo("*");
     assertThat(exceptClause.exception().is(Kind.NAME)).isTrue();

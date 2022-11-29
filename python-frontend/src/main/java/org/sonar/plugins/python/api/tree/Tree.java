@@ -90,6 +90,8 @@ public interface Tree {
 
     EXCEPT_CLAUSE(ExceptClause.class),
 
+    EXCEPT_GROUP_CLAUSE(ExceptClause.class),
+
     EXEC_STMT(ExecStatement.class),
 
     EXPRESSION_LIST(ExpressionList.class),

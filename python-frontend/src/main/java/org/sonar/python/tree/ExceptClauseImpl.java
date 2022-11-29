@@ -132,7 +132,11 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
 
   @Override
   public Kind getKind() {
-    return Kind.EXCEPT_CLAUSE;
+    if (this.starToken != null) {
+      return Kind.EXCEPT_GROUP_CLAUSE;
+    } else {
+      return Kind.EXCEPT_CLAUSE;
+    }
   }
 
   @Override
