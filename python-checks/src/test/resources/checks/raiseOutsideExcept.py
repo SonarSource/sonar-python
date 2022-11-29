@@ -24,6 +24,14 @@ def function_called_inside_except():
   except:
     inner()
 
+def function_called_inside_except_group():
+  def inner():
+    raise
+  try:
+    ...
+  except* OSError:
+    inner()
+
 def function_not_called_inside_except():
   def inner():
     raise # Noncompliant

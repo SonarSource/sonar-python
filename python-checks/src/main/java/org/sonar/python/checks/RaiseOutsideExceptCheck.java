@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_CLAUSE;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_GROUP_CLAUSE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FINALLY_CLAUSE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.RAISE_STMT;
@@ -55,7 +56,7 @@ public class RaiseOutsideExceptCheck extends PythonSubscriptionCheck {
         // __exit__ special method is handled by S5706
         return ((FunctionDef) parent).name().name().equals("__exit__") || isFunctionCalledInsideExceptBlock(((FunctionDef) parent));
       }
-      if (parent.is(EXCEPT_CLAUSE, FINALLY_CLAUSE)) {
+      if (parent.is(EXCEPT_CLAUSE, EXCEPT_GROUP_CLAUSE, FINALLY_CLAUSE)) {
         return true;
       }
       parent = parent.parent();
@@ -67,6 +68,6 @@ public class RaiseOutsideExceptCheck extends PythonSubscriptionCheck {
     Symbol symbol = functionDef.name().symbol();
     return symbol != null && symbol.usages().stream()
       .filter(usage -> usage.tree() != functionDef.name())
-      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), EXCEPT_CLAUSE, FINALLY_CLAUSE) != null);
+      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), EXCEPT_CLAUSE, EXCEPT_GROUP_CLAUSE, FINALLY_CLAUSE) != null);
   }
 }
