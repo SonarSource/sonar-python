@@ -21,12 +21,14 @@ package org.sonar.plugins.python.indexer;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.Before;
@@ -48,6 +50,7 @@ import org.sonar.python.index.VariableDescriptor;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.python.caching.Caching.PROJECT_FILES_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,6 +69,7 @@ public class SonarQubePythonIndexerTest {
   private InputFile file2;
   private SonarQubePythonIndexer pythonIndexer;
   private TestReadCache readCache;
+  private TestWriteCache writeCache;
   private CacheContextImpl cacheContext;
 
   @Before
@@ -75,7 +79,7 @@ public class SonarQubePythonIndexerTest {
     context.fileSystem().setWorkDir(workDir);
     context.settings().setProperty("sonar.python.skipUnchanged", true);
 
-    TestWriteCache writeCache = new TestWriteCache();
+    writeCache = new TestWriteCache();
     readCache = new TestReadCache();
     writeCache.bind(readCache);
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
@@ -130,6 +134,58 @@ public class SonarQubePythonIndexerTest {
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Optimized analysis can be performed for 0 out of 2 files.")
       .contains("1/1 source file has been analyzed");
+  }
+
+  @Test
+  public void test_deleted_dependency() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("unknown", "mod", "other")));
+    readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
+    readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("Cached information of global symbols will be used for 1 out of 1 main files. Global symbols will be recomputed for the remaining files.")
+      .contains("Optimized analysis can be performed for 0 out of 1 files.");
+
+    byte[] bytes = writeCache.getData().get(PROJECT_FILES_KEY);
+    HashSet<String> retrievedFileList = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    assertThat(retrievedFileList).containsExactlyInAnyOrder("main");
+  }
+
+  @Test
+  public void test_deleted_unrelated_file() {
+    file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("unknown", "mod", "other")));
+    readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
+    readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isTrue();
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("Cached information of global symbols will be used for 1 out of 1 main files. Global symbols will be recomputed for the remaining files.")
+      .contains("Optimized analysis can be performed for 1 out of 1 files.");
+
+    byte[] bytes = writeCache.getData().get(PROJECT_FILES_KEY);
+    HashSet<String> retrievedFileList = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    assertThat(retrievedFileList).containsExactlyInAnyOrder("mod");
   }
 
   @Test

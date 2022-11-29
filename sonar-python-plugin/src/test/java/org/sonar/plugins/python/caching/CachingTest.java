@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.DescriptorsToProtobuf;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;

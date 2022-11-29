@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
@@ -84,21 +86,25 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private void computeGlobalSymbolsUsingCache(SensorContext context) {
     LOG.info("Using cached data to retrieve global symbols.");
-    // TODO SONARPY-1196: Compute deleted files here through diff with what was saved and include them to projectModuleFQNs / modifiedFiles
-    Set<String> projectModulesFQNs = new HashSet<>(inputFileToFQN.values());
+    Set<String> currentProjectModulesFQNs = new HashSet<>(inputFileToFQN.values());
+    Set<String> deletedModulesFQNs = deletedModulesFQNs(currentProjectModulesFQNs);
+    Set<String> allProjectFilesFQNs = Stream.concat(currentProjectModulesFQNs.stream(), deletedModulesFQNs.stream())
+      .collect(Collectors.toSet());
     Map<String, Set<String>> importsByModule = new HashMap<>();
+    // Deleted files are considered impactful to their dependents but will not be re-analyzed.
     List<InputFile> impactfulFiles = new ArrayList<>();
-    List<String> impactfulFilesFQN = new ArrayList<>();
+    List<String> impactfulModulesFQNs = new ArrayList<>(deletedModulesFQNs);
     for (InputFile inputFile : mainFiles) {
       String currFQN = inputFileToFQN.get(inputFile);
       boolean isUnimpacted = tryToUseCache(importsByModule, inputFile, currFQN);
       if (!isUnimpacted) {
         // Failed to retrieve some data: consider the file as impactful.
         impactfulFiles.add(inputFile);
-        impactfulFilesFQN.add(currFQN);
+        impactfulModulesFQNs.add(currFQN);
       }
     }
-    Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, projectModulesFQNs).impactedModules(impactfulFilesFQN);
+    // Impacted modules are computed from both modified files and deleted ones.
+    Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, allProjectFilesFQNs).impactedModules(impactfulModulesFQNs);
     mainFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(skippableFiles::add);
     // No project level information is stored for test files. It is therefore impossible for a change in a test file to impact other files.
     testFiles.stream().filter(f -> f.status().equals(InputFile.Status.SAME)).forEach(skippableFiles::add);
@@ -140,6 +146,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     globalSymbolsStep.execute(files, context);
     if (caching.isCacheEnabled()) {
       saveGlobalSymbolsInCache(files);
+      saveMainFilesListInCache(new HashSet<>(inputFileToFQN.values()));
     }
   }
 
@@ -150,6 +157,16 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
       caching.writeImportsMapEntry(inputFile.key(), projectLevelSymbolTable().importsByModule().get(moduleFQN));
     }
+  }
+
+  private Set<String> deletedModulesFQNs(Set<String> projectModulesFQNs) {
+    Set<String> previousAnalysisModulesFQNs = caching.readFilesList();
+    previousAnalysisModulesFQNs.removeAll(projectModulesFQNs);
+    return previousAnalysisModulesFQNs;
+  }
+
+  private void saveMainFilesListInCache(Set<String> modulesFQN) {
+    caching.writeFilesList(new ArrayList<>(modulesFQN));
   }
 
   @Override

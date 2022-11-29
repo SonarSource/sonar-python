@@ -27,12 +27,13 @@ import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -60,12 +61,14 @@ public class PythonPrAnalysisTest {
   private final int expectedTotalFiles;
   private final int expectedRecomputed;
   private final int expectedSkipped;
+  private final List<String> deletedFiles;
 
-  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped) {
+  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped, List<String> deletedFiles) {
     this.scenario = scenario;
     this.expectedTotalFiles = expectedTotalFiles;
     this.expectedRecomputed = expectedRecomputed;
     this.expectedSkipped = expectedSkipped;
+    this.deletedFiles = deletedFiles;
   }
 
   @BeforeClass
@@ -81,12 +84,13 @@ public class PythonPrAnalysisTest {
   @Parameters(name = "{index}: {0}")
   public static Collection<Object[]> data() {
     return List.of(new Object[][] {
-      // {<scenario>, <total files>, <recomputed>, <skipped>}
-      {"newFile", 10, 1, 9},
-      {"changeInImportedModule", 9, 1, 7},
-      {"changeInParent", 9, 1, 6},
-      {"changeInPackageInit", 9, 1, 7},
-      {"changeInRelativeImport", 9, 2, 4}}
+      // {<scenario>, <total files>, <recomputed>, <skipped>, <deleted>}
+      {"newFile", 10, 1, 9, Collections.emptyList()},
+      {"changeInImportedModule", 9, 1, 7, Collections.emptyList()},
+      {"changeInParent", 9, 1, 6, Collections.emptyList()},
+      {"changeInPackageInit", 9, 1, 7, Collections.emptyList()},
+      {"changeInRelativeImport", 9, 2, 4, Collections.emptyList()},
+      {"deletedFile", 8, 0, 7, List.of("submodule.py")}}
     );
   }
 
@@ -156,6 +160,7 @@ public class PythonPrAnalysisTest {
   }
 
   private void setUpChanges(File tempDirectory, String scenario) throws IOException {
+    Arrays.stream(tempDirectory.listFiles(f -> deletedFiles.contains(f.getName()))).forEach(File::delete);
     FileUtils.copyDirectory(new File("../sources_pr_analysis", scenario), tempDirectory);
   }
 

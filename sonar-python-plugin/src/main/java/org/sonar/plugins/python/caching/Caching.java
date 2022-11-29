@@ -22,7 +22,9 @@ package org.sonar.plugins.python.caching;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.api.utils.log.Logger;
@@ -40,6 +42,7 @@ public class Caching {
 
   public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
   public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
+  public static final String PROJECT_FILES_KEY = "python:files";
 
   private static final Logger LOG = Loggers.get(Caching.class);
 
@@ -51,6 +54,11 @@ public class Caching {
     byte[] importData = String.join(";", imports).getBytes(StandardCharsets.UTF_8);
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     cacheContext.getWriteCache().write(cacheKey, importData);
+  }
+
+  public void writeFilesList(List<String> mainFiles) {
+    byte[] projectFiles = String.join(";", mainFiles).getBytes(StandardCharsets.UTF_8);
+    cacheContext.getWriteCache().write(PROJECT_FILES_KEY, projectFiles);
   }
 
   public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
@@ -87,6 +95,14 @@ public class Caching {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
     return null;
+  }
+
+  public Set<String> readFilesList() {
+    byte[] bytes = cacheContext.getReadCache().readBytes(PROJECT_FILES_KEY);
+    if (bytes != null) {
+      return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    }
+    return Collections.emptySet();
   }
 
   public boolean isCacheEnabled() {
