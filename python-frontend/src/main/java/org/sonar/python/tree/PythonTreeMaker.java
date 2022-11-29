@@ -748,16 +748,13 @@ public class PythonTreeMaker {
   public void checkExceptClauses(List<ExceptClause> excepts) {
     if (excepts.isEmpty()) return;
 
-    boolean isFirstExceptGroup = excepts.get(0).starToken() != null;
+    Tree.Kind firstExceptKind = excepts.get(0).getKind();
     for (ExceptClause except : excepts) {
-      boolean isCurrentExceptGroup = except.starToken() != null;
-      if (isFirstExceptGroup != isCurrentExceptGroup) {
+      if (firstExceptKind != except.getKind()) {
         recognitionException(except.exceptKeyword().line(), "Try statement cannot contain both except and except* clauses");
-        return;
       }
-      if (isCurrentExceptGroup && except.exception() == null) {
-        recognitionException(except.exceptKeyword().line(), "Except* statement must specify the type of the expected exception");
-        return;
+      if (except.is(Tree.Kind.EXCEPT_GROUP_CLAUSE) && except.exception() == null) {
+        recognitionException(except.exceptKeyword().line(), "except* clause must specify the type of the expected exception");
       }
     }
   }

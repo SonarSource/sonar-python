@@ -117,6 +117,7 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
 
 public class PythonTreeMakerTest extends RuleTest {
@@ -2586,25 +2587,35 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.starToken()).isNotNull();
     assertThat(exceptClause.starToken().value()).isEqualTo("*");
     assertThat(exceptClause.exception().is(Kind.NAME)).isTrue();
-    assertThat(exceptClause.exception().is(Kind.NAME)).isTrue();
 
-    try {
-      parse("try:pass\nexcept* OSError:pass\nexcept IOError:pass", treeMaker::fileInput);
-      fail("Parse of try except with a mix of except/except* should not be successful.");
-    } catch (RecognitionException e) {
-      assertThat(e.getLine()).isEqualTo(3);
-      assertThat(e.getMessage()).isEqualTo("Parse error at line 3: Try statement cannot contain both except and except* clauses.");
-      assertThat(e).hasMessage("Parse error at line 3: Try statement cannot contain both except and except* clauses.");
-    }
+    assertThatThrownBy(() -> parse("try:pass\nexcept* OSError:pass\nexcept IOError:pass", treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 3: Try statement cannot contain both except and except* clauses.");
 
-    try {
-      parse("try:pass\nexcept*:pass", treeMaker::fileInput);
-      fail("Parse of try except with an except* and empty exception should not be successful.");
-    } catch (RecognitionException e) {
-      assertThat(e.getLine()).isEqualTo(2);
-      assertThat(e.getMessage()).isEqualTo("Parse error at line 2: Except* statement must specify the type of the expected exception.");
-      assertThat(e).hasMessage("Parse error at line 2: Except* statement must specify the type of the expected exception.");
-    }
+    assertThatThrownBy(() -> parse("try:pass\nexcept*:pass", treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 2: except* clause must specify the type of the expected exception.");
+  }
+
+  @Test
+  public void except_group_multiple() {
+    FileInput tree = parse("try:pass\nexcept* OSError:pass\nexcept* ValueError:pass", treeMaker::fileInput);
+    TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
+    assertThat(tryStatement.exceptClauses()).hasSize(2);
+
+    ExceptClause exceptClause1 = tryStatement.exceptClauses().get(0);
+    assertThat(exceptClause1.getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+    assertThat(exceptClause1.starToken()).isNotNull();
+    assertThat(exceptClause1.starToken().value()).isEqualTo("*");
+    assertThat(exceptClause1.exception().is(Kind.NAME)).isTrue();
+    assertThat(((Name) exceptClause1.exception()).name()).isEqualTo("OSError");
+
+    ExceptClause exceptClause2 = tryStatement.exceptClauses().get(1);
+    assertThat(exceptClause2.getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+    assertThat(exceptClause2.starToken()).isNotNull();
+    assertThat(exceptClause2.starToken().value()).isEqualTo("*");
+    assertThat(exceptClause2.exception().is(Kind.NAME)).isTrue();
+    assertThat(((Name) exceptClause2.exception()).name()).isEqualTo("ValueError");
   }
 
   public String fileContent(File file) {
