@@ -32,7 +32,6 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -86,7 +85,8 @@ public class PythonPrAnalysisTest {
       {"changeInImportedModule", 9, 1, 7},
       {"changeInParent", 9, 1, 6},
       {"changeInPackageInit", 9, 1, 7},
-      {"changeInRelativeImport", 9, 2, 4}}
+      {"changeInRelativeImport", 9, 2, 4},
+      {"deletedFile", 8, 0, 7}}
     );
   }
 
@@ -156,7 +156,15 @@ public class PythonPrAnalysisTest {
   }
 
   private void setUpChanges(File tempDirectory, String scenario) throws IOException {
-    FileUtils.copyDirectory(new File("../sources_pr_analysis", scenario), tempDirectory);
+    if (scenario.equals("deletedFile")) {
+      File[] files = tempDirectory.listFiles(f -> f.getName().equals("submodule.py"));
+      if (files == null || files.length != 1) {
+        throw new AssertionError("One and only one \"submodule.py\" file is expected in the \"deletedFile\" scenario.");
+      }
+      files[0].delete();
+    } else {
+      FileUtils.copyDirectory(new File("../sources_pr_analysis", scenario), tempDirectory);
+    }
   }
 
   private SonarScanner prepareScanner(File path, String projectKey, String scenario, File litsDifferencesFile) throws IOException{
