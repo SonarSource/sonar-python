@@ -10,6 +10,15 @@ def duplicate_except():
   except TypeError as e:  # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
     print("Never executed")
 
+  try:
+    raise ExceptionGroup("problem", [BlockingIOError()])
+  except* BlockingIOError as e:
+    print(repr(e))
+  except* BlockingIOError as e: # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
+    print("Never executed")
+  except* BlockingIOError as e: # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
+    print("Never executed")
+
 def within_tuple():
     try:
       raise ModuleNotFoundError()
@@ -20,6 +29,13 @@ def within_tuple():
     except (ModuleNotFoundError, TypeError) as e: # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
 #           ^^^^^^^^^^^^^^^^^^^
         print(e)
+
+    try:
+      raise ExceptionGroup("problem", [ModuleNotFoundError()])
+    except* (ImportError, OSError) as e:
+      print(e)
+    except* (ModuleNotFoundError, TypeError) as e: # Noncompliant
+      print(e)
 
 def bare_except():
   try:
@@ -49,13 +65,28 @@ def custom_exceptions():
   except MyChildException as e: # Noncompliant
     pass
 
+  try:
+    raise ExceptionGroup("problem", [MyChildException()])
+  except* MyException as e:
+    pass
+  except* MyChildException as e: # Noncompliant
+    pass
+
 def exception_class_assigned_to_variable():
   a = UnicodeDecodeError
+
   try:
     raise a
   except UnicodeError:
     pass
   except a: # FN, type of a is "class", missing link with corresponding class symbol
+    pass
+
+  try:
+    raise ExceptionGroup("problem", [a])
+  except* UnicodeError:
+    pass
+  except* a: # Same FN
     pass
 
 def unknown_symbols():
@@ -92,3 +123,11 @@ def oserror_hierarchy():
         print("Never executed")
     except FileNotFoundError as e:  # Noncompliant
         print("Never executed")
+
+    try:
+        raise ExceptionGroup("problem", [BlockingIOError()])
+    except* OSError as e:
+        #BlockingIOError is a subclass of OSError
+        print(repr(e))
+    except* BlockingIOError: # Noncompliant
+        print('never')
