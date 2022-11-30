@@ -465,7 +465,7 @@ public enum PythonGrammar implements GrammarRuleKey {
         b.optional("finally", ":", SUITE)),
       b.sequence("finally", ":", SUITE)));
 
-    b.rule(EXCEPT_CLAUSE).is("except", b.optional(TEST, b.optional(b.firstOf("as", ","), TEST)));
+    b.rule(EXCEPT_CLAUSE).is("except", b.optional("*"), b.optional(TEST, b.optional(b.firstOf("as", ","), TEST)));
 
     b.rule(WITH_STMT).is(b.firstOf(
       b.sequence("with", "(", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), b.optional(","), ")", ":", SUITE),

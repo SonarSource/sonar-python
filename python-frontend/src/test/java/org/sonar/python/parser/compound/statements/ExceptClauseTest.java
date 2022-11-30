@@ -37,6 +37,7 @@ public class ExceptClauseTest extends RuleTest {
   public void ok() {
     assertThat(p).matches("except")
       .matches("except TEST")
+      .matches("except* TEST")
       .matches("except TEST as TEST")
       .matches("except TEST , TEST");
   }
