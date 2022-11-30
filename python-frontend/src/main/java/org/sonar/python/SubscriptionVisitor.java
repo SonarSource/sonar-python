@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -167,6 +168,11 @@ public class SubscriptionVisitor {
     @CheckForNull
     public File workingDirectory() {
       return pythonVisitorContext.workingDirectory();
+    }
+
+    @Override
+    public CacheContext cacheContext() {
+      return pythonVisitorContext.cacheContext();
     }
 
     public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {

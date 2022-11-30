@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.Collection;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -56,4 +57,6 @@ public interface SubscriptionContext {
    */
   @CheckForNull
   File workingDirectory();
+
+  CacheContext cacheContext();
 }
