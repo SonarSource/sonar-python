@@ -38,16 +38,19 @@ import org.sonar.python.tree.TreeUtils;
 public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
-      ExceptClause exceptClause = (ExceptClause) ctx.syntaxNode();
-      Map<ClassSymbol, List<Expression>> caughtExceptionsBySymbol = new HashMap<>();
-      Expression exceptionExpression = exceptClause.exception();
-      if (exceptionExpression == null) {
-        return;
-      }
-      TreeUtils.flattenTuples(exceptionExpression).forEach(e -> addExceptionExpression(e, caughtExceptionsBySymbol));
-      checkCaughtExceptions(ctx, caughtExceptionsBySymbol);
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ChildAndParentExceptionCaughtCheck::checkExceptClause);
+    context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_GROUP_CLAUSE, ChildAndParentExceptionCaughtCheck::checkExceptClause);
+  }
+
+  private static void checkExceptClause(SubscriptionContext ctx) {
+    ExceptClause exceptClause = (ExceptClause) ctx.syntaxNode();
+    Map<ClassSymbol, List<Expression>> caughtExceptionsBySymbol = new HashMap<>();
+    Expression exceptionExpression = exceptClause.exception();
+    if (exceptionExpression == null) {
+      return;
+    }
+    TreeUtils.flattenTuples(exceptionExpression).forEach(e -> addExceptionExpression(e, caughtExceptionsBySymbol));
+    checkCaughtExceptions(ctx, caughtExceptionsBySymbol);
   }
 
   private static void checkCaughtExceptions(SubscriptionContext ctx, Map<ClassSymbol, List<Expression>> caughtExceptionsBySymbol) {
