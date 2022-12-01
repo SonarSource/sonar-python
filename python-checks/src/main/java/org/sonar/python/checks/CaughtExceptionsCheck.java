@@ -25,6 +25,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -35,6 +36,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_CLAUSE;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_GROUP_CLAUSE;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.DICT;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
@@ -49,18 +51,21 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(EXCEPT_CLAUSE, ctx -> {
-      Expression exception = ((ExceptClause) ctx.syntaxNode()).exception();
-      if (exception == null) {
-        return;
-      }
-      TreeUtils.flattenTuples(exception).forEach(expression -> {
-        if (!canBeOrExtendBaseException(expression.type()) ||
-          ((expression instanceof HasSymbol) && !inheritsFromBaseException(((HasSymbol) expression).symbol()))) {
+    context.registerSyntaxNodeConsumer(EXCEPT_CLAUSE, CaughtExceptionsCheck::checkExceptClause);
+    context.registerSyntaxNodeConsumer(EXCEPT_GROUP_CLAUSE, CaughtExceptionsCheck::checkExceptClause);
+  }
 
-          ctx.addIssue(expression, MESSAGE);
-        }
-      });
+  private static void checkExceptClause(SubscriptionContext ctx) {
+    Expression exception = ((ExceptClause) ctx.syntaxNode()).exception();
+    if (exception == null) {
+      return;
+    }
+    TreeUtils.flattenTuples(exception).forEach(expression -> {
+      if (!canBeOrExtendBaseException(expression.type()) ||
+        ((expression instanceof HasSymbol) && !inheritsFromBaseException(((HasSymbol) expression).symbol()))) {
+
+        ctx.addIssue(expression, MESSAGE);
+      }
     });
   }
 
