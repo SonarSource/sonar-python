@@ -22,11 +22,11 @@ package org.sonar.python.checks;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ExceptGroupShouldNotCaughtExceptionGroupCheckTest {
+public class ExceptionGroupCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/exceptGroupShouldNotCaughtExceptionGroup.py", new ExceptGroupShouldNotCaughtExceptionGroupCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/exceptionGroup.py", new ExceptionGroupCheck());
   }
 
 }

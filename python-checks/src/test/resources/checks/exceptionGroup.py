@@ -1,10 +1,10 @@
 def except_star_caught_exception_group():
     try:
         ...
-    except* ExceptionGroup: # Noncompliant {{Exception group cannot be caught by an except*.}}
-#   ^^^^^^
+    except* ExceptionGroup: # Noncompliant {{Avoid catching ExceptionGroup exception with 'except*'}}
+#   ^^^^^^^
         ...
-    except* BaseExceptionGroup: # Noncompliant
+    except* BaseExceptionGroup: # Noncompliant {{Avoid catching BaseExceptionGroup exception with 'except*'}}
         ...
 
 def except_star_caught_exception_group_multiple():
@@ -12,7 +12,7 @@ def except_star_caught_exception_group_multiple():
         ...
     except* (TypeError, ExceptionGroup): # Noncompliant
         ...
-    except* (ExceptionGroup, BaseExceptionGroup): # Noncompliant
+    except* (ExceptionGroup, BaseExceptionGroup): # Noncompliant 2
         ...
     except* (TypeError, ValueError):
         ...
@@ -45,3 +45,10 @@ def except_caught_global():
     except:
         ...
 
+def exception_group_replaced():
+    ExceptionGroup = 5
+    try:
+        ...
+    # FP : should not be raised as it is no more the original ExceptionGroup class
+    except* ExceptionGroup: # Noncompliant
+        ...

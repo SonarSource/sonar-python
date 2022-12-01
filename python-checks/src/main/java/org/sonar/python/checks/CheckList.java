@@ -168,7 +168,7 @@ public final class CheckList {
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
       EmptyStringRepetitionCheck.class,
-      ExceptGroupShouldNotCaughtExceptionGroupCheck.class,
+      ExceptionGroupCheck.class,
       ExceptionCauseTypeCheck.class,
       ExceptionNotThrownCheck.class,
       ExceptionSuperClassDeclarationCheck.class,

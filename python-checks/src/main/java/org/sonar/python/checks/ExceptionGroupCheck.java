@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -31,38 +32,35 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_GROUP_CLAUSE;
 
 @Rule(key = "S6468")
-public class ExceptGroupShouldNotCaughtExceptionGroupCheck extends PythonSubscriptionCheck {
+public class ExceptionGroupCheck extends PythonSubscriptionCheck {
   private static final Set<String> EXCEPTION_GROUP = Set.of("ExceptionGroup", "BaseExceptionGroup");
-  private static final String MESSAGE = "Exception group cannot be caught by an except*.";
+  private static final String MESSAGE = "Avoid catching %s exception with 'except*'";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(EXCEPT_GROUP_CLAUSE, ctx -> {
       ExceptClause exceptClause = (ExceptClause) ctx.syntaxNode();
+      Expression exception = exceptClause.exception();
 
-      if (hasAnyExceptionGroup(exceptClause.exception())) {
-        ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE);
+      if (isExceptionGroup(exception)) {
+        raiseIssue(ctx, exceptClause, exception);
+      } else if (exception.is(Tree.Kind.TUPLE)) {
+        Tuple exceptionTuple = (Tuple) exception;
+        for (Expression exceptionEl : exceptionTuple.elements()) {
+          if (isExceptionGroup(exceptionEl)) {
+            raiseIssue(ctx, exceptClause, exceptionEl);
+          }
+        }
       }
     });
   }
 
-  public boolean hasAnyExceptionGroup(Expression exception) {
-    if (isExceptionGroup(exception)) {
-      return true;
-    }
-    if (exception.is(Tree.Kind.TUPLE)) {
-      Tuple exceptionTuple = (Tuple) exception;
-      for (Expression exceptionEl : exceptionTuple.elements()) {
-        if (isExceptionGroup(exceptionEl)) {
-          return true;
-        }
-      }
-      return false;
-    }
-    return false;
+  private static boolean isExceptionGroup(Expression exception) {
+    // TODO : replace this logic by using type/symbol from typeshed
+    return exception.is(Tree.Kind.NAME) && EXCEPTION_GROUP.contains(((Name) exception).name());
   }
 
-  public boolean isExceptionGroup(Expression exception) {
-    return exception.is(Tree.Kind.NAME) && EXCEPTION_GROUP.contains(((Name) exception).name());
+  private static void raiseIssue(SubscriptionContext ctx, ExceptClause exceptClause, Expression exception) {
+    ctx.addIssue(exceptClause.exceptKeyword(), exceptClause.starToken(), String.format(MESSAGE, ((Name) exception).name()));
   }
 }
