@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -30,13 +31,16 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.EXCEPT_CLAUSE, ctx -> {
-      ExceptClause except = (ExceptClause) ctx.syntaxNode();
-      Expression exception = Expressions.removeParentheses(except.exception());
-      if (exception != null && exception.is(Kind.OR, Kind.AND)) {
-        ctx.addIssue(exception, "Rewrite this \"except\" expression as a tuple of exception classes.");
-      }
-    });
+    context.registerSyntaxNodeConsumer(Kind.EXCEPT_CLAUSE, BooleanExpressionInExceptCheck::checkExceptClause);
+    context.registerSyntaxNodeConsumer(Kind.EXCEPT_GROUP_CLAUSE, BooleanExpressionInExceptCheck::checkExceptClause);
+  }
+
+  private static void checkExceptClause(SubscriptionContext ctx) {
+    ExceptClause except = (ExceptClause) ctx.syntaxNode();
+    Expression exception = Expressions.removeParentheses(except.exception());
+    if (exception != null && exception.is(Kind.OR, Kind.AND)) {
+      ctx.addIssue(exception, "Rewrite this \"except\" expression as a tuple of exception classes.");
+    }
   }
 
 }
