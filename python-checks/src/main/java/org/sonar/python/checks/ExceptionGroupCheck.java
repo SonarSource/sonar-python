@@ -43,12 +43,12 @@ public class ExceptionGroupCheck extends PythonSubscriptionCheck {
       Expression exception = exceptClause.exception();
 
       if (isExceptionGroup(exception)) {
-        raiseIssue(ctx, exceptClause, exception);
+        raiseIssue(ctx, exception);
       } else if (exception.is(Tree.Kind.TUPLE)) {
         Tuple exceptionTuple = (Tuple) exception;
         for (Expression exceptionEl : exceptionTuple.elements()) {
           if (isExceptionGroup(exceptionEl)) {
-            raiseIssue(ctx, exceptClause, exceptionEl);
+            raiseIssue(ctx, exceptionEl);
           }
         }
       }
@@ -60,7 +60,7 @@ public class ExceptionGroupCheck extends PythonSubscriptionCheck {
     return exception.is(Tree.Kind.NAME) && EXCEPTION_GROUP.contains(((Name) exception).name());
   }
 
-  private static void raiseIssue(SubscriptionContext ctx, ExceptClause exceptClause, Expression exception) {
-    ctx.addIssue(exceptClause.exceptKeyword(), exceptClause.starToken(), String.format(MESSAGE, ((Name) exception).name()));
+  private static void raiseIssue(SubscriptionContext ctx, Expression exception) {
+    ctx.addIssue(exception, String.format(MESSAGE, ((Name) exception).name()));
   }
 }
