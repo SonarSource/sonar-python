@@ -326,6 +326,17 @@ public class SonarQubePythonIndexerTest {
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
   }
 
+  @Test
+  public void test_no_data_in_cache_for_parse_error() {
+    file1 = createInputFile(baseDir, "parse_error.py", InputFile.Status.ADDED, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer.buildOnce(context);
+    assertThat(writeCache.getData().get(projectSymbolTableCacheKey("moduleKey:parse_error.py"))).isNull();
+  }
+
   private byte[] importsAsByteArray(List<String> mod) {
     return String.join(";", mod).getBytes(StandardCharsets.UTF_8);
   }

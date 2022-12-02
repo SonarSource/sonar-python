@@ -154,8 +154,14 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     for (InputFile inputFile : files) {
       String moduleFQN = inputFileToFQN.get(inputFile);
       Set<Descriptor> descriptors = projectLevelSymbolTable().descriptorsForModule(moduleFQN);
+      Set<String> imports = projectLevelSymbolTable().importsByModule().get(moduleFQN);
+      if (descriptors == null || imports == null) {
+        // Descriptors/imports map may be null if the file failed to parse.
+        // We don't try to save information in the cache in that case.
+        continue;
+      }
       caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
-      caching.writeImportsMapEntry(inputFile.key(), projectLevelSymbolTable().importsByModule().get(moduleFQN));
+      caching.writeImportsMapEntry(inputFile.key(), imports);
     }
   }
 
