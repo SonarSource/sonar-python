@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -56,7 +57,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory) {
-    return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), null);
+    return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,

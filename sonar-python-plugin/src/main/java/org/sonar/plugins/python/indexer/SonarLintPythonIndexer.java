@@ -32,7 +32,6 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.caching.CacheContextImpl;
-import org.sonar.python.caching.DummyCache;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
