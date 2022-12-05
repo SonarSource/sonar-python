@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
@@ -37,7 +38,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private List<PreciseIssue> issues = new ArrayList<>();
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
-    super(pythonFile, workingDirectory, null);
+    super(pythonFile, workingDirectory, CacheContextImpl.dummyCache());
     this.rootTree = rootTree;
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
@@ -45,7 +46,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable CacheContext cacheContext) {
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     super(pythonFile, workingDirectory, cacheContext);
     this.rootTree = rootTree;
     this.parsingException = null;
@@ -53,7 +54,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    super(pythonFile, null, null);
+    super(pythonFile, null, CacheContextImpl.dummyCache());
     this.rootTree = null;
     this.parsingException = parsingException;
   }

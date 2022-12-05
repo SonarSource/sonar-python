@@ -17,39 +17,47 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.caching;
+package org.sonar.python.caching;
 
+import java.io.IOException;
 import java.io.InputStream;
 import javax.annotation.CheckForNull;
+import org.sonar.api.batch.sensor.cache.ReadCache;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
-import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
-public class DummyCache implements PythonReadCache, PythonWriteCache {
+public class PythonReadCacheImpl implements PythonReadCache {
+  private static final Logger LOG = Loggers.get(PythonReadCacheImpl.class);
+
+  private final ReadCache readCache;
+
+  public PythonReadCacheImpl(ReadCache readCache) {
+    this.readCache = readCache;
+  }
 
   @Override
   public InputStream read(String key) {
-    throw new IllegalArgumentException("No cache data available");
+    return readCache.read(key);
   }
 
   @CheckForNull
   @Override
   public byte[] readBytes(String key) {
+    if (readCache.contains(key)) {
+      try (var in = read(key)) {
+        return in.readAllBytes();
+      } catch (IOException e) {
+        LOG.debug("Unable to read data for key: \"{}\"", key);
+      }
+    } else {
+      LOG.trace(() -> String.format("Cache miss for key '%s'", key));
+    }
     return null;
   }
 
   @Override
   public boolean contains(String key) {
-    return false;
-  }
-
-  @Override
-  public void write(String key, byte[] data) {
-    throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
-  }
-
-  @Override
-  public void copyFromPrevious(String key) {
-    throw new IllegalArgumentException("No cache data available");
+    return readCache.contains(key);
   }
 }
-

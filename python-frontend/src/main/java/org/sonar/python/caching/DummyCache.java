@@ -17,36 +17,39 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api;
+package org.sonar.python.caching;
 
-import java.io.File;
+import java.io.InputStream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
+import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
-public class PythonInputFileContext {
+public class DummyCache implements PythonReadCache, PythonWriteCache {
 
-  private final PythonFile pythonFile;
-  private final File workingDirectory;
-  private final CacheContext cacheContext;
-
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
-    this.pythonFile = pythonFile;
-    this.workingDirectory = workingDirectory;
-    this.cacheContext = cacheContext;
-  }
-
-  public PythonFile pythonFile() {
-    return pythonFile;
+  @Override
+  public InputStream read(String key) {
+    throw new IllegalArgumentException("No cache data available");
   }
 
   @CheckForNull
-  public CacheContext cacheContext() {
-    return cacheContext;
+  @Override
+  public byte[] readBytes(String key) {
+    return null;
   }
 
-  @CheckForNull
-  public File workingDirectory() {
-    return workingDirectory;
+  @Override
+  public boolean contains(String key) {
+    return false;
+  }
+
+  @Override
+  public void write(String key, byte[] data) {
+    throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
+  }
+
+  @Override
+  public void copyFromPrevious(String key) {
+    throw new IllegalArgumentException("No cache data available");
   }
 }
+

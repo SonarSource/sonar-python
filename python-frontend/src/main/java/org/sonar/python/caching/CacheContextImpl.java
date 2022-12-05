@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.caching;
+package org.sonar.python.caching;
 
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -25,7 +25,6 @@ import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
-import org.sonar.python.caching.DummyCache;
 
 public class CacheContextImpl implements CacheContext {
 
@@ -58,6 +57,10 @@ public class CacheContextImpl implements CacheContext {
     if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
       return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
     }
+    return new CacheContextImpl(false, new DummyCache(), new DummyCache());
+  }
+
+  public static CacheContextImpl dummyCache() {
     return new CacheContextImpl(false, new DummyCache(), new DummyCache());
   }
 }

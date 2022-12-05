@@ -147,7 +147,6 @@ public class PythonScanner extends Scanner {
 
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
       PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext());
-
       if (!check.scanWithoutParsing(inputFileContext)) {
         return false;
       }

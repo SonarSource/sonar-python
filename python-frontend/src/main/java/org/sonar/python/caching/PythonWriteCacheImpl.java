@@ -17,36 +17,26 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api;
+package org.sonar.python.caching;
 
-import java.io.File;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.api.batch.sensor.cache.WriteCache;
+import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
-public class PythonInputFileContext {
+public class PythonWriteCacheImpl implements PythonWriteCache {
 
-  private final PythonFile pythonFile;
-  private final File workingDirectory;
-  private final CacheContext cacheContext;
+  private WriteCache writeCache;
 
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
-    this.pythonFile = pythonFile;
-    this.workingDirectory = workingDirectory;
-    this.cacheContext = cacheContext;
+  public PythonWriteCacheImpl(WriteCache writeCache) {
+    this.writeCache = writeCache;
   }
 
-  public PythonFile pythonFile() {
-    return pythonFile;
+  @Override
+  public void write(String key, byte[] data) {
+    this.writeCache.write(key, data);
   }
 
-  @CheckForNull
-  public CacheContext cacheContext() {
-    return cacheContext;
-  }
-
-  @CheckForNull
-  public File workingDirectory() {
-    return workingDirectory;
+  @Override
+  public void copyFromPrevious(String key) {
+    this.writeCache.copyFromPrevious(key);
   }
 }
