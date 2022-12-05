@@ -17,26 +17,39 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.caching;
+package org.sonar.python.caching;
 
-import org.sonar.api.batch.sensor.cache.WriteCache;
+import java.io.InputStream;
+import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
-public class PythonWriteCacheImpl implements PythonWriteCache {
+public class DummyCache implements PythonReadCache, PythonWriteCache {
 
-  private WriteCache writeCache;
+  @Override
+  public InputStream read(String key) {
+    throw new IllegalArgumentException("No cache data available");
+  }
 
-  public PythonWriteCacheImpl(WriteCache writeCache) {
-    this.writeCache = writeCache;
+  @CheckForNull
+  @Override
+  public byte[] readBytes(String key) {
+    return null;
+  }
+
+  @Override
+  public boolean contains(String key) {
+    return false;
   }
 
   @Override
   public void write(String key, byte[] data) {
-    this.writeCache.write(key, data);
+    throw new IllegalArgumentException(String.format("Same key cannot be written to multiple times (%s)", key));
   }
 
   @Override
   public void copyFromPrevious(String key) {
-    this.writeCache.copyFromPrevious(key);
+    throw new IllegalArgumentException("No cache data available");
   }
 }
+

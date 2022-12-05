@@ -28,6 +28,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.mockito.Mockito;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
@@ -35,6 +37,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
@@ -115,7 +118,7 @@ public class PythonQuickFixVerifier {
 
     PythonVisitorContext visitorContext = new PythonVisitorContext(parse,
       pythonFile, null, "",
-      ProjectLevelSymbolTable.empty());
+      ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
 
     return scanFileForIssues(check, visitorContext);
   }
@@ -246,6 +249,11 @@ public class PythonQuickFixVerifier {
     @Override
     public URI uri() {
       return URI.create(this.fileName());
+    }
+
+    @Override
+    public String key() {
+      return "PythonQuickFixFile";
     }
   }
 }

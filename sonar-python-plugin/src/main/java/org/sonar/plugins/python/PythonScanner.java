@@ -47,6 +47,7 @@ import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -101,7 +102,8 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
+      visitorContext = new PythonVisitorContext(
+        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext());
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
@@ -142,7 +144,10 @@ public class PythonScanner extends Scanner {
       if (!isCheckApplicable(check, fileType)) {
         continue;
       }
-      if (!check.scanWithoutParsing(inputFile)) {
+
+      PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext());
+      if (!check.scanWithoutParsing(inputFileContext)) {
         return false;
       }
     }

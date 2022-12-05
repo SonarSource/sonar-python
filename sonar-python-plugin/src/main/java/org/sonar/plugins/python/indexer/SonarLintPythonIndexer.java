@@ -30,6 +30,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
@@ -75,6 +77,11 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   public InputFile getFileWithId(String fileId) {
     String compare = fileId.replace("\\", "/");
     return indexedFiles.getOrDefault(compare, null);
+  }
+
+  @Override
+  public CacheContext cacheContext() {
+    return CacheContextImpl.dummyCache();
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {

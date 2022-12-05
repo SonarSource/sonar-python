@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -34,10 +35,12 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionCheck;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -126,6 +129,28 @@ public class PythonVisitorCheckTest {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, null);
     assertThat(context.workingDirectory()).isNull();
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+    check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
+  }
+
+  @Test
+  public void cache_context() throws IOException {
+    PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(SubscriptionCheck.Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isNull());
+      }
+    };
+    File tmpFile = Files.createTempFile("foo", "py").toFile();
+
+    var cache = Mockito.mock(CacheContext.class);
+
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, null, "", ProjectLevelSymbolTable.empty(), cache);
+    assertThat(context.workingDirectory()).isNull();
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+    assertThat(context.pythonFile().key()).isEqualTo(tmpFile.getPath());
+    assertThat(context.cacheContext()).isSameAs(cache);
+
     check.scanFile(context);
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }

@@ -40,11 +40,11 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
-import org.sonar.plugins.python.caching.CacheContextImpl;
-import org.sonar.plugins.python.caching.PythonReadCacheImpl;
-import org.sonar.plugins.python.caching.PythonWriteCacheImpl;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
+import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.caching.PythonReadCacheImpl;
+import org.sonar.python.caching.PythonWriteCacheImpl;
 import org.sonar.python.index.VariableDescriptor;
 
 import static org.mockito.ArgumentMatchers.any;

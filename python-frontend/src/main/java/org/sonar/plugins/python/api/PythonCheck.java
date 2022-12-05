@@ -33,7 +33,7 @@ public interface PythonCheck {
   void scanFile(PythonVisitorContext visitorContext);
 
   @Beta
-  default boolean scanWithoutParsing(InputFile inputFile) {
+  default boolean scanWithoutParsing(PythonInputFileContext inputFileContext) {
     return true;
   }
 
