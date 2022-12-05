@@ -176,3 +176,14 @@ def no_overlap_with_S5549():
       self.method1(self, a=a) # S5549 scope
       "{self}".format(self=self)  # Ok
 
+
+
+def flask_send_file():
+    # make sure no FPs are raised on flask.send_file
+    from flask import send_file
+    return send_file(
+        status.message,
+        mimetype=APPLICATION_MIME_TYPE,
+        as_attachment=True,
+        download_name=f"{analytics.filename}.zip",
+    )
