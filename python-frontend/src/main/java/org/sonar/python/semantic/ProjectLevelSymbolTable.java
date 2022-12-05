@@ -169,6 +169,7 @@ public class ProjectLevelSymbolTable {
     this.globalDescriptorsByModuleName.put(moduleName, descriptors);
   }
 
+  @CheckForNull
   public Set<Descriptor> descriptorsForModule(String moduleName) {
     return globalDescriptorsByModuleName.get(moduleName);
   }
