@@ -19,23 +19,40 @@
  */
 package org.sonar.python.checks.utils;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
-import org.sonarsource.analyzer.commons.internal.json.simple.parser.JSONParser;
-import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FileResourceUtils {
   private FileResourceUtils(){}
 
-  public static JSONArray loadJsonArrayFile(String filename, Charset charset) throws IOException, ParseException {
-    JSONParser jsonParser = new JSONParser();
-    try (InputStream is = new FileInputStream(filename);
-         InputStreamReader streamReader = new InputStreamReader(is, charset)) {
-      return (JSONArray) jsonParser.parse(streamReader);
+  public static Set<String> loadResourceAsSet(String resourceName, Charset charset) throws IOException {
+    try (InputStream is = FileResourceUtils.class.getResourceAsStream(resourceName)) {
+      if (is == null) {
+        throw new MissingResourceException("Cannot find resource file '" + resourceName + "'");
+      }
+      try (InputStreamReader isr = new InputStreamReader(is, charset);
+           BufferedReader br = new BufferedReader(isr)) {
+        Set<String> result = new HashSet<>();
+        String line;
+        while((line = br.readLine()) != null) {
+          result.add(line);
+        }
+        return result;
+      }
+    }
+  }
+
+  public static class MissingResourceException extends RuntimeException {
+    public MissingResourceException(Exception exception) {
+      super(exception);
+    }
+    public MissingResourceException(String message) {
+      super(message);
     }
   }
 }
