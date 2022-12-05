@@ -61,7 +61,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable CacheContext cacheContext) {
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     PythonParser parser = PythonParser.create();
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
