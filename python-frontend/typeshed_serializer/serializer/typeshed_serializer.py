@@ -25,7 +25,8 @@ from mypy import build, options
 from serializer import symbols_merger, symbols
 
 STDLIB_PATH = "../resources/typeshed/stdlib"
-STUBS_PATH = "../resources/typeshed/stubs"
+STDLIB_INTERNAL_PATH = "../resources/typeshed-internal/stdlib"
+STUBS_PATH = "../resources/typeshed-internal/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
@@ -43,7 +44,7 @@ def get_options(python_version=(3, 8)):
 
 def walk_typeshed_stdlib(opt: options.Options = get_options()):
     generate_python2_stdlib = opt.python_version < (3, 0)
-    relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_PATH}/@python2"
+    relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_INTERNAL_PATH}/@python2"
     source_list, source_paths = get_sources(relative_path, generate_python2_stdlib)
     build_result = build.build(source_list, opt)
     return build_result, source_paths
