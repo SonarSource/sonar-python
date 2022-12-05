@@ -2597,6 +2597,56 @@ public class PythonTreeMakerTest extends RuleTest {
       .hasMessage("Parse error at line 2: except* clause must specify the type of the expected exception.");
   }
 
+  /**
+   * except* body cannot contain continue, break or return instruction
+   */
+  @Test
+  public void except_group_invalid_instruction() {
+    final String code1 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  continue";
+    assertThatThrownBy(() -> parse(code1, treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 3: continue statement cannot appear in except* block.");
+
+    final String code2 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  break";
+    assertThatThrownBy(() -> parse(code2, treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 3: break statement cannot appear in except* block.");
+
+    final String code3 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  return";
+    assertThatThrownBy(() -> parse(code3, treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 3: return statement cannot appear in except* block.");
+
+    // should not return parse error if continue/break is in a loop
+    final String code4 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  while true:break";
+    FileInput tree = parse(code4, treeMaker::fileInput);
+    TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
+    assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+
+    final String code5 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  for x in \"bob\":continue";
+    tree = parse(code5, treeMaker::fileInput);
+    tryStatement = (TryStatement) tree.statements().statements().get(0);
+    assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+
+    // should not return parse error if return is in a function
+    final String code6 = "try:pass\n" +
+      "except* OSError:\n" +
+      "  def foo():return";
+    tree = parse(code6, treeMaker::fileInput);
+    tryStatement = (TryStatement) tree.statements().statements().get(0);
+    assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+  }
+
   @Test
   public void except_group_multiple() {
     FileInput tree = parse("try:pass\nexcept* OSError:pass\nexcept* ValueError:pass", treeMaker::fileInput);

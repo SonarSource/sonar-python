@@ -120,10 +120,11 @@ public class PythonTreeMaker {
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
+    pyFileInputTree.accept(new PythonSyntaxVerifierVisitor());
     return pyFileInputTree;
   }
 
-  private static void recognitionException(int line, String message) {
+  public static void recognitionException(int line, String message) {
     throw new RecognitionException(line, "Parse error at line " + line + ": " + message + ".");
   }
 
