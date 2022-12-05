@@ -17,26 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.caching;
+@ParametersAreNonnullByDefault
+package org.sonar.python.caching;
 
-import org.sonar.api.batch.sensor.cache.WriteCache;
-import org.sonar.plugins.python.api.caching.PythonWriteCache;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public class PythonWriteCacheImpl implements PythonWriteCache {
-
-  private WriteCache writeCache;
-
-  public PythonWriteCacheImpl(WriteCache writeCache) {
-    this.writeCache = writeCache;
-  }
-
-  @Override
-  public void write(String key, byte[] data) {
-    this.writeCache.write(key, data);
-  }
-
-  @Override
-  public void copyFromPrevious(String key) {
-    this.writeCache.copyFromPrevious(key);
-  }
-}

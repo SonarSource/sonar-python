@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.checks.verifier.MultiFileVerifier;
@@ -81,7 +82,7 @@ public class PythonCheckVerifier {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
       PythonVisitorContext context = baseDir != null
-        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, null)
+        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
         : TestPythonVisitorRunner.createContext(file);
       addFileIssues(check, multiFileVerifier, file, context);
     }

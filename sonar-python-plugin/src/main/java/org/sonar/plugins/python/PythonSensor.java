@@ -40,10 +40,10 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.plugins.python.caching.CacheContextImpl;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
