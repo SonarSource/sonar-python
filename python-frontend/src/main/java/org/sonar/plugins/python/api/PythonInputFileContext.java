@@ -40,7 +40,6 @@ public class PythonInputFileContext {
     return pythonFile;
   }
 
-  @CheckForNull
   public CacheContext cacheContext() {
     return cacheContext;
   }
