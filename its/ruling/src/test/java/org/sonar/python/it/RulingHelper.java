@@ -134,6 +134,7 @@ public class RulingHelper {
       "S6002",
       "S6323",
       "S6328",
+      "S6468",
       "S905",
       "S930"
     );
