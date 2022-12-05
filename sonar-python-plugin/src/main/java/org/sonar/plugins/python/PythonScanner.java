@@ -103,7 +103,8 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext());
+      visitorContext = new PythonVisitorContext(
+        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext());
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
@@ -146,7 +147,7 @@ public class PythonScanner extends Scanner {
       }
 
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), CacheContextImpl.of(context));
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext());
 
       if (!check.scanWithoutParsing(inputFileContext)) {
         return false;

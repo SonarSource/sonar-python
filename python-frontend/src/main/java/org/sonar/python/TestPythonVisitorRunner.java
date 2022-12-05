@@ -27,7 +27,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -60,7 +59,8 @@ public class TestPythonVisitorRunner {
     return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), null);
   }
 
-  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable CacheContext cacheContext) {
     PythonParser parser = PythonParser.create();
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
@@ -108,8 +108,8 @@ public class TestPythonVisitorRunner {
     }
 
     @Override
-    public InputFile inputFile() {
-      return null;
+    public String key() {
+      return file.getPath();
     }
 
   }

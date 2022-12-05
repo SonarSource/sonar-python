@@ -41,7 +41,6 @@ public abstract class SonarQubePythonFile implements PythonFile {
     return inputFile.filename();
   }
 
-  @Override
   public InputFile inputFile() {
     return inputFile;
   }
@@ -49,6 +48,11 @@ public abstract class SonarQubePythonFile implements PythonFile {
   @Override
   public URI uri() {
     return inputFile().uri();
+  }
+
+  @Override
+  public String key() {
+    return inputFile().key();
   }
 
   @Override

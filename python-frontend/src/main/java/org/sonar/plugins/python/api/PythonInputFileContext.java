@@ -30,7 +30,7 @@ public class PythonInputFileContext {
   private final File workingDirectory;
   private final CacheContext cacheContext;
 
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
+  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, @Nullable CacheContext cacheContext) {
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.cacheContext = cacheContext;
@@ -40,6 +40,7 @@ public class PythonInputFileContext {
     return pythonFile;
   }
 
+  @CheckForNull
   public CacheContext cacheContext() {
     return cacheContext;
   }

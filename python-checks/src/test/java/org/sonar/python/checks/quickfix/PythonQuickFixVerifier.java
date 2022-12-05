@@ -251,8 +251,8 @@ public class PythonQuickFixVerifier {
     }
 
     @Override
-    public InputFile inputFile() {
-      return Mockito.mock(InputFile.class);
+    public String key() {
+      return "PythonQuickFixFile";
     }
   }
 }

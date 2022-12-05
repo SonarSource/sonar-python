@@ -23,7 +23,6 @@ import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -37,16 +36,16 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
 
-
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
     super(pythonFile, workingDirectory, null);
     this.rootTree = rootTree;
     this.parsingException = null;
-    SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile): new SymbolTableBuilder(pythonFile);
+    SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
     symbolTableBuilder.visitFileInput(rootTree);
   }
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable CacheContext cacheContext) {
     super(pythonFile, workingDirectory, cacheContext);
     this.rootTree = rootTree;
     this.parsingException = null;

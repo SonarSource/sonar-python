@@ -20,7 +20,6 @@
 package org.sonar.plugins.python.api;
 
 import java.net.URI;
-import org.sonar.api.batch.fs.InputFile;
 
 public interface PythonFile {
 
@@ -30,6 +29,6 @@ public interface PythonFile {
 
   URI uri();
 
-  InputFile inputFile();
+  String key();
 
 }

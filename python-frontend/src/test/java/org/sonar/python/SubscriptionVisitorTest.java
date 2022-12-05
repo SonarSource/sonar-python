@@ -22,12 +22,16 @@ package org.sonar.python;
 import java.util.Collections;
 import java.util.regex.Pattern;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
@@ -56,6 +60,26 @@ public class SubscriptionVisitorTest {
 
     FileInput fileInput = PythonTestUtils.parse("'.*'");
     PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null);
+    SubscriptionVisitor.analyze(Collections.singleton(check), context);
+  }
+
+  @Test
+  public void exposed_visitor_data() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(): ...");
+    var cache = Mockito.mock(CacheContext.class);
+
+    PythonFile pythonFile = PythonTestUtils.pythonFile("file");
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "", ProjectLevelSymbolTable.empty(), cache);
+
+    PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+          assertThat(ctx.cacheContext()).isSameAs(cache);
+          assertThat(ctx.pythonFile()).isEqualTo(pythonFile);
+        });
+      }
+    };
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 }
