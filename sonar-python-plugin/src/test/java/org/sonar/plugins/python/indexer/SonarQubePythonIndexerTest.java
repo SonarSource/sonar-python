@@ -334,7 +334,7 @@ public class SonarQubePythonIndexerTest {
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
     pythonIndexer.buildOnce(context);
-    assertThat(writeCache.getData().get(projectSymbolTableCacheKey("moduleKey:parse_error.py"))).isNull();
+    assertThat(writeCache.getData().containsKey(projectSymbolTableCacheKey("moduleKey:parse_error.py"))).isFalse();
   }
 
   private byte[] importsAsByteArray(List<String> mod) {
