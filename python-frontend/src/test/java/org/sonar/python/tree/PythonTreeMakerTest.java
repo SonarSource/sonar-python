@@ -2602,21 +2602,21 @@ public class PythonTreeMakerTest extends RuleTest {
    */
   @Test
   public void except_group_invalid_instruction() {
-    final String code1 = "try:pass\n" +
+    String code1 = "try:pass\n" +
       "except* OSError:\n" +
       "  continue";
     assertThatThrownBy(() -> parse(code1, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 3: continue statement cannot appear in except* block.");
 
-    final String code2 = "try:pass\n" +
+    String code2 = "try:pass\n" +
       "except* OSError:\n" +
       "  break";
     assertThatThrownBy(() -> parse(code2, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 3: break statement cannot appear in except* block.");
 
-    final String code3 = "try:pass\n" +
+    String code3 = "try:pass\n" +
       "except* OSError:\n" +
       "  return";
     assertThatThrownBy(() -> parse(code3, treeMaker::fileInput))
@@ -2624,14 +2624,14 @@ public class PythonTreeMakerTest extends RuleTest {
       .hasMessage("Parse error at line 3: return statement cannot appear in except* block.");
 
     // should not return parse error if continue/break is in a loop
-    final String code4 = "try:pass\n" +
+    String code4 = "try:pass\n" +
       "except* OSError:\n" +
       "  while true:break";
     FileInput tree = parse(code4, treeMaker::fileInput);
     TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
 
-    final String code5 = "try:pass\n" +
+    String code5 = "try:pass\n" +
       "except* OSError:\n" +
       "  for x in \"bob\":continue";
     tree = parse(code5, treeMaker::fileInput);
@@ -2639,12 +2639,28 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
 
     // should not return parse error if return is in a function
-    final String code6 = "try:pass\n" +
+    String code6 = "try:pass\n" +
       "except* OSError:\n" +
       "  def foo():return";
     tree = parse(code6, treeMaker::fileInput);
     tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
+
+    String code7 = "for x in range(42):\n" +
+      "  try:pass\n" +
+      "  except* OSError:\n" +
+      "    continue";
+    assertThatThrownBy(() -> parse(code7, treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 4: continue statement cannot appear in except* block.");
+
+    String code8 = "def foo():\n" +
+      "  try:pass\n" +
+      "  except* OSError:\n" +
+      "    continue";
+    assertThatThrownBy(() -> parse(code8, treeMaker::fileInput))
+      .isInstanceOf(RecognitionException.class)
+      .hasMessage("Parse error at line 4: continue statement cannot appear in except* block.");
   }
 
   @Test

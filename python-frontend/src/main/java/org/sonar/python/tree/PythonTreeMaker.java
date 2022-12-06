@@ -120,7 +120,7 @@ public class PythonTreeMaker {
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
-    pyFileInputTree.accept(new PythonSyntaxVerifierVisitor());
+    pyFileInputTree.accept(new ExceptGroupJumpInstructionsCheck());
     return pyFileInputTree;
   }
 

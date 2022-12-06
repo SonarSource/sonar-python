@@ -25,7 +25,11 @@ import org.sonar.plugins.python.api.tree.ContinueStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 
-public class PythonSyntaxVerifierVisitor extends BaseTreeVisitor {
+/**
+ * Purpose of this class is to detect and throw exception if the scanned tree that contain invalid syntax regarding the except* instruction.
+ * It is currently not valid to have a break, continue or return statement in an except* body.
+ */
+public class ExceptGroupJumpInstructionsCheck extends BaseTreeVisitor {
   @Override
   public void visitBreakStatement(BreakStatement breakStatement) {
     checkExceptGroupStatement(breakStatement, "break statement cannot appear in except* block",
