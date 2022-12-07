@@ -19,32 +19,66 @@
  */
 package org.sonar.python.checks.cdk;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
-import org.sonar.python.checks.utils.FileResourceUtils;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 
 @Rule(key = "S6304")
 public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
 
+  private static final Logger LOG = Loggers.get(ResourceAccessPolicyCheck.class);
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
-  private static final Set<String> SENSITIVE_AWS_ACTIONS;
-  private static final String FILEPATH_SENSITIVE_AWS_ACTIONS = "/org/sonar/python/checks/cdk/sensitiveAwsActions.txt";
+  String resourceNameSensitiveAwsActions = "ResourceAccessPolicyCheck.txt";
+  Set<String> sensitiveAwsActions = null;
 
-  static {
+  void init() {
     try {
-      SENSITIVE_AWS_ACTIONS = FileResourceUtils.loadResourceAsSet(FILEPATH_SENSITIVE_AWS_ACTIONS, StandardCharsets.UTF_8);
+      sensitiveAwsActions = new HashSet<>(loadResourceAsSet(resourceNameSensitiveAwsActions, StandardCharsets.UTF_8));
     } catch (IOException e) {
-      throw new FileResourceUtils.MissingResourceException(e);
+      sensitiveAwsActions = new HashSet<>();
+      LOG.error("Couldn't load resource '" + resourceNameSensitiveAwsActions + "', rule [S6304] ResourceAccessPolicyCheck will be disabled.", e);
+    }
+  }
+
+  @Override
+  public void initialize(SubscriptionCheck.Context context) {
+    super.initialize(context);
+    init();
+  }
+
+  static List<String> loadResourceAsSet(String resourceName, Charset charset) throws IOException {
+    try (InputStream is = ResourceAccessPolicyCheck.class.getResourceAsStream(resourceName)) {
+      if (is == null) {
+        throw new IOException("Cannot find resource file '" + resourceName + "'");
+      }
+      try (InputStreamReader isr = new InputStreamReader(is, charset);
+           BufferedReader br = new BufferedReader(isr)) {
+        List<String> result = new ArrayList<>();
+        String line;
+        while((line = br.readLine()) != null) {
+          result.add(line);
+        }
+        return result;
+      }
     }
   }
 
@@ -61,13 +95,13 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
       .ifPresent(wildcard -> reportWildcardResourceAndEffect(wildcard, policyStatement.effect()));
   }
 
-  private static boolean isSensitiveAction(ExpressionFlow actions) {
+  private boolean isSensitiveAction(ExpressionFlow actions) {
     return getSensitiveExpression(actions, inSensitiveSet()) != null;
   }
 
-  public static Predicate<Expression> inSensitiveSet() {
+  public Predicate<Expression> inSensitiveSet() {
     return expression -> CdkUtils.getString(expression)
-      .filter(SENSITIVE_AWS_ACTIONS::contains).isPresent();
+      .filter(sensitiveAwsActions::contains).isPresent();
   }
 
   private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, @Nullable ExpressionFlow effect) {

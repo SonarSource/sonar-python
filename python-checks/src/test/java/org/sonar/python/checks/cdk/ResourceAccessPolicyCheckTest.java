@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ResourceAccessPolicyCheckTest {
 
-  PythonCheck check = new ResourceAccessPolicyCheck();
+  ResourceAccessPolicyCheck check = new ResourceAccessPolicyCheck();
 
   @Test
   public void policyStatement() {
@@ -40,6 +40,12 @@ public class ResourceAccessPolicyCheckTest {
   @Test
   public void policyDocument() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/resourceAccessPolicy/policyDocument.py", check);
+  }
+
+  @Test
+  public void resourceFileNotFound() {
+    check.resourceNameSensitiveAwsActions = "random";
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/cdk/resourceAccessPolicy/issueNotDetected.py", check);
   }
 
 }
