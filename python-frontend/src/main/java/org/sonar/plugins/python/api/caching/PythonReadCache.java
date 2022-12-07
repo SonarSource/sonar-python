@@ -21,7 +21,9 @@ package org.sonar.plugins.python.api.caching;
 
 import java.io.InputStream;
 import javax.annotation.CheckForNull;
+import org.sonar.api.Beta;
 
+@Beta
 public interface PythonReadCache {
   /**
    * Returns an input stream for the data cached with the provided {@code key}. It is the responsibility of the caller to close the stream.
