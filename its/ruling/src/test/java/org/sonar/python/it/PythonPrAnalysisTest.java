@@ -34,6 +34,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -95,6 +96,7 @@ public class PythonPrAnalysisTest {
   }
 
   @Test
+  @Ignore
   public void pr_analysis_logs() throws IOException {
     File tempDirectory = temporaryFolder.newFolder();
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
@@ -113,6 +115,7 @@ public class PythonPrAnalysisTest {
   }
 
   @Test
+  @Ignore
   public void pr_analysis_issues() throws IOException {
     File tempDirectory = temporaryFolder.newFolder();
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();

@@ -55,7 +55,7 @@ public class CacheContextImpl implements CacheContext {
 
   public static CacheContextImpl of(SensorContext context) {
     if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
-      return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
+      return new CacheContextImpl(false, new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
     }
     return new CacheContextImpl(false, new DummyCache(), new DummyCache());
   }
