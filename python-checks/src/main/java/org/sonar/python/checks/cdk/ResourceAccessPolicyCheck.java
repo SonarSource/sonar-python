@@ -53,7 +53,7 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
 
   void init() {
     try {
-      sensitiveAwsActions = new HashSet<>(loadResourceAsSet(resourceNameSensitiveAwsActions));
+      sensitiveAwsActions = new HashSet<>(loadResource(resourceNameSensitiveAwsActions));
     } catch (IOException e) {
       sensitiveAwsActions = Collections.emptySet();
       LOG.error("Couldn't load resource '" + resourceNameSensitiveAwsActions + "', rule [S6304] ResourceAccessPolicyCheck will be disabled.", e);
@@ -66,7 +66,7 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
     init();
   }
 
-  private static List<String> loadResourceAsSet(String resourceName) throws IOException {
+  private static List<String> loadResource(String resourceName) throws IOException {
     try (InputStream is = ResourceAccessPolicyCheck.class.getResourceAsStream(resourceName)) {
       if (is == null) {
         throw new IOException("Cannot find resource file '" + resourceName + "'");
