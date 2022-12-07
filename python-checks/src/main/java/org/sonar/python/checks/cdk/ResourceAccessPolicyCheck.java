@@ -19,11 +19,23 @@
  */
 package org.sonar.python.checks.cdk;
 
-import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.python.checks.cdk.CdkUtils.ExpressionFlow;
 
@@ -32,15 +44,51 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 @Rule(key = "S6304")
 public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
 
+  private static final Logger LOG = Loggers.get(ResourceAccessPolicyCheck.class);
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
+  // visible for testing
+  String resourceNameSensitiveAwsActions = "ResourceAccessPolicyCheck.txt";
+  private Set<String> sensitiveAwsActions = null;
+
+  void init() {
+    try {
+      sensitiveAwsActions = new HashSet<>(loadResource(resourceNameSensitiveAwsActions));
+    } catch (IOException e) {
+      sensitiveAwsActions = Collections.emptySet();
+      LOG.error("Couldn't load resource '" + resourceNameSensitiveAwsActions + "', rule [S6304] ResourceAccessPolicyCheck will be disabled.", e);
+    }
+  }
+
+  @Override
+  public void initialize(SubscriptionCheck.Context context) {
+    super.initialize(context);
+    init();
+  }
+
+  private static List<String> loadResource(String resourceName) throws IOException {
+    try (InputStream is = ResourceAccessPolicyCheck.class.getResourceAsStream(resourceName)) {
+      if (is == null) {
+        throw new IOException("Cannot find resource file '" + resourceName + "'");
+      }
+      try (InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+           BufferedReader br = new BufferedReader(isr)) {
+        List<String> result = new ArrayList<>();
+        String line;
+        while((line = br.readLine()) != null) {
+          result.add(line);
+        }
+        return result;
+      }
+    }
+  }
 
   @Override
   protected void checkAllowingPolicyStatement(PolicyStatement policyStatement) {
     CdkUtils.ExpressionFlow actions = policyStatement.actions();
     CdkUtils.ExpressionFlow resources = policyStatement.resources();
 
-    if (resources == null || actions == null || hasOnlyKmsActions(actions)) {
+    if (resources == null || actions == null || !isSensitiveAction(actions)) {
       return;
     }
 
@@ -48,13 +96,13 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
       .ifPresent(wildcard -> reportWildcardResourceAndEffect(wildcard, policyStatement.effect()));
   }
 
-  private static boolean hasOnlyKmsActions(ExpressionFlow actions) {
-    return getSensitiveExpression(actions, notStartsWith("kms:")) == null;
+  private boolean isSensitiveAction(ExpressionFlow actions) {
+    return getSensitiveExpression(actions, inSensitiveSet()) != null;
   }
 
-  public static Predicate<Expression> notStartsWith(String expected) {
+  public Predicate<Expression> inSensitiveSet() {
     return expression -> CdkUtils.getString(expression)
-      .filter(str -> !str.toLowerCase(Locale.ROOT).startsWith(expected)).isPresent();
+      .filter(sensitiveAwsActions::contains).isPresent();
   }
 
   private static void reportWildcardResourceAndEffect(ExpressionFlow wildcard, @Nullable ExpressionFlow effect) {

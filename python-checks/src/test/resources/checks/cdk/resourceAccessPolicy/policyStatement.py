@@ -20,6 +20,28 @@ iam.PolicyStatement(
 )
 
 iam.PolicyStatement(
+    actions=["bob:random_key"],
+    resources=["*"]
+)
+
+iam.PolicyStatement(
+    actions=["iam:CreatePolicyVersion", "bob:random_key"],
+    resources=["*"]  # Noncompliant
+)
+
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    actions=["bob:random_key"],
+    resources=["*"]
+)
+
+iam.PolicyStatement(
+    effect=iam.Effect.ALLOW,
+    actions=["iam:CreatePolicyVersion", "bob:random_key"],
+    resources=["*"]  # Noncompliant
+)
+
+iam.PolicyStatement(
     effect=iam.Effect.ALLOW,
     actions=["iam:CreatePolicyVersion"],
     resources=[dummy_policy.managed_policy_arn]
