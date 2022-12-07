@@ -19,6 +19,7 @@
  */
 package org.sonar.python.caching;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
@@ -36,6 +37,7 @@ public class CacheContextImplTest {
   private static final Version VERSION_WITHOUT_CACHING = Version.create(9, 6);
 
   @Test
+  @Ignore
   public void cache_context_of_enabled_cache() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, true);
 
