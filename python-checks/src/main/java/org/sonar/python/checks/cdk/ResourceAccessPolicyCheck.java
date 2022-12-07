@@ -23,9 +23,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -47,14 +47,15 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
   private static final Logger LOG = Loggers.get(ResourceAccessPolicyCheck.class);
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
+  // visible for testing
   String resourceNameSensitiveAwsActions = "ResourceAccessPolicyCheck.txt";
-  Set<String> sensitiveAwsActions = null;
+  private Set<String> sensitiveAwsActions = null;
 
   void init() {
     try {
-      sensitiveAwsActions = new HashSet<>(loadResourceAsSet(resourceNameSensitiveAwsActions, StandardCharsets.UTF_8));
+      sensitiveAwsActions = new HashSet<>(loadResourceAsSet(resourceNameSensitiveAwsActions));
     } catch (IOException e) {
-      sensitiveAwsActions = new HashSet<>();
+      sensitiveAwsActions = Collections.emptySet();
       LOG.error("Couldn't load resource '" + resourceNameSensitiveAwsActions + "', rule [S6304] ResourceAccessPolicyCheck will be disabled.", e);
     }
   }
@@ -65,12 +66,12 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
     init();
   }
 
-  static List<String> loadResourceAsSet(String resourceName, Charset charset) throws IOException {
+  private static List<String> loadResourceAsSet(String resourceName) throws IOException {
     try (InputStream is = ResourceAccessPolicyCheck.class.getResourceAsStream(resourceName)) {
       if (is == null) {
         throw new IOException("Cannot find resource file '" + resourceName + "'");
       }
-      try (InputStreamReader isr = new InputStreamReader(is, charset);
+      try (InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
            BufferedReader br = new BufferedReader(isr)) {
         List<String> result = new ArrayList<>();
         String line;
