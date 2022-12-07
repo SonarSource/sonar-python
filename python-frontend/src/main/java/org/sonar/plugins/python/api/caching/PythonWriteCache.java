@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.caching;
 
+import org.sonar.api.Beta;
+
+@Beta
 public interface PythonWriteCache {
   /**
    * Save a new entry in the cache.

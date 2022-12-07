@@ -22,6 +22,7 @@ package org.sonar.plugins.python.api;
 import java.io.File;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.caching.CacheContext;
 
 public class PythonInputFileContext {
@@ -40,6 +41,7 @@ public class PythonInputFileContext {
     return pythonFile;
   }
 
+  @Beta
   public CacheContext cacheContext() {
     return cacheContext;
   }

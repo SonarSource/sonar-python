@@ -58,5 +58,6 @@ public interface SubscriptionContext {
   @CheckForNull
   File workingDirectory();
 
+  @Beta
   CacheContext cacheContext();
 }
