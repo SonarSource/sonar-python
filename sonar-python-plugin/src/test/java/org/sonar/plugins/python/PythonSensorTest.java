@@ -80,7 +80,6 @@ import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.checks.CheckList;
 
-import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.api.QuickFix;
@@ -101,6 +100,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
@@ -672,7 +672,7 @@ public class PythonSensorTest {
       .build();
 
     InputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
-    TestReadCache readCache = new TestReadCache();
+    TestReadCache readCache = getValidReadCache();
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
@@ -700,7 +700,7 @@ public class PythonSensorTest {
       .build();
 
     inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
-    TestReadCache readCache = new TestReadCache();
+    TestReadCache readCache = getValidReadCache();
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
@@ -869,5 +869,11 @@ public class PythonSensorTest {
 
     context.fileSystem().add(sonarFile);
     sensor().execute(context);
+  }
+
+  TestReadCache getValidReadCache() {
+    TestReadCache testReadCache = new TestReadCache();
+    testReadCache.put(CACHE_VERSION_KEY, "unknown".getBytes(UTF_8));
+    return testReadCache;
   }
 }

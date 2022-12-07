@@ -53,6 +53,7 @@ public class PythonPrAnalysisTest {
 
   private static final String PR_ANALYSIS_PROJECT_KEY = "prAnalysis";
   private static final String INCREMENTAL_ANALYSIS_PROFILE = "incrementalPrAnalysis";
+  private static final String EXPECTED_CACHE_VERSION = "3.21-SNAPSHOT";
 
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
@@ -146,7 +147,8 @@ public class PythonPrAnalysisTest {
 
     assertThat(result.getLogs())
       .contains(expectedRecomputedLog)
-      .contains(expectedRegularAnalysisLog);
+      .contains(expectedRegularAnalysisLog)
+      .contains(String.format("Cache version still up to date: \"%s\".", EXPECTED_CACHE_VERSION));
   }
 
   private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {
@@ -177,7 +179,8 @@ public class PythonPrAnalysisTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
+      .setDebugLogs(true)
+      .setEnvironmentVariable("SONAR_SCANNER_OPTS", "-Xdebug");
   }
 
 

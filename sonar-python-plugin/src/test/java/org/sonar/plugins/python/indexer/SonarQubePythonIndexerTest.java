@@ -21,7 +21,6 @@ package org.sonar.plugins.python.indexer;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,6 +49,7 @@ import org.sonar.python.index.VariableDescriptor;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_FILES_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
@@ -71,6 +71,7 @@ public class SonarQubePythonIndexerTest {
   private TestReadCache readCache;
   private TestWriteCache writeCache;
   private CacheContextImpl cacheContext;
+  private String cacheVersion;
 
   @Before
   public void init() throws IOException {
@@ -82,6 +83,8 @@ public class SonarQubePythonIndexerTest {
     writeCache = new TestWriteCache();
     readCache = new TestReadCache();
     writeCache.bind(readCache);
+    cacheVersion = "unknown";
+    readCache.put(CACHE_VERSION_KEY, cacheVersion.getBytes(StandardCharsets.UTF_8));
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
@@ -100,7 +103,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -110,6 +113,8 @@ public class SonarQubePythonIndexerTest {
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Optimized analysis can be performed for 1 out of 2 files.")
       .contains("1/1 source file has been analyzed");
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Cache version still up to date: \"unknown\".");
   }
 
   @Test
@@ -125,7 +130,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py") , serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -149,7 +154,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -175,7 +180,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isTrue();
@@ -195,7 +200,7 @@ public class SonarQubePythonIndexerTest {
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -218,7 +223,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
 
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -239,7 +244,7 @@ public class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
 
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -251,13 +256,39 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
+  public void test_no_file_modified_invalid_cache_version() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+    readCache.put(CACHE_VERSION_KEY, "outdatedVersion".getBytes(StandardCharsets.UTF_8));
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
+    readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
+
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. Retrieved: \"outdatedVersion\". Current version: \"unknown\".")
+      .contains("2/2 source files have been analyzed");
+  }
+
+  @Test
   public void test_test_files_not_using_cache() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
 
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isTrue();
@@ -272,7 +303,7 @@ public class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
     context.settings().setProperty("sonar.python.skipUnchanged", false);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -290,7 +321,7 @@ public class SonarQubePythonIndexerTest {
     SensorContext mockContext = spy(context);
     when(mockContext.canSkipUnchangedFiles()).thenReturn(true);
     context.settings().setProperty("sonar.python.skipUnchanged", false);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(mockContext);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -306,7 +337,7 @@ public class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
     cacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
@@ -318,7 +349,7 @@ public class SonarQubePythonIndexerTest {
   public void test_regular_scan_when_scan_without_parsing_fails() {
     List<InputFile> files = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
     PythonIndexer.GlobalSymbolsScanner globalSymbolsScanner = spy(
-      new SonarQubePythonIndexer(files, cacheContext).new GlobalSymbolsScanner(context)
+      new SonarQubePythonIndexer(files, cacheContext, context).new GlobalSymbolsScanner(context)
     );
     when(globalSymbolsScanner.canBeScannedWithoutParsing(any())).thenReturn(true);
     globalSymbolsScanner.execute(files, context);
@@ -332,7 +363,7 @@ public class SonarQubePythonIndexerTest {
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
 
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext);
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
     assertThat(writeCache.getData().containsKey(projectSymbolTableCacheKey("moduleKey:parse_error.py"))).isFalse();
   }
