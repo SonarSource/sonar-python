@@ -35,7 +35,6 @@ import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.SonarProduct;
@@ -658,7 +657,6 @@ public class PythonSensorTest {
 
 
   @Test
-  @Ignore
   public void test_using_cache() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -691,7 +689,6 @@ public class PythonSensorTest {
   }
 
   @Test
-  @Ignore
   public void test_scan_without_parsing_test_file() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
