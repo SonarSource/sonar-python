@@ -187,3 +187,10 @@ def flask_send_file():
         as_attachment=True,
         download_name=f"{analytics.filename}.zip",
     )
+
+
+# Fixing FPs reported in SONARPY-872
+def jinja_apis():
+    from jinja2.filters import do_indent, do_wordwrap
+    do_wordwrap(environment, s, break_on_hyphens=False)
+    do_indent(s, first=first, blank=blank)
