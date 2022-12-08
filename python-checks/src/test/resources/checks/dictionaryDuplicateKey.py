@@ -28,6 +28,8 @@ def numbers():
   {1.0: "one", 2.0: "two", 1.0: "three"}  # Noncompliant
   {0o1: "one", 0o2: "two", 0O1: "three"}  # Noncompliant
   {0x1: "one", 0x3: "two", 0X1: "three"}  # Noncompliant
+  {1j: "one", 2j: "two", 3j: "three"}
+  {1j: "one", 2j: "two", 1J: "three"}  # Noncompliant
   {0xB1E70073L: "1", 0xB1E70073L: "1"} # Noncompliant [[only valid for python 2]]
   {0xB1E70073l: "1", 0xB1E70073l: "1"} # Noncompliant [[only valid for python 2]]
   {0b1: "one", 0o2: "two", 0B1: "three"}  # Noncompliant
@@ -35,11 +37,13 @@ def numbers():
 
 def mixed_types():
   {1.0: "one", 2.0: "two", 0o1: "three"}  # Noncompliant
+  {0: "one", 1: "two", 0j: "three"}  # Noncompliant
   {1: "one", 2: "two", 1.0: "three"}  # Noncompliant
   # True == 1
   {1: "one", 2: "two", True: "three"}  # Noncompliant
   # False == 0
   {0: "one", 2: "two", False: "three"}  # Noncompliant
+  {0j: "one", 2j: "two", False: "three"}  # Noncompliant
   {"1": 1, 1: "1", "2": 2} # OK
 
 
@@ -97,3 +101,9 @@ def large_dict_literal():
   "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
   "a": "b"
   }
+
+def computed():
+  x = 1
+  {0: "one", 1:"two", 1-1:"three"} # FN
+  {0: "one", 1:"two", x:"three"} # FN
+  {0: "one", 1:"two", 1-x:"three"} # FN

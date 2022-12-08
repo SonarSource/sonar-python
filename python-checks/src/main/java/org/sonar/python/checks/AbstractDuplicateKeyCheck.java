@@ -67,14 +67,14 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
 
   private boolean areEquivalentNumbers(Tree key, Tree comparedKey) {
     // BigDecimal#compareTo is required as equals() returns true only with identical scales
-    return toBigDecimal(key).compareTo(toBigDecimal(comparedKey)) == 0;
+    return toNumber(key).isEquivalentNumber((toNumber(comparedKey)));
   }
 
-  private BigDecimal toBigDecimal(Tree numberTree) {
+  private static Number toNumber(Tree numberTree) {
     if (numberTree.is(Tree.Kind.NUMERIC_LITERAL)) {
-      return parseAsBigDecimal(((NumericLiteral) numberTree).valueAsString());
+      return Number.fromString(((NumericLiteral) numberTree).valueAsString());
     }
-    return ((Name) numberTree).name().equals("True") ? BigDecimal.ONE : BigDecimal.ZERO;
+    return "True".equals(((Name) numberTree).name()) ? new Number(BigDecimal.ONE) : new Number(BigDecimal.ZERO);
   }
 
   private static boolean areEquivalentStringLiterals(StringLiteral key, StringLiteral comparedKey) {
@@ -91,24 +91,53 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
     return false;
   }
 
-  public BigDecimal parseAsBigDecimal(String numberLiteralValue) {
-    String numberValue = numberLiteralValue.replace("_", "");
-    if (numberValue.endsWith("L") || numberValue.endsWith("l")) {
-      numberValue = numberValue.substring(0, numberValue.length() - 1);
-    }
-    if (numberValue.startsWith("0b") || numberValue.startsWith("0B")) {
-      return new BigDecimal(new BigInteger(numberValue.substring(2), 2));
-    }
-    if (numberValue.startsWith("0o") || numberValue.startsWith("0O")) {
-      return new BigDecimal(new BigInteger(numberValue.substring(2), 8));
-    }
-    if (numberValue.startsWith("0x") || numberValue.startsWith("0X")) {
-      return new BigDecimal(new BigInteger(numberValue.substring(2), 16));
-    }
-    return new BigDecimal(numberValue);
+  private static boolean isANumber(Tree tree) {
+    return tree.is(Tree.Kind.NUMERIC_LITERAL)
+      || (tree.is(Tree.Kind.NAME) && ("True".equals(((Name) tree).name()) || "False".equals(((Name) tree).name())));
   }
 
-  private static boolean isANumber(Tree tree) {
-    return tree.is(Tree.Kind.NUMERIC_LITERAL) || (tree.is(Tree.Kind.NAME) && (((Name) tree).name().equals("True") || ((Name) tree).name().equals("False")));
+  static class Number {
+    private final boolean isComplex;
+    private final BigDecimal value;
+
+    public Number(BigDecimal value, boolean isComplex) {
+      this.value = value;
+      this.isComplex = isComplex;
+    }
+
+    public Number(BigDecimal value) {
+      this.value = value;
+      this.isComplex = false;
+    }
+
+    public static Number fromString(String str) {
+      String numberValue = str.replace("_", "");
+      if (numberValue.endsWith("L") || numberValue.endsWith("l")) {
+        numberValue = numberValue.substring(0, numberValue.length() - 1);
+      }
+      if (numberValue.startsWith("0b") || numberValue.startsWith("0B")) {
+        return new Number(new BigDecimal(new BigInteger(numberValue.substring(2), 2)));
+      }
+      if (numberValue.startsWith("0o") || numberValue.startsWith("0O")) {
+        return new Number(new BigDecimal(new BigInteger(numberValue.substring(2), 8)));
+      }
+      if (numberValue.startsWith("0x") || numberValue.startsWith("0X")) {
+        return new Number(new BigDecimal(new BigInteger(numberValue.substring(2), 16)));
+      }
+      if (numberValue.endsWith("j") || numberValue.endsWith("J")) {
+        return new Number(new BigDecimal(new BigInteger(numberValue.substring(0, numberValue.length() - 1))), true);
+      }
+      return new Number(new BigDecimal(numberValue));
+    }
+
+    public boolean isEquivalentNumber(Number other) {
+      if (other.value.compareTo(BigDecimal.ZERO) == 0 && value.compareTo(BigDecimal.ZERO) == 0) {
+        return true;
+      }
+      if (other.isComplex != isComplex) {
+        return false;
+      }
+      return other.value.compareTo(value) == 0;
+    }
   }
 }

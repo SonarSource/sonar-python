@@ -27,10 +27,12 @@ def numbers():
   {0o1, 0o2, 0O1}  # Noncompliant
   {0x1, 0x3, 0X1}  # Noncompliant
   {0b1, 0o2, 0B1}  # Noncompliant
+  {1j, 2j, 1J}  # Noncompliant
   {True, False, True}  # Noncompliant
 
 def mixed_types():
   {1.0, 2.0, 0o1}  # Noncompliant
+  {0, 1.0, 0j}  # Noncompliant
   {1, 2, 1.0}  # Noncompliant
   # True == 1
   {1, 2, True}  # Noncompliant
