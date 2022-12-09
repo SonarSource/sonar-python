@@ -180,7 +180,7 @@ public class PythonPrAnalysisTest {
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
       .setDebugLogs(true)
-      .setEnvironmentVariable("SONAR_SCANNER_OPTS", "-Xdebug");
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
   }
 
 
