@@ -686,6 +686,8 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
   }
 
   @Test
@@ -739,6 +741,8 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.");
   }
 
   @Test
