@@ -66,7 +66,6 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
   }
 
   private boolean areEquivalentNumbers(Tree key, Tree comparedKey) {
-    // BigDecimal#compareTo is required as equals() returns true only with identical scales
     return toNumber(key).isEquivalentNumber((toNumber(comparedKey)));
   }
 
@@ -131,6 +130,7 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
     }
 
     public boolean isEquivalentNumber(Number other) {
+      // BigDecimal#compareTo is required as equals() returns true only with identical scales
       if (other.value.compareTo(BigDecimal.ZERO) == 0 && value.compareTo(BigDecimal.ZERO) == 0) {
         return true;
       }

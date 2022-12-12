@@ -30,6 +30,7 @@ def numbers():
   {0x1: "one", 0x3: "two", 0X1: "three"}  # Noncompliant
   {1j: "one", 2j: "two", 3j: "three"}
   {1j: "one", 2j: "two", 1J: "three"}  # Noncompliant
+  {1 + 2j: "one", 2j + 1: "two"}  # FN
   {0xB1E70073L: "1", 0xB1E70073L: "1"} # Noncompliant [[only valid for python 2]]
   {0xB1E70073l: "1", 0xB1E70073l: "1"} # Noncompliant [[only valid for python 2]]
   {0b1: "one", 0o2: "two", 0B1: "three"}  # Noncompliant
