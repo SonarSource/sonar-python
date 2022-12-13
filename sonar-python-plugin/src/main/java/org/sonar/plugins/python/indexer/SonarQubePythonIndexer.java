@@ -38,6 +38,8 @@ import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
+import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
+
 public class SonarQubePythonIndexer extends PythonIndexer {
 
   /**
@@ -54,21 +56,21 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private final List<InputFile> testFiles = new ArrayList<>();
   private final Map<InputFile, String> inputFileToFQN = new HashMap<>();
 
-  public SonarQubePythonIndexer(List<InputFile> inputFiles, CacheContext cacheContext) {
+  public SonarQubePythonIndexer(List<InputFile> inputFiles, CacheContext cacheContext, SensorContext context) {
+    this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {
       if (f.type().equals(InputFile.Type.MAIN)) {
         mainFiles.add(f);
+        inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
       } else {
         testFiles.add(f);
       }
     });
-    this.caching = new Caching(cacheContext);
   }
 
   @Override
   public void buildOnce(SensorContext context) {
-    this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
-    mainFiles.forEach(f ->  inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename())));
     LOG.debug("Input files for indexing: " + mainFiles);
     if (shouldOptimizeAnalysis(context)) {
       computeGlobalSymbolsUsingCache(context);
@@ -81,7 +83,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private boolean shouldOptimizeAnalysis(SensorContext context) {
     return caching.isCacheEnabled()
-      && (context.canSkipUnchangedFiles() || context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false));
+      && (context.canSkipUnchangedFiles() || context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false))
+      && caching.isCacheVersionUpToDate();
   }
 
   private void computeGlobalSymbolsUsingCache(SensorContext context) {
@@ -147,6 +150,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     if (caching.isCacheEnabled()) {
       saveGlobalSymbolsInCache(files);
       saveMainFilesListInCache(new HashSet<>(inputFileToFQN.values()));
+      caching.writeCacheVersion();
     }
   }
 
@@ -182,5 +186,19 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public CacheContext cacheContext() {
     return caching.cacheContext();
+  }
+
+  private static String getCacheVersion(SensorContext context) {
+    String implementationVersion = getImplementationVersion(SonarQubePythonIndexer.class);
+    return context.config().get(PYTHON_VERSION_KEY).map(v -> implementationVersion + ";" + v).orElse(implementationVersion);
+  }
+
+  private static String getImplementationVersion(Class<?> cls) {
+    String implementationVersion = cls.getPackage().getImplementationVersion();
+    if (implementationVersion == null) {
+      LOG.warn("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, which may lead to inaccurate analysis results.");
+      return "unknownPluginVersion";
+    }
+    return implementationVersion;
   }
 }

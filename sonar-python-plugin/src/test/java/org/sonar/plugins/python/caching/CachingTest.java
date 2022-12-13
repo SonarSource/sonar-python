@@ -57,6 +57,8 @@ public class CachingTest {
   @org.junit.Rule
   public LogTester logTester = new LogTester();
 
+  private final static String CACHE_VERSION = "dummyVersion";
+
 
   @Test
   public void writeProjectLevelSymbolTableEntry() throws InvalidProtocolBufferException {
@@ -66,7 +68,7 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<Descriptor> initialDescriptors = Set.of(
       new ClassDescriptor("C", "mod.C", Collections.emptyList(), Collections.emptySet(), false, null, false, false, null, false),
       new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
@@ -89,7 +91,7 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<Descriptor> initialDescriptors = Set.of(
       new ClassDescriptor("C", "mod.C", Collections.emptyList(), Collections.emptySet(), false, null, false, false, null, false),
       new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
@@ -107,7 +109,7 @@ public class CachingTest {
     TestReadCache readCache = new TestReadCache();
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     assertThat(caching.readProjectLevelSymbolTableEntry("unknown")).isNull();
   }
 
@@ -123,7 +125,7 @@ public class CachingTest {
     Mockito.when(pythonReadCache.read(cacheKey)).thenReturn(inputStream);
 
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), pythonReadCache);
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     assertThat(caching.readProjectLevelSymbolTableEntry("mod")).isNull();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Unable to read data for key: \"python:descriptors:mod\"");
   }
@@ -135,7 +137,7 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(new TestReadCache());
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<String> imports = Set.of("mod2", "pkg1.mod3", "pkg2.pkg3.mod4");
 
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + "mod";
@@ -154,7 +156,7 @@ public class CachingTest {
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<String> imports = Set.of("mod2", "pkg1.mod3", "pkg2.pkg3.mod4");
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + "mod";
     readCache.put(cacheKey, String.join(";", imports).getBytes(StandardCharsets.UTF_8));
@@ -167,7 +169,7 @@ public class CachingTest {
     TestReadCache readCache = new TestReadCache();
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     assertThat(caching.readImportMapEntry("unknown")).isNull();
   }
 
@@ -180,7 +182,7 @@ public class CachingTest {
     CacheContextImpl cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);
 
 
-    Caching caching = new Caching(cacheContext);
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
     String module = "mod";
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", new byte[] {42});
     assertThat(caching.readProjectLevelSymbolTableEntry(module)).isNull();

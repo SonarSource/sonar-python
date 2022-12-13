@@ -43,11 +43,15 @@ public class Caching {
   public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
   public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
   public static final String PROJECT_FILES_KEY = "python:files";
+  public static final String CACHE_VERSION_KEY = "python:cache_version";
 
   private static final Logger LOG = Loggers.get(Caching.class);
 
-  public Caching(CacheContext cacheContext) {
+  public final String cacheVersion;
+
+  public Caching(CacheContext cacheContext, String cacheVersion) {
     this.cacheContext = cacheContext;
+    this.cacheVersion = cacheVersion;
   }
 
   public void writeImportsMapEntry(String moduleFqn, Set<String> imports) {
@@ -59,6 +63,10 @@ public class Caching {
   public void writeFilesList(List<String> mainFiles) {
     byte[] projectFiles = String.join(";", mainFiles).getBytes(StandardCharsets.UTF_8);
     cacheContext.getWriteCache().write(PROJECT_FILES_KEY, projectFiles);
+  }
+
+  public void writeCacheVersion() {
+    cacheContext.getWriteCache().write(CACHE_VERSION_KEY, cacheVersion.getBytes(StandardCharsets.UTF_8));
   }
 
   public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
@@ -103,6 +111,20 @@ public class Caching {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
     return Collections.emptySet();
+  }
+
+  public boolean isCacheVersionUpToDate() {
+    byte[] bytes = cacheContext.getReadCache().readBytes(CACHE_VERSION_KEY);
+    if (bytes != null) {
+      String retrievedVersion = new String(bytes, StandardCharsets.UTF_8);
+      if (retrievedVersion.equals(cacheVersion)) {
+        LOG.debug("Cache version still up to date: \"{}\".", cacheVersion);
+        return true;
+      }
+      LOG.info("The cache version has changed since the previous analysis, cached data will not be used during this analysis." +
+        " Retrieved: \"{}\". Current version: \"{}\".", retrievedVersion, cacheVersion);
+    }
+    return false;
   }
 
   public boolean isCacheEnabled() {
