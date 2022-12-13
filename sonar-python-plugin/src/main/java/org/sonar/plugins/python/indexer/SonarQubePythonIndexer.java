@@ -62,11 +62,11 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     inputFiles.forEach(f -> {
       if (f.type().equals(InputFile.Type.MAIN)) {
         mainFiles.add(f);
+        inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
       } else {
         testFiles.add(f);
       }
     });
-    mainFiles.forEach(f ->  inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename())));
   }
 
   @Override
@@ -196,8 +196,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private static String getImplementationVersion(Class<?> cls) {
     String implementationVersion = cls.getPackage().getImplementationVersion();
     if (implementationVersion == null) {
-      LOG.warn("Implementation version of the Python plugin not found. Cached data may not be invalidated properly.");
-      return "unknown";
+      LOG.warn("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, which may lead to inaccurate analysis results.");
+      return "unknownPluginVersion";
     }
     return implementationVersion;
   }

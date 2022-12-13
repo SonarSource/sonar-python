@@ -83,7 +83,7 @@ public class SonarQubePythonIndexerTest {
     writeCache = new TestWriteCache();
     readCache = new TestReadCache();
     writeCache.bind(readCache);
-    cacheVersion = "unknown";
+    cacheVersion = "unknownPluginVersion";
     readCache.put(CACHE_VERSION_KEY, cacheVersion.getBytes(StandardCharsets.UTF_8));
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
@@ -113,8 +113,9 @@ public class SonarQubePythonIndexerTest {
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Optimized analysis can be performed for 1 out of 2 files.")
       .contains("1/1 source file has been analyzed");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Cache version still up to date: \"unknown\".");
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, " +
+      "which may lead to inaccurate analysis results.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Cache version still up to date: \"unknownPluginVersion\".");
   }
 
   @Test
@@ -277,7 +278,36 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO))
-      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. Retrieved: \"outdatedVersion\". Current version: \"unknown\".")
+      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
+        "Retrieved: \"outdatedVersion\". Current version: \"unknownPluginVersion\".")
+      .contains("2/2 source files have been analyzed");
+  }
+
+
+  @Test
+  public void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+
+    context.settings().setProperty("sonar.python.version", "3.11");
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
+    readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
+
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
+        "Retrieved: \"unknownPluginVersion\". Current version: \"unknownPluginVersion;3.11\".")
       .contains("2/2 source files have been analyzed");
   }
 

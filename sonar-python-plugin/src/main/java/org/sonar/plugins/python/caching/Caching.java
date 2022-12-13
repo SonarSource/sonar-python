@@ -122,7 +122,7 @@ public class Caching {
         return true;
       }
       LOG.info("The cache version has changed since the previous analysis, cached data will not be used during this analysis." +
-        String.format(" Retrieved: \"%s\". Current version: \"%s\".", retrievedVersion, cacheVersion));
+        " Retrieved: \"{}\". Current version: \"{}\".", retrievedVersion, cacheVersion);
     }
     return false;
   }

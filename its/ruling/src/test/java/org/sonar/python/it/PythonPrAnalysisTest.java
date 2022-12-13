@@ -146,8 +146,7 @@ public class PythonPrAnalysisTest {
 
     assertThat(result.getLogs())
       .contains(expectedRecomputedLog)
-      .contains(expectedRegularAnalysisLog)
-      .contains(String.format("Cache version still up to date"));
+      .contains(expectedRegularAnalysisLog);
   }
 
   private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {
@@ -178,7 +177,6 @@ public class PythonPrAnalysisTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setDebugLogs(true)
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
   }
 

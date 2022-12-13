@@ -873,7 +873,7 @@ public class PythonSensorTest {
 
   TestReadCache getValidReadCache() {
     TestReadCache testReadCache = new TestReadCache();
-    testReadCache.put(CACHE_VERSION_KEY, "unknown".getBytes(UTF_8));
+    testReadCache.put(CACHE_VERSION_KEY, "unknownPluginVersion".getBytes(UTF_8));
     return testReadCache;
   }
 }
