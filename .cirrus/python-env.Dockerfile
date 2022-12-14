@@ -1,4 +1,5 @@
-FROM eu.gcr.io/release-engineering-ci-prod/base:j11-latest
+ARG CIRRUS_AWS_ACCOUNT=275878209202
+FROM ${CIRRUS_AWS_ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/base:j11-latest
 USER root
 ENV PYTHON_VERSION=3.9.5
 RUN apt-get update && apt-get install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
