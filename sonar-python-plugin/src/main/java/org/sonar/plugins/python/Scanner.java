@@ -69,7 +69,7 @@ public abstract class Scanner {
         progressReport.nextFile();
       }
     }
-
+    endOfAnalysis();
     progressReport.stop();
     this.reportStatistics(numScannedWithoutParsing, files.size());
   }
@@ -80,6 +80,10 @@ public abstract class Scanner {
 
   protected boolean scanFileWithoutParsing(InputFile file) throws IOException {
     return false;
+  }
+
+  protected void endOfAnalysis() {
+    // no op
   }
 
   protected abstract void processException(Exception e, InputFile file);

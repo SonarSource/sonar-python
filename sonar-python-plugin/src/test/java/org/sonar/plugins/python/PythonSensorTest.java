@@ -63,7 +63,9 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -72,6 +74,8 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -138,7 +142,10 @@ public class PythonSensorTest {
     name = "name",
     description = "desc",
     tags = {"bug"})
-  public static class MyCustomRule implements PythonCheck {
+  public static class MyCustomRule implements PythonCheck, EndOfAnalysis {
+
+    private static final Logger LOG = Loggers.get(MyCustomRule.class);
+
     @RuleProperty(
       key = "customParam",
       description = "Custom parameter",
@@ -153,6 +160,11 @@ public class PythonSensorTest {
     @Override
     public boolean scanWithoutParsing(PythonInputFileContext inputFile) {
       return false;
+    }
+
+    @Override
+    public void endOfAnalysis(CacheContext cacheContext) {
+      LOG.trace("End of analysis called!");
     }
   }
 
@@ -404,6 +416,19 @@ public class PythonSensorTest {
     assertThat(flow.locations()).hasSize(2);
     assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile);
     assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile);
+  }
+
+  @Test
+  public void end_of_analysis_called() {
+    inputFile(FILE_2);
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, CUSTOM_RULE_KEY))
+        .build())
+      .build();
+    sensor().execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly("End of analysis called!");
   }
 
   @Test
