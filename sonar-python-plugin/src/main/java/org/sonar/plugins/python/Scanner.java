@@ -42,6 +42,8 @@ public abstract class Scanner {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
     LOG.info("Starting " + this.name());
     List<String> filenames = files.stream().map(InputFile::toString).collect(Collectors.toList());
+
+    int numScannedWithoutParsing = 0;
     progressReport.start(filenames);
     for (InputFile file : files) {
       if (context.isCancelled()) {
@@ -55,6 +57,8 @@ public abstract class Scanner {
         }
         if (!successfullyScannedWithoutParsing) {
           this.scanFile(file);
+        } else {
+          ++numScannedWithoutParsing;
         }
       } catch (Exception e) {
         this.processException(e, file);
@@ -67,6 +71,7 @@ public abstract class Scanner {
     }
 
     progressReport.stop();
+    this.reportStatistics(numScannedWithoutParsing, files.size());
   }
 
   protected abstract String name();
@@ -78,6 +83,10 @@ public abstract class Scanner {
   }
 
   protected abstract void processException(Exception e, InputFile file);
+
+  protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
+    // Intentionally empty. Subclasses can override this method to output logs containing some logs after the execution of the scanner.
+  }
 
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
     return false;

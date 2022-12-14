@@ -144,9 +144,13 @@ public class PythonPrAnalysisTest {
     String expectedRegularAnalysisLog = String.format("Optimized analysis can be performed for %d out of %d files.",
       expectedSkipped, expectedTotalFiles);
 
+    String expectedFinalLog = String.format("The Python analyzer was able to leverage cached data from previous analyses for %d out of %d files. These files were not parsed.",
+      expectedSkipped, expectedTotalFiles);
+
     assertThat(result.getLogs())
       .contains(expectedRecomputedLog)
-      .contains(expectedRegularAnalysisLog);
+      .contains(expectedRegularAnalysisLog)
+      .contains(expectedFinalLog);
   }
 
   private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {

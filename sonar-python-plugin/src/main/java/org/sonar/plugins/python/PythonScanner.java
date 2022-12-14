@@ -181,6 +181,12 @@ public class PythonScanner extends Scanner {
     return this.indexer.canBeScannedWithoutParsing(inputFile);
   }
 
+  @Override
+  protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
+    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not parsed.",
+      numSkippedFiles, numTotalFiles);
+  }
+
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
     for (PreciseIssue preciseIssue : issues) {
       RuleKey ruleKey = checks.ruleKey(preciseIssue.check());
