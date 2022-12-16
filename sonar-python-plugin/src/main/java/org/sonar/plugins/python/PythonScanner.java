@@ -50,6 +50,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -152,6 +153,14 @@ public class PythonScanner extends Scanner {
       }
     }
     return true;
+  }
+
+  @Override
+  public void endOfAnalysis() {
+    checks.all().stream()
+      .filter(EndOfAnalysis.class::isInstance)
+      .map(EndOfAnalysis.class::cast)
+      .forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
   }
 
   boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
