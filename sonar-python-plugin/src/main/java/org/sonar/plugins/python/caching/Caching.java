@@ -43,6 +43,7 @@ public class Caching {
   public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
   public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
   public static final String PROJECT_FILES_KEY = "python:files";
+  public static final String TYPESHED_MODULES_KEY = "python:typeshed_modules";
   public static final String CACHE_VERSION_KEY = "python:cache_version";
 
   private static final Logger LOG = Loggers.get(Caching.class);
@@ -63,6 +64,11 @@ public class Caching {
   public void writeFilesList(List<String> mainFiles) {
     byte[] projectFiles = String.join(";", mainFiles).getBytes(StandardCharsets.UTF_8);
     cacheContext.getWriteCache().write(PROJECT_FILES_KEY, projectFiles);
+  }
+
+  public void writeTypeshedModules(Set<String> stubModules) {
+    byte[] stubModulesBytes = String.join(";", stubModules).getBytes(StandardCharsets.UTF_8);
+    cacheContext.getWriteCache().write(TYPESHED_MODULES_KEY, stubModulesBytes);
   }
 
   public void writeCacheVersion() {
@@ -106,7 +112,15 @@ public class Caching {
   }
 
   public Set<String> readFilesList() {
-    byte[] bytes = cacheContext.getReadCache().readBytes(PROJECT_FILES_KEY);
+    return readSet(PROJECT_FILES_KEY);
+  }
+
+  public Set<String> readTypeshedModules() {
+    return readSet(TYPESHED_MODULES_KEY);
+  }
+
+  private Set<String> readSet(String cacheKey) {
+    byte[] bytes = cacheContext.getReadCache().readBytes(cacheKey);
     if (bytes != null) {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }

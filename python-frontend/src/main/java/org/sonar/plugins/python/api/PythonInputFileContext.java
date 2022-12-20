@@ -20,10 +20,13 @@
 package org.sonar.plugins.python.api;
 
 import java.io.File;
+import java.util.Collection;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.types.TypeShed;
 
 public class PythonInputFileContext {
 
@@ -44,6 +47,11 @@ public class PythonInputFileContext {
   @Beta
   public CacheContext cacheContext() {
     return cacheContext;
+  }
+
+  @Beta
+  public Collection<Symbol> stubFilesSymbols() {
+    return TypeShed.stubFilesSymbols();
   }
 
   @CheckForNull
