@@ -19,11 +19,15 @@
  */
 package org.sonar.python.caching;
 
+import java.util.Optional;
 import org.junit.Test;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.Version;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.api.caching.CacheContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,6 +38,10 @@ public class CacheContextImplTest {
 
   private static final Version VERSION_WITH_CACHING = Version.create(9, 7);
   private static final Version VERSION_WITHOUT_CACHING = Version.create(9, 6);
+  private static final String EXPECTED_SONAR_MODULE_LOG = "Caching will be disabled for this analysis due to the use of the \"sonar.modules\" property.";
+
+  @org.junit.Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void cache_context_of_enabled_cache() {
@@ -68,6 +76,30 @@ public class CacheContextImplTest {
   }
 
   @Test
+  public void cache_context_with_sonar_modules_property() {
+    SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, true);
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
+    when(sensorContext.config()).thenReturn(configuration);
+
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    assertThat(cacheContext.isCacheEnabled()).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains(EXPECTED_SONAR_MODULE_LOG);
+  }
+
+  @Test
+  public void cache_context_when_cache_disabled_no_sonar_module_logs() {
+    SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, false);
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
+    when(sensorContext.config()).thenReturn(configuration);
+
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    assertThat(cacheContext.isCacheEnabled()).isFalse();
+    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain(EXPECTED_SONAR_MODULE_LOG);
+  }
+
+  @Test
   public void dummy_cache() {
     CacheContext dummyCache = CacheContextImpl.dummyCache();
     assertThat(dummyCache.isCacheEnabled()).isFalse();
@@ -81,6 +113,8 @@ public class CacheContextImplTest {
     SensorContext sensorContext = mock(SensorContext.class);
     when(sensorContext.runtime()).thenReturn(runtime);
     when(sensorContext.isCacheEnabled()).thenReturn(isCacheEnabled);
+    Configuration configuration = mock(Configuration.class);
+    when(sensorContext.config()).thenReturn(configuration);
 
     return sensorContext;
   }

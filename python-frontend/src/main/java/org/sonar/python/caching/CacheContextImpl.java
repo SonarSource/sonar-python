@@ -22,11 +22,16 @@ package org.sonar.python.caching;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.Version;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
 public class CacheContextImpl implements CacheContext {
+
+  private static final Logger LOG = Loggers.get(CacheContextImpl.class);
+  private static final Version MINIMUM_RUNTIME_VERSION = Version.create(9, 7);
 
   private final boolean isCacheEnabled;
   private final PythonWriteCache writeCache;
@@ -54,7 +59,15 @@ public class CacheContextImpl implements CacheContext {
   }
 
   public static CacheContextImpl of(SensorContext context) {
-    if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT) && context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(9, 7))) {
+    String sonarModules = context.config().get("sonar.modules").orElse("");
+    boolean isUsingSonarModules = !sonarModules.isEmpty();
+    if (isUsingSonarModules && context.isCacheEnabled()) {
+      LOG.info("Caching will be disabled for this analysis due to the use of the \"sonar.modules\" property.");
+    }
+    if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT)
+      && context.runtime().getApiVersion().isGreaterThanOrEqual(MINIMUM_RUNTIME_VERSION)
+      && !isUsingSonarModules
+    ) {
       return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
     }
     return new CacheContextImpl(false, new DummyCache(), new DummyCache());
