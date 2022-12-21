@@ -47,7 +47,6 @@ import org.sonar.python.caching.PythonWriteCacheImpl;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.TypeShed;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
