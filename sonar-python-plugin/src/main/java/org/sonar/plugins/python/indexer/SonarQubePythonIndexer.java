@@ -36,6 +36,7 @@ import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
@@ -88,6 +89,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   private void computeGlobalSymbolsUsingCache(SensorContext context) {
+    loadTypeshedSymbols();
     LOG.info("Using cached data to retrieve global symbols.");
     Set<String> currentProjectModulesFQNs = new HashSet<>(inputFileToFQN.values());
     Set<String> deletedModulesFQNs = deletedModulesFQNs(currentProjectModulesFQNs);
@@ -121,6 +123,17 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     computeGlobalSymbols(impactfulFiles, context);
   }
 
+  /*
+    In a full analysis, Typeshed symbols are loaded lazily depending on which module is encountered during parsing.
+    SonarSecurity needs all Typeshed symbols used in the project to be properly loaded.
+    For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
+   */
+  private void loadTypeshedSymbols() {
+    TypeShed.builtinSymbols();
+    Set<String> typeShedModules = caching.readTypeshedModules();
+    typeShedModules.forEach(TypeShed::symbolsForModule);
+  }
+
   private boolean tryToUseCache(Map<String, Set<String>> importsByModule, InputFile inputFile, String currFQN) {
     if (!inputFile.status().equals(InputFile.Status.SAME)) {
       return false;
@@ -150,6 +163,10 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     if (caching.isCacheEnabled()) {
       saveGlobalSymbolsInCache(files);
       saveMainFilesListInCache(new HashSet<>(inputFileToFQN.values()));
+      Set<String> stubModules = TypeShed.stubModules();
+      if (!stubModules.isEmpty()) {
+        caching.writeTypeshedModules(stubModules);
+      }
       caching.writeCacheVersion();
     }
   }

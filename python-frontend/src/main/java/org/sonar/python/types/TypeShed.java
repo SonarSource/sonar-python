@@ -182,6 +182,16 @@ public class TypeShed {
     return symbols;
   }
 
+  public static Set<String> stubModules() {
+    Set<String> modules = new HashSet<>();
+    for (Map.Entry<String, Map<String, Symbol>> entry : typeShedSymbols.entrySet()) {
+      if (!entry.getValue().isEmpty()) {
+        modules.add(entry.getKey());
+      }
+    }
+    return modules;
+  }
+
   public static String normalizedFqn(String fqn) {
     if (fqn.startsWith(BUILTINS_PREFIX)) {
       return fqn.substring(BUILTINS_PREFIX.length());
@@ -259,7 +269,7 @@ public class TypeShed {
   //================================================================================
 
   // used by tests whenever 'sonar.python.version' changes
-  static void resetBuiltinSymbols() {
+  public static void resetBuiltinSymbols() {
     builtins = null;
     typeShedSymbols.clear();
     builtinSymbols();

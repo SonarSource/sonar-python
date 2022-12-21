@@ -45,13 +45,16 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
 import org.sonar.python.caching.PythonWriteCacheImpl;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.TypeShed;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_FILES_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.TYPESHED_MODULES_KEY;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
@@ -75,6 +78,7 @@ public class SonarQubePythonIndexerTest {
 
   @Before
   public void init() throws IOException {
+    TypeShed.resetBuiltinSymbols();
     context = SensorContextTester.create(baseDir);
     Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
@@ -373,6 +377,35 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBeScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
+  }
+
+  @Test
+  public void test_typeshed_modules_cached() {
+    file1 = createInputFile(baseDir, "uses_typeshed.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+
+    byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
+    Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder("math");
+  }
+
+  @Test
+  public void test_typeshed_modules_not_cached_if_empty() {
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.canBeScannedWithoutParsing(file1)).isFalse();
+    assertThat(writeCache.getData()).doesNotContainKey(TYPESHED_MODULES_KEY);
   }
 
   @Test

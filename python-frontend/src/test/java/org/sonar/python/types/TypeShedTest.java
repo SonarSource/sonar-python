@@ -474,6 +474,13 @@ public class TypeShedTest {
     assertThat(sequence).isSameAs(typing.get("Sequence"));
   }
 
+  @Test
+  public void stubModules() {
+    TypeShed.symbolsForModule("doesnotexist");
+    TypeShed.symbolsForModule("math");
+    assertThat(TypeShed.stubModules()).containsExactly("math");
+  }
+
   private static SymbolsProtos.ModuleSymbol moduleSymbol(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol.Builder builder = SymbolsProtos.ModuleSymbol.newBuilder();
     TextFormat.merge(protobuf, builder);

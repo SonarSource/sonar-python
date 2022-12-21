@@ -31,6 +31,8 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -40,10 +42,12 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PythonVisitorCheckTest {
 
@@ -143,7 +147,7 @@ public class PythonVisitorCheckTest {
     };
     File tmpFile = Files.createTempFile("foo", "py").toFile();
 
-    var cache = Mockito.mock(CacheContext.class);
+    var cache = mock(CacheContext.class);
 
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, null, "", ProjectLevelSymbolTable.empty(), cache);
     assertThat(context.workingDirectory()).isNull();
@@ -164,6 +168,9 @@ public class PythonVisitorCheckTest {
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
 
     assertThat(check.symbols).isEqualTo(TypeShed.stubFilesSymbols());
+
+    PythonInputFileContext inputFileContext = new PythonInputFileContext(mock(PythonFile.class), null, CacheContextImpl.dummyCache());
+    assertThat(inputFileContext.stubFilesSymbols()).isEqualTo(TypeShed.stubFilesSymbols());
   }
 
   private static class TestPythonCheck extends PythonVisitorCheck {
