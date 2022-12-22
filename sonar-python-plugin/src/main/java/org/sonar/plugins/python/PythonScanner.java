@@ -24,8 +24,12 @@ import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
@@ -76,6 +80,7 @@ public class PythonScanner extends Scanner {
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
+  private final Map<InputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -120,7 +125,8 @@ public class PythonScanner extends Scanner {
     }
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
-      if (!isCheckApplicable(check, fileType)) {
+      if (!isCheckApplicable(check, fileType)
+        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check)) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck) {
@@ -151,6 +157,9 @@ public class PythonScanner extends Scanner {
       if (!check.scanWithoutParsing(inputFileContext)) {
         return false;
       }
+      Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
+      executedChecks.add(check);
+      checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
     }
 
     return restoreAndPushMeasuresIfApplicable(inputFile);
