@@ -29,7 +29,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.python.PythonScanner;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.TokenLocation;
@@ -43,7 +42,7 @@ import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREF
 
 public class PythonCpdAnalyzer {
 
-  private static final Logger LOG = Loggers.get(PythonScanner.class);
+  private static final Logger LOG = Loggers.get(PythonCpdAnalyzer.class);
 
   private final SensorContext context;
 
