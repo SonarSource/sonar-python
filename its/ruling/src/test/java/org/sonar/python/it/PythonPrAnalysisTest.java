@@ -65,7 +65,7 @@ public class PythonPrAnalysisTest {
   private final int expectedRecomputed;
   private final int expectedSkipped;
   private final List<String> deletedFiles;
-  private final Integer expectedDuplication;
+  private final Integer expectedDuplicatedLines;
 
   public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped, List<String> deletedFiles, Integer expectedDuplication) {
     this.scenario = scenario;
@@ -73,7 +73,7 @@ public class PythonPrAnalysisTest {
     this.expectedRecomputed = expectedRecomputed;
     this.expectedSkipped = expectedSkipped;
     this.deletedFiles = deletedFiles;
-    this.expectedDuplication = expectedDuplication;
+    this.expectedDuplicatedLines = expectedDuplication;
   }
 
   @BeforeClass
@@ -161,12 +161,12 @@ public class PythonPrAnalysisTest {
   }
 
   private void assertMeasures() {
-    if (expectedDuplication != null) {
+    if (expectedDuplicatedLines != null) {
       var duplicatedLines = getMeasure(ORCHESTRATOR, PR_KEY, PR_ANALYSIS_PROJECT_KEY + ":index_duplicate.py", "duplicated_lines");
       assertThat(duplicatedLines)
         .isNotNull();
       assertThat(Integer.parseInt(duplicatedLines.getValue()))
-        .isEqualTo(expectedDuplication);
+        .isEqualTo(expectedDuplicatedLines);
     }
   }
 

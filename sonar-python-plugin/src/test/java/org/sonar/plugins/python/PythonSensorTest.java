@@ -1032,7 +1032,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_cache_disabled() throws IOException, ClassNotFoundException {
+  public void read_cpd_tokens_cache_disabled() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))

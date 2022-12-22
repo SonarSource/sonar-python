@@ -75,7 +75,7 @@ public class PythonCpdAnalyzer {
   }
 
   public boolean pushCachedCpdTokens(InputFile inputFile, CacheContext cacheContext) {
-    String key = CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key().replace('\\', '/');
+    String key = cacheKey(inputFile.key());
     byte[] bytes = cacheContext.getReadCache().readBytes(key);
     if (bytes == null) {
       return false;
@@ -104,8 +104,9 @@ public class PythonCpdAnalyzer {
     }
 
     try {
+      String key = cacheKey(visitorContext.pythonFile().key());
       byte[] bytes = CpdSerializer.toBytes(tokensToCache);
-      cacheContext.getWriteCache().write(CPD_TOKENS_CACHE_KEY_PREFIX + visitorContext.pythonFile().key().replace('\\', '/'), bytes);
+      cacheContext.getWriteCache().write(key, bytes);
     } catch (Exception e) {
       LOG.warn("Could not write CPD tokens to cache ({}: {})", e.getClass().getSimpleName(), e.getMessage());
     }
@@ -122,4 +123,7 @@ public class PythonCpdAnalyzer {
       type.equals(GenericTokenType.EOF);
   }
 
+  private static String cacheKey(String fileKey) {
+    return CPD_TOKENS_CACHE_KEY_PREFIX + fileKey.replace('\\', '/');
+  }
 }
