@@ -128,6 +128,7 @@ public class PythonSensorTest {
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
   private static final String CUSTOM_REPOSITORY_KEY = "customKey";
   private static final String CUSTOM_RULE_KEY = "key";
+  private static final String RULE_CRASHING_ON_SCAN_KEY = "key2";
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
 
@@ -141,7 +142,7 @@ public class PythonSensorTest {
 
     @Override
     public List<Class> checkClasses() {
-      return Collections.singletonList(MyCustomRule.class);
+      return List.of(MyCustomRule.class, RuleCrashingOnRegularScan.class);
     }
   }};
   private static Path workDir;
@@ -174,6 +175,24 @@ public class PythonSensorTest {
     @Override
     public void endOfAnalysis(CacheContext cacheContext) {
       LOG.trace("End of analysis called!");
+    }
+  }
+
+  @Rule(
+    key = RULE_CRASHING_ON_SCAN_KEY,
+    name = "rule_crashing_on_scan",
+    description = "desc",
+    tags = {"bug"})
+  public static class RuleCrashingOnRegularScan implements PythonCheck {
+
+    @Override
+    public void scanFile(PythonVisitorContext visitorContext) {
+      throw new IllegalStateException("Should not be executed!");
+    }
+
+    @Override
+    public boolean scanWithoutParsing(PythonInputFileContext inputFile) {
+      return true;
     }
   }
 
@@ -1056,6 +1075,50 @@ public class PythonSensorTest {
       .hasSize(1);
 
     assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
+  }
+
+  @Test
+  public void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, RULE_CRASHING_ON_SCAN_KEY))
+        .build())
+      .build();
+
+    InputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
+
+    TestReadCache readCache = getValidReadCache();
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
+    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
+
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(
+      new MapSettings()
+        .setProperty("sonar.python.skipUnchanged", true)
+        .setProperty("sonar.internal.analysis.failFast", true)
+    );
+
+    sensor().execute(context);
+
+    // Verify the written CPD tokens
+    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");
+    assertThat(tokensLines)
+      .isNotNull()
+      .hasSize(1);
+
+    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
+
+    // Verify that we carried the tokens over to the next cache
+    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
+
+    assertThat(writeCache.getData())
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {
