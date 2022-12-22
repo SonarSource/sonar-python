@@ -152,7 +152,8 @@ public class PythonScanner extends Scanner {
         return false;
       }
     }
-    return true;
+
+    return restoreAndPushMeasuresIfApplicable(inputFile);
   }
 
   @Override
@@ -294,6 +295,14 @@ public class PythonScanner extends Scanner {
       }
       fileLinesContext.save();
     }
+  }
+
+  private boolean restoreAndPushMeasuresIfApplicable(InputFile inputFile) {
+    if (inputFile.type() == InputFile.Type.TEST) {
+      return true;
+    }
+
+    return cpdAnalyzer.pushCachedCpdTokens(inputFile, indexer.cacheContext());
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
