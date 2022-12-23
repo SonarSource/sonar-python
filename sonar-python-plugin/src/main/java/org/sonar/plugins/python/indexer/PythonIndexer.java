@@ -89,6 +89,10 @@ public abstract class PythonIndexer {
     return false;
   }
 
+  public boolean canBeFullyScannedWithoutParsing(InputFile inputFile) {
+    return false;
+  }
+
   public abstract CacheContext cacheContext();
 
   class GlobalSymbolsScanner extends Scanner {
