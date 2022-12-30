@@ -24,6 +24,12 @@ container_definition: &CONTAINER_DEFINITION
   region: eu-central-1
   namespace: default
 
+qa_container_definition: &QA_CONTAINER_DEFINITION
+  image: ${CIRRUS_AWS_ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/base:j17-latest
+  cluster_name: ${CIRRUS_CLUSTER_NAME}
+  region: eu-central-1
+  namespace: default
+
 win_vm_definition: &WINDOWS_VM_DEFINITION
   ec2_instance:
     experimental: true # see https://github.com/cirruslabs/cirrus-ci-docs/issues/1051
@@ -113,7 +119,7 @@ plugin_qa_task:
     - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
-    <<: *CONTAINER_DEFINITION
+    <<: *QA_CONTAINER_DEFINITION
     cpu: 3
     memory: 8G
   env:
@@ -136,7 +142,7 @@ ruling_task:
     - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
-    <<: *CONTAINER_DEFINITION
+    <<: *QA_CONTAINER_DEFINITION
     cpu: 4
     memory: 8G
   env:
@@ -158,7 +164,7 @@ extended_ruling_task:
     - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
-    <<: *CONTAINER_DEFINITION
+    <<: *QA_CONTAINER_DEFINITION
     cpu: 4
     memory: 8G
   env:
@@ -180,7 +186,7 @@ pr_analysis_qa_task:
     - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
-    <<: *CONTAINER_DEFINITION
+    <<: *QA_CONTAINER_DEFINITION
     cpu: 4
     memory: 8G
   env:
