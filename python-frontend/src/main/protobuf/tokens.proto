@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// Not necessary for Python but should still be declared to avoid name collisions
+// in the Protocol Buffers namespace and non-Python languages
+package protoblog;
+option java_outer_classname = "CpdTokenProtos";
+option java_package = "org.sonar.python.types.protobuf";
+
+message Token {
+    string value = 1;
+    int32 startLine = 2;
+    int32 startLineOffset = 3;
+    int32 endLine = 4;
+    int32 endLineOffset = 5;
+}
+
+message FileCpdTokens {
+    repeated Token tokens = 1;
+}
