@@ -19,13 +19,10 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,7 +49,6 @@ import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
-import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.error.AnalysisError;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
@@ -80,19 +76,15 @@ import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
-import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.caching.Caching;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.caching.CpdSerializer;
 import org.sonar.python.checks.CheckList;
+
 import org.sonar.python.index.VariableDescriptor;
-import org.sonar.python.tree.TokenImpl;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.api.QuickFix;
 import org.sonarsource.sonarlint.core.analysis.api.TextEdit;
@@ -113,10 +105,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
-import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREFIX;
+import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 public class PythonSensorTest {
 
@@ -710,7 +701,7 @@ public class PythonSensorTest {
 
 
   @Test
-  public void test_using_cache() throws IOException {
+  public void test_using_cache() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -732,7 +723,6 @@ public class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(Collections.emptyList()));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -825,310 +815,6 @@ public class PythonSensorTest {
     sensor().execute(contextMock);
 
     assertThat(context.allIssues()).hasSize(1);
-  }
-
-  @Test
-  public void write_cpd_tokens_to_cache() throws IOException, ClassNotFoundException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    TestReadCache readCache = getValidReadCache();
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    inputFile("pass.py", Type.MAIN, InputFile.Status.ADDED);
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-    sensor().execute(context);
-
-    assertThat(writeCache.getData().keySet()).containsExactlyInAnyOrder(
-      "python:cache_version", "python:files", "python:descriptors:moduleKey:pass.py", "python:imports:moduleKey:pass.py",
-      "python:cpd:data:moduleKey:pass.py");
-
-    byte[] tokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
-
-    List<CpdSerializer.TokenInfo> actualTokens = CpdSerializer.fromBytes(tokensAsBytes);
-    assertThat(actualTokens)
-      .hasSize(1);
-
-    assertThat(actualTokens.get(0))
-      .usingRecursiveComparison()
-      .isEqualTo(new CpdSerializer.TokenInfo(1, 0, 1, 4, "pass"));
-  }
-
-  @Test
-  public void write_cpd_tokens_to_cache_failure() {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    TestReadCache readCache = getValidReadCache();
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    InputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.ADDED);
-    writeCache.write(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), "whatever".getBytes());
-
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-    sensor().execute(context);
-
-    assertThat(logTester.logs(LoggerLevel.WARN))
-      .contains("Could not write CPD tokens to cache (IllegalArgumentException: Same key cannot be written to multiple times (python:cpd:data:moduleKey:pass.py))");
-  }
-
-  @Test
-  public void write_cpd_tokens_multiple_files() throws IOException, ClassNotFoundException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    TestReadCache readCache = getValidReadCache();
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    inputFile("main.py", Type.MAIN, InputFile.Status.ADDED);
-    inputFile("pass.py", Type.MAIN, InputFile.Status.ADDED);
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-    sensor().execute(context);
-
-    byte[] mainTokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:main.py");
-    List<CpdSerializer.TokenInfo> actualTokensForMain = CpdSerializer.fromBytes(mainTokensAsBytes);
-    assertThat(actualTokensForMain)
-      .hasSize(14);
-
-    byte[] passTokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
-    List<CpdSerializer.TokenInfo> actualTokensForPass = CpdSerializer.fromBytes(passTokensAsBytes);
-    assertThat(actualTokensForPass)
-      .hasSize(1);
-  }
-
-  @Test
-  public void read_cpd_tokens_from_cache() throws IOException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    InputFile inputFile = inputFile("main.py", Type.MAIN, InputFile.Status.SAME);
-    var sslrToken = passToken(inputFile.uri());
-    List<Token> tokens = List.of(new TokenImpl(sslrToken));
-
-    TestReadCache readCache = getValidReadCache();
-    byte[] tokensAsBytes = CpdSerializer.toBytes(tokens);
-    readCache.put(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), tokensAsBytes);
-    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-
-    sensor().execute(context);
-
-    // Verify the written CPD tokens
-    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:main.py");
-    assertThat(tokensLines)
-      .isNotNull()
-      .hasSize(1);
-
-    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
-
-    // Verify that we carried the tokens over to the next cache
-    assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), tokensAsBytes);
-  }
-
-  @Test
-  public void read_cpd_tokens_from_cache_not_in_cache() throws IOException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    InputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-
-    TestReadCache readCache = getValidReadCache();
-    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-
-    sensor().execute(context);
-
-    // Verify the written CPD tokens
-    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");
-    assertThat(tokensLines)
-      .isNotNull()
-      .hasSize(1);
-
-    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
-
-    // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-
-    assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
-  }
-
-  @Test
-  public void read_cpd_tokens_from_cache_corrupted_format() throws IOException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    InputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-    var sslrToken = passToken(inputFile.uri());
-    List<Token> tokens = List.of(new TokenImpl(sslrToken));
-
-    TestReadCache readCache = getValidReadCache();
-
-    var byteArrayOutputStream = new ByteArrayOutputStream();
-    var objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-    objectOutputStream.writeObject("This is not a TokenInfo object");
-    readCache.put(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), byteArrayOutputStream.toByteArray());
-
-    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-
-    sensor().execute(context);
-
-    assertThat(logTester.logs(LoggerLevel.WARN))
-      .anyMatch(line -> line.startsWith("Failed to deserialize CPD tokens (ClassCastException: class java.lang.String cannot be cast to class java.util.List"));
-
-    // Verify the written CPD tokens
-    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");
-    assertThat(tokensLines)
-      .isNotNull()
-      .hasSize(1);
-
-    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
-
-    // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-
-    assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
-  }
-
-  @Test
-  public void read_cpd_tokens_cache_disabled() {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
-        .build())
-      .build();
-
-    TestReadCache readCache = getValidReadCache();
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(false);
-    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
-    sensor().execute(context);
-
-    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");
-    assertThat(tokensLines)
-      .isNotNull()
-      .hasSize(1);
-
-    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
-  }
-
-  @Test
-  public void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException {
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, RULE_CRASHING_ON_SCAN_KEY))
-        .build())
-      .build();
-
-    InputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-
-    TestReadCache readCache = getValidReadCache();
-    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-
-    TestWriteCache writeCache = new TestWriteCache();
-    writeCache.bind(readCache);
-
-    context.setPreviousCache(readCache);
-    context.setNextCache(writeCache);
-    context.setCacheEnabled(true);
-    context.setSettings(
-      new MapSettings()
-        .setProperty("sonar.python.skipUnchanged", true)
-        .setProperty("sonar.internal.analysis.failFast", true)
-    );
-
-    sensor().execute(context);
-
-    // Verify the written CPD tokens
-    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");
-    assertThat(tokensLines)
-      .isNotNull()
-      .hasSize(1);
-
-    assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
-
-    // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-
-    assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
-  }
-
-  private com.sonar.sslr.api.Token passToken(URI uri) {
-    return com.sonar.sslr.api.Token.builder()
-      .setType(PythonKeyword.PASS)
-      .setLine(1)
-      .setColumn(0)
-      .setURI(uri)
-      .setValueAndOriginalValue("pass")
-      .build();
   }
 
   private PythonSensor sensor() {
