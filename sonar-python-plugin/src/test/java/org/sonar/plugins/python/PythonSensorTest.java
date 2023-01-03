@@ -1033,7 +1033,7 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN))
-      .anyMatch(line -> line.startsWith("Failed to deserialize CPD tokens"));
+      .anyMatch(line -> line.startsWith("Failed to deserialize CPD tokens (ClassCastException: class java.lang.String cannot be cast to class java.util.List"));
 
     // Verify the written CPD tokens
     List<TokensLine> tokensLines = context.cpdTokens("moduleKey:pass.py");

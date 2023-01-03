@@ -19,12 +19,16 @@
  */
 package org.sonar.python.caching;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.TokenLocation;
-import org.sonar.python.types.protobuf.CpdTokenProtos;
 
 public class CpdSerializer {
 
@@ -32,7 +36,7 @@ public class CpdSerializer {
     // Prevent instantiation
   }
 
-  public static final class TokenInfo {
+  public static final class TokenInfo implements Serializable {
     public final int startLine;
     public final int startLineOffset;
     public final int endLine;
@@ -54,29 +58,19 @@ public class CpdSerializer {
   }
 
   public static byte[] toBytes(List<Token> tokens) throws IOException {
-    CpdTokenProtos.FileCpdTokens.Builder builder = CpdTokenProtos.FileCpdTokens.newBuilder();
+    List<TokenInfo> tokenInfos = tokens.stream()
+      .map(TokenInfo::from)
+      .collect(Collectors.toList());
 
-    for (Token token : tokens) {
-      TokenLocation location = new TokenLocation(token);
-      CpdTokenProtos.Token protoToken = CpdTokenProtos.Token.newBuilder()
-        .setValue(token.value())
-        .setStartLine(location.startLine())
-        .setStartLineOffset(location.startLineOffset())
-        .setEndLine(location.endLine())
-        .setEndLineOffset(location.endLineOffset())
-        .build();
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+    objectOutputStream.writeObject(tokenInfos);
 
-      builder.addTokens(protoToken);
-    }
-
-    return builder.build().toByteArray();
+    return byteArrayOutputStream.toByteArray();
   }
 
-  public static List<TokenInfo> fromBytes(byte[] bytes) throws IOException {
-    return CpdTokenProtos.FileCpdTokens.parseFrom(bytes)
-      .getTokensList()
-      .stream()
-      .map(proto -> new TokenInfo(proto.getStartLine(), proto.getStartLineOffset(), proto.getEndLine(), proto.getEndLineOffset(), proto.getValue()))
-      .collect(Collectors.toList());
+  public static List<TokenInfo> fromBytes(byte[] bytes) throws IOException, ClassNotFoundException {
+    ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+    return (List<TokenInfo>) objectInputStream.readObject();
   }
 }

@@ -90,7 +90,7 @@ public class PythonCpdAnalyzer {
       cpdTokens.save();
       cacheContext.getWriteCache().copyFromPrevious(key);
       return true;
-    } catch (IOException e) {
+    } catch (IOException | ClassNotFoundException | ClassCastException e) {
       LOG.warn("Failed to deserialize CPD tokens ({}: {})", e.getClass().getSimpleName(), e.getMessage());
     }
 
