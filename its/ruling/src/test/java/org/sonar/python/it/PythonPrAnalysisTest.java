@@ -43,7 +43,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.it.RulingHelper.getMeasure;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 @RunWith(Parameterized.class)
@@ -54,8 +53,6 @@ public class PythonPrAnalysisTest {
 
   private static final String PR_ANALYSIS_PROJECT_KEY = "prAnalysis";
   private static final String INCREMENTAL_ANALYSIS_PROFILE = "incrementalPrAnalysis";
-  private static final String PR_KEY = "1";
-  private static final String PR_BRANCH_NAME = "incremental";
 
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
@@ -65,15 +62,13 @@ public class PythonPrAnalysisTest {
   private final int expectedRecomputed;
   private final int expectedSkipped;
   private final List<String> deletedFiles;
-  private final Integer expectedDuplicatedLines;
 
-  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped, List<String> deletedFiles, Integer expectedDuplication) {
+  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped, List<String> deletedFiles) {
     this.scenario = scenario;
     this.expectedTotalFiles = expectedTotalFiles;
     this.expectedRecomputed = expectedRecomputed;
     this.expectedSkipped = expectedSkipped;
     this.deletedFiles = deletedFiles;
-    this.expectedDuplicatedLines = expectedDuplication;
   }
 
   @BeforeClass
@@ -88,16 +83,15 @@ public class PythonPrAnalysisTest {
 
   @Parameters(name = "{index}: {0}")
   public static Collection<Object[]> data() {
-    return List.of(new Object[][]{
-      // {<scenario>, <total files>, <recomputed>, <skipped>, <deleted>, <duplication on index.py>}
-      {"newFile", 10, 1, 9, Collections.emptyList(), null},
-      {"changeInImportedModule", 9, 1, 7, Collections.emptyList(), null},
-      {"changeInParent", 9, 1, 6, Collections.emptyList(), null},
-      {"changeInPackageInit", 9, 1, 7, Collections.emptyList(), null},
-      {"changeInRelativeImport", 9, 2, 4, Collections.emptyList(), null},
-      {"deletedFile", 8, 0, 7, List.of("submodule.py"), null},
-      {"duplication", 10, 1, 9, Collections.emptyList(), 55}
-    });
+    return List.of(new Object[][] {
+      // {<scenario>, <total files>, <recomputed>, <skipped>, <deleted>}
+      {"newFile", 10, 1, 9, Collections.emptyList()},
+      {"changeInImportedModule", 9, 1, 7, Collections.emptyList()},
+      {"changeInParent", 9, 1, 6, Collections.emptyList()},
+      {"changeInPackageInit", 9, 1, 7, Collections.emptyList()},
+      {"changeInRelativeImport", 9, 2, 4, Collections.emptyList()},
+      {"deletedFile", 8, 0, 7, List.of("submodule.py")}}
+    );
   }
 
   @Test
@@ -111,12 +105,11 @@ public class PythonPrAnalysisTest {
     // Analyze the changed branch
     setUpChanges(tempDirectory, scenario);
     SonarScanner build = prepareScanner(tempDirectory, PR_ANALYSIS_PROJECT_KEY, scenario, litsDifferencesFile)
-      .setProperty("sonar.pullrequest.key", PR_KEY)
-      .setProperty("sonar.pullrequest.branch", PR_BRANCH_NAME);
+      .setProperty("sonar.pullrequest.key", "1")
+      .setProperty("sonar.pullrequest.branch", "incremental");
 
     BuildResult result = ORCHESTRATOR.executeBuild(build);
     assertPrAnalysisLogs(result);
-    assertMeasures();
   }
 
   @Test
@@ -160,16 +153,6 @@ public class PythonPrAnalysisTest {
       .contains(expectedFinalLog);
   }
 
-  private void assertMeasures() {
-    if (expectedDuplicatedLines != null) {
-      var duplicatedLines = getMeasure(ORCHESTRATOR, PR_KEY, PR_ANALYSIS_PROJECT_KEY + ":index_duplicate.py", "duplicated_lines");
-      assertThat(duplicatedLines)
-        .isNotNull();
-      assertThat(Integer.parseInt(duplicatedLines.getValue()))
-        .isEqualTo(expectedDuplicatedLines);
-    }
-  }
-
   private void analyzeAndAssertBaseCommit(File tempFile, File litsDifferencesFile) throws IOException {
     FileUtils.copyDirectory(new File("../sources_pr_analysis", "baseCommit"), tempFile);
 
@@ -195,6 +178,7 @@ public class PythonPrAnalysisTest {
       .setSourceDirs(".")
       .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected_pr_analysis/" + scenario).getFile().getAbsolutePath())
       .setProperty("sonar.lits.dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
+      .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");

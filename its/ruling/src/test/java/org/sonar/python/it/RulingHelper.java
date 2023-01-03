@@ -29,14 +29,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
-import org.sonarqube.ws.Measures;
-import org.sonarqube.ws.client.HttpConnector;
-import org.sonarqube.ws.client.WsClient;
-import org.sonarqube.ws.client.WsClientFactories;
-import org.sonarqube.ws.client.measures.ComponentRequest;
-
-import static java.lang.Double.parseDouble;
-import static java.util.Collections.singletonList;
 
 public class RulingHelper {
 
@@ -146,25 +138,5 @@ public class RulingHelper {
       "S905",
       "S930"
     );
-  }
-
-  static Measures.Measure getMeasure(Orchestrator orchestrator, String branch, String componentKey, String metricKey) {
-    List<Measures.Measure> measures = getMeasures(orchestrator, branch, componentKey, singletonList(metricKey));
-    return measures != null && measures.size() == 1 ? measures.get(0) : null;
-  }
-
-  private static List<Measures.Measure> getMeasures(Orchestrator orchestrator, String prKey, String componentKey, List<String> metricKeys) {
-    Measures.ComponentWsResponse response = newWsClient(orchestrator).measures().component(new ComponentRequest()
-      .setComponent(componentKey)
-      .setPullRequest(prKey)
-      .setMetricKeys(metricKeys));
-    return response.getComponent().getMeasuresList();
-  }
-
-  static WsClient newWsClient(Orchestrator orchestrator) {
-    return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
-      .url(orchestrator.getServer().getUrl())
-      .credentials(null, null)
-      .build());
   }
 }

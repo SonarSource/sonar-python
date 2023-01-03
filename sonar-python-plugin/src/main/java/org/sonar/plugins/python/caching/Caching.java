@@ -45,7 +45,6 @@ public class Caching {
   public static final String PROJECT_FILES_KEY = "python:files";
   public static final String TYPESHED_MODULES_KEY = "python:typeshed_modules";
   public static final String CACHE_VERSION_KEY = "python:cache_version";
-  public static final String CPD_TOKENS_CACHE_KEY_PREFIX = "python:cpd:data:";
 
   private static final Logger LOG = Loggers.get(Caching.class);
 
