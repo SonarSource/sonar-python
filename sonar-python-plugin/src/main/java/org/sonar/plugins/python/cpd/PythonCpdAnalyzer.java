@@ -85,7 +85,7 @@ public class PythonCpdAnalyzer {
     }
 
     try {
-      List<CpdSerializer.TokenInfo> tokens = CpdSerializer.fromBytes(dataBytes, tableBytes);
+      List<CpdSerializer.TokenInfo> tokens = CpdSerializer.deserialize(dataBytes, tableBytes);
 
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
       tokens.forEach(tokenInfo ->
@@ -110,7 +110,7 @@ public class PythonCpdAnalyzer {
     try {
       String fileKey = visitorContext.pythonFile().key();
 
-      CpdSerializer.SerializationResult result = CpdSerializer.toBytes(tokensToCache);
+      CpdSerializer.SerializationResult result = CpdSerializer.serialize(tokensToCache);
       cacheContext.getWriteCache().write(stringTableCacheKey(fileKey), result.stringTable);
       cacheContext.getWriteCache().write(dataCacheKey(fileKey), result.data);
     } catch (Exception e) {

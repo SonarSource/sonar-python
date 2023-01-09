@@ -729,7 +729,7 @@ public class PythonSensorTest {
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    var cpdTokens = CpdSerializer.toBytes(Collections.emptyList());
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data);
@@ -854,7 +854,7 @@ public class PythonSensorTest {
     byte[] tokenData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
     byte[] stringTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
 
-    List<CpdSerializer.TokenInfo> actualTokens = CpdSerializer.fromBytes(tokenData, stringTable);
+    List<CpdSerializer.TokenInfo> actualTokens = CpdSerializer.deserialize(tokenData, stringTable);
     assertThat(actualTokens)
       .hasSize(1);
 
@@ -910,13 +910,13 @@ public class PythonSensorTest {
 
     byte[] mainTokensData = writeCache.getData().get("python:cpd:data:moduleKey:main.py");
     byte[] mainTokensTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:main.py");
-    List<CpdSerializer.TokenInfo> actualTokensForMain = CpdSerializer.fromBytes(mainTokensData, mainTokensTable);
+    List<CpdSerializer.TokenInfo> actualTokensForMain = CpdSerializer.deserialize(mainTokensData, mainTokensTable);
     assertThat(actualTokensForMain)
       .hasSize(14);
 
     byte[] passTokensData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
     byte[] passTokensTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
-    List<CpdSerializer.TokenInfo> actualTokensForPass = CpdSerializer.fromBytes(passTokensData, passTokensTable);
+    List<CpdSerializer.TokenInfo> actualTokensForPass = CpdSerializer.deserialize(passTokensData, passTokensTable);
     assertThat(actualTokensForPass)
       .hasSize(1);
   }
@@ -934,7 +934,7 @@ public class PythonSensorTest {
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
 
     TestReadCache readCache = getValidReadCache();
-    var cpdTokens = CpdSerializer.toBytes(tokens);
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(tokens);
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data);
     readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
@@ -1000,7 +1000,7 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-    var cpdTokens = CpdSerializer.toBytes(expectedTokens);
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
       .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
@@ -1051,7 +1051,7 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-    var cpdTokens = CpdSerializer.toBytes(expectedTokens);
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
       .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
@@ -1124,7 +1124,7 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
-    var cpdTokens = CpdSerializer.toBytes(expectedTokens);
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
       .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)

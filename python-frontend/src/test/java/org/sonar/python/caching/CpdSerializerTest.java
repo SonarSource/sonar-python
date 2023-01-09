@@ -43,9 +43,9 @@ public class CpdSerializerTest {
       .build();
 
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
-    var result = CpdSerializer.toBytes(tokens);
+    CpdSerializer.SerializationResult result = CpdSerializer.serialize(tokens);
 
-    List<CpdSerializer.TokenInfo> tokenInfos = CpdSerializer.fromBytes(result.data, result.stringTable);
+    List<CpdSerializer.TokenInfo> tokenInfos = CpdSerializer.deserialize(result.data, result.stringTable);
 
     assertThat(tokenInfos)
       .hasSize(1);
@@ -59,7 +59,7 @@ public class CpdSerializerTest {
     byte[] stringTable = new byte[] {0, 1, 2, 3};
     byte[] data = new byte[] {0};
 
-    assertThatCode(() -> CpdSerializer.fromBytes(data, stringTable))
+    assertThatCode(() -> CpdSerializer.deserialize(data, stringTable))
       .isInstanceOf(IOException.class)
       .hasMessageStartingWith("Can't read data from cache, format corrupted");
   }
@@ -70,7 +70,7 @@ public class CpdSerializerTest {
     byte[] stringTable = new byte[] {0, 3, 'E', 'N', 'D'};
     byte[] data = new byte[] {0, 1, 2, 3};
 
-    assertThatCode(() -> CpdSerializer.fromBytes(data, stringTable))
+    assertThatCode(() -> CpdSerializer.deserialize(data, stringTable))
       .isInstanceOf(IOException.class)
       .hasMessageStartingWith("Can't read data from cache, format corrupted");
   }

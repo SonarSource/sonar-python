@@ -64,11 +64,11 @@ public class CpdSerializer {
     }
   }
 
-  public static SerializationResult toBytes(List<Token> tokens) throws IOException {
+  public static SerializationResult serialize(List<Token> tokens) throws IOException {
     return new Serializer().convert(tokens);
   }
 
-  public static List<TokenInfo> fromBytes(byte[] dataBytes, byte[] stringTableBytes) throws IOException {
+  public static List<TokenInfo> deserialize(byte[] dataBytes, byte[] stringTableBytes) throws IOException {
     return new Deserializer(new VarLengthInputStream(dataBytes), new VarLengthInputStream(stringTableBytes)).convert();
   }
 
