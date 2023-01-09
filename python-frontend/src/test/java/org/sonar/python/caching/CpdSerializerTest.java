@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CpdSerializerTest {
 
   @Test
-  public void to_bytes_from_bytes() throws IOException, ClassNotFoundException {
+  public void to_bytes_from_bytes() throws IOException {
     var sslrToken = com.sonar.sslr.api.Token.builder()
       .setLine(1)
       .setColumn(0)
@@ -42,9 +42,9 @@ public class CpdSerializerTest {
       .build();
 
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
-    byte[] bytes = CpdSerializer.toBytes(tokens);
+    var result = CpdSerializer.toBytes(tokens);
 
-    List<CpdSerializer.TokenInfo> tokenInfos = CpdSerializer.fromBytes(bytes);
+    List<CpdSerializer.TokenInfo> tokenInfos = CpdSerializer.fromBytes(result.data, result.stringTable);
 
     assertThat(tokenInfos)
       .hasSize(1);

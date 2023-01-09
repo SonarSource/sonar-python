@@ -39,6 +39,7 @@ import org.sonar.python.caching.CpdSerializer;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_KEY_PREFIX;
 
 public class PythonCpdAnalyzer {
 
@@ -75,20 +76,23 @@ public class PythonCpdAnalyzer {
   }
 
   public boolean pushCachedCpdTokens(InputFile inputFile, CacheContext cacheContext) {
-    String key = cacheKey(inputFile.key());
-    byte[] bytes = cacheContext.getReadCache().readBytes(key);
-    if (bytes == null) {
+    String dataKey = dataCacheKey(inputFile.key());
+    String tableKey = stringTableCacheKey(inputFile.key());
+    byte[] dataBytes = cacheContext.getReadCache().readBytes(dataKey);
+    byte[] tableBytes = cacheContext.getReadCache().readBytes(tableKey);
+    if (dataBytes == null || tableBytes == null) {
       return false;
     }
 
     try {
-      List<CpdSerializer.TokenInfo> tokens = CpdSerializer.fromBytes(bytes);
+      List<CpdSerializer.TokenInfo> tokens = CpdSerializer.fromBytes(dataBytes, tableBytes);
 
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
       tokens.forEach(tokenInfo ->
         cpdTokens.addToken(tokenInfo.startLine, tokenInfo.startLineOffset, tokenInfo.endLine, tokenInfo.endLineOffset, tokenInfo.value));
       cpdTokens.save();
-      cacheContext.getWriteCache().copyFromPrevious(key);
+      cacheContext.getWriteCache().copyFromPrevious(dataKey);
+      cacheContext.getWriteCache().copyFromPrevious(tableKey);
       return true;
     } catch (IOException e) {
       LOG.warn("Failed to deserialize CPD tokens ({}: {})", e.getClass().getSimpleName(), e.getMessage());
@@ -104,9 +108,11 @@ public class PythonCpdAnalyzer {
     }
 
     try {
-      String key = cacheKey(visitorContext.pythonFile().key());
-      byte[] bytes = CpdSerializer.toBytes(tokensToCache);
-      cacheContext.getWriteCache().write(key, bytes);
+      String fileKey = visitorContext.pythonFile().key();
+
+      CpdSerializer.SerializationResult result = CpdSerializer.toBytes(tokensToCache);
+      cacheContext.getWriteCache().write(stringTableCacheKey(fileKey), result.stringTable);
+      cacheContext.getWriteCache().write(dataCacheKey(fileKey), result.data);
     } catch (Exception e) {
       LOG.warn("Could not write CPD tokens to cache ({}: {})", e.getClass().getSimpleName(), e.getMessage());
     }
@@ -123,7 +129,11 @@ public class PythonCpdAnalyzer {
       type.equals(GenericTokenType.EOF);
   }
 
-  private static String cacheKey(String fileKey) {
+  private static String dataCacheKey(String fileKey) {
     return CPD_TOKENS_CACHE_KEY_PREFIX + fileKey.replace('\\', '/');
+  }
+
+  private static String stringTableCacheKey(String fileKey) {
+    return CPD_TOKENS_STRING_TABLE_KEY_PREFIX + fileKey.replace('\\', '/');
   }
 }
