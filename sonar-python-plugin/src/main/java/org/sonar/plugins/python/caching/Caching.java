@@ -43,7 +43,7 @@ public class Caching {
   public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
   public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
   public static final String PROJECT_FILES_KEY = "python:files";
-  public static final String CONTENT_HASHES_KEY = "python:content_hashes";
+  public static final String CONTENT_HASHES_KEY = "python:content_hashes:";
   public static final String TYPESHED_MODULES_KEY = "python:typeshed_modules";
   public static final String CACHE_VERSION_KEY = "python:cache_version";
   public static final String CPD_TOKENS_CACHE_KEY_PREFIX = "python:cpd:data:";
@@ -58,14 +58,14 @@ public class Caching {
     this.cacheVersion = cacheVersion;
   }
 
-  public void writeImportsMapEntry(String moduleFqn, Set<String> imports) {
+  public void writeImportsMapEntry(String fileKey, Set<String> imports) {
     byte[] importData = String.join(";", imports).getBytes(StandardCharsets.UTF_8);
-    String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
+    String cacheKey = importsMapCacheKey(fileKey);
     cacheContext.getWriteCache().write(cacheKey, importData);
   }
 
   public void writeFileContentHash(String fileKey, byte[] hash) {
-    String cacheKey = CONTENT_HASHES_KEY + fileKey;
+    String cacheKey = fileContentHashCacheKey(fileKey);
     cacheContext.getWriteCache().write(cacheKey, hash);
   }
 
@@ -83,27 +83,27 @@ public class Caching {
     cacheContext.getWriteCache().write(CACHE_VERSION_KEY, cacheVersion.getBytes(StandardCharsets.UTF_8));
   }
 
-  public void writeProjectLevelSymbolTableEntry(String moduleFqn, Set<Descriptor> descriptors) {
-    String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn;
+  public void writeProjectLevelSymbolTableEntry(String fileKey, Set<Descriptor> descriptors) {
+    String cacheKey = projectSymbolTableCacheKey(fileKey);
     cacheContext.getWriteCache().write(cacheKey, toProtobufModuleDescriptor(descriptors).toByteArray());
   }
 
   public void copyFromPrevious(String fileKey) {
-    cacheContext.getWriteCache().copyFromPrevious(IMPORTS_MAP_CACHE_KEY_PREFIX + fileKey);
-    cacheContext.getWriteCache().copyFromPrevious(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + fileKey);
-    cacheContext.getWriteCache().copyFromPrevious(CONTENT_HASHES_KEY + fileKey);
+    cacheContext.getWriteCache().copyFromPrevious(importsMapCacheKey(fileKey));
+    cacheContext.getWriteCache().copyFromPrevious(projectSymbolTableCacheKey(fileKey));
+    cacheContext.getWriteCache().copyFromPrevious(fileContentHashCacheKey(fileKey));
   }
 
   @CheckForNull
-  public Set<Descriptor> readProjectLevelSymbolTableEntry(String module) {
-    String key = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + module;
+  public Set<Descriptor> readProjectLevelSymbolTableEntry(String fileKey) {
+    String key = projectSymbolTableCacheKey(fileKey);
     if (cacheContext.getReadCache().contains(key)) {
       byte[] bytes = cacheContext.getReadCache().readBytes(key);
       if (bytes != null) {
         try {
           return fromProtobuf(DescriptorsProtos.ModuleDescriptor.parseFrom(bytes));
         } catch (InvalidProtocolBufferException e) {
-          LOG.debug("Failed to deserialize project level symbol table entry for module: \"{}\"", module);
+          LOG.debug("Failed to deserialize project level symbol table entry for module: \"{}\"", fileKey);
         }
       }
     }
@@ -111,8 +111,8 @@ public class Caching {
   }
 
   @CheckForNull
-  public Set<String> readImportMapEntry(String moduleFqn) {
-    String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
+  public Set<String> readImportMapEntry(String fileKey) {
+    String cacheKey = importsMapCacheKey(fileKey);
     byte[] bytes = cacheContext.getReadCache().readBytes(cacheKey);
     if (bytes != null) {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
@@ -121,7 +121,7 @@ public class Caching {
   }
 
   public byte[] readFileContentHash(String fileKey) {
-    String cacheKey = CONTENT_HASHES_KEY + fileKey;
+    String cacheKey = fileContentHashCacheKey(fileKey);
     return cacheContext.getReadCache().readBytes(cacheKey);
   }
 
@@ -161,5 +161,17 @@ public class Caching {
 
   public CacheContext cacheContext() {
     return cacheContext;
+  }
+
+  public static String importsMapCacheKey(String key) {
+    return IMPORTS_MAP_CACHE_KEY_PREFIX + key.replace('\\', '/');
+  }
+
+  public static String projectSymbolTableCacheKey(String key) {
+    return PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + key.replace('\\', '/');
+  }
+
+  public static  String fileContentHashCacheKey(String key) {
+    return CONTENT_HASHES_KEY + key.replace('\\', '/');
   }
 }
