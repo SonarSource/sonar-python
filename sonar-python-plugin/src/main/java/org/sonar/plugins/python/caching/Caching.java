@@ -43,6 +43,7 @@ public class Caching {
   public static final String IMPORTS_MAP_CACHE_KEY_PREFIX = "python:imports:";
   public static final String PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX = "python:descriptors:";
   public static final String PROJECT_FILES_KEY = "python:files";
+  public static final String CONTENT_HASHES_KEY = "python:content_hashes";
   public static final String TYPESHED_MODULES_KEY = "python:typeshed_modules";
   public static final String CACHE_VERSION_KEY = "python:cache_version";
   public static final String CPD_TOKENS_CACHE_KEY_PREFIX = "python:cpd:data:";
@@ -61,6 +62,11 @@ public class Caching {
     byte[] importData = String.join(";", imports).getBytes(StandardCharsets.UTF_8);
     String cacheKey = IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn;
     cacheContext.getWriteCache().write(cacheKey, importData);
+  }
+
+  public void writeFileContentHash(String fileKey, byte[] hash) {
+    String cacheKey = CONTENT_HASHES_KEY + fileKey;
+    cacheContext.getWriteCache().write(cacheKey, hash);
   }
 
   public void writeFilesList(List<String> mainFiles) {
@@ -82,9 +88,10 @@ public class Caching {
     cacheContext.getWriteCache().write(cacheKey, toProtobufModuleDescriptor(descriptors).toByteArray());
   }
 
-  public void copyFromPrevious(String moduleFqn) {
-    cacheContext.getWriteCache().copyFromPrevious(IMPORTS_MAP_CACHE_KEY_PREFIX + moduleFqn);
-    cacheContext.getWriteCache().copyFromPrevious(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + moduleFqn);
+  public void copyFromPrevious(String fileKey) {
+    cacheContext.getWriteCache().copyFromPrevious(IMPORTS_MAP_CACHE_KEY_PREFIX + fileKey);
+    cacheContext.getWriteCache().copyFromPrevious(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + fileKey);
+    cacheContext.getWriteCache().copyFromPrevious(CONTENT_HASHES_KEY + fileKey);
   }
 
   @CheckForNull
@@ -111,6 +118,11 @@ public class Caching {
       return new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     }
     return null;
+  }
+
+  public byte[] readFileContentHash(String fileKey) {
+    String cacheKey = CONTENT_HASHES_KEY + fileKey;
+    return cacheContext.getReadCache().readBytes(cacheKey);
   }
 
   public Set<String> readFilesList() {

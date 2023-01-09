@@ -89,7 +89,7 @@
     <junit.version>4.13.2</junit.version>
     <logback.version>1.2.3</logback.version>
     <maven.project.version>2.2.1</maven.project.version>
-    <mockito.version>3.9.0</mockito.version>
+    <mockito.version>4.11.0</mockito.version>
     <sonar.version>9.7.1.62043</sonar.version>
     <sonar.orchestrator.version>3.40.0.183</sonar.orchestrator.version>
     <sonar.api.version>9.11.0.290</sonar.api.version>
@@ -203,6 +203,12 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-inline</artifactId>
         <version>${mockito.version}</version>
         <scope>test</scope>
       </dependency>

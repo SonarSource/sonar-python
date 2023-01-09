@@ -27,6 +27,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -82,6 +83,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
+import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
@@ -111,6 +113,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
+import static org.sonar.plugins.python.caching.Caching.CONTENT_HASHES_KEY;
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
@@ -709,7 +712,7 @@ public class PythonSensorTest {
 
 
   @Test
-  public void test_using_cache() throws IOException {
+  public void test_using_cache() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -734,6 +737,7 @@ public class PythonSensorTest {
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data);
     readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
+    readCache.put(CONTENT_HASHES_KEY + inputFile.key(), FileHashingUtils.inputFileContentHash(inputFile));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -849,7 +853,7 @@ public class PythonSensorTest {
 
     assertThat(writeCache.getData().keySet()).containsExactlyInAnyOrder(
       "python:cache_version", "python:files", "python:descriptors:moduleKey:pass.py", "python:imports:moduleKey:pass.py",
-      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py");
+      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py", "python:content_hashesmoduleKey:pass.py");
 
     byte[] tokenData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
     byte[] stringTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
@@ -922,7 +926,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_from_cache() throws IOException {
+  public void read_cpd_tokens_from_cache() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -940,6 +944,7 @@ public class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
+    readCache.put(CONTENT_HASHES_KEY + inputFile.key(), FileHashingUtils.inputFileContentHash(inputFile));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1008,7 +1013,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_from_cache_corrupted_format() throws IOException {
+  public void read_cpd_tokens_from_cache_corrupted_format() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1027,6 +1032,7 @@ public class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
+    readCache.put(CONTENT_HASHES_KEY + inputFile.key(), FileHashingUtils.inputFileContentHash(inputFile));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1086,7 +1092,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException {
+  public void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, RULE_CRASHING_ON_SCAN_KEY))
@@ -1099,6 +1105,7 @@ public class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
+    readCache.put(CONTENT_HASHES_KEY + inputFile.key(), FileHashingUtils.inputFileContentHash(inputFile));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);

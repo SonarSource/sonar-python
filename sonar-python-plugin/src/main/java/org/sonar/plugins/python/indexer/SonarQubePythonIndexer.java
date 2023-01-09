@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -135,7 +138,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   private boolean tryToUseCache(Map<String, Set<String>> importsByModule, InputFile inputFile, String currFQN) {
-    if (!inputFile.status().equals(InputFile.Status.SAME)) {
+    if (!fileIsUnchanged(inputFile)) {
       return false;
     }
 
@@ -150,6 +153,22 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
 
     return false;
+  }
+
+  private boolean fileIsUnchanged(InputFile inputFile) {
+    if (!inputFile.status().equals(InputFile.Status.SAME)) {
+      return false;
+    }
+    byte[] fileHash = caching.readFileContentHash(inputFile.key());
+    // InputFile.Status is not reliable in some cases
+    // We use the hash of the file's content to double-check the content is the same.
+    try {
+      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile);
+      return MessageDigest.isEqual(fileHash, bytes);
+    } catch (IOException | NoSuchAlgorithmException e) {
+      LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+      return false;
+    }
   }
 
   private void saveRetrievedDescriptors(String fileKey, Set<Descriptor> descriptors, Caching caching) {
@@ -179,6 +198,14 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       if (descriptors != null && imports != null) {
         // Descriptors/imports map may be null if the file failed to parse.
         // We don't try to save information in the cache in that case.
+        byte[] contentHash;
+        try {
+          contentHash = FileHashingUtils.inputFileContentHash(inputFile);
+        } catch (IOException | NoSuchAlgorithmException e) {
+          LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+          return;
+        }
+        caching.writeFileContentHash(inputFile.key(), contentHash);
         caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
         caching.writeImportsMapEntry(inputFile.key(), imports);
       }
