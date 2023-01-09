@@ -122,8 +122,7 @@ public class CpdSerializer {
       }
 
       output.writeUTF("END");
-      var bytes = stringTableStream.toByteArray();
-      return bytes;
+      return stringTableStream.toByteArray();
     }
   }
 

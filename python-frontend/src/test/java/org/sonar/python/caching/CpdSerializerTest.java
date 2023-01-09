@@ -28,6 +28,7 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class CpdSerializerTest {
 
@@ -50,5 +51,27 @@ public class CpdSerializerTest {
       .hasSize(1);
     assertThat(tokenInfos.get(0))
       .usingRecursiveComparison().isEqualTo(new CpdSerializer.TokenInfo(1, 0, 1, 4, "pass"));
+  }
+
+  @Test
+  public void corrupted_string_table_format() {
+    // A string table with zero elements and an invalid terminator
+    byte[] stringTable = new byte[] {0, 1, 2, 3};
+    byte[] data = new byte[] {0};
+
+    assertThatCode(() -> CpdSerializer.fromBytes(data, stringTable))
+      .isInstanceOf(IOException.class)
+      .hasMessageStartingWith("Can't read data from cache, format corrupted");
+  }
+
+  @Test
+  public void corrupted_data_format() {
+    // A string table with zero elements and a valid terminator string
+    byte[] stringTable = new byte[] {0, 3, 'E', 'N', 'D'};
+    byte[] data = new byte[] {0, 1, 2, 3};
+
+    assertThatCode(() -> CpdSerializer.fromBytes(data, stringTable))
+      .isInstanceOf(IOException.class)
+      .hasMessageStartingWith("Can't read data from cache, format corrupted");
   }
 }
