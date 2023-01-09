@@ -19,12 +19,10 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -114,6 +112,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
@@ -730,9 +729,11 @@ public class PythonSensorTest {
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
-    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(Collections.emptyList()));
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -848,11 +849,12 @@ public class PythonSensorTest {
 
     assertThat(writeCache.getData().keySet()).containsExactlyInAnyOrder(
       "python:cache_version", "python:files", "python:descriptors:moduleKey:pass.py", "python:imports:moduleKey:pass.py",
-      "python:cpd:data:moduleKey:pass.py");
+      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py");
 
-    byte[] tokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
+    byte[] tokenData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
+    byte[] stringTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
 
-    List<CpdSerializer.TokenInfo> actualTokens = CpdSerializer.fromBytes(tokensAsBytes);
+    List<CpdSerializer.TokenInfo> actualTokens = CpdSerializer.deserialize(tokenData, stringTable);
     assertThat(actualTokens)
       .hasSize(1);
 
@@ -906,13 +908,15 @@ public class PythonSensorTest {
     context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
     sensor().execute(context);
 
-    byte[] mainTokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:main.py");
-    List<CpdSerializer.TokenInfo> actualTokensForMain = CpdSerializer.fromBytes(mainTokensAsBytes);
+    byte[] mainTokensData = writeCache.getData().get("python:cpd:data:moduleKey:main.py");
+    byte[] mainTokensTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:main.py");
+    List<CpdSerializer.TokenInfo> actualTokensForMain = CpdSerializer.deserialize(mainTokensData, mainTokensTable);
     assertThat(actualTokensForMain)
       .hasSize(14);
 
-    byte[] passTokensAsBytes = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
-    List<CpdSerializer.TokenInfo> actualTokensForPass = CpdSerializer.fromBytes(passTokensAsBytes);
+    byte[] passTokensData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
+    byte[] passTokensTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
+    List<CpdSerializer.TokenInfo> actualTokensForPass = CpdSerializer.deserialize(passTokensData, passTokensTable);
     assertThat(actualTokensForPass)
       .hasSize(1);
   }
@@ -930,8 +934,9 @@ public class PythonSensorTest {
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
 
     TestReadCache readCache = getValidReadCache();
-    byte[] tokensAsBytes = CpdSerializer.toBytes(tokens);
-    readCache.put(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), tokensAsBytes);
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(tokens);
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + inputFile.key(), serializedSymbolTable);
@@ -956,7 +961,8 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), tokensAsBytes);
+      .containsEntry(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -994,9 +1000,11 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -1013,10 +1021,8 @@ public class PythonSensorTest {
 
     TestReadCache readCache = getValidReadCache();
 
-    var byteArrayOutputStream = new ByteArrayOutputStream();
-    var objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-    objectOutputStream.writeObject("This is not a TokenInfo object");
-    readCache.put(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), byteArrayOutputStream.toByteArray());
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), "not valid data".getBytes(UTF_8));
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), "not valid string table".getBytes(UTF_8));
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(IMPORTS_MAP_CACHE_KEY_PREFIX + inputFile.key(), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
@@ -1045,9 +1051,11 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -1116,9 +1124,11 @@ public class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.uri())));
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), CpdSerializer.toBytes(expectedTokens));
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {
