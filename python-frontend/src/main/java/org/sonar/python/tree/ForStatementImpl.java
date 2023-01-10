@@ -131,9 +131,9 @@ public class ForStatementImpl extends PyTree implements ForStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    List<Tree> expressionsWithSeparator = addCommas(expressions, expressionsCommas);
-    List<Tree> testExpressionsWithSeparator = addCommas(testExpressions, testExpressionsCommas);
-    return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressionsWithSeparator, Collections.singletonList(inKeyword), testExpressionsWithSeparator,
+    List<Tree> expressionsWithCommas = addCommas(expressions, expressionsCommas);
+    List<Tree> testExpressionsWithCommas = addCommas(testExpressions, testExpressionsCommas);
+    return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressionsWithCommas, Collections.singletonList(inKeyword), testExpressionsWithCommas,
       Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseClause))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
