@@ -183,6 +183,9 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("from foo import f", ImportStatement.class);
     testData.put("class toto:pass", ClassDef.class);
     testData.put("for foo in bar:pass", ForStatement.class);
+    testData.put("for foo1, foo2 in bar:pass", ForStatement.class);
+    testData.put("for foo in k:=bar:pass", ForStatement.class);
+    testData.put("for foo in *a, *b, *c:pass", ForStatement.class);
     testData.put("async for foo in bar: pass", ForStatement.class);
     testData.put("global foo", GlobalStatement.class);
     testData.put("nonlocal foo", NonlocalStatement.class);
@@ -1037,6 +1040,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(forStatement.inKeyword().value()).isEqualTo("in");
     assertThat(forStatement.colon().value()).isEqualTo(":");
     assertThat(forStatement.elseClause().elseKeyword().value()).isEqualTo("else");
+
+    astNode = p.parse("for foo in *x, *y, *z: pass");
+    forStatement = treeMaker.forStatement(astNode);
+    assertThat(forStatement.expressions()).hasSize(1);
+    assertThat(forStatement.testExpressions()).extracting(Tree::getKind).containsOnly(Kind.UNPACKING_EXPR, Kind.UNPACKING_EXPR, Kind.UNPACKING_EXPR);
   }
 
   @Test
