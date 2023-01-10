@@ -643,14 +643,21 @@ public class PythonTreeMaker {
     Token forKeyword = toPyToken(forStatementNode.getFirstChild(PythonKeyword.FOR).getToken());
     Token inKeyword = toPyToken(forStatementNode.getFirstChild(PythonKeyword.IN).getToken());
     Token colon = toPyToken(forStatementNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    List<Expression> expressions = expressionsFromExprList(forStatementNode.getFirstChild(PythonGrammar.EXPRLIST));
-    List<Expression> testExpressions = expressionsFromTest(forStatementNode.getFirstChild(PythonGrammar.TESTLIST));
+    AstNode exprList = forStatementNode.getFirstChild(PythonGrammar.EXPRLIST);
+    List<Expression> expressions = expressionsFromExprList(exprList);
+    List<Token> expressionsCommas = punctuators(exprList, PythonPunctuator.COMMA);
+    AstNode starNamedExpressions = forStatementNode.getFirstChild(PythonGrammar.STAR_NAMED_EXPRESSIONS);
+    List<Expression> testExpressions = starNamedExpressions
+      .getChildren(PythonGrammar.STAR_NAMED_EXPRESSION).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    List<Token> testExpressionsCommas = punctuators(starNamedExpressions, PythonPunctuator.COMMA);
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
     ElseClause elseClause = firstSuite == lastSuite ? null : elseClause(lastSuite);
-    return new ForStatementImpl(forKeyword, expressions, inKeyword, testExpressions, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite),
-      body, suiteDedent(firstSuite), elseClause, asyncToken);
+    return new ForStatementImpl(forKeyword, expressions, expressionsCommas, inKeyword, testExpressions, testExpressionsCommas,
+      colon, suiteNewLine(firstSuite), suiteIndent(firstSuite), body, suiteDedent(firstSuite), elseClause, asyncToken);
   }
 
   public WhileStatementImpl whileStatement(AstNode astNode) {

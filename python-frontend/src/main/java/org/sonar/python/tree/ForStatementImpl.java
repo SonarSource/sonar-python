@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,8 +40,10 @@ public class ForStatementImpl extends PyTree implements ForStatement {
 
   private final Token forKeyword;
   private final List<Expression> expressions;
+  private final List<Token> expressionsCommas;
   private final Token inKeyword;
   private final List<Expression> testExpressions;
+  private final List<Token> testExpressionsCommas;
   private final Token colon;
   private final Token firstNewLine;
   private final Token firstIndent;
@@ -50,13 +53,15 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   private final Token asyncKeyword;
   private final boolean isAsync;
 
-  public ForStatementImpl(Token forKeyword, List<Expression> expressions, Token inKeyword,
-                          List<Expression> testExpressions, Token colon, @Nullable Token firstNewLine, @Nullable Token firstIndent, StatementList body,
+  public ForStatementImpl(Token forKeyword, List<Expression> expressions, List<Token> expressionsCommas, Token inKeyword, List<Expression> testExpressions,
+                          List<Token> testExpressionsCommas, Token colon, @Nullable Token firstNewLine, @Nullable Token firstIndent, StatementList body,
                           @Nullable Token firstDedent, @Nullable ElseClause elseClause, @Nullable Token asyncKeyword) {
     this.forKeyword = forKeyword;
     this.expressions = expressions;
+    this.expressionsCommas = expressionsCommas;
     this.inKeyword = inKeyword;
     this.testExpressions = testExpressions;
+    this.testExpressionsCommas = testExpressionsCommas;
     this.colon = colon;
     this.firstNewLine = firstNewLine;
     this.firstIndent = firstIndent;
@@ -126,8 +131,23 @@ public class ForStatementImpl extends PyTree implements ForStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressions, Collections.singletonList(inKeyword), testExpressions,
+    List<Tree> expressionsWithSeparator = addCommas(expressions, expressionsCommas);
+    List<Tree> testExpressionsWithSeparator = addCommas(testExpressions, testExpressionsCommas);
+    return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressionsWithSeparator, Collections.singletonList(inKeyword), testExpressionsWithSeparator,
       Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseClause))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  private static List<Tree> addCommas(List<Expression> expressions, List<Token> commas) {
+    List<Tree> expressionsWithSeparator = new ArrayList<>();
+    int index = 0;
+    for (Expression expression : expressions) {
+      expressionsWithSeparator.add(expression);
+      if (index < commas.size()) {
+        expressionsWithSeparator.add(commas.get(index));
+      }
+      index++;
+    }
+    return expressionsWithSeparator;
   }
 }
