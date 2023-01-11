@@ -152,7 +152,7 @@ public class PythonScanner extends Scanner {
       if (!isCheckApplicable(check, fileType)) {
         continue;
       }
-      if (!indexer.canBeFullyScannedWithoutParsing(inputFile) && !check.getClass().getPackageName().startsWith("org.sonar.python.checks")) {
+      if (checkRequiresParsingOfImpactedFile(inputFile, check)) {
         // For regular Python checks, only directly modified files need to be analyzed
         // For DBD and Security, transitively impacted files must be re-analyzed.
         result = false;
@@ -174,6 +174,10 @@ public class PythonScanner extends Scanner {
       return false;
     }
     return restoreAndPushMeasuresIfApplicable(inputFile);
+  }
+
+  private boolean checkRequiresParsingOfImpactedFile(InputFile inputFile, PythonCheck check) {
+    return !indexer.canBeFullyScannedWithoutParsing(inputFile) && !check.getClass().getPackageName().startsWith("org.sonar.python.checks");
   }
 
   @Override
@@ -208,7 +212,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
-    return this.indexer.canBeScannedWithoutParsing(inputFile);
+    return this.indexer.canBePartiallyScannedWithoutParsing(inputFile);
   }
 
   @Override

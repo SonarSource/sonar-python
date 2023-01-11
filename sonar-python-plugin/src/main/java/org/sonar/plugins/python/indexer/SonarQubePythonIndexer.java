@@ -227,7 +227,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   @Override
-  public boolean canBeScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBePartiallyScannedWithoutParsing(InputFile inputFile) {
     return partiallySkippableFiles.contains(inputFile) || fullySkippableFiles.contains(inputFile);
   }
 
