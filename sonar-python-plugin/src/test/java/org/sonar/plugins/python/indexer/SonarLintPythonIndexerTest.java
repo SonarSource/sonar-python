@@ -84,6 +84,8 @@ public class SonarLintPythonIndexerTest {
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
     assertThat(modAddSymbol).isNotNull();
     assertThat(modAddSymbol.is(Symbol.Kind.FUNCTION)).isTrue();
+    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
+    assertThat(pythonIndexer.canBeFullyScannedWithoutParsing(file1)).isFalse();
   }
 
   @Test

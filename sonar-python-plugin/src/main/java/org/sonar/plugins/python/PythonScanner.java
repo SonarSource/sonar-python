@@ -147,22 +147,37 @@ public class PythonScanner extends Scanner {
   @Override
   public boolean scanFileWithoutParsing(InputFile inputFile) {
     InputFile.Type fileType = inputFile.type();
+    boolean result = true;
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)) {
         continue;
       }
-
+      if (checkRequiresParsingOfImpactedFile(inputFile, check)) {
+        // For regular Python checks, only directly modified files need to be analyzed
+        // For DBD and Security, transitively impacted files must be re-analyzed.
+        result = false;
+        continue;
+      }
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
       PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext());
-      if (!check.scanWithoutParsing(inputFileContext)) {
-        return false;
+      if (check.scanWithoutParsing(inputFileContext)) {
+        Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
+        executedChecks.add(check);
+        checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
+      } else {
+        result = false;
       }
-      Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
-      executedChecks.add(check);
-      checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
     }
-
+    if (!result) {
+      // If scan without parsing is not successful, measures will be pushed during regular scan.
+      // We must avoid pushing measures twice due to the risk of duplicate cache key error.
+      return false;
+    }
     return restoreAndPushMeasuresIfApplicable(inputFile);
+  }
+
+  private boolean checkRequiresParsingOfImpactedFile(InputFile inputFile, PythonCheck check) {
+    return !indexer.canBeFullyScannedWithoutParsing(inputFile) && !check.getClass().getPackageName().startsWith("org.sonar.python.checks");
   }
 
   @Override
@@ -197,7 +212,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
-    return this.indexer.canBeScannedWithoutParsing(inputFile);
+    return this.indexer.canBePartiallyScannedWithoutParsing(inputFile);
   }
 
   @Override

@@ -777,7 +777,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_scan_without_parsing_fails() {
+  public void test_scan_without_parsing_fails_does_not_reexecute_successful_checks() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -788,22 +788,55 @@ public class PythonSensorTest {
       .build();
 
     InputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
-    TestReadCache readCache = new TestReadCache();
+    TestReadCache readCache = getValidReadCache();
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(importsMapCacheKey(inputFile.key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.key()), FileHashingUtils.inputFileContentHash(inputFile));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
     context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
     sensor().execute(context);
 
-    assertThat(context.allIssues()).hasSize(1);
+    assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.");
+  }
+
+  @Test
+  public void test_partial_scan_without_parsing() throws IOException, NoSuchAlgorithmException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, CUSTOM_RULE_KEY))
+        .build())
+      .build();
+
+    inputFile(FILE_1, Type.MAIN, InputFile.Status.CHANGED);
+    InputFile inputFile2 = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = getValidReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    readCache.put(importsMapCacheKey(inputFile2.key()), String.join(";", List.of("file1.py")).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile2.key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile2.key()), FileHashingUtils.inputFileContentHash(inputFile2));
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 2 files. These files were not parsed.");
   }
 
   @Test

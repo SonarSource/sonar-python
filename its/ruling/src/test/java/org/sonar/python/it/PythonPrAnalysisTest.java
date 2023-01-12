@@ -63,15 +63,25 @@ public class PythonPrAnalysisTest {
   private final String scenario;
   private final int expectedTotalFiles;
   private final int expectedRecomputed;
-  private final int expectedSkipped;
+  private final int expectedPartiallySkipped;
+  private final int expectedFullySkipped;
   private final List<String> deletedFiles;
   private final Integer expectedDuplicatedLines;
 
-  public PythonPrAnalysisTest(String scenario, int expectedTotalFiles, int expectedRecomputed, int expectedSkipped, List<String> deletedFiles, Integer expectedDuplication) {
+  public PythonPrAnalysisTest(
+    String scenario,
+    int expectedTotalFiles,
+    int expectedRecomputed,
+    int expectedFullySkipped,
+    int expectedPartiallySkipped,
+    List<String> deletedFiles,
+    Integer expectedDuplication
+  ) {
     this.scenario = scenario;
     this.expectedTotalFiles = expectedTotalFiles;
     this.expectedRecomputed = expectedRecomputed;
-    this.expectedSkipped = expectedSkipped;
+    this.expectedFullySkipped = expectedFullySkipped;
+    this.expectedPartiallySkipped = expectedPartiallySkipped;
     this.deletedFiles = deletedFiles;
     this.expectedDuplicatedLines = expectedDuplication;
   }
@@ -89,14 +99,14 @@ public class PythonPrAnalysisTest {
   @Parameters(name = "{index}: {0}")
   public static Collection<Object[]> data() {
     return List.of(new Object[][]{
-      // {<scenario>, <total files>, <recomputed>, <skipped>, <deleted>, <duplication on index.py>}
-      {"newFile", 10, 1, 9, Collections.emptyList(), null},
-      {"changeInImportedModule", 9, 1, 7, Collections.emptyList(), null},
-      {"changeInParent", 9, 1, 6, Collections.emptyList(), null},
-      {"changeInPackageInit", 9, 1, 7, Collections.emptyList(), null},
-      {"changeInRelativeImport", 9, 2, 4, Collections.emptyList(), null},
-      {"deletedFile", 8, 0, 7, List.of("submodule.py"), null},
-      {"duplication", 10, 1, 9, Collections.emptyList(), 55}
+      // {<scenario>, <total files>, <recomputed>, <partially_skipped>, <fully_skipped>, <deleted>, <duplication on index.py>}
+      {"newFile", 10, 1, 9, 9, Collections.emptyList(), null},
+      {"changeInImportedModule", 9, 1, 7, 8, Collections.emptyList(), null},
+      {"changeInParent", 9, 1, 6, 8, Collections.emptyList(), null},
+      {"changeInPackageInit", 9, 1, 7, 8, Collections.emptyList(), null},
+      {"changeInRelativeImport", 9, 2, 4, 7, Collections.emptyList(), null},
+      {"deletedFile", 8, 0, 7, 8, List.of("submodule.py"), null},
+      {"duplication", 10, 1, 9, 9, Collections.emptyList(), 55}
     });
   }
 
@@ -148,15 +158,19 @@ public class PythonPrAnalysisTest {
     String expectedRecomputedLog = String.format("Cached information of global symbols will be used for %d out of %d main files. Global symbols will be recomputed for the remaining files.",
       expectedTotalFiles - expectedRecomputed, expectedTotalFiles);
 
-    String expectedRegularAnalysisLog = String.format("Optimized analysis can be performed for %d out of %d files.",
-      expectedSkipped, expectedTotalFiles);
+    String expectedFullySkippedLog = String.format("Fully optimized analysis can be performed for %d out of %d files.",
+      expectedFullySkipped, expectedTotalFiles);
+
+    String expectedPartiallySkippedLog = String.format("Partially optimized analysis can be performed for %d out of %d files.",
+      expectedPartiallySkipped, expectedTotalFiles);
 
     String expectedFinalLog = String.format("The Python analyzer was able to leverage cached data from previous analyses for %d out of %d files. These files were not parsed.",
-      expectedSkipped, expectedTotalFiles);
+      expectedPartiallySkipped, expectedTotalFiles);
 
     assertThat(result.getLogs())
       .contains(expectedRecomputedLog)
-      .contains(expectedRegularAnalysisLog)
+      .contains(expectedPartiallySkippedLog)
+      .contains(expectedFullySkippedLog)
       .contains(expectedFinalLog);
   }
 
