@@ -319,18 +319,18 @@ stream = kinesis.Stream(self,
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-url = "https://example.com" # Compliant
-url = "sftp://anonymous@example.com" # Compliant
-url = "ssh://anonymous@example.com" # Compliant
+url = "https://example.com"
+url = "sftp://anonymous@example.com"
+url = "ssh://anonymous@example.com"
 
 import ftplib
-cnx = ftplib.FTP_TLS("ftp.example.com") # Compliant
+cnx = ftplib.FTP_TLS("ftp.example.com")
 
 import smtplib
-smtp = smtplib.SMTP("smtp.example.com", port=587) # Compliant
+smtp = smtplib.SMTP("smtp.example.com", port=587)
 smtp.starttls(context=context)
 
-smtp_ssl = smtplib.SMTP_SSL("smtp.gmail.com", port=465) # Compliant
+smtp_ssl = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
 </pre>
 <p>For <a
 href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/ApplicationLoadBalancer.html">aws_cdk.aws_elasticloadbalancingv2.ApplicationLoadBalancer</a>:</p>
