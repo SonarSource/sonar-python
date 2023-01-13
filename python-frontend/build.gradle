@@ -47,6 +47,32 @@ protobuf {
 //    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 //}
 
+
+task runTypeshed(type:Exec) {
+    workingDir 'typeshed_serializer'
+    commandLine 'tox'
+
+    inputs.dir('typeshed_serializer/resources')
+    inputs.dir('typeshed_serializer/serializer')
+    inputs.dir('typeshed_serializer/tests')
+    inputs.file('typeshed_serializer/requirements.txt')
+    inputs.file('typeshed_serializer/tox.ini')
+    outputs.dir("src/main/resources")
+    outputs.cacheIf { true }
+}
+
+tasks['compileJava'].dependsOn 'runTypeshed'
+
+clean {
+    delete 'typeshed_serializer/output'
+    delete 'typeshed_serializer/.tox'
+    delete 'typeshed_serializer/.mypy_cache'
+    delete 'typeshed_serializer/venv'
+    delete 'typeshed_serializer/.coverage'
+    delete 'typeshed_serializer/cov.xml'
+}
+
+
 task printSourceSetInformation(){
 
     doLast{

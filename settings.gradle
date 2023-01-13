@@ -21,3 +21,11 @@ include(':python-its')
 //project(":python-its").projectDir = file('its')
 //project(":it-python-plugin-test").projectDir = file('its/plugin/it-python-plugin-test')
 //project(":it-python-plugin").projectDir = file('its/plugin')
+
+buildCache {
+  local {
+    directory = new File(rootDir, '.build-cache')
+    removeUnusedEntriesAfterDays = 30
+    push = true
+  }
+}
