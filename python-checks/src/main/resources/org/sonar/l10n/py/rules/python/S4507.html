@@ -8,14 +8,13 @@
 detailed information on both the system running the application and users.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the code or configuration enabling the application debug features is deployed on production servers or distributed to end users. </li>
-  <li> the application runs by default with debug features activated. </li>
+  <li> The code or configuration enabling the application debug features is deployed on production servers or distributed to end users. </li>
+  <li> The application runs by default with debug features activated. </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>Do not enable debug features on production servers or applications distributed to end users.</p>
 <h2>Sensitive Code Example</h2>
-<p>Django</p>
 <pre>
 from django.conf import settings
 
@@ -25,7 +24,7 @@ settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Sensitive when set to Tru
 def custom_config(config):
     settings.configure(default_settings=config, DEBUG=True)  # Sensitive
 </pre>
-<p>Django’s "settings.py" or "global_settings.py" configuration file</p>
+<p>Django’s "settings.py" or "global_settings.py" configuration file:</p>
 <pre>
 # NOTE: The following code raises issues only if the file is named "settings.py" or "global_settings.py". This is the default
 # name of Django configuration file
