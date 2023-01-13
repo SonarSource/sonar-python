@@ -7,3 +7,73 @@ buildscript {
   }
 }
 
+plugins {
+  id 'java'
+  id 'maven-publish'
+  id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
+
+}
+
+
+
+//repositories {
+//  // Use the plugin portal to apply community plugins in convention plugins.
+//  gradlePluginPortal()
+//}
+
+allprojects {
+//  plugins {
+//    id 'java'
+//    id 'maven-publish'
+//  }
+
+  apply plugin: 'java-library'
+  apply plugin: 'maven-publish'
+
+  repositories {
+    mavenLocal()
+    maven {
+      url = uri('https://repox.jfrog.io/repox/sonarsource')
+    }
+
+    maven {
+      url = uri('https://repo.maven.apache.org/maven2/')
+    }
+  }
+
+}
+
+ext {
+  sonarQubeMinVersion = 7.9
+  buildNumber = System.getProperty("buildNumber")
+}
+
+group = 'org.sonarsource.python'
+version = '3.24-SNAPSHOT'
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
+
+//tasks.withType(JavaCompile) {
+//    options.release = 11
+//}
+
+java {
+  withSourcesJar()
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      from(components.java)
+    }
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+  options.encoding = 'UTF-8'
+}
+
