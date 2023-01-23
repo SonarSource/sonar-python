@@ -22,9 +22,18 @@ include(':python-its')
 //project(":it-python-plugin-test").projectDir = file('its/plugin/it-python-plugin-test')
 //project(":it-python-plugin").projectDir = file('its/plugin')
 
+boolean isCiServer = System.getenv().containsKey("CI")
+println("is CI: $isCiServer")
+boolean isCirrusShell = System.getenv().containsKey("CIRRUS_SHELL")
+println("isCirrusShell: $isCirrusShell")
+
 buildCache {
   local {
-    directory = new File(rootDir, '.build-cache')
+    if (isCirrusShell) {
+      directory = new File('${CIRRUS_WORKING_DIR}/.m2/repository')
+    } else {
+      directory = new File(rootDir, '.build-cache')
+    }
     removeUnusedEntriesAfterDays = 30
     push = true
   }
