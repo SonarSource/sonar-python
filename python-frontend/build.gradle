@@ -28,6 +28,7 @@ sourceSets {
         java {
             compileClasspath += srcDirs("${buildDir}/generated/source/proto/main/java")
         }
+
         proto {
             srcDir 'src/main/protobuf'
         }
@@ -38,6 +39,21 @@ protobuf {
     protoc {
         artifact = 'com.google.protobuf:protoc:3.21.7'
     }
+    generateProtoTasks {
+        all().configureEach { task ->
+            task.builtins {
+                // Generates Python code
+                python {
+//                    srcDir = 'src/main/protobuf'
+//                    outputSubDir = 'serializer/proto_out'
+                    outputSubDir = "python/serializer/proto_out"
+                }
+            }
+        }
+    }
+//    python {
+//        // typeshed_serializer/serializer/proto_out
+//    }
 }
 
 // Due Execution failed for task ':python-frontend:sourcesJar'.
@@ -47,6 +63,10 @@ sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+task copyPythonProtobufToTypeshed(type: Copy) {
+    from "${buildDir}/generated/source/proto/main/python"
+    into "${projectDir}/typeshed_serializer"
+}
 
 task runTypeshed(type:Exec) {
     workingDir 'typeshed_serializer'
@@ -63,6 +83,8 @@ task runTypeshed(type:Exec) {
 
 tasks['processResources'].dependsOn 'runTypeshed'
 tasks['sourcesJar'].dependsOn 'runTypeshed'
+tasks['copyPythonProtobufToTypeshed'].dependsOn 'generateProto'
+tasks['runTypeshed'].dependsOn 'copyPythonProtobufToTypeshed'
 
 clean {
     delete 'typeshed_serializer/output'
@@ -71,6 +93,8 @@ clean {
     delete 'typeshed_serializer/venv'
     delete 'typeshed_serializer/.coverage'
     delete 'typeshed_serializer/cov.xml'
+    delete 'typeshed_serializer/serializer/proto_out'
+    delete 'typeshed_serializer/serializer/.mypy_cache'
 }
 
 

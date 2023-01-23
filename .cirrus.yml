@@ -70,12 +70,16 @@ build_task:
     CIRRUS_CLONE_DEPTH: 50
     SIGN_KEY: VAULT[development/kv/data/sign data.key]
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
+    GRADLE_OPTS: -Dorg.gradle.caching=true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  environment_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.build-cache
+    fingerprint_script: echo $CIRRUS_BUILD_ID
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
-    - ./gradlew build --console=plain --build-cache
+    - regular_gradle_build_deploy_analyze
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 

@@ -23,14 +23,12 @@ include(':python-its')
 //project(":it-python-plugin").projectDir = file('its/plugin')
 
 boolean isCiServer = System.getenv().containsKey("CI")
-println("is CI: $isCiServer")
-boolean isCirrusShell = System.getenv().containsKey("CIRRUS_SHELL")
-println("isCirrusShell: $isCirrusShell")
 
 buildCache {
   local {
-    if (isCirrusShell) {
-      directory = new File('${CIRRUS_WORKING_DIR}/.m2/repository')
+    if (isCiServer) {
+//      directory = new File('${CIRRUS_WORKING_DIR}/.m2/repository')
+      directory = new File(rootDir, '.build-cache')
     } else {
       directory = new File(rootDir, '.build-cache')
     }
