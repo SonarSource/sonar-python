@@ -13,11 +13,13 @@ plugins {
 dependencies {
     api project(':python-frontend')
     api project(':python-checks')
-    api 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
-    api 'org.sonarsource.analyzer-commons:sonar-xml-parsing:2.1.0.1111'
-    api 'org.sonarsource.analyzer-commons:sonar-performance-measure:2.1.0.1111'
-    api 'commons-lang:commons-lang:2.6'
-    api 'org.codehaus.staxmate:staxmate:2.0.1'
+    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    implementation 'org.sonarsource.analyzer-commons:sonar-xml-parsing:2.1.0.1111'
+    implementation 'org.sonarsource.analyzer-commons:sonar-performance-measure:2.1.0.1111'
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation 'org.codehaus.staxmate:staxmate:2.0.1'
+    implementation 'com.google.protobuf:protobuf-java:3.21.7'
     testImplementation 'org.sonarsource.sonarqube:sonar-plugin-api-impl:9.7.1.62043'
     testImplementation 'org.sonarsource.sslr:sslr-testing-harness:1.23'
     testImplementation 'org.sonarsource.sonarqube:sonar-testing-harness:9.7.1.62043'
@@ -88,19 +90,19 @@ jar {
 }
 
 shadowJar {
-    minimize { }
+    minimize()
     dependencies {
         exclude(dependency('org.sonarsource.sonarqube:sonar-plugin-api'))
         exclude(dependency('org.sonarsource.sonarlint.core:sonarlint-core'))
-        exclude(dependency('com.google.guava:guava'))
-        exclude(dependency('com.google.guava:failureaccess'))
-        exclude(dependency('com.google.errorprone:error_prone_annotations'))
-        exclude(dependency('com.google.j2objc:j2objc-annotations'))
-        exclude(dependency('xml-apis:xml-apis'))
-        exclude(dependency('commons-io:commons-io'))
-        exclude(dependency('org.checkerframework:checker-qual'))
-        exclude(dependency('commons-lang:commons-lang'))
-        exclude(dependency('org.apache.commons:commons-lang3'))
+//        exclude(dependency('com.google.guava:guava'))
+//        exclude(dependency('com.google.guava:failureaccess'))
+//        exclude(dependency('com.google.errorprone:error_prone_annotations'))
+//        exclude(dependency('com.google.j2objc:j2objc-annotations'))
+//        exclude(dependency('xml-apis:xml-apis'))
+//        exclude(dependency('commons-io:commons-io'))
+//        exclude(dependency('org.checkerframework:checker-qual'))
+//        exclude(dependency('commons-lang:commons-lang'))
+//        exclude(dependency('org.apache.commons:commons-lang3'))
 
 
         exclude(dependency('org.codehaus.woodstox:.*'))
@@ -118,7 +120,7 @@ shadowJar {
         exclude 'NOTICE*'
     }
     doLast {
-        enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 6_000_000L, 6_350_000L)
+        enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 6_000_000L, 9_000_000L)
     }
 }
 

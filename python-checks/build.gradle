@@ -8,9 +8,9 @@ plugins {
 }
 
 dependencies {
-    api project(':python-frontend')
-    api 'commons-io:commons-io:2.8.0'
-    api 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    implementation project(':python-frontend')
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
     testImplementation project(':python-checks-testkit')
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.19.0'

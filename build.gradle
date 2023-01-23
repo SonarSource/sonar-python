@@ -8,8 +8,8 @@ buildscript {
 }
 
 plugins {
-  id 'java'
-  id 'maven-publish'
+//  id 'java'
+//  id 'maven-publish' apply false
   id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
 
 }
@@ -21,7 +21,7 @@ plugins {
 //  gradlePluginPortal()
 //}
 
-allprojects {
+subprojects {
 //  plugins {
 //    id 'java'
 //    id 'maven-publish'
@@ -41,6 +41,30 @@ allprojects {
     }
   }
 
+  java {
+    withSourcesJar()
+  }
+
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        from(components.java)
+      }
+    }
+  }
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+  }
+
+  group = 'org.sonarsource.python'
+  version = '3.24-SNAPSHOT'
+  java.sourceCompatibility = JavaVersion.VERSION_11
+  java.targetCompatibility = JavaVersion.VERSION_11
 }
 
 ext {
@@ -48,32 +72,11 @@ ext {
   buildNumber = System.getProperty("buildNumber")
 }
 
-group = 'org.sonarsource.python'
-version = '3.24-SNAPSHOT'
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
+
 
 //tasks.withType(JavaCompile) {
 //    options.release = 11
 //}
 
-java {
-  withSourcesJar()
-}
 
-publishing {
-  publications {
-    maven(MavenPublication) {
-      from(components.java)
-    }
-  }
-}
-
-tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
-}
-
-tasks.withType(Javadoc) {
-  options.encoding = 'UTF-8'
-}
 
