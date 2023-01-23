@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ExceptionNotThrownCheckTest {
@@ -29,6 +30,16 @@ public class ExceptionNotThrownCheckTest {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/exceptionNotThrownCheck.py",
       new ExceptionNotThrownCheck());
+  }
+
+  @Test
+  public void quick_fix_test() {
+    var input = "def func():\n" +
+      "  NotImplementedError()\n";
+    var expected = "def func():\n" +
+      "  raise NotImplementedError()\n";
+    PythonQuickFixVerifier.verify(new ExceptionNotThrownCheck(), input, expected);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new ExceptionNotThrownCheck(), input, ExceptionNotThrownCheck.QUICK_FIX_MESSAGE);
   }
 
 }

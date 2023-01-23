@@ -33,6 +33,9 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.BuiltinSymbols;
 
 // https://jira.sonarsource.com/browse/RSPEC-3984
@@ -40,6 +43,7 @@ import org.sonar.python.semantic.BuiltinSymbols;
 @Rule(key = "S3984")
 public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Raise this exception or remove this useless statement.";
+  public static final String QUICK_FIX_MESSAGE = "Raise this exception";
 
   @Override
   public void initialize(Context context) {
@@ -54,7 +58,13 @@ public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
       if (symb != null && symb.is(Symbol.Kind.CLASS) && isThrowable((ClassSymbol) symb)) {
         Tree parent = t.parent();
         if (parent.is(Tree.Kind.EXPRESSION_STMT)) {
-          subscriptionContext.addIssue(t, MESSAGE);
+          var issue = (IssueWithQuickFix) subscriptionContext.addIssue(t, MESSAGE);
+
+          var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.insertBefore(t, "raise "))
+            .build();
+
+          issue.addQuickFix(quickFix);
         }
       }
     };
