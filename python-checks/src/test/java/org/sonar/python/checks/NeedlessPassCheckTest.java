@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NeedlessPassCheckTest {
@@ -28,4 +29,16 @@ public class NeedlessPassCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/needlessPass.py", new NeedlessPassCheck());
   }
+
+  @Test
+  public void quick_fix_test() {
+    var input = "def my_method():\n" +
+      "    print('foo')\n" +
+      "    pass";
+    var expected = "def my_method():\n" +
+      "    print('foo')\n";
+    PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new NeedlessPassCheck(), input, NeedlessPassCheck.QUICK_FIX_MESSAGE);
+  }
+
 }

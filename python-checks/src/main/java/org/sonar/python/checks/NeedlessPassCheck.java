@@ -24,8 +24,11 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
-import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.PASS_STMT;
@@ -36,6 +39,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 public class NeedlessPassCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this unneeded \"pass\".";
+  public static final String QUICK_FIX_MESSAGE = "Remove the \"pass\" statement";
 
   @Override
   public void initialize(Context context) {
@@ -46,10 +50,18 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
       if (statements.size() <= 1) {
         return;
       }
+
       statements.stream()
         .filter(st -> st.is(PASS_STMT))
         .findFirst()
-        .ifPresent(st -> ctx.addIssue(st, MESSAGE));
+        .ifPresent(st -> {
+          var issue = (IssueWithQuickFix) ctx.addIssue(st, MESSAGE);
+          var quickFix = PythonQuickFix
+            .newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.removeStatement(st))
+            .build();
+          issue.addQuickFix(quickFix);
+        });
     });
   }
 
