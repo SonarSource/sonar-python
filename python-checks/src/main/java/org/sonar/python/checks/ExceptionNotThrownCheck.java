@@ -43,7 +43,7 @@ import org.sonar.python.semantic.BuiltinSymbols;
 @Rule(key = "S3984")
 public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Raise this exception or remove this useless statement.";
-  public static final String QUICK_FIX_MESSAGE = "Insert \"raise\" before exception creation expression";
+  public static final String QUICK_FIX_MESSAGE = "Raise this exception";
 
   @Override
   public void initialize(Context context) {

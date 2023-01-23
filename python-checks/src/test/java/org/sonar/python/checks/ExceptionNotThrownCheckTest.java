@@ -39,13 +39,8 @@ public class ExceptionNotThrownCheckTest {
     var expected = "def func():\n" +
       "  raise NotImplementedError()\n";
     PythonQuickFixVerifier.verify(new ExceptionNotThrownCheck(), input, expected);
-  }
-
-  @Test
-  public void quick_fix_message_test() {
-    var input = "def func():\n" +
-                "  NotImplementedError()\n";
     PythonQuickFixVerifier.verifyQuickFixMessages(new ExceptionNotThrownCheck(), input, ExceptionNotThrownCheck.QUICK_FIX_MESSAGE);
   }
+
 }
 
