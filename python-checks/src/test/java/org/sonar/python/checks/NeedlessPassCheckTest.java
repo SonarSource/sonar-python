@@ -38,5 +38,14 @@ public class NeedlessPassCheckTest {
     var expected = "def my_method():\n" +
       "    print('foo')\n";
     PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new NeedlessPassCheck(), input, NeedlessPassCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void quick_fix_message_test() {
+    var input = "def my_method():\n" +
+                "    print('foo')\n" +
+                "    pass";
+    PythonQuickFixVerifier.verifyQuickFixMessages(new NeedlessPassCheck(), input, NeedlessPassCheck.QUICK_FIX_MESSAGE);
   }
 }
