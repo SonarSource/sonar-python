@@ -74,8 +74,8 @@ build_task:
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   environment_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.build-cache
-    fingerprint_script: echo $CIRRUS_BUILD_ID
+    folder: ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
+    fingerprint_script: echo "python-cache"
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD

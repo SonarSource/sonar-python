@@ -28,9 +28,9 @@ buildCache {
   local {
     if (isCiServer) {
 //      directory = new File('${CIRRUS_WORKING_DIR}/.m2/repository')
-      directory = new File(rootDir, '.build-cache')
+      directory = new File(rootDir, '.gradle/.build-cache')
     } else {
-      directory = new File(rootDir, '.build-cache')
+      directory = new File(rootDir, '.gradle/.build-cache')
     }
     removeUnusedEntriesAfterDays = 30
     push = true
