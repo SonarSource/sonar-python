@@ -56,7 +56,7 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
         .ifPresent(st -> {
           var issue = (IssueWithQuickFix) ctx.addIssue(st, MESSAGE);
           var quickFix = PythonQuickFix
-            .newQuickFix("Remove the \"pass\" statement at the end of a function or method")
+            .newQuickFix("Remove the \"pass\" statement")
             .addTextEdit(PythonTextEdit.removeStatement(st))
             .build();
           issue.addQuickFix(quickFix);
