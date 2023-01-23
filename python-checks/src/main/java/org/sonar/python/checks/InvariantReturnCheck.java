@@ -30,6 +30,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -44,7 +45,6 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3516")
@@ -170,8 +170,8 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean binaryExpressionsHaveTheSameValue(LatestExecutedBlock leftBlock, BinaryExpression left, LatestExecutedBlock rightBlock, BinaryExpression right) {
-    // the caller ensure left.getKind() == right.getKind(), so no need to compare left and right BinaryExpression#operator(), it's redundant
-    return haveTheSameValue(leftBlock, left.leftOperand(), rightBlock, right.leftOperand()) &&
+    return left.operator().value().equals(right.operator().value()) &&
+      haveTheSameValue(leftBlock, left.leftOperand(), rightBlock, right.leftOperand()) &&
       haveTheSameValue(leftBlock, left.rightOperand(), rightBlock, right.rightOperand());
   }
 
