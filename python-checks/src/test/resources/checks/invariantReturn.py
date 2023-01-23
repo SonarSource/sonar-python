@@ -520,3 +520,11 @@ def match_statement_fn_with_capture(value): # FN, implicit "None" return is unre
       return 42
     case x:
       return 42
+
+def different_operators_for_binary_exp(cond):
+    b = 1
+    c = 1
+    if cond:
+        return b > c
+    else:
+        return b >= c
