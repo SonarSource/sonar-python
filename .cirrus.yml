@@ -80,7 +80,7 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
 #    - regular_gradle_build_deploy_analyze
-    - ./gradlew build --console=plain --build-cache -x javadoc
+    - ./gradlew build --console=plain --build-cache -x javadoc --info
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
