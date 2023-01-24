@@ -1,3 +1,6 @@
+from sqlalchemy.exc import SQLAlchemyError
+import unknown
+
 def duplicate_except():
   try:
     raise TypeError()
@@ -131,3 +134,30 @@ def oserror_hierarchy():
         print(repr(e))
     except* BlockingIOError: # Noncompliant
         print('never')
+
+def unknown_exceptions():
+    try:
+        x = 42
+    except SQLAlchemyError as e:
+#          ^^^^^^^^^^^^^^^> {{Exceptions will be caught here.}}
+        x = 1
+    except SQLAlchemyError as e: # Noncompliant
+#          ^^^^^^^^^^^^^^^
+        x = 2
+    except:
+        x = 3
+    return x
+
+
+def unknown_qualified_exceptions():
+    try:
+        x = 42
+    except unknown.UnknownException as e:
+        #  ^^^^^^^^^^^^^^^^^^^^^^^^> {{Exceptions will be caught here.}}
+        x = 1
+    except unknown.UnknownException as e: # Noncompliant
+        #  ^^^^^^^^^^^^^^^^^^^^^^^^
+        x = 2
+    except:
+        x = 3
+    return x
