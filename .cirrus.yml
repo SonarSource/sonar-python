@@ -75,7 +75,7 @@ build_task:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   environment_cache:
     folder: ${CIRRUS_WORKING_DIR}/.gradle
-    fingerprint_script: echo "python-cache"
+    fingerprint_script: echo "python-gradle-cache"
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
