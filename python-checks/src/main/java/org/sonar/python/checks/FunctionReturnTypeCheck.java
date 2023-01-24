@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.InferredTypes;
@@ -68,13 +68,13 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
   private static void raiseIssues(SubscriptionContext ctx, FunctionDef functionDef, InferredType declaredReturnType, ReturnTypeVisitor returnTypeVisitor) {
     String functionName = functionDef.name().name();
     String returnTypeName = InferredTypes.typeName(declaredReturnType);
-    if (!returnTypeVisitor.yieldStatements.isEmpty()) {
+    if (!returnTypeVisitor.yieldExpressions.isEmpty()) {
       boolean isAsyncFunction = functionDef.asyncKeyword() != null;
       String recommendedSuperType = isAsyncFunction ? "typing.AsyncGenerator" : "typing.Generator";
       // Here we should probably use an equivalent of "canBeOrExtend" (accepting uncertainty) instead of "mustBeOrExtend"
       if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend) || ASYNC_ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
         if (isMixedUpAnnotation(isAsyncFunction, declaredReturnType)) {
-          returnTypeVisitor.yieldStatements
+          returnTypeVisitor.yieldExpressions
             .forEach(y -> {
               PreciseIssue issue =
                 ctx.addIssue(y, String.format("Annotate function \"%s\" with \"%s\" or one of its supertypes.", functionName, recommendedSuperType));
@@ -83,7 +83,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
         }
         return;
       }
-      returnTypeVisitor.yieldStatements
+      returnTypeVisitor.yieldExpressions
         .forEach(y -> {
           PreciseIssue issue =
             ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"%s\" or one of its supertypes.", functionName, recommendedSuperType));
@@ -118,7 +118,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
   private static class ReturnTypeVisitor extends BaseTreeVisitor {
 
     InferredType returnType;
-    List<YieldStatement> yieldStatements = new ArrayList<>();
+    List<YieldExpression> yieldExpressions = new ArrayList<>();
     List<ReturnStatement> invalidReturnStatements = new ArrayList<>();
 
     ReturnTypeVisitor(InferredType returnType) {
@@ -149,6 +149,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
           // Avoid FPs for TypedDict
           return;
         }
+
         if (!containsDeclaredType(inferredType) && !inferredType.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);
         }
@@ -157,9 +158,9 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitYieldStatement(YieldStatement yieldStatement) {
-      yieldStatements.add(yieldStatement);
-      super.visitYieldStatement(yieldStatement);
+    public void visitYieldExpression(YieldExpression yieldExpression) {
+      yieldExpressions.add(yieldExpression);
+      super.visitYieldExpression(yieldExpression);
     }
   }
 }

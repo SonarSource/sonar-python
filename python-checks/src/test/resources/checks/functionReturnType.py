@@ -322,3 +322,10 @@ async def no_issue_for_async_generators() -> AsyncGenerator[int]:
 
 async def async_function_returning_iterator() -> Iterator[int]:
     yield 1 # Noncompliant {{Annotate function "async_function_returning_iterator" with "typing.AsyncGenerator" or one of its supertypes.}}
+
+def echo_round() -> Generator[int, float, str]:
+  sent = 0
+  while sent < 3:
+    sent += 1
+    x = yield sent
+  return 'Done'
