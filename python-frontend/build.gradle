@@ -73,16 +73,25 @@ task runTypeshed(type:Exec) {
     commandLine 'tox'
 
     inputs.dir('typeshed_serializer/resources')
-    inputs.dir('typeshed_serializer/serializer')
+    inputs.file('typeshed_serializer/serializer/__init__.py')
+    inputs.file('typeshed_serializer/serializer/symbols.py')
+    inputs.file('typeshed_serializer/serializer/symbols_merger.py')
+    inputs.file('typeshed_serializer/serializer/typeshed_serializer.py')
     inputs.dir('typeshed_serializer/tests')
     inputs.file('typeshed_serializer/requirements.txt')
     inputs.file('typeshed_serializer/tox.ini')
-    outputs.dir("src/main/resources")
+    outputs.dir("${buildDir}/typeshed_serializer")
     outputs.cacheIf { true }
 }
 
-tasks['processResources'].dependsOn 'runTypeshed'
-tasks['sourcesJar'].dependsOn 'runTypeshed'
+task copyTypeshedOutputToResources(type: Copy) {
+    from "${buildDir}/typeshed_serializer"
+    into "${projectDir}/src/main/resources"
+}
+
+tasks['copyTypeshedOutputToResources'].dependsOn 'runTypeshed'
+tasks['processResources'].dependsOn 'copyTypeshedOutputToResources'
+tasks['sourcesJar'].dependsOn 'copyTypeshedOutputToResources'
 tasks['copyPythonProtobufToTypeshed'].dependsOn 'generateProto'
 tasks['runTypeshed'].dependsOn 'copyPythonProtobufToTypeshed'
 
