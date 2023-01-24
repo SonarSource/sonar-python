@@ -22,16 +22,10 @@ include(':python-its')
 //project(":it-python-plugin-test").projectDir = file('its/plugin/it-python-plugin-test')
 //project(":it-python-plugin").projectDir = file('its/plugin')
 
-boolean isCiServer = System.getenv().containsKey("CI")
 
 buildCache {
   local {
-    if (isCiServer) {
-//      directory = new File('${CIRRUS_WORKING_DIR}/.m2/repository')
-      directory = new File(rootDir, '.gradle/.build-cache')
-    } else {
-      directory = new File(rootDir, '.gradle/.build-cache')
-    }
+    directory = new File(rootDir, '.gradle/.build-cache')
     removeUnusedEntriesAfterDays = 30
     push = true
   }

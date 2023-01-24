@@ -29,7 +29,6 @@ public class TokenLocation {
   private final int endLineOffset;
 
   public TokenLocation(Token token) {
-
     this.startLine = token.line();
     this.startLineOffset = token.column();
 

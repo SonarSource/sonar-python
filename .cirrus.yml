@@ -80,7 +80,7 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
 #    - regular_gradle_build_deploy_analyze
-    - ./gradlew build --console=plain --build-cache -x javadoc --info
+    - ./gradlew build --console=plain --build-cache
     - ls ${CIRRUS_WORKING_DIR}/.gradle
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
     - ./check-license-compliance.sh
