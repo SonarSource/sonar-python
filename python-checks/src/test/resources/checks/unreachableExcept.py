@@ -161,3 +161,13 @@ def unknown_qualified_exceptions():
     except:
         x = 3
     return x
+
+def test_fn(a, b):
+    try:
+        raise b
+    except a:
+        c = 1
+    except b:
+        c = 2
+    finally:
+        c += 3

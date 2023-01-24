@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,15 +85,16 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
       .filter(expression -> Objects.nonNull(expression.symbol()))
       .ifPresent(expression -> {
         var symbol = expression.symbol();
+        var symbolName = getSymbolName(symbol).orElse(null);
         var handledExceptions = Symbol.Kind.CLASS == symbol.kind() ?
           retrieveAlreadyHandledExceptionsByClass((ClassSymbol) symbol, caughtTypes)
           : retrieveAlreadyHandledExceptionsByFullyQualifiedName(symbol, caughtTypes);
 
         if (!handledExceptions.isEmpty()) {
-          var issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
+          var issue = ctx.addIssue((Expression) expression, "Catch this exception only once; it is already handled by a previous except clause.");
           handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
         }
-        caughtInExceptClause.put(symbol.fullyQualifiedName(), (Expression) expression);
+        caughtInExceptClause.put(symbolName, (Expression) expression);
       });
   }
 
@@ -103,7 +103,15 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
   }
 
   private static List<Expression> retrieveAlreadyHandledExceptionsByFullyQualifiedName(Symbol symbol, Map<String, Expression> caughtTypes) {
-    return caughtTypes.containsKey(symbol.fullyQualifiedName())
-      ? List.of(caughtTypes.get(symbol.fullyQualifiedName())) : Collections.emptyList();
+    return getSymbolName(symbol)
+      .filter(caughtTypes::containsKey)
+      .map(caughtTypes::get)
+      .stream()
+      .collect(Collectors.toList());
+  }
+
+  private static Optional<String> getSymbolName(Symbol symbol) {
+    return Optional.ofNullable(symbol.fullyQualifiedName())
+      .or(() -> Optional.ofNullable(symbol.name()));
   }
 }
