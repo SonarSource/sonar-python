@@ -74,13 +74,17 @@ build_task:
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   environment_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
+    folder: ${CIRRUS_WORKING_DIR}/.gradle
     fingerprint_script: echo "python-cache"
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
+    - ls .gradle
+    - ls .gradle/.build-cache
 #    - regular_gradle_build_deploy_analyze
     - ./gradlew build --console=plain --build-cache -x javadoc --info
+    - ls .gradle
+    - ls .gradle/.build-cache
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
