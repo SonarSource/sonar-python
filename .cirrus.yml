@@ -79,8 +79,6 @@ build_task:
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
-    - ls ${CIRRUS_WORKING_DIR}/.gradle
-    - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
 #    - regular_gradle_build_deploy_analyze
     - ./gradlew build --console=plain --build-cache -x javadoc --info
     - ls ${CIRRUS_WORKING_DIR}/.gradle
