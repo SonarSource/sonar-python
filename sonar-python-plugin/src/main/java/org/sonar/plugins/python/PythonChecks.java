@@ -39,7 +39,6 @@ public class PythonChecks {
   }
   public PythonChecks addChecks(String repositoryKey, Iterable<Class> checkClass) {
     checksByRepository.add(checkFactory.<PythonCheck>create(repositoryKey).addAnnotatedChecks(checkClass));
-
     return this;
   }
 
