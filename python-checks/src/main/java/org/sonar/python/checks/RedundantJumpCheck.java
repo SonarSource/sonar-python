@@ -20,12 +20,13 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.cfg.CfgBlock;
-import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -33,6 +34,9 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3626")
@@ -57,10 +61,22 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
         if (!isException(lastElement)) {
-          PreciseIssue preciseIssue = ctx.addIssue(lastElement, message(lastElement));
+          var issue = ctx.addIssue(lastElement, message(lastElement));
+
+          Optional.of(issue)
+            .filter(IssueWithQuickFix.class::isInstance)
+            .map(IssueWithQuickFix.class::cast)
+            .ifPresent(i -> {
+              var quickFix = PythonQuickFix
+                .newQuickFix("Remove redundant statement")
+                .addTextEdit(PythonTextEdit.removeTree(lastElement))
+                .build();
+              i.addQuickFix(quickFix);
+            });
+
           if (lastElement.is(Kind.CONTINUE_STMT)) {
             Tree loop = ((PythonCfgBranchingBlock) cfgBlock.successors().iterator().next()).branchingTree();
-            preciseIssue.secondary(loop.firstToken(), null);
+            issue.secondary(loop.firstToken(), null);
           }
         }
       }
