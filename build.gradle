@@ -59,6 +59,8 @@ subprojects {
 
   tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
+    // It's because https://bugs.openjdk.org/browse/JDK-8222091 bug
+    options.addBooleanOption('Xdoclint:none', true)
   }
 
   group = 'org.sonarsource.python'
