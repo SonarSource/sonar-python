@@ -80,10 +80,11 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
     - java -version
-#    - regular_gradle_build_deploy_analyze
-    - ./gradlew build --console=plain --build-cache
+    - regular_gradle_build_deploy_analyze --build-cache
+#    - ./gradlew build sonarqube --console=plain --build-cache
     - ls ${CIRRUS_WORKING_DIR}/.gradle
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
+    - cleanup_maven_repository
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 

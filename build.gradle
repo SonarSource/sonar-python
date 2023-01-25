@@ -8,27 +8,27 @@ buildscript {
 }
 
 plugins {
-//  id 'java'
-//  id 'maven-publish' apply false
   id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
-
+  id 'org.sonarqube' version '3.5.0.2730'
+  id 'com.jfrog.artifactory' version '4.31.0'
 }
 
+ext {
+  sonarQubeMinVersion = 7.9
+  buildNumber = System.getProperty("buildNumber")
+  projectScm = "https://github.com/SonarSource/sonar-python"
 
-
-//repositories {
-//  // Use the plugin portal to apply community plugins in convention plugins.
-//  gradlePluginPortal()
-//}
+  artifactsToPublish = ''
+  artifactsToDownload = ''
+}
 
 subprojects {
-//  plugins {
-//    id 'java'
-//    id 'maven-publish'
-//  }
-
   apply plugin: 'java-library'
   apply plugin: 'maven-publish'
+  apply plugin: 'com.jfrog.artifactory'
+
+  // do not publish to Artifactory by default
+  artifactoryPublish.skip = true
 
   repositories {
     mavenLocal()
@@ -67,14 +67,85 @@ subprojects {
   version = '3.24-SNAPSHOT'
   java.sourceCompatibility = JavaVersion.VERSION_11
   java.targetCompatibility = JavaVersion.VERSION_11
+
+  println("projectTitle: $projectTitle")
+
+  sonarqube {
+    properties {
+      property 'sonar.projectName', 'Python'
+      property 'sonar.links.ci', "https://cirrus-ci.com/github/SonarSource/sonar-python"
+      property 'sonar.links.scm', "$projectScm"
+      property 'sonar.links.issue', 'https://jira.sonarsource.com/browse/SONARPY'
+      property 'sonar.exclusions', '**/build/**/*'
+    }
+  }
+
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        pom {
+          name = projectTitle
+          description = project.description
+          url = 'http://www.sonarqube.org/'
+          organization {
+            name = 'SonarSource'
+            url = 'http://www.sonarsource.com'
+          }
+          licenses {
+            license {
+              name = 'GNU LGPL 3'
+              url = 'http://www.gnu.org/licenses/lgpl.txt'
+              distribution = 'repo'
+            }
+          }
+          scm {
+            url = "$projectScm"
+          }
+          developers {
+            developer {
+              id = 'sonarsource-team'
+              name = 'SonarSource Team'
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-ext {
-  sonarQubeMinVersion = 7.9
-  buildNumber = System.getProperty("buildNumber")
+artifactory {
+  clientConfig.setIncludeEnvVars(true)
+  clientConfig.setEnvVarsExcludePatterns('*password*,*PASSWORD*,*secret*,*MAVEN_CMD_LINE_ARGS*,sun.java.command,*token*,*TOKEN*,*LOGIN*,*login*,*key*,*KEY*,*PASSPHRASE*,*signing*')
+  contextUrl = System.getenv('ARTIFACTORY_URL')
+  publish {
+    repository {
+      repoKey = System.getenv('ARTIFACTORY_DEPLOY_REPO')
+      username = System.getenv('ARTIFACTORY_DEPLOY_USERNAME')
+      password = System.getenv('ARTIFACTORY_DEPLOY_PASSWORD')
+    }
+    defaults {
+      properties = [
+        'build.number': System.getenv('BUILD_NUMBER'),
+        'pr.branch.target': System.getenv('PULL_REQUEST_BRANCH_TARGET'),
+        'pr.number': System.getenv('PULL_REQUEST_NUMBER'),
+        'vcs.branch': System.getenv('GIT_BRANCH'),
+        'vcs.revision': System.getenv('GIT_COMMIT'),
+        'version': version
+      ]
+      publications('mavenJava')
+      publishPom = true
+      publishIvy = false
+    }
+  }
+
+  clientConfig.info.setBuildName('slang-enterprise')
+  clientConfig.info.setBuildNumber(System.getenv('BUILD_NUMBER'))
+  // Define the artifacts to be deployed to https://binaries.sonarsource.com on releases
+  clientConfig.info.addEnvironmentProperty('ARTIFACTS_TO_PUBLISH', artifactsToPublish)
+  clientConfig.info.addEnvironmentProperty('ARTIFACTS_TO_DOWNLOAD', artifactsToDownload)
+  // The name of this variable is important because it's used by the delivery process when extracting version from Artifactory build info.
+  clientConfig.info.addEnvironmentProperty('PROJECT_VERSION', "${version}")
 }
-
-
 
 //tasks.withType(JavaCompile) {
 //    options.release = 11
