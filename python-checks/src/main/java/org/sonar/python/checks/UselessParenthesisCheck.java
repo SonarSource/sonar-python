@@ -43,7 +43,7 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
       Expression expression = parenthesized.expression();
       if (expression.is(Tree.Kind.PARENTHESIZED, Tree.Kind.TUPLE, Tree.Kind.GENERATOR_EXPR)) {
         var issue = (IssueWithQuickFix) ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+        var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.remove(parenthesized.leftParenthesis()), PythonTextEdit.remove(parenthesized.rightParenthesis()))
           .build();
         issue.addQuickFix(quickFix);
