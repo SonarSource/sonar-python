@@ -19,52 +19,68 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.cfg.CfgBlock;
-import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3626")
 public class RedundantJumpCheck extends PythonSubscriptionCheck {
 
+  public static final String QUICK_FIX_DESCRIPTION = "Remove redundant statement";
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
-      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
-    );
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
-      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
-    );
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx));
   }
 
   private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx) {
-    if (cfg == null) {
-      return;
-    }
-    for (CfgBlock cfgBlock : cfg.blocks()) {
-      if (cfgBlock.successors().size() == 1 && cfgBlock.successors().contains(cfgBlock.syntacticSuccessor())) {
+    Optional.ofNullable(cfg)
+      .map(ControlFlowGraph::blocks)
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(cfgBlock -> cfgBlock.successors().size() == 1 && cfgBlock.successors().contains(cfgBlock.syntacticSuccessor()))
+      .forEach(cfgBlock -> {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
         if (!isException(lastElement)) {
-          PreciseIssue preciseIssue = ctx.addIssue(lastElement, message(lastElement));
+          var issue = ctx.addIssue(lastElement, message(lastElement));
+          addQuickFix(lastElement, issue);
+
           if (lastElement.is(Kind.CONTINUE_STMT)) {
             Tree loop = ((PythonCfgBranchingBlock) cfgBlock.successors().iterator().next()).branchingTree();
-            preciseIssue.secondary(loop.firstToken(), null);
+            issue.secondary(loop.firstToken(), null);
           }
         }
-      }
+      });
+  }
+
+  private static void addQuickFix(Tree lastElement, PreciseIssue issue) {
+    if (!(lastElement instanceof Statement) || !(issue instanceof IssueWithQuickFix)) {
+      return;
     }
+    var quickFix = PythonQuickFix
+      .newQuickFix(QUICK_FIX_DESCRIPTION)
+      .addTextEdit(PythonTextEdit.removeStatement((Statement) lastElement))
+      .build();
+    ((IssueWithQuickFix) issue).addQuickFix(quickFix);
   }
 
   private static String message(Tree jumpStatement) {
@@ -88,6 +104,7 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
       || isInsideSingleStatementBlock(lastElement)
       || hasTryAncestor(lastElement);
   }
+
   // ignore jumps in try statement because CFG is not precise
   private static boolean hasTryAncestor(Tree element) {
     return TreeUtils.firstAncestorOfKind(element, Kind.TRY_STMT) != null;

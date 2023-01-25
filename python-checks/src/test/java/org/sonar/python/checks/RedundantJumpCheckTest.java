@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class RedundantJumpCheckTest {
@@ -27,6 +28,19 @@ public class RedundantJumpCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/redundantJump.py", new RedundantJumpCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    String input = "def redundant_jump(x):\n" +
+      "  if x == 1:\n" +
+      "    print(True)\n" +
+      "    return";
+    String expected = "def redundant_jump(x):\n" +
+      "  if x == 1:\n" +
+      "    print(True)\n";
+    PythonQuickFixVerifier.verify(new RedundantJumpCheck(), input, expected);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new RedundantJumpCheck(), input, RedundantJumpCheck.QUICK_FIX_DESCRIPTION);
   }
 
 }
