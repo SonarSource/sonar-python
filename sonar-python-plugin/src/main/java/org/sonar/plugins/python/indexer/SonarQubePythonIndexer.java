@@ -83,6 +83,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
     PerformanceMeasure.Duration duration = PerformanceMeasure.start("ProjectLevelSymbolTable");
     computeGlobalSymbols(mainFiles, context);
+    if (caching.isCacheEnabled()) {
+      testFiles.forEach(this::writeContentHashToCache);
+    }
     duration.stop();
   }
 
@@ -118,7 +121,10 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, allProjectFilesFQNs).impactedModules(impactfulModulesFQNs);
     mainFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(fullySkippableFiles::add);
     // No project level information is stored for test files. It is therefore impossible for a change in a test file to impact other files.
-    testFiles.stream().filter(f -> f.status().equals(InputFile.Status.SAME)).forEach(fullySkippableFiles::add);
+    testFiles.stream().filter(this::fileIsUnchanged).forEach(f -> {
+      fullySkippableFiles.add(f);
+      partiallySkippableFiles.add(f);
+    });
     LOG.info(
       "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
       mainFiles.size() - impactfulFiles.size(),
@@ -128,6 +134,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     LOG.info("Partially optimized analysis can be performed for {} out of {} files.", partiallySkippableFiles.size(), mainFiles.size() + testFiles.size());
     // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies in the project symbol table)
     computeGlobalSymbols(impactfulFiles, context);
+    testFiles.forEach(this::writeContentHashToCache);
   }
 
   /*
@@ -202,18 +209,25 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       if (descriptors != null && imports != null) {
         // Descriptors/imports map may be null if the file failed to parse.
         // We don't try to save information in the cache in that case.
-        byte[] contentHash;
-        try {
-          contentHash = FileHashingUtils.inputFileContentHash(inputFile);
-        } catch (IOException | NoSuchAlgorithmException e) {
-          LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+        if (!writeContentHashToCache(inputFile)) {
           return;
         }
-        caching.writeFileContentHash(inputFile.key(), contentHash);
         caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
         caching.writeImportsMapEntry(inputFile.key(), imports);
       }
     }
+  }
+
+  private boolean writeContentHashToCache(InputFile inputFile) {
+    byte[] contentHash;
+    try {
+      contentHash = FileHashingUtils.inputFileContentHash(inputFile);
+    } catch (IOException | NoSuchAlgorithmException e) {
+      LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+      return false;
+    }
+    caching.writeFileContentHash(inputFile.key(), contentHash);
+    return true;
   }
 
   private Set<String> deletedModulesFQNs(Set<String> projectModulesFQNs) {

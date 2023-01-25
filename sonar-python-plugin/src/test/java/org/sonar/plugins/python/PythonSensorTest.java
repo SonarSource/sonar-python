@@ -120,6 +120,7 @@ import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACH
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
 import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKey;
+import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 public class PythonSensorTest {
@@ -752,7 +753,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_scan_without_parsing_test_file() {
+  public void test_scan_without_parsing_test_file() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -762,8 +763,9 @@ public class PythonSensorTest {
         .build())
       .build();
 
-    inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
+    InputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
     TestReadCache readCache = getValidReadCache();
+    readCache.put(fileContentHashCacheKey(inputFile.key()), inputFileContentHash(inputFile));
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
