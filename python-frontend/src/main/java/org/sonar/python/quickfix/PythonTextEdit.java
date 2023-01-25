@@ -141,10 +141,6 @@ public class PythonTextEdit {
   }
 
   public static PythonTextEdit removeStatement(Statement statement) {
-    return removeTree(statement);
-  }
-
-  public static PythonTextEdit removeTree(Tree statement) {
     Token firstTokenOfStmt = statement.firstToken();
     Token lastTokenOfStmt = TreeUtils.getTreeSeparatorOrLastToken(statement);
 

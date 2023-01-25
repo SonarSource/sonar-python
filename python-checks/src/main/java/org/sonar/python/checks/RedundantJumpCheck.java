@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -67,11 +68,13 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
             .filter(IssueWithQuickFix.class::isInstance)
             .map(IssueWithQuickFix.class::cast)
             .ifPresent(i -> {
-              var quickFix = PythonQuickFix
-                .newQuickFix("Remove redundant statement")
-                .addTextEdit(PythonTextEdit.removeTree(lastElement))
-                .build();
-              i.addQuickFix(quickFix);
+              if (lastElement instanceof Statement) {
+                var quickFix = PythonQuickFix
+                  .newQuickFix("Remove redundant statement")
+                  .addTextEdit(PythonTextEdit.removeStatement((Statement) lastElement))
+                  .build();
+                i.addQuickFix(quickFix);
+              }
             });
 
           if (lastElement.is(Kind.CONTINUE_STMT)) {
