@@ -42,13 +42,11 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
       ParenthesizedExpression parenthesized = (ParenthesizedExpression) ctx.syntaxNode();
       Expression expression = parenthesized.expression();
       if (expression.is(Tree.Kind.PARENTHESIZED, Tree.Kind.TUPLE, Tree.Kind.GENERATOR_EXPR)) {
-        var issue = ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
-        if (issue instanceof IssueWithQuickFix) {
-          PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.remove(parenthesized.leftParenthesis()), PythonTextEdit.remove(parenthesized.rightParenthesis()))
-            .build();
-          ((IssueWithQuickFix) issue).addQuickFix(quickFix);
-        }
+        var issue = (IssueWithQuickFix) ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.remove(parenthesized.leftParenthesis()), PythonTextEdit.remove(parenthesized.rightParenthesis()))
+          .build();
+        issue.addQuickFix(quickFix);
       }
     });
   }
