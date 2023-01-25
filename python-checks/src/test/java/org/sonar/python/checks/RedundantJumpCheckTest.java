@@ -31,7 +31,7 @@ public class RedundantJumpCheckTest {
   }
 
   @Test
-  public void quick_fix_test() {
+  public void quickFixTest() {
     String input = "def redundant_jump(x):\n" +
       "  if x == 1:\n" +
       "    print(True)\n" +
