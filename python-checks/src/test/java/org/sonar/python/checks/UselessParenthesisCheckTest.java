@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UselessParenthesisCheckTest {
@@ -27,6 +28,16 @@ public class UselessParenthesisCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/uselessParenthesis.py", new UselessParenthesisCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    PythonQuickFixVerifier.verify(new UselessParenthesisCheck(), "assert ((x < 2))", "assert (x < 2)");
+    PythonQuickFixVerifier.verify(new UselessParenthesisCheck(),
+      "for (x) in ((range(0, 3))):\n  pass",
+      "for (x) in (range(0, 3)):\n  pass");
+    PythonQuickFixVerifier.verifyQuickFixMessages(new UselessParenthesisCheck(),
+      "for (x) in ((range(0, 3))):\n  pass", UselessParenthesisCheck.QUICK_FIX_MESSAGE);
   }
 
 }
