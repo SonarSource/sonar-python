@@ -34,7 +34,7 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1110";
 
   private static final String MESSAGE = "Remove those useless parentheses.";
-  public static final String QUICK_FIX_MESSAGE = MESSAGE;
+  public static final String QUICK_FIX_MESSAGE = "Remove the redundant parentheses";
 
   @Override
   public void initialize(Context context) {
