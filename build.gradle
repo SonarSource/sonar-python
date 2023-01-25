@@ -26,6 +26,8 @@ subprojects {
   apply plugin: 'java-library'
   apply plugin: 'maven-publish'
   apply plugin: 'com.jfrog.artifactory'
+  apply plugin: 'maven-publish'
+
 
   // do not publish to Artifactory by default
   artifactoryPublish.skip = true
