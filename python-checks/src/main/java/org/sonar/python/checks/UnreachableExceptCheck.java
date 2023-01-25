@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -77,23 +78,39 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
 
   private static void handleExceptionExpression(SubscriptionContext ctx, Map<String, Expression> caughtTypes,
                                          Expression exceptionExpression, Map<String, Expression> caughtInExceptClause) {
-    if (exceptionExpression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) exceptionExpression).symbol();
-      if (symbol != null && symbol.kind().equals(Symbol.Kind.CLASS)) {
-        ClassSymbol classSymbol = (ClassSymbol) symbol;
-        List<Expression> handledExceptions = retrieveAlreadyHandledExceptions(classSymbol, caughtTypes);
-        if (!handledExceptions.isEmpty()) {
-          PreciseIssue issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
-          handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
-        }
-      }
-      if (symbol != null) {
-        caughtInExceptClause.put(symbol.fullyQualifiedName(), exceptionExpression);
-      }
+    if (!(exceptionExpression instanceof HasSymbol)) {
+      return;
     }
+    var symbol = ((HasSymbol) exceptionExpression).symbol();
+    if (symbol == null) {
+      return;
+    }
+    var symbolName = getSymbolName(symbol).orElse(null);
+    var handledExceptions = Symbol.Kind.CLASS == symbol.kind() ?
+      retrieveAlreadyHandledExceptionsByClass((ClassSymbol) symbol, caughtTypes)
+      : retrieveAlreadyHandledExceptionsByFullyQualifiedName(symbol, caughtTypes);
+
+    if (!handledExceptions.isEmpty()) {
+      var issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
+      handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
+    }
+    caughtInExceptClause.put(symbolName, exceptionExpression);
   }
 
-  private static List<Expression> retrieveAlreadyHandledExceptions(ClassSymbol classSymbol, Map<String, Expression> caughtTypes) {
+  private static List<Expression> retrieveAlreadyHandledExceptionsByClass(ClassSymbol classSymbol, Map<String, Expression> caughtTypes) {
     return caughtTypes.keySet().stream().filter(classSymbol::isOrExtends).map(caughtTypes::get).collect(Collectors.toList());
+  }
+
+  private static List<Expression> retrieveAlreadyHandledExceptionsByFullyQualifiedName(Symbol symbol, Map<String, Expression> caughtTypes) {
+    return getSymbolName(symbol)
+      .filter(caughtTypes::containsKey)
+      .map(caughtTypes::get)
+      .stream()
+      .collect(Collectors.toList());
+  }
+
+  private static Optional<String> getSymbolName(Symbol symbol) {
+    return Optional.ofNullable(symbol.fullyQualifiedName())
+      .or(() -> Optional.ofNullable(symbol.name()));
   }
 }
