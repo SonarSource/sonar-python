@@ -162,7 +162,7 @@ def unknown_qualified_exceptions():
         x = 3
     return x
 
-def test_fn(a, b):
+def no_fp_for_symbols_with_null_fqn(a, b):
     try:
         raise b
     except a:

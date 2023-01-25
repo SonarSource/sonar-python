@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
@@ -79,23 +78,23 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
 
   private static void handleExceptionExpression(SubscriptionContext ctx, Map<String, Expression> caughtTypes,
                                          Expression exceptionExpression, Map<String, Expression> caughtInExceptClause) {
-    Optional.of(exceptionExpression)
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .filter(expression -> Objects.nonNull(expression.symbol()))
-      .ifPresent(expression -> {
-        var symbol = expression.symbol();
-        var symbolName = getSymbolName(symbol).orElse(null);
-        var handledExceptions = Symbol.Kind.CLASS == symbol.kind() ?
-          retrieveAlreadyHandledExceptionsByClass((ClassSymbol) symbol, caughtTypes)
-          : retrieveAlreadyHandledExceptionsByFullyQualifiedName(symbol, caughtTypes);
+    if (!(exceptionExpression instanceof HasSymbol)) {
+      return;
+    }
+    var symbol = ((HasSymbol) exceptionExpression).symbol();
+    if (symbol == null) {
+      return;
+    }
+    var symbolName = getSymbolName(symbol).orElse(null);
+    var handledExceptions = Symbol.Kind.CLASS == symbol.kind() ?
+      retrieveAlreadyHandledExceptionsByClass((ClassSymbol) symbol, caughtTypes)
+      : retrieveAlreadyHandledExceptionsByFullyQualifiedName(symbol, caughtTypes);
 
-        if (!handledExceptions.isEmpty()) {
-          var issue = ctx.addIssue((Expression) expression, "Catch this exception only once; it is already handled by a previous except clause.");
-          handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
-        }
-        caughtInExceptClause.put(symbolName, (Expression) expression);
-      });
+    if (!handledExceptions.isEmpty()) {
+      var issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
+      handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
+    }
+    caughtInExceptClause.put(symbolName, exceptionExpression);
   }
 
   private static List<Expression> retrieveAlreadyHandledExceptionsByClass(ClassSymbol classSymbol, Map<String, Expression> caughtTypes) {
