@@ -40,6 +40,7 @@ public class RedundantJumpCheckTest {
       "  if x == 1:\n" +
       "    print(True)\n";
     PythonQuickFixVerifier.verify(new RedundantJumpCheck(), input, expected);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new RedundantJumpCheck(), input, RedundantJumpCheck.QUICK_FIX_DESCRIPTION);
   }
 
 }

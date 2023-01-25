@@ -47,12 +47,8 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
-      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
-    );
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
-      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
-    );
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx));
   }
 
   private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx) {
@@ -77,19 +73,14 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   }
 
   private static void addQuickFix(Tree lastElement, PreciseIssue issue) {
-    if (!(lastElement instanceof Statement)) {
+    if (!(lastElement instanceof Statement) && !(issue instanceof IssueWithQuickFix)) {
       return;
     }
-    Optional.of(issue)
-      .filter(IssueWithQuickFix.class::isInstance)
-      .map(IssueWithQuickFix.class::cast)
-      .ifPresent(i -> {
-          var quickFix = PythonQuickFix
-            .newQuickFix(QUICK_FIX_DESCRIPTION)
-            .addTextEdit(PythonTextEdit.removeStatement((Statement) lastElement))
-            .build();
-          i.addQuickFix(quickFix);
-      });
+    var quickFix = PythonQuickFix
+      .newQuickFix(QUICK_FIX_DESCRIPTION)
+      .addTextEdit(PythonTextEdit.removeStatement((Statement) lastElement))
+      .build();
+    ((IssueWithQuickFix) issue).addQuickFix(quickFix);
   }
 
   private static String message(Tree jumpStatement) {
@@ -113,6 +104,7 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
       || isInsideSingleStatementBlock(lastElement)
       || hasTryAncestor(lastElement);
   }
+
   // ignore jumps in try statement because CFG is not precise
   private static boolean hasTryAncestor(Tree element) {
     return TreeUtils.firstAncestorOfKind(element, Kind.TRY_STMT) != null;
