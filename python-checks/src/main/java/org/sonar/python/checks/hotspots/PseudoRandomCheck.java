@@ -19,35 +19,52 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = "S2245")
 public class PseudoRandomCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> FUNCTIONS_TO_CHECK = new HashSet<>(Arrays.asList(
-    "random.random",
-    "random.getrandbits",
-    "random.randint",
-    "random.sample",
-    "random.choice",
-    "random.choices"));
+  private static final Set<String> FUNCTION_NAMES = Set.of(
+    "random",
+    "getrandbits",
+    "randint",
+    "sample",
+    "choice",
+    "choices",
+    "randbytes",
+    "randrange",
+    "shuffle");
+  private static final String RANDOM_PACKAGE_PREFIX = "random.";
+  private static final String RANDOM_CLASS_PREFIX = "random.Random.";
+  private static final Set<String> FUNCTIONS_TO_CHECK = getFunctionsFullyQualifiedNames();
+  public static final String MESSAGE = "Make sure that using this pseudorandom number generator is safe here.";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol symbol = callExpression.calleeSymbol();
-      if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
-        ctx.addIssue(callExpression, "Make sure that using this pseudorandom number generator is safe here.");
-      }
+      Optional.ofNullable(symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FUNCTIONS_TO_CHECK::contains)
+        .ifPresent(functionFqn -> {
+          ctx.addIssue(callExpression, MESSAGE);
+        });
     });
+  }
+
+  private static Set<String> getFunctionsFullyQualifiedNames() {
+    return FUNCTION_NAMES.stream()
+      .flatMap(functionName -> Stream.of(RANDOM_PACKAGE_PREFIX + functionName, RANDOM_CLASS_PREFIX + functionName))
+      .collect(Collectors.toSet());
   }
 
 }
