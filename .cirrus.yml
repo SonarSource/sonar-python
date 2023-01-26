@@ -80,7 +80,7 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
     - java -version
-    - regular_gradle_build_deploy_analyze --build-cache -Dsonar.projectKey=Python
+    - regular_gradle_build_deploy_analyze --build-cache
     #    - ./gradlew build sonarqube --console=plain --build-cache
     - ls ${CIRRUS_WORKING_DIR}/.gradle
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
