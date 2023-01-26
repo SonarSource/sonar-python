@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -85,7 +86,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     return issueLocation(body, null);
   }
 
-  private static IssueLocation issueLocation(StatementList body, String message) {
+  private static IssueLocation issueLocation(StatementList body, @Nullable String message) {
     List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
     return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), message);
   }
