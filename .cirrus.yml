@@ -73,9 +73,13 @@ build_task:
     GRADLE_OPTS: -Dorg.gradle.caching=true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  environment_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.gradle
-    fingerprint_script: echo "python-gradle-cache"
+#  environment_cache:
+#    folder: ${CIRRUS_WORKING_DIR}/.gradle
+#    fingerprint_script: echo "python-gradle-cache"
+  gradle_cache:
+    folder: .gradle
+  create_gradle_directory_script:
+    - mkdir -p "${CIRRUS_WORKING_DIR}/.gradle"
   build_script:
     - git submodule update --init
     - source cirrus-env BUILD
