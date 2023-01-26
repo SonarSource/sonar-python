@@ -24,6 +24,9 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
 public class UselessParenthesisCheck extends PythonSubscriptionCheck {
@@ -31,14 +34,19 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1110";
 
   private static final String MESSAGE = "Remove those useless parentheses.";
+  public static final String QUICK_FIX_MESSAGE = "Remove the redundant parentheses";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.PARENTHESIZED, ctx -> {
       ParenthesizedExpression parenthesized = (ParenthesizedExpression) ctx.syntaxNode();
       Expression expression = parenthesized.expression();
-      if (expression.is(Tree.Kind.PARENTHESIZED) || expression.is(Tree.Kind.TUPLE) || expression.is(Tree.Kind.GENERATOR_EXPR)) {
-        ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
+      if (expression.is(Tree.Kind.PARENTHESIZED, Tree.Kind.TUPLE, Tree.Kind.GENERATOR_EXPR)) {
+        var issue = (IssueWithQuickFix) ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
+        var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.remove(parenthesized.leftParenthesis()), PythonTextEdit.remove(parenthesized.rightParenthesis()))
+          .build();
+        issue.addQuickFix(quickFix);
       }
     });
   }
