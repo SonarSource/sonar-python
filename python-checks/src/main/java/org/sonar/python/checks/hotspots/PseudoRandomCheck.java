@@ -55,9 +55,7 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(symbol)
         .map(Symbol::fullyQualifiedName)
         .filter(FUNCTIONS_TO_CHECK::contains)
-        .ifPresent(functionFqn -> {
-          ctx.addIssue(callExpression, MESSAGE);
-        });
+        .ifPresent(functionFqn -> ctx.addIssue(callExpression, MESSAGE));
     });
   }
 
