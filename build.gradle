@@ -12,6 +12,7 @@ plugins {
   id 'org.sonarqube' version '3.5.0.2730'
   id 'com.jfrog.artifactory' version '4.31.0'
   id 'maven-publish'
+  id 'com.github.hierynomus.license' version "0.16.1"
 }
 
 ext {
@@ -34,7 +35,8 @@ subprojects {
   apply plugin: 'maven-publish'
   apply plugin: 'com.jfrog.artifactory'
   apply plugin: 'maven-publish'
-
+  apply plugin: 'com.github.hierynomus.license'
+  apply plugin: 'signing'
 
   // do not publish to Artifactory by default
   artifactoryPublish.skip = true
@@ -77,8 +79,6 @@ subprojects {
   java.sourceCompatibility = JavaVersion.VERSION_11
   java.targetCompatibility = JavaVersion.VERSION_11
 
-  println("projectTitle: $projectTitle")
-
   sonarqube {
     properties {
       property 'sonar.projectName', 'python'
@@ -87,6 +87,29 @@ subprojects {
       property 'sonar.links.issue', 'https://jira.sonarsource.com/browse/SONARPY'
       property 'sonar.exclusions', '**/build/**/*'
     }
+  }
+
+  license {
+    header = rootProject.file('LICENSE_HEADER')
+    ext.name = 'SonarQube Python Plugin'
+    ext.inceptionYear = '2011'
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    strictCheck true
+    mapping {
+      java = 'SLASHSTAR_STYLE'
+      js = 'SLASHSTAR_STYLE'
+      ts = 'SLASHSTAR_STYLE'
+      tsx = 'SLASHSTAR_STYLE'
+      css = 'SLASHSTAR_STYLE'
+      less = 'SLASHSTAR_STYLE'
+    }
+    includes(['**/src/**/*.java', '**/*.js', '**/*.ts', '**/*.tsx', '**/*.css'])
+    excludes([
+      "**/src/test/resources/**",
+      "**/build/**",
+      "its/sources/**",
+      "its/plugin/projects/**"
+    ])
   }
 
   publishing {
@@ -118,6 +141,28 @@ subprojects {
           }
         }
       }
+    }
+  }
+
+  signing {
+    def signingKeyId = findProperty("signingKeyId")
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    required {
+      def branch = System.getenv()["CIRRUS_BRANCH"]
+      return (branch == 'master' || branch ==~ 'branch-[\\d.]+') &&
+        gradle.taskGraph.hasTask(":artifactoryPublish")
+    }
+    sign publishing.publications
+  }
+
+  tasks.withType(Sign) {
+    onlyIf {
+      def branch = System.getenv()["CIRRUS_BRANCH"]
+      return !artifactoryPublish.skip &&
+        (branch == 'master' || branch ==~ 'branch-[\\d.]+') &&
+        gradle.taskGraph.hasTask(":artifactoryPublish")
     }
   }
 }
