@@ -48,6 +48,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   private static final String CONDITIONAL_MESSAGE = "This conditional expression returns the same value whether the condition is \"true\" or \"false\".";
 
   private static final List<ConditionalExpression> ignoreList = new ArrayList<>();
+  public static final String SECONDARY_MESSAGE = "Redundant statements.";
 
   @Override
   public void initialize(Context context) {
@@ -72,17 +73,21 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       return;
     }
     IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
-    issue.secondary(issueLocation(ifStmt.body()));
-    ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
-    issue.secondary(issueLocation(elseBranch.body()));
+    issue.secondary(issueLocation(ifStmt.body(), SECONDARY_MESSAGE));
+    ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body(), SECONDARY_MESSAGE)));
+    issue.secondary(issueLocation(elseBranch.body(), SECONDARY_MESSAGE));
     if (!hasSideEffect(ifStmt)) {
       issue.addQuickFix(computeQuickFixForIfStatement(ifStmt, elseBranch));
     }
   }
 
   private static IssueLocation issueLocation(StatementList body) {
+    return issueLocation(body, null);
+  }
+
+  private static IssueLocation issueLocation(StatementList body, String message) {
     List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
-    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), null);
+    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), message);
   }
 
   private static void handleConditionalExpression(ConditionalExpression conditionalExpression, SubscriptionContext ctx) {
@@ -105,7 +110,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
     } else {
-      issue.secondary(unwrappedExpression, null);
+      issue.secondary(unwrappedExpression, SECONDARY_MESSAGE);
     }
   }
 

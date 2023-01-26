@@ -78,3 +78,11 @@ a = ((1 if x else 1) if cond else (1 if x else 1)) if other else (1 if x else (1
 
 a = 1 if (x and y) else 1 # Noncompliant
 
+def test_secondary_messages():
+    if b == 0: # Noncompliant
+#   ^^
+        doSomething()
+#       ^^^^^^^^^^^^^< 1 {{Redundant statements.}}
+    else:
+        doSomething()
+#       ^^^^^^^^^^^^^< 2 {{Redundant statements.}}
