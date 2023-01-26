@@ -38,6 +38,7 @@ To execute full build just run:
 
 `mvn clean install`
 
+
 The full build executes [Typeshed](https://github.com/python/typeshed) serializer script. 
 It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 
 (for Python libraries, e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html)).
