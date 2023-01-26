@@ -82,10 +82,6 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static IssueLocation issueLocation(StatementList body) {
-    return issueLocation(body, null);
-  }
-
   private static IssueLocation issueLocation(StatementList body, @Nullable String message) {
     List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
     return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), message);
