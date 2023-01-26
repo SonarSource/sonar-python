@@ -21,3 +21,26 @@ sysrand = random.SystemRandom()
 sysrand.getrandbits(1)
 sysrand.randint(0,9)
 sysrand.random()
+
+def test_random_class_obj_methods():
+    a = random.Random()
+    a.random() # Noncompliant
+    a.getrandbits() # Noncompliant
+    a.randint() # Noncompliant
+    a.sample() # Noncompliant
+    a.choice() # Noncompliant
+    a.choices() # Noncompliant
+    a.randbytes() # Noncompliant
+    a.randrange() # Noncompliant
+    a.shuffle() # Noncompliant
+
+def test_random_pkg_methods():
+    random.random() # Noncompliant
+    random.getrandbits() # Noncompliant
+    random.randint() # Noncompliant
+    random.sample() # Noncompliant
+    random.choice() # Noncompliant
+    random.choices() # Noncompliant
+    random.randbytes() # Noncompliant
+    random.randrange() # Noncompliant
+    random.shuffle() # Noncompliant
