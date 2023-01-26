@@ -80,9 +80,13 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
     - java -version
+    - ls /tmp/cirrus-ci-build/.gradle || true
+    - ls ${CIRRUS_WORKING_DIR}/.gradle || true
+    - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache || true
+    - pwd || true
 #    - regular_gradle_build_deploy_analyze --build-cache
     #    - ./gradlew build sonarqube --console=plain --build-cache
-    - gradle --no-daemon --info --stacktrace --console plain
+    - gradle --info --stacktrace --console plain
       build sonarqube artifactoryPublish
       -DbuildNumber="$BUILD_NUMBER"
       -Dsonar.host.url="$SONAR_HOST_URL"
