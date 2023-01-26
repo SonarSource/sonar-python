@@ -90,7 +90,7 @@ build_task:
     - pwd || true
 #    - regular_gradle_build_deploy_analyze --build-cache
     #    - ./gradlew build sonarqube --console=plain --build-cache
-    - gradle --info --stacktrace --console plain
+    - gradle --no-daemon --info --stacktrace --console plain
       build sonarqube artifactoryPublish
       -DbuildNumber="$BUILD_NUMBER"
       -Dsonar.host.url="$SONAR_HOST_URL"
