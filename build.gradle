@@ -122,6 +122,8 @@ subprojects {
   }
 }
 
+artifactoryPublish.skip = true
+
 artifactory {
   clientConfig.setIncludeEnvVars(true)
   clientConfig.setEnvVarsExcludePatterns('*password*,*PASSWORD*,*secret*,*MAVEN_CMD_LINE_ARGS*,sun.java.command,*token*,*TOKEN*,*LOGIN*,*login*,*key*,*KEY*,*PASSPHRASE*,*signing*')
@@ -147,7 +149,8 @@ artifactory {
     }
   }
 
-  clientConfig.info.setBuildName('slang-enterprise')
+  // TODO whats that?
+  clientConfig.info.setBuildName('python')
   clientConfig.info.setBuildNumber(System.getenv('BUILD_NUMBER'))
   // Define the artifacts to be deployed to https://binaries.sonarsource.com on releases
   clientConfig.info.addEnvironmentProperty('ARTIFACTS_TO_PUBLISH', artifactsToPublish)
