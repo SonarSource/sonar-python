@@ -82,7 +82,7 @@ def test_secondary_messages():
     if b == 0: # Noncompliant
 #   ^^
         doSomething()
-#       ^^^^^^^^^^^^^< 1 {{Redundant statements.}}
+#       ^^^^^^^^^^^^^< 1 {{Duplicated statements.}}
     else:
         doSomething()
-#       ^^^^^^^^^^^^^< 2 {{Redundant statements.}}
+#       ^^^^^^^^^^^^^< 2 {{Duplicated statements.}}

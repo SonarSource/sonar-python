@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -49,7 +48,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   private static final String CONDITIONAL_MESSAGE = "This conditional expression returns the same value whether the condition is \"true\" or \"false\".";
 
   private static final List<ConditionalExpression> ignoreList = new ArrayList<>();
-  public static final String SECONDARY_MESSAGE = "Redundant statements.";
+  public static final String SECONDARY_MESSAGE = "Duplicated statements.";
 
   @Override
   public void initialize(Context context) {
@@ -74,17 +73,17 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       return;
     }
     IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
-    issue.secondary(issueLocation(ifStmt.body(), SECONDARY_MESSAGE));
-    ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body(), SECONDARY_MESSAGE)));
-    issue.secondary(issueLocation(elseBranch.body(), SECONDARY_MESSAGE));
+    issue.secondary(secondaryIssueLocation(ifStmt.body()));
+    ifStmt.elifBranches().forEach(e -> issue.secondary(secondaryIssueLocation(e.body())));
+    issue.secondary(secondaryIssueLocation(elseBranch.body()));
     if (!hasSideEffect(ifStmt)) {
       issue.addQuickFix(computeQuickFixForIfStatement(ifStmt, elseBranch));
     }
   }
 
-  private static IssueLocation issueLocation(StatementList body, @Nullable String message) {
+  private static IssueLocation secondaryIssueLocation(StatementList body) {
     List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
-    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), message);
+    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), SECONDARY_MESSAGE);
   }
 
   private static void handleConditionalExpression(ConditionalExpression conditionalExpression, SubscriptionContext ctx) {
