@@ -20,12 +20,16 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -91,24 +95,56 @@ public class CdkUtils {
    * Resolve a particular argument of a call by keyword or get an empty optional if the argument is not set nor resolvable.
    */
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
-    return getArgument(ctx, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
+    return getArgument(ctx, callExpression, TreeUtils.argumentByKeyword(argumentName,
+      callExpression.arguments()), argumentName);
   }
 
   protected static Optional<ExpressionFlow> getArgument(CallExpression callExpression, String argumentName) {
     // ctx not required as long as we don't try to raise an issue with ExpressionFlow
-    return getArgument(null, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
+    return getArgument(null, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()), argumentName);
   }
 
-  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, RegularArgument regArg) {
+  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, RegularArgument regArg, String argumentName) {
     List<Argument> arguments = callExpression.arguments();
     Optional<ExpressionFlow> argument = Optional.ofNullable(regArg)
       .map(RegularArgument::expression)
       .map(expression -> ExpressionFlow.build(ctx, expression));
 
-    if (argument.isEmpty() && arguments.stream().anyMatch(UnpackingExpression.class::isInstance)) {
-      return Optional.of(new UnresolvedExpressionFlow(ctx));
+    if (argument.isEmpty()) {
+      return arguments.stream()
+        .filter(UnpackingExpression.class::isInstance)
+        .map(UnpackingExpression.class::cast)
+        .map(unpacking -> resolveValue(unpacking.expression(), argumentName, new HashSet<>())
+          .map(exp -> new ExpressionFlow(ctx, new LinkedList<>(List.of(unpacking.expression(), exp))))
+          .orElseGet(() -> new UnresolvedExpressionFlow(ctx)))
+        .findFirst();
     }
     return argument;
+  }
+
+  private static Optional<Expression> resolveValue(@Nullable Expression expression, String argumentName, Set<Expression> visited) {
+    if (expression == null || visited.contains(expression)) {
+      return Optional.empty();
+    }
+    visited.add(expression);
+
+    if (expression.is(Tree.Kind.NAME)) {
+      var assignedValue = Expressions.singleAssignedValue((Name) expression);
+      var resolved = resolveValue(assignedValue, argumentName, visited);
+      return resolved.isEmpty() ? Optional.of(expression) : resolved;
+    } else if (expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
+      return ((DictionaryLiteral) expression).elements()
+        .stream()
+        .filter(KeyValuePair.class::isInstance)
+        .map(KeyValuePair.class::cast)
+        .filter(el -> el.key() instanceof StringLiteral)
+        .filter(el -> Objects.equals(argumentName, ((StringLiteral) el.key()).trimmedQuotesValue()))
+        .map(KeyValuePair::value)
+        .map(value -> resolveValue(value, argumentName, visited))
+        .findFirst()
+        .orElseGet(Optional::empty);
+    }
+    return Optional.empty();
   }
 
   /**
