@@ -85,11 +85,11 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static Function<Tree, Tree> mapToAssignmentToParentStatementOrExpression() {
-    return tree -> TreeUtils.firstAncestor(tree, (parent) -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    return tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
   }
 
   private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
-    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, (parent) -> parent.is(Tree.Kind.STATEMENT_LIST)),
+    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
       Function.identity(),
       //Get just first element for each block
       (t1, t2) -> t1.firstToken().line() < t2.firstToken().line() ? t1 : t2);
