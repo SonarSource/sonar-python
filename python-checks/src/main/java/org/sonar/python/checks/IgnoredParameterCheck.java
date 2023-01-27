@@ -19,7 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -30,6 +36,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
@@ -65,12 +72,27 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
             assignment.symbol.usages().stream()
               .filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS)
               .map(Usage::tree)
-              .map(Tree::parent)
-              .map(Tree::parent)
+              .collect(groupAssignmentByParentStatementList())
+              .values()
+              .stream()
+              .sorted(Comparator.comparing(t -> t.firstToken().line()))
+              .map(mapToAssignmentToParentStatementOrExpression())
+              .filter(Objects::nonNull)
               .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
           });
       });
     });
+  }
+
+  private static Function<Tree, Tree> mapToAssignmentToParentStatementOrExpression() {
+    return tree -> TreeUtils.firstAncestor(tree, (parent) -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+  }
+
+  private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
+    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, (parent) -> parent.is(Tree.Kind.STATEMENT_LIST)),
+      Function.identity(),
+      //Get just first element for each block
+      (t1, t2) -> t1.firstToken().line() < t2.firstToken().line() ? t1 : t2);
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {

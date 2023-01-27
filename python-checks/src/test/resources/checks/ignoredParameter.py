@@ -1,3 +1,5 @@
+
+
 def ignored_param(p): # Noncompliant
     p = 42
     print(p)
@@ -64,13 +66,11 @@ def match_statement_no_fn(value, param): # Noncompliant
   value = 42  # OK
 
 def secondary_issues(p): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
-#                    ^ 3
+#                    ^ 1
     p = 42
 #   ^^^^^^< 1 {{'p' is reassigned here.}}
     p = 43
-#   ^^^^^^< 2 {{'p' is reassigned here.}}
     p = 44
-#   ^^^^^^< 3 {{'p' is reassigned here.}}
     print(p)
 
 def secondary_issue_internal_blocks(a, b):  # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'b'.}}
@@ -81,4 +81,17 @@ def secondary_issue_internal_blocks(a, b):  # Noncompliant {{Introduce a new var
         print(b)
     b = 24
 #   ^^^^^^< 2 {{'b' is reassigned here.}}
+    print(b)
+
+def secondary_issue_multiple_internal_blocks_2(a, b):  # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'b'.}}
+#                                                 ^ 3
+    if a():
+        b = 42
+#       ^^^^^^< 1 {{'b' is reassigned here.}}
+    else:
+        b = 41
+#       ^^^^^^< 2 {{'b' is reassigned here.}}
+        print(b)
+    b = 24
+#   ^^^^^^< 3 {{'b' is reassigned here.}}
     print(b)
