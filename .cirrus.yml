@@ -89,21 +89,6 @@ build_task:
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache || true
     - pwd || true
     - regular_gradle_build_deploy_analyze --build-cache
-    #    - ./gradlew build sonarqube --console=plain --build-cache
-#    - gradle --no-daemon --info --stacktrace --console plain
-#      build sonarqube artifactoryPublish
-#      -DbuildNumber="$BUILD_NUMBER"
-#      -Dsonar.host.url="$SONAR_HOST_URL"
-#      -Dsonar.login="$SONAR_TOKEN"
-#      -Dsonar.analysis.buildNumber="$BUILD_NUMBER"
-#      -Dsonar.analysis.pipeline="$PIPELINE_ID"
-#      -Dsonar.analysis.sha1="$PULL_REQUEST_SHA"
-#      -Dsonar.analysis.repository="$GITHUB_REPO"
-#      -Dsonar.analysis.prNumber="$PULL_REQUEST"
-#      -Dsonar.pullrequest.branch="$GITHUB_BRANCH"
-#      -Dsonar.pullrequest.base="$GITHUB_BASE_BRANCH"
-#      -Dsonar.pullrequest.key="$PULL_REQUEST"
-#      --build-cache
     - ls ${CIRRUS_WORKING_DIR}/.gradle
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
     - cleanup_maven_repository
@@ -137,8 +122,8 @@ ws_scan_task:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   whitesource_script:
     - source cirrus-env QA
-    - source set_maven_build_version $BUILD_NUMBER
-    - mvn clean install -DskipTests -DskipTypeshed -Denforcer.skip=true -Dskip.its=true
+    - ./gradlew --no-daemon --info --stacktrace --console plain --no-daemon build -x test -x runTypeshed
+    - source ./export_ws_variables_from_gradle
     - source ws_scan.sh
   allow_failures: "true"
   always:

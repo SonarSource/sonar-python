@@ -13,6 +13,7 @@ plugins {
   id 'com.jfrog.artifactory' version '4.31.0'
   id 'maven-publish'
   id 'com.github.hierynomus.license' version "0.16.1"
+  id 'com.diffplug.spotless' version '6.14.0'
 }
 
 ext {
@@ -37,6 +38,7 @@ subprojects {
   apply plugin: 'maven-publish'
   apply plugin: 'com.github.hierynomus.license'
   apply plugin: 'signing'
+  apply plugin: 'com.diffplug.spotless'
 
   // do not publish to Artifactory by default
   artifactoryPublish.skip = true
@@ -54,6 +56,13 @@ subprojects {
 
   java {
     withSourcesJar()
+  }
+
+  spotless {
+    java {
+      licenseHeaderFile rootProject.file("LICENSE_HEADER")
+      targetExclude("**/CpdTokenProtos.java", "**/DescriptorsProtos.java", "**/SymbolsProtos.java")
+    }
   }
 
   publishing {
