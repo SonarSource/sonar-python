@@ -19,18 +19,17 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
@@ -39,6 +38,7 @@ import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
 public class IgnoredParameterCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_TEMPLATE = "Introduce a new variable or use its initial value before reassigning '%s'.";
+  private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
 
   @Override
   public void initialize(Context context) {
@@ -51,8 +51,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
       LiveVariablesAnalysis lva = LiveVariablesAnalysis.analyze(cfg);
       Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
       cfg.blocks().forEach(block -> {
-        List<DeadStoreUtils.UnnecessaryAssignment> unnecessaryAssignments =
-          DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
+        var unnecessaryAssignments = DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
         unnecessaryAssignments.stream()
           .filter(assignment -> !assignment.symbol.name().equals("_"))
           .filter((assignment -> isParameter(assignment.element)))
@@ -61,7 +60,15 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
           // no usages in unreachable blocks
           .filter(assignment -> !isSymbolUsedInUnreachableBlocks(lva, unreachableBlocks, assignment.symbol))
           .filter((assignment -> !isUsedInSubFunction(assignment.symbol, functionDef)))
-          .forEach(assignment -> ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name())));
+          .forEach(assignment -> {
+            var issue = ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name()));
+            assignment.symbol.usages().stream()
+              .filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS)
+              .map(Usage::tree)
+              .map(Tree::parent)
+              .map(Tree::parent)
+              .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
+          });
       });
     });
   }
