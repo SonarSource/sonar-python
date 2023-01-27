@@ -104,7 +104,7 @@ public class CdkUtils {
     return getArgument(null, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()), argumentName);
   }
 
-  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, RegularArgument regArg, String argumentName) {
+  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, @Nullable RegularArgument regArg, String argumentName) {
     List<Argument> arguments = callExpression.arguments();
     Optional<ExpressionFlow> argument = Optional.ofNullable(regArg)
       .map(RegularArgument::expression)
