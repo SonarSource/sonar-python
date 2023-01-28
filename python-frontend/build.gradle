@@ -9,26 +9,27 @@ plugins {
 }
 
 dependencies {
-    api 'org.sonarsource.sslr:sslr-core:1.23'
-    implementation 'com.google.guava:guava:30.1.1-jre'
-    implementation 'com.google.protobuf:protobuf-java:3.21.7'
-    api 'org.sonarsource.analyzer-commons:sonar-regex-parsing:2.1.0.1111'
-    api 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    api "org.sonarsource.sslr:sslr-core:$sslrVersion"
+    api "org.sonarsource.analyzer-commons:sonar-regex-parsing:$analyzerCommonsVersion"
+    api "org.sonarsource.analyzer-commons:sonar-analyzer-commons:$analyzerCommonsVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation "com.google.protobuf:protobuf-java:$protobufVersion"
+    compileOnly "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
     testImplementation 'org.sonarsource.sslr:sslr-testing-harness:1.23'
     testImplementation 'org.assertj:assertj-core:3.19.0'
     testImplementation 'org.mockito:mockito-core:4.11.0'
-    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
-    testImplementation 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
+    testImplementation "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
 }
 
+//TODO: MS CHeck if it's needed, it looks unused
 description = 'Python :: Frontend'
 
+// Definition of compiling protobuf for Java
 sourceSets {
     main {
         java {
             compileClasspath += srcDirs("${buildDir}/generated/source/proto/main/java")
         }
-
         proto {
             srcDir 'src/main/protobuf'
         }

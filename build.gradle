@@ -20,9 +20,17 @@ ext {
   sonarQubeMinVersion = 7.9
   buildNumber = System.getProperty("buildNumber")
   projectScm = "https://github.com/SonarSource/sonar-python"
-
   artifactsToPublish = ''
   artifactsToDownload = ''
+
+  // I don't like usage of io.spring.dependency-management plugin for dependency management because it has some own problems
+  // e.g. it's harder to override some dependency locally, or detect why some dependency is in such version
+  sslrVersion = '1.23'
+  analyzerCommonsVersion = '2.1.0.1111'
+  sonarPluginApi = '9.11.0.290'
+  guavaVersion = '30.1.1-jre'
+  protobufVersion = '3.21.7'
+ //TODO: MS define all versions here
 }
 
 // Replaces the version defined in sources, usually x.y-SNAPSHOT, by a version identifying the build.
@@ -40,6 +48,7 @@ subprojects {
   apply plugin: 'signing'
   apply plugin: 'com.diffplug.spotless'
 
+  //TODO: MS Check if this can be done differently
   // do not publish to Artifactory by default
   artifactoryPublish.skip = true
 
@@ -53,6 +62,8 @@ subprojects {
       url = uri('https://repo.maven.apache.org/maven2/')
     }
   }
+
+
 
   java {
     withSourcesJar()

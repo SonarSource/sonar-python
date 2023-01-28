@@ -10,11 +10,11 @@ plugins {
 dependencies {
     api project(':python-frontend')
     implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-test-commons:2.1.0.1111'
-    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation "com.google.guava:guava:$guavaVersion"
     implementation 'junit:junit:4.13.2'
     implementation 'org.assertj:assertj-core:3.19.0'
-    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
-    testImplementation 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
+    compileOnly "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
+    testImplementation "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
 }
 
 description = 'python-checks-testkit'

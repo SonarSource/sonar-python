@@ -9,11 +9,11 @@ plugins {
 }
 
 dependencies {
-    api 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    api "org.sonarsource.analyzer-commons:sonar-analyzer-commons:$analyzerCommonsVersion"
     testImplementation 'org.sonarsource.orchestrator:sonar-orchestrator:3.40.0.183'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.19.0'
-    testImplementation 'com.google.guava:guava:30.1.1-jre'
+    testImplementation "com.google.guava:guava:$guavaVersion"
     testImplementation 'org.sonarsource.sonarqube:sonar-ws:9.7.1.62043'
 }
 

@@ -10,15 +10,15 @@ plugins {
 dependencies {
     implementation project(':python-frontend')
     implementation 'commons-io:commons-io:2.8.0'
-    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    implementation "org.sonarsource.analyzer-commons:sonar-analyzer-commons:$analyzerCommonsVersion"
     testImplementation project(':python-checks-testkit')
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.19.0'
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
-    testImplementation 'com.google.guava:guava:30.1.1-jre'
+    testImplementation "com.google.guava:guava:$guavaVersion"
     testImplementation 'org.mockito:mockito-core:4.11.0'
-    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
-    testImplementation 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
+    compileOnly "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
+    testImplementation "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
 
     // org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290
 }

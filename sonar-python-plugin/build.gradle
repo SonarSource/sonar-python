@@ -13,13 +13,13 @@ plugins {
 dependencies {
     api project(':python-frontend')
     api project(':python-checks')
-    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons:2.1.0.1111'
+    implementation "org.sonarsource.analyzer-commons:sonar-analyzer-commons:$analyzerCommonsVersion"
     implementation 'org.sonarsource.analyzer-commons:sonar-xml-parsing:2.1.0.1111'
     implementation 'org.sonarsource.analyzer-commons:sonar-performance-measure:2.1.0.1111'
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'commons-io:commons-io:2.8.0'
     implementation 'org.codehaus.staxmate:staxmate:2.0.1'
-    implementation 'com.google.protobuf:protobuf-java:3.21.7'
+    implementation "com.google.protobuf:protobuf-java:$protobufVersion"
     testImplementation 'org.sonarsource.sonarqube:sonar-plugin-api-impl:9.7.1.62043'
     testImplementation 'org.sonarsource.sslr:sslr-testing-harness:1.23'
     testImplementation 'org.sonarsource.sonarqube:sonar-testing-harness:9.7.1.62043'
@@ -29,8 +29,8 @@ dependencies {
 
     testImplementation 'org.sonarsource.sonarlint.core:sonarlint-core:8.11.0.56591'
     // TODO api or compileOnly?
-    api 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
-//    testImplementation 'org.sonarsource.api.plugin:sonar-plugin-api:9.11.0.290'
+    api "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
+//    testImplementation "org.sonarsource.api.plugin:sonar-plugin-api:$sonarPluginApi"
 
     compileOnly 'org.sonarsource.sonarlint.core:sonarlint-plugin-api:8.11.0.56591'
 }

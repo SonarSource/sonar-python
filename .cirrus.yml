@@ -70,12 +70,8 @@ build_task:
     CIRRUS_CLONE_DEPTH: 50
     SIGN_KEY: VAULT[development/kv/data/sign data.key]
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
-    GRADLE_OPTS: -Dorg.gradle.caching=true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-#  environment_cache:
-#    folder: ${CIRRUS_WORKING_DIR}/.gradle
-#    fingerprint_script: echo "python-gradle-cache"
   gradle_cache:
     folder: .gradle
   create_gradle_directory_script:
@@ -84,12 +80,9 @@ build_task:
     - git submodule update --init
     - source cirrus-env BUILD
     - java -version
-    - ls /tmp/cirrus-ci-build/.gradle || true
-    - ls ${CIRRUS_WORKING_DIR}/.gradle || true
+    - ls /tmp/cirrus-ci-build/.gradle/.build-cache || true
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache || true
-    - pwd || true
     - regular_gradle_build_deploy_analyze --build-cache
-    - ls ${CIRRUS_WORKING_DIR}/.gradle
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
     - cleanup_maven_repository
     - ./check-license-compliance.sh
@@ -122,6 +115,7 @@ ws_scan_task:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   whitesource_script:
     - source cirrus-env QA
+#   TODO: MS This can be more optimized, let's identify what exact task needs to be run
     - ./gradlew --no-daemon --info --stacktrace --console plain --no-daemon build -x test -x runTypeshed
     - source ./export_ws_variables_from_gradle
     - source ws_scan.sh
