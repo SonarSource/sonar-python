@@ -82,7 +82,8 @@ build_task:
     - java -version
     - ls /tmp/cirrus-ci-build/.gradle/.build-cache || true
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache || true
-    - regular_gradle_build_deploy_analyze --build-cache
+    - regular_gradle_build_deploy_analyze
+#    - --build-cache
     - ls ${CIRRUS_WORKING_DIR}/.gradle/.build-cache
     - cleanup_maven_repository
     - ./check-license-compliance.sh
