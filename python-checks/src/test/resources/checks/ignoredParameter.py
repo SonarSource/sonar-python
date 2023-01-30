@@ -101,3 +101,13 @@ def ignored_param_reassign_in_loop(p, b): # Noncompliant {{Introduce a new varia
         print(p)
     p = 42
     print(p)
+
+def ignored_param_reassign_in_loop_body(p, b): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                       ^ 2
+    for p in range(b):
+#       ^< 1 {{'p' is reassigned here.}}
+        p = 45
+#       ^^^^^^< 2 {{'p' is reassigned here.}}
+        print(p)
+    p = 42
+    print(p)

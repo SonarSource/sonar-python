@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -86,9 +85,15 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
-    return Optional.of(tree)
-      .filter(t -> TreeUtils.firstAncestor(t, p -> p.is(Tree.Kind.FOR_STMT)) != null)
-      .orElseGet(() -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION)));
+    var assignment = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    if (assignment != null) {
+      return assignment;
+    }
+    var forLoop = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.FOR_STMT));
+    if (forLoop != null) {
+      return tree;
+    }
+    return null;
   }
 
   private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
