@@ -54,15 +54,19 @@ class CircularAssignment(Stack):
 class DictValueLinkedToVariable(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         a = False
+#       ^^^^^^^^^> 1 {{Propagated setting.}}
         volume_args = {"encrypted": a}
         Volume(self, **volume_args) # Noncompliant
+#                    ^^^^^^^^^^^^^ 1
 
 class DictValueLinkedToVariableLinkedToVariable(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         b = False
+#       ^^^^^^^^^> 1 {{Propagated setting.}}
         a = b
         volume_args = {"encrypted": a}
-        Volume(self, **volume_args) # Noncompliant
+        Volume(self, **volume_args) # Noncompliant {{Make sure that using unencrypted volumes is safe here.}}
+#                    ^^^^^^^^^^^^^ 1
 
 class DictValueLinkedToDictValue(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
