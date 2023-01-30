@@ -42,7 +42,9 @@ class CompliantStack(Stack):
 class SimpleDictValue(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         volume_args = {"encrypted": False}
-        Volume(self, **volume_args) # Noncompliant
+#                      ^^^^^^^^^^^^^^^^^^> 1 {{Propagated setting.}}
+        Volume(self, **volume_args) # Noncompliant {{Make sure that using unencrypted volumes is safe here.}}
+#                    ^^^^^^^^^^^^^ 1
 
 class CircularAssignment(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
