@@ -111,3 +111,18 @@ def ignored_param_reassign_in_loop_body(p, b): # Noncompliant {{Introduce a new 
         print(p)
     p = 42
     print(p)
+
+
+def ignored_param_reassign_class(p): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                ^ 1
+    class p:
+#         ^< 1 {{'p' is reassigned here.}}
+        def foo(self):
+            print("something")
+
+    print(p)
+
+def ignored_param_reassign_function(p): # FN
+    def p():
+        print("something")
+    print(p)

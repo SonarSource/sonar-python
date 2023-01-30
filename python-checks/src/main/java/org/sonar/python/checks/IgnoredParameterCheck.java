@@ -70,7 +70,8 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
           .forEach(assignment -> {
             var issue = ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name()));
             assignment.symbol.usages().stream()
-              .filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS || u.kind() == Usage.Kind.LOOP_DECLARATION)
+              .filter(Usage::isBindingUsage)
+              .filter(u -> u.kind() != Usage.Kind.PARAMETER)
               .map(Usage::tree)
               .collect(groupAssignmentByParentStatementList())
               .values()
@@ -89,11 +90,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
     if (assignment != null) {
       return assignment;
     }
-    var forLoop = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.FOR_STMT));
-    if (forLoop != null) {
-      return tree;
-    }
-    return null;
+    return tree;
   }
 
   private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
