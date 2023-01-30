@@ -76,7 +76,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
               .values()
               .stream()
               .sorted(Comparator.comparing(t -> t.firstToken().line()))
-              .map(mapToAssignmentToParentStatementOrExpression())
+              .map(IgnoredParameterCheck::mapToParentAssignmentStatementOrExpression)
               .filter(Objects::nonNull)
               .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
           });
@@ -84,8 +84,8 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static Function<Tree, Tree> mapToAssignmentToParentStatementOrExpression() {
-    return tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+  private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
+    return TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
   }
 
   private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
