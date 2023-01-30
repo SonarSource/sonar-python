@@ -93,3 +93,11 @@ def secondary_location_multiple_internal_blocks_2(a, b):  # Noncompliant {{Intro
     b = 24
 #   ^^^^^^< 3 {{'b' is reassigned here.}}
     print(b)
+
+def ignored_param_reassign_in_loop(p, b): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                  ^ 1
+    for p in range(b):
+#       ^< 1 {{'p' is reassigned here.}}
+        print(p)
+    p = 42
+    print(p)
