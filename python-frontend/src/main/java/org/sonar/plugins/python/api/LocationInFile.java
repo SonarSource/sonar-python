@@ -20,6 +20,8 @@
 package org.sonar.plugins.python.api;
 
 public class LocationInFile {
+  public static final int UNDEFINED_LINE_2 = 2;
+
   private final String fileId;
   private final int startLine;
   private final int startLineOffset;
