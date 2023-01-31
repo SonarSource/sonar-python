@@ -85,23 +85,23 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
   }
 
   private static void checkCallCfnSecuritySensitive(SubscriptionContext ctx, CallExpression callExpression) {
-    if (isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(callExpression) || isCallWithArgumentInvalidProtocolEmptyIpAddress(callExpression)) {
+    if (isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(ctx, callExpression) || isCallWithArgumentInvalidProtocolEmptyIpAddress(ctx, callExpression)) {
       getArgument(ctx, callExpression, CIDR_IP).ifPresent(flow -> flow.addIssue(MESSAGE));
       getArgument(ctx, callExpression, CIDR_IPV6).ifPresent(flow -> flow.addIssue(MESSAGE));
     }
   }
 
-  private static boolean isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(CallExpression call) {
-    return getArgument(call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(SENSITIVE_PROTOCOL))).isPresent()
-      && (getArgument(call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
-        || getArgument(call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent())
+  private static boolean isCallWithArgumentBadProtocolEmptyIpAddressAdminPort(SubscriptionContext ctx, CallExpression call) {
+    return getArgument(ctx, call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(SENSITIVE_PROTOCOL))).isPresent()
+      && (getArgument(ctx, call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
+        || getArgument(ctx, call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent())
       && hasSensitivePortRange(call, "from_port", "to_port", ADMIN_PORTS);
   }
 
-  private static boolean isCallWithArgumentInvalidProtocolEmptyIpAddress(CallExpression call) {
-    return getArgument(call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(ANY_PROTOCOL))).isPresent()
-      && (getArgument(call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
-      || getArgument(call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent());
+  private static boolean isCallWithArgumentInvalidProtocolEmptyIpAddress(SubscriptionContext ctx, CallExpression call) {
+    return getArgument(ctx, call, IP_PROTOCOL).filter(flow -> flow.hasExpression(isString(ANY_PROTOCOL))).isPresent()
+      && (getArgument(ctx, call, CIDR_IP).filter(flow -> flow.hasExpression(isString(EMPTY_IPV4))).isPresent()
+      || getArgument(ctx, call, CIDR_IPV6).filter(flow -> flow.hasExpression(isString(EMPTY_IPV6))).isPresent());
   }
 
   // Methods to handle dictionaries
