@@ -9,7 +9,6 @@ class Connections(CustomStubBase):
     def allow_default_port_from(self, other, description, *args, **kwargs) -> None: ...
     def allow_default_port_from_any_ipv4(self, description, *args, **kwargs) -> None: ...
 
-
 ## All constructs with connections attributes
 class BastionHostLinux(CustomStubBase):
     connections: Connections

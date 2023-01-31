@@ -83,6 +83,7 @@ shadowJar {
         exclude 'NOTICE*'
     }
     doLast {
+        // TODO: MS This check should be a separate task to benefit from build cache
         enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 6_000_000L, 9_000_000L)
     }
 }
