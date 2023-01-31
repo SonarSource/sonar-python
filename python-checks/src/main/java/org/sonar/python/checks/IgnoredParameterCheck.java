@@ -19,18 +19,23 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
@@ -39,6 +44,7 @@ import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
 public class IgnoredParameterCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_TEMPLATE = "Introduce a new variable or use its initial value before reassigning '%s'.";
+  private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
 
   @Override
   public void initialize(Context context) {
@@ -51,8 +57,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
       LiveVariablesAnalysis lva = LiveVariablesAnalysis.analyze(cfg);
       Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
       cfg.blocks().forEach(block -> {
-        List<DeadStoreUtils.UnnecessaryAssignment> unnecessaryAssignments =
-          DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
+        var unnecessaryAssignments = DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
         unnecessaryAssignments.stream()
           .filter(assignment -> !assignment.symbol.name().equals("_"))
           .filter((assignment -> isParameter(assignment.element)))
@@ -61,9 +66,36 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
           // no usages in unreachable blocks
           .filter(assignment -> !isSymbolUsedInUnreachableBlocks(lva, unreachableBlocks, assignment.symbol))
           .filter((assignment -> !isUsedInSubFunction(assignment.symbol, functionDef)))
-          .forEach(assignment -> ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name())));
+          .forEach(assignment -> {
+            var issue = ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name()));
+            assignment.symbol.usages().stream()
+              .filter(Usage::isBindingUsage)
+              .filter(u -> u.kind() != Usage.Kind.PARAMETER)
+              .map(Usage::tree)
+              .collect(groupAssignmentByParentStatementList())
+              .values()
+              .stream()
+              .sorted(Comparator.comparing(t -> t.firstToken().line()))
+              .map(IgnoredParameterCheck::mapToParentAssignmentStatementOrExpression)
+              .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
+          });
       });
     });
+  }
+
+  private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
+    var assignment = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    if (assignment != null) {
+      return assignment;
+    }
+    return tree;
+  }
+
+  private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
+    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
+      Function.identity(),
+      //Get just first element for each block
+      (t1, t2) -> t1.firstToken().line() < t2.firstToken().line() ? t1 : t2);
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {

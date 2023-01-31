@@ -62,3 +62,67 @@ def match_statement_no_fn(value, param): # Noncompliant
     case 1: ...
     case param: ...
   value = 42  # OK
+
+def secondary_location(p): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                      ^ 1
+    p = 42
+#   ^^^^^^< 1 {{'p' is reassigned here.}}
+    p = 43
+    p = 44
+    print(p)
+
+def secondary_location_internal_blocks(a, b):  # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'b'.}}
+#                                         ^ 2
+    while a():
+        b = 42
+#       ^^^^^^< 1 {{'b' is reassigned here.}}
+        print(b)
+    b = 24
+#   ^^^^^^< 2 {{'b' is reassigned here.}}
+    print(b)
+
+def secondary_location_multiple_internal_blocks_2(a, b):  # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'b'.}}
+#                                                    ^ 3
+    if a():
+        b = 42
+#       ^^^^^^< 1 {{'b' is reassigned here.}}
+    else:
+        b = 41
+#       ^^^^^^< 2 {{'b' is reassigned here.}}
+        print(b)
+    b = 24
+#   ^^^^^^< 3 {{'b' is reassigned here.}}
+    print(b)
+
+def ignored_param_reassign_in_loop(p, b): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                  ^ 1
+    for p in range(b):
+#       ^< 1 {{'p' is reassigned here.}}
+        print(p)
+    p = 42
+    print(p)
+
+def ignored_param_reassign_in_loop_body(p, b): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                       ^ 2
+    for p in range(b):
+#       ^< 1 {{'p' is reassigned here.}}
+        p = 45
+#       ^^^^^^< 2 {{'p' is reassigned here.}}
+        print(p)
+    p = 42
+    print(p)
+
+
+def ignored_param_reassign_class(p): # Noncompliant {{Introduce a new variable or use its initial value before reassigning 'p'.}}
+#                                ^ 1
+    class p:
+#         ^< 1 {{'p' is reassigned here.}}
+        def foo(self):
+            print("something")
+
+    print(p)
+
+def ignored_param_reassign_function(p): # FN
+    def p():
+        print("something")
+    print(p)
