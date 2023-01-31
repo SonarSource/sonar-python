@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 
 public class PythonChecks {
-  public static final int ABC = 5;
   private final CheckFactory checkFactory;
   private List<Checks<PythonCheck>> checksByRepository = new ArrayList<>();
 

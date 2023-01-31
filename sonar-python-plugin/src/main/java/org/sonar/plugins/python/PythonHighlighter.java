@@ -89,6 +89,9 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
  */
 public class PythonHighlighter extends PythonSubscriptionCheck {
 
+  public static final int ABC = 5;
+
+
   private NewHighlighting newHighlighting;
 
   private Set<Token> docStringTokens;
