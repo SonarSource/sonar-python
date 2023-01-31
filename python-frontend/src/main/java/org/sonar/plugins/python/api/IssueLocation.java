@@ -30,7 +30,6 @@ public abstract class IssueLocation {
   public static final int UNDEFINED_OFFSET = -1;
 
   public static final int UNDEFINED_LINE = 0;
-  public static final int UNDEFINED_LINE_2 = 2;
 
   private String message;
 
