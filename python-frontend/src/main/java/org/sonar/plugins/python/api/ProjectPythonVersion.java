@@ -25,7 +25,6 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version;
 import static org.sonar.plugins.python.api.PythonVersionUtils.allVersions;
 
 public class ProjectPythonVersion {
-  public static final int UNDEFINED_LINE_2 = 2;
 
   private ProjectPythonVersion() {
   }

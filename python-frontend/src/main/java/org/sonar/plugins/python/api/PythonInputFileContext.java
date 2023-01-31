@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.types.TypeShed;
 
 public class PythonInputFileContext {
+  public static final int UNDEFINED_LINE_2 = 2;
 
   private final PythonFile pythonFile;
   private final File workingDirectory;
