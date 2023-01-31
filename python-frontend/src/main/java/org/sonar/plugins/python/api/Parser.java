@@ -28,8 +28,6 @@ import org.sonar.python.tree.PythonTreeMaker;
  * Use this class to parse Python module
  */
 public class Parser {
-  public static final int UNDEFINED_LINE_2 = 2;
-
   private PythonParser astParser = PythonParser.create();
 
   public FileInput parse(String code)  {
