@@ -28,7 +28,6 @@ import org.sonar.api.resources.AbstractLanguage;
 public class Python extends AbstractLanguage {
 
   public static final String KEY = "py";
-  public static final String KEY2 = "py2";
 
   private static final String[] DEFAULT_FILE_SUFFIXES = { "py" };
 

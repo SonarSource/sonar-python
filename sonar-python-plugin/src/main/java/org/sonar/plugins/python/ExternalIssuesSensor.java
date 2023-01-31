@@ -46,7 +46,6 @@ public abstract class ExternalIssuesSensor implements Sensor {
   private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
   protected static final String PYLINT_LEGACY_KEY = "sonar.python.pylint.reportPath";
 
-
   @Override
   public void describe(SensorDescriptor descriptor) {
     descriptor
