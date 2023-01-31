@@ -19,7 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -54,6 +60,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_TEMPLATE = "Remove this assignment to local variable '%s'; the value is never used.";
 
+  private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -76,7 +84,9 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
     Set<Symbol> readSymbols, FunctionDef functionDef) {
 
-    DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
+    var unnecessaryAssignments = DeadStoreUtils.findUnnecessaryAssignments(block,
+      blockLiveVariables, functionDef);
+    unnecessaryAssignments
       .stream()
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
@@ -86,7 +96,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static void raiseIssue(SubscriptionContext ctx, DeadStoreUtils.UnnecessaryAssignment unnecessaryAssignment) {
     Tree element = unnecessaryAssignment.element;
-    String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
+    String symbolName = unnecessaryAssignment.symbol.name();
+    String message = String.format(MESSAGE_TEMPLATE, symbolName);
     Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
     PreciseIssue issue;
     if ("\n".equals(lastRelevantToken.value())) {
@@ -95,11 +106,44 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       issue = ctx.addIssue(element.firstToken(), lastRelevantToken, message);
     }
 
+    unnecessaryAssignment.symbol.usages().stream()
+      .filter(Usage::isBindingUsage)
+      .filter(u -> u.kind() != Usage.Kind.PARAMETER)
+      .map(Usage::tree)
+      // skip initial issue binding
+      .filter(tree -> tree != element && TreeUtils.firstAncestor(tree, parent -> parent == element) == null)
+      .collect(groupAssignmentByParentStatementList())
+      .values()
+      .stream()
+      .sorted(getTreeByPositionComparator())
+      .map(DeadStoreCheck::mapToParentAssignmentStatementOrExpression)
+      .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, symbolName)));
+
     if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
       ((IssueWithQuickFix) issue).addQuickFix(PythonQuickFix.newQuickFix("Remove the unused statement",
         PythonTextEdit.removeStatement((Statement) element)));
     }
 
+  }
+
+  private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
+    var assignment = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    if (assignment != null) {
+      return assignment;
+    }
+    return tree;
+  }
+
+  private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
+    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
+      Function.identity(),
+      //Get just first element for each block
+      (t1, t2) ->
+        Stream.of(t1, t2).min(getTreeByPositionComparator()).get());
+  }
+
+  private static Comparator<Tree> getTreeByPositionComparator() {
+    return Comparator.comparing((Tree t) -> t.firstToken().line()).thenComparing((Tree t) -> t.firstToken().column());
   }
 
   private static boolean isMultipleAssignement(Tree element) {

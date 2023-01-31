@@ -352,3 +352,40 @@ def override_loop_var():
     for value in value:
         ...
 
+def simple_reassignment_secondary_location():
+    a = 42 # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
+#   ^^^^^^ 1
+    a = 24
+#   ^^^^^^< 1 {{'a' is reassigned here.}}
+    print(a)
+
+
+def if_else_reassignment_secondary_location(a):
+    b = 42 # Noncompliant {{Remove this assignment to local variable 'b'; the value is never used.}}
+#   ^^^^^^ 2
+    if a:
+        b = 24
+#       ^^^^^^< 1 {{'b' is reassigned here.}}
+    else:
+        b = 31
+#       ^^^^^^< 2 {{'b' is reassigned here.}}
+    print(b)
+
+def while_loop_reassignment_secondary_location(a, b, c):
+    d = a # Noncompliant {{Remove this assignment to local variable 'd'; the value is never used.}}
+#   ^^^^^ 2
+    while a():
+        d = b
+#       ^^^^^< 1 {{'d' is reassigned here.}}
+        print(d)
+    d = c
+#   ^^^^^< 2 {{'d' is reassigned here.}}
+    print(d)
+
+def while_loop_reassignment_digits_secondary_location(a):
+    b = 1
+    while a():
+        b = 42
+        print(b)
+    b = 24
+    print(b)
