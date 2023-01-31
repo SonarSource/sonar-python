@@ -108,10 +108,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
     unnecessaryAssignment.symbol.usages().stream()
       .filter(Usage::isBindingUsage)
-      .filter(u -> u.kind() != Usage.Kind.PARAMETER)
       .map(Usage::tree)
       // skip initial issue binding
       .filter(tree -> tree != element && TreeUtils.firstAncestor(tree, parent -> parent == element) == null)
+      //skip assignments before
+      .filter(tree -> getTreeByPositionComparator().compare(tree, element) == 1)
       .collect(groupAssignmentByParentStatementList())
       .values()
       .stream()

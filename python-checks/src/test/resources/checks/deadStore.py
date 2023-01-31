@@ -372,13 +372,13 @@ def if_else_reassignment_secondary_location(a):
     print(b)
 
 def while_loop_reassignment_secondary_location(a, b, c):
-    d = a # Noncompliant {{Remove this assignment to local variable 'd'; the value is never used.}}
+    d = 2 # Noncompliant {{Remove this assignment to local variable 'd'; the value is never used.}}
 #   ^^^^^ 2
     while a():
-        d = b
+        d = 3
 #       ^^^^^< 1 {{'d' is reassigned here.}}
         print(d)
-    d = c
+    d = 4
 #   ^^^^^< 2 {{'d' is reassigned here.}}
     print(d)
 
@@ -389,3 +389,13 @@ def while_loop_reassignment_digits_secondary_location(a):
         print(b)
     b = 24
     print(b)
+
+def class_dead_store():
+    class a: # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
+#         ^ 1
+        pass
+    a = 42
+#   ^^^^^^< 1 {{'a' is reassigned here.}}
+    print(a)
+
+
