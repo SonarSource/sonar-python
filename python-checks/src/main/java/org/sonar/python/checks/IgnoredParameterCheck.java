@@ -78,7 +78,6 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
               .stream()
               .sorted(Comparator.comparing(t -> t.firstToken().line()))
               .map(IgnoredParameterCheck::mapToParentAssignmentStatementOrExpression)
-              .filter(Objects::nonNull)
               .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
           });
       });
