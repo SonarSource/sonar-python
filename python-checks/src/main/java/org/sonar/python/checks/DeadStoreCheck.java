@@ -19,13 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Comparator;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -84,9 +78,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
     Set<Symbol> readSymbols, FunctionDef functionDef) {
 
-    var unnecessaryAssignments = DeadStoreUtils.findUnnecessaryAssignments(block,
-      blockLiveVariables, functionDef);
-    unnecessaryAssignments
+    DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
       .stream()
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
@@ -112,11 +104,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       // skip initial issue binding
       .filter(tree -> tree != element && TreeUtils.firstAncestor(tree, parent -> parent == element) == null)
       //skip assignments before
-      .filter(tree -> getTreeByPositionComparator().compare(tree, element) == 1)
-      .collect(groupAssignmentByParentStatementList())
+      .filter(tree -> TreeUtils.getTreeByPositionComparator().compare(tree, element) > 0)
+      .collect(TreeUtils.groupAssignmentByParentStatementList())
       .values()
       .stream()
-      .sorted(getTreeByPositionComparator())
+      .sorted(TreeUtils.getTreeByPositionComparator())
       .map(DeadStoreCheck::mapToParentAssignmentStatementOrExpression)
       .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, symbolName)));
 
@@ -133,18 +125,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       return assignment;
     }
     return tree;
-  }
-
-  private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
-    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
-      Function.identity(),
-      //Get just first element for each block
-      (t1, t2) ->
-        Stream.of(t1, t2).min(getTreeByPositionComparator()).get());
-  }
-
-  private static Comparator<Tree> getTreeByPositionComparator() {
-    return Comparator.comparing((Tree t) -> t.firstToken().line()).thenComparing((Tree t) -> t.firstToken().column());
   }
 
   private static boolean isMultipleAssignement(Tree element) {

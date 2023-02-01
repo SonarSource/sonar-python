@@ -382,14 +382,6 @@ def while_loop_reassignment_secondary_location(a, b, c):
 #   ^^^^^< 2 {{'d' is reassigned here.}}
     print(d)
 
-def while_loop_reassignment_digits_secondary_location(a):
-    b = 1
-    while a():
-        b = 42
-        print(b)
-    b = 24
-    print(b)
-
 def class_dead_store():
     class a: # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
 #         ^ 1
@@ -397,5 +389,14 @@ def class_dead_store():
     a = 42
 #   ^^^^^^< 1 {{'a' is reassigned here.}}
     print(a)
+
+def multiple_issues(a):
+    b = 2 # Noncompliant
+    if a:
+        b = 3 # Noncompliant
+        b = 4
+    else:
+        b = 4
+    print(b)
 
 
