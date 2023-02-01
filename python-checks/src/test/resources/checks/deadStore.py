@@ -400,16 +400,20 @@ def multiple_issues(a):
     print(b)
 
 
-def nested_packages_import():
-    import sample # FN
-    import sample.first # FN
+def nested_packages_import_no_fn():
+    import sample.first
     import sample.second
-    import sample.first.third
 
     a = sample.Sample()
     b = sample.first.First()
     c = sample.second.Second()
-    d = sample.first.third.Third()
+
+def nested_packages_import_fn():
+    import sample # FN SONARPY-1267
+    import sample.first
+
+    a = sample.Sample()
+    b = sample.first.First()
 
 def package_import_overrides_variable_assignment():
     sample = "Sample" # Noncompliant {{Remove this assignment to local variable 'sample'; the value is never used.}}
