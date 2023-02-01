@@ -52,6 +52,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.RegularArgumentImpl;
+
 import static java.util.Optional.ofNullable;
 
 // https://jira.sonarsource.com/browse/SONARPY-357
@@ -67,7 +68,8 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, VerifiedSslTlsCertificateCheck::standardSslCheckForRegularArgument);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheckForAssignmentStatement);
   }
 
   /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
@@ -297,7 +299,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static void standardSslCheck(SubscriptionContext subscriptionContext) {
+  private static void standardSslCheckForAssignmentStatement(SubscriptionContext subscriptionContext) {
     AssignmentStatement asgnStmt = (AssignmentStatement) subscriptionContext.syntaxNode();
 
     Optional<VulnerabilityAndProblematicToken> vulnTokOpt = searchRhsForVulnerableMethod(asgnStmt.assignedValue());
@@ -316,6 +318,12 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
           subscriptionContext.addIssue(vulnTok.token, MESSAGE);
         }
       }));
+  }
+
+  private static void standardSslCheckForRegularArgument(SubscriptionContext subscriptionContext) {
+    var argument = (RegularArgument) subscriptionContext.syntaxNode();
+    searchRhsForVulnerableMethod(argument.expression())
+      .ifPresent(vulnTok -> subscriptionContext.addIssue(vulnTok.token, MESSAGE));
   }
 
   /** Finds the next higher line where a binding usage occurs. */
