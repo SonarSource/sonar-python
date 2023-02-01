@@ -20,12 +20,15 @@
 package org.sonar.python.checks.cdk;
 
 import java.util.Deque;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -91,24 +94,26 @@ public class CdkUtils {
    * Resolve a particular argument of a call by keyword or get an empty optional if the argument is not set nor resolvable.
    */
   protected static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, String argumentName) {
-    return getArgument(ctx, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
-  }
-
-  protected static Optional<ExpressionFlow> getArgument(CallExpression callExpression, String argumentName) {
-    // ctx not required as long as we don't try to raise an issue with ExpressionFlow
-    return getArgument(null, callExpression, TreeUtils.argumentByKeyword(argumentName, callExpression.arguments()));
-  }
-
-  private static Optional<ExpressionFlow> getArgument(SubscriptionContext ctx, CallExpression callExpression, RegularArgument regArg) {
     List<Argument> arguments = callExpression.arguments();
-    Optional<ExpressionFlow> argument = Optional.ofNullable(regArg)
+
+    return resolveNamedArgument(ctx, arguments, argumentName)
+      .or(() -> resolveUnpackingExpression(ctx, arguments, argumentName));
+  }
+
+  private static Optional<ExpressionFlow> resolveNamedArgument(SubscriptionContext ctx, List<Argument> arguments, String argumentName) {
+    RegularArgument regArgument = TreeUtils.argumentByKeyword(argumentName, arguments);
+    return Optional.ofNullable(regArgument)
       .map(RegularArgument::expression)
       .map(expression -> ExpressionFlow.build(ctx, expression));
+  }
 
-    if (argument.isEmpty() && arguments.stream().anyMatch(UnpackingExpression.class::isInstance)) {
-      return Optional.of(new UnresolvedExpressionFlow(ctx));
-    }
-    return argument;
+  private static Optional<ExpressionFlow> resolveUnpackingExpression(SubscriptionContext ctx, List<Argument> arguments, String argumentName) {
+    return arguments.stream()
+      .filter(UnpackingExpression.class::isInstance)
+      .map(UnpackingExpression.class::cast)
+      .map(UnpackingExpression::expression)
+      .map(expression -> ExpressionFlow.build(ctx, expression, argumentName))
+      .findFirst();
   }
 
   /**
@@ -215,17 +220,29 @@ public class CdkUtils {
     }
 
     protected static ExpressionFlow build(SubscriptionContext ctx, Expression expression) {
-      Deque<Expression> locations = new LinkedList<>();
-      resolveLocations(expression, locations);
-      return new ExpressionFlow(ctx, locations);
+      return build(ctx, expression, null);
     }
 
-    static void resolveLocations(Expression expression, Deque<Expression> locations) {
+    protected static ExpressionFlow build(SubscriptionContext ctx, Expression expression, @Nullable String argumentName) {
+      Set<Expression> locations = new LinkedHashSet<>();
+      resolveLocations(ctx, expression, locations, argumentName);
+      return new ExpressionFlow(ctx, new LinkedList<>(locations));
+    }
+
+    static void resolveLocations(SubscriptionContext ctx, Expression expression, Set<Expression> locations, @Nullable String argumentName) {
+      // Handle dicts as part of unpacking expressions
+      if (argumentName != null && expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
+        getDictionaryPair(ctx, (DictionaryLiteral) expression, argumentName).ifPresent(
+          argumentPair -> locations.addAll(argumentPair.value.locations())
+        );
+        return;
+      }
+      // Do not add an entire dict to locations, only the relevant key value pair
       locations.add(expression);
       if (expression.is(Tree.Kind.NAME)) {
         Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
         if (singleAssignedValue != null && !locations.contains(singleAssignedValue)) {
-          resolveLocations(singleAssignedValue, locations);
+          resolveLocations(ctx, singleAssignedValue, locations, argumentName);
         }
       }
     }
