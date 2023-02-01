@@ -189,10 +189,10 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, Set<String> keys, Predicate<Expression> expected) {
     keys.stream()
         .map(key -> CdkUtils.getDictionaryPair(ctx, dict, key))
-        .filter(o -> o.isPresent())
+        .filter(Optional::isPresent)
         .findFirst()
         .map(Optional::get)
-            .ifPresent(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
+        .ifPresent(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
   }
 
   // ---------------------------------------------------------------------------------------

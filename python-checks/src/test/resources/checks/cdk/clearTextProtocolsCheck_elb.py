@@ -70,3 +70,15 @@ def load_balancer_with_dictionary_listeners_snake_case():
         ]
     )
 
+def load_balancer_with_dictionary_listeners_snake_case():
+    loadBalancer = elb.LoadBalancer(
+        self,
+        "elb-http-dict",
+        vpc=vpc,
+        listeners=[
+            {
+                "externalPort":10081,
+                "internalPort":10081
+            }
+        ]
+    )
