@@ -50,7 +50,7 @@ public class DeadStoreUtils {
       Tree element = elementsReverseIterator.previous();
       blockLiveVariables.getSymbolReadWrites(element).forEach((symbol, symbolReadWrite) -> {
         if (symbolReadWrite.isWrite() && !symbolReadWrite.isRead()) {
-          if (!willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol)) {
+          if (!element.is(Tree.Kind.IMPORT_NAME) && !willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol)) {
             unnecessaryAssignments.add(new UnnecessaryAssignment(symbol, element));
           }
           willBeRead.remove(symbol);
