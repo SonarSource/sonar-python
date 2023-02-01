@@ -423,7 +423,7 @@ public class TreeUtilsTest {
     var grouped = assignments.stream()
       .collect(TreeUtils.groupAssignmentByParentStatementList());
 
-    assertThat(grouped.size()).isEqualTo(2);
+    assertThat(grouped).hasSize(2);
   }
 
   @Test
@@ -438,7 +438,7 @@ public class TreeUtilsTest {
     var comparator = TreeUtils.getTreeByPositionComparator();
 
     int comparsionResult = comparator.compare(assignments.get(1), assignments.get(0));
-    assertThat(comparsionResult).isGreaterThan(0);
+    assertThat(comparsionResult).isPositive();
   }
 
   private static boolean isOuterFunction(Tree tree) {
