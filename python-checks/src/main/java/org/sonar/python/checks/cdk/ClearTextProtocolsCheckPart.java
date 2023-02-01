@@ -46,7 +46,8 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   private static final String OMITTING_MESSAGE = "Omitting `%s` causes %s encryption to be disabled. Make sure it is safe here.";
 
   private static final String PROTOCOL = "protocol";
-  private static final String EXTERNAL_PROTOCOL = "external_protocol";
+  private static final String EXTERNAL_PROTOCOL_SNAKE_CASE = "external_protocol";
+  private static final String EXTERNAL_PROTOCOL_CAMEL_CASE = "externalProtocol";
   private static final String LISTENERS = "listeners";
 
   /**
@@ -98,7 +99,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
     // with the `external_protocol` argument set to  `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.TCP`
     // or `aws_cdk.aws_elasticloadbalancing.LoadBalancingProtocol.HTTP`.
     checkFqns(List.of(Elb.prefix("LoadBalancerListener"), Elb.prefix("LoadBalancer.add_listener")), (ctx, call) ->
-      getArgument(ctx, call, EXTERNAL_PROTOCOL).ifPresent(
+      getArgument(ctx, call, EXTERNAL_PROTOCOL_SNAKE_CASE).ifPresent(
         protocol -> protocol.addIssueIf(isSensitiveTransportProtocolFqn(Elb.SENSITIVE_TRANSPORT_PROTOCOL_FQNS), LB_MESSAGE)));
 
 
@@ -174,7 +175,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static void checkLoadBalancerListenerDict(SubscriptionContext ctx, DictionaryLiteral dict) {
-    checkKeyValuePair(ctx, dict, EXTERNAL_PROTOCOL, isSensitiveTransportProtocolFqn(Elb.SENSITIVE_TRANSPORT_PROTOCOL_FQNS));
+    checkKeyValuePair(ctx, dict, Set.of(EXTERNAL_PROTOCOL_SNAKE_CASE, EXTERNAL_PROTOCOL_CAMEL_CASE), isSensitiveTransportProtocolFqn(Elb.SENSITIVE_TRANSPORT_PROTOCOL_FQNS));
   }
 
   private static void checkCfnLoadBalancerListenerDict(SubscriptionContext ctx, DictionaryLiteral dict) {
@@ -182,7 +183,16 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
   }
 
   private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, String key, Predicate<Expression> expected) {
-    CdkUtils.getDictionaryPair(ctx, dict, key).ifPresent(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
+    checkKeyValuePair(ctx, dict, Set.of(key), expected);
+  }
+
+  private static void checkKeyValuePair(SubscriptionContext ctx, DictionaryLiteral dict, Set<String> keys, Predicate<Expression> expected) {
+    keys.stream()
+        .map(key -> CdkUtils.getDictionaryPair(ctx, dict, key))
+        .filter(o -> o.isPresent())
+        .findFirst()
+        .map(Optional::get)
+            .ifPresent(pair -> pair.value.addIssueIf(expected, LB_MESSAGE));
   }
 
   // ---------------------------------------------------------------------------------------

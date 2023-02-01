@@ -39,3 +39,34 @@ class CfnLoadBalancerStack(Stack):
         elb.CfnLoadBalancer(listeners=[{"protocol": "http"}])  # Noncompliant
         elb.CfnLoadBalancer(listeners=[{"protocol": "https"}])
         elb.CfnLoadBalancer(listeners=[{**unkpacking_expression}])
+
+def load_balancer_with_dictionary_listeners_camel_case():
+    loadBalancer = elb.LoadBalancer(
+        self,
+        "elb-http-dict",
+        vpc=vpc,
+        listeners=[
+            {
+                "externalPort":10081,
+                "externalProtocol":elb.LoadBalancingProtocol.HTTP, # Noncompliant {{Make sure that using network protocols without an SSL/TLS underlay is safe here.}}
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
+                "internalPort":10081
+            }
+        ]
+    )
+
+def load_balancer_with_dictionary_listeners_snake_case():
+    loadBalancer = elb.LoadBalancer(
+        self,
+        "elb-http-dict",
+        vpc=vpc,
+        listeners=[
+            {
+                "externalPort":10081,
+                "external_protocol":elb.LoadBalancingProtocol.HTTP, # Noncompliant {{Make sure that using network protocols without an SSL/TLS underlay is safe here.}}
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
+                "internalPort":10081
+            }
+        ]
+    )
+
