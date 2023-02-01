@@ -54,6 +54,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_TEMPLATE = "Remove this assignment to local variable '%s'; the value is never used.";
 
+  private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -86,7 +88,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static void raiseIssue(SubscriptionContext ctx, DeadStoreUtils.UnnecessaryAssignment unnecessaryAssignment) {
     Tree element = unnecessaryAssignment.element;
-    String message = String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
+    String symbolName = unnecessaryAssignment.symbol.name();
+    String message = String.format(MESSAGE_TEMPLATE, symbolName);
     Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
     PreciseIssue issue;
     if ("\n".equals(lastRelevantToken.value())) {
@@ -95,11 +98,33 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       issue = ctx.addIssue(element.firstToken(), lastRelevantToken, message);
     }
 
+    unnecessaryAssignment.symbol.usages().stream()
+      .filter(Usage::isBindingUsage)
+      .map(Usage::tree)
+      // skip initial issue binding
+      .filter(tree -> tree != element && TreeUtils.firstAncestor(tree, parent -> parent == element) == null)
+      //skip assignments before
+      .filter(tree -> TreeUtils.getTreeByPositionComparator().compare(tree, element) > 0)
+      .collect(TreeUtils.groupAssignmentByParentStatementList())
+      .values()
+      .stream()
+      .sorted(TreeUtils.getTreeByPositionComparator())
+      .map(DeadStoreCheck::mapToParentAssignmentStatementOrExpression)
+      .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, symbolName)));
+
     if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
       ((IssueWithQuickFix) issue).addQuickFix(PythonQuickFix.newQuickFix("Remove the unused statement",
         PythonTextEdit.removeStatement((Statement) element)));
     }
 
+  }
+
+  private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
+    var assignment = TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    if (assignment != null) {
+      return assignment;
+    }
+    return tree;
   }
 
   private static boolean isMultipleAssignement(Tree element) {

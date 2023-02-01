@@ -19,12 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Comparator;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -72,10 +67,10 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
               .filter(Usage::isBindingUsage)
               .filter(u -> u.kind() != Usage.Kind.PARAMETER)
               .map(Usage::tree)
-              .collect(groupAssignmentByParentStatementList())
+              .collect(TreeUtils.groupAssignmentByParentStatementList())
               .values()
               .stream()
-              .sorted(Comparator.comparing(t -> t.firstToken().line()))
+              .sorted(TreeUtils.getTreeByPositionComparator())
               .map(IgnoredParameterCheck::mapToParentAssignmentStatementOrExpression)
               .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, assignment.symbol.name())));
           });
@@ -89,13 +84,6 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
       return assignment;
     }
     return tree;
-  }
-
-  private static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
-    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
-      Function.identity(),
-      //Get just first element for each block
-      (t1, t2) -> t1.firstToken().line() < t2.firstToken().line() ? t1 : t2);
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {

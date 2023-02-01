@@ -410,6 +410,37 @@ public class TreeUtilsTest {
     assertThat(lastToken.type().getName()).isEqualTo("NEWLINE");
   }
 
+  @Test
+  public void test_groupAssignmentByParentStatementList() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
+      "    b = a\n" +
+      "    if a > 10:\n" +
+      "        b = 10\n" +
+      "    c = 3 ");
+
+    var fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
+    var assignments = PythonTestUtils.getAllDescendant(fooDef, t -> t.is(Kind.ASSIGNMENT_STMT));
+    var grouped = assignments.stream()
+      .collect(TreeUtils.groupAssignmentByParentStatementList());
+
+    assertThat(grouped).hasSize(2);
+  }
+
+  @Test
+  public void test_getTreeByPositionComparator() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
+      "    b = a\n" +
+      "    if a > 10:\n" +
+      "        b = 10\n");
+
+    var fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
+    var assignments = PythonTestUtils.getAllDescendant(fooDef, t -> t.is(Kind.ASSIGNMENT_STMT));
+    var comparator = TreeUtils.getTreeByPositionComparator();
+
+    int comparsionResult = comparator.compare(assignments.get(1), assignments.get(0));
+    assertThat(comparsionResult).isPositive();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

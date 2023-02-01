@@ -352,3 +352,51 @@ def override_loop_var():
     for value in value:
         ...
 
+def simple_reassignment_secondary_location():
+    a = 42 # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
+#   ^^^^^^ 1
+    a = 24
+#   ^^^^^^< 1 {{'a' is reassigned here.}}
+    print(a)
+
+
+def if_else_reassignment_secondary_location(a):
+    b = 42 # Noncompliant {{Remove this assignment to local variable 'b'; the value is never used.}}
+#   ^^^^^^ 2
+    if a:
+        b = 24
+#       ^^^^^^< 1 {{'b' is reassigned here.}}
+    else:
+        b = 31
+#       ^^^^^^< 2 {{'b' is reassigned here.}}
+    print(b)
+
+def while_loop_reassignment_secondary_location(a, b, c):
+    d = 2 # Noncompliant {{Remove this assignment to local variable 'd'; the value is never used.}}
+#   ^^^^^ 2
+    while a():
+        d = 3
+#       ^^^^^< 1 {{'d' is reassigned here.}}
+        print(d)
+    d = 4
+#   ^^^^^< 2 {{'d' is reassigned here.}}
+    print(d)
+
+def class_dead_store():
+    class a: # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
+#         ^ 1
+        pass
+    a = 42
+#   ^^^^^^< 1 {{'a' is reassigned here.}}
+    print(a)
+
+def multiple_issues(a):
+    b = 2 # Noncompliant
+    if a:
+        b = 3 # Noncompliant
+        b = 4
+    else:
+        b = 4
+    print(b)
+
+

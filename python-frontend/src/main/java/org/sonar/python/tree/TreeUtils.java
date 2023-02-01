@@ -21,12 +21,16 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -81,6 +85,18 @@ public class TreeUtils {
   @CheckForNull
   public static Tree firstAncestorOfKind(Tree tree, Kind... kinds) {
     return firstAncestor(tree, t -> t.is(kinds));
+  }
+
+  public static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
+    return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
+      Function.identity(),
+      //Get just first element for each block
+      (t1, t2) ->
+        Stream.of(t1, t2).min(getTreeByPositionComparator()).get());
+  }
+
+  public static Comparator<Tree> getTreeByPositionComparator() {
+    return Comparator.comparing((Tree t) -> t.firstToken().line()).thenComparing((Tree t) -> t.firstToken().column());
   }
 
   public static List<Token> tokens(Tree tree) {
