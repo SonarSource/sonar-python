@@ -28,3 +28,26 @@ class A:
     print(self.__used())
     print(A.__used_cls_method())
     print(A.__used_static_method())
+
+
+def method_decorator(func):
+  def inner(*args, **kwargs):
+    return func(*args, **kwargs)
+  return inner
+
+class ClassWithMethodDecorator:
+  @method_decorator
+  def __getVariable(self):
+    return self._v
+
+  def __printVariable(self): # Noncompliant
+    print(self._v)
+
+def class_decorator(c):
+  return c
+
+@class_decorator
+class ClassWithDecorator:
+
+  def __printVariable(self):
+    print(self.__v)

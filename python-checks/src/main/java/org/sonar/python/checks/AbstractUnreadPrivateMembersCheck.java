@@ -20,9 +20,12 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -37,10 +40,33 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
     String memberPrefix = memberPrefix();
     context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> {
       ClassDef classDef = (ClassDef) ctx.syntaxNode();
-      Optional.ofNullable(getClassSymbolFromDef(classDef)).ifPresent(classSymbol -> classSymbol.declaredMembers().stream()
-        .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-        .forEach(symbol -> reportIssue(ctx, symbol)));
+      if (!classDef.decorators().isEmpty()) {
+        // avoid checking for classes with decorators since it is impossible to analyze its final behavior
+        return;
+      }
+
+      Optional.ofNullable(getClassSymbolFromDef(classDef))
+        .ifPresent(classSymbol -> {
+          Set<Symbol> members = classSymbol.declaredMembers();
+
+          Set<FunctionSymbol> decoratedMethods = members
+            .stream()
+            .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
+            .filter(FunctionSymbol.class::isInstance)
+            .map(FunctionSymbol.class::cast)
+            .filter(f -> !f.decorators().isEmpty())
+            .collect(Collectors.toSet());
+
+          members.stream()
+            .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
+            .filter(symbol -> filterMember(symbol, decoratedMethods))
+            .forEach(symbol -> reportIssue(ctx, symbol));
+        });
     });
+  }
+
+  protected boolean filterMember(Symbol symbol, Set<FunctionSymbol> decoratedMethods) {
+    return true;
   }
 
   private boolean equalsToKind(Symbol symbol) {
