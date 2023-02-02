@@ -302,7 +302,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   private static void standardSslCheckForAssignmentStatement(SubscriptionContext subscriptionContext) {
     AssignmentStatement asgnStmt = (AssignmentStatement) subscriptionContext.syntaxNode();
 
-    Optional<VulnerabilityAndProblematicToken> vulnTokOpt = searchRhsForVulnerableMethod(asgnStmt.assignedValue());
+    Optional<VulnerabilityAndProblematicToken> vulnTokOpt = isVulnerableMethodCall(asgnStmt.assignedValue());
     vulnTokOpt.ifPresent(vulnTok -> asgnStmt
       .lhsExpressions()
       .stream()
@@ -322,7 +322,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   private static void standardSslCheckForRegularArgument(SubscriptionContext subscriptionContext) {
     var argument = (RegularArgument) subscriptionContext.syntaxNode();
-    searchRhsForVulnerableMethod(argument.expression())
+    isVulnerableMethodCall(argument.expression())
       .ifPresent(vulnTok -> subscriptionContext.addIssue(vulnTok.token, MESSAGE));
   }
 
@@ -396,7 +396,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * if found, returns the token of the callee, together with the boolean that indicates whether the default settings
    * are dangerous.
    */
-  private static Optional<VulnerabilityAndProblematicToken> searchRhsForVulnerableMethod(Expression expr) {
+  private static Optional<VulnerabilityAndProblematicToken> isVulnerableMethodCall(Expression expr) {
     if (expr instanceof CallExpression) {
       CallExpression callExpression = (CallExpression) expr;
       Symbol calleeSymbol = callExpression.calleeSymbol();
