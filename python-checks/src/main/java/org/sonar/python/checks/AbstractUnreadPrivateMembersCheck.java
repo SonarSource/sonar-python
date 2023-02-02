@@ -28,9 +28,9 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CLASSDEF;
-import static org.sonar.python.tree.TreeUtils.getClassSymbolFromDef;
 
 public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscriptionCheck {
 
@@ -38,13 +38,11 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
   public void initialize(Context context) {
     String memberPrefix = memberPrefix();
     context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> {
-      ClassDef classDef = (ClassDef) ctx.syntaxNode();
-      if (!classDef.decorators().isEmpty()) {
+      Optional.of(ctx.syntaxNode())
+        .map(ClassDef.class::cast)
         // avoid checking for classes with decorators since it is impossible to analyze its final behavior
-        return;
-      }
-
-      Optional.ofNullable(getClassSymbolFromDef(classDef))
+        .filter(classDef -> classDef.decorators().isEmpty())
+        .map(TreeUtils::getClassSymbolFromDef)
         .map(ClassSymbol::declaredMembers)
         .stream()
         .flatMap(Collection::stream)
