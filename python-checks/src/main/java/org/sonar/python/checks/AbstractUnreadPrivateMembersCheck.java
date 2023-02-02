@@ -59,13 +59,13 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
 
           members.stream()
             .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-            .filter(symbol -> filterMember(symbol, decoratedMethods))
+            .filter(this::filterMember)
             .forEach(symbol -> reportIssue(ctx, symbol));
         });
     });
   }
 
-  protected boolean filterMember(Symbol symbol, Set<FunctionSymbol> decoratedMethods) {
+  protected boolean filterMember(Symbol symbol) {
     return true;
   }
 

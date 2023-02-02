@@ -40,6 +40,10 @@ class ClassWithMethodDecorator:
   def __getVariable(self):
     return self._v
 
+  @classmethod
+  def __setVariable(self, v): # Noncompliant
+    self._v = v
+
   def __printVariable(self): # Noncompliant
     print(self._v)
 

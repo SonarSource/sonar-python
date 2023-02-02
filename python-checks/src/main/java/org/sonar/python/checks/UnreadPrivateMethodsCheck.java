@@ -19,11 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.BuiltinSymbols;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 
@@ -50,8 +51,13 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
   }
 
   @Override
-  protected boolean filterMember(Symbol symbol, Set<FunctionSymbol> decoratedMethods) {
-    // check only methods if there is no other methods with decorators or there is other decorated methods
-    return decoratedMethods.isEmpty() || decoratedMethods.stream().anyMatch(m -> !Objects.equals(symbol, m));
+  protected boolean filterMember(Symbol symbol) {
+    return Optional.of(symbol)
+      .filter(FunctionSymbol.class::isInstance)
+      .map(FunctionSymbol.class::cast)
+      .map(FunctionSymbol::decorators)
+      .stream()
+      .flatMap(Collection::stream)
+      .allMatch(BuiltinSymbols.KNOWN_DECORATORS::contains);
   }
 }
