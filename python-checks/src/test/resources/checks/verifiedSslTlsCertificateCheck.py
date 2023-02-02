@@ -231,3 +231,8 @@ def ctxSymbolSharedBetweenTwoIfBranches():
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
         #                     ^^^^^^^^^
+
+def call_expression_in_arguments():
+    import ssl
+    conn = httplib.client.HTTPSConnection("123.123.21.21", context=ssl._create_unverified_context()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+#                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
