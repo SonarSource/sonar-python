@@ -202,7 +202,7 @@ class Scope {
       globalSymbol = globalSymbol != null ? copySymbol(symbolName, globalSymbol) : null;
     }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
-      addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
+      addBindingUsage(nameTree, Usage.Kind.IMPORT, globalSymbol != null ? globalSymbol.fullyQualifiedName() : fullyQualifiedName);
     } else {
       this.symbols.add(globalSymbol);
       symbolsByName.put(symbolName, globalSymbol);

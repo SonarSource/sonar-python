@@ -610,6 +610,15 @@ public class FullyQualifiedNameTest {
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
+  @Test
+  public void fqn_resolution_works_with_double_import() {
+    FileInput tree = parse(
+            "from flask import request, request",
+            "request.cookies.get('a')"
+    );
+    assertNameAndQualifiedName(tree, "get", "flask.globals.request.cookies.get");
+  }
+
   private void assertNameAndQualifiedName(FileInput tree, String name, @Nullable String qualifiedName) {
     CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNotNull();
