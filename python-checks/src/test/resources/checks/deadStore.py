@@ -400,7 +400,7 @@ def multiple_issues(a):
     print(b)
 
 
-def nested_packages_import_no_fn():
+def nested_packages_import_no_fp():
     import sample.first
     import sample.second
 
