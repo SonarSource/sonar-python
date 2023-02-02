@@ -19,13 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -46,22 +45,12 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
       }
 
       Optional.ofNullable(getClassSymbolFromDef(classDef))
-        .ifPresent(classSymbol -> {
-          Set<Symbol> members = classSymbol.declaredMembers();
-
-          Set<FunctionSymbol> decoratedMethods = members
-            .stream()
-            .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
-            .filter(FunctionSymbol.class::isInstance)
-            .map(FunctionSymbol.class::cast)
-            .filter(f -> !f.decorators().isEmpty())
-            .collect(Collectors.toSet());
-
-          members.stream()
-            .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-            .filter(this::filterMember)
-            .forEach(symbol -> reportIssue(ctx, symbol));
-        });
+        .map(ClassSymbol::declaredMembers)
+        .stream()
+        .flatMap(Collection::stream)
+        .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
+        .filter(this::filterMember)
+        .forEach(symbol -> reportIssue(ctx, symbol));
     });
   }
 
