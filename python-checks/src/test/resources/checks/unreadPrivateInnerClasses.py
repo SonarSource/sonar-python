@@ -8,6 +8,9 @@ class A:
 
   class _unused_cls: ... # Noncompliant
 
+  @unknown
+  class _unused_decorated_cls: ...
+
   class __used_cls: ...
 
   class __other_used_cls: ...

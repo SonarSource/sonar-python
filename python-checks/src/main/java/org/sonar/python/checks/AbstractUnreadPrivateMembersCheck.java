@@ -19,16 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CLASSDEF;
-import static org.sonar.python.tree.TreeUtils.getClassSymbolFromDef;
 
 public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscriptionCheck {
 
@@ -36,11 +39,22 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
   public void initialize(Context context) {
     String memberPrefix = memberPrefix();
     context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> {
-      ClassDef classDef = (ClassDef) ctx.syntaxNode();
-      Optional.ofNullable(getClassSymbolFromDef(classDef)).ifPresent(classSymbol -> classSymbol.declaredMembers().stream()
+      Optional.of(ctx.syntaxNode())
+        .map(ClassDef.class::cast)
+        // avoid checking for classes with decorators since it is impossible to analyze its final behavior
+        .filter(classDef -> classDef.decorators().isEmpty())
+        .map(TreeUtils::getClassSymbolFromDef)
+        .map(ClassSymbol::declaredMembers)
+        .stream()
+        .flatMap(Collection::stream)
         .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-        .forEach(symbol -> reportIssue(ctx, symbol)));
+        .filter(Predicate.not(this::isException))
+        .forEach(symbol -> reportIssue(ctx, symbol));
     });
+  }
+
+  protected boolean isException(Symbol symbol) {
+    return false;
   }
 
   private boolean equalsToKind(Symbol symbol) {

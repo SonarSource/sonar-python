@@ -19,8 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.BuiltinSymbols;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 
@@ -44,5 +49,16 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
   @Override
   String secondaryMessage() {
     return null;
+  }
+
+  @Override
+  protected boolean isException(Symbol symbol) {
+    return Optional.of(symbol)
+      .filter(FunctionSymbol.class::isInstance)
+      .map(FunctionSymbol.class::cast)
+      .map(FunctionSymbol::decorators)
+      .stream()
+      .flatMap(Collection::stream)
+      .anyMatch(Predicate.not(BuiltinSymbols.STATIC_AND_CLASS_METHOD_DECORATORS::contains));
   }
 }
