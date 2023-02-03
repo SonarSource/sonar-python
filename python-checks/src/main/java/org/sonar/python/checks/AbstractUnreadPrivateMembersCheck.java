@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -47,7 +48,7 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
         .stream()
         .flatMap(Collection::stream)
         .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-        .filter(s -> !this.isException(s))
+        .filter(Predicate.not(this::isException))
         .forEach(symbol -> reportIssue(ctx, symbol));
     });
   }

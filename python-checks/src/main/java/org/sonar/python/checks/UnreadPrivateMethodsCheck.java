@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -58,6 +59,6 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
       .map(FunctionSymbol::decorators)
       .stream()
       .flatMap(Collection::stream)
-      .anyMatch(decorator -> !BuiltinSymbols.STATIC_AND_CLASS_METHOD_DECORATORS.contains(decorator));
+      .anyMatch(Predicate.not(BuiltinSymbols.STATIC_AND_CLASS_METHOD_DECORATORS::contains));
   }
 }
