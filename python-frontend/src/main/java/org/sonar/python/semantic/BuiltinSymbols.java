@@ -342,5 +342,5 @@ public class BuiltinSymbols {
   public static final String CLASS_METHOD_DECORATOR = "classmethod";
   public static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
-  public static final Set<String> KNOWN_DECORATORS = Set.of(CLASS_METHOD_DECORATOR, STATIC_METHOD_DECORATOR);
+  public static final Set<String> STATIC_AND_CLASS_METHOD_DECORATORS = Set.of(CLASS_METHOD_DECORATOR, STATIC_METHOD_DECORATOR);
 }

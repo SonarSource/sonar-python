@@ -51,13 +51,13 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
   }
 
   @Override
-  protected boolean filterMember(Symbol symbol) {
+  protected boolean isException(Symbol symbol) {
     return Optional.of(symbol)
       .filter(FunctionSymbol.class::isInstance)
       .map(FunctionSymbol.class::cast)
       .map(FunctionSymbol::decorators)
       .stream()
       .flatMap(Collection::stream)
-      .allMatch(BuiltinSymbols.KNOWN_DECORATORS::contains);
+      .anyMatch(decorator -> !BuiltinSymbols.STATIC_AND_CLASS_METHOD_DECORATORS.contains(decorator));
   }
 }

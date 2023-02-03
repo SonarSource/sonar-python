@@ -19,7 +19,9 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -29,6 +31,15 @@ public class UnreadPrivateInnerClassesCheck extends AbstractUnreadPrivateMembers
   @Override
   String memberPrefix() {
     return "_";
+  }
+
+  @Override
+  protected boolean isException(Symbol symbol) {
+    return Optional.of(symbol)
+      .filter(ClassSymbol.class::isInstance)
+      .map(ClassSymbol.class::cast)
+      .filter(ClassSymbol::hasDecorators)
+      .isPresent();
   }
 
   @Override
