@@ -38,19 +38,17 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
   @Override
   public void initialize(Context context) {
     String memberPrefix = memberPrefix();
-    context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> {
-      Optional.of(ctx.syntaxNode())
-        .map(ClassDef.class::cast)
-        // avoid checking for classes with decorators since it is impossible to analyze its final behavior
-        .filter(classDef -> classDef.decorators().isEmpty())
-        .map(TreeUtils::getClassSymbolFromDef)
-        .map(ClassSymbol::declaredMembers)
-        .stream()
-        .flatMap(Collection::stream)
-        .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
-        .filter(Predicate.not(this::isException))
-        .forEach(symbol -> reportIssue(ctx, symbol));
-    });
+    context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> Optional.of(ctx.syntaxNode())
+      .map(ClassDef.class::cast)
+      // avoid checking for classes with decorators since it is impossible to analyze its final behavior
+      .filter(classDef -> classDef.decorators().isEmpty())
+      .map(TreeUtils::getClassSymbolFromDef)
+      .map(ClassSymbol::declaredMembers)
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
+      .filter(Predicate.not(this::isException))
+      .forEach(symbol -> reportIssue(ctx, symbol)));
   }
 
   protected boolean isException(Symbol symbol) {
