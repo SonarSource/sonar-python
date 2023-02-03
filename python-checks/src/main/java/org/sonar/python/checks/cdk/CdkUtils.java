@@ -291,19 +291,6 @@ public class CdkUtils {
   }
 
   /**
-   * In the case of unpacking expression, we cannot generate flows at the moment.
-   * However, to avoid a wrong interpretation of the unpacked expression in the context of absent arguments,
-   * an alternative dummy must be returned, which should not lead to false positives.
-   * The resolving of such expressions can be improved by <a href="https://sonarsource.atlassian.net/browse/SONARPY-1164">SONARPY-1164</a> if necessary.
-   */
-  static class UnresolvedExpressionFlow extends ExpressionFlow {
-
-    private UnresolvedExpressionFlow(SubscriptionContext ctx) {
-      super(ctx, new LinkedList<>());
-    }
-  }
-
-  /**
    * Dataclass to store a resolved KeyValuePair structure
    */
   static class ResolvedKeyValuePair {
