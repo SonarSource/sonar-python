@@ -71,7 +71,7 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
         var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
         issue.addQuickFix(quickFix);
       } else {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Replace with equality check")
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
           .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
           .build();
