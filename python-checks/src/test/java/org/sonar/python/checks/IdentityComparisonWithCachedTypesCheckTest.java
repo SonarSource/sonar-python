@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IdentityComparisonWithCachedTypesCheckTest {
@@ -29,6 +30,28 @@ public class IdentityComparisonWithCachedTypesCheckTest {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/identityComparisonWithCachedTypes.py",
       new IdentityComparisonWithCachedTypesCheck());
+  }
+
+  @Test
+  public void testIsReplacementQuickfix() {
+    var check = new IdentityComparisonWithCachedTypesCheck();
+    String codeWithIssue = "def literal_comparison(param):\n" +
+      "    3000 is param";
+    String codeFixed = "def literal_comparison(param):\n" +
+      "    3000 == param";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void testIsNotReplacementQuickfix() {
+    var check = new IdentityComparisonWithCachedTypesCheck();
+    String codeWithIssue = "def literal_comparison(param):\n" +
+      "    3000 is not param";
+    String codeFixed = "def literal_comparison(param):\n" +
+      "    3000 != param";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.QUICK_FIX_MESSAGE);
   }
 
 }
