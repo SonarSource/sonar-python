@@ -46,4 +46,13 @@ public class EmptyNestedBlockCheckTest {
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, EmptyNestedBlockCheck.QUICK_FIX_MESSAGE);
   }
 
+  @Test
+  public void inlineQuickFixTest() {
+    var check = new EmptyNestedBlockCheck();
+
+    var before = "if 3 > 2: pass\n";
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
 }
