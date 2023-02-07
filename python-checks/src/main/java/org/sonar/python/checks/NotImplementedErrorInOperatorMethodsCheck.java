@@ -31,6 +31,9 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key="S5712")
 public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptionCheck {
@@ -88,6 +91,7 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
     "__ior__",
     "__length_hint__"
   );
+  public static final String QUICK_FIX_MESSAGE = "Replace the raised exception with return NotImplemented";
 
   private static class RaiseNotImplementedErrorVisitor extends BaseTreeVisitor {
     private List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
@@ -123,7 +127,11 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
       functionDef.accept(visitor);
 
       for (RaiseStatement notImplementedErrorRaise : visitor.nonCompliantRaises) {
-        ctx.addIssue(notImplementedErrorRaise, MESSAGE);
+        var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(notImplementedErrorRaise, "return NotImplemented"))
+          .build();
+        var issue = (IssueWithQuickFix) ctx.addIssue(notImplementedErrorRaise, MESSAGE);
+        issue.addQuickFix(quickFix);
       }
     });
   }
