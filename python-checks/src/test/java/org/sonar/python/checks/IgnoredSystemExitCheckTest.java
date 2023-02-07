@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IgnoredSystemExitCheckTest {
@@ -27,6 +28,20 @@ public class IgnoredSystemExitCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/ignoredSystemExit.py", new IgnoredSystemExitCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var before = "try:\n" +
+      "    open(\"foo.txt\", \"r\")\n" +
+      "except SystemExit:\n" +
+      "    pass";
+    var after = "try:\n" +
+      "    open(\"foo.txt\", \"r\")\n" +
+      "except SystemExit:\n" +
+      "    raise";
+    PythonQuickFixVerifier.verify(new IgnoredSystemExitCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new IgnoredSystemExitCheck(), before, IgnoredSystemExitCheck.NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE);
   }
 
 }

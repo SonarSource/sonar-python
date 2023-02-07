@@ -32,9 +32,13 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5754")
@@ -49,6 +53,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
 
   private static final String SYSTEM_EXIT_FUNCTION_NAME = "sys.exit";
   private static final String SYSTEM_EXC_INFO_NAME = "sys.exc_info";
+  public static final String NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE = "Replace \"pass\" statement with \"raise\"";
 
   /**
    * Checks that a given expression is re-raised or eventually handled.
@@ -56,6 +61,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
   private static class ExceptionReRaiseCheckVisitor extends BaseTreeVisitor {
     private Symbol exceptionInstance;
     private boolean isReRaised;
+    private PassStatement passStatement;
 
     public ExceptionReRaiseCheckVisitor(@Nullable Symbol exceptionInstance) {
       this.exceptionInstance = exceptionInstance;
@@ -85,6 +91,11 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
           this.isReRaised = true;
         }
       }
+    }
+
+    @Override
+    public void visitPassStatement(PassStatement passStatement) {
+      this.passStatement = passStatement;
     }
 
     @Override
@@ -154,7 +165,14 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     }
 
     if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+      if (visitor.passStatement != null) {
+        var quickFix = PythonQuickFix.newQuickFix(NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(visitor.passStatement, "raise"))
+          .build();
+        issue.addQuickFix(quickFix);
+      }
+
       return true;
     }
 
