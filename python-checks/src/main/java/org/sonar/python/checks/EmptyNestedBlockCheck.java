@@ -19,20 +19,28 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
 public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S108";
+  public static final String QUICK_FIX_MESSAGE = "Add an empty TODO comment.";
   private static final String MESSAGE = "Either remove or fill this block of code.";
+  private static final String TODO_COMMENT_TEXT = "# TODO: Add implementation";
 
   @Override
   public void initialize(Context context) {
@@ -52,11 +60,19 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
       // sublist call is excluding last index and token following last token of statement list (dedent) should be included in the comment verification.
       int to = parentTokens.indexOf(statementListTree.lastToken()) + 2;
       if (!containsComment(parentTokens.subList(from, to))) {
-        if (statementListTree.statements().isEmpty()) {
-          ctx.addIssue(statementListTree.firstToken(), MESSAGE);
-        } else {
-          ctx.addIssue(statementListTree.statements().get(0), MESSAGE);
-        }
+        var passTreeElement = Optional.of(statementListTree)
+          .map(StatementList::statements)
+          .map(Collection::stream)
+          .flatMap(Stream::findFirst)
+          .map(Tree.class::cast)
+          .orElseGet(statementListTree::firstToken);
+
+        var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.insertLineBefore(passTreeElement, TODO_COMMENT_TEXT))
+          .build();
+
+        var issue = (IssueWithQuickFix) ctx.addIssue(passTreeElement, MESSAGE);
+        issue.addQuickFix(quickFix);
       }
     });
   }
