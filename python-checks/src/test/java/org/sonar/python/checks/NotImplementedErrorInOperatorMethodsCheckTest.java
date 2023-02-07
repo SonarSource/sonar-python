@@ -20,11 +20,40 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NotImplementedErrorInOperatorMethodsCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/notImplementedErrorInOperatorMethods.py", new NotImplementedErrorInOperatorMethodsCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var check = new NotImplementedErrorInOperatorMethodsCheck();
+    String codeWithIssue = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        raise NotImplementedError()";
+    String codeFixed = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        return NotImplemented";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void quickFixOfExceptionAsVariableTest() {
+    var check = new NotImplementedErrorInOperatorMethodsCheck();
+    String codeWithIssue = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        ex = NotImplementedError()\n" +
+      "        raise ex";
+    String codeFixed = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        ex = NotImplementedError()\n" +
+      "        return NotImplemented";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
   }
 }
