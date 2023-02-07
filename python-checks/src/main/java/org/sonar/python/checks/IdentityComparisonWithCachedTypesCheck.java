@@ -65,14 +65,14 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     if (isUnsuitableOperand(isExpr.leftOperand()) || isUnsuitableOperand(isExpr.rightOperand())) {
       var notToken = isExpr.notToken();
       if (notToken == null) {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
+        var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
           .build();
 
         var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
         issue.addQuickFix(quickFix);
       } else {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
+        var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
           .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
           .build();
