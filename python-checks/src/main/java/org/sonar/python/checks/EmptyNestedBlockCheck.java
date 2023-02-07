@@ -38,7 +38,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
 public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S108";
-  public static final String QUICK_FIX_MESSAGE = "Add an empty TODO comment";
+  public static final String QUICK_FIX_MESSAGE = "Add a TODO comment";
   private static final String MESSAGE = "Either remove or fill this block of code.";
   private static final String TODO_COMMENT_TEXT = "# TODO: Add implementation";
 
