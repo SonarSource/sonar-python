@@ -46,8 +46,8 @@ import static java.util.Arrays.asList;
 public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\"; identity operator is not reliable here.";
   private static final String MESSAGE_IS_NOT = "Replace this \"is not\" operator with \"!=\"; identity operator is not reliable here.";
-  public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\".";
-  public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\".";
+  public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
+  public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
 
   @Override
   public void initialize(Context context) {
