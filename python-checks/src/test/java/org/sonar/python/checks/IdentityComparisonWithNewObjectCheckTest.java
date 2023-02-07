@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IdentityComparisonWithNewObjectCheckTest {
@@ -28,5 +29,27 @@ public class IdentityComparisonWithNewObjectCheckTest {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/identityComparisonWithNewObjects.py",
       new IdentityComparisonWithNewObjectCheck());
+  }
+
+  @Test
+  public void testIsReplacementQuickfix() {
+    var check = new IdentityComparisonWithNewObjectCheck();
+    String codeWithIssue = "def comprehensions(p):\n" +
+      "  p is { x: x for x in range(10) }";
+    String codeFixed = "def comprehensions(p):\n" +
+      "  p == { x: x for x in range(10) }";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithNewObjectCheck.IS_QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void testIsNotReplacementQuickfix() {
+    var check = new IdentityComparisonWithNewObjectCheck();
+    String codeWithIssue = "def comprehensions(p):\n" +
+      "  p is not { x: x for x in range(10) }";
+    String codeFixed = "def comprehensions(p):\n" +
+      "  p != { x: x for x in range(10) }";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithNewObjectCheck.IS_NOT_QUICK_FIX_MESSAGE);
   }
 }

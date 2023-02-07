@@ -33,9 +33,11 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Arrays.asList;
@@ -46,6 +48,8 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 @Rule(key = "S5796")
 public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\".";
+  public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
+  public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
   private static final String MESSAGE_IS_NOT = "Replace this \"is not\" operator with \"!=\".";
   private static final String MESSAGE_SECONDARY = "This expression creates a new object every time.";
 
@@ -77,12 +81,27 @@ public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionChec
   private static boolean checkOperand(Expression operand, IsExpression isExpr, SubscriptionContext ctx) {
     Optional<List<Tree>> secondariesOpt = findIssueForOperand(operand);
     secondariesOpt.ifPresent(secondaryLocations -> {
-      Token notToken = isExpr.notToken();
-      PreciseIssue preciseIssue = notToken == null ?
-        ctx.addIssue(isExpr.operator(), MESSAGE_IS) :
-        ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+      IssueWithQuickFix issue;
+      var notToken = isExpr.notToken();
+      if (notToken != null) {
+        var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
+          .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
+          .build();
+
+        issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        issue.addQuickFix(quickFix);
+      } else {
+        var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
+          .build();
+        issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
+        issue.addQuickFix(quickFix);
+      }
+
+
       for (Tree secondary : secondaryLocations) {
-        preciseIssue.secondary(secondary, MESSAGE_SECONDARY);
+        issue.secondary(secondary, MESSAGE_SECONDARY);
       }
     });
     return secondariesOpt.isPresent();
