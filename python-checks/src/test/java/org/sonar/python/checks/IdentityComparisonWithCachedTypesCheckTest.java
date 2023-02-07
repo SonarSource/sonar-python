@@ -40,7 +40,7 @@ public class IdentityComparisonWithCachedTypesCheckTest {
     String codeFixed = "def literal_comparison(param):\n" +
       "    3000 == param";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.QUICK_FIX_MESSAGE);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.IS_QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -51,7 +51,7 @@ public class IdentityComparisonWithCachedTypesCheckTest {
     String codeFixed = "def literal_comparison(param):\n" +
       "    3000 != param";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.QUICK_FIX_MESSAGE);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.IS_NOT_QUICK_FIX_MESSAGE);
   }
 
 }

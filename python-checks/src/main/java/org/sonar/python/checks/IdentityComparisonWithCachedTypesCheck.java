@@ -47,6 +47,8 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\"; identity operator is not reliable here.";
   private static final String MESSAGE_IS_NOT = "Replace this \"is not\" operator with \"!=\"; identity operator is not reliable here.";
   public static final String QUICK_FIX_MESSAGE = "Replace with equality check";
+  public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\".";
+  public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\".";
 
   @Override
   public void initialize(Context context) {
@@ -64,14 +66,14 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     if (isUnsuitableOperand(isExpr.leftOperand()) || isUnsuitableOperand(isExpr.rightOperand())) {
       var notToken = isExpr.notToken();
       if (notToken == null) {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
           .build();
 
         var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
         issue.addQuickFix(quickFix);
       } else {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
           .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
           .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
           .build();
