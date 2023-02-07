@@ -31,9 +31,11 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Arrays.asList;
@@ -44,6 +46,8 @@ import static java.util.Arrays.asList;
 public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\"; identity operator is not reliable here.";
   private static final String MESSAGE_IS_NOT = "Replace this \"is not\" operator with \"!=\"; identity operator is not reliable here.";
+  public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
+  public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
 
   @Override
   public void initialize(Context context) {
@@ -59,11 +63,22 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     }
 
     if (isUnsuitableOperand(isExpr.leftOperand()) || isUnsuitableOperand(isExpr.rightOperand())) {
-      Token notToken = isExpr.notToken();
+      var notToken = isExpr.notToken();
       if (notToken == null) {
-        ctx.addIssue(isExpr.operator(), MESSAGE_IS);
+        var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
+          .build();
+
+        var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
+        issue.addQuickFix(quickFix);
       } else {
-        ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
+          .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
+          .build();
+
+        var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        issue.addQuickFix(quickFix);
       }
     }
   }
