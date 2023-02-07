@@ -45,6 +45,7 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
         var issue = (IssueWithQuickFix) ctx.addIssue(tuple, MESSAGE);
 
         if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null) {
+          // defensive condition
           issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
             .addTextEdit(PythonTextEdit.remove(tuple.leftParenthesis()))
             .addTextEdit(PythonTextEdit.remove(tuple.rightParenthesis()))
