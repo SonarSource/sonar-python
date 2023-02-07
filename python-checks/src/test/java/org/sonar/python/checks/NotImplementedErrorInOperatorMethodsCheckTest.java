@@ -41,4 +41,19 @@ public class NotImplementedErrorInOperatorMethodsCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
   }
+
+  @Test
+  public void quickFixOfExceptionAsVariableTest() {
+    var check = new NotImplementedErrorInOperatorMethodsCheck();
+    String codeWithIssue = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        ex = NotImplementedError()\n" +
+      "        raise ex";
+    String codeFixed = "class MyClass:\n" +
+      "    def __lt__(self, other):\n" +
+      "        ex = NotImplementedError()\n" +
+      "        return NotImplemented";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
+  }
 }
