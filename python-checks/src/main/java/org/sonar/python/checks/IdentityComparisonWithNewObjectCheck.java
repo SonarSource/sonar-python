@@ -81,27 +81,27 @@ public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionChec
   private static boolean checkOperand(Expression operand, IsExpression isExpr, SubscriptionContext ctx) {
     Optional<List<Tree>> secondariesOpt = findIssueForOperand(operand);
     secondariesOpt.ifPresent(secondaryLocations -> {
-      var preciseIssue = Optional.ofNullable(isExpr.notToken())
-        .map(notToken -> {
-          var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
-            .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
-            .build();
+      IssueWithQuickFix issue;
+      var notToken = isExpr.notToken();
+      if (notToken != null) {
+        var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
+          .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
+          .build();
 
-          var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
-          issue.addQuickFix(quickFix);
-          return issue;
-        }).orElseGet(() -> {
-          var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
-            .build();
-          var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
-          issue.addQuickFix(quickFix);
-          return issue;
-        });
+        issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        issue.addQuickFix(quickFix);
+      } else {
+        var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
+          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
+          .build();
+        issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
+        issue.addQuickFix(quickFix);
+      }
+
 
       for (Tree secondary : secondaryLocations) {
-        preciseIssue.secondary(secondary, MESSAGE_SECONDARY);
+        issue.secondary(secondary, MESSAGE_SECONDARY);
       }
     });
     return secondariesOpt.isPresent();
