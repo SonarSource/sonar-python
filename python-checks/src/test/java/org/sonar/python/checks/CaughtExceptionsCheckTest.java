@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CaughtExceptionsCheckTest {
@@ -27,5 +28,92 @@ public class CaughtExceptionsCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/caughtExceptions.py", new CaughtExceptionsCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var check = new CaughtExceptionsCheck();
+    var before = "class CustomException:\n" +
+      "  ...\n" +
+      "\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = bar()\n" +
+      "  except CustomException:\n" +
+      "    print(\"Exception\")";
+
+    var after = "class CustomException(Exception):\n" +
+      "  ...\n" +
+      "\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = bar()\n" +
+      "  except CustomException:\n" +
+      "    print(\"Exception\")";
+
+    var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, expectedMessage);
+  }
+
+  @Test
+  public void exceptionWithEmptyParenthesisQuickFixTest() {
+    var check = new CaughtExceptionsCheck();
+    var before = "class CustomException():\n" +
+      "  ...\n" +
+      "\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = bar()\n" +
+      "  except CustomException:\n" +
+      "    print(\"Exception\")";
+
+    var after = "class CustomException(Exception):\n" +
+      "  ...\n" +
+      "\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = bar()\n" +
+      "  except CustomException:\n" +
+      "    print(\"Exception\")";
+
+    var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, expectedMessage);
+  }
+
+  @Test
+  public void exceptionWithNotEmptyParenthesisQuickFixTest() {
+    var check = new CaughtExceptionsCheck();
+    var before = "class AbcEx:\n" +
+      "    ...\n" +
+      "\n" +
+      "class Ex(AbcEx):\n" +
+      "    ...\n" +
+      "\n" +
+      "def someLogic():\n" +
+      "    try:\n" +
+      "        a = foo()\n" +
+      "    except Ex:\n" +
+      "        ...";
+
+    var after = "class AbcEx:\n" +
+      "    ...\n" +
+      "\n" +
+      "class Ex(AbcEx, Exception):\n" +
+      "    ...\n" +
+      "\n" +
+      "def someLogic():\n" +
+      "    try:\n" +
+      "        a = foo()\n" +
+      "    except Ex:\n" +
+      "        ...";
+
+    var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "Ex");
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, expectedMessage);
   }
 }

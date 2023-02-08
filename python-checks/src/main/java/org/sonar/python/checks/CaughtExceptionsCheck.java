@@ -22,16 +22,22 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -48,6 +54,7 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Change this expression to be a class deriving from BaseException or a tuple of such classes.";
   private static final Set<String> NON_COMPLIANT_TYPES = new HashSet<>(Arrays.asList(LIST, SET, DICT));
+  public static final String QUICK_FIX_MESSAGE_FORMAT = "Make \"%s\" deriving from \"Exception\"";
 
   @Override
   public void initialize(Context context) {
@@ -60,13 +67,45 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
     if (exception == null) {
       return;
     }
-    TreeUtils.flattenTuples(exception).forEach(expression -> {
-      if (!canBeOrExtendBaseException(expression.type()) ||
-        ((expression instanceof HasSymbol) && !inheritsFromBaseException(((HasSymbol) expression).symbol()))) {
 
-        ctx.addIssue(expression, MESSAGE);
+    TreeUtils.flattenTuples(exception).forEach(expression -> {
+      var expressionSymbolOpt = TreeUtils.getSymbolFromTree(expression);
+      var notInheritsFromBaseException = expressionSymbolOpt
+        .filter(Predicate.not(CaughtExceptionsCheck::inheritsFromBaseException))
+        .isPresent();
+      if (!canBeOrExtendBaseException(expression.type()) || notInheritsFromBaseException) {
+        var issue = (IssueWithQuickFix) ctx.addIssue(expression, MESSAGE);
+        expressionSymbolOpt.ifPresent(symbol -> addQuickFix(issue, symbol));
       }
     });
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Symbol symbol) {
+    symbol.usages()
+      .stream()
+      .filter(Usage::isBindingUsage)
+      .findFirst()
+      .map(Usage::tree)
+      .map(Tree::parent)
+      .map(TreeUtils.toInstanceOfMapper(ClassDef.class))
+      .ifPresent(classDef -> {
+        Tree insertAfter = classDef.name();
+        String insertingText = "(Exception)";
+
+        if (classDef.leftPar() != null) {
+          if (classDef.args() == null) {
+            insertAfter = classDef.leftPar();
+            insertingText = "Exception";
+          } else {
+            insertAfter = classDef.args();
+            insertingText = ", Exception";
+          }
+        }
+
+        issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, classDef.name().name()))
+          .addTextEdit(PythonTextEdit.insertAfter(insertAfter, insertingText))
+          .build());
+      });
   }
 
   private static boolean canBeOrExtendBaseException(InferredType type) {
