@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -32,8 +33,8 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
-import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.python.quickfix.IssueWithQuickFix;
@@ -53,7 +54,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
 
   private static final String SYSTEM_EXIT_FUNCTION_NAME = "sys.exit";
   private static final String SYSTEM_EXC_INFO_NAME = "sys.exc_info";
-  public static final String NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE = "Replace \"pass\" statement with \"raise\"";
+  public static final String QUICK_FIX_MESSAGE = "Propagate the exception";
 
   /**
    * Checks that a given expression is re-raised or eventually handled.
@@ -61,7 +62,6 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
   private static class ExceptionReRaiseCheckVisitor extends BaseTreeVisitor {
     private Symbol exceptionInstance;
     private boolean isReRaised;
-    private PassStatement passStatement;
 
     public ExceptionReRaiseCheckVisitor(@Nullable Symbol exceptionInstance) {
       this.exceptionInstance = exceptionInstance;
@@ -91,11 +91,6 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
           this.isReRaised = true;
         }
       }
-    }
-
-    @Override
-    public void visitPassStatement(PassStatement passStatement) {
-      this.passStatement = passStatement;
     }
 
     @Override
@@ -140,7 +135,8 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
     exceptClause.accept(visitor);
     if (!visitor.isReRaised && !isSystemExitHandled) {
-      ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+      var issue = (IssueWithQuickFix) ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+      addQuickFix(exceptClause, issue);
     }
   }
 
@@ -166,21 +162,38 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
 
     if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
       var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
-      if (visitor.passStatement != null) {
-        var quickFix = PythonQuickFix.newQuickFix(NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE)
-          .addTextEdit(PythonTextEdit.replace(visitor.passStatement, "raise"))
-          .build();
-        issue.addQuickFix(quickFix);
-      }
+      addQuickFix(caughtException, issue);
 
       return true;
     }
 
     if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledSystemExit) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+      addQuickFix(caughtException, issue);
     }
 
     return false;
+  }
+
+  private static void addQuickFix(Expression caughtException, IssueWithQuickFix issue) {
+    Optional.of(caughtException)
+      .map(e -> TreeUtils.firstAncestor(caughtException, p -> p.is(Tree.Kind.EXCEPT_CLAUSE)))
+      .map(ExceptClause.class::cast)
+      .ifPresent(exceptClause -> addQuickFix(exceptClause, issue));
+  }
+
+  private static void addQuickFix(ExceptClause exceptClause, IssueWithQuickFix issue) {
+    var bodyStatements = exceptClause.body().statements();
+    var lastStatement = bodyStatements.get(bodyStatements.size() - 1);
+
+    var quickFixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
+    if (lastStatement.is(Tree.Kind.PASS_STMT) || TreeUtils.hasDescendant(lastStatement, c -> c.is(Tree.Kind.ELLIPSIS))) {
+      quickFixBuilder.addTextEdit(PythonTextEdit.replace(lastStatement, "raise"));
+    } else {
+      Token lastToken = lastStatement.lastToken();
+      quickFixBuilder.addTextEdit(PythonTextEdit.insertLineAfter(lastToken, lastStatement, "raise"));
+    }
+    issue.addQuickFix(quickFixBuilder.build());
   }
 
   @Override

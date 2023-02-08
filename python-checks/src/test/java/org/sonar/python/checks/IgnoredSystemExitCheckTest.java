@@ -40,8 +40,115 @@ public class IgnoredSystemExitCheckTest {
       "    open(\"foo.txt\", \"r\")\n" +
       "except SystemExit:\n" +
       "    raise";
-    PythonQuickFixVerifier.verify(new IgnoredSystemExitCheck(), before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(new IgnoredSystemExitCheck(), before, IgnoredSystemExitCheck.NOT_RAISED_CAUGHT_EXCEPTION_QUICK_FIX_MESSAGE);
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void addRaiseQuickFixTest() {
+    var before = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        pass\n" +
+      "        a = 10\n" +
+      "        print(a)";
+    var after = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        pass\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        raise";
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void replacePassWithRaiseQuickFixTest() {
+    var before = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        pass";
+    var after = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        raise";
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void replaceEllipsisWithRaiseQuickFixTest() {
+    var before = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        ...";
+    var after = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except SystemExit:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        raise";
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void baseExceptionQuickFixTest() {
+    var before = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except BaseException:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        ...";
+    var after = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except BaseException:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        raise";
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void bareExceptionQuickFixTest() {
+    var before = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        ...";
+    var after = "def bar():\n" +
+      "    try:\n" +
+      "        foo()\n" +
+      "    except:\n" +
+      "        a = 10\n" +
+      "        print(a)\n" +
+      "        raise";
+    IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
   }
 
 }
