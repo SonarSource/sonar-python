@@ -34,6 +34,9 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tests.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -47,6 +50,7 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   private static final String PYTEST_RAISE_CALL = "pytest.raises";
   private static final String PYTEST_ARG_EXCEPTION = "expected_exception";
   private static final String UNITTEST_ARG_EXCEPTION = "exception";
+  public static final String QUICK_FIX_MESSAGE = "Change indentation level";
 
   @Override
   public void initialize(Context context) {
@@ -59,8 +63,16 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
       List<Statement> statements = withStatement.statements().statements();
       Statement statement = statements.get(statements.size()-1);
       if (isAnAssert(statement)) {
-        ctx.addIssue(statement, statements.size() > 1 ? MESSAGE_MULTIPLE_STATEMENT : MESSAGE_SINGLE_STATEMENT)
+        var message = statements.size() > 1 ? MESSAGE_MULTIPLE_STATEMENT : MESSAGE_SINGLE_STATEMENT;
+        var issue = (IssueWithQuickFix) ctx.addIssue(statement, message)
           .secondary(IssueLocation.preciseLocation(withStatement.firstToken(), withStatement.colon(), MESSAGE_SECONDARY));
+
+        if (statements.size() > 1) {
+          var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.shiftLeft(statement, statement.firstToken().column() - withStatement.firstToken().column()))
+            .build();
+          issue.addQuickFix(quickFix);
+        }
       }
     });
   }

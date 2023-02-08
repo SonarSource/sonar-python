@@ -20,6 +20,7 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class AssertAfterRaiseCheckTest {
@@ -41,5 +42,21 @@ public class AssertAfterRaiseCheckTest {
   @Test
   public void testImportPytestAs() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseImportPytestAs.py", new AssertAfterRaiseCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var before = "import pytest\n" +
+      "def test_base_case_multiple_statement():\n" +
+      "    with pytest.raises(ZeroDivisionError):\n" +
+      "        foo()\n" +
+      "        assert bar() == 42 ";
+    var after = "import pytest\n" +
+      "def test_base_case_multiple_statement():\n" +
+      "    with pytest.raises(ZeroDivisionError):\n" +
+      "        foo()\n" +
+      "    assert bar() == 42 ";
+
+    PythonQuickFixVerifier.verify(new AssertAfterRaiseCheck(), before, after);
   }
 }
