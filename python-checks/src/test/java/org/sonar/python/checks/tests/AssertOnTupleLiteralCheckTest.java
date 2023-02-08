@@ -21,6 +21,7 @@ package org.sonar.python.checks.tests;
 
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,16 @@ public class AssertOnTupleLiteralCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnTupleLiteral.py", new AssertOnTupleLiteralCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var before = "def foo():\n" +
+      "    assert (a, b)";
+    var after = "def foo():\n" +
+      "    assert a, b";
+    PythonQuickFixVerifier.verify(new AssertOnTupleLiteralCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new AssertOnTupleLiteralCheck(), before, AssertOnTupleLiteralCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test

@@ -23,11 +23,16 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S5905")
 public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Fix this assertion on a tuple literal.";
+  public static final String QUICK_FIX_MESSAGE = "Remove parentheses";
 
   @Override
   public void initialize(Context context) {
@@ -35,7 +40,17 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
       AssertStatement assertStatement = (AssertStatement) ctx.syntaxNode();
 
       if (assertStatement.condition().is(Tree.Kind.TUPLE) && assertStatement.message() == null) {
-        ctx.addIssue(assertStatement.condition(), MESSAGE);
+        var tuple = (Tuple) assertStatement.condition();
+
+        var issue = (IssueWithQuickFix) ctx.addIssue(tuple, MESSAGE);
+
+        if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null) {
+          // defensive condition
+          issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.remove(tuple.leftParenthesis()))
+            .addTextEdit(PythonTextEdit.remove(tuple.rightParenthesis()))
+            .build());
+        }
       }
     });
   }
