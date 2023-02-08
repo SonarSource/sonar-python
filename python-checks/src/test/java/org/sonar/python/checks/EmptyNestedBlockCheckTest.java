@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class EmptyNestedBlockCheckTest {
@@ -27,6 +28,31 @@ public class EmptyNestedBlockCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/emptyNestedBlock.py", new EmptyNestedBlockCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var check = new EmptyNestedBlockCheck();
+
+    var before = "def foo():\n" +
+      "    for i in range(3):\n" +
+      "        pass";
+    var after = "def foo():\n" +
+      "    for i in range(3):\n" +
+      "        # TODO: Add implementation\n" +
+      "        pass";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, EmptyNestedBlockCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void inlineQuickFixTest() {
+    var check = new EmptyNestedBlockCheck();
+
+    var before = "if 3 > 2: pass\n";
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
   }
 
 }
