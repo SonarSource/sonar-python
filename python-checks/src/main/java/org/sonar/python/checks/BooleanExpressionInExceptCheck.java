@@ -19,15 +19,28 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 
 @Rule(key = "S5714")
 public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
+
+  public static final String MESSAGE = "Rewrite this \"except\" expression as a tuple of exception classes.";
+  public static final String QUICK_FIX_MESSAGE = "Replace boolean expression with tuple";
 
   @Override
   public void initialize(Context context) {
@@ -39,8 +52,38 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
     ExceptClause except = (ExceptClause) ctx.syntaxNode();
     Expression exception = Expressions.removeParentheses(except.exception());
     if (exception != null && exception.is(Kind.OR, Kind.AND)) {
-      ctx.addIssue(exception, "Rewrite this \"except\" expression as a tuple of exception classes.");
+      var issue = (IssueWithQuickFix) ctx.addIssue(exception, MESSAGE);
+      var quickFixEdits = getQuickFixEdits(exception);
+      if (!quickFixEdits.isEmpty()) {
+        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE).addTextEdit(quickFixEdits).build());
+      }
     }
+  }
+
+  private static List<PythonTextEdit> getQuickFixEdits(Tree expression) {
+    return IntStream.range(0, expression.children().size())
+      .mapToObj(childIndex -> {
+        var child = expression.children().get(childIndex);
+        if (child.is(Kind.TOKEN)) {
+          var previous = expression.children().get(childIndex - 1);
+          if (!previous.children().isEmpty()) {
+            previous = previous.children().get(previous.children().size() -1);
+          }
+          var next = expression.children().get(childIndex + 1);
+          return Stream.of(
+            PythonTextEdit.insertAfter(previous, ","),
+            PythonTextEdit.removeUntil(child, next)
+          );
+        } else if (child.is(Kind.OR, Kind.AND)) {
+          return getQuickFixEdits(child).stream();
+        } else if (child.is(Kind.PARENTHESIZED)) {
+          return getQuickFixEdits(((ParenthesizedExpression) child).expression()).stream();
+        }
+        return Stream.empty();
+      })
+      .flatMap(Function.identity())
+      .map(PythonTextEdit.class::cast)
+      .collect(Collectors.toList());
   }
 
 }

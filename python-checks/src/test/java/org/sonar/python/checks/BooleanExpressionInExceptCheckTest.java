@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class BooleanExpressionInExceptCheckTest {
@@ -27,6 +28,53 @@ public class BooleanExpressionInExceptCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/booleanExpressionInExcept.py", new BooleanExpressionInExceptCheck());
+  }
+  @Test
+  public void quickFixTest() {
+    var check = new BooleanExpressionInExceptCheck();
+    var before = "try:\n" +
+      "    foo()\n" +
+      "except ValueError or TypeError and SomeError:\n" +
+      "    pass";
+
+    var after = "try:\n" +
+      "    foo()\n" +
+      "except ValueError, TypeError, SomeError:\n" +
+      "    pass";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void wrappedInParenthesisQuickFixTest() {
+    var check = new BooleanExpressionInExceptCheck();
+    var before = "try:\n" +
+      "    foo()\n" +
+      "except (ValueError or TypeError and SomeError):\n" +
+      "    pass";
+
+    var after = "try:\n" +
+      "    foo()\n" +
+      "except (ValueError, TypeError, SomeError):\n" +
+      "    pass";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void nestedQuickFixTest() {
+    var check = new BooleanExpressionInExceptCheck();
+    var before = "try:\n" +
+      "    foo()\n" +
+      "except ((ValueError or TypeError) and SomeError):\n" +
+      "    pass";
+
+    var after = "try:\n" +
+      "    foo()\n" +
+      "except ((ValueError, TypeError), SomeError):\n" +
+      "    pass";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
   }
 
 }
