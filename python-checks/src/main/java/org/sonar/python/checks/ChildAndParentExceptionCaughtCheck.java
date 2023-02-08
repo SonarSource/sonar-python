@@ -40,7 +40,7 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5713")
 public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck {
-  public static final String QUICK_FIX_MESSAGE = "Remove this redundant Exception";
+  public static final String QUICK_FIX_MESSAGE = "Remove the redundant Exception";
 
   @Override
   public void initialize(Context context) {
@@ -74,10 +74,12 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         ClassSymbol comparedSymbol = otherEntry.getKey();
         if (currentSymbol != comparedSymbol && currentSymbol.isOrExtends(comparedSymbol)) {
           if (issue == null) {
-            var quickFix = createQuickFix(currentException);
 
             issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
-            issue.addQuickFix(quickFix);
+            if (currentException.parent().is(Tree.Kind.TUPLE)) {
+              var quickFix = createQuickFix(currentException);
+              issue.addQuickFix(quickFix);
+            }
           }
           addSecondaryLocations(issue, otherEntry.getValue());
         }
@@ -88,35 +90,55 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
   private static PythonQuickFix createQuickFix(Expression currentException) {
     PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
 
-    var fromLine = currentException.firstToken().line();
-    var fromColumn = currentException.firstToken().column();
-    var toLine = currentException.lastToken().line();
-    var toColumn = currentException.lastToken().column();
+    var parentTuple = (Tuple) currentException.parent();
 
-    if (currentException.parent().is(Tree.Kind.TUPLE)) {
-      var parentTuple = (Tuple) currentException.parent();
+    if (parentTuple.elements().size() == 2) {
+      // If there is just 2 exceptions
+      // then we need just to remove everything from one which should stay till the end of the clause
+      // and from the beginning of the clause till one which should stay
+      parentTuple.elements().stream()
+        .filter(el -> el != currentException)
+        .findFirst()
+        .ifPresent(toKeep -> {
+          List<Tree> tupleChildren = parentTuple.children();
+          var currentIndex = tupleChildren.indexOf(toKeep);
+
+          var fromToken = tupleChildren.get(currentIndex + 1).firstToken();
+          var toToken = tupleChildren.get(tupleChildren.size() - 1).lastToken();
+          // toToken.column() + 1 to remove right parenthesis
+          builder.addTextEdit(PythonTextEdit.removeRange(fromToken.line(), fromToken.column(), toToken.line(),  toToken.column() + 1));
+
+          fromToken = tupleChildren.get(0).firstToken();
+          toToken = toKeep.firstToken();
+          builder.addTextEdit(PythonTextEdit.removeRange(fromToken.line(), fromToken.column(), toToken.line(),  toToken.column()));
+        });
+    } else {
       var currentIndex = parentTuple.children().indexOf(currentException);
+
+      var firstToken = currentException.firstToken();
 
       // If currentException is not first one - need to remove previous comma
       if (currentIndex > 1) {
         var previous = parentTuple.children().get(currentIndex - 1);
-        var previousToken = previous.lastToken();
-        fromLine = previousToken.line();
-        fromColumn = previousToken.column();
+        firstToken = previous.lastToken();
       }
 
+      var fromLine = firstToken.line();
+      var fromColumn = firstToken.column();
+
       var nextIndex = currentIndex + 1;
-      // If currentException is not last one - need to remove next comma
-      if (currentIndex < parentTuple.children().size() - 2) {
-        nextIndex = currentIndex + 2;
+      // If currentException is first one - need to remove next comma
+      if (currentIndex == 1) {
+        nextIndex++;
       }
       var next = parentTuple.children().get(nextIndex);
       var nextToken = next.lastToken();
-      toLine = nextToken.line();
-      toColumn = nextToken.column();
+      var toLine = nextToken.line();
+      var toColumn = nextToken.column();
 
+      builder.addTextEdit(PythonTextEdit.removeRange(fromLine, fromColumn, toLine, toColumn));
     }
-    builder.addTextEdit(PythonTextEdit.removeRange(fromLine, fromColumn, toLine, toColumn));
+
     return builder.build();
   }
 

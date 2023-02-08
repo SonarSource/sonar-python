@@ -42,7 +42,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
     String after = "def child_with_parent():\n" +
       "  try:\n" +
       "      raise NotImplementedError()\n" +
-      "  except (RuntimeError):\n" +
+      "  except RuntimeError:\n" +
       "      print(\"Foo\")";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
@@ -60,7 +60,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
     String after = "def parent_with_child():\n" +
       "  try:\n" +
       "      raise NotImplementedError()\n" +
-      "  except (RuntimeError):\n" +
+      "  except RuntimeError:\n" +
       "      print(\"Foo\")";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
@@ -78,7 +78,79 @@ public class ChildAndParentExceptionCaughtCheckTest {
     String after = "def duplicate_exception_caught():\n" +
       "  try:\n" +
       "      raise NotImplementedError()\n" +
-      "  except (RuntimeError):\n" +
+      "  except RuntimeError:\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void threeExceptionsFirstQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RecursionError, RuntimeError, Abc):\n" +
+      "      print(\"Foo\")";
+    String after = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void threeExceptionsSecondQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, RecursionError, Abc):\n" +
+      "      print(\"Foo\")";
+    String after = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void threeExceptionsThirdQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc, RecursionError):\n" +
+      "      print(\"Foo\")";
+    String after = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void threeExceptionsThirdWithCommaInTheEndQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc, RecursionError,):\n" +
+      "      print(\"Foo\")";
+    String after = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc,):\n" +
       "      print(\"Foo\")";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);

@@ -21,15 +21,13 @@ package org.sonar.python.checks.quickfix;
 
 import com.sonar.sslr.api.AstNode;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.mockito.Mockito;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
