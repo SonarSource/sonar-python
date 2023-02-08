@@ -54,9 +54,7 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
     if (exception != null && exception.is(Kind.OR, Kind.AND)) {
       var issue = (IssueWithQuickFix) ctx.addIssue(exception, MESSAGE);
       var quickFixEdits = getQuickFixEdits(exception);
-      if (!quickFixEdits.isEmpty()) {
-        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE).addTextEdit(quickFixEdits).build());
-      }
+      issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE).addTextEdit(quickFixEdits).build());
     }
   }
 
@@ -66,12 +64,10 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
         var child = expression.children().get(childIndex);
         if (child.is(Kind.TOKEN)) {
           var previous = expression.children().get(childIndex - 1);
-          if (!previous.children().isEmpty()) {
-            previous = previous.children().get(previous.children().size() -1);
-          }
+          var previousLastChildren = previous.children().get(previous.children().size() -1);
           var next = expression.children().get(childIndex + 1);
           return Stream.of(
-            PythonTextEdit.insertAfter(previous, ","),
+            PythonTextEdit.insertAfter(previousLastChildren, ","),
             PythonTextEdit.removeUntil(child, next)
           );
         } else if (child.is(Kind.OR, Kind.AND)) {

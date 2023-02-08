@@ -31,7 +31,6 @@ public class BooleanExpressionInExceptCheckTest {
   }
   @Test
   public void quickFixTest() {
-    var check = new BooleanExpressionInExceptCheck();
     var before = "try:\n" +
       "    foo()\n" +
       "except ValueError or TypeError and SomeError:\n" +
@@ -41,13 +40,11 @@ public class BooleanExpressionInExceptCheckTest {
       "    foo()\n" +
       "except ValueError, TypeError, SomeError:\n" +
       "    pass";
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
+    verifyQuickFix(before, after);
   }
 
   @Test
   public void wrappedInParenthesisQuickFixTest() {
-    var check = new BooleanExpressionInExceptCheck();
     var before = "try:\n" +
       "    foo()\n" +
       "except (ValueError or TypeError and SomeError):\n" +
@@ -57,13 +54,11 @@ public class BooleanExpressionInExceptCheckTest {
       "    foo()\n" +
       "except (ValueError, TypeError, SomeError):\n" +
       "    pass";
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
+    verifyQuickFix(before, after);
   }
 
   @Test
   public void nestedQuickFixTest() {
-    var check = new BooleanExpressionInExceptCheck();
     var before = "try:\n" +
       "    foo()\n" +
       "except ((ValueError or TypeError) and SomeError):\n" +
@@ -73,6 +68,11 @@ public class BooleanExpressionInExceptCheckTest {
       "    foo()\n" +
       "except ((ValueError, TypeError), SomeError):\n" +
       "    pass";
+    verifyQuickFix(before, after);
+  }
+
+  private void verifyQuickFix(String before, String after) {
+    var check = new BooleanExpressionInExceptCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, BooleanExpressionInExceptCheck.QUICK_FIX_MESSAGE);
   }
