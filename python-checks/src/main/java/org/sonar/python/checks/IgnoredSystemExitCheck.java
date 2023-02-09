@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -33,8 +34,12 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5754")
@@ -49,6 +54,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
 
   private static final String SYSTEM_EXIT_FUNCTION_NAME = "sys.exit";
   private static final String SYSTEM_EXC_INFO_NAME = "sys.exc_info";
+  public static final String QUICK_FIX_MESSAGE = "Propagate the exception";
 
   /**
    * Checks that a given expression is re-raised or eventually handled.
@@ -129,7 +135,8 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
     exceptClause.accept(visitor);
     if (!visitor.isReRaised && !isSystemExitHandled) {
-      ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+      var issue = (IssueWithQuickFix) ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+      addQuickFix(exceptClause, issue);
     }
   }
 
@@ -154,15 +161,39 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     }
 
     if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+      addQuickFix(caughtException, issue);
+
       return true;
     }
 
     if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledSystemExit) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+      addQuickFix(caughtException, issue);
     }
 
     return false;
+  }
+
+  private static void addQuickFix(Expression caughtException, IssueWithQuickFix issue) {
+    Optional.of(caughtException)
+      .map(e -> TreeUtils.firstAncestor(caughtException, p -> p.is(Tree.Kind.EXCEPT_CLAUSE)))
+      .map(ExceptClause.class::cast)
+      .ifPresent(exceptClause -> addQuickFix(exceptClause, issue));
+  }
+
+  private static void addQuickFix(ExceptClause exceptClause, IssueWithQuickFix issue) {
+    var bodyStatements = exceptClause.body().statements();
+    var lastStatement = bodyStatements.get(bodyStatements.size() - 1);
+
+    var quickFixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
+    if (lastStatement.is(Tree.Kind.PASS_STMT) || TreeUtils.hasDescendant(lastStatement, c -> c.is(Tree.Kind.ELLIPSIS))) {
+      quickFixBuilder.addTextEdit(PythonTextEdit.replace(lastStatement, "raise"));
+    } else {
+      Token lastToken = lastStatement.lastToken();
+      quickFixBuilder.addTextEdit(PythonTextEdit.insertLineAfter(lastToken, lastStatement, "raise"));
+    }
+    issue.addQuickFix(quickFixBuilder.build());
   }
 
   @Override
