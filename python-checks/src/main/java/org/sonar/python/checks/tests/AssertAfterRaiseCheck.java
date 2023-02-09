@@ -69,12 +69,22 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
 
         if (statements.size() > 1) {
           var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.shiftLeft(statement, statement.firstToken().column() - withStatement.firstToken().column()))
+            .addTextEdit(createTextEdits(withStatement, statement))
             .build();
           issue.addQuickFix(quickFix);
         }
       }
     });
+  }
+
+  private static List<PythonTextEdit> createTextEdits(WithStatement withStatement, Statement statement) {
+    if (statement.firstToken().line() == withStatement.firstToken().line()) {
+      var textToInsert = "\n" + " ".repeat(withStatement.firstToken().column());
+      return List.of(PythonTextEdit.insertBefore(statement, textToInsert));
+    } else {
+      int offset = statement.firstToken().column() - withStatement.firstToken().column();
+      return PythonTextEdit.shiftLeft(statement, offset);
+    }
   }
 
   public boolean isWithStatementItemARaise(WithStatement withStatement) {
