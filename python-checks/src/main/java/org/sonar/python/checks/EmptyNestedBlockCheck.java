@@ -70,9 +70,18 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
         var issue = (IssueWithQuickFix) ctx.addIssue(passTreeElement, MESSAGE);
 
         if (passTreeElement.firstToken().line() != parent.firstToken().line()) {
-          var quickFixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.insertLineBefore(passTreeElement, TODO_COMMENT_TEXT));
-          issue.addQuickFix(quickFixBuilder.build());
+          var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
+            PythonTextEdit.insertLineBefore(passTreeElement, TODO_COMMENT_TEXT));
+          issue.addQuickFix(quickFix);
+        } else {
+          var indent = TreeUtils.findIndentationSize(passTreeElement);
+          if (indent > 0) {
+            var offset = parent.firstToken().column() + indent;
+            var textToInsert = "\n" + " ".repeat(offset) + TODO_COMMENT_TEXT + "\n" + " ".repeat(offset);
+            var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
+              PythonTextEdit.insertBefore(passTreeElement, textToInsert));
+            issue.addQuickFix(quickFix);
+          }
         }
 
       }

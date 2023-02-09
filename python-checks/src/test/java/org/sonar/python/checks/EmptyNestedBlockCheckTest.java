@@ -50,9 +50,34 @@ public class EmptyNestedBlockCheckTest {
   public void inlineQuickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
-    var before = "if 3 > 2: pass\n";
+    var before = "def foo():\n" +
+      "    if a < 3: pass\n";
 
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+    var after = "def foo():\n" +
+      "    if a < 3: \n" +
+      "        # TODO: Add implementation\n" +
+      "        pass\n";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+  }
+
+  @Test
+  public void rootInlineQuickFixTest() {
+    var check = new EmptyNestedBlockCheck();
+
+    var before = "if a < 3: pass\n" +
+      "\n" +
+      "def foo(a):\n" +
+      "  print(a)";
+
+    var after = "if a < 3: \n" +
+      "  # TODO: Add implementation\n" +
+      "  pass\n" +
+      "\n" +
+      "def foo(a):\n" +
+      "  print(a)";
+
+    PythonQuickFixVerifier.verify(check, before, after);
   }
 
 }

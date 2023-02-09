@@ -248,7 +248,7 @@ public class TreeUtils {
     return visitor.functionDefs;
   }
 
-  public static int findIndent(Tree tree) {
+  public static int findIndentationSize(Tree tree) {
     var parent = tree.parent();
 
     if (parent == null) {
@@ -261,7 +261,7 @@ public class TreeUtils {
     if (treeToken.line() != parentToken.line()) {
       return treeToken.column() - parentToken.column();
     } else {
-      return findIndent(parent);
+      return findIndentationSize(parent);
     }
   }
 
