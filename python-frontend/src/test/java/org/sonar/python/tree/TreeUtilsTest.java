@@ -519,45 +519,66 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_findIndent() {
-    FileInput fileInput = PythonTestUtils.parse("def foo():\n" +
+  public void test_findIndentationSize() {
+    var fileInput = PythonTestUtils.parse("def foo():\n" +
       "    if a < 3: pass\n");
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
-    var indent = TreeUtils.findIndent(passDef);
+    var indent = TreeUtils.findIndentationSize(passDef);
     assertThat(indent).isEqualTo(4);
+
+    fileInput = PythonTestUtils.parse("class A():\n" +
+      "    def foo(self):\n" +
+      "      if a < 3: pass\n");
+
+    passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
+
+    indent = TreeUtils.findIndentationSize(passDef);
+    assertThat(indent).isEqualTo(2);
+
   }
 
   @Test
-  public void test_findIndentDownTree() {
-    FileInput fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
+  public void test_findIndentationSizeDownTree() {
+    var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
       "\n" +
       "def foo(a):\n" +
       "  print(a)");
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
-    var indent = TreeUtils.findIndent(passDef);
+    var indent = TreeUtils.findIndentationSize(passDef);
     assertThat(indent).isEqualTo(2);
+
+    fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
+      "\n" +
+      "class A():\n" +
+      "    def foo(self, a):\n" +
+      "      print(a)");
+
+    passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
+
+    indent = TreeUtils.findIndentationSize(passDef);
+    assertThat(indent).isEqualTo(4);
   }
 
   @Test
-  public void test_findIndentZero() {
-    FileInput fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
+  public void test_findIndentationSizeZero() {
+    var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
       "\n" +
       "def foo(a): pass");
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
-    var indent = TreeUtils.findIndent(passDef);
+    var indent = TreeUtils.findIndentationSize(passDef);
     assertThat(indent).isZero();
   }
 
   @Test
-  public void test_findIndentEmpty() {
-    FileInput fileInput = PythonTestUtils.parse("");
-    var indent = TreeUtils.findIndent(fileInput);
+  public void test_findIndentationSizeEmpty() {
+    var fileInput = PythonTestUtils.parse("");
+    var indent = TreeUtils.findIndentationSize(fileInput);
     assertThat(indent).isZero();
   }
 
