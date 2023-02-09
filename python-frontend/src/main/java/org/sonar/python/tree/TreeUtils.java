@@ -389,4 +389,17 @@ public class TreeUtils {
     }
     return tree.lastToken();
   }
+
+  public static <T extends Tree> Function<Tree, T> toInstanceOfMapper(Class<T> castToClass) {
+    return toOptionalInstanceOfMapper(castToClass).andThen(t -> t.orElse(null));
+  }
+
+  public static <T extends Tree> Function<Tree, Optional<T>> toOptionalInstanceOfMapper(Class<T> castToClass) {
+    return tree -> toOptionalInstanceOf(castToClass, tree);
+  }
+
+  public static <T extends Tree> Optional<T> toOptionalInstanceOf(Class<T> castToClass, Tree tree) {
+    return Optional.of(tree).filter(castToClass::isInstance).map(castToClass::cast);
+  }
+
 }

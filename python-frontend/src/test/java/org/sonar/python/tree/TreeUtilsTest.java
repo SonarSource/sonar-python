@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -439,6 +440,82 @@ public class TreeUtilsTest {
 
     int comparsionResult = comparator.compare(assignments.get(1), assignments.get(0));
     assertThat(comparsionResult).isPositive();
+  }
+
+  @Test
+  public void test_toOptionalInstanceOf() {
+    var fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    boolean classPresent = TreeUtils.toOptionalInstanceOf(ClassDef.class, tree)
+      .isPresent();
+
+    assertThat(classPresent).isTrue();
+
+    boolean funcDefPresent = TreeUtils.toOptionalInstanceOf(FunctionDef.class, tree)
+      .isPresent();
+
+    assertThat(funcDefPresent).isFalse();
+  }
+
+  @Test
+  public void test_toOptionalInstanceOfMapper() {
+    var fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    boolean classPresent = Optional.of(tree)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .isPresent();
+
+    assertThat(classPresent).isTrue();
+
+    boolean funcDefPresent = Optional.of(tree)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(FunctionDef.class))
+      .isPresent();
+
+    assertThat(funcDefPresent).isFalse();
+  }
+
+  @Test
+  public void test_toInstanceOfMapper() {
+    var fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    boolean classPresent = Optional.of(tree)
+      .map(TreeUtils.toInstanceOfMapper(ClassDef.class))
+      .isPresent();
+
+    assertThat(classPresent).isTrue();
+
+    boolean funcDefPresent = Optional.of(tree)
+      .map(TreeUtils.toInstanceOfMapper(FunctionDef.class))
+      .isPresent();
+
+    assertThat(funcDefPresent).isFalse();
   }
 
   private static boolean isOuterFunction(Tree tree) {
