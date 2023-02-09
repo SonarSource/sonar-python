@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -63,28 +64,32 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
     caughtExceptionsBySymbol.forEach((currentSymbol, caughtExceptionsWithSameSymbol) -> {
       Expression currentException = caughtExceptionsWithSameSymbol.get(0);
       if (caughtExceptionsWithSameSymbol.size() > 1) {
-        var quickFix = createQuickFix(currentException);
-
         IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this duplicate Exception class.");
-        issue.addQuickFix(quickFix);
+        addQuickFix(issue, currentException);
         caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, "Duplicate."));
       }
-      IssueWithQuickFix issue = null;
-      for (Map.Entry<ClassSymbol, List<Expression>> otherEntry : caughtExceptionsBySymbol.entrySet()) {
-        ClassSymbol comparedSymbol = otherEntry.getKey();
-        if (currentSymbol != comparedSymbol && currentSymbol.isOrExtends(comparedSymbol)) {
-          if (issue == null) {
 
-            issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
-            if (currentException.parent().is(Tree.Kind.TUPLE)) {
-              var quickFix = createQuickFix(currentException);
-              issue.addQuickFix(quickFix);
-            }
-          }
-          addSecondaryLocations(issue, otherEntry.getValue());
-        }
+      var symbolsWithErrors = caughtExceptionsBySymbol.entrySet()
+        .stream()
+        .filter(entry -> entry.getKey() != currentSymbol && currentSymbol.isOrExtends(entry.getKey()))
+        .collect(Collectors.toList());
+
+      if (!symbolsWithErrors.isEmpty()) {
+        var issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
+        addQuickFix(issue, currentException);
+
+        symbolsWithErrors.stream()
+          .map(Map.Entry::getValue)
+          .forEach(entries -> addSecondaryLocations(issue, entries));
       }
     });
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Expression currentException) {
+    if (currentException.parent().is(Tree.Kind.TUPLE)) {
+      var quickFix = createQuickFix(currentException);
+      issue.addQuickFix(quickFix);
+    }
   }
 
   private static PythonQuickFix createQuickFix(Expression currentException) {
