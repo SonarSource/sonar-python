@@ -518,6 +518,49 @@ public class TreeUtilsTest {
     assertThat(funcDefPresent).isFalse();
   }
 
+  @Test
+  public void test_findIndent() {
+    FileInput fileInput = PythonTestUtils.parse("def foo():\n" +
+      "    if a < 3: pass\n");
+
+    var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
+
+    var indent = TreeUtils.findIndent(passDef);
+    assertThat(indent).isEqualTo(4);
+  }
+
+  @Test
+  public void test_findIndentDownTree() {
+    FileInput fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
+      "\n" +
+      "def foo(a):\n" +
+      "  print(a)");
+
+    var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
+
+    var indent = TreeUtils.findIndent(passDef);
+    assertThat(indent).isEqualTo(2);
+  }
+
+  @Test
+  public void test_findIndentZero() {
+    FileInput fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
+      "\n" +
+      "def foo(a): pass");
+
+    var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
+
+    var indent = TreeUtils.findIndent(passDef);
+    assertThat(indent).isZero();
+  }
+
+  @Test
+  public void test_findIndentEmpty() {
+    FileInput fileInput = PythonTestUtils.parse("");
+    var indent = TreeUtils.findIndent(fileInput);
+    assertThat(indent).isZero();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }
