@@ -119,7 +119,7 @@ public class PythonTextEdit {
    * Shift single statement of a statement list by the given offset.
    * Take care about child statements by collecting all child tokens and shift each line once.
    */
-  private static List<PythonTextEdit> shiftLeft(Tree tree, int offset) {
+  public static List<PythonTextEdit> shiftLeft(Tree tree, int offset) {
     return TreeUtils.tokens(tree).stream()
       .filter(token -> token.column() >= offset)
       .map(Token::line)
