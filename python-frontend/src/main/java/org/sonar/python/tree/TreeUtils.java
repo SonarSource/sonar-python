@@ -248,6 +248,41 @@ public class TreeUtils {
     return visitor.functionDefs;
   }
 
+  public static int findIndent(Tree tree) {
+    var parent = tree.parent();
+
+    if (parent == null) {
+      return findIndentDownTree(tree);
+    }
+
+    var treeToken = tree.firstToken();
+    var parentToken = parent.firstToken();
+
+    if (treeToken.line() != parentToken.line()) {
+      return treeToken.column() - parentToken.column();
+    } else {
+      return findIndent(parent);
+    }
+  }
+
+  private static int findIndentDownTree(Tree parent) {
+    var parentToken = parent.firstToken();
+    return parent.children()
+      .stream()
+      .map(child -> {
+
+        var childToken = child.firstToken();
+        if (childToken.line() > parentToken.line() && childToken.column() > parentToken.column()) {
+          return childToken.column() - parentToken.column();
+        } else  {
+          return findIndentDownTree(child);
+        }
+      })
+      .filter(i -> i > 0)
+      .findFirst()
+      .orElse(0);
+  }
+
   private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
     private List<FunctionDef> functionDefs = new ArrayList<>();
 
