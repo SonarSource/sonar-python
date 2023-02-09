@@ -24,9 +24,9 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -85,9 +85,9 @@ public class PythonQuickFixVerifierTest {
     public void initialize(Context context) {
       context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> {
         AssignmentStatement assignment = ((AssignmentStatement) ctx.syntaxNode());
-        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(assignment.equalTokens().get(0), "");
+        PreciseIssue issue = ctx.addIssue(assignment.equalTokens().get(0), "");
 
-        PythonTextEdit text = PythonTextEdit
+        PythonTextEdit text = TextEditUtils
           .insertBefore(assignment.equalTokens().get(0), "!");
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Add '!' here.")
           .addTextEdit(text)

@@ -30,9 +30,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
@@ -67,11 +66,11 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
           .map(Tree.class::cast)
           .orElseGet(statementListTree::firstToken);
 
-        var issue = (IssueWithQuickFix) ctx.addIssue(passTreeElement, MESSAGE);
+        var issue = ctx.addIssue(passTreeElement, MESSAGE);
 
         if (passTreeElement.firstToken().line() != parent.firstToken().line()) {
           var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
-            PythonTextEdit.insertLineBefore(passTreeElement, TODO_COMMENT_TEXT));
+            TextEditUtils.insertLineBefore(passTreeElement, TODO_COMMENT_TEXT));
           issue.addQuickFix(quickFix);
         } else {
           var indent = TreeUtils.findIndentationSize(passTreeElement);
@@ -79,7 +78,7 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
             var offset = parent.firstToken().column() + indent;
             var textToInsert = "\n" + " ".repeat(offset) + TODO_COMMENT_TEXT + "\n" + " ".repeat(offset);
             var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
-              PythonTextEdit.insertBefore(passTreeElement, textToInsert));
+              TextEditUtils.insertBefore(passTreeElement, textToInsert));
             issue.addQuickFix(quickFix);
           }
         }

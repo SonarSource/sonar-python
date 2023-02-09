@@ -45,7 +45,6 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
@@ -60,8 +59,8 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SET_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
-import static org.sonar.python.quickfix.PythonTextEdit.insertLineBefore;
-import static org.sonar.python.quickfix.PythonTextEdit.replace;
+import static org.sonar.python.quickfix.TextEditUtils.insertLineBefore;
+import static org.sonar.python.quickfix.TextEditUtils.replace;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nonTupleParameters;
 
@@ -134,7 +133,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
           .ifPresent(paramSymbol -> {
             Map<Tree, String> mutations = getMutations(defaultValue, paramSymbol);
             if (!mutations.isEmpty()) {
-              IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameter, MESSAGE);
+              PreciseIssue issue = ctx.addIssue(parameter, MESSAGE);
               mutations.keySet().forEach(t -> issue.secondary(t, mutations.get(t)));
 
               getQuickFix(functionDef, defaultValue, paramSymbol)

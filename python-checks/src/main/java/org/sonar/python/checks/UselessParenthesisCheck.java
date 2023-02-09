@@ -24,9 +24,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
 public class UselessParenthesisCheck extends PythonSubscriptionCheck {
@@ -42,9 +41,9 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
       ParenthesizedExpression parenthesized = (ParenthesizedExpression) ctx.syntaxNode();
       Expression expression = parenthesized.expression();
       if (expression.is(Tree.Kind.PARENTHESIZED, Tree.Kind.TUPLE, Tree.Kind.GENERATOR_EXPR)) {
-        var issue = (IssueWithQuickFix) ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
+        var issue = ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
         var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-          .addTextEdit(PythonTextEdit.remove(parenthesized.leftParenthesis()), PythonTextEdit.remove(parenthesized.rightParenthesis()))
+          .addTextEdit(TextEditUtils.remove(parenthesized.leftParenthesis()), TextEditUtils.remove(parenthesized.rightParenthesis()))
           .build();
         issue.addQuickFix(quickFix);
       }

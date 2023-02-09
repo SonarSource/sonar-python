@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -57,7 +56,7 @@ public class PythonQuickFixVerifier {
       .as("Number of issues")
       .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
       .hasSize(1);
-    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+    PreciseIssue issue = issues.get(0);
 
     assertThat(issue.getQuickFixes())
       .as("Number of quickfixes")
@@ -82,7 +81,7 @@ public class PythonQuickFixVerifier {
       .as("Number of issues")
       .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
       .hasSize(1);
-    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+    PreciseIssue issue = issues.get(0);
 
     assertThat(issue.getQuickFixes())
       .as("Number of quick fixes")
@@ -93,7 +92,7 @@ public class PythonQuickFixVerifier {
   public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
     Stream<String> descriptions = PythonQuickFixVerifier
       .getIssuesWithQuickFix(check, codeWithIssue)
-      .stream().map(IssueWithQuickFix.class::cast)
+      .stream()
       .flatMap(issue -> issue.getQuickFixes().stream())
       .map(PythonQuickFix::getDescription);
 

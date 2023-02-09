@@ -44,9 +44,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
@@ -94,11 +93,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     String symbolName = unnecessaryAssignment.symbol.name();
     String message = String.format(MESSAGE_TEMPLATE, symbolName);
     Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
-    IssueWithQuickFix issue;
+    PreciseIssue issue;
     if ("\n".equals(lastRelevantToken.value())) {
-      issue = (IssueWithQuickFix) ctx.addIssue(element, message);
+      issue = ctx.addIssue(element, message);
     } else {
-      issue = (IssueWithQuickFix) ctx.addIssue(element.firstToken(), lastRelevantToken, message);
+      issue = ctx.addIssue(element.firstToken(), lastRelevantToken, message);
     }
 
     unnecessaryAssignment.symbol.usages().stream()
@@ -120,13 +119,13 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         addMultipleAssignmentStatementQuickFix((AssignmentStatement) element, issue, unnecessaryAssignment.symbol);
       } else {
         issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
-          PythonTextEdit.removeStatement((Statement) element)));
+          TextEditUtils.removeStatement((Statement) element)));
       }
     }
 
   }
 
-  private static void addMultipleAssignmentStatementQuickFix(AssignmentStatement element, IssueWithQuickFix issue, Symbol symbol) {
+  private static void addMultipleAssignmentStatementQuickFix(AssignmentStatement element, PreciseIssue issue, Symbol symbol) {
     var children = element.children();
 
     IntStream.range(0, children.size())
@@ -137,7 +136,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         var to = from + 2;
 
         issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
-          PythonTextEdit.removeUntil(children.get(from), children.get(to))));
+          TextEditUtils.removeUntil(children.get(from), children.get(to))));
       });
   }
 

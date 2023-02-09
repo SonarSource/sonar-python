@@ -37,9 +37,8 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5754")
@@ -135,7 +134,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
     exceptClause.accept(visitor);
     if (!visitor.isReRaised && !isSystemExitHandled) {
-      var issue = (IssueWithQuickFix) ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+      var issue = ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
       addQuickFix(exceptClause, issue);
     }
   }
@@ -161,37 +160,37 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     }
 
     if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
-      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+      var issue = ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
       addQuickFix(caughtException, issue);
 
       return true;
     }
 
     if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledSystemExit) {
-      var issue = (IssueWithQuickFix) ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+      var issue = ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
       addQuickFix(caughtException, issue);
     }
 
     return false;
   }
 
-  private static void addQuickFix(Expression caughtException, IssueWithQuickFix issue) {
+  private static void addQuickFix(Expression caughtException, PreciseIssue issue) {
     Optional.of(caughtException)
       .map(e -> TreeUtils.firstAncestor(caughtException, p -> p.is(Tree.Kind.EXCEPT_CLAUSE)))
       .map(ExceptClause.class::cast)
       .ifPresent(exceptClause -> addQuickFix(exceptClause, issue));
   }
 
-  private static void addQuickFix(ExceptClause exceptClause, IssueWithQuickFix issue) {
+  private static void addQuickFix(ExceptClause exceptClause, PreciseIssue issue) {
     var bodyStatements = exceptClause.body().statements();
     var lastStatement = bodyStatements.get(bodyStatements.size() - 1);
 
     var quickFixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
     if (lastStatement.is(Tree.Kind.PASS_STMT) || TreeUtils.hasDescendant(lastStatement, c -> c.is(Tree.Kind.ELLIPSIS))) {
-      quickFixBuilder.addTextEdit(PythonTextEdit.replace(lastStatement, "raise"));
+      quickFixBuilder.addTextEdit(TextEditUtils.replace(lastStatement, "raise"));
     } else {
       Token lastToken = lastStatement.lastToken();
-      quickFixBuilder.addTextEdit(PythonTextEdit.insertLineAfter(lastToken, lastStatement, "raise"));
+      quickFixBuilder.addTextEdit(TextEditUtils.insertLineAfter(lastToken, lastStatement, "raise"));
     }
     issue.addQuickFix(quickFixBuilder.build());
   }

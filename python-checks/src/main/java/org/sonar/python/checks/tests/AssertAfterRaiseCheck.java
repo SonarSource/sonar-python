@@ -34,9 +34,9 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tests.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -64,7 +64,7 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
       Statement statement = statements.get(statements.size()-1);
       if (isAnAssert(statement)) {
         var message = statements.size() > 1 ? MESSAGE_MULTIPLE_STATEMENT : MESSAGE_SINGLE_STATEMENT;
-        var issue = (IssueWithQuickFix) ctx.addIssue(statement, message)
+        var issue = ctx.addIssue(statement, message)
           .secondary(IssueLocation.preciseLocation(withStatement.firstToken(), withStatement.colon(), MESSAGE_SECONDARY));
 
         if (statements.size() > 1) {
@@ -80,10 +80,10 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   private static List<PythonTextEdit> createTextEdits(WithStatement withStatement, Statement statement) {
     if (statement.firstToken().line() == withStatement.firstToken().line()) {
       var textToInsert = "\n" + " ".repeat(withStatement.firstToken().column());
-      return List.of(PythonTextEdit.insertBefore(statement, textToInsert));
+      return List.of(TextEditUtils.insertBefore(statement, textToInsert));
     } else {
       int offset = statement.firstToken().column() - withStatement.firstToken().column();
-      return PythonTextEdit.shiftLeft(statement, offset);
+      return TextEditUtils.shiftLeft(statement, offset);
     }
   }
 

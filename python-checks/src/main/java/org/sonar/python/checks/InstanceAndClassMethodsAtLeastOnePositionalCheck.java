@@ -33,11 +33,10 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
+import static org.sonar.python.quickfix.TextEditUtils.insertAfter;
 
 @Rule(key="S5719")
 public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubscriptionCheck {
@@ -97,7 +96,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
   }
 
   private static void addIssue(SubscriptionContext ctx, FunctionDef functionDef, MethodIssueType type) {
-    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(),
+    PreciseIssue issue = ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(),
       type.message);
     String separator = functionDef.parameters() == null ? "" : ", ";
     for (String insertion : type.insertions) {

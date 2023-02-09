@@ -31,9 +31,9 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1940")
@@ -57,14 +57,14 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
         String oppositeOperator = oppositeOperator(binaryExp.operator());
 
-        IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+        PreciseIssue issue = (ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
         createQuickFix(issue, oppositeOperator, binaryExp, original);
       }
     } else if (negatedExpr.is(Kind.IN, Kind.IS)) {
       BinaryExpression isInExpr = (BinaryExpression) negatedExpr;
       String oppositeOperator = oppositeOperator(isInExpr.operator(), isInExpr);
 
-      IssueWithQuickFix issue = ((IssueWithQuickFix) ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
+      PreciseIssue issue = (ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
       createQuickFix(issue, oppositeOperator, isInExpr, original);
     }
   }
@@ -110,7 +110,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void createQuickFix(IssueWithQuickFix issue, String oppositeOperator, BinaryExpression toUse, UnaryExpression notAncestor) {
+  private static void createQuickFix(PreciseIssue issue, String oppositeOperator, BinaryExpression toUse, UnaryExpression notAncestor) {
     PythonTextEdit replaceEdit = getReplaceEdit(toUse, oppositeOperator, notAncestor);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Use %s instead", oppositeOperator))
@@ -120,7 +120,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   }
 
   private static PythonTextEdit getReplaceEdit(BinaryExpression toUse, String oppositeOperator, UnaryExpression notAncestor) {
-    return PythonTextEdit.replace(notAncestor, getNewExpression(toUse, oppositeOperator));
+    return TextEditUtils.replace(notAncestor, getNewExpression(toUse, oppositeOperator));
   }
 
   private static String getNewExpression(BinaryExpression toUse, String oppositeOperator) {

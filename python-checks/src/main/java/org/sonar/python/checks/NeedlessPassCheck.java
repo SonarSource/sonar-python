@@ -26,9 +26,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.PASS_STMT;
@@ -55,10 +54,10 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
         .filter(st -> st.is(PASS_STMT))
         .findFirst()
         .ifPresent(st -> {
-          var issue = (IssueWithQuickFix) ctx.addIssue(st, MESSAGE);
+          var issue = ctx.addIssue(st, MESSAGE);
           var quickFix = PythonQuickFix
             .newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.removeStatement(st))
+            .addTextEdit(TextEditUtils.removeStatement(st))
             .build();
           issue.addQuickFix(quickFix);
         });

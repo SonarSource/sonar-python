@@ -33,9 +33,9 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
 
@@ -73,7 +73,7 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
         int line = originalMethod.name().firstToken().line();
         String message = String.format(MESSAGE, originalMethod.name().name(), line);
         PreciseIssue issue = ctx.addIssue(suspiciousMethod.name(), message).secondary(originalMethod.name(), "Original");
-        addQuickFix((IssueWithQuickFix) issue, originalMethod, suspiciousMethod);
+        addQuickFix(issue, originalMethod, suspiciousMethod);
         break;
       }
     }
@@ -96,7 +96,7 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
     return statementList.statements().get(first).firstToken().line() == statementList.statements().get(statementList.statements().size() - 1).lastToken().line();
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, FunctionDef originalMethod, FunctionDef suspiciousMethod) {
+  private static void addQuickFix(PreciseIssue issue, FunctionDef originalMethod, FunctionDef suspiciousMethod) {
     ParameterList parameters = originalMethod.parameters();
     if (parameters != null) {
       List<AnyParameter> all = parameters.all();
@@ -122,7 +122,7 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
       replacementText = replacementText + "self.";
     }
     replacementText = replacementText + originalMethod.name().name() + "()";
-    PythonTextEdit edit = PythonTextEdit.replace(suspiciousMethod.body(), replacementText);
+    PythonTextEdit edit = TextEditUtils.replace(suspiciousMethod.body(), replacementText);
 
     PythonQuickFix fix = PythonQuickFix
       .newQuickFix(String.format(QUICK_FIX_MESSAGE, originalMethod.name().name()))
