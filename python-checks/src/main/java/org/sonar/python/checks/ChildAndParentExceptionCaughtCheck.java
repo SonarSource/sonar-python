@@ -20,9 +20,12 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -31,11 +34,19 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5713")
 public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck {
+  public static final String QUICK_FIX_MESSAGE = "Remove the redundant Exception";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ChildAndParentExceptionCaughtCheck::checkExceptClause);
@@ -57,20 +68,83 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
     caughtExceptionsBySymbol.forEach((currentSymbol, caughtExceptionsWithSameSymbol) -> {
       Expression currentException = caughtExceptionsWithSameSymbol.get(0);
       if (caughtExceptionsWithSameSymbol.size() > 1) {
-        PreciseIssue issue = ctx.addIssue(currentException, "Remove this duplicate Exception class.");
+        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this duplicate Exception class.");
+        addQuickFix(issue, currentException);
         caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, "Duplicate."));
       }
-      PreciseIssue issue = null;
-      for (Map.Entry<ClassSymbol, List<Expression>> otherEntry : caughtExceptionsBySymbol.entrySet()) {
-        ClassSymbol comparedSymbol = otherEntry.getKey();
-        if (currentSymbol != comparedSymbol && currentSymbol.isOrExtends(comparedSymbol)) {
-          if (issue == null) {
-            issue = ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
-          }
-          addSecondaryLocations(issue, otherEntry.getValue());
-        }
+
+      var caughtParentExceptions = caughtExceptionsBySymbol.entrySet()
+        .stream()
+        .filter(entry -> entry.getKey() != currentSymbol && currentSymbol.isOrExtends(entry.getKey()))
+        .collect(Collectors.toList());
+
+      if (!caughtParentExceptions.isEmpty()) {
+        var issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
+        addQuickFix(issue, currentException);
+
+        caughtParentExceptions.stream()
+          .map(Map.Entry::getValue)
+          .forEach(entries -> addSecondaryLocations(issue, entries));
       }
     });
+  }
+
+  private static void addQuickFix(IssueWithQuickFix issue, Expression currentException) {
+    var quickFix = createQuickFix(currentException);
+    if (quickFix != null) {
+      issue.addQuickFix(quickFix);
+    }
+  }
+
+  private static List<String> collectNamesFromTuple(Expression expression) {
+    expression = Expressions.removeParentheses(expression);
+    if (expression.is(Tree.Kind.TUPLE)) {
+      var tuple = (Tuple) expression;
+      return tuple.elements()
+        .stream()
+        .map(ChildAndParentExceptionCaughtCheck::collectNames)
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
+    }
+    throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
+  }
+  private static List<String> collectNames(Expression expression) {
+    expression = Expressions.removeParentheses(expression);
+    if (expression.is(Tree.Kind.NAME)) {
+      var name = (Name) expression;
+      return List.of(name.name());
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      var name = TreeUtils.tokens(expression)
+        .stream()
+        .map(Token::value)
+        .collect(Collectors.joining());
+      return List.of(name);
+    }
+    throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
+  }
+
+  private static PythonQuickFix createQuickFix(Expression currentException) {
+    try {
+      var currentExceptionName = collectNames(currentException).get(0);
+
+      return Optional.of(currentException)
+        .map(exception -> TreeUtils.firstAncestorOfKind(exception, Tree.Kind.EXCEPT_CLAUSE))
+        .map(ExceptClause.class::cast)
+        .map(ExceptClause::exception)
+        .map(exceptions -> {
+          List<String> names = collectNamesFromTuple(exceptions);
+          names.remove(currentExceptionName);
+
+          var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));
+
+          return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.replace(exceptions, text))
+            .build();
+        }).orElse(null);
+    } catch (IllegalArgumentException e) {
+      // expression contains subexpressions that are out of scope for quick fixing
+      return null;
+    }
   }
 
   private static void addExceptionExpression(Expression exceptionExpression, Map<ClassSymbol, List<Expression>> caughtExceptionsByFQN) {
