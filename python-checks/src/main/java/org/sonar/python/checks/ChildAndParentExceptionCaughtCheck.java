@@ -96,7 +96,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
     }
   }
 
-  private static List<String> collectNames(Expression expression) {
+  private static List<String> collectNamesFromTuple(Expression expression) {
     expression = Expressions.removeParentheses(expression);
     if (expression.is(Tree.Kind.TUPLE)) {
       var tuple = (Tuple) expression;
@@ -105,7 +105,12 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .map(ChildAndParentExceptionCaughtCheck::collectNames)
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
-    } else if (expression.is(Tree.Kind.NAME)) {
+    }
+    throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
+  }
+  private static List<String> collectNames(Expression expression) {
+    expression = Expressions.removeParentheses(expression);
+    if (expression.is(Tree.Kind.NAME)) {
       var name = (Name) expression;
       return List.of(name.name());
     } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
@@ -127,7 +132,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .map(ExceptClause.class::cast)
         .map(ExceptClause::exception)
         .map(exceptions -> {
-          List<String> names = collectNames(exceptions);
+          List<String> names = collectNamesFromTuple(exceptions);
           names.remove(currentExceptionName);
 
           var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));
