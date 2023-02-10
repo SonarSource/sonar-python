@@ -86,6 +86,11 @@ public class PythonPlugin implements Plugin {
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
+      context.addExtensions(
+        IPynb.class,
+        IPynbProfile.class,
+        IPynbSensor.class,
+        IPynbRuleRepository.class);
     }
   }
 
