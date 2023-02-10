@@ -62,8 +62,8 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
@@ -338,7 +338,7 @@ public class PythonScanner extends Scanner {
 
   private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
     if (isInSonarLint(context) && newIssue instanceof NewSonarLintIssue) {
-      List<PythonQuickFix> quickFixes = preciseIssue.getQuickFixes();
+      List<PythonQuickFix> quickFixes = preciseIssue.quickFixes();
       addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
     }
   }

@@ -25,7 +25,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S1131")

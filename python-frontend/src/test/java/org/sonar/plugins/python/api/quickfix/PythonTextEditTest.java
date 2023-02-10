@@ -17,9 +17,10 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.quickfix;
+package org.sonar.plugins.python.api.quickfix;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

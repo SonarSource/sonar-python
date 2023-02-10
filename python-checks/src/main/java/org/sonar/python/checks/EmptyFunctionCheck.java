@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.quickfix.TextEditUtils.insertLineBefore;

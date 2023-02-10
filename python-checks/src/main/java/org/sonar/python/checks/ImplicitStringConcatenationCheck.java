@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
 import static org.sonar.python.quickfix.TextEditUtils.insertAfter;
 import static org.sonar.python.quickfix.TextEditUtils.replaceRange;

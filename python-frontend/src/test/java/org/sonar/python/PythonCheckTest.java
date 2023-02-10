@@ -32,8 +32,8 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -76,7 +76,7 @@ public class PythonCheckTest {
     assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
 
-    assertThat(firstIssue.getQuickFixes()).isEmpty();
+    assertThat(firstIssue.quickFixes()).isEmpty();
     PythonTextEdit textEdit = Mockito.mock(PythonTextEdit.class);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New Quickfix")
       .addTextEdit(textEdit)
@@ -85,7 +85,7 @@ public class PythonCheckTest {
     firstIssue.addQuickFix(quickFix);
     firstIssue.addQuickFix(quickFix);
 
-    assertThat(firstIssue.getQuickFixes()).containsExactly(quickFix, quickFix);
+    assertThat(firstIssue.quickFixes()).containsExactly(quickFix, quickFix);
   }
 
   @Test

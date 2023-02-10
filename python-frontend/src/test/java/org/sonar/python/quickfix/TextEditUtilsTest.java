@@ -22,6 +22,7 @@ package org.sonar.python.quickfix;
 import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;

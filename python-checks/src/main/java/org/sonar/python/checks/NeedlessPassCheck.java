@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
