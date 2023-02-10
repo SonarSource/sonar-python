@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class BuiltinShadowingAssignmentCheckTest {
@@ -27,6 +28,22 @@ public class BuiltinShadowingAssignmentCheckTest {
   @Test
   public void testVariableShadowing() {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowing.py", new BuiltinShadowingAssignmentCheck());
+  }
+
+  @Test
+  public void quickFixTest() {
+    var before = "def my_function():\n" +
+      "  int = 42\n" +
+      "  print(int)\n" +
+      "  return int";
+
+    var after = "def my_function():\n" +
+      "  _int = 42\n" +
+      "  print(_int)\n" +
+      "  return _int";
+    var check = new BuiltinShadowingAssignmentCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(BuiltinShadowingAssignmentCheck.QUICK_FIX_MESSAGE_FORMAT, "int"));
   }
 
 }

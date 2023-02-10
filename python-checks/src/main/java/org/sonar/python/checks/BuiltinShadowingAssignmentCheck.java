@@ -19,8 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -33,6 +36,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.IssueWithQuickFix;
+import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.TypeShed;
 
@@ -41,6 +47,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Rename this variable; it shadows a builtin.";
   public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
+  public static final String QUICK_FIX_MESSAGE_FORMAT = "Rename to _%s";
   private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
 
   @Override
@@ -86,15 +93,35 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private void raiseIssueForNonGlobalVariable(SubscriptionContext ctx, Name variable) {
-    Symbol variableSymbol = variable.symbol();
-    if (variableSymbol != null && variableSymbol.usages().stream().noneMatch(u -> u.kind().equals(Usage.Kind.GLOBAL_DECLARATION))) {
-      PreciseIssue existingIssue = variableIssuesRaised.get(variableSymbol);
-      if (existingIssue != null) {
-        existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
-      } else {
-        variableIssuesRaised.put(variableSymbol, ctx.addIssue(variable, MESSAGE));
-      }
-    }
+    Optional.ofNullable(variable.symbol())
+      .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(Usage.Kind.GLOBAL_DECLARATION::equals))
+      .ifPresent(symbol -> {
+        var existingIssue = variableIssuesRaised.get(symbol);
+        if (existingIssue != null) {
+          existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
+        } else {
+          var issue = (IssueWithQuickFix) ctx.addIssue(variable, MESSAGE);
+
+          PythonQuickFix quickFix = createQuickFix(symbol);
+          issue.addQuickFix(quickFix);
+          variableIssuesRaised.put(symbol, issue);
+        }
+      });
+  }
+
+  private static PythonQuickFix createQuickFix(Symbol symbol) {
+    var edits = symbol.usages()
+      .stream()
+      .map(Usage::tree)
+      .map(Tree::firstToken)
+      .sorted(Comparator.comparing(Token::line).reversed().thenComparing(Token::column).reversed())
+      .map(token -> PythonTextEdit.insertBefore(token, "_"))
+      .collect(Collectors.toList());
+
+
+    return PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, symbol.name()))
+      .addTextEdit(edits)
+      .build();
   }
 
   private boolean shouldReportIssue(Tree tree) {
