@@ -20,6 +20,7 @@
 package org.sonar.python.checks.regex;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class VerboseRegexCheckTest {
@@ -27,5 +28,50 @@ public class VerboseRegexCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/verboseRegexCheck.py", new VerboseRegexCheck());
+  }
+
+  @Test
+  public void dotReplacementQuickFixTest() {
+    var before = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\"[\\s\\S]\", input, re.DOTALL)";
+    var after = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\".\", input, re.DOTALL)";
+    var check = new VerboseRegexCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "."));
+  }
+
+  @Test
+  public void digitReplacementQuickFixTest() {
+    var before = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\"foo[0-9]barr\", input)";
+    var after = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\"foo\\dbarr\", input)";
+    var check = new VerboseRegexCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "\\d"));
+  }
+
+  @Test
+  public void plusReplacementQuickFixTest() {
+    var before = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\"x{1,}\", input)";
+    var after = "import re\n" +
+      "\n" +
+      "def non_compliant(input):\n" +
+      "    re.match(r\"x+\", input)";
+    var check = new VerboseRegexCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "+"));
   }
 }
