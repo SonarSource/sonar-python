@@ -102,6 +102,8 @@ public final class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 
+  public static final String IPYTHON_REPOSITORY_KEY = "ipython";
+
   private CheckList() {
   }
 
