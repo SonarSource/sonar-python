@@ -19,7 +19,9 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -35,6 +37,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -55,6 +58,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_TEMPLATE = "Remove this assignment to local variable '%s'; the value is never used.";
 
   private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
+  public static final String QUICK_FIX_MESSAGE = "Remove the unused statement";
 
   @Override
   public void initialize(Context context) {
@@ -91,11 +95,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     String symbolName = unnecessaryAssignment.symbol.name();
     String message = String.format(MESSAGE_TEMPLATE, symbolName);
     Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
-    PreciseIssue issue;
+    IssueWithQuickFix issue;
     if ("\n".equals(lastRelevantToken.value())) {
-      issue = ctx.addIssue(element, message);
+      issue = (IssueWithQuickFix) ctx.addIssue(element, message);
     } else {
-      issue = ctx.addIssue(element.firstToken(), lastRelevantToken, message);
+      issue = (IssueWithQuickFix) ctx.addIssue(element.firstToken(), lastRelevantToken, message);
     }
 
     unnecessaryAssignment.symbol.usages().stream()
@@ -113,10 +117,39 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, symbolName)));
 
     if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
-      ((IssueWithQuickFix) issue).addQuickFix(PythonQuickFix.newQuickFix("Remove the unused statement",
-        PythonTextEdit.removeStatement((Statement) element)));
+      if (element.is(Tree.Kind.ASSIGNMENT_STMT) && ((AssignmentStatement) element).lhsExpressions().size() > 1) {
+        addMultipleAssignmentStatementQuickFix((AssignmentStatement) element, issue, unnecessaryAssignment.symbol);
+      } else {
+        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
+          PythonTextEdit.removeStatement((Statement) element)));
+      }
     }
 
+  }
+
+  private static void addMultipleAssignmentStatementQuickFix(AssignmentStatement element, IssueWithQuickFix issue, Symbol symbol) {
+    var children = element.children();
+
+    IntStream.range(0, children.size())
+      .filter(i -> isExpressionHasSymbol(children.get(i), symbol))
+      .findFirst()
+      .ifPresent(i -> {
+        var from = i == 0 ? i : (i - 1);
+        var to = i == 0 ? (i + 2) : (i + 1);
+
+        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
+          PythonTextEdit.removeUntil(children.get(from), children.get(to))));
+      });
+  }
+
+  private static boolean isExpressionHasSymbol(Tree element, Symbol symbol) {
+    return TreeUtils.hasDescendant(element,
+      t -> Optional.of(t)
+        .filter(HasSymbol.class::isInstance)
+        .map(HasSymbol.class::cast)
+        .map(HasSymbol::symbol)
+        .filter(s -> s == symbol)
+        .isPresent());
   }
 
   private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {
@@ -198,11 +231,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         return SideEffectDetector.hasSideEffect(((AnnotatedAssignment) tree).assignedValue());
       // foo = bar or foo = bar = 1
       case ASSIGNMENT_STMT:
-        // TODO: SONARPY-1192 Provide quick fix for chained assignment
-        AssignmentStatement assignmentStatement = (AssignmentStatement) tree;
-        if(assignmentStatement.lhsExpressions().size() > 1) {
-          return true;
-        }
         return SideEffectDetector.hasSideEffect(((AssignmentStatement) tree).assignedValue());
       // foo(bar:=3)
       case EXPRESSION_STMT:

@@ -181,6 +181,7 @@ public class DeadStoreCheckTest {
       "    a = 43",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -201,6 +202,7 @@ public class DeadStoreCheckTest {
       "    a = 43",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -218,6 +220,7 @@ public class DeadStoreCheckTest {
       "        pass",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -236,6 +239,7 @@ public class DeadStoreCheckTest {
       "        a = 4",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -253,6 +257,7 @@ public class DeadStoreCheckTest {
       "        a = 4;",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -267,12 +272,34 @@ public class DeadStoreCheckTest {
 
   @Test
   public void chain_assignment() {
-    String codeWithIssue = code(
+    var codeWithIssue = code(
       "def chain_assign():",
         "    a = b = 42",
-        "    a = foo()",
+        "    b = foo()",
         "    print(a, b)"
     );
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+    var codeFixed = code(
+      "def chain_assign():",
+      "    a = 42",
+      "    b = foo()",
+      "    print(a, b)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
+
+    codeWithIssue = code(
+      "def chain_assign():",
+      "    a = b = 42",
+      "    a = foo()",
+      "    print(a, b)"
+    );
+    codeFixed = code(
+      "def chain_assign():",
+      "    b = 42",
+      "    a = foo()",
+      "    print(a, b)"
+    );
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 }
