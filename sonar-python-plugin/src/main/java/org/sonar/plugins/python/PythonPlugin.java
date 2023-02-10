@@ -75,6 +75,12 @@ public class PythonPlugin implements Plugin {
       PythonRuleRepository.class,
       AnalysisWarningsWrapper.class);
 
+    context.addExtensions(
+      IPynb.class,
+      IPynbProfile.class,
+      IPynbSensor.class,
+      IPynbRuleRepository.class);
+
     SonarRuntime sonarRuntime = context.getRuntime();
     if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
       addCoberturaExtensions(context);
