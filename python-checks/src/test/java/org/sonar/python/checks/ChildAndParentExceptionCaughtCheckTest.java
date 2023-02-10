@@ -150,9 +150,78 @@ public class ChildAndParentExceptionCaughtCheckTest {
     String after = "def child_with_parent():\n" +
       "  try:\n" +
       "      raise NotImplementedError()\n" +
-      "  except (RuntimeError, Abc,):\n" +
+      "  except (RuntimeError, Abc):\n" +
       "      print(\"Foo\")";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void multiLineQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def milty_line():\n" +
+      "  try:\n" +
+      "    raise NotImplementedError()\n" +
+      "  except (RuntimeError, \n" +
+      "    Abc, RecursionError,):\n" +
+      "      print(\"Foo\")";
+    String after = "def milty_line():\n" +
+      "  try:\n" +
+      "    raise NotImplementedError()\n" +
+      "  except (RuntimeError, Abc):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void multiLineTwoQuickFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def milty_line():\n" +
+      "  try:\n" +
+      "    raise NotImplementedError()\n" +
+      "  except (RuntimeError, \n" +
+      "    RecursionError,):\n" +
+      "      print(\"Foo\")";
+    String after = "def milty_line():\n" +
+      "  try:\n" +
+      "    raise NotImplementedError()\n" +
+      "  except RuntimeError:\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+  @Test
+  public void qualifiedExpressionExpressionFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, RecursionError, asd.Abc):\n" +
+      "      print(\"Foo\")";
+    String after = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, asd.Abc):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, ChildAndParentExceptionCaughtCheck.QUICK_FIX_MESSAGE);
+  }
+
+
+  @Test
+  public void functionCallExpressionFixTest() {
+    ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
+
+    String before = "def child_with_parent():\n" +
+      "  try:\n" +
+      "      raise NotImplementedError()\n" +
+      "  except (RuntimeError, RecursionError, asd.Abc()):\n" +
+      "      print(\"Foo\")";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
   }
 }

@@ -20,9 +20,11 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -32,6 +34,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.quickfix.IssueWithQuickFix;
@@ -69,16 +73,16 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, "Duplicate."));
       }
 
-      var symbolsWithErrors = caughtExceptionsBySymbol.entrySet()
+      var caughtParentExceptions = caughtExceptionsBySymbol.entrySet()
         .stream()
         .filter(entry -> entry.getKey() != currentSymbol && currentSymbol.isOrExtends(entry.getKey()))
         .collect(Collectors.toList());
 
-      if (!symbolsWithErrors.isEmpty()) {
+      if (!caughtParentExceptions.isEmpty()) {
         var issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
         addQuickFix(issue, currentException);
 
-        symbolsWithErrors.stream()
+        caughtParentExceptions.stream()
           .map(Map.Entry::getValue)
           .forEach(entries -> addSecondaryLocations(issue, entries));
       }
@@ -86,65 +90,56 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
   }
 
   private static void addQuickFix(IssueWithQuickFix issue, Expression currentException) {
-    if (currentException.parent().is(Tree.Kind.TUPLE)) {
-      var quickFix = createQuickFix(currentException);
+    var quickFix = createQuickFix(currentException);
+    if (quickFix != null) {
       issue.addQuickFix(quickFix);
     }
   }
 
-  private static PythonQuickFix createQuickFix(Expression currentException) {
-    PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
-
-    var parentTuple = (Tuple) currentException.parent();
-
-    if (parentTuple.elements().size() == 2) {
-      // If there is just 2 exceptions
-      // then we need just to remove everything from one which should stay till the end of the clause
-      // and from the beginning of the clause till one which should stay
-      parentTuple.elements().stream()
-        .filter(el -> el != currentException)
-        .findFirst()
-        .ifPresent(toKeep -> {
-          List<Tree> tupleChildren = parentTuple.children();
-          var currentIndex = tupleChildren.indexOf(toKeep);
-
-          var fromToken = tupleChildren.get(currentIndex + 1).firstToken();
-          var toToken = tupleChildren.get(tupleChildren.size() - 1).lastToken();
-          // toToken.column() + 1 to remove right parenthesis
-          builder.addTextEdit(PythonTextEdit.removeRange(fromToken.line(), fromToken.column(), toToken.line(),  toToken.column() + 1));
-
-          fromToken = tupleChildren.get(0).firstToken();
-          toToken = toKeep.firstToken();
-          builder.addTextEdit(PythonTextEdit.removeRange(fromToken.line(), fromToken.column(), toToken.line(),  toToken.column()));
-        });
-    } else {
-      var currentIndex = parentTuple.children().indexOf(currentException);
-
-      var firstToken = currentException.firstToken();
-
-      // If currentException is not first one - need to remove previous comma
-      if (currentIndex > 1) {
-        var previous = parentTuple.children().get(currentIndex - 1);
-        firstToken = previous.lastToken();
-      }
-
-      var fromLine = firstToken.line();
-      var fromColumn = firstToken.column();
-
-      var nextIndex = currentIndex + 1;
-      // If currentException is first one - need to remove next comma
-      if (currentIndex == 1) {
-        nextIndex++;
-      }
-      var next = parentTuple.children().get(nextIndex);
-      var nextToken = next.lastToken();
-      var toLine = nextToken.line();
-      var toColumn = nextToken.column();
-
-      builder.addTextEdit(PythonTextEdit.removeRange(fromLine, fromColumn, toLine, toColumn));
+  private static List<String> collectNames(Expression expression) {
+    expression = Expressions.removeParentheses(expression);
+    if (expression.is(Tree.Kind.TUPLE)) {
+      var tuple = (Tuple) expression;
+      return tuple.elements()
+        .stream()
+        .map(ChildAndParentExceptionCaughtCheck::collectNames)
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
+    } else if (expression.is(Tree.Kind.NAME)) {
+      var name = (Name) expression;
+      return List.of(name.name());
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      var name = TreeUtils.tokens(expression)
+        .stream()
+        .map(Token::value)
+        .collect(Collectors.joining());
+      return List.of(name);
     }
+    throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
+  }
 
-    return builder.build();
+  private static PythonQuickFix createQuickFix(Expression currentException) {
+    try {
+      var currentExceptionName = collectNames(currentException).get(0);
+
+      return Optional.of(currentException)
+        .map(exception -> TreeUtils.firstAncestorOfKind(exception, Tree.Kind.EXCEPT_CLAUSE))
+        .map(ExceptClause.class::cast)
+        .map(ExceptClause::exception)
+        .map(exceptions -> {
+          List<String> names = collectNames(exceptions);
+          names.remove(currentExceptionName);
+
+          var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));
+
+          return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(PythonTextEdit.replace(exceptions, text))
+            .build();
+        }).orElse(null);
+    } catch (IllegalArgumentException e) {
+      // expression contains subexpressions that are out of scope for quick fixing
+      return null;
+    }
   }
 
   private static void addExceptionExpression(Expression exceptionExpression, Map<ClassSymbol, List<Expression>> caughtExceptionsByFQN) {
