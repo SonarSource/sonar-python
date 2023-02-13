@@ -39,8 +39,8 @@ import org.sonarsource.analyzer.commons.regex.finders.VerboseRegexFinder;
 @Rule(key = "S6353")
 public class VerboseRegexCheck extends AbstractRegexCheck {
 
-  private static final String ISSUE_MESSAGE_REGEX = ".+syntax '(.+)' instead of.+";
-  private static final Pattern issueMessagePattern = Pattern.compile(ISSUE_MESSAGE_REGEX);
+  private static final String ISSUE_MESSAGE_PATTERN = ".+syntax '(.+)' instead of.+";
+  private static final Pattern issueMessagePattern = Pattern.compile(ISSUE_MESSAGE_PATTERN);
   public static final String QUICK_FIX_FORMAT = "Replace with \"%s\"";
 
   @Override

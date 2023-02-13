@@ -33,45 +33,33 @@ public class VerboseRegexCheckTest {
   @Test
   public void dotReplacementQuickFixTest() {
     var before = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\"[\\s\\S]\", input, re.DOTALL)";
+      "re.match(r\"[\\s\\S]\", input, re.DOTALL)";
     var after = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\".\", input, re.DOTALL)";
+      "re.match(r\".\", input, re.DOTALL)";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "."));
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \".\"");
   }
 
   @Test
   public void digitReplacementQuickFixTest() {
     var before = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\"foo[0-9]barr\", input)";
+      "re.match(r\"foo[0-9]barr\", input)";
     var after = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\"foo\\dbarr\", input)";
+      "re.match(r\"foo\\dbarr\", input)";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "\\d"));
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"\\d\"");
   }
 
   @Test
   public void plusReplacementQuickFixTest() {
     var before = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\"x{1,}\", input)";
+      "re.match(r\"x{1,}\", input)";
     var after = "import re\n" +
-      "\n" +
-      "def non_compliant(input):\n" +
-      "    re.match(r\"x+\", input)";
+      "re.match(r\"x+\", input)";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(VerboseRegexCheck.QUICK_FIX_FORMAT, "+"));
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");
   }
 }
