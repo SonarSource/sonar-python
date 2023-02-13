@@ -87,6 +87,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   STAR_NAMED_EXPRESSIONS,
   STAR_NAMED_EXPRESSION,
   FORMATTED_EXPR,
+  FORMATTED_EXPR_ENTITIES,
   F_STRING_CONTENT,
   FORMAT_SPECIFIER,
 
@@ -249,11 +250,15 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(F_STRING_CONTENT).is(b.zeroOrMore(b.firstOf(GenericTokenType.UNKNOWN_CHAR, FORMATTED_EXPR)));
     b.rule(FORMATTED_EXPR).is(
       PythonPunctuator.LCURLYBRACE,
-      TEST,
+      FORMATTED_EXPR_ENTITIES,
       b.optional(PythonPunctuator.ASSIGN),
       b.optional("!", b.firstOf("s", "r", "a")),
       b.optional(FORMAT_SPECIFIER),
       PythonPunctuator.RCURLYBRACE);
+    b.rule(FORMATTED_EXPR_ENTITIES).is(
+      TEST,
+      b.zeroOrMore(",", TEST)
+      );
     b.rule(FORMAT_SPECIFIER).is(
       ":",
       b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot(PythonPunctuator.RCURLYBRACE)))
