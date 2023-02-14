@@ -50,7 +50,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
 
   @Override
   public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    return Optional.of(super.addIssue(regexTree, message, cost, secondaries))
+    return Optional.ofNullable(super.addIssue(regexTree, message, cost, secondaries))
       .map(IssueWithQuickFix.class::cast)
       .map(issue -> {
         Matcher matcher = issueMessagePattern.matcher(message);
