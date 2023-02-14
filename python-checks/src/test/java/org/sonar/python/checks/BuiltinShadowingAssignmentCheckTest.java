@@ -46,4 +46,28 @@ public class BuiltinShadowingAssignmentCheckTest {
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(BuiltinShadowingAssignmentCheck.QUICK_FIX_MESSAGE_FORMAT, "int"));
   }
 
+  @Test
+  public void noQuickFixTest() {
+    var check = new BuiltinShadowingAssignmentCheck();
+
+    var before = "def my_function():\n" +
+      "  _int = 22\n" +
+      "  int = 42\n" +
+      "  print(int)\n" +
+      "  return int";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+
+    before = "def my_function(_int = 22):\n" +
+      "  int = 42\n" +
+      "  print(int)\n" +
+      "  return int";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+
+    before = "def my_function((_int, b)):\n" +
+      "  int = 42\n" +
+      "  print(int)\n" +
+      "  return int";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
 }

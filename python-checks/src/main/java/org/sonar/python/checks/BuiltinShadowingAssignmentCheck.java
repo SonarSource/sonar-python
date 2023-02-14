@@ -19,23 +19,32 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TupleParameter;
 import org.sonar.python.quickfix.IssueWithQuickFix;
 import org.sonar.python.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.PythonTextEdit;
@@ -47,7 +56,8 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Rename this variable; it shadows a builtin.";
   public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
-  public static final String QUICK_FIX_MESSAGE_FORMAT = "Rename to _%s";
+  public static final String RENAME_PREFIX = "_";
+  public static final String QUICK_FIX_MESSAGE_FORMAT = "Rename to " + RENAME_PREFIX+ " %s";
   private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
 
   @Override
@@ -92,6 +102,51 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private static Set<String> collectUsedNames(Tree tree) {
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF))
+      .map(FunctionLike.class::cast)
+      .map(BuiltinShadowingAssignmentCheck::collectFunctionVariableNames)
+      .stream()
+      .flatMap(Function.identity())
+      .collect(Collectors.toSet());
+  }
+
+  private static Stream<String> collectFunctionVariableNames(FunctionLike funcDef) {
+    return Stream.concat(
+      funcDef.localVariables().stream()
+        .map(Symbol::name),
+      Optional.of(funcDef)
+        .map(FunctionLike::parameters)
+        .map(ParameterList::all)
+        .stream()
+        .flatMap(Collection::stream)
+        .map(BuiltinShadowingAssignmentCheck::collectParameterNames)
+        .flatMap(Collection::stream)
+    );
+  }
+
+  private static Set<String> collectParameterNames(AnyParameter parameter) {
+    var result = new HashSet<String>();
+
+    Optional.of(parameter)
+      .filter(Parameter.class::isInstance)
+      .map(Parameter.class::cast)
+      .map(Parameter::name)
+      .map(Name::name)
+      .ifPresent(result::add);
+
+    Optional.of(parameter)
+      .filter(TupleParameter.class::isInstance)
+      .map(TupleParameter.class::cast)
+      .map(TupleParameter::parameters)
+      .stream()
+      .flatMap(Collection::stream)
+      .map(BuiltinShadowingAssignmentCheck::collectParameterNames)
+      .forEach(result::addAll);
+
+    return result;
+  }
+
   private void raiseIssueForNonGlobalVariable(SubscriptionContext ctx, Name variable) {
     Optional.ofNullable(variable.symbol())
       .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(Usage.Kind.GLOBAL_DECLARATION::equals))
@@ -101,10 +156,13 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
           existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
         } else {
           var issue = (IssueWithQuickFix) ctx.addIssue(variable, MESSAGE);
-
-          PythonQuickFix quickFix = createQuickFix(symbol);
-          issue.addQuickFix(quickFix);
           variableIssuesRaised.put(symbol, issue);
+
+          var names = collectUsedNames(variable);
+          if (!names.contains(RENAME_PREFIX + variable.name())) {
+            var quickFix = createQuickFix(symbol);
+            issue.addQuickFix(quickFix);
+          }
         }
       });
   }
@@ -114,10 +172,8 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       .stream()
       .map(Usage::tree)
       .map(Tree::firstToken)
-      .sorted(Comparator.comparing(Token::line).reversed().thenComparing(Token::column).reversed())
-      .map(token -> PythonTextEdit.insertBefore(token, "_"))
+      .map(token -> PythonTextEdit.insertBefore(token, RENAME_PREFIX))
       .collect(Collectors.toList());
-
 
     return PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, symbol.name()))
       .addTextEdit(edits)
