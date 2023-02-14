@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,6 +36,8 @@ import org.sonar.python.types.TypeShed;
 
 @Rule(key = "S5890")
 public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
+
+  private static final String NONE_TYPE_NAME = "NoneType";
 
   @Override
   public void initialize(Context context) {
@@ -57,16 +60,32 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
       return;
     }
     if (!inferredType.isCompatibleWith(expectedType) || isTypeUsedInsteadOfInstance(assignedExpression, expectedType)) {
-      String inferredTypeName = InferredTypes.typeName(inferredType);
-      String inferredTypeNameMessage = inferredTypeName != null ? String.format(" instead of \"%s\"", inferredTypeName) : "";
-      String nameFromExpression = TreeUtils.nameFromExpression(annotatedAssignment.variable());
-      String variableMessage = nameFromExpression != null ? String.format("\"%s\"", nameFromExpression) : "this expression";
-      ctx.addIssue(assignedExpression,
-        String.format("Assign to %s a value of type \"%s\"%s or update its type hint.",
-          variableMessage,
-          InferredTypes.typeName(expectedType),
-          inferredTypeNameMessage))
+      String message = getIssueMessage(annotatedAssignment.variable(), inferredType, expectedType);
+
+      ctx.addIssue(assignedExpression, message)
         .secondary(annotation.expression(), null);
+    }
+  }
+
+  private static String getIssueMessage(Expression variable, InferredType inferredType, InferredType expectedType) {
+    String expectedTypeName = InferredTypes.typeName(expectedType);
+    String inferredTypeName = InferredTypes.typeName(inferredType);
+
+    var variableName = Optional.ofNullable(TreeUtils.nameFromExpression(variable))
+      .map(name -> "\"" + name + "\"")
+      .orElse("this expression");
+
+    if (NONE_TYPE_NAME.equals(inferredTypeName)) {
+      return String.format("Replace the type hint \"%1$s\" with \"Optional[%1s]\" or don't assign \"None\" to %2$s",
+        expectedTypeName,
+        variableName
+      );
+    } else {
+      String inferredTypeNameMessage = inferredTypeName != null ? String.format(" instead of \"%s\"", inferredTypeName) : "";
+      return String.format("Assign to %s a value of type \"%s\"%s or update its type hint.",
+        variableName,
+        expectedTypeName,
+        inferredTypeNameMessage);
     }
   }
 
