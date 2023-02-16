@@ -37,10 +37,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -188,14 +186,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
 
   @CheckForNull
   private static String parameterInitialization(Expression defaultValue) {
-    if (defaultValue.is(CALL_EXPR)) {
-      return getAssignedValueString(defaultValue);
-    } else if (defaultValue.is(DICTIONARY_LITERAL)) {
-      return ((DictionaryLiteral) defaultValue).elements().isEmpty() ? "dict()" : getAssignedValueString(defaultValue);
-    } else if (defaultValue.is(LIST_LITERAL)) {
-      return ((ListLiteral) defaultValue).elements().expressions().isEmpty() ? "list()" : getAssignedValueString(defaultValue);
-    } else if (defaultValue.is(SET_LITERAL)) {
-      // no reason to check is set is empty cause '{}' creates empty dictionary, not set
+    if (defaultValue.is(CALL_EXPR, DICTIONARY_LITERAL, LIST_LITERAL, SET_LITERAL)) {
       return getAssignedValueString(defaultValue);
     }
     return null;

@@ -164,7 +164,7 @@ public class ModifiedParameterValueCheckTest {
       "    param.pop('a')";
     String fixedCode = "def literal_dict(param=None):\n" +
       "    if param is None:\n" +
-      "        param = dict()\n" +
+      "        param = {}\n" +
       "    param.pop('a')";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
@@ -176,7 +176,7 @@ public class ModifiedParameterValueCheckTest {
       "    param.append('a')";
     String fixedCode = "def literal_dict(param=None):\n" +
       "    if param is None:\n" +
-      "        param = list()\n" +
+      "        param = []\n" +
       "    param.append('a')";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
