@@ -127,20 +127,22 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     return getText(toUse.leftOperand()) + " " + oppositeOperator + " " + getText(toUse.rightOperand());
   }
 
-  private static String getText(Tree tree) {
-    return TreeUtils.tokens(tree).stream()
-      .map(Token::value)
-      .reduce("", (acc, currentChar) -> isSpaceNotNeeded(acc, currentChar) ? (acc + currentChar) : (acc + " " + currentChar));
-  }
+  private static String getText(Tree defaultValue) {
+    var tokens = TreeUtils.tokens(defaultValue);
 
-  @SuppressWarnings("java:S125")
-  private static boolean isSpaceNotNeeded(String acc, String toAdd) {
-    // Heuristic telling when a space is not needed: 1) after a space, after opening parenthesis or bracket;
-    // 2) if the accumulator is ending with anything other than a comma and that an opening parenthesis is to be added;
-    // 3) if the accumulator is ending with anything other than a space and that an opening bracket is to be added
-    // 4) if a specific character is added : such as closing parenthesis or bracket, or a comma.
-    return acc.isBlank() || acc.endsWith("(") || acc.endsWith("[")
-      || (!acc.endsWith(",") && "(".equals(toAdd)) || (!acc.endsWith(" ") && "[".equals(toAdd))
-      || "]".equals(toAdd) || ")".equals(toAdd) || ",".equals(toAdd);
+    var valueBuilder = new StringBuilder();
+    for (int i = 0; i < tokens.size(); i++) {
+      var token = tokens.get(i);
+      if (i > 0) {
+        var previous = tokens.get(i - 1);
+        var linesBetween = token.line() - previous.line();
+        var spacesBetween = linesBetween == 0 ? (token.column() - previous.column() - previous.value().length()) : token.column();
+
+        valueBuilder.append("\n".repeat(linesBetween));
+        valueBuilder.append(" ".repeat(spacesBetween));
+      }
+      valueBuilder.append(token.value());
+    }
+    return valueBuilder.toString();
   }
 }
