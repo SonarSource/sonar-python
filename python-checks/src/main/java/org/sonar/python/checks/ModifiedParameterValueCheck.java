@@ -36,16 +36,12 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -150,6 +146,29 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     });
   }
 
+  private static String getAssignedValueString(Expression defaultValue) {
+    var firstLine = defaultValue.firstToken().line() - 1;
+    var lastLine = defaultValue.lastToken().line() - 1;
+
+    if (firstLine != lastLine) {
+      return null;
+    }
+
+    var tokens = TreeUtils.tokens(defaultValue);
+
+    var valueBuilder = new StringBuilder();
+    for (int i = 0; i < tokens.size(); i++) {
+      var token = tokens.get(i);
+      if (i > 0) {
+        var previous = tokens.get(i - 1);
+        var spaceBetween = token.column() - previous.column() - previous.value().length();
+        valueBuilder.append(" ".repeat(spaceBetween));
+      }
+      valueBuilder.append(token.value());
+    }
+    return valueBuilder.toString();
+  }
+
   // We use "\n" systematically, the IDE will decide which one to use,
   // therefore suppressing java:S3457 (Printf-style format strings should be used correctly)
   @SuppressWarnings("java:S3457")
@@ -160,27 +179,15 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(parameterInitialization(defaultValue)).map(
       paramInit -> PythonQuickFix.newQuickFix("Initialize this parameter inside the function/method")
         .addTextEdit(replace(defaultValue, "None"))
-        .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s()", paramName, paramInit)))
+        .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s", paramName, paramInit)))
         .build()
     );
   }
 
   @CheckForNull
   private static String parameterInitialization(Expression defaultValue) {
-    if (defaultValue.is(CALL_EXPR)) {
-      CallExpression call = (CallExpression) defaultValue;
-      if (!call.arguments().isEmpty()) {
-        return null;
-      }
-      return Optional.ofNullable(call.calleeSymbol())
-        .map(symbol -> call.callee().is(QUALIFIED_EXPR) ? symbol.fullyQualifiedName() : symbol.name())
-        .orElse(null);
-    } else if (defaultValue.is(DICTIONARY_LITERAL)) {
-      return ((DictionaryLiteral) defaultValue).elements().isEmpty() ? "dict" : null;
-    } else if (defaultValue.is(LIST_LITERAL)) {
-      return ((ListLiteral) defaultValue).elements().expressions().isEmpty() ? "list" : null;
-    } else if (defaultValue.is(SET_LITERAL)) {
-      return ((SetLiteral) defaultValue).elements().isEmpty() ? "set" : null;
+    if (defaultValue.is(CALL_EXPR, DICTIONARY_LITERAL, LIST_LITERAL, SET_LITERAL)) {
+      return getAssignedValueString(defaultValue);
     }
     return null;
   }
