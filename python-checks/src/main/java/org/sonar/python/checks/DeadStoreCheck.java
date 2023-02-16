@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
 import javax.annotation.Nullable;
@@ -58,7 +57,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_TEMPLATE = "Remove this assignment to local variable '%s'; the value is never used.";
 
   private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
-  public static final String QUICK_FIX_MESSAGE = "Remove the unused statement";
+  public static final String QUICK_FIX_MESSAGE = "Remove the unused assignment";
 
   @Override
   public void initialize(Context context) {
@@ -135,7 +134,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .findFirst()
       .ifPresent(i -> {
         var from = i == 0 ? i : (i - 1);
-        var to = i == 0 ? (i + 2) : (i + 1);
+        var to = from + 2;
 
         issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
           PythonTextEdit.removeUntil(children.get(from), children.get(to))));
@@ -143,13 +142,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isExpressionHasSymbol(Tree element, Symbol symbol) {
-    return TreeUtils.hasDescendant(element,
-      t -> Optional.of(t)
-        .filter(HasSymbol.class::isInstance)
-        .map(HasSymbol.class::cast)
-        .map(HasSymbol::symbol)
-        .filter(s -> s == symbol)
-        .isPresent());
+    return element.children()
+      .stream()
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
+      .anyMatch(s -> s == symbol);
   }
 
   private static Tree mapToParentAssignmentStatementOrExpression(Tree tree) {

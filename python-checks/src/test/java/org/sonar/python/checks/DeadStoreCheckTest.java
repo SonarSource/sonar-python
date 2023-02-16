@@ -47,6 +47,7 @@ public class DeadStoreCheckTest {
       "    x = 0",
       "    print(x)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -181,7 +182,6 @@ public class DeadStoreCheckTest {
       "    a = 43",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -202,7 +202,6 @@ public class DeadStoreCheckTest {
       "    a = 43",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -220,7 +219,6 @@ public class DeadStoreCheckTest {
       "        pass",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -239,7 +237,6 @@ public class DeadStoreCheckTest {
       "        a = 4",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -257,7 +254,6 @@ public class DeadStoreCheckTest {
       "        a = 4;",
       "    print(a)");
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 
   @Test
@@ -285,7 +281,6 @@ public class DeadStoreCheckTest {
       "    print(a, b)"
     );
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
 
     codeWithIssue = code(
       "def chain_assign():",
@@ -300,6 +295,5 @@ public class DeadStoreCheckTest {
       "    print(a, b)"
     );
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
   }
 }
