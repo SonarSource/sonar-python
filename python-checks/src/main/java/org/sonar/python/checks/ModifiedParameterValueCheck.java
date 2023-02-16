@@ -150,6 +150,8 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     var firstLine = defaultValue.firstToken().line() - 1;
     var lastLine = defaultValue.lastToken().line() - 1;
 
+    // We decided to not support multiline default parameters
+    // because it requires indents calculation for place where the value should be copied.
     if (firstLine != lastLine) {
       return null;
     }
