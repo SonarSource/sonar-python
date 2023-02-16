@@ -1,6 +1,8 @@
 from typing import SupportsFloat, List, Iterable, Generator, Set, Union, Type, TypedDict
 
 def assigned_directly():
+  foo : int = None # Noncompliant {{Replace the type hint "int" with "Optional[int]" or don't assign "None" to "foo"}}
+#       ^^^>  ^^^^
   my_int_nok: int = "hello"  # Noncompliant  {{Assign to "my_int_nok" a value of type "int" instead of "str" or update its type hint.}}
 #             ^^^>  ^^^^^^^
   my_str_ok: str = 42  # Noncompliant
