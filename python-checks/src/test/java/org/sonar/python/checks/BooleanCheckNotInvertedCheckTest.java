@@ -160,12 +160,14 @@ public class BooleanCheckNotInvertedCheckTest {
 
   @Test
   public void expression_list() {
-    String codeWithIssue = "a = not [] < (c,d)";
-    String codeFixed = "a = [] >= (c, d)";
+    String codeWithIssue = "a = not [] < (c,\n" +
+      "  d)";
+    String codeFixed = "a = [] >= (c,\n" +
+      "  d)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not [a, (a,b)] is c";
-    codeFixed = "a = [a, (a, b)] is not c";
+    codeFixed = "a = [a, (a,b)] is not c";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not (foo((1)) < c)";
@@ -185,7 +187,7 @@ public class BooleanCheckNotInvertedCheckTest {
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not ((1,2,3,4) in c)";
-    codeFixed = "a = (1, 2, 3, 4) not in c";
+    codeFixed = "a = (1,2,3,4) not in c";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -200,6 +202,17 @@ public class BooleanCheckNotInvertedCheckTest {
   public void brackets(){
     String codeWithIssue = "x = not ( ham[1] in a)";
     String codeFixed = "x = ham[1] not in a";
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+  }
+
+  @Test
+  public void notInQuickFix(){
+    String codeWithIssue = "def foo(key, mapping):\n" +
+      "    if not key in mapping.keys():\n" +
+      "        pass";
+    String codeFixed = "def foo(key, mapping):\n" +
+      "    if key not in mapping.keys():\n" +
+      "        pass";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }
