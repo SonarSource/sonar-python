@@ -43,12 +43,6 @@ public interface StringElement extends Tree {
   boolean isInterpolated();
 
   /**
-   * @deprecated Use {@link #formattedExpressions()} instead.
-   */
-  @Deprecated
-  List<Expression> interpolatedExpressions();
-
-  /**
    * @return Formatted expressions of an f-string.
    * Empty list if the string element is not an f-string.
    */

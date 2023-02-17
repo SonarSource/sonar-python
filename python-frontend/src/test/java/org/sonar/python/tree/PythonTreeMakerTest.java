@@ -783,17 +783,12 @@ public class PythonTreeMakerTest extends RuleTest {
     Decorator decoratorTree = functionDef.decorators().get(0);
     assertThat(decoratorTree.getKind()).isEqualTo(Tree.Kind.DECORATOR);
     assertThat(decoratorTree.atToken().value()).isEqualTo("@");
-    assertThat(decoratorTree.name().names().get(0).name()).isEqualTo("foo");
-    assertThat(decoratorTree.leftPar()).isNull();
     assertThat(decoratorTree.arguments()).isNull();
-    assertThat(decoratorTree.rightPar()).isNull();
 
     functionDef = parse("@foo()\n@bar(1)\ndef func(x): pass", treeMaker::funcDefStatement);
     assertThat(functionDef.decorators()).hasSize(2);
     Decorator decoratorTree1 = functionDef.decorators().get(0);
-    assertThat(decoratorTree1.leftPar().value()).isEqualTo("(");
     assertThat(decoratorTree1.arguments()).isNull();
-    assertThat(decoratorTree1.rightPar().value()).isEqualTo(")");
     Decorator decoratorTree2 = functionDef.decorators().get(1);
     assertThat(decoratorTree2.arguments().arguments()).extracting(arg -> ((RegularArgument) arg).expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
 
@@ -886,7 +881,6 @@ public class PythonTreeMakerTest extends RuleTest {
     List<Decorator> decorators = functionDef.decorators();
     assertThat(decorators).hasSize(2);
     Decorator decorator = decorators.get(0);
-    assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo");
     assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isEqualTo("foo");
     assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
@@ -895,8 +889,6 @@ public class PythonTreeMakerTest extends RuleTest {
     decorators = functionDef.decorators();
     assertThat(decorators).hasSize(1);
     decorator = decorators.get(0);
-    assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
-    assertThat(decorator.name().names().get(1).name()).isEqualTo("bar");
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo.bar");
     assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isEqualTo("foo.bar");
     assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
@@ -905,7 +897,6 @@ public class PythonTreeMakerTest extends RuleTest {
     decorators = functionDef.decorators();
     assertThat(decorators).hasSize(1);
     decorator = decorators.get(0);
-    assertThat(decorator.name().names()).isEmpty();
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isNull();
     assertThat(TreeUtils.fullyQualifiedNameFromExpression(decorator.expression())).isNull();
     assertThat(decorator.expression().is(Kind.QUALIFIED_EXPR)).isTrue();
@@ -964,7 +955,6 @@ public class PythonTreeMakerTest extends RuleTest {
     classDef = treeMaker.classDefStatement(astNode);
     assertThat(classDef.decorators()).hasSize(1);
     Decorator decorator = classDef.decorators().get(0);
-    assertThat(decorator.name().names()).extracting(Name::name).containsExactly("foo", "bar");
 
     astNode = p.parse("class clazz:\n  def foo(): pass");
     classDef = treeMaker.classDefStatement(astNode);
@@ -2090,7 +2080,6 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral.stringElements()).hasSize(1);
     StringElement elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
-    assertThat(elmt.formattedExpressions()).extracting(FormattedExpression::expression).containsExactlyElementsOf(elmt.interpolatedExpressions());
     assertThat(elmt.formattedExpressions()).hasSize(1);
     return elmt.formattedExpressions().get(0);
   }

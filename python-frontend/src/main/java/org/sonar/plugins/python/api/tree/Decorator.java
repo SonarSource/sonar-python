@@ -35,21 +35,6 @@ public interface Decorator extends Tree {
 
   Expression expression();
 
-  /**
-  Might return a DottedName containing an empty list of names when the expression is more complex
-   than a qualified name or a call expression (possible since Python 3.9)
-   */
-  @Deprecated
-  DottedName name();
-
-  @CheckForNull
-  @Deprecated
-  Token leftPar();
-
   @CheckForNull
   ArgList arguments();
-
-  @CheckForNull
-  @Deprecated
-  Token rightPar();
 }
