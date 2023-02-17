@@ -26,10 +26,9 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
@@ -51,7 +50,6 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
   @Override
   public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
     return Optional.ofNullable(super.addIssue(regexTree, message, cost, secondaries))
-      .map(IssueWithQuickFix.class::cast)
       .map(issue -> {
         Matcher matcher = issueMessagePattern.matcher(message);
         String quickFixReplacement = matcher.replaceFirst("$1");

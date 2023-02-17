@@ -31,6 +31,7 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
@@ -45,9 +46,7 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.TypeShed;
 
@@ -155,7 +154,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
         if (existingIssue != null) {
           existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
         } else {
-          var issue = (IssueWithQuickFix) ctx.addIssue(variable, MESSAGE);
+          var issue = ctx.addIssue(variable, MESSAGE);
           variableIssuesRaised.put(symbol, issue);
 
           var names = collectUsedNames(variable);
@@ -172,7 +171,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       .stream()
       .map(Usage::tree)
       .map(Tree::firstToken)
-      .map(token -> PythonTextEdit.insertBefore(token, RENAME_PREFIX))
+      .map(token -> TextEditUtils.insertBefore(token, RENAME_PREFIX))
       .collect(Collectors.toList());
 
     return PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, symbol.name()))
