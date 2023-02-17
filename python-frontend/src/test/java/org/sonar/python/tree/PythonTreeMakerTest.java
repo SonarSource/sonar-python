@@ -2097,7 +2097,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
     Expression expression = formattedExpression.expression();
     assertThat(expression).isNotNull();
-    assertThat(expression.getKind()).isEqualTo(Kind.EXPRESSION_LIST);
+    assertThat(expression.getKind()).isEqualTo(Kind.TUPLE);
     assertThat(expression.children()).hasSize(9);
   }
 

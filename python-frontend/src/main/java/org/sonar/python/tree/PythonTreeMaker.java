@@ -1634,7 +1634,7 @@ public class PythonTreeMaker {
   }
 
   private FormattedExpression formattedExpression(AstNode expressionNode) {
-    var formattedExpressionEntities = expressionNode.getFirstChild(PythonGrammar.FORMATTED_EXPR_ENTITIES);
+    var formattedExpressionEntities = expressionNode.getFirstChild(PythonGrammar.TESTLIST);
     var expressions = formattedExpressionEntities
       .getChildren(PythonGrammar.TEST)
       .stream()
@@ -1652,7 +1652,7 @@ public class PythonTreeMaker {
         .map(PythonTreeMaker::toPyToken)
         .collect(Collectors.toList());
 
-      exp = new ExpressionListImpl(expressions, commas);
+      exp = new TupleImpl(null, expressions, commas, null);
     }
     AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
