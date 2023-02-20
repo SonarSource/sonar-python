@@ -31,9 +31,8 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key="S5712")
 public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptionCheck {
@@ -128,9 +127,9 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
 
       for (RaiseStatement notImplementedErrorRaise : visitor.nonCompliantRaises) {
         var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-          .addTextEdit(PythonTextEdit.replace(notImplementedErrorRaise, "return NotImplemented"))
+          .addTextEdit(TextEditUtils.replace(notImplementedErrorRaise, "return NotImplemented"))
           .build();
-        var issue = (IssueWithQuickFix) ctx.addIssue(notImplementedErrorRaise, MESSAGE);
+        var issue = ctx.addIssue(notImplementedErrorRaise, MESSAGE);
         issue.addQuickFix(quickFix);
       }
     });

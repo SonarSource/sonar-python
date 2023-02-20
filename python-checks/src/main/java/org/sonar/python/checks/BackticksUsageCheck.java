@@ -23,9 +23,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ReprExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "BackticksUsage")
 public class BackticksUsageCheck extends PythonSubscriptionCheck {
@@ -34,11 +34,11 @@ public class BackticksUsageCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.REPR, ctx -> {
       ReprExpression node = (ReprExpression) ctx.syntaxNode();
-      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(node, "Use \"repr\" instead.");
+      PreciseIssue issue = ctx.addIssue(node, "Use \"repr\" instead.");
 
-      PythonTextEdit text1 = PythonTextEdit
+      PythonTextEdit text1 = TextEditUtils
               .replace(node.openingBacktick(), "repr(");
-      PythonTextEdit text2 = PythonTextEdit
+      PythonTextEdit text2 = TextEditUtils
               .replace(node.closingBacktick(), ")");
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Replace backtick with \"repr()\".")
               .addTextEdit(text1)

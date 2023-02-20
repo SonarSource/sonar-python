@@ -22,7 +22,7 @@ package org.sonar.python;
 import java.io.File;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.api.batch.fs.InputFile;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -73,6 +75,17 @@ public class PythonCheckTest {
     assertThat(primaryLocation.endLine()).isEqualTo(1);
     assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
+
+    assertThat(firstIssue.quickFixes()).isEmpty();
+    PythonTextEdit textEdit = Mockito.mock(PythonTextEdit.class);
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New Quickfix")
+      .addTextEdit(textEdit)
+      .build();
+
+    firstIssue.addQuickFix(quickFix);
+    firstIssue.addQuickFix(quickFix);
+
+    assertThat(firstIssue.quickFixes()).containsExactly(quickFix, quickFix);
   }
 
   @Test

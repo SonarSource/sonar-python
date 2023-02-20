@@ -37,9 +37,8 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -57,14 +56,14 @@ public class PythonQuickFixVerifier {
       .as("Number of issues")
       .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
       .hasSize(1);
-    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+    PreciseIssue issue = issues.get(0);
 
-    assertThat(issue.getQuickFixes())
+    assertThat(issue.quickFixes())
       .as("Number of quickfixes")
-      .overridingErrorMessage("Expected %d quickfix but found %d", codesFixed.length, issue.getQuickFixes().size())
+      .overridingErrorMessage("Expected %d quickfix but found %d", codesFixed.length, issue.quickFixes().size())
       .hasSize(codesFixed.length);
 
-    List<String> appliedQuickFix = issue.getQuickFixes().stream()
+    List<String> appliedQuickFix = issue.quickFixes().stream()
       .map(quickFix -> applyQuickFix(codeWithIssue, quickFix))
       .collect(Collectors.toList());
 
@@ -82,19 +81,19 @@ public class PythonQuickFixVerifier {
       .as("Number of issues")
       .overridingErrorMessage("Expected 1 issue but found %d", issues.size())
       .hasSize(1);
-    IssueWithQuickFix issue = (IssueWithQuickFix) issues.get(0);
+    PreciseIssue issue = issues.get(0);
 
-    assertThat(issue.getQuickFixes())
+    assertThat(issue.quickFixes())
       .as("Number of quick fixes")
-      .overridingErrorMessage("Expected no quick fixes for the issue but found %d", issue.getQuickFixes().size())
+      .overridingErrorMessage("Expected no quick fixes for the issue but found %d", issue.quickFixes().size())
       .isEmpty();
   }
 
   public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
     Stream<String> descriptions = PythonQuickFixVerifier
       .getIssuesWithQuickFix(check, codeWithIssue)
-      .stream().map(IssueWithQuickFix.class::cast)
-      .flatMap(issue -> issue.getQuickFixes().stream())
+      .stream()
+      .flatMap(issue -> issue.quickFixes().stream())
       .map(PythonQuickFix::getDescription);
 
     assertThat(descriptions).containsExactly(expectedMessages);

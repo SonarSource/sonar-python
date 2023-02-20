@@ -22,8 +22,8 @@ package org.sonar.python.quickfix;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -33,24 +33,9 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
-/**
- * For internal use only. Can not be used outside SonarPython analyzer.
- */
-public class PythonTextEdit {
+public class TextEditUtils {
 
-  private final String message;
-  private final int startLine;
-  private final int startLineOffset;
-  private final int endLine;
-  private final int endLineOffset;
-
-  public PythonTextEdit(String message, int startLine, int startLineOffset, int endLine, int endLineOffset) {
-    this.message = message;
-    this.startLine = startLine;
-    this.startLineOffset = startLineOffset;
-    this.endLine = endLine;
-    this.endLineOffset = endLineOffset;
-  }
+  private TextEditUtils() {}
 
   /**
    * Insert a line with the same offset as the given tree, before the given tree.
@@ -152,7 +137,7 @@ public class PythonTextEdit {
     // Statement is the single element in the block
     // Replace by `pass` keyword
     if (previous == null && next == null) {
-      return PythonTextEdit.replace(statement, "pass");
+      return replace(statement, "pass");
     }
 
     boolean hasPreviousSiblingOnLine = previous != null && firstTokenOfStmt.line() == TreeUtils.getTreeSeparatorOrLastToken(previous.lastToken()).line();
@@ -162,17 +147,17 @@ public class PythonTextEdit {
       // Statement is first on the line or between at least two statements
       // Remove from first token to last toke of statement
       Token firstNextToken = next.firstToken();
-      return PythonTextEdit.removeRange(firstTokenOfStmt.line(), firstTokenOfStmt.column(), firstNextToken.line(), firstNextToken.column());
+      return removeRange(firstTokenOfStmt.line(), firstTokenOfStmt.column(), firstNextToken.line(), firstNextToken.column());
     } else if (hasPreviousSiblingOnLine) {
       // Statement is last on the line and has one or more previous statement on the line
       // Remove from last token or separator of previous statement to avoid trailing white spaces
       // Keep the line break to ensure elements on the next line don't get pushed to the current line
       Token lastPreviousToken = TreeUtils.getTreeSeparatorOrLastToken(previous);
-      return PythonTextEdit.removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfStmt) - 1);
+      return removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfStmt) - 1);
     } else {
       // Statement is single on the line
       // Remove the entire line including indent and line break
-      return PythonTextEdit.removeRange(firstTokenOfStmt.line(), 0, lastTokenOfStmt.line(), getEndColumn(lastTokenOfStmt));
+      return removeRange(firstTokenOfStmt.line(), 0, lastTokenOfStmt.line(), getEndColumn(lastTokenOfStmt));
     }
   }
 
@@ -196,54 +181,9 @@ public class PythonTextEdit {
     List<Usage> usages = symbol != null ? symbol.usages() : Collections.emptyList();
     List<PythonTextEdit> result = new LinkedList<>();
     for(Usage usage: usages) {
-      PythonTextEdit text = PythonTextEdit.replace(usage.tree().firstToken(), newName);
+      PythonTextEdit text = replace(usage.tree().firstToken(), newName);
       result.add(text);
     }
     return result;
-  }
-
-  public String replacementText() {
-    return message;
-  }
-
-  public int startLine() {
-    return startLine;
-  }
-
-  public int startLineOffset() {
-    return startLineOffset;
-  }
-
-  public int endLine() {
-    return endLine;
-  }
-
-  public int endLineOffset() {
-    return endLineOffset;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    PythonTextEdit that = (PythonTextEdit) o;
-    return startLine == that.startLine && startLineOffset == that.startLineOffset && endLine == that.endLine
-      && endLineOffset == that.endLineOffset && Objects.equals(message, that.message);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(message, startLine, startLineOffset, endLine, endLineOffset);
-  }
-
-  @Override
-  public String toString() {
-    return "PythonTextEdit{" +
-      "message='" + message + '\'' +
-      ", startLine=" + startLine +
-      ", startLineOffset=" + startLineOffset +
-      ", endLine=" + endLine +
-      ", endLineOffset=" + endLineOffset +
-      '}';
   }
 }

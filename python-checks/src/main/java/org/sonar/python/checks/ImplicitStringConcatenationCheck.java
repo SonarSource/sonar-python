@@ -27,11 +27,10 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
-import static org.sonar.python.quickfix.PythonTextEdit.insertAfter;
-import static org.sonar.python.quickfix.PythonTextEdit.replaceRange;
+import static org.sonar.python.quickfix.TextEditUtils.insertAfter;
+import static org.sonar.python.quickfix.TextEditUtils.replaceRange;
 
 @Rule(key = "S5799")
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
@@ -106,8 +105,7 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
       Tree.Kind.SET_LITERAL, Tree.Kind.TUPLE);
   }
 
-  private static void createQuickFix(PreciseIssue issueRaised, StringElement start, StringElement end) {
-    IssueWithQuickFix issue = (IssueWithQuickFix) issueRaised;
+  private static void createQuickFix(PreciseIssue issue, StringElement start, StringElement end) {
     String textStart = start.value();
     String textEnd = end.value();
 

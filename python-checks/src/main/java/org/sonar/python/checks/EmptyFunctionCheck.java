@@ -28,11 +28,10 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.quickfix.PythonTextEdit.insertLineBefore;
+import static org.sonar.python.quickfix.TextEditUtils.insertLineBefore;
 
 @Rule(key = "S1186")
 public class EmptyFunctionCheck extends PythonSubscriptionCheck {
@@ -67,13 +66,13 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
           return;
         }
         String type = functionDef.isMethodDefinition() ? "method" : "function";
-        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(functionDef.name(), String.format(MESSAGE, type));
+        PreciseIssue issue = ctx.addIssue(functionDef.name(), String.format(MESSAGE, type));
         addQuickFixes(issue, functionDef, type);
       }
     });
   }
 
-  private static void addQuickFixes(IssueWithQuickFix issue, FunctionDef functionDef, String functionType) {
+  private static void addQuickFixes(PreciseIssue issue, FunctionDef functionDef, String functionType) {
     Statement passStatement = functionDef.body().statements().get(0);
     issue.addQuickFix(PythonQuickFix.newQuickFix("Insert placeholder comment",
       insertLineBefore(passStatement, "# TODO document why this method is empty")));

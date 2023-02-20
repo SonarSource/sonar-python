@@ -29,9 +29,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
@@ -64,7 +64,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
         if (previousTokenLine == commentToken.line()) {
           String comment = commentToken.value();
           if (!pattern.matcher(comment).matches()) {
-            IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(commentToken, MESSAGE);
+            var issue = ctx.addIssue(commentToken, MESSAGE);
             String line = getLines(ctx).get(commentToken.line() - 1);
             addQuickFix(issue, commentToken, line);
           }
@@ -74,12 +74,12 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Token commentToken, String line) {
+  private static void addQuickFix(PreciseIssue issue, Token commentToken, String line) {
     String indent = calculateIndent(line);
-    PythonTextEdit insertComment = PythonTextEdit.insertAtPosition(commentToken.line(), 0, indent + commentToken.value() + "\n");
+    PythonTextEdit insertComment = TextEditUtils.insertAtPosition(commentToken.line(), 0, indent + commentToken.value() + "\n");
 
     int startColumnRemove = calculateStartColumnToRemove(commentToken, line);
-    PythonTextEdit removeTrailingComment = PythonTextEdit.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
+    PythonTextEdit removeTrailingComment = TextEditUtils.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
 
     PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE, removeTrailingComment, insertComment);
     issue.addQuickFix(fix);

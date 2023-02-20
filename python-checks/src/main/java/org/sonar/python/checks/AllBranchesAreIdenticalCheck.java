@@ -34,12 +34,11 @@ import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.quickfix.PythonTextEdit.removeUntil;
+import static org.sonar.python.quickfix.TextEditUtils.removeUntil;
 
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
@@ -72,7 +71,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     if (!CheckUtils.areEquivalent(body, elseBranch.body())) {
       return;
     }
-    IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
+    PreciseIssue issue = ctx.addIssue(ifStmt.keyword(), IF_STATEMENT_MESSAGE);
     issue.secondary(secondaryIssueLocation(ifStmt.body()));
     ifStmt.elifBranches().forEach(e -> issue.secondary(secondaryIssueLocation(e.body())));
     issue.secondary(secondaryIssueLocation(elseBranch.body()));
@@ -91,7 +90,7 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
       return;
     }
     if (areIdentical(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
-      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_MESSAGE);
+      PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_MESSAGE);
       addSecondaryLocations(issue, conditionalExpression.trueExpression());
       addSecondaryLocations(issue, conditionalExpression.falseExpression());
       issue.addQuickFix(computeQuickFixForConditional(conditionalExpression));
@@ -153,11 +152,11 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix("Remove the if statement");
 
     // Remove everything from if keyword to the last branch's body
-    builder.addTextEdit(PythonTextEdit.removeUntil(ifStatement.keyword(), elseClause.body()));
+    builder.addTextEdit(removeUntil(ifStatement.keyword(), elseClause.body()));
 
     // Shift all body statements to the left
     // Skip first shift because already done by removeUntil of the if statement
-    PythonTextEdit.shiftLeft(elseClause.body()).stream()
+    TextEditUtils.shiftLeft(elseClause.body()).stream()
       .skip(1)
       .forEach(builder::addTextEdit);
 

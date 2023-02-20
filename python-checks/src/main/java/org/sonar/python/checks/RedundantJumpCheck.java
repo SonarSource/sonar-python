@@ -35,9 +35,8 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3626")
@@ -73,14 +72,14 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   }
 
   private static void addQuickFix(Tree lastElement, PreciseIssue issue) {
-    if (!(lastElement instanceof Statement) || !(issue instanceof IssueWithQuickFix)) {
+    if (!(lastElement instanceof Statement)) {
       return;
     }
     var quickFix = PythonQuickFix
       .newQuickFix(QUICK_FIX_DESCRIPTION)
-      .addTextEdit(PythonTextEdit.removeStatement((Statement) lastElement))
+      .addTextEdit(TextEditUtils.removeStatement((Statement) lastElement))
       .build();
-    ((IssueWithQuickFix) issue).addQuickFix(quickFix);
+    issue.addQuickFix(quickFix);
   }
 
   private static String message(Tree jumpStatement) {

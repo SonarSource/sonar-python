@@ -33,9 +33,9 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2710")
@@ -93,7 +93,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
       return;
     }
     if (!classParameterNames().contains(parameterName.name())) {
-      IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(parameterName,
+      PreciseIssue issue = ctx.addIssue(parameterName,
         String.format("Rename \"%s\" to a valid class parameter name or add the missing class parameter.", parameterName.name()));
       
       issue.addQuickFix(addClsAsTheFirstArgument(parameterName));
@@ -106,9 +106,9 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
     PythonTextEdit text;
     if (isSecondArgInNewLine(parameterName)) {
       int indent = secondArgIndent(parameterName);
-      text = PythonTextEdit.insertBefore(parameterName, newName + ",\n" + " ".repeat(indent));
+      text = TextEditUtils.insertBefore(parameterName, newName + ",\n" + " ".repeat(indent));
     } else {
-      text = PythonTextEdit.insertBefore(parameterName, newName + ", ");
+      text = TextEditUtils.insertBefore(parameterName, newName + ", ");
     }
     return PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", newName))
       .addTextEdit(text)
@@ -133,7 +133,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
     String newName = newName();
 
     return PythonQuickFix.newQuickFix(String.format("Rename '%s' to '%s'", parameterName.name(), newName))
-      .addTextEdit(PythonTextEdit.renameAllUsages(parameterName, newName))
+      .addTextEdit(TextEditUtils.renameAllUsages(parameterName, newName))
       .build();
   }
 

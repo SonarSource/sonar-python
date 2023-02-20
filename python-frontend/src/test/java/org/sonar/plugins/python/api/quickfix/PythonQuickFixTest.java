@@ -17,37 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.quickfix;
+package org.sonar.plugins.python.api.quickfix;
 
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IssueWithQuickFixTest {
+public class PythonQuickFixTest {
 
   @Test
-  public void test() {
-    PythonCheck check = Mockito.mock(PythonCheck.class);
-    LocationInFile loc1 = new LocationInFile("null", 1, 7, 10, 10);
-    IssueLocation issueLocation = IssueLocation.preciseLocation(loc1, "location");
+  public void test_newQuickFix_builder() {
+    PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
 
-    IssueWithQuickFix issue = new IssueWithQuickFix(check, issueLocation);
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix").addTextEdit(textEdit).build();
 
-    assertThat(issue.getQuickFixes()).isEmpty();
-
-    PythonTextEdit textEdit = Mockito.mock(PythonTextEdit.class);
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New Quickfix")
-      .addTextEdit(textEdit)
-      .build();
-
-    issue.addQuickFix(quickFix);
-    issue.addQuickFix(quickFix);
-
-    assertThat(issue.getQuickFixes()).containsExactly(quickFix, quickFix);
+    assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
+    assertThat(quickFix.getDescription()).isEqualTo("New quickfix");
   }
 
+  @Test
+  public void test_newQuickFix() {
+    PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
+
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix", textEdit);
+
+    assertThat(quickFix.getTextEdits()).containsExactly(textEdit);
+  }
 }

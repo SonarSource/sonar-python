@@ -25,9 +25,8 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S1131")
 public class TrailingWhitespaceCheck implements PythonCheck {
@@ -42,10 +41,10 @@ public class TrailingWhitespaceCheck implements PythonCheck {
       Matcher matcher = TRAILING_WS.matcher(lines[i]);
       if (matcher.find()) {
         int lineNumber = i + 1;
-        IssueWithQuickFix issue = new IssueWithQuickFix(this, IssueLocation.atLineLevel(MESSAGE, lineNumber));
+        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, lineNumber));
 
         issue.addQuickFix(PythonQuickFix.newQuickFix("Remove trailing whitespaces")
-            .addTextEdit(PythonTextEdit.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
+            .addTextEdit(TextEditUtils.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
           .build());
 
         ctx.addIssue(issue);

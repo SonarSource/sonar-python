@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
 public interface PythonCheck {
 
@@ -42,6 +43,7 @@ public interface PythonCheck {
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
+    private final List<PythonQuickFix> quickFixes = new ArrayList<>();
 
     public PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
@@ -85,6 +87,18 @@ public interface PythonCheck {
 
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
+    }
+
+    /**
+     * This only makes sense in SonarLint context. Should not be used in custom rules.
+     */
+    @Beta
+    public void addQuickFix(PythonQuickFix quickFix){
+      this.quickFixes.add(quickFix);
+    }
+
+    public List<PythonQuickFix> quickFixes() {
+      return quickFixes;
     }
 
     public PythonCheck check() {

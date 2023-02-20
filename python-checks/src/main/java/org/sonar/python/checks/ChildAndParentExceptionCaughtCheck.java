@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -38,9 +39,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5713")
@@ -68,7 +67,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
     caughtExceptionsBySymbol.forEach((currentSymbol, caughtExceptionsWithSameSymbol) -> {
       Expression currentException = caughtExceptionsWithSameSymbol.get(0);
       if (caughtExceptionsWithSameSymbol.size() > 1) {
-        IssueWithQuickFix issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this duplicate Exception class.");
+        var issue = ctx.addIssue(currentException, "Remove this duplicate Exception class.");
         addQuickFix(issue, currentException);
         caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, "Duplicate."));
       }
@@ -79,7 +78,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .collect(Collectors.toList());
 
       if (!caughtParentExceptions.isEmpty()) {
-        var issue = (IssueWithQuickFix) ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
+        var issue = ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
         addQuickFix(issue, currentException);
 
         caughtParentExceptions.stream()
@@ -89,7 +88,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
     });
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Expression currentException) {
+  private static void addQuickFix(PreciseIssue issue, Expression currentException) {
     var quickFix = createQuickFix(currentException);
     if (quickFix != null) {
       issue.addQuickFix(quickFix);
@@ -138,7 +137,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
           var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));
 
           return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.replace(exceptions, text))
+            .addTextEdit(TextEditUtils.replace(exceptions, text))
             .build();
         }).orElse(null);
     } catch (IllegalArgumentException e) {

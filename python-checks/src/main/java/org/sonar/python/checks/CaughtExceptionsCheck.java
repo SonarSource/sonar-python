@@ -27,17 +27,18 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -74,13 +75,13 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
         .filter(Predicate.not(CaughtExceptionsCheck::inheritsFromBaseException))
         .isPresent();
       if (!canBeOrExtendBaseException(expression.type()) || notInheritsFromBaseException) {
-        var issue = (IssueWithQuickFix) ctx.addIssue(expression, MESSAGE);
+        var issue = ctx.addIssue(expression, MESSAGE);
         expressionSymbolOpt.ifPresent(symbol -> addQuickFix(issue, symbol));
       }
     });
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Symbol symbol) {
+  private static void addQuickFix(PreciseIssue issue, Symbol symbol) {
     symbol.usages()
       .stream()
       .filter(Usage::isBindingUsage)
@@ -92,18 +93,20 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
         Tree insertAfter = classDef.name();
         String insertingText = "(Exception)";
 
-        if (classDef.leftPar() != null) {
-          if (classDef.args() == null) {
-            insertAfter = classDef.leftPar();
+        Token leftPar = classDef.leftPar();
+        if (leftPar != null) {
+          ArgList args = classDef.args();
+          if (args == null) {
+            insertAfter = leftPar;
             insertingText = "Exception";
           } else {
-            insertAfter = classDef.args();
+            insertAfter = args;
             insertingText = ", Exception";
           }
         }
 
         issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, classDef.name().name()))
-          .addTextEdit(PythonTextEdit.insertAfter(insertAfter, insertingText))
+          .addTextEdit(TextEditUtils.insertAfter(insertAfter, insertingText))
           .build());
       });
   }

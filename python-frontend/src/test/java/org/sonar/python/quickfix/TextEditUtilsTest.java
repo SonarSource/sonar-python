@@ -22,6 +22,7 @@ package org.sonar.python.quickfix;
 import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -37,14 +38,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class PythonTextEditTest {
+public class TextEditUtilsTest {
 
   @Test
   public void insertBefore() {
     String textToInsert = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
-    PythonTextEdit textEdit = PythonTextEdit.insertBefore(token, textToInsert);
+    PythonTextEdit textEdit = TextEditUtils.insertBefore(token, textToInsert);
     assertThat(textEdit.replacementText()).isEqualTo(textToInsert);
     assertTextEditLocation(textEdit, 1, 7, 1, 7);
   }
@@ -54,7 +55,7 @@ public class PythonTextEditTest {
     String textToInsert = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
-    PythonTextEdit textEdit = PythonTextEdit.insertAfter(token, textToInsert);
+    PythonTextEdit textEdit = TextEditUtils.insertAfter(token, textToInsert);
     assertThat(textEdit.replacementText()).isEqualTo(textToInsert);
     assertTextEditLocation(textEdit, 1, 12, 1, 12);
   }
@@ -64,7 +65,7 @@ public class PythonTextEditTest {
     String replacementText = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
-    PythonTextEdit textEdit = PythonTextEdit.replace(token, replacementText);
+    PythonTextEdit textEdit = TextEditUtils.replace(token, replacementText);
     assertThat(textEdit.replacementText()).isEqualTo(replacementText);
     assertTextEditLocation(textEdit, 1, 7, 1, 12);
   }
@@ -73,7 +74,7 @@ public class PythonTextEditTest {
   public void remove() {
     Token token = mockToken("token", 1, 7);
 
-    PythonTextEdit textEdit = PythonTextEdit.remove(token);
+    PythonTextEdit textEdit = TextEditUtils.remove(token);
     assertThat(textEdit.replacementText()).isEmpty();
     assertTextEditLocation(textEdit, 1, 7, 1, 12);
   }
@@ -84,7 +85,7 @@ public class PythonTextEditTest {
     Token token1 = mockToken("(", 1, 4);
     Token token2 = mockToken(")", 1, 12);
 
-    PythonTextEdit textEdit = PythonTextEdit.replaceRange(token1, token2, "b and c");
+    PythonTextEdit textEdit = TextEditUtils.replaceRange(token1, token2, "b and c");
     assertThat(textEdit.replacementText()).isEqualTo("b and c");
     assertTextEditLocation(textEdit, 1, 4, 1, 13);
   }
@@ -93,7 +94,7 @@ public class PythonTextEditTest {
   public void insertLineBefore() {
     Token token = mockToken("tree", 1, 4);
 
-    PythonTextEdit textEdit = PythonTextEdit.insertLineBefore(token, "firstLine\n    secondLineWithIndent");
+    PythonTextEdit textEdit = TextEditUtils.insertLineBefore(token, "firstLine\n    secondLineWithIndent");
     assertThat(textEdit.replacementText()).isEqualTo("firstLine\n        secondLineWithIndent\n    ");
     assertTextEditLocation(textEdit, 1, 4, 1, 4);
   }
@@ -108,7 +109,7 @@ public class PythonTextEditTest {
     );
     StatementList functionBody = getFunctionBody(file);
 
-    List<PythonTextEdit> textEdits = PythonTextEdit.shiftLeft(functionBody);
+    List<PythonTextEdit> textEdits = TextEditUtils.shiftLeft(functionBody);
     assertThat(textEdits).hasSize(2);
     textEdits.forEach(textEdit -> {
       assertThat(textEdit.startLineOffset()).isZero();
@@ -129,7 +130,7 @@ public class PythonTextEditTest {
     StatementList functionBody = getFunctionBody(file);
     Statement lastStatement = ListUtils.getLast(functionBody.statements());
 
-    PythonTextEdit textEdit = PythonTextEdit.removeUntil(functionBody, lastStatement);
+    PythonTextEdit textEdit = TextEditUtils.removeUntil(functionBody, lastStatement);
     assertThat(textEdit.replacementText()).isEmpty();
     assertTextEditLocation(textEdit, 2, 4, 4, 4);
   }
@@ -144,7 +145,7 @@ public class PythonTextEditTest {
     );
     Parameter parameter = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.PARAMETER));
 
-    List<PythonTextEdit> textEdits = PythonTextEdit.renameAllUsages(parameter.name(), "xxx");
+    List<PythonTextEdit> textEdits = TextEditUtils.renameAllUsages(parameter.name(), "xxx");
 
     assertThat(textEdits).containsExactly(
       new PythonTextEdit("xxx", 1, 8, 1, 11),
@@ -157,7 +158,7 @@ public class PythonTextEditTest {
     FileInput file = parse("foo()");
     CallExpression call = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.CALL_EXPR));
 
-    PythonTextEdit textEdit = PythonTextEdit.insertLineAfter(call, call, "bar");
+    PythonTextEdit textEdit = TextEditUtils.insertLineAfter(call, call, "bar");
     assertThat(textEdit).isEqualTo(new PythonTextEdit("\nbar", 1,3,1,3));
   }
 
@@ -170,7 +171,7 @@ public class PythonTextEditTest {
     FunctionDef functionDef = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.FUNCDEF));
     StatementList functionBody = functionDef.body();
 
-    PythonTextEdit textEdit = PythonTextEdit.insertLineAfter(functionDef.colon(), functionBody, "bar");
+    PythonTextEdit textEdit = TextEditUtils.insertLineAfter(functionDef.colon(), functionBody, "bar");
     assertThat(textEdit).isEqualTo(new PythonTextEdit("\n    bar", 1,10,1,10));
   }
 
@@ -180,7 +181,7 @@ public class PythonTextEditTest {
       "    a = 1");
     StatementList functionBody = getFunctionBody(file);
 
-    PythonTextEdit textEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    PythonTextEdit textEdit = TextEditUtils.removeStatement(functionBody.statements().get(0));
     assertThat(textEdit).isEqualTo(new PythonTextEdit("pass", 2, 4, 2, 9));
   }
 
@@ -191,10 +192,10 @@ public class PythonTextEditTest {
       "    b = 2");
     StatementList functionBody = getFunctionBody(file);
 
-    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    PythonTextEdit firstTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(0));
     assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 0, 2, 10));
 
-    PythonTextEdit secondTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(1));
+    PythonTextEdit secondTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(1));
     assertThat(secondTextEdit).isEqualTo(new PythonTextEdit("", 3, 0, 3, 9));
   }
 
@@ -205,7 +206,7 @@ public class PythonTextEditTest {
       "    b = 2");
     StatementList functionBody = getFunctionBody(file);
 
-    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    PythonTextEdit firstTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(0));
     assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 0, 2, 11));
   }
 
@@ -215,44 +216,14 @@ public class PythonTextEditTest {
       "    a = 1; b = 2; c = 3;");
     StatementList functionBody = getFunctionBody(file);
 
-    PythonTextEdit firstTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(0));
+    PythonTextEdit firstTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(0));
     assertThat(firstTextEdit).isEqualTo(new PythonTextEdit("", 2, 4, 2, 11));
 
-    PythonTextEdit secondTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(1));
+    PythonTextEdit secondTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(1));
     assertThat(secondTextEdit).isEqualTo(new PythonTextEdit("", 2, 11, 2, 18));
 
-    PythonTextEdit thirdTextEdit = PythonTextEdit.removeStatement(functionBody.statements().get(2));
+    PythonTextEdit thirdTextEdit = TextEditUtils.removeStatement(functionBody.statements().get(2));
     assertThat(thirdTextEdit).isEqualTo(new PythonTextEdit("", 2, 17, 2, 23));
-  }
-
-  @Test
-  public void equals() {
-    PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
-    assertThat(edit.equals(edit)).isTrue();
-    assertThat(edit.equals(null)).isFalse();
-    assertThat(edit.equals(new Object())).isFalse();
-
-    assertThat(edit.equals(new PythonTextEdit("", 0, 0, 1, 1))).isTrue();
-    assertThat(edit.equals(new PythonTextEdit("",1, 0, 1, 1))).isFalse();
-    assertThat(edit.equals(new PythonTextEdit("",0, 1, 1, 1))).isFalse();
-    assertThat(edit.equals(new PythonTextEdit("",0, 0, 0, 1))).isFalse();
-    assertThat(edit.equals(new PythonTextEdit("",0, 0, 1, 0))).isFalse();
-    assertThat(edit.equals(new PythonTextEdit("a", 0, 0, 1, 1))).isFalse();
-  }
-
-  @Test
-  public void test_hashCode() {
-    PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
-    assertThat(edit)
-      .hasSameHashCodeAs(edit)
-      .hasSameHashCodeAs(new PythonTextEdit("", 0, 0, 1, 1))
-      .doesNotHaveSameHashCodeAs(new Object())
-      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",1, 0, 1, 1))
-      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 1, 1, 1))
-      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 0, 0, 1))
-      .doesNotHaveSameHashCodeAs(new PythonTextEdit("",0, 0, 1, 0))
-      .doesNotHaveSameHashCodeAs(new PythonTextEdit("a", 0, 0, 1, 1))
-    ;
   }
 
   private void assertTextEditLocation(PythonTextEdit textEdit, int startLine, int startLineOffset, int endLine, int endLineOffset) {

@@ -24,9 +24,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S5905")
 public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
@@ -42,13 +41,13 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
       if (assertStatement.condition().is(Tree.Kind.TUPLE) && assertStatement.message() == null) {
         var tuple = (Tuple) assertStatement.condition();
 
-        var issue = (IssueWithQuickFix) ctx.addIssue(tuple, MESSAGE);
+        var issue = ctx.addIssue(tuple, MESSAGE);
 
         if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null) {
           // defensive condition
           issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(PythonTextEdit.remove(tuple.leftParenthesis()))
-            .addTextEdit(PythonTextEdit.remove(tuple.rightParenthesis()))
+            .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()))
+            .addTextEdit(TextEditUtils.remove(tuple.rightParenthesis()))
             .build());
         }
       }

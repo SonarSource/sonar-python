@@ -33,9 +33,8 @@ import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Arrays.asList;
@@ -66,18 +65,18 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
       var notToken = isExpr.notToken();
       if (notToken == null) {
         var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
-          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "=="))
+          .addTextEdit(TextEditUtils.replace(isExpr.operator(), "=="))
           .build();
 
-        var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), MESSAGE_IS);
+        var issue = ctx.addIssue(isExpr.operator(), MESSAGE_IS);
         issue.addQuickFix(quickFix);
       } else {
         var quickFix = PythonQuickFix.newQuickFix(IS_NOT_QUICK_FIX_MESSAGE)
-          .addTextEdit(PythonTextEdit.replace(isExpr.operator(), "!="))
-          .addTextEdit(PythonTextEdit.removeUntil(notToken, isExpr.rightOperand()))
+          .addTextEdit(TextEditUtils.replace(isExpr.operator(), "!="))
+          .addTextEdit(TextEditUtils.removeUntil(notToken, isExpr.rightOperand()))
           .build();
 
-        var issue = (IssueWithQuickFix) ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
+        var issue = ctx.addIssue(isExpr.operator(), notToken, MESSAGE_IS_NOT);
         issue.addQuickFix(quickFix);
       }
     }

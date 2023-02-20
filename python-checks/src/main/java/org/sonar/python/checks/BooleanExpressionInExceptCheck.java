@@ -27,15 +27,14 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5714")
@@ -57,7 +56,7 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
       .map(Expressions::removeParentheses)
       .filter(exception -> exception.is(Kind.OR, Kind.AND))
       .ifPresent(exception -> {
-        var issue = (IssueWithQuickFix) ctx.addIssue(exception, MESSAGE);
+        var issue = ctx.addIssue(exception, MESSAGE);
         addQuickFix(issue, exception);
       });
   }
@@ -85,7 +84,7 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
     throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Expression expression) {
+  private static void addQuickFix(PreciseIssue issue, Expression expression) {
     expression = Objects.requireNonNullElse((Expression) TreeUtils.firstAncestorOfKind(expression, Kind.PARENTHESIZED), expression);
 
     List<String> names;
@@ -100,7 +99,7 @@ public class BooleanExpressionInExceptCheck extends PythonSubscriptionCheck {
       .collect(Collectors.joining(", ", "(", ")"));
 
     var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-      .addTextEdit(PythonTextEdit.replace(expression, text))
+      .addTextEdit(TextEditUtils.replace(expression, text))
       .build();
 
     issue.addQuickFix(quickFix);

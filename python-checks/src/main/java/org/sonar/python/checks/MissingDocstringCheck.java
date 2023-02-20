@@ -30,9 +30,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.quickfix.IssueWithQuickFix;
-import org.sonar.python.quickfix.PythonQuickFix;
-import org.sonar.python.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S1720")
 public class MissingDocstringCheck extends PythonSubscriptionCheck {
@@ -108,7 +107,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     } else {
       issue = ctx.addFileIssue(finalMessage);
     }
-    addQuickFix((IssueWithQuickFix) issue, tree, type);
+    addQuickFix(issue, tree, type);
   }
 
   private static Name getNameNode(Tree tree) {
@@ -118,17 +117,17 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     return ((ClassDef) tree).name();
   }
 
-  private static void addQuickFix(IssueWithQuickFix issue, Tree tree, DeclarationType type) {
+  private static void addQuickFix(PreciseIssue issue, Tree tree, DeclarationType type) {
     PythonQuickFix.Builder quickFix = PythonQuickFix.newQuickFix("Add docstring");
 
     if (type == DeclarationType.MODULE) {
-      quickFix.addTextEdit(PythonTextEdit.insertAtPosition(1, 0, EMPTY_DOCSTRING));
+      quickFix.addTextEdit(TextEditUtils.insertAtPosition(1, 0, EMPTY_DOCSTRING));
     } else if (type == DeclarationType.CLASS) {
       ClassDef classDef = (ClassDef) tree;
-      quickFix.addTextEdit(PythonTextEdit.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));
+      quickFix.addTextEdit(TextEditUtils.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));
     } else {
       FunctionDef functionDef = (FunctionDef) tree;
-      quickFix.addTextEdit(PythonTextEdit.insertLineAfter(functionDef.colon(), functionDef.body(), EMPTY_DOCSTRING));
+      quickFix.addTextEdit(TextEditUtils.insertLineAfter(functionDef.colon(), functionDef.body(), EMPTY_DOCSTRING));
     }
 
     issue.addQuickFix(quickFix.build());
