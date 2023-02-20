@@ -1634,18 +1634,18 @@ public class PythonTreeMaker {
   }
 
   private FormattedExpression formattedExpression(AstNode expressionNode) {
-    var formattedExpressionEntities = expressionNode.getFirstChild(PythonGrammar.TESTLIST);
-    var expressions = formattedExpressionEntities
+    var expressionsList = expressionNode.getFirstChild(PythonGrammar.TESTLIST);
+    var expressions = expressionsList
       .getChildren(PythonGrammar.TEST)
       .stream()
       .map(this::expression)
       .collect(Collectors.toList());
 
     Expression exp;
-    if (expressions.size() == 1) {
+    if (expressionsList.getChildren().size() == 1) {
       exp = expressions.get(0);
     } else {
-      var commas = formattedExpressionEntities
+      var commas = expressionsList
         .getChildren(PythonPunctuator.COMMA)
         .stream()
         .map(AstNode::getToken)

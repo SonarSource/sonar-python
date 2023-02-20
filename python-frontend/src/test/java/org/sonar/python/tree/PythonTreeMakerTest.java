@@ -2086,19 +2086,45 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void string_tuple() {
     setRootRule(PythonGrammar.ATOM);
-    Expression exp = parse("f\"a = {h,w,a == 100,foo(),(asd, asadas)}\"", treeMaker::expression);
-    StringLiteral stringLiteral = (StringLiteral) exp;
+    var stringLiteral = (StringLiteral) parse("f\"a = {h,w,a == 100,foo(),(asd, asadas)}\"", treeMaker::expression);
     assertThat(stringLiteral.stringElements()).hasSize(1);
-    StringElement elmt = stringLiteral.stringElements().get(0);
+    var elmt = stringLiteral.stringElements().get(0);
 
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.formattedExpressions()).hasSize(1);
-    FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
+    var formattedExpression = elmt.formattedExpressions().get(0);
 
-    Expression expression = formattedExpression.expression();
+    var expression = formattedExpression.expression();
     assertThat(expression).isNotNull();
     assertThat(expression.getKind()).isEqualTo(Kind.TUPLE);
     assertThat(expression.children()).hasSize(9);
+
+
+    stringLiteral = (StringLiteral) parse("f\"a = {h,!r}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    formattedExpression = elmt.formattedExpressions().get(0);
+
+    expression = formattedExpression.expression();
+    assertThat(expression).isNotNull();
+    assertThat(expression.getKind()).isEqualTo(Kind.TUPLE);
+    assertThat(expression.children()).hasSize(2);
+
+    stringLiteral = (StringLiteral) parse("f\"a = {h!r}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    formattedExpression = elmt.formattedExpressions().get(0);
+
+    expression = formattedExpression.expression();
+    assertThat(expression).isNotNull();
+    assertThat(expression.getKind()).isEqualTo(Kind.NAME);
+    assertThat(expression.children()).hasSize(1);
   }
 
   private FormattedExpression parseInterpolated(String interpolatedExpr) {
