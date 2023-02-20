@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
@@ -99,11 +98,6 @@ public class StringElementImpl extends PyTree implements StringElement {
   public boolean isInterpolated() {
     String prefix = prefix();
     return prefix.indexOf('f') >= 0 || prefix.indexOf('F') >= 0;
-  }
-
-  @Override
-  public List<Expression> interpolatedExpressions() {
-    return formattedExpressions.stream().map(FormattedExpression::expression).collect(Collectors.toList());
   }
 
   @Override
