@@ -2,7 +2,12 @@
 def f_strings():
     var = 42
     f"{var}" # Ok
-    f"[var]" # FN {{Add replacement fields or use a normal string instead of an f-string.}}
+    f"{var,}" # Ok
+    f"{var,var}" # Ok
+    f"[var]" # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
+#   ^^^^^^^^ 0
+    a = f"Hello" + f"{var}" # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
+#       ^^^^^^^^ 0
 
 def printf_style():
     "%(key)s" % {"key": "str", "other": "key"}  # Noncompliant {{Remove this unused argument or add a replacement field.}}

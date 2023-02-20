@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -57,6 +59,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, this::checkPrintfStyle);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, StringFormatCorrectnessCheck::checkFStringLiteral);
   }
 
   private void checkCallExpression(SubscriptionContext ctx) {
@@ -105,6 +108,18 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     }
 
     return "logging.getLogger".equals(symbol.fullyQualifiedName());
+  }
+
+  private static void checkFStringLiteral(SubscriptionContext ctx) {
+    StringLiteral literal = (StringLiteral) ctx.syntaxNode();
+
+    List<StringElement> fStrings = literal.stringElements().stream()
+      .filter(stringElement -> stringElement.prefix().toLowerCase(Locale.ENGLISH).contains("f"))
+      .collect(Collectors.toList());
+
+    if (!fStrings.isEmpty() && fStrings.stream().allMatch(str -> str.formattedExpressions().isEmpty())) {
+      ctx.addIssue(literal, "Add replacement fields or use a normal string instead of an f-string.");
+    }
   }
 
   private static void checkLoggerLog(SubscriptionContext ctx, CallExpression callExpression) {
