@@ -2084,7 +2084,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_multiple_expressions() {
+  public void string_tuple() {
     setRootRule(PythonGrammar.ATOM);
     Expression exp = parse("f\"a = {h,w,a == 100,foo(),(asd, asadas)}\"", treeMaker::expression);
     StringLiteral stringLiteral = (StringLiteral) exp;
