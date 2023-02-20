@@ -20,10 +20,9 @@
 package org.sonar.plugins.python.api.quickfix;
 
 import java.util.Objects;
+import org.sonar.api.Beta;
 
-/**
- * For internal use only. Can not be used outside SonarPython analyzer.
- */
+@Beta
 public class PythonTextEdit {
 
   private final String message;

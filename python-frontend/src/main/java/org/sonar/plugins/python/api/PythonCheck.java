@@ -89,6 +89,10 @@ public interface PythonCheck {
       return secondaryLocations;
     }
 
+    /**
+     * This only makes sense in SonarLint context. Should not be used in custom rules.
+     */
+    @Beta
     public void addQuickFix(PythonQuickFix quickFix){
       this.quickFixes.add(quickFix);
     }

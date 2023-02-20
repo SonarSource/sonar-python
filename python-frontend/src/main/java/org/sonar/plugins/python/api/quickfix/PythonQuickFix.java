@@ -22,10 +22,9 @@ package org.sonar.plugins.python.api.quickfix;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.sonar.api.Beta;
 
-/**
- * For internal use only. Can not be used outside SonarPython analyzer.
- */
+@Beta
 public class PythonQuickFix {
   private final String description;
   private final List<PythonTextEdit> textEdits;
