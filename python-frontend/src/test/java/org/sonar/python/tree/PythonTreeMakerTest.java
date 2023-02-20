@@ -2074,7 +2074,6 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.formattedExpressions()).hasSize(1);
     FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
-
     FormatSpecifier formatSpecifier = formattedExpression.formatSpecifier();
     assertThat(formatSpecifier).isNotNull();
     assertThat(formatSpecifier.getKind()).isEqualTo(Kind.FORMAT_SPECIFIER);
@@ -2082,6 +2081,50 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(formatSpecifier.formatExpressions()).hasSize(2);
     assertThat(formatSpecifier.formatExpressions().get(0).expression().is(Tree.Kind.NAME)).isTrue();
     assertThat(formatSpecifier.formatExpressions().get(1).expression().is(Kind.MULTIPLICATION)).isTrue();
+  }
+
+  @Test
+  public void string_tuple() {
+    setRootRule(PythonGrammar.ATOM);
+    var stringLiteral = (StringLiteral) parse("f\"a = {h,w,a == 100,foo(),(asd, asadas)}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    var elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    var formattedExpression = elmt.formattedExpressions().get(0);
+
+    var expression = formattedExpression.expression();
+    assertThat(expression).isNotNull();
+    assertThat(expression.getKind()).isEqualTo(Kind.TUPLE);
+    assertThat(expression.children()).hasSize(9);
+
+
+    stringLiteral = (StringLiteral) parse("f\"a = {h,!r}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    formattedExpression = elmt.formattedExpressions().get(0);
+
+    expression = formattedExpression.expression();
+    assertThat(expression).isNotNull();
+    assertThat(expression.getKind()).isEqualTo(Kind.TUPLE);
+    assertThat(expression.children()).hasSize(2);
+
+    stringLiteral = (StringLiteral) parse("f\"a = {h!r}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    formattedExpression = elmt.formattedExpressions().get(0);
+
+    expression = formattedExpression.expression();
+    assertThat(expression).isNotNull();
+    assertThat(expression.getKind()).isEqualTo(Kind.NAME);
+    assertThat(expression.children()).hasSize(1);
   }
 
   private FormattedExpression parseInterpolated(String interpolatedExpr) {

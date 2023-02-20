@@ -108,3 +108,7 @@ def no_fp_f_string_conditional_expr_2(p):
 def f():
     pass
 print(var)
+
+def no_pf_multiple_formatted_expressions_in_one_braces():
+    x = 42 # OK
+    print(f"{41,x}")

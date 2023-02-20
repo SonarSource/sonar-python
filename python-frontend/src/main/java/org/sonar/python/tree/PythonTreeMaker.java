@@ -1634,7 +1634,26 @@ public class PythonTreeMaker {
   }
 
   private FormattedExpression formattedExpression(AstNode expressionNode) {
-    Expression exp = expression(expressionNode.getFirstChild(PythonGrammar.TEST));
+    var expressionsList = expressionNode.getFirstChild(PythonGrammar.TESTLIST);
+    var expressions = expressionsList
+      .getChildren(PythonGrammar.TEST)
+      .stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+
+    Expression exp;
+    if (expressionsList.getChildren().size() == 1) {
+      exp = expressions.get(0);
+    } else {
+      var commas = expressionsList
+        .getChildren(PythonPunctuator.COMMA)
+        .stream()
+        .map(AstNode::getToken)
+        .map(PythonTreeMaker::toPyToken)
+        .collect(Collectors.toList());
+
+      exp = new TupleImpl(null, expressions, commas, null);
+    }
     AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
     FormatSpecifier formatSpecifier = formatSpecifier(expressionNode);
