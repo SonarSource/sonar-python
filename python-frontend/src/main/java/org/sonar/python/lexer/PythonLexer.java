@@ -48,18 +48,18 @@ public final class PythonLexer {
 
   public static Lexer create(LexerState lexerState) {
     Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
-    addCommonChannels(builder, lexerState);
+    addCommonChannels(builder, lexerState, PythonPunctuator.values());
     return builder.build();
   }
 
   public static Lexer fStringLexer(LexerState lexerState) {
     Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
     builder.withChannel(new FStringChannel(lexerState));
-    addCommonChannels(builder, lexerState);
+    addCommonChannels(builder, lexerState, PythonPunctuator.fStringValues());
     return builder.build();
   }
 
-  private static void addCommonChannels(Lexer.Builder builder, LexerState lexerState) {
+  private static void addCommonChannels(Lexer.Builder builder, LexerState lexerState, PythonPunctuator[] pythonPunctuators) {
     builder
         .withChannel(new NewLineChannel(lexerState))
 
@@ -102,7 +102,7 @@ public final class PythonLexer {
 
         // http://docs.python.org/reference/lexical_analysis.html#operators
         // http://docs.python.org/reference/lexical_analysis.html#delimiters
-        .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
+        .withChannel(new PunctuatorChannel(pythonPunctuators))
 
         .withChannel(new UnknownCharacterChannel());
   }

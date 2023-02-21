@@ -2073,6 +2073,26 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(formatSpecifier.formatExpressions().get(1).expression().is(Kind.MULTIPLICATION)).isTrue();
   }
 
+
+  @Test
+  public void string_interpolation_equal_in_format_specifier() {
+    setRootRule(PythonGrammar.ATOM);
+    Expression exp = parse("f'{x:=>{y}}'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
+    FormatSpecifier formatSpecifier = formattedExpression.formatSpecifier();
+    assertThat(formatSpecifier).isNotNull();
+    assertThat(formatSpecifier.getKind()).isEqualTo(Kind.FORMAT_SPECIFIER);
+    assertThat(formatSpecifier.children()).hasSize(2);
+    assertThat(formatSpecifier.formatExpressions()).hasSize(1);
+    assertThat(formatSpecifier.formatExpressions().get(0).expression().is(Tree.Kind.NAME)).isTrue();
+  }
+
   @Test
   public void string_tuple() {
     setRootRule(PythonGrammar.ATOM);

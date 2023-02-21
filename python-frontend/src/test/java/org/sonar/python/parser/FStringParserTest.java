@@ -48,6 +48,13 @@ public class FStringParserTest {
   }
 
   @Test
+  public void no_walrus_in_format_specifier() {
+    List<AstNode> nodes = parse("f'{x:={y}}!'");
+    assertThat(nodes).hasSize(1);
+    assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "x", ":", "=", "{", "y", "}", "}");
+  }
+
+  @Test
   public void name_expression() {
     List<AstNode> nodes = parse("f'hello {var}!'");
     assertThat(nodes).hasSize(1);

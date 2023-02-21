@@ -21,6 +21,7 @@ package org.sonar.python.api;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
+import java.util.Arrays;
 
 public enum PythonPunctuator implements TokenType {
 
@@ -106,6 +107,10 @@ public enum PythonPunctuator implements TokenType {
   @Override
   public boolean hasToBeSkippedFromAst(AstNode node) {
     return false;
+  }
+
+  public static PythonPunctuator[] fStringValues() {
+    return Arrays.stream(PythonPunctuator.values()).filter(a -> a != PythonPunctuator.WALRUS_OPERATOR).toArray(PythonPunctuator[]::new);
   }
 
 }
