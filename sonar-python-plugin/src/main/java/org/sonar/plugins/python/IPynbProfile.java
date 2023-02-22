@@ -28,15 +28,8 @@ import static org.sonar.plugins.python.PythonRuleRepository.RESOURCE_FOLDER;
 
 public class IPynbProfile implements BuiltInQualityProfilesDefinition {
 
-  private static final Logger LOG = Loggers.get(IPynbProfile.class);
-
   static final String PROFILE_NAME = "Sonar way";
   static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
-  static final String SECURITY_RULES_CLASS_NAME = "com.sonar.plugins.security.api.PythonRules";
-  static final String SECURITY_RULE_KEYS_METHOD_NAME = "getRuleKeys";
-  static final String DBD_RULES_CLASS_NAME = "com.sonarsource.plugins.dbd.api.PythonRules";
-  static final String DBD_RULE_KEYS_METHOD_NAME = "getDataflowBugDetectionRuleKeys";
-  static final String GET_REPOSITORY_KEY = "getRepositoryKey";
 
 
   @Override

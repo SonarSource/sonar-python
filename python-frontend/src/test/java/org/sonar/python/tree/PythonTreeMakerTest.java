@@ -111,6 +111,7 @@ import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -262,6 +263,13 @@ public class PythonTreeMakerTest extends RuleTest {
     pyIfStatementTree = parse("if x:\n pass\n pass", treeMaker::ifStatement);
     assertThat(pyIfStatementTree.body().statements()).hasSize(2);
 
+  }
+
+  @Test
+  public void smth() {
+    setRootRule(IPythonGrammar.LINE_MAGIC_COMMAND);
+    AstNode astNode = p.parse("%timeit blablublorandom stuff");
+    System.out.println("hello");
   }
 
   @Test
