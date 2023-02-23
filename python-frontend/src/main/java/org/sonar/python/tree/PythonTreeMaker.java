@@ -128,7 +128,7 @@ public class PythonTreeMaker {
     throw new RecognitionException(line, "Parse error at line " + line + ": " + message + ".");
   }
 
-  private static Token toPyToken(@Nullable com.sonar.sslr.api.Token token) {
+  protected static Token toPyToken(@Nullable com.sonar.sslr.api.Token token) {
     if (token == null) {
       return null;
     }
@@ -148,8 +148,9 @@ public class PythonTreeMaker {
     }
   }
 
-  private Statement statement(StatementWithSeparator statementWithSeparator) {
+  protected Statement statement(StatementWithSeparator statementWithSeparator) {
     AstNode astNode = statementWithSeparator.statement();
+
     if (astNode.is(PythonGrammar.IF_STMT)) {
       return ifStatement(astNode);
     }
@@ -246,7 +247,7 @@ public class PythonTreeMaker {
     Expression assignedValue = null;
     if (equalTokenNode != null) {
       equalToken = toPyToken(equalTokenNode.getToken());
-      assignedValue = expression(equalTokenNode.getNextSibling());
+      assignedValue = assignmentValue(equalTokenNode.getNextSibling());
     }
     TypeAnnotationImpl typeAnnotation = new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation, Tree.Kind.VARIABLE_TYPE_ANNOTATION);
     return new AnnotatedAssignmentImpl(variable, typeAnnotation, equalToken, assignedValue, separators);
@@ -625,7 +626,7 @@ public class PythonTreeMaker {
       colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), DocstringExtractor.extractDocstring(body));
   }
 
-  private static Name name(AstNode astNode) {
+  protected static Name name(AstNode astNode) {
     return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), astNode.getParent().is(PythonGrammar.ATOM));
   }
 
@@ -676,6 +677,7 @@ public class PythonTreeMaker {
   public ExpressionStatement expressionStatement(StatementWithSeparator statementWithSeparator) {
     AstNode astNode = statementWithSeparator.statement();
     Separators separators = statementWithSeparator.separator();
+
     List<Expression> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
       .map(this::expression)
       .collect(Collectors.toList());
@@ -693,8 +695,21 @@ public class PythonTreeMaker {
       lhsExpressions.add(expressionList(assignNode.getPreviousSibling()));
     }
     AstNode assignedValueNode = assignNodes.get(assignNodes.size() - 1).getNextSibling();
-    Expression assignedValue = assignedValueNode.is(PythonGrammar.YIELD_EXPR) ? yieldExpression(assignedValueNode) : exprListOrTestList(assignedValueNode);
+    assignedValueNode = assignedValueNode.getFirstChild();
+    Expression assignedValue = assignmentValue(assignedValueNode);
     return new AssignmentStatementImpl(assignTokens, lhsExpressions, assignedValue, separators);
+  }
+
+  protected Expression assignmentValue(AstNode assignedValue) {
+    if (assignedValue.is(PythonGrammar.ASSIGNMENT_VALUE)) {
+      assignedValue = assignedValue.getFirstChild();
+    }
+
+    if (assignedValue.is(PythonGrammar.YIELD_EXPR)) {
+      return yieldExpression(assignedValue);
+    } else {
+      return exprListOrTestList(assignedValue);
+    }
   }
 
   public CompoundAssignmentStatement compoundAssignment(StatementWithSeparator statementWithSeparator) {
@@ -1192,6 +1207,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.SUBJECT_EXPR, PythonGrammar.STAR_NAMED_EXPRESSION)) {
       return expression(astNode.getFirstChild());
+    }
+    if (astNode.is(PythonGrammar.ASSIGNMENT_VALUE)) {
+      return assignmentValue(astNode);
     }
     throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
   }

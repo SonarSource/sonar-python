@@ -25,6 +25,7 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.Parser;
 import java.util.List;
+import org.sonar.python.api.PythonGrammarBuilder;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;
@@ -35,7 +36,7 @@ public class FStringParser {
 
   private final LexerState lexerState;
   private final Lexer lexer;
-  private final Parser<Grammar> internalParser = Parser.builder(PythonGrammar.create()).build();
+  private final Parser<Grammar> internalParser = Parser.builder(new PythonGrammarBuilder().create()).build();
 
   public FStringParser() {
     this.lexerState = new LexerState();

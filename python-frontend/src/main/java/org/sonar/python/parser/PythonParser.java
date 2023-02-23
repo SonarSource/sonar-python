@@ -28,7 +28,7 @@ import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.matcher.RuleDefinition;
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.IPythonGrammarBuilder;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;
@@ -38,11 +38,15 @@ public final class PythonParser {
   private final Parser<Grammar> sslrParser;
 
   public static PythonParser create() {
-    return new PythonParser();
+    return new PythonParser(new IPythonGrammarBuilder().create());
   }
 
-  private PythonParser() {
-    sslrParser = new SslrPythonParser();
+  public static PythonParser createIPythonParser() {
+    return new PythonParser(new IPythonGrammarBuilder().create());
+  }
+
+  private PythonParser(Grammar grammar) {
+    sslrParser = new SslrPythonParser(grammar);
   }
 
   public AstNode parse(String source) {
@@ -69,8 +73,8 @@ public final class PythonParser {
     private final LexerState lexerState;
     private final Lexer lexer;
 
-    private SslrPythonParser() {
-      super(PythonGrammar.create());
+    private SslrPythonParser(Grammar grammar) {
+      super(grammar);
       super.setRootRule(super.getGrammar().getRootRule());
       this.lexerState = new LexerState();
       this.lexer = PythonLexer.create(lexerState);
@@ -80,7 +84,8 @@ public final class PythonParser {
     public AstNode parse(String source) {
       lexerState.reset();
       lexer.lex(source);
-      return super.parse(tokens());
+      List<Token> tokens = tokens();
+      return super.parse(tokens);
     }
 
     private List<Token> tokens() {
