@@ -46,6 +46,8 @@ import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.TextPointer;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.DefaultTextPointer;
+import org.sonar.api.batch.fs.internal.DefaultTextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -57,6 +59,8 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.batch.sensor.issue.fix.QuickFix;
+import org.sonar.api.batch.sensor.issue.fix.TextEdit;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.NoSonarFilter;
@@ -94,13 +98,9 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.tree.TokenImpl;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
-import org.sonarsource.sonarlint.core.analysis.api.QuickFix;
-import org.sonarsource.sonarlint.core.analysis.api.TextEdit;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.DefaultTextPointer;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.DefaultTextRange;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.DefaultQuickFix;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.SensorQuickFix;
 import org.sonarsource.sonarlint.core.commons.Language;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 
@@ -267,7 +267,7 @@ public class PythonSensorTest {
 
     Issue issue = context.allIssues().iterator().next();
 
-    List<DefaultQuickFix> quickFixes = ((MockSonarLintIssue) issue).quickFixes;
+    List<SensorQuickFix> quickFixes = ((MockSonarLintIssue) issue).quickFixes;
     assertThat(quickFixes).hasSize(2);
 
     QuickFix quickfix = quickFixes.get(0);
@@ -281,7 +281,7 @@ public class PythonSensorTest {
     assertThat(textEdits).hasSize(1);
     assertThat(textEdits.get(0).newText()).isEqualTo("cls, ");
 
-    org.sonarsource.sonarlint.core.commons.TextRange textRange = new org.sonarsource.sonarlint.core.commons.TextRange(4, 13, 4, 13);
+    TextRange textRange = reference(4, 13, 4, 13);
     assertThat(textEdits.get(0).range()).usingRecursiveComparison().isEqualTo(textRange);
   }
 

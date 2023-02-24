@@ -30,7 +30,7 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.DefaultQuickFix;
+import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.SensorQuickFix;
 import org.sonarsource.sonarlint.core.analysis.sonarapi.DefaultSonarLintIssue;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
@@ -39,7 +39,7 @@ import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   private final DefaultSonarLintIssue parent = new DefaultSonarLintIssue(null, null, null);
   private final SensorContextTester context;
-  public final List<DefaultQuickFix> quickFixes = new ArrayList<>();
+  public final List<SensorQuickFix> quickFixes = new ArrayList<>();
   private boolean isQuickFixAvailable = false;
   private boolean saved;
 
@@ -54,7 +54,7 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
 
   @Override
   public NewSonarLintIssue addQuickFix(NewQuickFix newQuickFix) {
-    quickFixes.add((DefaultQuickFix) newQuickFix);
+    quickFixes.add((SensorQuickFix) newQuickFix);
     return parent.addQuickFix(newQuickFix);
   }
 
