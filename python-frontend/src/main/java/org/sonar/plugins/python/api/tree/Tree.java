@@ -247,6 +247,7 @@ public interface Tree {
     TOKEN(Token.class),
     LINE_MAGIC(LineMagic.class),
     LINE_MAGIC_STATEMENT(LineMagicStatement.class),
+    DYNAMIC_OBJECT_INFO_STATEMENT(DynamicObjectInfoStatement.class),
     CELL_MAGIC_STATEMENT(CellMagicStatement.class);
     final Class<? extends Tree> associatedInterface;
 

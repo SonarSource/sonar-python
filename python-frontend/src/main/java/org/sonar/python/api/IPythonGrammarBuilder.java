@@ -25,8 +25,10 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static org.sonar.python.api.IPythonGrammar.CELL;
 import static org.sonar.python.api.IPythonGrammar.CELL_MAGIC_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
+import static org.sonar.python.api.IPythonGrammar.DYNAMIC_OBJECT_INFO_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC;
 import static org.sonar.python.api.IPythonGrammar.MAGIC_CELL;
+import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.PythonGrammar.ASSERT_STMT;
 import static org.sonar.python.api.PythonGrammar.ANNOTATED_RHS;
 import static org.sonar.python.api.PythonGrammar.BREAK_STMT;
@@ -45,6 +47,7 @@ import static org.sonar.python.api.PythonGrammar.RAISE_STMT;
 import static org.sonar.python.api.PythonGrammar.RETURN_STMT;
 import static org.sonar.python.api.PythonGrammar.SIMPLE_STMT;
 import static org.sonar.python.api.PythonGrammar.STATEMENT;
+import static org.sonar.python.api.PythonGrammar.TEST;
 import static org.sonar.python.api.PythonGrammar.TESTLIST_STAR_EXPR;
 import static org.sonar.python.api.PythonGrammar.YIELD_EXPR;
 import static org.sonar.python.api.PythonGrammar.YIELD_STMT;
@@ -74,11 +77,26 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
       NAME,
       b.zeroOrMore(b.anyTokenButNot(b.firstOf(NEWLINE, b.next(EOF))))
     );
+    b.rule(DYNAMIC_OBJECT_INFO_STATEMENT).is(b.firstOf(
+      b.sequence(
+        PythonPunctuator.QUESTION_MARK,
+        b.optional(PythonPunctuator.QUESTION_MARK),
+        TEST,
+        b.optional(PythonPunctuator.QUESTION_MARK),
+        b.optional(PythonPunctuator.QUESTION_MARK)
+      ),
+      b.sequence(
+        TEST,
+        PythonPunctuator.QUESTION_MARK,
+        b.optional(PythonPunctuator.QUESTION_MARK)
+      )
+    ));
   }
 
   @Override
   protected void simpleStatement(LexerfulGrammarBuilder b) {
     b.rule(SIMPLE_STMT).is(b.firstOf(
+      DYNAMIC_OBJECT_INFO_STATEMENT,
       PRINT_STMT,
       EXEC_STMT,
       EXPRESSION_STMT,

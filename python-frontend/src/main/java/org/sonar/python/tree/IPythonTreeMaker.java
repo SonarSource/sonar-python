@@ -21,10 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.CellMagicStatement;
+import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.LineMagic;
@@ -32,9 +34,11 @@ import org.sonar.plugins.python.api.tree.LineMagicStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
 
@@ -66,6 +70,9 @@ public class IPythonTreeMaker extends PythonTreeMaker {
     if (astNode.is(IPythonGrammar.LINE_MAGIC_STATEMENT)) {
       return lineMagicStatement(astNode);
     }
+    if (astNode.is(IPythonGrammar.DYNAMIC_OBJECT_INFO_STATEMENT)) {
+      return dynamicObjectInfoStatement(astNode);
+    }
     return super.statement(statementWithSeparator);
   }
 
@@ -91,6 +98,32 @@ public class IPythonTreeMaker extends PythonTreeMaker {
   protected LineMagicStatement lineMagicStatement(AstNode astNode) {
     var lineMagic = lineMagic(astNode.getFirstChild(IPythonGrammar.LINE_MAGIC));
     return new LineMagicStatementImpl(lineMagic);
+  }
+
+  protected DynamicObjectInfoStatement dynamicObjectInfoStatement(AstNode astNode) {
+    var questionMarksBefore = new ArrayList<Tree>();
+    var children = new ArrayList<Tree>();
+    var questionMarksAfter = new ArrayList<Tree>();
+
+    var nodeChildren = astNode.getChildren();
+    var currentList = questionMarksBefore;
+    for (int i = 0; i < nodeChildren.size(); i++) {
+      var nodeChild = nodeChildren.get(i);
+      if (nodeChild.is(PythonPunctuator.QUESTION_MARK)) {
+        if (currentList == children) {
+          currentList = questionMarksAfter;
+        }
+        var nodeChildToken = toPyToken(nodeChild.getToken());
+        currentList.add(nodeChildToken);
+      } else {
+        currentList = children;
+        nodeChild.getTokens()
+          .stream()
+          .map(PythonTreeMaker::toPyToken)
+          .forEach(currentList::add);
+      }
+    }
+    return new DynamicObjectInfoStatementImpl(questionMarksBefore, children, questionMarksAfter);
   }
 
   protected LineMagic lineMagic(AstNode astNode) {
