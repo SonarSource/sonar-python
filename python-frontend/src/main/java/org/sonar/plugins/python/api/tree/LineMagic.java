@@ -19,12 +19,6 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import javax.annotation.CheckForNull;
-
 public interface LineMagic extends Expression {
-
-  @CheckForNull
-  Token percent();
-  Name name();
 
 }

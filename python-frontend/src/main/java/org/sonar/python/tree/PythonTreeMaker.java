@@ -247,7 +247,7 @@ public class PythonTreeMaker {
     Expression assignedValue = null;
     if (equalTokenNode != null) {
       equalToken = toPyToken(equalTokenNode.getToken());
-      assignedValue = assignmentValue(equalTokenNode.getNextSibling());
+      assignedValue = annotatedRhs(equalTokenNode.getNextSibling());
     }
     TypeAnnotationImpl typeAnnotation = new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation, Tree.Kind.VARIABLE_TYPE_ANNOTATION);
     return new AnnotatedAssignmentImpl(variable, typeAnnotation, equalToken, assignedValue, separators);
@@ -695,21 +695,16 @@ public class PythonTreeMaker {
       lhsExpressions.add(expressionList(assignNode.getPreviousSibling()));
     }
     AstNode assignedValueNode = assignNodes.get(assignNodes.size() - 1).getNextSibling();
-    assignedValueNode = assignedValueNode.getFirstChild();
-    Expression assignedValue = assignmentValue(assignedValueNode);
+    Expression assignedValue = annotatedRhs(assignedValueNode);
     return new AssignmentStatementImpl(assignTokens, lhsExpressions, assignedValue, separators);
   }
 
-  protected Expression assignmentValue(AstNode assignedValue) {
-    if (assignedValue.is(PythonGrammar.ASSIGNMENT_VALUE)) {
-      assignedValue = assignedValue.getFirstChild();
+  protected Expression annotatedRhs(AstNode annotatedRhs) {
+    var child = annotatedRhs.getFirstChild();
+    if (child.is(PythonGrammar.YIELD_EXPR)) {
+      return yieldExpression(child);
     }
-
-    if (assignedValue.is(PythonGrammar.YIELD_EXPR)) {
-      return yieldExpression(assignedValue);
-    } else {
-      return exprListOrTestList(assignedValue);
-    }
+    return exprListOrTestList(child);
   }
 
   public CompoundAssignmentStatement compoundAssignment(StatementWithSeparator statementWithSeparator) {
@@ -1208,8 +1203,8 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.SUBJECT_EXPR, PythonGrammar.STAR_NAMED_EXPRESSION)) {
       return expression(astNode.getFirstChild());
     }
-    if (astNode.is(PythonGrammar.ASSIGNMENT_VALUE)) {
-      return assignmentValue(astNode);
+    if (astNode.is(PythonGrammar.ANNOTATED_RHS)) {
+      return annotatedRhs(astNode);
     }
     throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
   }

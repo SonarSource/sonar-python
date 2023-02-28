@@ -102,7 +102,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   ANNASSIGN,
   AUGASSIGN,
-  ASSIGNMENT_VALUE,
+  ANNOTATED_RHS,
 
   PASS_STMT,
   DEL_STMT,

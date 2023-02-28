@@ -21,6 +21,4 @@ package org.sonar.plugins.python.api.tree;
 
 public interface LineMagicStatement extends Statement {
 
-  LineMagic lineMagic();
-
 }

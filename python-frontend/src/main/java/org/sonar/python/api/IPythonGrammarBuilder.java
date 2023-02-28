@@ -25,7 +25,7 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC;
 import static org.sonar.python.api.PythonGrammar.ASSERT_STMT;
-import static org.sonar.python.api.PythonGrammar.ASSIGNMENT_VALUE;
+import static org.sonar.python.api.PythonGrammar.ANNOTATED_RHS;
 import static org.sonar.python.api.PythonGrammar.BREAK_STMT;
 import static org.sonar.python.api.PythonGrammar.CONTINUE_STMT;
 import static org.sonar.python.api.PythonGrammar.DEL_STMT;
@@ -56,7 +56,7 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
   protected void lineMagic(LexerfulGrammarBuilder b) {
     b.rule(LINE_MAGIC_STATEMENT).is(LINE_MAGIC);
     b.rule(LINE_MAGIC).is(
-      b.firstOf("%", "!", "/"),
+      b.firstOf(PythonPunctuator.MOD, "!", PythonPunctuator.DIV),
       NAME,
       b.zeroOrMore(b.anyTokenButNot(b.firstOf(NEWLINE, b.next(EOF))))
     );
@@ -83,7 +83,7 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
   }
 
   @Override
-  protected void assignmentValue(LexerfulGrammarBuilder b) {
-    b.rule(ASSIGNMENT_VALUE).is(b.firstOf(LINE_MAGIC, YIELD_EXPR, TESTLIST_STAR_EXPR));
+  protected void annotatedRhs(LexerfulGrammarBuilder b) {
+    b.rule(ANNOTATED_RHS).is(b.firstOf(LINE_MAGIC, YIELD_EXPR, TESTLIST_STAR_EXPR));
   }
 }

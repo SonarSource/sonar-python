@@ -50,9 +50,4 @@ public class LineMagicStatementImpl extends PyTree implements LineMagicStatement
     children.add(lineMagic);
     return children;
   }
-
-  @Override
-  public LineMagic lineMagic() {
-    return lineMagic;
-  }
 }

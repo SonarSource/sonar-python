@@ -38,35 +38,55 @@ public class IPythonTreeMakerTest extends RuleTest {
       "a = %alias showPath pwd && ls -a\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
     var lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
-    var assertion = assertThat(lineMagic)
+    assertThat(lineMagic)
       .isNotNull()
-      .isInstanceOf(LineMagic.class)
-      .extracting(v -> (LineMagic) v);
-
-    assertion
-      .extracting(v -> v.percent().value())
-      .isEqualTo("%");
-    assertion
-      .extracting(v -> v.name().name())
-      .isEqualTo("alias");
+      .isInstanceOf(LineMagic.class);
 
     parse = parseIPython("print(b)\n" +
+      "a = %timeit foo(b)\n", treeMaker::fileInput);
+    assertThat(parse).isNotNull();
+    lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic)
+      .isNotNull()
+      .isInstanceOf(LineMagic.class);
+
+    parse = parseIPython("print(b)\n" +
+      "a = %timeit foo(b) % 3\n" +
+      "print(a)", treeMaker::fileInput);
+    assertThat(parse).isNotNull();
+    lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic)
+      .isNotNull()
+      .isInstanceOf(LineMagic.class);
+  }
+
+  @Test
+  public void line_magic_statement() {
+    var parse = parseIPython("print(b)\n" +
       "%alias showPath pwd && ls -a\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
     var lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
     assertThat(lineMagicStatement)
       .isNotNull()
-      .isInstanceOf(LineMagicStatement.class)
-      .extracting(v -> ((LineMagicStatement) v).lineMagic().name().name())
-      .isEqualTo("alias");
+      .isInstanceOf(LineMagicStatement.class);
+
+    assertThat(lineMagicStatement.children()).hasSize(1);
+    var lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic).isNotNull();
 
     parse = parseIPython("print(b)\n" +
-      "%timeit print(a)\n", treeMaker::fileInput);
+      "%timeit a = foo(b) % 3; b = 2\n" +
+      "a %= b\n" +
+      "print(a)", treeMaker::fileInput);
     assertThat(parse).isNotNull();
+    lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(lineMagicStatement)
+      .isNotNull()
+      .isInstanceOf(LineMagicStatement.class);
 
-    parse = parseIPython("print(b)\n" +
-      "a = %timeit foo(b)\n", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
+    assertThat(lineMagicStatement.children()).hasSize(1);
+    lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic).isNotNull();
 
     parse = parseIPython("print(b)\n" +
       "%autocall 1\n", treeMaker::fileInput);

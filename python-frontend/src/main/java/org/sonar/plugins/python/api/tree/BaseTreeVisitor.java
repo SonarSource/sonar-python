@@ -564,13 +564,11 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitLineMagic(LineMagic lineMagic) {
-    lineMagic.children()
-      .forEach(this::scan);
+    // noop
   }
 
   @Override
   public void visitLineMagicStatement(LineMagicStatement lineMagicStatement) {
-    lineMagicStatement.children()
-      .forEach(this::scan);
+    // noop
   }
 }

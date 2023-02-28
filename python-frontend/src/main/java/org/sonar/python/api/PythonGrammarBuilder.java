@@ -60,17 +60,17 @@ public class PythonGrammarBuilder {
         b.firstOf(
           ANNASSIGN,
           b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
-          b.zeroOrMore("=", ASSIGNMENT_VALUE))
+          b.zeroOrMore("=", ANNOTATED_RHS))
       )
     );
 
     // https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar#L87
-    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", ASSIGNMENT_VALUE));
+    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", ANNOTATED_RHS));
 
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
-    assignmentValue(b);
+    annotatedRhs(b);
 
     b.rule(NAMED_EXPR_TEST).is(TEST, b.optional(PythonPunctuator.WALRUS_OPERATOR, TEST));
     b.rule(STAR_NAMED_EXPRESSIONS).is(STAR_NAMED_EXPRESSION, b.zeroOrMore(",", STAR_NAMED_EXPRESSION), b.optional(","));
@@ -188,8 +188,8 @@ public class PythonGrammarBuilder {
     b.rule(TFPLIST).is(TFPDEF, b.zeroOrMore(",", TFPDEF), b.optional(","));
   }
 
-  protected void assignmentValue(LexerfulGrammarBuilder b) {
-    b.rule(ASSIGNMENT_VALUE).is(b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR));
+  protected void annotatedRhs(LexerfulGrammarBuilder b) {
+    b.rule(ANNOTATED_RHS).is(b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR));
   }
 
   /**

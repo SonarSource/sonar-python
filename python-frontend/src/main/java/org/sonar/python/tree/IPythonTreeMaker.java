@@ -43,14 +43,12 @@ public class IPythonTreeMaker extends PythonTreeMaker {
   }
 
   @Override
-  protected Expression assignmentValue(AstNode assignedValue) {
-    if (assignedValue.is(PythonGrammar.ASSIGNMENT_VALUE)) {
-      assignedValue = assignedValue.getFirstChild();
+  protected Expression annotatedRhs(AstNode annotatedRhs) {
+    var child = annotatedRhs.getFirstChild();
+    if (child.is(IPythonGrammar.LINE_MAGIC)) {
+      return lineMagic(child);
     }
-    if (assignedValue.is(IPythonGrammar.LINE_MAGIC)) {
-      return lineMagic(assignedValue);
-    }
-    return super.assignmentValue(assignedValue);
+    return super.annotatedRhs(annotatedRhs);
   }
 
   protected LineMagicStatement lineMagicStatement(AstNode astNode) {
@@ -60,7 +58,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
 
   protected LineMagic lineMagic(AstNode astNode) {
     var percent = toPyToken(astNode.getFirstChild().getToken());
-    var name = name(astNode.getFirstChild(PythonGrammar.NAME));
+    var name = toPyToken(astNode.getFirstChild(PythonGrammar.NAME).getToken());
 
     var tokens = astNode.getChildren()
       .stream()

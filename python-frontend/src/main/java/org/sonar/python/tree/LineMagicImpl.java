@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.tree.LineMagic;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
@@ -30,10 +29,10 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class LineMagicImpl extends PyTree implements LineMagic {
 
   private final Token percent;
-  private final Name name;
+  private final Tree name;
   private final List<Tree> tokens;
 
-  public LineMagicImpl(Token percent, Name name, List<Tree> tokens) {
+  public LineMagicImpl(Token percent, Tree name, List<Tree> tokens) {
     this.percent = percent;
     this.name = name;
     this.tokens = tokens;
@@ -58,13 +57,4 @@ public class LineMagicImpl extends PyTree implements LineMagic {
     return children;
   }
 
-  @Override
-  public Token percent() {
-    return percent;
-  }
-
-  @Override
-  public Name name() {
-    return name;
-  }
 }
