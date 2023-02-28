@@ -58,8 +58,7 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
     b.rule(LINE_MAGIC).is(
       b.firstOf("%", "!", "/"),
       NAME,
-      b.zeroOrMore(b.anyTokenButNot(b.firstOf(NEWLINE, b.next(EOF)))),
-      b.firstOf(NEWLINE, b.next(EOF))
+      b.zeroOrMore(b.anyTokenButNot(b.firstOf(NEWLINE, b.next(EOF))))
     );
   }
 
