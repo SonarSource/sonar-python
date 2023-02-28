@@ -19,7 +19,11 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Objects;
 import org.junit.Test;
+import org.sonar.plugins.python.api.tree.LineMagic;
+import org.sonar.plugins.python.api.tree.LineMagicStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,10 +37,28 @@ public class IPythonTreeMakerTest extends RuleTest {
     var parse = parseIPython("print(b)\n" +
       "a = %alias showPath pwd && ls -a\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
+    var lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+    var assertion = assertThat(lineMagic)
+      .isNotNull()
+      .isInstanceOf(LineMagic.class)
+      .extracting(v -> (LineMagic) v);
+
+    assertion
+      .extracting(v -> v.percent().value())
+      .isEqualTo("%");
+    assertion
+      .extracting(v -> v.name().name())
+      .isEqualTo("alias");
 
     parse = parseIPython("print(b)\n" +
       "%alias showPath pwd && ls -a\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
+    var lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(lineMagicStatement)
+      .isNotNull()
+      .isInstanceOf(LineMagicStatement.class)
+      .extracting(v -> ((LineMagicStatement) v).lineMagic().name().name())
+      .isEqualTo("alias");
 
     parse = parseIPython("print(b)\n" +
       "%timeit print(a)\n", treeMaker::fileInput);
@@ -49,5 +71,20 @@ public class IPythonTreeMakerTest extends RuleTest {
     parse = parseIPython("print(b)\n" +
       "%autocall 1\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
+  }
+
+  private <T extends Tree> T findFirstChildOf(Tree parent, Tree.Kind kind) {
+    return (T) parent.children()
+      .stream()
+      .map(c -> {
+        if (c.is(kind)) {
+          return c;
+        } else {
+          return findFirstChildOf(c, kind);
+        }
+      })
+      .filter(Objects::nonNull)
+      .findFirst()
+      .orElse(null);
   }
 }
