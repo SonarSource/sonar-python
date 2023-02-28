@@ -19,10 +19,7 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
@@ -39,9 +36,7 @@ public class IPynbProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, IPynb.KEY);
     BuiltInQualityProfileJsonLoader.load(profile, CheckList.IPYTHON_REPOSITORY_KEY, PROFILE_LOCATION);
-    Collection<NewBuiltInActiveRule> activeRules = profile.activeRules();
-    List<NewBuiltInActiveRule> disabledRules = activeRules.stream().filter(IPynbProfile::isDisabled).collect(Collectors.toList());
-    disabledRules.forEach(activeRules::remove);
+    profile.activeRules().removeIf(IPynbProfile::isDisabled);
     profile.done();
   }
 
