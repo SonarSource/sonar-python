@@ -56,6 +56,10 @@ public class IPynbRuleRepository implements RulesDefinition {
       .filter(rule -> TEMPLATE_RULE_KEYS.contains(rule.key()))
       .forEach(rule -> rule.setTemplate(true));
 
+    repository.rules().stream()
+      .filter(rule -> IPynbProfile.DISABLED_RULES.contains(rule.key()))
+      .forEach(rule -> rule.setActivatedByDefault(false));
+
     repository.done();
   }
 
