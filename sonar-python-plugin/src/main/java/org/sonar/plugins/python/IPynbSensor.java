@@ -46,7 +46,7 @@ public final class IPynbSensor implements Sensor {
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
-      .addChecks("ipython", CheckList.getChecks());
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;

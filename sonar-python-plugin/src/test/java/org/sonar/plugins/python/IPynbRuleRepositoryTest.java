@@ -57,6 +57,10 @@ public class IPynbRuleRepositoryTest {
     assertThat(backstickUsage).isNotNull();
     assertThat(backstickUsage.activatedByDefault()).isTrue();
 
+    RulesDefinition.Rule s905 = repository.rule("S905");
+    assertThat(s905).isNotNull();
+    assertThat(s905.activatedByDefault()).isFalse();
+
     for (RulesDefinition.Rule rule : rules) {
       assertThat(rule.htmlDescription()).isNotEmpty();
       rule.params().forEach(p -> assertThat(p.description()).isNotEmpty());

@@ -46,7 +46,7 @@ public class IPynbRuleRepository implements RulesDefinition {
   @Override
   public void define(Context context) {
     NewRepository repository = context
-      .createRepository("ipython", IPynb.KEY)
+      .createRepository(CheckList.IPYTHON_REPOSITORY_KEY, IPynb.KEY)
       .setName(REPOSITORY_NAME);
 
     RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION, runtime);
@@ -55,6 +55,10 @@ public class IPynbRuleRepository implements RulesDefinition {
     repository.rules().stream()
       .filter(rule -> TEMPLATE_RULE_KEYS.contains(rule.key()))
       .forEach(rule -> rule.setTemplate(true));
+
+    repository.rules().stream()
+      .filter(rule -> IPynbProfile.DISABLED_RULES.contains(rule.key()))
+      .forEach(rule -> rule.setActivatedByDefault(false));
 
     repository.done();
   }
