@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.LineMagic;
-import org.sonar.plugins.python.api.tree.LineMagicStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
 
@@ -39,16 +38,22 @@ public class IPythonTreeMakerTest extends RuleTest {
   public void line_magic() {
     var parse = parseIPython("print(b)\n" +
       "a = %alias showPath pwd && ls -a\n", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    var lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+    var statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(2);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    var lineMagic = findFirstChildWithKind(statementList.children().get(1), Tree.Kind.LINE_MAGIC);
     assertThat(lineMagic)
       .isNotNull()
       .isInstanceOf(LineMagic.class);
 
     parse = parseIPython("print(b)\n" +
       "a = %timeit foo(b)\n", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+    statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(2);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    lineMagic = findFirstChildWithKind(statementList.children().get(1), Tree.Kind.LINE_MAGIC);
     assertThat(lineMagic)
       .isNotNull()
       .isInstanceOf(LineMagic.class);
@@ -56,8 +61,13 @@ public class IPythonTreeMakerTest extends RuleTest {
     parse = parseIPython("print(b)\n" +
       "a = %timeit foo(b) % 3\n" +
       "print(a)", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    lineMagic = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC);
+
+    statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(3);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    assertThat(statementList.children().get(2).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    lineMagic = findFirstChildWithKind(statementList.children().get(1), Tree.Kind.LINE_MAGIC);
     assertThat(lineMagic)
       .isNotNull()
       .isInstanceOf(LineMagic.class);
@@ -67,85 +77,78 @@ public class IPythonTreeMakerTest extends RuleTest {
   public void line_magic_statement() {
     var parse = parseIPython("print(b)\n" +
       "%alias showPath pwd && ls -a\n", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    var lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
-    assertThat(lineMagicStatement)
-      .isNotNull()
-      .isInstanceOf(LineMagicStatement.class);
 
+    var statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(2);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.LINE_MAGIC_STATEMENT);
+
+    var lineMagicStatement = statementList.children().get(1);
     assertThat(lineMagicStatement.children()).hasSize(1);
-    var lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    var lineMagic = findFirstChildWithKind(lineMagicStatement, Tree.Kind.LINE_MAGIC);
     assertThat(lineMagic).isNotNull();
 
     parse = parseIPython("print(b)\n" +
       "%timeit a = foo(b) % 3\n" +
       "a %= 2\n" +
-      "print(a)", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
-    assertThat(lineMagicStatement)
-      .isNotNull()
-      .isInstanceOf(LineMagicStatement.class);
-
-    assertThat(lineMagicStatement.children()).hasSize(1);
-    lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
-    assertThat(lineMagic).isNotNull();
+      "b = a % foo(b)", treeMaker::fileInput);
+    statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(4);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(statementList.children().get(2).getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
+    assertThat(statementList.children().get(3).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    assertThat(findFirstChildWithKind(statementList.children().get(3), Tree.Kind.MODULO)).isNotNull();
 
     parse = parseIPython("print(b)\n" +
       "%timeit a = foo(b); b = 2\n" +
-      "a += b\n" +
-      "print(a)", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
-    lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
-    assertThat(lineMagicStatement)
-      .isNotNull()
-      .isInstanceOf(LineMagicStatement.class);
-
-    assertThat(lineMagicStatement.children()).hasSize(1);
-    lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
-    assertThat(lineMagic).isNotNull();
-
-    parse = parseIPython("print(b)\n" +
-      "%autocall 1\n", treeMaker::fileInput);
-    assertThat(parse).isNotNull();
+      "a += b", treeMaker::fileInput);
+    statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(3);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(statementList.children().get(2).getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
   }
 
   @Test
   public void assignment_rhs_test() {
     var parse = parseIPython("print(b)\n" +
       "a = yield foo(b)\n" +
-      "c = bar(a) + b", treeMaker::fileInput);
+      "c = bar(a) + b\n" +
+      "d = bar(c) % bar(a)", treeMaker::fileInput);
     assertThat(parse).isNotNull();
 
-    var assignments = findChildrenOf(parse, Tree.Kind.ASSIGNMENT_STMT);
-    assertThat(assignments).hasSize(2);
-    var yieldExpression = findFirstChildOf(assignments.get(0), Tree.Kind.YIELD_EXPR);
+    var assignments = findChildrenWithKind(parse, Tree.Kind.ASSIGNMENT_STMT);
+    assertThat(assignments).hasSize(3);
+    var yieldExpression = findChildrenWithKind(assignments.get(0), Tree.Kind.YIELD_EXPR);
     assertThat(yieldExpression).isNotNull();
-    var binaryExpression = findFirstChildOf(assignments.get(1), Tree.Kind.PLUS);
+    var binaryExpression = findChildrenWithKind(assignments.get(1), Tree.Kind.PLUS);
+    assertThat(binaryExpression).isNotNull();
+    binaryExpression = findChildrenWithKind(assignments.get(2), Tree.Kind.MODULO);
     assertThat(binaryExpression).isNotNull();
   }
 
-  private <T extends Tree> List<T> findChildrenOf(Tree parent, Tree.Kind kind) {
-    return (List<T>) parent.children()
+  private List<Tree> findChildrenWithKind(Tree parent, Tree.Kind kind) {
+    return parent.children()
       .stream()
       .flatMap(c -> {
         if (c.is(kind)) {
           return Stream.of(c);
         } else {
-          return findChildrenOf(c, kind).stream();
+          return findChildrenWithKind(c, kind).stream();
         }
       })
       .collect(Collectors.toList());
   }
 
-  private <T extends Tree> T findFirstChildOf(Tree parent, Tree.Kind kind) {
-    return (T) parent.children()
+  private Tree findFirstChildWithKind(Tree parent, Tree.Kind kind) {
+    return parent.children()
       .stream()
       .map(c -> {
         if (c.is(kind)) {
           return c;
         } else {
-          return findFirstChildOf(c, kind);
+          return findFirstChildWithKind(c, kind);
         }
       })
       .filter(Objects::nonNull)
