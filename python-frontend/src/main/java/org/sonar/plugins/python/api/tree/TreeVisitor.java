@@ -210,4 +210,6 @@ public interface TreeVisitor {
   void visitLineMagic(LineMagic lineMagic);
 
   void visitLineMagicStatement(LineMagicStatement lineMagicStatement);
+
+  void visitCellMagicStatement(CellMagicStatement cellMagicStatement);
 }

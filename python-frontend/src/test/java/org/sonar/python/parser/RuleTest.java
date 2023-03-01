@@ -42,6 +42,7 @@ public abstract class RuleTest {
 
   protected void setRootRule(GrammarRuleKey ruleKey) {
     p.setRootRule(p.getGrammar().rule(ruleKey));
+    ip.setRootRule(ip.getGrammar().rule(ruleKey));
   }
 
   protected  <T extends Tree> T parse(String code, Function<AstNode, T> func) {

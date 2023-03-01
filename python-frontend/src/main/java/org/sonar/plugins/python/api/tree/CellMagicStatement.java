@@ -17,26 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api;
+package org.sonar.plugins.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-
-public class PythonTokenTypeTest {
-
-  @Test
-  public void test() {
-    assertThat(PythonTokenType.values()).hasSize(6);
-
-    AstNode astNode = mock(AstNode.class);
-    for (PythonTokenType tokenType : PythonTokenType.values()) {
-      assertThat(tokenType.getName()).isEqualTo(tokenType.name());
-      assertThat(tokenType.getValue()).isEqualTo(tokenType.name());
-      assertThat(tokenType.hasToBeSkippedFromAst(astNode)).isFalse();
-    }
-  }
-
+public interface CellMagicStatement extends Statement {
 }

@@ -270,7 +270,7 @@ public class PythonTreeMaker {
     return Collections.emptyList();
   }
 
-  private static List<StatementWithSeparator> getStatements(AstNode astNode) {
+  static List<StatementWithSeparator> getStatements(AstNode astNode) {
     List<AstNode> statements = astNode.getChildren(PythonGrammar.STATEMENT);
     List<StatementWithSeparator> statementsWithSeparators = new ArrayList<>();
     for (AstNode stmt : statements) {

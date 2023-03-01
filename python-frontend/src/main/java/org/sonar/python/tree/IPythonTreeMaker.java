@@ -20,17 +20,44 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.LineMagicStatement;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
+
+  @Override
+  public FileInput fileInput(AstNode astNode) {
+    List<AstNode> cells = new ArrayList<>(astNode.getChildren(IPythonGrammar.CELL, IPythonGrammar.MAGIC_CELL));
+    List<Statement> statements = new ArrayList<>();
+    cells.forEach(c -> addStatementsFromCell(statements, c));
+    StatementListImpl statementList = statements.isEmpty() ? null : new StatementListImpl(statements);
+    Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
+    FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
+    setParents(pyFileInputTree);
+    pyFileInputTree.accept(new ExceptGroupJumpInstructionsCheck());
+    return pyFileInputTree;
+  }
+
+  private void addStatementsFromCell(List<Statement> statements, AstNode cell) {
+    if (cell.is(IPythonGrammar.CELL)) {
+      getStatements(cell).stream().map(this::statement).forEach(statements::add);
+    } else {
+      statements.add(cellMagicStatement(cell.getFirstChild(IPythonGrammar.CELL_MAGIC_STATEMENT)));
+    }
+  }
 
   @Override
   protected Statement statement(StatementWithSeparator statementWithSeparator) {
@@ -49,6 +76,17 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       return lineMagic(child);
     }
     return super.annotatedRhs(annotatedRhs);
+  }
+
+  private static CellMagicStatementImpl cellMagicStatement(AstNode astNode) {
+    var tokens = astNode.getChildren()
+      .stream()
+      .map(AstNode::getTokens)
+      .flatMap(Collection::stream)
+      .map(IPythonTreeMaker::toPyToken)
+      .map(Tree.class::cast)
+      .collect(Collectors.toList());
+    return new CellMagicStatementImpl(tokens);
   }
 
   protected LineMagicStatement lineMagicStatement(AstNode astNode) {

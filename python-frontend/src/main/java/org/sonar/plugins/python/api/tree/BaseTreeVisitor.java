@@ -571,4 +571,9 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitLineMagicStatement(LineMagicStatement lineMagicStatement) {
     // noop
   }
+
+  @Override
+  public void visitCellMagicStatement(CellMagicStatement lineMagicStatement) {
+    // noop
+  }
 }

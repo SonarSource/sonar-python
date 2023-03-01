@@ -64,6 +64,7 @@ import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
 import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
@@ -106,7 +107,8 @@ public class PythonScanner extends Scanner {
     InputFile.Type fileType = inputFile.type();
     try {
       AstNode astNode = parser.parse(pythonFile.content());
-      FileInput parse = new PythonTreeMaker().fileInput(astNode);
+      PythonTreeMaker treeMaker = getTreeMaker(inputFile);
+      FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(
         parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext());
       if (fileType == InputFile.Type.MAIN) {
@@ -141,6 +143,10 @@ public class PythonScanner extends Scanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
+  }
+
+  private static PythonTreeMaker getTreeMaker(InputFile inputFile) {
+    return Python.KEY.equals(inputFile.language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
   }
 
   @Override
