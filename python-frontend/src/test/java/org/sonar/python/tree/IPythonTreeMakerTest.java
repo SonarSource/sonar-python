@@ -19,7 +19,10 @@
  */
 package org.sonar.python.tree;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.LineMagicStatement;
@@ -75,8 +78,22 @@ public class IPythonTreeMakerTest extends RuleTest {
     assertThat(lineMagic).isNotNull();
 
     parse = parseIPython("print(b)\n" +
-      "%timeit a = foo(b) % 3; b = 2\n" +
-      "a %= b\n" +
+      "%timeit a = foo(b) % 3\n" +
+      "a %= 2\n" +
+      "print(a)", treeMaker::fileInput);
+    assertThat(parse).isNotNull();
+    lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(lineMagicStatement)
+      .isNotNull()
+      .isInstanceOf(LineMagicStatement.class);
+
+    assertThat(lineMagicStatement.children()).hasSize(1);
+    lineMagic = findFirstChildOf(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic).isNotNull();
+
+    parse = parseIPython("print(b)\n" +
+      "%timeit a = foo(b); b = 2\n" +
+      "a += b\n" +
       "print(a)", treeMaker::fileInput);
     assertThat(parse).isNotNull();
     lineMagicStatement = findFirstChildOf(parse, Tree.Kind.LINE_MAGIC_STATEMENT);
@@ -91,6 +108,34 @@ public class IPythonTreeMakerTest extends RuleTest {
     parse = parseIPython("print(b)\n" +
       "%autocall 1\n", treeMaker::fileInput);
     assertThat(parse).isNotNull();
+  }
+
+  @Test
+  public void assignment_rhs_test() {
+    var parse = parseIPython("print(b)\n" +
+      "a = yield foo(b)\n" +
+      "c = bar(a) + b", treeMaker::fileInput);
+    assertThat(parse).isNotNull();
+
+    var assignments = findChildrenOf(parse, Tree.Kind.ASSIGNMENT_STMT);
+    assertThat(assignments).hasSize(2);
+    var yieldExpression = findFirstChildOf(assignments.get(0), Tree.Kind.YIELD_EXPR);
+    assertThat(yieldExpression).isNotNull();
+    var binaryExpression = findFirstChildOf(assignments.get(1), Tree.Kind.PLUS);
+    assertThat(binaryExpression).isNotNull();
+  }
+
+  private <T extends Tree> List<T> findChildrenOf(Tree parent, Tree.Kind kind) {
+    return (List<T>) parent.children()
+      .stream()
+      .flatMap(c -> {
+        if (c.is(kind)) {
+          return Stream.of(c);
+        } else {
+          return findChildrenOf(c, kind).stream();
+        }
+      })
+      .collect(Collectors.toList());
   }
 
   private <T extends Tree> T findFirstChildOf(Tree parent, Tree.Kind kind) {
