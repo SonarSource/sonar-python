@@ -29,6 +29,7 @@ import com.sonar.sslr.impl.matcher.RuleDefinition;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.api.IPythonGrammarBuilder;
+import org.sonar.python.api.PythonGrammarBuilder;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;
@@ -38,7 +39,7 @@ public final class PythonParser {
   private final Parser<Grammar> sslrParser;
 
   public static PythonParser create() {
-    return new PythonParser(new IPythonGrammarBuilder().create());
+    return new PythonParser(new PythonGrammarBuilder().create());
   }
 
   public static PythonParser createIPythonParser() {
