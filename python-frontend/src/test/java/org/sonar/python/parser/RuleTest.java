@@ -38,13 +38,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 public abstract class RuleTest {
 
   protected PythonParser p = PythonParser.create();
+  protected PythonParser ip = PythonParser.createIPythonParser();
 
   protected void setRootRule(GrammarRuleKey ruleKey) {
     p.setRootRule(p.getGrammar().rule(ruleKey));
   }
 
   protected  <T extends Tree> T parse(String code, Function<AstNode, T> func) {
-    T tree = func.apply(p.parse(code));
+    return parse(p, code, func);
+  }
+
+  protected  <T extends Tree> T parseIPython(String code, Function<AstNode, T> func) {
+    return parse(ip, code, func);
+  }
+
+  protected  <T extends Tree> T parse(PythonParser parser, String code, Function<AstNode, T> func) {
+    AstNode ast = parser.parse(code);
+    T tree = func.apply(ast);
     // ensure every visit method of base tree visitor is called without errors
     BaseTreeVisitor visitor = new BaseTreeVisitor();
     tree.accept(visitor);
