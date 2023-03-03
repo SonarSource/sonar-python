@@ -17,26 +17,36 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api;
+package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
+import org.sonar.plugins.python.api.tree.CellMagicStatement;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
-public class PythonTokenTypeTest {
+public class CellMagicStatementImpl extends PyTree implements CellMagicStatement {
 
-  @Test
-  public void test() {
-    assertThat(PythonTokenType.values()).hasSize(6);
+  private final List<Token> tokens;
 
-    AstNode astNode = mock(AstNode.class);
-    for (PythonTokenType tokenType : PythonTokenType.values()) {
-      assertThat(tokenType.getName()).isEqualTo(tokenType.name());
-      assertThat(tokenType.getValue()).isEqualTo(tokenType.name());
-      assertThat(tokenType.hasToBeSkippedFromAst(astNode)).isFalse();
-    }
+  public CellMagicStatementImpl(List<Token> tokens) {
+    this.tokens = tokens;
   }
 
+  @Override
+  public void accept(TreeVisitor visitor) {
+    visitor.visitCellMagicStatement(this);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.CELL_MAGIC_STATEMENT;
+  }
+
+  @Override
+  List<Tree> computeChildren() {
+    return new ArrayList<>(tokens);
+  }
 }
