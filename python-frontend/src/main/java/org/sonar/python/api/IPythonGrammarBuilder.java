@@ -28,7 +28,6 @@ import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.DYNAMIC_OBJECT_INFO_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC;
 import static org.sonar.python.api.IPythonGrammar.MAGIC_CELL;
-import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.PythonGrammar.ASSERT_STMT;
 import static org.sonar.python.api.PythonGrammar.ANNOTATED_RHS;
 import static org.sonar.python.api.PythonGrammar.BREAK_STMT;
@@ -56,6 +55,8 @@ import static org.sonar.python.api.PythonTokenType.NEWLINE;
 
 public class IPythonGrammarBuilder extends PythonGrammarBuilder {
 
+  public static final String QUESTION_MARK = "?";
+
   @Override
   protected void fileInput(LexerfulGrammarBuilder b) {
     b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(CELL, MAGIC_CELL, NEWLINE, IPYNB_CELL_DELIMITER)), EOF);
@@ -79,16 +80,16 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
     );
     b.rule(DYNAMIC_OBJECT_INFO_STATEMENT).is(b.firstOf(
       b.sequence(
-        PythonPunctuator.QUESTION_MARK,
-        b.optional(PythonPunctuator.QUESTION_MARK),
+        QUESTION_MARK,
+        b.optional(QUESTION_MARK),
         TEST,
-        b.optional(PythonPunctuator.QUESTION_MARK),
-        b.optional(PythonPunctuator.QUESTION_MARK)
+        b.optional(QUESTION_MARK),
+        b.optional(QUESTION_MARK)
       ),
       b.sequence(
         TEST,
-        PythonPunctuator.QUESTION_MARK,
-        b.optional(PythonPunctuator.QUESTION_MARK)
+        QUESTION_MARK,
+        b.optional(QUESTION_MARK)
       )
     ));
   }

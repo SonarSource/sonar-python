@@ -22,17 +22,18 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class DynamicObjectInfoStatementImpl extends PyTree implements DynamicObjectInfoStatement {
 
 
-  private final List<Tree> questionMarksBefore;
+  private final List<Token> questionMarksBefore;
   private final List<Tree> children;
-  private final List<Tree> questionMarksAfter;
+  private final List<Token> questionMarksAfter;
 
-  public DynamicObjectInfoStatementImpl(List<Tree> questionMarksBefore, List<Tree> children, List<Tree> questionMarksAfter) {
+  public DynamicObjectInfoStatementImpl(List<Token> questionMarksBefore, List<Tree> children, List<Token> questionMarksAfter) {
     this.questionMarksBefore = questionMarksBefore;
     this.children = children;
     this.questionMarksAfter = questionMarksAfter;

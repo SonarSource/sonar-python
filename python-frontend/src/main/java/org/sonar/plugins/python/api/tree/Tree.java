@@ -249,6 +249,7 @@ public interface Tree {
     LINE_MAGIC_STATEMENT(LineMagicStatement.class),
     DYNAMIC_OBJECT_INFO_STATEMENT(DynamicObjectInfoStatement.class),
     CELL_MAGIC_STATEMENT(CellMagicStatement.class);
+
     final Class<? extends Tree> associatedInterface;
 
     Kind(Class<? extends Tree> associatedInterface) {

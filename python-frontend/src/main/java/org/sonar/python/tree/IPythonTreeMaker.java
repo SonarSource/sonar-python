@@ -38,7 +38,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
 
@@ -101,26 +100,28 @@ public class IPythonTreeMaker extends PythonTreeMaker {
   }
 
   protected DynamicObjectInfoStatement dynamicObjectInfoStatement(AstNode astNode) {
-    var questionMarksBefore = new ArrayList<Tree>();
+    var questionMarksBefore = new ArrayList<Token>();
     var children = new ArrayList<Tree>();
-    var questionMarksAfter = new ArrayList<Tree>();
+    var questionMarksAfter = new ArrayList<Token>();
 
     var nodeChildren = astNode.getChildren();
-    var currentList = questionMarksBefore;
+
+    var isQuestionMarksBefore = true;
     for (int i = 0; i < nodeChildren.size(); i++) {
-      var nodeChild = nodeChildren.get(i);
-      if (nodeChild.is(PythonPunctuator.QUESTION_MARK)) {
-        if (currentList == children) {
-          currentList = questionMarksAfter;
+      var child = nodeChildren.get(i);
+      var childToken = child.getToken();
+      if ("?".equals(childToken.getValue())) {
+        if (isQuestionMarksBefore) {
+          questionMarksBefore.add(toPyToken(childToken));
+        } else {
+          questionMarksAfter.add(toPyToken(childToken));
         }
-        var nodeChildToken = toPyToken(nodeChild.getToken());
-        currentList.add(nodeChildToken);
       } else {
-        currentList = children;
-        nodeChild.getTokens()
+        isQuestionMarksBefore = false;
+        child.getTokens()
           .stream()
           .map(PythonTreeMaker::toPyToken)
-          .forEach(currentList::add);
+          .forEach(children::add);
       }
     }
     return new DynamicObjectInfoStatementImpl(questionMarksBefore, children, questionMarksAfter);
