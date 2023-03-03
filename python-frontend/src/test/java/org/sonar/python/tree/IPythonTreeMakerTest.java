@@ -111,6 +111,24 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  public void system_shell_access() {
+    var parse = parseIPython("print(b)\n" +
+      "!pwd && ls -a | sed 's/^/    /'\n" +
+      "a = b", treeMaker::fileInput);
+
+    var statementList = findFirstChildWithKind(parse, Tree.Kind.STATEMENT_LIST);
+    assertThat(statementList.children()).hasSize(3);
+    assertThat(statementList.children().get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statementList.children().get(1).getKind()).isEqualTo(Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(statementList.children().get(2).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+
+    var lineMagicStatement = statementList.children().get(1);
+    assertThat(lineMagicStatement.children()).hasSize(1);
+    var lineMagic = findFirstChildWithKind(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic).isNotNull();
+  }
+
+  @Test
   public void assignment_rhs_test() {
     var parse = parseIPython("print(b)\n" +
       "a = yield foo(b)\n" +
