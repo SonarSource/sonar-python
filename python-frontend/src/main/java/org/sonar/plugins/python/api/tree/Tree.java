@@ -244,7 +244,9 @@ public interface Tree {
 
     KEY_VALUE_PAIR(KeyValuePair.class),
     KEY_VALUE_PATTERN(KeyValuePattern.class),
-    TOKEN(Token.class);
+    TOKEN(Token.class),
+    LINE_MAGIC(LineMagic.class),
+    LINE_MAGIC_STATEMENT(LineMagicStatement.class);
     final Class<? extends Tree> associatedInterface;
 
     Kind(Class<? extends Tree> associatedInterface) {

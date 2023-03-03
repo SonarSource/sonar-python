@@ -561,4 +561,14 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitValuePattern(ValuePattern valuePattern) {
     scan(valuePattern.qualifiedExpression());
   }
+
+  @Override
+  public void visitLineMagic(LineMagic lineMagic) {
+    // noop
+  }
+
+  @Override
+  public void visitLineMagicStatement(LineMagicStatement lineMagicStatement) {
+    // noop
+  }
 }
