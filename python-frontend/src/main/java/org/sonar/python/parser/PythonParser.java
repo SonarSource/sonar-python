@@ -39,15 +39,17 @@ public final class PythonParser {
   private final Parser<Grammar> sslrParser;
 
   public static PythonParser create() {
-    return new PythonParser(new PythonGrammarBuilder().create());
+    LexerState lexerState = new LexerState();
+    return new PythonParser(new PythonGrammarBuilder().create(), lexerState, PythonLexer.create(lexerState));
   }
 
   public static PythonParser createIPythonParser() {
-    return new PythonParser(new IPythonGrammarBuilder().create());
+    LexerState lexerState = new LexerState();
+    return new PythonParser(new IPythonGrammarBuilder().create(), lexerState, PythonLexer.ipynbLexer(lexerState));
   }
 
-  private PythonParser(Grammar grammar) {
-    sslrParser = new SslrPythonParser(grammar);
+  private PythonParser(Grammar grammar, LexerState lexerState, Lexer lexer) {
+    sslrParser = new SslrPythonParser(grammar, lexerState, lexer);
   }
 
   public AstNode parse(String source) {
@@ -74,11 +76,11 @@ public final class PythonParser {
     private final LexerState lexerState;
     private final Lexer lexer;
 
-    private SslrPythonParser(Grammar grammar) {
+    private SslrPythonParser(Grammar grammar, LexerState lexerState, Lexer lexer) {
       super(grammar);
       super.setRootRule(super.getGrammar().getRootRule());
-      this.lexerState = new LexerState();
-      this.lexer = PythonLexer.create(lexerState);
+      this.lexerState = lexerState;
+      this.lexer = lexer;
     }
 
     @Override

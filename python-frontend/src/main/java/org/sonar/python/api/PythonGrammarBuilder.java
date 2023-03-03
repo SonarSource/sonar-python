@@ -37,8 +37,6 @@ public class PythonGrammarBuilder {
   public Grammar create() {
     LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
 
-    b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
-
     setupRules(b);
 
     b.setRootRule(FILE_INPUT);
@@ -46,10 +44,15 @@ public class PythonGrammarBuilder {
   }
 
   protected void setupRules(LexerfulGrammarBuilder b) {
+    fileInput(b);
     grammar(b);
     compoundStatements(b);
     simpleStatements(b);
     expressions(b);
+  }
+
+  protected void fileInput(LexerfulGrammarBuilder b) {
+    b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
   }
 
   protected void grammar(LexerfulGrammarBuilder b) {

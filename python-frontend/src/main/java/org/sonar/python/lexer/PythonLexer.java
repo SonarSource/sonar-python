@@ -52,6 +52,13 @@ public final class PythonLexer {
     return builder.build();
   }
 
+  public static Lexer ipynbLexer(LexerState lexerState) {
+    Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
+    builder.withChannel(new IPynbCellDelimiterChannel(lexerState));
+    addCommonChannels(builder, lexerState);
+    return builder.build();
+  }
+
   public static Lexer fStringLexer(LexerState lexerState) {
     Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
     builder.withChannel(new FStringChannel(lexerState));
