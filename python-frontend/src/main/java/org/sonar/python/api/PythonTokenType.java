@@ -28,7 +28,8 @@ public enum PythonTokenType implements TokenType {
 
   INDENT,
   DEDENT,
-  NEWLINE;
+  NEWLINE,
+  IPYNB_CELL_DELIMITER;
 
   @Override
   public String getName() {

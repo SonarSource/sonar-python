@@ -22,6 +22,9 @@ package org.sonar.python.api;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
 public enum IPythonGrammar implements GrammarRuleKey {
+  CELL,
+  MAGIC_CELL,
   LINE_MAGIC,
-  LINE_MAGIC_STATEMENT
+  LINE_MAGIC_STATEMENT,
+  CELL_MAGIC_STATEMENT
 }

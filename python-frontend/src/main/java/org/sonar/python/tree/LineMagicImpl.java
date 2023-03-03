@@ -30,9 +30,9 @@ public class LineMagicImpl extends PyTree implements LineMagic {
 
   private final Token percent;
   private final Tree name;
-  private final List<Tree> tokens;
+  private final List<Token> tokens;
 
-  public LineMagicImpl(Token percent, Tree name, List<Tree> tokens) {
+  public LineMagicImpl(Token percent, Tree name, List<Token> tokens) {
     this.percent = percent;
     this.name = name;
     this.tokens = tokens;
