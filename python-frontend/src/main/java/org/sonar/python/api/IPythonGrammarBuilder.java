@@ -59,27 +59,18 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
     LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
 
     b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(CELL, MAGIC_CELL, NEWLINE, IPYNB_CELL_DELIMITER)), EOF);
-    b.rule(CELL).is(b.oneOrMore(b.firstOf(NEWLINE, STATEMENT)));
-    b.rule(MAGIC_CELL).is(CELL_MAGIC_STATEMENT);
 
-    setupRules(b);
+    setupIPythonNotebooksRules(b);
+    setupCommonRules(b);
 
     b.setRootRule(FILE_INPUT);
     return b.buildWithMemoizationOfMatchesForAllRules();
   }
 
-  @Override
-  protected void setupRules(LexerfulGrammarBuilder b) {
-    lineMagic(b);
-    super.setupRules(b);
-    cellMagic(b);
-  }
-
-  protected void cellMagic(LexerfulGrammarBuilder b) {
+  protected void setupIPythonNotebooksRules(LexerfulGrammarBuilder b) {
+    b.rule(CELL).is(b.oneOrMore(b.firstOf(NEWLINE, STATEMENT)));
+    b.rule(MAGIC_CELL).is(CELL_MAGIC_STATEMENT);
     b.rule(CELL_MAGIC_STATEMENT).is(PythonPunctuator.MOD, PythonPunctuator.MOD, b.zeroOrMore(b.anyTokenButNot(b.firstOf(IPYNB_CELL_DELIMITER, EOF))));
-  }
-
-  protected void lineMagic(LexerfulGrammarBuilder b) {
     b.rule(LINE_MAGIC_STATEMENT).is(LINE_MAGIC);
     b.rule(LINE_MAGIC).is(
       b.firstOf(PythonPunctuator.MOD, "!", PythonPunctuator.DIV),

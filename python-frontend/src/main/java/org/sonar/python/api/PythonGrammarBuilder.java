@@ -39,13 +39,13 @@ public class PythonGrammarBuilder {
 
     b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
 
-    setupRules(b);
+    setupCommonRules(b);
 
     b.setRootRule(FILE_INPUT);
     return b.buildWithMemoizationOfMatchesForAllRules();
   }
 
-  protected void setupRules(LexerfulGrammarBuilder b) {
+  protected void setupCommonRules(LexerfulGrammarBuilder b) {
     grammar(b);
     compoundStatements(b);
     simpleStatements(b);

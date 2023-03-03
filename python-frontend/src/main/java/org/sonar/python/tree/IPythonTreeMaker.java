@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.LineMagicStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
@@ -84,7 +83,6 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
       .map(IPythonTreeMaker::toPyToken)
-      .map(Tree.class::cast)
       .collect(Collectors.toList());
     return new CellMagicStatementImpl(tokens);
   }
@@ -104,7 +102,6 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
       .map(IPythonTreeMaker::toPyToken)
-      .map(Tree.class::cast)
       .collect(Collectors.toList());
     return new LineMagicImpl(percent, name, tokens);
   }

@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import org.sonar.api.Beta;
 import org.sonar.python.tree.DictCompExpressionImpl;
 
 public interface TreeVisitor {
@@ -207,9 +208,12 @@ public interface TreeVisitor {
 
   void visitValuePattern(ValuePattern valuePattern);
 
+  @Beta
   void visitLineMagic(LineMagic lineMagic);
 
+  @Beta
   void visitLineMagicStatement(LineMagicStatement lineMagicStatement);
 
+  @Beta
   void visitCellMagicStatement(CellMagicStatement cellMagicStatement);
 }

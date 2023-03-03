@@ -22,15 +22,16 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.tree.CellMagicStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 
 public class CellMagicStatementImpl extends PyTree implements CellMagicStatement {
 
-  private final List<Tree> tokens;
+  private final List<Token> tokens;
 
-  public CellMagicStatementImpl(List<Tree> tokens) {
+  public CellMagicStatementImpl(List<Token> tokens) {
     this.tokens = tokens;
   }
 
