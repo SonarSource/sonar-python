@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api;
 
-import com.sonar.sslr.api.Grammar;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
 import static com.sonar.sslr.api.GenericTokenType.EOF;
@@ -55,19 +54,17 @@ import static org.sonar.python.api.PythonTokenType.NEWLINE;
 public class IPythonGrammarBuilder extends PythonGrammarBuilder {
 
   @Override
-  public Grammar create() {
-    LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
-
+  protected void fileInput(LexerfulGrammarBuilder b) {
     b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(CELL, MAGIC_CELL, NEWLINE, IPYNB_CELL_DELIMITER)), EOF);
-
-    setupIPythonNotebooksRules(b);
-    setupCommonRules(b);
-
-    b.setRootRule(FILE_INPUT);
-    return b.buildWithMemoizationOfMatchesForAllRules();
   }
 
-  protected void setupIPythonNotebooksRules(LexerfulGrammarBuilder b) {
+  @Override
+  protected void setupRules(LexerfulGrammarBuilder b) {
+    ipythonRules(b);
+    super.setupRules(b);
+  }
+
+  protected void ipythonRules(LexerfulGrammarBuilder b) {
     b.rule(CELL).is(b.oneOrMore(b.firstOf(NEWLINE, STATEMENT)));
     b.rule(MAGIC_CELL).is(CELL_MAGIC_STATEMENT);
     b.rule(CELL_MAGIC_STATEMENT).is(PythonPunctuator.MOD, PythonPunctuator.MOD, b.zeroOrMore(b.anyTokenButNot(b.firstOf(IPYNB_CELL_DELIMITER, EOF))));
