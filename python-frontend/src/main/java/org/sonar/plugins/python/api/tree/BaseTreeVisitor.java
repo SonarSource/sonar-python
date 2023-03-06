@@ -573,6 +573,11 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitDynamicObjectInfoStatement(DynamicObjectInfoStatement dynamicObjectInfoStatement) {
+    // noop
+  }
+
+  @Override
   public void visitCellMagicStatement(CellMagicStatement lineMagicStatement) {
     // noop
   }

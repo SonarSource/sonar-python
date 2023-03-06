@@ -216,4 +216,7 @@ public interface TreeVisitor {
 
   @Beta
   void visitCellMagicStatement(CellMagicStatement cellMagicStatement);
+
+  @Beta
+  void visitDynamicObjectInfoStatement(DynamicObjectInfoStatement dynamicObjectInfoStatement);
 }
