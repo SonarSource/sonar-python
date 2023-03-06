@@ -68,7 +68,10 @@ public abstract class RuleTest {
       }
       return token.value();
     }).collect(Collectors.joining(""));
-    String originalCode = code.replaceAll("#.*\\n", "").replaceAll("\\n", "").replaceAll(" ", "");
+    String originalCode = code.replaceAll("#.*\\n", "")
+      .replaceAll("\\\\?\\n", "")
+      .replaceAll(" ", "")
+      ;
     assertThat(tokens).isEqualTo(originalCode);
     return tree;
   }
