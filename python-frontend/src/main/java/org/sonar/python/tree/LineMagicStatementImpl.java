@@ -36,7 +36,7 @@ public class LineMagicStatementImpl extends PyTree implements LineMagicStatement
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitLineMagicStatement(this);
+    // no op
   }
 
   @Override

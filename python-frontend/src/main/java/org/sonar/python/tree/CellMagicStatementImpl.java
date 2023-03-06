@@ -37,7 +37,7 @@ public class CellMagicStatementImpl extends PyTree implements CellMagicStatement
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitCellMagicStatement(this);
+    // no op
   }
 
   @Override

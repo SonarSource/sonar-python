@@ -561,24 +561,4 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitValuePattern(ValuePattern valuePattern) {
     scan(valuePattern.qualifiedExpression());
   }
-
-  @Override
-  public void visitLineMagic(LineMagic lineMagic) {
-    // noop
-  }
-
-  @Override
-  public void visitLineMagicStatement(LineMagicStatement lineMagicStatement) {
-    // noop
-  }
-
-  @Override
-  public void visitDynamicObjectInfoStatement(DynamicObjectInfoStatement dynamicObjectInfoStatement) {
-    // noop
-  }
-
-  @Override
-  public void visitCellMagicStatement(CellMagicStatement lineMagicStatement) {
-    // noop
-  }
 }

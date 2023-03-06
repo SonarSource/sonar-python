@@ -207,16 +207,4 @@ public interface TreeVisitor {
   void visitKeywordPattern(KeywordPattern keywordPattern);
 
   void visitValuePattern(ValuePattern valuePattern);
-
-  @Beta
-  void visitLineMagic(LineMagic lineMagic);
-
-  @Beta
-  void visitLineMagicStatement(LineMagicStatement lineMagicStatement);
-
-  @Beta
-  void visitCellMagicStatement(CellMagicStatement cellMagicStatement);
-
-  @Beta
-  void visitDynamicObjectInfoStatement(DynamicObjectInfoStatement dynamicObjectInfoStatement);
 }
