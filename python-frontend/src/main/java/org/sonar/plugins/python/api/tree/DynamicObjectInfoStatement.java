@@ -17,15 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api;
+package org.sonar.plugins.python.api.tree;
 
-import org.sonar.sslr.grammar.GrammarRuleKey;
-
-public enum IPythonGrammar implements GrammarRuleKey {
-  CELL,
-  MAGIC_CELL,
-  LINE_MAGIC,
-  LINE_MAGIC_STATEMENT,
-  CELL_MAGIC_STATEMENT,
-  DYNAMIC_OBJECT_INFO_STATEMENT
+public interface DynamicObjectInfoStatement extends Statement {
 }

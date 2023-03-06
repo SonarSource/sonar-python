@@ -85,8 +85,6 @@ public enum PythonPunctuator implements TokenType {
   MATRIX_MULT_ASSIGN("@="),
   WALRUS_OPERATOR(":=");
 
-  ;
-
   private final String value;
 
   PythonPunctuator(String word) {
