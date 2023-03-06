@@ -25,8 +25,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Test;
-import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -41,7 +41,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   private final IPythonTreeMaker treeMaker = new IPythonTreeMaker();
 
   @Test
-  public void empty_file() {
+  public void emptyFile() {
     var parse = parseIPython("", treeMaker::fileInput);
     assertThat(parse).isNotNull();
     assertThat(parse.statements()).isNull();
@@ -99,7 +99,39 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void dynamic_object_info() {
+  public void regularCellFollowedByMagicCell() {
+    var parse = parseIPython("print(b)\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
+      "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
+    List<Statement> statements = parse.statements().statements();
+    assertThat(statements).hasSize(3);
+    assertThat(statements.get(0).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
+    assertThat(statements.get(1).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
+    assertThat(statements.get(2).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
+  }
+
+  @Test
+  public void cellMagicWithMissingDelimiterStillParsed() {
+    var parse = parseIPython("print(b)\n" +
+      "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
+    List<Statement> statements = parse.statements().statements();
+    assertThat(statements).hasSize(3);
+    assertThat(statements.get(0).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
+    assertThat(statements.get(1).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
+    assertThat(statements.get(2).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
+  }
+
+  @Test
+  public void cellMagicUntilEndOfFile() {
+    setRootRule(PythonGrammar.FILE_INPUT);
+    var parse = parseIPython("%%hello\n" +
+      "print(b)\n", treeMaker::fileInput);
+    List<Statement> statements = parse.statements().statements();
+    assertThat(statements).hasSize(1);
+    assertThat(statements.get(0).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
+  }
+
+  @Test
+  public void dynamicObjectInfo() {
     var file = parseIPython("a = A()\n" +
       "??a.foo\n" +
       "?a.foo\n" +
@@ -146,7 +178,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void line_magic() {
+  public void lineMagic() {
     var statements = parseIPython("print(b)\n" +
       "a = %alias showPath pwd && ls -a\n", treeMaker::fileInput).statements().statements();
     assertThat(statements).hasSize(2);
@@ -181,7 +213,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void line_magic_statement() {
+  public void lineMagicStatement() {
     var statements = parseIPython("print(b)\n" +
       "%alias showPath pwd && ls -a\n", treeMaker::fileInput).statements().statements();
     assertThat(statements).hasSize(2);
@@ -224,7 +256,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void system_shell_access() {
+  public void systemShellAccess() {
     var statements = parseIPython("print(b)\n" +
       "!pwd \\\n" +
       "  && ls -a | sed 's/^/\\    /'\n" +
@@ -239,10 +271,23 @@ public class IPythonTreeMakerTest extends RuleTest {
     assertThat(lineMagicStatement.children()).hasSize(1);
     var lineMagic = findFirstChildWithKind(lineMagicStatement, Tree.Kind.LINE_MAGIC);
     assertThat(lineMagic).isNotNull();
+
+    statements = parseIPython("print(b)\n" +
+      "!pwd && ls -a | sed 's/^/\\    /'\n" +
+      "a = b", treeMaker::fileInput).statements().statements();
+    assertThat(statements).hasSize(3);
+    assertThat(statements.get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(statements.get(1).getKind()).isEqualTo(Tree.Kind.LINE_MAGIC_STATEMENT);
+    assertThat(statements.get(2).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+
+    lineMagicStatement = statements.get(1);
+    assertThat(lineMagicStatement.children()).hasSize(1);
+    lineMagic = findFirstChildWithKind(lineMagicStatement, Tree.Kind.LINE_MAGIC);
+    assertThat(lineMagic).isNotNull();
   }
 
   @Test
-  public void assignment_rhs_test() {
+  public void assignmentRhs() {
     var statementList = parseIPython("print(b)\n" +
       "a = yield foo(b)\n" +
       "c = bar(a) + b\n" +
@@ -255,38 +300,6 @@ public class IPythonTreeMakerTest extends RuleTest {
     assertThat(assignments.get(0).assignedValue().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
     assertThat(assignments.get(1).assignedValue().getKind()).isEqualTo(Tree.Kind.PLUS);
     assertThat(assignments.get(2).assignedValue().getKind()).isEqualTo(Tree.Kind.MODULO);
-  }
-
-  @Test
-  public void regularCellFollowedByMagicCell() {
-    var parse = parseIPython("print(b)\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
-      "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
-    List<Statement> statements = parse.statements().statements();
-    assertThat(statements).hasSize(3);
-    assertThat(statements.get(0).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
-    assertThat(statements.get(1).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
-    assertThat(statements.get(2).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
-  }
-
-  @Test
-  public void cellMagicWithMissingDelimiterStillParsed() {
-    var parse = parseIPython("print(b)\n" +
-      "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
-    List<Statement> statements = parse.statements().statements();
-    assertThat(statements).hasSize(3);
-    assertThat(statements.get(0).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
-    assertThat(statements.get(1).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
-    assertThat(statements.get(2).is(Tree.Kind.EXPRESSION_STMT)).isTrue();
-  }
-
-  @Test
-  public void cellMagicUntilEndOfFile() {
-    setRootRule(PythonGrammar.FILE_INPUT);
-    var parse = parseIPython("%%hello\n" +
-      "print(b)\n", treeMaker::fileInput);
-    List<Statement> statements = parse.statements().statements();
-    assertThat(statements).hasSize(1);
-    assertThat(statements.get(0).is(Tree.Kind.CELL_MAGIC_STATEMENT)).isTrue();
   }
 
   private List<Tree> findChildrenWithKind(Tree parent, Tree.Kind kind) {
