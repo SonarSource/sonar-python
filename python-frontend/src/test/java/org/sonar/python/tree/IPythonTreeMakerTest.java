@@ -25,6 +25,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Test;
+import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -95,6 +96,53 @@ public class IPythonTreeMakerTest extends RuleTest {
       "  print(x)\n" +
       "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
       "  print(c)", treeMaker::fileInput)).isInstanceOf(RecognitionException.class);
+  }
+
+  @Test
+  public void dynamic_object_info() {
+    var file = parseIPython("a = A()\n" +
+      "??a.foo\n" +
+      "?a.foo\n" +
+      "?a.foo?\n" +
+      "a.foo?\n" +
+      "a.foo??\n" +
+      "??a.foo()??\n" +
+      "b = a.foo()", treeMaker::fileInput);
+    var statementList = findFirstChildWithKind(file, Tree.Kind.STATEMENT_LIST);
+    var statements = statementList.children();
+    assertThat(statements).hasSize(8);
+
+    assertThat(statements.get(0).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    checkDynamicObjectInfo(statements.get(1), 2, 0);
+    checkDynamicObjectInfo(statements.get(2), 1, 0);
+    checkDynamicObjectInfo(statements.get(3), 1, 1);
+    checkDynamicObjectInfo(statements.get(4), 0, 1);
+    checkDynamicObjectInfo(statements.get(5), 0, 2);
+    checkDynamicObjectInfo(statements.get(6), 2, 2);
+    assertThat(statements.get(7).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+  }
+
+  private void checkDynamicObjectInfo(Tree dynamicObjectInfo, int questionMarksBefore, int questionMarksAfter) {
+    assertThat(dynamicObjectInfo)
+      .isNotNull()
+      .isInstanceOf(DynamicObjectInfoStatement.class)
+      .extracting(Tree::getKind)
+      .isEqualTo(Tree.Kind.DYNAMIC_OBJECT_INFO_STATEMENT);
+
+    var children = dynamicObjectInfo.children();
+    for (int i = 0; questionMarksBefore > 0 && i < questionMarksBefore; i++) {
+      var child = children.get(i);
+      assertThat(child.getKind()).isEqualTo(Tree.Kind.TOKEN);
+      var tokenValue = child.firstToken().value();
+      assertThat(tokenValue).isEqualTo("?");
+    }
+
+    for (int i = children.size() - questionMarksAfter; questionMarksAfter > 0 && i < children.size(); i++) {
+      var child = children.get(i);
+      assertThat(child.getKind()).isEqualTo(Tree.Kind.TOKEN);
+      var tokenValue = child.firstToken().value();
+      assertThat(tokenValue).isEqualTo("?");
+    }
   }
 
   @Test
