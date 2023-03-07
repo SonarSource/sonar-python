@@ -212,9 +212,6 @@ public interface TreeVisitor {
   void visitLineMagic(LineMagic lineMagic);
 
   @Beta
-  void visitLineMagicStatement(LineMagicStatement lineMagicStatement);
-
-  @Beta
   void visitCellMagicStatement(CellMagicStatement cellMagicStatement);
 
   @Beta

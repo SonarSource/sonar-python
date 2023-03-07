@@ -23,14 +23,15 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.CellMagicStatement;
 import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.LineMagic;
-import org.sonar.plugins.python.api.tree.LineMagicStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -94,9 +95,9 @@ public class IPythonTreeMaker extends PythonTreeMaker {
     return new CellMagicStatementImpl(tokens);
   }
 
-  protected LineMagicStatement lineMagicStatement(AstNode astNode) {
+  protected ExpressionStatement lineMagicStatement(AstNode astNode) {
     var lineMagic = lineMagic(astNode.getFirstChild(IPythonGrammar.LINE_MAGIC));
-    return new LineMagicStatementImpl(lineMagic);
+    return new ExpressionStatementImpl(List.of(lineMagic), Separators.EMPTY);
   }
 
   protected DynamicObjectInfoStatement dynamicObjectInfoStatement(AstNode astNode) {
