@@ -19,7 +19,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -33,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -44,6 +42,7 @@ import org.sonarsource.sonarlint.core.StandaloneSonarLintEngineImpl;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.api.ClientModuleFileSystem;
 import org.sonarsource.sonarlint.core.analysis.api.ClientModuleInfo;
+import org.sonarsource.sonarlint.core.analysis.api.WithTextRange;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.Issue;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneAnalysisConfiguration;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneGlobalConfiguration;
@@ -62,8 +61,6 @@ public class IPythonTest {
 
   private static StandaloneSonarLintEngine sonarlintEngine;
 
-  private static File baseDir;
-
   @BeforeClass
   public static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
@@ -75,7 +72,6 @@ public class IPythonTest {
       .setModulesProvider(Collections::emptyList)
       .build();
     sonarlintEngine = new StandaloneSonarLintEngineImpl(sonarLintConfig);
-    baseDir = TEMP.newFolder();
   }
 
   @AfterClass
@@ -84,50 +80,50 @@ public class IPythonTest {
   }
 
   @Test
-  public void should_raise_issues() throws IOException {
-    ClientInputFile inputFile = prepareInputFile("foo.ipynb",
-      "def fooBar():\n"
-        + "  `1` \n"
-        + "  `1` #NOSONAR\n",
-      false);
+  public void shouldRaiseIssues() {
+    var inputFile = createInputFile(Path.of("projects/ipynb_project/file1.ipynb"), "file1.ipynb", false);
+    var issues = new ArrayList<Issue>();
 
-    List<Issue> issues = new ArrayList<>();
-    StandaloneAnalysisConfiguration configuration =
-      StandaloneAnalysisConfiguration.builder()
-        .setBaseDir(baseDir.toPath())
-        .addInputFile(inputFile)
-        .setModuleKey("myModule")
-        .build();
+    var configuration = StandaloneAnalysisConfiguration.builder()
+      .setBaseDir(Path.of("projects/ipynb_project"))
+      .addInputFile(inputFile)
+      .setModuleKey("myModule")
+      .build();
 
-    Map<ClientLogOutput.Level, List<String>> logsByLevel = new HashMap<>();
-    ClientLogOutput logOutput = (s, level) -> {
-      List<String> logs = logsByLevel.getOrDefault(level, new ArrayList<>());
-      logs.add(s);
-      logsByLevel.putIfAbsent(level, logs);
-    };
-    ClientModuleFileSystem clientFileSystem = new ClientModuleFileSystem() {
+    var logsByLevel = new HashMap<ClientLogOutput.Level, List<String>>();
+    var logOutput = createClientLogOutput(logsByLevel);
+    var clientFileSystem = createClientFileSystem(inputFile);
+    sonarlintEngine.declareModule(new ClientModuleInfo("myModule", clientFileSystem));
+    sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
+
+    assertThat(issues)
+      .extracting(Issue::getRuleKey, WithTextRange::getStartLine, i -> i.getInputFile().uri(), Issue::getSeverity)
+      .containsOnly(
+        tuple("ipython:PrintStatementUsage", 32, inputFile.uri(), IssueSeverity.MAJOR),
+        tuple("ipython:S1172", 40, inputFile.uri(), IssueSeverity.MAJOR),
+        tuple("ipython:S930", 41, inputFile.uri(), IssueSeverity.BLOCKER),
+        tuple("ipython:S1172", 42, inputFile.uri(), IssueSeverity.MAJOR),
+        tuple("ipython:S1542", 57, inputFile.uri(), IssueSeverity.MAJOR),
+        tuple("ipython:BackticksUsage", 58, inputFile.uri(), IssueSeverity.BLOCKER)
+      );
+  }
+
+  private static ClientLogOutput createClientLogOutput(Map<ClientLogOutput.Level, List<String>> logsByLevel) {
+    return (s, level) -> logsByLevel.computeIfAbsent(level, (k) -> new ArrayList<>()).add(s);
+  }
+
+  private static ClientModuleFileSystem createClientFileSystem(ClientInputFile... inputFiles) {
+    return new ClientModuleFileSystem() {
       @Override
       public Stream<ClientInputFile> files(String s, InputFile.Type type) {
-        return Stream.of(inputFile);
+        return Stream.of(inputFiles);
       }
 
       @Override
       public Stream<ClientInputFile> files() {
-        return Stream.of(inputFile);
+        return Stream.of(inputFiles);
       }
     };
-    sonarlintEngine.declareModule(new ClientModuleInfo("myModule", clientFileSystem));
-    sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
-
-    assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
-      tuple("ipython:BackticksUsage", 2, inputFile.uri().getPath(), IssueSeverity.BLOCKER),
-      tuple("ipython:S1542", 1, inputFile.uri().getPath(), IssueSeverity.MAJOR));
-  }
-
-  private static ClientInputFile prepareInputFile(String relativePath, String content, final boolean isTest) throws IOException {
-    File file = new File(baseDir, relativePath);
-    FileUtils.write(file, content, StandardCharsets.UTF_8);
-    return createInputFile(file.toPath(), relativePath, isTest);
   }
 
   private static ClientInputFile createInputFile(final Path path, String relativePath, final boolean isTest) {
