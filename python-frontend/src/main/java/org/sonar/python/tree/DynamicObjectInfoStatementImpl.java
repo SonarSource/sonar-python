@@ -42,7 +42,7 @@ public class DynamicObjectInfoStatementImpl extends PyTree implements DynamicObj
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitDynamicObjectInfoStatement(this);
+    // no op
   }
 
   @Override
