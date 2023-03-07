@@ -19,5 +19,8 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import org.sonar.api.Beta;
+
+@Beta
 public interface DynamicObjectInfoStatement extends Statement {
 }
