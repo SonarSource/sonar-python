@@ -40,7 +40,7 @@ public class LineMagicImpl extends PyTree implements LineMagic {
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitLineMagic(this);
+    // no op
   }
 
   @Override
