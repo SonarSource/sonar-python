@@ -64,11 +64,11 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
 
   @Override
   protected void setupRules(LexerfulGrammarBuilder b) {
-    ipythonRules(b);
+    iPythonRules(b);
     super.setupRules(b);
   }
 
-  protected void ipythonRules(LexerfulGrammarBuilder b) {
+  protected void iPythonRules(LexerfulGrammarBuilder b) {
     b.rule(CELL).is(b.oneOrMore(b.firstOf(NEWLINE, STATEMENT)));
     b.rule(MAGIC_CELL).is(CELL_MAGIC_STATEMENT);
     b.rule(CELL_MAGIC_STATEMENT).is(PythonPunctuator.MOD, PythonPunctuator.MOD, b.zeroOrMore(b.anyTokenButNot(b.firstOf(IPYNB_CELL_DELIMITER, EOF))));
