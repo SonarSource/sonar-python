@@ -19,7 +19,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -33,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.NotNull;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -63,8 +61,6 @@ public class IPythonTest {
 
   private static StandaloneSonarLintEngine sonarlintEngine;
 
-  private static File baseDir;
-
   @BeforeClass
   public static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
@@ -76,7 +72,6 @@ public class IPythonTest {
       .setModulesProvider(Collections::emptyList)
       .build();
     sonarlintEngine = new StandaloneSonarLintEngineImpl(sonarLintConfig);
-    baseDir = TEMP.newFolder();
   }
 
   @AfterClass
@@ -85,7 +80,7 @@ public class IPythonTest {
   }
 
   @Test
-  public void shouldRaiseIssues() throws IOException {
+  public void shouldRaiseIssues() {
     var inputFile = createInputFile(Path.of("projects/ipynb_project/file1.ipynb"), "file1.ipynb", false);
     var issues = new ArrayList<Issue>();
 
@@ -113,12 +108,10 @@ public class IPythonTest {
       );
   }
 
-  @NotNull
   private static ClientLogOutput createClientLogOutput(Map<ClientLogOutput.Level, List<String>> logsByLevel) {
     return (s, level) -> logsByLevel.computeIfAbsent(level, (k) -> new ArrayList<>()).add(s);
   }
 
-  @NotNull
   private static ClientModuleFileSystem createClientFileSystem(ClientInputFile... inputFiles) {
     return new ClientModuleFileSystem() {
       @Override
