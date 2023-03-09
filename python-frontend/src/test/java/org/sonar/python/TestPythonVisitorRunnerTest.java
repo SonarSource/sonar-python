@@ -39,7 +39,14 @@ public class TestPythonVisitorRunnerTest {
 
   @Test
   public void file_uri() throws IOException {
-    File tmpFile = Files.createTempFile("foo", "py").toFile();
+    File tmpFile = Files.createTempFile("foo", ".py").toFile();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+  }
+
+  @Test
+  public void file_uri_ipython() throws IOException {
+    File tmpFile = Files.createTempFile("foo", ".ipynb").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
