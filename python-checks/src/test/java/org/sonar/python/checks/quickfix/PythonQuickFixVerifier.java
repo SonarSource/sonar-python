@@ -19,13 +19,13 @@
  */
 package org.sonar.python.checks.quickfix;
 
-import com.sonar.sslr.api.AstNode;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -33,13 +33,13 @@ import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,8 +49,32 @@ public class PythonQuickFixVerifier {
   }
 
   public static void verify(PythonCheck check, String codeWithIssue, String... codesFixed) {
+    verify(PythonQuickFixVerifier::createPythonVisitorContext, check, codeWithIssue, codesFixed);
+  }
+
+  public static void verifyNoQuickFixes(PythonCheck check, String codeWithIssue) {
+    verifyNoQuickFixes(PythonQuickFixVerifier::createPythonVisitorContext, check, codeWithIssue);
+  }
+
+  public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
+    verifyQuickFixMessages(PythonQuickFixVerifier::createPythonVisitorContext, check, codeWithIssue, expectedMessages);
+  }
+
+  public static void verifyIPython(PythonCheck check, String codeWithIssue, String... codesFixed) {
+    verify(PythonQuickFixVerifier::createIPythonVisitorContext, check, codeWithIssue, codesFixed);
+  }
+
+  public static void verifyIPythonNoQuickFixes(PythonCheck check, String codeWithIssue) {
+    verifyNoQuickFixes(PythonQuickFixVerifier::createIPythonVisitorContext, check, codeWithIssue);
+  }
+
+  public static void verifyIPythonQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
+    verifyQuickFixMessages(PythonQuickFixVerifier::createIPythonVisitorContext, check, codeWithIssue, expectedMessages);
+  }
+
+  public static void verify(Function<String, PythonVisitorContext> createVisitorContext, PythonCheck check, String codeWithIssue, String... codesFixed) {
     List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
-      .getIssuesWithQuickFix(check, codeWithIssue);
+      .getIssuesWithQuickFix(createVisitorContext, check, codeWithIssue);
 
     assertThat(issues)
       .as("Number of issues")
@@ -73,9 +97,9 @@ public class PythonQuickFixVerifier {
       .isEqualTo(Arrays.asList(codesFixed));
   }
 
-  public static void verifyNoQuickFixes(PythonCheck check, String codeWithIssue) {
+  public static void verifyNoQuickFixes(Function<String, PythonVisitorContext> createVisitorContext, PythonCheck check, String codeWithIssue) {
     List<PythonCheck.PreciseIssue> issues = PythonQuickFixVerifier
-      .getIssuesWithQuickFix(check, codeWithIssue);
+      .getIssuesWithQuickFix(createVisitorContext, check, codeWithIssue);
 
     assertThat(issues)
       .as("Number of issues")
@@ -89,9 +113,12 @@ public class PythonQuickFixVerifier {
       .isEmpty();
   }
 
-  public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
+  public static void verifyQuickFixMessages(Function<String, PythonVisitorContext> createVisitorContext,
+    PythonCheck check,
+    String codeWithIssue,
+    String... expectedMessages) {
     Stream<String> descriptions = PythonQuickFixVerifier
-      .getIssuesWithQuickFix(check, codeWithIssue)
+      .getIssuesWithQuickFix(createVisitorContext, check, codeWithIssue)
       .stream()
       .flatMap(issue -> issue.quickFixes().stream())
       .map(PythonQuickFix::getDescription);
@@ -107,17 +134,27 @@ public class PythonQuickFixVerifier {
     return context.getIssues();
   }
 
-  private static List<PreciseIssue> getIssuesWithQuickFix(PythonCheck check, String codeWithIssue) {
-    PythonParser parser = PythonParser.create();
-    PythonQuickFixFile pythonFile = new PythonQuickFixFile(codeWithIssue);
-    AstNode astNode = parser.parse(pythonFile.content());
-    FileInput parse = new PythonTreeMaker().fileInput(astNode);
+  private static List<PreciseIssue> getIssuesWithQuickFix(Function<String, PythonVisitorContext> createVisitorContext, PythonCheck check, String codeWithIssue) {
+    var visitorContext = createVisitorContext.apply(codeWithIssue);
+    return scanFileForIssues(check, visitorContext);
+  }
 
-    PythonVisitorContext visitorContext = new PythonVisitorContext(parse,
+  private static PythonVisitorContext createPythonVisitorContext(String code) {
+    return createVisitorContext(PythonParser.create(), new PythonTreeMaker(), code);
+  }
+
+  private static PythonVisitorContext createIPythonVisitorContext(String code) {
+    return createVisitorContext(PythonParser.createIPythonParser(), new IPythonTreeMaker(), code);
+  }
+
+  private static PythonVisitorContext createVisitorContext(PythonParser parser, PythonTreeMaker treeMaker, String code) {
+    var pythonFile = new PythonQuickFixFile(code);
+    var astNode = parser.parse(pythonFile.content());
+    var fileInput = treeMaker.fileInput(astNode);
+
+    return new PythonVisitorContext(fileInput,
       pythonFile, null, "",
       ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
-
-    return scanFileForIssues(check, visitorContext);
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {
