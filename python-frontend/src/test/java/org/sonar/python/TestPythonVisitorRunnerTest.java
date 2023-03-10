@@ -22,7 +22,7 @@ package org.sonar.python;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -33,28 +33,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestPythonVisitorRunnerTest {
 
   @Test(expected = IllegalStateException.class)
-  public void unknown_file() {
+  public void unknownFile() {
     TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {});
   }
 
   @Test
-  public void file_uri() throws IOException {
+  public void fileUri() throws IOException {
     File tmpFile = Files.createTempFile("foo", ".py").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
 
   @Test
-  public void file_uri_ipython() throws IOException {
+  public void fileUriIPython() throws IOException {
     File tmpFile = Files.createTempFile("foo", ".ipynb").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
 
   @Test
-  public void global_symbols() {
+  public void globalSymbols() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
-    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(Collections.singletonList(new File(baseDir, "file.py")), baseDir);
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file")).extracting(Symbol::name).containsExactlyInAnyOrder("hello", "A");
+    List<File> files = List.of(new File(baseDir, "file.py"));
+    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDir);
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file"))
+      .extracting(Symbol::name)
+      .containsExactlyInAnyOrder("hello", "A");
+  }
+
+  @Test
+  public void globalSymbolsIPython() {
+    File baseDir = new File("src/test/resources").getAbsoluteFile();
+    List<File> files = List.of(new File(baseDir, "file.py"), new File(baseDir, "file.ipynb"));
+    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDir);
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file"))
+      .extracting(Symbol::name)
+      .containsExactlyInAnyOrder("hello", "A");
   }
 }

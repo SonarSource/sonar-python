@@ -71,6 +71,9 @@ public class TestPythonVisitorRunner {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     for (File file : files) {
       var pythonFile = new TestPythonFile(file);
+      if (pythonFile.isIPython()) {
+        continue;
+      }
       var astRoot = parseFile(pythonFile);
       String packageName = pythonPackageName(file, baseDir.getAbsolutePath());
       projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);

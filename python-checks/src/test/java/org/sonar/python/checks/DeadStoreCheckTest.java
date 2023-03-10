@@ -56,23 +56,6 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_on_single_line_ipython() {
-    String codeWithIssue = code(
-      "def foo():",
-      "    x = 42",
-      "    x??",
-      "    x = 0",
-      "    print(x)");
-    String codeFixed = code(
-      "def foo():",
-      "    x??",
-      "    x = 0",
-      "    print(x)");
-    PythonQuickFixVerifier.verifyIPython(check, codeWithIssue, codeFixed);
-    PythonQuickFixVerifier.verifyIPythonQuickFixMessages(check, codeWithIssue, DeadStoreCheck.QUICK_FIX_MESSAGE);
-  }
-
-  @Test
   public void assignment_with_semicolon_on_single_line() {
     String codeWithIssue = code(
       "def foo():",
@@ -176,18 +159,6 @@ public class DeadStoreCheckTest {
       "    c = foo()",
       "");
     PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
-  }
-
-  @Test
-  public void function_call_as_assigned_value_ipython() {
-    String codeWithIssue = code(
-      "def function_assign():",
-      "    c = foo()",
-      "    ??c",
-      "    print(c)",
-      "    c = foo()",
-      "");
-    PythonQuickFixVerifier.verifyIPythonNoQuickFixes(check, codeWithIssue);
   }
 
   @Test

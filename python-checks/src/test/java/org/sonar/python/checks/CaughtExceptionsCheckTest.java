@@ -58,6 +58,37 @@ public class CaughtExceptionsCheckTest {
   }
 
   @Test
+  public void quickFixIPythonTest() {
+    var check = new CaughtExceptionsCheck();
+    var before = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
+      "class CustomException:\n" +
+      "  ...\n" +
+      "\n" +
+      "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = %time bar()\n" +
+      "  except CustomException:\n" +
+      "    ...";
+
+    var after = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
+      "class CustomException(Exception):\n" +
+      "  ...\n" +
+      "\n" +
+      "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
+      "def foo():\n" +
+      "  try:\n" +
+      "    a = %time bar()\n" +
+      "  except CustomException:\n" +
+      "    ...";
+
+    var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
+
+    PythonQuickFixVerifier.verifyIPython(check, before, after);
+    PythonQuickFixVerifier.verifyIPythonQuickFixMessages(check, before, expectedMessage);
+  }
+
+  @Test
   public void exceptionWithEmptyParenthesisQuickFixTest() {
     var check = new CaughtExceptionsCheck();
     var before = "class CustomException():\n" +
