@@ -75,6 +75,12 @@ public class PythonQuickFixVerifierTest {
   }
 
   @Test
+  public void verifyIPython() {
+    PythonQuickFixVerifier.verifyIPython(new SimpleCheck(), "a=10\n?a", "a!=10\n?a");
+    PythonQuickFixVerifier.verifyIPythonQuickFixMessages(new SimpleCheck(), "a=10\n?a", "Add '!' here.");
+  }
+  
+  @Test
   public void test_multiple_lines() {
     PythonQuickFixVerifier.verify(new SimpleCheck(), "b \na=10", "b \na!=10");
   }

@@ -36,6 +36,11 @@ public class DeadStoreCheckTest {
   }
 
   @Test
+  public void iPythonTest() {
+    PythonCheckVerifier.verify("src/test/resources/checks/deadStore.ipynb", check);
+  }
+
+  @Test
   public void assignment_on_single_line() {
     String codeWithIssue = code(
       "def foo():",

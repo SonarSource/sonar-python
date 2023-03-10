@@ -19,7 +19,6 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -35,6 +34,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -62,23 +62,31 @@ public class TestPythonVisitorRunner {
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
-    PythonParser parser = PythonParser.create();
     TestPythonFile pythonFile = new TestPythonFile(file);
-    AstNode astNode = parser.parse(pythonFile.content());
-    FileInput rootTree = new PythonTreeMaker().fileInput(astNode);
+    FileInput rootTree = parseFile(pythonFile);
     return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     for (File file : files) {
-      TestPythonFile pythonFile = new TestPythonFile(file);
-      AstNode astNode = PythonParser.create().parse(pythonFile.content());
-      FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
+      var pythonFile = new TestPythonFile(file);
+      if (pythonFile.isIPython()) {
+        continue;
+      }
+      var astRoot = parseFile(pythonFile);
       String packageName = pythonPackageName(file, baseDir.getAbsolutePath());
       projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
     }
     return projectLevelSymbolTable;
+  }
+
+  private static FileInput parseFile(TestPythonFile file) {
+    var parser = file.isIPython() ? PythonParser.createIPythonParser() : PythonParser.create();
+    var treeMaker = file.isIPython() ? new IPythonTreeMaker() : new PythonTreeMaker();
+
+    var astNode = parser.parse(file.content());
+    return treeMaker.fileInput(astNode);
   }
 
   private static class TestPythonFile implements PythonFile {
@@ -111,6 +119,10 @@ public class TestPythonVisitorRunner {
     @Override
     public String key() {
       return file.getPath();
+    }
+
+    public boolean isIPython() {
+      return fileName().endsWith(".ipynb");
     }
 
   }
