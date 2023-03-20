@@ -26,9 +26,9 @@ import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
+import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.IamPrivilegeEscalationCheck;
 import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
-import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
 import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
 import org.sonar.python.checks.cdk.ResourceAccessPolicyCheck;
@@ -75,6 +75,7 @@ import org.sonar.python.checks.regex.EmptyGroupCheck;
 import org.sonar.python.checks.regex.EmptyStringRepetitionCheck;
 import org.sonar.python.checks.regex.GraphemeClustersInClassesCheck;
 import org.sonar.python.checks.regex.GroupReplacementCheck;
+import org.sonar.python.checks.regex.ImpossibleBackReferenceCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
@@ -204,6 +205,7 @@ public final class CheckList {
       IdentityComparisonWithNewObjectCheck.class,
       IgnoredPureOperationsCheck.class,
       ImplicitStringConcatenationCheck.class,
+      ImpossibleBackReferenceCheck.class,
       ImpossibleBoundariesCheck.class,
       IncompatibleOperandsCheck.class,
       InconsistentTypeHintCheck.class,
