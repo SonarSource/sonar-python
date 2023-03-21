@@ -15,14 +15,10 @@ def non_compliant(input):
 
 def compliant(input):
     re.match(r'\(\[', input)
-
-
-def unsupported_feature(input):
     # atomic group
-    re.match(r'(?>x)', input)  # Noncompliant
+    re.match(r'(?>x)', input)
     # possessive quantifier
-    re.match(r'x*+', input)  # Noncompliant
-
+    re.match(r'x*+', input)
 
 def false_positives():
     re.compile(r'''
