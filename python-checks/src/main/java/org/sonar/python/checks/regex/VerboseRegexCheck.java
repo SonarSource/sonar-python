@@ -36,6 +36,9 @@ import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterRangeTree;
 import org.sonarsource.analyzer.commons.regex.ast.RegexBaseVisitor;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
+import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
+import org.sonarsource.analyzer.commons.regex.ast.RepetitionTree;
+import org.sonarsource.analyzer.commons.regex.ast.SimpleQuantifier;
 import org.sonarsource.analyzer.commons.regex.finders.VerboseRegexFinder;
 
 @Rule(key = "S6353")
@@ -45,11 +48,13 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
   private static final Pattern issueMessagePattern = Pattern.compile(ISSUE_MESSAGE_PATTERN);
   public static final String QUICK_FIX_FORMAT = "Replace with \"%s\"";
   public static final String REDUNDANT_RANGE_MESSAGE = "Use simple character '%s' instead of '%s'.";
+  public static final String REDUNDANT_REPETITION_MESSAGE = "Use simple repetition '%s' instead of '%s'.";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
     new VerboseRegexFinder(this::addIssueWithQuickFix).visit(regexParseResult);
     new PythonVerboseRegexRangeCheckVisitor().visit(regexParseResult);
+    new PythonVerboseRegexRepetitionCheckVisitor().visit(regexParseResult);
   }
 
   public PreciseIssue addIssueWithQuickFix(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
@@ -85,10 +90,44 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
           issueLocation.endLine(),
           issueLocation.endLineOffset());
 
-        var issue = addIssue(tree, String.format(REDUNDANT_RANGE_MESSAGE, lower, tree.getText()), null, Collections.emptyList());
+        var issue = addIssue(tree, String.format(REDUNDANT_RANGE_MESSAGE, quickFixReplacement, tree.getText()), null, Collections.emptyList());
         issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
       }
       super.visitCharacterRange(tree);
+    }
+  }
+
+  private class PythonVerboseRegexRepetitionCheckVisitor extends RegexBaseVisitor {
+
+    @Override
+    public void visit(RegexTree tree) {
+      tree.continuation().toRegexTree()
+        .filter(nextTree -> nextTree.is(RegexTree.Kind.REPETITION))
+        .filter(RepetitionTree.class::isInstance)
+        .map(RepetitionTree.class::cast)
+        .filter(repetition -> repetition.getQuantifier() instanceof SimpleQuantifier)
+        .filter(repetition -> ((SimpleQuantifier) repetition.getQuantifier()).getKind() == SimpleQuantifier.Kind.STAR)
+        .filter(repetition -> repetition.getRange().getBeginningOffset() > tree.getRange().getBeginningOffset())
+        .ifPresent(repetition -> {
+          var treeText = tree.getText();
+          var nextTreeText = repetition.getElement().getText();
+          if (treeText.equals(nextTreeText)) {
+            var treeLocation = PythonRegexIssueLocation.preciseLocation(tree, null);
+            var repetitionLocation = PythonRegexIssueLocation.preciseLocation(repetition, null);
+            var quickFixReplacement = treeText + "+";
+
+            var textEdit = new PythonTextEdit(quickFixReplacement,
+              treeLocation.startLine(),
+              treeLocation.startLineOffset(),
+              repetitionLocation.endLine(),
+              repetitionLocation.endLineOffset());
+
+            var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, quickFixReplacement, treeText + repetition.getText());
+            var issue = addIssue(tree, issueMessage, null, Collections.emptyList());
+            issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
+          }
+        });
+      super.visit(tree);
     }
   }
 }
