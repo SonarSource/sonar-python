@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.RegexParser;
 import org.sonarsource.analyzer.commons.regex.RegexSource;
+import org.sonarsource.analyzer.commons.regex.ast.AtomicGroupTree;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterTree;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 import org.sonarsource.analyzer.commons.regex.ast.Quantifier;
@@ -94,6 +95,14 @@ public class PythonAnalyzerRegexSourceTest {
       .isNotNull()
       .extracting(Quantifier::getModifier)
       .isEqualTo(Quantifier.Modifier.POSSESSIVE);
+  }
+  
+  @Test
+  public void atomicGroups() {
+    var regex = assertSuccessfulParse("r\"(?>bc|b)\"");
+    assertKind(RegexTree.Kind.ATOMIC_GROUP, regex);
+    assertThat(regex)
+      .isInstanceOf(AtomicGroupTree.class);
   }
 
   @Test
