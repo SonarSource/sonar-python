@@ -19,11 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.FunctionDefImpl;
 
 @Rule(key = "S6538")
 public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionCheck {
@@ -37,11 +39,10 @@ public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionChec
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (functionDef.returnTypeAnnotation() == null) {
         Name functionName = functionDef.name();
-        if ("__init__".equals(functionName.name())) {
-          ctx.addIssue(functionName, CONSTRUCTOR_MESSAGE);
-        } else {
-          ctx.addIssue(functionName, MESSAGE);
-        }
+        FunctionDefImpl functionDefImpl = (FunctionDefImpl) functionDef;
+        Optional.ofNullable(functionDefImpl.functionSymbol())
+          .filter(functionSymbol -> "__init__".equals(functionName.name()) && functionSymbol.isInstanceMethod())
+          .ifPresentOrElse(symbol -> ctx.addIssue(functionName, CONSTRUCTOR_MESSAGE), () -> ctx.addIssue(functionName, MESSAGE));
       }
     });
   }

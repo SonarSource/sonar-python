@@ -11,6 +11,11 @@ class Baz:
        #^^^
         return "foo"
 
+def __init__(): # Noncompliant {{Add a return type hint to this function declaration.}}
+   #^^^^^^^^
+    print("foo")
+
+
 def nested() -> str:
     def child(): # Noncompliant {{Add a return type hint to this function declaration.}}
        #^^^^^
