@@ -1,0 +1,28 @@
+<h2>Why is this an issue?</h2>
+<p>Being a dynamically typed language, the Python interpreter only does type checking during runtime. Getting the typing right is important as certain
+operations may result in a <code>TypeError</code>.</p>
+<p>Type hints can be used to clarify the expected return type of a function, enabling developers to better document its contract. Applying them
+consistently makes the code easier to read and understand.</p>
+<p>In addition, type hints allow some development environments to offer better autocompletion and improve the precision of static analysis tools.</p>
+<h2>How to fix it</h2>
+<p>Add a type hint to the function definition.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+def hello(name):
+   return 'Hello ' + name
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+def hello(name) -&gt; str:
+   return 'Hello ' + name
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/typing.html">Python3 documentation on type hints</a> </li>
+  <li> <a href="https://peps.python.org/pep-0484">PEP-484 - Type Hints</a> </li>
+  <li> <a href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">Cheat sheet on type annotations as part of the mypy documentation</a>
+  </li>
+</ul>
+
