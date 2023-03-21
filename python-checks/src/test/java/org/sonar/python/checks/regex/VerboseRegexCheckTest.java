@@ -62,4 +62,15 @@ public class VerboseRegexCheckTest {
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");
   }
+
+  @Test
+  public void redundantRange() {
+    var before = "import re\n" +
+      "re.match(r\"[ah-hz]\", input)";
+    var after = "import re\n" +
+      "re.match(r\"[ahz]\", input)";
+    var check = new VerboseRegexCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"h\"");
+  }
 }

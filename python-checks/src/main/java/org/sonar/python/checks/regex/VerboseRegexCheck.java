@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.regex;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -32,6 +33,8 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.CharacterRangeTree;
+import org.sonarsource.analyzer.commons.regex.ast.RegexBaseVisitor;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.finders.VerboseRegexFinder;
 
@@ -41,15 +44,16 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
   private static final String ISSUE_MESSAGE_PATTERN = ".+syntax '(.+)' instead of.+";
   private static final Pattern issueMessagePattern = Pattern.compile(ISSUE_MESSAGE_PATTERN);
   public static final String QUICK_FIX_FORMAT = "Replace with \"%s\"";
+  public static final String REDUNDANT_RANGE_MESSAGE = "Use simple character '%s' instead of '%s'.";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
-    new VerboseRegexFinder(this::addIssue).visit(regexParseResult);
+    new VerboseRegexFinder(this::addIssueWithQuickFix).visit(regexParseResult);
+    new PythonVerboseRegexRangeCheckVisitor().visit(regexParseResult);
   }
 
-  @Override
-  public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    return Optional.ofNullable(super.addIssue(regexTree, message, cost, secondaries))
+  public PreciseIssue addIssueWithQuickFix(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    return Optional.ofNullable(addIssue(regexTree, message, cost, secondaries))
       .map(issue -> {
         Matcher matcher = issueMessagePattern.matcher(message);
         String quickFixReplacement = matcher.replaceFirst("$1");
@@ -65,5 +69,26 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
         return issue;
       })
       .orElse(null);
+  }
+
+  private class PythonVerboseRegexRangeCheckVisitor extends RegexBaseVisitor {
+    @Override
+    public void visitCharacterRange(CharacterRangeTree tree) {
+      var lower = tree.getLowerBound().getText();
+      var upper = tree.getUpperBound().getText();
+      if (upper.equals(lower)) {
+        var quickFixReplacement = lower;
+        var issueLocation = PythonRegexIssueLocation.preciseLocation(tree, null);
+        var textEdit = new PythonTextEdit(quickFixReplacement,
+          issueLocation.startLine(),
+          issueLocation.startLineOffset(),
+          issueLocation.endLine(),
+          issueLocation.endLineOffset());
+
+        var issue = addIssue(tree, String.format(REDUNDANT_RANGE_MESSAGE, lower, tree.getText()), null, Collections.emptyList());
+        issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
+      }
+      super.visitCharacterRange(tree);
+    }
   }
 }
