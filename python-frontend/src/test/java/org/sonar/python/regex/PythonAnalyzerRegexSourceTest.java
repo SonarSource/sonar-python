@@ -28,8 +28,10 @@ import org.sonarsource.analyzer.commons.regex.RegexParser;
 import org.sonarsource.analyzer.commons.regex.RegexSource;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterTree;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
+import org.sonarsource.analyzer.commons.regex.ast.Quantifier;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
+import org.sonarsource.analyzer.commons.regex.ast.RepetitionTree;
 import org.sonarsource.analyzer.commons.regex.ast.SequenceTree;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +44,7 @@ public class PythonAnalyzerRegexSourceTest {
 
   @Test
   // TODO: Extend test with exact syntax error location check
-  public void invalid_regex() {
+  public void invalidRegex() {
     RegexSource source = makeSource("r'+'");
     RegexParseResult result = new RegexParser(source, new FlagSet()).parse();
 
@@ -50,7 +52,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void test_string_literal() {
+  public void testStringLiteral() {
     RegexTree regex = assertSuccessfulParse("r'a\\nb'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -66,7 +68,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void test_triple_quote_literal() {
+  public void testTripleQuoteLiteral() {
     RegexTree regex = assertSuccessfulParse("r'''a\\nb'''");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -82,7 +84,20 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void multiline_string_literal() {
+  public void possessiveQuantifiers() {
+    var regex = assertSuccessfulParse("r\"a++\"");
+    assertKind(RegexTree.Kind.REPETITION, regex);
+    assertThat(regex)
+      .isInstanceOf(RepetitionTree.class)
+      .extracting(RepetitionTree.class::cast)
+      .extracting(RepetitionTree::getQuantifier)
+      .isNotNull()
+      .extracting(Quantifier::getModifier)
+      .isEqualTo(Quantifier.Modifier.POSSESSIVE);
+  }
+
+  @Test
+  public void multilineStringLiteral() {
     RegexTree regex = assertSuccessfulParse("r'a\nbc\r\nde'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -94,7 +109,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void test_location_on_regex_opener() {
+  public void testLocationOnRegexOpener() {
     RegexParseResult regex = parseRegex("r'/(?(1|2)ab|cd|ef)/'");
     RegexSyntaxElement openingQuote = regex.openingQuote();
     LocationInFile locationInFile = ((PythonAnalyzerRegexSource) openingQuote.getSource()).locationInFileFor(openingQuote.getRange());

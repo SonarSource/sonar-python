@@ -21,7 +21,9 @@ package org.sonar.python.checks.regex;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonarsource.analyzer.commons.regex.RegexIssueReporter;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.Quantifier;
 import org.sonarsource.analyzer.commons.regex.finders.ReluctantQuantifierFinder;
 
 @Rule(key = "S5857")
@@ -29,7 +31,19 @@ public class ReluctantQuantifierCheck extends AbstractRegexCheck {
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
-    new ReluctantQuantifierFinder(this::addIssue).visit(regexParseResult);
+    new PythonReluctantQuantifierFinder(this::addIssue).visit(regexParseResult);
+  }
+
+  private static class PythonReluctantQuantifierFinder extends ReluctantQuantifierFinder {
+
+    public PythonReluctantQuantifierFinder(RegexIssueReporter.ElementIssue regexElementIssueReporter) {
+      super(regexElementIssueReporter);
+    }
+
+    @Override
+    protected String makePossessiveOrGreedy(Quantifier quantifier, boolean possessive) {
+      return super.makePossessiveOrGreedy(quantifier, false);
+    }
   }
 }
 
