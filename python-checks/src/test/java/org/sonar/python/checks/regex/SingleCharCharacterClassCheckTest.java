@@ -20,6 +20,7 @@
 package org.sonar.python.checks.regex;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class SingleCharCharacterClassCheckTest {
@@ -28,5 +29,16 @@ public class SingleCharCharacterClassCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/singleCharCharacterClassCheck.py", new SingleCharCharacterClassCheck());
   }
-  
+
+  @Test
+  public void quickFixTest() {
+    var before = "import re\n" +
+      "changed = re.match(r\"[B]\", input)";
+    var after = "import re\n" +
+      "changed = re.match(r\"B\", input)";
+    var check = new SingleCharCharacterClassCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace this character class with the character itself");
+  }
+
 }
