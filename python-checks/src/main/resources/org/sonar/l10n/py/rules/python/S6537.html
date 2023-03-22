@@ -1,0 +1,25 @@
+<p>Octal escapes are included in a limited form. If the first digit is a 0, or if there are three octal digits, it is considered an octal escape.
+Otherwise, it is a group reference. As for string literals, octal escapes are always at most three digits in length.</p>
+<h2>Why is this an issue?</h2>
+<p>Using octal escapes in regular expressions can create confusion with backreferences. Octal escapes are sequences of digits that represent a
+character in the ASCII table, and they are sometimes used to represent special characters in regular expressions. However, they can be easily mistaken
+for backreferences, which are also sequences of digits that represent previously captured groups. This confusion can lead to unexpected results or
+errors in the regular expression.</p>
+<h2>How to fix it</h2>
+<p>Instead of using octal escapes, it is recommended to use other ways to represent special characters in regular expressions. For example, you can
+use Unicode escape sequences, hexadecimal escape sequences or character classes. By using these alternatives, you can avoid the confusion with
+backreferences and improve the readability of your regular expressions.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+import re
+
+match = re.match(r"\101", "A")
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+import re
+
+match = re.match(r"\x41", "A")
+</pre>
+
