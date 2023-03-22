@@ -26,9 +26,9 @@ import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
+import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.IamPrivilegeEscalationCheck;
 import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
-import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
 import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
 import org.sonar.python.checks.cdk.ResourceAccessPolicyCheck;
@@ -78,6 +78,7 @@ import org.sonar.python.checks.regex.GroupReplacementCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
+import org.sonar.python.checks.regex.PossessiveQuantifierContinuationCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
@@ -262,6 +263,7 @@ public final class CheckList {
       PublicNetworkAccessToCloudResourcesCheck.class,
       RaiseOutsideExceptCheck.class,
       RedundantJumpCheck.class,
+      PossessiveQuantifierContinuationCheck.class,
       RedundantRegexAlternativesCheck.class,
       ReluctantQuantifierCheck.class,
       RegexCheck.class,
