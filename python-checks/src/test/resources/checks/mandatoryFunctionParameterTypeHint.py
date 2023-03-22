@@ -36,11 +36,27 @@ def nested(param1: str):
         pass
     print("the end")
 
-def dynamic_param_list(*args, **kwargs): # Noncompliant 2
+def dynamic_param_list(param1, param2, *args, **kwargs): # Noncompliant 4
+    pass
+
+def dynamic_args(param:str, *args): # Noncompliant {{Add a type hint to this function parameter.}}
+                           #^^^^^
+    pass
+
+def dynamic_kwargs(param:int, **kwargs): # Noncompliant {{Add a type hint to this function parameter.}}
+                             #^^^^^^^^
+    pass
+
+def default_params(param=None): # Noncompliant {{Add a type hint to this function parameter.}}
+                  #^^^^^^^^^^
     pass
 
 def self_outside_cls(self): # Noncompliant {{Add a type hint to this function parameter.}}
                     #^^^^
+    pass
+
+def __init__(self, param1: str): # Noncompliant {{Add a type hint to this function parameter.}}
+            #^^^^
     pass
 
 class SuccessBar:
@@ -68,3 +84,4 @@ def union(param1: str|int):
 
 def success_dynamic_param_list(*args: str, **kwargs: int):
     pass
+

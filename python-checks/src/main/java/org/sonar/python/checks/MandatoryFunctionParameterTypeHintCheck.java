@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -38,40 +37,34 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      Optional.ofNullable(functionDef.parameters())
-        .ifPresent(parameterList -> removeSelfAndClassParameters(parameterList, (FunctionDefImpl) functionDef).forEach(parameter -> {
-          if (parameter.typeAnnotation() == null) {
-            ctx.addIssue(parameter, MESSAGE);
-          }
-        }));
+      FunctionDefImpl functionDef = (FunctionDefImpl) ctx.syntaxNode();
+      ParameterList parameterList = functionDef.parameters();
+      FunctionSymbol functionSymbol = functionDef.functionSymbol();
+      if (parameterList != null && functionSymbol != null) {
+        removeSelfAndClassParameters(parameterList, functionSymbol)
+          .forEach(parameter -> {
+            if (parameter.typeAnnotation() == null) {
+              ctx.addIssue(parameter, MESSAGE);
+            }
+          });
+      }
     });
   }
 
-  private Stream<Parameter> removeSelfAndClassParameters(ParameterList parameterList, FunctionDefImpl functionDefImpl) {
+  private static Stream<Parameter> removeSelfAndClassParameters(ParameterList parameterList, FunctionSymbol functionSymbol) {
     return parameterList.nonTuple().stream()
-      .filter(param -> !isASelfInstanceParameter(param, functionDefImpl) && !isAClassMethodParameter(param, functionDefImpl));
+      .filter(param -> !isASelfInstanceParameter(param, functionSymbol) && !isAClassMethodParameter(param, functionSymbol));
   }
 
-  private boolean isASelfInstanceParameter(Parameter parameter, FunctionDefImpl functionDefImpl) {
-    return hasName("self", parameter) && isAnInstanceMethod(functionDefImpl);
+  private static boolean isASelfInstanceParameter(Parameter parameter, FunctionSymbol functionSymbol) {
+    return hasName("self", parameter) && functionSymbol.isInstanceMethod();
   }
 
-  private boolean hasName(String name, Parameter parameter) {
+  private static boolean isAClassMethodParameter(Parameter parameter, FunctionSymbol functionSymbol) {
+    return hasName("cls", parameter) && functionSymbol.decorators().contains("classmethod");
+  }
+
+  private static boolean hasName(String name, Parameter parameter) {
     return Optional.ofNullable(parameter.name()).map(parameterName -> name.equals(parameterName.name())).orElse(false);
-  }
-
-  private boolean isAnInstanceMethod(FunctionDefImpl functionDefImpl) {
-    return Optional.ofNullable(functionDefImpl.functionSymbol())
-      .map(FunctionSymbol::isInstanceMethod).orElse(false);
-  }
-
-  private boolean isAClassMethodParameter(Parameter parameter, FunctionDefImpl functionDefImpl) {
-    return hasName("cls", parameter) && hasAClassMethodDecorator(functionDefImpl);
-  }
-
-  private boolean hasAClassMethodDecorator(FunctionDefImpl functionDefImpl) {
-    return Optional.ofNullable(functionDefImpl.functionSymbol())
-      .map(symbol -> symbol.decorators().contains("classmethod")).orElse(false);
   }
 }
