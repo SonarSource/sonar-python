@@ -20,6 +20,7 @@
 package org.sonar.python.checks.regex;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UnquantifiedNonCapturingGroupCheckTest {
@@ -28,4 +29,16 @@ public class UnquantifiedNonCapturingGroupCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/unquantifiedNonCapturingGroupCheck.py", new UnquantifiedNonCapturingGroupCheck());
   }
+
+  @Test
+  public void quickFixTest() {
+    var before = "import re\n" +
+      "re.match(r\"(?:number)abc\", input)";
+    var after = "import re\n" +
+      "re.match(r\"numberabc\", input)";
+    var check = new UnquantifiedNonCapturingGroupCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Unwrap subpattern");
+  }
+
 }

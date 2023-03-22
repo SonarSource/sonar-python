@@ -19,16 +19,49 @@
  */
 package org.sonar.python.checks.regex;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.python.regex.PythonRegexIssueLocation;
+import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
+import org.sonarsource.analyzer.commons.regex.ast.NonCapturingGroupTree;
+import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.finders.UnquantifiedNonCapturingGroupFinder;
 
 @Rule(key = "S6395")
 public class UnquantifiedNonCapturingGroupCheck extends AbstractRegexCheck {
+  public static final String QUICK_FIX_MESSAGE = "Unwrap subpattern";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
     new UnquantifiedNonCapturingGroupFinder(this::addIssue).visit(regexParseResult);
+  }
+
+  @Override
+  public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    var issue = super.addIssue(regexTree, message, cost, secondaries);
+
+    Optional.of(regexTree)
+      .filter(NonCapturingGroupTree.class::isInstance)
+      .map(NonCapturingGroupTree.class::cast)
+      .filter(group -> Objects.nonNull(group.getElement()))
+      .map(group -> {
+        var quickFixReplacement = group.getElement().getText();
+        var issueLocation = PythonRegexIssueLocation.preciseLocation(group, null);
+        var textEdit = new PythonTextEdit(quickFixReplacement,
+          issueLocation.startLine(),
+          issueLocation.startLineOffset(),
+          issueLocation.endLine(),
+          issueLocation.endLineOffset());
+        return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, textEdit);
+      }).ifPresent(issue::addQuickFix);
+
+    return issue;
   }
 }
