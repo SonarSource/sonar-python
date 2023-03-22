@@ -36,7 +36,7 @@ import org.sonarsource.analyzer.commons.regex.finders.UnquantifiedNonCapturingGr
 
 @Rule(key = "S6395")
 public class UnquantifiedNonCapturingGroupCheck extends AbstractRegexCheck {
-  public static final String QUICK_FIX_MESSAGE = "Unwrap this unnecessarily grouped subpattern";
+  public static final String QUICK_FIX_MESSAGE = "Unwrap subpattern";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {

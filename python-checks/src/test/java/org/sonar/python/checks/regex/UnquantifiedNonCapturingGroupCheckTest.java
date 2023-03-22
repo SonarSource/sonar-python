@@ -38,7 +38,7 @@ public class UnquantifiedNonCapturingGroupCheckTest {
       "re.match(r\"numberabc\", input)";
     var check = new UnquantifiedNonCapturingGroupCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Unwrap this unnecessarily grouped subpattern");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Unwrap subpattern");
   }
 
 }
