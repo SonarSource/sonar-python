@@ -38,7 +38,7 @@ public class SingleCharCharacterClassCheckTest {
       "changed = re.match(r\"B\", input)";
     var check = new SingleCharCharacterClassCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace this character class by the character itself");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace this character class with the character itself");
   }
 
 }

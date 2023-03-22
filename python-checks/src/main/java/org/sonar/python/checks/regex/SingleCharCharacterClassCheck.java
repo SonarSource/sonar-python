@@ -35,7 +35,7 @@ import org.sonarsource.analyzer.commons.regex.finders.SingleCharCharacterClassFi
 
 @Rule(key = "S6397")
 public class SingleCharCharacterClassCheck extends AbstractRegexCheck {
-  public static final String QUICK_FIX_MESSAGE = "Replace this character class by the character itself";
+  public static final String QUICK_FIX_MESSAGE = "Replace this character class with the character itself";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
