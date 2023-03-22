@@ -24,7 +24,6 @@ def exit(cls): # Noncompliant {{Add a type hint to this function parameter.}}
 def foobar(param1, param2): # Noncompliant 2
     pass
 
-
 class Bar:
     def __init__(self, param): # Noncompliant {{Add a type hint to this function parameter.}}
                       #^^^^^
