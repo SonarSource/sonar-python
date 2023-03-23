@@ -9,8 +9,21 @@ def foobar_multiline(
        #^^^^^^
     pass
 
+def format(number, decimal_sep, decimal_pos=None, grouping=0, thousand_sep='', # Noncompliant 5
+           force_grouping=False, use_l10n=None): # Noncompliant 2
+    pass
+
+def set(self): # Noncompliant {{Add a type hint to this function parameter.}}
+       #^^^^
+    pass
+
+def exit(cls): # Noncompliant {{Add a type hint to this function parameter.}}
+        #^^^
+    pass
+
 def foobar(param1, param2): # Noncompliant 2
     pass
+
 
 class Bar:
     def __init__(self, param): # Noncompliant {{Add a type hint to this function parameter.}}
@@ -84,4 +97,3 @@ def union(param1: str|int):
 
 def success_dynamic_param_list(*args: str, **kwargs: int):
     pass
-
