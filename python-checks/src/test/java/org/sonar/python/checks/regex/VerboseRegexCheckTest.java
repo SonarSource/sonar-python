@@ -82,6 +82,6 @@ public class VerboseRegexCheckTest {
       "re.match(r\"x+\", input)";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"x+\"");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");
   }
 }

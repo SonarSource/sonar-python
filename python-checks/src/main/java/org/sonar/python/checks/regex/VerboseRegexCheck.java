@@ -99,7 +99,6 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
   }
 
   private class PythonVerboseRegexRepetitionCheckVisitor extends RegexBaseVisitor {
-
     @Override
     public void visit(RegexTree tree) {
       tree.continuation().toRegexTree()
@@ -114,19 +113,16 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
           var treeText = tree.getText();
           var nextTreeText = repetition.getElement().getText();
           if (treeText.equals(nextTreeText)) {
-            var treeLocation = PythonRegexIssueLocation.preciseLocation(tree, null);
             var repetitionLocation = PythonRegexIssueLocation.preciseLocation(repetition, null);
-            var quickFixReplacement = treeText + "+";
-
-
+            var quickFixReplacement = "+";
             var textEdit = new PythonTextEdit(quickFixReplacement,
-              treeLocation.startLine(),
-              treeLocation.startLineOffset(),
+              repetitionLocation.startLine(),
+              repetitionLocation.startLineOffset(),
               repetitionLocation.endLine(),
               repetitionLocation.endLineOffset());
 
-            var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, quickFixReplacement, treeText + repetition.getText());
-            var issue = addIssue(tree, issueMessage, null, List.of(new RegexIssueLocation(repetition, issueMessage)));
+            var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, treeText + quickFixReplacement, treeText + repetition.getText());
+            var issue = addIssue(repetition, issueMessage, null, Collections.emptyList());
             issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
           }
         });
