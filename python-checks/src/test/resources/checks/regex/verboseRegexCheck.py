@@ -1,9 +1,10 @@
 import re
 
-
 def non_compliant(input):
     re.match(r"xx*", input) # Noncompliant {{Use simple repetition 'x+' instead of 'xx*'.}}
+    #          ^
     re.match(r"[ah-hz]", input) # Noncompliant {{Use simple character 'h' instead of 'h-h'.}}
+    #            ^^^
     re.match(r"[\s\S]", input, re.DOTALL)  # Noncompliant {{Use concise character class syntax '.' instead of '[\s\S]'.}}
     #          ^^^^^^
     re.match(r"[\d\D]", input)  # Noncompliant {{Use concise character class syntax '.' instead of '[\d\D]'.}}
@@ -46,3 +47,5 @@ def compliant(input):
     re.match(r"[\w\S]", input)
     re.match(r"[\d\S]", input)
     re.match(r"[\s\d]", input)
+    re.match(r"xx+", input)
+    re.match(r"xy*", input)

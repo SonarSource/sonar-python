@@ -34,6 +34,7 @@ import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.CharacterRangeTree;
+import org.sonarsource.analyzer.commons.regex.ast.Quantifier;
 import org.sonarsource.analyzer.commons.regex.ast.RegexBaseVisitor;
 import org.sonarsource.analyzer.commons.regex.ast.RegexSyntaxElement;
 import org.sonarsource.analyzer.commons.regex.ast.RegexTree;
@@ -107,6 +108,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
         .map(RepetitionTree.class::cast)
         .filter(repetition -> repetition.getQuantifier() instanceof SimpleQuantifier)
         .filter(repetition -> ((SimpleQuantifier) repetition.getQuantifier()).getKind() == SimpleQuantifier.Kind.STAR)
+        .filter(repetition -> repetition.getQuantifier().getModifier() == Quantifier.Modifier.GREEDY)
         .filter(repetition -> repetition.getRange().getBeginningOffset() > tree.getRange().getBeginningOffset())
         .ifPresent(repetition -> {
           var treeText = tree.getText();
@@ -116,6 +118,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
             var repetitionLocation = PythonRegexIssueLocation.preciseLocation(repetition, null);
             var quickFixReplacement = treeText + "+";
 
+
             var textEdit = new PythonTextEdit(quickFixReplacement,
               treeLocation.startLine(),
               treeLocation.startLineOffset(),
@@ -123,7 +126,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
               repetitionLocation.endLineOffset());
 
             var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, quickFixReplacement, treeText + repetition.getText());
-            var issue = addIssue(tree, issueMessage, null, Collections.emptyList());
+            var issue = addIssue(tree, issueMessage, null, List.of(new RegexIssueLocation(repetition, issueMessage)));
             issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
           }
         });
