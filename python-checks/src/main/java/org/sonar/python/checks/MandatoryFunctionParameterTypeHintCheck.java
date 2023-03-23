@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Optional;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -40,7 +41,7 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
       FunctionDefImpl functionDef = (FunctionDefImpl) ctx.syntaxNode();
       ParameterList parameterList = functionDef.parameters();
       FunctionSymbol functionSymbol = functionDef.functionSymbol();
-      if (parameterList != null && functionSymbol != null) {
+      if (parameterList != null ) {
         removeSelfAndClassParameters(parameterList, functionSymbol)
           .forEach(parameter -> {
             if (parameter.typeAnnotation() == null) {
@@ -51,17 +52,17 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
     });
   }
 
-  private static Stream<Parameter> removeSelfAndClassParameters(ParameterList parameterList, FunctionSymbol functionSymbol) {
+  private static Stream<Parameter> removeSelfAndClassParameters(ParameterList parameterList, @Nullable FunctionSymbol functionSymbol) {
     return parameterList.nonTuple().stream()
       .filter(param -> !isASelfInstanceParameter(param, functionSymbol) && !isAClassMethodParameter(param, functionSymbol));
   }
 
-  private static boolean isASelfInstanceParameter(Parameter parameter, FunctionSymbol functionSymbol) {
-    return hasName("self", parameter) && functionSymbol.isInstanceMethod();
+  private static boolean isASelfInstanceParameter(Parameter parameter, @Nullable FunctionSymbol functionSymbol) {
+    return hasName("self", parameter) && functionSymbol != null && functionSymbol.isInstanceMethod();
   }
 
-  private static boolean isAClassMethodParameter(Parameter parameter, FunctionSymbol functionSymbol) {
-    return hasName("cls", parameter) && functionSymbol.decorators().contains("classmethod");
+  private static boolean isAClassMethodParameter(Parameter parameter, @Nullable FunctionSymbol functionSymbol) {
+    return hasName("cls", parameter) && functionSymbol != null && functionSymbol.decorators().contains("classmethod");
   }
 
   private static boolean hasName(String name, Parameter parameter) {
