@@ -1,0 +1,17 @@
+<p>When a back reference in a regex refers to a capturing group that hasn’t been defined yet (or at all), it can never be matched and will fail with
+an <code>re.error</code> exception</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+import re
+pattern1 = re.compile(r"\1(.)") # Noncompliant, group 1 is defined after the back reference
+pattern2 = re.compile(r"(.)\2") # Noncompliant, group 2 isn't defined at all
+pattern3 = re.compile(r"(.)|\1") # Noncompliant, group 1 and the back reference are in different branches
+pattern4 = re.compile(r"(?P&lt;x&gt;.)|(?P=x)") # Noncompliant, group x and the back reference are in different branches
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+import re
+pattern1 = re.compile(r"(.)\1")
+pattern2 = re.compile(r"(?P&lt;x&gt;.)(?P=x)")
+</pre>
+
