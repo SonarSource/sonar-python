@@ -73,4 +73,15 @@ public class VerboseRegexCheckTest {
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"h\"");
   }
+
+  @Test
+  public void repetition() {
+    var before = "import re\n" +
+      "re.match(r\"xx*\", input)";
+    var after = "import re\n" +
+      "re.match(r\"x+\", input)";
+    var check = new VerboseRegexCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");
+  }
 }
