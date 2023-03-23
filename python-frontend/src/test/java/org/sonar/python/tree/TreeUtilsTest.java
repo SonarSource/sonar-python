@@ -582,6 +582,24 @@ public class TreeUtilsTest {
     assertThat(indent).isZero();
   }
 
+  @Test
+  public void  test_firstChild() {
+    var fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    var functionOpt = TreeUtils.firstChild(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(functionOpt).isPresent();
+
+    var classDefOpt = TreeUtils.firstChild(functionOpt.get(), t -> t.is(Kind.CLASSDEF));
+    assertThat(classDefOpt).isNotPresent();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

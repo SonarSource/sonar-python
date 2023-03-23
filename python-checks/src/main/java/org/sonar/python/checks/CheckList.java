@@ -79,6 +79,7 @@ import org.sonar.python.checks.regex.ImpossibleBackReferenceCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
+import org.sonar.python.checks.regex.NotExistedGroupUsagesCheck;
 import org.sonar.python.checks.regex.PossessiveQuantifierContinuationCheck;
 import org.sonar.python.checks.regex.RedosCheck;
 import org.sonar.python.checks.regex.OctalEscapeCheck;
@@ -252,6 +253,7 @@ public final class CheckList {
       NoSonarCommentCheck.class,
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
+      NotExistedGroupUsagesCheck.class,
       OctalEscapeCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,

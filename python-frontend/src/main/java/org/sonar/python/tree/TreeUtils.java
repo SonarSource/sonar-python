@@ -437,4 +437,16 @@ public class TreeUtils {
     return Optional.of(tree).filter(castToClass::isInstance).map(castToClass::cast);
   }
 
+  public static Optional<Tree> firstChild(Tree tree, Predicate<Tree> filter) {
+    if (filter.test(tree)) {
+      return Optional.of(tree);
+    }
+    return tree.children()
+      .stream()
+      .map(c -> firstChild(c, filter))
+      .filter(Optional::isPresent)
+      .findFirst()
+      .map(Optional::get);
+  }
+
 }
