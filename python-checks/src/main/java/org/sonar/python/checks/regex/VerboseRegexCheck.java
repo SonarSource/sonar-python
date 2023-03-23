@@ -50,6 +50,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
   public static final String QUICK_FIX_FORMAT = "Replace with \"%s\"";
   public static final String REDUNDANT_RANGE_MESSAGE = "Use simple character '%s' instead of '%s'.";
   public static final String REDUNDANT_REPETITION_MESSAGE = "Use simple repetition '%s' instead of '%s'.";
+  public static final String REDUNDANT_REPETITION_SECONDARY_LOCATION_MESSAGE = "The repeated element.";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
@@ -122,7 +123,8 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
               repetitionLocation.endLineOffset());
 
             var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, treeText + quickFixReplacement, treeText + repetition.getText());
-            var issue = addIssue(repetition, issueMessage, null, Collections.emptyList());
+            var issue = addIssue(repetition, issueMessage, null,
+              List.of(new RegexIssueLocation(tree, REDUNDANT_REPETITION_SECONDARY_LOCATION_MESSAGE)));
             issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
           }
         });
