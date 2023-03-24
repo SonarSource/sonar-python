@@ -229,6 +229,7 @@ public final class CheckList {
       LoggersConfigurationCheck.class,
       LongIntegerWithLowercaseSuffixUsageCheck.class,
       LoopExecutingAtMostOnceCheck.class,
+      MandatoryFunctionParameterTypeHintCheck.class,
       MandatoryFunctionReturnTypeHintCheck.class,
       MethodNameCheck.class,
       MethodShouldBeStaticCheck.class,
