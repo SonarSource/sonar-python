@@ -46,7 +46,7 @@ public class RedosCheck extends AbstractRegexCheck {
   private static final String POLY = "polynomial";
   private static final Set<String> FULL_MATCH_METHODS = Set.of("fullmatch");
   private static final Set<String> PARTIAL_MATCH_METHODS = Set.of("findall", "search", "split", "sub", "subn");
-  private static final String COMPILE = "compile";
+  private static final String COMPILE_METHOD = "compile";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
@@ -66,7 +66,7 @@ public class RedosCheck extends AbstractRegexCheck {
     if (PARTIAL_MATCH_METHODS.contains(symbol.name())) {
       return MatchType.PARTIAL;
     }
-    if (COMPILE.equals(symbol.name())) {
+    if (COMPILE_METHOD.equals(symbol.name())) {
       return matchTypeOfCompiledPattern(regexFunctionCall);
     }
     return MatchType.UNKNOWN;
@@ -74,7 +74,7 @@ public class RedosCheck extends AbstractRegexCheck {
 
   private static MatchType matchTypeOfCompiledPattern(CallExpression regexFunctionCall) {
     return Optional.ofNullable(TreeUtils.firstAncestorOfKind(regexFunctionCall, Tree.Kind.ASSIGNMENT_STMT))
-      .map(t -> ((AssignmentStatement) t))
+      .map(AssignmentStatement.class::cast)
       .map(a -> a.lhsExpressions().get(0).expressions().get(0))
       .filter(lhs -> lhs.is(Tree.Kind.NAME))
       .map(n -> (Name) n)
@@ -107,13 +107,13 @@ public class RedosCheck extends AbstractRegexCheck {
   }
 
   private static Predicate<Tree> isCallToMethod(Set<String> methodNames) {
-    return t -> {
-      if (!t.is(Tree.Kind.CALL_EXPR)) {
-        return false;
-      }
-      Symbol symbol = ((CallExpression) t).calleeSymbol();
-      return symbol != null && methodNames.contains(symbol.name());
-    };
+    return tree -> Optional.ofNullable(tree)
+      .filter(t -> t.is(Tree.Kind.CALL_EXPR))
+      .map(CallExpression.class::cast)
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::name)
+      .filter(methodNames::contains)
+      .isPresent();
   }
 
   static class PythonRedosFinder extends RedosFinder {
