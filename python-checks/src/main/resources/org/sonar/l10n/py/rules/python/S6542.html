@@ -1,0 +1,32 @@
+<h2>Why is this an issue?</h2>
+<p>The type hint <code>Any</code> represents any possible Python type, on which all operations are possible. This conveys the information that all
+operations could be possible on a value annotated with <code>Any</code>, making the value dynamically-typed.</p>
+<p><code>Any</code> as a type hint does not provide any information about the expected type of the variable or parameter, essentially losing the
+benefits of type hinting. This can make the code less clear and harder to understand and will reduce the code insight capabilities of IDEs and static
+analysis tools.</p>
+<h2>How to fix it</h2>
+<p>Replace this use of <code>Any</code> with a more specific type hint.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+def foo(arg: Any) -&gt; Any:
+    if isinstance(arg, int):
+        return arg + 1
+    else:
+        return arg.upper()
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+def foo(arg: int | str) -&gt; int | str:
+    if isinstance(arg, int):
+        return arg + 1
+    else:
+        return arg.upper()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/typing.html#the-any-type">Python3 documentation on Any</a> </li>
+  <li> <a href="https://mypy.readthedocs.io/en/stable/kinds_of_types.html#the-any-type">Mypy documentation on the Any type</a> </li>
+</ul>
+

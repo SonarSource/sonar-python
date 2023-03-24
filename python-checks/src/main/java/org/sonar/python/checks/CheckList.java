@@ -336,6 +336,7 @@ public final class CheckList {
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
       UselessStatementCheck.class,
+      UseOfAnyAsTypeHintCheck.class,
       UseOfEmptyReturnValueCheck.class,
       VerboseRegexCheck.class,
       VerifiedSslTlsCertificateCheck.class,
