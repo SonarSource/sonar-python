@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -77,6 +78,7 @@ public class SubscriptionVisitorTest {
         context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
           assertThat(ctx.cacheContext()).isSameAs(cache);
           assertThat(ctx.pythonFile()).isEqualTo(pythonFile);
+          assertThat(ctx.currentPythonVersions()).isEqualTo(ProjectPythonVersion.currentVersions());
         });
       }
     };

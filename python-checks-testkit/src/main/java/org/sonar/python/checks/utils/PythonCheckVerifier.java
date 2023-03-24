@@ -78,15 +78,25 @@ public class PythonCheckVerifier {
     createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertNoIssues();
   }
 
+  public static List<PreciseIssue> issues(String path, PythonCheck check) {
+    File file = new File(path);
+    PythonVisitorContext context = createContext(file, ProjectLevelSymbolTable.empty(), null);
+    return scanFileForIssues(check, context);
+  }
+
   private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
-      PythonVisitorContext context = baseDir != null
-        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
-        : TestPythonVisitorRunner.createContext(file);
+      PythonVisitorContext context = createContext(file, projectLevelSymbolTable, baseDir);
       addFileIssues(check, multiFileVerifier, file, context);
     }
     return multiFileVerifier;
+  }
+
+  private static PythonVisitorContext createContext(File file, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
+    return baseDir != null
+      ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
+      : TestPythonVisitorRunner.createContext(file);
   }
 
   private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context) {

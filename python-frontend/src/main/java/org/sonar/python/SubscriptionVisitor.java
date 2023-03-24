@@ -28,14 +28,17 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -151,6 +154,11 @@ public class SubscriptionVisitor {
       PythonCheck.PreciseIssue newIssue = new PythonCheck.PreciseIssue(check, issueLocation);
       pythonVisitorContext.addIssue(newIssue);
       return newIssue;
+    }
+
+    @Override
+    public Set<PythonVersionUtils.Version> currentPythonVersions() {
+      return Collections.unmodifiableSet(ProjectPythonVersion.currentVersions());
     }
 
     @Override
