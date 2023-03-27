@@ -40,6 +40,10 @@ class MyClass:
         pass
 
 
+# There is no clear recommendation on this case, so we will just not handle them for the time being.
+def union_in_generic_type() -> list[Union[int, str]]: # FN
+    pass
+
 def ok(param: int | str) -> int | str:
     variable : int | str
     variable = param
