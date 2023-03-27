@@ -1,0 +1,69 @@
+<p>Most of the regular expression engines use <code>backtracking</code> to try all possible execution paths of the regular expression when evaluating
+an input, in some cases it can cause performance issues, called <code>catastrophic backtracking</code> situations. In the worst case, the complexity
+of the regular expression is exponential in the size of the input, this means that a small carefully-crafted input (like 20 chars) can trigger
+<code>catastrophic backtracking</code> and cause a denial of service of the application. Super-linear regex complexity can lead to the same impact too
+with, in this case, a large carefully-crafted input (thousands chars).</p>
+<p>This rule determines the runtime complexity of a regular expression and informs you of the complexity if it is not linear.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> The input is user-controlled. </li>
+  <li> The input size is not restricted to a small number of characters. </li>
+  <li> There is no timeout in place to limit the regex evaluation time. </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>To avoid <code>catastrophic backtracking</code> situations, make sure that none of the following conditions apply to your regular expression.</p>
+<p>In all of the following cases, catastrophic backtracking can only happen if the problematic part of the regex is followed by a pattern that can
+fail, causing the backtracking to actually happen. Note that when performing a full match (e.g. using <code>re.fullmatch</code>), the end of the regex
+counts as a pattern that can fail because it will only succeed when the end of the string is reached.</p>
+<ul>
+  <li> If you have a non-possessive repetition <code>r*</code> or <code>r*?</code>, such that the regex <code>r</code> could produce different
+  possible matches (of possibly different lengths) on the same input, the worst case matching time can be exponential. This can be the case if
+  <code>r</code> contains optional parts, alternations or additional repetitions (but not if the repetition is written in such a way that there’s only
+  one way to match it). </li>
+  <li> If you have multiple non-possessive repetitions that can match the same contents and are consecutive or are only separated by an optional
+  separator or a separator that can be matched by both of the repetitions, the worst case matching time can be polynomial (O(n^c) where c is the
+  number of problematic repetitions). For example <code>a*b*</code> is not a problem because <code>a*</code> and <code>b*</code> match different
+  things and <code>a*_a*</code> is not a problem because the repetitions are separated by a <code>'_'</code> and can’t match that <code>'_'</code>.
+  However, <code>a*a*</code> and <code>.*_.*</code> have quadratic runtime. </li>
+  <li> If you’re performing a partial match (such as by using <code>re.search</code>, <code>re.split</code>, <code>re.findall</code> etc.) and the
+  regex is not anchored to the beginning of the string, quadratic runtime is especially hard to avoid because whenever a match fails, the regex engine
+  will try again starting at the next index. This means that any unbounded repetition (even a possessive one), if it’s followed by a pattern that can
+  fail, can cause quadratic runtime on some inputs. For example <code>re.split(r"\s*,", my_str)</code> will run in quadratic time on strings that
+  consist entirely of spaces (or at least contain large sequences of spaces, not followed by a comma). </li>
+</ul>
+<p>In order to rewrite your regular expression without these patterns, consider the following strategies:</p>
+<ul>
+  <li> If applicable, define a maximum number of expected repetitions using the bounded quantifiers, like <code>{1,5}</code> instead of <code>+</code>
+  for instance. </li>
+  <li> Refactor <code>nested quantifiers</code> to limit the number of way the inner group can be matched by the outer quantifier, for instance this
+  nested quantifier situation <code>(ba+)+</code> doesn’t cause performance issues, indeed, the inner group can be matched only if there exists
+  exactly one <code>b</code> char per repetition of the group. </li>
+  <li> Optimize regular expressions with <code>possessive quantifiers</code> and <code>atomic grouping</code> (available since Python 3.11). </li>
+  <li> Use negated character classes instead of <code>.</code> to exclude separators where applicable. For example the quadratic regex
+  <code>.*_.*</code> can be made linear by changing it to <code>[^_]*_.*</code> </li>
+</ul>
+<p>Sometimes it’s not possible to rewrite the regex to be linear while still matching what you want it to match. Especially when using partial
+matches, for which it is quite hard to avoid quadratic runtimes. In those cases consider the following approaches:</p>
+<ul>
+  <li> Solve the problem without regular expressions </li>
+  <li> Use an alternative non-backtracking regex implementations such as Google’s <a href="https://github.com/google/re2">RE2</a>. </li>
+  <li> Use multiple passes. This could mean pre- and/or post-processing the string manually before/after applying the regular expression to it or
+  using multiple regular expressions. One example of this would be to replace <code>re.split("\s*,\s*", my_str)</code> with <code>re.split(",",
+  my_str)</code> and then trimming the spaces from the strings as a second step. </li>
+</ul>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/400">MITRE, CWE-400</a> - Uncontrolled Resource Consumption </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/1333">MITRE, CWE-1333</a> - Inefficient Regular Expression Complexity </li>
+  <li> <a href="https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS">owasp.org</a> - OWASP Regular expression Denial
+  of Service - ReDoS </li>
+  <li> <a
+  href="https://web.archive.org/web/20220506215733/https://stackstatus.net/post/147710624694/outage-postmortem-july-20-2016">stackstatus.net(archived)</a> - Outage Postmortem - July 20, 2016 </li>
+  <li> <a href="https://www.regular-expressions.info/catastrophic.html">regular-expressions.info</a> - Runaway Regular Expressions: Catastrophic
+  Backtracking </li>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/backtracking-in-regular-expressions#backtracking-with-nested-optional-quantifiers">docs.microsoft.com</a> - Backtracking with Nested Optional Quantifiers </li>
+</ul>
+

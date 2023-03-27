@@ -80,6 +80,7 @@ import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
 import org.sonar.python.checks.regex.PossessiveQuantifierContinuationCheck;
+import org.sonar.python.checks.regex.RedosCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
@@ -265,6 +266,7 @@ public final class CheckList {
       PubliclyWritableDirectoriesCheck.class,
       PublicNetworkAccessToCloudResourcesCheck.class,
       RaiseOutsideExceptCheck.class,
+      RedosCheck.class,
       RedundantJumpCheck.class,
       PossessiveQuantifierContinuationCheck.class,
       RedundantRegexAlternativesCheck.class,
