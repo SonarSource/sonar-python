@@ -43,6 +43,10 @@ class Bar:
                          #^^^^^
         pass
 
+    def __new__(self, param2): # Noncompliant {{Add a type hint to this function parameter.}}
+                     #^^^^^^
+        pass
+
 def nested(param1: str):
     def foo(param2): # Noncompliant {{Add a type hint to this function parameter.}}
            #^^^^^^
@@ -72,12 +76,20 @@ def __init__(self, param1: str): # Noncompliant {{Add a type hint to this functi
             #^^^^
     pass
 
+
 class SuccessBar:
     def __init__(self, param1: str):
         pass
 
     @classmethod
     def class_method(cls):
+        pass
+
+    @classmethod
+    def class_method_first_param(class_param, param1: str, param2:int):
+        pass
+
+    def __new__(cls, param2:str):
         pass
 
     def not_class_method(cls: str):
@@ -92,8 +104,24 @@ class SuccessBar:
     def foobar(param1: str, param2: int):
         pass
 
+    def __enter__(self):
+        pass
+
+    def __exit__(self):
+        pass
+
 def union(param1: str|int):
     pass
 
 def success_dynamic_param_list(*args: str, **kwargs: int):
     pass
+
+def success_slash(param1: str, /, param2:int):
+    pass
+
+def success_star(param1: str, *, param2:int):
+    pass
+
+def success_underscore(_):
+    pass
+
