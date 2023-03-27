@@ -21,12 +21,12 @@ package org.sonar.python.checks.regex;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -58,25 +59,28 @@ public class NotExistedGroupUsagesCheck extends AbstractRegexCheck {
   );
   private static final Set<String> COMPILE_FUNCTION_NAMES = Set.of("re.compile");
 
-  public static final String GROUP_DOESNT_EXISTS_MESSAGE = "Group doesn't exists";
+
+  public static final String GROUP_NAME_DOESNT_EXISTS_MESSAGE_FORMAT = "There is no group named '%s' in the regular expression.";
+  public static final String GROUP_NUMBER_DOESNT_EXISTS_MESSAGE_FORMAT = "There is no group with number '%d' in the regular expression.";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
     var groupsCollector = new KnownGroupsCollector();
     groupsCollector.visit(regexParseResult);
 
-    var usedGroups = new HashSet<String>();
-
     getCallExpressionResultUsages(regexFunctionCall, COMPILE_FUNCTION_NAMES)
+//      .filter(patternUsages -> patternUsages.size() == 2)
       .map(patternUsages -> getUsagesQualifiedExpressions(patternUsages, "typing.Pattern.match")
         .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.ASSIGNMENT_STMT))
         .filter(Objects::nonNull)
         .map(AssignmentStatement.class::cast)
         .map(NotExistedGroupUsagesCheck::getAssignmentResultUsages)
+        // To avoid FP apply rule only if there is only one match assignment
+        .filter(NotExistedGroupUsagesCheck::isSingleAssignment)
         .flatMap(Collection::stream)
         .collect(Collectors.toList()))
       .or(() -> getCallExpressionResultUsages(regexFunctionCall, MATCH_CREATION_FUNCTION_NAMES))
-      .ifPresent(matchUsages -> checkGroupAccesses(regexParseResult, groupsCollector, matchUsages, usedGroups));
+      .ifPresent(matchUsages -> checkGroupAccesses(regexParseResult, groupsCollector, matchUsages));
   }
 
   private static Optional<List<Usage>> getCallExpressionResultUsages(CallExpression regexFunctionCall, Set<String> expressionFQNs) {
@@ -99,7 +103,7 @@ public class NotExistedGroupUsagesCheck extends AbstractRegexCheck {
       .count();
   }
 
-  private void checkGroupAccesses(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, List<Usage> matchUsages, Set<String> usedGroups) {
+  private void checkGroupAccesses(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, List<Usage> matchUsages) {
     getUsagesQualifiedExpressions(matchUsages, "typing.Match.group")
       .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.CALL_EXPR))
       .filter(Objects::nonNull)
@@ -109,22 +113,35 @@ public class NotExistedGroupUsagesCheck extends AbstractRegexCheck {
       .filter(RegularArgument.class::isInstance)
       .map(RegularArgument.class::cast)
       .map(RegularArgument::expression)
-      .forEach(argumentExpression -> {
-        var hasGroup = true;
-        if (argumentExpression.is(Tree.Kind.STRING_LITERAL)) {
-          var groupName = ((StringLiteral) argumentExpression).trimmedQuotesValue();
-          hasGroup = groupsCollector.byName.containsKey(groupName);
-          usedGroups.add(groupName);
-        } else if (argumentExpression.is(Tree.Kind.NUMERIC_LITERAL)) {
-          var groupNumber = ((NumericLiteral) argumentExpression).valueAsLong();
-          hasGroup = groupsCollector.byNumber.containsKey(groupNumber);
-        }
-        if (!hasGroup) {
-          IssueLocation issueLocation = PythonRegexIssueLocation.preciseLocation(regexParseResult.getResult(), GROUP_DOESNT_EXISTS_MESSAGE);
-          regexContext.addIssue(argumentExpression, GROUP_DOESNT_EXISTS_MESSAGE)
-            .secondary(issueLocation);
-        }
+      .forEach(argumentExpression -> checkGroupNameOrNumberExists(regexParseResult, groupsCollector, argumentExpression));
+  }
+
+  private void checkGroupNameOrNumberExists(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, Expression argumentExpression) {
+    Optional.of(argumentExpression)
+      .filter(StringLiteral.class::isInstance)
+      .map(StringLiteral.class::cast)
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter(Predicate.not(groupsCollector.byName::containsKey))
+      .map(NotExistedGroupUsagesCheck::getMessage)
+      .or(() -> Optional.of(argumentExpression)
+        .filter(NumericLiteral.class::isInstance)
+        .map(NumericLiteral.class::cast)
+        .map(NumericLiteral::valueAsLong)
+        .filter(Predicate.not(groupsCollector.byNumber::containsKey))
+        .map(NotExistedGroupUsagesCheck::getMessage))
+      .ifPresent(message -> {
+        IssueLocation issueLocation = PythonRegexIssueLocation.preciseLocation(regexParseResult.getResult(), message);
+        regexContext.addIssue(argumentExpression, message)
+          .secondary(issueLocation);
       });
+  }
+
+  private static String getMessage(String groupName) {
+    return String.format(GROUP_NAME_DOESNT_EXISTS_MESSAGE_FORMAT, groupName);
+  }
+
+  private static String getMessage(Long groupNumber) {
+    return String.format(GROUP_NUMBER_DOESNT_EXISTS_MESSAGE_FORMAT, groupNumber);
   }
 
   private static Stream<QualifiedExpression> getUsagesQualifiedExpressions(List<Usage> usages, String fullyQualifiedName) {
