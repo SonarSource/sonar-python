@@ -19,14 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Parameter;
-import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.tree.TreeUtils;
@@ -38,25 +34,15 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
-      if (isTypeAny(typeAnnotation)) {
-        ctx.addIssue(typeAnnotation.expression(), MESSAGE);
-      }
-      checkForAnyInParameters(ctx, functionDef.parameters());
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
+    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
+    context.registerSyntaxNodeConsumer(Tree.Kind.VARIABLE_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
   }
 
-  private static void checkForAnyInParameters(SubscriptionContext ctx, @Nullable ParameterList parameterList) {
-    if (parameterList != null) {
-      List<Parameter> parameters = parameterList.nonTuple();
-      parameters.forEach(parameter -> {
-        TypeAnnotation typeAnnotation = parameter.typeAnnotation();
-        if (isTypeAny(typeAnnotation)) {
-          ctx.addIssue(typeAnnotation.expression(), MESSAGE);
-        }
-      });
+  private static void checkForAnyInTypeHint(SubscriptionContext ctx){
+    TypeAnnotation typeAnnotation = (TypeAnnotation) ctx.syntaxNode();
+    if (isTypeAny(typeAnnotation)) {
+      ctx.addIssue(typeAnnotation.expression(), MESSAGE);
     }
   }
 

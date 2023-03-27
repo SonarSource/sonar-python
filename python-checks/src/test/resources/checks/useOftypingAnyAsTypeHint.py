@@ -6,6 +6,8 @@ def foo(test: str, param: typing.Any) -> str: # Noncompliant {{Use a more specif
 
 def foobar() -> typing.Any: # Noncompliant {{Use a more specific type than `Any` for this type hint.}}
                #^^^^^^^^^^
+    my_var: typing.Any # Noncompliant
+           #^^^^^^^^^^
     pass
 
 def multiple_hints(param: typing.Any) -> typing.Any: # Noncompliant 2
@@ -17,6 +19,10 @@ def multiline(param: typing.Any, # Noncompliant {{Use a more specific type than 
     pass
 
 class Bar:
+
+    my_var: typing.Any # Noncompliant
+           #^^^^^^^^^^
+    correct_var: str
 
     def foo(test: int, param: typing.Any) -> str: # Noncompliant {{Use a more specific type than `Any` for this type hint.}}
                              #^^^^^^^^^^
