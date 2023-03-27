@@ -29,7 +29,7 @@ import org.sonarsource.analyzer.commons.regex.ast.RegexBaseVisitor;
 @Rule(key = "S6537")
 public class OctalEscapeCheck extends AbstractRegexCheck {
 
-  public static final String MESSAGE = "Replace with hexadecimal code";
+  public static final String MESSAGE = "Consider replacing this octal escape sequence with a Unicode or hexadecimal sequence instead.";
 
   @Override
   public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {

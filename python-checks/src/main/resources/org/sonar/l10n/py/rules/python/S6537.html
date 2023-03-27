@@ -1,5 +1,5 @@
-<p>Octal escapes are included in a limited form. If the first digit is a 0, or if there are three octal digits, it is considered an octal escape.
-Otherwise, it is a group reference. As for string literals, octal escapes are always at most three digits in length.</p>
+<p>Octal escape sequences, when used in regular expressions, can easily be mistaken for backreferences. When the use of such sequence is intentional,
+it is generally better to replace them with Unicode or hexadecimal sequence to avoid any ambiguity.</p>
 <h2>Why is this an issue?</h2>
 <p>Using octal escapes in regular expressions can create confusion with backreferences. Octal escapes are sequences of digits that represent a
 character in the ASCII table, and they are sometimes used to represent special characters in regular expressions. However, they can be easily mistaken
