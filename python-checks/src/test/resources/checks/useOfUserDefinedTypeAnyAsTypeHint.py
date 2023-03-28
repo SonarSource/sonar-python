@@ -3,6 +3,8 @@ from typing import Any as _Any
 class Any:
     my_var: Any
 
+    no_hint_var = "test"
+
     def __new__(cls) -> Any:
         return object.__new__(cls)
 
@@ -18,3 +20,5 @@ def proper_any(param: _Any) -> _Any: # Noncompliant 2
                       #^^^^
     pass
 
+def success_without_hint(param):
+    pass

@@ -24,6 +24,8 @@ class Bar:
            #^^^^^^^^^^
     correct_var: str
 
+    no_hint_var = "test"
+
     def foo(test: int, param: typing.Any) -> str: # Noncompliant {{Use a more specific type than `Any` for this type hint.}}
                              #^^^^^^^^^^
         pass
@@ -33,4 +35,7 @@ class Bar:
         pass
 
 def success(param: str | int) -> None:
+    pass
+
+def success_without_hint(param):
     pass

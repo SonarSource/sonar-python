@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -39,7 +40,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.VARIABLE_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
   }
 
-  private static void checkForAnyInTypeHint(SubscriptionContext ctx){
+  private static void checkForAnyInTypeHint(SubscriptionContext ctx) {
     TypeAnnotation typeAnnotation = (TypeAnnotation) ctx.syntaxNode();
     if (isTypeAny(typeAnnotation)) {
       ctx.addIssue(typeAnnotation.expression(), MESSAGE);
@@ -47,6 +48,8 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {
-    return typeAnnotation != null && "typing.Any".equals(TreeUtils.fullyQualifiedNameFromExpression(typeAnnotation.expression()));
+    return Optional.ofNullable(typeAnnotation)
+      .map(annotation -> "typing.Any".equals(TreeUtils.fullyQualifiedNameFromExpression(annotation.expression())))
+      .orElse(false);
   }
 }

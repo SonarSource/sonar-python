@@ -9,6 +9,8 @@ def foobar() -> Any: # Noncompliant {{Use a more specific type than `Any` for th
     my_var: Any # Noncompliant
            #^^^
 
+    no_hint_var = 1
+
     pass
 
 def multiple_hints(param: Any) -> Any: # Noncompliant 2
@@ -24,6 +26,8 @@ class Bar:
     my_var: Any # Noncompliant
            #^^^
 
+    no_hint_var = "test"
+
     def foo(test: int, param: Any) -> str: # Noncompliant {{Use a more specific type than `Any` for this type hint.}}
                              #^^^
         pass
@@ -33,4 +37,7 @@ class Bar:
         pass
 
 def success(param: str | int) -> None:
+    pass
+
+def success_without_hint(param):
     pass
