@@ -38,6 +38,8 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
 
   private static final String MESSAGE = "Add a type hint to this function parameter.";
 
+  private static final List<String> SPECIAL_TOKEN_PARAMS = Arrays.asList("*", "/");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -49,15 +51,20 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
         for (int i = 0; i < parameters.size(); i++) {
           Parameter parameter = parameters.get(i);
           boolean isFirstParameter = i == 0;
-          if (!isASelfInstanceParameter(parameter, functionSymbol) &&
-            !isFirstParamOfClassAnnotatedMethod(functionSymbol, isFirstParameter) &&
-            !isFirstParamOfNewMethod(functionSymbol, isFirstParameter) &&
-            !isSpecialCharParameter(parameter) && parameter.typeAnnotation() == null) {
+          if (shouldRaiseIssue(functionSymbol, parameter, isFirstParameter)) {
             ctx.addIssue(parameter, MESSAGE);
           }
         }
       }
     });
+  }
+
+  private static boolean shouldRaiseIssue(@Nullable FunctionSymbol functionSymbol, Parameter parameter, boolean isFirstParameter) {
+    return !isASelfInstanceParameter(parameter, functionSymbol) &&
+      !isFirstParamOfClassAnnotatedMethod(functionSymbol, isFirstParameter) &&
+      !isFirstParamOfNewMethod(functionSymbol, isFirstParameter) &&
+      !isSpecialCharParameter(parameter) &&
+      parameter.typeAnnotation() == null;
   }
 
   private static boolean isASelfInstanceParameter(Parameter parameter, @Nullable FunctionSymbol functionSymbol) {
@@ -72,13 +79,16 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
     return functionSymbol != null && "__new__".equals(functionSymbol.name()) && isFirstParameter;
   }
 
-  private static final List<String> specialTokenParams = Arrays.asList("*", "/");
-
   private static boolean isSpecialCharParameter(Parameter parameter) {
     Name parameterName = parameter.name();
-    Token token = parameter.starToken();
-    return (hasName("_", parameter)) ||
-      (parameterName == null && token != null && specialTokenParams.contains(token.value()));
+    Token maybeToken = parameter.starToken();
+    return (hasName("_", parameter)) || (parameterName == null && isSpecialTokenParameter(maybeToken));
+  }
+
+  private static Boolean isSpecialTokenParameter(@Nullable Token maybeToken) {
+    return Optional.ofNullable(maybeToken)
+      .map(token -> SPECIAL_TOKEN_PARAMS.contains(token.value()))
+      .orElse(false);
   }
 
   private static boolean hasName(String name, Parameter parameter) {
