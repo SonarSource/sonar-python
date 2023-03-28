@@ -51,7 +51,7 @@ public interface SubscriptionContext {
    * List of Python versions this project is compatible with.
    */
   @Beta
-  Set<PythonVersionUtils.Version> currentPythonVersions();
+  Set<PythonVersionUtils.Version> sourcePythonVersions();
 
   /**
    * Returns symbols declared in stub files (e.g. typeshed) used in the analyzed project.

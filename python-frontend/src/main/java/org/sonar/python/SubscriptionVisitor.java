@@ -157,7 +157,7 @@ public class SubscriptionVisitor {
     }
 
     @Override
-    public Set<PythonVersionUtils.Version> currentPythonVersions() {
+    public Set<PythonVersionUtils.Version> sourcePythonVersions() {
       return Collections.unmodifiableSet(ProjectPythonVersion.currentVersions());
     }
 
