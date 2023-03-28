@@ -1,0 +1,7 @@
+src/type_hints_noncompliant.py:11:11: error: Argument 1 to "greet_all" has incompatible type "List[int]"; expected "List[str]"  [arg-type]
+src/type_hints_noncompliant.py:13:1: error: Function is missing a type annotation  [no-untyped-def]
+src/type_hints_noncompliant.py:16:1: error: Cannot find implementation or library stub for module named "unknown"  [import]
+src/type_hints_noncompliant.py:16:1: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+src/type_hints_noncompliant.py:19:11: error: Call to untyped function "no_type_hints" in typed context  [no-untyped-call]
+src/type_hints_noncompliant.py:24: error: Unused "type: ignore" comment
+Found 5 errors in 1 file (checked 1 source file)

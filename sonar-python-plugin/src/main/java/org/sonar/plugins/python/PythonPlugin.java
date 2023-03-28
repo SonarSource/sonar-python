@@ -33,6 +33,8 @@ import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
+import org.sonar.plugins.python.mypy.MypyRulesDefinition;
+import org.sonar.plugins.python.mypy.MypySensor;
 import org.sonar.plugins.python.pylint.PylintRulesDefinition;
 import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -82,6 +84,7 @@ public class PythonPlugin implements Plugin {
       addPylintExtensions(context);
       addBanditExtensions(context);
       addFlake8Extensions(context);
+      addMypyExtensions(context);
     }
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
@@ -182,6 +185,19 @@ public class PythonPlugin implements Plugin {
         .multiValues(true)
         .build(),
       Flake8RulesDefinition.class);
+  }
+
+  private static void addMypyExtensions(Context context) {
+    context.addExtensions(MypySensor.class,
+      PropertyDefinition.builder(MypySensor.REPORT_PATH_KEY)
+        .name("Mypy Report Files")
+        .description("Paths (absolute or relative) to report files with Flake8 issues.")
+        .category(EXTERNAL_ANALYZERS_CATEGORY)
+        .subCategory(PYTHON_CATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build(),
+      MypyRulesDefinition.class);
   }
 
   static class SonarLintPluginAPIManager {

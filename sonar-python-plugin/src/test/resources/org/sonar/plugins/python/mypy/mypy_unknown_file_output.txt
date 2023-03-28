@@ -1,0 +1,7 @@
+mypy/unknown.py:2:12:2:12: error: Incompatible return value type (got "int", expected "str")  [return-value]
+mypy/type_hints_noncompliant.py:11:11:11:14: error: Argument 1 to "greet_all" has incompatible type "List[int]"; expected "List[str]"  [arg-type]
+mypy/type_hints_noncompliant.py:13:1:14:14: error: Function is missing a type annotation  [no-untyped-def]
+mypy/type_hints_noncompliant.py:16:1:16:1: error: Module "unknown" has no attribute "unknown"  [attr-defined]
+mypy/type_hints_noncompliant.py:19:11:19:26: error: Call to untyped function "no_type_hints" in typed context  [no-untyped-call]
+mypy/type_hints_noncompliant.py:24: error: Unused "type: ignore" comment
+Found 6 errors in 2 files (checked 2 source files)
