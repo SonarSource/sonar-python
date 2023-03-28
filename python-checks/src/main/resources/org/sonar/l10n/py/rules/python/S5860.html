@@ -1,7 +1,8 @@
 <p>Why use named groups only to never use any of them later on in the code?</p>
 <p>This rule raises issues every time named groups are:</p>
 <ul>
-  <li> referenced while not defined. </li>
+  <li> referenced while not defined; </li>
+  <li> defined but called elsewhere in the code by their number instead. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -10,8 +11,8 @@ import re
 def foo():
     pattern = re.compile(r"(?P&lt;a&gt;.)")
     matches = pattern.match("abc")
-    g = matches.group("b") # Noncompliant - group "b" is not defined
-    g = matches.group(2) # Noncompliant - there is no group with this number
+    g1 = matches.group("b") # Noncompliant - group "b" is not defined
+    g2 = matches.group(1) # Noncompliant - Directly use 'a' instead of its group number.
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -21,6 +22,5 @@ def foo():
     pattern = re.compile(r"(?P&lt;a&gt;.)")
     matches = pattern.match("abc")
     g = matches.group("a")
-    g = matches.group(1)
 </pre>
 

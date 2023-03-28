@@ -22,9 +22,9 @@ package org.sonar.python.checks.regex;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class NotExistedGroupUsagesCheckTest {
+public class UnusedGroupNamesCheckTest {
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/regex/notExistedGroupUsagesCheck.py", new NotExistedGroupUsagesCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/regex/unusedGroupNamesCheck.py", new UnusedGroupNamesCheck());
   }
 }
