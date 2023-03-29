@@ -114,18 +114,18 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
       .filter(RegularArgument.class::isInstance)
       .map(RegularArgument.class::cast)
       .map(RegularArgument::expression)
-      .forEach(argumentExpression -> checkGroupNameOrNumberExists(regexParseResult, groupsCollector, argumentExpression));
+      .forEach(argumentExpression -> checkValidGroupNameAccess(regexParseResult, groupsCollector, argumentExpression));
   }
 
-  private void checkGroupNameOrNumberExists(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, Expression argumentExpression) {
+  private void checkValidGroupNameAccess(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, Expression argumentExpression) {
     //Check if group accessed by name exists
     Optional.of(argumentExpression)
       .filter(StringLiteral.class::isInstance)
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
       .filter(Predicate.not(groupsCollector.byName::containsKey))
-      .ifPresent(notExistedGroupName -> {
-        var message = getGroupNameNotExistsMessage(notExistedGroupName);
+      .ifPresent(nonExistingGroupName -> {
+        var message = getGroupNameNotExistsMessage(nonExistingGroupName);
         var issue = regexContext.addIssue(argumentExpression, message);
 
         if (groupsCollector.byName.isEmpty()) {
@@ -140,7 +140,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
         }
       });
 
-    //Check if group accessed by number exists
+    //Check if group access by number doesn't have name
     Optional.of(argumentExpression)
       .filter(NumericLiteral.class::isInstance)
       .map(NumericLiteral.class::cast)
@@ -157,6 +157,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
   }
 
   private static String getUseNameInsteadNumberMessage(CapturingGroupTree capturingGroupTree) {
+    //it will never be null actually
     var name = capturingGroupTree.getName().orElse(null);
     return String.format(USE_NAME_INSTEAD_OF_NUMBER_MESSAGE_FORMAT, name);
   }
