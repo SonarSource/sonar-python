@@ -1,0 +1,28 @@
+<h2>Why is this an issue?</h2>
+<p>Generic types, such as <code>list</code> or <code>dict</code> accept type arguments to specify the type of elements contained in the list or the
+keys and values in the dictionary.</p>
+<p>If a generic type is used without a type argument, the type arguments will implicitly assumed to be <code>Any</code>. This makes the type hint less
+informative and makes the contract of the function or variable annotated with the type hint more difficult to understand.</p>
+<p>Furthermore, incomplete type hints can hinder IDE autocompletion and code insight capabilities of static analyis tools.</p>
+<h2>How to fix it</h2>
+<p>Add the missing type parameters to this generic type.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+def print_list(numbers: list) -&gt; None:
+    for n in numbers:
+        print(n)
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+def print_list(numbers: list[int]) -&gt; None:
+    for n in numbers:
+        print(n)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/typing.html#generic-concrete-collections">Python documentation on generic collections</a> </li>
+  <li> <a href="https://mypy.readthedocs.io/en/stable/builtin_types.html#generic-types">Built-in generic types</a> </li>
+</ul>
+
