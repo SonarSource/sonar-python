@@ -53,7 +53,7 @@ public class PythonRulingTest {
   public static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
       .add("CommentRegularExpression", "message", "The regular expression matches this comment")
-      .add("S1451","headerFormat" , "# Copyright 2004 by Harry Zuzan. All rights reserved.");
+      .add("S1451", "headerFormat", "# Copyright 2004 by Harry Zuzan. All rights reserved.");
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));

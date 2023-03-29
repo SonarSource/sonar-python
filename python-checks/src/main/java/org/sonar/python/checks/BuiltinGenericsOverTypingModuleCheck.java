@@ -1,0 +1,97 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2023 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.checks;
+
+import java.util.Map;
+import java.util.Optional;
+import javax.annotation.Nullable;
+import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
+
+import static java.util.Map.entry;
+
+@Rule(key = "S6545")
+public class BuiltinGenericsOverTypingModuleCheck extends PythonSubscriptionCheck {
+
+  private static final String MESSAGE = "Use the built-in generic type `%s` instead of its typing counterpart.";
+  private static final Map<String, String> GENERICS_NAME = Map.ofEntries(
+    entry("typing.List", "list"),
+    entry("typing.Dict", "dict"),
+    entry("typing.Tuple", "tuple"),
+    entry("typing.Set", "set"),
+    entry("typing.FrozenSet", "frozenset"),
+    entry("typing.Type", "type"),
+    entry("typing.Iterable", "collections.abc.Iterable"),
+    entry("typing.AbstractSet", "collections.abc.Set"),
+    entry("typing.Callable", "collections.abc.Callable"),
+    entry("typing.Mapping", "collections.abc.Mapping"),
+    entry("typing.Sequence", "collections.abc.Sequence"),
+    entry("typing.deque", "collections.deque"),
+    entry("typing.defaultdict", "collections.defaultdict"),
+    entry("typing.OrderedDict", "collections.OrderedDict"),
+    entry("typing.Counter", "collections.Counter"),
+    entry("typing.ChainMap", "collections.ChainMap"));
+
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_TYPE_ANNOTATION, BuiltinGenericsOverTypingModuleCheck::checkForTypingModule);
+    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_TYPE_ANNOTATION, BuiltinGenericsOverTypingModuleCheck::checkForTypingModule);
+    context.registerSyntaxNodeConsumer(Tree.Kind.VARIABLE_TYPE_ANNOTATION, BuiltinGenericsOverTypingModuleCheck::checkForTypingModule);
+  }
+
+  private static void checkForTypingModule(SubscriptionContext subscriptionContext) {
+    TypeAnnotation typeAnnotation = (TypeAnnotation) subscriptionContext.syntaxNode();
+    Expression expression = typeAnnotation.expression();
+    checkForGenericsFromTypingModule(subscriptionContext, expression);
+  }
+
+  private static void checkForGenericsFromTypingModule(SubscriptionContext subscriptionContext, Expression expression) {
+    getGenericsCounterPartFromTypingModule(subscriptionContext, expression)
+      .ifPresent(preferredGenerics -> subscriptionContext.addIssue(expression, String.format(MESSAGE, preferredGenerics)));
+  }
+
+  private static Optional<String> getGenericsCounterPartFromTypingModule(SubscriptionContext context, Expression expression) {
+    if (expression instanceof SubscriptionExpression) {
+      SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
+      subscriptionExpression.subscripts().expressions()
+        .forEach(nestedExpression -> checkForGenericsFromTypingModule(context, nestedExpression));
+      Expression mainExpression = subscriptionExpression.object();
+      return Optional.of(mainExpression)
+        .map(HasSymbol.class::cast)
+        .map(HasSymbol::symbol)
+        .flatMap(BuiltinGenericsOverTypingModuleCheck::getBuiltinGenericsType);
+    }
+    return Optional.empty();
+  }
+
+  private static Optional<String> getBuiltinGenericsType(@Nullable Symbol maybeSymbol) {
+    return Optional.ofNullable(maybeSymbol)
+      .map(Symbol::fullyQualifiedName)
+      .flatMap(fullyQualifiedName -> Optional.ofNullable(GENERICS_NAME.get(fullyQualifiedName)));
+  }
+
+}
