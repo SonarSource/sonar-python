@@ -308,6 +308,19 @@ public class InferredTypesTest {
   }
 
   @Test
+  public void test_fullyQualifiedTypeName() {
+    assertThat(InferredTypes.fullyQualifiedTypeName(STR)).isEqualTo("str");
+
+    ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
+    assertThat(InferredTypes.fullyQualifiedTypeName(new RuntimeType(a))).isEqualTo("mod.A");
+
+    assertThat(InferredTypes.fullyQualifiedTypeName(new DeclaredType(a))).isEqualTo("mod.A");
+
+    assertThat(InferredTypes.fullyQualifiedTypeName(or(STR, INT))).isNull();
+    assertThat(InferredTypes.fullyQualifiedTypeName(InferredTypes.anyType())).isNull();
+  }
+
+  @Test
   public void test_typeLocation() {
     assertThat(InferredTypes.typeClassLocation(STR)).isNull();
 

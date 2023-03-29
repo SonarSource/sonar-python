@@ -22,6 +22,7 @@ package org.sonar.plugins.python.api;
 import com.google.common.annotations.Beta;
 import java.io.File;
 import java.util.Collection;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -45,6 +46,12 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
 
   PythonFile pythonFile();
+
+  /**
+   * List of Python versions this project is compatible with.
+   */
+  @Beta
+  Set<PythonVersionUtils.Version> sourcePythonVersions();
 
   /**
    * Returns symbols declared in stub files (e.g. typeshed) used in the analyzed project.

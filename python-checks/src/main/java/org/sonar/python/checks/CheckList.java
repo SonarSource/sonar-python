@@ -320,6 +320,7 @@ public final class CheckList {
       UnencryptedSageMakerNotebookCheck.class,
       UnencryptedSqsQueueCheck.class,
       UnencryptedEbsVolumeCheck.class,
+      UnionTypeExpressionCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,

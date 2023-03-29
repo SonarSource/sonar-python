@@ -25,6 +25,8 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Tree;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PythonCheckVerifierAdditionalTest {
 
   private static final String BASE_DIR = "src/test/resources/";
@@ -66,5 +68,29 @@ public class PythonCheckVerifierAdditionalTest {
       return;
     }
     Assertions.fail("Should have failed");
+  }
+
+  @Test
+  public void issues_with_issue() {
+    var issues = PythonCheckVerifier.issues(BASE_DIR + "line_issue.py", new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> ctx.addLineIssue("This line has a function.", ctx.syntaxNode().firstToken().line()));
+      }
+    });
+
+    assertThat(issues).hasSize(1);
+  }
+
+  @Test
+  public void issues_without_issue() {
+    var issues = PythonCheckVerifier.issues(BASE_DIR + "no_issue.py", new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> ctx.addLineIssue("This line has a function.", ctx.syntaxNode().firstToken().line()));
+      }
+    });
+
+    assertThat(issues).isEmpty();
   }
 }

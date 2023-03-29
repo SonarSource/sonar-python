@@ -305,6 +305,18 @@ public class InferredTypes {
   }
 
   @CheckForNull
+  public static String fullyQualifiedTypeName(InferredType inferredType) {
+    if (inferredType instanceof DeclaredType) {
+      return ((DeclaredType) inferredType).getTypeClass().fullyQualifiedName();
+    }
+    Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
+    if (typeClasses.size() == 1) {
+      return typeClasses.iterator().next().fullyQualifiedName();
+    }
+    return null;
+  }
+
+  @CheckForNull
   public static LocationInFile typeClassLocation(InferredType inferredType) {
     Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
     if (typeClasses.size() == 1) {
