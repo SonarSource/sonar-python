@@ -194,6 +194,7 @@ public final class CheckList {
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
+      GenericTypeWithoutArgumentCheck.class,
       GraphemeClustersInClassesCheck.class,
       GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,
