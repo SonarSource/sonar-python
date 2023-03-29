@@ -22,8 +22,6 @@ package org.sonar.python.checks;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.junit.Assert.*;
-
 public class GenericTypeWithoutArgumentCheckTest {
 
   @Test

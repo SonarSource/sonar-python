@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -60,7 +61,7 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (typeSupportsGenerics(expression) || qualifiedExpressionIsACollection(expression)) {
+    if (typeSupportsGenericsOrIsACollection(expression) || qualifiedExpressionIsACollection(expression)) {
       subscriptionContext.addIssue(expression, MESSAGE);
     }
   }
@@ -70,14 +71,16 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
     expressions.forEach(nestedTypeExpression -> checkForGenericTypeWithoutArgument(subscriptionContext, nestedTypeExpression));
   }
 
-  private static boolean typeSupportsGenerics(Expression expression) {
-    if (expression instanceof NameImpl) {
+  private static boolean typeSupportsGenericsOrIsACollection(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
       NameImpl name = (NameImpl) expression;
       if (name.symbol() instanceof ClassSymbolImpl) {
         ClassSymbolImpl maybeSymbol = (ClassSymbolImpl) name.symbol();
         return Optional.ofNullable(maybeSymbol)
           .map(ClassSymbolImpl::supportsGenerics)
           .orElse(false);
+      } else {
+        return isACollection(name.symbol());
       }
     }
     return false;
@@ -86,11 +89,14 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
   private static boolean qualifiedExpressionIsACollection(Expression expression) {
     if (expression instanceof QualifiedExpression) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
-      Symbol maybeSymbol = qualifiedExpression.symbol();
-      return Optional.ofNullable(maybeSymbol)
-        .map(symbol -> COLLECTIONS_NAME.contains(symbol.fullyQualifiedName()))
-        .orElse(false);
+      return isACollection(qualifiedExpression.symbol());
     }
     return false;
+  }
+
+  private static Boolean isACollection(@Nullable Symbol maybeSymbol) {
+    return Optional.ofNullable(maybeSymbol)
+      .map(symbol -> COLLECTIONS_NAME.contains(symbol.fullyQualifiedName()))
+      .orElse(false);
   }
 }

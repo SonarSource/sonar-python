@@ -1,4 +1,7 @@
 import typing
+from typing import List, Tuple
+from typing import Set as TypingSet
+from typing import Dict as MyDict
 
 
 def foo(param: list): # Noncompliant {{Add a type argument to this generic type.}}
@@ -16,20 +19,35 @@ def with_tuple(param:str) -> tuple: # Noncompliant
 def with_var(param:str):
     my_var: dict # Noncompliant
            #^^^^
+
+    my_var_no_module: TypingSet # Noncompliant
+                     #^^^^^^^^^
     return True
 
 def nested(my_list: list[tuple[int, dict, str]]): # Noncompliant
                                    #^^^^
     pass
 
+def nested_user_alias(param: TypingSet[Tuple[int, List, str]]): # Noncompliant
+                                                 #^^^^
+    pass
+
 def nest_types() -> typing.List[typing.Dict]: # Noncompliant
                                #^^^^^^^^^^^
+    pass
+
+def nest_type_no_module() -> typing.List[MyDict[str, TypingSet]]: # Noncompliant
+                                                    #^^^^^^^^^
     pass
 
 class Bar:
 
     def foo(param: list): # Noncompliant
                   #^^^^
+        pass
+
+    def foo_user_alias(param: MyDict): # Noncompliant
+                             #^^^^^^
         pass
 
     def foobar(param: str) -> set: # Noncompliant
@@ -79,6 +97,12 @@ def success_dict(param: dict[str, int]):
     pass
 
 def typing_list() -> typing.List[int]:
+    pass
+
+def no_module_list() -> List[int]:
+    pass
+
+def user_type() -> MyDict[int, Tuple[int, ...]]:
     pass
 
 def typing_dict() -> typing.Dict[str, int]:
