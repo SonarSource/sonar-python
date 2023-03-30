@@ -56,7 +56,7 @@ public class MypySensor extends ExternalIssuesSensor {
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
 
-  private List<TextReportReader.Issue> parse(File report, FileSystem fileSystem) throws IOException {
+  private static List<TextReportReader.Issue> parse(File report, FileSystem fileSystem) throws IOException {
     List<TextReportReader.Issue> issues = new ArrayList<>();
     try (Scanner scanner = new Scanner(report.toPath(), fileSystem.encoding().name())) {
       while (scanner.hasNextLine()) {
