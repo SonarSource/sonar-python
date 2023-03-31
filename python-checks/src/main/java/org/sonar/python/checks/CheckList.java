@@ -129,6 +129,7 @@ public final class CheckList {
       BooleanCheckNotInvertedCheck.class,
       BreakContinueOutsideLoopCheck.class,
       BuiltinShadowingAssignmentCheck.class,
+      BuiltinGenericsOverTypingModuleCheck.class,
       CaughtExceptionsCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,

@@ -1,0 +1,84 @@
+<h2>Why is this an issue?</h2>
+<p>Python 3.9 introduced built-in generic types such as <code>list[T]</code>, <code>dict[T]</code>, <code>set[T]</code> to make type hints more
+concise and easier to read. These built-in types have the same functionality as their counterparts in the <code>typing</code> module, but are more
+readable and idiomatic.</p>
+<p>Using types such as <code>typing.List</code> are confusing in the presence of the already existing built-in types. They can also create
+inconsistencies when different parts of the codebase use different syntaxes for the same type.</p>
+<h2>How to fix it</h2>
+<p>Replace the generic type from the <code>typing</code> module with its built-in counterpart:</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p>Legacy type</p></td>
+      <td><p>Replacement</p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.List[int]</code></p></td>
+      <td><p><code>list[int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Dict[str, int]</code></p></td>
+      <td><p><code>dict[str, int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Set[int]</code></p></td>
+      <td><p><code>set[int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.FrozenSet[str]</code></p></td>
+      <td><p><code>frozenset[str]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Tuple[int, int]</code></p></td>
+      <td><p><code>tuple[int, int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Tuple[int, ...]</code></p></td>
+      <td><p><code>tuple[int, ...]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Iterable[int]</code></p></td>
+      <td><p><code>collections.abc.Iterable[int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Sequence[bool]</code></p></td>
+      <td><p><code>collections.abc.Sequence[bool]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Mapping[str, int]</code></p></td>
+      <td><p><code>collections.abc.Mapping[str, int]</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>typing.Type[T]</code></p></td>
+      <td><p><code>type[T]</code></p></td>
+    </tr>
+  </tbody>
+</table>
+<p>Refer to PEP-585 in the Resources section for the full list of replacements.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+import typing
+
+def print_numbers(numbers: typing.List[int]) -&gt; None:
+    for n in numbers:
+        print(n)
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+def print_numbers(numbers: list[int]) -&gt; None:
+    for n in numbers:
+        print(n)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://mypy.readthedocs.io/en/stable/builtin_types.html#generic-types">Mypy documentation on built-in generic types</a> </li>
+  <li> <a href="https://peps.python.org/pep-0585/">PEP 585 - Type Hinting Generics In Standard Collections</a> </li>
+  <li> <a href="https://docs.python.org/3/library/typing.html#generic-concrete-collections">Python documentation on generic collections</a> </li>
+</ul>
+
