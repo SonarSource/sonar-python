@@ -191,7 +191,7 @@ public class PythonPlugin implements Plugin {
     context.addExtensions(MypySensor.class,
       PropertyDefinition.builder(MypySensor.REPORT_PATH_KEY)
         .name("Mypy Report Files")
-        .description("Paths (absolute or relative) to report files with Flake8 issues.")
+        .description("Paths (absolute or relative) to report files with Mypy issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
         .onQualifiers(Qualifiers.PROJECT)

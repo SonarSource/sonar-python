@@ -97,6 +97,10 @@ public class MypySensorTest {
       "no-untyped-call",
       "Call to untyped function \"no_type_hints\" in typed context",
       19, 0, 19, 27);
+    assertIssue(externalIssues.get(4),
+      "unknown_mypy_rule",
+      "Unused \"type: ignore\" comment",
+      24, 0, 24, 49);
   }
 
   @Test
@@ -121,7 +125,7 @@ public class MypySensorTest {
       "Call to untyped function \"no_type_hints\" in typed context",
       19, 10, 19, 11);
     assertIssue(externalIssues.get(4),
-      "????",
+      "unknown_mypy_rule",
       "Unused \"type: ignore\" comment",
       24, 0, 24, 49);
   }
@@ -147,6 +151,10 @@ public class MypySensorTest {
       "no-untyped-call",
       "Call to untyped function \"no_type_hints\" in typed context",
       19, 10, 19, 11);
+    assertIssue(externalIssues.get(4),
+      "unknown_mypy_rule",
+      "Unused \"type: ignore\" comment",
+      24, 0, 24, 49);
   }
 
   @Test

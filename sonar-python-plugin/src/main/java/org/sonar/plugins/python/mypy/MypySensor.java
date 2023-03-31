@@ -35,7 +35,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.TextReportReader;
-import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 public class MypySensor extends ExternalIssuesSensor {
 
@@ -45,13 +44,15 @@ public class MypySensor extends ExternalIssuesSensor {
   public static final String LINTER_KEY = "mypy";
   public static final String REPORT_PATH_KEY = "sonar.python.mypy.reportPaths";
 
+  private static final String FALLBACK_RULE_KEY = "unknown_mypy_rule";
+
   // Pattern -> Location ': ' Severity ':' Message '['Code']'
   // Location -> File ':' StartLine
   private static final Pattern PATTERN =
     Pattern.compile("^(?<file>[^:]+):(?<startLine>\\d+)(?::(?<startCol>\\d+))?(?::\\d+:\\d+)?: (?<severity>\\S+[^:]): (?<message>.*?)(?: \\[(?<code>.*)])?\\s*$");
 
   @Override
-  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException {
+  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
     List<TextReportReader.Issue> issues = parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
@@ -73,7 +74,7 @@ public class MypySensor extends ExternalIssuesSensor {
     if (line.length() > 0) {
       Matcher m = PATTERN.matcher(line);
       if (m.matches()) {
-        return extractDefaultStyleIssue(m);
+        return extractIssue(m);
       }
       LOG.debug("Cannot parse the line: {}", line);
     }
@@ -81,7 +82,7 @@ public class MypySensor extends ExternalIssuesSensor {
     return null;
   }
 
-  private static TextReportReader.Issue extractDefaultStyleIssue(Matcher m) {
+  private static TextReportReader.Issue extractIssue(Matcher m) {
     String severity = m.group("severity");
     if (!"error".equals(severity)) {
       return null;
@@ -92,9 +93,8 @@ public class MypySensor extends ExternalIssuesSensor {
     String message = m.group("message");
     String errorCode = m.group("code");
     if (errorCode == null) {
-      // Sometimes pylint does not report an error code, however the API expects a non-null error code.
-      // This
-      errorCode = "????";
+      // Sometimes mypy does not report an error code, however the API expects a non-null error code.
+      errorCode = FALLBACK_RULE_KEY;
     }
 
     Integer columnNumber = Optional.ofNullable(m.group("startCol"))
@@ -104,7 +104,6 @@ public class MypySensor extends ExternalIssuesSensor {
 
     return new TextReportReader.Issue(filePath, errorCode, message, lineNumber, columnNumber);
   }
-
 
   @Override
   protected boolean shouldExecute(Configuration conf) {
