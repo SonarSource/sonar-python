@@ -22,16 +22,19 @@ package org.sonar.python.checks;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.FunctionDefImpl;
 
 @Rule(key = "S6538")
 public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add a return type hint to this function declaration.";
-  private static final String CONSTRUCTOR_MESSAGE = "Annotate the return type of this constructor with `None`.";
+  public static final String CONSTRUCTOR_MESSAGE = "Annotate the return type of this constructor with `None`.";
 
   @Override
   public void initialize(Context context) {
@@ -42,8 +45,16 @@ public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionChec
         FunctionDefImpl functionDefImpl = (FunctionDefImpl) functionDef;
         Optional.ofNullable(functionDefImpl.functionSymbol())
           .filter(functionSymbol -> "__init__".equals(functionName.name()) && functionSymbol.isInstanceMethod())
-          .ifPresentOrElse(symbol -> ctx.addIssue(functionName, CONSTRUCTOR_MESSAGE), () -> ctx.addIssue(functionName, MESSAGE));
+          .ifPresentOrElse(symbol -> raiseIssueForConstructor(ctx, functionName, functionDef), () -> ctx.addIssue(functionName, MESSAGE));
       }
     });
+  }
+
+  private static void raiseIssueForConstructor(SubscriptionContext ctx, Name functionName, FunctionDef functionDef) {
+    PreciseIssue preciseIssue = ctx.addIssue(functionName, CONSTRUCTOR_MESSAGE);
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix(CONSTRUCTOR_MESSAGE)
+      .addTextEdit(TextEditUtils.insertAfter(functionDef.rightPar(), " -> None"))
+      .build();
+    preciseIssue.addQuickFix(quickFix); 
   }
 }
