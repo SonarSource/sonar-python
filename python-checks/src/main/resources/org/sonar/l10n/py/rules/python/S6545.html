@@ -2,7 +2,7 @@
 <p>Python 3.9 introduced built-in generic types such as <code>list[T]</code>, <code>dict[T]</code>, <code>set[T]</code> to make type hints more
 concise and easier to read. These built-in types have the same functionality as their counterparts in the <code>typing</code> module, but are more
 readable and idiomatic.</p>
-<p>Using types such as <code>typing.List</code> are confusing in the presence of the already existing built-in types. They can also create
+<p>Using types such as <code>typing.List</code> is confusing in the presence of the already existing built-in types. This can also create
 inconsistencies when different parts of the codebase use different syntaxes for the same type.</p>
 <h2>How to fix it</h2>
 <p>Replace the generic type from the <code>typing</code> module with its built-in counterpart:</p>
@@ -25,8 +25,8 @@ inconsistencies when different parts of the codebase use different syntaxes for 
       <td><p><code>dict[str, int]</code></p></td>
     </tr>
     <tr>
-      <td><p><code>typing.Set[int]</code></p></td>
-      <td><p><code>set[int]</code></p></td>
+      <td><p><code>typing.Set[str]</code></p></td>
+      <td><p><code>set[str]</code></p></td>
     </tr>
     <tr>
       <td><p><code>typing.FrozenSet[str]</code></p></td>
