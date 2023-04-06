@@ -20,11 +20,61 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
 public class MandatoryFunctionReturnTypeHintCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/mandatoryFunctionReturnType.py", new MandatoryFunctionReturnTypeHintCheck());
+  }
+
+  @Test
+  public void quick_fix_none_return_type_for_init() {
+    String codeWithIssue = code(
+      "class A():",
+      "    def __init__(self):",
+      "        pass");
+    String codeFixed = code(
+      "class A():",
+      "    def __init__(self) -> None:",
+      "        pass");
+    MandatoryFunctionReturnTypeHintCheck check = new MandatoryFunctionReturnTypeHintCheck();
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, MandatoryFunctionReturnTypeHintCheck.CONSTRUCTOR_MESSAGE);
+  }
+
+  @Test
+  public void quick_fix_none_return_type_for_init_weird_format() {
+    String codeWithIssue = code(
+      "class A():",
+      "    def __init__(self)   : ",
+      "        pass");
+    String codeFixed = code(
+      "class A():",
+      "    def __init__(self) -> None   : ",
+      "        pass");
+    MandatoryFunctionReturnTypeHintCheck check = new MandatoryFunctionReturnTypeHintCheck();
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, MandatoryFunctionReturnTypeHintCheck.CONSTRUCTOR_MESSAGE);
+  }
+
+  @Test
+  public void quick_fix_none_return_type_for_init_multiline() {
+    String codeWithIssue = code(
+      "class A():",
+      "    def __init__(self,",
+      "        alice, bob):",
+      "        pass");
+    String codeFixed = code(
+      "class A():",
+      "    def __init__(self,",
+      "        alice, bob) -> None:",
+      "        pass");
+    MandatoryFunctionReturnTypeHintCheck check = new MandatoryFunctionReturnTypeHintCheck();
+    PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, MandatoryFunctionReturnTypeHintCheck.CONSTRUCTOR_MESSAGE);
   }
 }
