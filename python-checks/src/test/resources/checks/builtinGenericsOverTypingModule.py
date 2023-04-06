@@ -72,6 +72,8 @@ class Success:
         my_var: frozenset[int] = None
         pass
 
+    def without_type_arg() -> typing.Set:
+        pass
 
 class CheckCollections:
     class_var: typing.Iterable[str] # Noncompliant {{Use the built-in generic type `collections.abc.Iterable` instead of its typing counterpart.}}
@@ -131,4 +133,5 @@ class GenericType:
 
     def success():
         my_var: type[int] = None
+        other_var: Dict
         pass
