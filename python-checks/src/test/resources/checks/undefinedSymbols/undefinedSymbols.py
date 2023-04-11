@@ -111,3 +111,13 @@ def python_3_10(value):
     match value:
         case remaining:
             print(remaining)
+
+class InnerClassFp:
+    class MyInnerClass:
+        pass
+
+    def __init__(self, my_inner: MyInnerClass):  # Ok
+        x = MyInnerClass()  # Noncompliant
+
+    def ret(self) -> MyInnerClass: # Ok
+        pass

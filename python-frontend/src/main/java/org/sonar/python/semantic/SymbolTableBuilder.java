@@ -692,6 +692,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
       }
     }
+
+    @Override
+    public void visitTypeAnnotation(TypeAnnotation tree) {
+      if (tree.is(Kind.PARAMETER_TYPE_ANNOTATION) || tree.is(Kind.RETURN_TYPE_ANNOTATION)) {
+        Scope currentScope = currentScope();
+        leaveScope();
+        super.visitTypeAnnotation(tree);
+        enterScope(currentScope.rootTree);
+      } else {
+        super.visitTypeAnnotation(tree);
+      }
+    }
   }
 
   private class ThirdPhaseVisitor extends BaseTreeVisitor {
