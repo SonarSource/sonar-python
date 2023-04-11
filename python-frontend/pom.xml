@@ -150,10 +150,13 @@
             </configuration>
             <executions>
               <execution>
-                <id>tox</id>
+                <id>tox-runner</id>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <executable>tox</executable>
+                  <executable>python</executable>
+                  <arguments>
+                      <argument>runners/tox_runner.py</argument>
+                  </arguments>
                 </configuration>
                 <goals>
                   <goal>exec</goal>
