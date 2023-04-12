@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -47,8 +48,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   @RuleProperty(
     key = "regex",
     description = "Regular expression used to identify variable name to ignore.",
-    defaultValue = DEFAULT
-  )
+    defaultValue = DEFAULT)
   public String format = DEFAULT;
   private Pattern pattern;
 
@@ -70,14 +70,22 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     symbols.stream()
       .filter(s -> !pattern.matcher(s.name()).matches())
       .filter(UnusedLocalVariableCheck::hasOnlyBindingUsages)
-      .forEach(symbol ->
-        symbol.usages().stream()
-        .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
-        .filter(usage -> !isTupleDeclaration(usage.tree()))
-        .filter(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION)
-        .filter(usage -> usage.kind() != Usage.Kind.CLASS_DECLARATION)
-        .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())))
-      );
+      .forEach(symbol -> {
+        var usages = symbol.usages().stream()
+          .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
+          .filter(usage -> !isTupleDeclaration(usage.tree()))
+          .filter(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION)
+          .filter(usage -> usage.kind() != Usage.Kind.CLASS_DECLARATION)
+          .collect(Collectors.toList());
+
+        if (!usages.isEmpty()) {
+          var firstUsage = usages.get(0);
+          var issue = ctx.addIssue(firstUsage.tree(), String.format(MESSAGE, symbol.name()));
+
+          usages.stream().skip(1)
+            .forEach(usage -> issue.secondary(usage.tree(), String.format(MESSAGE, symbol.name())));
+        }
+      });
   }
 
   private static boolean hasOnlyBindingUsages(Symbol symbol) {
@@ -96,7 +104,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static boolean isTupleDeclaration(Tree tree) {
     return TreeUtils.firstAncestor(tree, t -> t.is(Kind.TUPLE)
-        || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
-        || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree))) != null;
+      || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
+      || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree))) != null;
   }
 }
