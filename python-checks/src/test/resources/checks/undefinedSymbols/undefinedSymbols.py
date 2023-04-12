@@ -116,8 +116,27 @@ class InnerClassFp:
     class MyInnerClass:
         pass
 
+    field : MyInnerClass # Ok
+
+    class AnotherInnerClass:
+        pass
+
     def __init__(self, my_inner: MyInnerClass):  # Ok
-        x = MyInnerClass()  # Noncompliant
+        # Within the scope of the function body, we should use `self.AnotherInnerClass`
+        v1: MyInnerClass # Noncompliant
+           #^^^^^^^^^^^^
+        v2: self.MyInnerClass # Ok
+
+        def even_inner(x: AnotherInnerClass): # Noncompliant
+                         #^^^^^^^^^^^^^^^^^
+            pass
 
     def ret(self) -> MyInnerClass: # Ok
         pass
+
+    def class_in_function(self):
+        class ClassInFunction:
+            pass
+
+        def nested_function() -> ClassInFunction:
+            pass

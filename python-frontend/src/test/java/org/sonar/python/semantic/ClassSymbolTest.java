@@ -26,9 +26,13 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -487,6 +491,33 @@ public class ClassSymbolTest {
       "class A: ..."
     );
     assertThat(classSymbol.hasDecorators()).isFalse();
+  }
+
+  @Test
+  public void type_annotations_scope() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class Foo:",
+      "    class Inner: ...",
+      "    def f(self, x: Inner) -> Inner:",
+      "        x: Inner"
+    );
+    ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
+    ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
+    FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
+
+    ClassSymbol innerClassSymbol = (ClassSymbol) innerClass.name().symbol();
+    assertThat(innerClassSymbol).isNotNull();
+
+    // The scope of the function parameters and return type annotations is the parent scope of the function
+    Name returnTypeAnnotationName = (Name) functionDef.returnTypeAnnotation().expression();
+    assertThat(returnTypeAnnotationName.symbol()).isEqualTo(innerClassSymbol);
+
+    Name paramAnnotationName = (Name) functionDef.parameters().nonTuple().get(1).typeAnnotation().expression();
+    assertThat(paramAnnotationName.symbol()).isEqualTo(innerClassSymbol);
+
+    // In the function body the scope is the scope of the function, where the inner class needs to be referenced through `self`
+    Name varAnnotationName = ((Name) ((AnnotatedAssignment) functionDef.body().statements().get(0)).annotation().expression());
+    assertThat(varAnnotationName.symbol()).isNull();
   }
 
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {

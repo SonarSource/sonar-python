@@ -652,6 +652,20 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
+    public void visitTypeAnnotation(TypeAnnotation tree) {
+      if (tree.is(Kind.PARAMETER_TYPE_ANNOTATION) || tree.is(Kind.RETURN_TYPE_ANNOTATION)) {
+        // The scope of the type annotations on a function declaration should be the scope enclosing the function, and not the scope of
+        // the function body itself. Note that this code assumes that we already entered the function body scope by visiting the type
+        // annotations, so there should always be a scope to pop out and return to here.
+        Tree currentScopeTree = leaveScope();
+        super.visitTypeAnnotation(tree);
+        enterScope(currentScopeTree);
+      } else {
+        super.visitTypeAnnotation(tree);
+      }
+    }
+
+    @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
       scan(pyClassDefTree.args());
       scan(pyClassDefTree.decorators());
@@ -690,18 +704,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       // TODO: use Set to improve performances
       if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(nameTree))) {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
-      }
-    }
-
-    @Override
-    public void visitTypeAnnotation(TypeAnnotation tree) {
-      if (tree.is(Kind.PARAMETER_TYPE_ANNOTATION) || tree.is(Kind.RETURN_TYPE_ANNOTATION)) {
-        Scope currentScope = currentScope();
-        leaveScope();
-        super.visitTypeAnnotation(tree);
-        enterScope(currentScope.rootTree);
-      } else {
-        super.visitTypeAnnotation(tree);
       }
     }
   }
