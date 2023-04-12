@@ -33,7 +33,7 @@ class A:
     pass
 
   def some_usage(self, node):
-    node.__used_through_not_self
+    node.__used_through_not_self()
 
 def method_decorator(func):
   def inner(*args, **kwargs):
