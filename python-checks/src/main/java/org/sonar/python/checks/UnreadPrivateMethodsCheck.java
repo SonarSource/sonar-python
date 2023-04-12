@@ -70,7 +70,7 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
     CallNamesVisitor visitor = new CallNamesVisitor(symbol.name());
     classDef.accept(visitor);
 
-    // There is always at least on usage - the declaration itself.
+    // There is always at least one usage - the declaration itself.
     return visitor.usages > 1;
   }
 
