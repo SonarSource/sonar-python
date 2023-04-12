@@ -25,6 +25,9 @@ import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.BuiltinSymbols;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -60,5 +63,30 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
       .stream()
       .flatMap(Collection::stream)
       .anyMatch(Predicate.not(BuiltinSymbols.STATIC_AND_CLASS_METHOD_DECORATORS::contains));
+  }
+
+  @Override
+  protected boolean hasAmbiguousUsage(Symbol symbol, ClassDef classDef) {
+    CallNamesVisitor visitor = new CallNamesVisitor(symbol.name());
+    classDef.accept(visitor);
+
+    // There is always at least one usage - the declaration itself.
+    return visitor.usages > 1;
+  }
+
+  private static class CallNamesVisitor extends BaseTreeVisitor {
+    private final String name;
+    private int usages = 0;
+
+    public CallNamesVisitor(String name) {
+      this.name = name;
+    }
+
+    @Override
+    public void visitName(Name pyNameTree) {
+      if (name.equals(pyNameTree.name())) {
+        ++usages;
+      }
+    }
   }
 }
