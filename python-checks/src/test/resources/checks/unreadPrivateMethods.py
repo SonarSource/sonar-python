@@ -29,6 +29,11 @@ class A:
     print(A.__used_cls_method())
     print(A.__used_static_method())
 
+  def __used_through_not_self(self):
+    pass
+
+  def some_usage(self, node):
+    node.__used_through_not_self
 
 def method_decorator(func):
   def inner(*args, **kwargs):
