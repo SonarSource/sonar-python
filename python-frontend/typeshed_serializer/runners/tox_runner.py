@@ -35,7 +35,6 @@ def fetch_resource_file_names(folder_name: str, file_extension: str) -> list[str
     for root, _, files in os.walk(folder_name):
         for file in files:
             if file.endswith(file_extension):
-                print(join(root, file))
                 result.append(join(root, file))
     return result
 
@@ -61,7 +60,7 @@ def read_file(file_name: str) -> bytes:
 
 
 def compute_checksum(file_names: list[str], get_file_bytes: Callable[[str], bytes]) -> str:
-    _hash = hashlib.md5()
+    _hash = hashlib.sha256()
     for fn in file_names:
         with contextlib.suppress(IsADirectoryError):
             _hash.update(get_file_bytes(fn))
