@@ -38,7 +38,7 @@ public class UnusedLocalVariableCheckTest {
   }
 
   @Test
-  public void quickFixTest() {
+  public void tupleQuickFixTest() {
     var check = new UnusedLocalVariableCheck();
 
     var before = "def using_tuples():\n" +
@@ -46,6 +46,18 @@ public class UnusedLocalVariableCheckTest {
       "    print x";
     var after = "def using_tuples():\n" +
       "    x, _ = (1, 2)\n" +
+      "    print x";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+
+    before = "def using_tuples():\n" +
+      "    x, y = (1, 2)\n" +
+      "    y = 5\n" +
+      "    print x";
+    after = "def using_tuples():\n" +
+      "    x, _ = (1, 2)\n" +
+      "    y = 5\n" +
       "    print x";
 
     PythonQuickFixVerifier.verify(check, before, after);
