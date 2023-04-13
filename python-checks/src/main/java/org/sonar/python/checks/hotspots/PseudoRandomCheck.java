@@ -27,6 +27,8 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S2245")
@@ -44,6 +46,7 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
     "shuffle");
   private static final String RANDOM_PACKAGE_PREFIX = "random.";
   private static final String RANDOM_CLASS_PREFIX = "random.Random.";
+  private static final Set<String> QUALIFIERS_TO_SKIP = Set.of("random.SystemRandom");
   private static final Set<String> FUNCTIONS_TO_CHECK = getFunctionsFullyQualifiedNames();
   public static final String MESSAGE = "Make sure that using this pseudorandom number generator is safe here.";
 
@@ -51,6 +54,11 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+
+      if (skip(callExpression)) {
+        return;
+      }
+
       Symbol symbol = callExpression.calleeSymbol();
       Optional.ofNullable(symbol)
         .map(Symbol::fullyQualifiedName)
@@ -63,6 +71,17 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
     return FUNCTION_NAMES.stream()
       .flatMap(functionName -> Stream.of(RANDOM_PACKAGE_PREFIX + functionName, RANDOM_CLASS_PREFIX + functionName))
       .collect(Collectors.toSet());
+  }
+
+  private static boolean skip(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .map(CallExpression::callee)
+      .filter(QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .map(QualifiedExpression::qualifier)
+      .map(Expression::type)
+      .filter(type -> QUALIFIERS_TO_SKIP.stream().anyMatch(type::mustBeOrExtend))
+      .isPresent();
   }
 
 }
