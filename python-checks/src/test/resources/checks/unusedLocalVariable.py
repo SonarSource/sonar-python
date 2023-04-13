@@ -53,6 +53,12 @@ def using_tuples():
     (a, b) = (1, 2)
     print b
 
+    i, j = (1, 2) # Noncompliant {{Replace unused local variable "j" with "_".}}
+#      ^ 1
+    j = 3
+#   ^< 1 {{Assignment to unused local variable "j".}}
+    print i
+
     for name, b in foo():
         pass
     for (c, d) in foo():
