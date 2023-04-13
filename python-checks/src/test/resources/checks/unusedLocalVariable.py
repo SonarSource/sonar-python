@@ -3,8 +3,10 @@ unread_global = 1
 def f(unread_param):
     global unread_global
     unread_global = 1
-    unread_local = 1 # Noncompliant
-    unread_local = 2 # Noncompliant
+    unread_local = 1 # Noncompliant {{Remove the unused local variable "unread_local".}}
+#   ^^^^^^^^^^^^ 1
+    unread_local = 2
+#   ^^^^^^^^^^^^< 1 {{Assignment to unused local variable "unread_local".}}
     read_local = 1
     print(read_local)
     read_in_nested_function = 1
@@ -112,3 +114,11 @@ print(var)
 def no_pf_multiple_formatted_expressions_in_one_braces():
     x = 42 # OK
     print(f"{41,x}")
+
+def multiple_assignments():
+    i = 0 # Noncompliant {{Remove the unused local variable "i".}}
+#   ^ 1
+    for x in bar():
+        i += x
+#       ^< 1 {{Assignment to unused local variable "i".}}
+    return x
