@@ -6,7 +6,7 @@ import genericpath
 import _heapq
 import imaplib
 from unittest.mock import Mock
-from typing import Dict, Tuple, Set
+from typing import Dict, Tuple, Set, TypedDict
 from collections import OrderedDict, Counter
 from emoji import emojize
 
@@ -129,6 +129,15 @@ def type_aliases():
   with_tuple({1 : 42}) # Noncompliant
   with_tuple((42, 43)) # OK
   with_tuple(42) # Noncompliant
+
+  class Movie(TypedDict):
+    name: str
+    year: int
+
+  def with_typed_dict(movie: Movie): ...
+  with_typed_dict({'name': "Ad Astra", 'year': 2019}) # Ok
+  with_typed_dict({'name': "Ad Astra", 'year': 2019, 'other': 'foo'}) # FN
+
 
 def edge_cases():
   ambiguous = 42
