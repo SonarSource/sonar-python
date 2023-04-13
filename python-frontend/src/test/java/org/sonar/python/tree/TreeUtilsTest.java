@@ -600,6 +600,26 @@ public class TreeUtilsTest {
     assertThat(classDefOpt).isNotPresent();
   }
 
+  @Test
+  public void treeToStringTest() {
+    var input = "a = 1\n" +
+      "b = 2";
+    var fileInput = PythonTestUtils.parse(input);
+    var statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.STATEMENT_LIST));
+
+    var result = TreeUtils.treeToString(statements, true);
+    assertThat(result).isEqualTo(input);
+
+    result = TreeUtils.treeToString(statements, false);
+    assertThat(result).isNull();
+
+    input = "a = 1";
+    fileInput = PythonTestUtils.parse(input);
+    statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.STATEMENT_LIST));
+    result = TreeUtils.treeToString(statements, false);
+    assertThat(result).isEqualTo(input);
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

@@ -449,4 +449,34 @@ public class TreeUtils {
       .map(Optional::get);
   }
 
+  public static String treeToString(Tree tree, boolean renderMultiline) {
+    if (!renderMultiline) {
+      var firstLine = tree.firstToken().line();
+      var lastLine = tree.lastToken().line();
+
+      // We decided to not support multiline default parameters
+      // because it requires indents calculation for place where the value should be copied.
+      if (firstLine != lastLine) {
+        return null;
+      }
+    }
+
+    var tokens = TreeUtils.tokens(tree);
+
+    var valueBuilder = new StringBuilder();
+    for (int i = 0; i < tokens.size(); i++) {
+      var token = tokens.get(i);
+      if (i > 0) {
+        var previous = tokens.get(i - 1);
+        var spaceBetween = token.column() - previous.column() - previous.value().length();
+        if (spaceBetween < 0) {
+          spaceBetween = token.column();
+        }
+        valueBuilder.append(" ".repeat(spaceBetween));
+      }
+      valueBuilder.append(token.value());
+    }
+    return valueBuilder.toString();
+  }
+
 }
