@@ -6,7 +6,7 @@ def f(unread_param):
     unread_local = 1 # Noncompliant {{Remove the unused local variable "unread_local".}}
 #   ^^^^^^^^^^^^ 1
     unread_local = 2
-#   ^^^^^^^^^^^^< 1 {{Remove the unused local variable "unread_local".}}
+#   ^^^^^^^^^^^^< 1 {{Assignment to unused local variable "unread_local".}}
     read_local = 1
     print(read_local)
     read_in_nested_function = 1
@@ -120,5 +120,5 @@ def multiple_assignments():
 #   ^ 1
     for x in bar():
         i += x
-#       ^< 1 {{Remove the unused local variable "i".}}
+#       ^< 1 {{Assignment to unused local variable "i".}}
     return x

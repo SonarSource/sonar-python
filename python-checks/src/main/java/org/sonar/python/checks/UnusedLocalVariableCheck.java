@@ -44,6 +44,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT = "(_[a-zA-Z0-9_]*|dummy|unused|ignored)";
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
+  private static final String SECONDARY_MESSAGE = "Assignment to unused local variable \"%s\".";
 
   @RuleProperty(
     key = "regex",
@@ -83,7 +84,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
           var issue = ctx.addIssue(firstUsage.tree(), String.format(MESSAGE, symbol.name()));
 
           usages.stream().skip(1)
-            .forEach(usage -> issue.secondary(usage.tree(), String.format(MESSAGE, symbol.name())));
+            .forEach(usage -> issue.secondary(usage.tree(), String.format(SECONDARY_MESSAGE, symbol.name())));
         }
       });
   }
