@@ -44,3 +44,8 @@ def test_random_pkg_methods():
     random.randbytes() # Noncompliant
     random.randrange() # Noncompliant
     random.shuffle() # Noncompliant
+
+def system_random():
+    random.SystemRandom().randint(5, 25)
+    r = random.SystemRandom()
+    r.randint(5, 25)
