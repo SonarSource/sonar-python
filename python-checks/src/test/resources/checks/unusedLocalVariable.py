@@ -47,10 +47,17 @@ def function_with_lambdas():
 #             ^
 
 def using_tuples():
-    x, y = (1, 2)
+    x, y = (1, 2) # Noncompliant {{Replace unused local variable "y" with "_".}}
+#      ^
     print x
     (a, b) = (1, 2)
     print b
+
+    i, j = (1, 2) # Noncompliant {{Replace unused local variable "j" with "_".}}
+#      ^ 1
+    j = 3
+#   ^< 1 {{Assignment to unused local variable "j".}}
+    print i
 
     for name, b in foo():
         pass
@@ -122,3 +129,9 @@ def multiple_assignments():
         i += x
 #       ^< 1 {{Assignment to unused local variable "i".}}
     return x
+
+def multiple_values_assignment():
+    a, b, c = bar() # Noncompliant
+#         ^
+    print(a)
+    print(b)

@@ -17,11 +17,11 @@ for _ in range(10):
     foo()
 </pre>
 <h2>Exceptions</h2>
-<p><code>_</code> as well as tuples will not raise an issue for this rule. The following examples are compliant:</p>
+<p><code>_</code> will not raise an issue for this rule. The following examples are compliant:</p>
 <pre>
 for _ in range(10):
     do_something()
-username, login, password = auth
+username, login, _ = auth
 do_something_else(username, login)
 </pre>
 

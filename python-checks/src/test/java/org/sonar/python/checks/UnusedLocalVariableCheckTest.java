@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UnusedLocalVariableCheckTest {
@@ -34,5 +35,32 @@ public class UnusedLocalVariableCheckTest {
     UnusedLocalVariableCheck check = new UnusedLocalVariableCheck();
     check.format = "(_|myignore)";
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariableCustom.py", check);
+  }
+
+  @Test
+  public void tupleQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def using_tuples():\n" +
+      "    x, y = (1, 2)\n" +
+      "    print x";
+    var after = "def using_tuples():\n" +
+      "    x, _ = (1, 2)\n" +
+      "    print x";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+
+    before = "def using_tuples():\n" +
+      "    x, y = (1, 2)\n" +
+      "    y = 5\n" +
+      "    print x";
+    after = "def using_tuples():\n" +
+      "    x, _ = (1, 2)\n" +
+      "    y = 5\n" +
+      "    print x";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
 }
