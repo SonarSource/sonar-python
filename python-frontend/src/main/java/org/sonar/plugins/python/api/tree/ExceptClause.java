@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
+import org.sonar.api.Beta;
 
 /**
  * <pre>
@@ -52,6 +53,10 @@ public interface ExceptClause extends Tree {
 
   @CheckForNull
   Expression exceptionInstance();
+  
+  @Beta
+  Token colon();
 
   StatementList body();
+
 }

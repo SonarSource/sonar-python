@@ -145,31 +145,6 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static String getAssignedValueString(Expression defaultValue) {
-    var firstLine = defaultValue.firstToken().line() - 1;
-    var lastLine = defaultValue.lastToken().line() - 1;
-
-    // We decided to not support multiline default parameters
-    // because it requires indents calculation for place where the value should be copied.
-    if (firstLine != lastLine) {
-      return null;
-    }
-
-    var tokens = TreeUtils.tokens(defaultValue);
-
-    var valueBuilder = new StringBuilder();
-    for (int i = 0; i < tokens.size(); i++) {
-      var token = tokens.get(i);
-      if (i > 0) {
-        var previous = tokens.get(i - 1);
-        var spaceBetween = token.column() - previous.column() - previous.value().length();
-        valueBuilder.append(" ".repeat(spaceBetween));
-      }
-      valueBuilder.append(token.value());
-    }
-    return valueBuilder.toString();
-  }
-
   // We use "\n" systematically, the IDE will decide which one to use,
   // therefore suppressing java:S3457 (Printf-style format strings should be used correctly)
   @SuppressWarnings("java:S3457")
@@ -188,7 +163,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
   @CheckForNull
   private static String parameterInitialization(Expression defaultValue) {
     if (defaultValue.is(CALL_EXPR, DICTIONARY_LITERAL, LIST_LITERAL, SET_LITERAL)) {
-      return getAssignedValueString(defaultValue);
+      return TreeUtils.treeToString(defaultValue, false);
     }
     return null;
   }

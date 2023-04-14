@@ -63,4 +63,23 @@ public class UnusedLocalVariableCheckTest {
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
+
+  @Test
+  public void exceptClauseQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  try:\n" +
+      "    ...\n" +
+      "  except Type as e:\n" +
+      "    ...";
+    var after = "def foo():\n" +
+      "  try:\n" +
+      "    ...\n" +
+      "  except Type:\n" +
+      "    ...";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the unused local variable");
+  }
 }

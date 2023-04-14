@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -48,7 +50,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static final String DEFAULT = "(_[a-zA-Z0-9_]*|dummy|unused|ignored)";
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
   private static final String SEQUENCE_UNPACKING_MESSAGE = "Replace unused local variable \"%s\" with \"_\".";
-  private static final String QUICK_FIX_MESSAGE = "Replace with \"_\"";
+  private static final String SEQUENCE_UNPACKING_QUICK_FIX_MESSAGE = "Replace with \"_\"";
+  private static final String EXCEPT_CLAUSE_QUICK_FIX_MESSAGE = "Remove the unused local variable";
   private static final String SECONDARY_MESSAGE = "Assignment to unused local variable \"%s\".";
 
   @RuleProperty(
@@ -96,13 +99,33 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   public PreciseIssue createIssue(SubscriptionContext ctx, Symbol symbol, Usage usage) {
     if (isSequenceUnpacking(usage)) {
-      var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
+      var quickFix = PythonQuickFix.newQuickFix(SEQUENCE_UNPACKING_QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
       var issue = ctx.addIssue(usage.tree(), String.format(SEQUENCE_UNPACKING_MESSAGE, symbol.name()));
       issue.addQuickFix(quickFix);
       return issue;
     } else {
-      return ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
+      var issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
+      createExceptClauseQuickFix(usage, issue);
+      return issue;
     }
+  }
+
+  private static void createExceptClauseQuickFix(Usage usage, PreciseIssue issue) {
+    Optional.of(usage)
+      .filter(u -> u.kind() == Usage.Kind.EXCEPTION_INSTANCE)
+      .map(Usage::tree)
+      .map(Tree::parent)
+      .filter(ExceptClause.class::isInstance)
+      .map(ExceptClause.class::cast)
+      .filter(ec -> Objects.nonNull(ec.exception()))
+      .map(ec -> {
+        var replacement = TreeUtils.treeToString(ec.exception(), false) + ":";
+        var from = ec.exception();
+        var to = ec.colon();
+        var textEdit = TextEditUtils.replaceRange(from, to, replacement);
+        return PythonQuickFix.newQuickFix(EXCEPT_CLAUSE_QUICK_FIX_MESSAGE, textEdit);
+      })
+      .ifPresent(issue::addQuickFix);
   }
 
   private static boolean hasOnlyBindingUsages(Symbol symbol) {
