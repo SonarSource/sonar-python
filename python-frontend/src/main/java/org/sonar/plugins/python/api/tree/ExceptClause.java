@@ -53,9 +53,10 @@ public interface ExceptClause extends Tree {
 
   @CheckForNull
   Expression exceptionInstance();
+  
+  @Beta
+  Token colon();
 
   StatementList body();
 
-  @Beta
-  Token colon();
 }
