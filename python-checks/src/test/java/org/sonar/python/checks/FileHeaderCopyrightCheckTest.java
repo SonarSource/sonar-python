@@ -156,5 +156,7 @@ public class FileHeaderCopyrightCheckTest {
     fileHeaderCopyrightCheck.headerFormat = "# Copyright[ ]20[0-9]{2}";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/searchPatternShebangCopyright.py",
       fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternShebangCopyrightNonCompliant.py",
+      fileHeaderCopyrightCheck);
   }
 }
