@@ -53,8 +53,8 @@ class ToxRunnerTest(unittest.TestCase):
         folder_name = 'test'
         extension = '.test'
         with mock.patch('os.walk') as mocked_walk:
-            mocked_walk.return_value = [('folder1', '', ['file', f'__init__{extension}']),
-                                        ('folder2', '', [f'__init__{extension}', f'file1{extension}']),
+            mocked_walk.return_value = [('folder2', '', [f'__init__{extension}', f'file1{extension}']),
+                                        ('folder1', '', ['file', f'__init__{extension}']),
                                         ('folder3', '', ['otherfile.cpp', 'file2.testother', 'filetest'])]
             fns = tox_runner.fetch_resource_file_names(folder_name, extension)
             expected = [f'folder1/__init__{extension}', f'folder2/__init__{extension}', f'folder2/file1{extension}']
