@@ -146,7 +146,8 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
         Expression expression = expressions.get(0);
         InferredType inferredType = expression.type();
         if (returnType.mustBeOrExtend("typing.TypedDict")) {
-          // Avoid FPs for TypedDict
+          // TODO SONARPY-1340: This is a workaround to avoid FPs with TypedDict, however, this produces false-negatives. We should have a more
+          //  fine-grained solution to check dictionaries against TypedDict.
           return;
         }
 
