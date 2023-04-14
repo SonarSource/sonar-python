@@ -141,4 +141,22 @@ public class FileHeaderCopyrightCheckTest {
     IllegalArgumentException e = Assert.assertThrows(IllegalArgumentException.class, () -> SubscriptionVisitor.analyze(check, context));
     Assertions.assertThat(e.getMessage()).isEqualTo("[FileHeaderCopyrightCheck] Unable to compile the regular expression: "+fileHeaderCopyrightCheck.headerFormat);
   }
+
+  @Test
+  public void shebangTest() {
+    var fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
+    fileHeaderCopyrightCheck.headerFormat = "# Copyright FOO\n";
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/shebangCopyright.py", fileHeaderCopyrightCheck);
+  }
+
+  @Test
+  public void shebangPatternTest() {
+    var fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
+    fileHeaderCopyrightCheck.isRegularExpression = true;
+    fileHeaderCopyrightCheck.headerFormat = "# Copyright[ ]20[0-9]{2}";
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/searchPatternShebangCopyright.py",
+      fileHeaderCopyrightCheck);
+    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternShebangCopyrightNonCompliant.py",
+      fileHeaderCopyrightCheck);
+  }
 }

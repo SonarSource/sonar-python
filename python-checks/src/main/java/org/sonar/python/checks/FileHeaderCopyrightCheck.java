@@ -19,8 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -48,6 +48,7 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     defaultValue = "false")
   public boolean isRegularExpression = false;
   private Pattern searchPattern = null;
+  private Pattern shebangPattern = Pattern.compile("^#![^\\n]+\\n", Pattern.MULTILINE);
 
   @Override
   public void initialize(Context context) {
@@ -60,12 +61,16 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
         }
       }
 
-      String retrievedText = getHeaderText(ctx);
+      var header = getHeaderText(ctx);
+      var headerWithoutShebang = shebangPattern.matcher(header).replaceFirst("");
 
       if (isRegularExpression) {
-        checkRegularExpression(ctx, retrievedText);
-      } else {
-        if (!headerFormat.isEmpty() && !retrievedText.startsWith(headerFormat)) {
+        checkRegularExpression(ctx, header, headerWithoutShebang);
+      } else if (!headerFormat.isEmpty()) {
+        var matches = Stream.of(header, headerWithoutShebang)
+          .anyMatch(h -> h.startsWith(headerFormat));
+
+        if (!matches) {
           ctx.addFileIssue(MESSAGE);
         }
       }
@@ -80,9 +85,12 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     return ctx.pythonFile().content();
   }
 
-  private void checkRegularExpression(SubscriptionContext ctx, String fileContent) {
-    Matcher matcher = searchPattern.matcher(fileContent);
-    if (!matcher.find() || matcher.start() != 0) {
+  private void checkRegularExpression(SubscriptionContext ctx, String... fileContent) {
+    var matches = Stream.of(fileContent)
+      .map(searchPattern::matcher)
+      .anyMatch(matcher -> matcher.find() && matcher.start() == 0);
+
+    if (!matches) {
       ctx.addFileIssue(MESSAGE);
     }
   }
