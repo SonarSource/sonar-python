@@ -57,7 +57,7 @@ class ToxRunnerTest(unittest.TestCase):
                                         ('folder1', '', ['file', f'__init__{extension}']),
                                         ('folder3', '', ['otherfile.cpp', 'file2.testother', 'filetest'])]
             fns = tox_runner.fetch_resource_file_names(folder_name, extension)
-            expected = [f'folder1/__init__{extension}', f'folder2/__init__{extension}', f'folder2/file1{extension}']
+            expected = [f'folder2/__init__{extension}', f'folder2/file1{extension}', f'folder1/__init__{extension}']
             mocked_walk.assert_called_once_with(folder_name)
             self.assertListEqual(fns, expected)
 
@@ -73,7 +73,14 @@ class ToxRunnerTest(unittest.TestCase):
             self.assertListEqual(fns, ['_1', 'a/1', 'a/2', 'a/4', 'b/1', 'b/2', 'b/3', 'b/4', 'z'])
             mock_fetch_python.assert_called_with(folder)
             mock_fetch_config.assert_called()
-            mock_fetch_resource.assert_called()
+            mock_fetch_resource.assert_called_with(tox_runner.RESOURCES_FOLDER_PATH, tox_runner.PYTHON_STUB_EXTENSION)
+
+    def test_fetch_binary_file_name(self):
+        with mock.patch(f'{self.MODULE_NAME}.fetch_resource_file_names') as mock_fetch_resource:
+            mock_fetch_resource.return_value = ['b/1', 'a/2', 'a/1']
+            fns = runners.tox_runner.fetch_binary_file_names()
+            self.assertListEqual(fns, ['a/1', 'a/2', 'b/1'])
+            mock_fetch_resource.assert_called_with(tox_runner.BINARY_FOLDER_PATH, tox_runner.PROTOBUF_EXTENSION)
 
     def test_read_previous_checksum_non_existant_file(self):
         checksum_file = 'non_existant'
@@ -100,7 +107,7 @@ class ToxRunnerTest(unittest.TestCase):
             return checksums.pop()
 
         with mock.patch(self.BUILTIN_OPEN_FUNCTION, mock_open()) as mocked_open, \
-                mock.patch(f'{self.MODULE_NAME}.fetch_resource_file_names') as mock_binary_files, \
+                mock.patch(f'{self.MODULE_NAME}.fetch_binary_file_names') as mock_binary_files, \
                 mock.patch(f'{self.MODULE_NAME}.fetch_source_file_names') as mock_files, \
                 mock.patch(self.COMPUTE_CHECKSUM_FUNCTION) as mocked_checksum:
             mocked_checksum.side_effect = feed_checksum
@@ -155,13 +162,15 @@ class ToxRunnerTest(unittest.TestCase):
         with mock.patch(self.READ_PREVIOUS_CHECKSUM_FUNCTION) as mocked_previous_checksum, \
                 mock.patch(self.COMPUTE_CHECKSUM_FUNCTION) as mocked_checksum, \
                 mock.patch(f'{self.MODULE_NAME}.fetch_source_file_names') as mock_files, \
-                mock.patch(f'{self.MODULE_NAME}.fetch_resource_file_names') as mock_binary_files, \
+                mock.patch(f'{self.MODULE_NAME}.fetch_binary_file_names') as mock_binary_files, \
                 mock.patch(self.SUBPROCESS_CALL) as mocked_subprocess:
             mocked_previous_checksum.return_value = checksum
             mock_binary_files.return_value = self.FILE_NAMES
             mock_files.return_value = self.FILE_NAMES
             mocked_checksum.return_value = checksum
             tox_runner.main()
+            mock_files.assert_called_once()
+            mock_binary_files.assert_called_once()
             mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_FILE)
             mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_BINARIES_FILE)
             mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
@@ -183,12 +192,14 @@ class ToxRunnerTest(unittest.TestCase):
         with mock.patch(self.READ_PREVIOUS_CHECKSUM_FUNCTION) as mocked_previous_checksum, \
                 mock.patch(self.COMPUTE_CHECKSUM_FUNCTION) as mocked_checksum, \
                 mock.patch(f'{self.MODULE_NAME}.fetch_source_file_names') as mock_files, \
-                mock.patch(f'{self.MODULE_NAME}.fetch_resource_file_names') as mock_binary_files:
+                mock.patch(f'{self.MODULE_NAME}.fetch_binary_file_names') as mock_binary_files:
             mocked_previous_checksum.side_effect = feed_previous_checksum
             mock_binary_files.return_value = self.FILE_NAMES
             mock_files.return_value = self.FILE_NAMES
             mocked_checksum.side_effect = feed_checksum
             self.assertRaises(RuntimeError, tox_runner.main)
+            mock_files.assert_called_once()
+            mock_binary_files.assert_called_once()
             mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_FILE)
             mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_BINARIES_FILE)
             mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)

@@ -12,7 +12,10 @@ import logging
 CHECKSUM_FILE = 'checksum'
 CHECKSUM_BINARIES_FILE = 'checksum_binaries'
 SERIALIZER_PATH = 'serializer'
+RESOURCES_FOLDER_PATH = 'resources'
 BINARY_FOLDER_PATH = '../src/main/resources/org/sonar/python/types'
+PROTOBUF_EXTENSION = '.protobuf'
+PYTHON_STUB_EXTENSION = '.pyi'
 
 logger = logging.getLogger('tox_runner')
 handler = logging.StreamHandler(sys.stdout)
@@ -36,16 +39,20 @@ def fetch_resource_file_names(folder_name: str, file_extension: str) -> list[str
         for file in files:
             if file.endswith(file_extension):
                 result.append(join(root, file))
-    return sorted(result)
+    return result
 
 
 def fetch_config_file_names() -> list[str]:
     return ['requirements.txt', 'tox.ini']
 
 
+def fetch_binary_file_names() -> list[str]:
+    return sorted(fetch_resource_file_names(BINARY_FOLDER_PATH, PROTOBUF_EXTENSION))
+
+
 def fetch_source_file_names(folder_path: str) -> list[str]:
     filenames = fetch_python_file_names(folder_path)
-    resources = fetch_resource_file_names(folder_name='resources', file_extension='.pyi')
+    resources = fetch_resource_file_names(RESOURCES_FOLDER_PATH, PYTHON_STUB_EXTENSION)
     config_files = fetch_config_file_names()
     return sorted([*filenames, *resources, *config_files])
 
@@ -80,23 +87,23 @@ def update_checksum():
         file.write(compute_checksum(all_files, normalize_text_files))
 
     with open(CHECKSUM_BINARIES_FILE, 'w') as file:
-        binary_file_names = fetch_resource_file_names(BINARY_FOLDER_PATH, file_extension='.protobuf')
+        binary_file_names = fetch_binary_file_names()
         file.write(compute_checksum(binary_file_names, read_file))
 
 
 def main():
+    source_files = fetch_source_file_names(SERIALIZER_PATH)
     previous_sources_checksum = read_previous_checksum(CHECKSUM_FILE)
-    all_files = fetch_source_file_names(SERIALIZER_PATH)
-    current_sources_checksum = compute_checksum(all_files, normalize_text_files)
+    current_sources_checksum = compute_checksum(source_files, normalize_text_files)
     logger.info("STARTING TYPESHED SOURCE FILE CHECKSUM COMPUTATION")
     logger.info(f"Previous checksum {previous_sources_checksum}")
     logger.info(f"Current checksum {current_sources_checksum}")
-    logger.info(f"Checksum is computed over {len(all_files)} files")
+    logger.info(f"Checksum is computed over {len(source_files)} files")
     if previous_sources_checksum != current_sources_checksum:
         logger.info("STARTING TYPESHED SERIALIZATION")
         subprocess.run(["tox"])
     else:
-        binary_file_names = fetch_resource_file_names(BINARY_FOLDER_PATH, file_extension='.protobuf')
+        binary_file_names = fetch_binary_file_names()
         previous_binaries_checksum = read_previous_checksum(CHECKSUM_BINARIES_FILE)
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
         logger.info("STARTING TYPESHED BINARY FILES CHECKSUM COMPUTATION")
