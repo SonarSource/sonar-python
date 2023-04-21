@@ -5,12 +5,11 @@ from os.path import isfile, join
 import subprocess
 import hashlib
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 from collections.abc import Callable
 import logging
 
 CHECKSUM_FILE = 'checksum'
-CHECKSUM_BINARIES_FILE = 'checksum_binaries'
 SERIALIZER_PATH = 'serializer'
 RESOURCES_FOLDER_PATH = 'resources'
 BINARY_FOLDER_PATH = '../src/main/resources/org/sonar/python/types'
@@ -74,26 +73,32 @@ def compute_checksum(file_names: list[str], get_file_bytes: Callable[[str], byte
     return _hash.hexdigest()
 
 
-def read_previous_checksum(checksum_file: str) -> Optional[str]:
+def read_previous_checksum(checksum_file: str) -> Tuple[Optional[str], Optional[str]]:
+    def empty_str_to_none(s: str) -> Optional[str]:
+        if not s:
+            return None
+        return s
+
     if not Path(checksum_file).is_file():
-        return None
+        return None, None
     with open(checksum_file, 'r') as file:
-        return file.readline()
+        source_checksum = empty_str_to_none(file.readline().strip())
+        binaries_checksum = empty_str_to_none(file.readline().strip())
+        return source_checksum, binaries_checksum
 
 
 def update_checksum():
     with open(CHECKSUM_FILE, 'w') as file:
-        all_files = fetch_source_file_names(SERIALIZER_PATH)
-        file.write(compute_checksum(all_files, normalize_text_files))
-
-    with open(CHECKSUM_BINARIES_FILE, 'w') as file:
+        source_file_names = fetch_source_file_names(SERIALIZER_PATH)
+        source_checksum = compute_checksum(source_file_names, normalize_text_files)
         binary_file_names = fetch_binary_file_names()
-        file.write(compute_checksum(binary_file_names, read_file))
+        binary_checksum = compute_checksum(binary_file_names, read_file)
+        file.writelines([f"{source_checksum}\n", binary_checksum])
 
 
 def main():
     source_files = fetch_source_file_names(SERIALIZER_PATH)
-    previous_sources_checksum = read_previous_checksum(CHECKSUM_FILE)
+    (previous_sources_checksum, previous_binaries_checksum) = read_previous_checksum(CHECKSUM_FILE)
     current_sources_checksum = compute_checksum(source_files, normalize_text_files)
     logger.info("STARTING TYPESHED SOURCE FILE CHECKSUM COMPUTATION")
     logger.info(f"Previous checksum {previous_sources_checksum}")
@@ -104,7 +109,6 @@ def main():
         subprocess.run(["tox"])
     else:
         binary_file_names = fetch_binary_file_names()
-        previous_binaries_checksum = read_previous_checksum(CHECKSUM_BINARIES_FILE)
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
         logger.info("STARTING TYPESHED BINARY FILES CHECKSUM COMPUTATION")
         logger.info(f"Previous binaries checksum {previous_binaries_checksum}")
