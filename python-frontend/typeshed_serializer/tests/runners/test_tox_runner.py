@@ -20,13 +20,14 @@
 
 import unittest
 from unittest import mock
-from unittest.mock import mock_open, Mock
-
+from unittest.mock import mock_open
+import os
 from six import PY2
 
-import runners.tox_runner
 from runners import tox_runner
 from runners.tox_runner import CHECKSUM_FILE
+
+CURRENT_PATH = os.path.dirname(__file__)
 
 
 class ToxRunnerTest(unittest.TestCase):
@@ -38,7 +39,9 @@ class ToxRunnerTest(unittest.TestCase):
     BUILTIN_OPEN_FUNCTION = '__builtin__.open' if PY2 else 'builtins.open'
 
     FILE_NAMES = ['a/test', 'b/file', 'requirements.txt']
-    TEST_RESOURCES_FILE_NAMES = ["resources/fakemodule.pyi", "resources/fakemodule_imported.pyi"]
+    FAKEMODULE_PATH = os.path.join(CURRENT_PATH, "../resources/fakemodule.pyi")
+    FAKEMODULE_IMPORTED_PATH = os.path.join(CURRENT_PATH, "../resources/fakemodule_imported.pyi")
+    TEST_RESOURCES_FILE_NAMES = [FAKEMODULE_PATH, FAKEMODULE_IMPORTED_PATH]
     FILE_CONTENT = bytes("test\n end", 'utf-8')
 
     def test_fetching_python_files(self):
@@ -70,7 +73,7 @@ class ToxRunnerTest(unittest.TestCase):
             mock_fetch_resource.return_value = ['a/1', 'b/2', 'b/4']
             mock_fetch_python.return_value = ['a/2', 'a/4', 'b/1', 'b/3']
             mock_fetch_config.return_value = ['z', '_1']
-            fns = runners.tox_runner.fetch_source_file_names(folder)
+            fns = tox_runner.fetch_source_file_names(folder)
             self.assertListEqual(fns, ['_1', 'a/1', 'a/2', 'a/4', 'b/1', 'b/2', 'b/3', 'b/4', 'z'])
             mock_fetch_python.assert_called_with(folder)
             mock_fetch_config.assert_called()
@@ -79,7 +82,7 @@ class ToxRunnerTest(unittest.TestCase):
     def test_fetch_binary_file_name(self):
         with mock.patch(f'{self.MODULE_NAME}.fetch_resource_file_names') as mock_fetch_resource:
             mock_fetch_resource.return_value = ['b/1', 'a/2', 'a/1']
-            fns = runners.tox_runner.fetch_binary_file_names()
+            fns = tox_runner.fetch_binary_file_names()
             self.assertListEqual(fns, ['a/1', 'a/2', 'b/1'])
             mock_fetch_resource.assert_called_with(tox_runner.BINARY_FOLDER_PATH, tox_runner.PROTOBUF_EXTENSION)
 
@@ -164,7 +167,7 @@ class ToxRunnerTest(unittest.TestCase):
 
     def test_compute_different_checksum(self):
         checksum1 = tox_runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, tox_runner.normalize_text_files)
-        checksum2 = tox_runner.compute_checksum(["resources/fakemodule_imported.pyi"], tox_runner.normalize_text_files)
+        checksum2 = tox_runner.compute_checksum([self.FAKEMODULE_IMPORTED_PATH], tox_runner.normalize_text_files)
         assert checksum1 != checksum2
 
     def test_tox_runner_unchanged_checksums(self):
