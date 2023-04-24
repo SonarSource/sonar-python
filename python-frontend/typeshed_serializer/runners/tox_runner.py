@@ -138,6 +138,9 @@ def main():
         if previous_binaries_checksum != current_binaries_checksum:
             raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
         logger.info("SKIPPING TYPESHED SERIALIZATION")
+        # At the moment we need to run the tests in order to not break the quality gate.
+        # If the tests are skipped this could potentially result in missing coverage.
+        subprocess.run(['tox', '-e', 'py39'])
 
 
 if __name__ == '__main__':
