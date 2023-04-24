@@ -65,6 +65,11 @@ class ToxRunnerTest(unittest.TestCase):
             mocked_walk.assert_called_once_with(folder_name)
             self.assertListEqual(fns, expected)
 
+    def test_fetch_config_file_names(self):
+        fns = tox_runner.fetch_config_file_names()
+        expected = ['requirements.txt', 'tox.ini']
+        self.assertListEqual(fns, expected)
+
     def test_fetch_source_file_names(self):
         folder = "test"
         with mock.patch(f'{self.MODULE_NAME}.fetch_python_file_names') as mock_fetch_python, \
