@@ -403,6 +403,14 @@ public class InferredTypesTest {
     ).type()).isEqualTo(anyType());
   }
 
+  @Test
+  public void runtime_type_symbol() {
+    assertThat(INT.runtimeTypeSymbol()).isEqualTo(typeShedClass("int"));
+    assertThat(InferredTypes.or(INT, STR).runtimeTypeSymbol()).isNull();
+    assertThat(DECL_INT.runtimeTypeSymbol()).isNull();
+    assertThat(anyType().runtimeTypeSymbol()).isNull();
+  }
+
   private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
     SymbolsProtos.Type.Builder builder = SymbolsProtos.Type.newBuilder();
     TextFormat.merge(protobuf, builder);
