@@ -12,7 +12,7 @@
 
   <name>Python :: Frontend</name>
   <properties>
-    <sonar.sources>pom.xml,src/main/java,typeshed_serializer/serializer</sonar.sources>
+    <sonar.sources>pom.xml,src/main/java,typeshed_serializer/serializer,typeshed_serializer/runners</sonar.sources>
     <sonar.python.coverage.reportPaths>typeshed_serializer/cov.xml</sonar.python.coverage.reportPaths>
     <sonar.python.version>3.9</sonar.python.version>
   </properties>
@@ -144,16 +144,19 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
+            <version>3.1.0</version>
             <configuration>
               <workingDirectory>typeshed_serializer</workingDirectory>
             </configuration>
             <executions>
               <execution>
-                <id>tox</id>
+                <id>tox-runner</id>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <executable>tox</executable>
+                  <executable>python</executable>
+                  <arguments>
+                      <argument>runners/tox_runner.py</argument>
+                  </arguments>
                 </configuration>
                 <goals>
                   <goal>exec</goal>
@@ -169,6 +172,7 @@
               <includes>
                 <include>src/*/java/**/*.java</include>
                 <include>typeshed_serializer/serializer/**/*.py</include>
+                <include>typeshed_serializer/runners/**/*.py</include>
                 <include>typeshed_serializer/tests/**/*.py</include>
               </includes>
               <excludes>
