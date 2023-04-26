@@ -281,7 +281,7 @@ public class InferredTypes {
 
   public static Collection<ClassSymbol> typeSymbols(InferredType inferredType) {
     if (inferredType instanceof RuntimeType) {
-      return Collections.singleton(((RuntimeType) inferredType).getTypeClass());
+      return Collections.singleton(inferredType.runtimeTypeSymbol());
     }
     if (inferredType instanceof DeclaredType) {
       Symbol typeClass = ((DeclaredType) inferredType).getTypeClass();

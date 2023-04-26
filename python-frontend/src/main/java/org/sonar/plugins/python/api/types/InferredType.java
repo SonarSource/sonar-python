@@ -21,6 +21,8 @@ package org.sonar.plugins.python.api.types;
 
 import com.google.common.annotations.Beta;
 import java.util.Optional;
+import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Beta
@@ -62,5 +64,14 @@ public interface InferredType {
    */
   @Beta
   boolean mustBeOrExtend(String typeName);
+
+  /**
+   * Returns type ClassSymbol only in case of RuntimeType.
+   */
+  @Beta
+  @CheckForNull
+  default ClassSymbol runtimeTypeSymbol() {
+    return null;
+  }
 
 }
