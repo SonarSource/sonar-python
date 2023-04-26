@@ -31,6 +31,8 @@ CURRENT_PATH = os.path.dirname(__file__)
 
 @pytest.fixture(scope="session")
 def typeshed_stdlib():
+    typeshed_serializer.STDLIB_PATH = "resources/mock_stdlib"
+    typeshed_serializer.CURRENT_PATH = os.path.dirname(__file__)
     build_result, _ = typeshed_serializer.walk_typeshed_stdlib()
     return build_result
 
@@ -55,6 +57,7 @@ def fake_module_36_38():
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():
+    typeshed_serializer.THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, "resources/mock_third_parties"))
     return symbols_merger.merge_multiple_python_versions(is_third_parties=True)
 
 

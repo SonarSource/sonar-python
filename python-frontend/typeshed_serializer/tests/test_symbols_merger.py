@@ -35,7 +35,7 @@ def test_merge_multiple_python_versions(typeshed_stdlib):
     merged_modules = symbols_merger.merge_multiple_python_versions()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
-    assert len(merged_modules) == 477
+    assert len(merged_modules) == 28
 
 
 def test_basic_module_merge(typeshed_stdlib):
