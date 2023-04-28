@@ -1,0 +1,31 @@
+<p>This rule suggests avoiding the use of the built-in Python function "locals()" when passing context to a Django "render()" function.</p>
+<h2>Why is this an issue?</h2>
+<p>Using the "locals()" function to pass context to a Django "render()" function can lead to security vulnerabilities and unexpected behavior.
+"locals()" returns a dictionary of the current local scope, including any sensitive information that may be present in the function’s local namespace.
+This means that if "locals()" is used to pass context to "render()", sensitive data such as passwords, keys, and other secrets could be leaked.</p>
+<p>Additionally, using "locals()" to pass context can make code more difficult to read and understand. It can also make it harder to maintain code
+over time.</p>
+<h2>How to fix it</h2>
+<p>Instead of passing "locals()" to the "render()" function, explicitly define the context dictionary with only the variables that are required. This
+way, sensitive data is not accidentally included in the context, and the code is easier to read and maintain.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+def my_view(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    context = locals()
+    return render(request, "my_template.html", context)
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+def my_view(request):
+    username = "alice"
+    context = {"username": username}
+    return render(request, "my_template.html", context)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p><a href="https://docs.djangoproject.com/en/4.1/topics/http/shortcuts/#render">Django render() function</a></p>
+<p><a href="https://docs.python.org/3/library/functions.html#locals">Python locals() function</a></p>
+
