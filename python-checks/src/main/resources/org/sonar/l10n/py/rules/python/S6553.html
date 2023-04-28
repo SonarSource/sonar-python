@@ -1,0 +1,29 @@
+<p>This rule suggests avoiding the use of "null=True" on string-based fields such as CharField and TextField in Django models. Instead, it recommends
+using blank=True, which allows an empty string as a valid value while still maintaining the ability to query and filter on the field.</p>
+<h2>Why is this an issue?</h2>
+<p>Using "null=True" on string-based fields can lead to inconsistent and unexpected behavior. In Django, "null=True" allows the field to have a NULL
+value in the database. However, the Django convention to represent the absence of data for a string is an empty string. Having two ways to represent
+the absence of data can cause problems when querying and filtering on the field. For example, if a CharField with "null=True" has a value of NULL in
+the database, querying for an empty string will not return that object.</p>
+<h2>How to fix it</h2>
+<p>Instead of using "null=True", use "blank=True" on string-based fields such as CharField and TextField. This allows an empty string as a valid value
+while still maintaining the ability to query and filter on the field. If a field should not be left empty, specify a default value using the default
+argument.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+class ExampleModel(models.Model):
+    name = models.CharField(max_length=50, null=True)
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+class ExampleModel(models.Model):
+    name = models.CharField(max_length=50, blank=True)
+</pre>
+<h2>Exceptions</h2>
+<p>If <code>unique=True</code> and <code>blank=True</code> are both set, <code>null=True</code> is required to avoid unique constraint violations when
+saving multiple objects with blank values. No issue will be raised in this scenario.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p><a href="https://docs.djangoproject.com/en/4.1/ref/models/fields">Django model field reference</a></p>
+
