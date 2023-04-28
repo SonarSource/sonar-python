@@ -1,0 +1,40 @@
+<p>This rule discourages the use of <code>exclude</code> or <code><em>all</em></code> with ModelForm in Django and suggests using fields instead.</p>
+<h2>Why is this an issue?</h2>
+<p>In Django, when creating a <code>ModelForm</code>, it is common to use <code>exclude</code> to remove fields from the form. It is also possible to
+set the <code>fields</code> value to <code><em>all</em></code> to conveniently indicate that all the model fields should be included in the form.
+However, this can lead to security issues when new fields are added to the model, as they will automatically be included in the form, which may not be
+intended. Additionally, <code>exclude</code> or <code><em>all</em></code> can make it harder to maintain the codebase by hiding the dependencies
+between the model and the form.</p>
+<h2>How to fix it</h2>
+<p>Developers should use the "fields" attribute instead of "exclude" or "all" when creating ModelForms in Django. This ensures that all fields are
+explicitly listed and makes it clear what fields are included in the form.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+from django import forms
+
+class MyForm(forms.ModelForm):
+    class Meta:
+        model = MyModel
+        exclude = ['field1', 'field2']  # Noncompliant
+
+
+class MyOtherForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = '__all__'  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+from django import forms
+
+class MyForm(forms.ModelForm):
+    class Meta:
+        model = MyModel
+        fields = ['field3', 'field4']
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p><a href="https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/">Django ModelForm documentation</a> <a
+href="https://docs.djangoproject.com/en/4.1/ref/forms/fields/">Django form fields documentation</a></p>
+
