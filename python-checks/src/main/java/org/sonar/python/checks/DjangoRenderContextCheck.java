@@ -37,7 +37,7 @@ import org.sonar.python.tree.TreeUtils;
 public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use an explicit context instead of passing \"locals()\" to this Django \"render\" call.";
-  private static final String SECONDARY_MESSAGE = "locals() is assigned to \"%s\" here";
+  private static final String SECONDARY_MESSAGE = "locals() is assigned to \"%s\" here.";
   private static final String RENDER_FUNCTION = "django.shortcuts.render";
   private static final String LOCALS = "locals";
   private static final String CONTEXT_KEYWORD = "context";
@@ -97,7 +97,9 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
       if (localsSymbol != null && LOCALS.equals(localsSymbol.fullyQualifiedName())) {
         PreciseIssue preciseIssue = ctx.addIssue(contextArg.expression(), MESSAGE);
         assignment.lhsExpressions().stream().flatMap(e -> e.expressions().stream())
-          .forEach(variable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, variable)));
+          .filter(expression -> expression.is(Tree.Kind.NAME))
+          .map(Name.class::cast)
+          .forEach(namedVariable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, namedVariable.name())));
       }
     }
   }

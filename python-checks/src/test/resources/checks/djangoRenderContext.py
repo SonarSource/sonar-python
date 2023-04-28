@@ -4,12 +4,14 @@ def using_locals_from_var(request):
     username = "alice"
     password = "p@ssw0rd"
     context = locals()
+             #^^^^^^^^> {{locals() is assigned to "context" here.}}
     return render(request, "my_template.html", context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}} [[secondary=-1]]
                                               #^^^^^^^
 def using_locals_with_named_params(request):
     username = "alice"
     password = "p@ssw0rd"
     context = locals()
+             #^^^^^^^^> {{locals() is assigned to "context" here.}}
     return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}} [[secondary=-1]]
                                                                          #^^^^^^^
 def using_locals_directly(request):
