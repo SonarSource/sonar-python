@@ -27,4 +27,16 @@ public class DjangoReceiverDecoratorCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck.py", new DjangoReceiverDecoratorCheck());
   }
+
+  @Test
+  public void testRenamedImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck_renamed_import.py",
+      new DjangoReceiverDecoratorCheck());
+  }
+
+  @Test
+  public void testWrongImport() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/djangoReceiverDecoratorCheck_wrong_import.py",
+      new DjangoReceiverDecoratorCheck());
+  }
 }
