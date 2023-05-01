@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.django;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
@@ -32,28 +33,32 @@ import org.sonar.python.tree.TreeUtils;
 public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Define a \"__str__\" method for this Django model.";
-  private static final String DJANGO_MODEL_FQN = "django.db.models.Model";
+  private static final List<String> DJANGO_MODEL_FQN = List.of("django.db.models.Model");
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       var classDef = (ClassDef) ctx.syntaxNode();
-      if (TreeUtils.getParentClassesFQN(classDef).contains(DJANGO_MODEL_FQN)) {
-        var strMethodFqn = getStrMethodFqn(classDef);
-        var hasStrMethod = TreeUtils.topLevelFunctionDefs(classDef)
-          .stream()
-          .map(TreeUtils::getFunctionSymbolFromDef)
-          .filter(Objects::nonNull)
-          .map(Symbol::fullyQualifiedName)
-          .filter(Objects::nonNull)
-          .anyMatch(strMethodFqn::equals);
-
+      var parentClassesFQN = TreeUtils.getParentClassesFQN(classDef);
+      if (DJANGO_MODEL_FQN.equals(parentClassesFQN)) {
+        boolean hasStrMethod = hasStrMethod(classDef);
         if (!hasStrMethod) {
           ctx.addIssue(classDef.name(), MESSAGE);
         }
       }
 
     });
+  }
+
+  private static boolean hasStrMethod(ClassDef classDef) {
+    var strMethodFqn = getStrMethodFqn(classDef);
+    return TreeUtils.topLevelFunctionDefs(classDef)
+      .stream()
+      .map(TreeUtils::getFunctionSymbolFromDef)
+      .filter(Objects::nonNull)
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .anyMatch(strMethodFqn::equals);
   }
 
   private static String getStrMethodFqn(ClassDef classDef) {

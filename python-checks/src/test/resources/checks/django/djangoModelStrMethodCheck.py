@@ -10,5 +10,11 @@ class ValidModel(models.Model):
     def __str__(self):
         return self.name
 
+class ValidModelInherited(ValidModel):
+    name = models.CharField(max_length=100)
+
 class NotModel:
+    name = models.CharField(max_length=100)
+
+class UnknownModelInherited(UnknownModel):
     name = models.CharField(max_length=100)
