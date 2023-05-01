@@ -86,6 +86,9 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
     if (is(Kind.NOT)) {
       return InferredTypes.BOOL;
     }
+    if (is(Kind.UNARY_MINUS, Kind.UNARY_PLUS)) {
+      return expression.type();
+    }
     return InferredTypes.anyType();
   }
 }

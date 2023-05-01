@@ -31,8 +31,9 @@ public class UnaryExpressionImplTest {
   @Test
   public void type() {
     assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
-    assertThat(lastExpression("-42").type()).isEqualTo(InferredTypes.anyType());
-    assertThat(lastExpression("+42").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("-42").type()).isEqualTo(InferredTypes.INT);
+    assertThat(lastExpression("+42").type()).isEqualTo(InferredTypes.INT);
+    assertThat(lastExpression("+4.2").type()).isEqualTo(InferredTypes.FLOAT);
     assertThat(lastExpression("~42").type()).isEqualTo(InferredTypes.anyType());
   }
 }
