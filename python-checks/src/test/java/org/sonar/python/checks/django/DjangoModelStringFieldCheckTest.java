@@ -1,0 +1,87 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2023 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.checks.django;
+
+import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+public class DjangoModelStringFieldCheckTest {
+
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/django/djangoModelStringFieldCheck.py", new DjangoModelStringFieldCheck());
+  }
+
+  @Test
+  public void replaceQuickFixTest() {
+    var check = new DjangoModelStringFieldCheck();
+    var before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(max_length=50, null=True)";
+
+    var after = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(max_length=50, blank=True)";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"blank=True\"");
+  }
+
+  @Test
+  public void removeQuickFixTest() {
+    var check = new DjangoModelStringFieldCheck();
+    var before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(null=True, max_length=50, blank=True)";
+
+    var after = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(max_length=50, blank=True)";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the \"null=true\" flag");
+
+    before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(max_length=50, null=True, blank=True)";
+    PythonQuickFixVerifier.verify(check, before, after);
+
+    before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(max_length=50, blank=True, null=True)";
+    PythonQuickFixVerifier.verify(check, before, after);
+
+    before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(\n" +
+      "        max_length=50,\n" +
+      "        null=True,\n" +
+      "        blank=True\n" +
+      "    )";
+
+    after = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(\n" +
+      "        max_length=50,\n" +
+      "        blank=True\n" +
+      "    )";
+    PythonQuickFixVerifier.verify(check, before, after);
+  }
+
+}
