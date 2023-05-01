@@ -42,6 +42,8 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
   private static final String LOCALS = "locals";
   private static final String CONTEXT_KEYWORD = "context";
 
+  private static final int MAX_RECURSION_COUNT = 5;
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, DjangoRenderContextCheck::checkForDjangoRender);
@@ -59,49 +61,54 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
     RegularArgument contextArg = TreeUtils.nthArgumentOrKeyword(2, CONTEXT_KEYWORD, expression.arguments());
     if (contextArg != null) {
       if (contextArg.expression().is(Tree.Kind.CALL_EXPR)) {
-        raiseIssueLocalsCallDirectly(ctx, contextArg);
+        CallExpression maybeLocalsCall = (CallExpression) contextArg.expression();
+        if (isLocalsCall(maybeLocalsCall)) {
+          ctx.addIssue(maybeLocalsCall, MESSAGE);
+        }
       } else if (contextArg.expression().is(Tree.Kind.NAME)) {
-        checkIfLocalsIsAssignedToContextParameter(ctx, contextArg);
+        checkIfLocalsIsAssignedToContextParameter(ctx, contextArg, (Name) contextArg.expression(), 0);
       }
     }
   }
 
-  private static void raiseIssueLocalsCallDirectly(SubscriptionContext ctx, RegularArgument contextArg) {
-    CallExpression maybeLocalsCall = (CallExpression) contextArg.expression();
-    Symbol localsSymbol = maybeLocalsCall.calleeSymbol();
-    if (localsSymbol != null && LOCALS.equals(localsSymbol.fullyQualifiedName())) {
-      ctx.addIssue(maybeLocalsCall, MESSAGE);
-    }
-  }
-
-  private static void checkIfLocalsIsAssignedToContextParameter(SubscriptionContext ctx, RegularArgument contextArg) {
-    Name maybeLocalsCall = (Name) contextArg.expression();
-    Symbol contextSymbol = maybeLocalsCall.symbol();
-    if (contextSymbol != null) {
-      List<Tree> assignmentStmts = contextSymbol.usages().stream()
-        .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
-        .map(Usage::tree)
-        .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT))
-        .collect(Collectors.toList());
-      if (assignmentStmts.size() == 1) {
-        raiseIssueLocalsIsAssigned(ctx, contextArg, assignmentStmts);
+  private static void checkIfLocalsIsAssignedToContextParameter(SubscriptionContext ctx, RegularArgument contextArg, Name maybeLocalsCall, int recursionCount) {
+    if (recursionCount <= MAX_RECURSION_COUNT) {
+      Symbol contextSymbol = maybeLocalsCall.symbol();
+      if (contextSymbol != null) {
+        List<Tree> assignmentStmts = contextSymbol.usages().stream()
+          .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
+          .map(Usage::tree)
+          .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT))
+          .collect(Collectors.toList());
+        if (assignmentStmts.size() == 1) {
+          AssignmentStatement assignment = (AssignmentStatement) assignmentStmts.get(0);
+          checkIfLocalsIsCalledOrFindTheNextAncestor(ctx, contextArg, assignment, recursionCount);
+        }
       }
     }
   }
 
-  private static void raiseIssueLocalsIsAssigned(SubscriptionContext ctx, RegularArgument contextArg, List<Tree> assignmentStmts) {
-    AssignmentStatement assignment = (AssignmentStatement) assignmentStmts.get(0);
+  private static void checkIfLocalsIsCalledOrFindTheNextAncestor(SubscriptionContext ctx, RegularArgument contextArg, AssignmentStatement assignment, int recursionCount) {
     if (assignment.assignedValue().is(Tree.Kind.CALL_EXPR)) {
       CallExpression localsAssignment = (CallExpression) assignment.assignedValue();
-      Symbol localsSymbol = localsAssignment.calleeSymbol();
-      if (localsSymbol != null && LOCALS.equals(localsSymbol.fullyQualifiedName())) {
-        PreciseIssue preciseIssue = ctx.addIssue(contextArg.expression(), MESSAGE);
-        assignment.lhsExpressions().stream().flatMap(e -> e.expressions().stream())
-          .filter(expression -> expression.is(Tree.Kind.NAME))
-          .map(Name.class::cast)
-          .forEach(namedVariable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, namedVariable.name())));
+      if (isLocalsCall(localsAssignment)) {
+        raiseIssueLocalsIsAssigned(ctx, contextArg, assignment, localsAssignment);
       }
+    } else if (assignment.assignedValue().is(Tree.Kind.NAME)) {
+      checkIfLocalsIsAssignedToContextParameter(ctx, contextArg, (Name) assignment.assignedValue(), recursionCount + 1);
     }
   }
 
+  private static void raiseIssueLocalsIsAssigned(SubscriptionContext ctx, RegularArgument contextArg, AssignmentStatement assignment, CallExpression localsAssignment) {
+    PreciseIssue preciseIssue = ctx.addIssue(contextArg.expression(), MESSAGE);
+    assignment.lhsExpressions().stream().flatMap(e -> e.expressions().stream())
+      .filter(expression -> expression.is(Tree.Kind.NAME))
+      .map(Name.class::cast)
+      .forEach(namedVariable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, namedVariable.name())));
+  }
+
+  private static boolean isLocalsCall(CallExpression callExpression) {
+    Symbol localsSymbol = callExpression.calleeSymbol();
+    return localsSymbol != null && LOCALS.equals(localsSymbol.fullyQualifiedName());
+  }
 }

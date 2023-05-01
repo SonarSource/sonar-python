@@ -5,14 +5,14 @@ def using_locals_from_var(request):
     password = "p@ssw0rd"
     context = locals()
              #^^^^^^^^> {{locals() is assigned to "context" here.}}
-    return render(request, "my_template.html", context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}} [[secondary=-1]]
+    return render(request, "my_template.html", context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
                                               #^^^^^^^
 def using_locals_with_named_params(request):
     username = "alice"
     password = "p@ssw0rd"
     context = locals()
              #^^^^^^^^> {{locals() is assigned to "context" here.}}
-    return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}} [[secondary=-1]]
+    return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
                                                                          #^^^^^^^
 def using_locals_directly(request):
     username = "alice"
@@ -20,6 +20,15 @@ def using_locals_directly(request):
     return render(request, "my_template.html", locals()) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
                                               #^^^^^^^^
 
+def using_locals_multiple_assignment(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    some_var = locals()
+              #^^^^^^^^> {{locals() is assigned to "some_var" here.}}
+    other_var = some_var
+    my_context = other_var
+    return render(request, "my_template.html", my_context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
+                                              #^^^^^^^^^^
 def success(request):
     username = "alice"
     context = {username: username}
@@ -78,3 +87,23 @@ def success_render_not_called(request):
     password = "p@ssw0rd"
     context = locals()
     return foo(request, "my_template.html", context)
+
+def success_multiple_assignment(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    some_var = {}
+    other_var = some_var
+    my_context = other_var
+    return render(request, "my_template.html", my_context)
+
+def success_too_many_assignment(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    a = locals()
+    b = a
+    c = b
+    d = c
+    e = d
+    f = e
+    g = f
+    return render(request, "my_template.html", g)
