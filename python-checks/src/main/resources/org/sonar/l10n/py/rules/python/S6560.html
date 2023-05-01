@@ -1,0 +1,24 @@
+<h2>Why is this an issue?</h2>
+<p>By default, only dictionary objects can be serialized in Django JSON-encoded response. Before ECMASCript 5, serializing non-dictionary objects
+could lead to security vulnerabilities. Since most modern browsers implement ECMAScript 5, this vector of attack is no longer a threat and it is
+possible to serialize non-dictionary objects by setting the <code>safe</code> flag to <code>False</code>. However, if this flag is not set, a
+<code>TypeError</code> will be thrown by the serializer.</p>
+<p>Despite this possibility, it is still recommended to serialize dictionary objects, as an API based on <code>dict</code> is generally more
+extensible and easier to maintain.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, developers should ensure that the safe flag is set to "False" when attempting to serialize non-dictionary objects in Django.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+from django.http import JsonResponse
+response = JsonResponse([1, 2, 3])
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+from django.http import JsonResponse
+response = JsonResponse([1, 2, 3], safe=False)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p><a href="https://docs.djangoproject.com/en/4.1/ref/request-response/#serializing-non-dictionary-objects">Serializing non-dictionary objects</a></p>
+
