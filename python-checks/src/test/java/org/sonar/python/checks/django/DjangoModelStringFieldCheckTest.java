@@ -55,7 +55,7 @@ public class DjangoModelStringFieldCheckTest {
       "class NullFieldsModel(models.Model):\n" +
       "    name = models.CharField(max_length=50, blank=True)";
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove \"null\" argument");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the \"null=true\" flag");
 
     before = "from django.db import models\n" +
       "class NullFieldsModel(models.Model):\n" +
@@ -65,6 +65,22 @@ public class DjangoModelStringFieldCheckTest {
     before = "from django.db import models\n" +
       "class NullFieldsModel(models.Model):\n" +
       "    name = models.CharField(max_length=50, blank=True, null=True)";
+    PythonQuickFixVerifier.verify(check, before, after);
+
+    before = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(\n" +
+      "        max_length=50,\n" +
+      "        null=True,\n" +
+      "        blank=True\n" +
+      "    )";
+
+    after = "from django.db import models\n" +
+      "class NullFieldsModel(models.Model):\n" +
+      "    name = models.CharField(\n" +
+      "        max_length=50,\n" +
+      "        blank=True\n" +
+      "    )";
     PythonQuickFixVerifier.verify(check, before, after);
   }
 

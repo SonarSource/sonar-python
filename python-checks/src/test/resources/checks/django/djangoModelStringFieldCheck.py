@@ -13,4 +13,6 @@ class BlankFieldsModel(models.Model):
     name = models.CharField(max_length=50, blank=True)
     desc = models.TextField(max_length=50, blank=True)
 
-
+class NullBlankUniqueFieldsModel(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=True, unique=True)
+    desc = models.TextField(max_length=50, null=True, blank=True, unique=True)

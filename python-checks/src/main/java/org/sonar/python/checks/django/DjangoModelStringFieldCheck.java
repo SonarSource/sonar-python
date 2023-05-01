@@ -42,7 +42,7 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
   private static final String REPLACE_MESSAGE = "Replace this \"null=True\" flag with \"blank=True\".";
   private static final String REMOVE_MESSAGE = "Remove this \"null=True\" flag.";
   private static final String REPLACE_QUICK_FIX_MESSAGE = "Replace with \"blank=True\"";
-  private static final String REMOVE_QUICK_FIX_MESSAGE = "Remove \"null\" argument";
+  private static final String REMOVE_QUICK_FIX_MESSAGE = "Remove the \"null=true\" flag";
 
   private static final String DJANGO_MODEL_FQN = "django.db.models.Model";
   public static final Set<String> FIELD_TYPES_FQN = Set.of(
@@ -80,6 +80,12 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
       .filter(DjangoModelStringFieldCheck::isArgumentSetAsTrue);
     var blankArg = getCallArgumentByName(call, "blank")
       .filter(DjangoModelStringFieldCheck::isArgumentSetAsTrue);
+    var uniqueArg = getCallArgumentByName(call, "unique")
+      .filter(DjangoModelStringFieldCheck::isArgumentSetAsTrue);
+
+    if (blankArg.isPresent() && uniqueArg.isPresent()) {
+      return;
+    }
 
     nullArg.ifPresent(arg -> {
       if (blankArg.isPresent()) {
@@ -126,12 +132,16 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
         var removeFrom = arg;
         Tree removeTo;
         if (index == 0) {
+          // if argument to be removed is first one - remove it and comma next to it
           removeTo = args.get(index + 2);
         } else {
+          // if argument to be removed is not first one - remove comma going before the argument
           removeFrom = args.get(index - 1);
           if (index == count - 1) {
+            // if argument to be removed is last one - remove until close parenthesis
             removeTo = call.rightPar();
           } else {
+            // if argument to be removed is not last one - remove until next comma
             removeTo = args.get(index + 1);
           }
         }
