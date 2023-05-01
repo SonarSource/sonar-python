@@ -38,6 +38,7 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
@@ -409,6 +410,14 @@ public class InferredTypesTest {
     assertThat(InferredTypes.or(INT, STR).runtimeTypeSymbol()).isNull();
     assertThat(DECL_INT.runtimeTypeSymbol()).isNull();
     assertThat(anyType().runtimeTypeSymbol()).isNull();
+  }
+
+  @Test
+  public void adding_a_negative_number() {
+    assertThat(lastExpressionInFunction(
+      "x = -1",
+      "x + 1"
+    ).type()).isEqualTo(INT);
   }
 
   private static InferredType protobufType(String protobuf) throws TextFormat.ParseException {
