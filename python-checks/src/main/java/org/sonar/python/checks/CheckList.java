@@ -41,6 +41,7 @@ import org.sonar.python.checks.cdk.UnencryptedSageMakerNotebookCheck;
 import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck;
 import org.sonar.python.checks.cdk.UnrestrictedOutboundCommunicationsCheck;
+import org.sonar.python.checks.django.DjangoModelFormFieldsCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -348,7 +349,9 @@ public final class CheckList {
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,
       WrongAssignmentOperatorCheck.class,
-      XMLParserXXEVulnerableCheck.class)));
+      XMLParserXXEVulnerableCheck.class,
+      DjangoModelFormFieldsCheck.class
+    )));
   }
 
 }

@@ -35,7 +35,6 @@ import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.measures.ComponentRequest;
 
-import static java.lang.Double.parseDouble;
 import static java.util.Collections.singletonList;
 
 public class RulingHelper {
