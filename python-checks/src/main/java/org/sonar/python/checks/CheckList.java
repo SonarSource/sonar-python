@@ -41,6 +41,7 @@ import org.sonar.python.checks.cdk.UnencryptedSageMakerNotebookCheck;
 import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck;
 import org.sonar.python.checks.cdk.UnrestrictedOutboundCommunicationsCheck;
+import org.sonar.python.checks.django.DjangoReceiverDecoratorCheck;
 import org.sonar.python.checks.django.DjangoModelFormFieldsCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
@@ -80,10 +81,9 @@ import org.sonar.python.checks.regex.ImpossibleBackReferenceCheck;
 import org.sonar.python.checks.regex.ImpossibleBoundariesCheck;
 import org.sonar.python.checks.regex.InvalidRegexCheck;
 import org.sonar.python.checks.regex.MultipleWhitespaceCheck;
-import org.sonar.python.checks.regex.UnusedGroupNamesCheck;
+import org.sonar.python.checks.regex.OctalEscapeCheck;
 import org.sonar.python.checks.regex.PossessiveQuantifierContinuationCheck;
 import org.sonar.python.checks.regex.RedosCheck;
-import org.sonar.python.checks.regex.OctalEscapeCheck;
 import org.sonar.python.checks.regex.RedundantRegexAlternativesCheck;
 import org.sonar.python.checks.regex.RegexComplexityCheck;
 import org.sonar.python.checks.regex.RegexLookaheadCheck;
@@ -94,6 +94,7 @@ import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
+import org.sonar.python.checks.regex.UnusedGroupNamesCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertAfterRaiseCheck;
 import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
@@ -350,7 +351,8 @@ public final class CheckList {
       WildcardImportCheck.class,
       WrongAssignmentOperatorCheck.class,
       XMLParserXXEVulnerableCheck.class,
-      DjangoModelFormFieldsCheck.class
+      DjangoModelFormFieldsCheck.class,
+      DjangoReceiverDecoratorCheck.class
     )));
   }
 

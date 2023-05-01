@@ -1,0 +1,37 @@
+<p>This rule enforces that the '@receiver' decorator is placed on top of all other decorators in Django functions.</p>
+<h2>Why is this an issue?</h2>
+<p>In Django, the '@receiver' decorator is used to register signal handlers. These handlers are used to respond to events that occur in the
+application, such as a user logging in or a database record being saved.</p>
+<p>The order in which decorators are applied can have a significant impact on their behavior. In the case of the @receiver decorator, it is important
+that it is applied first, before any other decorators, in order to ensure that the signal handler is registered correctly.</p>
+<p>If the '@receiver' decorator is not applied first, the decorators placed above it will be ignored, which can result in unexpected behavior or even
+errors in the application.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, simply move the '@receiver' decorator to the top of the list of decorators used to decorate the function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+from django.dispatch import receiver
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+@receiver(some_signal)
+def my_handler(sender, **kwargs):
+    ...
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+from django.dispatch import receiver
+from django.views.decorators.csrf import csrf_exempt
+
+@receiver(some_signal)
+@csrf_exempt
+def my_handler(sender, **kwargs):
+    ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.djangoproject.com/en/4.1/topics/signals/">Django signals</a> </li>
+</ul>
+
