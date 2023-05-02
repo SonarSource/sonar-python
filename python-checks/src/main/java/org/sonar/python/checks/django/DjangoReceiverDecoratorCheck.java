@@ -33,7 +33,7 @@ import org.sonar.python.tree.TreeUtils;
 public class DjangoReceiverDecoratorCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Move this '@receiver' decorator to the top of the other decorators.";
-  private static final String QUICK_FIX_MESSAGE = "Move this '@receiver' decorator to the top of the other decorators.";
+  private static final String QUICK_FIX_MESSAGE = "Move the '@receiver' decorator to the top";
   private static final String RECEIVER_DECORATOR_FQN = "django.dispatch.receiver";
 
   @Override

@@ -56,7 +56,7 @@ public class DjangoReceiverDecoratorCheckTest {
       "def my_handler(sender, **kwargs):\n" +
       "    ...";
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move this '@receiver' decorator to the top of the other decorators.");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@receiver' decorator to the top");
 
     before = "from django.dispatch import receiver\n" +
       "@csrf_exempt\n" +
@@ -72,7 +72,7 @@ public class DjangoReceiverDecoratorCheckTest {
       "def my_handler(sender, **kwargs):\n" +
       "    ...";
     PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move this '@receiver' decorator to the top of the other decorators.");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@receiver' decorator to the top");
   }
 
 }
