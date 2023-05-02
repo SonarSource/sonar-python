@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
@@ -27,7 +28,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -59,32 +61,18 @@ public class DjangoNonDictSerializationCheck extends PythonSubscriptionCheck {
   private static void checkForDictSerialization(SubscriptionContext ctx, CallExpression callExpression) {
     RegularArgument safe = TreeUtils.nthArgumentOrKeyword(2, "safe", callExpression.arguments());
     if (safe == null || (safe.expression().is(Tree.Kind.NAME) && "True".equals(((Name) safe.expression()).name()))) {
-      RegularArgument dataArg = getFirstArgument(callExpression.arguments());
-      if (dataArg != null
-        && (!dataArg.expression().is(Tree.Kind.DICTIONARY_LITERAL))
-        && (!dataArg.expression().is(Tree.Kind.CALL_EXPR)
-          && !isDictAssignedToExpression(dataArg.expression()))) {
+      RegularArgument dataArg = TreeUtils.nthArgumentOrKeyword(0, "data", callExpression.arguments());
+      if (dataArg != null && !couldExpressionBeADict(dataArg.expression())) {
         ctx.addIssue(dataArg, MESSAGE);
       }
     }
   }
 
-  @CheckForNull
-  private static RegularArgument getFirstArgument(List<Argument> args) {
-    if (!args.isEmpty()) {
-      Argument argument = args.get(0);
-      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-        return (RegularArgument) argument;
-      }
-    }
-    return null;
-  }
-
-  private static boolean isDictAssignedToExpression(Expression expression) {
+  private static boolean couldExpressionBeADict(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       return couldDictBeAssignedToDataArg((Name) expression, 0);
     }
-    return false;
+    return couldTypeBeADict(expression);
   }
 
   private static boolean couldDictBeAssignedToDataArg(Name dataArg, int recursiveCount) {
@@ -93,22 +81,37 @@ public class DjangoNonDictSerializationCheck extends PythonSubscriptionCheck {
       List<Tree> assignmentStmts = dataArgSymbol.usages().stream()
         .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
         .map(Usage::tree)
-        .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT))
+        .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION))
+        .filter(Objects::nonNull)
         .collect(Collectors.toList());
       if (assignmentStmts.size() == 1) {
-        AssignmentStatement assignment = (AssignmentStatement) assignmentStmts.get(0);
+        Tree assignment = assignmentStmts.get(0);
+        Expression assignedValue = getAssignedValue(assignment);
         // We do not yet support checking the types from call expressions
-        if (assignment.assignedValue().is(Tree.Kind.DICTIONARY_LITERAL)
-          || assignment.assignedValue().is(Tree.Kind.CALL_EXPR)
-          || assignment.assignedValue().is(Tree.Kind.QUALIFIED_EXPR)) {
-          return true;
-        } else if (assignment.assignedValue().is(Tree.Kind.NAME)) {
-          return couldDictBeAssignedToDataArg((Name) assignment.assignedValue(), recursiveCount + 1);
-        } else {
-          return false;
+        if (assignedValue != null) {
+          if (assignedValue.is(Tree.Kind.NAME)) {
+            return couldDictBeAssignedToDataArg((Name) assignedValue, recursiveCount + 1);
+          } else {
+            return couldTypeBeADict(assignedValue);
+          }
         }
       }
     }
     return true;
+  }
+
+  private static boolean couldTypeBeADict(Expression expression) {
+    return expression.is(Tree.Kind.DICTIONARY_LITERAL) || expression.is(Tree.Kind.DICT_COMPREHENSION) || expression.type().canBeOrExtend("dict");
+  }
+
+  @CheckForNull
+  private static Expression getAssignedValue(Tree assignment) {
+    if (assignment.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      return ((AssignmentStatement) assignment).assignedValue();
+    } else if (assignment.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      return ((AnnotatedAssignment) assignment).assignedValue();
+    } else {
+      return ((AssignmentExpression) assignment).expression();
+    }
   }
 }

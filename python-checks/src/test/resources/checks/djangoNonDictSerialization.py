@@ -1,25 +1,39 @@
 from django.http import JsonResponse
 
-response = JsonResponse([1, 2, 3]) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
-                       #^^^^^^^^^
+JsonResponse([1, 2, 3]) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^^^^^^^^^
 
 list_lit = [42]
-response = JsonResponse(list_lit) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
-                       #^^^^^^^^
+JsonResponse(list_lit) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^^^^^^^^
 
-response = JsonResponse(4) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
-                       #^
+JsonResponse(4) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^
 
-response = JsonResponse({1,2,3,4}) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
-                       #^^^^^^^^^
+JsonResponse({1,2,3,4}) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^^^^^^^^^
 
-response = JsonResponse({1,2,3,4}, safe=True) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
-                       #^^^^^^^^^
+JsonResponse({1,2,3,4}, safe=True) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^^^^^^^^^
+
+assignment_exp_list
+if(assignment_exp_list:= [1,2,3]):
+  print("OK")
+JsonResponse(assignment_exp_list) # Noncompliant {{Use a dictionary object here, or set the "safe" flag to False.}}
+            #^^^^^^^^^^^^^^^^^^^
+
+dict_comprehension = {k:42 for k in [1,2,3,]}
+JsonResponse(dict_comprehension)
 
 def MyClass():
-  pass
+  dict_field = {"a": 42}
+  list_field = [1,2,3]
 
- response = JsonResponse(MyClass())
+response = JsonResponse(MyClass())
+non_dict_obj = MyClass()
+JsonResponse(non_dict_obj)
+JsonResponse(non_dict_obj.dict_field)
+JsonResponse(non_dict_obj.list_field) # FN
 
 
 def safeCall():
@@ -44,17 +58,22 @@ class Success:
   success3 = JsonResponse(foo())
   success4 = JsonResponse(4, safe=False)
   success5 = JsonResponse([1, 2, 3], DjangoJSONEncoder, False)
-  data = {"foo": 42}
+  data: dict[str, int] = {"foo": 42}
   success6 = JsonResponse(data)
-  a = data
+  annotated_only : list[str]
+  success7 = JsonResponse(annotated_only)
+  a = [1,2,3,4,5]
   b = a
   c = b
   d = c
   e = d
   f = e
   g = f
-  reassigned_data = g
-  success7 = JsonResponse(reassigned_data)
+  success8 = JsonResponse(g)
+  assignment_exp = None
+  if(assignment_exp:= data):
+    print("OK")
+  success9 = JsonResponse(assignment_exp)
 
 
 def unknown_data(maybe_dict):
