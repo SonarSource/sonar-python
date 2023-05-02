@@ -44,6 +44,7 @@ import org.sonar.python.checks.cdk.UnrestrictedOutboundCommunicationsCheck;
 import org.sonar.python.checks.django.DjangoReceiverDecoratorCheck;
 import org.sonar.python.checks.django.DjangoModelFormFieldsCheck;
 import org.sonar.python.checks.django.DjangoModelStringFieldCheck;
+import org.sonar.python.checks.django.DjangoModelStrMethodCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -355,7 +356,8 @@ public final class CheckList {
       XMLParserXXEVulnerableCheck.class,
       DjangoModelFormFieldsCheck.class,
       DjangoReceiverDecoratorCheck.class,
-      DjangoModelStringFieldCheck.class
+      DjangoModelStringFieldCheck.class,
+      DjangoModelStrMethodCheck.class
     )));
   }
 
