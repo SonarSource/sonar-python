@@ -20,6 +20,7 @@
 package org.sonar.python.checks.django;
 
 import org.junit.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class DjangoReceiverDecoratorCheckTest {
@@ -39,4 +40,39 @@ public class DjangoReceiverDecoratorCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/djangoReceiverDecoratorCheck_wrong_import.py",
       new DjangoReceiverDecoratorCheck());
   }
+
+  @Test
+  public void quickFixTest() {
+    var check = new DjangoReceiverDecoratorCheck();
+    var before = "from django.dispatch import receiver\n" +
+      "@csrf_exempt\n" +
+      "@receiver(some_signal)\n" +
+      "def my_handler(sender, **kwargs):\n" +
+      "    ...";
+
+    var after = "from django.dispatch import receiver\n" +
+      "@receiver(some_signal)\n" +
+      "@csrf_exempt\n" +
+      "def my_handler(sender, **kwargs):\n" +
+      "    ...";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move this '@receiver' decorator to the top of the other decorators.");
+
+    before = "from django.dispatch import receiver\n" +
+      "@csrf_exempt\n" +
+      "@receiver(some_signal)\n" +
+      "@another_decorator\n" +
+      "def my_handler(sender, **kwargs):\n" +
+      "    ...";
+
+    after = "from django.dispatch import receiver\n" +
+      "@receiver(some_signal)\n" +
+      "@csrf_exempt\n" +
+      "@another_decorator\n" +
+      "def my_handler(sender, **kwargs):\n" +
+      "    ...";
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move this '@receiver' decorator to the top of the other decorators.");
+  }
+
 }
