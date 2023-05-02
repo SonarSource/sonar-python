@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -161,21 +162,22 @@ public class TreeUtils {
   }
 
   public static List<String> getParentClassesFQN(ClassDef classDef) {
-    return getParentClasses(TreeUtils.getClassSymbolFromDef(classDef)).stream()
+    return getParentClasses(TreeUtils.getClassSymbolFromDef(classDef), new HashSet<>()).stream()
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
   }
 
-  private static List<Symbol> getParentClasses(@Nullable ClassSymbol classSymbol) {
+  private static List<Symbol> getParentClasses(@Nullable ClassSymbol classSymbol, Set<ClassSymbol> visitedSymbols) {
     List<Symbol> superClasses = new ArrayList<>();
-    if (classSymbol == null) {
+    if (classSymbol == null || visitedSymbols.contains(classSymbol)) {
       return superClasses;
     }
+    visitedSymbols.add(classSymbol);
     for (Symbol symbol : classSymbol.superClasses()) {
       superClasses.add(symbol);
       if (symbol instanceof ClassSymbol) {
-        superClasses.addAll(getParentClasses((ClassSymbol) symbol));
+        superClasses.addAll(getParentClasses((ClassSymbol) symbol, visitedSymbols));
       }
     }
     return superClasses;
