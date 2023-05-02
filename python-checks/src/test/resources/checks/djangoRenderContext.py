@@ -7,6 +7,16 @@ def using_locals_from_var(request):
              #^^^^^^^^> {{locals() is assigned to "context" here.}}
     return render(request, "my_template.html", context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
                                               #^^^^^^^
+def using_locals_from_var(request):
+    class MyContextClass():
+      attr_ref : Any
+
+    username = "alice"
+    password = "p@ssw0rd"
+    obj = MyContextClass()
+    obj.attr_ref : Any = locals()
+    return render(request, "my_template.html", obj.attr_ref) # FN - not supporting object attributes
+
 def using_locals_with_named_params(request):
     username = "alice"
     password = "p@ssw0rd"
@@ -14,6 +24,23 @@ def using_locals_with_named_params(request):
              #^^^^^^^^> {{locals() is assigned to "context" here.}}
     return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
                                                                          #^^^^^^^
+def using_annotated_locals(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    context: Any = locals()
+                  #^^^^^^^^> {{locals() is assigned to "context" here.}}
+    return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
+                                                                         #^^^^^^^
+
+def using_assignment_expression(request):
+    username = "alice"
+    password = "p@ssw0rd"
+    if(context := locals()) is not None:
+                 #^^^^^^^^> {{locals() is assigned to "context" here.}}
+       print("OK") 
+    return render(request, "my_template.html", content_type=None, context=context) # Noncompliant {{Use an explicit context instead of passing "locals()" to this Django "render" call.}}
+                                                                         #^^^^^^^
+
 def using_locals_directly(request):
     username = "alice"
     password = "p@ssw0rd"
@@ -107,3 +134,18 @@ def success_too_many_assignment(request):
     f = e
     g = f
     return render(request, "my_template.html", g)
+
+from typing import Dict
+
+def success_assignment_expression(request):
+    if(context:= { "a": 1, "b" :2 }) is not None:
+        print("ok")
+    return render(request, "my_template.html", context=context)
+
+def success_annotated_assignment(request):
+    context: Dict[str, Any] = { "a": 1, "b" :2 }
+    return render(request, "my_template.html", context=context)
+
+def success_annotated_assignment_no_value(request):
+    context: Dict[str, Any]
+    return render(request, "my_template.html", context=context)

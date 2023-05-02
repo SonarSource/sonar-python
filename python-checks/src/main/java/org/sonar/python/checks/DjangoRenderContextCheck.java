@@ -20,14 +20,19 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -78,33 +83,59 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
         List<Tree> assignmentStmts = contextSymbol.usages().stream()
           .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
           .map(Usage::tree)
-          .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT))
+          .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_EXPRESSION, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT))
+          .filter(Objects::nonNull)
           .collect(Collectors.toList());
         if (assignmentStmts.size() == 1) {
-          AssignmentStatement assignment = (AssignmentStatement) assignmentStmts.get(0);
-          checkIfLocalsIsCalledOrFindTheNextAncestor(ctx, contextArg, assignment, recursionCount);
+          Tree assignment = assignmentStmts.get(0);
+          Expression assignedValue = getAssignedValue(assignment);
+          if (assignedValue != null) {
+            checkIfLocalsIsCalledOrFindTheNextAncestor(ctx, contextArg, assignment, assignedValue, recursionCount);
+          }
         }
       }
     }
   }
 
-  private static void checkIfLocalsIsCalledOrFindTheNextAncestor(SubscriptionContext ctx, RegularArgument contextArg, AssignmentStatement assignment, int recursionCount) {
-    if (assignment.assignedValue().is(Tree.Kind.CALL_EXPR)) {
-      CallExpression localsAssignment = (CallExpression) assignment.assignedValue();
-      if (isLocalsCall(localsAssignment)) {
-        raiseIssueLocalsIsAssigned(ctx, contextArg, assignment, localsAssignment);
-      }
-    } else if (assignment.assignedValue().is(Tree.Kind.NAME)) {
-      checkIfLocalsIsAssignedToContextParameter(ctx, contextArg, (Name) assignment.assignedValue(), recursionCount + 1);
+  @CheckForNull
+  private static Expression getAssignedValue(Tree assignment) {
+    if (assignment.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      return ((AssignmentStatement) assignment).assignedValue();
+    } else if (assignment.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      return ((AnnotatedAssignment) assignment).assignedValue();
+    } else {
+      return ((AssignmentExpression) assignment).expression();
     }
   }
 
-  private static void raiseIssueLocalsIsAssigned(SubscriptionContext ctx, RegularArgument contextArg, AssignmentStatement assignment, CallExpression localsAssignment) {
+  private static void checkIfLocalsIsCalledOrFindTheNextAncestor(SubscriptionContext ctx, RegularArgument contextArg, Tree assignment, Expression assignedValue,
+    int recursionCount) {
+    if (assignedValue.is(Tree.Kind.CALL_EXPR)) {
+      CallExpression localsAssignment = (CallExpression) assignedValue;
+      if (isLocalsCall(localsAssignment)) {
+        raiseIssueLocalsIsAssigned(ctx, contextArg, assignment, localsAssignment);
+      }
+    } else if (assignedValue.is(Tree.Kind.NAME)) {
+      checkIfLocalsIsAssignedToContextParameter(ctx, contextArg, (Name) assignedValue, recursionCount + 1);
+    }
+  }
+
+  private static void raiseIssueLocalsIsAssigned(SubscriptionContext ctx, RegularArgument contextArg, Tree assignment, CallExpression localsAssignment) {
     PreciseIssue preciseIssue = ctx.addIssue(contextArg.expression(), MESSAGE);
-    assignment.lhsExpressions().stream().flatMap(e -> e.expressions().stream())
-      .filter(expression -> expression.is(Tree.Kind.NAME))
-      .map(Name.class::cast)
-      .forEach(namedVariable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, namedVariable.name())));
+    if (assignment.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      ((AssignmentStatement) assignment).lhsExpressions().stream().flatMap(e -> e.expressions().stream())
+        .filter(expression -> expression.is(Tree.Kind.NAME))
+        .map(Name.class::cast)
+        .forEach(namedVariable -> preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, namedVariable.name())));
+    } else if (assignment.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      Expression variable = ((AnnotatedAssignment) assignment).variable();
+      if (variable.is(Tree.Kind.NAME)) {
+        preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, ((Name) variable).name()));
+      }
+    } else {
+      Name variable = ((AssignmentExpression) assignment).lhsName();
+      preciseIssue.secondary(localsAssignment, String.format(SECONDARY_MESSAGE, variable.name()));
+    }
   }
 
   private static boolean isLocalsCall(CallExpression callExpression) {
