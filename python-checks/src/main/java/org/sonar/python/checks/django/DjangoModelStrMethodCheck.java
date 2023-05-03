@@ -27,7 +27,11 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.django.DjangoUtils.getFieldAssignment;
+import static org.sonar.python.checks.django.DjangoUtils.getMetaClass;
 
 @Rule(key = "S6554")
 public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
@@ -41,6 +45,9 @@ public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
       var classDef = (ClassDef) ctx.syntaxNode();
       var parentClassesFQN = TreeUtils.getParentClassesFQN(classDef);
       if (DJANGO_MODEL_FQN.equals(parentClassesFQN)) {
+        if (isAbstractModel(classDef)) {
+          return;
+        }
         boolean hasStrMethod = hasStrMethod(classDef);
         if (!hasStrMethod) {
           ctx.addIssue(classDef.name(), MESSAGE);
@@ -48,6 +55,13 @@ public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
       }
 
     });
+  }
+
+  private static boolean isAbstractModel(ClassDef classDef) {
+    return getMetaClass(classDef)
+      .flatMap(metaClass -> getFieldAssignment(metaClass, "abstract"))
+      .filter(assignmentStatement -> Expressions.isTruthy(assignmentStatement.assignedValue()))
+      .isPresent();
   }
 
   private static boolean hasStrMethod(ClassDef classDef) {

@@ -19,19 +19,17 @@
  */
 package org.sonar.python.checks.django;
 
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.django.DjangoUtils.getFieldAssignment;
+import static org.sonar.python.checks.django.DjangoUtils.getMetaClass;
 
 @Rule(key = "S6559")
 public class DjangoModelFormFieldsCheck extends PythonSubscriptionCheck {
@@ -65,31 +63,5 @@ public class DjangoModelFormFieldsCheck extends PythonSubscriptionCheck {
       .map(StringLiteral::trimmedQuotesValue)
       .filter("__all__"::equals)
       .isPresent();
-  }
-
-  private static Optional<ClassDef> getMetaClass(ClassDef formClass) {
-    return formClass.body()
-      .statements()
-      .stream()
-      .filter(ClassDef.class::isInstance)
-      .map(ClassDef.class::cast)
-      .filter(nestedClass -> Objects.equals("Meta", nestedClass.name().name()))
-      .findFirst();
-  }
-
-  private static Optional<AssignmentStatement> getFieldAssignment(ClassDef metaClass, String fieldName) {
-    return metaClass.body()
-      .statements()
-      .stream()
-      .filter(AssignmentStatement.class::isInstance)
-      .map(AssignmentStatement.class::cast)
-      .filter(assignment -> assignment.lhsExpressions()
-        .stream()
-        .map(ExpressionList::expressions)
-        .flatMap(Collection::stream)
-        .filter(Name.class::isInstance)
-        .map(Name.class::cast)
-        .anyMatch(name -> fieldName.equals(name.name())))
-      .findFirst();
   }
 }
