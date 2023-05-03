@@ -51,6 +51,7 @@ def func(x):
 def func(x):
     return x.a, x.b
 
+
 def func():
 	return [1, 2]
 
@@ -61,6 +62,9 @@ def func(x):
   return () # compliant, empty tuple
 def func(x):
 	return 1, 2
+
+def func():
+    return (1,) #compliant, single element in tuple
 
 def func(x):
 	return '' if x is None else x.isoformat()
@@ -76,6 +80,7 @@ yield (x) #Noncompliant {{Remove the parentheses after this "yield" keyword.}}
 yield (a, b) #Noncompliant
 yield a, (b,c) #compliant
 yield (a,b), c #compliant
+yield (a,) #compliant
 
 try:
 	x = 1
@@ -119,15 +124,21 @@ for (first, second), name in zip(my_pairs, names): # the parenthesis after the "
 for (x, y) in foo: # Noncompliant {{Remove the parentheses after this "for" keyword.}}
     print(x, y)
 
+for (x, ) in foo: # compliant
+    print(x)
+
 for x, y in (foo): # Noncompliant {{Remove the parentheses after this "in" keyword.}}
     pass
 
+for x in ("who", ): # compliant
+	pass
 for x in ("who", "comments", "revlink", "category", "branch", "revision"): # Noncompliant
 	pass
 for x in ("who", "comments", "revlink", "category", "branch", "revision"), foo:
 	pass
 
 a = (10, 5)
+b = (1,)
 
 # SONARPY-292 should not raise issues on tuples
 my_tuple_list = [('foo', 'bar')]

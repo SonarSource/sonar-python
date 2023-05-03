@@ -61,7 +61,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
     context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_EXPR, ctx -> handleYieldExpression(ctx, (YieldExpression) ctx.syntaxNode()));
     context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
       Expression exception = ((ExceptClause) ctx.syntaxNode()).exception();
-      if( exception != null) {
+      if (exception != null) {
         checkExprExcludeTuples(exception, ctx, "except");
       }
     });
@@ -77,7 +77,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
   private static void handleReturnStatement(SubscriptionContext ctx, ReturnStatement retStmt) {
     if (retStmt.expressions().size() == 1) {
       Expression expr = retStmt.expressions().get(0);
-      if ((isParenthesisWithoutAssignmentInside(expr) || (expr.is(Tree.Kind.TUPLE) && !((Tuple) expr).elements().isEmpty()))
+      if ((isParenthesisWithoutAssignmentInside(expr) || isTupleWithMoreThanOneElement(expr))
         && expr.firstToken().line() == expr.lastToken().line()) {
         ctx.addIssue(expr, String.format(MESSAGE, "return"));
       }
@@ -101,10 +101,10 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
   }
 
   private static void handleForStatement(SubscriptionContext ctx, ForStatement forStmt) {
-    if(forStmt.expressions().size() == 1) {
+    if (forStmt.expressions().size() == 1) {
       checkExpr(forStmt.expressions().get(0), ctx, "for");
     }
-    if(forStmt.testExpressions().size() == 1) {
+    if (forStmt.testExpressions().size() == 1) {
       checkExpr(forStmt.testExpressions().get(0), ctx, "in");
     }
   }
@@ -118,7 +118,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
   }
 
   private static void checkExpr(Expression expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
-    if ((isParenthesisWithoutAssignmentInside(expr) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
+    if ((isParenthesisWithoutAssignmentInside(expr) || (raiseForTuple && isTupleWithMoreThanOneElement(expr)))
       && expr.firstToken().line() == expr.lastToken().line()) {
       ctx.addIssue(expr, String.format(MESSAGE, keyword));
     }
@@ -126,5 +126,9 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
 
   private static boolean isParenthesisWithoutAssignmentInside(Expression expr) {
     return expr.is(Tree.Kind.PARENTHESIZED) && !((ParenthesizedExpression) expr).expression().is(Tree.Kind.ASSIGNMENT_EXPRESSION);
+  }
+
+  private static boolean isTupleWithMoreThanOneElement(Expression expr) {
+    return expr.is(Tree.Kind.TUPLE) && ((Tuple) expr).elements().size() > 1;
   }
 }
