@@ -52,7 +52,7 @@ def db_connect(pwd):
 
     mysql.connector.connection.MySQLConnection(host='localhost', user='sonarsource', password='')  # Noncompliant
     pymysql.connect(host='localhost', user='sonarsource', password='') # Noncompliant
-    pymysql.connections.Connection(host='localhost', user='sonarsource', password='') # Noncompliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password='') # OK
     psycopg2.connect(host='localhost', user='postgres', password='') # Noncompliant
     pgdb.connect(host='localhost', user='postgres', password='') # Noncompliant
 
