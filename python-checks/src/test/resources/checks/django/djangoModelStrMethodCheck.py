@@ -24,3 +24,15 @@ class MyAbstractModel(models.Model):
     name = models.CharField(max_length=100)
     class Meta:
         abstract=True
+
+
+class MyAbstractModel2(models.Model):
+    name = models.CharField(max_length=100)
+    class Meta:
+        abstract, fields = True, '__all__'
+
+
+class MyAbstractModel3(models.Model):
+    name = models.CharField(max_length=100)
+    class Meta:
+        fields, abstract = '__all__', False  # FN
