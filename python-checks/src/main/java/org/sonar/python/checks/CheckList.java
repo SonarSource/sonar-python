@@ -167,6 +167,7 @@ public final class CheckList {
       DisabledHtmlAutoEscapeLegacyCheck.class,
       DisabledRDSEncryptionCheck.class,
       DisabledSNSTopicEncryptionCheck.class,
+      DjangoNonDictSerializationCheck.class,
       DjangoRenderContextCheck.class,
       DoublePrefixOperatorCheck.class,
       DuplicateArgumentCheck.class,
