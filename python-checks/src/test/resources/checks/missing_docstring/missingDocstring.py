@@ -32,9 +32,9 @@ class ClassWithoutDocstring: # Noncompliant {{Add a docstring to this class.}}
 		""" doc """
 		pass
 
-	def method_without_docstring(): # Noncompliant {{The docstring for this method should not be empty.}}
+	def method_with_empty_docstring(): # Noncompliant {{The docstring for this method should not be empty.}}
 		''''''
 		pass
 
-	def method_without_docstring(): # FN Noncompliant {{Add a docstring to this method.}}
+	def method_without_docstring(): # Noncompliant {{Add a docstring to this method.}}
 		pass

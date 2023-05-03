@@ -94,9 +94,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
   }
 
   private static void raiseIssueNoDocstring(Tree tree, DeclarationType type, SubscriptionContext ctx) {
-    if (type != DeclarationType.METHOD) {
       raiseIssue(tree, MESSAGE_NO_DOCSTRING, type, ctx);
-    }
   }
 
   private static void raiseIssue(Tree tree, String message, DeclarationType type, SubscriptionContext ctx) {
