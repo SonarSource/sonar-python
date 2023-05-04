@@ -9,8 +9,12 @@ key: python
 
 
 ## Supported Versions
-* Python 3.X
-* Python 2.X
+
+| Version           | Status    |
+|-------------------|-----------|
+| Python 3.0 - 3.11 | Supported |
+| Python 2.x        | Supported |
+| IPython 7.x       | Supported |
 
 ## Language-Specific Properties
 
