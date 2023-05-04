@@ -358,7 +358,8 @@ public final class CheckList {
       DjangoModelFormFieldsCheck.class,
       DjangoReceiverDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
-      DjangoModelStrMethodCheck.class
+      DjangoModelStrMethodCheck.class,
+      HardcodedCredentialsCallCheck.class
     )));
   }
 

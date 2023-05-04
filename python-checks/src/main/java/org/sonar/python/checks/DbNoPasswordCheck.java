@@ -56,7 +56,6 @@ public class DbNoPasswordCheck extends PythonSubscriptionCheck {
     "mysql.connector.connect",
     "mysql.connector.connection.MySQLConnection",
     "pymysql.connect",
-    "pymysql.connections.Connection",
     "psycopg2.connect",
     "pgdb.connect",
     "pg.DB",
