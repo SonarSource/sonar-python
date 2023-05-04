@@ -57,7 +57,8 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
   private static void checkIdentityComparison(SubscriptionContext ctx, IsExpression comparison) {
     InferredType left = comparison.leftOperand().type();
     InferredType right = comparison.rightOperand().type();
-    if (!left.isIdentityComparableWith(right) && (isNone(left) || isNone(right))) {
+    // `isObject` Removes FP when the return type of a function is an object
+    if (!left.isIdentityComparableWith(right) && (isNone(left) || isNone(right)) && !(isObject(left) || isObject(right))) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() != null);
     } else if (isNone(left) && isNone(right)) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() == null);
@@ -70,6 +71,11 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean cannotBeNone(InferredType type) {
-    return !type.canBeOrExtend(BuiltinTypes.NONE_TYPE);
+    return !type.canBeOrExtend(BuiltinTypes.NONE_TYPE) && !isObject(type);
   }
+
+  private static boolean isObject(InferredType type) {
+    return type.canOnlyBe(BuiltinTypes.OBJECT_TYPE);
+  }
+
 }
