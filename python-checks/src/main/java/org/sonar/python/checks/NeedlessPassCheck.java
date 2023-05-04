@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.PASS_STMT;
@@ -49,19 +51,35 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
       if (statements.size() <= 1) {
         return;
       }
-
       statements.stream()
         .filter(st -> st.is(PASS_STMT))
         .findFirst()
         .ifPresent(st -> {
-          var issue = ctx.addIssue(st, MESSAGE);
+          var textEdit = createRemoveStatementTextEdit(statements, st);
           var quickFix = PythonQuickFix
             .newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(TextEditUtils.removeStatement(st))
+            .addTextEdit(textEdit)
             .build();
-          issue.addQuickFix(quickFix);
+          ctx.addIssue(st, MESSAGE).addQuickFix(quickFix);
         });
     });
+  }
+
+  private static PythonTextEdit createRemoveStatementTextEdit(List<Statement> statements, Statement toRemove) {
+    var removeIndex = statements.indexOf(toRemove);
+    var last = removeIndex == statements.size() - 1;
+    if (last) {
+      var previous = statements.get(removeIndex - 1);
+      var removeFrom = TreeUtils.getTreeSeparatorOrLastToken(previous);
+      var removeTo = TreeUtils.getTreeSeparatorOrLastToken(toRemove);
+      return TextEditUtils.removeRange(
+        removeFrom.line(),
+        removeFrom.column(),
+        removeTo.line(),
+        removeTo.column());
+    } else {
+      return TextEditUtils.removeUntil(toRemove, statements.get(removeIndex + 1));
+    }
   }
 
   private static boolean isNotStringLiteralExpressionStatement(Statement st) {
