@@ -62,17 +62,19 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       .filter(CallExpression.class::isInstance)
       .map(CallExpression.class::cast)
       .filter(this::callHasToBeChecked)
-      .ifPresent(call -> {
-        var method = getMethod(call);
-        method.indices()
-          .forEach(argumentIndex -> {
-            var argumentName = method.args().get(argumentIndex);
-            var argument = TreeUtils.nthArgumentOrKeyword(argumentIndex, argumentName, call.arguments());
-            if (argument != null) {
-              checkArgument(ctx, argument);
-            }
-          });
-      });
+      .ifPresent(call -> checkCallArguments(ctx, call));
+  }
+
+  private void checkCallArguments(SubscriptionContext ctx, CallExpression call) {
+    getMethod(call)
+      .ifPresent(method -> method.indices()
+        .forEach(argumentIndex -> {
+          var argumentName = method.args().get(argumentIndex);
+          var argument = TreeUtils.nthArgumentOrKeyword(argumentIndex, argumentName, call.arguments());
+          if (argument != null) {
+            checkArgument(ctx, argument);
+          }
+        }));
   }
 
   private static void checkArgument(SubscriptionContext ctx, RegularArgument argument) {
@@ -81,19 +83,22 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       Optional.of(argExp)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
-        .map(StringLiteral::trimmedQuotesValue)
-        .filter(Predicate.not(String::isEmpty))
-        .ifPresent(value -> ctx.addIssue(argument, MESSAGE));
+        .filter(HardcodedCredentialsCallCheck::isNotEmpty)
+        .ifPresent(string -> ctx.addIssue(argument, MESSAGE));
     } else if (argExp.is(Tree.Kind.NAME)) {
       findAssignment((Name) argExp, 0)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
-        .filter(string -> Optional.of(string)
-          .map(StringLiteral::trimmedQuotesValue)
-          .filter(Predicate.not(String::isEmpty))
-          .isPresent())
+        .filter(HardcodedCredentialsCallCheck::isNotEmpty)
         .ifPresent(assignedValue -> ctx.addIssue(argument, MESSAGE).secondary(assignedValue, MESSAGE));
     }
+  }
+
+  private static boolean isNotEmpty(StringLiteral stringLiteral) {
+    return Optional.of(stringLiteral)
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter(Predicate.not(String::isEmpty))
+      .isPresent();
   }
 
   private static Optional<Tree> findAssignment(Name name, int depth) {
@@ -130,12 +135,11 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  private CredentialMethod getMethod(CallExpression call) {
+  private Optional<CredentialMethod> getMethod(CallExpression call) {
     return Optional.of(call)
       .map(CallExpression::calleeSymbol)
       .map(Symbol::fullyQualifiedName)
-      .map(methods::get)
-      .orElse(null);
+      .map(methods::get);
   }
 
   public static class CredentialMethod {
