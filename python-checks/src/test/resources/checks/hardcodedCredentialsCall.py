@@ -90,3 +90,14 @@ def db_connect(pwd):
     pg.DB('dbname', 'localhost', 5432, 'opt', 'postgres', '')
     pg.connect(host='localhost', user='postgres', passwd='')
 
+
+def byte_decode_hardcoded_value():
+    apiKey = b"abc".decode("utf-8")
+#            ^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
+    network = pylast.LibreFMNetwork(api_key = apiKey) # Noncompliant {{Revoke and change this password, as it is compromised.}}
+#                                   ^^^^^^^^^^^^^^^^ 1
+
+def byte_decode_hardcoded_value():
+    b = apiKey
+    apiKey = b
+    network = pylast.LibreFMNetwork(api_key = apiKey)

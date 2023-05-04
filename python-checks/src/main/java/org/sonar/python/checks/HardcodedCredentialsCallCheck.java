@@ -34,7 +34,9 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -83,7 +85,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
         .filter(Predicate.not(String::isEmpty))
         .ifPresent(value -> ctx.addIssue(argument, MESSAGE));
     } else if (argExp.is(Tree.Kind.NAME)) {
-      findAssignment((Name) argExp)
+      findAssignment((Name) argExp, 0)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
         .filter(string -> Optional.of(string)
@@ -94,16 +96,30 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static Optional<Tree> findAssignment(Name name) {
+  private static Optional<Tree> findAssignment(Name name, int depth) {
+    if (depth > 99) {
+      return Optional.empty();
+    }
     return Optional.of(name)
       .map(Expressions::singleAssignedValue)
-      .map(assignedValue -> {
-        if (assignedValue.is(Tree.Kind.NAME)) {
-          return findAssignment((Name) assignedValue).orElse(null);
-        } else {
-          return assignedValue;
-        }
-      });
+      .map(v -> findValue(v, depth));
+  }
+
+  private static Tree findValue(Expression assignedValue, int depth) {
+    if (assignedValue.is(Tree.Kind.NAME)) {
+      return findAssignment((Name) assignedValue, depth + 1).orElse(null);
+    } else if (assignedValue.is(Tree.Kind.CALL_EXPR)) {
+      return Optional.of(assignedValue)
+        .filter(CallExpression.class::isInstance)
+        .map(CallExpression.class::cast)
+        .map(CallExpression::callee)
+        .filter(QualifiedExpression.class::isInstance)
+        .map(QualifiedExpression.class::cast)
+        .map(QualifiedExpression::qualifier)
+        .map(v -> findValue(v, depth + 1))
+        .orElse(assignedValue);
+    }
+    return assignedValue;
   }
 
   private Boolean callHasToBeChecked(CallExpression call) {
