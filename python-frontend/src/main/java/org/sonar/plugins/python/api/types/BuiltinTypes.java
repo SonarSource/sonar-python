@@ -34,6 +34,8 @@ public class BuiltinTypes {
   public static final String EXCEPTION = "Exception";
   public static final String BASE_EXCEPTION = "BaseException";
 
+  public static final String OBJECT_TYPE = "object";
+
   private BuiltinTypes() {
   }
 
