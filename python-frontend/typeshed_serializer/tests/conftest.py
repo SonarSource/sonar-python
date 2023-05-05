@@ -32,7 +32,7 @@ CURRENT_PATH = os.path.dirname(__file__)
 @pytest.fixture(scope="session")
 def typeshed_stdlib():
     typeshed_serializer.STDLIB_PATH = "resources/mock_stdlib"
-    typeshed_serializer.CURRENT_PATH = os.path.dirname(__file__)
+    typeshed_serializer.CURRENT_PATH = CURRENT_PATH
     build_result, _ = typeshed_serializer.walk_typeshed_stdlib()
     return build_result
 
