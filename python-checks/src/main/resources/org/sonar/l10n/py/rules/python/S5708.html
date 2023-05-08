@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In Python 3, attempting to catch in an <code>except</code> statement an object which does not derive from BaseException will raise a
 <code>TypeError</code>. In Python 2 it is possible to raise old-style classes but this shouldn’t be done anymore in order to be compatible with Python
 3.</p>
@@ -8,7 +9,7 @@ such as <code>KeyboardInterrupt</code> and <a href="https://docs.python.org/3/li
 which is not an error. See <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352</a> for more information.</p>
 <p>This rule raises an issue when the expression used in an <code>except</code> statement is not a class deriving from <code>BaseException</code> nor
 a tuple of such classes.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class CustomException:
     """An Invalid exception class."""
@@ -27,7 +28,7 @@ except [TypeError, ValueError]:  # Noncompliant. Lists are not accepted.
 except {TypeError, ValueError}:  # Noncompliant. Sets are not accepted.
     print("exception")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyError(Exception):
     pass
@@ -37,7 +38,7 @@ try:
 except (MyError, TypeError):
     print("exception")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions</a> </li>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> </li>

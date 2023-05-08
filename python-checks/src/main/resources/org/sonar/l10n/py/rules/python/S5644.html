@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Getting, setting and deleting items using square brackets requires the accessed object to have special methods:</p>
 <ul>
   <li> Getting items such as <code>my_variable[key]</code> requires <code>my_variable</code> to have the <a
@@ -10,7 +11,7 @@
   href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__"><code>__delitem__</code></a> method. </li>
 </ul>
 <p>This rule raises an issue when an item operation is performed on an object which doesn’t have the corresponding method.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 del (1, 2)[0]  # Noncompliant, tuples are immutable
 (1, 2)[0] = 42  # Noncompliant
@@ -31,7 +32,7 @@ class B:
 
 B[0]  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 del [1, 2][0]  # Lists are mutable
 [1, 2][0] = 42
@@ -62,7 +63,7 @@ class B:
 
 B[0]
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__">Python documentation - __getitem__ method</a> </li>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__">Python documentation - __setitem__ method</a> </li>

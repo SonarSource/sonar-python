@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Exceptions handlers (<code>except:</code>) are evaluated in the order they are written. Once a match is found, the evaluation stops.</p>
 <p>In some contexts an except block is dead code as it will never catch any exception:</p>
 <ul>
@@ -9,7 +10,7 @@
   anything. </li>
 </ul>
 <p>This rule raises an issue when an <code>except</code> block catches every exception before a later <code>except</code> block could catch it.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def foo():
     try:
@@ -35,7 +36,7 @@ def foo():
     except: # Noncompliant. This is equivalent to "except BaseException" block
         print("Never executed")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def foo():
     try:
@@ -57,7 +58,7 @@ def foo():
     except BaseException as e:
         print(e)
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code> statement</a>
   </li>

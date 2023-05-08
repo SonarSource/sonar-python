@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
 <code>True</code> if <code>id(a) == id(b)</code>.</p>
 <p>When a new object is created it will have its own identity. Thus if an object is created and used only in an identity check it is not possible for
@@ -10,7 +11,7 @@ use <code>__eq__</code> or <code>__ne__</code> methods under the hood.</p>
   <li> When it is a call to <code>dict</code>, <code>set</code>, <code>list</code> or <code>complex</code> built-in functions. </li>
   <li> When such a new object is assigned to only one variable and this variable is used in an identity check. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def func(param):
     param is {1: 2}  # Noncompliant; always False
@@ -22,7 +23,7 @@ def func(param):
     mylist = []  # mylist is assigned a new object
     param is mylist  # Noncompliant; always False
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def func(param):
     param == {1: 2}
@@ -34,7 +35,7 @@ def func(param):
     mylist = []
     param == mylist
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
   with literals?</a> - Adam Johnson </li>

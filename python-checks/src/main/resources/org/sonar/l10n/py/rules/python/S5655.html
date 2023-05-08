@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>The CPython interpreter does not check arguments type when functions are called. However a function can express the type it expects for each
 argument in its documentation or by using <a href="https://www.python.org/dev/peps/pep-0484/">Type Hints</a>. Calling such a function with an argument
 of a different type can easily create a bug. Even if it works right now it can fail later when APIs evolve or when type checks are added (ex: with
 <code>isinstance</code>).</p>
 <p>This rule raises an issue when a function or method is called with an argument of a different type than the one described in its type annotations.
 It also checks argument types for builtin functions.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def func(var: str):
     pass
@@ -13,7 +14,7 @@ func(42)  # Noncompliant
 
 len(1)  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def func(var: str):
     pass
@@ -22,7 +23,7 @@ func("42")
 
 len("1")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/functions.html#built-in-funcs">Python documentation - builtins</a> </li>
   <li> <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484 — Type Hints</a> </li>

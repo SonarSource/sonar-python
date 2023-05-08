@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Raising instances of <a href="https://docs.python.org/3/library/exceptions.html#Exception"><code>Exception</code></a> and <a
 href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>BaseException</code></a> will have a negative impact on any code trying
 to catch these exceptions.</p>
@@ -15,7 +16,7 @@ to re-raise exceptions such as <code>SystemExit</code> and the software cannot b
   coming from the library with a single "except" statement </li>
 </ul>
 <p>This rule raises an issue when <code>Exception</code> or <code>BaseException</code> are raised.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def process1():
     raise BaseException("Wrong user input for field X")  # Noncompliant
@@ -43,7 +44,7 @@ def caller():
             # re-raise other exceptions
             raise
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyProjectError(Exception):
     """Exception class from which every exception in this library will derive.
@@ -82,7 +83,7 @@ def caller():
         # process error
         pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Built-in exceptions</a> </li>

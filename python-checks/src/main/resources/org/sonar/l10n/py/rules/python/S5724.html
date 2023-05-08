@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Property getter, setter and deleter methods are called by the python interpreter with a specific number or arguments:</p>
 <ul>
   <li> only "self" for property getter and deleter methods. </li>
@@ -9,7 +10,7 @@
   <li> too many parameters are defined in a property getter, setter or deleter method. </li>
   <li> the value parameter is missing in a property setter method. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class A:
     @property
@@ -36,7 +37,7 @@ class B:
 
     foo = property(get_foo, set_foo, del_foo, "'foo' property.")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class A:
     @property
@@ -63,7 +64,7 @@ class B:
 
     foo = property(get_foo, set_foo, del_foo, "'foo' property.")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/functions.html#property">Python Documentation - Built-in Functions - property</a> </li>
 </ul>

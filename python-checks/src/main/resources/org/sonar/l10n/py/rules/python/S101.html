@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Shared coding conventions allow teams to collaborate effectively. This rule allows to check that all class names match a provided regular
 expression.</p>
 <p>The default regular expression is based on PEP-8 standard. It allows "CapWords" convention and "snake_case" in lowercase. The "snake_case"
 convention is accepted by PEP-8 when the class is primarily used as a callable (ex: decorator, context manager, etc…​). However the "CapWords"
 convention is recommended in every case.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With default provided regular expression <code>^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$</code>:</p>
 <pre>
 class myClass:  # Noncompliant
@@ -15,7 +16,7 @@ class my_CONTEXT_manager:  # Noncompliant
     def __exit__(self, type, value, traceback):
         pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
    ...

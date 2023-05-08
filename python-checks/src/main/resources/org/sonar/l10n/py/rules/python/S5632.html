@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In Python 3, attempting to raise an object which does not derive from BaseException will raise a <code>TypeError</code>. In Python 2 it is possible
 to raise old-style classes but this shouldn’t be done anymore in order to be compatible with Python 3.</p>
 <p>If you are about to create a custom Exception class, note that custom exceptions should inherit from <code>Exception</code>, not
@@ -5,7 +6,7 @@ to raise old-style classes but this shouldn’t be done anymore in order to be c
 such as <code>KeyboardInterrupt</code> and <a href="https://docs.python.org/3/library/exceptions.html#GeneratorExit"><code>GeneratorExit</code></a>
 which is not an error. See <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352</a> for more information.</p>
 <p>This rule raises an issue when an object which doesn’t derive from BaseException is raised.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 raise "Something went wrong"  # Noncompliant
 
@@ -14,7 +15,7 @@ class A:
 
 raise A  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyError(Exception):
     pass
@@ -22,7 +23,7 @@ class MyError(Exception):
 raise MyError("Something went wrong")
 raise MyError
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/errors.html">Python documentation - Errors and Exceptions</a> </li>
   <li> <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352 - Required Superclass for Exceptions</a> </li>

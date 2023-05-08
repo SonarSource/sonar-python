@@ -1,17 +1,18 @@
+<h2>Why is this an issue?</h2>
 <p>Developers can use type hints to specify which type a function is expected to return. These annotations are not enforced at runtime and returning a
 different type might not fail. It is however likely to be unintended and will lead to maintainability issues, if not bugs.</p>
 <p>This rule raises an issue when a function or method returns a value that contradicts its type hint.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def hello() -&gt; str:
     return 42  # Noncompliant. Function's type hint asks for a string return value
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def hello() -&gt; str:
     return "Hello"
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/typing.html">Python documentation - Support for type hints</a> </li>
 </ul>

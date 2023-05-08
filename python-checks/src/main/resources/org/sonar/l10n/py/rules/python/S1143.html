@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Using <code>return</code>, <code>break</code> or <code>continue</code> in a <code>finally</code> block suppresses the propagation of any unhandled
 exception which was raised in the <code>try</code>, <code>else</code> or <code>except</code> blocks. It will also ignore their return statements.</p>
 <p><code><a href="https://docs.python.org/3/library/exceptions.html#SystemExit">SystemExit</a></code> is raised when <code>sys.exit()</code> is
@@ -11,7 +12,7 @@ href="https://docs.python.org/3/library/exceptions.html#MemoryError">MemoryError
 still reraise <code>SystemExit</code> and <code>KeyboardInterrupt</code>.</p>
 <p>This rule raises an issue when a jump statement (<code>break</code>, <code>continue</code>, <code>return</code>) would force the control flow to
 leave a finally block.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def find_file_which_contains(expected_content, paths):
     file = None
@@ -56,7 +57,7 @@ def continue_whatever_happens_noncompliant():
         finally:
             continue  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 # Note that using "with open(...) as" would be better. We keep the example as is just for demonstration purpose.
 
@@ -101,7 +102,7 @@ def continue_whatever_happens_compliant():
         except Exception:
             logging.exception("Failed")  # Ignore all "Exception" subclasses yet allow SystemExit and other important exceptions to pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> </li>
 </ul>

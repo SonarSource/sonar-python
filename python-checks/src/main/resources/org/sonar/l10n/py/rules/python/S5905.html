@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Using the <code>assert</code> statement on a tuple literal will always fail if the tuple is empty, and always succeed otherwise.</p>
 <p>The <code>assert</code> statement does not have parentheses around its parameters. Calling <code>assert(x, y)</code> will test if the tuple
 <code>(x, y)</code> is True, which is always the case.</p>
@@ -6,12 +7,12 @@
   <li> If your intention is to test the first value of the tuple and use the second value as a message, simply remove the parentheses. </li>
   <li> If your intention is to check that every element of the tuple is <code>True</code>, test each value separately. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def test_values(a, b):
     assert (a, b)  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def test_values(a, b):
     # If you mean to test "a" and use "b" as an error message
@@ -20,7 +21,7 @@ def test_values(a, b):
     # If you mean to test the values of "a" and "b"
     assert a and b
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement">Python documentation - The <code>assert</code>
   statement</a> </li>

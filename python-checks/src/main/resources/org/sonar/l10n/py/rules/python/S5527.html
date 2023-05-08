@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>To establish a SSL/TLS connection not vulnerable to man-in-the-middle attacks, it’s essential to make sure the server presents the right
 certificate.</p>
 <p>The certificate’s hostname-specific data should match the server hostname.</p>
 <p>It’s not recommended to re-invent the wheel by implementing custom hostname verification.</p>
 <p>TLS/SSL libraries provide built-in hostname verification functions that should be used.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>Python <a href="https://docs.python.org/3/library/ssl.html">ssl standard</a> library:</p>
 <pre>
 import ssl
@@ -17,7 +18,7 @@ ctx.check_hostname = False # Noncompliant
 ctx = ssl._create_default_https_context()
 ctx.check_hostname = False # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p>Python <a href="https://docs.python.org/3/library/ssl.html">ssl standard</a> library:</p>
 <pre>
 import ssl
@@ -31,7 +32,7 @@ ctx.check_hostname = True # Compliant
 ctx = ssl.create_default_context() # Compliant: by default hostname verification is enabled
 ctx = ssl._create_default_https_context() # Compliant: by default hostname verification is enabled
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
   <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>

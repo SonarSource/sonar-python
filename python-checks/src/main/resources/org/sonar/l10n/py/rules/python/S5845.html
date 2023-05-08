@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Calling <code>unittest</code> methods <code>assertEqual</code>, <code>assertNotEqual</code>, <code>assertIs</code> or <code>assertIsNot</code> on
 objects of incompatible types will always fail or always succeed.</p>
 <p>For methods <code>assertEqual</code> and <code>assertNotEqual</code>, arguments' types are incompatible if:</p>
@@ -9,7 +10,7 @@ they are instances of unrelated classes which do not implement ``++__eq__++`` or
 </pre>
 <p>As for methods <code>assertIs</code> and <code>assertIsNot</code>, if arguments' types are different it is not possible for them to point to the
 same object, thus <code>assertIs</code> will always fail and <code>assertIsNot</code> will always succeed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import unittest
 class A(): ...
@@ -20,7 +21,7 @@ class MyTest(unittest.TestCase):
     self.assertEqual(a, "x")  # Noncompliant
     self.assertIs(a, "x")  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import unittest
 class A(): ...
@@ -31,7 +32,7 @@ class MyTest(unittest.TestCase):
     self.assertEqual(a, mydict["x"])  # OK
     self.assertIs(a, mydict["x"])  # OK
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> {rule:python:S2159} Silly equality checks should not be made </li>
   <li> {rule:python:S3403} Identity operators should not be used with dissimilar types </li>

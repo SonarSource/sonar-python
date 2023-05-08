@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Instance methods, i.e. methods not annotated with <code>@classmethod</code> or <code>@staticmethod</code>, are expected to have at least one
 parameter. This parameter will reference the object instance on which the method is called. By convention, this first parameter is named "self".</p>
 <p>Naming the "self" parameter differently is confusing. It might also indicate that the "self" parameter was forgotten, in which case calling the
@@ -6,7 +7,7 @@ method will most probably fail.</p>
 these methods on an instance will raise a <code>TypeError</code>. Either move the method out of the class or decorate it with
 <code>@staticmethod</code>.</p>
 <p>This rule raises an issue when the first parameter of an instance method is not called "self".</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     def send_request(request):  # Noncompliant. "self" was probably forgotten
@@ -17,7 +18,7 @@ class ClassWithStaticMethod:
         print(param)
 ClassWithStaticMethod().static_method(42)  # Method is available on the instance but calling it will raise a TypeError
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     def send_request(self, request):
@@ -29,7 +30,7 @@ class ClassWithStaticMethod:
         print(param)
 ClassWithStaticMethod().static_method(42)
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule will also accept "cls" or "mcs" as first parameter’s name for metaclasses' methods.</p>
 <p>No issue will be raised for methods called <code>__init_subclass__</code>, <code>__class_getitem__</code> or <code>__new__</code> as these methods'
 first parameter is a class.</p>
@@ -43,7 +44,7 @@ class MyClass(ABC):
     def method():  # No issue, even if it is better in this case to also decorate with @staticmethod
         pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3.8/tutorial/classes.html#method-objects">Method Objects</a> </li>
   <li> PEP8 - <a href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">Function and Method Arguments</a> </li>

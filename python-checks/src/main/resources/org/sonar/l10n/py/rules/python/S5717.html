@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In Python function parameters can have default values. These default values are expressions which are executed when the function is defined, i.e.
 only once. The same default value will be used every time the function is called, thus modifying it will have an effect on every subsequent call. This
 can create some very confusing bugs.</p>
@@ -13,7 +14,7 @@ modifying one objet will modify all of them.</p>
     </ul>  </li>
   <li> or when an attribute of a default value is assigned. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>In the following example, the parameter "param" has <code>list()</code> as a default value. This list is created only once and then reused in every
 call. Thus when it appends <code>'a'</code> to this list, the next call will have <code>['a']</code> as a default value.</p>
 <pre>
@@ -39,7 +40,7 @@ a1.process("value")
 print(a1.param)  # ['value']
 print(a2.param)  # ['value']
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def myfunction(param=None):
     if param is None:
@@ -67,10 +68,10 @@ a1.process("value")
 print(a1.param)  # ['value']
 print(a2.param)  # []
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>In some very rare cases modifying a default value is ok. For example, default values can be used as a cache.</p>
 <p>No issue will be raised when the parameter’s name contains "cache" or "memo" (as in memoization).</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker’s Guide to Python - Common Gotchas</a> </li>
   <li> <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Python documentation - Function definitions</a> </li>

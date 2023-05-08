@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The special method <a
 href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
 exception when it fails. It should never raise the provided exception, it is the caller’s responsibility.</p>
@@ -8,7 +9,7 @@ exception when it fails. It should never raise the provided exception, it is the
   <li> an <code>__exit__</code> method has a bare <code>raise</code> outside of an <code>except</code> block. </li>
   <li> an <code>__exit__</code> method raises the exception provided as parameter. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyContextManager:
     def __enter__(self):
@@ -23,7 +24,7 @@ class MyContextManager:
     def __exit__(self, exc_type, exc_value, traceback):
         raise exc_value # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyContextManager:
     def __enter__(self):
@@ -43,7 +44,7 @@ class MyContextManager:
             raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
         raise MemoryError("No more memory")  # This is ok too.
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation – <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__">The
   <code>__exit__</code> special method</a> </li>

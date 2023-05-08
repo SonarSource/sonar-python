@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>Why use named groups only to never use any of them later on in the code?</p>
 <p>This rule raises issues every time named groups are:</p>
 <ul>
   <li> referenced while not defined; </li>
   <li> defined but called elsewhere in the code by their number instead. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import re
 
@@ -14,7 +15,7 @@ def foo():
     g1 = matches.group("b") # Noncompliant - group "b" is not defined
     g2 = matches.group(1) # Noncompliant - Directly use 'a' instead of its group number.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import re
 

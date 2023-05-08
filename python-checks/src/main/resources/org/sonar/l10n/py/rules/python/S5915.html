@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Using <code>pytest.raises</code> or <code>unittest.TestCase.assertRaises</code> will assert that an exception is raised in the following block.
 Ending such block in an assertion means that the test can succeed with that last assertion never being executed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import pytest
 def foo(): return 1 / 0
@@ -10,7 +11,7 @@ def test_something():
     foo()
     assert bar() == 42  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import pytest
 def foo(): return 1 / 0
@@ -20,7 +21,7 @@ def test_something():
     foo()
   assert bar() == 42
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">Unittest: assertRaises</a> </li>
   <li> <a href="https://docs.pytest.org/en/stable/assert.html#assertions-about-expected-exceptions">Pytest: assertions about expected exceptions</a>

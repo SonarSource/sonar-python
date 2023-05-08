@@ -1,18 +1,18 @@
+<p>This rule is deprecated, and will eventually be removed.</p>
+<h2>Why is this an issue?</h2>
 <p>Typically, backslashes are seen only as part of escape sequences. Therefore, the use of a backslash outside of a raw string or escape sequence
 looks suspiciously like a broken escape sequence.</p>
 <p>Characters recognized as escape-able are: <code>abfnrtvox\'"</code></p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 s = "Hello \world."
 t = "Nice to \ meet you"
 u = "Let's have \ lunch"
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 s = "Hello world."
 t = "Nice to \\ meet you"
 u = r"Let's have \ lunch"  // raw string
 </pre>
-<h2>Deprecated</h2>
-<p>This rule is deprecated, and will eventually be removed.</p>
 

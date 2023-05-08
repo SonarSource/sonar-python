@@ -1,15 +1,16 @@
+<h2>Why is this an issue?</h2>
 <p>Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def do_something(a, b): # "b" is unused
   return compute(a)
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def do_something(a):
   return compute(a)
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Overriding methods are ignored.</p>
 <pre>
 class C(B):

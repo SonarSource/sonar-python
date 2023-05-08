@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Repeating an exception class in a single <code>except</code> statement will not fail but it is not what the developer intended. Either the class is
 not the one which should be caught, or this is dead code.</p>
 <p>Having a subclass and a parent class in the same <code>except</code> statement is also useless. It is enough to keep only the parent class.</p>
 <p>This rule raises an issue when an exception class is duplicated in an <code>except</code> statement, or when an exception class has a parent class
 in the same <code>except</code> statement.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 try:
     raise NotImplementedError()
@@ -15,14 +16,14 @@ try:
 except (RuntimeError, RuntimeError):  # Noncompliant.
     print("Foo")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 try:
     raise NotImplementedError()
 except RuntimeError:
     print("Foo")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions">Handling Exceptions</a> </li>
 </ul>

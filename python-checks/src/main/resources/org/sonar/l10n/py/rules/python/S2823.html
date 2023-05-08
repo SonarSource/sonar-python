@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p><code>__all__</code> is used to define the list of module’s names that should be imported when <code>from package import *</code> is used. For that
 reason, it may only contain strings.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     pass
@@ -9,7 +10,7 @@ __all__ = [
     MyClass  # Noncompliant
 ]
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     pass
@@ -18,7 +19,7 @@ __all__ = [
     "MyClass"
 ]
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/modules.html#importing-from-a-package">Python documentation - Importing * From a Package</a> </li>
 </ul>

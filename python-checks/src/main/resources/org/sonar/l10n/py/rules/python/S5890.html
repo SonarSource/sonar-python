@@ -1,12 +1,13 @@
+<h2>Why is this an issue?</h2>
 <p>Type hints can be used to communicate the intended type of a given variable. These are not enforced at runtime and not respecting them might not
 necessarily lead to runtime errors.</p>
 <p>It is however confusing and could lead to maintainability issues.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def my_function():
     my_int: int = "string"  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def my_function():
     my_str: str = "string"

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>"Private" nested classes that are never used inside the enclosing class are usually dead code: unnecessary, inoperative code that should be
 removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from
 being introduced.</p>
@@ -13,7 +14,7 @@ being introduced.</p>
   leading underscore(s). Class-Private classes shouldn’t be used outside of their enclosing class. </li>
 </ul>
 <p>This rule raises an issue when a private nested class (either with one or two leading underscores) is never used inside its parent class.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Noncompliant:
     class __MyClass1():  # Noncompliant
@@ -22,7 +23,7 @@ class Noncompliant:
     class _MyClass2():  # Noncompliant
         pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Compliant:
     class __MyClass1():
@@ -37,7 +38,7 @@ class Compliant:
     def process(self):
         return Compliant._MyClass2()
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a> </li>
   <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a> </li>

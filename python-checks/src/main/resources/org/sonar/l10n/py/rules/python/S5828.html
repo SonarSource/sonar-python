@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The <code>open</code> builtin can open files in different modes, which are provided as a combination of characters. Using an invalid sequence of
 characters will at best make <code>open</code> fail, or worse, it will have an undefined behavior (ex: it might ignore some characters).</p>
 <p>A valid mode:</p>
@@ -9,19 +10,19 @@ characters will at best make <code>open</code> fail, or worse, it will have an u
   shouldn’t be used anymore. </li>
 </ul>
 <p>This rule raises an issue when an invalid "mode" is provided to the <code>open</code> builtin.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 # In python 3 the following fails
 # In python 2.7.16 on MacOs, "open" will just ignore the "w" flag
 with open("test.txt", "aw") as f:  # Noncompliant
     pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 with open("test.txt", "a") as f:
     pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/functions.html#open">Python documentation - the <code>open</code> builtin</a> </li>
 </ul>

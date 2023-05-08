@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Formatting strings, either with the <code>%</code> operator or <code>str.format</code> method, requires a valid string and arguments matching this
 string’s replacement fields.</p>
 <p>This rule raises an issue when formatting a string will raise an exception because the input string or arguments are invalid. Rule
 {rule:python:S3457} covers cases where no exception is raised and the resulting string is simply not formatted properly.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 print('Error code %d' % '42')  # Noncompliant. Replace this value with a number as %d requires.
 
@@ -12,7 +13,7 @@ print('User {0} has not been able to access {}'.format('Alice', 'MyFile'))  # No
 
 print('User {a} has not been able to access {b}'.format(a='Alice'))  # Noncompliant. Provide a value for field "b".
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 print('Error code %d' % 42)
 
@@ -22,7 +23,7 @@ print('User {0} has not been able to access {1}'.format('Alice', 'MyFile'))
 
 print('User {a} has not been able to access {b}'.format(a='Alice', b='MyFile'))
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/string.html#format-string-syntax">Python documentation - Format String Syntax</a> </li>
   <li> <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">Python documentation - printf-style String

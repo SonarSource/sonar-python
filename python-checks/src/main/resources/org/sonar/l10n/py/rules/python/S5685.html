@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>The <a href="https://www.python.org/dev/peps/pep-0572">walrus operator</a> <code>:=</code> (also known as "assignment expression") should be used
 with caution as it can easily make code more difficult to understand and thus maintain. In such case it is advised to refactor the code and use an
 assignment statement (i.e. <code>=</code>) instead.</p>
 <p>This rule raises an issue when the walrus operator is used in a way which makes the code confusing, as described in <a
 href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572</a>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 # using an assignment expression (:=) as an assignment statement (=) is more explicit
 (v := f(p))  # Noncompliant
@@ -23,7 +24,7 @@ def func(param: (p := 21) = 3):  # Noncompliant
 f'{(x:=10)}'  # Noncompliant
 f'{x:=10}' # No issue raised but still not recommended. This is not an assignment expression. '=10' is passed to the f-string formatter.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 v = f(p)
 v0 = v1 = f(p)
@@ -41,7 +42,7 @@ def func(param: p = 3):
 x = 10
 f'{x}'
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572 - Assignment Expressions</a> </li>
 </ul>

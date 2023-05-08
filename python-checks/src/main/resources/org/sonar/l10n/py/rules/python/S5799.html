@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Python concatenates adjacent string or byte literals at compile time. It means that <code>"a" "b"</code> is equivalent to <code>"ab"</code>. This
 is sometimes used to split a long string on multiple lines. However an implicit string concatenation can also be very confusing. In the following
 contexts it might indicate that a comma was forgotten:</p>
@@ -6,7 +7,7 @@ contexts it might indicate that a comma was forgotten:</p>
   comma is. </li>
   <li> when the strings are in a list, set or tuple. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def func():
     return "item1" "item2"  # Noncompliant
@@ -18,7 +19,7 @@ def func():
  "very very long string",
  "4"]
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def func():
     return "item1", "item2"
@@ -30,7 +31,7 @@ def func():
  "very very long string",
  "4"]
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue will be raised when there is a visible reason for the string concatenation:</p>
 <ul>
   <li> when the quotes used for both strings are different. This can be used to avoid escaping quotes </li>

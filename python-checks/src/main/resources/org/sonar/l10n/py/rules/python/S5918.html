@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Test frameworks provide a mechanism to skip tests if their prerequisites are not met, by either calling dedicated methods (e.g:
 <code>unittest.TestCase.skipTest</code>, <code>pytest.skip</code>, …​) or using decorators (e.g: <code>unittest.skip</code>,
 <code>pytest.mark.skip</code>, …​)</p>
@@ -6,7 +7,7 @@ flag the test as <code>skipped</code> in such situation.</p>
 <p>This rule raises an issue when a <code>return</code> is performed conditionally at the beginning of a test method.</p>
 <p>No issue will be raised if the <code>return</code> is unconditional as {rule:python:S1763} already raises an issue in such case.</p>
 <p>The supported frameworks are <code>Pytest</code> and <code>Unittest</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import unittest
 class MyTest(unittest.TestCase):
@@ -16,7 +17,7 @@ class MyTest(unittest.TestCase):
             return  # Noncompliant
         self.assertEqual(foo(), 42)
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import unittest
 class MyTest(unittest.TestCase):
@@ -26,7 +27,7 @@ class MyTest(unittest.TestCase):
             self.skipTest("prerequisite not met")
         self.assertEqual(foo(), 42)
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.pytest.org/en/latest/how-to/skipping.html">Pytest: skipping test functions</a> </li>
   <li> <a href="https://docs.python.org/3/library/unittest.html#skipping-tests-and-expected-failures">Unittest: skipping tests and expected

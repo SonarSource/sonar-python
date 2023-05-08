@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Python developers can customize how code is interpreted by defining special methods (also called magic methods). For example, it is possible to
 override how the multiplication operator (<code>a * b</code>) will apply to instances of a class by defining in this class the <code>__mul__</code>
 and <code>__rmul__</code> methods. Whenever a multiplication operation is performed with this class, the python interpreter will call one of these
@@ -5,7 +6,7 @@ methods instead of performing the default multiplication.</p>
 <p>The python interpreter will always call these methods with the same number of parameters. Every call to a special method will fail if it is defined
 with an unexpected number of parameters.</p>
 <p>This rule raises an issue when a special method is defined with an unexpected number of parameters.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class A:
     def __mul__(self, other, unexpected):  # Noncompliant. Too many parameters
@@ -17,7 +18,7 @@ class A:
 A() * 3  # TypeError: __mul__() missing 1 required positional argument: 'unexpected'
 A() + 3  # TypeError: __add__() takes 1 positional argument but 2 were given
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class A:
     def __mul__(self, other):
@@ -29,7 +30,7 @@ class A:
 A() * 3
 A() + 3
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/copy.html">copy module</a> </li>

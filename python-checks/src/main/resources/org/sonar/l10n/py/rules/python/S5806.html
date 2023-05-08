@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Shadowing a builtin makes your code more difficult to read and maintain. It may also be a source of bugs as you can reference the builtin by
 mistake.</p>
 <p>It is sometimes ok to shadow a builtin to improve the readability of a public API or to support multiple versions of a library. In these cases the
@@ -5,17 +6,17 @@ value is higher than the maintainability cost. Just be careful when you do it.</
 <p>It is not ok to shadow builtins with variables which are local to a function or method. These variables are not public and can be easily renamed,
 thus reducing the confusion and making the code less error-prone.</p>
 <p>This rule raises an issue when the name of a local variable matches the name of a builtin.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def a_function():
     int = 42  # Noncompliant; int is a builtin
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def a_function():
     value = 42
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/library/stdtypes.html">Python documentation - Built-in Types</a> </li>
   <li> <a href="https://docs.python.org/3/library/functions.html">Python documentation - Built-in Functions</a> </li>

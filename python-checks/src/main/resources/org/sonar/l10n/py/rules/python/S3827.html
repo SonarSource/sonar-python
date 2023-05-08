@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>Variables, Classes and functions should be defined before they are used, otherwise the code will fail.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def noncompliant():
     foo()  # Noncompliant
@@ -13,7 +14,7 @@ def noncompliant():
     class MyClass:
         pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def compliant():
     foo = sum

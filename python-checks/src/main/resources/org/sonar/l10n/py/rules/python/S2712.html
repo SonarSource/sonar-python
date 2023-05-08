@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Functions that use <code>yield</code> are known as "generators". Before Python 3.3, generators cannot <code>return</code> values. Similarly,
 functions that use <code>return</code> cannot use <code>yield</code>. Doing so will cause a <code>SyntaxError</code>.</p>
 <p>Either upgrade your version of Python to a version &gt;= 3.3, or don’t use both return and yield in a function.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def adder(n):
      num = 0

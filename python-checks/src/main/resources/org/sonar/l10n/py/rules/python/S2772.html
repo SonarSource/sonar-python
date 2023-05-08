@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>The use of a <code>pass</code> statement where it’s not required by the syntax is pure cruft and should be removed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
     def __init__(self, log="", who="", date=0, files=[]):
         self.log = log
@@ -11,7 +12,7 @@
     def lookup():
         pass    # Compliant; method can't be empty
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
     def __init__(self, log="", who="", date=0, files=[]):
         self.log = log

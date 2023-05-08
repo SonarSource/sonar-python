@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Private attributes which are written but never read are a clear case of dead store. Changing their value is useless and most probably indicates a
 serious error in the code.</p>
 <p>Python has no real private attribute. Every attribute is accessible. There are however two conventions indicating that an attribute is not meant to
@@ -14,7 +15,7 @@ be "public":</p>
 <p>This rule raises an issue when a class-private attribute (two leading underscores, max one underscore at the end) is never read inside the class.
 It optionally raises an issue on unread attributes prefixed with a single underscore. Both class attribute and instance attributes will raise an
 issue.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Noncompliant:
     _class_attr = 0  # Noncompliant if enable_single_underscore_issues is enabled
@@ -27,7 +28,7 @@ class Noncompliant:
     def compute(self, x):
         return x * x
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Compliant:
     _class_attr = 0
@@ -40,7 +41,7 @@ class Compliant:
     def compute(self, x):
         return x * Compliant._class_attr * Compliant.__mangled_class_attr * self._attr * self.__mangled_attr
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a> </li>
   <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a> </li>

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>For-in loops, <a href="https://docs.python.org/3/whatsnew/3.3.html#pep-380-syntax-for-delegating-to-a-subgenerator"><code>yield from</code></a> and
 iterable unpacking only work with <a href="https://docs.python.org/3/glossary.html#term-iterable">iterable objects</a>. In order to be iterable, an
 object should have either an <code>__iter__</code> method or a <code>__getitem__</code> method implementing the <a
@@ -8,7 +9,7 @@ href="https://docs.python.org/3/reference/compound_stmts.html#the-async-for-stat
 in</code>.</p>
 <p>This rule raises an issue when a non iterable object is used in a <code>for-in</code> loop, in a <code>yield from</code> or when it is
 unpacked.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Empty:
     pass
@@ -36,7 +37,7 @@ a, *rest = async_generator()  # Noncompliant
 for a in async_generator():  # Noncompliant; "async" is missing before "for"
     print(a)
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyIterable:
     def __init__(self, values):
@@ -70,7 +71,7 @@ async def async_generator():
 async for a in async_generator():
     print(a)
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://www.python.org/dev/peps/pep-0234/#python-api-specification">PEP 234 - Iterators</a> </li>
   <li> <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Python documentation - Iterator Types</a> </li>

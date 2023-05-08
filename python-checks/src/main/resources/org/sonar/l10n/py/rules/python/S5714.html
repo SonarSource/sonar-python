@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>The only two possible types for an <code>except</code>'s expression are a class deriving from <code>BaseException</code>, or a tuple composed of
 such classes (or an old style class if you are using python 2, but this has been removed in python 3).</p>
 <p>This rule raises an issue when the expression used in an <code>except</code> block is a boolean expression of exceptions. The result of such
 expression is a single exception class, which is valid but not what the developer intended.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 try:
     raise TypeError()
@@ -16,14 +17,14 @@ except (ValueError or TypeError) as exception:  # Noncompliant
 foo = ValueError or TypeError  # foo == ValueError
 foo = ValueError and TypeError  # foo == TypeError
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 try:
     raise TypeError()
 except (ValueError, TypeError) as exception:
     print("Catching all exceptions")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> </li>
 </ul>

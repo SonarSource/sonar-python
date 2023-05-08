@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In some cases a comparison with operators <code>==</code>, or <code>!=</code> will always return True or always return False. When this happens,
 the comparison and all its dependent code can simply be removed. This includes:</p>
 <ul>
@@ -5,7 +6,7 @@ the comparison and all its dependent code can simply be removed. This includes:<
   <li> comparing class instances which do not implement <code>__eq__</code> or <code>__ne__</code> to an object of a different type (builtin or from
   an unrelated class which also doesn’t implement <code>__eq__</code> or <code>__ne__</code>). </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 foo = 1 == "1"  # Noncompliant. Always False.
 
@@ -17,7 +18,7 @@ class A:
 myvar = A() == 1  # Noncompliant. Always False.
 myvar = A() != 1  # Noncompliant. Always True.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 foo = 1 == int("1")
 

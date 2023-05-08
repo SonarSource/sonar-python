@@ -1,21 +1,22 @@
+<h2>Why is this an issue?</h2>
 <p>A dictionary cannot have two values with the same key. When a key is repeated in a dictionary literal, only the last occurence will remain. Thus
 duplicate keys should be either modified or removed.</p>
 <p>This rule raises an issue when the same value is used multiple times as a key in a dictionary literal.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 {"one": 1, "two": 2, "one": 3}  # Noncompliant
 
 def func(a1, a2, a3):
     {a1: 1, a2: 2, a1: 3}  # Noncompliant.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 {"one": 1, "two": 2, "three": 3}
 
 def func(a1, a2, a3):
     {a1: 1, a2: 2, a3: 3}
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/expressions.html#dictionary-displays">Python documentation - Dictionary displays</a> </li>
 </ul>

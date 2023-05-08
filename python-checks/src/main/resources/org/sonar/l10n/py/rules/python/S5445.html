@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Creating temporary files using insecure methods exposes the application to race conditions on filenames: a malicious user can try to create a file
 with a predictable name before the application does. A successful attack can result in other files being accessed, modified, corrupted or deleted.
 This risk is even higher if the application run with elevated permissions.</p>
@@ -6,21 +7,21 @@ This risk is even higher if the application run with elevated permissions.</p>
   <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-1858">CVE-2014-1858</a> </li>
   <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-1932">CVE-2014-1932</a> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import tempfile
 
 filename = tempfile.mktemp() # Noncompliant
 tmp_file = open(filename, "w+")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import tempfile
 
 tmp_file1 = tempfile.NamedTemporaryFile(delete=False) # Compliant; Easy replacement to tempfile.mktemp()
 tmp_file2 = tempfile.NamedTemporaryFile() # Compliant; Created file will be automatically deleted
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP Top 10 2021 Category A1</a> - Broken Access Control </li>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities">OWASP Top 10 2017 Category A9</a> -
