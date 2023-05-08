@@ -1,3 +1,5 @@
+<p>This rule is deprecated; use {rule:python:S5247} instead.</p>
+<h2>Why is this an issue?</h2>
 <p>Template engines have an HTML autoescape mechanism that protects web applications against most common cross-site-scripting (XSS)
 vulnerabilities.</p>
 <p>By default, it automatically replaces HTML special characters in any template variables. This secure by design configuration should not be globally
@@ -17,19 +19,19 @@ browser. The most severe XSS attacks involve:</p>
   <li> <a href="https://github.com/django/django">Django Templates</a> </li>
   <li> <a href="https://github.com/pallets/jinja">Jinja2</a> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 from jinja2 import Environment
 
 env = Environment() # Noncompliant; New Jinja2 Environment has autoescape set to false
 env = Environment(autoescape=False) # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 from jinja2 import Environment
 env = Environment(autoescape=True) # Compliant
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md">OWASP Cheat
   Sheet</a> - XSS Prevention Cheat Sheet </li>
@@ -52,6 +54,4 @@ env = Environment(autoescape=True) # Compliant
   <li> <a href="https://cwe.mitre.org/data/definitions/87">MITRE, CWE-87</a> - Improper Neutralization of Alternate XSS Syntax </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
 </ul>
-<h2>Deprecated</h2>
-<p>This rule is deprecated; use {rule:python:S5247} instead.</p>
 

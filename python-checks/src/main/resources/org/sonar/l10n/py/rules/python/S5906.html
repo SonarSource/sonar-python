@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The <code>unittest</code> module provides assertion methods specific to common types and operations. Both versions will test the same things, but
 the dedicated one will provide a better error message, simplifying the debugging process.</p>
 <p>This rule reports an issue when an assertion can be simplified by using a more specific function. The array below gives a list of assertions on
@@ -31,7 +32,7 @@ which an issue will be raised, and which function should be used instead:</p>
 <p>|<code>assertFalse(x is not None)</code>|<code>assertIsNone(x)</code>|</p>
 <p>|<code>assertEqual(x, True)</code>|<code>assertTrue(x)</code>|</p>
 <p>|<code>assertEqual(x, False)</code>|<code>assertFalse(x)</code>|</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import unittest
 class SomeTest(unittest.TestCase):
@@ -41,7 +42,7 @@ class SomeTest(unittest.TestCase):
     self.assertFalse(x == y)  # Noncompliant
     self.assertTrue(x &lt; y)  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class SomeTest(unittest.TestCase):
   def test_something(self):
@@ -50,7 +51,7 @@ class SomeTest(unittest.TestCase):
     self.assertNotEqual(x, y)
     self.assertLess(x, y)
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertEqual">Python documentation - the <code>unittest</code>
 module</a></p>
 

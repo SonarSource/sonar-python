@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When two functions or methods have the same implementation, either it was a mistake - something else was intended - or the duplication was
 intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other. Numerical and string literals are
 not taken into account.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     code = "bounteous"
@@ -17,7 +18,7 @@ class MyClass:
     def do_the_thing(self):
         pass  # on purpose
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     code = "bounteous"
@@ -32,6 +33,6 @@ class MyClass:
     def do_the_thing(self):
         pass  # on purpose
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue will be raised on empty methods/functions and methods/functions with only one line of code.</p>
 

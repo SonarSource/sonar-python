@@ -1,23 +1,24 @@
+<h2>Why is this an issue?</h2>
 <p>When a test fails due, for example, to infrastructure issues, you might want to ignore it temporarily. But without some kind of notation about why
 the test is being ignored, it may never be reactivated. Such tests are difficult to address without comprehensive knowledge of the project, and end up
 polluting their projects.</p>
 <p>This rule raises an issue for each skipped test with "<code>unittest.skip</code>" or "<code>pytest.mark.skip</code>" without providing a reason
 argument.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import unittest
 class MyTest(unittest.TestCase):
     @unittest.skip  # Noncompliant
     def test_something(self): ...
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import unittest
 class MyTest(unittest.TestCase):
     @unittest.skip("need to fix something")
     def test_something(self): ...
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://docs.python.org/3/library/unittest.html#skipping-tests-and-expected-failures">Unittest documentation - skipping tests and expected
 failures</a></p>
 <p><a href="https://docs.pytest.org/en/latest/how-to/skipping.html#skipping-test-functions">Pytest documentation - skipping test functions</a></p>

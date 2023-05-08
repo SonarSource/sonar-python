@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Assertions are meant to detect when code behaves as expected. An assertion which fails or succeeds all the time should be fixed.</p>
 <p>This rule raises an issue when an assertion method is given parameters which will make it succeed or fail all the time. It covers three cases:</p>
 <ul>
@@ -8,7 +9,7 @@
   <li> a unittest’s <code>assertIsNot</code> or <code>assertIs</code> method is called with a literal expression creating a new object every time (ex:
   <code>[1, 2, 3]</code>). </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 import unittest
 
@@ -25,7 +26,7 @@ class MyTestCase(unittest.TestCase):
     def helper_compare(param):
         self.assertIs(param, [1, 2, 3])  # Noncompliant. This assertion always fails because [1, 2, 3] creates a new object.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import unittest
 
@@ -39,7 +40,7 @@ class MyTestCase(unittest.TestCase):
     def helper_compare(param):
         self.assertEqual(param, [1, 2, 3])
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/unittest.html">Python documentation - the <code>unittest</code> module</a> </li>
   <li> <a href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement">Python documentation - the <code>assert</code>

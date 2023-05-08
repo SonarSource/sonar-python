@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Checking that variable X has type T with <a href="https://docs.python.org/3/library/typing.html">type annotations</a> implies that X’s value is of
 type T or a subtype of T. After such a check, it is a good practice to limit actions on X to those allowed by type T, even if a subclass of T allows
 different actions. Doing otherwise will confuse your fellow developers.</p>
@@ -8,18 +9,18 @@ performed, they should not contradict the following actions.</p>
 actions corresponds to rules {rule:python:S2159}, {rule:python:S3403}, {rule:python:S5607}, {rule:python:S5756}, {rule:python:S5644},
 {rule:python:S3862}, {rule:python:S5797}, {rule:python:S5795} and {rule:python:S5632}. These other rules only detect cases where the type of a
 variable is certain, i.e. it cannot be a subclass.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def add_the_answer(param: str):
     return param + 42  # Noncompliant. Fix this "+" operation; Type annotation on "param" suggest that operands have incompatible types.
     # Note: In practice it is possible to create a class inheriting from both "str" and "int", but this would be a very confusing design.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def add_the_answer(param: str):
     return param + "42"
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/functions.html#isinstance">Python documentation - <code>isinstance</code> function</a> </li>
   <li> <a href="https://docs.python.org/3/glossary.html#term-eafp">Python glossary - "Easier to ask for forgiveness than permission."</a> </li>

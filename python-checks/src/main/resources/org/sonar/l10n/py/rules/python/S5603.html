@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When a class or function is defined in a parent function or method, it is only visible in this parent function or method’s scope. If the defined
 class or function is not used within this scope it is dead code, i.e. unnecessary, inoperative code that should be removed. Cleaning out dead code
 decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def noncompliant():
     def nested_function():  # Noncompliant
@@ -11,7 +12,7 @@ def noncompliant():
         def __init__(self):
             print("NestedClass")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def compliant():
     def nested_function():

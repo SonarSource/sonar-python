@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>Python has no pre/post increment/decrement operator. For instance, <code>x++</code> and <code>x--</code> will fail to parse. More importantly,
 <code>++x</code> and <code>--x</code> will do nothing. To increment a number, simply write <code>x += 1</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 ++x # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 x += 1
 </pre>

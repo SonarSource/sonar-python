@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>When a function is called, it accepts only one value per parameter. Python interpreters will raise a SyntaxError when they see something like
 <code>myfunction(a=1, a=2)</code>, but there are other cases which will only fail at runtime:</p>
 <ul>
@@ -5,7 +6,7 @@
   <li> Some arguments are provided via unpacking and the same argument is provided twice. </li>
 </ul>
 <p>This rule raises an issue when a function is called with multiple values for the same parameter.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def func(a, b, c):
     return a * b * c
@@ -16,7 +17,7 @@ params = {'c':31}
 func(6, 93, 31, **params) # Noncompliant: argument "c" is duplicated
 func(6, 93, c=62, **params) # Noncompliant: argument "c" is duplicated
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def func(a, b, c):
     return a * b * c

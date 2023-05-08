@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>A bare <code>raise</code> statement, i.e. a <code>raise</code> with no exception provided, will re-raise the last active exception in the current
 scope. If the "raise" statement is not in an <code>except</code> or <code>finally</code> block, no exception is active and a <code>RuntimeError</code>
 is raised instead.</p>
@@ -8,7 +9,7 @@ exception will be reraised, and nothing prevents a developer from calling the fu
 the <code>try</code> block is not caught or when an exception is raised by an <code>except</code> block. It will fail in any other case and should not
 be relied upon. This code smell is handled by rule {rule:python:S5704}.</p>
 <p>This rule raises an exception when a bare <code>raise</code> statement is not in an <code>except</code> or <code>finally</code> block.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 raise  # Noncompliant
 
@@ -28,7 +29,7 @@ def foo():
 def handle_error():
     raise  # Noncompliant. This works but is hard to understand.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 raise ValueError()
 
@@ -43,7 +44,7 @@ def foo():
     finally:
         raise
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/simple_stmts.html#raise">The <code>raise</code> statement</a> </li>
 </ul>

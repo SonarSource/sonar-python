@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>Creating a new <code>Exception</code> without actually raising it has no effect and is probably due to a mistake.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def func(x):
     if not isinstance(x, int):
@@ -8,7 +9,7 @@ def func(x):
         ValueError  # Noncompliant
     return x + 42
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def func(x):
     if not isinstance(x, int):
@@ -17,7 +18,7 @@ def func(x):
         raise ValueError
     return x + 42
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/errors.html#raising-exceptions">Python documentation - Raising Exceptions</a> </li>
 </ul>

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Because a subclass instance may be used as an instance of the superclass, overriding methods should uphold the aspects of the superclass contract
 that relate to the Liskov Substitution Principle. Specifically, an overriding method should be callable with the same parameters as the overriden
 one.</p>
@@ -26,7 +27,7 @@ one.</p>
 </ul>
 <p>This rule raises an issue when the signature of an overriding method does not accept the same parameters as the overriden one. Only instance
 methods are considered, class methods and static methods are ignored.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class ParentClass(object):
     def mymethod(self, param1):
@@ -47,7 +48,7 @@ class ChildClassReordered(ParentClass):
         # Remove parameters "inserted" or provide a default value.
         pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class ParentClass(object):
     def mymethod(self, param1):
@@ -65,7 +66,7 @@ class ChildClassReordered(ParentClass):
     def mymethod(self, param1, inserted=None):
         pass
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>In theory renaming parameters also breaks Liskov Substitution Principle. Arguments can’t be passed via keyword arguments anymore. However, <a
 href="https://www.python.org/dev/peps/pep-0570/#consistency-in-subclasses">as PEP-570 says</a>, it is common to rename parameters when it improves
 code readability and when arguments are always passed by position.</p>
@@ -80,7 +81,7 @@ class ChildClassRenamed(ParentClass):
     def mymethod(self, renamed): # No issue but this is suspicious. Rename this parameter as "param1" or use positional only arguments if possible.
         pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
   <li> Python Enhancement Proposal (PEP) 3102 - <a href="https://www.python.org/dev/peps/pep-3102/">Keyword-Only Arguments</a> </li>

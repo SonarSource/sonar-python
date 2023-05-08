@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Calling a function or a method with fewer or more arguments than expected will raise a <code>TypeError</code>. This is usually a bug and should be
 fixed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 ######################
 # Positional Arguments
@@ -53,7 +54,7 @@ def mandatory_keyword(a, *, b):
 mandatory_keyword(1, b=2)
 mandatory_keyword(1)  # Noncompliant. Missing keyword argument "b"
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/628">MITRE, CWE-628</a> - Function Call with Incorrectly Specified Arguments </li>
 </ul>

@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Backticks are a deprecated alias for <code>repr()</code>. Don’t use them any more, the syntax was removed in Python 3.0.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 return `num`  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 return repr(num)
 </pre>

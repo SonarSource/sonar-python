@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Every instance method is expected to have at least one positional parameter. This parameter will reference the object instance on which the method
 is called. Calling an instance method which doesn’t have at least one parameter will raise a "TypeError". By convention, this first parameter is
 usually named "self".</p>
@@ -5,7 +6,7 @@ usually named "self".</p>
 receive the class itself instead of a class instance. By convention, this first parameter is usually named "cls". Note that <code>__new__</code> and
 <code>__init_subclass__</code> take a class as first argument even thought they are not decorated with <code>@classmethod</code>.</p>
 <p>This rule raises an issue when an instance of class method does not have at least one positional parameter.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     def instance_method():  # Noncompliant. "self" parameter is missing.
@@ -15,7 +16,7 @@ class MyClass:
     def class_method():  # Noncompliant. "cls" parameter is missing.
         print("class_method")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     def instance_method(self):
@@ -30,7 +31,7 @@ class MyClass:
     def static_method():
         print("static_method")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3.8/tutorial/classes.html#method-objects">Method Objects</a> </li>
 </ul>

@@ -1,21 +1,22 @@
+<h2>Why is this an issue?</h2>
 <p>A set cannot have two identical values. When a value is repeated in a set literal, only the last occurence will remain. Thus duplicate values
 should be either modified or removed.</p>
 <p>This rule raises an issue when the same value is used multiple times as a value in a set literal.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 {"one", "two", "one"}  # Noncompliant
 
 def func(a1, a2, a3):
     {a1, a2, a1}  # Noncompliant.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 {"one", "two", "three"}
 
 def func(a1, a2, a3):
     {a1, a2, a3}
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/expressions.html#set-displays">Python documentation - Set displays</a> </li>
 </ul>

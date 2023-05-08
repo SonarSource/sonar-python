@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>Variables, Classes and functions should not be undefined, otherwise the code will fail with a NameError.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 my_var # Noncompliant (variable is never defined)
 
@@ -7,7 +8,7 @@ def noncompliant():
     foo()  # Noncompliant
     MyClass()  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 from mod import my_var
 

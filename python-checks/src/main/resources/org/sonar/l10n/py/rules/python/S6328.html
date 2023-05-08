@@ -1,16 +1,17 @@
+<h2>Why is this an issue?</h2>
 <p>The regex function <code>re.sub</code> can be used to perform a search and replace based on regular expression matches. The <code>repl</code>
 parameter can contain references to capturing groups used in the <code>pattern</code> parameter. This can be achieved with <code>\n</code> to
 reference the n’th group.</p>
 <p>When referencing a nonexistent group an error will be thrown for Python &lt; 3.5 or replaced by an empty string for Python &gt;= 3.5.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 re.sub(r"(a)(b)(c)", r"\1, \9, \3", "abc") # Noncompliant - result is an re.error: invalid group reference
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 re.sub(r"(a)(b)(c)", r"\1, \2, \3", "abc")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.10/library/re.html#re.sub">re.sub</a> - Python Documentation </li>
 </ul>

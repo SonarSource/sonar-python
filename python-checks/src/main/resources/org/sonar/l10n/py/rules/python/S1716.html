@@ -1,14 +1,15 @@
+<h2>Why is this an issue?</h2>
 <p><code>break</code> and <code>continue</code> are unstructured control flow statements which make code harder to read. Additionally, more recent
 versions of Python raise a SyntaxError when modules containing <code>break</code> or <code>continue</code> outside of a loop are imported.</p>
 <p>Therefore, these statements should not be used outside of loops.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 narg=len(sys.argv)
 if narg == 1:
         print('@Usage: input_filename nelements nintervals')
         break
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 if narg == 1:
         print('@Usage: input_filename nelements nintervals')

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Formatting strings, either with the <code>%</code> operator or <code>str.format</code> method, requires a valid string and arguments matching this
 string’s replacement fields.</p>
 <p>This also applies to loggers from the <code>logging</code> module. Internally they use <code>%-formatting</code>. The only difference is that they
@@ -12,7 +13,7 @@ easy to forget curly braces and it won’t raise any error.</p>
   <li> Loggers will log an error because their message is not formatted properly. </li>
 </ul>
 <p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 "Error %(message)s" % {"message": "something failed", "extra": "some dead code"}  # Noncompliant. Remove the unused argument "extra" or add a replacement field.
 
@@ -25,7 +26,7 @@ message = f"Error: User [user] has not been able to access [resource]"  # Noncom
 import logging
 logging.error("Error: User %s has not been able to access %s", "Alice")  # Noncompliant. Add 1 missing argument.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 "Error %(message)s" % {"message": "something failed"}
 
@@ -38,7 +39,7 @@ message = f"Error: User {user} has not been able to access {resource}"
 import logging
 logging.error("Error: User %s has not been able to access %s", "Alice", "MyFile")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/string.html#format-string-syntax">Python documentation - Format String Syntax</a> </li>
   <li> <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">Python documentation - printf-style String

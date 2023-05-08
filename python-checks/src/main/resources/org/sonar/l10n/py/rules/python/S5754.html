@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
 href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. This exception is expected to propagate up until the
 application stops. It is ok to catch it when a clean-up is necessary but it should be raised again immediately.</p>
@@ -10,7 +11,7 @@ raised again.</p>
 href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> exception.</p>
 <p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> don’t reraise
 the exception caught.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 try:
     open("foo.txt", "r")
@@ -26,7 +27,7 @@ except BaseException:  # Noncompliant
 except:  # Noncompliant
     pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 try:
     open("foo.txt", "r")
@@ -53,7 +54,7 @@ try:
 except FileNotFoundError:
     # process the exception
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#id5">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html">Built-in exceptions</a> </li>

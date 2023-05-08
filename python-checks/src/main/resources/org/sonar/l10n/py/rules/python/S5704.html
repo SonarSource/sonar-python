@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>A bare <code>raise</code> statement, i.e. a <code>raise</code> with no exception provided, will re-raise the last active exception in the current
 scope. If no exception is active a <code>RuntimeError</code> is raised instead.</p>
 <p>If the bare "raise" statement is in a <code>finally</code> block, it will only have an active exception to re-raise when an exception from the
 <code>try</code> block is not caught or when an exception is raised by an <code>except</code> or <code>else</code> block. Thus bare <code>raise</code>
 statements should not be relied upon in <code>finally</code> blocks. It is simpler to let the exception raise automatically.</p>
 <p>This rule raises an issue when a bare <code>raise</code> statements is in a <code>finally</code> block.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def foo(param):
     result = 0
@@ -22,7 +23,7 @@ def foo(param):
             result = 1
     return result
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def foo(param):
     result = 0
@@ -39,7 +40,7 @@ def foo(param):
         # the exception will raise automatically
     return result
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/simple_stmts.html#raise">The <code>raise</code> statement</a> </li>
 </ul>

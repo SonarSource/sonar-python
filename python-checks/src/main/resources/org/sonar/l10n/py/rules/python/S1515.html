@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Nested functions and lambdas can reference variables defined in enclosing scopes. This can create tricky bugs when the variable and the function
 are defined in a loop. If the function is called in another iteration or after the loop finishes, it will see the variables' last value instead of
 seeing the values corresponding to the iteration where the function was defined.</p>
@@ -12,7 +13,7 @@ executed once, when the function is defined, which means that the parameter’s 
 following iterations.</p>
 <p>Another solution is to pass the variable as an argument to the function/lambda when it is called.</p>
 <p>This rule raises an issue when a function or lambda references a variable defined in an enclosing loop.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def run():
     mylist = []
@@ -37,7 +38,7 @@ def example_of_api_change():
         # prints [4, 5, 6] x 4 with python 3, with python 2 it prints [0, 1, 2], [1, 2, 3], ...
         print(list(sublist))
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def run():
     mylist = []
@@ -58,7 +59,7 @@ def example_of_api_change():
     for sublist in lst:
         print(list(sublist))
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue will be raised if the function or lambda is directly called in the same loop. This still makes the design difficult to understand but it
 is less error prone.</p>
 <pre>
@@ -71,7 +72,7 @@ def function_called_in_loop():
 
         print(func(42))  # Calling "func" directly
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker’s Guide to Python - Common Gotchas</a> </li>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Function definitions</a> </li>

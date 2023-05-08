@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Calling an operator in python is equivalent to calling a special method (except for the identity operator <code>is</code>). Python provides a set
 of built-in operations. It is for example possible to add two integers: <code>1 + 2</code>. It is however not possible to add a string and an integer:
 <code>1 + "2"</code> and such an operation will raise a <code>TypeError</code>.</p>
@@ -10,7 +11,7 @@ operators</a>.</p>
 <code>__radd__</code>.</p>
 <p>This rule raises an issue when an operator is used on incompatible types. Types are considered incompatible if no built-in operations between those
 types exist and none of the operands has implemented the corresponding special methods.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Empty:
     pass
@@ -27,7 +28,7 @@ Add() + 1
 Add() + Empty()
 Empty() + Add()  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Empty:
     pass
@@ -44,7 +45,7 @@ Add() + 1
 Add() + Empty()
 Empty() + Add()
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special%20methods#object.__lt__">Rich
   comparison methods</a> </li>

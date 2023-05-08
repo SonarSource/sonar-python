@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In Python, special methods corresponding to numeric operators, rich comparison operators and the <code>__length_hint__</code> method should return
 <code>NotImplemented</code> when the operation is not supported. These methods should not raise <code>NotImplementedError</code> as callers don’t
 expect it and won’t catch this exception.</p>
@@ -56,7 +57,7 @@ expect it and won’t catch this exception.</p>
   <li> __ior__(self, other) </li>
   <li> __length_hint__(self) </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     def __add__(self, other):
@@ -72,7 +73,7 @@ class MyOtherClass:
 
 MyClass() + MyOtherClass()  # This will raise NotImplementedError
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     def __add__(self, other):
@@ -88,7 +89,7 @@ class MyOtherClass:
 
 MyClass() + MyOtherClass()  # This returns 42
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/library/constants.html#NotImplemented">Built-in Constants - NotImplemented</a> </li>
   <li> Python documentation - <a href="https://docs.python.org/3/library/numbers.html#implementing-the-arithmetic-operations">Implementing the

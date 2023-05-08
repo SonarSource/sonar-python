@@ -1,17 +1,18 @@
+<h2>Why is this an issue?</h2>
 <p>When the call to a function doesn’t have any side effects, what is the point of making the call if the results are ignored? In such case, either
 the function call is useless and should be dropped or the source code doesn’t behave as expected.</p>
 <p>This rule raises an issue when a builtin function or methods which has no side effects is called and its result is not used.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 myvar = "this is a multiline"
 "message from {}".format(sender)  # Noncompliant. The formatted string is not used because the concatenation is not done properly.
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 myvar = ("this is a multiline"
 "message from {}".format(sender))
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue will be raised when the function or method call is in a <code>try...except</code> body. This usually indicates that an exception is
 expected, and this exception is the side-effect.</p>
 <pre>
@@ -27,7 +28,7 @@ def tryExcept():
     except ZeroDivisionError as e:
         pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/library/functions.html">Python documentation - Built-in Functions</a> </li>
 </ul>

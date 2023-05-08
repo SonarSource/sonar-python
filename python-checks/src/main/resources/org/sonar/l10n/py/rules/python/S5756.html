@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>In order to be callable, a python class should implement the <a
 href="https://docs.python.org/3/reference/datamodel.html#object.__call__"><code>__call__</code></a> method.</p>
 <p>This rule raises an issue when a non-callable object is called.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass:
     pass
@@ -12,7 +13,7 @@ myvar()  # Noncompliant
 none_var = None
 none_var()  # Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass:
     def __call__(self):
@@ -21,7 +22,7 @@ class MyClass:
 myvar = MyClass()
 myvar()
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__call__">Python documentation - __call__ method</a> </li>
 </ul>

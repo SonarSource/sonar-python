@@ -1,18 +1,19 @@
+<h2>Why is this an issue?</h2>
 <p>Developers may define a list named <code>__all__</code> in a module to limit the names imported from it by wildcard imports (<code>from mymodule
 import *</code>). This list can only reference defined names, otherwise an <code>AttributeError</code> will be raised when the module is imported.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 from mymodule import my_func
 
 __all__ = ["unknown_func"]  # Noncompliant. "unknown_func" is undefined
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 from mymodule import my_func
 
 __all__ = ["my_func"]
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/modules.html#importing-from-a-package">Python documentation - Importing * From a Package</a> </li>
 </ul>

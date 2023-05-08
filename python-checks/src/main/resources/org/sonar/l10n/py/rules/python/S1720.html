@@ -1,12 +1,13 @@
+<h2>Why is this an issue?</h2>
 <p>A string literal that is the first statement in a module, function, class, or method is a docstring. A docstring should document what a caller
 needs to know about the code. Information about what it does, what it returns, and what it requires are all valid candidates for documentation. Well
 written docstrings allow callers to use your code without having to first read it and understand its logic.</p>
 <p>By convention, docstrings are enclosed in three sets of double-quotes.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def my_function(a,b):
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def my_function(a,b):
       """Do X"""

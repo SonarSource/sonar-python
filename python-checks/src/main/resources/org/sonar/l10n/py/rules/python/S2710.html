@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>By convention, the first argument to class methods, i.e. methods decorated with <code>@classmethod</code>, is named <code>cls</code> as a
 representation and a reminder that the argument is the class itself. Name the argument something else, and you stand a good chance of confusing both
 users and maintainers of the code. It might also indicate that the <code>cls</code> parameter was forgotten, in which case calling the method will
@@ -6,7 +7,7 @@ first argument is always the class instead of "self".</p>
 <p>By default this rule accepts <code>cls</code> and <code>mcs</code>, which is sometime used in metaclasses, as valid names for class parameters. You
 can set your own list of accepted names via the parameter <code>classParameterNames</code>.</p>
 <p>This rule raises an issue when the first parameter of a class method is not an accepted name.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Rectangle(object):
 
@@ -14,7 +15,7 @@ class Rectangle(object):
   def area(bob, height, width):  #Noncompliant
     return height * width
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Rectangle(object):
 
@@ -22,7 +23,7 @@ class Rectangle(object):
   def area(cls, height, width):
     return height * width
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> PEP8 - <a href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">Function and Method Arguments</a> </li>
 </ul>

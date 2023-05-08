@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Having two branches in the same <code>if</code> structure with the same implementation is at best duplicate code, and at worst a coding error. If
 the same logic is truly needed for both instances, then they should be combined.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 if 0 &lt;= a &lt; 10:
     do_first()
@@ -11,7 +12,7 @@ elif 20 &lt;= a &lt; 50:
     do_first()         # Noncompliant; duplicates first condition
     do_second()
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Blocks in an <code>if</code> chain that contain a single line of code are ignored.</p>
 <pre>
 if 0 &lt;= a &lt; 10:

@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The length of a collection is always greater than or equal to zero. So testing that a length is greater than or equal to zero doesn’t make sense,
 since the result is always <code>true</code>. Similarly testing that it is less than zero will always return <code>false</code>. Perhaps the intent
 was to check the non-emptiness of the collection instead.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 mylist = []
 if len(myList) &gt;= 0:  # Noncompliant
@@ -10,7 +11,7 @@ if len(myList) &gt;= 0:  # Noncompliant
 if len(myList) &lt; 0:  # Noncompliant
     pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 mylist = []
 if len(myList) &gt;= 42:

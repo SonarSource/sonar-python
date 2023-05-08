@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy/paste
 error and therefore a bug, or it is simply wasted code, and should be simplified. In the case of bitwise operators and most binary mathematical
 operators, having the same value on both sides of an operator yields predictable results, and should be simplified.</p>
 <p>Note that this rule will raise issues on <code>a == a</code> and <code>a != a</code> expressions which are sometime used to detect <code>NaN</code>
 values. It is recommended to use instead <a href="https://docs.python.org/3/library/math.html#math.isnan"><code>math.isnan</code></a> or an equivalent
 function. This will improve code readability.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 if a == a: # Noncompliant
     work()
@@ -21,12 +22,12 @@ if a == b or a == b: # Noncompliant
 j = 5 / 5 # Noncompliant
 k = 5 - 5 # Noncompliant
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>The following are ignored:</p>
 <ul>
   <li> The expression <code>1 &lt;&lt; 1</code> </li>
 </ul>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> {rule:python:S1656} - Implements a check on <code>=</code>. </li>
 </ul>

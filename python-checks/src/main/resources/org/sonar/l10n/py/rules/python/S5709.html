@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
 href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. <a
 href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> is raised when the user asks the program
@@ -12,7 +13,7 @@ user code.</p>
 supposed to inherit directly from <code>BaseException</code>. They should instead inherit from <code>Exception</code> or one of its subclasses.</p>
 <p>This rule raises an issue when a class derives from one of the following exception classes: <code>BaseException</code>,
 <code>KeyboardInterrupt</code>, <code>SystemExit</code> or <code>GeneratorExit</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyException(BaseException):  # Noncompliant
     pass
@@ -26,12 +27,12 @@ class MyException(KeyboardInterrupt):  # Noncompliant
 class MyException(SystemExit):  # Noncompliant
     pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyException(Exception):
     pass
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> PEP 352 – <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#BaseException">BaseException class</a> </li>

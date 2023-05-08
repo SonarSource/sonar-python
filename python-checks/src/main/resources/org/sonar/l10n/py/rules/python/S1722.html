@@ -1,13 +1,14 @@
+<h2>Why is this an issue?</h2>
 <p>The new style of class creation, with the declaration of a parent class, created a unified object model in Python, so that the type of an
 instantiated class is equal to its class. In Python 2.2-2.7, this is not the case for old-style classes. In Python 3+ all classes are new-style
 classes. However, since the behavior can differ from 2.2+ to 3+, explicitly inheriting from <code>object</code> (if there is no better candidate) is
 recommended.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class MyClass():
     pass
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class MyClass(object):
     pass

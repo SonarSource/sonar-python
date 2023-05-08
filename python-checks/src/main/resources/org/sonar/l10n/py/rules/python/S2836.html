@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>The <code>else</code> clause of a loop is skipped when a <code>break</code> is executed in this loop. In other words, a loop with an
 <code>else</code> but no <code>break</code> statement will always execute the <code>else</code> part (unless of course an exception is raised or
 <code>return</code> is used). If this is what the developer intended, it would be much simpler to have the <code>else</code> statement removed and its
 body unindented. Thus having a loop with an <code>else</code> and no <code>break</code> is most likely an error.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 from typing import List
 
@@ -13,7 +14,7 @@ def search_first_number_without_break(elements: List[str]):
     else:  # Noncompliant. This will be executed every time
         raise ValueError("List does not contain any number")
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 from typing import List
 
@@ -35,7 +36,7 @@ def search_first_number_without_else(elements: List[str]):
             return elt
     raise ValueError("List does not contain any number")
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">Python documentation -
   break and continue Statements, and else Clauses on Loops</a> </li>

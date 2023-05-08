@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
 <code>True</code> if <code>id(a) == id(b)</code>.</p>
 <p>Integers, bytes, floats, strings, frozensets and tuples should not be compared with identity operators because the result may not be as expected.
@@ -14,7 +15,7 @@ necessarily have the same identity as string literals.</p>
   <li> is of type <code>int</code>, <code>bytes</code>, <code>float</code>, <code>frozenset</code> or <code>tuple</code>. </li>
   <li> or it is a string literal. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 def literal_comparison(param):
     param is 2000  # Noncompliant
@@ -31,7 +32,7 @@ with open("test.txt") as f:  # test.txt contains "blabla\n"
     text = f.read()
 intern(text) is "blabla\n"  # Noncompliant. Always False
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 def literal_comparison(param):
     param == 2000
@@ -48,7 +49,7 @@ with open("tmp/test.txt") as f:  # test.txt contains "blabla\n"
     text = f.read()
 intern(text) is intern("blabla\n")  # Always True
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
   with literals?</a> - Adam Johnson </li>

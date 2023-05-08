@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Importing every public name from a module using a wildcard (<code>from mymodule import *</code>) is a bad idea because:</p>
 <ul>
   <li> It could lead to conflicts between names defined locally and the ones imported. </li>
@@ -12,14 +13,14 @@
   <li> List every imported name. If necessary import statements can be split on multiple lines using parentheses (preferred solution) or backslashes.
   </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 from math import *  # Noncompliant
 def exp(x):
     pass
 print(exp(0))   # "None" will be printed
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 import math
 def exp(x):
@@ -33,7 +34,7 @@ def exp(x):
     pass
 print(m_exp(0))   # "1.0" will be printed
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue will be raised in <code>__init__.py</code> files. Wildcard imports are a common way of populating these modules.</p>
 <p>No issue will be raised in modules doing only imports. Local modules are sometimes created as a proxy for third-party modules.</p>
 <pre>
@@ -44,7 +45,7 @@ except Exception:
     from matplotlib.pyplot import *  # Ok
 </pre>
 <p>Just keep in mind that wildcard imports might still create issues in these cases. It’s always better to import only what you need.</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a> </li>
 </ul>
