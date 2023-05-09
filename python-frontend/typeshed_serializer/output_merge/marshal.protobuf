@@ -9,41 +9,6 @@ functions {
   parameters {
     name: "__value"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__file"
-    type_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  parameters {
-    name: "__version"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "dump"
-  fully_qualified_name: "marshal.dump"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__value"
-    type_annotation {
       pretty_printed_name: "UnboundType[_Marshallable]"
       kind: UNBOUND
     }
@@ -84,26 +49,6 @@ functions {
   parameters {
     name: "__file"
     type_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load"
-  fully_qualified_name: "marshal.load"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__file"
-    type_annotation {
       pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -118,30 +63,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "dumps"
-  fully_qualified_name: "marshal.dumps"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__value"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__version"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "dumps"
@@ -182,22 +103,6 @@ functions {
   parameters {
     name: "__bytes"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "loads"
-  fully_qualified_name: "marshal.loads"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__bytes"
-    type_annotation {
       pretty_printed_name: "UnboundType[ReadableBuffer]"
       kind: UNBOUND
     }
@@ -216,7 +121,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

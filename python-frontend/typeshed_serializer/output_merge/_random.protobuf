@@ -27,38 +27,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "seed"
-    fully_qualified_name: "_random.Random.seed"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_random.Random"
-        fully_qualified_name: "_random.Random"
-      }
-    }
-    parameters {
-      name: "__n"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "seed"
@@ -102,32 +76,6 @@ classes {
     name: "getstate"
     fully_qualified_name: "_random.Random.getstate"
     return_annotation {
-      pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.tuple[builtins.int]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-      fully_qualified_name: "_random._State"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_random.Random"
-        fully_qualified_name: "_random.Random"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getstate"
-    fully_qualified_name: "_random.Random.getstate"
-    return_annotation {
       pretty_printed_name: "UnboundType[_State]"
       kind: UNBOUND
     }
@@ -145,39 +93,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "setstate"
-    fully_qualified_name: "_random.Random.setstate"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_random.Random"
-        fully_qualified_name: "_random.Random"
-      }
-    }
-    parameters {
-      name: "__state"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        fully_qualified_name: "_random._State"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "setstate"
@@ -223,7 +138,6 @@ classes {
         fully_qualified_name: "_random.Random"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -253,7 +167,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -261,32 +174,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "jumpahead"
-    fully_qualified_name: "_random.Random.jumpahead"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_random.Random"
-        fully_qualified_name: "_random.Random"
-      }
-    }
-    parameters {
-      name: "i"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

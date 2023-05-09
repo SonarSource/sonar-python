@@ -85,17 +85,22 @@ functions {
   valid_for: "310"
 }
 vars {
-  name: "cmp_op"
-  fully_qualified_name: "opcode.cmp_op"
+  name: "__all__"
+  fully_qualified_name: "opcode.__all__"
   type_annotation {
-    pretty_printed_name: "typing.Sequence[builtins.str]"
+    pretty_printed_name: "builtins.list[builtins.str]"
     args {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    fully_qualified_name: "typing.Sequence"
+    fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "cmp_op"
@@ -274,7 +279,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -293,7 +297,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -312,7 +315,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -331,7 +333,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -350,7 +351,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -369,7 +369,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -388,7 +387,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -407,7 +405,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -430,22 +427,12 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "HAVE_ARGUMENT"
-  fully_qualified_name: "opcode.HAVE_ARGUMENT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
 }
 vars {
   name: "HAVE_ARGUMENT"
@@ -469,39 +456,12 @@ vars {
   name: "EXTENDED_ARG"
   fully_qualified_name: "opcode.EXTENDED_ARG"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "EXTENDED_ARG"
-  fully_qualified_name: "opcode.EXTENDED_ARG"
-  type_annotation {
     pretty_printed_name: "Literal[builtins.int]"
     kind: LITERAL
     args {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "__all__"
-  fully_qualified_name: "opcode.__all__"
-  type_annotation {
-    pretty_printed_name: "builtins.list[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"

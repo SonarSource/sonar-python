@@ -60,7 +60,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -68,23 +67,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "modulefinder.Module.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "modulefinder.Module"
-        fully_qualified_name: "modulefinder.Module"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -175,7 +157,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -318,7 +299,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -349,7 +329,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -380,7 +359,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -411,7 +389,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -442,7 +419,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -528,7 +504,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -584,7 +559,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -631,7 +605,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -670,7 +643,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -722,7 +694,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -757,7 +728,6 @@ classes {
         fully_qualified_name: "modulefinder.Module"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -812,7 +782,6 @@ classes {
         fully_qualified_name: "modulefinder.Module"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -883,11 +852,100 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scan_opcodes"
+    fully_qualified_name: "modulefinder.ModuleFinder.scan_opcodes"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,Tuple[Any,Any]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,Tuple[Any,Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "modulefinder.ModuleFinder"
+        fully_qualified_name: "modulefinder.ModuleFinder"
+      }
+    }
+    parameters {
+      name: "co"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "scan_opcodes"
+    fully_qualified_name: "modulefinder.ModuleFinder.scan_opcodes"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,builtins.tuple[Any]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "modulefinder.ModuleFinder"
+        fully_qualified_name: "modulefinder.ModuleFinder"
+      }
+    }
+    parameters {
+      name: "co"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -922,7 +980,6 @@ classes {
         fully_qualified_name: "modulefinder.Module"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -961,7 +1018,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -992,7 +1048,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1100,7 +1155,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1123,7 +1177,6 @@ classes {
         fully_qualified_name: "modulefinder.ModuleFinder"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1150,7 +1203,6 @@ classes {
         fully_qualified_name: "modulefinder.ModuleFinder"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1189,7 +1241,6 @@ classes {
         fully_qualified_name: "modulefinder.ModuleFinder"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1220,7 +1271,6 @@ classes {
         fully_qualified_name: "types.CodeType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1228,97 +1278,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "scan_opcodes"
-    fully_qualified_name: "modulefinder.ModuleFinder.scan_opcodes"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,Tuple[Any,Any]]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.str,Tuple[Any,Any]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[Any,Any]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "modulefinder.ModuleFinder"
-        fully_qualified_name: "modulefinder.ModuleFinder"
-      }
-    }
-    parameters {
-      name: "co"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.CodeType"
-        fully_qualified_name: "types.CodeType"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "scan_opcodes"
-    fully_qualified_name: "modulefinder.ModuleFinder.scan_opcodes"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,builtins.tuple[Any]]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[Any]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "modulefinder.ModuleFinder"
-        fully_qualified_name: "modulefinder.ModuleFinder"
-      }
-    }
-    parameters {
-      name: "co"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.CodeType"
-        fully_qualified_name: "types.CodeType"
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1340,7 +1299,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1359,7 +1317,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1390,7 +1347,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1405,7 +1361,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1420,7 +1375,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1439,7 +1393,6 @@ classes {
       }
       fully_qualified_name: "typing.Container"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1466,7 +1419,6 @@ classes {
       }
       fully_qualified_name: "typing.Sequence"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1498,7 +1450,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1529,7 +1480,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1544,7 +1494,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1559,7 +1508,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1574,7 +1522,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1589,7 +1536,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1612,7 +1558,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1627,7 +1572,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1654,7 +1598,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1677,7 +1620,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

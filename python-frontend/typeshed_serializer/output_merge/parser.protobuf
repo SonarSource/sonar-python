@@ -3,157 +3,12 @@ classes {
   name: "ParserError"
   fully_qualified_name: "parser.ParserError"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "STType"
-  fully_qualified_name: "parser.STType"
-  super_classes: "builtins.object"
-  methods {
-    name: "compile"
-    fully_qualified_name: "parser.STType.compile"
-    return_annotation {
-      pretty_printed_name: "types.CodeType"
-      fully_qualified_name: "types.CodeType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "parser.STType"
-        fully_qualified_name: "parser.STType"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isexpr"
-    fully_qualified_name: "parser.STType.isexpr"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "parser.STType"
-        fully_qualified_name: "parser.STType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "issuite"
-    fully_qualified_name: "parser.STType.issuite"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "parser.STType"
-        fully_qualified_name: "parser.STType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "tolist"
-    fully_qualified_name: "parser.STType.tolist"
-    return_annotation {
-      pretty_printed_name: "builtins.list[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "parser.STType"
-        fully_qualified_name: "parser.STType"
-      }
-    }
-    parameters {
-      name: "line_info"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "col_info"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "totuple"
-    fully_qualified_name: "parser.STType.totuple"
-    return_annotation {
-      pretty_printed_name: "Tuple[Any]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "parser.STType"
-        fully_qualified_name: "parser.STType"
-      }
-    }
-    parameters {
-      name: "line_info"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "col_info"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
 }
 classes {
   name: "STType"
@@ -383,23 +238,6 @@ functions {
     name: "source"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "expr"
-  fully_qualified_name: "parser.expr"
-  return_annotation {
-    pretty_printed_name: "parser.STType"
-    fully_qualified_name: "parser.STType"
-  }
-  parameters {
-    name: "source"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
@@ -410,23 +248,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "suite"
-  fully_qualified_name: "parser.suite"
-  return_annotation {
-    pretty_printed_name: "parser.STType"
-    fully_qualified_name: "parser.STType"
-  }
-  parameters {
-    name: "source"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "suite"
@@ -469,7 +290,6 @@ functions {
       fully_qualified_name: "typing.Sequence"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -496,7 +316,6 @@ functions {
       fully_qualified_name: "typing.Sequence"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -541,52 +360,12 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "st2tuple"
-  fully_qualified_name: "parser.st2tuple"
-  return_annotation {
-    pretty_printed_name: "Tuple[Any]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "st"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "parser.STType"
-      fully_qualified_name: "parser.STType"
-    }
-  }
-  parameters {
-    name: "line_info"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "col_info"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "st2tuple"
@@ -693,32 +472,6 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "compilest"
-  fully_qualified_name: "parser.compilest"
-  return_annotation {
-    pretty_printed_name: "types.CodeType"
-    fully_qualified_name: "types.CodeType"
-  }
-  parameters {
-    name: "st"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "parser.STType"
-      fully_qualified_name: "parser.STType"
-    }
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "UnboundType[StrOrBytesPath]"
       kind: UNBOUND
     }
@@ -746,7 +499,6 @@ functions {
       fully_qualified_name: "parser.STType"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -769,7 +521,6 @@ functions {
       fully_qualified_name: "parser.STType"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

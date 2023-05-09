@@ -12,37 +12,34 @@ classes {
   valid_for: "310"
 }
 functions {
-  name: "search_function"
-  fully_qualified_name: "encodings.search_function"
+  name: "normalize_encoding"
+  fully_qualified_name: "encodings.normalize_encoding"
   return_annotation {
-    pretty_printed_name: "Tuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "codecs._Encoder"
-      fully_qualified_name: "codecs._Encoder"
-    }
-    args {
-      pretty_printed_name: "codecs._Decoder"
-      fully_qualified_name: "codecs._Decoder"
-    }
-    args {
-      pretty_printed_name: "codecs._StreamReader"
-      fully_qualified_name: "codecs._StreamReader"
-    }
-    args {
-      pretty_printed_name: "codecs._StreamWriter"
-      fully_qualified_name: "codecs._StreamWriter"
-    }
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
   }
   parameters {
     name: "encoding"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "search_function"
@@ -94,22 +91,6 @@ functions {
   name: "__getattr__"
   fully_qualified_name: "encodings.__getattr__"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "__getattr__"
-  fully_qualified_name: "encodings.__getattr__"
-  return_annotation {
     pretty_printed_name: "UnboundType[Incomplete]"
     kind: UNBOUND
   }
@@ -118,36 +99,6 @@ functions {
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "normalize_encoding"
-  fully_qualified_name: "encodings.normalize_encoding"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
     }
   }
   valid_for: "35"

@@ -3,7 +3,6 @@ classes {
   name: "FatalIncludeError"
   fully_qualified_name: "xml.etree.ElementInclude.FatalIncludeError"
   super_classes: "builtins.SyntaxError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -17,68 +16,6 @@ classes {
   super_classes: "xml.etree.ElementInclude.FatalIncludeError"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "default_loader"
-  fully_qualified_name: "xml.etree.ElementInclude.default_loader"
-  return_annotation {
-    pretty_printed_name: "Union[builtins.str,xml.etree.ElementTree.Element]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "xml.etree.ElementTree.Element"
-      fully_qualified_name: "xml.etree.ElementTree.Element"
-    }
-  }
-  parameters {
-    name: "href"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.str,builtins.int]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  parameters {
-    name: "parse"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "default_loader"
@@ -171,7 +108,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -257,7 +193,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -272,7 +207,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -287,7 +221,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

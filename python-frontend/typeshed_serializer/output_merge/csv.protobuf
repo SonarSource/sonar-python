@@ -18,7 +18,6 @@ classes {
         fully_qualified_name: "_csv.Dialect"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -26,7 +25,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -40,7 +38,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -63,7 +60,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -86,7 +82,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -101,7 +96,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -116,7 +110,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -131,22 +124,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "quoting"
-    fully_qualified_name: "_csv.Dialect.quoting"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "quoting"
@@ -161,15 +144,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "strict"
-    fully_qualified_name: "_csv.Dialect.strict"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "strict"
@@ -190,7 +164,6 @@ classes {
   name: "Error"
   fully_qualified_name: "_csv.Error"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -199,522 +172,545 @@ classes {
   valid_for: "310"
 }
 classes {
-  name: "excel"
-  fully_qualified_name: "csv.excel"
-  super_classes: "_csv.Dialect"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "delimiter"
-    fully_qualified_name: "csv.excel.delimiter"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "quotechar"
-    fully_qualified_name: "csv.excel.quotechar"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "doublequote"
-    fully_qualified_name: "csv.excel.doublequote"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "skipinitialspace"
-    fully_qualified_name: "csv.excel.skipinitialspace"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "lineterminator"
-    fully_qualified_name: "csv.excel.lineterminator"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "quoting"
-    fully_qualified_name: "csv.excel.quoting"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "excel_tab"
-  fully_qualified_name: "csv.excel_tab"
-  super_classes: "csv.excel"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "delimiter"
-    fully_qualified_name: "csv.excel_tab.delimiter"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "DictReader"
-  fully_qualified_name: "csv.DictReader"
-  super_classes: "typing.Iterator"
+  name: "_DictReadMapping"
+  fully_qualified_name: "collections.OrderedDict"
+  super_classes: "builtins.dict"
+  super_classes: "typing.Reversible"
   methods {
-    name: "__iter__"
-    fully_qualified_name: "csv.DictReader.__iter__"
+    name: "popitem"
+    fully_qualified_name: "collections.OrderedDict.popitem"
     return_annotation {
-      pretty_printed_name: "csv.DictReader[csv._T]"
+      pretty_printed_name: "Tuple[collections._KT,collections._VT]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "csv._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "csv.DictReader"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "csv.DictReader[csv._T]"
-        args {
-          pretty_printed_name: "csv._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "csv.DictReader"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "next"
-    fully_qualified_name: "csv.DictReader.next"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[csv._T,builtins.str]"
-      args {
-        pretty_printed_name: "csv._T"
+        pretty_printed_name: "collections._KT"
         kind: TYPE_VAR
       }
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "collections._VT"
+        kind: TYPE_VAR
       }
-      fully_qualified_name: "builtins.dict"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "csv.DictReader[csv._T]"
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
         args {
-          pretty_printed_name: "csv._T"
+          pretty_printed_name: "collections._KT"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "csv.DictReader"
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
       }
     }
-    valid_for: "27"
+    parameters {
+      name: "last"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "move_to_end"
+    fully_qualified_name: "collections.OrderedDict.move_to_end"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections._KT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "last"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "collections.OrderedDict.copy"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "collections.OrderedDict.__reversed__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[collections._KT]"
+      args {
+        pretty_printed_name: "collections._KT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "collections.OrderedDict.keys"
+    return_annotation {
+      pretty_printed_name: "collections._odict_keys[collections._KT,collections._VT]"
+      args {
+        pretty_printed_name: "collections._KT"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "collections._VT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "collections._odict_keys"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "collections.OrderedDict.items"
+    return_annotation {
+      pretty_printed_name: "collections._odict_items[collections._KT,collections._VT]"
+      args {
+        pretty_printed_name: "collections._KT"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "collections._VT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "collections._odict_items"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "collections.OrderedDict.values"
+    return_annotation {
+      pretty_printed_name: "collections._odict_values[collections._KT,collections._VT]"
+      args {
+        pretty_printed_name: "collections._KT"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "collections._VT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "collections._odict_values"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+        args {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
   }
   overloaded_methods {
-    name: "__init__"
-    fullname: "csv.DictReader.__init__"
+    name: "fromkeys"
+    fullname: "collections.OrderedDict.fromkeys"
     definitions {
-      name: "__init__"
-      fully_qualified_name: "csv.DictReader.__init__"
+      name: "fromkeys"
+      fully_qualified_name: "collections.OrderedDict.fromkeys"
       return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "csv.DictReader[csv._T]"
-          args {
-            pretty_printed_name: "csv._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "csv.DictReader"
-        }
-      }
-      parameters {
-        name: "f"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      parameters {
-        name: "fieldnames"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "typing.Sequence[csv._T]"
-          args {
-            pretty_printed_name: "csv._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-      }
-      parameters {
-        name: "restkey"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "restval"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "dialect"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "_csv.Dialect"
-              fully_qualified_name: "_csv.Dialect"
-            }
-            args {
-              pretty_printed_name: "Type[_csv.Dialect]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "_csv.Dialect"
-                fully_qualified_name: "_csv.Dialect"
-              }
-            }
-          }
-          fully_qualified_name: "_csv._DialectLike"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "args"
-        kind: VAR_POSITIONAL
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      parameters {
-        name: "kwds"
-        kind: VAR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "csv.DictReader.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "csv.DictReader[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "csv.DictReader"
-        }
-      }
-      parameters {
-        name: "f"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      parameters {
-        name: "fieldnames"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.Sequence[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.Sequence"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "restkey"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "restval"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "dialect"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "_csv.Dialect"
-              fully_qualified_name: "_csv.Dialect"
-            }
-            args {
-              pretty_printed_name: "Type[_csv.Dialect]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "_csv.Dialect"
-                fully_qualified_name: "_csv.Dialect"
-              }
-            }
-          }
-          fully_qualified_name: "_csv._DialectLike"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "args"
-        kind: VAR_POSITIONAL
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      parameters {
-        name: "kwds"
-        kind: VAR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  is_generic: true
-  valid_for: "27"
-  attributes {
-    name: "fieldnames"
-    fully_qualified_name: "csv.DictReader.fieldnames"
-    type_annotation {
-      pretty_printed_name: "Union[typing.Sequence[csv._T],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Sequence[csv._T]"
+        pretty_printed_name: "collections.OrderedDict[collections._T,Union[Any,None]]"
         args {
-          pretty_printed_name: "csv._T"
+          pretty_printed_name: "collections._T"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "typing.Sequence"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "restkey"
-    fully_qualified_name: "csv.DictReader.restkey"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "restval"
-    fully_qualified_name: "csv.DictReader.restval"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "reader"
-    fully_qualified_name: "csv.DictReader.reader"
-    type_annotation {
-      pretty_printed_name: "_csv._reader"
-      fully_qualified_name: "_csv._reader"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dialect"
-    fully_qualified_name: "csv.DictReader.dialect"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-        kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
-        args {
-          pretty_printed_name: "_csv.Dialect"
-          fully_qualified_name: "_csv.Dialect"
-        }
-        args {
-          pretty_printed_name: "Type[_csv.Dialect]"
+        fully_qualified_name: "collections.OrderedDict"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[collections.OrderedDict[collections._KT,collections._VT]]"
           kind: TYPE
           args {
-            pretty_printed_name: "_csv.Dialect"
-            fully_qualified_name: "_csv.Dialect"
+            pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+            args {
+              pretty_printed_name: "collections._KT"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "collections._VT"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "collections.OrderedDict"
           }
         }
       }
-      fully_qualified_name: "_csv._DialectLike"
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[collections._T]"
+          args {
+            pretty_printed_name: "collections._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "classmethod"
+      resolved_decorator_names: "overload"
+      is_overload: true
+      is_class_method: true
     }
-    valid_for: "27"
-  }
-  attributes {
-    name: "line_num"
-    fully_qualified_name: "csv.DictReader.line_num"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+    definitions {
+      name: "fromkeys"
+      fully_qualified_name: "collections.OrderedDict.fromkeys"
+      return_annotation {
+        pretty_printed_name: "collections.OrderedDict[collections._T,collections._S]"
+        args {
+          pretty_printed_name: "collections._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "collections._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "collections.OrderedDict"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[collections.OrderedDict[collections._KT,collections._VT]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+            args {
+              pretty_printed_name: "collections._KT"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "collections._VT"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "collections.OrderedDict"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[collections._T]"
+          args {
+            pretty_printed_name: "collections._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections._S"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "classmethod"
+      resolved_decorator_names: "overload"
+      is_overload: true
+      is_class_method: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
   }
+  overloaded_methods {
+    name: "setdefault"
+    fullname: "collections.OrderedDict.setdefault"
+    definitions {
+      name: "setdefault"
+      fully_qualified_name: "collections.OrderedDict.setdefault"
+      return_annotation {
+        pretty_printed_name: "Union[collections._T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "collections._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections.OrderedDict[collections._KT,Union[collections._T,None]]"
+          args {
+            pretty_printed_name: "collections._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Union[collections._T,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "collections._T"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "collections.OrderedDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "setdefault"
+      fully_qualified_name: "collections.OrderedDict.setdefault"
+      return_annotation {
+        pretty_printed_name: "collections._VT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
+          args {
+            pretty_printed_name: "collections._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "collections._VT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "collections.OrderedDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections._KT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "collections._VT"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+classes {
+  name: "excel"
+  fully_qualified_name: "csv.excel"
+  super_classes: "_csv.Dialect"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "excel_tab"
+  fully_qualified_name: "csv.excel_tab"
+  super_classes: "csv.excel"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "unix_dialect"
+  fully_qualified_name: "csv.unix_dialect"
+  super_classes: "_csv.Dialect"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "DictReader"
@@ -1361,119 +1357,6 @@ classes {
       name: "f"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "fieldnames"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[csv._T]"
-        args {
-          pretty_printed_name: "csv._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "restval"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "extrasaction"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "dialect"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "_csv.Dialect"
-            fully_qualified_name: "_csv.Dialect"
-          }
-          args {
-            pretty_printed_name: "Type[_csv.Dialect]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "_csv.Dialect"
-              fully_qualified_name: "_csv.Dialect"
-            }
-          }
-        }
-        fully_qualified_name: "_csv._DialectLike"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwds"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "csv.DictWriter.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "csv.DictWriter[csv._T]"
-        args {
-          pretty_printed_name: "csv._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "csv.DictWriter"
-      }
-    }
-    parameters {
-      name: "f"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
         args {
           pretty_printed_name: "builtins.str"
@@ -1659,7 +1542,6 @@ classes {
         fully_qualified_name: "csv.DictWriter"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1722,7 +1604,6 @@ classes {
         fully_qualified_name: "typing.Mapping"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1769,7 +1650,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1778,26 +1658,12 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "fieldnames"
-    fully_qualified_name: "csv.DictWriter.fieldnames"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[csv._T]"
-      args {
-        pretty_printed_name: "csv._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "fieldnames"
     fully_qualified_name: "csv.DictWriter.fieldnames"
@@ -1831,22 +1697,12 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "extrasaction"
-    fully_qualified_name: "csv.DictWriter.extrasaction"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "extrasaction"
@@ -1885,7 +1741,6 @@ classes {
       pretty_printed_name: "_csv._writer"
       fully_qualified_name: "_csv._writer"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1898,71 +1753,6 @@ classes {
   name: "Sniffer"
   fully_qualified_name: "csv.Sniffer"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "csv.Sniffer.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "csv.Sniffer"
-        fully_qualified_name: "csv.Sniffer"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "sniff"
-    fully_qualified_name: "csv.Sniffer.sniff"
-    return_annotation {
-      pretty_printed_name: "Type[_csv.Dialect]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "_csv.Dialect"
-        fully_qualified_name: "_csv.Dialect"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "csv.Sniffer"
-        fully_qualified_name: "csv.Sniffer"
-      }
-    }
-    parameters {
-      name: "sample"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "delimiters"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "sniff"
     fully_qualified_name: "csv.Sniffer.sniff"
@@ -2009,6 +1799,53 @@ classes {
     valid_for: "38"
   }
   methods {
+    name: "sniff"
+    fully_qualified_name: "csv.Sniffer.sniff"
+    return_annotation {
+      pretty_printed_name: "Type[_csv.Dialect]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "_csv.Dialect"
+        fully_qualified_name: "_csv.Dialect"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "csv.Sniffer"
+        fully_qualified_name: "csv.Sniffer"
+      }
+    }
+    parameters {
+      name: "sample"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "delimiters"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "has_header"
     fully_qualified_name: "csv.Sniffer.has_header"
     return_annotation {
@@ -2031,7 +1868,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2039,7 +1875,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2057,7 +1892,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2065,525 +1899,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "_DictReadMapping"
-  fully_qualified_name: "collections.OrderedDict"
-  super_classes: "builtins.dict"
-  super_classes: "typing.Reversible"
-  methods {
-    name: "popitem"
-    fully_qualified_name: "collections.OrderedDict.popitem"
-    return_annotation {
-      pretty_printed_name: "Tuple[collections._KT,collections._VT]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "collections._VT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    parameters {
-      name: "last"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "move_to_end"
-    fully_qualified_name: "collections.OrderedDict.move_to_end"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "last"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "copy"
-    fully_qualified_name: "collections.OrderedDict.copy"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "__reversed__"
-    fully_qualified_name: "collections.OrderedDict.__reversed__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[collections._KT]"
-      args {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "keys"
-    fully_qualified_name: "collections.OrderedDict.keys"
-    return_annotation {
-      pretty_printed_name: "collections._odict_keys[collections._KT,collections._VT]"
-      args {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "collections._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "collections._odict_keys"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "collections.OrderedDict.items"
-    return_annotation {
-      pretty_printed_name: "collections._odict_items[collections._KT,collections._VT]"
-      args {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "collections._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "collections._odict_items"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "values"
-    fully_qualified_name: "collections.OrderedDict.values"
-    return_annotation {
-      pretty_printed_name: "collections._odict_values[collections._KT,collections._VT]"
-      args {
-        pretty_printed_name: "collections._KT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "collections._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "collections._odict_values"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-        args {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  overloaded_methods {
-    name: "fromkeys"
-    fullname: "collections.OrderedDict.fromkeys"
-    definitions {
-      name: "fromkeys"
-      fully_qualified_name: "collections.OrderedDict.fromkeys"
-      return_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._T,Union[Any,None]]"
-        args {
-          pretty_printed_name: "collections._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "Union[Any,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-      parameters {
-        name: "cls"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Type[collections.OrderedDict[collections._KT,collections._VT]]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-            args {
-              pretty_printed_name: "collections._KT"
-              kind: TYPE_VAR
-            }
-            args {
-              pretty_printed_name: "collections._VT"
-              kind: TYPE_VAR
-            }
-            fully_qualified_name: "collections.OrderedDict"
-          }
-        }
-      }
-      parameters {
-        name: "iterable"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[collections._T]"
-          args {
-            pretty_printed_name: "collections._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      parameters {
-        name: "value"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "classmethod"
-      resolved_decorator_names: "overload"
-      is_overload: true
-      is_class_method: true
-    }
-    definitions {
-      name: "fromkeys"
-      fully_qualified_name: "collections.OrderedDict.fromkeys"
-      return_annotation {
-        pretty_printed_name: "collections.OrderedDict[collections._T,collections._S]"
-        args {
-          pretty_printed_name: "collections._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "collections._S"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "collections.OrderedDict"
-      }
-      parameters {
-        name: "cls"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Type[collections.OrderedDict[collections._KT,collections._VT]]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-            args {
-              pretty_printed_name: "collections._KT"
-              kind: TYPE_VAR
-            }
-            args {
-              pretty_printed_name: "collections._VT"
-              kind: TYPE_VAR
-            }
-            fully_qualified_name: "collections.OrderedDict"
-          }
-        }
-      }
-      parameters {
-        name: "iterable"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[collections._T]"
-          args {
-            pretty_printed_name: "collections._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      parameters {
-        name: "value"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections._S"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "classmethod"
-      resolved_decorator_names: "overload"
-      is_overload: true
-      is_class_method: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  overloaded_methods {
-    name: "setdefault"
-    fullname: "collections.OrderedDict.setdefault"
-    definitions {
-      name: "setdefault"
-      fully_qualified_name: "collections.OrderedDict.setdefault"
-      return_annotation {
-        pretty_printed_name: "Union[collections._T,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "collections._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections.OrderedDict[collections._KT,Union[collections._T,None]]"
-          args {
-            pretty_printed_name: "collections._KT"
-            kind: TYPE_VAR
-          }
-          args {
-            pretty_printed_name: "Union[collections._T,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "collections._T"
-              kind: TYPE_VAR
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "collections.OrderedDict"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "setdefault"
-      fully_qualified_name: "collections.OrderedDict.setdefault"
-      return_annotation {
-        pretty_printed_name: "collections._VT"
-        kind: TYPE_VAR
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections.OrderedDict[collections._KT,collections._VT]"
-          args {
-            pretty_printed_name: "collections._KT"
-            kind: TYPE_VAR
-          }
-          args {
-            pretty_printed_name: "collections._VT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "collections.OrderedDict"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections._KT"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "collections._VT"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-}
-classes {
-  name: "unix_dialect"
-  fully_qualified_name: "csv.unix_dialect"
-  super_classes: "_csv.Dialect"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 classes {
   name: "_DictReadMapping"
@@ -3941,7 +3256,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3964,7 +3278,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3983,72 +3296,12 @@ functions {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "reader"
-  fully_qualified_name: "_csv.reader"
-  return_annotation {
-    pretty_printed_name: "_csv._reader"
-    fully_qualified_name: "_csv._reader"
-  }
-  parameters {
-    name: "csvfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.unicode]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-  }
-  parameters {
-    name: "dialect"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "_csv.Dialect"
-          fully_qualified_name: "_csv.Dialect"
-        }
-        args {
-          pretty_printed_name: "Type[_csv.Dialect]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "_csv.Dialect"
-            fully_qualified_name: "_csv.Dialect"
-          }
-        }
-      }
-      fully_qualified_name: "_csv._DialectLike"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fmtparams"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "reader"
@@ -4172,40 +3425,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "register_dialect"
-  fully_qualified_name: "_csv.register_dialect"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "dialect"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fmtparams"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "register_dialect"
@@ -4458,68 +3677,12 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "writer"
-  fully_qualified_name: "_csv.writer"
-  return_annotation {
-    pretty_printed_name: "_csv._writer"
-    fully_qualified_name: "_csv._writer"
-  }
-  parameters {
-    name: "csvfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_csv._Writer"
-      fully_qualified_name: "_csv._Writer"
-    }
-  }
-  parameters {
-    name: "dialect"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,_csv.Dialect,Type[_csv.Dialect]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "_csv.Dialect"
-          fully_qualified_name: "_csv.Dialect"
-        }
-        args {
-          pretty_printed_name: "Type[_csv.Dialect]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "_csv.Dialect"
-            fully_qualified_name: "_csv.Dialect"
-          }
-        }
-      }
-      fully_qualified_name: "_csv._DialectLike"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fmtparams"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "writer"
@@ -4648,15 +3811,6 @@ vars {
   name: "QUOTE_ALL"
   fully_qualified_name: "_csv.QUOTE_ALL"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "QUOTE_ALL"
-  fully_qualified_name: "_csv.QUOTE_ALL"
-  type_annotation {
     pretty_printed_name: "Literal[builtins.int]"
     kind: LITERAL
     args {
@@ -4670,15 +3824,6 @@ vars {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "QUOTE_MINIMAL"
-  fully_qualified_name: "_csv.QUOTE_MINIMAL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
 }
 vars {
   name: "QUOTE_MINIMAL"
@@ -4702,15 +3847,6 @@ vars {
   name: "QUOTE_NONE"
   fully_qualified_name: "_csv.QUOTE_NONE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "QUOTE_NONE"
-  fully_qualified_name: "_csv.QUOTE_NONE"
-  type_annotation {
     pretty_printed_name: "Literal[builtins.int]"
     kind: LITERAL
     args {
@@ -4724,15 +3860,6 @@ vars {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "QUOTE_NONNUMERIC"
-  fully_qualified_name: "_csv.QUOTE_NONNUMERIC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
 }
 vars {
   name: "QUOTE_NONNUMERIC"

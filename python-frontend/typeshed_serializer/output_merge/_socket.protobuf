@@ -1,911 +1,5 @@
 fully_qualified_name: "_socket"
 classes {
-  name: "error"
-  fully_qualified_name: "_socket.error"
-  super_classes: "builtins.IOError"
-  valid_for: "27"
-}
-classes {
-  name: "gaierror"
-  fully_qualified_name: "_socket.gaierror"
-  super_classes: "_socket.error"
-  valid_for: "27"
-}
-classes {
-  name: "gaierror"
-  fully_qualified_name: "_socket.gaierror"
-  super_classes: "builtins.OSError"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "timeout"
-  fully_qualified_name: "_socket.timeout"
-  super_classes: "_socket.error"
-  valid_for: "27"
-}
-classes {
-  name: "timeout"
-  fully_qualified_name: "_socket.timeout"
-  super_classes: "builtins.OSError"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-}
-classes {
-  name: "SocketType"
-  fully_qualified_name: "_socket.SocketType"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "_socket.SocketType.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "family"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "proto"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "accept"
-    fully_qualified_name: "_socket.SocketType.accept"
-    return_annotation {
-      pretty_printed_name: "Tuple[_socket.SocketType,builtins.tuple[Any]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-      args {
-        pretty_printed_name: "builtins.tuple[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "bind"
-    fully_qualified_name: "_socket.SocketType.bind"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.tuple[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "_socket.SocketType.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "connect"
-    fully_qualified_name: "_socket.SocketType.connect"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.tuple[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "connect_ex"
-    fully_qualified_name: "_socket.SocketType.connect_ex"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.tuple[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "dup"
-    fully_qualified_name: "_socket.SocketType.dup"
-    return_annotation {
-      pretty_printed_name: "_socket.SocketType"
-      fully_qualified_name: "_socket.SocketType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "_socket.SocketType.fileno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getpeername"
-    fully_qualified_name: "_socket.SocketType.getpeername"
-    return_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getsockname"
-    fully_qualified_name: "_socket.SocketType.getsockname"
-    return_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getsockopt"
-    fully_qualified_name: "_socket.SocketType.getsockopt"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "option"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "buffersize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "gettimeout"
-    fully_qualified_name: "_socket.SocketType.gettimeout"
-    return_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "listen"
-    fully_qualified_name: "_socket.SocketType.listen"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "backlog"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "makefile"
-    fully_qualified_name: "_socket.SocketType.makefile"
-    return_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "buffersize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recv"
-    fully_qualified_name: "_socket.SocketType.recv"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "buffersize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recv_into"
-    fully_qualified_name: "_socket.SocketType.recv_into"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytearray"
-        fully_qualified_name: "builtins.bytearray"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recvfrom"
-    fully_qualified_name: "_socket.SocketType.recvfrom"
-    return_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "buffersize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recvfrom_into"
-    fully_qualified_name: "_socket.SocketType.recvfrom_into"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytearray"
-        fully_qualified_name: "builtins.bytearray"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "send"
-    fully_qualified_name: "_socket.SocketType.send"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "sendall"
-    fully_qualified_name: "_socket.SocketType.sendall"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setblocking"
-    fully_qualified_name: "_socket.SocketType.setblocking"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "flag"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setsockopt"
-    fully_qualified_name: "_socket.SocketType.setsockopt"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "option"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "settimeout"
-    fully_qualified_name: "_socket.SocketType.settimeout"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.float,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "shutdown"
-    fully_qualified_name: "_socket.SocketType.shutdown"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_socket.SocketType"
-        fully_qualified_name: "_socket.SocketType"
-      }
-    }
-    parameters {
-      name: "flag"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "sendto"
-    fullname: "_socket.SocketType.sendto"
-    definitions {
-      name: "sendto"
-      fully_qualified_name: "_socket.SocketType.sendto"
-      return_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "_socket.SocketType"
-          fully_qualified_name: "_socket.SocketType"
-        }
-      }
-      parameters {
-        name: "data"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "address"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "sendto"
-      fully_qualified_name: "_socket.SocketType.sendto"
-      return_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "_socket.SocketType"
-          fully_qualified_name: "_socket.SocketType"
-        }
-      }
-      parameters {
-        name: "data"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "flags"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "address"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "family"
-    fully_qualified_name: "_socket.SocketType.family"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "type"
-    fully_qualified_name: "_socket.SocketType.type"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "proto"
-    fully_qualified_name: "_socket.SocketType.proto"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "timeout"
-    fully_qualified_name: "_socket.SocketType.timeout"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-  }
-}
-classes {
   name: "herror"
   fully_qualified_name: "_socket.herror"
   super_classes: "builtins.OSError"
@@ -915,6 +9,27 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+}
+classes {
+  name: "gaierror"
+  fully_qualified_name: "_socket.gaierror"
+  super_classes: "builtins.OSError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "timeout"
+  fully_qualified_name: "_socket.timeout"
+  super_classes: "builtins.OSError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
 }
 classes {
   name: "socket"
@@ -3146,3498 +2261,6 @@ functions {
   valid_for: "310"
 }
 vars {
-  name: "AF_APPLETALK"
-  fully_qualified_name: "_socket.AF_APPLETALK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ASH"
-  fully_qualified_name: "_socket.AF_ASH"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ATMPVC"
-  fully_qualified_name: "_socket.AF_ATMPVC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ATMSVC"
-  fully_qualified_name: "_socket.AF_ATMSVC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_AX25"
-  fully_qualified_name: "_socket.AF_AX25"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_BLUETOOTH"
-  fully_qualified_name: "_socket.AF_BLUETOOTH"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_BRIDGE"
-  fully_qualified_name: "_socket.AF_BRIDGE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_DECnet"
-  fully_qualified_name: "_socket.AF_DECnet"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ECONET"
-  fully_qualified_name: "_socket.AF_ECONET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_INET"
-  fully_qualified_name: "_socket.AF_INET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_INET6"
-  fully_qualified_name: "_socket.AF_INET6"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_IPX"
-  fully_qualified_name: "_socket.AF_IPX"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_IRDA"
-  fully_qualified_name: "_socket.AF_IRDA"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_KEY"
-  fully_qualified_name: "_socket.AF_KEY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_LLC"
-  fully_qualified_name: "_socket.AF_LLC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_NETBEUI"
-  fully_qualified_name: "_socket.AF_NETBEUI"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_NETLINK"
-  fully_qualified_name: "_socket.AF_NETLINK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_NETROM"
-  fully_qualified_name: "_socket.AF_NETROM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_PACKET"
-  fully_qualified_name: "_socket.AF_PACKET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_PPPOX"
-  fully_qualified_name: "_socket.AF_PPPOX"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ROSE"
-  fully_qualified_name: "_socket.AF_ROSE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_ROUTE"
-  fully_qualified_name: "_socket.AF_ROUTE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_SECURITY"
-  fully_qualified_name: "_socket.AF_SECURITY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_SNA"
-  fully_qualified_name: "_socket.AF_SNA"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_TIPC"
-  fully_qualified_name: "_socket.AF_TIPC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_UNIX"
-  fully_qualified_name: "_socket.AF_UNIX"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_UNSPEC"
-  fully_qualified_name: "_socket.AF_UNSPEC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_WANPIPE"
-  fully_qualified_name: "_socket.AF_WANPIPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AF_X25"
-  fully_qualified_name: "_socket.AF_X25"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_ADDRCONFIG"
-  fully_qualified_name: "_socket.AI_ADDRCONFIG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_ALL"
-  fully_qualified_name: "_socket.AI_ALL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_CANONNAME"
-  fully_qualified_name: "_socket.AI_CANONNAME"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_NUMERICHOST"
-  fully_qualified_name: "_socket.AI_NUMERICHOST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_NUMERICSERV"
-  fully_qualified_name: "_socket.AI_NUMERICSERV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_PASSIVE"
-  fully_qualified_name: "_socket.AI_PASSIVE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "AI_V4MAPPED"
-  fully_qualified_name: "_socket.AI_V4MAPPED"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BDADDR_ANY"
-  fully_qualified_name: "_socket.BDADDR_ANY"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BDADDR_LOCAL"
-  fully_qualified_name: "_socket.BDADDR_LOCAL"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BTPROTO_HCI"
-  fully_qualified_name: "_socket.BTPROTO_HCI"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BTPROTO_L2CAP"
-  fully_qualified_name: "_socket.BTPROTO_L2CAP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BTPROTO_RFCOMM"
-  fully_qualified_name: "_socket.BTPROTO_RFCOMM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "BTPROTO_SCO"
-  fully_qualified_name: "_socket.BTPROTO_SCO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_ADDRFAMILY"
-  fully_qualified_name: "_socket.EAI_ADDRFAMILY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_AGAIN"
-  fully_qualified_name: "_socket.EAI_AGAIN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_BADFLAGS"
-  fully_qualified_name: "_socket.EAI_BADFLAGS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_FAIL"
-  fully_qualified_name: "_socket.EAI_FAIL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_FAMILY"
-  fully_qualified_name: "_socket.EAI_FAMILY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_MEMORY"
-  fully_qualified_name: "_socket.EAI_MEMORY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_NODATA"
-  fully_qualified_name: "_socket.EAI_NODATA"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_NONAME"
-  fully_qualified_name: "_socket.EAI_NONAME"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_OVERFLOW"
-  fully_qualified_name: "_socket.EAI_OVERFLOW"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_SERVICE"
-  fully_qualified_name: "_socket.EAI_SERVICE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_SOCKTYPE"
-  fully_qualified_name: "_socket.EAI_SOCKTYPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EAI_SYSTEM"
-  fully_qualified_name: "_socket.EAI_SYSTEM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EBADF"
-  fully_qualified_name: "_socket.EBADF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "EINTR"
-  fully_qualified_name: "_socket.EINTR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "HCI_DATA_DIR"
-  fully_qualified_name: "_socket.HCI_DATA_DIR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "HCI_FILTER"
-  fully_qualified_name: "_socket.HCI_FILTER"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "HCI_TIME_STAMP"
-  fully_qualified_name: "_socket.HCI_TIME_STAMP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_ALLHOSTS_GROUP"
-  fully_qualified_name: "_socket.INADDR_ALLHOSTS_GROUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_ANY"
-  fully_qualified_name: "_socket.INADDR_ANY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_BROADCAST"
-  fully_qualified_name: "_socket.INADDR_BROADCAST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_LOOPBACK"
-  fully_qualified_name: "_socket.INADDR_LOOPBACK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_MAX_LOCAL_GROUP"
-  fully_qualified_name: "_socket.INADDR_MAX_LOCAL_GROUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_NONE"
-  fully_qualified_name: "_socket.INADDR_NONE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "INADDR_UNSPEC_GROUP"
-  fully_qualified_name: "_socket.INADDR_UNSPEC_GROUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPORT_RESERVED"
-  fully_qualified_name: "_socket.IPPORT_RESERVED"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPORT_USERRESERVED"
-  fully_qualified_name: "_socket.IPPORT_USERRESERVED"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_AH"
-  fully_qualified_name: "_socket.IPPROTO_AH"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_DSTOPTS"
-  fully_qualified_name: "_socket.IPPROTO_DSTOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_EGP"
-  fully_qualified_name: "_socket.IPPROTO_EGP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_ESP"
-  fully_qualified_name: "_socket.IPPROTO_ESP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_FRAGMENT"
-  fully_qualified_name: "_socket.IPPROTO_FRAGMENT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_GRE"
-  fully_qualified_name: "_socket.IPPROTO_GRE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_HOPOPTS"
-  fully_qualified_name: "_socket.IPPROTO_HOPOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_ICMP"
-  fully_qualified_name: "_socket.IPPROTO_ICMP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_ICMPV6"
-  fully_qualified_name: "_socket.IPPROTO_ICMPV6"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_IDP"
-  fully_qualified_name: "_socket.IPPROTO_IDP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_IGMP"
-  fully_qualified_name: "_socket.IPPROTO_IGMP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_IP"
-  fully_qualified_name: "_socket.IPPROTO_IP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_IPIP"
-  fully_qualified_name: "_socket.IPPROTO_IPIP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_IPV6"
-  fully_qualified_name: "_socket.IPPROTO_IPV6"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_NONE"
-  fully_qualified_name: "_socket.IPPROTO_NONE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_PIM"
-  fully_qualified_name: "_socket.IPPROTO_PIM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_PUP"
-  fully_qualified_name: "_socket.IPPROTO_PUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_RAW"
-  fully_qualified_name: "_socket.IPPROTO_RAW"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_ROUTING"
-  fully_qualified_name: "_socket.IPPROTO_ROUTING"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_RSVP"
-  fully_qualified_name: "_socket.IPPROTO_RSVP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_TCP"
-  fully_qualified_name: "_socket.IPPROTO_TCP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_TP"
-  fully_qualified_name: "_socket.IPPROTO_TP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPPROTO_UDP"
-  fully_qualified_name: "_socket.IPPROTO_UDP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_CHECKSUM"
-  fully_qualified_name: "_socket.IPV6_CHECKSUM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_DSTOPTS"
-  fully_qualified_name: "_socket.IPV6_DSTOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_HOPLIMIT"
-  fully_qualified_name: "_socket.IPV6_HOPLIMIT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_HOPOPTS"
-  fully_qualified_name: "_socket.IPV6_HOPOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_JOIN_GROUP"
-  fully_qualified_name: "_socket.IPV6_JOIN_GROUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_LEAVE_GROUP"
-  fully_qualified_name: "_socket.IPV6_LEAVE_GROUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_MULTICAST_HOPS"
-  fully_qualified_name: "_socket.IPV6_MULTICAST_HOPS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_MULTICAST_IF"
-  fully_qualified_name: "_socket.IPV6_MULTICAST_IF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_MULTICAST_LOOP"
-  fully_qualified_name: "_socket.IPV6_MULTICAST_LOOP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_NEXTHOP"
-  fully_qualified_name: "_socket.IPV6_NEXTHOP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_PKTINFO"
-  fully_qualified_name: "_socket.IPV6_PKTINFO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVDSTOPTS"
-  fully_qualified_name: "_socket.IPV6_RECVDSTOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVHOPLIMIT"
-  fully_qualified_name: "_socket.IPV6_RECVHOPLIMIT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVHOPOPTS"
-  fully_qualified_name: "_socket.IPV6_RECVHOPOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVPKTINFO"
-  fully_qualified_name: "_socket.IPV6_RECVPKTINFO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVRTHDR"
-  fully_qualified_name: "_socket.IPV6_RECVRTHDR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RECVTCLASS"
-  fully_qualified_name: "_socket.IPV6_RECVTCLASS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RTHDR"
-  fully_qualified_name: "_socket.IPV6_RTHDR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RTHDRDSTOPTS"
-  fully_qualified_name: "_socket.IPV6_RTHDRDSTOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_RTHDR_TYPE_0"
-  fully_qualified_name: "_socket.IPV6_RTHDR_TYPE_0"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_TCLASS"
-  fully_qualified_name: "_socket.IPV6_TCLASS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_UNICAST_HOPS"
-  fully_qualified_name: "_socket.IPV6_UNICAST_HOPS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IPV6_V6ONLY"
-  fully_qualified_name: "_socket.IPV6_V6ONLY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_ADD_MEMBERSHIP"
-  fully_qualified_name: "_socket.IP_ADD_MEMBERSHIP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_DEFAULT_MULTICAST_LOOP"
-  fully_qualified_name: "_socket.IP_DEFAULT_MULTICAST_LOOP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_DEFAULT_MULTICAST_TTL"
-  fully_qualified_name: "_socket.IP_DEFAULT_MULTICAST_TTL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_DROP_MEMBERSHIP"
-  fully_qualified_name: "_socket.IP_DROP_MEMBERSHIP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_HDRINCL"
-  fully_qualified_name: "_socket.IP_HDRINCL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_MAX_MEMBERSHIPS"
-  fully_qualified_name: "_socket.IP_MAX_MEMBERSHIPS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_MULTICAST_IF"
-  fully_qualified_name: "_socket.IP_MULTICAST_IF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_MULTICAST_LOOP"
-  fully_qualified_name: "_socket.IP_MULTICAST_LOOP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_MULTICAST_TTL"
-  fully_qualified_name: "_socket.IP_MULTICAST_TTL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_OPTIONS"
-  fully_qualified_name: "_socket.IP_OPTIONS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_RECVOPTS"
-  fully_qualified_name: "_socket.IP_RECVOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_RECVRETOPTS"
-  fully_qualified_name: "_socket.IP_RECVRETOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_RETOPTS"
-  fully_qualified_name: "_socket.IP_RETOPTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_TOS"
-  fully_qualified_name: "_socket.IP_TOS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IP_TTL"
-  fully_qualified_name: "_socket.IP_TTL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_CTRUNC"
-  fully_qualified_name: "_socket.MSG_CTRUNC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_DONTROUTE"
-  fully_qualified_name: "_socket.MSG_DONTROUTE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_DONTWAIT"
-  fully_qualified_name: "_socket.MSG_DONTWAIT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_EOR"
-  fully_qualified_name: "_socket.MSG_EOR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_OOB"
-  fully_qualified_name: "_socket.MSG_OOB"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_PEEK"
-  fully_qualified_name: "_socket.MSG_PEEK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_TRUNC"
-  fully_qualified_name: "_socket.MSG_TRUNC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MSG_WAITALL"
-  fully_qualified_name: "_socket.MSG_WAITALL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "MethodType"
-  fully_qualified_name: "_socket.MethodType"
-  type_annotation {
-    pretty_printed_name: "builtins.type"
-    fully_qualified_name: "builtins.type"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "NETLINK_DNRTMSG"
-  fully_qualified_name: "_socket.NETLINK_DNRTMSG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_FIREWALL"
-  fully_qualified_name: "_socket.NETLINK_FIREWALL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_IP6_FW"
-  fully_qualified_name: "_socket.NETLINK_IP6_FW"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_NFLOG"
-  fully_qualified_name: "_socket.NETLINK_NFLOG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_ROUTE"
-  fully_qualified_name: "_socket.NETLINK_ROUTE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_USERSOCK"
-  fully_qualified_name: "_socket.NETLINK_USERSOCK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NETLINK_XFRM"
-  fully_qualified_name: "_socket.NETLINK_XFRM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_DGRAM"
-  fully_qualified_name: "_socket.NI_DGRAM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_MAXHOST"
-  fully_qualified_name: "_socket.NI_MAXHOST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_MAXSERV"
-  fully_qualified_name: "_socket.NI_MAXSERV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_NAMEREQD"
-  fully_qualified_name: "_socket.NI_NAMEREQD"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_NOFQDN"
-  fully_qualified_name: "_socket.NI_NOFQDN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_NUMERICHOST"
-  fully_qualified_name: "_socket.NI_NUMERICHOST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NI_NUMERICSERV"
-  fully_qualified_name: "_socket.NI_NUMERICSERV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_BROADCAST"
-  fully_qualified_name: "_socket.PACKET_BROADCAST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_FASTROUTE"
-  fully_qualified_name: "_socket.PACKET_FASTROUTE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_HOST"
-  fully_qualified_name: "_socket.PACKET_HOST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_LOOPBACK"
-  fully_qualified_name: "_socket.PACKET_LOOPBACK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_MULTICAST"
-  fully_qualified_name: "_socket.PACKET_MULTICAST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_OTHERHOST"
-  fully_qualified_name: "_socket.PACKET_OTHERHOST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PACKET_OUTGOING"
-  fully_qualified_name: "_socket.PACKET_OUTGOING"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PF_PACKET"
-  fully_qualified_name: "_socket.PF_PACKET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SHUT_RD"
-  fully_qualified_name: "_socket.SHUT_RD"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SHUT_RDWR"
-  fully_qualified_name: "_socket.SHUT_RDWR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SHUT_WR"
-  fully_qualified_name: "_socket.SHUT_WR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOCK_DGRAM"
-  fully_qualified_name: "_socket.SOCK_DGRAM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOCK_RAW"
-  fully_qualified_name: "_socket.SOCK_RAW"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOCK_RDM"
-  fully_qualified_name: "_socket.SOCK_RDM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOCK_SEQPACKET"
-  fully_qualified_name: "_socket.SOCK_SEQPACKET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOCK_STREAM"
-  fully_qualified_name: "_socket.SOCK_STREAM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_HCI"
-  fully_qualified_name: "_socket.SOL_HCI"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_IP"
-  fully_qualified_name: "_socket.SOL_IP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_SOCKET"
-  fully_qualified_name: "_socket.SOL_SOCKET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_TCP"
-  fully_qualified_name: "_socket.SOL_TCP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_TIPC"
-  fully_qualified_name: "_socket.SOL_TIPC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOL_UDP"
-  fully_qualified_name: "_socket.SOL_UDP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SOMAXCONN"
-  fully_qualified_name: "_socket.SOMAXCONN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_ACCEPTCONN"
-  fully_qualified_name: "_socket.SO_ACCEPTCONN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_BROADCAST"
-  fully_qualified_name: "_socket.SO_BROADCAST"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_DEBUG"
-  fully_qualified_name: "_socket.SO_DEBUG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_DONTROUTE"
-  fully_qualified_name: "_socket.SO_DONTROUTE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_ERROR"
-  fully_qualified_name: "_socket.SO_ERROR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_KEEPALIVE"
-  fully_qualified_name: "_socket.SO_KEEPALIVE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_LINGER"
-  fully_qualified_name: "_socket.SO_LINGER"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_OOBINLINE"
-  fully_qualified_name: "_socket.SO_OOBINLINE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_RCVBUF"
-  fully_qualified_name: "_socket.SO_RCVBUF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_RCVLOWAT"
-  fully_qualified_name: "_socket.SO_RCVLOWAT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_RCVTIMEO"
-  fully_qualified_name: "_socket.SO_RCVTIMEO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_REUSEADDR"
-  fully_qualified_name: "_socket.SO_REUSEADDR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_REUSEPORT"
-  fully_qualified_name: "_socket.SO_REUSEPORT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_SNDBUF"
-  fully_qualified_name: "_socket.SO_SNDBUF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_SNDLOWAT"
-  fully_qualified_name: "_socket.SO_SNDLOWAT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_SNDTIMEO"
-  fully_qualified_name: "_socket.SO_SNDTIMEO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SO_TYPE"
-  fully_qualified_name: "_socket.SO_TYPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "SSL_ERROR_EOF"
-  fully_qualified_name: "_socket.SSL_ERROR_EOF"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_INVALID_ERROR_CODE"
-  fully_qualified_name: "_socket.SSL_ERROR_INVALID_ERROR_CODE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_SSL"
-  fully_qualified_name: "_socket.SSL_ERROR_SSL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_SYSCALL"
-  fully_qualified_name: "_socket.SSL_ERROR_SYSCALL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_WANT_CONNECT"
-  fully_qualified_name: "_socket.SSL_ERROR_WANT_CONNECT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_WANT_READ"
-  fully_qualified_name: "_socket.SSL_ERROR_WANT_READ"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_WANT_WRITE"
-  fully_qualified_name: "_socket.SSL_ERROR_WANT_WRITE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_WANT_X509_LOOKUP"
-  fully_qualified_name: "_socket.SSL_ERROR_WANT_X509_LOOKUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SSL_ERROR_ZERO_RETURN"
-  fully_qualified_name: "_socket.SSL_ERROR_ZERO_RETURN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "TCP_CORK"
-  fully_qualified_name: "_socket.TCP_CORK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_DEFER_ACCEPT"
-  fully_qualified_name: "_socket.TCP_DEFER_ACCEPT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_INFO"
-  fully_qualified_name: "_socket.TCP_INFO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_KEEPCNT"
-  fully_qualified_name: "_socket.TCP_KEEPCNT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_KEEPIDLE"
-  fully_qualified_name: "_socket.TCP_KEEPIDLE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_KEEPINTVL"
-  fully_qualified_name: "_socket.TCP_KEEPINTVL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_LINGER2"
-  fully_qualified_name: "_socket.TCP_LINGER2"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_MAXSEG"
-  fully_qualified_name: "_socket.TCP_MAXSEG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_NODELAY"
-  fully_qualified_name: "_socket.TCP_NODELAY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_QUICKACK"
-  fully_qualified_name: "_socket.TCP_QUICKACK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_SYNCNT"
-  fully_qualified_name: "_socket.TCP_SYNCNT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TCP_WINDOW_CLAMP"
-  fully_qualified_name: "_socket.TCP_WINDOW_CLAMP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_ADDR_ID"
-  fully_qualified_name: "_socket.TIPC_ADDR_ID"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_ADDR_NAME"
-  fully_qualified_name: "_socket.TIPC_ADDR_NAME"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_ADDR_NAMESEQ"
-  fully_qualified_name: "_socket.TIPC_ADDR_NAMESEQ"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_CFG_SRV"
-  fully_qualified_name: "_socket.TIPC_CFG_SRV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_CLUSTER_SCOPE"
-  fully_qualified_name: "_socket.TIPC_CLUSTER_SCOPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_CONN_TIMEOUT"
-  fully_qualified_name: "_socket.TIPC_CONN_TIMEOUT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_CRITICAL_IMPORTANCE"
-  fully_qualified_name: "_socket.TIPC_CRITICAL_IMPORTANCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_DEST_DROPPABLE"
-  fully_qualified_name: "_socket.TIPC_DEST_DROPPABLE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_HIGH_IMPORTANCE"
-  fully_qualified_name: "_socket.TIPC_HIGH_IMPORTANCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_IMPORTANCE"
-  fully_qualified_name: "_socket.TIPC_IMPORTANCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_LOW_IMPORTANCE"
-  fully_qualified_name: "_socket.TIPC_LOW_IMPORTANCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_MEDIUM_IMPORTANCE"
-  fully_qualified_name: "_socket.TIPC_MEDIUM_IMPORTANCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_NODE_SCOPE"
-  fully_qualified_name: "_socket.TIPC_NODE_SCOPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_PUBLISHED"
-  fully_qualified_name: "_socket.TIPC_PUBLISHED"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_SRC_DROPPABLE"
-  fully_qualified_name: "_socket.TIPC_SRC_DROPPABLE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_SUBSCR_TIMEOUT"
-  fully_qualified_name: "_socket.TIPC_SUBSCR_TIMEOUT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_SUB_CANCEL"
-  fully_qualified_name: "_socket.TIPC_SUB_CANCEL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_SUB_PORTS"
-  fully_qualified_name: "_socket.TIPC_SUB_PORTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_SUB_SERVICE"
-  fully_qualified_name: "_socket.TIPC_SUB_SERVICE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_TOP_SRV"
-  fully_qualified_name: "_socket.TIPC_TOP_SRV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_WAIT_FOREVER"
-  fully_qualified_name: "_socket.TIPC_WAIT_FOREVER"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_WITHDRAWN"
-  fully_qualified_name: "_socket.TIPC_WITHDRAWN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TIPC_ZONE_SCOPE"
-  fully_qualified_name: "_socket.TIPC_ZONE_SCOPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "CAPI"
-  fully_qualified_name: "_socket.CAPI"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "has_ipv6"
-  fully_qualified_name: "_socket.has_ipv6"
-  type_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
   name: "_FD"
   fully_qualified_name: "_socket._FD"
   type_annotation {
@@ -6708,6 +2331,118 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "has_ipv6"
+  fully_qualified_name: "_socket.has_ipv6"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_INET"
+  fully_qualified_name: "_socket.AF_INET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_INET6"
+  fully_qualified_name: "_socket.AF_INET6"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOCK_STREAM"
+  fully_qualified_name: "_socket.SOCK_STREAM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOCK_DGRAM"
+  fully_qualified_name: "_socket.SOCK_DGRAM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOCK_RAW"
+  fully_qualified_name: "_socket.SOCK_RAW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOCK_RDM"
+  fully_qualified_name: "_socket.SOCK_RDM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOCK_SEQPACKET"
+  fully_qualified_name: "_socket.SOCK_SEQPACKET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "SOCK_CLOEXEC"
   fully_qualified_name: "_socket.SOCK_CLOEXEC"
   type_annotation {
@@ -6736,8 +2471,120 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "AF_APPLETALK"
+  fully_qualified_name: "_socket.AF_APPLETALK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_DECnet"
+  fully_qualified_name: "_socket.AF_DECnet"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_IPX"
+  fully_qualified_name: "_socket.AF_IPX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_SNA"
+  fully_qualified_name: "_socket.AF_SNA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_UNSPEC"
+  fully_qualified_name: "_socket.AF_UNSPEC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_ROUTE"
+  fully_qualified_name: "_socket.AF_ROUTE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "AF_SYSTEM"
   fully_qualified_name: "_socket.AF_SYSTEM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_UNIX"
+  fully_qualified_name: "_socket.AF_UNIX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_IRDA"
+  fully_qualified_name: "_socket.AF_IRDA"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -6764,6 +2611,650 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "AF_ASH"
+  fully_qualified_name: "_socket.AF_ASH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_ATMPVC"
+  fully_qualified_name: "_socket.AF_ATMPVC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_ATMSVC"
+  fully_qualified_name: "_socket.AF_ATMSVC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_AX25"
+  fully_qualified_name: "_socket.AF_AX25"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_BRIDGE"
+  fully_qualified_name: "_socket.AF_BRIDGE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_ECONET"
+  fully_qualified_name: "_socket.AF_ECONET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_KEY"
+  fully_qualified_name: "_socket.AF_KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_LLC"
+  fully_qualified_name: "_socket.AF_LLC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_NETBEUI"
+  fully_qualified_name: "_socket.AF_NETBEUI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_NETROM"
+  fully_qualified_name: "_socket.AF_NETROM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_PPPOX"
+  fully_qualified_name: "_socket.AF_PPPOX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_ROSE"
+  fully_qualified_name: "_socket.AF_ROSE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_SECURITY"
+  fully_qualified_name: "_socket.AF_SECURITY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_WANPIPE"
+  fully_qualified_name: "_socket.AF_WANPIPE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_X25"
+  fully_qualified_name: "_socket.AF_X25"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOMAXCONN"
+  fully_qualified_name: "_socket.SOMAXCONN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_ADDRCONFIG"
+  fully_qualified_name: "_socket.AI_ADDRCONFIG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_ALL"
+  fully_qualified_name: "_socket.AI_ALL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_CANONNAME"
+  fully_qualified_name: "_socket.AI_CANONNAME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_NUMERICHOST"
+  fully_qualified_name: "_socket.AI_NUMERICHOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_NUMERICSERV"
+  fully_qualified_name: "_socket.AI_NUMERICSERV"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_PASSIVE"
+  fully_qualified_name: "_socket.AI_PASSIVE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AI_V4MAPPED"
+  fully_qualified_name: "_socket.AI_V4MAPPED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_AGAIN"
+  fully_qualified_name: "_socket.EAI_AGAIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_BADFLAGS"
+  fully_qualified_name: "_socket.EAI_BADFLAGS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_FAIL"
+  fully_qualified_name: "_socket.EAI_FAIL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_FAMILY"
+  fully_qualified_name: "_socket.EAI_FAMILY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_MEMORY"
+  fully_qualified_name: "_socket.EAI_MEMORY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_NODATA"
+  fully_qualified_name: "_socket.EAI_NODATA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_NONAME"
+  fully_qualified_name: "_socket.EAI_NONAME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_SERVICE"
+  fully_qualified_name: "_socket.EAI_SERVICE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EAI_SOCKTYPE"
+  fully_qualified_name: "_socket.EAI_SOCKTYPE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_ALLHOSTS_GROUP"
+  fully_qualified_name: "_socket.INADDR_ALLHOSTS_GROUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_ANY"
+  fully_qualified_name: "_socket.INADDR_ANY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_BROADCAST"
+  fully_qualified_name: "_socket.INADDR_BROADCAST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_LOOPBACK"
+  fully_qualified_name: "_socket.INADDR_LOOPBACK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_MAX_LOCAL_GROUP"
+  fully_qualified_name: "_socket.INADDR_MAX_LOCAL_GROUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_NONE"
+  fully_qualified_name: "_socket.INADDR_NONE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INADDR_UNSPEC_GROUP"
+  fully_qualified_name: "_socket.INADDR_UNSPEC_GROUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPORT_RESERVED"
+  fully_qualified_name: "_socket.IPPORT_RESERVED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPORT_USERRESERVED"
+  fully_qualified_name: "_socket.IPPORT_USERRESERVED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_AH"
+  fully_qualified_name: "_socket.IPPROTO_AH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_DSTOPTS"
+  fully_qualified_name: "_socket.IPPROTO_DSTOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_EGP"
+  fully_qualified_name: "_socket.IPPROTO_EGP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_ESP"
+  fully_qualified_name: "_socket.IPPROTO_ESP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_FRAGMENT"
+  fully_qualified_name: "_socket.IPPROTO_FRAGMENT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPPROTO_GGP"
   fully_qualified_name: "_socket.IPPROTO_GGP"
   type_annotation {
@@ -6778,8 +3269,78 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "IPPROTO_HOPOPTS"
+  fully_qualified_name: "_socket.IPPROTO_HOPOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_ICMPV6"
+  fully_qualified_name: "_socket.IPPROTO_ICMPV6"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_IDP"
+  fully_qualified_name: "_socket.IPPROTO_IDP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_IGMP"
+  fully_qualified_name: "_socket.IPPROTO_IGMP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPPROTO_IPV4"
   fully_qualified_name: "_socket.IPPROTO_IPV4"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_IPV6"
+  fully_qualified_name: "_socket.IPPROTO_IPV6"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -6808,6 +3369,62 @@ vars {
 vars {
   name: "IPPROTO_ND"
   fully_qualified_name: "_socket.IPPROTO_ND"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_NONE"
+  fully_qualified_name: "_socket.IPPROTO_NONE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_PIM"
+  fully_qualified_name: "_socket.IPPROTO_PIM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_PUP"
+  fully_qualified_name: "_socket.IPPROTO_PUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_ROUTING"
+  fully_qualified_name: "_socket.IPPROTO_ROUTING"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -6932,8 +3549,386 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "IPPROTO_ICMP"
+  fully_qualified_name: "_socket.IPPROTO_ICMP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_IP"
+  fully_qualified_name: "_socket.IPPROTO_IP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_RAW"
+  fully_qualified_name: "_socket.IPPROTO_RAW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_TCP"
+  fully_qualified_name: "_socket.IPPROTO_TCP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_UDP"
+  fully_qualified_name: "_socket.IPPROTO_UDP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_CHECKSUM"
+  fully_qualified_name: "_socket.IPV6_CHECKSUM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_JOIN_GROUP"
+  fully_qualified_name: "_socket.IPV6_JOIN_GROUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_LEAVE_GROUP"
+  fully_qualified_name: "_socket.IPV6_LEAVE_GROUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_MULTICAST_HOPS"
+  fully_qualified_name: "_socket.IPV6_MULTICAST_HOPS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_MULTICAST_IF"
+  fully_qualified_name: "_socket.IPV6_MULTICAST_IF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_MULTICAST_LOOP"
+  fully_qualified_name: "_socket.IPV6_MULTICAST_LOOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RECVTCLASS"
+  fully_qualified_name: "_socket.IPV6_RECVTCLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_TCLASS"
+  fully_qualified_name: "_socket.IPV6_TCLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_UNICAST_HOPS"
+  fully_qualified_name: "_socket.IPV6_UNICAST_HOPS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_V6ONLY"
+  fully_qualified_name: "_socket.IPV6_V6ONLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPV6_DONTFRAG"
   fully_qualified_name: "_socket.IPV6_DONTFRAG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_HOPLIMIT"
+  fully_qualified_name: "_socket.IPV6_HOPLIMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_HOPOPTS"
+  fully_qualified_name: "_socket.IPV6_HOPOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_PKTINFO"
+  fully_qualified_name: "_socket.IPV6_PKTINFO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RECVRTHDR"
+  fully_qualified_name: "_socket.IPV6_RECVRTHDR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RTHDR"
+  fully_qualified_name: "_socket.IPV6_RTHDR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_ADD_MEMBERSHIP"
+  fully_qualified_name: "_socket.IP_ADD_MEMBERSHIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_DROP_MEMBERSHIP"
+  fully_qualified_name: "_socket.IP_DROP_MEMBERSHIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_HDRINCL"
+  fully_qualified_name: "_socket.IP_HDRINCL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_MULTICAST_IF"
+  fully_qualified_name: "_socket.IP_MULTICAST_IF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_MULTICAST_LOOP"
+  fully_qualified_name: "_socket.IP_MULTICAST_LOOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_MULTICAST_TTL"
+  fully_qualified_name: "_socket.IP_MULTICAST_TTL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_OPTIONS"
+  fully_qualified_name: "_socket.IP_OPTIONS"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -6974,8 +3969,540 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "IP_TOS"
+  fully_qualified_name: "_socket.IP_TOS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_TTL"
+  fully_qualified_name: "_socket.IP_TTL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_CTRUNC"
+  fully_qualified_name: "_socket.MSG_CTRUNC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_DONTROUTE"
+  fully_qualified_name: "_socket.MSG_DONTROUTE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "MSG_ERRQUEUE"
   fully_qualified_name: "_socket.MSG_ERRQUEUE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_OOB"
+  fully_qualified_name: "_socket.MSG_OOB"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_PEEK"
+  fully_qualified_name: "_socket.MSG_PEEK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_TRUNC"
+  fully_qualified_name: "_socket.MSG_TRUNC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_WAITALL"
+  fully_qualified_name: "_socket.MSG_WAITALL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_DGRAM"
+  fully_qualified_name: "_socket.NI_DGRAM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_MAXHOST"
+  fully_qualified_name: "_socket.NI_MAXHOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_MAXSERV"
+  fully_qualified_name: "_socket.NI_MAXSERV"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_NAMEREQD"
+  fully_qualified_name: "_socket.NI_NAMEREQD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_NOFQDN"
+  fully_qualified_name: "_socket.NI_NOFQDN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_NUMERICHOST"
+  fully_qualified_name: "_socket.NI_NUMERICHOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NI_NUMERICSERV"
+  fully_qualified_name: "_socket.NI_NUMERICSERV"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SHUT_RD"
+  fully_qualified_name: "_socket.SHUT_RD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SHUT_RDWR"
+  fully_qualified_name: "_socket.SHUT_RDWR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SHUT_WR"
+  fully_qualified_name: "_socket.SHUT_WR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOL_IP"
+  fully_qualified_name: "_socket.SOL_IP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOL_SOCKET"
+  fully_qualified_name: "_socket.SOL_SOCKET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOL_TCP"
+  fully_qualified_name: "_socket.SOL_TCP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOL_UDP"
+  fully_qualified_name: "_socket.SOL_UDP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_ACCEPTCONN"
+  fully_qualified_name: "_socket.SO_ACCEPTCONN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_BROADCAST"
+  fully_qualified_name: "_socket.SO_BROADCAST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_DEBUG"
+  fully_qualified_name: "_socket.SO_DEBUG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_DONTROUTE"
+  fully_qualified_name: "_socket.SO_DONTROUTE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_ERROR"
+  fully_qualified_name: "_socket.SO_ERROR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_KEEPALIVE"
+  fully_qualified_name: "_socket.SO_KEEPALIVE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_LINGER"
+  fully_qualified_name: "_socket.SO_LINGER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_OOBINLINE"
+  fully_qualified_name: "_socket.SO_OOBINLINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_RCVBUF"
+  fully_qualified_name: "_socket.SO_RCVBUF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_RCVLOWAT"
+  fully_qualified_name: "_socket.SO_RCVLOWAT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_RCVTIMEO"
+  fully_qualified_name: "_socket.SO_RCVTIMEO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_REUSEADDR"
+  fully_qualified_name: "_socket.SO_REUSEADDR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_SNDBUF"
+  fully_qualified_name: "_socket.SO_SNDBUF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_SNDLOWAT"
+  fully_qualified_name: "_socket.SO_SNDLOWAT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_SNDTIMEO"
+  fully_qualified_name: "_socket.SO_SNDTIMEO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SO_TYPE"
+  fully_qualified_name: "_socket.SO_TYPE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7004,6 +4531,76 @@ vars {
 vars {
   name: "TCP_FASTOPEN"
   fully_qualified_name: "_socket.TCP_FASTOPEN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_KEEPCNT"
+  fully_qualified_name: "_socket.TCP_KEEPCNT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_KEEPINTVL"
+  fully_qualified_name: "_socket.TCP_KEEPINTVL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_KEEPIDLE"
+  fully_qualified_name: "_socket.TCP_KEEPIDLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_MAXSEG"
+  fully_qualified_name: "_socket.TCP_MAXSEG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_NODELAY"
+  fully_qualified_name: "_socket.TCP_NODELAY"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7114,6 +4711,20 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "EAI_ADDRFAMILY"
+  fully_qualified_name: "_socket.EAI_ADDRFAMILY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "EAI_BADHINTS"
   fully_qualified_name: "_socket.EAI_BADHINTS"
   type_annotation {
@@ -7142,6 +4753,20 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "EAI_OVERFLOW"
+  fully_qualified_name: "_socket.EAI_OVERFLOW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "EAI_PROTOCOL"
   fully_qualified_name: "_socket.EAI_PROTOCOL"
   type_annotation {
@@ -7156,8 +4781,36 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "EAI_SYSTEM"
+  fully_qualified_name: "_socket.EAI_SYSTEM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPPROTO_EON"
   fully_qualified_name: "_socket.IPPROTO_EON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_GRE"
+  fully_qualified_name: "_socket.IPPROTO_GRE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7198,8 +4851,148 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "IPPROTO_IPIP"
+  fully_qualified_name: "_socket.IPPROTO_IPIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_RSVP"
+  fully_qualified_name: "_socket.IPPROTO_RSVP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPPROTO_TP"
+  fully_qualified_name: "_socket.IPPROTO_TP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPPROTO_XTP"
   fully_qualified_name: "_socket.IPPROTO_XTP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RTHDR_TYPE_0"
+  fully_qualified_name: "_socket.IPV6_RTHDR_TYPE_0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_DEFAULT_MULTICAST_LOOP"
+  fully_qualified_name: "_socket.IP_DEFAULT_MULTICAST_LOOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_DEFAULT_MULTICAST_TTL"
+  fully_qualified_name: "_socket.IP_DEFAULT_MULTICAST_TTL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_MAX_MEMBERSHIPS"
+  fully_qualified_name: "_socket.IP_MAX_MEMBERSHIPS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_RECVOPTS"
+  fully_qualified_name: "_socket.IP_RECVOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_RECVRETOPTS"
+  fully_qualified_name: "_socket.IP_RECVRETOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP_RETOPTS"
+  fully_qualified_name: "_socket.IP_RETOPTS"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7226,8 +5019,36 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "MSG_DONTWAIT"
+  fully_qualified_name: "_socket.MSG_DONTWAIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "MSG_EOF"
   fully_qualified_name: "_socket.MSG_EOF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MSG_EOR"
+  fully_qualified_name: "_socket.MSG_EOR"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7282,6 +5103,48 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "SO_REUSEPORT"
+  fully_qualified_name: "_socket.SO_REUSEPORT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_DSTOPTS"
+  fully_qualified_name: "_socket.IPV6_DSTOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_NEXTHOP"
+  fully_qualified_name: "_socket.IPV6_NEXTHOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPV6_PATHMTU"
   fully_qualified_name: "_socket.IPV6_PATHMTU"
   type_annotation {
@@ -7296,8 +5159,78 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "IPV6_RECVDSTOPTS"
+  fully_qualified_name: "_socket.IPV6_RECVDSTOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RECVHOPLIMIT"
+  fully_qualified_name: "_socket.IPV6_RECVHOPLIMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RECVHOPOPTS"
+  fully_qualified_name: "_socket.IPV6_RECVHOPOPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "IPV6_RECVPATHMTU"
   fully_qualified_name: "_socket.IPV6_RECVPATHMTU"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RECVPKTINFO"
+  fully_qualified_name: "_socket.IPV6_RECVPKTINFO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IPV6_RTHDRDSTOPTS"
+  fully_qualified_name: "_socket.IPV6_RTHDRDSTOPTS"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -7534,6 +5467,20 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "SOL_HCI"
+  fully_qualified_name: "_socket.SOL_HCI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "SOL_IPX"
   fully_qualified_name: "_socket.SOL_IPX"
   type_annotation {
@@ -7648,6 +5595,104 @@ vars {
 vars {
   name: "SO_SETFIB"
   fully_qualified_name: "_socket.SO_SETFIB"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_CORK"
+  fully_qualified_name: "_socket.TCP_CORK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_DEFER_ACCEPT"
+  fully_qualified_name: "_socket.TCP_DEFER_ACCEPT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_INFO"
+  fully_qualified_name: "_socket.TCP_INFO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_LINGER2"
+  fully_qualified_name: "_socket.TCP_LINGER2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_QUICKACK"
+  fully_qualified_name: "_socket.TCP_QUICKACK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_SYNCNT"
+  fully_qualified_name: "_socket.TCP_SYNCNT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TCP_WINDOW_CLAMP"
+  fully_qualified_name: "_socket.TCP_WINDOW_CLAMP"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -8080,6 +6125,132 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "AF_PACKET"
+  fully_qualified_name: "_socket.AF_PACKET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PF_PACKET"
+  fully_qualified_name: "_socket.PF_PACKET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_BROADCAST"
+  fully_qualified_name: "_socket.PACKET_BROADCAST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_FASTROUTE"
+  fully_qualified_name: "_socket.PACKET_FASTROUTE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_HOST"
+  fully_qualified_name: "_socket.PACKET_HOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_LOOPBACK"
+  fully_qualified_name: "_socket.PACKET_LOOPBACK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_MULTICAST"
+  fully_qualified_name: "_socket.PACKET_MULTICAST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_OTHERHOST"
+  fully_qualified_name: "_socket.PACKET_OTHERHOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PACKET_OUTGOING"
+  fully_qualified_name: "_socket.PACKET_OUTGOING"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "AF_RDS"
   fully_qualified_name: "_socket.AF_RDS"
   type_annotation {
@@ -8362,6 +6533,356 @@ vars {
 vars {
   name: "RDS_RECVERR"
   fully_qualified_name: "_socket.RDS_RECVERR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_TIPC"
+  fully_qualified_name: "_socket.AF_TIPC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOL_TIPC"
+  fully_qualified_name: "_socket.SOL_TIPC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_ADDR_ID"
+  fully_qualified_name: "_socket.TIPC_ADDR_ID"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_ADDR_NAME"
+  fully_qualified_name: "_socket.TIPC_ADDR_NAME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_ADDR_NAMESEQ"
+  fully_qualified_name: "_socket.TIPC_ADDR_NAMESEQ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_CFG_SRV"
+  fully_qualified_name: "_socket.TIPC_CFG_SRV"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_CLUSTER_SCOPE"
+  fully_qualified_name: "_socket.TIPC_CLUSTER_SCOPE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_CONN_TIMEOUT"
+  fully_qualified_name: "_socket.TIPC_CONN_TIMEOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_CRITICAL_IMPORTANCE"
+  fully_qualified_name: "_socket.TIPC_CRITICAL_IMPORTANCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_DEST_DROPPABLE"
+  fully_qualified_name: "_socket.TIPC_DEST_DROPPABLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_HIGH_IMPORTANCE"
+  fully_qualified_name: "_socket.TIPC_HIGH_IMPORTANCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_IMPORTANCE"
+  fully_qualified_name: "_socket.TIPC_IMPORTANCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_LOW_IMPORTANCE"
+  fully_qualified_name: "_socket.TIPC_LOW_IMPORTANCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_MEDIUM_IMPORTANCE"
+  fully_qualified_name: "_socket.TIPC_MEDIUM_IMPORTANCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_NODE_SCOPE"
+  fully_qualified_name: "_socket.TIPC_NODE_SCOPE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_PUBLISHED"
+  fully_qualified_name: "_socket.TIPC_PUBLISHED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_SRC_DROPPABLE"
+  fully_qualified_name: "_socket.TIPC_SRC_DROPPABLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_SUBSCR_TIMEOUT"
+  fully_qualified_name: "_socket.TIPC_SUBSCR_TIMEOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_SUB_CANCEL"
+  fully_qualified_name: "_socket.TIPC_SUB_CANCEL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_SUB_PORTS"
+  fully_qualified_name: "_socket.TIPC_SUB_PORTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_SUB_SERVICE"
+  fully_qualified_name: "_socket.TIPC_SUB_SERVICE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_TOP_SRV"
+  fully_qualified_name: "_socket.TIPC_TOP_SRV"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_WAIT_FOREVER"
+  fully_qualified_name: "_socket.TIPC_WAIT_FOREVER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_WITHDRAWN"
+  fully_qualified_name: "_socket.TIPC_WITHDRAWN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TIPC_ZONE_SCOPE"
+  fully_qualified_name: "_socket.TIPC_ZONE_SCOPE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -8766,6 +7287,20 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "AF_NETLINK"
+  fully_qualified_name: "_socket.AF_NETLINK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "NETLINK_ARPD"
   fully_qualified_name: "_socket.NETLINK_ARPD"
   type_annotation {
@@ -8794,8 +7329,78 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "NETLINK_DNRTMSG"
+  fully_qualified_name: "_socket.NETLINK_DNRTMSG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NETLINK_FIREWALL"
+  fully_qualified_name: "_socket.NETLINK_FIREWALL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NETLINK_IP6_FW"
+  fully_qualified_name: "_socket.NETLINK_IP6_FW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NETLINK_NFLOG"
+  fully_qualified_name: "_socket.NETLINK_NFLOG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "NETLINK_ROUTE6"
   fully_qualified_name: "_socket.NETLINK_ROUTE6"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NETLINK_ROUTE"
+  fully_qualified_name: "_socket.NETLINK_ROUTE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -8850,8 +7455,176 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "NETLINK_USERSOCK"
+  fully_qualified_name: "_socket.NETLINK_USERSOCK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "NETLINK_W1"
   fully_qualified_name: "_socket.NETLINK_W1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NETLINK_XFRM"
+  fully_qualified_name: "_socket.NETLINK_XFRM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AF_BLUETOOTH"
+  fully_qualified_name: "_socket.AF_BLUETOOTH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BDADDR_ANY"
+  fully_qualified_name: "_socket.BDADDR_ANY"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BDADDR_LOCAL"
+  fully_qualified_name: "_socket.BDADDR_LOCAL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BTPROTO_RFCOMM"
+  fully_qualified_name: "_socket.BTPROTO_RFCOMM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BTPROTO_HCI"
+  fully_qualified_name: "_socket.BTPROTO_HCI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BTPROTO_L2CAP"
+  fully_qualified_name: "_socket.BTPROTO_L2CAP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BTPROTO_SCO"
+  fully_qualified_name: "_socket.BTPROTO_SCO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HCI_FILTER"
+  fully_qualified_name: "_socket.HCI_FILTER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HCI_TIME_STAMP"
+  fully_qualified_name: "_socket.HCI_TIME_STAMP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HCI_DATA_DIR"
+  fully_qualified_name: "_socket.HCI_DATA_DIR"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"

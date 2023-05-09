@@ -3,7 +3,6 @@ classes {
   name: "ZipImportError"
   fully_qualified_name: "zipimport.ZipImportError"
   super_classes: "builtins.ImportError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -34,317 +33,10 @@ classes {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "zipimport.zipimporter.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[StrOrBytesPath]"
         kind: UNBOUND
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "find_module"
-    fully_qualified_name: "zipimport.zipimporter.find_module"
-    return_annotation {
-      pretty_printed_name: "Union[zipimport.zipimporter,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_code"
-    fully_qualified_name: "zipimport.zipimporter.get_code"
-    return_annotation {
-      pretty_printed_name: "types.CodeType"
-      fully_qualified_name: "types.CodeType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_data"
-    fully_qualified_name: "zipimport.zipimporter.get_data"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "pathname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_data"
-    fully_qualified_name: "zipimport.zipimporter.get_data"
-    return_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "pathname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_filename"
-    fully_qualified_name: "zipimport.zipimporter.get_filename"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_source"
-    fully_qualified_name: "zipimport.zipimporter.get_source"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "is_package"
-    fully_qualified_name: "zipimport.zipimporter.is_package"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "load_module"
-    fully_qualified_name: "zipimport.zipimporter.load_module"
-    return_annotation {
-      pretty_printed_name: "types.ModuleType"
-      fully_qualified_name: "types.ModuleType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "zipimport.zipimporter"
-        fully_qualified_name: "zipimport.zipimporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -420,6 +112,151 @@ classes {
     valid_for: "310"
   }
   methods {
+    name: "find_module"
+    fully_qualified_name: "zipimport.zipimporter.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[zipimport.zipimporter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_code"
+    fully_qualified_name: "zipimport.zipimporter.get_code"
+    return_annotation {
+      pretty_printed_name: "types.CodeType"
+      fully_qualified_name: "types.CodeType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_data"
+    fully_qualified_name: "zipimport.zipimporter.get_data"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "pathname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_filename"
+    fully_qualified_name: "zipimport.zipimporter.get_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "get_resource_reader"
     fully_qualified_name: "zipimport.zipimporter.get_resource_reader"
     return_annotation {
@@ -433,6 +270,104 @@ classes {
         pretty_printed_name: "None"
         kind: NONE
       }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "zipimport.zipimporter.get_source"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_package"
+    fully_qualified_name: "zipimport.zipimporter.is_package"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_module"
+    fully_qualified_name: "zipimport.zipimporter.load_module"
+    return_annotation {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
     }
     parameters {
       name: "self"
@@ -524,7 +459,6 @@ classes {
     }
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -538,7 +472,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -553,7 +486,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"

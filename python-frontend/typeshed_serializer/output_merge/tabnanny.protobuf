@@ -42,7 +42,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -65,7 +64,6 @@ classes {
         fully_qualified_name: "tabnanny.NannyNag"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -88,7 +86,6 @@ classes {
         fully_qualified_name: "tabnanny.NannyNag"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -111,7 +108,6 @@ classes {
         fully_qualified_name: "tabnanny.NannyNag"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -119,30 +115,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "check"
-  fully_qualified_name: "tabnanny.check"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "check"
@@ -221,37 +199,6 @@ functions {
       fully_qualified_name: "typing.Iterable"
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "verbose"
-  fully_qualified_name: "tabnanny.verbose"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "filename_only"
-  fully_qualified_name: "tabnanny.filename_only"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -269,6 +216,34 @@ vars {
       fully_qualified_name: "builtins.str"
     }
     fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "verbose"
+  fully_qualified_name: "tabnanny.verbose"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "filename_only"
+  fully_qualified_name: "tabnanny.filename_only"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
   valid_for: "35"
   valid_for: "36"

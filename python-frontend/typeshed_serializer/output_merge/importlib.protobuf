@@ -141,79 +141,6 @@ classes {
   valid_for: "310"
 }
 functions {
-  name: "import_module"
-  fully_qualified_name: "importlib.import_module"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "package"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "import_module"
-  fully_qualified_name: "importlib.import_module"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "package"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
   name: "__import__"
   fully_qualified_name: "importlib.__import__"
   return_annotation {
@@ -297,6 +224,45 @@ functions {
     type_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "import_module"
+  fully_qualified_name: "importlib.import_module"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     has_default: true
   }

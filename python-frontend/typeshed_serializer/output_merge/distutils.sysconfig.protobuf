@@ -1,5 +1,43 @@
 fully_qualified_name: "distutils.sysconfig"
 functions {
+  name: "expand_makefile_vars"
+  fully_qualified_name: "distutils.sysconfig.expand_makefile_vars"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "vars"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "get_config_var"
   fully_qualified_name: "distutils.sysconfig.get_config_var"
   return_annotation {
@@ -26,7 +64,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -65,7 +102,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -80,7 +116,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -95,7 +130,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -136,7 +170,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -186,7 +219,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -207,54 +239,6 @@ functions {
     type_annotation {
       pretty_printed_name: "distutils.ccompiler.CCompiler"
       fully_qualified_name: "distutils.ccompiler.CCompiler"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "set_python_build"
-  fully_qualified_name: "distutils.sysconfig.set_python_build"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-}
-functions {
-  name: "expand_makefile_vars"
-  fully_qualified_name: "distutils.sysconfig.expand_makefile_vars"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "vars"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Mapping"
     }
   }
   valid_for: "35"
@@ -284,7 +268,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -299,7 +282,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

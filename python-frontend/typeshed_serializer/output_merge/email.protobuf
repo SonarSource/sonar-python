@@ -2686,39 +2686,6 @@ functions {
   name: "message_from_string"
   fully_qualified_name: "email.message_from_string"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "message_from_string"
-  fully_qualified_name: "email.message_from_string"
-  return_annotation {
     pretty_printed_name: "email.message.Message"
     fully_qualified_name: "email.message.Message"
   }
@@ -2758,39 +2725,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "message_from_bytes"
-  fully_qualified_name: "email.message_from_bytes"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "message_from_bytes"
@@ -2848,43 +2782,6 @@ functions {
   name: "message_from_file"
   fully_qualified_name: "email.message_from_file"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "fp"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[typing.AnyStr]"
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "message_from_file"
-  fully_qualified_name: "email.message_from_file"
-  return_annotation {
     pretty_printed_name: "email.message.Message"
     fully_qualified_name: "email.message.Message"
   }
@@ -2928,43 +2825,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "message_from_binary_file"
-  fully_qualified_name: "email.message_from_binary_file"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "fp"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "message_from_binary_file"

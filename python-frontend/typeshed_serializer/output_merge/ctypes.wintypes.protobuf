@@ -2,12 +2,6 @@ fully_qualified_name: "ctypes.wintypes"
 classes {
   name: "VARIANT_BOOL"
   fully_qualified_name: "ctypes.wintypes.VARIANT_BOOL"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
-}
-classes {
-  name: "VARIANT_BOOL"
-  fully_qualified_name: "ctypes.wintypes.VARIANT_BOOL"
   super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
@@ -15,12 +9,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "WPARAM"
-  fully_qualified_name: "ctypes.wintypes.WPARAM"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
 }
 classes {
   name: "WPARAM"
@@ -36,12 +24,6 @@ classes {
 classes {
   name: "LPARAM"
   fully_qualified_name: "ctypes.wintypes.LPARAM"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
-}
-classes {
-  name: "LPARAM"
-  fully_qualified_name: "ctypes.wintypes.LPARAM"
   super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
@@ -49,48 +31,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "RECT"
-  fully_qualified_name: "ctypes.wintypes.RECT"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "left"
-    fully_qualified_name: "ctypes.wintypes.RECT.left"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "top"
-    fully_qualified_name: "ctypes.wintypes.RECT.top"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "right"
-    fully_qualified_name: "ctypes.wintypes.RECT.right"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "bottom"
-    fully_qualified_name: "ctypes.wintypes.RECT.bottom"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "RECT"
@@ -157,48 +97,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "_SMALL_RECT"
-  fully_qualified_name: "ctypes.wintypes._SMALL_RECT"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "Left"
-    fully_qualified_name: "ctypes.wintypes._SMALL_RECT.Left"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "Top"
-    fully_qualified_name: "ctypes.wintypes._SMALL_RECT.Top"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "Right"
-    fully_qualified_name: "ctypes.wintypes._SMALL_RECT.Right"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "Bottom"
-    fully_qualified_name: "ctypes.wintypes._SMALL_RECT.Bottom"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -271,30 +169,6 @@ classes {
 classes {
   name: "_COORD"
   fully_qualified_name: "ctypes.wintypes._COORD"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "X"
-    fully_qualified_name: "ctypes.wintypes._COORD.X"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "Y"
-    fully_qualified_name: "ctypes.wintypes._COORD.Y"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_short"
-      fully_qualified_name: "ctypes.c_short"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "_COORD"
-  fully_qualified_name: "ctypes.wintypes._COORD"
   super_classes: "_ctypes.Structure"
   valid_for: "35"
   valid_for: "36"
@@ -329,30 +203,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "POINT"
-  fully_qualified_name: "ctypes.wintypes.POINT"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "x"
-    fully_qualified_name: "ctypes.wintypes.POINT.x"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "y"
-    fully_qualified_name: "ctypes.wintypes.POINT.y"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -397,30 +247,6 @@ classes {
 classes {
   name: "SIZE"
   fully_qualified_name: "ctypes.wintypes.SIZE"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "cx"
-    fully_qualified_name: "ctypes.wintypes.SIZE.cx"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "cy"
-    fully_qualified_name: "ctypes.wintypes.SIZE.cy"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_long"
-      fully_qualified_name: "ctypes.c_long"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "SIZE"
-  fully_qualified_name: "ctypes.wintypes.SIZE"
   super_classes: "_ctypes.Structure"
   valid_for: "35"
   valid_for: "36"
@@ -460,30 +286,6 @@ classes {
 classes {
   name: "FILETIME"
   fully_qualified_name: "ctypes.wintypes.FILETIME"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "dwLowDateTime"
-    fully_qualified_name: "ctypes.wintypes.FILETIME.dwLowDateTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dwHighDateTime"
-    fully_qualified_name: "ctypes.wintypes.FILETIME.dwHighDateTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "FILETIME"
-  fully_qualified_name: "ctypes.wintypes.FILETIME"
   super_classes: "_ctypes.Structure"
   valid_for: "35"
   valid_for: "36"
@@ -518,66 +320,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "MSG"
-  fully_qualified_name: "ctypes.wintypes.MSG"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "hWnd"
-    fully_qualified_name: "ctypes.wintypes.MSG.hWnd"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_void_p"
-      fully_qualified_name: "ctypes.c_void_p"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "message"
-    fully_qualified_name: "ctypes.wintypes.MSG.message"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_uint"
-      fully_qualified_name: "ctypes.c_uint"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "wParam"
-    fully_qualified_name: "ctypes.wintypes.MSG.wParam"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.WPARAM"
-      fully_qualified_name: "ctypes.wintypes.WPARAM"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "lParam"
-    fully_qualified_name: "ctypes.wintypes.MSG.lParam"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.LPARAM"
-      fully_qualified_name: "ctypes.wintypes.LPARAM"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "time"
-    fully_qualified_name: "ctypes.wintypes.MSG.time"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "pt"
-    fully_qualified_name: "ctypes.wintypes.MSG.pt"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.POINT"
-      fully_qualified_name: "ctypes.wintypes.POINT"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -673,110 +415,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "WIN32_FIND_DATAA"
-  fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "dwFileAttributes"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.dwFileAttributes"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftCreationTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.ftCreationTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftLastAccessTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.ftLastAccessTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftLastWriteTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.ftLastWriteTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nFileSizeHigh"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.nFileSizeHigh"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nFileSizeLow"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.nFileSizeLow"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dwReserved0"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.dwReserved0"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dwReserved1"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.dwReserved1"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "cFileName"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.cFileName"
-    type_annotation {
-      pretty_printed_name: "ctypes.Array[ctypes.c_char]"
-      args {
-        pretty_printed_name: "ctypes.c_char"
-        fully_qualified_name: "ctypes.c_char"
-      }
-      fully_qualified_name: "ctypes.Array"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "cAlternateFileName"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAA.cAlternateFileName"
-    type_annotation {
-      pretty_printed_name: "ctypes.Array[ctypes.c_char]"
-      args {
-        pretty_printed_name: "ctypes.c_char"
-        fully_qualified_name: "ctypes.c_char"
-      }
-      fully_qualified_name: "ctypes.Array"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -936,110 +574,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "WIN32_FIND_DATAW"
-  fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
-  attributes {
-    name: "dwFileAttributes"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.dwFileAttributes"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftCreationTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.ftCreationTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftLastAccessTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.ftLastAccessTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ftLastWriteTime"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.ftLastWriteTime"
-    type_annotation {
-      pretty_printed_name: "ctypes.wintypes.FILETIME"
-      fully_qualified_name: "ctypes.wintypes.FILETIME"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nFileSizeHigh"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.nFileSizeHigh"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nFileSizeLow"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.nFileSizeLow"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dwReserved0"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.dwReserved0"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dwReserved1"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.dwReserved1"
-    type_annotation {
-      pretty_printed_name: "ctypes.c_ulong"
-      fully_qualified_name: "ctypes.c_ulong"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "cFileName"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.cFileName"
-    type_annotation {
-      pretty_printed_name: "ctypes.Array[ctypes.c_wchar]"
-      args {
-        pretty_printed_name: "ctypes.c_wchar"
-        fully_qualified_name: "ctypes.c_wchar"
-      }
-      fully_qualified_name: "ctypes.Array"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "cAlternateFileName"
-    fully_qualified_name: "ctypes.wintypes.WIN32_FIND_DATAW.cAlternateFileName"
-    type_annotation {
-      pretty_printed_name: "ctypes.Array[ctypes.c_wchar]"
-      args {
-        pretty_printed_name: "ctypes.c_wchar"
-        fully_qualified_name: "ctypes.c_wchar"
-      }
-      fully_qualified_name: "ctypes.Array"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -1232,7 +766,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1247,7 +780,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

@@ -133,7 +133,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -156,7 +155,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -187,7 +185,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -202,7 +199,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -241,7 +237,6 @@ functions {
       fully_qualified_name: "typing.Mapping"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -268,81 +263,10 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "execute"
-  fully_qualified_name: "distutils.util.execute"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "func"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-  }
-  parameters {
-    name: "msg"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "verbose"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "dry_run"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
   valid_for: "39"
   valid_for: "310"
 }
@@ -422,21 +346,73 @@ functions {
   valid_for: "38"
 }
 functions {
-  name: "strtobool"
-  fully_qualified_name: "distutils.util.strtobool"
+  name: "execute"
+  fully_qualified_name: "distutils.util.execute"
   return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
+    pretty_printed_name: "None"
+    kind: NONE
   }
   parameters {
-    name: "val"
+    name: "func"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
     }
   }
-  valid_for: "27"
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "verbose"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "dry_run"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "strtobool"
@@ -582,7 +558,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -605,7 +580,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

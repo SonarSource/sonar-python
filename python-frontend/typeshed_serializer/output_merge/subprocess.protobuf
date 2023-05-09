@@ -1,11 +1,11 @@
 fully_qualified_name: "subprocess"
 classes {
-  name: "CalledProcessError"
-  fully_qualified_name: "subprocess.CalledProcessError"
-  super_classes: "builtins.Exception"
+  name: "CompletedProcess"
+  fully_qualified_name: "subprocess.CompletedProcess"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
-    fully_qualified_name: "subprocess.CalledProcessError.__init__"
+    fully_qualified_name: "subprocess.CompletedProcess.__init__"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -14,8 +14,20 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "subprocess.CalledProcessError"
-        fully_qualified_name: "subprocess.CalledProcessError"
+        pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
+        args {
+          pretty_printed_name: "subprocess._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "subprocess.CompletedProcess"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_CMD]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -27,65 +39,14 @@ classes {
       }
     }
     parameters {
-      name: "cmd"
+      name: "stdout"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          args {
-            pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]"
-            args {
-              pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "builtins.unicode"
-                  fully_qualified_name: "builtins.unicode"
-                }
-              }
-              fully_qualified_name: "subprocess._TXT"
-            }
-            fully_qualified_name: "typing.Sequence"
-          }
-        }
-        fully_qualified_name: "subprocess._CMD"
-      }
-    }
-    parameters {
-      name: "output"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[subprocess._T,None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "subprocess._T"
+          kind: TYPE_VAR
         }
         args {
           pretty_printed_name: "None"
@@ -94,35 +55,341 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "returncode"
-    fully_qualified_name: "subprocess.CalledProcessError.returncode"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+    parameters {
+      name: "stderr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[subprocess._T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "subprocess._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
+  methods {
+    name: "check_returncode"
+    fully_qualified_name: "subprocess.CompletedProcess.check_returncode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
+        args {
+          pretty_printed_name: "subprocess._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "subprocess.CompletedProcess"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "subprocess.CompletedProcess.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[subprocess.CompletedProcess[subprocess._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
+          args {
+            pretty_printed_name: "subprocess._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "subprocess.CompletedProcess"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
-    name: "cmd"
-    fully_qualified_name: "subprocess.CalledProcessError.cmd"
+    name: "args"
+    fully_qualified_name: "subprocess.CompletedProcess.args"
     type_annotation {
       pretty_printed_name: "Any"
       kind: ANY
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "returncode"
+    fully_qualified_name: "subprocess.CompletedProcess.returncode"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stdout"
+    fully_qualified_name: "subprocess.CompletedProcess.stdout"
+    type_annotation {
+      pretty_printed_name: "subprocess._T"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stderr"
+    fully_qualified_name: "subprocess.CompletedProcess.stderr"
+    type_annotation {
+      pretty_printed_name: "subprocess._T"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SubprocessError"
+  fully_qualified_name: "subprocess.SubprocessError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "TimeoutExpired"
+  fully_qualified_name: "subprocess.TimeoutExpired"
+  super_classes: "subprocess.SubprocessError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "subprocess.TimeoutExpired.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "subprocess.TimeoutExpired"
+        fully_qualified_name: "subprocess.TimeoutExpired"
+      }
+    }
+    parameters {
+      name: "cmd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_CMD]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "output"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "stderr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "cmd"
+    fully_qualified_name: "subprocess.TimeoutExpired.cmd"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "subprocess.TimeoutExpired.timeout"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "output"
-    fully_qualified_name: "subprocess.CalledProcessError.output"
+    fully_qualified_name: "subprocess.TimeoutExpired.output"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Any"
+      kind: ANY
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stdout"
+    fully_qualified_name: "subprocess.TimeoutExpired.stdout"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stderr"
+    fully_qualified_name: "subprocess.TimeoutExpired.stderr"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 classes {
@@ -291,378 +558,6 @@ classes {
   fully_qualified_name: "subprocess.Popen"
   super_classes: "builtins.object"
   methods {
-    name: "__new__"
-    fully_qualified_name: "subprocess.Popen.__new__"
-    return_annotation {
-      pretty_printed_name: "subprocess.Popen[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "subprocess.Popen"
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[subprocess.Popen[subprocess._T]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "subprocess.Popen[subprocess._T]"
-          args {
-            pretty_printed_name: "subprocess._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "subprocess.Popen"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          args {
-            pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]"
-            args {
-              pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "builtins.unicode"
-                  fully_qualified_name: "builtins.unicode"
-                }
-              }
-              fully_qualified_name: "subprocess._TXT"
-            }
-            fully_qualified_name: "typing.Sequence"
-          }
-        }
-        fully_qualified_name: "subprocess._CMD"
-      }
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "executable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stdin"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stdout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stderr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "preexec_fn"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "close_fds"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "shell"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "cwd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "env"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]],typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          fully_qualified_name: "typing.Mapping"
-        }
-        args {
-          pretty_printed_name: "typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          fully_qualified_name: "typing.Mapping"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "universal_newlines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "startupinfo"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "creationflags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "poll"
-    fully_qualified_name: "subprocess.Popen.poll"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "poll"
     fully_qualified_name: "subprocess.Popen.poll"
     return_annotation {
@@ -695,27 +590,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "wait"
-    fully_qualified_name: "subprocess.Popen.wait"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "wait"
@@ -759,56 +633,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "communicate"
-    fully_qualified_name: "subprocess.Popen.communicate"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    parameters {
-      name: "input"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "communicate"
@@ -889,35 +713,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    parameters {
-      name: "signal"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "send_signal"
-    fully_qualified_name: "subprocess.Popen.send_signal"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "subprocess.Popen[typing.AnyStr]"
         args {
           pretty_printed_name: "typing.AnyStr"
@@ -952,27 +747,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "terminate"
-    fully_qualified_name: "subprocess.Popen.terminate"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "subprocess.Popen[typing.AnyStr]"
         args {
           pretty_printed_name: "typing.AnyStr"
@@ -987,27 +761,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "kill"
-    fully_qualified_name: "subprocess.Popen.kill"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.Popen[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.Popen"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "kill"
@@ -7666,7 +7419,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -7674,25 +7426,18 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
-    name: "stdin"
-    fully_qualified_name: "subprocess.Popen.stdin"
+    name: "args"
+    fully_qualified_name: "subprocess.Popen.args"
     type_annotation {
-      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      pretty_printed_name: "UnboundType[_CMD]"
+      kind: UNBOUND
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "stdin"
@@ -7724,27 +7469,6 @@ classes {
     name: "stdout"
     fully_qualified_name: "subprocess.Popen.stdout"
     type_annotation {
-      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "stdout"
-    fully_qualified_name: "subprocess.Popen.stdout"
-    type_annotation {
       pretty_printed_name: "Union[typing.IO[typing.AnyStr],None]"
       kind: UNION
       args {
@@ -7766,27 +7490,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "stderr"
-    fully_qualified_name: "subprocess.Popen.stderr"
-    type_annotation {
-      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
   }
   attributes {
     name: "stderr"
@@ -7821,22 +7524,12 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "returncode"
-    fully_qualified_name: "subprocess.Popen.returncode"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "returncode"
@@ -7861,20 +7554,6 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "args"
-    fully_qualified_name: "subprocess.Popen.args"
-    type_annotation {
-      pretty_printed_name: "UnboundType[_CMD]"
-      kind: UNBOUND
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
     name: "universal_newlines"
     fully_qualified_name: "subprocess.Popen.universal_newlines"
     type_annotation {
@@ -7889,722 +7568,6 @@ classes {
     valid_for: "310"
   }
 }
-classes {
-  name: "CompletedProcess"
-  fully_qualified_name: "subprocess.CompletedProcess"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "subprocess.CompletedProcess.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.CompletedProcess"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[_CMD]"
-        kind: UNBOUND
-      }
-    }
-    parameters {
-      name: "returncode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "stdout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[subprocess._T,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stderr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[subprocess._T,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "check_returncode"
-    fully_qualified_name: "subprocess.CompletedProcess.check_returncode"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
-        args {
-          pretty_printed_name: "subprocess._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "subprocess.CompletedProcess"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__class_getitem__"
-    fully_qualified_name: "subprocess.CompletedProcess.__class_getitem__"
-    return_annotation {
-      pretty_printed_name: "types.GenericAlias"
-      fully_qualified_name: "types.GenericAlias"
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[subprocess.CompletedProcess[subprocess._T]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "subprocess.CompletedProcess[subprocess._T]"
-          args {
-            pretty_printed_name: "subprocess._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "subprocess.CompletedProcess"
-        }
-      }
-    }
-    parameters {
-      name: "item"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    is_class_method: true
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "args"
-    fully_qualified_name: "subprocess.CompletedProcess.args"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "returncode"
-    fully_qualified_name: "subprocess.CompletedProcess.returncode"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "stdout"
-    fully_qualified_name: "subprocess.CompletedProcess.stdout"
-    type_annotation {
-      pretty_printed_name: "subprocess._T"
-      kind: TYPE_VAR
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "stderr"
-    fully_qualified_name: "subprocess.CompletedProcess.stderr"
-    type_annotation {
-      pretty_printed_name: "subprocess._T"
-      kind: TYPE_VAR
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "SubprocessError"
-  fully_qualified_name: "subprocess.SubprocessError"
-  super_classes: "builtins.Exception"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "TimeoutExpired"
-  fully_qualified_name: "subprocess.TimeoutExpired"
-  super_classes: "subprocess.SubprocessError"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "subprocess.TimeoutExpired.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "subprocess.TimeoutExpired"
-        fully_qualified_name: "subprocess.TimeoutExpired"
-      }
-    }
-    parameters {
-      name: "cmd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[_CMD]"
-        kind: UNBOUND
-      }
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "output"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stderr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "cmd"
-    fully_qualified_name: "subprocess.TimeoutExpired.cmd"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "timeout"
-    fully_qualified_name: "subprocess.TimeoutExpired.timeout"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "output"
-    fully_qualified_name: "subprocess.TimeoutExpired.output"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "stdout"
-    fully_qualified_name: "subprocess.TimeoutExpired.stdout"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "stderr"
-    fully_qualified_name: "subprocess.TimeoutExpired.stderr"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-functions {
-  name: "call"
-  fully_qualified_name: "subprocess.call"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        args {
-          pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-      }
-      fully_qualified_name: "subprocess._CMD"
-    }
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "executable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "subprocess._TXT"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdin"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdout"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stderr"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "preexec_fn"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "close_fds"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "shell"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cwd"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "env"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]],typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "universal_newlines"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "startupinfo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "creationflags"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
 functions {
   name: "call"
   fully_qualified_name: "subprocess.call"
@@ -9613,329 +8576,6 @@ functions {
     name: "args"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        args {
-          pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-      }
-      fully_qualified_name: "subprocess._CMD"
-    }
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "executable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "subprocess._TXT"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdin"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdout"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stderr"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "preexec_fn"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "close_fds"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "shell"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cwd"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "env"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]],typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "universal_newlines"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "startupinfo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "creationflags"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "check_call"
-  fully_qualified_name: "subprocess.check_call"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "UnboundType[_CMD]"
       kind: UNBOUND
     }
@@ -10920,366 +9560,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "310"
-}
-functions {
-  name: "check_output"
-  fully_qualified_name: "subprocess.check_output"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        args {
-          pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,builtins.unicode]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "subprocess._TXT"
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-      }
-      fully_qualified_name: "subprocess._CMD"
-    }
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "executable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "subprocess._TXT"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdin"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stderr"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.int,typing.IO[Any]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.int,typing.IO[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "typing.IO[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.IO"
-        }
-      }
-      fully_qualified_name: "subprocess._FILE"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "preexec_fn"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "close_fds"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "shell"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cwd"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "env"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]],typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.unicode,TypeAlias[Union[builtins.str,builtins.unicode]]]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "subprocess._TXT"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "universal_newlines"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "startupinfo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "creationflags"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "list2cmdline"
-  fully_qualified_name: "subprocess.list2cmdline"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "seq"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "list2cmdline"
-  fully_qualified_name: "subprocess.list2cmdline"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "seq"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-}
-functions {
-  name: "list2cmdline"
-  fully_qualified_name: "subprocess.list2cmdline"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "seq"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
-      args {
-        pretty_printed_name: "UnboundType[StrOrBytesPath]"
-        kind: UNBOUND
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-  }
-  valid_for: "38"
-  valid_for: "39"
   valid_for: "310"
 }
 functions {
@@ -11350,6 +9630,52 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
+functions {
+  name: "list2cmdline"
+  fully_qualified_name: "subprocess.list2cmdline"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "seq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+functions {
+  name: "list2cmdline"
+  fully_qualified_name: "subprocess.list2cmdline"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "seq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
 overloaded_functions {
   name: "run"
   fullname: "subprocess.run"
@@ -25095,108 +23421,6 @@ overloaded_functions {
     is_overload: true
   }
   valid_for: "310"
-}
-vars {
-  name: "PIPE"
-  fully_qualified_name: "subprocess.PIPE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "STDOUT"
-  fully_qualified_name: "subprocess.STDOUT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "STD_INPUT_HANDLE"
-  fully_qualified_name: "subprocess.STD_INPUT_HANDLE"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "STD_OUTPUT_HANDLE"
-  fully_qualified_name: "subprocess.STD_OUTPUT_HANDLE"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "STD_ERROR_HANDLE"
-  fully_qualified_name: "subprocess.STD_ERROR_HANDLE"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "SW_HIDE"
-  fully_qualified_name: "subprocess.SW_HIDE"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "STARTF_USESTDHANDLES"
-  fully_qualified_name: "subprocess.STARTF_USESTDHANDLES"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "STARTF_USESHOWWINDOW"
-  fully_qualified_name: "subprocess.STARTF_USESHOWWINDOW"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "CREATE_NEW_CONSOLE"
-  fully_qualified_name: "subprocess.CREATE_NEW_CONSOLE"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "CREATE_NEW_PROCESS_GROUP"
-  fully_qualified_name: "subprocess.CREATE_NEW_PROCESS_GROUP"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
 }
 vars {
   name: "__all__"
@@ -25264,6 +23488,34 @@ vars {
   type_annotation {
     pretty_printed_name: "UnboundType[TypeAlias]"
     kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PIPE"
+  fully_qualified_name: "subprocess.PIPE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STDOUT"
+  fully_qualified_name: "subprocess.STDOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
   valid_for: "35"
   valid_for: "36"

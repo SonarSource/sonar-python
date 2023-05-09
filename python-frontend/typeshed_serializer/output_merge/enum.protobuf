@@ -1,15 +1,711 @@
 fully_qualified_name: "enum"
 classes {
+  name: "_builtins_property"
+  fully_qualified_name: "builtins.property"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "builtins.property.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "fget"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fdel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getter"
+    fully_qualified_name: "builtins.property.getter"
+    return_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__fget"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setter"
+    fully_qualified_name: "builtins.property.setter"
+    return_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__fset"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "deleter"
+    fully_qualified_name: "builtins.property.deleter"
+    return_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__fdel"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "builtins.property.__get__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__instance"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__owner"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__set__"
+    fully_qualified_name: "builtins.property.__set__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__instance"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delete__"
+    fully_qualified_name: "builtins.property.__delete__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+    }
+    parameters {
+      name: "__instance"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "fget"
+    fully_qualified_name: "builtins.property.fget"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "fset"
+    fully_qualified_name: "builtins.property.fset"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "fdel"
+    fully_qualified_name: "builtins.property.fdel"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "builtins.property.__isabstractmethod__"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_EnumDict"
+  fully_qualified_name: "enum._EnumDict"
+  super_classes: "builtins.dict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "enum._EnumDict.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum._EnumDict"
+        fully_qualified_name: "enum._EnumDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "enum._EnumDict.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "enum._EnumDict"
+        fully_qualified_name: "enum._EnumDict"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "EnumMeta"
   fully_qualified_name: "enum.EnumMeta"
   super_classes: "abc.ABCMeta"
   methods {
+    name: "__new__"
+    fully_qualified_name: "enum.EnumMeta.__new__"
+    return_annotation {
+      pretty_printed_name: "_typeshed.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "metacls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.type,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "classdict"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum._EnumDict"
+        fully_qualified_name: "enum._EnumDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "enum.EnumMeta.__new__"
+    return_annotation {
+      pretty_printed_name: "_typeshed.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "metacls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_typeshed.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_typeshed.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.type]"
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "classdict"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum._EnumDict"
+        fully_qualified_name: "enum._EnumDict"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__prepare__"
+    fully_qualified_name: "enum.EnumMeta.__prepare__"
+    return_annotation {
+      pretty_printed_name: "enum._EnumDict"
+      fully_qualified_name: "enum._EnumDict"
+    }
+    parameters {
+      name: "metacls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum.EnumMeta]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum.EnumMeta"
+          fully_qualified_name: "enum.EnumMeta"
+        }
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.type,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__prepare__"
+    fully_qualified_name: "enum.EnumMeta.__prepare__"
+    return_annotation {
+      pretty_printed_name: "enum._EnumDict"
+      fully_qualified_name: "enum._EnumDict"
+    }
+    parameters {
+      name: "metacls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum.EnumMeta]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum.EnumMeta"
+          fully_qualified_name: "enum.EnumMeta"
+        }
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.type]"
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "__iter__"
     fully_qualified_name: "enum.EnumMeta.__iter__"
     return_annotation {
-      pretty_printed_name: "typing.Iterator[enum._T]"
+      pretty_printed_name: "typing.Iterator[enum._EnumMemberT]"
       args {
-        pretty_printed_name: "enum._T"
+        pretty_printed_name: "enum._EnumMemberT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Iterator"
@@ -17,23 +713,47 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "Type[enum._T]"
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "enum.EnumMeta.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[enum._EnumMemberT]"
+      args {
+        pretty_printed_name: "enum._EnumMemberT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "Type[enum._EnumMemberT]"
         kind: TYPE
         args {
-          pretty_printed_name: "enum._T"
+          pretty_printed_name: "enum._EnumMemberT"
           kind: TYPE_VAR
         }
       }
     }
-    valid_for: "27"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__reversed__"
     fully_qualified_name: "enum.EnumMeta.__reversed__"
     return_annotation {
-      pretty_printed_name: "typing.Iterator[enum._T]"
+      pretty_printed_name: "typing.Iterator[enum._EnumMemberT]"
       args {
-        pretty_printed_name: "enum._T"
+        pretty_printed_name: "enum._EnumMemberT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Iterator"
@@ -41,15 +761,39 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "Type[enum._T]"
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "enum.EnumMeta.__reversed__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[enum._EnumMemberT]"
+      args {
+        pretty_printed_name: "enum._EnumMemberT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "Type[enum._EnumMemberT]"
         kind: TYPE
         args {
-          pretty_printed_name: "enum._T"
+          pretty_printed_name: "enum._EnumMemberT"
           kind: TYPE_VAR
         }
       }
     }
-    valid_for: "27"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__contains__"
@@ -61,8 +805,8 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum.EnumMeta"
-        fully_qualified_name: "enum.EnumMeta"
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
       }
     }
     parameters {
@@ -72,22 +816,105 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "enum.EnumMeta.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "member"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "39"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "enum.EnumMeta.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "obj"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "310"
   }
   methods {
     name: "__getitem__"
     fully_qualified_name: "enum.EnumMeta.__getitem__"
     return_annotation {
-      pretty_printed_name: "enum._T"
+      pretty_printed_name: "enum._EnumMemberT"
       kind: TYPE_VAR
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "Type[enum._T]"
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "enum.EnumMeta.__getitem__"
+    return_annotation {
+      pretty_printed_name: "enum._EnumMemberT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "Type[enum._EnumMemberT]"
         kind: TYPE
         args {
-          pretty_printed_name: "enum._T"
+          pretty_printed_name: "enum._EnumMemberT"
           kind: TYPE_VAR
         }
       }
@@ -99,39 +926,72 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__members__"
     fully_qualified_name: "enum.EnumMeta.__members__"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,enum._T]"
+      pretty_printed_name: "types.MappingProxyType[builtins.str,enum._EnumMemberT]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
       args {
-        pretty_printed_name: "enum._T"
+        pretty_printed_name: "enum._EnumMemberT"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.Mapping"
+      fully_qualified_name: "types.MappingProxyType"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[enum._T]"
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_builtins_property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__members__"
+    fully_qualified_name: "enum.EnumMeta.__members__"
+    return_annotation {
+      pretty_printed_name: "types.MappingProxyType[builtins.str,enum._EnumMemberT]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "enum._EnumMemberT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "types.MappingProxyType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum._EnumMemberT]"
         kind: TYPE
         args {
-          pretty_printed_name: "enum._T"
+          pretty_printed_name: "enum._EnumMemberT"
           kind: TYPE_VAR
         }
       }
     }
     has_decorators: true
-    resolved_decorator_names: "property"
+    resolved_decorator_names: "_builtins_property"
     is_property: true
-    valid_for: "27"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__len__"
@@ -147,14 +1007,466 @@ classes {
         fully_qualified_name: "enum.EnumMeta"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "enum.EnumMeta.__bool__"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.EnumMeta"
+        fully_qualified_name: "enum.EnumMeta"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__dir__"
+    fully_qualified_name: "enum.EnumMeta.__dir__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.EnumMeta"
+        fully_qualified_name: "enum.EnumMeta"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "enum.EnumMeta.__call__"
+    return_annotation {
+      pretty_printed_name: "enum._EnumMemberT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "enum.EnumMeta.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.EnumMeta"
+        fully_qualified_name: "enum.EnumMeta"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_EnumNames]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "module"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "qualname"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "type"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "start"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "enum.EnumMeta.__call__"
+    return_annotation {
+      pretty_printed_name: "enum._EnumMemberT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum._EnumMemberT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum._EnumMemberT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "enum.EnumMeta.__call__"
+    return_annotation {
+      pretty_printed_name: "Type[enum.Enum]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.EnumMeta"
+        fully_qualified_name: "enum.EnumMeta"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_EnumNames]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "module"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "qualname"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "type"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "start"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_member_names_"
+    fully_qualified_name: "enum.EnumMeta._member_names_"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_member_map_"
+    fully_qualified_name: "enum.EnumMeta._member_map_"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,enum.Enum]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_value2member_map_"
+    fully_qualified_name: "enum.EnumMeta._value2member_map_"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,enum.Enum]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Enum"
   fully_qualified_name: "enum.Enum"
   super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "enum.Enum.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "enum.Enum.value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "_missing_"
     fully_qualified_name: "enum.Enum._missing_"
@@ -185,7 +1497,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "_generate_next_value_"
@@ -233,24 +1550,29 @@ classes {
     has_decorators: true
     resolved_decorator_names: "staticmethod"
     is_static: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__new__"
     fully_qualified_name: "enum.Enum.__new__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[enum._T]"
+        pretty_printed_name: "Type[enum.Enum]"
         kind: TYPE
         args {
-          pretty_printed_name: "enum._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "enum.Enum"
+          fully_qualified_name: "enum.Enum"
         }
       }
     }
@@ -262,39 +1584,12 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "enum.Enum.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "enum.Enum"
-        fully_qualified_name: "enum.Enum"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "enum.Enum.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "enum.Enum"
-        fully_qualified_name: "enum.Enum"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__dir__"
@@ -315,7 +1610,12 @@ classes {
         fully_qualified_name: "enum.Enum"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__format__"
@@ -340,31 +1640,27 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "enum.Enum.__hash__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "enum.Enum"
-        fully_qualified_name: "enum.Enum"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__reduce_ex__"
     fully_qualified_name: "enum.Enum.__reduce_ex__"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     parameters {
       name: "self"
@@ -378,34 +1674,54 @@ classes {
       name: "proto"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__reduce_ex__"
+    fully_qualified_name: "enum.Enum.__reduce_ex__"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.Enum"
+        fully_qualified_name: "enum.Enum"
+      }
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
   }
   has_metaclass: true
   is_enum: true
   metaclass_name: "enum.EnumMeta"
-  valid_for: "27"
-  attributes {
-    name: "name"
-    fully_qualified_name: "enum.Enum.name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "value"
-    fully_qualified_name: "enum.Enum.value"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "_name_"
     fully_qualified_name: "enum.Enum._name_"
@@ -413,7 +1729,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "_value_"
@@ -422,54 +1743,38 @@ classes {
       pretty_printed_name: "Any"
       kind: ANY
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
-    name: "_member_names_"
-    fully_qualified_name: "enum.Enum._member_names_"
+    name: "_ignore_"
+    fully_qualified_name: "enum.Enum._ignore_"
     type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "_member_map_"
-    fully_qualified_name: "enum.Enum._member_map_"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,enum.Enum]"
+      pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str]]"
+      kind: UNION
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
       args {
-        pretty_printed_name: "enum.Enum"
-        fully_qualified_name: "enum.Enum"
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
       }
-      fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
-  }
-  attributes {
-    name: "_value2member_map_"
-    fully_qualified_name: "enum.Enum._value2member_map_"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.int,enum.Enum]"
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "enum.Enum"
-        fully_qualified_name: "enum.Enum"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "_order_"
@@ -478,7 +1783,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "__order__"
@@ -487,7 +1797,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 classes {
@@ -495,38 +1810,149 @@ classes {
   fully_qualified_name: "enum.IntEnum"
   super_classes: "builtins.int"
   super_classes: "enum.Enum"
-  is_enum: true
-  valid_for: "27"
-  attributes {
+  methods {
     name: "value"
     fully_qualified_name: "enum.IntEnum.value"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.IntEnum"
+        fully_qualified_name: "enum.IntEnum"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "enum.IntEnum.__new__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum.IntEnum]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum.IntEnum"
+          fully_qualified_name: "enum.IntEnum"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_value_"
+    fully_qualified_name: "enum.IntEnum._value_"
     type_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "auto"
-  fully_qualified_name: "enum.auto"
-  super_classes: "enum.IntFlag"
-  is_enum: true
-  valid_for: "27"
-  attributes {
-    name: "value"
-    fully_qualified_name: "enum.auto.value"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 classes {
   name: "Flag"
   fully_qualified_name: "enum.Flag"
   super_classes: "enum.Enum"
+  methods {
+    name: "name"
+    fully_qualified_name: "enum.Flag.name"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "enum.Flag.value"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "__contains__"
     fully_qualified_name: "enum.Flag.__contains__"
@@ -537,50 +1963,23 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "enum.Flag.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "enum.Flag"
-        fully_qualified_name: "enum.Flag"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "enum.Flag.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "enum.Flag"
-        fully_qualified_name: "enum.Flag"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__bool__"
@@ -597,95 +1996,161 @@ classes {
         fully_qualified_name: "enum.Flag"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__or__"
     fully_qualified_name: "enum.Flag.__or__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__and__"
     fully_qualified_name: "enum.Flag.__and__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__xor__"
     fully_qualified_name: "enum.Flag.__xor__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__invert__"
     fully_qualified_name: "enum.Flag.__invert__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.Flag"
+        fully_qualified_name: "enum.Flag"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   is_enum: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_name_"
+    fully_qualified_name: "enum.Flag._name_"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_value_"
+    fully_qualified_name: "enum.Flag._value_"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "IntFlag"
@@ -693,100 +2158,130 @@ classes {
   super_classes: "builtins.int"
   super_classes: "enum.Flag"
   methods {
+    name: "__new__"
+    fully_qualified_name: "enum.IntFlag.__new__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum.IntFlag]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum.IntFlag"
+          fully_qualified_name: "enum.IntFlag"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "__or__"
     fully_qualified_name: "enum.IntFlag.__or__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.IntFlag"
+        fully_qualified_name: "enum.IntFlag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,enum._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "enum._T"
-          kind: TYPE_VAR
-        }
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__and__"
     fully_qualified_name: "enum.IntFlag.__and__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.IntFlag"
+        fully_qualified_name: "enum.IntFlag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,enum._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "enum._T"
-          kind: TYPE_VAR
-        }
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__xor__"
     fully_qualified_name: "enum.IntFlag.__xor__"
     return_annotation {
-      pretty_printed_name: "enum._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "enum._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "enum.IntFlag"
+        fully_qualified_name: "enum.IntFlag"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,enum._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "enum._T"
-          kind: TYPE_VAR
-        }
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   is_enum: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "__ror__"
     fully_qualified_name: "enum.IntFlag.__ror__"
@@ -798,7 +2293,12 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "__rand__"
@@ -811,7 +2311,12 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "__rxor__"
@@ -824,25 +2329,144 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "auto"
+  fully_qualified_name: "enum.auto"
+  super_classes: "enum.IntFlag"
+  methods {
+    name: "value"
+    fully_qualified_name: "enum.auto.value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "enum.auto"
+        fully_qualified_name: "enum.auto"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "_magic_enum_attr"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "enum.auto.__new__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[enum.auto]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "enum.auto"
+          fully_qualified_name: "enum.auto"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_value_"
+    fully_qualified_name: "enum.auto._value_"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 functions {
   name: "unique"
   fully_qualified_name: "enum.unique"
   return_annotation {
-    pretty_printed_name: "enum._S"
+    pretty_printed_name: "enum._EnumerationT"
     kind: TYPE_VAR
   }
   parameters {
     name: "enumeration"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "enum._S"
+      pretty_printed_name: "enum._EnumerationT"
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "enum.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_EnumNames"
+  fully_qualified_name: "enum._EnumNames"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "_auto_null"
@@ -851,5 +2475,10 @@ vars {
     pretty_printed_name: "Any"
     kind: ANY
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

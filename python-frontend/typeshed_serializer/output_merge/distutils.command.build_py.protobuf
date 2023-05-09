@@ -1,5 +1,132 @@
 fully_qualified_name: "distutils.command.build_py"
 classes {
+  name: "Mixin2to3"
+  fully_qualified_name: "distutils.util.Mixin2to3"
+  super_classes: "builtins.object"
+  methods {
+    name: "run_2to3"
+    fully_qualified_name: "distutils.util.Mixin2to3.run_2to3"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "distutils.util.Mixin2to3"
+        fully_qualified_name: "distutils.util.Mixin2to3"
+      }
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "fixer_names"
+    fully_qualified_name: "distutils.util.Mixin2to3.fixer_names"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "options"
+    fully_qualified_name: "distutils.util.Mixin2to3.options"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "explicit"
+    fully_qualified_name: "distutils.util.Mixin2to3.explicit"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Container[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Container[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Container"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "build_py"
   fully_qualified_name: "distutils.command.build_py.build_py"
   super_classes: "distutils.cmd.Command"
@@ -18,7 +145,6 @@ classes {
         fully_qualified_name: "distutils.command.build_py.build_py"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -41,7 +167,6 @@ classes {
         fully_qualified_name: "distutils.command.build_py.build_py"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -64,7 +189,6 @@ classes {
         fully_qualified_name: "distutils.command.build_py.build_py"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -413,7 +537,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -608,133 +731,6 @@ classes {
     type_annotation {
       pretty_printed_name: "Any"
       kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Mixin2to3"
-  fully_qualified_name: "distutils.util.Mixin2to3"
-  super_classes: "builtins.object"
-  methods {
-    name: "run_2to3"
-    fully_qualified_name: "distutils.util.Mixin2to3.run_2to3"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.util.Mixin2to3"
-        fully_qualified_name: "distutils.util.Mixin2to3"
-      }
-    }
-    parameters {
-      name: "files"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "fixer_names"
-    fully_qualified_name: "distutils.util.Mixin2to3.fixer_names"
-    type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "options"
-    fully_qualified_name: "distutils.util.Mixin2to3.options"
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "explicit"
-    fully_qualified_name: "distutils.util.Mixin2to3.explicit"
-    type_annotation {
-      pretty_printed_name: "Union[typing.Container[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Container[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Container"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
     }
     valid_for: "35"
     valid_for: "36"

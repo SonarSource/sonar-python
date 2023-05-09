@@ -22,57 +22,6 @@ classes {
       name: "_imagedata"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "_subtype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_encoder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_params"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "email.mime.image.MIMEImage.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.mime.image.MIMEImage"
-        fully_qualified_name: "email.mime.image.MIMEImage"
-      }
-    }
-    parameters {
-      name: "_imagedata"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[builtins.str,builtins.bytes,builtins.bytearray]"
         kind: UNION
         args {
@@ -151,7 +100,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

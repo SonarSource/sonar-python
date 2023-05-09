@@ -1,151 +1,62 @@
 fully_qualified_name: "uuid"
 classes {
-  name: "UUID"
-  fully_qualified_name: "uuid.UUID"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "uuid.UUID.__init__"
-    return_annotation {
+  name: "SafeUUID"
+  fully_qualified_name: "uuid.SafeUUID"
+  super_classes: "enum.Enum"
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "safe"
+    fully_qualified_name: "uuid.SafeUUID.safe"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "unsafe"
+    fully_qualified_name: "uuid.SafeUUID.unsafe"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "unknown"
+    fully_qualified_name: "uuid.SafeUUID.unknown"
+    type_annotation {
       pretty_printed_name: "None"
       kind: NONE
     }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    parameters {
-      name: "hex"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "bytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "bytes_le"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "fields"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "int"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "version"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
+}
+classes {
+  name: "UUID"
+  fully_qualified_name: "uuid.UUID"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "uuid.UUID.__init__"
@@ -280,11 +191,11 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "bytes"
-    fully_qualified_name: "uuid.UUID.bytes"
+    name: "is_safe"
+    fully_qualified_name: "uuid.UUID.is_safe"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "uuid.SafeUUID"
+      fully_qualified_name: "uuid.SafeUUID"
     }
     parameters {
       name: "self"
@@ -297,7 +208,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "bytes"
@@ -328,26 +244,6 @@ classes {
     name: "bytes_le"
     fully_qualified_name: "uuid.UUID.bytes_le"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "bytes_le"
-    fully_qualified_name: "uuid.UUID.bytes_le"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Bytes]"
       kind: UNBOUND
     }
@@ -373,26 +269,6 @@ classes {
     name: "clock_seq"
     fully_qualified_name: "uuid.UUID.clock_seq"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "clock_seq"
-    fully_qualified_name: "uuid.UUID.clock_seq"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -413,26 +289,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "clock_seq_hi_variant"
-    fully_qualified_name: "uuid.UUID.clock_seq_hi_variant"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "clock_seq_hi_variant"
@@ -463,26 +319,6 @@ classes {
     name: "clock_seq_low"
     fully_qualified_name: "uuid.UUID.clock_seq_low"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "clock_seq_low"
-    fully_qualified_name: "uuid.UUID.clock_seq_low"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -503,55 +339,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "fields"
-    fully_qualified_name: "uuid.UUID.fields"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "uuid._FieldsType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "fields"
@@ -596,33 +383,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "int"
-    fully_qualified_name: "uuid.UUID.int"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "int"
@@ -653,26 +419,6 @@ classes {
     name: "node"
     fully_qualified_name: "uuid.UUID.node"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "node"
-    fully_qualified_name: "uuid.UUID.node"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -693,26 +439,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "time"
-    fully_qualified_name: "uuid.UUID.time"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "time"
@@ -743,26 +469,6 @@ classes {
     name: "time_hi_version"
     fully_qualified_name: "uuid.UUID.time_hi_version"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "time_hi_version"
-    fully_qualified_name: "uuid.UUID.time_hi_version"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -788,26 +494,6 @@ classes {
     name: "time_low"
     fully_qualified_name: "uuid.UUID.time_low"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "time_low"
-    fully_qualified_name: "uuid.UUID.time_low"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -828,26 +514,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "time_mid"
-    fully_qualified_name: "uuid.UUID.time_mid"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "time_mid"
@@ -892,7 +558,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -918,41 +583,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "version"
-    fully_qualified_name: "uuid.UUID.version"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
   }
   methods {
     name: "version"
@@ -991,22 +627,6 @@ classes {
     name: "__int__"
     fully_qualified_name: "uuid.UUID.__int__"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__int__"
-    fully_qualified_name: "uuid.UUID.__int__"
-    return_annotation {
       pretty_printed_name: "UnboundType[_Int]"
       kind: UNBOUND
     }
@@ -1017,346 +637,6 @@ classes {
         fully_qualified_name: "uuid.UUID"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_bytes"
-    fully_qualified_name: "uuid.UUID.get_bytes"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_bytes_le"
-    fully_qualified_name: "uuid.UUID.get_bytes_le"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_clock_seq"
-    fully_qualified_name: "uuid.UUID.get_clock_seq"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_clock_seq_hi_variant"
-    fully_qualified_name: "uuid.UUID.get_clock_seq_hi_variant"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_clock_seq_low"
-    fully_qualified_name: "uuid.UUID.get_clock_seq_low"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_fields"
-    fully_qualified_name: "uuid.UUID.get_fields"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "uuid._FieldsType"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_hex"
-    fully_qualified_name: "uuid.UUID.get_hex"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_node"
-    fully_qualified_name: "uuid.UUID.get_node"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_time"
-    fully_qualified_name: "uuid.UUID.get_time"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_time_hi_version"
-    fully_qualified_name: "uuid.UUID.get_time_hi_version"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_time_low"
-    fully_qualified_name: "uuid.UUID.get_time_low"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_time_mid"
-    fully_qualified_name: "uuid.UUID.get_time_mid"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_urn"
-    fully_qualified_name: "uuid.UUID.get_urn"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_variant"
-    fully_qualified_name: "uuid.UUID.get_variant"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_version"
-    fully_qualified_name: "uuid.UUID.get_version"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__cmp__"
-    fully_qualified_name: "uuid.UUID.__cmp__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "is_safe"
-    fully_qualified_name: "uuid.UUID.is_safe"
-    return_annotation {
-      pretty_printed_name: "uuid.SafeUUID"
-      fully_qualified_name: "uuid.SafeUUID"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "uuid.UUID"
-        fully_qualified_name: "uuid.UUID"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1504,76 +784,10 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "SafeUUID"
-  fully_qualified_name: "uuid.SafeUUID"
-  super_classes: "enum.Enum"
-  is_enum: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "safe"
-    fully_qualified_name: "uuid.SafeUUID.safe"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "unsafe"
-    fully_qualified_name: "uuid.SafeUUID.unsafe"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "unknown"
-    fully_qualified_name: "uuid.SafeUUID.unknown"
-    type_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-functions {
-  name: "getnode"
-  fully_qualified_name: "uuid.getnode"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "39"
   valid_for: "310"
 }
@@ -1607,47 +821,14 @@ functions {
   valid_for: "38"
 }
 functions {
-  name: "uuid1"
-  fully_qualified_name: "uuid.uuid1"
+  name: "getnode"
+  fully_qualified_name: "uuid.getnode"
   return_annotation {
-    pretty_printed_name: "uuid.UUID"
-    fully_qualified_name: "uuid.UUID"
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
-  parameters {
-    name: "node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "clock_seq"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "uuid1"
@@ -1720,7 +901,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1735,7 +915,6 @@ functions {
     pretty_printed_name: "uuid.UUID"
     fully_qualified_name: "uuid.UUID"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1766,127 +945,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NAMESPACE_DNS"
-  fully_qualified_name: "uuid.NAMESPACE_DNS"
-  type_annotation {
-    pretty_printed_name: "uuid.UUID"
-    fully_qualified_name: "uuid.UUID"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NAMESPACE_URL"
-  fully_qualified_name: "uuid.NAMESPACE_URL"
-  type_annotation {
-    pretty_printed_name: "uuid.UUID"
-    fully_qualified_name: "uuid.UUID"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NAMESPACE_OID"
-  fully_qualified_name: "uuid.NAMESPACE_OID"
-  type_annotation {
-    pretty_printed_name: "uuid.UUID"
-    fully_qualified_name: "uuid.UUID"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NAMESPACE_X500"
-  fully_qualified_name: "uuid.NAMESPACE_X500"
-  type_annotation {
-    pretty_printed_name: "uuid.UUID"
-    fully_qualified_name: "uuid.UUID"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RESERVED_NCS"
-  fully_qualified_name: "uuid.RESERVED_NCS"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RFC_4122"
-  fully_qualified_name: "uuid.RFC_4122"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RESERVED_MICROSOFT"
-  fully_qualified_name: "uuid.RESERVED_MICROSOFT"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RESERVED_FUTURE"
-  fully_qualified_name: "uuid.RESERVED_FUTURE"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1928,6 +986,118 @@ vars {
   type_annotation {
     pretty_printed_name: "UnboundType[TypeAlias]"
     kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAMESPACE_DNS"
+  fully_qualified_name: "uuid.NAMESPACE_DNS"
+  type_annotation {
+    pretty_printed_name: "uuid.UUID"
+    fully_qualified_name: "uuid.UUID"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAMESPACE_URL"
+  fully_qualified_name: "uuid.NAMESPACE_URL"
+  type_annotation {
+    pretty_printed_name: "uuid.UUID"
+    fully_qualified_name: "uuid.UUID"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAMESPACE_OID"
+  fully_qualified_name: "uuid.NAMESPACE_OID"
+  type_annotation {
+    pretty_printed_name: "uuid.UUID"
+    fully_qualified_name: "uuid.UUID"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAMESPACE_X500"
+  fully_qualified_name: "uuid.NAMESPACE_X500"
+  type_annotation {
+    pretty_printed_name: "uuid.UUID"
+    fully_qualified_name: "uuid.UUID"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RESERVED_NCS"
+  fully_qualified_name: "uuid.RESERVED_NCS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RFC_4122"
+  fully_qualified_name: "uuid.RFC_4122"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RESERVED_MICROSOFT"
+  fully_qualified_name: "uuid.RESERVED_MICROSOFT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RESERVED_FUTURE"
+  fully_qualified_name: "uuid.RESERVED_FUTURE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
   }
   valid_for: "35"
   valid_for: "36"

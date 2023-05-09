@@ -45,7 +45,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -96,7 +95,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -127,7 +125,6 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -187,7 +184,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -195,7 +191,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -209,8 +204,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -231,8 +224,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -253,8 +244,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -287,7 +276,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -310,7 +298,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -333,7 +320,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -348,7 +334,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -371,7 +356,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -384,83 +368,6 @@ classes {
   name: "SequenceMatcher"
   fully_qualified_name: "difflib.SequenceMatcher"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "difflib.SequenceMatcher.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.SequenceMatcher[difflib._T]"
-        args {
-          pretty_printed_name: "difflib._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "difflib.SequenceMatcher"
-      }
-    }
-    parameters {
-      name: "isjunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._T]"
-        args {
-          pretty_printed_name: "difflib._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._T]"
-        args {
-          pretty_printed_name: "difflib._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "autojunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "set_seqs"
     fully_qualified_name: "difflib.SequenceMatcher.set_seqs"
@@ -504,7 +411,6 @@ classes {
         fully_qualified_name: "typing.Sequence"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -543,7 +449,6 @@ classes {
         fully_qualified_name: "typing.Sequence"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -582,7 +487,6 @@ classes {
         fully_qualified_name: "typing.Sequence"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -653,7 +557,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -780,7 +683,6 @@ classes {
         fully_qualified_name: "difflib.SequenceMatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -831,7 +733,6 @@ classes {
         fully_qualified_name: "difflib.SequenceMatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -895,7 +796,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -922,7 +822,6 @@ classes {
         fully_qualified_name: "difflib.SequenceMatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -949,7 +848,6 @@ classes {
         fully_qualified_name: "difflib.SequenceMatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -976,7 +874,6 @@ classes {
         fully_qualified_name: "difflib.SequenceMatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1241,7 +1138,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1253,81 +1149,6 @@ classes {
   name: "Differ"
   fully_qualified_name: "difflib.Differ"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "difflib.Differ.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.Differ"
-        fully_qualified_name: "difflib.Differ"
-      }
-    }
-    parameters {
-      name: "linejunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "charjunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "difflib.Differ.__init__"
@@ -1391,51 +1212,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "compare"
-    fully_qualified_name: "difflib.Differ.compare"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.Differ"
-        fully_qualified_name: "difflib.Differ"
-      }
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "compare"
@@ -1487,7 +1263,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1544,107 +1319,6 @@ classes {
       name: "linejunk"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "charjunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "difflib.HtmlDiff.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.HtmlDiff"
-        fully_qualified_name: "difflib.HtmlDiff"
-      }
-    }
-    parameters {
-      name: "tabsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "wrapcolumn"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "linejunk"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[CallableType[builtins.function],None]"
         kind: UNION
         args {
@@ -1689,83 +1363,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "make_file"
-    fully_qualified_name: "difflib.HtmlDiff.make_file"
-    return_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.HtmlDiff"
-        fully_qualified_name: "difflib.HtmlDiff"
-      }
-    }
-    parameters {
-      name: "fromlines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "tolines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "fromdesc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    parameters {
-      name: "todesc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "numlines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "make_file"
@@ -1862,83 +1459,6 @@ classes {
     name: "make_table"
     fully_qualified_name: "difflib.HtmlDiff.make_table"
     return_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib.HtmlDiff"
-        fully_qualified_name: "difflib.HtmlDiff"
-      }
-    }
-    parameters {
-      name: "fromlines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "tolines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[difflib._StrType]"
-        args {
-          pretty_printed_name: "difflib._StrType"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "fromdesc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    parameters {
-      name: "todesc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "numlines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "make_table"
-    fully_qualified_name: "difflib.HtmlDiff.make_table"
-    return_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
@@ -2017,39 +1537,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "IS_LINE_JUNK"
-  fully_qualified_name: "difflib.IS_LINE_JUNK"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "line"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "pat"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "IS_LINE_JUNK"
@@ -2093,32 +1586,6 @@ functions {
     name: "ch"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "ws"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "IS_CHARACTER_JUNK"
-  fully_qualified_name: "difflib.IS_CHARACTER_JUNK"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "ch"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
@@ -2138,97 +1605,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "unified_diff"
-  fully_qualified_name: "difflib.unified_diff"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[difflib._StrType]"
-    args {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "b"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "fromfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "tofile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fromfiledate"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "tofiledate"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "n"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "lineterm"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "unified_diff"
@@ -2330,97 +1706,6 @@ functions {
   name: "context_diff"
   fully_qualified_name: "difflib.context_diff"
   return_annotation {
-    pretty_printed_name: "typing.Iterator[difflib._StrType]"
-    args {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "b"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "fromfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "tofile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fromfiledate"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "tofiledate"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "n"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "lineterm"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "context_diff"
-  fully_qualified_name: "difflib.context_diff"
-  return_annotation {
     pretty_printed_name: "typing.Iterator[builtins.str]"
     args {
       pretty_printed_name: "builtins.str"
@@ -2517,101 +1802,6 @@ functions {
   name: "ndiff"
   fully_qualified_name: "difflib.ndiff"
   return_annotation {
-    pretty_printed_name: "typing.Iterator[difflib._StrType]"
-    args {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "b"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "linejunk"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "charjunk"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "ndiff"
-  fully_qualified_name: "difflib.ndiff"
-  return_annotation {
     pretty_printed_name: "typing.Iterator[builtins.str]"
     args {
       pretty_printed_name: "builtins.str"
@@ -2691,39 +1881,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "restore"
-  fully_qualified_name: "difflib.restore"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[difflib._StrType]"
-    args {
-      pretty_printed_name: "difflib._StrType"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "delta"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[difflib._StrType]"
-      args {
-        pretty_printed_name: "difflib._StrType"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-  }
-  parameters {
-    name: "which"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "restore"
@@ -3048,7 +2205,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

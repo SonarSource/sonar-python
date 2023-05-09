@@ -4,48 +4,6 @@ classes {
   fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.grammar.Grammar"
-        fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "dump"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.dump"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.grammar.Grammar"
-        fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "dump"
     fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.dump"
     return_annotation {
@@ -94,31 +52,6 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "load"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.load"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.grammar.Grammar"
-        fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[StrPath]"
         kind: UNBOUND
       }
@@ -129,23 +62,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "copy"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.copy"
-    return_annotation {
-      pretty_printed_name: "lib2to3.pgen2.grammar._P"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.grammar._P"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "copy"
@@ -184,7 +100,6 @@ classes {
         fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -192,30 +107,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "symbol2number"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.symbol2number"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.unicode,builtins.int]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "symbol2number"
     fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.symbol2number"
@@ -237,23 +134,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "number2symbol"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.number2symbol"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.int,builtins.unicode]"
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "number2symbol"
@@ -281,40 +161,6 @@ classes {
     name: "states"
     fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.states"
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]]"
-      args {
-        pretty_printed_name: "TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]"
-          args {
-            pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-            args {
-              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        fully_qualified_name: "lib2to3.pgen2.grammar._DFA"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "states"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.states"
-    type_annotation {
       pretty_printed_name: "builtins.list[UnboundType[_DFA]]"
       args {
         pretty_printed_name: "UnboundType[_DFA]"
@@ -328,65 +174,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "dfas"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.dfas"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.int,TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]]]"
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]"
-              args {
-                pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-                args {
-                  pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                  kind: TUPLE
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            fully_qualified_name: "lib2to3.pgen2.grammar._DFA"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "lib2to3.pgen2.grammar._DFAS"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "dfas"
@@ -414,40 +201,6 @@ classes {
     name: "labels"
     fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.labels"
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.int,Union[builtins.unicode,None]]]]"
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.int,Union[builtins.unicode,None]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.int,Union[builtins.unicode,None]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.unicode,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-        }
-        fully_qualified_name: "lib2to3.pgen2.grammar._Label"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "labels"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.labels"
-    type_annotation {
       pretty_printed_name: "builtins.list[UnboundType[_Label]]"
       args {
         pretty_printed_name: "UnboundType[_Label]"
@@ -461,23 +214,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "keywords"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.keywords"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.unicode,builtins.int]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "keywords"
@@ -516,30 +252,12 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "symbol2label"
-    fully_qualified_name: "lib2to3.pgen2.grammar.Grammar.symbol2label"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.unicode,builtins.int]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "symbol2label"
@@ -570,7 +288,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -578,68 +295,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-vars {
-  name: "opmap_raw"
-  fully_qualified_name: "lib2to3.pgen2.grammar.opmap_raw"
-  type_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "opmap_raw"
-  fully_qualified_name: "lib2to3.pgen2.grammar.opmap_raw"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "opmap"
-  fully_qualified_name: "lib2to3.pgen2.grammar.opmap"
-  type_annotation {
-    pretty_printed_name: "builtins.dict[builtins.unicode,builtins.unicode]"
-    args {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    args {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    fully_qualified_name: "builtins.dict"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "opmap"
-  fully_qualified_name: "lib2to3.pgen2.grammar.opmap"
-  type_annotation {
-    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.dict"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 vars {
   name: "_Label"
@@ -675,6 +330,42 @@ vars {
   type_annotation {
     pretty_printed_name: "UnboundType[TypeAlias]"
     kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "opmap_raw"
+  fully_qualified_name: "lib2to3.pgen2.grammar.opmap_raw"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "opmap"
+  fully_qualified_name: "lib2to3.pgen2.grammar.opmap"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
   }
   valid_for: "35"
   valid_for: "36"

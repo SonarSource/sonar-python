@@ -26,7 +26,6 @@ classes {
         fully_qualified_name: "distutils.dist.Distribution"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -52,7 +51,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -78,7 +76,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -104,47 +101,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "announce"
-    fully_qualified_name: "distutils.cmd.Command.announce"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "announce"
@@ -184,31 +146,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "debug_print"
-    fully_qualified_name: "distutils.cmd.Command.debug_print"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "debug_print"
@@ -280,7 +217,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -323,7 +259,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -354,7 +289,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -385,7 +319,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -408,54 +341,12 @@ classes {
         fully_qualified_name: "distutils.cmd.Command"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "set_undefined_options"
-    fully_qualified_name: "distutils.cmd.Command.set_undefined_options"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "src_cmd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "option_pairs"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "set_undefined_options"
@@ -522,40 +413,6 @@ classes {
       name: "command"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_finalized_command"
-    fully_qualified_name: "distutils.cmd.Command.get_finalized_command"
-    return_annotation {
-      pretty_printed_name: "distutils.cmd.Command"
-      fully_qualified_name: "distutils.cmd.Command"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "command"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
@@ -575,48 +432,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "reinitialize_command"
-    fully_qualified_name: "distutils.cmd.Command.reinitialize_command"
-    return_annotation {
-      pretty_printed_name: "distutils.cmd.Command"
-      fully_qualified_name: "distutils.cmd.Command"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "command"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[distutils.cmd.Command,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "distutils.cmd.Command"
-          fully_qualified_name: "distutils.cmd.Command"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-    }
-    parameters {
-      name: "reinit_subcommands"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "reinitialize_command"
@@ -684,31 +499,6 @@ classes {
       name: "command"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "run_command"
-    fully_qualified_name: "distutils.cmd.Command.run_command"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "command"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
@@ -739,38 +529,12 @@ classes {
         fully_qualified_name: "distutils.cmd.Command"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "warn"
-    fully_qualified_name: "distutils.cmd.Command.warn"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "warn"
@@ -801,73 +565,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "execute"
-    fully_qualified_name: "distutils.cmd.Command.execute"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "func"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "execute"
@@ -973,7 +670,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1064,7 +760,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1143,7 +838,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1191,7 +885,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1244,7 +937,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1351,133 +1043,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "make_file"
-    fully_qualified_name: "distutils.cmd.Command.make_file"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.cmd.Command"
-        fully_qualified_name: "distutils.cmd.Command"
-      }
-    }
-    parameters {
-      name: "infiles"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-      }
-    }
-    parameters {
-      name: "outfile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "func"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "exec_msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "skip_msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "make_file"
@@ -1797,13 +1368,26 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "distribution"
+    fully_qualified_name: "distutils.cmd.Command.distribution"
+    type_annotation {
+      pretty_printed_name: "distutils.dist.Distribution"
+      fully_qualified_name: "distutils.dist.Distribution"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   attributes {
     name: "sub_commands"
     fully_qualified_name: "distutils.cmd.Command.sub_commands"
@@ -1834,21 +1418,6 @@ classes {
         }
       }
       fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "distribution"
-    fully_qualified_name: "distutils.cmd.Command.distribution"
-    type_annotation {
-      pretty_printed_name: "distutils.dist.Distribution"
-      fully_qualified_name: "distutils.dist.Distribution"
     }
     valid_for: "35"
     valid_for: "36"
@@ -1902,54 +1471,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_option_dict"
-    fully_qualified_name: "distutils.dist.Distribution.get_option_dict"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Tuple[builtins.str,builtins.unicode]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.unicode]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.dist.Distribution"
-        fully_qualified_name: "distutils.dist.Distribution"
-      }
-    }
-    parameters {
-      name: "command"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_option_dict"
@@ -1996,44 +1523,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "parse_config_files"
-    fully_qualified_name: "distutils.dist.Distribution.parse_config_files"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.dist.Distribution"
-        fully_qualified_name: "distutils.dist.Distribution"
-      }
-    }
-    parameters {
-      name: "filenames"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[typing.Iterable[builtins.unicode],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "parse_config_files"
@@ -2118,7 +1607,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3272,36 +2760,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "cmdclass"
-    fully_qualified_name: "distutils.dist.Distribution.cmdclass"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Type[distutils.cmd.Command]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Type[distutils.cmd.Command]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "distutils.cmd.Command"
-          fully_qualified_name: "distutils.cmd.Command"
-        }
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-    valid_for: "39"
-    valid_for: "310"
-  }
   attributes {
     name: "cmdclass"
     fully_qualified_name: "distutils.dist.Distribution.cmdclass"
@@ -3321,6 +2785,28 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "cmdclass"
+    fully_qualified_name: "distutils.dist.Distribution.cmdclass"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Type[distutils.cmd.Command]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Type[distutils.cmd.Command]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "distutils.cmd.Command"
+          fully_qualified_name: "distutils.cmd.Command"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "metadata"
@@ -3896,228 +3382,6 @@ classes {
       name: "include_dirs"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "define_macros"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[Tuple[builtins.str,Union[builtins.str,None]]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "undef_macros"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "library_dirs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "libraries"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "runtime_library_dirs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "extra_objects"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "extra_compile_args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "extra_link_args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "export_symbols"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "swig_opts"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "depends"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "language"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.extension.Extension.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.extension.Extension"
-        fully_qualified_name: "distutils.extension.Extension"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sources"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "include_dirs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[builtins.list[builtins.str],None]"
         kind: UNION
         args {
@@ -4423,7 +3687,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4740,523 +4003,24 @@ classes {
   }
 }
 functions {
-  name: "setup"
-  fully_qualified_name: "distutils.core.setup"
+  name: "gen_usage"
+  fully_qualified_name: "distutils.core.gen_usage"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "name"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "version"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "description"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "long_description"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "author"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "author_email"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "maintainer"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "maintainer_email"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "url"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "download_url"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "packages"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "py_modules"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "scripts"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "ext_modules"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[distutils.extension.Extension]"
-      args {
-        pretty_printed_name: "distutils.extension.Extension"
-        fully_qualified_name: "distutils.extension.Extension"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "classifiers"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "distclass"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Type[distutils.dist.Distribution]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "distutils.dist.Distribution"
-        fully_qualified_name: "distutils.dist.Distribution"
-      }
-    }
-    has_default: true
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
   }
   parameters {
     name: "script_name"
-    kind: KEYWORD_ONLY
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "script_args"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "options"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "license"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "keywords"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.list[builtins.str],builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "platforms"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.list[builtins.str],builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cmdclass"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,Type[distutils.cmd.Command]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Type[distutils.cmd.Command]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "distutils.cmd.Command"
-          fully_qualified_name: "distutils.cmd.Command"
-        }
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "data_files"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.list[builtins.str]]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "package_dir"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "obsoletes"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "provides"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "requires"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "command_packages"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "command_options"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,typing.Mapping[builtins.str,Tuple[Any,Any]]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,Tuple[Any,Any]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[Any,Any]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "package_data"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,builtins.list[builtins.str]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "include_package_data"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "libraries"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "headers"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "ext_package"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "include_dirs"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "password"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fullname"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "attrs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -5775,6 +4539,526 @@ functions {
   valid_for: "38"
 }
 functions {
+  name: "setup"
+  fully_qualified_name: "distutils.core.setup"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "version"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "description"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "long_description"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "author"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "author_email"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "maintainer"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "maintainer_email"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "url"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "download_url"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "packages"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "py_modules"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "scripts"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "ext_modules"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[distutils.extension.Extension]"
+      args {
+        pretty_printed_name: "distutils.extension.Extension"
+        fully_qualified_name: "distutils.extension.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "classifiers"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "distclass"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Type[distutils.dist.Distribution]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "distutils.dist.Distribution"
+        fully_qualified_name: "distutils.dist.Distribution"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "script_name"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "script_args"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "options"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "license"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "keywords"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.str],builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "platforms"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.str],builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "cmdclass"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Type[distutils.cmd.Command]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Type[distutils.cmd.Command]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "distutils.cmd.Command"
+          fully_qualified_name: "distutils.cmd.Command"
+        }
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "data_files"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.list[builtins.str]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "package_dir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "obsoletes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "provides"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "requires"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "command_packages"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "command_options"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,typing.Mapping[builtins.str,Tuple[Any,Any]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,Tuple[Any,Any]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "package_data"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.list[builtins.str]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "include_package_data"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "libraries"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "headers"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "ext_package"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "include_dirs"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "password"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "fullname"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "attrs"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "run_setup"
   fully_qualified_name: "distutils.core.run_setup"
   return_annotation {
@@ -5818,29 +5102,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
     has_default: true
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "gen_usage"
-  fully_qualified_name: "distutils.core.gen_usage"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "script_name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "UnboundType[StrOrBytesPath]"
-      kind: UNBOUND
-    }
   }
   valid_for: "35"
   valid_for: "36"

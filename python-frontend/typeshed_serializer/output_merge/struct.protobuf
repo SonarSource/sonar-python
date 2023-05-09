@@ -3,7 +3,6 @@ classes {
   name: "error"
   fully_qualified_name: "struct.error"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -16,11 +15,11 @@ classes {
   fully_qualified_name: "struct.Struct"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "struct.Struct.__init__"
+    name: "format"
+    fully_qualified_name: "struct.Struct.format"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -30,28 +29,40 @@ classes {
         fully_qualified_name: "struct.Struct"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "struct.Struct.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
     parameters {
-      name: "format"
+      name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-        }
-        fully_qualified_name: "struct._FmtType"
+        pretty_printed_name: "struct.Struct"
+        fully_qualified_name: "struct.Struct"
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__init__"
@@ -95,31 +106,6 @@ classes {
     name: "pack"
     fully_qualified_name: "struct.Struct.pack"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    parameters {
-      name: "v"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pack"
-    fully_qualified_name: "struct.Struct.pack"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -145,76 +131,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "pack_into"
-    fully_qualified_name: "struct.Struct.pack_into"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[array.array[Any],builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[array.array[Any],builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "struct._WriteBufferType"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "v"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "pack_into"
@@ -266,67 +182,6 @@ classes {
     name: "unpack"
     fully_qualified_name: "struct.Struct.unpack"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    parameters {
-      name: "__buffer"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "array.array[builtins.int]"
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "struct._BufferType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unpack"
-    fully_qualified_name: "struct.Struct.unpack"
-    return_annotation {
       pretty_printed_name: "Tuple[Any,Any]"
       kind: TUPLE
       args {
@@ -386,77 +241,6 @@ classes {
     }
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "unpack_from"
-    fully_qualified_name: "struct.Struct.unpack_from"
-    return_annotation {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "array.array[builtins.int]"
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "struct._BufferType"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "unpack_from"
@@ -539,56 +323,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "format"
-    fully_qualified_name: "struct.Struct.format"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "size"
-    fully_qualified_name: "struct.Struct.size"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "struct.Struct"
-        fully_qualified_name: "struct.Struct"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -664,69 +398,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "format"
-    fully_qualified_name: "struct.Struct.format"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "size"
-    fully_qualified_name: "struct.Struct.size"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-}
-functions {
-  name: "pack"
-  fully_qualified_name: "struct.pack"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "fmt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "struct._FmtType"
-    }
-  }
-  parameters {
-    name: "v"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "pack"
@@ -764,89 +441,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "pack_into"
-  fully_qualified_name: "struct.pack_into"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "fmt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "struct._FmtType"
-    }
-  }
-  parameters {
-    name: "buffer"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[array.array[Any],builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[array.array[Any],builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-        kind: UNION
-        args {
-          pretty_printed_name: "array.array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-      }
-      fully_qualified_name: "struct._WriteBufferType"
-    }
-  }
-  parameters {
-    name: "offset"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "v"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "pack_into"
@@ -903,79 +497,6 @@ functions {
   name: "unpack"
   fully_qualified_name: "struct.unpack"
   return_annotation {
-    pretty_printed_name: "builtins.tuple[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  parameters {
-    name: "__format"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "struct._FmtType"
-    }
-  }
-  parameters {
-    name: "__buffer"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-        kind: UNION
-        args {
-          pretty_printed_name: "array.array[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-      }
-      fully_qualified_name: "struct._BufferType"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "unpack"
-  fully_qualified_name: "struct.unpack"
-  return_annotation {
     pretty_printed_name: "Tuple[Any,Any]"
     kind: TUPLE
     args {
@@ -1049,89 +570,6 @@ functions {
   }
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "unpack_from"
-  fully_qualified_name: "struct.unpack_from"
-  return_annotation {
-    pretty_printed_name: "builtins.tuple[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  parameters {
-    name: "__format"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "struct._FmtType"
-    }
-  }
-  parameters {
-    name: "buffer"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[array.array[builtins.int],builtins.str,builtins.bytearray,builtins.buffer,builtins.memoryview,mmap.mmap]"
-        kind: UNION
-        args {
-          pretty_printed_name: "array.array[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-      }
-      fully_qualified_name: "struct._BufferType"
-    }
-  }
-  parameters {
-    name: "offset"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "unpack_from"
@@ -1228,64 +666,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "calcsize"
-  fully_qualified_name: "struct.calcsize"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__format"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "struct._FmtType"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "calcsize"
-  fully_qualified_name: "struct.calcsize"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__format"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -1372,6 +752,35 @@ functions {
       kind: UNBOUND
     }
   }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "calcsize"
+  fully_qualified_name: "struct.calcsize"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__format"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }

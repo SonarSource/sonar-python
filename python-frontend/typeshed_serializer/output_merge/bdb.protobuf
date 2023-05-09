@@ -3,7 +3,6 @@ classes {
   name: "BdbQuit"
   fully_qualified_name: "bdb.BdbQuit"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -51,7 +50,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -82,7 +80,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -105,63 +102,12 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "trace_dispatch"
-    fully_qualified_name: "bdb.Bdb.trace_dispatch"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "bdb._TraceDispatch"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    parameters {
-      name: "event"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "trace_dispatch"
@@ -213,40 +159,6 @@ classes {
     name: "dispatch_line"
     fully_qualified_name: "bdb.Bdb.dispatch_line"
     return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "bdb._TraceDispatch"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "dispatch_line"
-    fully_qualified_name: "bdb.Bdb.dispatch_line"
-    return_annotation {
       pretty_printed_name: "UnboundType[TraceFunction]"
       kind: UNBOUND
     }
@@ -272,48 +184,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "dispatch_call"
-    fully_qualified_name: "bdb.Bdb.dispatch_call"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "bdb._TraceDispatch"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "dispatch_call"
@@ -357,48 +227,6 @@ classes {
     name: "dispatch_return"
     fully_qualified_name: "bdb.Bdb.dispatch_return"
     return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "bdb._TraceDispatch"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "dispatch_return"
-    fully_qualified_name: "bdb.Bdb.dispatch_return"
-    return_annotation {
       pretty_printed_name: "UnboundType[TraceFunction]"
       kind: UNBOUND
     }
@@ -432,69 +260,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "dispatch_exception"
-    fully_qualified_name: "bdb.Bdb.dispatch_exception"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "bdb._TraceDispatch"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.FrameType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.FrameType]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "types.FrameType"
-            fully_qualified_name: "types.FrameType"
-          }
-        }
-        fully_qualified_name: "bdb._ExcInfo"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "dispatch_exception"
@@ -557,7 +322,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -588,7 +352,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -619,7 +382,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -658,7 +420,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -689,7 +450,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -728,7 +488,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -759,7 +518,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -798,67 +556,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "user_exception"
-    fully_qualified_name: "bdb.Bdb.user_exception"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "frame"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "types.FrameType"
-        fully_qualified_name: "types.FrameType"
-      }
-    }
-    parameters {
-      name: "exc_info"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.FrameType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.FrameType]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "types.FrameType"
-            fully_qualified_name: "types.FrameType"
-          }
-        }
-        fully_qualified_name: "bdb._ExcInfo"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "user_exception"
@@ -938,7 +641,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -961,7 +663,6 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -992,7 +693,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1023,7 +723,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1063,7 +762,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1086,7 +784,6 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1109,7 +806,6 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1191,7 +887,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1230,7 +925,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1261,7 +955,6 @@ classes {
         fully_qualified_name: "typing.SupportsInt"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1292,7 +985,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1315,7 +1007,6 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1346,7 +1037,6 @@ classes {
         fully_qualified_name: "typing.SupportsInt"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1385,7 +1075,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1428,7 +1117,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1463,7 +1151,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1490,7 +1177,6 @@ classes {
         fully_qualified_name: "bdb.Bdb"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1565,7 +1251,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1605,7 +1290,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1694,7 +1378,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1775,7 +1458,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1862,65 +1544,12 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "runcall"
-    fully_qualified_name: "bdb.Bdb.runcall"
-    return_annotation {
-      pretty_printed_name: "Union[bdb._T,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "bdb._T"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "bdb.Bdb"
-        fully_qualified_name: "bdb.Bdb"
-      }
-    }
-    parameters {
-      name: "__func"
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwds"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "runcall"
@@ -1975,7 +1604,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2001,7 +1629,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2028,7 +1655,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2051,7 +1677,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2074,7 +1699,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2097,7 +1721,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2112,7 +1735,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2135,7 +1757,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2158,7 +1779,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2173,7 +1793,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2260,7 +1879,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2283,7 +1901,6 @@ classes {
         fully_qualified_name: "bdb.Breakpoint"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2306,7 +1923,6 @@ classes {
         fully_qualified_name: "bdb.Breakpoint"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2329,7 +1945,6 @@ classes {
         fully_qualified_name: "bdb.Breakpoint"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2373,7 +1988,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2396,7 +2010,6 @@ classes {
         fully_qualified_name: "bdb.Breakpoint"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2404,23 +2017,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "bdb.Breakpoint.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "bdb.Breakpoint"
-        fully_qualified_name: "bdb.Breakpoint"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2434,7 +2030,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2469,7 +2064,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2496,7 +2090,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2519,7 +2112,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2542,7 +2134,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2557,7 +2148,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2572,7 +2162,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2587,7 +2176,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2610,7 +2198,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2625,7 +2212,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2640,7 +2226,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2655,7 +2240,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2670,7 +2254,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2702,7 +2285,6 @@ functions {
       fully_qualified_name: "types.FrameType"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2765,7 +2347,6 @@ functions {
       fully_qualified_name: "types.FrameType"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2779,34 +2360,6 @@ functions {
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "GENERATOR_AND_COROUTINE_FLAGS"
-  fully_qualified_name: "bdb.GENERATOR_AND_COROUTINE_FLAGS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "GENERATOR_AND_COROUTINE_FLAGS"
-  fully_qualified_name: "bdb.GENERATOR_AND_COROUTINE_FLAGS"
-  type_annotation {
-    pretty_printed_name: "Literal[builtins.int]"
-    kind: LITERAL
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -2839,6 +2392,24 @@ vars {
   type_annotation {
     pretty_printed_name: "typing_extensions.ParamSpec"
     fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "GENERATOR_AND_COROUTINE_FLAGS"
+  fully_qualified_name: "bdb.GENERATOR_AND_COROUTINE_FLAGS"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"

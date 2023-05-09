@@ -3,31 +3,6 @@ functions {
   name: "get_config_var"
   fully_qualified_name: "sysconfig.get_config_var"
   return_annotation {
-    pretty_printed_name: "Union[builtins.str,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "get_config_var"
-  fully_qualified_name: "sysconfig.get_config_var"
-  return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
   }
@@ -50,21 +25,40 @@ functions {
   name: "get_scheme_names"
   fully_qualified_name: "sysconfig.get_scheme_names"
   return_annotation {
-    pretty_printed_name: "builtins.tuple[builtins.str]"
+    pretty_printed_name: "Tuple[builtins.str,Any]"
+    kind: TUPLE
     args {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    fully_qualified_name: "builtins.tuple"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
   }
-  valid_for: "27"
-  valid_for: "39"
-  valid_for: "310"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "get_scheme_names"
   fully_qualified_name: "sysconfig.get_scheme_names"
   return_annotation {
+    pretty_printed_name: "builtins.tuple[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_path_names"
+  fully_qualified_name: "sysconfig.get_path_names"
+  return_annotation {
     pretty_printed_name: "Tuple[builtins.str,Any]"
     kind: TUPLE
     args {
@@ -92,29 +86,8 @@ functions {
     }
     fully_qualified_name: "builtins.tuple"
   }
-  valid_for: "27"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "get_path_names"
-  fully_qualified_name: "sysconfig.get_path_names"
-  return_annotation {
-    pretty_printed_name: "Tuple[builtins.str,Any]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
 }
 functions {
   name: "get_path"
@@ -174,7 +147,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -240,7 +212,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -255,7 +226,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -270,7 +240,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -294,7 +263,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -354,7 +322,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -369,7 +336,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -384,7 +350,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -495,7 +460,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

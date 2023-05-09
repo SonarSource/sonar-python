@@ -2,46 +2,6 @@ fully_qualified_name: "shutil"
 classes {
   name: "Error"
   fully_qualified_name: "shutil.Error"
-  super_classes: "builtins.EnvironmentError"
-  valid_for: "27"
-}
-classes {
-  name: "Error"
-  fully_qualified_name: "shutil.Error"
-  super_classes: "builtins.OSError"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "SpecialFileError"
-  fully_qualified_name: "shutil.SpecialFileError"
-  super_classes: "builtins.EnvironmentError"
-  valid_for: "27"
-}
-classes {
-  name: "SpecialFileError"
-  fully_qualified_name: "shutil.SpecialFileError"
-  super_classes: "builtins.OSError"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "ExecError"
-  fully_qualified_name: "shutil.ExecError"
-  super_classes: "builtins.EnvironmentError"
-  valid_for: "27"
-}
-classes {
-  name: "ExecError"
-  fully_qualified_name: "shutil.ExecError"
   super_classes: "builtins.OSError"
   valid_for: "35"
   valid_for: "36"
@@ -54,6 +14,28 @@ classes {
   name: "SameFileError"
   fully_qualified_name: "shutil.SameFileError"
   super_classes: "shutil.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SpecialFileError"
+  fully_qualified_name: "shutil.SpecialFileError"
+  super_classes: "builtins.OSError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ExecError"
+  fully_qualified_name: "shutil.ExecError"
+  super_classes: "builtins.OSError"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -570,38 +552,12 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "copyfile"
-  fully_qualified_name: "shutil.copyfile"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "copyfile"
@@ -653,31 +609,6 @@ functions {
     name: "src"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "copymode"
-  fully_qualified_name: "shutil.copymode"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "UnboundType[StrOrBytesPath]"
       kind: UNBOUND
     }
@@ -717,31 +648,6 @@ functions {
     name: "src"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "copystat"
-  fully_qualified_name: "shutil.copystat"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "UnboundType[StrOrBytesPath]"
       kind: UNBOUND
     }
@@ -769,95 +675,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "copy"
-  fully_qualified_name: "shutil.copy"
-  return_annotation {
-    pretty_printed_name: "TypeAlias[Type[None]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Type[None]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    fully_qualified_name: "shutil._PathReturn"
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "copy2"
-  fully_qualified_name: "shutil.copy2"
-  return_annotation {
-    pretty_printed_name: "TypeAlias[Type[None]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Type[None]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    fully_qualified_name: "shutil._PathReturn"
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "ignore_patterns"
-  fully_qualified_name: "shutil.ignore_patterns"
-  return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
-  }
-  parameters {
-    name: "patterns"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "ignore_patterns"
@@ -884,70 +701,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "copytree"
-  fully_qualified_name: "shutil.copytree"
-  return_annotation {
-    pretty_printed_name: "TypeAlias[Type[None]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Type[None]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    fully_qualified_name: "shutil._PathReturn"
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "symlinks"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "ignore"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[None,CallableType[builtins.function]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "copytree"
@@ -1133,87 +886,6 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "rmtree"
-  fully_qualified_name: "shutil.rmtree"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "shutil._AnyPath"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "ignore_errors"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "onerror"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "move"
-  fully_qualified_name: "shutil.move"
-  return_annotation {
-    pretty_printed_name: "TypeAlias[Type[None]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Type[None]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    fully_qualified_name: "shutil._PathReturn"
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
   name: "move"
   fully_qualified_name: "shutil.move"
   return_annotation {
@@ -1286,37 +958,84 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "make_archive"
-  fully_qualified_name: "shutil.make_archive"
+  name: "disk_usage"
+  fully_qualified_name: "shutil.disk_usage"
   return_annotation {
-    pretty_printed_name: "shutil._AnyStr"
-    kind: TYPE_VAR
+    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   parameters {
-    name: "base_name"
+    name: "path"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "shutil._AnyStr"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "which"
+  fully_qualified_name: "shutil.which"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,shutil._StrPathT,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "shutil._StrPathT"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "cmd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "shutil._StrPathT"
       kind: TYPE_VAR
     }
   }
   parameters {
-    name: "format"
+    name: "mode"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
+    has_default: true
   }
   parameters {
-    name: "root_dir"
+    name: "path"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1325,93 +1044,9 @@ functions {
     }
     has_default: true
   }
-  parameters {
-    name: "base_dir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "verbose"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "dry_run"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "owner"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "group"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "logger"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[Any,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
 }
 functions {
   name: "make_archive"
@@ -1565,92 +1200,12 @@ functions {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "register_archive_format"
-  fully_qualified_name: "shutil.register_archive_format"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "function"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-  }
-  parameters {
-    name: "extra_args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Sequence[Union[Tuple[builtins.str,Any],builtins.list[Any]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Sequence[Union[Tuple[builtins.str,Any],builtins.list[Any]]]"
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,Any],builtins.list[Any]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,Any]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "description"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "unregister_archive_format"
@@ -1667,104 +1222,12 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "disk_usage"
-  fully_qualified_name: "shutil.disk_usage"
-  return_annotation {
-    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
-      kind: UNBOUND
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "which"
-  fully_qualified_name: "shutil.which"
-  return_annotation {
-    pretty_printed_name: "Union[builtins.str,shutil._StrPathT,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "shutil._StrPathT"
-      kind: TYPE_VAR
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "cmd"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "shutil._StrPathT"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[UnboundType[StrPath],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "UnboundType[StrPath]"
-        kind: UNBOUND
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
 }
 functions {
   name: "unpack_archive"

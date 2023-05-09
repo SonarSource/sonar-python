@@ -21,7 +21,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -31,7 +30,6 @@ classes {
   }
   has_metaclass: true
   metaclass_name: "abc.ABCMeta"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -60,7 +58,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -69,20 +66,26 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__nonzero__"
-    fully_qualified_name: "numbers.Complex.__nonzero__"
+    name: "__bool__"
+    fully_qualified_name: "numbers.Complex.__bool__"
     return_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "numbers.Complex"
         fully_qualified_name: "numbers.Complex"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "real"
@@ -104,7 +107,6 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -132,7 +134,6 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -164,7 +165,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -196,7 +196,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -221,7 +220,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -246,7 +244,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -275,7 +272,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -304,7 +300,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -336,7 +331,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -368,45 +362,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__div__"
-    fully_qualified_name: "numbers.Complex.__div__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-  }
-  methods {
-    name: "__rdiv__"
-    fully_qualified_name: "numbers.Complex.__rdiv__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
   }
   methods {
     name: "__truediv__"
@@ -432,7 +393,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -464,7 +424,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -496,7 +455,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -528,29 +486,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__abs__"
-    fully_qualified_name: "numbers.Complex.__abs__"
-    return_annotation {
-      pretty_printed_name: "numbers.Real"
-      fully_qualified_name: "numbers.Real"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Complex"
-        fully_qualified_name: "numbers.Complex"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__abs__"
@@ -591,23 +532,6 @@ classes {
         fully_qualified_name: "numbers.Complex"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "conjugate"
-    fully_qualified_name: "numbers.Complex.conjugate"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Complex"
-        fully_qualified_name: "numbers.Complex"
-      }
-    }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
@@ -617,29 +541,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__eq__"
-    fully_qualified_name: "numbers.Complex.__eq__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Complex"
-        fully_qualified_name: "numbers.Complex"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__eq__"
@@ -672,52 +573,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "__ne__"
-    fully_qualified_name: "numbers.Complex.__ne__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Complex"
-        fully_qualified_name: "numbers.Complex"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__bool__"
-    fully_qualified_name: "numbers.Complex.__bool__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Complex"
-        fully_qualified_name: "numbers.Complex"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -747,7 +602,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -773,356 +627,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__divmod__"
-    fully_qualified_name: "numbers.Real.__divmod__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__rdivmod__"
-    fully_qualified_name: "numbers.Real.__rdivmod__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__floordiv__"
-    fully_qualified_name: "numbers.Real.__floordiv__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__rfloordiv__"
-    fully_qualified_name: "numbers.Real.__rfloordiv__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__mod__"
-    fully_qualified_name: "numbers.Real.__mod__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__rmod__"
-    fully_qualified_name: "numbers.Real.__rmod__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__lt__"
-    fully_qualified_name: "numbers.Real.__lt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "numbers.Real.__le__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__complex__"
-    fully_qualified_name: "numbers.Real.__complex__"
-    return_annotation {
-      pretty_printed_name: "builtins.complex"
-      fully_qualified_name: "builtins.complex"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "real"
-    fully_qualified_name: "numbers.Real.real"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "imag"
-    fully_qualified_name: "numbers.Real.imag"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "conjugate"
-    fully_qualified_name: "numbers.Real.conjugate"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "numbers.Real"
-        fully_qualified_name: "numbers.Real"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1173,6 +677,343 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "numbers.Real.__divmod__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rdivmod__"
+    fully_qualified_name: "numbers.Real.__rdivmod__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__floordiv__"
+    fully_qualified_name: "numbers.Real.__floordiv__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rfloordiv__"
+    fully_qualified_name: "numbers.Real.__rfloordiv__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "numbers.Real.__mod__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmod__"
+    fully_qualified_name: "numbers.Real.__rmod__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "numbers.Real.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "numbers.Real.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__complex__"
+    fully_qualified_name: "numbers.Real.__complex__"
+    return_annotation {
+      pretty_printed_name: "builtins.complex"
+      fully_qualified_name: "builtins.complex"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "real"
+    fully_qualified_name: "numbers.Real.real"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "imag"
+    fully_qualified_name: "numbers.Real.imag"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "conjugate"
+    fully_qualified_name: "numbers.Real.conjugate"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "numbers.Real"
+        fully_qualified_name: "numbers.Real"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1249,7 +1090,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1281,7 +1121,6 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1309,7 +1148,6 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1331,7 +1169,6 @@ classes {
         fully_qualified_name: "numbers.Rational"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1339,7 +1176,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1352,8 +1188,8 @@ classes {
   fully_qualified_name: "numbers.Integral"
   super_classes: "numbers.Rational"
   methods {
-    name: "__long__"
-    fully_qualified_name: "numbers.Integral.__long__"
+    name: "__int__"
+    fully_qualified_name: "numbers.Integral.__int__"
     return_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
@@ -1368,7 +1204,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__index__"
@@ -1385,7 +1226,6 @@ classes {
         fully_qualified_name: "numbers.Integral"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1433,7 +1273,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1465,7 +1304,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1497,7 +1335,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1529,7 +1366,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1561,7 +1397,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1593,7 +1428,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1625,7 +1459,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1657,7 +1490,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1689,7 +1521,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1721,7 +1552,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1753,7 +1583,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1778,7 +1607,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1800,7 +1628,6 @@ classes {
         fully_qualified_name: "numbers.Integral"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1826,7 +1653,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1852,7 +1678,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1860,31 +1685,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "__int__"
-    fully_qualified_name: "numbers.Integral.__int__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "numbers.Integral"
-        fully_qualified_name: "numbers.Integral"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

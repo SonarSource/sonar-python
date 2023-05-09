@@ -4,70 +4,6 @@ classes {
   fully_qualified_name: "select.poll"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "select.poll.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.poll"
-        fully_qualified_name: "select.poll"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "register"
-    fully_qualified_name: "select.poll.register"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.poll"
-        fully_qualified_name: "select.poll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    parameters {
-      name: "eventmask"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "register"
     fully_qualified_name: "select.poll.register"
     return_annotation {
@@ -125,52 +61,6 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    parameters {
-      name: "eventmask"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "modify"
-    fully_qualified_name: "select.poll.modify"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.poll"
-        fully_qualified_name: "select.poll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[FileDescriptorLike]"
         kind: UNBOUND
       }
@@ -189,44 +79,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "unregister"
-    fully_qualified_name: "select.poll.unregister"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.poll"
-        fully_qualified_name: "select.poll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "unregister"
@@ -302,7 +154,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -310,324 +161,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "error"
-  fully_qualified_name: "select.error"
-  super_classes: "builtins.Exception"
-  valid_for: "27"
-}
-classes {
-  name: "epoll"
-  fully_qualified_name: "select.epoll"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "select.epoll.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    parameters {
-      name: "sizehint"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "select.epoll.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "select.epoll.fileno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "register"
-    fully_qualified_name: "select.epoll.register"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    parameters {
-      name: "eventmask"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "modify"
-    fully_qualified_name: "select.epoll.modify"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    parameters {
-      name: "eventmask"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unregister"
-    fully_qualified_name: "select.epoll.unregister"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "poll"
-    fully_qualified_name: "select.epoll.poll"
-    return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "select.epoll"
-        fully_qualified_name: "select.epoll"
-      }
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.float,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "maxevents"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "fromfd"
-    fully_qualified_name: "select.epoll.fromfd"
-    return_annotation {
-      pretty_printed_name: "select.epoll"
-      fully_qualified_name: "select.epoll"
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[select.epoll]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "select.epoll"
-          fully_qualified_name: "select.epoll"
-        }
-      }
-    }
-    parameters {
-      name: "__fd"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "closed"
-    fully_qualified_name: "select.epoll.closed"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "epoll"
@@ -1179,7 +718,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1194,7 +732,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1209,7 +746,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1224,7 +760,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1239,7 +774,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1254,7 +788,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1269,7 +802,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1284,7 +816,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1299,7 +830,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1314,7 +844,20 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "POLLRDHUP"
+  fully_qualified_name: "select.POLLRDHUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1329,7 +872,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1344,7 +886,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1359,7 +900,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1370,201 +910,6 @@ vars {
 vars {
   name: "EPOLLERR"
   fully_qualified_name: "select.EPOLLERR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLET"
-  fully_qualified_name: "select.EPOLLET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLHUP"
-  fully_qualified_name: "select.EPOLLHUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLIN"
-  fully_qualified_name: "select.EPOLLIN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLMSG"
-  fully_qualified_name: "select.EPOLLMSG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLONESHOT"
-  fully_qualified_name: "select.EPOLLONESHOT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLOUT"
-  fully_qualified_name: "select.EPOLLOUT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLPRI"
-  fully_qualified_name: "select.EPOLLPRI"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLRDBAND"
-  fully_qualified_name: "select.EPOLLRDBAND"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLRDNORM"
-  fully_qualified_name: "select.EPOLLRDNORM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLWRBAND"
-  fully_qualified_name: "select.EPOLLWRBAND"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLLWRNORM"
-  fully_qualified_name: "select.EPOLLWRNORM"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "EPOLL_RDHUP"
-  fully_qualified_name: "select.EPOLL_RDHUP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "POLLRDHUP"
-  fully_qualified_name: "select.POLLRDHUP"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -1591,8 +936,176 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "EPOLLET"
+  fully_qualified_name: "select.EPOLLET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLHUP"
+  fully_qualified_name: "select.EPOLLHUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLIN"
+  fully_qualified_name: "select.EPOLLIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLMSG"
+  fully_qualified_name: "select.EPOLLMSG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLONESHOT"
+  fully_qualified_name: "select.EPOLLONESHOT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLOUT"
+  fully_qualified_name: "select.EPOLLOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLPRI"
+  fully_qualified_name: "select.EPOLLPRI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLRDBAND"
+  fully_qualified_name: "select.EPOLLRDBAND"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "EPOLLRDHUP"
   fully_qualified_name: "select.EPOLLRDHUP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLRDNORM"
+  fully_qualified_name: "select.EPOLLRDNORM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLWRBAND"
+  fully_qualified_name: "select.EPOLLWRBAND"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLLWRNORM"
+  fully_qualified_name: "select.EPOLLWRNORM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EPOLL_RDHUP"
+  fully_qualified_name: "select.EPOLL_RDHUP"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"

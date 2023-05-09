@@ -23,48 +23,6 @@ functions {
     name: "input"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.BinaryIO"
-      fully_qualified_name: "typing.BinaryIO"
-    }
-  }
-  parameters {
-    name: "output"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.BinaryIO"
-      fully_qualified_name: "typing.BinaryIO"
-    }
-  }
-  parameters {
-    name: "quotetabs"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "encode"
-  fully_qualified_name: "quopri.encode"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "input"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "quopri._Input"
       fully_qualified_name: "quopri._Input"
     }
@@ -104,41 +62,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "encodestring"
-  fully_qualified_name: "quopri.encodestring"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "quotetabs"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "encodestring"
@@ -191,40 +114,6 @@ functions {
     name: "input"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.BinaryIO"
-      fully_qualified_name: "typing.BinaryIO"
-    }
-  }
-  parameters {
-    name: "output"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.BinaryIO"
-      fully_qualified_name: "typing.BinaryIO"
-    }
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "decode"
-  fully_qualified_name: "quopri.decode"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "input"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "quopri._Input"
       fully_qualified_name: "quopri._Input"
     }
@@ -256,32 +145,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "decodestring"
-  fully_qualified_name: "quopri.decodestring"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "decodestring"

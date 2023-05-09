@@ -1,7 +1,7 @@
 fully_qualified_name: "glob"
 functions {
-  name: "glob"
-  fully_qualified_name: "glob.glob"
+  name: "glob0"
+  fully_qualified_name: "glob.glob0"
   return_annotation {
     pretty_printed_name: "builtins.list[typing.AnyStr]"
     args {
@@ -11,14 +11,61 @@ functions {
     fully_qualified_name: "builtins.list"
   }
   parameters {
-    name: "pathname"
+    name: "dirname"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "typing.AnyStr"
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
+  parameters {
+    name: "pattern"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "glob1"
+  fully_qualified_name: "glob.glob1"
+  return_annotation {
+    pretty_printed_name: "builtins.list[typing.AnyStr]"
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "dirname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "pattern"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "glob"
@@ -137,27 +184,6 @@ functions {
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
-}
-functions {
-  name: "iglob"
-  fully_qualified_name: "glob.iglob"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
   parameters {
     name: "recursive"
     kind: KEYWORD_ONLY
@@ -238,63 +264,14 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "glob1"
-  fully_qualified_name: "glob.glob1"
+  name: "escape"
+  fully_qualified_name: "glob.escape"
   return_annotation {
-    pretty_printed_name: "builtins.list[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "builtins.list"
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
   }
   parameters {
-    name: "dirname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  parameters {
-    name: "pattern"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "glob1"
-  fully_qualified_name: "glob.glob1"
-  return_annotation {
-    pretty_printed_name: "builtins.list[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "dirname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "pattern"
+    name: "pathname"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "typing.AnyStr"
@@ -307,102 +284,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "glob0"
-  fully_qualified_name: "glob.glob0"
-  return_annotation {
-    pretty_printed_name: "builtins.list[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "dirname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  parameters {
-    name: "basename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "glob0"
-  fully_qualified_name: "glob.glob0"
-  return_annotation {
-    pretty_printed_name: "builtins.list[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "dirname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "pattern"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "has_magic"
-  fully_qualified_name: "glob.has_magic"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "has_magic"
@@ -425,28 +306,6 @@ functions {
         pretty_printed_name: "builtins.bytes"
         fully_qualified_name: "builtins.bytes"
       }
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "escape"
-  fully_qualified_name: "glob.escape"
-  return_annotation {
-    pretty_printed_name: "typing.AnyStr"
-    kind: TYPE_VAR
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
     }
   }
   valid_for: "35"

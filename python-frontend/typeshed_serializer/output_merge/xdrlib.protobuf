@@ -26,7 +26,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -34,7 +33,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -48,7 +46,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -61,7 +58,6 @@ classes {
   name: "ConversionError"
   fully_qualified_name: "xdrlib.ConversionError"
   super_classes: "xdrlib.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -73,23 +69,6 @@ classes {
   name: "Packer"
   fully_qualified_name: "xdrlib.Packer"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "xdrlib.Packer.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "reset"
     fully_qualified_name: "xdrlib.Packer.reset"
@@ -105,30 +84,12 @@ classes {
         fully_qualified_name: "xdrlib.Packer"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_buffer"
-    fully_qualified_name: "xdrlib.Packer.get_buffer"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_buffer"
@@ -151,23 +112,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_buf"
-    fully_qualified_name: "xdrlib.Packer.get_buf"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_buf"
@@ -214,7 +158,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -245,7 +188,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -276,7 +218,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -307,7 +248,6 @@ classes {
         fully_qualified_name: "builtins.bool"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -338,7 +278,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -369,7 +308,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -400,7 +338,6 @@ classes {
         fully_qualified_name: "builtins.float"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -431,46 +368,12 @@ classes {
         fully_qualified_name: "builtins.float"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "pack_fstring"
-    fully_qualified_name: "xdrlib.Packer.pack_fstring"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "pack_fstring"
@@ -537,39 +440,6 @@ classes {
       name: "s"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pack_fopaque"
-    fully_qualified_name: "xdrlib.Packer.pack_fopaque"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.bytes"
         fully_qualified_name: "builtins.bytes"
       }
@@ -580,31 +450,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "pack_string"
-    fully_qualified_name: "xdrlib.Packer.pack_string"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "pack_string"
@@ -655,31 +500,6 @@ classes {
       name: "s"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pack_opaque"
-    fully_qualified_name: "xdrlib.Packer.pack_opaque"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.bytes"
         fully_qualified_name: "builtins.bytes"
       }
@@ -690,31 +510,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "pack_bytes"
-    fully_qualified_name: "xdrlib.Packer.pack_bytes"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Packer"
-        fully_qualified_name: "xdrlib.Packer"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "pack_bytes"
@@ -785,7 +580,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -840,7 +634,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -887,7 +680,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -895,7 +687,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -926,31 +717,6 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "xdrlib.Unpacker.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.bytes"
         fully_qualified_name: "builtins.bytes"
       }
@@ -961,31 +727,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "reset"
-    fully_qualified_name: "xdrlib.Unpacker.reset"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "reset"
@@ -1032,7 +773,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1063,30 +803,12 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_buffer"
-    fully_qualified_name: "xdrlib.Unpacker.get_buffer"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_buffer"
@@ -1125,7 +847,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1148,7 +869,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1171,7 +891,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1194,7 +913,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1217,7 +935,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1240,7 +957,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1263,7 +979,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1286,7 +1001,6 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1309,38 +1023,12 @@ classes {
         fully_qualified_name: "xdrlib.Unpacker"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "unpack_fstring"
-    fully_qualified_name: "xdrlib.Unpacker.unpack_fstring"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "unpack_fstring"
@@ -1376,31 +1064,6 @@ classes {
     name: "unpack_fopaque"
     fully_qualified_name: "xdrlib.Unpacker.unpack_fopaque"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unpack_fopaque"
-    fully_qualified_name: "xdrlib.Unpacker.unpack_fopaque"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -1431,23 +1094,6 @@ classes {
     name: "unpack_string"
     fully_qualified_name: "xdrlib.Unpacker.unpack_string"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unpack_string"
-    fully_qualified_name: "xdrlib.Unpacker.unpack_string"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -1470,23 +1116,6 @@ classes {
     name: "unpack_opaque"
     fully_qualified_name: "xdrlib.Unpacker.unpack_opaque"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unpack_opaque"
-    fully_qualified_name: "xdrlib.Unpacker.unpack_opaque"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -1504,23 +1133,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "unpack_bytes"
-    fully_qualified_name: "xdrlib.Unpacker.unpack_bytes"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xdrlib.Unpacker"
-        fully_qualified_name: "xdrlib.Unpacker"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "unpack_bytes"
@@ -1575,7 +1187,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1622,7 +1233,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1661,7 +1271,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1669,7 +1278,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

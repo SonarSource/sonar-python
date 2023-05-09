@@ -1,17 +1,5 @@
 fully_qualified_name: "_json"
 classes {
-  name: "Encoder"
-  fully_qualified_name: "_json.Encoder"
-  super_classes: "builtins.object"
-  valid_for: "27"
-}
-classes {
-  name: "Scanner"
-  fully_qualified_name: "_json.Scanner"
-  super_classes: "builtins.object"
-  valid_for: "27"
-}
-classes {
   name: "make_encoder"
   fully_qualified_name: "_json.make_encoder"
   super_classes: "builtins.object"
@@ -599,31 +587,6 @@ functions {
     fully_qualified_name: "builtins.str"
   }
   parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "encode_basestring_ascii"
-  fully_qualified_name: "_json.encode_basestring_ascii"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
     name: "s"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
@@ -637,51 +600,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "scanstring"
-  fully_qualified_name: "_json.scanstring"
-  return_annotation {
-    pretty_printed_name: "builtins.tuple[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "b"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "scanstring"

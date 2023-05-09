@@ -10,56 +10,6 @@ functions {
     name: "ob_type"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "copyreg._TypeT"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "pickle_function"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-  }
-  parameters {
-    name: "constructor_ob"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "pickle"
-  fully_qualified_name: "copyreg.pickle"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "ob_type"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "builtins.type"
       fully_qualified_name: "builtins.type"
     }
@@ -176,7 +126,6 @@ functions {
       }
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -215,7 +164,6 @@ functions {
       fully_qualified_name: "typing.SupportsInt"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -254,7 +202,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -269,7 +216,20 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Reduce"
+  fully_qualified_name: "copyreg._Reduce"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -287,21 +247,6 @@ vars {
       fully_qualified_name: "builtins.str"
     }
     fully_qualified_name: "builtins.list"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "_Reduce"
-  fully_qualified_name: "copyreg._Reduce"
-  type_annotation {
-    pretty_printed_name: "UnboundType[TypeAlias]"
-    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

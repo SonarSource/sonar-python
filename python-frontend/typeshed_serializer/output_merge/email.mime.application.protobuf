@@ -22,98 +22,6 @@ classes {
       name: "_data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "_subtype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_encoder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_params"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.str,None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-        }
-        fully_qualified_name: "email.mime.application._ParamsType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "email.mime.application.MIMEApplication.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.mime.application.MIMEApplication"
-        fully_qualified_name: "email.mime.application.MIMEApplication"
-      }
-    }
-    parameters {
-      name: "_data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[builtins.str,builtins.bytes,builtins.bytearray]"
         kind: UNION
         args {
@@ -184,7 +92,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

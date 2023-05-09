@@ -1,140 +1,5 @@
 fully_qualified_name: "pkgutil"
 classes {
-  name: "ImpImporter"
-  fully_qualified_name: "pkgutil.ImpImporter"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pkgutil.ImpImporter.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pkgutil.ImpImporter"
-        fully_qualified_name: "pkgutil.ImpImporter"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "ImpLoader"
-  fully_qualified_name: "pkgutil.ImpLoader"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pkgutil.ImpLoader.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pkgutil.ImpLoader"
-        fully_qualified_name: "pkgutil.ImpLoader"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "etc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
   name: "ModuleInfo"
   fully_qualified_name: "pkgutil.ModuleInfo"
   super_classes: "builtins.tuple"
@@ -523,38 +388,136 @@ classes {
     valid_for: "310"
   }
 }
-functions {
-  name: "extend_path"
-  fully_qualified_name: "pkgutil.extend_path"
-  return_annotation {
-    pretty_printed_name: "builtins.list[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+classes {
+  name: "ImpImporter"
+  fully_qualified_name: "pkgutil.ImpImporter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkgutil.ImpImporter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
     }
-    fully_qualified_name: "builtins.list"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkgutil.ImpImporter"
+        fully_qualified_name: "pkgutil.ImpImporter"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ImpLoader"
+  fully_qualified_name: "pkgutil.ImpLoader"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkgutil.ImpLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkgutil.ImpLoader"
+        fully_qualified_name: "pkgutil.ImpLoader"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "builtins.list"
     }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
     }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "etc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "extend_path"
@@ -590,31 +553,6 @@ functions {
   name: "find_loader"
   fully_qualified_name: "pkgutil.find_loader"
   return_annotation {
-    pretty_printed_name: "Union[Any,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "fullname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "find_loader"
-  fully_qualified_name: "pkgutil.find_loader"
-  return_annotation {
     pretty_printed_name: "Union[importlib.abc.Loader,None]"
     kind: UNION
     args {
@@ -640,31 +578,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "get_importer"
-  fully_qualified_name: "pkgutil.get_importer"
-  return_annotation {
-    pretty_printed_name: "Union[Any,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "path_item"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "get_importer"
@@ -700,28 +613,6 @@ functions {
   name: "get_loader"
   fully_qualified_name: "pkgutil.get_loader"
   return_annotation {
-    pretty_printed_name: "TypeAlias[Any]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "pkgutil.Loader"
-  }
-  parameters {
-    name: "module_or_name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "get_loader"
-  fully_qualified_name: "pkgutil.get_loader"
-  return_annotation {
     pretty_printed_name: "Union[importlib.abc.Loader,None]"
     kind: UNION
     args {
@@ -747,46 +638,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "iter_importers"
-  fully_qualified_name: "pkgutil.iter_importers"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[Union[TypeAlias[Any],TypeAlias[Any]]]"
-    args {
-      pretty_printed_name: "Union[TypeAlias[Any],TypeAlias[Any]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "TypeAlias[Any]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "pkgutil.MetaPathFinder"
-      }
-      args {
-        pretty_printed_name: "TypeAlias[Any]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "pkgutil.PathEntryFinder"
-      }
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "fullname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "iter_importers"
@@ -827,84 +678,6 @@ functions {
   name: "iter_modules"
   fully_qualified_name: "pkgutil.iter_modules"
   return_annotation {
-    pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]]]"
-    args {
-      pretty_printed_name: "TypeAlias[Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Union[TypeAlias[Any],TypeAlias[Any]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Any]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "pkgutil.MetaPathFinder"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Any]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "pkgutil.PathEntryFinder"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-      }
-      fully_qualified_name: "pkgutil._ModuleInfoLike"
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "prefix"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "iter_modules"
-  fully_qualified_name: "pkgutil.iter_modules"
-  return_annotation {
     pretty_printed_name: "typing.Iterator[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]"
     args {
       pretty_printed_name: "Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]"
@@ -968,27 +741,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_code"
-  fully_qualified_name: "pkgutil.read_code"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "stream"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "_typeshed.SupportsRead"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_code"
@@ -1020,105 +772,6 @@ functions {
   name: "walk_packages"
   fully_qualified_name: "pkgutil.walk_packages"
   return_annotation {
-    pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]]]"
-    args {
-      pretty_printed_name: "TypeAlias[Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[Union[TypeAlias[Any],TypeAlias[Any]],builtins.str,builtins.bool]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Union[TypeAlias[Any],TypeAlias[Any]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Any]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "pkgutil.MetaPathFinder"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Any]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "pkgutil.PathEntryFinder"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-      }
-      fully_qualified_name: "pkgutil._ModuleInfoLike"
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "prefix"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "onerror"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "walk_packages"
-  fully_qualified_name: "pkgutil.walk_packages"
-  return_annotation {
     pretty_printed_name: "typing.Iterator[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]"
     args {
       pretty_printed_name: "Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]"
@@ -1203,39 +856,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "get_data"
-  fully_qualified_name: "pkgutil.get_data"
-  return_annotation {
-    pretty_printed_name: "Union[builtins.str,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "package"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "resource"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "get_data"

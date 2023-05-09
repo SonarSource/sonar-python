@@ -19,31 +19,6 @@ classes {
       }
     }
     parameters {
-      name: "path_string"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "imp.NullImporter.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "imp.NullImporter"
-        fully_qualified_name: "imp.NullImporter"
-      }
-    }
-    parameters {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
@@ -77,40 +52,6 @@ classes {
       name: "fullname"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "find_module"
-    fully_qualified_name: "imp.NullImporter.find_module"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "imp.NullImporter"
-        fully_qualified_name: "imp.NullImporter"
-      }
-    }
-    parameters {
-      name: "fullname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Any"
         kind: ANY
       }
@@ -122,7 +63,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -375,739 +315,6 @@ classes {
 }
 functions {
   name: "acquire_lock"
-  fully_qualified_name: "imp.acquire_lock"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-}
-functions {
-  name: "find_module"
-  fully_qualified_name: "imp.find_module"
-  return_annotation {
-    pretty_printed_name: "Union[Tuple[typing.IO[Any],builtins.str,Tuple[builtins.str,builtins.str,builtins.int]],None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "Tuple[typing.IO[Any],builtins.str,Tuple[builtins.str,builtins.str,builtins.int]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "typing.IO[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "find_module"
-  fully_qualified_name: "imp.find_module"
-  return_annotation {
-    pretty_printed_name: "Tuple[typing.IO[Any],builtins.str,Tuple[builtins.str,builtins.str,builtins.int]]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[None,builtins.list[builtins.str],builtins.list[os.PathLike[builtins.str]],builtins.list[UnboundType[StrPath]]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "builtins.list[os.PathLike[builtins.str]]"
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "builtins.list[UnboundType[StrPath]]"
-        args {
-          pretty_printed_name: "UnboundType[StrPath]"
-          kind: UNBOUND
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "get_magic"
-  fully_qualified_name: "imp.get_magic"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-}
-functions {
-  name: "get_magic"
-  fully_qualified_name: "imp.get_magic"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "get_suffixes"
-  fully_qualified_name: "imp.get_suffixes"
-  return_annotation {
-    pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str,builtins.int]]"
-    args {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "init_builtin"
-  fully_qualified_name: "imp.init_builtin"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "init_builtin"
-  fully_qualified_name: "imp.init_builtin"
-  return_annotation {
-    pretty_printed_name: "Union[types.ModuleType,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "types.ModuleType"
-      fully_qualified_name: "types.ModuleType"
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "init_frozen"
-  fully_qualified_name: "imp.init_frozen"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "is_builtin"
-  fully_qualified_name: "imp.is_builtin"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "is_frozen"
-  fully_qualified_name: "imp.is_frozen"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load_compiled"
-  fully_qualified_name: "imp.load_compiled"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load_compiled"
-  fully_qualified_name: "imp.load_compiled"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[imp._FileLike,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "imp._FileLike"
-        fully_qualified_name: "imp._FileLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "load_dynamic"
-  fully_qualified_name: "imp.load_dynamic"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load_dynamic"
-  fully_qualified_name: "imp.load_dynamic"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[Any,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "load_module"
-  fully_qualified_name: "imp.load_module"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "description"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load_module"
-  fully_qualified_name: "imp.load_module"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[imp._FileLike,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "imp._FileLike"
-        fully_qualified_name: "imp._FileLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "details"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "load_source"
-  fully_qualified_name: "imp.load_source"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "load_source"
-  fully_qualified_name: "imp.load_source"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "pathname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[imp._FileLike,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "imp._FileLike"
-        fully_qualified_name: "imp._FileLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "lock_held"
-  fully_qualified_name: "imp.lock_held"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  valid_for: "27"
-}
-functions {
-  name: "new_module"
-  fully_qualified_name: "imp.new_module"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "release_lock"
-  fully_qualified_name: "imp.release_lock"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-}
-functions {
-  name: "acquire_lock"
   fully_qualified_name: "_imp.acquire_lock"
   return_annotation {
     pretty_printed_name: "None"
@@ -1291,6 +498,42 @@ functions {
   valid_for: "310"
 }
 functions {
+  name: "new_module"
+  fully_qualified_name: "imp.new_module"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_magic"
+  fully_qualified_name: "imp.get_magic"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "get_tag"
   fully_qualified_name: "imp.get_tag"
   return_annotation {
@@ -1366,6 +609,130 @@ functions {
   valid_for: "310"
 }
 functions {
+  name: "get_suffixes"
+  fully_qualified_name: "imp.get_suffixes"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str,builtins.int]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_source"
+  fully_qualified_name: "imp.load_source"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pathname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[imp._FileLike,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "imp._FileLike"
+        fully_qualified_name: "imp._FileLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_compiled"
+  fully_qualified_name: "imp.load_compiled"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pathname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[imp._FileLike,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "imp._FileLike"
+        fully_qualified_name: "imp._FileLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "load_package"
   fully_qualified_name: "imp.load_package"
   return_annotation {
@@ -1396,6 +763,163 @@ functions {
   valid_for: "310"
 }
 functions {
+  name: "load_module"
+  fully_qualified_name: "imp.load_module"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[imp._FileLike,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "imp._FileLike"
+        fully_qualified_name: "imp._FileLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "details"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "find_module"
+  fully_qualified_name: "imp.find_module"
+  return_annotation {
+    pretty_printed_name: "Tuple[typing.IO[Any],builtins.str,Tuple[builtins.str,builtins.str,builtins.int]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "typing.IO[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.list[builtins.str],builtins.list[os.PathLike[builtins.str]],builtins.list[UnboundType[StrPath]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[os.PathLike[builtins.str]]"
+        args {
+          pretty_printed_name: "os.PathLike[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[UnboundType[StrPath]]"
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "reload"
   fully_qualified_name: "imp.reload"
   return_annotation {
@@ -1417,14 +941,29 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-vars {
-  name: "C_BUILTIN"
-  fully_qualified_name: "imp.C_BUILTIN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+functions {
+  name: "init_builtin"
+  fully_qualified_name: "imp.init_builtin"
+  return_annotation {
+    pretty_printed_name: "Union[types.ModuleType,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
-  valid_for: "27"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1432,119 +971,46 @@ vars {
   valid_for: "39"
   valid_for: "310"
 }
-vars {
-  name: "C_EXTENSION"
-  fully_qualified_name: "imp.C_EXTENSION"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+functions {
+  name: "load_dynamic"
+  fully_qualified_name: "imp.load_dynamic"
+  return_annotation {
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "IMP_HOOK"
-  fully_qualified_name: "imp.IMP_HOOK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PKG_DIRECTORY"
-  fully_qualified_name: "imp.PKG_DIRECTORY"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PY_CODERESOURCE"
-  fully_qualified_name: "imp.PY_CODERESOURCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PY_COMPILED"
-  fully_qualified_name: "imp.PY_COMPILED"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PY_FROZEN"
-  fully_qualified_name: "imp.PY_FROZEN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PY_RESOURCE"
-  fully_qualified_name: "imp.PY_RESOURCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "PY_SOURCE"
-  fully_qualified_name: "imp.PY_SOURCE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1559,7 +1025,132 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY_SOURCE"
+  fully_qualified_name: "imp.PY_SOURCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY_COMPILED"
+  fully_qualified_name: "imp.PY_COMPILED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "C_EXTENSION"
+  fully_qualified_name: "imp.C_EXTENSION"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY_RESOURCE"
+  fully_qualified_name: "imp.PY_RESOURCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PKG_DIRECTORY"
+  fully_qualified_name: "imp.PKG_DIRECTORY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "C_BUILTIN"
+  fully_qualified_name: "imp.C_BUILTIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY_FROZEN"
+  fully_qualified_name: "imp.PY_FROZEN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY_CODERESOURCE"
+  fully_qualified_name: "imp.PY_CODERESOURCE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IMP_HOOK"
+  fully_qualified_name: "imp.IMP_HOOK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

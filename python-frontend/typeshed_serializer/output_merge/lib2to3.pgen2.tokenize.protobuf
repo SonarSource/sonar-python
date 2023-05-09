@@ -3,7 +3,6 @@ classes {
   name: "TokenError"
   fully_qualified_name: "lib2to3.pgen2.tokenize.TokenError"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -15,7 +14,6 @@ classes {
   name: "StopTokenizing"
   fully_qualified_name: "lib2to3.pgen2.tokenize.StopTokenizing"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -27,61 +25,6 @@ classes {
   name: "Untokenizer"
   fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.tokenize.Untokenizer"
-        fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "add_whitespace"
-    fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.add_whitespace"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.tokenize.Untokenizer"
-        fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-        fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "add_whitespace"
     fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.add_whitespace"
@@ -116,86 +59,6 @@ classes {
     name: "untokenize"
     fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.untokenize"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.tokenize.Untokenizer"
-        fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer"
-      }
-    }
-    parameters {
-      name: "iterable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.tokenize._TokenInfo"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "untokenize"
-    fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.untokenize"
-    return_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
@@ -225,102 +88,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "compat"
-    fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.compat"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.tokenize.Untokenizer"
-        fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer"
-      }
-    }
-    parameters {
-      name: "token"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Tuple[builtins.int,builtins.unicode]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-    }
-    parameters {
-      name: "iterable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.tokenize._TokenInfo"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "compat"
@@ -372,26 +139,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "tokens"
-    fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.tokens"
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.unicode]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "tokens"
     fully_qualified_name: "lib2to3.pgen2.tokenize.Untokenizer.tokens"
@@ -417,7 +170,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -432,7 +184,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -456,7 +207,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -479,7 +229,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -502,52 +251,12 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "tokenize"
-  fully_qualified_name: "lib2to3.pgen2.tokenize.tokenize"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "readline"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-  }
-  parameters {
-    name: "tokeneater"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "lib2to3.pgen2.tokenize._TokenEater"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "tokenize"
@@ -588,78 +297,6 @@ functions {
   name: "untokenize"
   fully_qualified_name: "lib2to3.pgen2.tokenize.untokenize"
   return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  parameters {
-    name: "iterable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Iterable[TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]]"
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-            }
-            fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-          }
-          args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-            }
-            fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-          }
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-        }
-        fully_qualified_name: "lib2to3.pgen2.tokenize._TokenInfo"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "untokenize"
-  fully_qualified_name: "lib2to3.pgen2.tokenize.untokenize"
-  return_annotation {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
@@ -681,82 +318,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "generate_tokens"
-  fully_qualified_name: "lib2to3.pgen2.tokenize.generate_tokens"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]]"
-    args {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "lib2to3.pgen2.tokenize._TokenInfo"
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "readline"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "generate_tokens"
@@ -795,7 +356,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -810,7 +370,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -825,7 +384,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -840,7 +398,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -855,7 +412,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -870,7 +426,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -885,7 +440,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -900,7 +454,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -915,7 +468,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -930,7 +482,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -945,7 +496,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -960,7 +510,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -975,7 +524,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -990,7 +538,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1005,7 +552,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1020,7 +566,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1035,7 +580,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1050,7 +594,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1065,7 +608,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1080,7 +622,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1095,7 +636,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1110,7 +650,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1125,7 +664,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1140,7 +678,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1155,7 +692,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1170,7 +706,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1185,7 +720,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1200,7 +734,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1215,7 +748,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1230,7 +762,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1245,7 +776,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1260,7 +790,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1275,7 +804,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1290,7 +818,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1305,7 +832,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1320,7 +846,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1335,7 +860,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1350,7 +874,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1365,7 +888,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1380,7 +902,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1395,7 +916,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1410,7 +930,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1425,7 +944,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1440,7 +958,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1455,7 +972,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1470,7 +986,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1485,7 +1000,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1500,7 +1014,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1515,7 +1028,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1530,7 +1042,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1545,7 +1056,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1560,7 +1070,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1574,91 +1083,6 @@ vars {
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ERRORTOKEN"
-  fully_qualified_name: "lib2to3.pgen2.token.ERRORTOKEN"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "N_TOKENS"
-  fully_qualified_name: "lib2to3.pgen2.token.N_TOKENS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "NT_OFFSET"
-  fully_qualified_name: "lib2to3.pgen2.token.NT_OFFSET"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "tok_name"
-  fully_qualified_name: "lib2to3.pgen2.token.tok_name"
-  type_annotation {
-    pretty_printed_name: "builtins.dict[builtins.int,builtins.unicode]"
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    fully_qualified_name: "builtins.dict"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "tok_name"
-  fully_qualified_name: "lib2to3.pgen2.token.tok_name"
-  type_annotation {
-    pretty_printed_name: "builtins.dict[builtins.int,builtins.str]"
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.dict"
   }
   valid_for: "35"
   valid_for: "36"
@@ -1738,11 +1162,75 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "ERRORTOKEN"
+  fully_qualified_name: "lib2to3.pgen2.token.ERRORTOKEN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "COLONEQUAL"
   fully_qualified_name: "lib2to3.pgen2.token.COLONEQUAL"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "N_TOKENS"
+  fully_qualified_name: "lib2to3.pgen2.token.N_TOKENS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NT_OFFSET"
+  fully_qualified_name: "lib2to3.pgen2.token.NT_OFFSET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "tok_name"
+  fully_qualified_name: "lib2to3.pgen2.token.tok_name"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
   }
   valid_for: "35"
   valid_for: "36"

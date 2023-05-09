@@ -1,70 +1,21 @@
 fully_qualified_name: "mailbox"
 classes {
+  name: "_SupportsReadAndReadline"
+  fully_qualified_name: "mailbox._SupportsReadAndReadline"
+  super_classes: "_typeshed.SupportsRead"
+  super_classes: "_typeshed.SupportsNoArgReadline"
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "_HasIteritems"
   fully_qualified_name: "mailbox._HasIteritems"
   super_classes: "builtins.object"
-  methods {
-    name: "iteritems"
-    fully_qualified_name: "mailbox._HasIteritems.iteritems"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "email.message.Message"
-              fully_qualified_name: "email.message.Message"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "typing.IO[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "typing.IO"
-            }
-            args {
-              pretty_printed_name: "typing.IO[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "typing.IO"
-            }
-          }
-          fully_qualified_name: "mailbox._MessageData"
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox._HasIteritems"
-        fully_qualified_name: "mailbox._HasIteritems"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "iteritems"
     fully_qualified_name: "mailbox._HasIteritems.iteritems"
@@ -100,7 +51,6 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -116,68 +66,6 @@ classes {
     name: "items"
     fully_qualified_name: "mailbox._HasItems.items"
     return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]]"
-      args {
-        pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "email.message.Message"
-              fully_qualified_name: "email.message.Message"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "typing.IO[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "typing.IO"
-            }
-            args {
-              pretty_printed_name: "typing.IO[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "typing.IO"
-            }
-          }
-          fully_qualified_name: "mailbox._MessageData"
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox._HasItems"
-        fully_qualified_name: "mailbox._HasItems"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "mailbox._HasItems.items"
-    return_annotation {
       pretty_printed_name: "typing.Iterator[Tuple[builtins.str,UnboundType[_MessageData]]]"
       args {
         pretty_printed_name: "Tuple[builtins.str,UnboundType[_MessageData]]"
@@ -209,7 +97,6 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -221,127 +108,6 @@ classes {
   name: "Mailbox"
   fully_qualified_name: "mailbox.Mailbox"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.Mailbox.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "add"
-    fully_qualified_name: "mailbox.Mailbox.add"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "message"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "email.message.Message"
-            fully_qualified_name: "email.message.Message"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-        }
-        fully_qualified_name: "mailbox._MessageData"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "add"
     fully_qualified_name: "mailbox.Mailbox.add"
@@ -406,35 +172,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "remove"
-    fully_qualified_name: "mailbox.Mailbox.remove"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
@@ -470,7 +207,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -505,80 +241,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "mailbox.Mailbox.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "message"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "email.message.Message"
-            fully_qualified_name: "email.message.Message"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-        }
-        fully_qualified_name: "mailbox._MessageData"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__setitem__"
@@ -647,42 +315,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_message"
-    fully_qualified_name: "mailbox.Mailbox.get_message"
-    return_annotation {
-      pretty_printed_name: "mailbox._MessageT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_message"
@@ -748,42 +386,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_bytes"
-    fully_qualified_name: "mailbox.Mailbox.get_bytes"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_bytes"
@@ -849,35 +457,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.Mailbox.get_file"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
@@ -887,31 +466,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "iterkeys"
-    fully_qualified_name: "mailbox.Mailbox.iterkeys"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "iterkeys"
@@ -969,7 +523,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1000,7 +553,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1030,7 +582,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1061,7 +612,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1100,7 +650,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1139,40 +688,12 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__contains__"
-    fully_qualified_name: "mailbox.Mailbox.__contains__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "key"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__contains__"
@@ -1208,26 +729,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "mailbox.Mailbox.__len__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__len__"
@@ -1276,7 +777,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1311,104 +811,12 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "mailbox.Mailbox.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[mailbox._HasIteritems,mailbox._HasItems,typing.Iterable[Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._HasIteritems"
-          fully_qualified_name: "mailbox._HasIteritems"
-        }
-        args {
-          pretty_printed_name: "mailbox._HasItems"
-          fully_qualified_name: "mailbox._HasItems"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]]"
-          args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "email.message.Message"
-                  fully_qualified_name: "email.message.Message"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "typing.IO[builtins.str]"
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  fully_qualified_name: "typing.IO"
-                }
-                args {
-                  pretty_printed_name: "typing.IO[builtins.str]"
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  fully_qualified_name: "typing.IO"
-                }
-              }
-              fully_qualified_name: "mailbox._MessageData"
-            }
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "update"
@@ -1492,27 +900,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "flush"
-    fully_qualified_name: "mailbox.Mailbox.flush"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
@@ -1522,27 +909,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "lock"
-    fully_qualified_name: "mailbox.Mailbox.lock"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "lock"
@@ -1592,27 +958,6 @@ classes {
         fully_qualified_name: "mailbox.Mailbox"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "unlock"
-    fully_qualified_name: "mailbox.Mailbox.unlock"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
@@ -1622,27 +967,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "mailbox.Mailbox.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox.Mailbox"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "close"
@@ -1705,318 +1029,6 @@ classes {
       }
     }
     is_class_method: true
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "get"
-    fullname: "mailbox.Mailbox.get"
-    definitions {
-      name: "get"
-      fully_qualified_name: "mailbox.Mailbox.get"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "get"
-      fully_qualified_name: "mailbox.Mailbox.get"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,mailbox._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "pop"
-    fullname: "mailbox.Mailbox.pop"
-    definitions {
-      name: "pop"
-      fully_qualified_name: "mailbox.Mailbox.pop"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "pop"
-      fully_qualified_name: "mailbox.Mailbox.pop"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,mailbox._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "pop"
-    fullname: "mailbox.Mailbox.pop"
-    definitions {
-      name: "pop"
-      fully_qualified_name: "mailbox.Mailbox.pop"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "pop"
-      fully_qualified_name: "mailbox.Mailbox.pop"
-      return_annotation {
-        pretty_printed_name: "Union[mailbox._MessageT,mailbox._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
-          args {
-            pretty_printed_name: "mailbox._MessageT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "mailbox.Mailbox"
-        }
-      }
-      parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "mailbox._T"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2131,31 +1143,223 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  overloaded_methods {
+    name: "get"
+    fullname: "mailbox.Mailbox.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "mailbox.Mailbox.get"
+      return_annotation {
+        pretty_printed_name: "Union[mailbox._MessageT,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "mailbox._MessageT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
+          args {
+            pretty_printed_name: "mailbox._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "mailbox.Mailbox"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "mailbox.Mailbox.get"
+      return_annotation {
+        pretty_printed_name: "Union[mailbox._MessageT,mailbox._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "mailbox._MessageT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "mailbox._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
+          args {
+            pretty_printed_name: "mailbox._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "mailbox.Mailbox"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "pop"
+    fullname: "mailbox.Mailbox.pop"
+    definitions {
+      name: "pop"
+      fully_qualified_name: "mailbox.Mailbox.pop"
+      return_annotation {
+        pretty_printed_name: "Union[mailbox._MessageT,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "mailbox._MessageT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
+          args {
+            pretty_printed_name: "mailbox._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "mailbox.Mailbox"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "pop"
+      fully_qualified_name: "mailbox.Mailbox.pop"
+      return_annotation {
+        pretty_printed_name: "Union[mailbox._MessageT,mailbox._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "mailbox._MessageT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "mailbox._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox.Mailbox[mailbox._MessageT]"
+          args {
+            pretty_printed_name: "mailbox._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "mailbox.Mailbox"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "mailbox._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "_path"
-    fully_qualified_name: "mailbox.Mailbox._path"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "_path"
     fully_qualified_name: "mailbox.Mailbox._path"
@@ -2189,7 +1393,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2202,61 +1405,6 @@ classes {
   name: "Maildir"
   fully_qualified_name: "mailbox.Maildir"
   super_classes: "mailbox.Mailbox"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.Maildir.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "dirname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "mailbox.Maildir.__init__"
@@ -2310,315 +1458,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.Maildir.get_file"
-    return_annotation {
-      pretty_printed_name: "mailbox._ProxyFile[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "mailbox._ProxyFile"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.Maildir.get_file"
-    return_annotation {
-      pretty_printed_name: "mailbox._ProxyFile[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "mailbox._ProxyFile"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "list_folders"
-    fully_qualified_name: "mailbox.Maildir.list_folders"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_folder"
-    fully_qualified_name: "mailbox.Maildir.get_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.Maildir"
-      fully_qualified_name: "mailbox.Maildir"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_folder"
-    fully_qualified_name: "mailbox.Maildir.get_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.Maildir"
-      fully_qualified_name: "mailbox.Maildir"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "add_folder"
-    fully_qualified_name: "mailbox.Maildir.add_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.Maildir"
-      fully_qualified_name: "mailbox.Maildir"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "add_folder"
-    fully_qualified_name: "mailbox.Maildir.add_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.Maildir"
-      fully_qualified_name: "mailbox.Maildir"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "remove_folder"
-    fully_qualified_name: "mailbox.Maildir.remove_folder"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "remove_folder"
-    fully_qualified_name: "mailbox.Maildir.remove_folder"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "clean"
-    fully_qualified_name: "mailbox.Maildir.clean"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "next"
-    fully_qualified_name: "mailbox.Maildir.next"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Maildir"
-        fully_qualified_name: "mailbox.Maildir"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2757,6 +1596,40 @@ classes {
     return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_file"
+    fully_qualified_name: "mailbox.Maildir.get_file"
+    return_annotation {
+      pretty_printed_name: "mailbox._ProxyFile[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "mailbox._ProxyFile"
     }
     parameters {
       name: "self"
@@ -2944,7 +1817,174 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "list_folders"
+    fully_qualified_name: "mailbox.Maildir.list_folders"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_folder"
+    fully_qualified_name: "mailbox.Maildir.get_folder"
+    return_annotation {
+      pretty_printed_name: "mailbox.Maildir"
+      fully_qualified_name: "mailbox.Maildir"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_folder"
+    fully_qualified_name: "mailbox.Maildir.add_folder"
+    return_annotation {
+      pretty_printed_name: "mailbox.Maildir"
+      fully_qualified_name: "mailbox.Maildir"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove_folder"
+    fully_qualified_name: "mailbox.Maildir.remove_folder"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clean"
+    fully_qualified_name: "mailbox.Maildir.clean"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "mailbox.Maildir.next"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Maildir"
+        fully_qualified_name: "mailbox.Maildir"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2958,7 +1998,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2966,13 +2005,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "_singlefileMailbox"
-  fully_qualified_name: "mailbox._singlefileMailbox"
-  super_classes: "mailbox.Mailbox"
-  is_generic: true
-  valid_for: "27"
 }
 classes {
   name: "_singlefileMailbox"
@@ -3291,15 +2323,11 @@ classes {
   fully_qualified_name: "mailbox._mboxMMDF"
   super_classes: "mailbox._singlefileMailbox"
   methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox._mboxMMDF.get_file"
+    name: "get_message"
+    fully_qualified_name: "mailbox._mboxMMDF.get_message"
     return_annotation {
-      pretty_printed_name: "mailbox._PartialFile[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "mailbox._PartialFile"
+      pretty_printed_name: "mailbox._MessageT"
+      kind: TYPE_VAR
     }
     parameters {
       name: "self"
@@ -3321,16 +2349,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    parameters {
-      name: "from_"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "get_file"
@@ -3378,44 +2402,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get_bytes"
-    fully_qualified_name: "mailbox._mboxMMDF.get_bytes"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox._mboxMMDF[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox._mboxMMDF"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "from_"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "get_bytes"
@@ -3496,41 +2482,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_message"
-    fully_qualified_name: "mailbox._mboxMMDF.get_message"
-    return_annotation {
-      pretty_printed_name: "mailbox._MessageT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox._mboxMMDF[mailbox._MessageT]"
-        args {
-          pretty_printed_name: "mailbox._MessageT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox._mboxMMDF"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3539,7 +2490,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3570,61 +2520,6 @@ classes {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.mbox.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.mbox"
-        fully_qualified_name: "mailbox.mbox"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[StrPath]"
         kind: UNBOUND
       }
@@ -3666,7 +2561,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3697,61 +2591,6 @@ classes {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.MMDF.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MMDF"
-        fully_qualified_name: "mailbox.MMDF"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[StrPath]"
         kind: UNBOUND
       }
@@ -3793,7 +2632,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3824,61 +2662,6 @@ classes {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.MH.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[StrPath]"
         kind: UNBOUND
       }
@@ -3913,362 +2696,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.MH.get_file"
-    return_annotation {
-      pretty_printed_name: "mailbox._ProxyFile[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "mailbox._ProxyFile"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.MH.get_file"
-    return_annotation {
-      pretty_printed_name: "mailbox._ProxyFile[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "mailbox._ProxyFile"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "list_folders"
-    fully_qualified_name: "mailbox.MH.list_folders"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_folder"
-    fully_qualified_name: "mailbox.MH.get_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.MH"
-      fully_qualified_name: "mailbox.MH"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_folder"
-    fully_qualified_name: "mailbox.MH.get_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.MH"
-      fully_qualified_name: "mailbox.MH"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[StrPath]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "add_folder"
-    fully_qualified_name: "mailbox.MH.add_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.MH"
-      fully_qualified_name: "mailbox.MH"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "add_folder"
-    fully_qualified_name: "mailbox.MH.add_folder"
-    return_annotation {
-      pretty_printed_name: "mailbox.MH"
-      fully_qualified_name: "mailbox.MH"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[StrPath]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "remove_folder"
-    fully_qualified_name: "mailbox.MH.remove_folder"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "remove_folder"
-    fully_qualified_name: "mailbox.MH.remove_folder"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "folder"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[StrPath]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_sequences"
-    fully_qualified_name: "mailbox.MH.get_sequences"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.int]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.int]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "set_sequences"
-    fully_qualified_name: "mailbox.MH.set_sequences"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    parameters {
-      name: "sequences"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,typing.Sequence[builtins.int]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "typing.Sequence[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "pack"
-    fully_qualified_name: "mailbox.MH.pack"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MH"
-        fully_qualified_name: "mailbox.MH"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4407,6 +2834,40 @@ classes {
     return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_file"
+    fully_qualified_name: "mailbox.MH.get_file"
+    return_annotation {
+      pretty_printed_name: "mailbox._ProxyFile[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "mailbox._ProxyFile"
     }
     parameters {
       name: "self"
@@ -4594,7 +3055,220 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "list_folders"
+    fully_qualified_name: "mailbox.MH.list_folders"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_folder"
+    fully_qualified_name: "mailbox.MH.get_folder"
+    return_annotation {
+      pretty_printed_name: "mailbox.MH"
+      fully_qualified_name: "mailbox.MH"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_folder"
+    fully_qualified_name: "mailbox.MH.add_folder"
+    return_annotation {
+      pretty_printed_name: "mailbox.MH"
+      fully_qualified_name: "mailbox.MH"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove_folder"
+    fully_qualified_name: "mailbox.MH.remove_folder"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    parameters {
+      name: "folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_sequences"
+    fully_qualified_name: "mailbox.MH.get_sequences"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.int]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_sequences"
+    fully_qualified_name: "mailbox.MH.set_sequences"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    parameters {
+      name: "sequences"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,typing.Sequence[builtins.int]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pack"
+    fully_qualified_name: "mailbox.MH.pack"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.MH"
+        fully_qualified_name: "mailbox.MH"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4606,61 +3280,6 @@ classes {
   name: "Babyl"
   fully_qualified_name: "mailbox.Babyl"
   super_classes: "mailbox._singlefileMailbox"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.Babyl.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Babyl"
-        fully_qualified_name: "mailbox.Babyl"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "create"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "mailbox.Babyl.__init__"
@@ -4714,96 +3333,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.Babyl.get_file"
-    return_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Babyl"
-        fully_qualified_name: "mailbox.Babyl"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_file"
-    fully_qualified_name: "mailbox.Babyl.get_file"
-    return_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Babyl"
-        fully_qualified_name: "mailbox.Babyl"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_labels"
-    fully_qualified_name: "mailbox.Babyl.get_labels"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Babyl"
-        fully_qualified_name: "mailbox.Babyl"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4871,7 +3400,66 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "get_file"
+    fully_qualified_name: "mailbox.Babyl.get_file"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Babyl"
+        fully_qualified_name: "mailbox.Babyl"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_labels"
+    fully_qualified_name: "mailbox.Babyl.get_labels"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "mailbox.Babyl"
+        fully_qualified_name: "mailbox.Babyl"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4883,64 +3471,6 @@ classes {
   name: "Message"
   fully_qualified_name: "mailbox.Message"
   super_classes: "email.message.Message"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mailbox.Message.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.Message"
-        fully_qualified_name: "mailbox.Message"
-      }
-    }
-    parameters {
-      name: "message"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "email.message.Message"
-          fully_qualified_name: "email.message.Message"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "typing.IO[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "typing.IO[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "mailbox.Message.__init__"
@@ -4980,7 +3510,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5007,54 +3536,12 @@ classes {
         fully_qualified_name: "mailbox.MaildirMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "set_subdir"
-    fully_qualified_name: "mailbox.MaildirMessage.set_subdir"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.MaildirMessage"
-        fully_qualified_name: "mailbox.MaildirMessage"
-      }
-    }
-    parameters {
-      name: "subdir"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Literal[builtins.unicode],Literal[builtins.unicode]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Literal[builtins.unicode]"
-          kind: LITERAL
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-        }
-        args {
-          pretty_printed_name: "Literal[builtins.unicode]"
-          kind: LITERAL
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-        }
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "set_subdir"
@@ -5117,7 +3604,6 @@ classes {
         fully_qualified_name: "mailbox.MaildirMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5152,7 +3638,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5183,7 +3668,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5214,7 +3698,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5237,7 +3720,6 @@ classes {
         fully_qualified_name: "mailbox.MaildirMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5268,7 +3750,6 @@ classes {
         fully_qualified_name: "builtins.float"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5291,7 +3772,6 @@ classes {
         fully_qualified_name: "mailbox.MaildirMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5322,7 +3802,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5330,7 +3809,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5357,7 +3835,6 @@ classes {
         fully_qualified_name: "mailbox._mboxMMDFMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5445,7 +3922,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5468,7 +3944,6 @@ classes {
         fully_qualified_name: "mailbox._mboxMMDFMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5503,7 +3978,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5534,7 +4008,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5565,7 +4038,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5573,7 +4045,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5585,7 +4056,6 @@ classes {
   name: "mboxMessage"
   fully_qualified_name: "mailbox.mboxMessage"
   super_classes: "mailbox._mboxMMDFMessage"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5616,7 +4086,6 @@ classes {
         fully_qualified_name: "mailbox.MHMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5651,7 +4120,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5682,7 +4150,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5713,7 +4180,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5721,7 +4187,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5752,7 +4217,6 @@ classes {
         fully_qualified_name: "mailbox.BabylMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5787,7 +4251,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5818,7 +4281,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5849,7 +4311,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5872,71 +4333,12 @@ classes {
         fully_qualified_name: "mailbox.BabylMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "set_visible"
-    fully_qualified_name: "mailbox.BabylMessage.set_visible"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mailbox.BabylMessage"
-        fully_qualified_name: "mailbox.BabylMessage"
-      }
-    }
-    parameters {
-      name: "visible"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[email.message.Message,builtins.str,builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "email.message.Message"
-            fully_qualified_name: "email.message.Message"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-        }
-        fully_qualified_name: "mailbox._MessageData"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "set_visible"
@@ -5983,7 +4385,6 @@ classes {
         fully_qualified_name: "mailbox.BabylMessage"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5991,7 +4392,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6003,7 +4403,6 @@ classes {
   name: "MMDFMessage"
   fully_qualified_name: "mailbox.MMDFMessage"
   super_classes: "mailbox._mboxMMDFMessage"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6063,7 +4462,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6107,7 +4505,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6151,7 +4548,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6195,7 +4591,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6243,7 +4638,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6273,7 +4667,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6300,7 +4693,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6344,7 +4736,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6371,37 +4762,12 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "mailbox._ProxyFile.__enter__"
-    return_annotation {
-      pretty_printed_name: "mailbox._ProxyFile[typing.AnyStr]"
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "mailbox._ProxyFile"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mailbox._ProxyFile[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox._ProxyFile"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__enter__"
@@ -6425,77 +4791,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "mailbox._ProxyFile.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mailbox._ProxyFile[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "mailbox._ProxyFile"
-      }
-    }
-    parameters {
-      name: "exc_type"
-      type_annotation {
-        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "exc"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.BaseException,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.BaseException"
-          fully_qualified_name: "builtins.BaseException"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "tb"
-      type_annotation {
-        pretty_printed_name: "Union[types.TracebackType,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "types.TracebackType"
-          fully_qualified_name: "types.TracebackType"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
     valid_for: "39"
     valid_for: "310"
   }
@@ -6568,6 +4863,76 @@ classes {
     valid_for: "38"
   }
   methods {
+    name: "__exit__"
+    fully_qualified_name: "mailbox._ProxyFile.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "mailbox._ProxyFile[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "mailbox._ProxyFile"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "readable"
     fully_qualified_name: "mailbox._ProxyFile.readable"
     return_annotation {
@@ -6586,7 +4951,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6613,7 +4977,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6640,7 +5003,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6667,7 +5029,6 @@ classes {
         fully_qualified_name: "mailbox._ProxyFile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6697,7 +5058,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6741,7 +5101,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6818,7 +5177,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6827,7 +5185,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6839,7 +5196,6 @@ classes {
   name: "Error"
   fully_qualified_name: "mailbox.Error"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6851,7 +5207,6 @@ classes {
   name: "NoSuchMailboxError"
   fully_qualified_name: "mailbox.NoSuchMailboxError"
   super_classes: "mailbox.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6863,7 +5218,6 @@ classes {
   name: "NotEmptyError"
   fully_qualified_name: "mailbox.NotEmptyError"
   super_classes: "mailbox.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6875,7 +5229,6 @@ classes {
   name: "ExternalClashError"
   fully_qualified_name: "mailbox.ExternalClashError"
   super_classes: "mailbox.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6887,20 +5240,6 @@ classes {
   name: "FormatError"
   fully_qualified_name: "mailbox.FormatError"
   super_classes: "mailbox.Error"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_SupportsReadAndReadline"
-  fully_qualified_name: "mailbox._SupportsReadAndReadline"
-  super_classes: "_typeshed.SupportsRead"
-  super_classes: "_typeshed.SupportsNoArgReadline"
-  is_protocol: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6912,30 +5251,6 @@ vars {
   name: "email"
   fully_qualified_name: "email"
   is_imported_module: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "linesep"
-  fully_qualified_name: "mailbox.linesep"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "linesep"
-  fully_qualified_name: "mailbox.linesep"
-  type_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6967,6 +5282,20 @@ vars {
   type_annotation {
     pretty_printed_name: "UnboundType[TypeAlias]"
     kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "linesep"
+  fully_qualified_name: "mailbox.linesep"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
   }
   valid_for: "35"
   valid_for: "36"

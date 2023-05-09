@@ -22,69 +22,6 @@ classes {
       name: "option_table"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "Union[builtins.str,None]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "None"
-                  kind: NONE
-                }
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "distutils.fancy_getopt._Option"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.fancy_getopt.FancyGetopt.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.fancy_getopt.FancyGetopt"
-        fully_qualified_name: "distutils.fancy_getopt.FancyGetopt"
-      }
-    }
-    parameters {
-      name: "option_table"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[builtins.list[UnboundType[_Option]],None]"
         kind: UNION
         args {
@@ -136,7 +73,6 @@ classes {
         fully_qualified_name: "distutils.fancy_getopt.FancyGetopt"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -180,126 +116,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  overloaded_methods {
-    name: "getopt"
-    fullname: "distutils.fancy_getopt.FancyGetopt.getopt"
-    definitions {
-      name: "getopt"
-      fully_qualified_name: "distutils.fancy_getopt.FancyGetopt.getopt"
-      return_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.list[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "distutils.fancy_getopt.OptionDummy"
-            fully_qualified_name: "distutils.fancy_getopt.OptionDummy"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._GR"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "distutils.fancy_getopt.FancyGetopt"
-          fully_qualified_name: "distutils.fancy_getopt.FancyGetopt"
-        }
-      }
-      parameters {
-        name: "args"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.list[builtins.str],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.list[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "getopt"
-      fully_qualified_name: "distutils.fancy_getopt.FancyGetopt.getopt"
-      return_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "distutils.fancy_getopt.FancyGetopt"
-          fully_qualified_name: "distutils.fancy_getopt.FancyGetopt"
-        }
-      }
-      parameters {
-        name: "args"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.list[builtins.str],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.list[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-      }
-      parameters {
-        name: "object"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
   }
   overloaded_methods {
     name: "getopt"
@@ -402,7 +224,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -449,182 +270,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "fancy_getopt"
-  fully_qualified_name: "distutils.fancy_getopt.fancy_getopt"
-  return_annotation {
-    pretty_printed_name: "Union[builtins.list[builtins.str],TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    args {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "distutils.fancy_getopt.OptionDummy"
-          fully_qualified_name: "distutils.fancy_getopt.OptionDummy"
-        }
-      }
-      fully_qualified_name: "distutils.fancy_getopt._GR"
-    }
-  }
-  parameters {
-    name: "options"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-  }
-  parameters {
-    name: "negative_opt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
-      }
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
-      }
-      fully_qualified_name: "typing.Mapping"
-    }
-  }
-  parameters {
-    name: "object"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.list[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "fancy_getopt"
@@ -735,7 +386,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

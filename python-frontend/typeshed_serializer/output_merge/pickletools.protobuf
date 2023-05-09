@@ -38,64 +38,6 @@ classes {
       name: "reader"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "pickletools._Reader"
-      }
-    }
-    parameters {
-      name: "doc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pickletools.ArgumentDescriptor.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pickletools.ArgumentDescriptor"
-        fully_qualified_name: "pickletools.ArgumentDescriptor"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "reader"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "UnboundType[_Reader]"
         kind: UNBOUND
       }
@@ -115,7 +57,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -129,7 +70,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -144,31 +84,12 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "reader"
-    fully_qualified_name: "pickletools.ArgumentDescriptor.reader"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "pickletools._Reader"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "reader"
@@ -191,7 +112,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -204,69 +124,6 @@ classes {
   name: "StackObject"
   fully_qualified_name: "pickletools.StackObject"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pickletools.StackObject.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pickletools.StackObject"
-        fully_qualified_name: "pickletools.StackObject"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "obtype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Type[Any],builtins.tuple[Type[Any]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[Any]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Type[Any]]"
-          args {
-            pretty_printed_name: "Type[Any]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-    }
-    parameters {
-      name: "doc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "pickletools.StackObject.__init__"
@@ -327,7 +184,68 @@ classes {
     valid_for: "37"
     valid_for: "38"
   }
-  valid_for: "27"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pickletools.StackObject.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pickletools.StackObject"
+        fully_qualified_name: "pickletools.StackObject"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "obtype"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[Any],builtins.tuple[Type[Any]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Type[Any]]"
+          args {
+            pretty_printed_name: "Type[Any]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -341,42 +259,10 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "obtype"
-    fully_qualified_name: "pickletools.StackObject.obtype"
-    type_annotation {
-      pretty_printed_name: "Union[Type[Any],builtins.tuple[Type[Any]]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[Any]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      args {
-        pretty_printed_name: "builtins.tuple[Type[Any]]"
-        args {
-          pretty_printed_name: "Type[Any]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-    }
-    valid_for: "27"
     valid_for: "39"
     valid_for: "310"
   }
@@ -409,13 +295,42 @@ classes {
     valid_for: "38"
   }
   attributes {
+    name: "obtype"
+    fully_qualified_name: "pickletools.StackObject.obtype"
+    type_annotation {
+      pretty_printed_name: "Union[Type[Any],builtins.tuple[Type[Any]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[Type[Any]]"
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
     name: "doc"
     fully_qualified_name: "pickletools.StackObject.doc"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -515,7 +430,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -523,7 +437,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -537,7 +450,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -552,7 +464,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -575,7 +486,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -594,7 +504,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -613,7 +522,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -628,7 +536,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -643,7 +550,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -663,27 +569,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_uint1"
-  fully_qualified_name: "pickletools.read_uint1"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -698,27 +583,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_uint2"
-  fully_qualified_name: "pickletools.read_uint2"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_uint2"
@@ -757,19 +621,24 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
+      pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       fully_qualified_name: "typing.IO"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
-  name: "read_int4"
-  fully_qualified_name: "pickletools.read_int4"
+  name: "read_uint4"
+  fully_qualified_name: "pickletools.read_uint4"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -794,51 +663,30 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "read_stringnl"
-  fully_qualified_name: "pickletools.read_stringnl"
+  name: "read_uint8"
+  fully_qualified_name: "pickletools.read_uint8"
   return_annotation {
-    pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-    kind: UNION
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
   parameters {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
+      pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       fully_qualified_name: "typing.IO"
     }
   }
-  parameters {
-    name: "decode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stripquotes"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "read_stringnl"
@@ -903,27 +751,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_stringnl_noescape"
-  fully_qualified_name: "pickletools.read_stringnl_noescape"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -938,27 +765,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_stringnl_noescape_pair"
-  fully_qualified_name: "pickletools.read_stringnl_noescape_pair"
-  return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_stringnl_noescape_pair"
@@ -997,27 +803,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_string1"
-  fully_qualified_name: "pickletools.read_string1"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -1032,27 +817,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_string4"
-  fully_qualified_name: "pickletools.read_string4"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_string4"
@@ -1081,29 +845,112 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "read_unicodestringnl"
-  fully_qualified_name: "pickletools.read_unicodestringnl"
+  name: "read_bytes1"
+  fully_qualified_name: "pickletools.read_bytes1"
   return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
+      pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       fully_qualified_name: "typing.IO"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_bytes4"
+  fully_qualified_name: "pickletools.read_bytes4"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_bytes8"
+  fully_qualified_name: "pickletools.read_bytes8"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "read_unicodestringnl"
   fully_qualified_name: "pickletools.read_unicodestringnl"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_unicodestring1"
+  fully_qualified_name: "pickletools.read_unicodestring1"
   return_annotation {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
@@ -1131,27 +978,6 @@ functions {
   name: "read_unicodestring4"
   fully_qualified_name: "pickletools.read_unicodestring4"
   return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_unicodestring4"
-  fully_qualified_name: "pickletools.read_unicodestring4"
-  return_annotation {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
@@ -1175,25 +1001,30 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "read_decimalnl_short"
-  fully_qualified_name: "pickletools.read_decimalnl_short"
+  name: "read_unicodestring8"
+  fully_qualified_name: "pickletools.read_unicodestring8"
   return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
   }
   parameters {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
+      pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       fully_qualified_name: "typing.IO"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "read_decimalnl_short"
@@ -1232,27 +1063,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_decimalnl_long"
-  fully_qualified_name: "pickletools.read_decimalnl_long"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -1267,27 +1077,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_floatnl"
-  fully_qualified_name: "pickletools.read_floatnl"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_floatnl"
@@ -1326,27 +1115,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_float8"
-  fully_qualified_name: "pickletools.read_float8"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -1361,27 +1129,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "read_long1"
-  fully_qualified_name: "pickletools.read_long1"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "read_long1"
@@ -1420,27 +1167,6 @@ functions {
     name: "f"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_long4"
-  fully_qualified_name: "pickletools.read_long4"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "typing.IO[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
@@ -1455,67 +1181,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "genops"
-  fully_qualified_name: "pickletools.genops"
-  return_annotation {
-    pretty_printed_name: "typing.Iterator[Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]]"
-    args {
-      pretty_printed_name: "Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "pickletools.OpcodeInfo"
-        fully_qualified_name: "pickletools.OpcodeInfo"
-      }
-      args {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      args {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    fully_qualified_name: "typing.Iterator"
-  }
-  parameters {
-    name: "pickle"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "genops"
@@ -1586,35 +1251,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "optimize"
-  fully_qualified_name: "pickletools.optimize"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "p"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "optimize"
@@ -1653,90 +1289,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "dis"
-  fully_qualified_name: "pickletools.dis"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "pickle"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-  }
-  parameters {
-    name: "out"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "memo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.MutableMapping[builtins.int,Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.MutableMapping[builtins.int,Any]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.MutableMapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "indentlevel"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "dis"
@@ -1840,702 +1392,6 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-functions {
-  name: "read_uint4"
-  fully_qualified_name: "pickletools.read_uint4"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_uint8"
-  fully_qualified_name: "pickletools.read_uint8"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_bytes1"
-  fully_qualified_name: "pickletools.read_bytes1"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_bytes4"
-  fully_qualified_name: "pickletools.read_bytes4"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_bytes8"
-  fully_qualified_name: "pickletools.read_bytes8"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_unicodestring1"
-  fully_qualified_name: "pickletools.read_unicodestring1"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "read_unicodestring8"
-  fully_qualified_name: "pickletools.read_unicodestring8"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "UP_TO_NEWLINE"
-  fully_qualified_name: "pickletools.UP_TO_NEWLINE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TAKEN_FROM_ARGUMENT1"
-  fully_qualified_name: "pickletools.TAKEN_FROM_ARGUMENT1"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TAKEN_FROM_ARGUMENT4"
-  fully_qualified_name: "pickletools.TAKEN_FROM_ARGUMENT4"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "uint1"
-  fully_qualified_name: "pickletools.uint1"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "uint2"
-  fully_qualified_name: "pickletools.uint2"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "int4"
-  fully_qualified_name: "pickletools.int4"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "stringnl"
-  fully_qualified_name: "pickletools.stringnl"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "stringnl_noescape"
-  fully_qualified_name: "pickletools.stringnl_noescape"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "stringnl_noescape_pair"
-  fully_qualified_name: "pickletools.stringnl_noescape_pair"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "string1"
-  fully_qualified_name: "pickletools.string1"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "string4"
-  fully_qualified_name: "pickletools.string4"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "unicodestringnl"
-  fully_qualified_name: "pickletools.unicodestringnl"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "unicodestring4"
-  fully_qualified_name: "pickletools.unicodestring4"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "decimalnl_short"
-  fully_qualified_name: "pickletools.decimalnl_short"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "decimalnl_long"
-  fully_qualified_name: "pickletools.decimalnl_long"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "floatnl"
-  fully_qualified_name: "pickletools.floatnl"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "float8"
-  fully_qualified_name: "pickletools.float8"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "long1"
-  fully_qualified_name: "pickletools.long1"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "long4"
-  fully_qualified_name: "pickletools.long4"
-  type_annotation {
-    pretty_printed_name: "pickletools.ArgumentDescriptor"
-    fully_qualified_name: "pickletools.ArgumentDescriptor"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pyint"
-  fully_qualified_name: "pickletools.pyint"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pylong"
-  fully_qualified_name: "pickletools.pylong"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pyinteger_or_bool"
-  fully_qualified_name: "pickletools.pyinteger_or_bool"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pybool"
-  fully_qualified_name: "pickletools.pybool"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pyfloat"
-  fully_qualified_name: "pickletools.pyfloat"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pystring"
-  fully_qualified_name: "pickletools.pystring"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pyunicode"
-  fully_qualified_name: "pickletools.pyunicode"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pynone"
-  fully_qualified_name: "pickletools.pynone"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pytuple"
-  fully_qualified_name: "pickletools.pytuple"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pylist"
-  fully_qualified_name: "pickletools.pylist"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "pydict"
-  fully_qualified_name: "pickletools.pydict"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "anyobject"
-  fully_qualified_name: "pickletools.anyobject"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "markobject"
-  fully_qualified_name: "pickletools.markobject"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "stackslice"
-  fully_qualified_name: "pickletools.stackslice"
-  type_annotation {
-    pretty_printed_name: "pickletools.StackObject"
-    fully_qualified_name: "pickletools.StackObject"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "opcodes"
-  fully_qualified_name: "pickletools.opcodes"
-  type_annotation {
-    pretty_printed_name: "builtins.list[pickletools.OpcodeInfo]"
-    args {
-      pretty_printed_name: "pickletools.OpcodeInfo"
-      fully_qualified_name: "pickletools.OpcodeInfo"
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
 vars {
   name: "__all__"
   fully_qualified_name: "pickletools.__all__"
@@ -2607,6 +1463,48 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "UP_TO_NEWLINE"
+  fully_qualified_name: "pickletools.UP_TO_NEWLINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TAKEN_FROM_ARGUMENT1"
+  fully_qualified_name: "pickletools.TAKEN_FROM_ARGUMENT1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TAKEN_FROM_ARGUMENT4"
+  fully_qualified_name: "pickletools.TAKEN_FROM_ARGUMENT4"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "TAKEN_FROM_ARGUMENT4U"
   fully_qualified_name: "pickletools.TAKEN_FROM_ARGUMENT4U"
   type_annotation {
@@ -2635,6 +1533,48 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "uint1"
+  fully_qualified_name: "pickletools.uint1"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "uint2"
+  fully_qualified_name: "pickletools.uint2"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "int4"
+  fully_qualified_name: "pickletools.int4"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "uint4"
   fully_qualified_name: "pickletools.uint4"
   type_annotation {
@@ -2651,6 +1591,76 @@ vars {
 vars {
   name: "uint8"
   fully_qualified_name: "pickletools.uint8"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "stringnl"
+  fully_qualified_name: "pickletools.stringnl"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "stringnl_noescape"
+  fully_qualified_name: "pickletools.stringnl_noescape"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "stringnl_noescape_pair"
+  fully_qualified_name: "pickletools.stringnl_noescape_pair"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "string1"
+  fully_qualified_name: "pickletools.string1"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "string4"
+  fully_qualified_name: "pickletools.string4"
   type_annotation {
     pretty_printed_name: "pickletools.ArgumentDescriptor"
     fully_qualified_name: "pickletools.ArgumentDescriptor"
@@ -2705,8 +1715,36 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "unicodestringnl"
+  fully_qualified_name: "pickletools.unicodestringnl"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "unicodestring1"
   fully_qualified_name: "pickletools.unicodestring1"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "unicodestring4"
+  fully_qualified_name: "pickletools.unicodestring4"
   type_annotation {
     pretty_printed_name: "pickletools.ArgumentDescriptor"
     fully_qualified_name: "pickletools.ArgumentDescriptor"
@@ -2733,6 +1771,160 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "decimalnl_short"
+  fully_qualified_name: "pickletools.decimalnl_short"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "decimalnl_long"
+  fully_qualified_name: "pickletools.decimalnl_long"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "floatnl"
+  fully_qualified_name: "pickletools.floatnl"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "float8"
+  fully_qualified_name: "pickletools.float8"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "long1"
+  fully_qualified_name: "pickletools.long1"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "long4"
+  fully_qualified_name: "pickletools.long4"
+  type_annotation {
+    pretty_printed_name: "pickletools.ArgumentDescriptor"
+    fully_qualified_name: "pickletools.ArgumentDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pyint"
+  fully_qualified_name: "pickletools.pyint"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pylong"
+  fully_qualified_name: "pickletools.pylong"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pyinteger_or_bool"
+  fully_qualified_name: "pickletools.pyinteger_or_bool"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pybool"
+  fully_qualified_name: "pickletools.pybool"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pyfloat"
+  fully_qualified_name: "pickletools.pyfloat"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "pybytes_or_str"
   fully_qualified_name: "pickletools.pybytes_or_str"
   type_annotation {
@@ -2747,8 +1939,92 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "pystring"
+  fully_qualified_name: "pickletools.pystring"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "pybytes"
   fully_qualified_name: "pickletools.pybytes"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pyunicode"
+  fully_qualified_name: "pickletools.pyunicode"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pynone"
+  fully_qualified_name: "pickletools.pynone"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pytuple"
+  fully_qualified_name: "pickletools.pytuple"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pylist"
+  fully_qualified_name: "pickletools.pylist"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pydict"
+  fully_qualified_name: "pickletools.pydict"
   type_annotation {
     pretty_printed_name: "pickletools.StackObject"
     fully_qualified_name: "pickletools.StackObject"
@@ -2780,6 +2056,66 @@ vars {
   type_annotation {
     pretty_printed_name: "pickletools.StackObject"
     fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "anyobject"
+  fully_qualified_name: "pickletools.anyobject"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "markobject"
+  fully_qualified_name: "pickletools.markobject"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "stackslice"
+  fully_qualified_name: "pickletools.stackslice"
+  type_annotation {
+    pretty_printed_name: "pickletools.StackObject"
+    fully_qualified_name: "pickletools.StackObject"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "opcodes"
+  fully_qualified_name: "pickletools.opcodes"
+  type_annotation {
+    pretty_printed_name: "builtins.list[pickletools.OpcodeInfo]"
+    args {
+      pretty_printed_name: "pickletools.OpcodeInfo"
+      fully_qualified_name: "pickletools.OpcodeInfo"
+    }
+    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"

@@ -4,23 +4,6 @@ classes {
   fully_qualified_name: "pipes.Template"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "pipes.Template.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pipes.Template"
-        fully_qualified_name: "pipes.Template"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "reset"
     fully_qualified_name: "pipes.Template.reset"
     return_annotation {
@@ -35,7 +18,6 @@ classes {
         fully_qualified_name: "pipes.Template"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -58,7 +40,6 @@ classes {
         fully_qualified_name: "pipes.Template"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -89,7 +70,6 @@ classes {
         fully_qualified_name: "builtins.bool"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -128,7 +108,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -167,50 +146,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "open"
-    fully_qualified_name: "pipes.Template.open"
-    return_annotation {
-      pretty_printed_name: "typing.IO[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pipes.Template"
-        fully_qualified_name: "pipes.Template"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "open"
@@ -254,39 +195,6 @@ classes {
     name: "copy"
     fully_qualified_name: "pipes.Template.copy"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pipes.Template"
-        fully_qualified_name: "pipes.Template"
-      }
-    }
-    parameters {
-      name: "infile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "outfile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "copy"
-    fully_qualified_name: "pipes.Template.copy"
-    return_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
@@ -321,30 +229,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "quote"
-  fully_qualified_name: "pipes.quote"
-  return_annotation {
-    pretty_printed_name: "typing.AnyStr"
-    kind: TYPE_VAR
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "quote"

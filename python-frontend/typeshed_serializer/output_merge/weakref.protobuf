@@ -1,40 +1,154 @@
 fully_qualified_name: "weakref"
 classes {
-  name: "WeakSet"
-  fully_qualified_name: "_weakrefset.WeakSet"
-  super_classes: "typing.MutableSet"
+  name: "CallableProxyType"
+  fully_qualified_name: "_weakref.CallableProxyType"
+  super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "_weakrefset.WeakSet.__init__"
+    name: "__getattr__"
+    fully_qualified_name: "_weakref.CallableProxyType.__getattr__"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "Any"
+      kind: ANY
     }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
+        pretty_printed_name: "_weakref.CallableProxyType[_weakref._C]"
         args {
-          pretty_printed_name: "_weakrefset._T"
+          pretty_printed_name: "_weakref._C"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "_weakrefset.WeakSet"
+        fully_qualified_name: "_weakref.CallableProxyType"
       }
     }
     parameters {
-      name: "data"
+      name: "attr"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__call__"
+    fully_qualified_name: "_weakref.CallableProxyType.__call__"
+    type_annotation {
+      pretty_printed_name: "_weakref._C"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ProxyType"
+  fully_qualified_name: "_weakref.ProxyType"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "_weakref.ProxyType.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_weakref.ProxyType[_weakref._T]"
+        args {
+          pretty_printed_name: "_weakref._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_weakref.ProxyType"
+      }
+    }
+    parameters {
+      name: "attr"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ReferenceType"
+  fully_qualified_name: "_weakref.ReferenceType"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "_weakref.ReferenceType.__new__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Iterable[_weakrefset._T],None]"
-        kind: UNION
+        pretty_printed_name: "Type[_weakref.ReferenceType[_weakref._T]]"
+        kind: TYPE
         args {
-          pretty_printed_name: "typing.Iterable[_weakrefset._T]"
+          pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
           args {
-            pretty_printed_name: "_weakrefset._T"
+            pretty_printed_name: "_weakref._T"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Iterable"
+          fully_qualified_name: "_weakref.ReferenceType"
+        }
+      }
+    }
+    parameters {
+      name: "__o"
+      type_annotation {
+        pretty_printed_name: "_weakref._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__callback"
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
         }
         args {
           pretty_printed_name: "None"
@@ -43,8 +157,112 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_weakref.ReferenceType.__call__"
+    return_annotation {
+      pretty_printed_name: "Union[_weakref._T,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_weakref._T"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+        args {
+          pretty_printed_name: "_weakref._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_weakref.ReferenceType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "_weakref.ReferenceType.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_weakref.ReferenceType[_weakref._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+          args {
+            pretty_printed_name: "_weakref._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_weakref.ReferenceType"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__callback__"
+    fully_qualified_name: "_weakref.ReferenceType.__callback__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "WeakSet"
+  fully_qualified_name: "_weakrefset.WeakSet"
+  super_classes: "typing.MutableSet"
   methods {
     name: "add"
     fully_qualified_name: "_weakrefset.WeakSet.add"
@@ -72,34 +290,12 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "clear"
-    fully_qualified_name: "_weakrefset.WeakSet.clear"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "discard"
@@ -128,30 +324,12 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "copy"
-    fully_qualified_name: "_weakrefset.WeakSet.copy"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "copy"
@@ -180,27 +358,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "pop"
-    fully_qualified_name: "_weakrefset.WeakSet.pop"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "remove"
     fully_qualified_name: "_weakrefset.WeakSet.remove"
     return_annotation {
@@ -227,7 +384,6 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -266,7 +422,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -299,7 +454,6 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -325,7 +479,6 @@ classes {
         fully_qualified_name: "_weakrefset.WeakSet"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -355,56 +508,12 @@ classes {
         fully_qualified_name: "_weakrefset.WeakSet"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__ior__"
-    fully_qualified_name: "_weakrefset.WeakSet.__ior__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset.WeakSet[Union[_weakrefset._S,_weakrefset._T]]"
-      args {
-        pretty_printed_name: "Union[_weakrefset._S,_weakrefset._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "_weakrefset._S"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "_weakrefset.WeakSet"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._S]"
-        args {
-          pretty_printed_name: "_weakrefset._S"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__ior__"
@@ -446,35 +555,6 @@ classes {
     name: "difference"
     fully_qualified_name: "_weakrefset.WeakSet.difference"
     return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "difference"
-    fully_qualified_name: "_weakrefset.WeakSet.difference"
-    return_annotation {
       pretty_printed_name: "UnboundType[Self]"
       kind: UNBOUND
     }
@@ -508,33 +588,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__sub__"
-    fully_qualified_name: "_weakrefset.WeakSet.__sub__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__sub__"
@@ -595,39 +648,6 @@ classes {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "difference_update"
-    fully_qualified_name: "_weakrefset.WeakSet.difference_update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
           pretty_printed_name: "Any"
@@ -642,33 +662,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__isub__"
-    fully_qualified_name: "_weakrefset.WeakSet.__isub__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__isub__"
@@ -710,35 +703,6 @@ classes {
     name: "intersection"
     fully_qualified_name: "_weakrefset.WeakSet.intersection"
     return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "intersection"
-    fully_qualified_name: "_weakrefset.WeakSet.intersection"
-    return_annotation {
       pretty_printed_name: "UnboundType[Self]"
       kind: UNBOUND
     }
@@ -772,33 +736,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__and__"
-    fully_qualified_name: "_weakrefset.WeakSet.__and__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__and__"
@@ -859,39 +796,6 @@ classes {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "intersection_update"
-    fully_qualified_name: "_weakrefset.WeakSet.intersection_update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
           pretty_printed_name: "Any"
@@ -906,33 +810,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__iand__"
-    fully_qualified_name: "_weakrefset.WeakSet.__iand__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__iand__"
@@ -1001,7 +878,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1038,7 +914,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1075,7 +950,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1114,7 +988,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1151,7 +1024,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1188,7 +1060,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1221,7 +1092,6 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1272,7 +1142,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1321,46 +1190,12 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "symmetric_difference_update"
-    fully_qualified_name: "_weakrefset.WeakSet.symmetric_difference_update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "symmetric_difference_update"
@@ -1399,49 +1234,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__ixor__"
-    fully_qualified_name: "_weakrefset.WeakSet.__ixor__"
-    return_annotation {
-      pretty_printed_name: "_weakrefset.WeakSet[Union[_weakrefset._S,_weakrefset._T]]"
-      args {
-        pretty_printed_name: "Union[_weakrefset._S,_weakrefset._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "_weakrefset._S"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "_weakrefset.WeakSet"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakrefset.WeakSet[_weakrefset._T]"
-        args {
-          pretty_printed_name: "_weakrefset._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakrefset.WeakSet"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[_weakrefset._S]"
-        args {
-          pretty_printed_name: "_weakrefset._S"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__ixor__"
@@ -1522,7 +1314,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1571,7 +1362,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1610,7 +1400,6 @@ classes {
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1731,7 +1520,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1740,205 +1528,37 @@ classes {
   valid_for: "310"
 }
 classes {
-  name: "CallableProxyType"
-  fully_qualified_name: "_weakref.CallableProxyType"
-  super_classes: "builtins.object"
+  name: "WeakMethod"
+  fully_qualified_name: "weakref.WeakMethod"
+  super_classes: "_weakref.ReferenceType"
   methods {
-    name: "__getattr__"
-    fully_qualified_name: "_weakref.CallableProxyType.__getattr__"
+    name: "__new__"
+    fully_qualified_name: "weakref.WeakMethod.__new__"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakref.CallableProxyType[_weakref._C]"
-        args {
-          pretty_printed_name: "_weakref._C"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.CallableProxyType"
-      }
-    }
-    parameters {
-      name: "attr"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  is_generic: true
-  valid_for: "27"
-}
-classes {
-  name: "CallableProxyType"
-  fully_qualified_name: "_weakref.CallableProxyType"
-  super_classes: "builtins.object"
-  methods {
-    name: "__getattr__"
-    fully_qualified_name: "_weakref.CallableProxyType.__getattr__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakref.CallableProxyType[_weakref._C]"
-        args {
-          pretty_printed_name: "_weakref._C"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.CallableProxyType"
-      }
-    }
-    parameters {
-      name: "attr"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_decorators: true
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "__call__"
-    fully_qualified_name: "_weakref.CallableProxyType.__call__"
-    type_annotation {
-      pretty_printed_name: "_weakref._C"
-      kind: TYPE_VAR
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "ProxyType"
-  fully_qualified_name: "_weakref.ProxyType"
-  super_classes: "builtins.object"
-  methods {
-    name: "__getattr__"
-    fully_qualified_name: "_weakref.ProxyType.__getattr__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakref.ProxyType[_weakref._T]"
-        args {
-          pretty_printed_name: "_weakref._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.ProxyType"
-      }
-    }
-    parameters {
-      name: "attr"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  is_generic: true
-  valid_for: "27"
-}
-classes {
-  name: "ProxyType"
-  fully_qualified_name: "_weakref.ProxyType"
-  super_classes: "builtins.object"
-  methods {
-    name: "__getattr__"
-    fully_qualified_name: "_weakref.ProxyType.__getattr__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_weakref.ProxyType[_weakref._T]"
-        args {
-          pretty_printed_name: "_weakref._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.ProxyType"
-      }
-    }
-    parameters {
-      name: "attr"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_decorators: true
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "ReferenceType"
-  fully_qualified_name: "_weakref.ReferenceType"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "_weakref.ReferenceType.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
+      name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+        pretty_printed_name: "Type[weakref.WeakMethod[weakref._CallableT]]"
+        kind: TYPE
         args {
-          pretty_printed_name: "_weakref._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
+          args {
+            pretty_printed_name: "weakref._CallableT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "weakref.WeakMethod"
         }
-        fully_qualified_name: "_weakref.ReferenceType"
       }
     }
     parameters {
-      name: "o"
+      name: "meth"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakref._T"
+        pretty_printed_name: "weakref._CallableT"
         kind: TYPE_VAR
       }
     }
@@ -1963,16 +1583,21 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__call__"
-    fully_qualified_name: "_weakref.ReferenceType.__call__"
+    fully_qualified_name: "weakref.WeakMethod.__call__"
     return_annotation {
-      pretty_printed_name: "Union[_weakref._T,None]"
+      pretty_printed_name: "Union[weakref._CallableT,None]"
       kind: UNION
       args {
-        pretty_printed_name: "_weakref._T"
+        pretty_printed_name: "weakref._CallableT"
         kind: TYPE_VAR
       }
       args {
@@ -1984,15 +1609,14 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
         args {
-          pretty_printed_name: "_weakref._T"
+          pretty_printed_name: "weakref._CallableT"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "_weakref.ReferenceType"
+        fully_qualified_name: "weakref.WeakMethod"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2001,75 +1625,29 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__hash__"
-    fully_qualified_name: "_weakref.ReferenceType.__hash__"
+    name: "__eq__"
+    fully_qualified_name: "weakref.WeakMethod.__eq__"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
         args {
-          pretty_printed_name: "_weakref._T"
+          pretty_printed_name: "weakref._CallableT"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "_weakref.ReferenceType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__new__"
-    fully_qualified_name: "_weakref.ReferenceType.__new__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[_weakref.ReferenceType[_weakref._T]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
-          args {
-            pretty_printed_name: "_weakref._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "_weakref.ReferenceType"
-        }
+        fully_qualified_name: "weakref.WeakMethod"
       }
     }
     parameters {
-      name: "__o"
+      name: "other"
       type_annotation {
-        pretty_printed_name: "_weakref._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
-    }
-    parameters {
-      name: "__callback"
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
     }
     valid_for: "35"
     valid_for: "36"
@@ -2079,72 +1657,44 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__class_getitem__"
-    fully_qualified_name: "_weakref.ReferenceType.__class_getitem__"
+    name: "__ne__"
+    fully_qualified_name: "weakref.WeakMethod.__ne__"
     return_annotation {
-      pretty_printed_name: "types.GenericAlias"
-      fully_qualified_name: "types.GenericAlias"
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "self"
       type_annotation {
-        pretty_printed_name: "Type[_weakref.ReferenceType[_weakref._T]]"
-        kind: TYPE
+        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
         args {
-          pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
-          args {
-            pretty_printed_name: "_weakref._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "_weakref.ReferenceType"
+          pretty_printed_name: "weakref._CallableT"
+          kind: TYPE_VAR
         }
+        fully_qualified_name: "weakref.WeakMethod"
       }
     }
     parameters {
-      name: "item"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "other"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
-    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "__callback__"
-    fully_qualified_name: "_weakref.ReferenceType.__callback__"
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "ReferenceError"
-  fully_qualified_name: "builtins.ReferenceError"
-  super_classes: "builtins.StandardError"
-  valid_for: "27"
 }
 classes {
   name: "WeakValueDictionary"
@@ -2172,44 +1722,12 @@ classes {
         fully_qualified_name: "weakref.WeakValueDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__getitem__"
-    return_annotation {
-      pretty_printed_name: "weakref._VT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__getitem__"
@@ -2246,44 +1764,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "v"
-      type_annotation {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__setitem__"
@@ -2351,37 +1831,6 @@ classes {
       }
     }
     parameters {
-      name: "v"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
       name: "key"
       type_annotation {
         pretty_printed_name: "weakref._KT"
@@ -2394,70 +1843,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "has_key"
-    fully_qualified_name: "weakref.WeakValueDictionary.has_key"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__contains__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__contains__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
-      name: "o"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__contains__"
@@ -2521,37 +1906,12 @@ classes {
         fully_qualified_name: "weakref.WeakValueDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "copy"
@@ -2584,7 +1944,6 @@ classes {
         fully_qualified_name: "weakref.WeakValueDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2593,15 +1952,11 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "keys"
-    fully_qualified_name: "weakref.WeakValueDictionary.keys"
+    name: "__deepcopy__"
+    fully_qualified_name: "weakref.WeakValueDictionary.__deepcopy__"
     return_annotation {
-      pretty_printed_name: "builtins.list[weakref._KT]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "builtins.list"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -2619,7 +1974,20 @@ classes {
         fully_qualified_name: "weakref.WeakValueDictionary"
       }
     }
-    valid_for: "27"
+    parameters {
+      name: "memo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "keys"
@@ -2659,35 +2027,6 @@ classes {
     name: "values"
     fully_qualified_name: "weakref.WeakValueDictionary.values"
     return_annotation {
-      pretty_printed_name: "builtins.list[weakref._VT]"
-      args {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "values"
-    fully_qualified_name: "weakref.WeakValueDictionary.values"
-    return_annotation {
       pretty_printed_name: "typing.Iterator[weakref._VT]"
       args {
         pretty_printed_name: "weakref._VT"
@@ -2717,43 +2056,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "weakref.WeakValueDictionary.items"
-    return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[weakref._KT,weakref._VT]]"
-      args {
-        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "items"
@@ -2796,101 +2098,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "iterkeys"
-    fully_qualified_name: "weakref.WeakValueDictionary.iterkeys"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._KT]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "itervalues"
-    fully_qualified_name: "weakref.WeakValueDictionary.itervalues"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._VT]"
-      args {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "iteritems"
-    fully_qualified_name: "weakref.WeakValueDictionary.iteritems"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[weakref._KT,weakref._VT]]"
-      args {
-        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "itervaluerefs"
@@ -2927,7 +2134,6 @@ classes {
         fully_qualified_name: "weakref.WeakValueDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2968,45 +2174,6 @@ classes {
           kind: TYPE_VAR
         }
         fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__deepcopy__"
-    fully_qualified_name: "weakref.WeakValueDictionary.__deepcopy__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakValueDictionary"
-      }
-    }
-    parameters {
-      name: "memo"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
       }
     }
     valid_for: "35"
@@ -3189,108 +2356,6 @@ classes {
     }
     valid_for: "39"
     valid_for: "310"
-  }
-  overloaded_methods {
-    name: "__init__"
-    fullname: "weakref.WeakValueDictionary.__init__"
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "weakref.WeakValueDictionary.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-          args {
-            pretty_printed_name: "weakref._KT"
-            kind: TYPE_VAR
-          }
-          args {
-            pretty_printed_name: "weakref._VT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "weakref.WeakValueDictionary"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "weakref.WeakValueDictionary.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "weakref.WeakValueDictionary[weakref._KT,weakref._VT]"
-          args {
-            pretty_printed_name: "weakref._KT"
-            kind: TYPE_VAR
-          }
-          args {
-            pretty_printed_name: "weakref._VT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "weakref.WeakValueDictionary"
-        }
-      }
-      parameters {
-        name: "__other"
-        type_annotation {
-          pretty_printed_name: "Union[typing.Mapping[weakref._KT,weakref._VT],typing.Iterable[Tuple[weakref._KT,weakref._VT]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.Mapping[weakref._KT,weakref._VT]"
-            args {
-              pretty_printed_name: "weakref._KT"
-              kind: TYPE_VAR
-            }
-            args {
-              pretty_printed_name: "weakref._VT"
-              kind: TYPE_VAR
-            }
-            fully_qualified_name: "typing.Mapping"
-          }
-          args {
-            pretty_printed_name: "typing.Iterable[Tuple[weakref._KT,weakref._VT]]"
-            args {
-              pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "weakref._KT"
-                kind: TYPE_VAR
-              }
-              args {
-                pretty_printed_name: "weakref._VT"
-                kind: TYPE_VAR
-              }
-            }
-            fully_qualified_name: "typing.Iterable"
-          }
-        }
-      }
-      parameters {
-        name: "kwargs"
-        kind: VAR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
   }
   overloaded_methods {
     name: "__init__"
@@ -3660,7 +2725,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3690,71 +2754,6 @@ classes {
   name: "KeyedRef"
   fully_qualified_name: "weakref.KeyedRef"
   super_classes: "_weakref.ReferenceType"
-  methods {
-    name: "__new__"
-    fully_qualified_name: "weakref.KeyedRef.__new__"
-    return_annotation {
-      pretty_printed_name: "weakref.KeyedRef[weakref._KT,weakref._T]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "weakref._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "weakref.KeyedRef"
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[weakref.KeyedRef[weakref._KT,weakref._T]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "weakref.KeyedRef[weakref._KT,weakref._T]"
-          args {
-            pretty_printed_name: "weakref._KT"
-            kind: TYPE_VAR
-          }
-          args {
-            pretty_printed_name: "weakref._T"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "weakref.KeyedRef"
-        }
-      }
-    }
-    parameters {
-      name: "ob"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__new__"
     fully_qualified_name: "weakref.KeyedRef.__new__"
@@ -3868,7 +2867,6 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3877,7 +2875,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3891,7 +2888,6 @@ classes {
       pretty_printed_name: "weakref._KT"
       kind: TYPE_VAR
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3926,44 +2922,12 @@ classes {
         fully_qualified_name: "weakref.WeakKeyDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "weakref.WeakKeyDictionary.__getitem__"
-    return_annotation {
-      pretty_printed_name: "weakref._VT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__getitem__"
@@ -4000,44 +2964,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "weakref.WeakKeyDictionary.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "v"
-      type_annotation {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__setitem__"
@@ -4105,37 +3031,6 @@ classes {
       }
     }
     parameters {
-      name: "v"
-      type_annotation {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "weakref.WeakKeyDictionary.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    parameters {
       name: "key"
       type_annotation {
         pretty_printed_name: "weakref._KT"
@@ -4148,70 +3043,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "has_key"
-    fully_qualified_name: "weakref.WeakKeyDictionary.has_key"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__contains__"
-    fully_qualified_name: "weakref.WeakKeyDictionary.__contains__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    parameters {
-      name: "o"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__contains__"
@@ -4275,37 +3106,12 @@ classes {
         fully_qualified_name: "weakref.WeakKeyDictionary"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "weakref.WeakKeyDictionary.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "copy"
@@ -4338,379 +3144,6 @@ classes {
         fully_qualified_name: "weakref.WeakKeyDictionary"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "keys"
-    fully_qualified_name: "weakref.WeakKeyDictionary.keys"
-    return_annotation {
-      pretty_printed_name: "builtins.list[weakref._KT]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "keys"
-    fully_qualified_name: "weakref.WeakKeyDictionary.keys"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._KT]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "values"
-    fully_qualified_name: "weakref.WeakKeyDictionary.values"
-    return_annotation {
-      pretty_printed_name: "builtins.list[weakref._VT]"
-      args {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "values"
-    fully_qualified_name: "weakref.WeakKeyDictionary.values"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._VT]"
-      args {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "weakref.WeakKeyDictionary.items"
-    return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[weakref._KT,weakref._VT]]"
-      args {
-        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "weakref.WeakKeyDictionary.items"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[weakref._KT,weakref._VT]]"
-      args {
-        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "iterkeys"
-    fully_qualified_name: "weakref.WeakKeyDictionary.iterkeys"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._KT]"
-      args {
-        pretty_printed_name: "weakref._KT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "itervalues"
-    fully_qualified_name: "weakref.WeakKeyDictionary.itervalues"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[weakref._VT]"
-      args {
-        pretty_printed_name: "weakref._VT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "iteritems"
-    fully_qualified_name: "weakref.WeakKeyDictionary.iteritems"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Tuple[weakref._KT,weakref._VT]]"
-      args {
-        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "iterkeyrefs"
-    fully_qualified_name: "weakref.WeakKeyDictionary.iterkeyrefs"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[_weakref.ReferenceType[weakref._KT]]"
-      args {
-        pretty_printed_name: "_weakref.ReferenceType[weakref._KT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.ReferenceType"
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "keyrefs"
-    fully_qualified_name: "weakref.WeakKeyDictionary.keyrefs"
-    return_annotation {
-      pretty_printed_name: "builtins.list[_weakref.ReferenceType[weakref._KT]]"
-      args {
-        pretty_printed_name: "_weakref.ReferenceType[weakref._KT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.ReferenceType"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
-        args {
-          pretty_printed_name: "weakref._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "weakref._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakKeyDictionary"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4747,6 +3180,154 @@ classes {
       type_annotation {
         pretty_printed_name: "Any"
         kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "weakref.WeakKeyDictionary.keys"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[weakref._KT]"
+      args {
+        pretty_printed_name: "weakref._KT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "weakref._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "weakref.WeakKeyDictionary"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "weakref.WeakKeyDictionary.values"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[weakref._VT]"
+      args {
+        pretty_printed_name: "weakref._VT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "weakref._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "weakref.WeakKeyDictionary"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "weakref.WeakKeyDictionary.items"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[weakref._KT,weakref._VT]]"
+      args {
+        pretty_printed_name: "Tuple[weakref._KT,weakref._VT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "weakref._VT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "weakref._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "weakref.WeakKeyDictionary"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keyrefs"
+    fully_qualified_name: "weakref.WeakKeyDictionary.keyrefs"
+    return_annotation {
+      pretty_printed_name: "builtins.list[_weakref.ReferenceType[weakref._KT]]"
+      args {
+        pretty_printed_name: "_weakref.ReferenceType[weakref._KT]"
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_weakref.ReferenceType"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "weakref.WeakKeyDictionary[weakref._KT,weakref._VT]"
+        args {
+          pretty_printed_name: "weakref._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "weakref._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "weakref.WeakKeyDictionary"
       }
     }
     valid_for: "35"
@@ -4986,7 +3567,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5297,7 +3877,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5322,175 +3901,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "WeakMethod"
-  fully_qualified_name: "weakref.WeakMethod"
-  super_classes: "_weakref.ReferenceType"
-  methods {
-    name: "__new__"
-    fully_qualified_name: "weakref.WeakMethod.__new__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[weakref.WeakMethod[weakref._CallableT]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
-          args {
-            pretty_printed_name: "weakref._CallableT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "weakref.WeakMethod"
-        }
-      }
-    }
-    parameters {
-      name: "meth"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref._CallableT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__call__"
-    fully_qualified_name: "weakref.WeakMethod.__call__"
-    return_annotation {
-      pretty_printed_name: "Union[weakref._CallableT,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "weakref._CallableT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
-        args {
-          pretty_printed_name: "weakref._CallableT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakMethod"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__eq__"
-    fully_qualified_name: "weakref.WeakMethod.__eq__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
-        args {
-          pretty_printed_name: "weakref._CallableT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakMethod"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__ne__"
-    fully_qualified_name: "weakref.WeakMethod.__ne__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "weakref.WeakMethod[weakref._CallableT]"
-        args {
-          pretty_printed_name: "weakref._CallableT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "weakref.WeakMethod"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 classes {
   name: "finalize"
@@ -5883,34 +4293,12 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "getweakrefs"
-  fully_qualified_name: "_weakref.getweakrefs"
-  return_annotation {
-    pretty_printed_name: "builtins.list[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "object"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "getweakrefs"
@@ -5952,95 +4340,6 @@ overloaded_functions {
       fully_qualified_name: "_weakref.CallableProxyType"
     }
     parameters {
-      name: "object"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakref._C"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "proxy"
-    fully_qualified_name: "_weakref.proxy"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "object"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakref._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  valid_for: "27"
-}
-overloaded_functions {
-  name: "proxy"
-  fullname: "_weakref.proxy"
-  definitions {
-    name: "proxy"
-    fully_qualified_name: "_weakref.proxy"
-    return_annotation {
-      pretty_printed_name: "_weakref.CallableProxyType[_weakref._C]"
-      args {
-        pretty_printed_name: "_weakref._C"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "_weakref.CallableProxyType"
-    }
-    parameters {
       name: "__object"
       type_annotation {
         pretty_printed_name: "_weakref._C"
@@ -6115,45 +4414,6 @@ overloaded_functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "ProxyTypes"
-  fully_qualified_name: "weakref.ProxyTypes"
-  type_annotation {
-    pretty_printed_name: "builtins.tuple[Type[Any]]"
-    args {
-      pretty_printed_name: "Type[Any]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  valid_for: "27"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ProxyTypes"
-  fully_qualified_name: "weakref.ProxyTypes"
-  type_annotation {
-    pretty_printed_name: "Tuple[builtins.type,Any]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.type"
-      fully_qualified_name: "builtins.type"
-    }
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
 }
 vars {
   name: "__all__"
@@ -6184,6 +4444,44 @@ vars {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ProxyTypes"
+  fully_qualified_name: "weakref.ProxyTypes"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.type,Any]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+vars {
+  name: "ProxyTypes"
+  fully_qualified_name: "weakref.ProxyTypes"
+  type_annotation {
+    pretty_printed_name: "builtins.tuple[Type[Any]]"
+    args {
+      pretty_printed_name: "Type[Any]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
   valid_for: "39"
   valid_for: "310"
 }

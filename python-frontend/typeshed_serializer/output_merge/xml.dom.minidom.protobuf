@@ -4,475 +4,6 @@ classes {
   fully_qualified_name: "xml.dom.minidom.Node"
   super_classes: "xml.dom.Node"
   methods {
-    name: "toxml"
-    fully_qualified_name: "xml.dom.minidom.Node.toxml"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "toprettyxml"
-    fully_qualified_name: "xml.dom.minidom.Node.toprettyxml"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "hasChildNodes"
-    fully_qualified_name: "xml.dom.minidom.Node.hasChildNodes"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "insertBefore"
-    fully_qualified_name: "xml.dom.minidom.Node.insertBefore"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "refChild"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "appendChild"
-    fully_qualified_name: "xml.dom.minidom.Node.appendChild"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "appendChild"
-    fully_qualified_name: "xml.dom.minidom.Node.appendChild"
-    return_annotation {
-      pretty_printed_name: "xml.dom.minidom._N"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom._N"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "replaceChild"
-    fully_qualified_name: "xml.dom.minidom.Node.replaceChild"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "removeChild"
-    fully_qualified_name: "xml.dom.minidom.Node.removeChild"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "normalize"
-    fully_qualified_name: "xml.dom.minidom.Node.normalize"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "cloneNode"
-    fully_qualified_name: "xml.dom.minidom.Node.cloneNode"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "deep"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isSupported"
-    fully_qualified_name: "xml.dom.minidom.Node.isSupported"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "feature"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "version"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isSameNode"
-    fully_qualified_name: "xml.dom.minidom.Node.isSameNode"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "getInterface"
-    fully_qualified_name: "xml.dom.minidom.Node.getInterface"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "feature"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "getUserData"
-    fully_qualified_name: "xml.dom.minidom.Node.getUserData"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "setUserData"
-    fully_qualified_name: "xml.dom.minidom.Node.setUserData"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "handler"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "unlink"
-    fully_qualified_name: "xml.dom.minidom.Node.unlink"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "xml.dom.minidom.Node.__enter__"
-    return_annotation {
-      pretty_printed_name: "xml.dom.minidom._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "xml.dom.minidom.Node.__enter__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "xml.dom.minidom.Node.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Node"
-        fully_qualified_name: "xml.dom.minidom.Node"
-      }
-    }
-    parameters {
-      name: "et"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "ev"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "tb"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "firstChild"
     fully_qualified_name: "xml.dom.minidom.Node.firstChild"
     return_annotation {
@@ -597,6 +128,347 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  methods {
+    name: "hasChildNodes"
+    fully_qualified_name: "xml.dom.minidom.Node.hasChildNodes"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "insertBefore"
+    fully_qualified_name: "xml.dom.minidom.Node.insertBefore"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "newChild"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "refChild"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "appendChild"
+    fully_qualified_name: "xml.dom.minidom.Node.appendChild"
+    return_annotation {
+      pretty_printed_name: "xml.dom.minidom._N"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom._N"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "replaceChild"
+    fully_qualified_name: "xml.dom.minidom.Node.replaceChild"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "newChild"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "oldChild"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "removeChild"
+    fully_qualified_name: "xml.dom.minidom.Node.removeChild"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "oldChild"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "normalize"
+    fully_qualified_name: "xml.dom.minidom.Node.normalize"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cloneNode"
+    fully_qualified_name: "xml.dom.minidom.Node.cloneNode"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "deep"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isSupported"
+    fully_qualified_name: "xml.dom.minidom.Node.isSupported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "feature"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isSameNode"
+    fully_qualified_name: "xml.dom.minidom.Node.isSameNode"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getInterface"
+    fully_qualified_name: "xml.dom.minidom.Node.getInterface"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "feature"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getUserData"
+    fully_qualified_name: "xml.dom.minidom.Node.getUserData"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setUserData"
+    fully_qualified_name: "xml.dom.minidom.Node.setUserData"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unlink"
+    fully_qualified_name: "xml.dom.minidom.Node.unlink"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "xml.dom.minidom.Node.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "xml.dom.minidom.Node.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "xml.dom.minidom.Node"
+        fully_qualified_name: "xml.dom.minidom.Node"
+      }
+    }
+    parameters {
+      name: "et"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "ev"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tb"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   overloaded_methods {
     name: "toxml"
     fullname: "xml.dom.minidom.Node.toxml"
@@ -1088,7 +960,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1110,22 +981,12 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "parentNode"
-    fully_qualified_name: "xml.dom.minidom.Node.parentNode"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "parentNode"
@@ -1145,15 +1006,6 @@ classes {
     name: "ownerDocument"
     fully_qualified_name: "xml.dom.minidom.Node.ownerDocument"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "ownerDocument"
-    fully_qualified_name: "xml.dom.minidom.Node.ownerDocument"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -1163,15 +1015,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nextSibling"
-    fully_qualified_name: "xml.dom.minidom.Node.nextSibling"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nextSibling"
@@ -1191,15 +1034,6 @@ classes {
     name: "previousSibling"
     fully_qualified_name: "xml.dom.minidom.Node.previousSibling"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "previousSibling"
-    fully_qualified_name: "xml.dom.minidom.Node.previousSibling"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -1214,15 +1048,6 @@ classes {
     name: "prefix"
     fully_qualified_name: "xml.dom.minidom.Node.prefix"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "prefix"
-    fully_qualified_name: "xml.dom.minidom.Node.prefix"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -1232,15 +1057,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Node.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -1276,7 +1092,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.DocumentFragment"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1284,22 +1099,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.DocumentFragment.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.DocumentFragment.nodeType"
@@ -1321,22 +1126,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.DocumentFragment.nodeValue"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeValue"
@@ -1356,15 +1151,6 @@ classes {
     name: "attributes"
     fully_qualified_name: "xml.dom.minidom.DocumentFragment.attributes"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.DocumentFragment.attributes"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -1379,15 +1165,6 @@ classes {
     name: "parentNode"
     fully_qualified_name: "xml.dom.minidom.DocumentFragment.parentNode"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "parentNode"
-    fully_qualified_name: "xml.dom.minidom.DocumentFragment.parentNode"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -1397,15 +1174,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.DocumentFragment.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -1426,82 +1194,6 @@ classes {
   name: "Attr"
   fully_qualified_name: "xml.dom.minidom.Attr"
   super_classes: "xml.dom.minidom.Node"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "xml.dom.minidom.Attr.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Attr"
-        fully_qualified_name: "xml.dom.minidom.Attr"
-      }
-    }
-    parameters {
-      name: "qName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "prefix"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "xml.dom.minidom.Attr.__init__"
@@ -1598,7 +1290,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Attr"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1648,7 +1339,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1662,22 +1352,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Attr.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeType"
@@ -1692,15 +1372,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.Attr.attributes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "attributes"
@@ -1723,22 +1394,12 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "ownerElement"
-    fully_qualified_name: "xml.dom.minidom.Attr.ownerElement"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "ownerElement"
@@ -1769,22 +1430,12 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Attr.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -1799,15 +1450,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.Attr.nodeName"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeName"
@@ -1830,7 +1472,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1845,22 +1486,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "prefix"
-    fully_qualified_name: "xml.dom.minidom.Attr.prefix"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "prefix"
@@ -1920,7 +1551,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1939,7 +1569,6 @@ classes {
       name: "index"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1954,7 +1583,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1969,7 +1597,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1988,7 +1615,6 @@ classes {
       name: "key"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2003,7 +1629,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2018,7 +1643,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2033,55 +1657,12 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "get"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.get"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "get"
@@ -2144,36 +1725,12 @@ classes {
         fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__eq__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__eq__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__eq__"
@@ -2220,29 +1777,6 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ge__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__ge__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
         pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
         fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
       }
@@ -2253,29 +1787,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__gt__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__gt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__gt__"
@@ -2322,29 +1833,6 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__le__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
         pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
         fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
       }
@@ -2373,29 +1861,6 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__lt__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__lt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
         pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
         fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
       }
@@ -2406,19 +1871,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__getitem__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "attname_or_tuple"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "__getitem__"
@@ -2489,36 +1941,6 @@ classes {
     parameters {
       name: "attname"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "value"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "attname"
-      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
@@ -2548,19 +1970,6 @@ classes {
   methods {
     name: "getNamedItem"
     fully_qualified_name: "xml.dom.minidom.NamedNodeMap.getNamedItem"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getNamedItem"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.getNamedItem"
     return_annotation {
       pretty_printed_name: "Union[xml.dom.minidom.Attr,None]"
       kind: UNION
@@ -2595,39 +2004,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getNamedItemNS"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.getNamedItemNS"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "getNamedItemNS"
@@ -2686,19 +2062,6 @@ classes {
   methods {
     name: "removeNamedItem"
     fully_qualified_name: "xml.dom.minidom.NamedNodeMap.removeNamedItem"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "removeNamedItem"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.removeNamedItem"
     return_annotation {
       pretty_printed_name: "xml.dom.minidom.Attr"
       fully_qualified_name: "xml.dom.minidom.Attr"
@@ -2725,39 +2088,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "removeNamedItemNS"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.removeNamedItemNS"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "removeNamedItemNS"
@@ -2808,19 +2138,6 @@ classes {
   methods {
     name: "setNamedItem"
     fully_qualified_name: "xml.dom.minidom.NamedNodeMap.setNamedItem"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setNamedItem"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.setNamedItem"
     return_annotation {
       pretty_printed_name: "xml.dom.minidom.Attr"
       fully_qualified_name: "xml.dom.minidom.Attr"
@@ -2851,19 +2168,6 @@ classes {
   methods {
     name: "setNamedItemNS"
     fully_qualified_name: "xml.dom.minidom.NamedNodeMap.setNamedItemNS"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setNamedItemNS"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.setNamedItemNS"
     return_annotation {
       pretty_printed_name: "xml.dom.minidom.Attr"
       fully_qualified_name: "xml.dom.minidom.Attr"
@@ -2890,29 +2194,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "xml.dom.minidom.NamedNodeMap.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.NamedNodeMap"
-        fully_qualified_name: "xml.dom.minidom.NamedNodeMap"
-      }
-    }
-    parameters {
-      name: "attname_or_tuple"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__delitem__"
@@ -2991,7 +2272,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3003,39 +2283,6 @@ classes {
   name: "TypeInfo"
   fully_qualified_name: "xml.dom.minidom.TypeInfo"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "xml.dom.minidom.TypeInfo.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.TypeInfo"
-        fully_qualified_name: "xml.dom.minidom.TypeInfo"
-      }
-    }
-    parameters {
-      name: "namespace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "xml.dom.minidom.TypeInfo.__init__"
@@ -3082,22 +2329,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "namespace"
-    fully_qualified_name: "xml.dom.minidom.TypeInfo.namespace"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "namespace"
     fully_qualified_name: "xml.dom.minidom.TypeInfo.namespace"
@@ -3124,15 +2361,6 @@ classes {
     name: "name"
     fully_qualified_name: "xml.dom.minidom.TypeInfo.name"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "name"
-    fully_qualified_name: "xml.dom.minidom.TypeInfo.name"
-    type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
@@ -3148,82 +2376,6 @@ classes {
   name: "Element"
   fully_qualified_name: "xml.dom.minidom.Element"
   super_classes: "xml.dom.minidom.Node"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "xml.dom.minidom.Element.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Element"
-        fully_qualified_name: "xml.dom.minidom.Element"
-      }
-    }
-    parameters {
-      name: "tagName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "prefix"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "xml.dom.minidom.Element.__init__"
@@ -3320,26 +2472,12 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Element"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getAttribute"
-    fully_qualified_name: "xml.dom.minidom.Element.getAttribute"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "attname"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "getAttribute"
@@ -3402,46 +2540,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "setAttribute"
-    fully_qualified_name: "xml.dom.minidom.Element.setAttribute"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Element"
-        fully_qualified_name: "xml.dom.minidom.Element"
-      }
-    }
-    parameters {
-      name: "attname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "setAttribute"
@@ -3520,26 +2624,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getAttributeNode"
-    fully_qualified_name: "xml.dom.minidom.Element.getAttributeNode"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "attrname"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "getAttributeNode"
@@ -3602,7 +2692,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3621,38 +2710,12 @@ classes {
       name: "attr"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "removeAttribute"
-    fully_qualified_name: "xml.dom.minidom.Element.removeAttribute"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Element"
-        fully_qualified_name: "xml.dom.minidom.Element"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "removeAttribute"
@@ -3715,7 +2778,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3734,7 +2796,6 @@ classes {
       name: "node"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3765,7 +2826,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3804,26 +2864,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getElementsByTagName"
-    fully_qualified_name: "xml.dom.minidom.Element.getElementsByTagName"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "getElementsByTagName"
@@ -3858,39 +2904,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getElementsByTagNameNS"
-    fully_qualified_name: "xml.dom.minidom.Element.getElementsByTagNameNS"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Element"
-        fully_qualified_name: "xml.dom.minidom.Element"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "getElementsByTagNameNS"
@@ -3933,58 +2946,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.Element.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Element"
-        fully_qualified_name: "xml.dom.minidom.Element"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -4062,7 +3023,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Element"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4093,7 +3053,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4132,7 +3091,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4163,7 +3121,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4196,22 +3153,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Element.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.Element.nodeType"
@@ -4230,15 +3177,6 @@ classes {
     name: "nodeValue"
     fully_qualified_name: "xml.dom.minidom.Element.nodeValue"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.Element.nodeValue"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -4253,15 +3191,6 @@ classes {
     name: "schemaType"
     fully_qualified_name: "xml.dom.minidom.Element.schemaType"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "schemaType"
-    fully_qualified_name: "xml.dom.minidom.Element.schemaType"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -4271,15 +3200,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "parentNode"
-    fully_qualified_name: "xml.dom.minidom.Element.parentNode"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "parentNode"
@@ -4302,7 +3222,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4311,13 +3230,18 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "prefix"
-    fully_qualified_name: "xml.dom.minidom.Element.prefix"
+    name: "nodeName"
+    fully_qualified_name: "xml.dom.minidom.Element.nodeName"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "prefix"
@@ -4348,22 +3272,12 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Element.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -4383,15 +3297,6 @@ classes {
     name: "nextSibling"
     fully_qualified_name: "xml.dom.minidom.Element.nextSibling"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nextSibling"
-    fully_qualified_name: "xml.dom.minidom.Element.nextSibling"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -4401,15 +3306,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "setAttributeNodeNS"
-    fully_qualified_name: "xml.dom.minidom.Element.setAttributeNodeNS"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "setAttributeNodeNS"
@@ -4429,31 +3325,8 @@ classes {
     name: "removeAttributeNodeNS"
     fully_qualified_name: "xml.dom.minidom.Element.removeAttributeNodeNS"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "removeAttributeNodeNS"
-    fully_qualified_name: "xml.dom.minidom.Element.removeAttributeNodeNS"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.Element.nodeName"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
     }
     valid_for: "35"
     valid_for: "36"
@@ -4467,31 +3340,6 @@ classes {
   name: "Childless"
   fully_qualified_name: "xml.dom.minidom.Childless"
   super_classes: "builtins.object"
-  methods {
-    name: "appendChild"
-    fully_qualified_name: "xml.dom.minidom.Childless.appendChild"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Childless"
-        fully_qualified_name: "xml.dom.minidom.Childless"
-      }
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "appendChild"
     fully_qualified_name: "xml.dom.minidom.Childless.appendChild"
@@ -4537,46 +3385,12 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Childless"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "insertBefore"
-    fully_qualified_name: "xml.dom.minidom.Childless.insertBefore"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Childless"
-        fully_qualified_name: "xml.dom.minidom.Childless"
-      }
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "refChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "insertBefore"
@@ -4615,31 +3429,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "removeChild"
-    fully_qualified_name: "xml.dom.minidom.Childless.removeChild"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Childless"
-        fully_qualified_name: "xml.dom.minidom.Childless"
-      }
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "removeChild"
@@ -4686,46 +3475,12 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Childless"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "replaceChild"
-    fully_qualified_name: "xml.dom.minidom.Childless.replaceChild"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Childless"
-        fully_qualified_name: "xml.dom.minidom.Childless"
-      }
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "replaceChild"
@@ -4765,7 +3520,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4776,15 +3530,6 @@ classes {
     name: "attributes"
     fully_qualified_name: "xml.dom.minidom.Childless.attributes"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.Childless.attributes"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -4794,15 +3539,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Childless.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -4822,15 +3558,6 @@ classes {
     name: "firstChild"
     fully_qualified_name: "xml.dom.minidom.Childless.firstChild"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "firstChild"
-    fully_qualified_name: "xml.dom.minidom.Childless.firstChild"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -4840,15 +3567,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "lastChild"
-    fully_qualified_name: "xml.dom.minidom.Childless.lastChild"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "lastChild"
@@ -4901,65 +3619,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.ProcessingInstruction"
-        fully_qualified_name: "xml.dom.minidom.ProcessingInstruction"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -5022,22 +3687,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.nodeType"
@@ -5056,15 +3711,6 @@ classes {
     name: "target"
     fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.target"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "target"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.target"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -5074,15 +3720,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "data"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.data"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "data"
@@ -5102,15 +3739,6 @@ classes {
     name: "nodeValue"
     fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.nodeValue"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.nodeValue"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -5120,15 +3748,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.ProcessingInstruction.nodeName"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeName"
@@ -5165,7 +3784,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.CharacterData"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5187,7 +3805,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.CharacterData"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5226,7 +3843,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5257,7 +3873,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5296,7 +3911,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5335,7 +3949,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5382,7 +3995,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5415,22 +4027,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "ownerDocument"
-    fully_qualified_name: "xml.dom.minidom.CharacterData.ownerDocument"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "ownerDocument"
     fully_qualified_name: "xml.dom.minidom.CharacterData.ownerDocument"
@@ -5444,15 +4046,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "previousSibling"
-    fully_qualified_name: "xml.dom.minidom.CharacterData.previousSibling"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "previousSibling"
@@ -5475,22 +4068,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.CharacterData.nodeValue"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeValue"
@@ -5522,65 +4105,12 @@ classes {
       name: "offset"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.Text.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Text"
-        fully_qualified_name: "xml.dom.minidom.Text"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -5654,7 +4184,6 @@ classes {
       name: "content"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -5712,22 +4241,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Text.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.Text.nodeType"
@@ -5749,22 +4268,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.Text.attributes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "attributes"
@@ -5779,15 +4288,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "data"
-    fully_qualified_name: "xml.dom.minidom.Text.data"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "data"
@@ -5831,65 +4331,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.Comment.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Comment"
-        fully_qualified_name: "xml.dom.minidom.Comment"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -5952,22 +4399,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Comment.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.Comment.nodeType"
@@ -5989,7 +4426,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6021,58 +4457,6 @@ classes {
       name: "writer"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.CDATASection.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.CDATASection"
-        fully_qualified_name: "xml.dom.minidom.CDATASection"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
         args {
           pretty_printed_name: "builtins.str"
@@ -6115,22 +4499,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.CDATASection.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.CDATASection.nodeType"
@@ -6152,7 +4526,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6189,22 +4562,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "xml.dom.minidom.ReadOnlySequentialNamedNodeMap.__len__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "__len__"
@@ -6238,7 +4601,6 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6277,7 +4639,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6296,7 +4657,6 @@ classes {
       name: "name_or_tuple"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6315,7 +4675,6 @@ classes {
       name: "index"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6346,7 +4705,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6385,7 +4743,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6416,7 +4773,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6447,7 +4803,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6480,7 +4835,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6492,7 +4846,6 @@ classes {
   name: "Identified"
   fully_qualified_name: "xml.dom.minidom.Identified"
   super_classes: "builtins.object"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6557,7 +4910,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -6576,65 +4928,12 @@ classes {
       name: "deep"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.DocumentType"
-        fully_qualified_name: "xml.dom.minidom.DocumentType"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -6697,22 +4996,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.DocumentType.nodeType"
@@ -6731,15 +5020,6 @@ classes {
     name: "nodeValue"
     fully_qualified_name: "xml.dom.minidom.DocumentType.nodeValue"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.nodeValue"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -6754,15 +5034,6 @@ classes {
     name: "name"
     fully_qualified_name: "xml.dom.minidom.DocumentType.name"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "name"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.name"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -6772,33 +5043,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "publicId"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.publicId"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "systemId"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.systemId"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "internalSubset"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.internalSubset"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "internalSubset"
@@ -6818,15 +5062,6 @@ classes {
     name: "entities"
     fully_qualified_name: "xml.dom.minidom.DocumentType.entities"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "entities"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.entities"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -6841,15 +5076,6 @@ classes {
     name: "notations"
     fully_qualified_name: "xml.dom.minidom.DocumentType.notations"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "notations"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.notations"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -6859,15 +5085,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.DocumentType.nodeName"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeName"
@@ -6936,38 +5153,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "appendChild"
-    fully_qualified_name: "xml.dom.minidom.Entity.appendChild"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Entity"
-        fully_qualified_name: "xml.dom.minidom.Entity"
-      }
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "appendChild"
@@ -6998,39 +5189,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "insertBefore"
-    fully_qualified_name: "xml.dom.minidom.Entity.insertBefore"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Entity"
-        fully_qualified_name: "xml.dom.minidom.Entity"
-      }
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "refChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "insertBefore"
@@ -7074,31 +5232,6 @@ classes {
     name: "removeChild"
     fully_qualified_name: "xml.dom.minidom.Entity.removeChild"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Entity"
-        fully_qualified_name: "xml.dom.minidom.Entity"
-      }
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "removeChild"
-    fully_qualified_name: "xml.dom.minidom.Entity.removeChild"
-    return_annotation {
       pretty_printed_name: "NoReturn"
       kind: UNINHABITED
     }
@@ -7124,39 +5257,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "replaceChild"
-    fully_qualified_name: "xml.dom.minidom.Entity.replaceChild"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Entity"
-        fully_qualified_name: "xml.dom.minidom.Entity"
-      }
-    }
-    parameters {
-      name: "newChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "oldChild"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "replaceChild"
@@ -7196,22 +5296,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.Entity.attributes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "attributes"
     fully_qualified_name: "xml.dom.minidom.Entity.attributes"
@@ -7225,15 +5315,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Entity.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeType"
@@ -7253,15 +5334,6 @@ classes {
     name: "nodeValue"
     fully_qualified_name: "xml.dom.minidom.Entity.nodeValue"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.Entity.nodeValue"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -7271,15 +5343,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "actualEncoding"
-    fully_qualified_name: "xml.dom.minidom.Entity.actualEncoding"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "actualEncoding"
@@ -7299,15 +5362,6 @@ classes {
     name: "encoding"
     fully_qualified_name: "xml.dom.minidom.Entity.encoding"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "encoding"
-    fully_qualified_name: "xml.dom.minidom.Entity.encoding"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -7317,15 +5371,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "version"
-    fully_qualified_name: "xml.dom.minidom.Entity.version"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "version"
@@ -7345,15 +5390,6 @@ classes {
     name: "nodeName"
     fully_qualified_name: "xml.dom.minidom.Entity.nodeName"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.Entity.nodeName"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -7368,15 +5404,6 @@ classes {
     name: "notationName"
     fully_qualified_name: "xml.dom.minidom.Entity.notationName"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "notationName"
-    fully_qualified_name: "xml.dom.minidom.Entity.notationName"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -7386,15 +5413,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Entity.childNodes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "childNodes"
@@ -7456,7 +5474,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -7464,22 +5481,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Notation.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "nodeType"
     fully_qualified_name: "xml.dom.minidom.Notation.nodeType"
@@ -7498,15 +5505,6 @@ classes {
     name: "nodeValue"
     fully_qualified_name: "xml.dom.minidom.Notation.nodeValue"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.Notation.nodeValue"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -7516,15 +5514,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeName"
-    fully_qualified_name: "xml.dom.minidom.Notation.nodeName"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeName"
@@ -7545,39 +5534,6 @@ classes {
   name: "DOMImplementation"
   fully_qualified_name: "xml.dom.minidom.DOMImplementation"
   super_classes: "xml.dom.xmlbuilder.DOMImplementationLS"
-  methods {
-    name: "hasFeature"
-    fully_qualified_name: "xml.dom.minidom.DOMImplementation.hasFeature"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.DOMImplementation"
-        fully_qualified_name: "xml.dom.minidom.DOMImplementation"
-      }
-    }
-    parameters {
-      name: "feature"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "version"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "hasFeature"
     fully_qualified_name: "xml.dom.minidom.DOMImplementation.hasFeature"
@@ -7623,47 +5579,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "createDocument"
-    fully_qualified_name: "xml.dom.minidom.DOMImplementation.createDocument"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.DOMImplementation"
-        fully_qualified_name: "xml.dom.minidom.DOMImplementation"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "qualifiedName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "doctype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "createDocument"
@@ -7739,47 +5654,6 @@ classes {
     name: "createDocumentType"
     fully_qualified_name: "xml.dom.minidom.DOMImplementation.createDocumentType"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.DOMImplementation"
-        fully_qualified_name: "xml.dom.minidom.DOMImplementation"
-      }
-    }
-    parameters {
-      name: "qualifiedName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "publicId"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "systemId"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "createDocumentType"
-    fully_qualified_name: "xml.dom.minidom.DOMImplementation.createDocumentType"
-    return_annotation {
       pretty_printed_name: "xml.dom.minidom.DocumentType"
       fully_qualified_name: "xml.dom.minidom.DocumentType"
     }
@@ -7833,19 +5707,6 @@ classes {
   methods {
     name: "getInterface"
     fully_qualified_name: "xml.dom.minidom.DOMImplementation.getInterface"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "feature"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getInterface"
-    fully_qualified_name: "xml.dom.minidom.DOMImplementation.getInterface"
     return_annotation {
       pretty_printed_name: "Union[UnboundType[Self],None]"
       kind: UNION
@@ -7881,7 +5742,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -7916,7 +5776,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -7935,7 +5794,6 @@ classes {
       name: "aname"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -7974,7 +5832,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -7989,7 +5846,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8004,7 +5860,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8023,7 +5878,6 @@ classes {
       name: "aname"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8062,7 +5916,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8070,22 +5923,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "tagName"
-    fully_qualified_name: "xml.dom.minidom.ElementInfo.tagName"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "tagName"
     fully_qualified_name: "xml.dom.minidom.ElementInfo.tagName"
@@ -8121,26 +5964,12 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Document"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "appendChild"
-    fully_qualified_name: "xml.dom.minidom.Document.appendChild"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "appendChild"
@@ -8183,7 +6012,6 @@ classes {
       name: "oldChild"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8206,7 +6034,6 @@ classes {
         fully_qualified_name: "xml.dom.minidom.Document"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8225,22 +6052,12 @@ classes {
       name: "deep"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "createDocumentFragment"
-    fully_qualified_name: "xml.dom.minidom.Document.createDocumentFragment"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "createDocumentFragment"
@@ -8263,31 +6080,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "createElement"
-    fully_qualified_name: "xml.dom.minidom.Document.createElement"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Document"
-        fully_qualified_name: "xml.dom.minidom.Document"
-      }
-    }
-    parameters {
-      name: "tagName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "createElement"
@@ -8322,19 +6114,6 @@ classes {
   methods {
     name: "createTextNode"
     fully_qualified_name: "xml.dom.minidom.Document.createTextNode"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "createTextNode"
-    fully_qualified_name: "xml.dom.minidom.Document.createTextNode"
     return_annotation {
       pretty_printed_name: "xml.dom.minidom.Text"
       fully_qualified_name: "xml.dom.minidom.Text"
@@ -8365,19 +6144,6 @@ classes {
   methods {
     name: "createCDATASection"
     fully_qualified_name: "xml.dom.minidom.Document.createCDATASection"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "createCDATASection"
-    fully_qualified_name: "xml.dom.minidom.Document.createCDATASection"
     return_annotation {
       pretty_printed_name: "xml.dom.minidom.CDATASection"
       fully_qualified_name: "xml.dom.minidom.CDATASection"
@@ -8404,19 +6170,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "createComment"
-    fully_qualified_name: "xml.dom.minidom.Document.createComment"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "createComment"
@@ -8463,7 +6216,6 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8494,7 +6246,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8533,7 +6284,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -8572,26 +6322,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getElementById"
-    fully_qualified_name: "xml.dom.minidom.Document.getElementById"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "id"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "getElementById"
@@ -8635,31 +6371,6 @@ classes {
     name: "getElementsByTagName"
     fully_qualified_name: "xml.dom.minidom.Document.getElementsByTagName"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Document"
-        fully_qualified_name: "xml.dom.minidom.Document"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getElementsByTagName"
-    fully_qualified_name: "xml.dom.minidom.Document.getElementsByTagName"
-    return_annotation {
       pretty_printed_name: "xml.dom.minicompat.NodeList[xml.dom.minidom.Element]"
       args {
         pretty_printed_name: "xml.dom.minidom.Element"
@@ -8689,39 +6400,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "getElementsByTagNameNS"
-    fully_qualified_name: "xml.dom.minidom.Document.getElementsByTagNameNS"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Document"
-        fully_qualified_name: "xml.dom.minidom.Document"
-      }
-    }
-    parameters {
-      name: "namespaceURI"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "localName"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "getElementsByTagNameNS"
@@ -8764,23 +6442,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "isSupported"
-    fully_qualified_name: "xml.dom.minidom.Document.isSupported"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "feature"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "version"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
   }
   methods {
     name: "isSupported"
@@ -8843,82 +6504,12 @@ classes {
       name: "deep"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "writexml"
-    fully_qualified_name: "xml.dom.minidom.Document.writexml"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.minidom.Document"
-        fully_qualified_name: "xml.dom.minidom.Document"
-      }
-    }
-    parameters {
-      name: "writer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "indent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "addindent"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newl"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "writexml"
@@ -9126,7 +6717,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -9134,22 +6724,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "implementation"
-    fully_qualified_name: "xml.dom.minidom.Document.implementation"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "implementation"
     fully_qualified_name: "xml.dom.minidom.Document.implementation"
@@ -9163,15 +6743,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeType"
-    fully_qualified_name: "xml.dom.minidom.Document.nodeType"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeType"
@@ -9194,22 +6765,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nodeValue"
-    fully_qualified_name: "xml.dom.minidom.Document.nodeValue"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nodeValue"
@@ -9229,15 +6790,6 @@ classes {
     name: "attributes"
     fully_qualified_name: "xml.dom.minidom.Document.attributes"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "attributes"
-    fully_qualified_name: "xml.dom.minidom.Document.attributes"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9247,15 +6799,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "parentNode"
-    fully_qualified_name: "xml.dom.minidom.Document.parentNode"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "parentNode"
@@ -9275,15 +6818,6 @@ classes {
     name: "previousSibling"
     fully_qualified_name: "xml.dom.minidom.Document.previousSibling"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "previousSibling"
-    fully_qualified_name: "xml.dom.minidom.Document.previousSibling"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9293,15 +6827,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "nextSibling"
-    fully_qualified_name: "xml.dom.minidom.Document.nextSibling"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "nextSibling"
@@ -9321,15 +6846,6 @@ classes {
     name: "actualEncoding"
     fully_qualified_name: "xml.dom.minidom.Document.actualEncoding"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "actualEncoding"
-    fully_qualified_name: "xml.dom.minidom.Document.actualEncoding"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9339,15 +6855,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "encoding"
-    fully_qualified_name: "xml.dom.minidom.Document.encoding"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "encoding"
@@ -9375,15 +6882,6 @@ classes {
     name: "standalone"
     fully_qualified_name: "xml.dom.minidom.Document.standalone"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "standalone"
-    fully_qualified_name: "xml.dom.minidom.Document.standalone"
-    type_annotation {
       pretty_printed_name: "Union[builtins.bool,None]"
       kind: UNION
       args {
@@ -9406,15 +6904,6 @@ classes {
     name: "version"
     fully_qualified_name: "xml.dom.minidom.Document.version"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "version"
-    fully_qualified_name: "xml.dom.minidom.Document.version"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9432,22 +6921,12 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "errorHandler"
-    fully_qualified_name: "xml.dom.minidom.Document.errorHandler"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "errorHandler"
@@ -9467,15 +6946,6 @@ classes {
     name: "documentURI"
     fully_qualified_name: "xml.dom.minidom.Document.documentURI"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "documentURI"
-    fully_qualified_name: "xml.dom.minidom.Document.documentURI"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9485,15 +6955,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "doctype"
-    fully_qualified_name: "xml.dom.minidom.Document.doctype"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "doctype"
@@ -9521,15 +6982,6 @@ classes {
     name: "childNodes"
     fully_qualified_name: "xml.dom.minidom.Document.childNodes"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "childNodes"
-    fully_qualified_name: "xml.dom.minidom.Document.childNodes"
-    type_annotation {
       pretty_printed_name: "UnboundType[Incomplete]"
       kind: UNBOUND
     }
@@ -9539,15 +6991,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "documentElement"
-    fully_qualified_name: "xml.dom.minidom.Document.documentElement"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
   }
   attributes {
     name: "documentElement"
@@ -9563,69 +7006,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-functions {
-  name: "parse"
-  fully_qualified_name: "xml.dom.minidom.parse"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[Any]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.IO[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-  }
-  parameters {
-    name: "parser"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[xml.sax.xmlreader.XMLReader,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
-        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "parse"
@@ -9707,48 +7087,6 @@ functions {
   name: "parseString"
   fully_qualified_name: "xml.dom.minidom.parseString"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "string"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  parameters {
-    name: "parser"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[xml.sax.xmlreader.XMLReader,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
-        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "parseString"
-  fully_qualified_name: "xml.dom.minidom.parseString"
-  return_annotation {
     pretty_printed_name: "xml.dom.minidom.Document"
     fully_qualified_name: "xml.dom.minidom.Document"
   }
@@ -9795,16 +7133,6 @@ functions {
 functions {
   name: "getDOMImplementation"
   fully_qualified_name: "xml.dom.minidom.getDOMImplementation"
-  parameters {
-    name: "features"
-    kind: POSITIONAL_OR_KEYWORD
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "getDOMImplementation"
-  fully_qualified_name: "xml.dom.minidom.getDOMImplementation"
   return_annotation {
     pretty_printed_name: "Union[xml.dom.minidom.DOMImplementation,None]"
     kind: UNION
@@ -9837,7 +7165,6 @@ vars {
   name: "xml"
   fully_qualified_name: "xml"
   is_imported_module: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

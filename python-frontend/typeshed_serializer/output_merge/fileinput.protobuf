@@ -1,324 +1,37 @@
 fully_qualified_name: "fileinput"
 classes {
-  name: "FileInput"
-  fully_qualified_name: "fileinput.FileInput"
-  super_classes: "typing.Iterable"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "fileinput.FileInput.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    parameters {
-      name: "files"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.unicode,typing.Iterable[builtins.unicode]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "inplace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "backup"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "openhook"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__del__"
-    fully_qualified_name: "fileinput.FileInput.__del__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "fileinput.FileInput.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "fileinput.FileInput.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[typing.AnyStr]"
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__next__"
-    fully_qualified_name: "fileinput.FileInput.__next__"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "fileinput.FileInput.__getitem__"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    parameters {
-      name: "i"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "nextfile"
-    fully_qualified_name: "fileinput.FileInput.nextfile"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
+  name: "_HasReadlineAndFileno"
+  fully_qualified_name: "fileinput._HasReadlineAndFileno"
+  super_classes: "builtins.object"
   methods {
     name: "readline"
-    fully_qualified_name: "fileinput.FileInput.readline"
+    fully_qualified_name: "fileinput._HasReadlineAndFileno.readline"
     return_annotation {
-      pretty_printed_name: "typing.AnyStr"
+      pretty_printed_name: "_typeshed.AnyStr_co"
       kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
         args {
-          pretty_printed_name: "typing.AnyStr"
+          pretty_printed_name: "_typeshed.AnyStr_co"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "fileinput.FileInput"
+        fully_qualified_name: "fileinput._HasReadlineAndFileno"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "filename"
-    fully_qualified_name: "fileinput.FileInput.filename"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "lineno"
-    fully_qualified_name: "fileinput.FileInput.lineno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "filelineno"
-    fully_qualified_name: "fileinput.FileInput.filelineno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "fileno"
-    fully_qualified_name: "fileinput.FileInput.fileno"
+    fully_qualified_name: "fileinput._HasReadlineAndFileno.fileno"
     return_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
@@ -327,60 +40,29 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
         args {
-          pretty_printed_name: "typing.AnyStr"
+          pretty_printed_name: "_typeshed.AnyStr_co"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "fileinput.FileInput"
+        fully_qualified_name: "fileinput._HasReadlineAndFileno"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "isfirstline"
-    fully_qualified_name: "fileinput.FileInput.isfirstline"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isstdin"
-    fully_qualified_name: "fileinput.FileInput.isstdin"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "FileInput"
@@ -2139,158 +1821,6 @@ classes {
   valid_for: "39"
   valid_for: "310"
 }
-classes {
-  name: "_HasReadlineAndFileno"
-  fully_qualified_name: "fileinput._HasReadlineAndFileno"
-  super_classes: "builtins.object"
-  methods {
-    name: "readline"
-    fully_qualified_name: "fileinput._HasReadlineAndFileno.readline"
-    return_annotation {
-      pretty_printed_name: "_typeshed.AnyStr_co"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
-        args {
-          pretty_printed_name: "_typeshed.AnyStr_co"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput._HasReadlineAndFileno"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "fileinput._HasReadlineAndFileno.fileno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
-        args {
-          pretty_printed_name: "_typeshed.AnyStr_co"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput._HasReadlineAndFileno"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  is_protocol: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "input"
-  fully_qualified_name: "fileinput.input"
-  return_annotation {
-    pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "fileinput.FileInput"
-  }
-  parameters {
-    name: "files"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,typing.Iterable[builtins.unicode],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "typing.Iterable[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "inplace"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "backup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "openhook"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
 functions {
   name: "close"
   fully_qualified_name: "fileinput.close"
@@ -2298,7 +1828,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2313,7 +1842,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2328,7 +1856,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2343,7 +1870,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2358,7 +1884,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2373,7 +1898,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2388,7 +1912,6 @@ functions {
     pretty_printed_name: "builtins.bool"
     fully_qualified_name: "builtins.bool"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2403,42 +1926,12 @@ functions {
     pretty_printed_name: "builtins.bool"
     fully_qualified_name: "builtins.bool"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "hook_compressed"
-  fully_qualified_name: "fileinput.hook_compressed"
-  return_annotation {
-    pretty_printed_name: "typing.IO[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "typing.IO"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "hook_compressed"
@@ -2535,27 +2028,6 @@ functions {
     has_default: true
   }
   valid_for: "310"
-}
-functions {
-  name: "hook_encoded"
-  fully_qualified_name: "fileinput.hook_encoded"
-  return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "hook_encoded"

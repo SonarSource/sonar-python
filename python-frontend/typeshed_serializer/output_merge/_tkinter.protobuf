@@ -3,30 +3,6 @@ classes {
   name: "Tcl_Obj"
   fully_qualified_name: "_tkinter.Tcl_Obj"
   super_classes: "builtins.object"
-  valid_for: "27"
-  attributes {
-    name: "string"
-    fully_qualified_name: "_tkinter.Tcl_Obj.string"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "typename"
-    fully_qualified_name: "_tkinter.Tcl_Obj.typename"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "Tcl_Obj"
-  fully_qualified_name: "_tkinter.Tcl_Obj"
-  super_classes: "builtins.object"
   methods {
     name: "string"
     fully_qualified_name: "_tkinter.Tcl_Obj.string"
@@ -211,345 +187,12 @@ classes {
   name: "TclError"
   fully_qualified_name: "_tkinter.TclError"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "TkappType"
-  fully_qualified_name: "_tkinter.TkappType"
-  super_classes: "builtins.object"
-  methods {
-    name: "call"
-    fully_qualified_name: "_tkinter.TkappType.call"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_tkinter.TkappType"
-        fully_qualified_name: "_tkinter.TkappType"
-      }
-    }
-    parameters {
-      name: "__command"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "eval"
-    fully_qualified_name: "_tkinter.TkappType.eval"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_tkinter.TkappType"
-        fully_qualified_name: "_tkinter.TkappType"
-      }
-    }
-    parameters {
-      name: "__script"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "adderrorinfo"
-    fully_qualified_name: "_tkinter.TkappType.adderrorinfo"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "createcommand"
-    fully_qualified_name: "_tkinter.TkappType.createcommand"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "createfilehandler"
-    fully_qualified_name: "_tkinter.TkappType.createfilehandler"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "createtimerhandler"
-    fully_qualified_name: "_tkinter.TkappType.createtimerhandler"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "deletecommand"
-    fully_qualified_name: "_tkinter.TkappType.deletecommand"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "deletefilehandler"
-    fully_qualified_name: "_tkinter.TkappType.deletefilehandler"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "dooneevent"
-    fully_qualified_name: "_tkinter.TkappType.dooneevent"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "evalfile"
-    fully_qualified_name: "_tkinter.TkappType.evalfile"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "exprboolean"
-    fully_qualified_name: "_tkinter.TkappType.exprboolean"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "exprdouble"
-    fully_qualified_name: "_tkinter.TkappType.exprdouble"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "exprlong"
-    fully_qualified_name: "_tkinter.TkappType.exprlong"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "exprstring"
-    fully_qualified_name: "_tkinter.TkappType.exprstring"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "getboolean"
-    fully_qualified_name: "_tkinter.TkappType.getboolean"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "getdouble"
-    fully_qualified_name: "_tkinter.TkappType.getdouble"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "getint"
-    fully_qualified_name: "_tkinter.TkappType.getint"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "getvar"
-    fully_qualified_name: "_tkinter.TkappType.getvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "globalgetvar"
-    fully_qualified_name: "_tkinter.TkappType.globalgetvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "globalsetvar"
-    fully_qualified_name: "_tkinter.TkappType.globalsetvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "globalunsetvar"
-    fully_qualified_name: "_tkinter.TkappType.globalunsetvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "interpaddr"
-    fully_qualified_name: "_tkinter.TkappType.interpaddr"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "loadtk"
-    fully_qualified_name: "_tkinter.TkappType.loadtk"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "mainloop"
-    fully_qualified_name: "_tkinter.TkappType.mainloop"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "quit"
-    fully_qualified_name: "_tkinter.TkappType.quit"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "record"
-    fully_qualified_name: "_tkinter.TkappType.record"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "setvar"
-    fully_qualified_name: "_tkinter.TkappType.setvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "split"
-    fully_qualified_name: "_tkinter.TkappType.split"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "splitlist"
-    fully_qualified_name: "_tkinter.TkappType.splitlist"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "unsetvar"
-    fully_qualified_name: "_tkinter.TkappType.unsetvar"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "wantobjects"
-    fully_qualified_name: "_tkinter.TkappType.wantobjects"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "willdispatch"
-    fully_qualified_name: "_tkinter.TkappType.willdispatch"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "TkappType"
@@ -1480,7 +1123,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1499,7 +1141,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1518,7 +1159,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1537,7 +1177,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1556,7 +1195,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1575,7 +1213,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1594,7 +1231,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1613,7 +1249,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1632,7 +1267,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1647,7 +1281,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1662,56 +1295,10 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "TkttType"
-  fully_qualified_name: "_tkinter.TkttType"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "_flatten"
-  fully_qualified_name: "_tkinter._flatten"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "create"
-  fully_qualified_name: "_tkinter.create"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "getbusywaitinterval"
-  fully_qualified_name: "_tkinter.getbusywaitinterval"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-}
-vars {
-  name: "setbusywaitinterval"
-  fully_qualified_name: "_tkinter.setbusywaitinterval"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
 }

@@ -1,1505 +1,5 @@
 fully_qualified_name: "typing_extensions"
 classes {
-  name: "ContextManager"
-  fully_qualified_name: "typing.ContextManager"
-  super_classes: "builtins.object"
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "typing.ContextManager.__enter__"
-    return_annotation {
-      pretty_printed_name: "typing._T_co"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing.ContextManager[typing._T_co]"
-        args {
-          pretty_printed_name: "typing._T_co"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.ContextManager"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "typing.ContextManager.__exit__"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.bool,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing.ContextManager[typing._T_co]"
-        args {
-          pretty_printed_name: "typing._T_co"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.ContextManager"
-      }
-    }
-    parameters {
-      name: "__exc_type"
-      type_annotation {
-        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "__exc_value"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.BaseException,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.BaseException"
-          fully_qualified_name: "builtins.BaseException"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "__traceback"
-      type_annotation {
-        pretty_printed_name: "Union[types.TracebackType,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "types.TracebackType"
-          fully_qualified_name: "types.TracebackType"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  has_decorators: true
-  is_generic: true
-  is_protocol: true
-  valid_for: "27"
-}
-classes {
-  name: "_SpecialForm"
-  fully_qualified_name: "typing_extensions._SpecialForm"
-  super_classes: "builtins.object"
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "typing_extensions._SpecialForm.__getitem__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._SpecialForm"
-        fully_qualified_name: "typing_extensions._SpecialForm"
-      }
-    }
-    parameters {
-      name: "typeargs"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "typing_extensions._SpecialForm.__getitem__"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._SpecialForm"
-        fully_qualified_name: "typing_extensions._SpecialForm"
-      }
-    }
-    parameters {
-      name: "parameters"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__or__"
-    fully_qualified_name: "typing_extensions._SpecialForm.__or__"
-    return_annotation {
-      pretty_printed_name: "typing_extensions._SpecialForm"
-      fully_qualified_name: "typing_extensions._SpecialForm"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._SpecialForm"
-        fully_qualified_name: "typing_extensions._SpecialForm"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "310"
-  }
-  methods {
-    name: "__ror__"
-    fully_qualified_name: "typing_extensions._SpecialForm.__ror__"
-    return_annotation {
-      pretty_printed_name: "typing_extensions._SpecialForm"
-      fully_qualified_name: "typing_extensions._SpecialForm"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._SpecialForm"
-        fully_qualified_name: "typing_extensions._SpecialForm"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_TypedDict"
-  fully_qualified_name: "typing_extensions._TypedDict"
-  super_classes: "typing.Mapping"
-  methods {
-    name: "copy"
-    fully_qualified_name: "typing_extensions._TypedDict.copy"
-    return_annotation {
-      pretty_printed_name: "typing_extensions._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setdefault"
-    fully_qualified_name: "typing_extensions._TypedDict.setdefault"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "NoReturn"
-        kind: UNINHABITED
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pop"
-    fully_qualified_name: "typing_extensions._TypedDict.pop"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "NoReturn"
-        kind: UNINHABITED
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "typing_extensions._TypedDict.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "__m"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "has_key"
-    fully_qualified_name: "typing_extensions._TypedDict.has_key"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "viewitems"
-    fully_qualified_name: "typing_extensions._TypedDict.viewitems"
-    return_annotation {
-      pretty_printed_name: "typing.ItemsView[builtins.str,builtins.object]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      fully_qualified_name: "typing.ItemsView"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "viewkeys"
-    fully_qualified_name: "typing_extensions._TypedDict.viewkeys"
-    return_annotation {
-      pretty_printed_name: "typing.KeysView[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.KeysView"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "viewvalues"
-    fully_qualified_name: "typing_extensions._TypedDict.viewvalues"
-    return_annotation {
-      pretty_printed_name: "typing.ValuesView[builtins.object]"
-      args {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      fully_qualified_name: "typing.ValuesView"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "typing_extensions._TypedDict.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "NoReturn"
-        kind: UNINHABITED
-      }
-    }
-    valid_for: "27"
-  }
-  has_metaclass: true
-  valid_for: "27"
-}
-classes {
-  name: "_TypedDict"
-  fully_qualified_name: "typing_extensions._TypedDict"
-  super_classes: "typing.Mapping"
-  methods {
-    name: "copy"
-    fully_qualified_name: "typing_extensions._TypedDict.copy"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "setdefault"
-    fully_qualified_name: "typing_extensions._TypedDict.setdefault"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[Never]"
-        kind: UNBOUND
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "pop"
-    fully_qualified_name: "typing_extensions._TypedDict.pop"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[Never]"
-        kind: UNBOUND
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "typing_extensions._TypedDict.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "__m"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "items"
-    fully_qualified_name: "typing_extensions._TypedDict.items"
-    return_annotation {
-      pretty_printed_name: "_collections_abc.dict_items[builtins.str,builtins.object]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      fully_qualified_name: "_collections_abc.dict_items"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "keys"
-    fully_qualified_name: "typing_extensions._TypedDict.keys"
-    return_annotation {
-      pretty_printed_name: "_collections_abc.dict_keys[builtins.str,builtins.object]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      fully_qualified_name: "_collections_abc.dict_keys"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "values"
-    fully_qualified_name: "typing_extensions._TypedDict.values"
-    return_annotation {
-      pretty_printed_name: "_collections_abc.dict_values[builtins.str,builtins.object]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      fully_qualified_name: "_collections_abc.dict_values"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "typing_extensions._TypedDict.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "k"
-      type_annotation {
-        pretty_printed_name: "UnboundType[Never]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__or__"
-    fully_qualified_name: "typing_extensions._TypedDict.__or__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "__value"
-      type_annotation {
-        pretty_printed_name: "UnboundType[Self]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__ior__"
-    fully_qualified_name: "typing_extensions._TypedDict.__ior__"
-    return_annotation {
-      pretty_printed_name: "UnboundType[Self]"
-      kind: UNBOUND
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "typing_extensions._TypedDict"
-        fully_qualified_name: "typing_extensions._TypedDict"
-      }
-    }
-    parameters {
-      name: "__value"
-      type_annotation {
-        pretty_printed_name: "UnboundType[Self]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_decorators: true
-  has_metaclass: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "__required_keys__"
-    fully_qualified_name: "typing_extensions._TypedDict.__required_keys__"
-    type_annotation {
-      pretty_printed_name: "builtins.frozenset[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.frozenset"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "__optional_keys__"
-    fully_qualified_name: "typing_extensions._TypedDict.__optional_keys__"
-    type_annotation {
-      pretty_printed_name: "builtins.frozenset[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.frozenset"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "__total__"
-    fully_qualified_name: "typing_extensions._TypedDict.__total__"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "SupportsIndex"
-  fully_qualified_name: "typing_extensions.SupportsIndex"
-  super_classes: "builtins.object"
-  methods {
-    name: "__index__"
-    fully_qualified_name: "typing_extensions.SupportsIndex.__index__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abc.abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_decorators: true
-  has_metaclass: true
-  is_protocol: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "ParamSpecArgs"
-  fully_qualified_name: "typing_extensions.ParamSpecArgs"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "typing_extensions.ParamSpecArgs.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpecArgs"
-        fully_qualified_name: "typing_extensions.ParamSpecArgs"
-      }
-    }
-    parameters {
-      name: "origin"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  attributes {
-    name: "__origin__"
-    fully_qualified_name: "typing_extensions.ParamSpecArgs.__origin__"
-    type_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpec"
-      fully_qualified_name: "typing_extensions.ParamSpec"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-}
-classes {
-  name: "ParamSpecKwargs"
-  fully_qualified_name: "typing_extensions.ParamSpecKwargs"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "typing_extensions.ParamSpecKwargs.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpecKwargs"
-        fully_qualified_name: "typing_extensions.ParamSpecKwargs"
-      }
-    }
-    parameters {
-      name: "origin"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  attributes {
-    name: "__origin__"
-    fully_qualified_name: "typing_extensions.ParamSpecKwargs.__origin__"
-    type_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpec"
-      fully_qualified_name: "typing_extensions.ParamSpec"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-}
-classes {
-  name: "ParamSpec"
-  fully_qualified_name: "typing_extensions.ParamSpec"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "bound"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[None,Type[Any],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "Type[Any]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "contravariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "covariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "args"
-    fully_qualified_name: "typing_extensions.ParamSpec.args"
-    return_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpecArgs"
-      fully_qualified_name: "typing_extensions.ParamSpecArgs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "kwargs"
-    fully_qualified_name: "typing_extensions.ParamSpec.kwargs"
-    return_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpecKwargs"
-      fully_qualified_name: "typing_extensions.ParamSpecKwargs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "__bound__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__bound__"
-    type_annotation {
-      pretty_printed_name: "Union[Type[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[Any]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "__covariant__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__covariant__"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "__contravariant__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__contravariant__"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "ParamSpec"
-  fully_qualified_name: "typing_extensions.ParamSpec"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "bound"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.type,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "contravariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "covariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "default"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[builtins.type,builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "bound"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[None,Type[Any],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "Type[Any]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "contravariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "covariant"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "default"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[Type[Any],builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[Any]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "args"
-    fully_qualified_name: "typing_extensions.ParamSpec.args"
-    return_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpecArgs"
-      fully_qualified_name: "typing_extensions.ParamSpecArgs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-  methods {
-    name: "args"
-    fully_qualified_name: "typing_extensions.ParamSpec.args"
-    return_annotation {
-      pretty_printed_name: "typing.ParamSpecArgs"
-      fully_qualified_name: "typing.ParamSpecArgs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "310"
-  }
-  methods {
-    name: "kwargs"
-    fully_qualified_name: "typing_extensions.ParamSpec.kwargs"
-    return_annotation {
-      pretty_printed_name: "typing_extensions.ParamSpecKwargs"
-      fully_qualified_name: "typing_extensions.ParamSpecKwargs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-  }
-  methods {
-    name: "kwargs"
-    fully_qualified_name: "typing_extensions.ParamSpec.kwargs"
-    return_annotation {
-      pretty_printed_name: "typing.ParamSpecKwargs"
-      fully_qualified_name: "typing.ParamSpecKwargs"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.ParamSpec"
-        fully_qualified_name: "typing_extensions.ParamSpec"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "310"
-  }
-  has_decorators: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "__bound__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__bound__"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.type,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.type"
-        fully_qualified_name: "builtins.type"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  attributes {
-    name: "__bound__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__bound__"
-    type_annotation {
-      pretty_printed_name: "Union[Type[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[Any]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "__covariant__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__covariant__"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "__contravariant__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__contravariant__"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "__default__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__default__"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.type,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.type"
-        fully_qualified_name: "builtins.type"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  attributes {
-    name: "__default__"
-    fully_qualified_name: "typing_extensions.ParamSpec.__default__"
-    type_annotation {
-      pretty_printed_name: "Union[Type[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[Any]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
   name: "AsyncGenerator"
   fully_qualified_name: "typing.AsyncGenerator"
   super_classes: "typing.AsyncIterator"
@@ -2498,6 +998,591 @@ classes {
   }
 }
 classes {
+  name: "_SpecialForm"
+  fully_qualified_name: "typing_extensions._SpecialForm"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "typing_extensions._SpecialForm.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._SpecialForm"
+        fully_qualified_name: "typing_extensions._SpecialForm"
+      }
+    }
+    parameters {
+      name: "parameters"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing_extensions._SpecialForm.__or__"
+    return_annotation {
+      pretty_printed_name: "typing_extensions._SpecialForm"
+      fully_qualified_name: "typing_extensions._SpecialForm"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._SpecialForm"
+        fully_qualified_name: "typing_extensions._SpecialForm"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "__ror__"
+    fully_qualified_name: "typing_extensions._SpecialForm.__ror__"
+    return_annotation {
+      pretty_printed_name: "typing_extensions._SpecialForm"
+      fully_qualified_name: "typing_extensions._SpecialForm"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._SpecialForm"
+        fully_qualified_name: "typing_extensions._SpecialForm"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_TypedDict"
+  fully_qualified_name: "typing_extensions._TypedDict"
+  super_classes: "typing.Mapping"
+  methods {
+    name: "copy"
+    fully_qualified_name: "typing_extensions._TypedDict.copy"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "typing_extensions._TypedDict.setdefault"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Never]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "typing_extensions._TypedDict.pop"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Never]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._T"
+        kind: TYPE_VAR
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "typing_extensions._TypedDict.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__m"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "typing_extensions._TypedDict.items"
+    return_annotation {
+      pretty_printed_name: "_collections_abc.dict_items[builtins.str,builtins.object]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "_collections_abc.dict_items"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "typing_extensions._TypedDict.keys"
+    return_annotation {
+      pretty_printed_name: "_collections_abc.dict_keys[builtins.str,builtins.object]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "_collections_abc.dict_keys"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "typing_extensions._TypedDict.values"
+    return_annotation {
+      pretty_printed_name: "_collections_abc.dict_values[builtins.str,builtins.object]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "_collections_abc.dict_values"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "typing_extensions._TypedDict.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    parameters {
+      name: "k"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Never]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing_extensions._TypedDict.__or__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ior__"
+    fully_qualified_name: "typing_extensions._TypedDict.__ior__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing_extensions._TypedDict"
+        fully_qualified_name: "typing_extensions._TypedDict"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  has_metaclass: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__required_keys__"
+    fully_qualified_name: "typing_extensions._TypedDict.__required_keys__"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__optional_keys__"
+    fully_qualified_name: "typing_extensions._TypedDict.__optional_keys__"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__total__"
+    fully_qualified_name: "typing_extensions._TypedDict.__total__"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SupportsIndex"
+  fully_qualified_name: "typing_extensions.SupportsIndex"
+  super_classes: "builtins.object"
+  methods {
+    name: "__index__"
+    fully_qualified_name: "typing_extensions.SupportsIndex.__index__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  has_metaclass: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ParamSpecArgs"
+  fully_qualified_name: "typing_extensions.ParamSpecArgs"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "typing_extensions.ParamSpecArgs.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpecArgs"
+        fully_qualified_name: "typing_extensions.ParamSpecArgs"
+      }
+    }
+    parameters {
+      name: "origin"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  attributes {
+    name: "__origin__"
+    fully_qualified_name: "typing_extensions.ParamSpecArgs.__origin__"
+    type_annotation {
+      pretty_printed_name: "typing_extensions.ParamSpec"
+      fully_qualified_name: "typing_extensions.ParamSpec"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+}
+classes {
+  name: "ParamSpecKwargs"
+  fully_qualified_name: "typing_extensions.ParamSpecKwargs"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "typing_extensions.ParamSpecKwargs.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpecKwargs"
+        fully_qualified_name: "typing_extensions.ParamSpecKwargs"
+      }
+    }
+    parameters {
+      name: "origin"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  attributes {
+    name: "__origin__"
+    fully_qualified_name: "typing_extensions.ParamSpecKwargs.__origin__"
+    type_annotation {
+      pretty_printed_name: "typing_extensions.ParamSpec"
+      fully_qualified_name: "typing_extensions.ParamSpec"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+}
+classes {
   name: "NamedTuple"
   fully_qualified_name: "typing_extensions.NamedTuple"
   super_classes: "builtins.tuple"
@@ -3332,6 +2417,400 @@ classes {
   }
 }
 classes {
+  name: "ParamSpec"
+  fully_qualified_name: "typing_extensions.ParamSpec"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bound"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.type,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "contravariant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "covariant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "default"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bound"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,Type[Any],builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "contravariant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "covariant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "default"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Type[Any],builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "args"
+    fully_qualified_name: "typing_extensions.ParamSpec.args"
+    return_annotation {
+      pretty_printed_name: "typing_extensions.ParamSpecArgs"
+      fully_qualified_name: "typing_extensions.ParamSpecArgs"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "args"
+    fully_qualified_name: "typing_extensions.ParamSpec.args"
+    return_annotation {
+      pretty_printed_name: "typing.ParamSpecArgs"
+      fully_qualified_name: "typing.ParamSpecArgs"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "310"
+  }
+  methods {
+    name: "kwargs"
+    fully_qualified_name: "typing_extensions.ParamSpec.kwargs"
+    return_annotation {
+      pretty_printed_name: "typing_extensions.ParamSpecKwargs"
+      fully_qualified_name: "typing_extensions.ParamSpecKwargs"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "kwargs"
+    fully_qualified_name: "typing_extensions.ParamSpec.kwargs"
+    return_annotation {
+      pretty_printed_name: "typing.ParamSpecKwargs"
+      fully_qualified_name: "typing.ParamSpecKwargs"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.ParamSpec"
+        fully_qualified_name: "typing_extensions.ParamSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "310"
+  }
+  has_decorators: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__bound__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__bound__"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "__bound__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__bound__"
+    type_annotation {
+      pretty_printed_name: "Union[Type[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__covariant__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__covariant__"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__contravariant__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__contravariant__"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__default__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__default__"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "__default__"
+    fully_qualified_name: "typing_extensions.ParamSpec.__default__"
+    type_annotation {
+      pretty_printed_name: "Union[Type[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "TypeVarTuple"
   fully_qualified_name: "typing_extensions.TypeVarTuple"
   super_classes: "builtins.object"
@@ -3636,39 +3115,6 @@ functions {
   name: "NewType"
   fully_qualified_name: "typing.NewType"
   return_annotation {
-    pretty_printed_name: "Type[typing._T]"
-    kind: TYPE
-    args {
-      pretty_printed_name: "typing._T"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "tp"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Type[typing._T]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "typing._T"
-        kind: TYPE_VAR
-      }
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "NewType"
-  fully_qualified_name: "typing.NewType"
-  return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
   }
@@ -3693,23 +3139,6 @@ functions {
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
-}
-functions {
-  name: "overload"
-  fully_qualified_name: "typing.overload"
-  return_annotation {
-    pretty_printed_name: "typing._F"
-    kind: TYPE_VAR
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing._F"
-      kind: TYPE_VAR
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "overload"
@@ -3748,7 +3177,6 @@ functions {
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3771,7 +3199,6 @@ functions {
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3794,7 +3221,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3888,7 +3314,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4578,209 +4003,12 @@ vars {
     pretty_printed_name: "builtins.bool"
     fully_qualified_name: "builtins.bool"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-vars {
-  name: "ClassVar"
-  fully_qualified_name: "typing.ClassVar"
-  type_annotation {
-    pretty_printed_name: "typing._SpecialForm"
-    fully_qualified_name: "typing._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Type"
-  fully_qualified_name: "typing.Type"
-  type_annotation {
-    pretty_printed_name: "typing._SpecialForm"
-    fully_qualified_name: "typing._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "runtime"
-  fully_qualified_name: "typing_extensions.runtime"
-  type_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Protocol"
-  fully_qualified_name: "typing_extensions.Protocol"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Final"
-  fully_qualified_name: "typing_extensions.Final"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Literal"
-  fully_qualified_name: "typing_extensions.Literal"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "TypedDict"
-  fully_qualified_name: "typing_extensions.TypedDict"
-  type_annotation {
-    pretty_printed_name: "builtins.object"
-    fully_qualified_name: "builtins.object"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "OrderedDict"
-  fully_qualified_name: "typing_extensions.OrderedDict"
-  type_annotation {
-    pretty_printed_name: "typing._Alias"
-    fully_qualified_name: "typing._Alias"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Annotated"
-  fully_qualified_name: "typing_extensions.Annotated"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "_AnnotatedAlias"
-  fully_qualified_name: "typing_extensions._AnnotatedAlias"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "Concatenate"
-  fully_qualified_name: "typing_extensions.Concatenate"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-}
-vars {
-  name: "TypeAlias"
-  fully_qualified_name: "typing_extensions.TypeAlias"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-}
-vars {
-  name: "TypeGuard"
-  fully_qualified_name: "typing_extensions.TypeGuard"
-  type_annotation {
-    pretty_printed_name: "typing_extensions._SpecialForm"
-    fully_qualified_name: "typing_extensions._SpecialForm"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
 }
 vars {
   name: "Any"
@@ -4797,8 +4025,36 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "ClassVar"
+  fully_qualified_name: "typing.ClassVar"
+  type_annotation {
+    pretty_printed_name: "typing._SpecialForm"
+    fully_qualified_name: "typing._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "NoReturn"
   fully_qualified_name: "typing.NoReturn"
+  type_annotation {
+    pretty_printed_name: "typing._SpecialForm"
+    fully_qualified_name: "typing._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "Type"
+  fully_qualified_name: "typing.Type"
   type_annotation {
     pretty_printed_name: "typing._SpecialForm"
     fully_qualified_name: "typing._SpecialForm"
@@ -4827,6 +4083,161 @@ vars {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+}
+vars {
+  name: "Protocol"
+  fully_qualified_name: "typing_extensions.Protocol"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "runtime"
+  fully_qualified_name: "typing_extensions.runtime"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "Final"
+  fully_qualified_name: "typing_extensions.Final"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "Literal"
+  fully_qualified_name: "typing_extensions.Literal"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TypedDict"
+  fully_qualified_name: "typing_extensions.TypedDict"
+  type_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "OrderedDict"
+  fully_qualified_name: "typing_extensions.OrderedDict"
+  type_annotation {
+    pretty_printed_name: "typing._Alias"
+    fully_qualified_name: "typing._Alias"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "Annotated"
+  fully_qualified_name: "typing_extensions.Annotated"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_AnnotatedAlias"
+  fully_qualified_name: "typing_extensions._AnnotatedAlias"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "Concatenate"
+  fully_qualified_name: "typing_extensions.Concatenate"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+vars {
+  name: "TypeAlias"
+  fully_qualified_name: "typing_extensions.TypeAlias"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+vars {
+  name: "TypeGuard"
+  fully_qualified_name: "typing_extensions.TypeGuard"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
 }
 vars {
   name: "Self"

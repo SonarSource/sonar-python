@@ -10,61 +10,6 @@ functions {
     name: "a"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Sequence[_bisect._T]"
-      args {
-        pretty_printed_name: "_bisect._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "x"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_bisect._T"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "lo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "hi"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "bisect_left"
-  fully_qualified_name: "_bisect.bisect_left"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "_typeshed.SupportsLenAndGetItem[_typeshed.SupportsRichComparisonT]"
       args {
         pretty_printed_name: "_typeshed.SupportsRichComparisonT"
@@ -124,61 +69,6 @@ functions {
     name: "a"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Sequence[_bisect._T]"
-      args {
-        pretty_printed_name: "_bisect._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "x"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_bisect._T"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "lo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "hi"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "bisect_right"
-  fully_qualified_name: "_bisect.bisect_right"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "_typeshed.SupportsLenAndGetItem[_typeshed.SupportsRichComparisonT]"
       args {
         pretty_printed_name: "_typeshed.SupportsRichComparisonT"
@@ -226,61 +116,6 @@ functions {
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
-}
-functions {
-  name: "insort_left"
-  fully_qualified_name: "_bisect.insort_left"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.MutableSequence[_bisect._T]"
-      args {
-        pretty_printed_name: "_bisect._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.MutableSequence"
-    }
-  }
-  parameters {
-    name: "x"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_bisect._T"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "lo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "hi"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "insort_left"
@@ -340,61 +175,6 @@ functions {
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
-}
-functions {
-  name: "insort_right"
-  fully_qualified_name: "_bisect.insort_right"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.MutableSequence[_bisect._T]"
-      args {
-        pretty_printed_name: "_bisect._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.MutableSequence"
-    }
-  }
-  parameters {
-    name: "x"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_bisect._T"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "lo"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "hi"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "insort_right"

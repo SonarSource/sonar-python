@@ -1,11 +1,144 @@
 fully_qualified_name: "gzip"
 classes {
-  name: "GzipFile"
-  fully_qualified_name: "gzip.GzipFile"
-  super_classes: "io.BufferedIOBase"
+  name: "_ReadableFileobj"
+  fully_qualified_name: "gzip._ReadableFileobj"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "gzip._ReadableFileobj.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._ReadableFileobj"
+        fully_qualified_name: "gzip._ReadableFileobj"
+      }
+    }
+    parameters {
+      name: "__n"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "gzip._ReadableFileobj.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._ReadableFileobj"
+        fully_qualified_name: "gzip._ReadableFileobj"
+      }
+    }
+    parameters {
+      name: "__n"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_WritableFileobj"
+  fully_qualified_name: "gzip._WritableFileobj"
+  super_classes: "builtins.object"
+  methods {
+    name: "write"
+    fully_qualified_name: "gzip._WritableFileobj.write"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._WritableFileobj"
+        fully_qualified_name: "gzip._WritableFileobj"
+      }
+    }
+    parameters {
+      name: "__b"
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "flush"
+    fully_qualified_name: "gzip._WritableFileobj.flush"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._WritableFileobj"
+        fully_qualified_name: "gzip._WritableFileobj"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_PaddedFile"
+  fully_qualified_name: "gzip._PaddedFile"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
-    fully_qualified_name: "gzip.GzipFile.__init__"
+    fully_qualified_name: "gzip._PaddedFile.__init__"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -14,338 +147,166 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "gzip.GzipFile"
-        fully_qualified_name: "gzip.GzipFile"
+        pretty_printed_name: "gzip._PaddedFile"
+        fully_qualified_name: "gzip._PaddedFile"
       }
     }
     parameters {
-      name: "filename"
+      name: "f"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "gzip._ReadableFileobj"
+        fully_qualified_name: "gzip._ReadableFileobj"
+      }
+    }
+    parameters {
+      name: "prepend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       has_default: true
     }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "gzip._PaddedFile.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
     }
     parameters {
-      name: "compresslevel"
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._PaddedFile"
+        fully_qualified_name: "gzip._PaddedFile"
+      }
+    }
+    parameters {
+      name: "size"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
       }
-      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "prepend"
+    fully_qualified_name: "gzip._PaddedFile.prepend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
     }
     parameters {
-      name: "fileobj"
+      name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
+        pretty_printed_name: "gzip._PaddedFile"
+        fully_qualified_name: "gzip._PaddedFile"
+      }
+    }
+    parameters {
+      name: "prepend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
       has_default: true
     }
-    parameters {
-      name: "mtime"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "filename"
-    fully_qualified_name: "gzip.GzipFile.filename"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "write"
-    fully_qualified_name: "gzip.GzipFile.write"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "gzip.GzipFile.read"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "closed"
-    fully_qualified_name: "gzip.GzipFile.closed"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "gzip.GzipFile.close"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "flush"
-    fully_qualified_name: "gzip.GzipFile.flush"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "zlib_mode"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "gzip.GzipFile.fileno"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rewind"
-    fully_qualified_name: "gzip.GzipFile.rewind"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readable"
-    fully_qualified_name: "gzip.GzipFile.readable"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "writable"
-    fully_qualified_name: "gzip.GzipFile.writable"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "seekable"
-    fully_qualified_name: "gzip.GzipFile.seekable"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "seek"
-    fully_qualified_name: "gzip.GzipFile.seek"
+    fully_qualified_name: "gzip._PaddedFile.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._PaddedFile"
+        fully_qualified_name: "gzip._PaddedFile"
+      }
     }
     parameters {
-      name: "offset"
+      name: "off"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
     }
-    parameters {
-      name: "whence"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
-    name: "readline"
-    fully_qualified_name: "gzip.GzipFile.readline"
+    name: "seekable"
+    fully_qualified_name: "gzip._PaddedFile.seekable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "gzip._PaddedFile"
+        fully_qualified_name: "gzip._PaddedFile"
+      }
     }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
-    name: "myfileobj"
-    fully_qualified_name: "gzip.GzipFile.myfileobj"
+    name: "file"
+    fully_qualified_name: "gzip._PaddedFile.file"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "gzip._ReadableFileobj"
+      fully_qualified_name: "gzip._ReadableFileobj"
     }
-    valid_for: "27"
-  }
-  attributes {
-    name: "max_read_chunk"
-    fully_qualified_name: "gzip.GzipFile.max_read_chunk"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "mode"
-    fully_qualified_name: "gzip.GzipFile.mode"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "extrabuf"
-    fully_qualified_name: "gzip.GzipFile.extrabuf"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "extrasize"
-    fully_qualified_name: "gzip.GzipFile.extrasize"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "extrastart"
-    fully_qualified_name: "gzip.GzipFile.extrastart"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "name"
-    fully_qualified_name: "gzip.GzipFile.name"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "min_readsize"
-    fully_qualified_name: "gzip.GzipFile.min_readsize"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "compress"
-    fully_qualified_name: "gzip.GzipFile.compress"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "fileobj"
-    fully_qualified_name: "gzip.GzipFile.fileobj"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "offset"
-    fully_qualified_name: "gzip.GzipFile.offset"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "mtime"
-    fully_qualified_name: "gzip.GzipFile.mtime"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "size"
-    fully_qualified_name: "gzip.GzipFile.size"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "crc"
-    fully_qualified_name: "gzip.GzipFile.crc"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 classes {
@@ -1261,316 +1222,6 @@ classes {
   }
 }
 classes {
-  name: "_ReadableFileobj"
-  fully_qualified_name: "gzip._ReadableFileobj"
-  super_classes: "builtins.object"
-  methods {
-    name: "read"
-    fully_qualified_name: "gzip._ReadableFileobj.read"
-    return_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._ReadableFileobj"
-        fully_qualified_name: "gzip._ReadableFileobj"
-      }
-    }
-    parameters {
-      name: "__n"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "seek"
-    fully_qualified_name: "gzip._ReadableFileobj.seek"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._ReadableFileobj"
-        fully_qualified_name: "gzip._ReadableFileobj"
-      }
-    }
-    parameters {
-      name: "__n"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_protocol: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_WritableFileobj"
-  fully_qualified_name: "gzip._WritableFileobj"
-  super_classes: "builtins.object"
-  methods {
-    name: "write"
-    fully_qualified_name: "gzip._WritableFileobj.write"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._WritableFileobj"
-        fully_qualified_name: "gzip._WritableFileobj"
-      }
-    }
-    parameters {
-      name: "__b"
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "flush"
-    fully_qualified_name: "gzip._WritableFileobj.flush"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._WritableFileobj"
-        fully_qualified_name: "gzip._WritableFileobj"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_protocol: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_PaddedFile"
-  fully_qualified_name: "gzip._PaddedFile"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "gzip._PaddedFile.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._PaddedFile"
-        fully_qualified_name: "gzip._PaddedFile"
-      }
-    }
-    parameters {
-      name: "f"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._ReadableFileobj"
-        fully_qualified_name: "gzip._ReadableFileobj"
-      }
-    }
-    parameters {
-      name: "prepend"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "gzip._PaddedFile.read"
-    return_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._PaddedFile"
-        fully_qualified_name: "gzip._PaddedFile"
-      }
-    }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "prepend"
-    fully_qualified_name: "gzip._PaddedFile.prepend"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._PaddedFile"
-        fully_qualified_name: "gzip._PaddedFile"
-      }
-    }
-    parameters {
-      name: "prepend"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "seek"
-    fully_qualified_name: "gzip._PaddedFile.seek"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._PaddedFile"
-        fully_qualified_name: "gzip._PaddedFile"
-      }
-    }
-    parameters {
-      name: "off"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "seekable"
-    fully_qualified_name: "gzip._PaddedFile.seekable"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "gzip._PaddedFile"
-        fully_qualified_name: "gzip._PaddedFile"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "file"
-    fully_qualified_name: "gzip._PaddedFile.file"
-    type_annotation {
-      pretty_printed_name: "gzip._ReadableFileobj"
-      fully_qualified_name: "gzip._ReadableFileobj"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
   name: "_GzipReader"
   fully_qualified_name: "gzip._GzipReader"
   super_classes: "_compression.DecompressReader"
@@ -1618,41 +1269,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "open"
-  fully_qualified_name: "gzip.open"
-  return_annotation {
-    pretty_printed_name: "gzip.GzipFile"
-    fully_qualified_name: "gzip.GzipFile"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "compresslevel"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "compress"

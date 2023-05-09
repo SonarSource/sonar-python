@@ -58,7 +58,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -81,7 +80,6 @@ classes {
         fully_qualified_name: "cProfile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -104,7 +102,6 @@ classes {
         fully_qualified_name: "cProfile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -144,38 +141,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "dump_stats"
-    fully_qualified_name: "cProfile.Profile.dump_stats"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "cProfile.Profile"
-        fully_qualified_name: "cProfile.Profile"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "dump_stats"
@@ -222,7 +193,6 @@ classes {
         fully_qualified_name: "cProfile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -245,38 +215,12 @@ classes {
         fully_qualified_name: "cProfile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "run"
-    fully_qualified_name: "cProfile.Profile.run"
-    return_annotation {
-      pretty_printed_name: "cProfile._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "cProfile._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "cmd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "run"
@@ -307,63 +251,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "runctx"
-    fully_qualified_name: "cProfile.Profile.runctx"
-    return_annotation {
-      pretty_printed_name: "cProfile._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "cProfile._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "cmd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "globals"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-    }
-    parameters {
-      name: "locals"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "runctx"
@@ -426,50 +313,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "runcall"
-    fully_qualified_name: "cProfile.Profile.runcall"
-    return_annotation {
-      pretty_printed_name: "cProfile._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "cProfile.Profile"
-        fully_qualified_name: "cProfile.Profile"
-      }
-    }
-    parameters {
-      name: "__func"
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kw"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "runcall"
@@ -560,108 +403,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "stats"
-    fully_qualified_name: "cProfile.Profile.stats"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]]"
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "cProfile._Label"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]"
-          args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "cProfile._Label"
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "stats"
     fully_qualified_name: "cProfile.Profile.stats"
@@ -778,7 +525,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -867,55 +613,12 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "label"
-  fully_qualified_name: "cProfile.label"
-  return_annotation {
-    pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    fully_qualified_name: "cProfile._Label"
-  }
-  parameters {
-    name: "code"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,types.CodeType]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "types.CodeType"
-        fully_qualified_name: "types.CodeType"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "label"

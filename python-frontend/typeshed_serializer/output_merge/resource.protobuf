@@ -1,699 +1,5 @@
 fully_qualified_name: "resource"
 classes {
-  name: "error"
-  fully_qualified_name: "resource.error"
-  super_classes: "builtins.Exception"
-  valid_for: "27"
-}
-classes {
-  name: "_RUsage"
-  fully_qualified_name: "resource._RUsage"
-  super_classes: "builtins.tuple"
-  methods {
-    name: "_replace"
-    fully_qualified_name: "resource._RUsage._replace"
-    return_annotation {
-      pretty_printed_name: "resource._RUsage._NT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "_self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "resource._RUsage._NT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "ru_utime"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_stime"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_maxrss"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_ixrss"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_idrss"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_isrss"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_minflt"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_majflt"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_nswap"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_inblock"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_oublock"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_msgsnd"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_msgrcv"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_nsignals"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_nvcsw"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ru_nivcsw"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__new__"
-    fully_qualified_name: "resource._RUsage.__new__"
-    return_annotation {
-      pretty_printed_name: "resource._RUsage._NT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "_cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[resource._RUsage._NT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "resource._RUsage._NT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "ru_utime"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "ru_stime"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "ru_maxrss"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_ixrss"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_idrss"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_isrss"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_minflt"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_majflt"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_nswap"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_inblock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_oublock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_msgsnd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_msgrcv"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_nsignals"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_nvcsw"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "ru_nivcsw"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "_asdict"
-    fully_qualified_name: "resource._RUsage._asdict"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    parameters {
-      name: "_self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "resource._RUsage._NT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "_make"
-    fully_qualified_name: "resource._RUsage._make"
-    return_annotation {
-      pretty_printed_name: "resource._RUsage._NT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "_cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[resource._RUsage._NT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "resource._RUsage._NT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "iterable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    parameters {
-      name: "new"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "len"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "ru_utime"
-    fully_qualified_name: "resource._RUsage.ru_utime"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_stime"
-    fully_qualified_name: "resource._RUsage.ru_stime"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_maxrss"
-    fully_qualified_name: "resource._RUsage.ru_maxrss"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_ixrss"
-    fully_qualified_name: "resource._RUsage.ru_ixrss"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_idrss"
-    fully_qualified_name: "resource._RUsage.ru_idrss"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_isrss"
-    fully_qualified_name: "resource._RUsage.ru_isrss"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_minflt"
-    fully_qualified_name: "resource._RUsage.ru_minflt"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_majflt"
-    fully_qualified_name: "resource._RUsage.ru_majflt"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_nswap"
-    fully_qualified_name: "resource._RUsage.ru_nswap"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_inblock"
-    fully_qualified_name: "resource._RUsage.ru_inblock"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_oublock"
-    fully_qualified_name: "resource._RUsage.ru_oublock"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_msgsnd"
-    fully_qualified_name: "resource._RUsage.ru_msgsnd"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_msgrcv"
-    fully_qualified_name: "resource._RUsage.ru_msgrcv"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_nsignals"
-    fully_qualified_name: "resource._RUsage.ru_nsignals"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_nvcsw"
-    fully_qualified_name: "resource._RUsage.ru_nvcsw"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "ru_nivcsw"
-    fully_qualified_name: "resource._RUsage.ru_nivcsw"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "27"
-  }
-  attributes {
-    name: "_fields"
-    fully_qualified_name: "resource._RUsage._fields"
-    type_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "_field_types"
-    fully_qualified_name: "resource._RUsage._field_types"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "_field_defaults"
-    fully_qualified_name: "resource._RUsage._field_defaults"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "_source"
-    fully_qualified_name: "resource._RUsage._source"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "__annotations__"
-    fully_qualified_name: "resource._RUsage.__annotations__"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-  }
-}
-classes {
   name: "struct_rusage"
   fully_qualified_name: "resource.struct_rusage"
   super_classes: "_typeshed.structseq"
@@ -2204,29 +1510,18 @@ classes {
   }
 }
 functions {
-  name: "getrlimit"
-  fully_qualified_name: "resource.getrlimit"
+  name: "getpagesize"
+  fully_qualified_name: "resource.getpagesize"
   return_annotation {
-    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
-  parameters {
-    name: "resource"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "getrlimit"
@@ -2256,156 +1551,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "setrlimit"
-  fully_qualified_name: "resource.setrlimit"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "resource"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "limits"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "setrlimit"
-  fully_qualified_name: "resource.setrlimit"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__resource"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "__limits"
-    type_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "getrusage"
-  fully_qualified_name: "resource.getrusage"
-  return_annotation {
-    pretty_printed_name: "Tuple[builtins.float,builtins.float,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    args {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "who"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "getrusage"
@@ -2493,13 +1638,34 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "getpagesize"
-  fully_qualified_name: "resource.getpagesize"
+  name: "setrlimit"
+  fully_qualified_name: "resource.setrlimit"
   return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "None"
+    kind: NONE
   }
-  valid_for: "27"
+  parameters {
+    name: "__resource"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__limits"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2604,13 +1770,12 @@ overloaded_functions {
   valid_for: "310"
 }
 vars {
-  name: "RLIM_INFINITY"
-  fully_qualified_name: "resource.RLIM_INFINITY"
+  name: "RLIMIT_AS"
+  fully_qualified_name: "resource.RLIMIT_AS"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2625,7 +1790,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2640,22 +1804,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RLIMIT_FSIZE"
-  fully_qualified_name: "resource.RLIMIT_FSIZE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2670,7 +1818,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2679,73 +1826,12 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "RLIMIT_STACK"
-  fully_qualified_name: "resource.RLIMIT_STACK"
+  name: "RLIMIT_FSIZE"
+  fully_qualified_name: "resource.RLIMIT_FSIZE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RLIMIT_RSS"
-  fully_qualified_name: "resource.RLIMIT_RSS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RLIMIT_NPROC"
-  fully_qualified_name: "resource.RLIMIT_NPROC"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RLIMIT_NOFILE"
-  fully_qualified_name: "resource.RLIMIT_NOFILE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "RLIMIT_OFILE"
-  fully_qualified_name: "resource.RLIMIT_OFILE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2760,7 +1846,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2769,22 +1854,12 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "RLIMIT_VMEM"
-  fully_qualified_name: "resource.RLIMIT_VMEM"
+  name: "RLIMIT_NOFILE"
+  fully_qualified_name: "resource.RLIMIT_NOFILE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-}
-vars {
-  name: "RLIMIT_AS"
-  fully_qualified_name: "resource.RLIMIT_AS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2793,13 +1868,54 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "RUSAGE_SELF"
-  fully_qualified_name: "resource.RUSAGE_SELF"
+  name: "RLIMIT_NPROC"
+  fully_qualified_name: "resource.RLIMIT_NPROC"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RLIMIT_RSS"
+  fully_qualified_name: "resource.RLIMIT_RSS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RLIMIT_STACK"
+  fully_qualified_name: "resource.RLIMIT_STACK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RLIM_INFINITY"
+  fully_qualified_name: "resource.RLIM_INFINITY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2814,7 +1930,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2823,13 +1938,18 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "RUSAGE_BOTH"
-  fully_qualified_name: "resource.RUSAGE_BOTH"
+  name: "RUSAGE_SELF"
+  fully_qualified_name: "resource.RUSAGE_SELF"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "RLIMIT_MSGQUEUE"
@@ -2848,6 +1968,20 @@ vars {
 vars {
   name: "RLIMIT_NICE"
   fully_qualified_name: "resource.RLIMIT_NICE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RLIMIT_OFILE"
+  fully_qualified_name: "resource.RLIMIT_OFILE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"

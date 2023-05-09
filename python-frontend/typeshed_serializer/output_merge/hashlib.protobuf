@@ -1,199 +1,5 @@
 fully_qualified_name: "hashlib"
 classes {
-  name: "_hash"
-  fully_qualified_name: "hashlib._hash"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "hashlib._hash.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hashlib._hash"
-        fully_qualified_name: "hashlib._hash"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-        }
-        fully_qualified_name: "hashlib._DataType"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "hashlib._hash.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hashlib._hash"
-        fully_qualified_name: "hashlib._hash"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-        }
-        fully_qualified_name: "hashlib._DataType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "digest"
-    fully_qualified_name: "hashlib._hash.digest"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hashlib._hash"
-        fully_qualified_name: "hashlib._hash"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "hexdigest"
-    fully_qualified_name: "hashlib._hash.hexdigest"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hashlib._hash"
-        fully_qualified_name: "hashlib._hash"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "copy"
-    fully_qualified_name: "hashlib._hash.copy"
-    return_annotation {
-      pretty_printed_name: "hashlib._hash"
-      fully_qualified_name: "hashlib._hash"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hashlib._hash"
-        fully_qualified_name: "hashlib._hash"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "name"
-    fully_qualified_name: "hashlib._hash.name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "block_size"
-    fully_qualified_name: "hashlib._hash.block_size"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "digest_size"
-    fully_qualified_name: "hashlib._hash.digest_size"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "digestsize"
-    fully_qualified_name: "hashlib._hash.digestsize"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-}
-classes {
   name: "AbstractSet"
   fully_qualified_name: "typing.AbstractSet"
   super_classes: "typing.Collection"
@@ -1362,32 +1168,6 @@ functions {
   name: "new"
   fully_qualified_name: "hashlib.new"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "data"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "new"
-  fully_qualified_name: "hashlib.new"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -1453,49 +1233,6 @@ functions {
   name: "md5"
   fully_qualified_name: "hashlib.md5"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "md5"
-  fully_qualified_name: "hashlib.md5"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -1561,49 +1298,6 @@ functions {
   name: "sha1"
   fully_qualified_name: "hashlib.sha1"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "sha1"
-  fully_qualified_name: "hashlib.sha1"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -1669,49 +1363,6 @@ functions {
   name: "sha224"
   fully_qualified_name: "hashlib.sha224"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "sha224"
-  fully_qualified_name: "hashlib.sha224"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -1777,49 +1428,6 @@ functions {
   name: "sha256"
   fully_qualified_name: "hashlib.sha256"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "sha256"
-  fully_qualified_name: "hashlib.sha256"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -1880,49 +1488,6 @@ functions {
   }
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "sha384"
-  fully_qualified_name: "hashlib.sha384"
-  return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "sha384"
@@ -1993,49 +1558,6 @@ functions {
   name: "sha512"
   fully_qualified_name: "hashlib.sha512"
   return_annotation {
-    pretty_printed_name: "hashlib._hash"
-    fully_qualified_name: "hashlib._hash"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-      }
-      fully_qualified_name: "hashlib._DataType"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "sha512"
-  fully_qualified_name: "hashlib.sha512"
-  return_annotation {
     pretty_printed_name: "hashlib._Hash"
     fully_qualified_name: "hashlib._Hash"
   }
@@ -2096,56 +1618,6 @@ functions {
   }
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "pbkdf2_hmac"
-  fully_qualified_name: "hashlib.pbkdf2_hmac"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "password"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "salt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "rounds"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "dklen"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "pbkdf2_hmac"
@@ -2319,81 +1791,6 @@ functions {
   valid_for: "310"
 }
 vars {
-  name: "algorithms"
-  fully_qualified_name: "hashlib.algorithms"
-  type_annotation {
-    pretty_printed_name: "builtins.tuple[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "algorithms_guaranteed"
-  fully_qualified_name: "hashlib.algorithms_guaranteed"
-  type_annotation {
-    pretty_printed_name: "builtins.tuple[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "algorithms_guaranteed"
-  fully_qualified_name: "hashlib.algorithms_guaranteed"
-  type_annotation {
-    pretty_printed_name: "typing.AbstractSet[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "typing.AbstractSet"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "algorithms_available"
-  fully_qualified_name: "hashlib.algorithms_available"
-  type_annotation {
-    pretty_printed_name: "builtins.tuple[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.tuple"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "algorithms_available"
-  fully_qualified_name: "hashlib.algorithms_available"
-  type_annotation {
-    pretty_printed_name: "typing.AbstractSet[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "typing.AbstractSet"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
   name: "__all__"
   fully_qualified_name: "hashlib.__all__"
   type_annotation {
@@ -2471,6 +1868,42 @@ vars {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "algorithms_guaranteed"
+  fully_qualified_name: "hashlib.algorithms_guaranteed"
+  type_annotation {
+    pretty_printed_name: "typing.AbstractSet[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.AbstractSet"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "algorithms_available"
+  fully_qualified_name: "hashlib.algorithms_available"
+  type_annotation {
+    pretty_printed_name: "typing.AbstractSet[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.AbstractSet"
   }
   valid_for: "35"
   valid_for: "36"

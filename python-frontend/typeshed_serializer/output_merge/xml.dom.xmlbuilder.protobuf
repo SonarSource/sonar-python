@@ -1,285 +1,5 @@
 fully_qualified_name: "xml.dom.xmlbuilder"
 classes {
-  name: "DocumentLS"
-  fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
-  super_classes: "builtins.object"
-  methods {
-    name: "abort"
-    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.abort"
-    return_annotation {
-      pretty_printed_name: "NoReturn"
-      kind: UNINHABITED
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "load"
-    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.load"
-    return_annotation {
-      pretty_printed_name: "NoReturn"
-      kind: UNINHABITED
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
-      }
-    }
-    parameters {
-      name: "uri"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[Unused]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "loadXML"
-    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.loadXML"
-    return_annotation {
-      pretty_printed_name: "NoReturn"
-      kind: UNINHABITED
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
-      }
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "UnboundType[Unused]"
-        kind: UNBOUND
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "saveXML"
-    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.saveXML"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
-      }
-    }
-    parameters {
-      name: "snode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[xml.dom.minidom.Node,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "xml.dom.minidom.Node"
-          fully_qualified_name: "xml.dom.minidom.Node"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "async_"
-    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.async_"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "DOMImplementationLS"
-  fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-  super_classes: "builtins.object"
-  methods {
-    name: "createDOMBuilder"
-    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMBuilder"
-    return_annotation {
-      pretty_printed_name: "xml.dom.xmlbuilder.DOMBuilder"
-      fully_qualified_name: "xml.dom.xmlbuilder.DOMBuilder"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Literal[builtins.int]"
-        kind: LITERAL
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-    }
-    parameters {
-      name: "schemaType"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "createDOMWriter"
-    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMWriter"
-    return_annotation {
-      pretty_printed_name: "NoReturn"
-      kind: UNINHABITED
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "createDOMInputSource"
-    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMInputSource"
-    return_annotation {
-      pretty_printed_name: "xml.dom.xmlbuilder.DOMInputSource"
-      fully_qualified_name: "xml.dom.xmlbuilder.DOMInputSource"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "MODE_SYNCHRONOUS"
-    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.MODE_SYNCHRONOUS"
-    type_annotation {
-      pretty_printed_name: "Literal[builtins.int]"
-      kind: LITERAL
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "MODE_ASYNCHRONOUS"
-    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.MODE_ASYNCHRONOUS"
-    type_annotation {
-      pretty_printed_name: "Literal[builtins.int]"
-      kind: LITERAL
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
   name: "Options"
   fully_qualified_name: "xml.dom.xmlbuilder.Options"
   super_classes: "builtins.object"
@@ -1366,21 +1086,283 @@ classes {
     valid_for: "310"
   }
 }
-functions {
-  name: "__getattr__"
-  fully_qualified_name: "xml.dom.xmlbuilder.__getattr__"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+classes {
+  name: "DocumentLS"
+  fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
+  super_classes: "builtins.object"
+  methods {
+    name: "abort"
+    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.abort"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  parameters {
-    name: "name"
-    type_annotation {
+  methods {
+    name: "load"
+    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.load"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
+      }
+    }
+    parameters {
+      name: "uri"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "loadXML"
+    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.loadXML"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "saveXML"
+    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.saveXML"
+    return_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DocumentLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS"
+      }
+    }
+    parameters {
+      name: "snode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[xml.dom.minidom.Node,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "xml.dom.minidom.Node"
+          fully_qualified_name: "xml.dom.minidom.Node"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "async_"
+    fully_qualified_name: "xml.dom.xmlbuilder.DocumentLS.async_"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DOMImplementationLS"
+  fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+  super_classes: "builtins.object"
+  methods {
+    name: "createDOMBuilder"
+    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMBuilder"
+    return_annotation {
+      pretty_printed_name: "xml.dom.xmlbuilder.DOMBuilder"
+      fully_qualified_name: "xml.dom.xmlbuilder.DOMBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "schemaType"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "createDOMWriter"
+    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMWriter"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "createDOMInputSource"
+    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.createDOMInputSource"
+    return_annotation {
+      pretty_printed_name: "xml.dom.xmlbuilder.DOMInputSource"
+      fully_qualified_name: "xml.dom.xmlbuilder.DOMInputSource"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+        fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "MODE_SYNCHRONOUS"
+    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.MODE_SYNCHRONOUS"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "MODE_ASYNCHRONOUS"
+    fully_qualified_name: "xml.dom.xmlbuilder.DOMImplementationLS.MODE_ASYNCHRONOUS"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 vars {
   name: "__all__"
