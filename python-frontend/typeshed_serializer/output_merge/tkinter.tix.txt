@@ -3994,11 +3994,11 @@ classes {
     name: "header_configure"
     fully_qualified_name: "tkinter.tix.HList.header_configure"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -4300,11 +4300,11 @@ classes {
     name: "indicator_configure"
     fully_qualified_name: "tkinter.tix.HList.indicator_configure"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -4559,6 +4559,51 @@ classes {
     name: "info_children"
     fully_qualified_name: "tkinter.tix.HList.info_children"
     return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.tix.HList"
+        fully_qualified_name: "tkinter.tix.HList"
+      }
+    }
+    parameters {
+      name: "entry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "info_children"
+    fully_qualified_name: "tkinter.tix.HList.info_children"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
@@ -4591,10 +4636,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4826,6 +4867,34 @@ classes {
     name: "info_selection"
     fully_qualified_name: "tkinter.tix.HList.info_selection"
     return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.tix.HList"
+        fully_qualified_name: "tkinter.tix.HList"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "info_selection"
+    fully_qualified_name: "tkinter.tix.HList.info_selection"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
@@ -4841,10 +4910,6 @@ classes {
         fully_qualified_name: "tkinter.tix.HList"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4898,11 +4963,11 @@ classes {
     name: "item_configure"
     fully_qualified_name: "tkinter.tix.HList.item_configure"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -5146,11 +5211,11 @@ classes {
     name: "entryconfigure"
     fully_qualified_name: "tkinter.tix.HList.entryconfigure"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -5610,6 +5675,43 @@ classes {
     name: "getselection"
     fully_qualified_name: "tkinter.tix.CheckList.getselection"
     return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.tix.CheckList"
+        fully_qualified_name: "tkinter.tix.CheckList"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "getselection"
+    fully_qualified_name: "tkinter.tix.CheckList.getselection"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
@@ -5634,10 +5736,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -6461,6 +6559,34 @@ classes {
     name: "info_selection"
     fully_qualified_name: "tkinter.tix.TList.info_selection"
     return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.tix.TList"
+        fully_qualified_name: "tkinter.tix.TList"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "info_selection"
+    fully_qualified_name: "tkinter.tix.TList.info_selection"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[builtins.int]"
       args {
         pretty_printed_name: "builtins.int"
@@ -6476,10 +6602,6 @@ classes {
         fully_qualified_name: "tkinter.tix.TList"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -6958,11 +7080,11 @@ classes {
     name: "paneconfigure"
     fully_qualified_name: "tkinter.tix.PanedWindow.paneconfigure"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"

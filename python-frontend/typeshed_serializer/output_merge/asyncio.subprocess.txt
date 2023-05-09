@@ -43,36 +43,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "connection_made"
-    fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol.connection_made"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.subprocess.SubprocessStreamProtocol"
-        fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol"
-      }
-    }
-    parameters {
-      name: "transport"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports.BaseTransport"
-        fully_qualified_name: "asyncio.transports.BaseTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "pipe_data_received"
     fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol.pipe_data_received"
     return_annotation {
@@ -109,74 +79,6 @@ classes {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "pipe_connection_lost"
-    fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol.pipe_connection_lost"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.subprocess.SubprocessStreamProtocol"
-        fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol"
-      }
-    }
-    parameters {
-      name: "fd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "exc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.Exception,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.Exception"
-          fully_qualified_name: "builtins.Exception"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "process_exited"
-    fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol.process_exited"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.subprocess.SubprocessStreamProtocol"
-        fully_qualified_name: "asyncio.subprocess.SubprocessStreamProtocol"
       }
     }
     valid_for: "35"
@@ -490,11 +392,19 @@ classes {
       name: "input"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,None]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.bytes"
           fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "builtins.memoryview"
+          fully_qualified_name: "builtins.memoryview"
         }
         args {
           pretty_printed_name: "None"
@@ -816,31 +726,11 @@ functions {
     name: "executable"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -883,31 +773,11 @@ functions {
     name: "cwd"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -920,89 +790,11 @@ functions {
     name: "env"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
+      pretty_printed_name: "Union[UnboundType[subprocess._ENV],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "UnboundType[subprocess._ENV]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1059,8 +851,92 @@ functions {
     name: "pass_fds"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "typing.Collection[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Collection"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "group"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extra_groups"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,typing.Collection[Union[builtins.str,builtins.int]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "typing.Collection[Union[builtins.str,builtins.int]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "typing.Collection"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "user"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "umask"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
@@ -1272,31 +1148,11 @@ functions {
     name: "executable"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1339,31 +1195,11 @@ functions {
     name: "cwd"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1376,89 +1212,11 @@ functions {
     name: "env"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
+      pretty_printed_name: "Union[UnboundType[subprocess._ENV],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "UnboundType[subprocess._ENV]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1515,8 +1273,101 @@ functions {
     name: "pass_fds"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "typing.Collection[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Collection"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "group"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extra_groups"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,typing.Collection[Union[builtins.str,builtins.int]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "typing.Collection[Union[builtins.str,builtins.int]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "typing.Collection"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "user"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "umask"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "pipesize"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
@@ -1546,42 +1397,16 @@ functions {
     name: "program"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
+      pretty_printed_name: "UnboundType[_ExecArg]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "args"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
+      pretty_printed_name: "UnboundType[_ExecArg]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -1763,31 +1588,11 @@ functions {
     name: "executable"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1830,31 +1635,11 @@ functions {
     name: "cwd"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1867,89 +1652,11 @@ functions {
     name: "env"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
+      pretty_printed_name: "Union[UnboundType[subprocess._ENV],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "UnboundType[subprocess._ENV]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2006,8 +1713,92 @@ functions {
     name: "pass_fds"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "typing.Collection[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Collection"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "group"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extra_groups"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,typing.Collection[Union[builtins.str,builtins.int]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "typing.Collection[Union[builtins.str,builtins.int]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "typing.Collection"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "user"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "umask"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
@@ -2015,538 +1806,6 @@ functions {
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
-}
-functions {
-  name: "create_subprocess_exec"
-  fully_qualified_name: "asyncio.subprocess.create_subprocess_exec"
-  return_annotation {
-    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.subprocess.Process]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    args {
-      pretty_printed_name: "asyncio.subprocess.Process"
-      fully_qualified_name: "asyncio.subprocess.Process"
-    }
-    fully_qualified_name: "typing.Coroutine"
-  }
-  parameters {
-    name: "program"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
-    }
-  }
-  parameters {
-    name: "args"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
-    }
-  }
-  parameters {
-    name: "stdin"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "typing.IO[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stdout"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "typing.IO[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "stderr"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "typing.IO[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "loop"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "limit"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "universal_newlines"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Literal[builtins.bool]"
-      kind: LITERAL
-      args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "shell"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Literal[builtins.bool]"
-      kind: LITERAL
-      args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Literal[builtins.int]"
-      kind: LITERAL
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "encoding"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    has_default: true
-  }
-  parameters {
-    name: "errors"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    has_default: true
-  }
-  parameters {
-    name: "text"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.bool,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "executable"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "preexec_fn"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "close_fds"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cwd"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "env"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "startupinfo"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[Any,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "creationflags"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "restore_signals"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "start_new_session"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "pass_fds"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  is_asynchronous: true
   valid_for: "38"
   valid_for: "39"
 }
@@ -2573,84 +1832,16 @@ functions {
     name: "program"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
+      pretty_printed_name: "UnboundType[_ExecArg]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "args"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      fully_qualified_name: "asyncio.subprocess._ExecArg"
+      pretty_printed_name: "UnboundType[_ExecArg]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -2815,31 +2006,11 @@ functions {
     name: "executable"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2882,31 +2053,11 @@ functions {
     name: "cwd"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2919,89 +2070,11 @@ functions {
     name: "env"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
+      pretty_printed_name: "Union[UnboundType[subprocess._ENV],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "UnboundType[subprocess._ENV]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3058,12 +2131,141 @@ functions {
     name: "pass_fds"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "typing.Collection[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Collection"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "group"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extra_groups"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,typing.Collection[Union[builtins.str,builtins.int]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "typing.Collection[Union[builtins.str,builtins.int]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "typing.Collection"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "user"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "umask"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "pipesize"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
   is_asynchronous: true
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.subprocess.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ExecArg"
+  fully_qualified_name: "asyncio.subprocess._ExecArg"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
   valid_for: "310"
 }
 vars {

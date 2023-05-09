@@ -688,60 +688,8 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "set_protocol"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.set_protocol"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    parameters {
-      name: "protocol"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BaseProtocol"
-        fully_qualified_name: "asyncio.protocols.BaseProtocol"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_protocol"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.get_protocol"
-    return_annotation {
-      pretty_printed_name: "asyncio.protocols.BaseProtocol"
-      fully_qualified_name: "asyncio.protocols.BaseProtocol"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "is_closing"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.is_closing"
+    name: "_protocol_paused"
+    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport._protocol_paused"
     return_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
@@ -754,150 +702,9 @@ classes {
         fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "pause_reading"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.pause_reading"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "resume_reading"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.resume_reading"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "set_write_buffer_limits"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.set_write_buffer_limits"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    parameters {
-      name: "high"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "low"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_write_buffer_size"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.get_write_buffer_size"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -924,8 +731,20 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "builtins.memoryview"
+          fully_qualified_name: "builtins.memoryview"
+        }
       }
     }
     valid_for: "35"
@@ -956,71 +775,6 @@ classes {
     }
     valid_for: "35"
     valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "abort"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.abort"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "is_reading"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport.is_reading"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "_protocol_paused"
-    fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport._protocol_paused"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto._SSLProtocolTransport"
-        fully_qualified_name: "asyncio.sslproto._SSLProtocolTransport"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -1092,96 +846,7 @@ classes {
 classes {
   name: "SSLProtocol"
   fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-  super_classes: "asyncio.protocols.Protocol"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    parameters {
-      name: "loop"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "app_protocol"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BaseProtocol"
-        fully_qualified_name: "asyncio.protocols.BaseProtocol"
-      }
-    }
-    parameters {
-      name: "sslcontext"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ssl.SSLContext"
-        fully_qualified_name: "ssl.SSLContext"
-      }
-    }
-    parameters {
-      name: "waiter"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.futures.Future[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "asyncio.futures.Future"
-      }
-    }
-    parameters {
-      name: "server_side"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "server_hostname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "call_connection_made"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-  }
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol.__init__"
@@ -1285,6 +950,38 @@ classes {
       }
       has_default: true
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_set_app_protocol"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._set_app_protocol"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
+        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
+      }
+    }
+    parameters {
+      name: "app_protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -1330,36 +1027,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "connection_made"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol.connection_made"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    parameters {
-      name: "transport"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports.BaseTransport"
-        fully_qualified_name: "asyncio.transports.BaseTransport"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "connection_lost"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol.connection_lost"
     return_annotation {
@@ -1388,80 +1055,6 @@ classes {
           pretty_printed_name: "None"
           kind: NONE
         }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "pause_writing"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol.pause_writing"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "resume_writing"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol.resume_writing"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "data_received"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol.data_received"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
       }
     }
     valid_for: "35"
@@ -1615,6 +1208,28 @@ classes {
     valid_for: "310"
   }
   methods {
+    name: "_check_handshake_timeout"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._check_handshake_timeout"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
+        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "_on_handshake_complete"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol._on_handshake_complete"
     return_annotation {
@@ -1643,28 +1258,6 @@ classes {
           pretty_printed_name: "None"
           kind: NONE
         }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "_process_write_backlog"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._process_write_backlog"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
       }
     }
     valid_for: "35"
@@ -1714,28 +1307,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "_finalize"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._finalize"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.sslproto.SSLProtocol"
-        fully_qualified_name: "asyncio.sslproto.SSLProtocol"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "_abort"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol._abort"
     return_annotation {
@@ -1758,8 +1329,8 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "_set_app_protocol"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._set_app_protocol"
+    name: "_finalize"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._finalize"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -1772,22 +1343,16 @@ classes {
         fully_qualified_name: "asyncio.sslproto.SSLProtocol"
       }
     }
-    parameters {
-      name: "app_protocol"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BaseProtocol"
-        fully_qualified_name: "asyncio.protocols.BaseProtocol"
-      }
-    }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
   methods {
-    name: "_check_handshake_timeout"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._check_handshake_timeout"
+    name: "_process_write_backlog"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._process_write_backlog"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -1800,6 +1365,8 @@ classes {
         fully_qualified_name: "asyncio.sslproto.SSLProtocol"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -1970,70 +1537,6 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "_sslpipe"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._sslpipe"
-    type_annotation {
-      pretty_printed_name: "Union[asyncio.sslproto._SSLPipe,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "asyncio.sslproto._SSLPipe"
-        fully_qualified_name: "asyncio.sslproto._SSLPipe"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_session_established"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._session_established"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_in_handshake"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._in_handshake"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_in_shutdown"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._in_shutdown"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
     name: "_transport"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol._transport"
     type_annotation {
@@ -2047,20 +1550,6 @@ classes {
         pretty_printed_name: "None"
         kind: NONE
       }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_call_connection_made"
-    fully_qualified_name: "asyncio.sslproto.SSLProtocol._call_connection_made"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
     }
     valid_for: "35"
     valid_for: "36"
@@ -2108,6 +1597,84 @@ classes {
   attributes {
     name: "_app_protocol_is_buffer"
     fully_qualified_name: "asyncio.sslproto.SSLProtocol._app_protocol_is_buffer"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_sslpipe"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._sslpipe"
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.sslproto._SSLPipe,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.sslproto._SSLPipe"
+        fully_qualified_name: "asyncio.sslproto._SSLPipe"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_session_established"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._session_established"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_call_connection_made"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._call_connection_made"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_in_handshake"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._in_handshake"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_in_shutdown"
+    fully_qualified_name: "asyncio.sslproto.SSLProtocol._in_shutdown"
     type_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
@@ -2222,6 +1789,20 @@ vars {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_SSLProtocolBase"
+  fully_qualified_name: "asyncio.sslproto._SSLProtocolBase"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

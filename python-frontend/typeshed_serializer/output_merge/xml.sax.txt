@@ -4,29 +4,6 @@ classes {
   fully_qualified_name: "xml.sax.handler.ContentHandler"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "xml.sax.handler.ContentHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.sax.handler.ContentHandler"
-        fully_qualified_name: "xml.sax.handler.ContentHandler"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "setDocumentLocator"
     fully_qualified_name: "xml.sax.handler.ContentHandler.setDocumentLocator"
     parameters {
@@ -37,7 +14,6 @@ classes {
       name: "locator"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -52,7 +28,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -67,7 +42,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -90,7 +64,6 @@ classes {
       name: "uri"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -109,7 +82,6 @@ classes {
       name: "prefix"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -132,7 +104,6 @@ classes {
       name: "attrs"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -151,7 +122,6 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -178,7 +148,6 @@ classes {
       name: "attrs"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -201,7 +170,6 @@ classes {
       name: "qname"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -220,7 +188,6 @@ classes {
       name: "content"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -239,7 +206,6 @@ classes {
       name: "whitespace"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -262,7 +228,6 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -281,7 +246,6 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -289,7 +253,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -304,15 +267,26 @@ classes {
   methods {
     name: "error"
     fully_qualified_name: "xml.sax.handler.ErrorHandler.error"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.sax.handler.ErrorHandler"
+        fully_qualified_name: "xml.sax.handler.ErrorHandler"
+      }
     }
     parameters {
       name: "exception"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -323,15 +297,26 @@ classes {
   methods {
     name: "fatalError"
     fully_qualified_name: "xml.sax.handler.ErrorHandler.fatalError"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.sax.handler.ErrorHandler"
+        fully_qualified_name: "xml.sax.handler.ErrorHandler"
+      }
     }
     parameters {
       name: "exception"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -342,15 +327,26 @@ classes {
   methods {
     name: "warning"
     fully_qualified_name: "xml.sax.handler.ErrorHandler.warning"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.sax.handler.ErrorHandler"
+        fully_qualified_name: "xml.sax.handler.ErrorHandler"
+      }
     }
     parameters {
       name: "exception"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -358,7 +354,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -377,7 +372,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -392,7 +386,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -407,7 +400,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -422,7 +414,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -430,7 +421,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -443,29 +433,6 @@ classes {
   fully_qualified_name: "xml.sax.xmlreader.XMLReader"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "xml.sax.xmlreader.XMLReader.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
-        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "parse"
     fully_qualified_name: "xml.sax.xmlreader.XMLReader.parse"
     parameters {
@@ -476,7 +443,6 @@ classes {
       name: "source"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -491,7 +457,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -510,7 +475,6 @@ classes {
       name: "handler"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -525,7 +489,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -544,7 +507,6 @@ classes {
       name: "handler"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -559,7 +521,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -578,7 +539,6 @@ classes {
       name: "resolver"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -593,7 +553,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -612,7 +571,6 @@ classes {
       name: "handler"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -631,7 +589,6 @@ classes {
       name: "locale"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -650,7 +607,6 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -673,7 +629,6 @@ classes {
       name: "state"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -692,7 +647,6 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -715,7 +669,6 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -723,7 +676,45 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsReadClose"
+  fully_qualified_name: "xml.sax._SupportsReadClose"
+  super_classes: "_typeshed.SupportsRead"
+  methods {
+    name: "close"
+    fully_qualified_name: "xml.sax._SupportsReadClose.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.sax._SupportsReadClose[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "xml.sax._SupportsReadClose"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -775,7 +766,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -798,7 +788,6 @@ classes {
         fully_qualified_name: "xml.sax.SAXException"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -821,7 +810,6 @@ classes {
         fully_qualified_name: "xml.sax.SAXException"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -850,7 +838,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -858,7 +845,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -897,8 +883,16 @@ classes {
       name: "exception"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.Exception"
-        fully_qualified_name: "builtins.Exception"
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
     parameters {
@@ -909,7 +903,6 @@ classes {
         fully_qualified_name: "xml.sax.xmlreader.Locator"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -932,7 +925,6 @@ classes {
         fully_qualified_name: "xml.sax.SAXParseException"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -955,7 +947,6 @@ classes {
         fully_qualified_name: "xml.sax.SAXParseException"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -970,7 +961,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -985,7 +975,6 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -993,7 +982,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1005,7 +993,6 @@ classes {
   name: "SAXNotRecognizedException"
   fully_qualified_name: "xml.sax.SAXNotRecognizedException"
   super_classes: "xml.sax.SAXException"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1017,7 +1004,6 @@ classes {
   name: "SAXNotSupportedException"
   fully_qualified_name: "xml.sax.SAXNotSupportedException"
   super_classes: "xml.sax.SAXException"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1029,7 +1015,6 @@ classes {
   name: "SAXReaderNotAvailable"
   fully_qualified_name: "xml.sax.SAXReaderNotAvailable"
   super_classes: "xml.sax.SAXNotSupportedException"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1057,7 +1042,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1097,81 +1081,27 @@ functions {
     name: "source"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str],typing.IO[builtins.str]]"
+      pretty_printed_name: "Union[builtins.str,xml.sax._SupportsReadClose[builtins.bytes],xml.sax._SupportsReadClose[builtins.str]]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
       args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-  }
-  parameters {
-    name: "handler"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "xml.sax.handler.ContentHandler"
-      fully_qualified_name: "xml.sax.handler.ContentHandler"
-    }
-  }
-  parameters {
-    name: "errorHandler"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "xml.sax.handler.ErrorHandler"
-      fully_qualified_name: "xml.sax.handler.ErrorHandler"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "parse"
-  fully_qualified_name: "xml.sax.parse"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "source"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str],typing.IO[builtins.bytes]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-      args {
-        pretty_printed_name: "typing.IO[builtins.bytes]"
+        pretty_printed_name: "xml.sax._SupportsReadClose[builtins.bytes]"
         args {
           pretty_printed_name: "builtins.bytes"
           fully_qualified_name: "builtins.bytes"
         }
-        fully_qualified_name: "typing.IO"
+        fully_qualified_name: "xml.sax._SupportsReadClose"
+      }
+      args {
+        pretty_printed_name: "xml.sax._SupportsReadClose[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "xml.sax._SupportsReadClose"
       }
     }
   }
@@ -1195,30 +1125,39 @@ functions {
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 functions {
-  name: "parseString"
-  fully_qualified_name: "xml.sax.parseString"
+  name: "parse"
+  fully_qualified_name: "xml.sax.parse"
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
   }
   parameters {
-    name: "string"
+    name: "source"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      pretty_printed_name: "Union[UnboundType[StrPath],xml.sax._SupportsReadClose[builtins.bytes],xml.sax._SupportsReadClose[builtins.str]]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "xml.sax._SupportsReadClose[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "xml.sax._SupportsReadClose"
+      }
+      args {
+        pretty_printed_name: "xml.sax._SupportsReadClose[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "xml.sax._SupportsReadClose"
       }
     }
   }
@@ -1234,20 +1173,14 @@ functions {
     name: "errorHandler"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[xml.sax.handler.ErrorHandler,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "xml.sax.handler.ErrorHandler"
-        fully_qualified_name: "xml.sax.handler.ErrorHandler"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      pretty_printed_name: "xml.sax.handler.ErrorHandler"
+      fully_qualified_name: "xml.sax.handler.ErrorHandler"
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "parseString"
@@ -1260,11 +1193,11 @@ functions {
     name: "string"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+      pretty_printed_name: "Union[UnboundType[ReadableBuffer],builtins.str]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "builtins.str"
@@ -1319,7 +1252,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1338,7 +1270,6 @@ vars {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

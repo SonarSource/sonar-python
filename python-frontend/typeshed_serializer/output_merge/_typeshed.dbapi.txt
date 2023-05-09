@@ -1,0 +1,502 @@
+fully_qualified_name: "_typeshed.dbapi"
+classes {
+  name: "DBAPIConnection"
+  fully_qualified_name: "_typeshed.dbapi.DBAPIConnection"
+  super_classes: "builtins.object"
+  methods {
+    name: "close"
+    fully_qualified_name: "_typeshed.dbapi.DBAPIConnection.close"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPIConnection"
+        fully_qualified_name: "_typeshed.dbapi.DBAPIConnection"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commit"
+    fully_qualified_name: "_typeshed.dbapi.DBAPIConnection.commit"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPIConnection"
+        fully_qualified_name: "_typeshed.dbapi.DBAPIConnection"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cursor"
+    fully_qualified_name: "_typeshed.dbapi.DBAPIConnection.cursor"
+    return_annotation {
+      pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+      fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPIConnection"
+        fully_qualified_name: "_typeshed.dbapi.DBAPIConnection"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DBAPICursor"
+  fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+  super_classes: "builtins.object"
+  methods {
+    name: "description"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.description"
+    return_annotation {
+      pretty_printed_name: "Union[typing.Sequence[UnboundType[DBAPIColumnDescription]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[UnboundType[DBAPIColumnDescription]]"
+        args {
+          pretty_printed_name: "UnboundType[DBAPIColumnDescription]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rowcount"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.rowcount"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.close"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "execute"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.execute"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    parameters {
+      name: "__operation"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__parameters"
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "executemany"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.executemany"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    parameters {
+      name: "__operation"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__seq_of_parameters"
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[typing.Sequence[Any]]"
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fetchone"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.fetchone"
+    return_annotation {
+      pretty_printed_name: "Union[typing.Sequence[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fetchmany"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.fetchmany"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[typing.Sequence[Any]]"
+      args {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fetchall"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.fetchall"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[typing.Sequence[Any]]"
+      args {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setinputsizes"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.setinputsizes"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    parameters {
+      name: "__sizes"
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Union[UnboundType[DBAPITypeCode],builtins.int,None]]"
+        args {
+          pretty_printed_name: "Union[UnboundType[DBAPITypeCode],builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[DBAPITypeCode]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setoutputsize"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.setoutputsize"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.dbapi.DBAPICursor"
+        fully_qualified_name: "_typeshed.dbapi.DBAPICursor"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__column"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "arraysize"
+    fully_qualified_name: "_typeshed.dbapi.DBAPICursor.arraysize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "DBAPITypeCode"
+  fully_qualified_name: "_typeshed.dbapi.DBAPITypeCode"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DBAPIColumnDescription"
+  fully_qualified_name: "_typeshed.dbapi.DBAPIColumnDescription"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

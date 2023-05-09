@@ -1,19 +1,1531 @@
 fully_qualified_name: "xml.dom.pulldom"
+classes {
+  name: "PullDOM"
+  fully_qualified_name: "xml.dom.pulldom.PullDOM"
+  super_classes: "xml.sax.handler.ContentHandler"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "documentFactory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_DocumentFactory],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_DocumentFactory]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.pop"
+    return_annotation {
+      pretty_printed_name: "xml.dom.minidom.Element"
+      fully_qualified_name: "xml.dom.minidom.Element"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setDocumentLocator"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.setDocumentLocator"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "locator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startPrefixMapping"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.startPrefixMapping"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "uri"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "endPrefixMapping"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.endPrefixMapping"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startElementNS"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.startElementNS"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tagName"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "endElementNS"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.endElementNS"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tagName"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startElement"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.startElement"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "endElement"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.endElement"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "comment"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.comment"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "processingInstruction"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.processingInstruction"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ignorableWhitespace"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.ignorableWhitespace"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "chars"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "characters"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.characters"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    parameters {
+      name: "chars"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startDocument"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.startDocument"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "buildDocument"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.buildDocument"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "uri"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tagname"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "endDocument"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.endDocument"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.PullDOM"
+        fully_qualified_name: "xml.dom.pulldom.PullDOM"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "document"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.document"
+    type_annotation {
+      pretty_printed_name: "Union[xml.dom.minidom.Document,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "xml.dom.minidom.Document"
+        fully_qualified_name: "xml.dom.minidom.Document"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "documentFactory"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.documentFactory"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_DocumentFactory]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "firstEvent"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.firstEvent"
+    type_annotation {
+      pretty_printed_name: "UnboundType[Incomplete]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lastEvent"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.lastEvent"
+    type_annotation {
+      pretty_printed_name: "UnboundType[Incomplete]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "elementStack"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.elementStack"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "pending_events"
+    fully_qualified_name: "xml.dom.pulldom.PullDOM.pending_events"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ErrorHandler"
+  fully_qualified_name: "xml.dom.pulldom.ErrorHandler"
+  super_classes: "builtins.object"
+  methods {
+    name: "warning"
+    fully_qualified_name: "xml.dom.pulldom.ErrorHandler.warning"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.ErrorHandler"
+        fully_qualified_name: "xml.dom.pulldom.ErrorHandler"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "error"
+    fully_qualified_name: "xml.dom.pulldom.ErrorHandler.error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.ErrorHandler"
+        fully_qualified_name: "xml.dom.pulldom.ErrorHandler"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fatalError"
+    fully_qualified_name: "xml.dom.pulldom.ErrorHandler.fatalError"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.ErrorHandler"
+        fully_qualified_name: "xml.dom.pulldom.ErrorHandler"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DOMEventStream"
+  fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+        fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_typeshed.SupportsRead[builtins.bytes],_typeshed.SupportsRead[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "_typeshed.SupportsRead"
+        }
+        args {
+          pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "_typeshed.SupportsRead"
+        }
+      }
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
+        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
+      }
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.__getitem__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.__next__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.__iter__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getEvent"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.getEvent"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_Event]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+        fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "expandNode"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.expandNode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+        fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Node]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+        fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+        fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "stream"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.stream"
+    type_annotation {
+      pretty_printed_name: "Union[_typeshed.SupportsRead[builtins.bytes],_typeshed.SupportsRead[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+      args {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parser"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.parser"
+    type_annotation {
+      pretty_printed_name: "xml.sax.xmlreader.XMLReader"
+      fully_qualified_name: "xml.sax.xmlreader.XMLReader"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "bufsize"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.bufsize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "pulldom"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream.pulldom"
+    type_annotation {
+      pretty_printed_name: "UnboundType[Incomplete]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SAX2DOM"
+  fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+  super_classes: "xml.dom.pulldom.PullDOM"
+  methods {
+    name: "startElementNS"
+    fully_qualified_name: "xml.dom.pulldom.SAX2DOM.startElementNS"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.SAX2DOM"
+        fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tagName"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startElement"
+    fully_qualified_name: "xml.dom.pulldom.SAX2DOM.startElement"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.SAX2DOM"
+        fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "processingInstruction"
+    fully_qualified_name: "xml.dom.pulldom.SAX2DOM.processingInstruction"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.SAX2DOM"
+        fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+      }
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ignorableWhitespace"
+    fully_qualified_name: "xml.dom.pulldom.SAX2DOM.ignorableWhitespace"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.SAX2DOM"
+        fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+      }
+    }
+    parameters {
+      name: "chars"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "characters"
+    fully_qualified_name: "xml.dom.pulldom.SAX2DOM.characters"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xml.dom.pulldom.SAX2DOM"
+        fully_qualified_name: "xml.dom.pulldom.SAX2DOM"
+      }
+    }
+    parameters {
+      name: "chars"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
 functions {
-  name: "__getattr__"
-  fully_qualified_name: "xml.dom.pulldom.__getattr__"
+  name: "parse"
+  fully_qualified_name: "xml.dom.pulldom.parse"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
   }
   parameters {
-    name: "name"
+    name: "stream_or_string"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,_typeshed.SupportsRead[builtins.bytes],_typeshed.SupportsRead[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+      args {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+  }
+  parameters {
+    name: "parser"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[xml.sax.xmlreader.XMLReader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
+        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "bufsize"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "parseString"
+  fully_qualified_name: "xml.dom.pulldom.parseString"
+  return_annotation {
+    pretty_printed_name: "xml.dom.pulldom.DOMEventStream"
+    fully_qualified_name: "xml.dom.pulldom.DOMEventStream"
+  }
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
+  parameters {
+    name: "parser"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[xml.sax.xmlreader.XMLReader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "xml.sax.xmlreader.XMLReader"
+        fully_qualified_name: "xml.sax.xmlreader.XMLReader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "START_ELEMENT"
+  fully_qualified_name: "xml.dom.pulldom.START_ELEMENT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "END_ELEMENT"
+  fully_qualified_name: "xml.dom.pulldom.END_ELEMENT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "COMMENT"
+  fully_qualified_name: "xml.dom.pulldom.COMMENT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "START_DOCUMENT"
+  fully_qualified_name: "xml.dom.pulldom.START_DOCUMENT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "END_DOCUMENT"
+  fully_qualified_name: "xml.dom.pulldom.END_DOCUMENT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PROCESSING_INSTRUCTION"
+  fully_qualified_name: "xml.dom.pulldom.PROCESSING_INSTRUCTION"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IGNORABLE_WHITESPACE"
+  fully_qualified_name: "xml.dom.pulldom.IGNORABLE_WHITESPACE"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CHARACTERS"
+  fully_qualified_name: "xml.dom.pulldom.CHARACTERS"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_DocumentFactory"
+  fully_qualified_name: "xml.dom.pulldom._DocumentFactory"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Node"
+  fully_qualified_name: "xml.dom.pulldom._Node"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Event"
+  fully_qualified_name: "xml.dom.pulldom._Event"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "default_bufsize"
+  fully_qualified_name: "xml.dom.pulldom.default_bufsize"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

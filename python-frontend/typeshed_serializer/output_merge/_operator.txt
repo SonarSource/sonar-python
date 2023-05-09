@@ -1,25 +1,299 @@
 fully_qualified_name: "_operator"
 classes {
+  name: "_SupportsDunderLT"
+  fully_qualified_name: "_operator._SupportsDunderLT"
+  super_classes: "builtins.object"
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "_operator._SupportsDunderLT.__lt__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsDunderLT"
+        fully_qualified_name: "_operator._SupportsDunderLT"
+      }
+    }
+    parameters {
+      name: "__other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsDunderGT"
+  fully_qualified_name: "_operator._SupportsDunderGT"
+  super_classes: "builtins.object"
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "_operator._SupportsDunderGT.__gt__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsDunderGT"
+        fully_qualified_name: "_operator._SupportsDunderGT"
+      }
+    }
+    parameters {
+      name: "__other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsDunderLE"
+  fully_qualified_name: "_operator._SupportsDunderLE"
+  super_classes: "builtins.object"
+  methods {
+    name: "__le__"
+    fully_qualified_name: "_operator._SupportsDunderLE.__le__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsDunderLE"
+        fully_qualified_name: "_operator._SupportsDunderLE"
+      }
+    }
+    parameters {
+      name: "__other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsDunderGE"
+  fully_qualified_name: "_operator._SupportsDunderGE"
+  super_classes: "builtins.object"
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "_operator._SupportsDunderGE.__ge__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsDunderGE"
+        fully_qualified_name: "_operator._SupportsDunderGE"
+      }
+    }
+    parameters {
+      name: "__other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsInversion"
+  fully_qualified_name: "_operator._SupportsInversion"
+  super_classes: "builtins.object"
+  methods {
+    name: "__invert__"
+    fully_qualified_name: "_operator._SupportsInversion.__invert__"
+    return_annotation {
+      pretty_printed_name: "_operator._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsInversion[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator._SupportsInversion"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsNeg"
+  fully_qualified_name: "_operator._SupportsNeg"
+  super_classes: "builtins.object"
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "_operator._SupportsNeg.__neg__"
+    return_annotation {
+      pretty_printed_name: "_operator._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsNeg[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator._SupportsNeg"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsPos"
+  fully_qualified_name: "_operator._SupportsPos"
+  super_classes: "builtins.object"
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "_operator._SupportsPos.__pos__"
+    return_annotation {
+      pretty_printed_name: "_operator._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_operator._SupportsPos[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator._SupportsPos"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "attrgetter"
-  fully_qualified_name: "operator.attrgetter"
+  fully_qualified_name: "_operator.attrgetter"
   super_classes: "builtins.object"
   methods {
     name: "__call__"
-    fully_qualified_name: "operator.attrgetter.__call__"
+    fully_qualified_name: "_operator.attrgetter.__call__"
     return_annotation {
-      pretty_printed_name: "operator._T_co"
+      pretty_printed_name: "_operator._T_co"
       kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "operator.attrgetter[operator._T_co]"
+        pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
         args {
-          pretty_printed_name: "operator._T_co"
+          pretty_printed_name: "_operator._T_co"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
     }
     parameters {
@@ -39,31 +313,31 @@ classes {
   }
   overloaded_methods {
     name: "__new__"
-    fullname: "operator.attrgetter.__new__"
+    fullname: "_operator.attrgetter.__new__"
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.attrgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.attrgetter[Any]"
+        pretty_printed_name: "_operator.attrgetter[Any]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.attrgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.attrgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.attrgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
@@ -81,9 +355,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.attrgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.attrgetter[Tuple[Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any]"
           kind: TUPLE
@@ -96,21 +370,21 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.attrgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.attrgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.attrgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
@@ -135,9 +409,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.attrgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.attrgetter[Tuple[Any,Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any,Any]"
           kind: TUPLE
@@ -154,21 +428,21 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.attrgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.attrgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.attrgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
@@ -200,9 +474,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.attrgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.attrgetter[Tuple[Any,Any,Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any,Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any,Any,Any]"
           kind: TUPLE
@@ -223,21 +497,21 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.attrgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.attrgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.attrgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
@@ -276,32 +550,36 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.attrgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.attrgetter[builtins.tuple[Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any]]"
         args {
-          pretty_printed_name: "builtins.tuple[Any]"
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
           args {
             pretty_printed_name: "Any"
             kind: ANY
           }
-          fully_qualified_name: "builtins.tuple"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
         }
-        fully_qualified_name: "operator.attrgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.attrgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.attrgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.attrgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
@@ -329,91 +607,43 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "itemgetter"
-  fully_qualified_name: "operator.itemgetter"
-  super_classes: "builtins.object"
-  methods {
-    name: "__call__"
-    fully_qualified_name: "operator.itemgetter.__call__"
-    return_annotation {
-      pretty_printed_name: "operator._T_co"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "operator.itemgetter[operator._T_co]"
-        args {
-          pretty_printed_name: "operator._T_co"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "operator.itemgetter"
-      }
-    }
-    parameters {
-      name: "obj"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "__new__"
-    fullname: "operator.itemgetter.__new__"
+    fullname: "_operator.attrgetter.__new__"
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.itemgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.itemgetter[Any]"
+        pretty_printed_name: "_operator.attrgetter[Any]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
         }
-        fully_qualified_name: "operator.itemgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.itemgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.itemgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.itemgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
       parameters {
-        name: "item"
+        name: "attr"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       has_decorators: true
@@ -422,9 +652,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.itemgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.itemgetter[Tuple[Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any]"
           kind: TUPLE
@@ -437,37 +667,37 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.itemgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.itemgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.itemgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.itemgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
       parameters {
-        name: "item"
+        name: "attr"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item2"
+        name: "__attr2"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       has_decorators: true
@@ -476,9 +706,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.itemgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.itemgetter[Tuple[Any,Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any,Any]"
           kind: TUPLE
@@ -495,44 +725,44 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.itemgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.itemgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.itemgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.itemgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
       parameters {
-        name: "item"
+        name: "attr"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item2"
+        name: "__attr2"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item3"
+        name: "__attr3"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       has_decorators: true
@@ -541,9 +771,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.itemgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.itemgetter[Tuple[Any,Any,Any,Any]]"
+        pretty_printed_name: "_operator.attrgetter[Tuple[Any,Any,Any,Any]]"
         args {
           pretty_printed_name: "Tuple[Any,Any,Any,Any]"
           kind: TUPLE
@@ -564,51 +794,51 @@ classes {
             kind: ANY
           }
         }
-        fully_qualified_name: "operator.itemgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.itemgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.itemgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.itemgetter"
+            fully_qualified_name: "_operator.attrgetter"
           }
         }
       }
       parameters {
-        name: "item"
+        name: "attr"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item2"
+        name: "__attr2"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item3"
+        name: "__attr3"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       parameters {
-        name: "__item4"
+        name: "__attr4"
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
       }
       has_decorators: true
@@ -617,9 +847,9 @@ classes {
     }
     definitions {
       name: "__new__"
-      fully_qualified_name: "operator.itemgetter.__new__"
+      fully_qualified_name: "_operator.attrgetter.__new__"
       return_annotation {
-        pretty_printed_name: "operator.itemgetter[builtins.tuple[Any]]"
+        pretty_printed_name: "_operator.attrgetter[builtins.tuple[Any]]"
         args {
           pretty_printed_name: "builtins.tuple[Any]"
           args {
@@ -628,21 +858,129 @@ classes {
           }
           fully_qualified_name: "builtins.tuple"
         }
-        fully_qualified_name: "operator.itemgetter"
+        fully_qualified_name: "_operator.attrgetter"
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[operator.itemgetter[operator._T_co]]"
+          pretty_printed_name: "Type[_operator.attrgetter[_operator._T_co]]"
           kind: TYPE
           args {
-            pretty_printed_name: "operator.itemgetter[operator._T_co]"
+            pretty_printed_name: "_operator.attrgetter[_operator._T_co]"
             args {
-              pretty_printed_name: "operator._T_co"
+              pretty_printed_name: "_operator._T_co"
               kind: TYPE_VAR
             }
-            fully_qualified_name: "operator.itemgetter"
+            fully_qualified_name: "_operator.attrgetter"
+          }
+        }
+      }
+      parameters {
+        name: "attr"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "attrs"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "itemgetter"
+  fully_qualified_name: "_operator.itemgetter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_operator.itemgetter.__call__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsGetItem[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_typeshed.SupportsGetItem"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "_operator.itemgetter.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
           }
         }
       }
@@ -650,16 +988,279 @@ classes {
         name: "item"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co,_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co,_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item4"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,Any]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item4"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "items"
         kind: VAR_POSITIONAL
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
         }
       }
       has_decorators: true
@@ -670,9 +1271,320 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "_operator.itemgetter.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+        args {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[Tuple[_operator._T_co,_operator._T_co,_operator._T_co,_operator._T_co]]"
+        args {
+          pretty_printed_name: "Tuple[_operator._T_co,_operator._T_co,_operator._T_co,_operator._T_co]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item4"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "_operator.itemgetter.__new__"
+      return_annotation {
+        pretty_printed_name: "_operator.itemgetter[builtins.tuple[_operator._T_co]]"
+        args {
+          pretty_printed_name: "builtins.tuple[_operator._T_co]"
+          args {
+            pretty_printed_name: "_operator._T_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "_operator.itemgetter"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_operator.itemgetter[_operator._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_operator.itemgetter[_operator._T_co]"
+            args {
+              pretty_printed_name: "_operator._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "_operator.itemgetter"
+          }
+        }
+      }
+      parameters {
+        name: "item"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item2"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item3"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__item4"
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "items"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "_operator._T_co"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
     valid_for: "39"
     valid_for: "310"
   }
+  has_decorators: true
   is_generic: true
   valid_for: "35"
   valid_for: "36"
@@ -683,11 +1595,11 @@ classes {
 }
 classes {
   name: "methodcaller"
-  fully_qualified_name: "operator.methodcaller"
+  fully_qualified_name: "_operator.methodcaller"
   super_classes: "builtins.object"
   methods {
     name: "__init__"
-    fully_qualified_name: "operator.methodcaller.__init__"
+    fully_qualified_name: "_operator.methodcaller.__init__"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -696,8 +1608,8 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "operator.methodcaller"
-        fully_qualified_name: "operator.methodcaller"
+        pretty_printed_name: "_operator.methodcaller"
+        fully_qualified_name: "_operator.methodcaller"
       }
     }
     parameters {
@@ -732,7 +1644,7 @@ classes {
   }
   methods {
     name: "__call__"
-    fully_qualified_name: "operator.methodcaller.__call__"
+    fully_qualified_name: "_operator.methodcaller.__call__"
     return_annotation {
       pretty_printed_name: "Any"
       kind: ANY
@@ -741,8 +1653,8 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "operator.methodcaller"
-        fully_qualified_name: "operator.methodcaller"
+        pretty_printed_name: "_operator.methodcaller"
+        fully_qualified_name: "_operator.methodcaller"
       }
     }
     parameters {
@@ -760,6 +1672,273 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  has_decorators: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lt"
+  fully_qualified_name: "_operator.lt"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "le"
+  fully_qualified_name: "_operator.le"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "eq"
+  fully_qualified_name: "_operator.eq"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ne"
+  fully_qualified_name: "_operator.ne"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ge"
+  fully_qualified_name: "_operator.ge"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "gt"
+  fully_qualified_name: "_operator.gt"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsComparison]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "not_"
+  fully_qualified_name: "_operator.not_"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "truth"
+  fully_qualified_name: "_operator.truth"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_"
+  fully_qualified_name: "_operator.is_"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_not"
+  fully_qualified_name: "_operator.is_not"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -769,17 +1948,17 @@ classes {
 }
 functions {
   name: "abs"
-  fully_qualified_name: "operator.abs"
+  fully_qualified_name: "_operator.abs"
   return_annotation {
-    pretty_printed_name: "operator._T"
+    pretty_printed_name: "_operator._T"
     kind: TYPE_VAR
   }
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "typing.SupportsAbs[operator._T]"
+      pretty_printed_name: "typing.SupportsAbs[_operator._T]"
       args {
-        pretty_printed_name: "operator._T"
+        pretty_printed_name: "_operator._T"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.SupportsAbs"
@@ -794,7 +1973,7 @@ functions {
 }
 functions {
   name: "add"
-  fully_qualified_name: "operator.add"
+  fully_qualified_name: "_operator.add"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -822,139 +2001,7 @@ functions {
 }
 functions {
   name: "and_"
-  fully_qualified_name: "operator.and_"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "concat"
-  fully_qualified_name: "operator.concat"
-  return_annotation {
-    pretty_printed_name: "typing.Sequence[operator._T]"
-    args {
-      pretty_printed_name: "operator._T"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "typing.Sequence"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[operator._T]"
-      args {
-        pretty_printed_name: "operator._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[operator._T]"
-      args {
-        pretty_printed_name: "operator._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "contains"
-  fully_qualified_name: "operator.contains"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "typing.Container[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.Container"
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "countOf"
-  fully_qualified_name: "operator.countOf"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "typing.Container[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "typing.Container"
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "eq"
-  fully_qualified_name: "operator.eq"
+  fully_qualified_name: "_operator.and_"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -982,287 +2029,7 @@ functions {
 }
 functions {
   name: "floordiv"
-  fully_qualified_name: "operator.floordiv"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ge"
-  fully_qualified_name: "operator.ge"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "gt"
-  fully_qualified_name: "operator.gt"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "iadd"
-  fully_qualified_name: "operator.iadd"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "iand"
-  fully_qualified_name: "operator.iand"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "iconcat"
-  fully_qualified_name: "operator.iconcat"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ifloordiv"
-  fully_qualified_name: "operator.ifloordiv"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ilshift"
-  fully_qualified_name: "operator.ilshift"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "imatmul"
-  fully_qualified_name: "operator.imatmul"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "imod"
-  fully_qualified_name: "operator.imod"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "imul"
-  fully_qualified_name: "operator.imul"
+  fully_qualified_name: "_operator.floordiv"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1290,7 +2057,7 @@ functions {
 }
 functions {
   name: "index"
-  fully_qualified_name: "operator.index"
+  fully_qualified_name: "_operator.index"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -1298,40 +2065,8 @@ functions {
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "indexOf"
-  fully_qualified_name: "operator.indexOf"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[operator._T]"
-      args {
-        pretty_printed_name: "operator._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "operator._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   valid_for: "35"
@@ -1343,16 +2078,20 @@ functions {
 }
 functions {
   name: "inv"
-  fully_qualified_name: "operator.inv"
+  fully_qualified_name: "_operator.inv"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "_operator._T_co"
+    kind: TYPE_VAR
   }
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "_operator._SupportsInversion[_operator._T_co]"
+      args {
+        pretty_printed_name: "_operator._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "_operator._SupportsInversion"
     }
   }
   valid_for: "35"
@@ -1364,298 +2103,21 @@ functions {
 }
 functions {
   name: "invert"
-  fully_qualified_name: "operator.invert"
+  fully_qualified_name: "_operator.invert"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "_operator._T_co"
+    kind: TYPE_VAR
   }
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "_operator._SupportsInversion[_operator._T_co]"
+      args {
+        pretty_printed_name: "_operator._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "_operator._SupportsInversion"
     }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ior"
-  fully_qualified_name: "operator.ior"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ipow"
-  fully_qualified_name: "operator.ipow"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "irshift"
-  fully_qualified_name: "operator.irshift"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "is_"
-  fully_qualified_name: "operator.is_"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "is_not"
-  fully_qualified_name: "operator.is_not"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isub"
-  fully_qualified_name: "operator.isub"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "itruediv"
-  fully_qualified_name: "operator.itruediv"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ixor"
-  fully_qualified_name: "operator.ixor"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "le"
-  fully_qualified_name: "operator.le"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "length_hint"
-  fully_qualified_name: "operator.length_hint"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__obj"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__default"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
   }
   valid_for: "35"
   valid_for: "36"
@@ -1666,63 +2128,7 @@ functions {
 }
 functions {
   name: "lshift"
-  fully_qualified_name: "operator.lshift"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "lt"
-  fully_qualified_name: "operator.lt"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "__b"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "matmul"
-  fully_qualified_name: "operator.matmul"
+  fully_qualified_name: "_operator.lshift"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1750,7 +2156,7 @@ functions {
 }
 functions {
   name: "mod"
-  fully_qualified_name: "operator.mod"
+  fully_qualified_name: "_operator.mod"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1778,7 +2184,7 @@ functions {
 }
 functions {
   name: "mul"
-  fully_qualified_name: "operator.mul"
+  fully_qualified_name: "_operator.mul"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1805,8 +2211,8 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "ne"
-  fully_qualified_name: "operator.ne"
+  name: "matmul"
+  fully_qualified_name: "_operator.matmul"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1834,37 +2240,20 @@ functions {
 }
 functions {
   name: "neg"
-  fully_qualified_name: "operator.neg"
+  fully_qualified_name: "_operator.neg"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "_operator._T_co"
+    kind: TYPE_VAR
   }
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "not_"
-  fully_qualified_name: "operator.not_"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "__a"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "_operator._SupportsNeg[_operator._T_co]"
+      args {
+        pretty_printed_name: "_operator._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "_operator._SupportsNeg"
     }
   }
   valid_for: "35"
@@ -1876,7 +2265,7 @@ functions {
 }
 functions {
   name: "or_"
-  fully_qualified_name: "operator.or_"
+  fully_qualified_name: "_operator.or_"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1904,16 +2293,20 @@ functions {
 }
 functions {
   name: "pos"
-  fully_qualified_name: "operator.pos"
+  fully_qualified_name: "_operator.pos"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "_operator._T_co"
+    kind: TYPE_VAR
   }
   parameters {
     name: "__a"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "_operator._SupportsPos[_operator._T_co]"
+      args {
+        pretty_printed_name: "_operator._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "_operator._SupportsPos"
     }
   }
   valid_for: "35"
@@ -1925,7 +2318,7 @@ functions {
 }
 functions {
   name: "pow"
-  fully_qualified_name: "operator.pow"
+  fully_qualified_name: "_operator.pow"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1953,7 +2346,7 @@ functions {
 }
 functions {
   name: "rshift"
-  fully_qualified_name: "operator.rshift"
+  fully_qualified_name: "_operator.rshift"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -1981,7 +2374,7 @@ functions {
 }
 functions {
   name: "sub"
-  fully_qualified_name: "operator.sub"
+  fully_qualified_name: "_operator.sub"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -2009,7 +2402,7 @@ functions {
 }
 functions {
   name: "truediv"
-  fully_qualified_name: "operator.truediv"
+  fully_qualified_name: "_operator.truediv"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -2036,14 +2429,21 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "truth"
-  fully_qualified_name: "operator.truth"
+  name: "xor"
+  fully_qualified_name: "_operator.xor"
   return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
+    pretty_printed_name: "Any"
+    kind: ANY
   }
   parameters {
     name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
     type_annotation {
       pretty_printed_name: "Any"
       kind: ANY
@@ -2057,8 +2457,537 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "xor"
-  fully_qualified_name: "operator.xor"
+  name: "concat"
+  fully_qualified_name: "_operator.concat"
+  return_annotation {
+    pretty_printed_name: "typing.Sequence[_operator._T]"
+    args {
+      pretty_printed_name: "_operator._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Sequence"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[_operator._T]"
+      args {
+        pretty_printed_name: "_operator._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[_operator._T]"
+      args {
+        pretty_printed_name: "_operator._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "contains"
+  fully_qualified_name: "_operator.contains"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "typing.Container[builtins.object]"
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "typing.Container"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "countOf"
+  fully_qualified_name: "_operator.countOf"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.object]"
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "indexOf"
+  fully_qualified_name: "_operator.indexOf"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[_operator._T]"
+      args {
+        pretty_printed_name: "_operator._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "_operator._T"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "length_hint"
+  fully_qualified_name: "_operator.length_hint"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "__default"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iadd"
+  fully_qualified_name: "_operator.iadd"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iand"
+  fully_qualified_name: "_operator.iand"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iconcat"
+  fully_qualified_name: "_operator.iconcat"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ifloordiv"
+  fully_qualified_name: "_operator.ifloordiv"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ilshift"
+  fully_qualified_name: "_operator.ilshift"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "imod"
+  fully_qualified_name: "_operator.imod"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "imul"
+  fully_qualified_name: "_operator.imul"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "imatmul"
+  fully_qualified_name: "_operator.imatmul"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ior"
+  fully_qualified_name: "_operator.ior"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ipow"
+  fully_qualified_name: "_operator.ipow"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "irshift"
+  fully_qualified_name: "_operator.irshift"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isub"
+  fully_qualified_name: "_operator.isub"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "itruediv"
+  fully_qualified_name: "_operator.itruediv"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__a"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__b"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ixor"
+  fully_qualified_name: "_operator.ixor"
   return_annotation {
     pretty_printed_name: "Any"
     kind: ANY
@@ -2114,10 +3043,10 @@ functions {
 }
 overloaded_functions {
   name: "delitem"
-  fullname: "operator.delitem"
+  fullname: "_operator.delitem"
   definitions {
     name: "delitem"
-    fully_qualified_name: "operator.delitem"
+    fully_qualified_name: "_operator.delitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2136,8 +3065,8 @@ overloaded_functions {
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     has_decorators: true
@@ -2146,7 +3075,7 @@ overloaded_functions {
   }
   definitions {
     name: "delitem"
-    fully_qualified_name: "operator.delitem"
+    fully_qualified_name: "_operator.delitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2175,7 +3104,7 @@ overloaded_functions {
   }
   definitions {
     name: "delitem"
-    fully_qualified_name: "operator.delitem"
+    fully_qualified_name: "_operator.delitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2183,9 +3112,9 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.MutableMapping[operator._K,Any]"
+        pretty_printed_name: "typing.MutableMapping[_operator._K,Any]"
         args {
-          pretty_printed_name: "operator._K"
+          pretty_printed_name: "_operator._K"
           kind: TYPE_VAR
         }
         args {
@@ -2198,7 +3127,7 @@ overloaded_functions {
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "operator._K"
+        pretty_printed_name: "_operator._K"
         kind: TYPE_VAR
       }
     }
@@ -2215,43 +3144,14 @@ overloaded_functions {
 }
 overloaded_functions {
   name: "getitem"
-  fullname: "operator.getitem"
+  fullname: "_operator.getitem"
   definitions {
     name: "getitem"
-    fully_qualified_name: "operator.getitem"
+    fully_qualified_name: "_operator.getitem"
     return_annotation {
-      pretty_printed_name: "operator._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "__a"
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[operator._T]"
-        args {
-          pretty_printed_name: "operator._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "__b"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "getitem"
-    fully_qualified_name: "operator.getitem"
-    return_annotation {
-      pretty_printed_name: "typing.Sequence[operator._T]"
+      pretty_printed_name: "typing.Sequence[_operator._T]"
       args {
-        pretty_printed_name: "operator._T"
+        pretty_printed_name: "_operator._T"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Sequence"
@@ -2259,9 +3159,9 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.Sequence[operator._T]"
+        pretty_printed_name: "typing.Sequence[_operator._T]"
         args {
-          pretty_printed_name: "operator._T"
+          pretty_printed_name: "_operator._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.Sequence"
@@ -2280,30 +3180,30 @@ overloaded_functions {
   }
   definitions {
     name: "getitem"
-    fully_qualified_name: "operator.getitem"
+    fully_qualified_name: "_operator.getitem"
     return_annotation {
-      pretty_printed_name: "operator._V"
+      pretty_printed_name: "_operator._V"
       kind: TYPE_VAR
     }
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.Mapping[operator._K,operator._V]"
+        pretty_printed_name: "_typeshed.SupportsGetItem[_operator._K,_operator._V]"
         args {
-          pretty_printed_name: "operator._K"
+          pretty_printed_name: "_operator._K"
           kind: TYPE_VAR
         }
         args {
-          pretty_printed_name: "operator._V"
+          pretty_printed_name: "_operator._V"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "typing.Mapping"
+        fully_qualified_name: "_typeshed.SupportsGetItem"
       }
     }
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "operator._K"
+        pretty_printed_name: "_operator._K"
         kind: TYPE_VAR
       }
     }
@@ -2320,10 +3220,10 @@ overloaded_functions {
 }
 overloaded_functions {
   name: "setitem"
-  fullname: "operator.setitem"
+  fullname: "_operator.setitem"
   definitions {
     name: "setitem"
-    fully_qualified_name: "operator.setitem"
+    fully_qualified_name: "_operator.setitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2331,9 +3231,9 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.MutableSequence[operator._T]"
+        pretty_printed_name: "typing.MutableSequence[_operator._T]"
         args {
-          pretty_printed_name: "operator._T"
+          pretty_printed_name: "_operator._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.MutableSequence"
@@ -2342,14 +3242,14 @@ overloaded_functions {
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     parameters {
       name: "__c"
       type_annotation {
-        pretty_printed_name: "operator._T"
+        pretty_printed_name: "_operator._T"
         kind: TYPE_VAR
       }
     }
@@ -2359,7 +3259,7 @@ overloaded_functions {
   }
   definitions {
     name: "setitem"
-    fully_qualified_name: "operator.setitem"
+    fully_qualified_name: "_operator.setitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2367,9 +3267,9 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.MutableSequence[operator._T]"
+        pretty_printed_name: "typing.MutableSequence[_operator._T]"
         args {
-          pretty_printed_name: "operator._T"
+          pretty_printed_name: "_operator._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.MutableSequence"
@@ -2385,9 +3285,9 @@ overloaded_functions {
     parameters {
       name: "__c"
       type_annotation {
-        pretty_printed_name: "typing.Sequence[operator._T]"
+        pretty_printed_name: "typing.Sequence[_operator._T]"
         args {
-          pretty_printed_name: "operator._T"
+          pretty_printed_name: "_operator._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.Sequence"
@@ -2399,7 +3299,7 @@ overloaded_functions {
   }
   definitions {
     name: "setitem"
-    fully_qualified_name: "operator.setitem"
+    fully_qualified_name: "_operator.setitem"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -2407,13 +3307,13 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "typing.MutableMapping[operator._K,operator._V]"
+        pretty_printed_name: "typing.MutableMapping[_operator._K,_operator._V]"
         args {
-          pretty_printed_name: "operator._K"
+          pretty_printed_name: "_operator._K"
           kind: TYPE_VAR
         }
         args {
-          pretty_printed_name: "operator._V"
+          pretty_printed_name: "_operator._V"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.MutableMapping"
@@ -2422,20 +3322,48 @@ overloaded_functions {
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "operator._K"
+        pretty_printed_name: "_operator._K"
         kind: TYPE_VAR
       }
     }
     parameters {
       name: "__c"
       type_annotation {
-        pretty_printed_name: "operator._V"
+        pretty_printed_name: "_operator._V"
         kind: TYPE_VAR
       }
     }
     has_decorators: true
     resolved_decorator_names: "overload"
     is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "_operator._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_SupportsComparison"
+  fully_qualified_name: "_operator._SupportsComparison"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

@@ -3,2221 +3,6 @@ classes {
   name: "_str"
   fully_qualified_name: "builtins.str"
   super_classes: "typing.Sequence"
-  super_classes: "builtins.basestring"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "builtins.str.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "o"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "capitalize"
-    fully_qualified_name: "builtins.str.capitalize"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "center"
-    fully_qualified_name: "builtins.str.center"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "count"
-    fully_qualified_name: "builtins.str.count"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "decode"
-    fully_qualified_name: "builtins.str.decode"
-    return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "errors"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "encode"
-    fully_qualified_name: "builtins.str.encode"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "errors"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "endswith"
-    fully_qualified_name: "builtins.str.endswith"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__suffix"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,builtins.tuple[builtins.unicode]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "expandtabs"
-    fully_qualified_name: "builtins.str.expandtabs"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "tabsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "find"
-    fully_qualified_name: "builtins.str.find"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sub"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "format"
-    fully_qualified_name: "builtins.str.format"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "format_map"
-    fully_qualified_name: "builtins.str.format_map"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "map"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins._FormatMapMapping"
-        fully_qualified_name: "builtins._FormatMapMapping"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "index"
-    fully_qualified_name: "builtins.str.index"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sub"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isalnum"
-    fully_qualified_name: "builtins.str.isalnum"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isalpha"
-    fully_qualified_name: "builtins.str.isalpha"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isdigit"
-    fully_qualified_name: "builtins.str.isdigit"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "islower"
-    fully_qualified_name: "builtins.str.islower"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isspace"
-    fully_qualified_name: "builtins.str.isspace"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "istitle"
-    fully_qualified_name: "builtins.str.istitle"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isupper"
-    fully_qualified_name: "builtins.str.isupper"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "join"
-    fully_qualified_name: "builtins.str.join"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__iterable"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "ljust"
-    fully_qualified_name: "builtins.str.ljust"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "lower"
-    fully_qualified_name: "builtins.str.lower"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "replace"
-    fully_qualified_name: "builtins.str.replace"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__old"
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "__new"
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "__count"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rfind"
-    fully_qualified_name: "builtins.str.rfind"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sub"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rindex"
-    fully_qualified_name: "builtins.str.rindex"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sub"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rjust"
-    fully_qualified_name: "builtins.str.rjust"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "splitlines"
-    fully_qualified_name: "builtins.str.splitlines"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "keepends"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "startswith"
-    fully_qualified_name: "builtins.str.startswith"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__prefix"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,builtins.tuple[builtins.unicode]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-    }
-    parameters {
-      name: "__start"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "__end"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "swapcase"
-    fully_qualified_name: "builtins.str.swapcase"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "title"
-    fully_qualified_name: "builtins.str.title"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "translate"
-    fully_qualified_name: "builtins.str.translate"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__table"
-      type_annotation {
-        pretty_printed_name: "Union[typing.AnyStr,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "deletechars"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "upper"
-    fully_qualified_name: "builtins.str.upper"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "zfill"
-    fully_qualified_name: "builtins.str.zfill"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__add__"
-    fully_qualified_name: "builtins.str.__add__"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "s"
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__contains__"
-    fully_qualified_name: "builtins.str.__contains__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "o"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__eq__"
-    fully_qualified_name: "builtins.str.__eq__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ge__"
-    fully_qualified_name: "builtins.str.__ge__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "builtins.str.__getitem__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "i"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.slice]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__gt__"
-    fully_qualified_name: "builtins.str.__gt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "builtins.str.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "builtins.str.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "builtins.str.__le__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "builtins.str.__len__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__lt__"
-    fully_qualified_name: "builtins.str.__lt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__mod__"
-    fully_qualified_name: "builtins.str.__mod__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__mul__"
-    fully_qualified_name: "builtins.str.__mul__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "n"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ne__"
-    fully_qualified_name: "builtins.str.__ne__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "builtins.str.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__rmul__"
-    fully_qualified_name: "builtins.str.__rmul__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "n"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "builtins.str.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getnewargs__"
-    fully_qualified_name: "builtins.str.__getnewargs__"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getslice__"
-    fully_qualified_name: "builtins.str.__getslice__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "stop"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__float__"
-    fully_qualified_name: "builtins.str.__float__"
-    return_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__int__"
-    fully_qualified_name: "builtins.str.__int__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "lstrip"
-    fullname: "builtins.str.lstrip"
-    definitions {
-      name: "lstrip"
-      fully_qualified_name: "builtins.str.lstrip"
-      return_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__chars"
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "lstrip"
-      fully_qualified_name: "builtins.str.lstrip"
-      return_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__chars"
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "partition"
-    fullname: "builtins.str.partition"
-    definitions {
-      name: "partition"
-      fully_qualified_name: "builtins.str.partition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.bytearray,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "partition"
-      fully_qualified_name: "builtins.str.partition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "partition"
-      fully_qualified_name: "builtins.str.partition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.unicode,builtins.unicode,builtins.unicode]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "rpartition"
-    fullname: "builtins.str.rpartition"
-    definitions {
-      name: "rpartition"
-      fully_qualified_name: "builtins.str.rpartition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.bytearray,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "rpartition"
-      fully_qualified_name: "builtins.str.rpartition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "rpartition"
-      fully_qualified_name: "builtins.str.rpartition"
-      return_annotation {
-        pretty_printed_name: "Tuple[builtins.unicode,builtins.unicode,builtins.unicode]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__sep"
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "rsplit"
-    fullname: "builtins.str.rsplit"
-    definitions {
-      name: "rsplit"
-      fully_qualified_name: "builtins.str.rsplit"
-      return_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "sep"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "maxsplit"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "rsplit"
-      fully_qualified_name: "builtins.str.rsplit"
-      return_annotation {
-        pretty_printed_name: "builtins.list[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "sep"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      parameters {
-        name: "maxsplit"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "rstrip"
-    fullname: "builtins.str.rstrip"
-    definitions {
-      name: "rstrip"
-      fully_qualified_name: "builtins.str.rstrip"
-      return_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__chars"
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "rstrip"
-      fully_qualified_name: "builtins.str.rstrip"
-      return_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__chars"
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "split"
-    fullname: "builtins.str.split"
-    definitions {
-      name: "split"
-      fully_qualified_name: "builtins.str.split"
-      return_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "sep"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "maxsplit"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "split"
-      fully_qualified_name: "builtins.str.split"
-      return_annotation {
-        pretty_printed_name: "builtins.list[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "sep"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      parameters {
-        name: "maxsplit"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "strip"
-    fullname: "builtins.str.strip"
-    definitions {
-      name: "strip"
-      fully_qualified_name: "builtins.str.strip"
-      return_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "__chars"
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "strip"
-      fully_qualified_name: "builtins.str.strip"
-      return_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "chars"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-}
-classes {
-  name: "_str"
-  fully_qualified_name: "builtins.str"
-  super_classes: "typing.Sequence"
-  methods {
-    name: "capitalize"
-    fully_qualified_name: "builtins.str.capitalize"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "casefold"
-    fully_qualified_name: "builtins.str.casefold"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "center"
-    fully_qualified_name: "builtins.str.center"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "count"
     fully_qualified_name: "builtins.str.count"
@@ -2338,6 +123,81 @@ classes {
     parameters {
       name: "__suffix"
       type_annotation {
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+    }
+    parameters {
+      name: "__start"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "__end"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "endswith"
+    fully_qualified_name: "builtins.str.endswith"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__suffix"
+      type_annotation {
         pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str]]"
         kind: UNION
         args {
@@ -2386,66 +246,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "expandtabs"
-    fully_qualified_name: "builtins.str.expandtabs"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "tabsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-  methods {
-    name: "expandtabs"
-    fully_qualified_name: "builtins.str.expandtabs"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "tabsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-      has_default: true
-    }
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2502,44 +302,6 @@ classes {
         }
       }
       has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "format"
-    fully_qualified_name: "builtins.str.format"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -2664,6 +426,28 @@ classes {
   methods {
     name: "isalpha"
     fully_qualified_name: "builtins.str.isalpha"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isascii"
+    fully_qualified_name: "builtins.str.isascii"
     return_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
@@ -2882,221 +666,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "join"
-    fully_qualified_name: "builtins.str.join"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__iterable"
-      type_annotation {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "ljust"
-    fully_qualified_name: "builtins.str.ljust"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "lower"
-    fully_qualified_name: "builtins.str.lower"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "lstrip"
-    fully_qualified_name: "builtins.str.lstrip"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__chars"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "partition"
-    fully_qualified_name: "builtins.str.partition"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__sep"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "replace"
-    fully_qualified_name: "builtins.str.replace"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__old"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__new"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__count"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "rfind"
     fully_qualified_name: "builtins.str.rfind"
     return_annotation {
@@ -3219,11 +788,11 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "rjust"
-    fully_qualified_name: "builtins.str.rjust"
+    name: "startswith"
+    fully_qualified_name: "builtins.str.startswith"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
@@ -3234,96 +803,36 @@ classes {
       }
     }
     parameters {
-      name: "__width"
+      name: "__prefix"
       type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    parameters {
-      name: "__fillchar"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "rpartition"
-    fully_qualified_name: "builtins.str.rpartition"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__sep"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "rsplit"
-    fully_qualified_name: "builtins.str.rsplit"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sep"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,Any]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+    }
+    parameters {
+      name: "__start"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
         }
         args {
           pretty_printed_name: "None"
@@ -3333,44 +842,13 @@ classes {
       has_default: true
     }
     parameters {
-      name: "maxsplit"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__end"
       type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "rstrip"
-    fully_qualified_name: "builtins.str.rstrip"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__chars"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
         }
         args {
           pretty_printed_name: "None"
@@ -3383,95 +861,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "split"
-    fully_qualified_name: "builtins.str.split"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sep"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "maxsplit"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "splitlines"
-    fully_qualified_name: "builtins.str.splitlines"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "keepends"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "startswith"
@@ -3539,92 +928,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "strip"
-    fully_qualified_name: "builtins.str.strip"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__chars"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "swapcase"
-    fully_qualified_name: "builtins.str.swapcase"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "title"
-    fully_qualified_name: "builtins.str.title"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -3646,131 +949,8 @@ classes {
     parameters {
       name: "__table"
       type_annotation {
-        pretty_printed_name: "Union[typing.Mapping[builtins.int,Union[builtins.int,builtins.str,None]],typing.Sequence[Union[builtins.int,builtins.str,None]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.Mapping[builtins.int,Union[builtins.int,builtins.str,None]]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.int,builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "typing.Mapping"
-        }
-        args {
-          pretty_printed_name: "typing.Sequence[Union[builtins.int,builtins.str,None]]"
-          args {
-            pretty_printed_name: "Union[builtins.int,builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "upper"
-    fully_qualified_name: "builtins.str.upper"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "zfill"
-    fully_qualified_name: "builtins.str.zfill"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__width"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__add__"
-    fully_qualified_name: "builtins.str.__add__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "s"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "builtins._TranslateTable"
+        fully_qualified_name: "builtins._TranslateTable"
       }
     }
     valid_for: "35"
@@ -3795,7 +975,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -3823,7 +1003,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
@@ -3851,7 +1031,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -3879,13 +1059,13 @@ classes {
       }
     }
     parameters {
-      name: "i"
+      name: "__key"
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.slice]"
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,builtins.slice]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
         }
         args {
           pretty_printed_name: "builtins.slice"
@@ -3915,54 +1095,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "builtins.str.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "builtins.str.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterator"
-    }
-    parameters {
-      name: "self"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -3990,7 +1123,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -4039,66 +1172,10 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__mod__"
-    fully_qualified_name: "builtins.str.__mod__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "x"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__mul__"
-    fully_qualified_name: "builtins.str.__mul__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "n"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     valid_for: "35"
@@ -4123,80 +1200,10 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "builtins.str.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__rmul__"
-    fully_qualified_name: "builtins.str.__rmul__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "n"
-      type_annotation {
-        pretty_printed_name: "typing_extensions.SupportsIndex"
-        fully_qualified_name: "typing_extensions.SupportsIndex"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "builtins.str.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
       }
     }
     valid_for: "35"
@@ -4232,76 +1239,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "isascii"
-    fully_qualified_name: "builtins.str.isascii"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "removeprefix"
-    fully_qualified_name: "builtins.str.removeprefix"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__prefix"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "removesuffix"
-    fully_qualified_name: "builtins.str.removesuffix"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "__suffix"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
   overloaded_methods {
     name: "__new__"
     fullname: "builtins.str.__new__"
@@ -4309,23 +1246,23 @@ classes {
       name: "__new__"
       fully_qualified_name: "builtins.str.__new__"
       return_annotation {
-        pretty_printed_name: "builtins._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[builtins._T]"
+          pretty_printed_name: "Type[builtins.str]"
           kind: TYPE
           args {
-            pretty_printed_name: "builtins._T"
-            kind: TYPE_VAR
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
         }
       }
       parameters {
-        name: "o"
+        name: "object"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
           pretty_printed_name: "builtins.object"
@@ -4341,27 +1278,27 @@ classes {
       name: "__new__"
       fully_qualified_name: "builtins.str.__new__"
       return_annotation {
-        pretty_printed_name: "builtins._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[builtins._T]"
+          pretty_printed_name: "Type[builtins.str]"
           kind: TYPE
           args {
-            pretty_printed_name: "builtins._T"
-            kind: TYPE_VAR
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
         }
       }
       parameters {
-        name: "o"
+        name: "object"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
       }
       parameters {
@@ -4381,6 +1318,1660 @@ classes {
           fully_qualified_name: "builtins.str"
         }
         has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "capitalize"
+    fullname: "builtins.str.capitalize"
+    definitions {
+      name: "capitalize"
+      fully_qualified_name: "builtins.str.capitalize"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "capitalize"
+      fully_qualified_name: "builtins.str.capitalize"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "casefold"
+    fullname: "builtins.str.casefold"
+    definitions {
+      name: "casefold"
+      fully_qualified_name: "builtins.str.casefold"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "casefold"
+      fully_qualified_name: "builtins.str.casefold"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "center"
+    fullname: "builtins.str.center"
+    definitions {
+      name: "center"
+      fully_qualified_name: "builtins.str.center"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "center"
+      fully_qualified_name: "builtins.str.center"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "expandtabs"
+    fullname: "builtins.str.expandtabs"
+    definitions {
+      name: "expandtabs"
+      fully_qualified_name: "builtins.str.expandtabs"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "tabsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "expandtabs"
+      fully_qualified_name: "builtins.str.expandtabs"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "tabsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  overloaded_methods {
+    name: "expandtabs"
+    fullname: "builtins.str.expandtabs"
+    definitions {
+      name: "expandtabs"
+      fully_qualified_name: "builtins.str.expandtabs"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "tabsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "expandtabs"
+      fully_qualified_name: "builtins.str.expandtabs"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "tabsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "format"
+    fullname: "builtins.str.format"
+    definitions {
+      name: "format"
+      fully_qualified_name: "builtins.str.format"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "format"
+      fully_qualified_name: "builtins.str.format"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "join"
+    fullname: "builtins.str.join"
+    definitions {
+      name: "join"
+      fully_qualified_name: "builtins.str.join"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__iterable"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[UnboundType[LiteralString]]"
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "join"
+      fully_qualified_name: "builtins.str.join"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__iterable"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "ljust"
+    fullname: "builtins.str.ljust"
+    definitions {
+      name: "ljust"
+      fully_qualified_name: "builtins.str.ljust"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "ljust"
+      fully_qualified_name: "builtins.str.ljust"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "lower"
+    fullname: "builtins.str.lower"
+    definitions {
+      name: "lower"
+      fully_qualified_name: "builtins.str.lower"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "lower"
+      fully_qualified_name: "builtins.str.lower"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "lstrip"
+    fullname: "builtins.str.lstrip"
+    definitions {
+      name: "lstrip"
+      fully_qualified_name: "builtins.str.lstrip"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "lstrip"
+      fully_qualified_name: "builtins.str.lstrip"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "partition"
+    fullname: "builtins.str.partition"
+    definitions {
+      name: "partition"
+      fully_qualified_name: "builtins.str.partition"
+      return_annotation {
+        pretty_printed_name: "Tuple[UnboundType[LiteralString],UnboundType[LiteralString],UnboundType[LiteralString]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__sep"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "partition"
+      fully_qualified_name: "builtins.str.partition"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__sep"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "replace"
+    fullname: "builtins.str.replace"
+    definitions {
+      name: "replace"
+      fully_qualified_name: "builtins.str.replace"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__old"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__new"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__count"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "replace"
+      fully_qualified_name: "builtins.str.replace"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__old"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__new"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__count"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "rjust"
+    fullname: "builtins.str.rjust"
+    definitions {
+      name: "rjust"
+      fully_qualified_name: "builtins.str.rjust"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "rjust"
+      fully_qualified_name: "builtins.str.rjust"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__fillchar"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "rpartition"
+    fullname: "builtins.str.rpartition"
+    definitions {
+      name: "rpartition"
+      fully_qualified_name: "builtins.str.rpartition"
+      return_annotation {
+        pretty_printed_name: "Tuple[UnboundType[LiteralString],UnboundType[LiteralString],UnboundType[LiteralString]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__sep"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "rpartition"
+      fully_qualified_name: "builtins.str.rpartition"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__sep"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "rsplit"
+    fullname: "builtins.str.rsplit"
+    definitions {
+      name: "rsplit"
+      fully_qualified_name: "builtins.str.rsplit"
+      return_annotation {
+        pretty_printed_name: "builtins.list[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "sep"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "maxsplit"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "rsplit"
+      fully_qualified_name: "builtins.str.rsplit"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "sep"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "maxsplit"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "rstrip"
+    fullname: "builtins.str.rstrip"
+    definitions {
+      name: "rstrip"
+      fully_qualified_name: "builtins.str.rstrip"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "rstrip"
+      fully_qualified_name: "builtins.str.rstrip"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "split"
+    fullname: "builtins.str.split"
+    definitions {
+      name: "split"
+      fully_qualified_name: "builtins.str.split"
+      return_annotation {
+        pretty_printed_name: "builtins.list[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "sep"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "maxsplit"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "split"
+      fully_qualified_name: "builtins.str.split"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "sep"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "maxsplit"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "splitlines"
+    fullname: "builtins.str.splitlines"
+    definitions {
+      name: "splitlines"
+      fully_qualified_name: "builtins.str.splitlines"
+      return_annotation {
+        pretty_printed_name: "builtins.list[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "keepends"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "splitlines"
+      fully_qualified_name: "builtins.str.splitlines"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "keepends"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "strip"
+    fullname: "builtins.str.strip"
+    definitions {
+      name: "strip"
+      fully_qualified_name: "builtins.str.strip"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "strip"
+      fully_qualified_name: "builtins.str.strip"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__chars"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "swapcase"
+    fullname: "builtins.str.swapcase"
+    definitions {
+      name: "swapcase"
+      fully_qualified_name: "builtins.str.swapcase"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "swapcase"
+      fully_qualified_name: "builtins.str.swapcase"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "title"
+    fullname: "builtins.str.title"
+    definitions {
+      name: "title"
+      fully_qualified_name: "builtins.str.title"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "title"
+      fully_qualified_name: "builtins.str.title"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "upper"
+    fullname: "builtins.str.upper"
+    definitions {
+      name: "upper"
+      fully_qualified_name: "builtins.str.upper"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "upper"
+      fully_qualified_name: "builtins.str.upper"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "zfill"
+    fullname: "builtins.str.zfill"
+    definitions {
+      name: "zfill"
+      fully_qualified_name: "builtins.str.zfill"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "zfill"
+      fully_qualified_name: "builtins.str.zfill"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__width"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -4472,6 +3063,41 @@ classes {
       name: "maketrans"
       fully_qualified_name: "builtins.str.maketrans"
       return_annotation {
+        pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "__x"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__y"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "staticmethod"
+      resolved_decorator_names: "overload"
+      is_overload: true
+      is_static: true
+    }
+    definitions {
+      name: "maketrans"
+      fully_qualified_name: "builtins.str.maketrans"
+      return_annotation {
         pretty_printed_name: "builtins.dict[builtins.int,Union[builtins.int,None]]"
         args {
           pretty_printed_name: "builtins.int"
@@ -4508,18 +3134,9 @@ classes {
       parameters {
         name: "__z"
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
-        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "staticmethod"
@@ -4534,6 +3151,498 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  overloaded_methods {
+    name: "__add__"
+    fullname: "builtins.str.__add__"
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.str.__add__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.str.__add__"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__iter__"
+    fullname: "builtins.str.__iter__"
+    definitions {
+      name: "__iter__"
+      fully_qualified_name: "builtins.str.__iter__"
+      return_annotation {
+        pretty_printed_name: "typing.Iterator[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__iter__"
+      fully_qualified_name: "builtins.str.__iter__"
+      return_annotation {
+        pretty_printed_name: "typing.Iterator[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__mod__"
+    fullname: "builtins.str.__mod__"
+    definitions {
+      name: "__mod__"
+      fully_qualified_name: "builtins.str.__mod__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],Tuple[UnboundType[LiteralString],Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "Tuple[UnboundType[LiteralString],Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "UnboundType[LiteralString]"
+              kind: UNBOUND
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__mod__"
+      fully_qualified_name: "builtins.str.__mod__"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "__mod__"
+    fullname: "builtins.str.__mod__"
+    definitions {
+      name: "__mod__"
+      fully_qualified_name: "builtins.str.__mod__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[LiteralString],builtins.tuple[UnboundType[LiteralString]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[LiteralString]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "builtins.tuple[UnboundType[LiteralString]]"
+            args {
+              pretty_printed_name: "UnboundType[LiteralString]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "builtins.tuple"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__mod__"
+      fully_qualified_name: "builtins.str.__mod__"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__mul__"
+    fullname: "builtins.str.__mul__"
+    definitions {
+      name: "__mul__"
+      fully_qualified_name: "builtins.str.__mul__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__mul__"
+      fully_qualified_name: "builtins.str.__mul__"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__rmul__"
+    fullname: "builtins.str.__rmul__"
+    definitions {
+      name: "__rmul__"
+      fully_qualified_name: "builtins.str.__rmul__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__rmul__"
+      fully_qualified_name: "builtins.str.__rmul__"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "removeprefix"
+    fullname: "builtins.str.removeprefix"
+    definitions {
+      name: "removeprefix"
+      fully_qualified_name: "builtins.str.removeprefix"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__prefix"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "removeprefix"
+      fully_qualified_name: "builtins.str.removeprefix"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__prefix"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "removesuffix"
+    fullname: "builtins.str.removesuffix"
+    definitions {
+      name: "removesuffix"
+      fully_qualified_name: "builtins.str.removesuffix"
+      return_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      parameters {
+        name: "__suffix"
+        type_annotation {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "removesuffix"
+      fully_qualified_name: "builtins.str.removesuffix"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__suffix"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4545,7 +3654,6 @@ classes {
   name: "Error"
   fully_qualified_name: "locale.Error"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4572,17 +3680,25 @@ functions {
     name: "locale"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,typing.Iterable[builtins.str],None]"
+      pretty_printed_name: "Union[builtins.str,typing.Iterable[Union[builtins.str,None]],None]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
       args {
-        pretty_printed_name: "typing.Iterable[builtins.str]"
+        pretty_printed_name: "typing.Iterable[Union[builtins.str,None]]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         fully_qualified_name: "typing.Iterable"
       }
@@ -4593,7 +3709,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4632,7 +3747,6 @@ functions {
     }
     fully_qualified_name: "typing.Mapping"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4654,13 +3768,65 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+}
+functions {
+  name: "getdefaultlocale"
+  fully_qualified_name: "locale.getdefaultlocale"
+  return_annotation {
+    pretty_printed_name: "Tuple[Union[builtins.str,None],Union[builtins.str,None]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "envvars"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "getdefaultlocale"
@@ -4706,11 +3872,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -4718,12 +3879,32 @@ functions {
   name: "getlocale"
   fully_qualified_name: "locale.getlocale"
   return_annotation {
-    pretty_printed_name: "typing.Sequence[builtins.str]"
+    pretty_printed_name: "Tuple[Union[builtins.str,None],Union[builtins.str,None]]"
+    kind: TUPLE
     args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
-    fully_qualified_name: "typing.Sequence"
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
   }
   parameters {
     name: "category"
@@ -4734,7 +3915,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4758,7 +3938,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4781,7 +3960,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4805,7 +3983,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4821,22 +3998,19 @@ functions {
     fully_qualified_name: "builtins.int"
   }
   parameters {
-    name: "string1"
-    kind: POSITIONAL_OR_KEYWORD
+    name: "__os1"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
   }
   parameters {
-    name: "string2"
-    kind: POSITIONAL_OR_KEYWORD
+    name: "__os2"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4852,14 +4026,12 @@ functions {
     fully_qualified_name: "builtins.str"
   }
   parameters {
-    name: "string"
-    kind: POSITIONAL_OR_KEYWORD
+    name: "__string"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4886,15 +4058,15 @@ functions {
     name: "value"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.float,decimal.Decimal]"
+      pretty_printed_name: "Union[builtins.float,_decimal.Decimal]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.float"
         fully_qualified_name: "builtins.float"
       }
       args {
-        pretty_printed_name: "decimal.Decimal"
-        fully_qualified_name: "decimal.Decimal"
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
       }
     }
   }
@@ -4924,49 +4096,12 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "format_string"
-  fully_qualified_name: "locale.format_string"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "f"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "val"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "grouping"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
 }
 functions {
   name: "format_string"
@@ -5009,6 +4144,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -5025,19 +4162,15 @@ functions {
     name: "val"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.int,builtins.float,decimal.Decimal]"
+      pretty_printed_name: "Union[builtins.float,_decimal.Decimal]"
       kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
       args {
         pretty_printed_name: "builtins.float"
         fully_qualified_name: "builtins.float"
       }
       args {
-        pretty_printed_name: "decimal.Decimal"
-        fully_qualified_name: "decimal.Decimal"
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
       }
     }
   }
@@ -5068,7 +4201,28 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "delocalize"
+  fully_qualified_name: "locale.delocalize"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5104,7 +4258,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5127,7 +4280,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5150,7 +4302,6 @@ functions {
       fully_qualified_name: "builtins.float"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5159,19 +4310,224 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "delocalize"
-  fully_qualified_name: "locale.delocalize"
+  name: "gettext"
+  fully_qualified_name: "locale.gettext"
   return_annotation {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
   parameters {
-    name: "string"
-    kind: POSITIONAL_OR_KEYWORD
+    name: "__msg"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dgettext"
+  fully_qualified_name: "locale.dgettext"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__domain"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__msg"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dcgettext"
+  fully_qualified_name: "locale.dcgettext"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__domain"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__msg"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__category"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "textdomain"
+  fully_qualified_name: "locale.textdomain"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__domain"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "bindtextdomain"
+  fully_qualified_name: "locale.bindtextdomain"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__domain"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__dir"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "bind_textdomain_codeset"
+  fully_qualified_name: "locale.bind_textdomain_codeset"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "__domain"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__codeset"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "locale.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"
@@ -5187,7 +4543,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5202,7 +4557,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5217,7 +4571,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5232,7 +4585,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5247,7 +4599,34 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AM_STR"
+  fully_qualified_name: "locale.AM_STR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PM_STR"
+  fully_qualified_name: "locale.PM_STR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5262,7 +4641,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5277,7 +4655,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5292,7 +4669,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5307,7 +4683,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5322,7 +4697,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5337,7 +4711,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5352,7 +4725,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5367,7 +4739,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5382,7 +4753,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5397,7 +4767,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5412,7 +4781,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5427,7 +4795,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5442,7 +4809,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5457,7 +4823,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5472,7 +4837,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5487,7 +4851,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5502,7 +4865,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5517,7 +4879,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5532,7 +4893,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5547,7 +4907,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5562,7 +4921,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5577,7 +4935,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5592,7 +4949,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5607,7 +4963,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5622,7 +4977,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5637,7 +4991,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5652,7 +5005,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5667,7 +5019,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5682,7 +5033,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5697,7 +5047,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5712,7 +5061,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5727,7 +5075,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5742,7 +5089,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5757,7 +5103,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5772,7 +5117,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5787,7 +5131,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5802,7 +5145,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5817,7 +5159,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5832,7 +5173,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5847,7 +5187,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5862,7 +5201,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5877,7 +5215,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5892,7 +5229,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5907,7 +5243,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5922,7 +5257,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5937,7 +5271,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5952,7 +5285,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5967,7 +5299,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5982,7 +5313,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5997,7 +5327,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6012,7 +5341,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6027,7 +5355,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6042,7 +5369,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6057,7 +5383,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6072,7 +5397,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6087,7 +5411,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6110,7 +5433,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6133,7 +5455,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6156,7 +5477,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

@@ -26,7 +26,6 @@ classes {
         fully_qualified_name: "xml.etree.ElementTree.Element"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -34,7 +33,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -64,7 +62,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -79,7 +76,6 @@ classes {
       pretty_printed_name: "xml.etree.ElementTree.Element"
       fully_qualified_name: "xml.etree.ElementTree.Element"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -92,23 +88,10 @@ functions {
   name: "xpath_tokenizer"
   fully_qualified_name: "xml.etree.ElementPath.xpath_tokenizer"
   return_annotation {
-    pretty_printed_name: "typing.Generator[TypeAlias[Tuple[builtins.str,builtins.str]],None,None]"
+    pretty_printed_name: "typing.Generator[UnboundType[_Token],None,None]"
     args {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
     args {
       pretty_printed_name: "None"
@@ -153,7 +136,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -184,7 +166,6 @@ functions {
       fully_qualified_name: "xml.etree.ElementPath._SelectorContext"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -196,57 +177,25 @@ functions {
   name: "prepare_child"
   fully_qualified_name: "xml.etree.ElementPath.prepare_child"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -258,57 +207,25 @@ functions {
   name: "prepare_star"
   fully_qualified_name: "xml.etree.ElementPath.prepare_star"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -320,57 +237,25 @@ functions {
   name: "prepare_self"
   fully_qualified_name: "xml.etree.ElementPath.prepare_self"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -382,57 +267,25 @@ functions {
   name: "prepare_descendant"
   fully_qualified_name: "xml.etree.ElementPath.prepare_descendant"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -444,57 +297,25 @@ functions {
   name: "prepare_parent"
   fully_qualified_name: "xml.etree.ElementPath.prepare_parent"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -506,57 +327,25 @@ functions {
   name: "prepare_predicate"
   fully_qualified_name: "xml.etree.ElementPath.prepare_predicate"
   return_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "xml.etree.ElementPath._callback"
+    pretty_printed_name: "UnboundType[_Callback]"
+    kind: UNBOUND
   }
   parameters {
     name: "next"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._next"
+      pretty_printed_name: "UnboundType[_Next]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "token"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "xml.etree.ElementPath._token"
+      pretty_printed_name: "UnboundType[_Token]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -624,7 +413,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -688,7 +476,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -748,7 +535,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -829,7 +615,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -841,14 +626,55 @@ vars {
   name: "xpath_tokenizer_re"
   fully_qualified_name: "xml.etree.ElementPath.xpath_tokenizer_re"
   type_annotation {
-    pretty_printed_name: "typing.Pattern[builtins.str]"
+    pretty_printed_name: "re.Pattern[builtins.str]"
     args {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    fully_qualified_name: "typing.Pattern"
+    fully_qualified_name: "re.Pattern"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Token"
+  fully_qualified_name: "xml.etree.ElementPath._Token"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Next"
+  fully_qualified_name: "xml.etree.ElementPath._Next"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Callback"
+  fully_qualified_name: "xml.etree.ElementPath._Callback"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -875,7 +701,6 @@ vars {
     }
     fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

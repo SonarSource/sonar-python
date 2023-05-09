@@ -1,5 +1,2139 @@
 fully_qualified_name: "ctypes"
 classes {
+  name: "ArgumentError"
+  fully_qualified_name: "_ctypes.ArgumentError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Array"
+  fully_qualified_name: "_ctypes.Array"
+  super_classes: "_ctypes._CData"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_ctypes.Array.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "_ctypes.Array.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "_ctypes.Array.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "_ctypes.Array.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes.Array[_ctypes._CT]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "_length_"
+    fullname: "_ctypes.Array._length_"
+    definitions {
+      name: "_length_"
+      fully_qualified_name: "_ctypes.Array._length_"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      resolved_decorator_names: "abstractmethod"
+      is_abstract: true
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "_length_"
+      fully_qualified_name: "_ctypes.Array._length_"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "_length_.setter"
+      is_abstract: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "_type_"
+    fullname: "_ctypes.Array._type_"
+    definitions {
+      name: "_type_"
+      fully_qualified_name: "_ctypes.Array._type_"
+      return_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      resolved_decorator_names: "abstractmethod"
+      is_abstract: true
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "_type_"
+      fully_qualified_name: "_ctypes.Array._type_"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "_type_.setter"
+      is_abstract: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "_type_"
+    fullname: "_ctypes.Array._type_"
+    definitions {
+      name: "_type_"
+      fully_qualified_name: "_ctypes.Array._type_"
+      return_annotation {
+        pretty_printed_name: "Type[_ctypes._CT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      resolved_decorator_names: "abstractmethod"
+      is_abstract: true
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "_type_"
+      fully_qualified_name: "_ctypes.Array._type_"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[_ctypes._CT]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "_type_.setter"
+      is_abstract: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "raw"
+    fullname: "_ctypes.Array.raw"
+    definitions {
+      name: "raw"
+      fully_qualified_name: "_ctypes.Array.raw"
+      return_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "raw"
+      fully_qualified_name: "_ctypes.Array.raw"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "raw.setter"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "_ctypes.Array.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "_ctypes.Array.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "_ctypes.Array.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__setitem__"
+    fullname: "_ctypes.Array.__setitem__"
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "_ctypes.Array.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "_ctypes.Array.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes.Array"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ctypes.Array.value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_CFuncPtr"
+  fully_qualified_name: "_ctypes.CFuncPtr"
+  super_classes: "_ctypes._PointerLike"
+  super_classes: "_ctypes._CData"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_ctypes.CFuncPtr.__call__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ctypes.CFuncPtr"
+        fully_qualified_name: "_ctypes.CFuncPtr"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "_ctypes.CFuncPtr.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__address"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__callable"
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__func_spec"
+        type_annotation {
+          pretty_printed_name: "Tuple[Union[builtins.str,builtins.int],ctypes.CDLL]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.int]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "ctypes.CDLL"
+            fully_qualified_name: "ctypes.CDLL"
+          }
+        }
+      }
+      parameters {
+        name: "__paramflags"
+        type_annotation {
+          pretty_printed_name: "Union[Tuple[UnboundType[_PF],Any],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[UnboundType[_PF],Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "UnboundType[_PF]"
+              kind: UNBOUND
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "_ctypes.CFuncPtr.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__address"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__callable"
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes.CFuncPtr.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes.CFuncPtr"
+          fully_qualified_name: "_ctypes.CFuncPtr"
+        }
+      }
+      parameters {
+        name: "__func_spec"
+        type_annotation {
+          pretty_printed_name: "Tuple[Union[builtins.str,builtins.int],ctypes.CDLL]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.int]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "ctypes.CDLL"
+            fully_qualified_name: "ctypes.CDLL"
+          }
+        }
+      }
+      parameters {
+        name: "__paramflags"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.tuple[UnboundType[_PF]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.tuple[UnboundType[_PF]]"
+            args {
+              pretty_printed_name: "UnboundType[_PF]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "builtins.tuple"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "restype"
+    fully_qualified_name: "_ctypes.CFuncPtr.restype"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "restype"
+    fully_qualified_name: "_ctypes.CFuncPtr.restype"
+    type_annotation {
+      pretty_printed_name: "Union[Type[_ctypes._CData],CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "argtypes"
+    fully_qualified_name: "_ctypes.CFuncPtr.argtypes"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.type]"
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "argtypes"
+    fully_qualified_name: "_ctypes.CFuncPtr.argtypes"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[Type[_ctypes._CData]]"
+      args {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "errcheck"
+    fully_qualified_name: "_ctypes.CFuncPtr.errcheck"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_ECT]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_flags_"
+    fully_qualified_name: "_ctypes.CFuncPtr._flags_"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Structure"
+  fully_qualified_name: "_ctypes.Structure"
+  super_classes: "_ctypes._StructUnionBase"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Union"
+  fully_qualified_name: "_ctypes.Union"
+  super_classes: "_ctypes._StructUnionBase"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_CanCastTo"
+  fully_qualified_name: "_ctypes._CanCastTo"
+  super_classes: "_ctypes._CData"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_CArgObject"
+  fully_qualified_name: "_ctypes._CArgObject"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_CData"
+  fully_qualified_name: "_ctypes._CData"
+  super_classes: "builtins.object"
+  methods {
+    name: "from_buffer"
+    fully_qualified_name: "_ctypes._CData.from_buffer"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[WriteableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_buffer_copy"
+    fully_qualified_name: "_ctypes._CData.from_buffer_copy"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_address"
+    fully_qualified_name: "_ctypes._CData.from_address"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_param"
+    fully_qualified_name: "_ctypes._CData.from_param"
+    return_annotation {
+      pretty_printed_name: "Union[UnboundType[Self],_ctypes._CArgObject]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "_ctypes._CArgObject"
+        fully_qualified_name: "_ctypes._CArgObject"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "in_dll"
+    fully_qualified_name: "_ctypes._CData.in_dll"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+    parameters {
+      name: "library"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ctypes.CDLL"
+        fully_qualified_name: "ctypes.CDLL"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "_ctypes._CDataMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_b_base_"
+    fully_qualified_name: "_ctypes._CData._b_base_"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_b_needsfree_"
+    fully_qualified_name: "_ctypes._CData._b_needsfree_"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_objects"
+    fully_qualified_name: "_ctypes._CData._objects"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[Any,builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[Any,builtins.int]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_CDataMeta"
+  fully_qualified_name: "_ctypes._CDataMeta"
+  super_classes: "builtins.type"
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "_ctypes._CDataMeta.__mul__"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "cls"
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "_ctypes._CDataMeta.__mul__"
+    return_annotation {
+      pretty_printed_name: "Type[_ctypes.Array[_ctypes._CT]]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
+      }
+    }
+    parameters {
+      name: "cls"
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "_ctypes._CDataMeta.__rmul__"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "cls"
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "_ctypes._CDataMeta.__rmul__"
+    return_annotation {
+      pretty_printed_name: "Type[_ctypes.Array[_ctypes._CT]]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "_ctypes.Array[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
+      }
+    }
+    parameters {
+      name: "cls"
+      type_annotation {
+        pretty_printed_name: "Type[_ctypes._CT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_CField"
+  fully_qualified_name: "_ctypes._CField"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "offset"
+    fully_qualified_name: "_ctypes._CField.offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "size"
+    fully_qualified_name: "_ctypes._CField.size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_Pointer"
+  fully_qualified_name: "_ctypes._Pointer"
+  super_classes: "_ctypes._PointerLike"
+  super_classes: "_ctypes._CData"
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "_ctypes._Pointer.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+        args {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes._Pointer"
+      }
+    }
+    parameters {
+      name: "__key"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "_ctypes._Pointer.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes._Pointer.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes._Pointer"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "_ctypes._Pointer.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes._Pointer"
+        }
+      }
+      parameters {
+        name: "arg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_ctypes._CT"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "_ctypes._Pointer.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "_ctypes._Pointer.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes._Pointer"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "_ctypes._Pointer.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+          args {
+            pretty_printed_name: "_ctypes._CT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_ctypes._Pointer"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_type_"
+    fully_qualified_name: "_ctypes._Pointer._type_"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_type_"
+    fully_qualified_name: "_ctypes._Pointer._type_"
+    type_annotation {
+      pretty_printed_name: "Type[_ctypes._CT]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "_ctypes._CT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "contents"
+    fully_qualified_name: "_ctypes._Pointer.contents"
+    type_annotation {
+      pretty_printed_name: "_ctypes._CT"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_PointerLike"
+  fully_qualified_name: "_ctypes._PointerLike"
+  super_classes: "_ctypes._CanCastTo"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SimpleCData"
+  fully_qualified_name: "_ctypes._SimpleCData"
+  super_classes: "_ctypes._CData"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_ctypes._SimpleCData.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ctypes._SimpleCData[_ctypes._T]"
+        args {
+          pretty_printed_name: "_ctypes._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes._SimpleCData"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ctypes._T"
+        kind: TYPE_VAR
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ctypes._SimpleCData.value"
+    type_annotation {
+      pretty_printed_name: "_ctypes._T"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_StructUnionBase"
+  fully_qualified_name: "_ctypes._StructUnionBase"
+  super_classes: "_ctypes._CData"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_ctypes._StructUnionBase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ctypes._StructUnionBase"
+        fully_qualified_name: "_ctypes._StructUnionBase"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "_ctypes._StructUnionBase.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes._StructUnionBase"
+        fully_qualified_name: "_ctypes._StructUnionBase"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "_ctypes._StructUnionBase.__setattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes._StructUnionBase"
+        fully_qualified_name: "_ctypes._StructUnionBase"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "_ctypes._StructUnionMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_StructUnionMeta"
+  fully_qualified_name: "_ctypes._StructUnionMeta"
+  super_classes: "_ctypes._CDataMeta"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "_ctypes._StructUnionMeta.__getattr__"
+    return_annotation {
+      pretty_printed_name: "_ctypes._CField"
+      fully_qualified_name: "_ctypes._CField"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_ctypes._StructUnionMeta"
+        fully_qualified_name: "_ctypes._StructUnionMeta"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_fields_"
+    fully_qualified_name: "_ctypes._StructUnionMeta._fields_"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[Union[Tuple[builtins.str,builtins.type],Tuple[builtins.str,builtins.type,builtins.int]]]"
+      args {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.type],Tuple[builtins.str,builtins.type,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.type]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.type,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_fields_"
+    fully_qualified_name: "_ctypes._StructUnionMeta._fields_"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[Union[Tuple[builtins.str,Type[_ctypes._CData]],Tuple[builtins.str,Type[_ctypes._CData],builtins.int]]]"
+      args {
+        pretty_printed_name: "Union[Tuple[builtins.str,Type[_ctypes._CData]],Tuple[builtins.str,Type[_ctypes._CData],builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Type[_ctypes._CData]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Type[_ctypes._CData]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "_ctypes._CData"
+              fully_qualified_name: "_ctypes._CData"
+            }
+          }
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Type[_ctypes._CData],builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Type[_ctypes._CData]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "_ctypes._CData"
+              fully_qualified_name: "_ctypes._CData"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_pack_"
+    fully_qualified_name: "_ctypes._StructUnionMeta._pack_"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_anonymous_"
+    fully_qualified_name: "_ctypes._StructUnionMeta._anonymous_"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "CDLL"
   fully_qualified_name: "ctypes.CDLL"
   super_classes: "builtins.object"
@@ -78,7 +2212,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -200,7 +2333,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -223,13 +2355,12 @@ classes {
       }
     }
     parameters {
-      name: "name"
+      name: "name_or_ordinal"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -237,7 +2368,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -251,7 +2381,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -263,10 +2392,9 @@ classes {
     name: "_func_restype_"
     fully_qualified_name: "ctypes.CDLL._func_restype_"
     type_annotation {
-      pretty_printed_name: "ctypes._CData"
-      fully_qualified_name: "ctypes._CData"
+      pretty_printed_name: "_ctypes._CData"
+      fully_qualified_name: "_ctypes._CData"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -281,7 +2409,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -296,13 +2423,24 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  attributes {
+    name: "_FuncPtr"
+    fully_qualified_name: "ctypes.CDLL._FuncPtr"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   attributes {
     name: "_FuncPtr"
@@ -315,11 +2453,6 @@ classes {
         fully_qualified_name: "ctypes._FuncPointer"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -328,7 +2461,6 @@ classes {
   name: "PyDLL"
   fully_qualified_name: "ctypes.PyDLL"
   super_classes: "ctypes.CDLL"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -363,6 +2495,38 @@ classes {
       name: "dlltype"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "ctypes.LibraryLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ctypes.LibraryLoader[ctypes._DLLT]"
+        args {
+          pretty_printed_name: "ctypes._DLLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ctypes.LibraryLoader"
+      }
+    }
+    parameters {
+      name: "dlltype"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "Type[ctypes._DLLT]"
         kind: TYPE
         args {
@@ -371,11 +2535,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -404,7 +2563,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -437,7 +2595,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -472,7 +2629,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -516,565 +2672,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_CDataMeta"
-  fully_qualified_name: "ctypes._CDataMeta"
-  super_classes: "builtins.type"
-  methods {
-    name: "__mul__"
-    fully_qualified_name: "ctypes._CDataMeta.__mul__"
-    return_annotation {
-      pretty_printed_name: "Type[ctypes.Array[ctypes._CT]]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "ctypes.Array[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.Array"
-      }
-    }
-    parameters {
-      name: "cls"
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__rmul__"
-    fully_qualified_name: "ctypes._CDataMeta.__rmul__"
-    return_annotation {
-      pretty_printed_name: "Type[ctypes.Array[ctypes._CT]]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "ctypes.Array[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.Array"
-      }
-    }
-    parameters {
-      name: "cls"
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_CData"
-  fully_qualified_name: "ctypes._CData"
-  super_classes: "builtins.object"
-  methods {
-    name: "from_buffer"
-    fully_qualified_name: "ctypes._CData.from_buffer"
-    return_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "ctypes._CData"
-            fully_qualified_name: "ctypes._CData"
-          }
-        }
-        fully_qualified_name: "ctypes._WritableBuffer"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "from_buffer_copy"
-    fully_qualified_name: "ctypes._CData.from_buffer_copy"
-    return_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.bytearray"
-                fully_qualified_name: "builtins.bytearray"
-              }
-              args {
-                pretty_printed_name: "builtins.memoryview"
-                fully_qualified_name: "builtins.memoryview"
-              }
-              args {
-                pretty_printed_name: "array.array[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "array.array"
-              }
-              args {
-                pretty_printed_name: "ctypes._CData"
-                fully_qualified_name: "ctypes._CData"
-              }
-            }
-            fully_qualified_name: "ctypes._WritableBuffer"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "ctypes._ReadOnlyBuffer"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-  }
-  methods {
-    name: "from_buffer_copy"
-    fully_qualified_name: "ctypes._CData.from_buffer_copy"
-    return_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.bytearray"
-                fully_qualified_name: "builtins.bytearray"
-              }
-              args {
-                pretty_printed_name: "builtins.memoryview"
-                fully_qualified_name: "builtins.memoryview"
-              }
-              args {
-                pretty_printed_name: "array.array[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "array.array"
-              }
-              args {
-                pretty_printed_name: "ctypes._CData"
-                fully_qualified_name: "ctypes._CData"
-              }
-            }
-            fully_qualified_name: "ctypes._WritableBuffer"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "ctypes._ReadOnlyBuffer"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "from_address"
-    fully_qualified_name: "ctypes._CData.from_address"
-    return_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "from_param"
-    fully_qualified_name: "ctypes._CData.from_param"
-    return_annotation {
-      pretty_printed_name: "Union[ctypes._CT,ctypes._CArgObject]"
-      kind: UNION
-      args {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "ctypes._CArgObject"
-        fully_qualified_name: "ctypes._CArgObject"
-      }
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "obj"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "in_dll"
-    fully_qualified_name: "ctypes._CData.in_dll"
-    return_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes._CT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "library"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.CDLL"
-        fully_qualified_name: "ctypes.CDLL"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_metaclass: true
-  metaclass_name: "ctypes._CDataMeta"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "_b_base"
-    fully_qualified_name: "ctypes._CData._b_base"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_b_needsfree_"
-    fully_qualified_name: "ctypes._CData._b_needsfree_"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_objects"
-    fully_qualified_name: "ctypes._CData._objects"
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[Any,builtins.int],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[Any,builtins.int]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_CanCastTo"
-  fully_qualified_name: "ctypes._CanCastTo"
-  super_classes: "ctypes._CData"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_PointerLike"
-  fully_qualified_name: "ctypes._PointerLike"
-  super_classes: "ctypes._CanCastTo"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1085,754 +2682,29 @@ classes {
 classes {
   name: "_FuncPointer"
   fully_qualified_name: "ctypes._FuncPointer"
-  super_classes: "ctypes._PointerLike"
-  super_classes: "ctypes._CData"
-  methods {
-    name: "__call__"
-    fully_qualified_name: "ctypes._FuncPointer.__call__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes._FuncPointer"
-        fully_qualified_name: "ctypes._FuncPointer"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "__init__"
-    fullname: "ctypes._FuncPointer.__init__"
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "ctypes._FuncPointer.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "ctypes._FuncPointer"
-          fully_qualified_name: "ctypes._FuncPointer"
-        }
-      }
-      parameters {
-        name: "address"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "ctypes._FuncPointer.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "ctypes._FuncPointer"
-          fully_qualified_name: "ctypes._FuncPointer"
-        }
-      }
-      parameters {
-        name: "callable"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "ctypes._FuncPointer.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "ctypes._FuncPointer"
-          fully_qualified_name: "ctypes._FuncPointer"
-        }
-      }
-      parameters {
-        name: "func_spec"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Tuple[Union[builtins.str,builtins.int],ctypes.CDLL]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          args {
-            pretty_printed_name: "ctypes.CDLL"
-            fully_qualified_name: "ctypes.CDLL"
-          }
-        }
-      }
-      parameters {
-        name: "paramflags"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.tuple[TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "Tuple[builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.str,Any]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-              }
-            }
-            fully_qualified_name: "ctypes._PF"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__init__"
-      fully_qualified_name: "ctypes._FuncPointer.__init__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "ctypes._FuncPointer"
-          fully_qualified_name: "ctypes._FuncPointer"
-        }
-      }
-      parameters {
-        name: "vtlb_index"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "name"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      parameters {
-        name: "paramflags"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.tuple[TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "Tuple[builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              args {
-                pretty_printed_name: "Tuple[builtins.int,builtins.str,Any]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-              }
-            }
-            fully_qualified_name: "ctypes._PF"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "iid"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "ctypes.pointer[ctypes.c_int]"
-          args {
-            pretty_printed_name: "ctypes.c_int"
-            fully_qualified_name: "ctypes.c_int"
-          }
-          fully_qualified_name: "ctypes.pointer"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
+  super_classes: "_ctypes.CFuncPtr"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "restype"
-    fully_qualified_name: "ctypes._FuncPointer.restype"
-    type_annotation {
-      pretty_printed_name: "Union[Type[ctypes._CData],CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[ctypes._CData]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
-        }
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "argtypes"
-    fully_qualified_name: "ctypes._FuncPointer.argtypes"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[Type[ctypes._CData]]"
-      args {
-        pretty_printed_name: "Type[ctypes._CData]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
-        }
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "errcheck"
-    fully_qualified_name: "ctypes._FuncPointer.errcheck"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "ctypes._ECT"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "_NamedFuncPointer"
   fully_qualified_name: "ctypes._NamedFuncPointer"
   super_classes: "ctypes._FuncPointer"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "ArgumentError"
-  fully_qualified_name: "ctypes.ArgumentError"
-  super_classes: "builtins.Exception"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_CArgObject"
-  fully_qualified_name: "ctypes._CArgObject"
-  super_classes: "builtins.object"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "pointer"
-  fully_qualified_name: "ctypes.pointer"
-  super_classes: "ctypes._PointerLike"
-  super_classes: "ctypes._CData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes.pointer.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.pointer"
-      }
-    }
-    parameters {
-      name: "arg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "__getitem__"
-    fullname: "ctypes.pointer.__getitem__"
-    definitions {
-      name: "__getitem__"
-      fully_qualified_name: "ctypes.pointer.__getitem__"
-      return_annotation {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.pointer"
-        }
-      }
-      parameters {
-        name: "i"
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__getitem__"
-      fully_qualified_name: "ctypes.pointer.__getitem__"
-      return_annotation {
-        pretty_printed_name: "builtins.list[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.pointer"
-        }
-      }
-      parameters {
-        name: "s"
-        type_annotation {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "__setitem__"
-    fullname: "ctypes.pointer.__setitem__"
-    definitions {
-      name: "__setitem__"
-      fully_qualified_name: "ctypes.pointer.__setitem__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.pointer"
-        }
-      }
-      parameters {
-        name: "i"
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "o"
-        type_annotation {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__setitem__"
-      fully_qualified_name: "ctypes.pointer.__setitem__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.pointer"
-        }
-      }
-      parameters {
-        name: "s"
-        type_annotation {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-      parameters {
-        name: "o"
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "_type_"
-    fully_qualified_name: "ctypes.pointer._type_"
-    type_annotation {
-      pretty_printed_name: "Type[ctypes._CT]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "contents"
-    fully_qualified_name: "ctypes.pointer.contents"
-    type_annotation {
-      pretty_printed_name: "ctypes._CT"
-      kind: TYPE_VAR
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_SimpleCData"
-  fully_qualified_name: "ctypes._SimpleCData"
-  super_classes: "ctypes._CData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes._SimpleCData.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes._SimpleCData[ctypes._T]"
-        args {
-          pretty_printed_name: "ctypes._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes._SimpleCData"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes._T"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "ctypes._SimpleCData.value"
-    type_annotation {
-      pretty_printed_name: "ctypes._T"
-      kind: TYPE_VAR
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "c_byte"
   fully_qualified_name: "ctypes.c_byte"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1843,7 +2715,7 @@ classes {
 classes {
   name: "c_char"
   fully_qualified_name: "ctypes.c_char"
-  super_classes: "ctypes._SimpleCData"
+  super_classes: "_ctypes._SimpleCData"
   methods {
     name: "__init__"
     fully_qualified_name: "ctypes.c_char.__init__"
@@ -1863,41 +2735,7 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes.c_char.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.c_char"
-        fully_qualified_name: "ctypes.c_char"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.bytes]"
+        pretty_printed_name: "Union[builtins.int,builtins.bytes,builtins.bytearray]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.int"
@@ -1906,6 +2744,10 @@ classes {
         args {
           pretty_printed_name: "builtins.bytes"
           fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
         }
       }
       has_default: true
@@ -1917,7 +2759,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1928,46 +2769,7 @@ classes {
 classes {
   name: "c_char_p"
   fully_qualified_name: "ctypes.c_char_p"
-  super_classes: "ctypes._PointerLike"
-  super_classes: "ctypes._SimpleCData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes.c_char_p.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.c_char_p"
-        fully_qualified_name: "ctypes.c_char_p"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
+  super_classes: "_ctypes._PointerLike"
   methods {
     name: "__init__"
     fully_qualified_name: "ctypes.c_char_p.__init__"
@@ -2011,7 +2813,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2022,8 +2823,7 @@ classes {
 classes {
   name: "c_double"
   fully_qualified_name: "ctypes.c_double"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2034,8 +2834,7 @@ classes {
 classes {
   name: "c_longdouble"
   fully_qualified_name: "ctypes.c_longdouble"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2046,8 +2845,7 @@ classes {
 classes {
   name: "c_float"
   fully_qualified_name: "ctypes.c_float"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2058,8 +2856,7 @@ classes {
 classes {
   name: "c_int"
   fully_qualified_name: "ctypes.c_int"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2070,8 +2867,7 @@ classes {
 classes {
   name: "c_int8"
   fully_qualified_name: "ctypes.c_int8"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2082,8 +2878,7 @@ classes {
 classes {
   name: "c_int16"
   fully_qualified_name: "ctypes.c_int16"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2094,8 +2889,7 @@ classes {
 classes {
   name: "c_int32"
   fully_qualified_name: "ctypes.c_int32"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2106,8 +2900,7 @@ classes {
 classes {
   name: "c_int64"
   fully_qualified_name: "ctypes.c_int64"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2118,8 +2911,7 @@ classes {
 classes {
   name: "c_long"
   fully_qualified_name: "ctypes.c_long"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2130,8 +2922,7 @@ classes {
 classes {
   name: "c_longlong"
   fully_qualified_name: "ctypes.c_longlong"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2142,8 +2933,7 @@ classes {
 classes {
   name: "c_short"
   fully_qualified_name: "ctypes.c_short"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2154,8 +2944,7 @@ classes {
 classes {
   name: "c_size_t"
   fully_qualified_name: "ctypes.c_size_t"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2166,8 +2955,7 @@ classes {
 classes {
   name: "c_ssize_t"
   fully_qualified_name: "ctypes.c_ssize_t"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2178,8 +2966,7 @@ classes {
 classes {
   name: "c_ubyte"
   fully_qualified_name: "ctypes.c_ubyte"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2190,8 +2977,7 @@ classes {
 classes {
   name: "c_uint"
   fully_qualified_name: "ctypes.c_uint"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2202,8 +2988,7 @@ classes {
 classes {
   name: "c_uint8"
   fully_qualified_name: "ctypes.c_uint8"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2214,8 +2999,7 @@ classes {
 classes {
   name: "c_uint16"
   fully_qualified_name: "ctypes.c_uint16"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2226,8 +3010,7 @@ classes {
 classes {
   name: "c_uint32"
   fully_qualified_name: "ctypes.c_uint32"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2238,8 +3021,7 @@ classes {
 classes {
   name: "c_uint64"
   fully_qualified_name: "ctypes.c_uint64"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2250,8 +3032,7 @@ classes {
 classes {
   name: "c_ulong"
   fully_qualified_name: "ctypes.c_ulong"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2262,8 +3043,7 @@ classes {
 classes {
   name: "c_ulonglong"
   fully_qualified_name: "ctypes.c_ulonglong"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2274,8 +3054,7 @@ classes {
 classes {
   name: "c_ushort"
   fully_qualified_name: "ctypes.c_ushort"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2286,9 +3065,7 @@ classes {
 classes {
   name: "c_void_p"
   fully_qualified_name: "ctypes.c_void_p"
-  super_classes: "ctypes._PointerLike"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._PointerLike"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2299,8 +3076,7 @@ classes {
 classes {
   name: "c_wchar"
   fully_qualified_name: "ctypes.c_wchar"
-  super_classes: "ctypes._SimpleCData"
-  valid_for: "27"
+  super_classes: "_ctypes._SimpleCData"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2311,46 +3087,7 @@ classes {
 classes {
   name: "c_wchar_p"
   fully_qualified_name: "ctypes.c_wchar_p"
-  super_classes: "ctypes._PointerLike"
-  super_classes: "ctypes._SimpleCData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes.c_wchar_p.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.c_wchar_p"
-        fully_qualified_name: "ctypes.c_wchar_p"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
+  super_classes: "_ctypes._PointerLike"
   methods {
     name: "__init__"
     fully_qualified_name: "ctypes.c_wchar_p.__init__"
@@ -2394,7 +3131,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2405,7 +3141,7 @@ classes {
 classes {
   name: "c_bool"
   fully_qualified_name: "ctypes.c_bool"
-  super_classes: "ctypes._SimpleCData"
+  super_classes: "_ctypes._SimpleCData"
   methods {
     name: "__init__"
     fully_qualified_name: "ctypes.c_bool.__init__"
@@ -2430,7 +3166,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2438,7 +3173,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2449,324 +3183,9 @@ classes {
 classes {
   name: "py_object"
   fully_qualified_name: "ctypes.py_object"
-  super_classes: "ctypes._CanCastTo"
-  super_classes: "ctypes._SimpleCData"
+  super_classes: "_ctypes._CanCastTo"
+  super_classes: "_ctypes._SimpleCData"
   is_generic: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "_CField"
-  fully_qualified_name: "ctypes._CField"
-  super_classes: "builtins.object"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "offset"
-    fully_qualified_name: "ctypes._CField.offset"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "size"
-    fully_qualified_name: "ctypes._CField.size"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_StructUnionMeta"
-  fully_qualified_name: "ctypes._StructUnionMeta"
-  super_classes: "ctypes._CDataMeta"
-  methods {
-    name: "__getattr__"
-    fully_qualified_name: "ctypes._StructUnionMeta.__getattr__"
-    return_annotation {
-      pretty_printed_name: "ctypes._CField"
-      fully_qualified_name: "ctypes._CField"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ctypes._StructUnionMeta"
-        fully_qualified_name: "ctypes._StructUnionMeta"
-      }
-    }
-    parameters {
-      name: "name"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "_fields_"
-    fully_qualified_name: "ctypes._StructUnionMeta._fields_"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[Union[Tuple[builtins.str,Type[ctypes._CData]],Tuple[builtins.str,Type[ctypes._CData],builtins.int]]]"
-      args {
-        pretty_printed_name: "Union[Tuple[builtins.str,Type[ctypes._CData]],Tuple[builtins.str,Type[ctypes._CData],builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Type[ctypes._CData]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Type[ctypes._CData]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "ctypes._CData"
-              fully_qualified_name: "ctypes._CData"
-            }
-          }
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Type[ctypes._CData],builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Type[ctypes._CData]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "ctypes._CData"
-              fully_qualified_name: "ctypes._CData"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_pack_"
-    fully_qualified_name: "ctypes._StructUnionMeta._pack_"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_anonymous_"
-    fully_qualified_name: "ctypes._StructUnionMeta._anonymous_"
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_StructUnionBase"
-  fully_qualified_name: "ctypes._StructUnionBase"
-  super_classes: "ctypes._CData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes._StructUnionBase.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes._StructUnionBase"
-        fully_qualified_name: "ctypes._StructUnionBase"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kw"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__getattr__"
-    fully_qualified_name: "ctypes._StructUnionBase.__getattr__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ctypes._StructUnionBase"
-        fully_qualified_name: "ctypes._StructUnionBase"
-      }
-    }
-    parameters {
-      name: "name"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__setattr__"
-    fully_qualified_name: "ctypes._StructUnionBase.__setattr__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ctypes._StructUnionBase"
-        fully_qualified_name: "ctypes._StructUnionBase"
-      }
-    }
-    parameters {
-      name: "name"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "value"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  has_metaclass: true
-  metaclass_name: "ctypes._StructUnionMeta"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "Union"
-  fully_qualified_name: "ctypes.Union"
-  super_classes: "ctypes._StructUnionBase"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "Structure"
-  fully_qualified_name: "ctypes.Structure"
-  super_classes: "ctypes._StructUnionBase"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2777,8 +3196,7 @@ classes {
 classes {
   name: "BigEndianStructure"
   fully_qualified_name: "ctypes.BigEndianStructure"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
+  super_classes: "_ctypes.Structure"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2789,8 +3207,7 @@ classes {
 classes {
   name: "LittleEndianStructure"
   fully_qualified_name: "ctypes.LittleEndianStructure"
-  super_classes: "ctypes.Structure"
-  valid_for: "27"
+  super_classes: "_ctypes.Structure"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2798,376 +3215,369 @@ classes {
   valid_for: "39"
   valid_for: "310"
 }
-classes {
-  name: "Array"
-  fully_qualified_name: "ctypes.Array"
-  super_classes: "ctypes._CData"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "ctypes.Array.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ctypes.Array[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.Array"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
+functions {
+  name: "POINTER"
+  fully_qualified_name: "_ctypes.POINTER"
+  return_annotation {
+    pretty_printed_name: "builtins.type"
+    fully_qualified_name: "builtins.type"
   }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "ctypes.Array.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[Any]"
+  parameters {
+    name: "type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "POINTER"
+  fully_qualified_name: "_ctypes.POINTER"
+  return_annotation {
+    pretty_printed_name: "Type[_ctypes._Pointer[_ctypes._CT]]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "_ctypes._CT"
+        kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.Iterator"
+      fully_qualified_name: "_ctypes._Pointer"
     }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ctypes.Array[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.Array"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "ctypes.Array.__len__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ctypes.Array[ctypes._CT]"
-        args {
-          pretty_printed_name: "ctypes._CT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "ctypes.Array"
+  parameters {
+    name: "type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[_ctypes._CT]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "_ctypes._CT"
+        kind: TYPE_VAR
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
-  methods {
-    name: "__class_getitem__"
-    fully_qualified_name: "ctypes.Array.__class_getitem__"
-    return_annotation {
-      pretty_printed_name: "types.GenericAlias"
-      fully_qualified_name: "types.GenericAlias"
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[ctypes.Array[ctypes._CT]]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes.Array[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-      }
-    }
-    parameters {
-      name: "item"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    is_class_method: true
-    valid_for: "39"
-    valid_for: "310"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "addressof"
+  fully_qualified_name: "_ctypes.addressof"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
-  overloaded_methods {
-    name: "__getitem__"
-    fullname: "ctypes.Array.__getitem__"
-    definitions {
-      name: "__getitem__"
-      fully_qualified_name: "ctypes.Array.__getitem__"
-      return_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.Array[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-      }
-      parameters {
-        name: "i"
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "_ctypes._CData"
+      fully_qualified_name: "_ctypes._CData"
     }
-    definitions {
-      name: "__getitem__"
-      fully_qualified_name: "ctypes.Array.__getitem__"
-      return_annotation {
-        pretty_printed_name: "builtins.list[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.Array[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-      }
-      parameters {
-        name: "s"
-        type_annotation {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
-  overloaded_methods {
-    name: "__setitem__"
-    fullname: "ctypes.Array.__setitem__"
-    definitions {
-      name: "__setitem__"
-      fully_qualified_name: "ctypes.Array.__setitem__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.Array[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-      }
-      parameters {
-        name: "i"
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "o"
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__setitem__"
-      fully_qualified_name: "ctypes.Array.__setitem__"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "ctypes.Array[ctypes._CT]"
-          args {
-            pretty_printed_name: "ctypes._CT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-      }
-      parameters {
-        name: "s"
-        type_annotation {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-      parameters {
-        name: "o"
-        type_annotation {
-          pretty_printed_name: "typing.Iterable[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "_length_"
-    fully_qualified_name: "ctypes.Array._length_"
+}
+functions {
+  name: "alignment"
+  fully_qualified_name: "_ctypes.alignment"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "obj_or_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[_ctypes._CData,builtins.type]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "alignment"
+  fully_qualified_name: "_ctypes.alignment"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "obj_or_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[_ctypes._CData,Type[_ctypes._CData]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
+      }
+      args {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
+    }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "byref"
+  fully_qualified_name: "_ctypes.byref"
+  return_annotation {
+    pretty_printed_name: "_ctypes._CArgObject"
+    fully_qualified_name: "_ctypes._CArgObject"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "_ctypes._CData"
+      fully_qualified_name: "_ctypes._CData"
+    }
+  }
+  parameters {
+    name: "offset"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
+    has_default: true
   }
-  attributes {
-    name: "_type_"
-    fully_qualified_name: "ctypes.Array._type_"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_errno"
+  fully_qualified_name: "_ctypes.get_errno"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "pointer"
+  fully_qualified_name: "_ctypes.pointer"
+  return_annotation {
+    pretty_printed_name: "_ctypes._Pointer[_ctypes._CT]"
+    args {
+      pretty_printed_name: "_ctypes._CT"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "_ctypes._Pointer"
+  }
+  parameters {
+    name: "__arg"
     type_annotation {
-      pretty_printed_name: "Type[ctypes._CT]"
-      kind: TYPE
+      pretty_printed_name: "_ctypes._CT"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resize"
+  fully_qualified_name: "_ctypes.resize"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "_ctypes._CData"
+      fully_qualified_name: "_ctypes._CData"
+    }
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_errno"
+  fully_qualified_name: "_ctypes.set_errno"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sizeof"
+  fully_qualified_name: "_ctypes.sizeof"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "obj_or_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[_ctypes._CData,builtins.type]"
+      kind: UNION
       args {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
-  attributes {
-    name: "raw"
-    fully_qualified_name: "ctypes.Array.raw"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "sizeof"
+  fully_qualified_name: "_ctypes.sizeof"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "obj_or_type"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[_ctypes._CData,Type[_ctypes._CData]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
+      }
+      args {
+        pretty_printed_name: "Type[_ctypes._CData]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
+        }
+      }
     }
-    valid_for: "27"
   }
-  attributes {
-    name: "raw"
-    fully_qualified_name: "ctypes.Array.raw"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "CFUNCTYPE"
+  fully_qualified_name: "ctypes.CFUNCTYPE"
+  return_annotation {
+    pretty_printed_name: "builtins.type"
+    fully_qualified_name: "builtins.type"
+  }
+  parameters {
+    name: "restype"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "Union[builtins.type,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
-  attributes {
-    name: "value"
-    fully_qualified_name: "ctypes.Array.value"
+  parameters {
+    name: "argtypes"
+    kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
+  parameters {
+    name: "use_errno"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "use_last_error"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "CFUNCTYPE"
@@ -3184,14 +3594,14 @@ functions {
     name: "restype"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[Type[ctypes._CData],None]"
+      pretty_printed_name: "Union[Type[_ctypes._CData],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Type[ctypes._CData]"
+        pretty_printed_name: "Type[_ctypes._CData]"
         kind: TYPE
         args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
         }
       }
       args {
@@ -3204,11 +3614,11 @@ functions {
     name: "argtypes"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "Type[ctypes._CData]"
+      pretty_printed_name: "Type[_ctypes._CData]"
       kind: TYPE
       args {
-        pretty_printed_name: "ctypes._CData"
-        fully_qualified_name: "ctypes._CData"
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
       }
     }
   }
@@ -3230,13 +3640,44 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "PYFUNCTYPE"
+  fully_qualified_name: "ctypes.PYFUNCTYPE"
+  return_annotation {
+    pretty_printed_name: "builtins.type"
+    fully_qualified_name: "builtins.type"
+  }
+  parameters {
+    name: "restype"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "argtypes"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 functions {
   name: "PYFUNCTYPE"
@@ -3253,14 +3694,14 @@ functions {
     name: "restype"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[Type[ctypes._CData],None]"
+      pretty_printed_name: "Union[Type[_ctypes._CData],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Type[ctypes._CData]"
+        pretty_printed_name: "Type[_ctypes._CData]"
         kind: TYPE
         args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
+          pretty_printed_name: "_ctypes._CData"
+          fully_qualified_name: "_ctypes._CData"
         }
       }
       args {
@@ -3273,109 +3714,14 @@ functions {
     name: "argtypes"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "Type[ctypes._CData]"
+      pretty_printed_name: "Type[_ctypes._CData]"
       kind: TYPE
       args {
-        pretty_printed_name: "ctypes._CData"
-        fully_qualified_name: "ctypes._CData"
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
       }
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "addressof"
-  fully_qualified_name: "ctypes.addressof"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "ctypes._CData"
-      fully_qualified_name: "ctypes._CData"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "alignment"
-  fully_qualified_name: "ctypes.alignment"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "obj_or_type"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[ctypes._CData,Type[ctypes._CData]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "ctypes._CData"
-        fully_qualified_name: "ctypes._CData"
-      }
-      args {
-        pretty_printed_name: "Type[ctypes._CData]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
-        }
-      }
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "byref"
-  fully_qualified_name: "ctypes.byref"
-  return_annotation {
-    pretty_printed_name: "ctypes._CArgObject"
-    fully_qualified_name: "ctypes._CArgObject"
-  }
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "ctypes._CData"
-      fully_qualified_name: "ctypes._CData"
-    }
-  }
-  parameters {
-    name: "offset"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -3390,15 +3736,55 @@ functions {
     name: "obj"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[ctypes._CData,ctypes._CArgObject,builtins.int]"
+      pretty_printed_name: "Union[_ctypes._CData,_ctypes._CArgObject,builtins.int]"
       kind: UNION
       args {
-        pretty_printed_name: "ctypes._CData"
-        fully_qualified_name: "ctypes._CData"
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
       }
       args {
-        pretty_printed_name: "ctypes._CArgObject"
-        fully_qualified_name: "ctypes._CArgObject"
+        pretty_printed_name: "_ctypes._CArgObject"
+        fully_qualified_name: "_ctypes._CArgObject"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  parameters {
+    name: "typ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "cast"
+  fully_qualified_name: "ctypes.cast"
+  return_annotation {
+    pretty_printed_name: "ctypes._CastT"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[_ctypes._CData,_ctypes._CArgObject,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ctypes._CData"
+        fully_qualified_name: "_ctypes._CData"
+      }
+      args {
+        pretty_printed_name: "_ctypes._CArgObject"
+        fully_qualified_name: "_ctypes._CArgObject"
       }
       args {
         pretty_printed_name: "builtins.int"
@@ -3418,11 +3804,6 @@ functions {
       }
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -3430,58 +3811,12 @@ functions {
   name: "create_string_buffer"
   fully_qualified_name: "ctypes.create_string_buffer"
   return_annotation {
-    pretty_printed_name: "ctypes.Array[ctypes.c_char]"
+    pretty_printed_name: "_ctypes.Array[ctypes.c_char]"
     args {
       pretty_printed_name: "ctypes.c_char"
       fully_qualified_name: "ctypes.c_char"
     }
-    fully_qualified_name: "ctypes.Array"
-  }
-  parameters {
-    name: "init"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-  }
-  parameters {
-    name: "size"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "create_string_buffer"
-  fully_qualified_name: "ctypes.create_string_buffer"
-  return_annotation {
-    pretty_printed_name: "ctypes.Array[ctypes.c_char]"
-    args {
-      pretty_printed_name: "ctypes.c_char"
-      fully_qualified_name: "ctypes.c_char"
-    }
-    fully_qualified_name: "ctypes.Array"
+    fully_qualified_name: "_ctypes.Array"
   }
   parameters {
     name: "init"
@@ -3527,58 +3862,12 @@ functions {
   name: "create_unicode_buffer"
   fully_qualified_name: "ctypes.create_unicode_buffer"
   return_annotation {
-    pretty_printed_name: "ctypes.Array[ctypes.c_wchar]"
+    pretty_printed_name: "_ctypes.Array[ctypes.c_wchar]"
     args {
       pretty_printed_name: "ctypes.c_wchar"
       fully_qualified_name: "ctypes.c_wchar"
     }
-    fully_qualified_name: "ctypes.Array"
-  }
-  parameters {
-    name: "init"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  parameters {
-    name: "size"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "create_unicode_buffer"
-  fully_qualified_name: "ctypes.create_unicode_buffer"
-  return_annotation {
-    pretty_printed_name: "ctypes.Array[ctypes.c_wchar]"
-    args {
-      pretty_printed_name: "ctypes.c_wchar"
-      fully_qualified_name: "ctypes.c_wchar"
-    }
-    fully_qualified_name: "ctypes.Array"
+    fully_qualified_name: "_ctypes.Array"
   }
   parameters {
     name: "init"
@@ -3621,200 +3910,26 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "get_errno"
-  fully_qualified_name: "ctypes.get_errno"
+  name: "memmove"
+  fully_qualified_name: "ctypes.memmove"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "memmove"
-  fully_qualified_name: "ctypes.memmove"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
   parameters {
     name: "dst"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-        kind: UNION
-        args {
-          pretty_printed_name: "ctypes._PointerLike"
-          fully_qualified_name: "ctypes._PointerLike"
-        }
-        args {
-          pretty_printed_name: "ctypes.Array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-        args {
-          pretty_printed_name: "ctypes._CArgObject"
-          fully_qualified_name: "ctypes._CArgObject"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidPLike"
+      pretty_printed_name: "UnboundType[_CVoidPLike]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "src"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
-    }
-  }
-  parameters {
-    name: "count"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "memmove"
-  fully_qualified_name: "ctypes.memmove"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "dst"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-        kind: UNION
-        args {
-          pretty_printed_name: "ctypes._PointerLike"
-          fully_qualified_name: "ctypes._PointerLike"
-        }
-        args {
-          pretty_printed_name: "ctypes.Array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-        args {
-          pretty_printed_name: "ctypes._CArgObject"
-          fully_qualified_name: "ctypes._CArgObject"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidPLike"
-    }
-  }
-  parameters {
-    name: "src"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
+      pretty_printed_name: "UnboundType[_CVoidConstPLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -3836,40 +3951,15 @@ functions {
   name: "memset"
   fully_qualified_name: "ctypes.memset"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
   parameters {
     name: "dst"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-        kind: UNION
-        args {
-          pretty_printed_name: "ctypes._PointerLike"
-          fully_qualified_name: "ctypes._PointerLike"
-        }
-        args {
-          pretty_printed_name: "ctypes.Array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "ctypes.Array"
-        }
-        args {
-          pretty_printed_name: "ctypes._CArgObject"
-          fully_qualified_name: "ctypes._CArgObject"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidPLike"
+      pretty_printed_name: "UnboundType[_CVoidPLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -3888,234 +3978,12 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "POINTER"
-  fully_qualified_name: "ctypes.POINTER"
-  return_annotation {
-    pretty_printed_name: "Type[ctypes.pointer[ctypes._CT]]"
-    kind: TYPE
-    args {
-      pretty_printed_name: "ctypes.pointer[ctypes._CT]"
-      args {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "ctypes.pointer"
-    }
-  }
-  parameters {
-    name: "type"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Type[ctypes._CT]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "ctypes._CT"
-        kind: TYPE_VAR
-      }
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "resize"
-  fully_qualified_name: "ctypes.resize"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "ctypes._CData"
-      fully_qualified_name: "ctypes._CData"
-    }
-  }
-  parameters {
-    name: "size"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "set_conversion_mode"
-  fully_qualified_name: "ctypes.set_conversion_mode"
-  return_annotation {
-    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "errors"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "set_errno"
-  fully_qualified_name: "ctypes.set_errno"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "value"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "sizeof"
-  fully_qualified_name: "ctypes.sizeof"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "obj_or_type"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[ctypes._CData,Type[ctypes._CData]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "ctypes._CData"
-        fully_qualified_name: "ctypes._CData"
-      }
-      args {
-        pretty_printed_name: "Type[ctypes._CData]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "ctypes._CData"
-          fully_qualified_name: "ctypes._CData"
-        }
-      }
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "string_at"
-  fully_qualified_name: "ctypes.string_at"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "address"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
-    }
-  }
-  parameters {
-    name: "size"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "string_at"
@@ -4128,46 +3996,8 @@ functions {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
+      pretty_printed_name: "UnboundType[_CVoidConstPLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -4197,46 +4027,8 @@ functions {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
+      pretty_printed_name: "UnboundType[_CVoidConstPLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -4248,85 +4040,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
-}
-functions {
-  name: "wstring_at"
-  fully_qualified_name: "ctypes.wstring_at"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "address"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]"
-            kind: UNION
-            args {
-              pretty_printed_name: "ctypes._PointerLike"
-              fully_qualified_name: "ctypes._PointerLike"
-            }
-            args {
-              pretty_printed_name: "ctypes.Array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "ctypes.Array"
-            }
-            args {
-              pretty_printed_name: "ctypes._CArgObject"
-              fully_qualified_name: "ctypes._CArgObject"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "ctypes._CVoidPLike"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      fully_qualified_name: "ctypes._CVoidConstPLike"
-    }
-  }
-  parameters {
-    name: "size"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "_UnionT"
-  fully_qualified_name: "typing.Union"
-  type_annotation {
-    pretty_printed_name: "typing._SpecialForm"
-    fully_qualified_name: "typing._SpecialForm"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4336,12 +4049,11 @@ vars {
 }
 vars {
   name: "RTLD_GLOBAL"
-  fully_qualified_name: "ctypes.RTLD_GLOBAL"
+  fully_qualified_name: "_ctypes.RTLD_GLOBAL"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4351,12 +4063,11 @@ vars {
 }
 vars {
   name: "RTLD_LOCAL"
-  fully_qualified_name: "ctypes.RTLD_LOCAL"
+  fully_qualified_name: "_ctypes.RTLD_LOCAL"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4371,7 +4082,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4390,7 +4100,6 @@ vars {
     }
     fully_qualified_name: "ctypes.LibraryLoader"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4409,7 +4118,6 @@ vars {
     }
     fully_qualified_name: "ctypes.LibraryLoader"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4424,7 +4132,34 @@ vars {
     pretty_printed_name: "ctypes.PyDLL"
     fully_qualified_name: "ctypes.PyDLL"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CVoidPLike"
+  fully_qualified_name: "ctypes._CVoidPLike"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CVoidConstPLike"
+  fully_qualified_name: "ctypes._CVoidConstPLike"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4443,7 +4178,6 @@ vars {
       fully_qualified_name: "builtins.function"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

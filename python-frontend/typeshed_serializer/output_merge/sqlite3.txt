@@ -22,19 +22,18 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "kwargs"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -58,19 +57,18 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "kwargs"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -94,24 +92,22 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "kwargs"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -120,6 +116,536 @@ classes {
   name: "Connection"
   fully_qualified_name: "sqlite3.dbapi2.Connection"
   super_classes: "builtins.object"
+  methods {
+    name: "DataError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.DataError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "DataError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.DataError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.DataError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.DataError"
+        fully_qualified_name: "sqlite3.dbapi2.DataError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "DatabaseError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.DatabaseError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "DatabaseError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.DatabaseError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.DatabaseError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.DatabaseError"
+        fully_qualified_name: "sqlite3.dbapi2.DatabaseError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Error"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.Error"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "Error"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.Error"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.Error]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.Error"
+        fully_qualified_name: "sqlite3.dbapi2.Error"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "IntegrityError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.IntegrityError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "IntegrityError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.IntegrityError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.IntegrityError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.IntegrityError"
+        fully_qualified_name: "sqlite3.dbapi2.IntegrityError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "InterfaceError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.InterfaceError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "InterfaceError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.InterfaceError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.InterfaceError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.InterfaceError"
+        fully_qualified_name: "sqlite3.dbapi2.InterfaceError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "InternalError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.InternalError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "InternalError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.InternalError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.InternalError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.InternalError"
+        fully_qualified_name: "sqlite3.dbapi2.InternalError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "NotSupportedError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.NotSupportedError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "NotSupportedError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.NotSupportedError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.NotSupportedError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.NotSupportedError"
+        fully_qualified_name: "sqlite3.dbapi2.NotSupportedError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "OperationalError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.OperationalError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "OperationalError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.OperationalError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.OperationalError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.OperationalError"
+        fully_qualified_name: "sqlite3.dbapi2.OperationalError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ProgrammingError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.ProgrammingError"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "ProgrammingError"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.ProgrammingError"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.ProgrammingError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.ProgrammingError"
+        fully_qualified_name: "sqlite3.dbapi2.ProgrammingError"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Warning"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.Warning"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "Warning"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.Warning"
+    return_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2.Warning]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "sqlite3.dbapi2.Warning"
+        fully_qualified_name: "sqlite3.dbapi2.Warning"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "in_transaction"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.in_transaction"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "total_changes"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.total_changes"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "__init__"
     fully_qualified_name: "sqlite3.dbapi2.Connection.__init__"
@@ -136,26 +662,203 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "database"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
       }
+      has_default: true
     }
-    valid_for: "27"
+    parameters {
+      name: "detect_types"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "isolation_level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "check_same_thread"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "cached_statements"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "uri"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    parameters {
+      name: "database"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "detect_types"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "isolation_level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "check_same_thread"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[sqlite3.dbapi2.Connection],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[sqlite3.dbapi2.Connection]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "sqlite3.dbapi2.Connection"
+            fully_qualified_name: "sqlite3.dbapi2.Connection"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "cached_statements"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "uri"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -174,7 +877,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -197,7 +899,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -248,7 +949,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -281,11 +981,22 @@ classes {
     parameters {
       name: "__callback"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -328,11 +1039,22 @@ classes {
       name: "func"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -372,8 +1094,20 @@ classes {
       name: "func"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
     parameters {
@@ -385,46 +1119,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "cursor"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.cursor"
-    return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Connection"
-        fully_qualified_name: "sqlite3.dbapi2.Connection"
-      }
-    }
-    parameters {
-      name: "cursorClass"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.type,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -456,16 +1150,11 @@ classes {
       name: "parameters"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Iterable[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Iterable"
+        pretty_printed_name: "UnboundType[_Parameters]"
+        kind: UNBOUND
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -498,19 +1187,14 @@ classes {
     parameters {
       name: "__parameters"
       type_annotation {
-        pretty_printed_name: "typing.Iterable[typing.Iterable[Any]]"
+        pretty_printed_name: "typing.Iterable[UnboundType[_Parameters]]"
         args {
-          pretty_printed_name: "typing.Iterable[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Iterable"
+          pretty_printed_name: "UnboundType[_Parameters]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -536,48 +1220,8 @@ classes {
     parameters {
       name: "__sql_script"
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "executescript"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.executescript"
-    return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Connection"
-        fully_qualified_name: "sqlite3.dbapi2.Connection"
-      }
-    }
-    parameters {
-      name: "__sql_script"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     valid_for: "35"
@@ -602,23 +1246,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -653,23 +1280,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -692,23 +1302,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -732,22 +1325,25 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "authorizer_callback"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -771,22 +1367,33 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "progress_handler"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
     parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -810,22 +1417,25 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "trace_callback"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -849,14 +1459,12 @@ classes {
       }
     }
     parameters {
-      name: "enabled"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__enable"
       type_annotation {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -880,142 +1488,12 @@ classes {
       }
     }
     parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__name"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__call__"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.__call__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Connection"
-        fully_qualified_name: "sqlite3.dbapi2.Connection"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.__enter__"
-    return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Connection"
-      fully_qualified_name: "sqlite3.dbapi2.Connection"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Connection"
-        fully_qualified_name: "sqlite3.dbapi2.Connection"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Connection"
-        fully_qualified_name: "sqlite3.dbapi2.Connection"
-      }
-    }
-    parameters {
-      name: "t"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.type,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "exc"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.BaseException,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.BaseException"
-          fully_qualified_name: "builtins.BaseException"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "tb"
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1094,12 +1572,293 @@ classes {
       }
       has_default: true
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__call__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_Statement]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    parameters {
+      name: "__sql"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__call__"
+    return_annotation {
+      pretty_printed_name: "sqlite3.dbapi2._Statement"
+      fully_qualified_name: "sqlite3.dbapi2._Statement"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    parameters {
+      name: "__sql"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__exit__"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    parameters {
+      name: "__type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "sqlite3.dbapi2.Connection.__exit__"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
+      }
+    }
+    parameters {
+      name: "__type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "cursor"
+    fullname: "sqlite3.dbapi2.Connection.cursor"
+    definitions {
+      name: "cursor"
+      fully_qualified_name: "sqlite3.dbapi2.Connection.cursor"
+      return_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Connection"
+          fully_qualified_name: "sqlite3.dbapi2.Connection"
+        }
+      }
+      parameters {
+        name: "cursorClass"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cursor"
+      fully_qualified_name: "sqlite3.dbapi2.Connection.cursor"
+      return_annotation {
+        pretty_printed_name: "sqlite3.dbapi2._CursorT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Connection"
+          fully_qualified_name: "sqlite3.dbapi2.Connection"
+        }
+      }
+      parameters {
+        name: "cursorClass"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1107,178 +1866,20 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
-    name: "DataError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.DataError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "DatabaseError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.DatabaseError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "Error"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.Error"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "IntegrityError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.IntegrityError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "InterfaceError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.InterfaceError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "InternalError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.InternalError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "NotSupportedError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.NotSupportedError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "OperationalError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.OperationalError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "ProgrammingError"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.ProgrammingError"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "Warning"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.Warning"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "in_transaction"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.in_transaction"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
     name: "isolation_level"
     fully_qualified_name: "sqlite3.dbapi2.Connection.isolation_level"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1293,7 +1894,6 @@ classes {
       pretty_printed_name: "Any"
       kind: ANY
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1308,22 +1908,6 @@ classes {
       pretty_printed_name: "Any"
       kind: ANY
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "total_changes"
-    fully_qualified_name: "sqlite3.dbapi2.Connection.total_changes"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1336,6 +1920,217 @@ classes {
   name: "Cursor"
   fully_qualified_name: "sqlite3.dbapi2.Cursor"
   super_classes: "typing.Iterator"
+  methods {
+    name: "connection"
+    fully_qualified_name: "sqlite3.dbapi2.Cursor.connection"
+    return_annotation {
+      pretty_printed_name: "sqlite3.dbapi2.Connection"
+      fully_qualified_name: "sqlite3.dbapi2.Connection"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "description"
+    fully_qualified_name: "sqlite3.dbapi2.Cursor.description"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[Tuple[builtins.str,None,None,None,None,None,None],Any],Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[Tuple[builtins.str,None,None,None,None,None,None],Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Tuple[builtins.str,None,None,None,None,None,None]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "description"
+    fully_qualified_name: "sqlite3.dbapi2.Cursor.description"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.tuple[Tuple[builtins.str,None,None,None,None,None,None]],Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.tuple[Tuple[builtins.str,None,None,None,None,None,None]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,None,None,None,None,None,None]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "lastrowid"
+    fully_qualified_name: "sqlite3.dbapi2.Cursor.lastrowid"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rowcount"
+    fully_qualified_name: "sqlite3.dbapi2.Cursor.rowcount"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "__init__"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.__init__"
@@ -1352,22 +2147,12 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__cursor"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "sqlite3.dbapi2.Connection"
+        fully_qualified_name: "sqlite3.dbapi2.Connection"
       }
     }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1390,23 +2175,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1418,8 +2186,8 @@ classes {
     name: "execute"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.execute"
     return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1439,16 +2207,11 @@ classes {
     parameters {
       name: "__parameters"
       type_annotation {
-        pretty_printed_name: "typing.Iterable[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Iterable"
+        pretty_printed_name: "UnboundType[_Parameters]"
+        kind: UNBOUND
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1460,8 +2223,8 @@ classes {
     name: "executemany"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.executemany"
     return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1481,19 +2244,14 @@ classes {
     parameters {
       name: "__seq_of_parameters"
       type_annotation {
-        pretty_printed_name: "typing.Iterable[typing.Iterable[Any]]"
+        pretty_printed_name: "typing.Iterable[UnboundType[_Parameters]]"
         args {
-          pretty_printed_name: "typing.Iterable[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Iterable"
+          pretty_printed_name: "UnboundType[_Parameters]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Iterable"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1519,48 +2277,8 @@ classes {
     parameters {
       name: "__sql_script"
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "executescript"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.executescript"
-    return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Cursor"
-        fully_qualified_name: "sqlite3.dbapi2.Cursor"
-      }
-    }
-    parameters {
-      name: "__sql_script"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     valid_for: "35"
@@ -1589,7 +2307,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1633,7 +2350,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1656,7 +2372,6 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1680,22 +2395,12 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__sizes"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1719,22 +2424,28 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__size"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
+      name: "__column"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[UnboundType[Unused],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[Unused]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
+      has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1746,8 +2457,8 @@ classes {
     name: "__iter__"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.__iter__"
     return_annotation {
-      pretty_printed_name: "sqlite3.dbapi2.Cursor"
-      fully_qualified_name: "sqlite3.dbapi2.Cursor"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1756,30 +2467,12 @@ classes {
         fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "next"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.next"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "sqlite3.dbapi2.Cursor"
-        fully_qualified_name: "sqlite3.dbapi2.Cursor"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__next__"
@@ -1803,7 +2496,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1814,55 +2506,9 @@ classes {
     name: "arraysize"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.arraysize"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "connection"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.connection"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "description"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.description"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "lastrowid"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.lastrowid"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1874,25 +2520,21 @@ classes {
     name: "row_factory"
     fully_qualified_name: "sqlite3.dbapi2.Cursor.row_factory"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "rowcount"
-    fully_qualified_name: "sqlite3.dbapi2.Cursor.rowcount"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1902,10 +2544,9 @@ classes {
   }
 }
 classes {
-  name: "DataError"
-  fully_qualified_name: "sqlite3.dbapi2.DataError"
-  super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
+  name: "Error"
+  fully_qualified_name: "sqlite3.dbapi2.Error"
+  super_classes: "builtins.Exception"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1917,7 +2558,6 @@ classes {
   name: "DatabaseError"
   fully_qualified_name: "sqlite3.dbapi2.DatabaseError"
   super_classes: "sqlite3.dbapi2.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1926,10 +2566,9 @@ classes {
   valid_for: "310"
 }
 classes {
-  name: "Error"
-  fully_qualified_name: "sqlite3.dbapi2.Error"
-  super_classes: "builtins.Exception"
-  valid_for: "27"
+  name: "DataError"
+  fully_qualified_name: "sqlite3.dbapi2.DataError"
+  super_classes: "sqlite3.dbapi2.DatabaseError"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1941,7 +2580,6 @@ classes {
   name: "IntegrityError"
   fully_qualified_name: "sqlite3.dbapi2.IntegrityError"
   super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1953,7 +2591,6 @@ classes {
   name: "InterfaceError"
   fully_qualified_name: "sqlite3.dbapi2.InterfaceError"
   super_classes: "sqlite3.dbapi2.Error"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1965,7 +2602,6 @@ classes {
   name: "InternalError"
   fully_qualified_name: "sqlite3.dbapi2.InternalError"
   super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1977,7 +2613,6 @@ classes {
   name: "NotSupportedError"
   fully_qualified_name: "sqlite3.dbapi2.NotSupportedError"
   super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1989,1018 +2624,12 @@ classes {
   name: "OperationalError"
   fully_qualified_name: "sqlite3.dbapi2.OperationalError"
   super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "OptimizedUnicode"
-  fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__init__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "capitalize"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.capitalize"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "casefold"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.casefold"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "center"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.center"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "count"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.count"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "encode"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.encode"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "endswith"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.endswith"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "expandtabs"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.expandtabs"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "find"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.find"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "format"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.format"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "format_map"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.format_map"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "index"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.index"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isalnum"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isalnum"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isalpha"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isalpha"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isdecimal"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isdecimal"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isdigit"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isdigit"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isidentifier"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isidentifier"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "islower"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.islower"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isnumeric"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isnumeric"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isprintable"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isprintable"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isspace"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isspace"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "istitle"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.istitle"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "isupper"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.isupper"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "join"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.join"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "ljust"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.ljust"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "lower"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.lower"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "lstrip"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.lstrip"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "partition"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.partition"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "replace"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.replace"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rfind"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rfind"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rindex"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rindex"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rjust"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rjust"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rpartition"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rpartition"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rsplit"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rsplit"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rstrip"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.rstrip"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "split"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.split"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "splitlines"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.splitlines"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "startswith"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.startswith"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "strip"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.strip"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "swapcase"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.swapcase"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "title"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.title"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "translate"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.translate"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "upper"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.upper"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "zfill"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.zfill"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__add__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__add__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__contains__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__contains__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__eq__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__eq__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__format__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__format__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ge__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__ge__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__getitem__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "index"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getnewargs__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__getnewargs__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__gt__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__gt__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__hash__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__iter__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__le__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__len__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__lt__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__lt__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__mod__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__mod__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__mul__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__mul__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ne__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__ne__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__rmod__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__rmod__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__rmul__"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.__rmul__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "maketrans"
-    fully_qualified_name: "sqlite3.dbapi2.OptimizedUnicode.maketrans"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "PrepareProtocol"
@@ -3025,19 +2654,18 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "kwargs"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3045,7 +2673,7 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  has_decorators: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3057,7 +2685,6 @@ classes {
   name: "ProgrammingError"
   fully_qualified_name: "sqlite3.dbapi2.ProgrammingError"
   super_classes: "sqlite3.dbapi2.DatabaseError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3085,35 +2712,38 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__cursor"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
     parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
+      name: "__data"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
-    name: "keys"
-    fully_qualified_name: "sqlite3.dbapi2.Row.keys"
+    name: "__init__"
+    fully_qualified_name: "sqlite3.dbapi2.Row.__init__"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
+      kind: NONE
     }
     parameters {
       name: "self"
@@ -3124,113 +2754,45 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__cursor"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "sqlite3.dbapi2.Cursor"
+        fully_qualified_name: "sqlite3.dbapi2.Cursor"
       }
     }
     parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
+      name: "__data"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
   methods {
-    name: "__eq__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__eq__"
+    name: "keys"
+    fully_qualified_name: "sqlite3.dbapi2.Row.keys"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
     }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__ge__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__ge__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__getitem__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "index"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__gt__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__gt__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__hash__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3241,30 +2803,21 @@ classes {
   methods {
     name: "__iter__"
     fully_qualified_name: "sqlite3.dbapi2.Row.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "sqlite3.dbapi2.Row.__le__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3275,11 +2828,129 @@ classes {
   methods {
     name: "__len__"
     fully_qualified_name: "sqlite3.dbapi2.Row.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "sqlite3.dbapi2.Row.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "sqlite3.dbapi2.Row.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "sqlite3.dbapi2.Row.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "sqlite3.dbapi2.Row.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3290,15 +2961,24 @@ classes {
   methods {
     name: "__lt__"
     fully_qualified_name: "sqlite3.dbapi2.Row.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
     }
     parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3309,15 +2989,24 @@ classes {
   methods {
     name: "__ne__"
     fully_qualified_name: "sqlite3.dbapi2.Row.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
     parameters {
       name: "self"
-      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Row"
+        fully_qualified_name: "sqlite3.dbapi2.Row"
+      }
     }
     parameters {
-      name: "other"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3325,7 +3014,148 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "sqlite3.dbapi2.Row.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "sqlite3.dbapi2.Row.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Row"
+          fully_qualified_name: "sqlite3.dbapi2.Row"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "sqlite3.dbapi2.Row.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Row"
+          fully_qualified_name: "sqlite3.dbapi2.Row"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "sqlite3.dbapi2.Row.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "sqlite3.dbapi2.Row.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Row"
+          fully_qualified_name: "sqlite3.dbapi2.Row"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "sqlite3.dbapi2.Row.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "sqlite3.dbapi2.Row"
+          fully_qualified_name: "sqlite3.dbapi2.Row"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3340,24 +3170,39 @@ classes {
   methods {
     name: "__init__"
     fully_qualified_name: "sqlite3.dbapi2.Statement.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2.Statement"
+        fully_qualified_name: "sqlite3.dbapi2.Statement"
+      }
     }
     parameters {
       name: "args"
       kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
     }
     parameters {
       name: "kwargs"
       kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
   }
-  valid_for: "27"
+  has_decorators: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3366,7 +3211,6 @@ classes {
   name: "Warning"
   fully_qualified_name: "sqlite3.dbapi2.Warning"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3389,7 +3233,6 @@ functions {
       fully_qualified_name: "builtins.float"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3412,7 +3255,6 @@ functions {
       fully_qualified_name: "builtins.float"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3435,30 +3277,6 @@ functions {
       fully_qualified_name: "builtins.float"
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "adapt"
-  fully_qualified_name: "sqlite3.dbapi2.adapt"
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  parameters {
-    name: "protocol"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  parameters {
-    name: "alternate"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3474,14 +3292,13 @@ functions {
     fully_qualified_name: "builtins.bool"
   }
   parameters {
-    name: "sql"
+    name: "statement"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3500,16 +3317,8 @@ functions {
     name: "database"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -3560,114 +3369,11 @@ functions {
     name: "factory"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[Type[sqlite3.dbapi2.Connection],None]"
+      pretty_printed_name: "Union[builtins.type,None]"
       kind: UNION
       args {
-        pretty_printed_name: "Type[sqlite3.dbapi2.Connection]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "sqlite3.dbapi2.Connection"
-          fully_qualified_name: "sqlite3.dbapi2.Connection"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "cached_statements"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "connect"
-  fully_qualified_name: "sqlite3.dbapi2.connect"
-  return_annotation {
-    pretty_printed_name: "sqlite3.dbapi2.Connection"
-    fully_qualified_name: "sqlite3.dbapi2.Connection"
-  }
-  parameters {
-    name: "database"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-  }
-  parameters {
-    name: "timeout"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "detect_types"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "isolation_level"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "check_same_thread"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "factory"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[Type[sqlite3.dbapi2.Connection],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Type[sqlite3.dbapi2.Connection]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "sqlite3.dbapi2.Connection"
-          fully_qualified_name: "sqlite3.dbapi2.Connection"
-        }
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
       }
       args {
         pretty_printed_name: "None"
@@ -3696,6 +3402,8 @@ functions {
   }
   valid_for: "35"
   valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "connect"
@@ -3708,37 +3416,8 @@ functions {
     name: "database"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -3824,8 +3503,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -3843,7 +3520,6 @@ functions {
       fully_qualified_name: "builtins.bool"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3866,13 +3542,38 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+}
+functions {
+  name: "register_adapter"
+  fully_qualified_name: "sqlite3.dbapi2.register_adapter"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__type"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "__caster"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Adapter]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "register_adapter"
@@ -3895,20 +3596,37 @@ functions {
   parameters {
     name: "__caster"
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
+      pretty_printed_name: "UnboundType[_Adapter]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "39"
+}
+functions {
+  name: "register_adapter"
+  fully_qualified_name: "sqlite3.dbapi2.register_adapter"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__type"
+    type_annotation {
+      pretty_printed_name: "Type[sqlite3.dbapi2._T]"
+      kind: TYPE
       args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
+        pretty_printed_name: "sqlite3.dbapi2._T"
+        kind: TYPE_VAR
       }
     }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
+  parameters {
+    name: "__adapter"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Adapter]"
+      kind: UNBOUND
+    }
+  }
   valid_for: "310"
 }
 functions {
@@ -3928,15 +3646,107 @@ functions {
   parameters {
     name: "__converter"
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "UnboundType[_Converter]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "register_converter"
+  fully_qualified_name: "sqlite3.dbapi2.register_converter"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__typename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__converter"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Converter]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "adapt"
+  fullname: "sqlite3.dbapi2.adapt"
+  definitions {
+    name: "adapt"
+    fully_qualified_name: "sqlite3.dbapi2.adapt"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__obj"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__proto"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "adapt"
+    fully_qualified_name: "sqlite3.dbapi2.adapt"
+    return_annotation {
+      pretty_printed_name: "Union[Any,sqlite3.dbapi2._T]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "sqlite3.dbapi2._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__obj"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__proto"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__alt"
+      type_annotation {
+        pretty_printed_name: "sqlite3.dbapi2._T"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3951,7 +3761,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3966,7 +3775,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3981,7 +3789,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4008,7 +3815,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4035,7 +3841,6 @@ vars {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4050,7 +3855,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4065,7 +3869,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4080,7 +3883,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4095,7 +3897,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4110,7 +3911,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4125,7 +3925,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4140,7 +3939,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4155,7 +3953,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4170,7 +3967,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4185,7 +3981,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4200,7 +3995,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4215,7 +4009,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4230,7 +4023,20 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_CREATE_VTABLE"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_CREATE_VTABLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4245,7 +4051,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4260,7 +4065,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4275,7 +4079,20 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_DONE"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_DONE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4290,7 +4107,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4305,7 +4121,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4320,7 +4135,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4335,7 +4149,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4350,7 +4163,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4365,7 +4177,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4380,7 +4191,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4395,7 +4205,34 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_DROP_VTABLE"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_DROP_VTABLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_FUNCTION"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_FUNCTION"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4410,7 +4247,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4425,7 +4261,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4440,7 +4275,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4455,7 +4289,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4470,7 +4303,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4485,7 +4317,34 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_RECURSIVE"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_RECURSIVE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SQLITE_SAVEPOINT"
+  fully_qualified_name: "sqlite3.dbapi2.SQLITE_SAVEPOINT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4500,7 +4359,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4515,7 +4373,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4530,7 +4387,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4542,14 +4398,61 @@ vars {
   name: "adapters"
   fully_qualified_name: "sqlite3.dbapi2.adapters"
   type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "builtins.dict[Tuple[builtins.type,builtins.type],UnboundType[_Adapter]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.type,builtins.type]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    args {
+      pretty_printed_name: "UnboundType[_Adapter]"
+      kind: UNBOUND
+    }
+    fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+vars {
+  name: "adapters"
+  fully_qualified_name: "sqlite3.dbapi2.adapters"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[Tuple[Type[Any],Type[Any]],UnboundType[_Adapter]]"
+    args {
+      pretty_printed_name: "Tuple[Type[Any],Type[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    args {
+      pretty_printed_name: "UnboundType[_Adapter]"
+      kind: UNBOUND
+    }
+    fully_qualified_name: "builtins.dict"
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -4557,10 +4460,17 @@ vars {
   name: "converters"
   fully_qualified_name: "sqlite3.dbapi2.converters"
   type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "builtins.dict[builtins.str,UnboundType[_Converter]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "UnboundType[_Converter]"
+      kind: UNBOUND
+    }
+    fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4575,7 +4485,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4590,7 +4499,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

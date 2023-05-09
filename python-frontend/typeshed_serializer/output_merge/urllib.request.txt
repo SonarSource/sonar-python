@@ -1,5 +1,186 @@
 fully_qualified_name: "urllib.request"
 classes {
+  name: "HTTPError"
+  fully_qualified_name: "urllib.error.HTTPError"
+  super_classes: "urllib.error.URLError"
+  super_classes: "urllib.response.addinfourl"
+  methods {
+    name: "reason"
+    fully_qualified_name: "urllib.error.HTTPError.reason"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.error.HTTPError"
+        fully_qualified_name: "urllib.error.HTTPError"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.error.HTTPError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.error.HTTPError"
+        fully_qualified_name: "urllib.error.HTTPError"
+      }
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "hdrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.IO[builtins.bytes],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.IO[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "headers"
+    fullname: "urllib.error.HTTPError.headers"
+    definitions {
+      name: "headers"
+      fully_qualified_name: "urllib.error.HTTPError.headers"
+      return_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "urllib.error.HTTPError"
+          fully_qualified_name: "urllib.error.HTTPError"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "headers"
+      fully_qualified_name: "urllib.error.HTTPError.headers"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "urllib.error.HTTPError"
+          fully_qualified_name: "urllib.error.HTTPError"
+        }
+      }
+      parameters {
+        name: "headers"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "email.message.Message"
+          fully_qualified_name: "email.message.Message"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "headers.setter"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "urllib.error.HTTPError.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "Request"
   fully_qualified_name: "urllib.request.Request"
   super_classes: "builtins.object"
@@ -30,11 +211,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[_DataType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[_DataType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -47,7 +228,7 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        pretty_printed_name: "typing.MutableMapping[builtins.str,builtins.str]"
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
@@ -56,7 +237,7 @@ classes {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
-        fully_qualified_name: "builtins.dict"
+        fully_qualified_name: "typing.MutableMapping"
       }
       has_default: true
     }
@@ -612,16 +793,8 @@ classes {
     name: "data"
     fully_qualified_name: "urllib.request.Request.data"
     type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      pretty_printed_name: "UnboundType[_DataType]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "36"
@@ -634,7 +807,7 @@ classes {
     name: "headers"
     fully_qualified_name: "urllib.request.Request.headers"
     type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      pretty_printed_name: "typing.MutableMapping[builtins.str,builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -643,7 +816,7 @@ classes {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "builtins.dict"
+      fully_qualified_name: "typing.MutableMapping"
     }
     valid_for: "35"
     valid_for: "36"
@@ -771,13 +944,8 @@ classes {
     name: "open"
     fully_qualified_name: "urllib.request.OpenerDirector.open"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -807,11 +975,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[_DataType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[_DataType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -848,13 +1016,8 @@ classes {
     name: "error"
     fully_qualified_name: "urllib.request.OpenerDirector.error"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -998,6 +1161,34 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "urllib.request.BaseHandler.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "urllib.request.BaseHandler"
+        fully_qualified_name: "urllib.request.BaseHandler"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1092,16 +1283,8 @@ classes {
       name: "hdrs"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -1157,10 +1340,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -1185,16 +1368,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
@@ -1216,11 +1391,11 @@ classes {
     name: "http_error_301"
     fully_qualified_name: "urllib.request.HTTPRedirectHandler.http_error_301"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1247,10 +1422,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -1267,24 +1442,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -1298,11 +1465,11 @@ classes {
     name: "http_error_302"
     fully_qualified_name: "urllib.request.HTTPRedirectHandler.http_error_302"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1329,10 +1496,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -1349,24 +1516,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -1380,11 +1539,11 @@ classes {
     name: "http_error_303"
     fully_qualified_name: "urllib.request.HTTPRedirectHandler.http_error_303"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1411,10 +1570,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -1431,24 +1590,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -1462,11 +1613,11 @@ classes {
     name: "http_error_307"
     fully_qualified_name: "urllib.request.HTTPRedirectHandler.http_error_307"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1493,10 +1644,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -1513,24 +1664,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -1844,11 +1987,11 @@ classes {
     name: "proxy_open"
     fully_qualified_name: "urllib.request.ProxyHandler.proxy_open"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2533,16 +2676,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -2692,11 +2827,11 @@ classes {
     name: "retry_http_basic_auth"
     fully_qualified_name: "urllib.request.AbstractBasicAuthHandler.retry_http_basic_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2752,12 +2887,12 @@ classes {
     name: "rx"
     fully_qualified_name: "urllib.request.AbstractBasicAuthHandler.rx"
     type_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
     valid_for: "35"
     valid_for: "36"
@@ -2808,11 +2943,11 @@ classes {
     name: "http_error_401"
     fully_qualified_name: "urllib.request.HTTPBasicAuthHandler.http_error_401"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2839,10 +2974,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -2859,24 +2994,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -2916,11 +3043,11 @@ classes {
     name: "http_error_407"
     fully_qualified_name: "urllib.request.ProxyBasicAuthHandler.http_error_407"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2947,10 +3074,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -2967,24 +3094,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -3123,16 +3242,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -3146,11 +3257,11 @@ classes {
     name: "retry_http_digest_auth"
     fully_qualified_name: "urllib.request.AbstractDigestAuthHandler.retry_http_digest_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3337,11 +3448,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -3388,11 +3499,11 @@ classes {
     name: "http_error_401"
     fully_qualified_name: "urllib.request.HTTPDigestAuthHandler.http_error_401"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3419,10 +3530,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -3439,24 +3550,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -3496,11 +3599,11 @@ classes {
     name: "http_error_407"
     fully_qualified_name: "urllib.request.ProxyDigestAuthHandler.http_error_407"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3527,10 +3630,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -3547,24 +3650,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -3594,6 +3689,108 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+}
+classes {
+  name: "_HTTPConnectionProtocol"
+  fully_qualified_name: "urllib.request._HTTPConnectionProtocol"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "urllib.request._HTTPConnectionProtocol.__call__"
+    return_annotation {
+      pretty_printed_name: "http.client.HTTPConnection"
+      fully_qualified_name: "http.client.HTTPConnection"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request._HTTPConnectionProtocol"
+        fully_qualified_name: "urllib.request._HTTPConnectionProtocol"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "source_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "blocksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "AbstractHTTPHandler"
@@ -3709,8 +3906,8 @@ classes {
       name: "http_class"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "http.client._HTTPConnectionProtocol"
-        fully_qualified_name: "http.client._HTTPConnectionProtocol"
+        pretty_printed_name: "urllib.request._HTTPConnectionProtocol"
+        fully_qualified_name: "urllib.request._HTTPConnectionProtocol"
       }
     }
     parameters {
@@ -3988,6 +4185,34 @@ classes {
     name: "get_names"
     fully_qualified_name: "urllib.request.FileHandler.get_names"
     return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.FileHandler"
+        fully_qualified_name: "urllib.request.FileHandler"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "get_names"
+    fully_qualified_name: "urllib.request.FileHandler.get_names"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
@@ -4003,10 +4228,6 @@ classes {
         fully_qualified_name: "urllib.request.FileHandler"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4050,6 +4271,34 @@ classes {
     name: "names"
     fully_qualified_name: "urllib.request.FileHandler.names"
     type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "urllib.request.FileHandler.names"
+    type_annotation {
       pretty_printed_name: "Union[builtins.tuple[builtins.str],None]"
       kind: UNION
       args {
@@ -4065,10 +4314,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4588,76 +4833,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "connect_ftp"
-    fully_qualified_name: "urllib.request.CacheFTPHandler.connect_ftp"
-    return_annotation {
-      pretty_printed_name: "urllib.request.ftpwrapper"
-      fully_qualified_name: "urllib.request.ftpwrapper"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "urllib.request.CacheFTPHandler"
-        fully_qualified_name: "urllib.request.CacheFTPHandler"
-      }
-    }
-    parameters {
-      name: "user"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "passwd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "host"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "port"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "dirs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4714,13 +4889,8 @@ classes {
     name: "http_response"
     fully_qualified_name: "urllib.request.HTTPErrorProcessor.http_response"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4757,13 +4927,8 @@ classes {
     name: "https_response"
     fully_qualified_name: "urllib.request.HTTPErrorProcessor.https_response"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4866,13 +5031,8 @@ classes {
     name: "open"
     fully_qualified_name: "urllib.request.URLopener.open"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4894,11 +5054,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -4918,13 +5078,8 @@ classes {
     name: "open_unknown"
     fully_qualified_name: "urllib.request.URLopener.open_unknown"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4946,11 +5101,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5047,11 +5202,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5153,13 +5308,8 @@ classes {
     name: "http_error"
     fully_qualified_name: "urllib.request.URLopener.http_error"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -5209,16 +5359,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
@@ -5249,13 +5391,8 @@ classes {
     name: "http_error_default"
     fully_qualified_name: "urllib.request.URLopener.http_error_default"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -5305,16 +5442,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -5351,11 +5480,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5435,13 +5564,8 @@ classes {
     name: "open_http"
     fully_qualified_name: "urllib.request.URLopener.open_http"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -5463,11 +5587,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5487,13 +5611,8 @@ classes {
     name: "open_https"
     fully_qualified_name: "urllib.request.URLopener.open_https"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Any]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "urllib.request._UrlopenRet"
+      pretty_printed_name: "UnboundType[_UrlopenRet]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -5515,11 +5634,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5600,11 +5719,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5750,11 +5869,11 @@ classes {
     name: "http_error_301"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_301"
     return_annotation {
-      pretty_printed_name: "Union[Any,urllib.response.addinfourl,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],urllib.response.addinfourl,None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "urllib.response.addinfourl"
@@ -5785,10 +5904,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -5813,27 +5932,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5853,11 +5964,11 @@ classes {
     name: "http_error_302"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_302"
     return_annotation {
-      pretty_printed_name: "Union[Any,urllib.response.addinfourl,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],urllib.response.addinfourl,None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "urllib.response.addinfourl"
@@ -5888,10 +5999,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -5916,27 +6027,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5956,11 +6059,11 @@ classes {
     name: "http_error_303"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_303"
     return_annotation {
-      pretty_printed_name: "Union[Any,urllib.response.addinfourl,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],urllib.response.addinfourl,None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "urllib.response.addinfourl"
@@ -5991,10 +6094,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -6019,27 +6122,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6059,11 +6154,11 @@ classes {
     name: "http_error_307"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_307"
     return_annotation {
-      pretty_printed_name: "Union[Any,urllib.response.addinfourl,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],urllib.response.addinfourl,None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "urllib.response.addinfourl"
@@ -6094,10 +6189,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -6122,27 +6217,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6162,11 +6249,11 @@ classes {
     name: "http_error_401"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_401"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6193,10 +6280,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -6221,27 +6308,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6270,11 +6349,11 @@ classes {
     name: "http_error_407"
     fully_qualified_name: "urllib.request.FancyURLopener.http_error_407"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6301,10 +6380,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -6329,27 +6408,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6429,16 +6500,8 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     valid_for: "35"
@@ -6452,11 +6515,11 @@ classes {
     name: "redirect_internal"
     fully_qualified_name: "urllib.request.FancyURLopener.redirect_internal"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6483,10 +6546,10 @@ classes {
       name: "fp"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
+        pretty_printed_name: "typing.IO[builtins.bytes]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
         }
         fully_qualified_name: "typing.IO"
       }
@@ -6511,27 +6574,19 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Mapping"
+        pretty_printed_name: "http.client.HTTPMessage"
+        fully_qualified_name: "http.client.HTTPMessage"
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6550,11 +6605,11 @@ classes {
     name: "retry_http_basic_auth"
     fully_qualified_name: "urllib.request.FancyURLopener.retry_http_basic_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6589,11 +6644,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6613,11 +6668,11 @@ classes {
     name: "retry_https_basic_auth"
     fully_qualified_name: "urllib.request.FancyURLopener.retry_https_basic_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6652,11 +6707,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6676,11 +6731,11 @@ classes {
     name: "retry_proxy_http_basic_auth"
     fully_qualified_name: "urllib.request.FancyURLopener.retry_proxy_http_basic_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6715,11 +6770,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6739,11 +6794,11 @@ classes {
     name: "retry_proxy_https_basic_auth"
     fully_qualified_name: "urllib.request.FancyURLopener.retry_proxy_https_basic_auth"
     return_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_UrlopenRet],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_UrlopenRet]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -6778,11 +6833,11 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -6809,13 +6864,8 @@ functions {
   name: "urlopen"
   fully_qualified_name: "urllib.request.urlopen"
   return_annotation {
-    pretty_printed_name: "TypeAlias[Any]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "urllib.request._UrlopenRet"
+    pretty_printed_name: "UnboundType[_UrlopenRet]"
+    kind: UNBOUND
   }
   parameters {
     name: "url"
@@ -6837,11 +6887,11 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,None]"
+      pretty_printed_name: "Union[UnboundType[_DataType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_DataType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -7190,31 +7240,11 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -7248,11 +7278,11 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,None]"
+      pretty_printed_name: "Union[UnboundType[_DataType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_DataType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -7274,6 +7304,52 @@ functions {
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "urllib.request.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_UrlopenRet"
+  fully_qualified_name: "urllib.request._UrlopenRet"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_DataType"
+  fully_qualified_name: "urllib.request._DataType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

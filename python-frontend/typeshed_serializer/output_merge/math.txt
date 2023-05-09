@@ -1,4 +1,121 @@
 fully_qualified_name: "math"
+classes {
+  name: "_SupportsCeil"
+  fully_qualified_name: "math._SupportsCeil"
+  super_classes: "builtins.object"
+  methods {
+    name: "__ceil__"
+    fully_qualified_name: "math._SupportsCeil.__ceil__"
+    return_annotation {
+      pretty_printed_name: "math._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "math._SupportsCeil[math._T_co]"
+        args {
+          pretty_printed_name: "math._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "math._SupportsCeil"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsFloor"
+  fully_qualified_name: "math._SupportsFloor"
+  super_classes: "builtins.object"
+  methods {
+    name: "__floor__"
+    fully_qualified_name: "math._SupportsFloor.__floor__"
+    return_annotation {
+      pretty_printed_name: "math._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "math._SupportsFloor[math._T_co]"
+        args {
+          pretty_printed_name: "math._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "math._SupportsFloor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsTrunc"
+  fully_qualified_name: "math._SupportsTrunc"
+  super_classes: "builtins.object"
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "math._SupportsTrunc.__trunc__"
+    return_annotation {
+      pretty_printed_name: "math._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "math._SupportsTrunc[math._T_co]"
+        args {
+          pretty_printed_name: "math._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "math._SupportsTrunc"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
 functions {
   name: "acos"
   fully_qualified_name: "math.acos"
@@ -9,11 +126,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -31,11 +147,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -53,11 +168,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -75,11 +189,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -97,11 +210,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -119,18 +231,17 @@ functions {
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -148,46 +259,8 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "ceil"
-  fully_qualified_name: "math.ceil"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "ceil"
-  fully_qualified_name: "math.ceil"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -207,18 +280,17 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -236,11 +308,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -258,11 +329,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -280,11 +350,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -302,11 +371,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -324,11 +392,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -346,11 +413,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -368,11 +434,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -390,11 +455,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -412,37 +476,17 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsInt"
-      fully_qualified_name: "typing.SupportsInt"
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 functions {
-  name: "floor"
-  fully_qualified_name: "math.floor"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "floor"
-  fully_qualified_name: "math.floor"
+  name: "factorial"
+  fully_qualified_name: "math.factorial"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -450,13 +494,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -471,18 +512,17 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -508,11 +548,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -530,15 +569,14 @@ functions {
   parameters {
     name: "__seq"
     type_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.float]"
+      pretty_printed_name: "typing.Iterable[UnboundType[_SupportsFloatOrIndex]]"
       args {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterable"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -556,15 +594,58 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "gcd"
+  fully_qualified_name: "math.gcd"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
+    }
+  }
+  parameters {
+    name: "__y"
+    type_annotation {
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "gcd"
+  fully_qualified_name: "math.gcd"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "integers"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
+    }
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -578,18 +659,17 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -605,10 +685,58 @@ functions {
     name: "coordinates"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isclose"
+  fully_qualified_name: "math.isclose"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "rel_tol"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+    has_default: true
+  }
+  parameters {
+    name: "abs_tol"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -623,11 +751,31 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isfinite"
+  fully_qualified_name: "math.isfinite"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -645,11 +793,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -667,8 +814,8 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -678,7 +825,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -696,11 +842,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -719,20 +864,19 @@ functions {
     name: "x"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "base"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -750,11 +894,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -772,11 +915,31 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "log2"
+  fully_qualified_name: "math.log2"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -802,11 +965,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -824,18 +986,17 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -853,275 +1014,8 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "sin"
-  fully_qualified_name: "math.sin"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "sinh"
-  fully_qualified_name: "math.sinh"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "sqrt"
-  fully_qualified_name: "math.sqrt"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "tan"
-  fully_qualified_name: "math.tan"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "tanh"
-  fully_qualified_name: "math.tanh"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "trunc"
-  fully_qualified_name: "math.trunc"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "gcd"
-  fully_qualified_name: "math.gcd"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "__y"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-}
-functions {
-  name: "gcd"
-  fully_qualified_name: "math.gcd"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "integers"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isclose"
-  fully_qualified_name: "math.isclose"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "a"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  parameters {
-    name: "b"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  parameters {
-    name: "rel_tol"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "abs_tol"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isfinite"
-  fully_qualified_name: "math.isfinite"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "log2"
-  fully_qualified_name: "math.log2"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "__x"
-    type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -1141,17 +1035,149 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sin"
+  fully_qualified_name: "math.sin"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sinh"
+  fully_qualified_name: "math.sinh"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sqrt"
+  fully_qualified_name: "math.sqrt"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "tan"
+  fully_qualified_name: "math.tan"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "tanh"
+  fully_qualified_name: "math.tanh"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "trunc"
+  fully_qualified_name: "math.trunc"
+  return_annotation {
+    pretty_printed_name: "math._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "__x"
+    type_annotation {
+      pretty_printed_name: "math._SupportsTrunc[math._T]"
+      args {
+        pretty_printed_name: "math._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "math._SupportsTrunc"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -1167,15 +1193,15 @@ functions {
   parameters {
     name: "__n"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   parameters {
     name: "__k"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   valid_for: "38"
@@ -1192,10 +1218,10 @@ functions {
   parameters {
     name: "__p"
     type_annotation {
-      pretty_printed_name: "typing.Iterable[typing.SupportsFloat]"
+      pretty_printed_name: "typing.Iterable[UnboundType[_SupportsFloatOrIndex]]"
       args {
-        pretty_printed_name: "typing.SupportsFloat"
-        fully_qualified_name: "typing.SupportsFloat"
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterable"
     }
@@ -1203,10 +1229,10 @@ functions {
   parameters {
     name: "__q"
     type_annotation {
-      pretty_printed_name: "typing.Iterable[typing.SupportsFloat]"
+      pretty_printed_name: "typing.Iterable[UnboundType[_SupportsFloatOrIndex]]"
       args {
-        pretty_printed_name: "typing.SupportsFloat"
-        fully_qualified_name: "typing.SupportsFloat"
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterable"
     }
@@ -1225,8 +1251,8 @@ functions {
   parameters {
     name: "__n"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   valid_for: "38"
@@ -1243,18 +1269,18 @@ functions {
   parameters {
     name: "__n"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   parameters {
     name: "__k"
     type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
+      pretty_printed_name: "Union[typing_extensions.SupportsIndex,None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       args {
         pretty_printed_name: "None"
@@ -1278,8 +1304,8 @@ functions {
     name: "integers"
     kind: VAR_POSITIONAL
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "typing_extensions.SupportsIndex"
+      fully_qualified_name: "typing_extensions.SupportsIndex"
     }
   }
   valid_for: "39"
@@ -1295,15 +1321,15 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
   valid_for: "39"
@@ -1319,10 +1345,110 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.SupportsFloat"
-      fully_qualified_name: "typing.SupportsFloat"
+      pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+      kind: UNBOUND
     }
   }
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "ceil"
+  fullname: "math.ceil"
+  definitions {
+    name: "ceil"
+    fully_qualified_name: "math.ceil"
+    return_annotation {
+      pretty_printed_name: "math._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "math._SupportsCeil[math._T]"
+        args {
+          pretty_printed_name: "math._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "math._SupportsCeil"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "ceil"
+    fully_qualified_name: "math.ceil"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "floor"
+  fullname: "math.floor"
+  definitions {
+    name: "floor"
+    fully_qualified_name: "math.floor"
+    return_annotation {
+      pretty_printed_name: "math._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "math._SupportsFloor[math._T]"
+        args {
+          pretty_printed_name: "math._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "math._SupportsFloor"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "floor"
+    fully_qualified_name: "math.floor"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -1339,10 +1465,10 @@ overloaded_functions {
     parameters {
       name: "__iterable"
       type_annotation {
-        pretty_printed_name: "typing.Iterable[builtins.int]"
+        pretty_printed_name: "typing.Iterable[typing_extensions.SupportsIndex]"
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
         }
         fully_qualified_name: "typing.Iterable"
       }
@@ -1351,8 +1477,8 @@ overloaded_functions {
       name: "start"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -1370,10 +1496,10 @@ overloaded_functions {
     parameters {
       name: "__iterable"
       type_annotation {
-        pretty_printed_name: "typing.Iterable[typing.SupportsFloat]"
+        pretty_printed_name: "typing.Iterable[UnboundType[_SupportsFloatOrIndex]]"
         args {
-          pretty_printed_name: "typing.SupportsFloat"
-          fully_qualified_name: "typing.SupportsFloat"
+          pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Iterable"
       }
@@ -1382,8 +1508,8 @@ overloaded_functions {
       name: "start"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "typing.SupportsFloat"
-        fully_qualified_name: "typing.SupportsFloat"
+        pretty_printed_name: "UnboundType[_SupportsFloatOrIndex]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -1396,13 +1522,26 @@ overloaded_functions {
   valid_for: "310"
 }
 vars {
+  name: "_SupportsFloatOrIndex"
+  fully_qualified_name: "math._SupportsFloatOrIndex"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "e"
   fully_qualified_name: "math.e"
   type_annotation {
     pretty_printed_name: "builtins.float"
     fully_qualified_name: "builtins.float"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1417,7 +1556,6 @@ vars {
     pretty_printed_name: "builtins.float"
     fully_qualified_name: "builtins.float"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

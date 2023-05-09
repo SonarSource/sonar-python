@@ -1,0 +1,170 @@
+fully_qualified_name: "lib2to3.fixes.fix_import"
+classes {
+  name: "FixImport"
+  fully_qualified_name: "lib2to3.fixes.fix_import.FixImport"
+  super_classes: "lib2to3.fixer_base.BaseFix"
+  methods {
+    name: "start_tree"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.start_tree"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.fixes.fix_import.FixImport"
+        fully_qualified_name: "lib2to3.fixes.fix_import.FixImport"
+      }
+    }
+    parameters {
+      name: "tree"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pytree.Node"
+        fully_qualified_name: "lib2to3.pytree.Node"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "transform"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.transform"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "results"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "probably_a_local_import"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.probably_a_local_import"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "imp_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "BM_compatible"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.BM_compatible"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "PATTERN"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.PATTERN"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "skip"
+    fully_qualified_name: "lib2to3.fixes.fix_import.FixImport.skip"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "traverse_imports"
+  fully_qualified_name: "lib2to3.fixes.fix_import.traverse_imports"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[builtins.str,None,None]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "names"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

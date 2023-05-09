@@ -22,38 +22,13 @@ classes {
       name: "option_table"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],None]"
+        pretty_printed_name: "Union[builtins.list[UnboundType[_Option]],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
+          pretty_printed_name: "builtins.list[UnboundType[_Option]]"
           args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "Union[builtins.str,None]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "None"
-                  kind: NONE
-                }
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "distutils.fancy_getopt._Option"
+            pretty_printed_name: "UnboundType[_Option]"
+            kind: UNBOUND
           }
           fully_qualified_name: "builtins.list"
         }
@@ -64,7 +39,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -99,7 +73,6 @@ classes {
         fully_qualified_name: "distutils.fancy_getopt.FancyGetopt"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -143,7 +116,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -158,25 +130,8 @@ classes {
       name: "getopt"
       fully_qualified_name: "distutils.fancy_getopt.FancyGetopt.getopt"
       return_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.list[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "distutils.fancy_getopt.OptionDummy"
-            fully_qualified_name: "distutils.fancy_getopt.OptionDummy"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._GR"
+        pretty_printed_name: "UnboundType[_GR]"
+        kind: UNBOUND
       }
       parameters {
         name: "self"
@@ -262,7 +217,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -270,7 +224,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -317,7 +270,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -329,7 +281,7 @@ functions {
   name: "fancy_getopt"
   fully_qualified_name: "distutils.fancy_getopt.fancy_getopt"
   return_annotation {
-    pretty_printed_name: "Union[builtins.list[builtins.str],TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]]"
+    pretty_printed_name: "Union[builtins.list[builtins.str],UnboundType[_GR]]"
     kind: UNION
     args {
       pretty_printed_name: "builtins.list[builtins.str]"
@@ -340,60 +292,18 @@ functions {
       fully_qualified_name: "builtins.list"
     }
     args {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.list[builtins.str],distutils.fancy_getopt.OptionDummy]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "distutils.fancy_getopt.OptionDummy"
-          fully_qualified_name: "distutils.fancy_getopt.OptionDummy"
-        }
-      }
-      fully_qualified_name: "distutils.fancy_getopt._GR"
+      pretty_printed_name: "UnboundType[_GR]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "options"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
+      pretty_printed_name: "builtins.list[UnboundType[_Option]]"
       args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
+        pretty_printed_name: "UnboundType[_Option]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
@@ -402,64 +312,14 @@ functions {
     name: "negative_opt"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[_Option],UnboundType[_Option]]"
       args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
+        pretty_printed_name: "UnboundType[_Option]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "distutils.fancy_getopt._Option"
+        pretty_printed_name: "UnboundType[_Option]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Mapping"
     }
@@ -492,7 +352,6 @@ functions {
       }
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -527,7 +386,150 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "translate_longopt"
+  fully_qualified_name: "distutils.fancy_getopt.translate_longopt"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "opt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Option"
+  fully_qualified_name: "distutils.fancy_getopt._Option"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_GR"
+  fully_qualified_name: "distutils.fancy_getopt._GR"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "longopt_pat"
+  fully_qualified_name: "distutils.fancy_getopt.longopt_pat"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "longopt_re"
+  fully_qualified_name: "distutils.fancy_getopt.longopt_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "neg_alias_re"
+  fully_qualified_name: "distutils.fancy_getopt.neg_alias_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "longopt_xlate"
+  fully_qualified_name: "distutils.fancy_getopt.longopt_xlate"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WS_TRANS"
+  fully_qualified_name: "distutils.fancy_getopt.WS_TRANS"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

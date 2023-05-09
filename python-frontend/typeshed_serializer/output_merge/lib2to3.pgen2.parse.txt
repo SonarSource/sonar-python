@@ -22,72 +22,6 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "lib2to3.pgen2.parse.ParseError.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.parse.ParseError"
-        fully_qualified_name: "lib2to3.pgen2.parse.ParseError"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
@@ -120,17 +54,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -140,22 +65,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "msg"
-    fully_qualified_name: "lib2to3.pgen2.parse.ParseError.msg"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "msg"
     fully_qualified_name: "lib2to3.pgen2.parse.ParseError.msg"
@@ -177,30 +92,12 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "value"
-    fully_qualified_name: "lib2to3.pgen2.parse.ParseError.value"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
   }
   attributes {
     name: "value"
@@ -228,19 +125,9 @@ classes {
     name: "context"
     fully_qualified_name: "lib2to3.pgen2.parse.ParseError.context"
     type_annotation {
-      pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "typing.Sequence[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      fully_qualified_name: "lib2to3.pgen2.parse._Context"
+      pretty_printed_name: "UnboundType[_Context]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -280,15 +167,11 @@ classes {
       name: "convert"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        pretty_printed_name: "Union[UnboundType[_Convert],None]"
         kind: UNION
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "UnboundType[_Convert]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -297,7 +180,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -337,71 +219,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "addtoken"
-    fully_qualified_name: "lib2to3.pgen2.parse.Parser.addtoken"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.parse.Parser"
-        fully_qualified_name: "lib2to3.pgen2.parse.Parser"
-      }
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "addtoken"
@@ -446,17 +269,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -465,64 +279,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "classify"
-    fully_qualified_name: "lib2to3.pgen2.parse.Parser.classify"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.parse.Parser"
-        fully_qualified_name: "lib2to3.pgen2.parse.Parser"
-      }
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "classify"
@@ -567,17 +323,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -586,72 +333,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "shift"
-    fully_qualified_name: "lib2to3.pgen2.parse.Parser.shift"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "lib2to3.pgen2.parse.Parser"
-        fully_qualified_name: "lib2to3.pgen2.parse.Parser"
-      }
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "newstate"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "shift"
@@ -704,17 +385,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -751,50 +423,8 @@ classes {
       name: "newdfa"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]"
-              args {
-                pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-                args {
-                  pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                  kind: TUPLE
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            fully_qualified_name: "lib2to3.pgen2.grammar._DFA"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "lib2to3.pgen2.grammar._DFAS"
+        pretty_printed_name: "UnboundType[_DFAS]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -809,20 +439,10 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[typing.Sequence[Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "typing.Sequence[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "typing.Sequence"
-        }
-        fully_qualified_name: "lib2to3.pgen2.parse._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -845,7 +465,6 @@ classes {
         fully_qualified_name: "lib2to3.pgen2.parse.Parser"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -853,7 +472,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -867,7 +485,6 @@ classes {
       pretty_printed_name: "lib2to3.pgen2.grammar.Grammar"
       fully_qualified_name: "lib2to3.pgen2.grammar.Grammar"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -879,19 +496,9 @@ classes {
     name: "convert"
     fully_qualified_name: "lib2to3.pgen2.parse.Parser.convert"
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "lib2to3.pytree._Convert"
+      pretty_printed_name: "UnboundType[_Convert]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -903,256 +510,21 @@ classes {
     name: "stack"
     fully_qualified_name: "lib2to3.pgen2.parse.Parser.stack"
     type_annotation {
-      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]],builtins.int,TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.unicode,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]]]"
+      pretty_printed_name: "builtins.list[Tuple[UnboundType[_DFAS],builtins.int,UnboundType[_RawNode]]]"
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]],builtins.int,TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.unicode,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]]"
+        pretty_printed_name: "Tuple[UnboundType[_DFAS],builtins.int,UnboundType[_RawNode]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]"
-                args {
-                  pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-                  args {
-                    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                    kind: TUPLE
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              fully_qualified_name: "lib2to3.pgen2.grammar._DFA"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.grammar._DFAS"
+          pretty_printed_name: "UnboundType[_DFAS]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
         }
         args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.unicode,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.unicode,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.unicode,builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.unicode,builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.unicode"
-                  fully_qualified_name: "builtins.unicode"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pytree._Context"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]]"
-                args {
-                  pretty_printed_name: "TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]"
-                  kind: TYPE_ALIAS
-                  args {
-                    pretty_printed_name: "Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]"
-                    kind: UNION
-                    args {
-                      pretty_printed_name: "lib2to3.pytree.Node"
-                      fully_qualified_name: "lib2to3.pytree.Node"
-                    }
-                    args {
-                      pretty_printed_name: "lib2to3.pytree.Leaf"
-                      fully_qualified_name: "lib2to3.pytree.Leaf"
-                    }
-                  }
-                  fully_qualified_name: "lib2to3.pytree._NL"
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-          }
-          fully_qualified_name: "lib2to3.pytree._RawNode"
-        }
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "stack"
-    fully_qualified_name: "lib2to3.pgen2.parse.Parser.stack"
-    type_annotation {
-      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]],builtins.int,TypeAlias[Tuple[builtins.int,builtins.str,TypeAlias[Tuple[builtins.str,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]]]"
-      args {
-        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]],builtins.int,TypeAlias[Tuple[builtins.int,builtins.str,TypeAlias[Tuple[builtins.str,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]],builtins.dict[builtins.int,builtins.int]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "TypeAlias[builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "builtins.list[builtins.list[Tuple[builtins.int,builtins.int]]]"
-                args {
-                  pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
-                  args {
-                    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-                    kind: TUPLE
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              fully_qualified_name: "lib2to3.pgen2.grammar._DFA"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          fully_qualified_name: "lib2to3.pgen2.grammar._DFAS"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,TypeAlias[Tuple[builtins.str,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.str,TypeAlias[Tuple[builtins.str,builtins.int,builtins.int]],Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "lib2to3.pytree._Context"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]],None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.list[TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]]"
-                args {
-                  pretty_printed_name: "TypeAlias[Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]]"
-                  kind: TYPE_ALIAS
-                  args {
-                    pretty_printed_name: "Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf]"
-                    kind: UNION
-                    args {
-                      pretty_printed_name: "lib2to3.pytree.Node"
-                      fully_qualified_name: "lib2to3.pytree.Node"
-                    }
-                    args {
-                      pretty_printed_name: "lib2to3.pytree.Leaf"
-                      fully_qualified_name: "lib2to3.pytree.Leaf"
-                    }
-                  }
-                  fully_qualified_name: "lib2to3.pytree._NL"
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-          }
-          fully_qualified_name: "lib2to3.pytree._RawNode"
+          pretty_printed_name: "UnboundType[_RawNode]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -1168,41 +540,23 @@ classes {
     name: "rootnode"
     fully_qualified_name: "lib2to3.pgen2.parse.Parser.rootnode"
     type_annotation {
-      pretty_printed_name: "Union[lib2to3.pytree.Node,lib2to3.pytree.Leaf,None]"
+      pretty_printed_name: "Union[UnboundType[_NL],None]"
       kind: UNION
       args {
-        pretty_printed_name: "lib2to3.pytree.Node"
-        fully_qualified_name: "lib2to3.pytree.Node"
-      }
-      args {
-        pretty_printed_name: "lib2to3.pytree.Leaf"
-        fully_qualified_name: "lib2to3.pytree.Leaf"
+        pretty_printed_name: "UnboundType[_NL]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "used_names"
-    fully_qualified_name: "lib2to3.pgen2.parse.Parser.used_names"
-    type_annotation {
-      pretty_printed_name: "builtins.set[builtins.unicode]"
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      fully_qualified_name: "builtins.set"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "used_names"
@@ -1222,4 +576,18 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+}
+vars {
+  name: "_Context"
+  fully_qualified_name: "lib2to3.pgen2.parse._Context"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

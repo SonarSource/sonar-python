@@ -31,113 +31,11 @@ classes {
       name: "logdir"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[typing.IO[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.IO[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "typing.IO"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "format"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "cgitb.Hook.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "cgitb.Hook"
-        fully_qualified_name: "cgitb.Hook"
-      }
-    }
-    parameters {
-      name: "display"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "logdir"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -211,6 +109,74 @@ classes {
       name: "etype"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "evalue"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "etb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "cgitb.Hook.__call__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cgitb.Hook"
+        fully_qualified_name: "cgitb.Hook"
+      }
+    }
+    parameters {
+      name: "etype"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "Union[Type[builtins.BaseException],None]"
         kind: UNION
         args {
@@ -259,11 +225,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -286,51 +247,11 @@ classes {
       name: "info"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]],None]"
+        pretty_printed_name: "Union[UnboundType[OptExcInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "Type[builtins.BaseException]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "builtins.BaseException"
-                fully_qualified_name: "builtins.BaseException"
-              }
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "Union[builtins.BaseException,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "Union[types.TracebackType,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "types.TracebackType"
-              fully_qualified_name: "types.TracebackType"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
+          pretty_printed_name: "UnboundType[OptExcInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -339,7 +260,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -347,7 +267,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -362,7 +281,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -385,7 +303,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -408,7 +325,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -431,7 +347,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -494,7 +409,6 @@ functions {
       fully_qualified_name: "builtins.dict"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -569,7 +483,6 @@ functions {
       fully_qualified_name: "builtins.dict"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -588,53 +501,8 @@ functions {
     name: "einfo"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-      }
-      fully_qualified_name: "cgitb._ExcInfo"
+      pretty_printed_name: "UnboundType[OptExcInfo]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -646,7 +514,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -665,53 +532,8 @@ functions {
     name: "einfo"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-      }
-      fully_qualified_name: "cgitb._ExcInfo"
+      pretty_printed_name: "UnboundType[OptExcInfo]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -723,7 +545,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -742,51 +563,11 @@ functions {
     name: "info"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]],None]"
+      pretty_printed_name: "Union[UnboundType[OptExcInfo],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
+        pretty_printed_name: "UnboundType[OptExcInfo]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -795,7 +576,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -823,11 +603,11 @@ functions {
     name: "logdir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -854,78 +634,19 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
-functions {
-  name: "enable"
-  fully_qualified_name: "cgitb.enable"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "display"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "logdir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "context"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "format"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
+vars {
+  name: "__UNDEF__"
+  fully_qualified_name: "cgitb.__UNDEF__"
+  type_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
   }
   valid_for: "35"
   valid_for: "36"

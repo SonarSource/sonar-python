@@ -141,8 +141,8 @@ classes {
   valid_for: "310"
 }
 functions {
-  name: "import_module"
-  fully_qualified_name: "importlib.import_module"
+  name: "__import__"
+  fully_qualified_name: "importlib.__import__"
   return_annotation {
     pretty_printed_name: "types.ModuleType"
     fully_qualified_name: "types.ModuleType"
@@ -151,19 +151,27 @@ functions {
     name: "name"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
   }
   parameters {
-    name: "package"
+    name: "globals"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,builtins.object],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.object]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        fully_qualified_name: "typing.Mapping"
       }
       args {
         pretty_printed_name: "None"
@@ -172,7 +180,59 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  parameters {
+    name: "locals"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,builtins.object],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.object]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "fromlist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "level"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "import_module"
@@ -203,100 +263,6 @@ functions {
         pretty_printed_name: "None"
         kind: NONE
       }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "__import__"
-  fully_qualified_name: "importlib.__import__"
-  return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
-  }
-  parameters {
-    name: "name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "globals"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "locals"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "fromlist"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "level"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
@@ -382,6 +348,24 @@ functions {
       pretty_printed_name: "types.ModuleType"
       fully_qualified_name: "types.ModuleType"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "importlib.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"

@@ -289,8 +289,12 @@ vars {
   name: "SF_APPEND"
   fully_qualified_name: "_stat.SF_APPEND"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -303,8 +307,12 @@ vars {
   name: "SF_ARCHIVED"
   fully_qualified_name: "_stat.SF_ARCHIVED"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -317,8 +325,12 @@ vars {
   name: "SF_IMMUTABLE"
   fully_qualified_name: "_stat.SF_IMMUTABLE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -331,8 +343,12 @@ vars {
   name: "SF_NOUNLINK"
   fully_qualified_name: "_stat.SF_NOUNLINK"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -345,78 +361,12 @@ vars {
   name: "SF_SNAPSHOT"
   fully_qualified_name: "_stat.SF_SNAPSHOT"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_ATIME"
-  fully_qualified_name: "_stat.ST_ATIME"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_CTIME"
-  fully_qualified_name: "_stat.ST_CTIME"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_DEV"
-  fully_qualified_name: "_stat.ST_DEV"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_GID"
-  fully_qualified_name: "_stat.ST_GID"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_INO"
-  fully_qualified_name: "_stat.ST_INO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -429,8 +379,12 @@ vars {
   name: "ST_MODE"
   fully_qualified_name: "_stat.ST_MODE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -440,11 +394,33 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "ST_MTIME"
-  fully_qualified_name: "_stat.ST_MTIME"
+  name: "ST_INO"
+  fully_qualified_name: "_stat.ST_INO"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ST_DEV"
+  fully_qualified_name: "_stat.ST_DEV"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -457,22 +433,12 @@ vars {
   name: "ST_NLINK"
   fully_qualified_name: "_stat.ST_NLINK"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "ST_SIZE"
-  fully_qualified_name: "_stat.ST_SIZE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -485,8 +451,12 @@ vars {
   name: "ST_UID"
   fully_qualified_name: "_stat.ST_UID"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -496,11 +466,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_ENFMT"
-  fully_qualified_name: "_stat.S_ENFMT"
+  name: "ST_GID"
+  fully_qualified_name: "_stat.ST_GID"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -510,11 +484,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IEXEC"
-  fully_qualified_name: "_stat.S_IEXEC"
+  name: "ST_SIZE"
+  fully_qualified_name: "_stat.ST_SIZE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -524,11 +502,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IFBLK"
-  fully_qualified_name: "_stat.S_IFBLK"
+  name: "ST_ATIME"
+  fully_qualified_name: "_stat.ST_ATIME"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -538,11 +520,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IFCHR"
-  fully_qualified_name: "_stat.S_IFCHR"
+  name: "ST_MTIME"
+  fully_qualified_name: "_stat.ST_MTIME"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -552,25 +538,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IFDIR"
-  fully_qualified_name: "_stat.S_IFDIR"
+  name: "ST_CTIME"
+  fully_qualified_name: "_stat.ST_CTIME"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IFDOOR"
-  fully_qualified_name: "_stat.S_IFDOOR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -583,8 +559,12 @@ vars {
   name: "S_IFIFO"
   fully_qualified_name: "_stat.S_IFIFO"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -596,6 +576,114 @@ vars {
 vars {
   name: "S_IFLNK"
   fully_qualified_name: "_stat.S_IFLNK"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFREG"
+  fully_qualified_name: "_stat.S_IFREG"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFSOCK"
+  fully_qualified_name: "_stat.S_IFSOCK"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFBLK"
+  fully_qualified_name: "_stat.S_IFBLK"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFCHR"
+  fully_qualified_name: "_stat.S_IFCHR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFDIR"
+  fully_qualified_name: "_stat.S_IFDIR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IFDOOR"
+  fully_qualified_name: "_stat.S_IFDOOR"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -622,148 +710,8 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IFREG"
-  fully_qualified_name: "_stat.S_IFREG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IFSOCK"
-  fully_qualified_name: "_stat.S_IFSOCK"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
   name: "S_IFWHT"
   fully_qualified_name: "_stat.S_IFWHT"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IREAD"
-  fully_qualified_name: "_stat.S_IREAD"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IRGRP"
-  fully_qualified_name: "_stat.S_IRGRP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IROTH"
-  fully_qualified_name: "_stat.S_IROTH"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IRUSR"
-  fully_qualified_name: "_stat.S_IRUSR"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IRWXG"
-  fully_qualified_name: "_stat.S_IRWXG"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IRWXO"
-  fully_qualified_name: "_stat.S_IRWXO"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IRWXU"
-  fully_qualified_name: "_stat.S_IRWXU"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_ISGID"
-  fully_qualified_name: "_stat.S_ISGID"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -779,8 +727,30 @@ vars {
   name: "S_ISUID"
   fully_qualified_name: "_stat.S_ISUID"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_ISGID"
+  fully_qualified_name: "_stat.S_ISGID"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -793,8 +763,12 @@ vars {
   name: "S_ISVTX"
   fully_qualified_name: "_stat.S_ISVTX"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -804,11 +778,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IWGRP"
-  fully_qualified_name: "_stat.S_IWGRP"
+  name: "S_IRWXU"
+  fully_qualified_name: "_stat.S_IRWXU"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -818,25 +796,15 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "S_IWOTH"
-  fully_qualified_name: "_stat.S_IWOTH"
+  name: "S_IRUSR"
+  fully_qualified_name: "_stat.S_IRUSR"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IWRITE"
-  fully_qualified_name: "_stat.S_IWRITE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -849,36 +817,12 @@ vars {
   name: "S_IWUSR"
   fully_qualified_name: "_stat.S_IWUSR"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IXGRP"
-  fully_qualified_name: "_stat.S_IXGRP"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "S_IXOTH"
-  fully_qualified_name: "_stat.S_IXOTH"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -891,8 +835,228 @@ vars {
   name: "S_IXUSR"
   fully_qualified_name: "_stat.S_IXUSR"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IRWXG"
+  fully_qualified_name: "_stat.S_IRWXG"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IRGRP"
+  fully_qualified_name: "_stat.S_IRGRP"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IWGRP"
+  fully_qualified_name: "_stat.S_IWGRP"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IXGRP"
+  fully_qualified_name: "_stat.S_IXGRP"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IRWXO"
+  fully_qualified_name: "_stat.S_IRWXO"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IROTH"
+  fully_qualified_name: "_stat.S_IROTH"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IWOTH"
+  fully_qualified_name: "_stat.S_IWOTH"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IXOTH"
+  fully_qualified_name: "_stat.S_IXOTH"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_ENFMT"
+  fully_qualified_name: "_stat.S_ENFMT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IREAD"
+  fully_qualified_name: "_stat.S_IREAD"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IWRITE"
+  fully_qualified_name: "_stat.S_IWRITE"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "S_IEXEC"
+  fully_qualified_name: "_stat.S_IEXEC"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -905,8 +1069,12 @@ vars {
   name: "UF_APPEND"
   fully_qualified_name: "_stat.UF_APPEND"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -919,8 +1087,12 @@ vars {
   name: "UF_COMPRESSED"
   fully_qualified_name: "_stat.UF_COMPRESSED"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -933,8 +1105,12 @@ vars {
   name: "UF_HIDDEN"
   fully_qualified_name: "_stat.UF_HIDDEN"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -947,8 +1123,12 @@ vars {
   name: "UF_IMMUTABLE"
   fully_qualified_name: "_stat.UF_IMMUTABLE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -961,8 +1141,12 @@ vars {
   name: "UF_NODUMP"
   fully_qualified_name: "_stat.UF_NODUMP"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -975,8 +1159,12 @@ vars {
   name: "UF_NOUNLINK"
   fully_qualified_name: "_stat.UF_NOUNLINK"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -989,8 +1177,12 @@ vars {
   name: "UF_OPAQUE"
   fully_qualified_name: "_stat.UF_OPAQUE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"

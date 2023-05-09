@@ -2,628 +2,6 @@ fully_qualified_name: "mmap"
 classes {
   name: "mmap"
   fully_qualified_name: "mmap.mmap"
-  super_classes: "typing.Sequence"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "mmap.mmap.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "fileno"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "length"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "prot"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "access"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "mmap.mmap.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "flush"
-    fully_qualified_name: "mmap.mmap.flush"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "move"
-    fully_qualified_name: "mmap.mmap.move"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "dest"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "src"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "count"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read_byte"
-    fully_qualified_name: "mmap.mmap.read_byte"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readline"
-    fully_qualified_name: "mmap.mmap.readline"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "resize"
-    fully_qualified_name: "mmap.mmap.resize"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "newsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "seek"
-    fully_qualified_name: "mmap.mmap.seek"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "pos"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "whence"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "size"
-    fully_qualified_name: "mmap.mmap.size"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "tell"
-    fully_qualified_name: "mmap.mmap.tell"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "write_byte"
-    fully_qualified_name: "mmap.mmap.write_byte"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "byte"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__len__"
-    fully_qualified_name: "mmap.mmap.__len__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "find"
-    fully_qualified_name: "mmap.mmap.find"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "string"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "end"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "rfind"
-    fully_qualified_name: "mmap.mmap.rfind"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "string"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "stop"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "mmap.mmap.read"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "num"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "write"
-    fully_qualified_name: "mmap.mmap.write"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "string"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "mmap.mmap.__getitem__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "index"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.slice]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__getslice__"
-    fully_qualified_name: "mmap.mmap.__getslice__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "i"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "j"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "mmap.mmap.__delitem__"
-    return_annotation {
-      pretty_printed_name: "NoReturn"
-      kind: UNINHABITED
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "index"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.slice]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "mmap.mmap.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-    }
-    parameters {
-      name: "index"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.slice]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.slice"
-          fully_qualified_name: "builtins.slice"
-        }
-      }
-    }
-    parameters {
-      name: "object"
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-}
-classes {
-  name: "mmap"
-  fully_qualified_name: "mmap.mmap"
-  super_classes: "typing.ContextManager"
   super_classes: "typing.Iterable"
   super_classes: "typing.Sized"
   methods {
@@ -1069,37 +447,8 @@ classes {
       name: "sub"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1146,37 +495,8 @@ classes {
       name: "sub"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1262,37 +582,8 @@ classes {
       name: "bytes"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1317,7 +608,7 @@ classes {
       }
     }
     parameters {
-      name: "index"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "Union[builtins.int,builtins.slice]"
         kind: UNION
@@ -1329,6 +620,34 @@ classes {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
         }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "mmap.mmap.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "mmap.mmap"
+        fully_qualified_name: "mmap.mmap"
+      }
+    }
+    parameters {
+      name: "__o"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     valid_for: "35"
@@ -1354,6 +673,56 @@ classes {
       type_annotation {
         pretty_printed_name: "mmap.mmap"
         fully_qualified_name: "mmap.mmap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "mmap.mmap.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "mmap.mmap"
+        fully_qualified_name: "mmap.mmap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "mmap.mmap.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "mmap.mmap"
+        fully_qualified_name: "mmap.mmap"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1426,7 +795,7 @@ classes {
         }
       }
       parameters {
-        name: "index"
+        name: "__key"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -1451,7 +820,7 @@ classes {
         }
       }
       parameters {
-        name: "index"
+        name: "__key"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
@@ -1486,14 +855,14 @@ classes {
         }
       }
       parameters {
-        name: "index"
+        name: "__key"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
         }
       }
       parameters {
-        name: "object"
+        name: "__value"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -1518,46 +887,17 @@ classes {
         }
       }
       parameters {
-        name: "index"
+        name: "__key"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
         }
       }
       parameters {
-        name: "object"
+        name: "__value"
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.bytearray"
-              fully_qualified_name: "builtins.bytearray"
-            }
-            args {
-              pretty_printed_name: "builtins.memoryview"
-              fully_qualified_name: "builtins.memoryview"
-            }
-            args {
-              pretty_printed_name: "array.array[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "array.array"
-            }
-            args {
-              pretty_printed_name: "mmap.mmap"
-              fully_qualified_name: "mmap.mmap"
-            }
-          }
-          fully_qualified_name: "_typeshed.ReadableBuffer"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
       }
       has_decorators: true
@@ -1599,7 +939,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1614,7 +953,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1629,7 +967,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1644,7 +981,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1659,7 +995,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1674,7 +1009,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1689,7 +1023,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1704,7 +1037,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1719,7 +1051,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1734,7 +1065,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1749,7 +1079,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1764,7 +1093,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1779,7 +1107,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1794,7 +1121,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1809,7 +1135,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1864,6 +1189,17 @@ vars {
 vars {
   name: "MADV_DONTNEED"
   fully_qualified_name: "mmap.MADV_DONTNEED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MADV_FREE"
+  fully_qualified_name: "mmap.MADV_FREE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
@@ -1983,13 +1319,11 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "MADV_FREE"
-  fully_qualified_name: "mmap.MADV_FREE"
+  name: "MAP_POPULATE"
+  fully_qualified_name: "mmap.MAP_POPULATE"
   type_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "38"
-  valid_for: "39"
   valid_for: "310"
 }

@@ -22,65 +22,11 @@ classes {
       name: "headers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[builtins.list[Tuple[builtins.str,builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        fully_qualified_name: "wsgiref.headers._HeaderList"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "wsgiref.headers.Headers.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.headers.Headers"
-        fully_qualified_name: "wsgiref.headers.Headers"
-      }
-    }
-    parameters {
-      name: "headers"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.list[Tuple[builtins.str,builtins.str]],None]"
+        pretty_printed_name: "Union[UnboundType[_HeaderList],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          fully_qualified_name: "builtins.list"
+          pretty_printed_name: "UnboundType[_HeaderList]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -110,7 +56,6 @@ classes {
         fully_qualified_name: "wsgiref.headers.Headers"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -146,7 +91,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -175,7 +119,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -212,38 +155,12 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "has_key"
-    fully_qualified_name: "wsgiref.headers.Headers.has_key"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.headers.Headers"
-        fully_qualified_name: "wsgiref.headers.Headers"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__contains__"
@@ -266,7 +183,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -301,7 +217,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -328,7 +243,6 @@ classes {
         fully_qualified_name: "wsgiref.headers.Headers"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -355,7 +269,6 @@ classes {
         fully_qualified_name: "wsgiref.headers.Headers"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -367,25 +280,8 @@ classes {
     name: "items"
     fully_qualified_name: "wsgiref.headers.Headers.items"
     return_annotation {
-      pretty_printed_name: "TypeAlias[builtins.list[Tuple[builtins.str,builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "wsgiref.headers._HeaderList"
+      pretty_printed_name: "UnboundType[_HeaderList]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -395,7 +291,28 @@ classes {
         fully_qualified_name: "wsgiref.headers.Headers"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__bytes__"
+    fully_qualified_name: "wsgiref.headers.Headers.__bytes__"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.headers.Headers"
+        fully_qualified_name: "wsgiref.headers.Headers"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -434,7 +351,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -495,29 +411,6 @@ classes {
           pretty_printed_name: "None"
           kind: NONE
         }
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__bytes__"
-    fully_qualified_name: "wsgiref.headers.Headers.__bytes__"
-    return_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.headers.Headers"
-        fully_qualified_name: "wsgiref.headers.Headers"
       }
     }
     valid_for: "35"
@@ -617,7 +510,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -625,7 +517,20 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_HeaderList"
+  fully_qualified_name: "wsgiref.headers._HeaderList"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -637,14 +542,13 @@ vars {
   name: "tspecials"
   fully_qualified_name: "wsgiref.headers.tspecials"
   type_annotation {
-    pretty_printed_name: "typing.Pattern[builtins.str]"
+    pretty_printed_name: "re.Pattern[builtins.str]"
     args {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    fully_qualified_name: "typing.Pattern"
+    fully_qualified_name: "re.Pattern"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

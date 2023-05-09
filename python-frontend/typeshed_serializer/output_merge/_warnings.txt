@@ -21,15 +21,11 @@ overloaded_functions {
       name: "category"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Type[builtins.Warning],None]"
+        pretty_printed_name: "Union[builtins.type,None]"
         kind: UNION
         args {
-          pretty_printed_name: "Type[builtins.Warning]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.Warning"
-            fully_qualified_name: "builtins.Warning"
-          }
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
         }
         args {
           pretty_printed_name: "None"
@@ -44,6 +40,23 @@ overloaded_functions {
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -70,8 +83,16 @@ overloaded_functions {
       name: "category"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -84,11 +105,31 @@ overloaded_functions {
       }
       has_default: true
     }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     has_decorators: true
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 overloaded_functions {
   name: "warn"
@@ -178,8 +219,16 @@ overloaded_functions {
       name: "category"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -213,10 +262,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -242,12 +287,8 @@ overloaded_functions {
       name: "category"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[builtins.Warning]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "builtins.Warning"
-          fully_qualified_name: "builtins.Warning"
-        }
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
       }
     }
     parameters {
@@ -287,31 +328,27 @@ overloaded_functions {
       name: "registry"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]],builtins.int],None]"
+        pretty_printed_name: "Union[builtins.dict[Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]],builtins.int],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]],builtins.int]"
+          pretty_printed_name: "builtins.dict[Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]],builtins.int]"
           args {
-            pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]]"
+            pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]]"
             kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "Tuple[builtins.str,Type[builtins.Warning],builtins.int]"
+              pretty_printed_name: "Tuple[builtins.str,builtins.type,builtins.int]"
               kind: TUPLE
               args {
                 pretty_printed_name: "builtins.str"
                 fully_qualified_name: "builtins.str"
               }
               args {
-                pretty_printed_name: "Type[builtins.Warning]"
-                kind: TYPE
-                args {
-                  pretty_printed_name: "builtins.Warning"
-                  fully_qualified_name: "builtins.Warning"
-                }
+                pretty_printed_name: "builtins.type"
+                fully_qualified_name: "builtins.type"
               }
               args {
                 pretty_printed_name: "builtins.int"
@@ -349,6 +386,23 @@ overloaded_functions {
             kind: ANY
           }
           fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
         }
         args {
           pretty_printed_name: "None"
@@ -421,31 +475,27 @@ overloaded_functions {
       name: "registry"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]],builtins.int],None]"
+        pretty_printed_name: "Union[builtins.dict[Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]],builtins.int],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]],builtins.int]"
+          pretty_printed_name: "builtins.dict[Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]],builtins.int]"
           args {
-            pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,Type[builtins.Warning],builtins.int]]"
+            pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.type,builtins.int]]"
             kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "Tuple[builtins.str,Type[builtins.Warning],builtins.int]"
+              pretty_printed_name: "Tuple[builtins.str,builtins.type,builtins.int]"
               kind: TUPLE
               args {
                 pretty_printed_name: "builtins.str"
                 fully_qualified_name: "builtins.str"
               }
               args {
-                pretty_printed_name: "Type[builtins.Warning]"
-                kind: TYPE
-                args {
-                  pretty_printed_name: "builtins.Warning"
-                  fully_qualified_name: "builtins.Warning"
-                }
+                pretty_printed_name: "builtins.type"
+                fully_qualified_name: "builtins.type"
               }
               args {
                 pretty_printed_name: "builtins.int"
@@ -491,11 +541,31 @@ overloaded_functions {
       }
       has_default: true
     }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     has_decorators: true
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 overloaded_functions {
   name: "warn_explicit"
@@ -806,59 +876,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "default_action"
-  fully_qualified_name: "_warnings.default_action"
-  type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "once_registry"
-  fully_qualified_name: "_warnings.once_registry"
-  type_annotation {
-    pretty_printed_name: "builtins.dict[Any,Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.dict"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "filters"
-  fully_qualified_name: "_warnings.filters"
-  type_annotation {
-    pretty_printed_name: "builtins.list[builtins.tuple[Any]]"
-    args {
-      pretty_printed_name: "builtins.tuple[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -895,6 +912,112 @@ vars {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "filters"
+  fully_qualified_name: "_warnings.filters"
+  type_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,Union[builtins.str,None],builtins.type,Union[builtins.str,None],builtins.int]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.type,Union[builtins.str,None],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+vars {
+  name: "filters"
+  fully_qualified_name: "_warnings.filters"
+  type_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,Union[builtins.str,None],Type[builtins.Warning],Union[builtins.str,None],builtins.int]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],Type[builtins.Warning],Union[builtins.str,None],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Type[builtins.Warning]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.Warning"
+          fully_qualified_name: "builtins.Warning"
+        }
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "39"
   valid_for: "310"
 }

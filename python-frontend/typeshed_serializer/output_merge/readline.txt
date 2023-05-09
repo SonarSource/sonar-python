@@ -13,7 +13,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -31,56 +30,11 @@ functions {
   parameters {
     name: "__filename"
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_init_file"
-  fully_qualified_name: "readline.read_init_file"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__filename"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -103,7 +57,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -125,7 +78,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -140,7 +92,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -158,56 +109,11 @@ functions {
   parameters {
     name: "__filename"
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "read_history_file"
-  fully_qualified_name: "readline.read_history_file"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__filename"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -233,11 +139,11 @@ functions {
   parameters {
     name: "__filename"
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -246,43 +152,35 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
-  name: "write_history_file"
-  fully_qualified_name: "readline.write_history_file"
+  name: "append_history_file"
+  fully_qualified_name: "readline.append_history_file"
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
   }
   parameters {
+    name: "__nelements"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
     name: "__filename"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -305,7 +203,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -327,7 +224,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -342,7 +238,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -357,7 +252,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -379,7 +273,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -401,7 +294,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -430,7 +322,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -452,7 +343,27 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_auto_history"
+  fully_qualified_name: "readline.set_auto_history"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__enabled"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -487,7 +398,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -522,7 +432,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -540,29 +449,19 @@ functions {
   parameters {
     name: "__function"
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],None]]"
-      kind: TYPE_ALIAS
+      pretty_printed_name: "Union[UnboundType[_Completer],None]"
+      kind: UNION
       args {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
+        pretty_printed_name: "UnboundType[_Completer]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "readline._CompleterT"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -574,27 +473,17 @@ functions {
   name: "get_completer"
   fully_qualified_name: "readline.get_completer"
   return_annotation {
-    pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],None]]"
-    kind: TYPE_ALIAS
+    pretty_printed_name: "Union[UnboundType[_Completer],None]"
+    kind: UNION
     args {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      pretty_printed_name: "UnboundType[_Completer]"
+      kind: UNBOUND
     }
-    fully_qualified_name: "readline._CompleterT"
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -609,7 +498,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -624,7 +512,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -639,7 +526,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -661,7 +547,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -676,7 +561,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -694,78 +578,11 @@ functions {
   parameters {
     name: "__function"
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],None]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      fully_qualified_name: "readline._CompDispT"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "append_history_file"
-  fully_qualified_name: "readline.append_history_file"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__nelements"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "__filename"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[_CompDisp],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[_CompDisp]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -781,19 +598,26 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-functions {
-  name: "set_auto_history"
-  fully_qualified_name: "readline.set_auto_history"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
+vars {
+  name: "_Completer"
+  fully_qualified_name: "readline._Completer"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
-  parameters {
-    name: "__enabled"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CompDisp"
+  fully_qualified_name: "readline._CompDisp"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

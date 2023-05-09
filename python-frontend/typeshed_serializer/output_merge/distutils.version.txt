@@ -4,227 +4,6 @@ classes {
   fully_qualified_name: "distutils.version.Version"
   super_classes: "builtins.object"
   methods {
-    name: "__repr__"
-    fully_qualified_name: "distutils.version.Version.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "distutils.version.Version"
-        fully_qualified_name: "distutils.version.Version"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.version.Version.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version.Version"
-        fully_qualified_name: "distutils.version.Version"
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.version.Version.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version.Version"
-        fully_qualified_name: "distutils.version.Version"
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "parse"
-    fully_qualified_name: "distutils.version.Version.parse"
-    return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-  }
-  methods {
-    name: "parse"
-    fully_qualified_name: "distutils.version.Version.parse"
-    return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__str__"
-    fully_qualified_name: "distutils.version.Version.__str__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "distutils.version.Version"
-        fully_qualified_name: "distutils.version.Version"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__cmp__"
-    fully_qualified_name: "distutils.version.Version.__cmp__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "27"
-  }
-  methods {
     name: "__eq__"
     fully_qualified_name: "distutils.version.Version.__eq__"
     return_annotation {
@@ -262,18 +41,18 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -298,18 +77,18 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -334,18 +113,18 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -370,18 +149,18 @@ classes {
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
       }
     }
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -389,6 +168,105 @@ classes {
         }
       }
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "distutils.version.Version.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
+      }
+    }
+    parameters {
+      name: "vstring"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "distutils.version.Version.parse"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
+      }
+    }
+    parameters {
+      name: "vstring"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "distutils.version.Version.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -407,19 +285,19 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.Version"
+        fully_qualified_name: "distutils.version.Version"
       }
     }
     parameters {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -437,7 +315,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -449,40 +326,6 @@ classes {
   name: "StrictVersion"
   fully_qualified_name: "distutils.version.StrictVersion"
   super_classes: "distutils.version.Version"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.version.StrictVersion.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version.StrictVersion"
-        fully_qualified_name: "distutils.version.StrictVersion"
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "distutils.version.StrictVersion.__init__"
@@ -526,40 +369,15 @@ classes {
     name: "parse"
     fully_qualified_name: "distutils.version.StrictVersion.parse"
     return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "parse"
-    fully_qualified_name: "distutils.version.StrictVersion.parse"
-    return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.StrictVersion"
+        fully_qualified_name: "distutils.version.StrictVersion"
       }
     }
     parameters {
@@ -591,44 +409,12 @@ classes {
         fully_qualified_name: "distutils.version.StrictVersion"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__cmp__"
-    fully_qualified_name: "distutils.version.StrictVersion.__cmp__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "_cmp"
@@ -641,19 +427,19 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.StrictVersion"
+        fully_qualified_name: "distutils.version.StrictVersion"
       }
     }
     parameters {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -668,7 +454,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -679,14 +464,13 @@ classes {
     name: "version_re"
     fully_qualified_name: "distutils.version.StrictVersion.version_re"
     type_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -713,38 +497,12 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "prerelease"
-    fully_qualified_name: "distutils.version.StrictVersion.prerelease"
-    type_annotation {
-      pretty_printed_name: "Union[Tuple[builtins.unicode,builtins.int],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
   }
   attributes {
     name: "prerelease"
@@ -800,40 +558,6 @@ classes {
       name: "vstring"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "distutils.version.LooseVersion.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version.LooseVersion"
-        fully_qualified_name: "distutils.version.LooseVersion"
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[builtins.str,None]"
         kind: UNION
         args {
@@ -858,40 +582,15 @@ classes {
     name: "parse"
     fully_qualified_name: "distutils.version.LooseVersion.parse"
     return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "vstring"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "parse"
-    fully_qualified_name: "distutils.version.LooseVersion.parse"
-    return_annotation {
-      pretty_printed_name: "distutils.version._T"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.LooseVersion"
+        fully_qualified_name: "distutils.version.LooseVersion"
       }
     }
     parameters {
@@ -923,44 +622,12 @@ classes {
         fully_qualified_name: "distutils.version.LooseVersion"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__cmp__"
-    fully_qualified_name: "distutils.version.LooseVersion.__cmp__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "_cmp"
@@ -973,19 +640,19 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "distutils.version._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "distutils.version.LooseVersion"
+        fully_qualified_name: "distutils.version.LooseVersion"
       }
     }
     parameters {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[distutils.version._T,builtins.str]"
+        pretty_printed_name: "Union[UnboundType[Self],builtins.str]"
         kind: UNION
         args {
-          pretty_printed_name: "distutils.version._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "builtins.str"
@@ -1000,7 +667,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1011,29 +677,19 @@ classes {
     name: "component_re"
     fully_qualified_name: "distutils.version.LooseVersion.component_re"
     type_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "vstring"
-    fully_qualified_name: "distutils.version.LooseVersion.vstring"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "vstring"
@@ -1053,22 +709,29 @@ classes {
     name: "version"
     fully_qualified_name: "distutils.version.LooseVersion.version"
     type_annotation {
-      pretty_printed_name: "builtins.tuple[Union[builtins.unicode,builtins.int]]"
+      pretty_printed_name: "Tuple[Union[builtins.str,builtins.int],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "Union[builtins.unicode,builtins.int]"
+        pretty_printed_name: "Union[builtins.str,builtins.int]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
         args {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
         }
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   attributes {
     name: "version"
@@ -1089,10 +752,6 @@ classes {
       }
       fully_qualified_name: "builtins.tuple"
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }

@@ -1,11 +1,11 @@
 fully_qualified_name: "wsgiref.types"
 classes {
   name: "StartResponse"
-  fully_qualified_name: "_typeshed.wsgi.StartResponse"
+  fully_qualified_name: "wsgiref.types.StartResponse"
   super_classes: "builtins.object"
   methods {
     name: "__call__"
-    fully_qualified_name: "_typeshed.wsgi.StartResponse.__call__"
+    fully_qualified_name: "wsgiref.types.StartResponse.__call__"
     return_annotation {
       pretty_printed_name: "CallableType[builtins.function]"
       kind: CALLABLE
@@ -18,21 +18,19 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.StartResponse"
-        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+        pretty_printed_name: "wsgiref.types.StartResponse"
+        fully_qualified_name: "wsgiref.types.StartResponse"
       }
     }
     parameters {
-      name: "status"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__status"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
     }
     parameters {
-      name: "headers"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__headers"
       type_annotation {
         pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
         args {
@@ -51,46 +49,13 @@ classes {
       }
     }
     parameters {
-      name: "exc_info"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__exc_info"
       type_annotation {
-        pretty_printed_name: "Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None],None]"
+        pretty_printed_name: "Union[UnboundType[_OptExcInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-        }
-        args {
-          pretty_printed_name: "Tuple[None,None,None]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
+          pretty_printed_name: "UnboundType[_OptExcInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -99,7 +64,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -108,7 +72,6 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -118,37 +81,11 @@ classes {
 }
 classes {
   name: "InputStream"
-  fully_qualified_name: "_typeshed.wsgi.InputStream"
+  fully_qualified_name: "wsgiref.types.InputStream"
   super_classes: "builtins.object"
   methods {
     name: "read"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.read"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
-      }
-    }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.read"
+    fully_qualified_name: "wsgiref.types.InputStream.read"
     return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
@@ -157,13 +94,12 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
+        pretty_printed_name: "wsgiref.types.InputStream"
+        fully_qualified_name: "wsgiref.types.InputStream"
       }
     }
     parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__size"
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
@@ -179,33 +115,7 @@ classes {
   }
   methods {
     name: "readline"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.readline"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
-      }
-    }
-    parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readline"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.readline"
+    fully_qualified_name: "wsgiref.types.InputStream.readline"
     return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
@@ -214,13 +124,12 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
+        pretty_printed_name: "wsgiref.types.InputStream"
+        fully_qualified_name: "wsgiref.types.InputStream"
       }
     }
     parameters {
-      name: "size"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__size"
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
@@ -236,37 +145,7 @@ classes {
   }
   methods {
     name: "readlines"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.readlines"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
-      }
-    }
-    parameters {
-      name: "hint"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readlines"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.readlines"
+    fully_qualified_name: "wsgiref.types.InputStream.readlines"
     return_annotation {
       pretty_printed_name: "builtins.list[builtins.bytes]"
       args {
@@ -279,13 +158,12 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
+        pretty_printed_name: "wsgiref.types.InputStream"
+        fully_qualified_name: "wsgiref.types.InputStream"
       }
     }
     parameters {
-      name: "hint"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__hint"
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
@@ -301,40 +179,20 @@ classes {
   }
   methods {
     name: "__iter__"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.__iter__"
+    fully_qualified_name: "wsgiref.types.InputStream.__iter__"
     return_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "_typeshed.wsgi.InputStream.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.bytes]"
+      pretty_printed_name: "typing.Iterator[builtins.bytes]"
       args {
         pretty_printed_name: "builtins.bytes"
         fully_qualified_name: "builtins.bytes"
       }
-      fully_qualified_name: "typing.Iterable"
+      fully_qualified_name: "typing.Iterator"
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.InputStream"
-        fully_qualified_name: "_typeshed.wsgi.InputStream"
+        pretty_printed_name: "wsgiref.types.InputStream"
+        fully_qualified_name: "wsgiref.types.InputStream"
       }
     }
     valid_for: "35"
@@ -345,7 +203,6 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -355,24 +212,23 @@ classes {
 }
 classes {
   name: "ErrorStream"
-  fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+  fully_qualified_name: "wsgiref.types.ErrorStream"
   super_classes: "builtins.object"
   methods {
     name: "flush"
-    fully_qualified_name: "_typeshed.wsgi.ErrorStream.flush"
+    fully_qualified_name: "wsgiref.types.ErrorStream.flush"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
-        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+        pretty_printed_name: "wsgiref.types.ErrorStream"
+        fully_qualified_name: "wsgiref.types.ErrorStream"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -382,28 +238,26 @@ classes {
   }
   methods {
     name: "write"
-    fully_qualified_name: "_typeshed.wsgi.ErrorStream.write"
+    fully_qualified_name: "wsgiref.types.ErrorStream.write"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
-        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+        pretty_printed_name: "wsgiref.types.ErrorStream"
+        fully_qualified_name: "wsgiref.types.ErrorStream"
       }
     }
     parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__s"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -413,22 +267,21 @@ classes {
   }
   methods {
     name: "writelines"
-    fully_qualified_name: "_typeshed.wsgi.ErrorStream.writelines"
+    fully_qualified_name: "wsgiref.types.ErrorStream.writelines"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
-        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+        pretty_printed_name: "wsgiref.types.ErrorStream"
+        fully_qualified_name: "wsgiref.types.ErrorStream"
       }
     }
     parameters {
-      name: "seq"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__seq"
       type_annotation {
         pretty_printed_name: "builtins.list[builtins.str]"
         args {
@@ -438,7 +291,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -447,7 +299,48 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_Readable"
+  fully_qualified_name: "wsgiref.types._Readable"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "wsgiref.types._Readable.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.types._Readable"
+        fully_qualified_name: "wsgiref.types._Readable"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -457,49 +350,11 @@ classes {
 }
 classes {
   name: "FileWrapper"
-  fully_qualified_name: "_typeshed.wsgi.FileWrapper"
+  fully_qualified_name: "wsgiref.types.FileWrapper"
   super_classes: "builtins.object"
   methods {
     name: "__call__"
-    fully_qualified_name: "_typeshed.wsgi.FileWrapper.__call__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterable[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.Iterable"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.FileWrapper"
-        fully_qualified_name: "_typeshed.wsgi.FileWrapper"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_typeshed.wsgi._Readable"
-        fully_qualified_name: "_typeshed.wsgi._Readable"
-      }
-    }
-    parameters {
-      name: "block_size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__call__"
-    fully_qualified_name: "_typeshed.wsgi.FileWrapper.__call__"
+    fully_qualified_name: "wsgiref.types.FileWrapper.__call__"
     return_annotation {
       pretty_printed_name: "typing.Iterable[builtins.bytes]"
       args {
@@ -512,21 +367,19 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi.FileWrapper"
-        fully_qualified_name: "_typeshed.wsgi.FileWrapper"
+        pretty_printed_name: "wsgiref.types.FileWrapper"
+        fully_qualified_name: "wsgiref.types.FileWrapper"
       }
     }
     parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__file"
       type_annotation {
-        pretty_printed_name: "_typeshed.wsgi._Readable"
-        fully_qualified_name: "_typeshed.wsgi._Readable"
+        pretty_printed_name: "wsgiref.types._Readable"
+        fully_qualified_name: "wsgiref.types._Readable"
       }
     }
     parameters {
-      name: "block_size"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__block_size"
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
@@ -541,7 +394,52 @@ classes {
     valid_for: "310"
   }
   is_protocol: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "wsgiref.types.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WSGIEnvironment"
+  fully_qualified_name: "wsgiref.types.WSGIEnvironment"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WSGIApplication"
+  fully_qualified_name: "wsgiref.types.WSGIApplication"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

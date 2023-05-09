@@ -30,11 +30,11 @@ classes {
       name: "title"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -96,11 +96,11 @@ classes {
       name: "key"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -135,11 +135,11 @@ classes {
       name: "how"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -346,11 +346,11 @@ classes {
       name: "event"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -413,11 +413,11 @@ classes {
       name: "event"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -525,8 +525,8 @@ classes {
     name: "master"
     fully_qualified_name: "tkinter.filedialog.FileDialog.master"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "UnboundType[Incomplete]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "36"
@@ -539,11 +539,11 @@ classes {
     name: "directory"
     fully_qualified_name: "tkinter.filedialog.FileDialog.directory"
     type_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -729,11 +729,11 @@ classes {
     name: "how"
     fully_qualified_name: "tkinter.filedialog.FileDialog.how"
     type_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -802,9 +802,17 @@ classes {
   methods {
     name: "ok_command"
     fully_qualified_name: "tkinter.filedialog.SaveFileDialog.ok_command"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.filedialog.SaveFileDialog"
+        fully_qualified_name: "tkinter.filedialog.SaveFileDialog"
+      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -965,56 +973,43 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
             }
           }
         }
@@ -1031,40 +1026,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1077,40 +1043,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1178,6 +1115,186 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "asksaveasfilename"
+  fully_qualified_name: "tkinter.filedialog.asksaveasfilename"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "confirmoverwrite"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -1209,56 +1326,43 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
             }
           }
         }
@@ -1275,40 +1379,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1321,40 +1396,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1422,8 +1468,362 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "askopenfilename"
+  fully_qualified_name: "tkinter.filedialog.askopenfilename"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
+}
+functions {
+  name: "askopenfilenames"
+  fully_qualified_name: "tkinter.filedialog.askopenfilenames"
+  return_annotation {
+    pretty_printed_name: "Union[Literal[builtins.str],Tuple[builtins.str,Any]]"
+    kind: UNION
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "askopenfilenames"
@@ -1469,56 +1869,39 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
             }
           }
         }
@@ -1535,40 +1918,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1581,40 +1935,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1678,10 +2003,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -1696,40 +2017,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1800,13 +2092,13 @@ functions {
   name: "asksaveasfile"
   fully_qualified_name: "tkinter.filedialog.asksaveasfile"
   return_annotation {
-    pretty_printed_name: "Union[typing.IO[Any],None]"
+    pretty_printed_name: "Union[typing.IO[UnboundType[Incomplete]],None]"
     kind: UNION
     args {
-      pretty_printed_name: "typing.IO[Any]"
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.IO"
     }
@@ -1862,56 +2154,43 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
             }
           }
         }
@@ -1928,40 +2207,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1974,40 +2224,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2075,6 +2296,207 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "asksaveasfile"
+  fully_qualified_name: "tkinter.filedialog.asksaveasfile"
+  return_annotation {
+    pretty_printed_name: "Union[typing.IO[UnboundType[Incomplete]],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "confirmoverwrite"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -2082,13 +2504,13 @@ functions {
   name: "askopenfile"
   fully_qualified_name: "tkinter.filedialog.askopenfile"
   return_annotation {
-    pretty_printed_name: "Union[typing.IO[Any],None]"
+    pretty_printed_name: "Union[typing.IO[UnboundType[Incomplete]],None]"
     kind: UNION
     args {
-      pretty_printed_name: "typing.IO[Any]"
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.IO"
     }
@@ -2127,56 +2549,43 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
             }
           }
         }
@@ -2193,40 +2602,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2239,40 +2619,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2340,6 +2691,190 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "askopenfile"
+  fully_qualified_name: "tkinter.filedialog.askopenfile"
+  return_annotation {
+    pretty_printed_name: "Union[typing.IO[UnboundType[Incomplete]],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -2347,12 +2882,204 @@ functions {
   name: "askopenfiles"
   fully_qualified_name: "tkinter.filedialog.askopenfiles"
   return_annotation {
-    pretty_printed_name: "builtins.tuple[typing.IO[Any]]"
+    pretty_printed_name: "Tuple[typing.IO[UnboundType[Incomplete]],Any]"
+    kind: TUPLE
     args {
-      pretty_printed_name: "typing.IO[Any]"
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "defaultextension"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "filetypes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],Tuple[builtins.str,Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.list[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "initialfile"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "title"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "typevariable"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.StringVar,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.StringVar"
+        fully_qualified_name: "tkinter.StringVar"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "askopenfiles"
+  fully_qualified_name: "tkinter.filedialog.askopenfiles"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[typing.IO[UnboundType[Incomplete]]]"
+    args {
+      pretty_printed_name: "typing.IO[UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.IO"
     }
@@ -2388,56 +3115,39 @@ functions {
     name: "filetypes"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]]"
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]]"
         args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]]"
-          kind: UNION
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]]"
-            kind: TUPLE
+            pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]"
+            kind: UNION
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
             args {
-              pretty_printed_name: "TypeAlias[Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]]"
-              kind: TYPE_ALIAS
+              pretty_printed_name: "builtins.list[builtins.str]"
               args {
-                pretty_printed_name: "Union[builtins.list[UnboundType[_T]],builtins.tuple[UnboundType[_T]]]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.list[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.list"
-                }
-                args {
-                  pretty_printed_name: "builtins.tuple[UnboundType[_T]]"
-                  args {
-                    pretty_printed_name: "UnboundType[_T]"
-                    kind: UNBOUND
-                  }
-                  fully_qualified_name: "builtins.tuple"
-                }
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
               }
-              fully_qualified_name: "tkinter._TkinterSequence"
+              fully_qualified_name: "builtins.list"
+            }
+            args {
+              pretty_printed_name: "builtins.tuple[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "builtins.tuple"
             }
           }
         }
@@ -2454,40 +3164,11 @@ functions {
     name: "initialdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2500,40 +3181,11 @@ functions {
     name: "initialfile"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2597,10 +3249,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -2622,21 +3270,21 @@ vars {
   name: "dialogstates"
   fully_qualified_name: "tkinter.filedialog.dialogstates"
   type_annotation {
-    pretty_printed_name: "builtins.dict[Any,Tuple[Any,Any]]"
+    pretty_printed_name: "builtins.dict[UnboundType[Incomplete],Tuple[UnboundType[Incomplete],UnboundType[Incomplete]]]"
     args {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "UnboundType[Incomplete]"
+      kind: UNBOUND
     }
     args {
-      pretty_printed_name: "Tuple[Any,Any]"
+      pretty_printed_name: "Tuple[UnboundType[Incomplete],UnboundType[Incomplete]]"
       kind: TUPLE
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
     fully_qualified_name: "builtins.dict"
@@ -2645,6 +3293,20 @@ vars {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "tkinter.filedialog.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "39"
   valid_for: "310"
 }

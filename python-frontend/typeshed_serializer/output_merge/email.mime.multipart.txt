@@ -22,58 +22,6 @@ classes {
       name: "_subtype"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "boundary"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_subparts"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "_params"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "email.mime.multipart.MIMEMultipart.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.mime.multipart.MIMEMultipart"
-        fully_qualified_name: "email.mime.multipart.MIMEMultipart"
-      }
-    }
-    parameters {
-      name: "_subtype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
@@ -138,45 +86,8 @@ classes {
       name: "_params"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.str,None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-        }
-        fully_qualified_name: "email.mime.multipart._ParamsType"
+        pretty_printed_name: "UnboundType[_ParamsType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -186,7 +97,24 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "email.mime.multipart.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

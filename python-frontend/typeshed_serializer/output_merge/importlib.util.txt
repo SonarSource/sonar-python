@@ -75,44 +75,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "create_module"
-    fully_qualified_name: "importlib.util.LazyLoader.create_module"
-    return_annotation {
-      pretty_printed_name: "Union[types.ModuleType,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "types.ModuleType"
-        fully_qualified_name: "types.ModuleType"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "importlib.util.LazyLoader"
-        fully_qualified_name: "importlib.util.LazyLoader"
-      }
-    }
-    parameters {
-      name: "spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "importlib.machinery.ModuleSpec"
-        fully_qualified_name: "importlib.machinery.ModuleSpec"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "exec_module"
     fully_qualified_name: "importlib.util.LazyLoader.exec_module"
     return_annotation {
@@ -153,23 +115,15 @@ functions {
   name: "module_for_loader"
   fully_qualified_name: "importlib.util.module_for_loader"
   return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
+    pretty_printed_name: "Any"
+    kind: ANY
   }
   parameters {
     name: "fxn"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   valid_for: "35"
@@ -183,23 +137,15 @@ functions {
   name: "set_loader"
   fully_qualified_name: "importlib.util.set_loader"
   return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
+    pretty_printed_name: "Any"
+    kind: ANY
   }
   parameters {
     name: "fxn"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   valid_for: "35"
@@ -213,23 +159,15 @@ functions {
   name: "set_package"
   fully_qualified_name: "importlib.util.set_package"
   return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
+    pretty_printed_name: "Any"
+    kind: ANY
   }
   parameters {
     name: "fxn"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   valid_for: "35"
@@ -258,8 +196,16 @@ functions {
     name: "package"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
   }
   valid_for: "35"
@@ -358,8 +304,8 @@ functions {
     name: "source_bytes"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -523,31 +469,11 @@ functions {
     name: "location"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]"
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -623,10 +549,46 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
+functions {
+  name: "source_hash"
+  fully_qualified_name: "importlib.util.source_hash"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "source_bytes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
 vars {
   name: "importlib"
   fully_qualified_name: "importlib"
   is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "importlib.util._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

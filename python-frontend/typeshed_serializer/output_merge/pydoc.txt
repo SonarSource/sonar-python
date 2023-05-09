@@ -1,5 +1,1205 @@
 fully_qualified_name: "pydoc"
 classes {
+  name: "_list"
+  fully_qualified_name: "builtins.list"
+  super_classes: "typing.MutableSequence"
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.list.copy"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "builtins.list.append"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__object"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "builtins.list.extend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__iterable"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "builtins.list.pop"
+    return_annotation {
+      pretty_printed_name: "builtins._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__index"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.list.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__start"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "__stop"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.list.count"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "builtins.list.insert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__index"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    parameters {
+      name: "__object"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "builtins.list.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.list.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.list.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "builtins.list.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__key"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "builtins.list.__iadd__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.list.__mul__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.list.__rmul__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "builtins.list.__imul__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.list.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__key"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "builtins.list.__reversed__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.list.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.list.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.list.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.list.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "builtins.list.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[builtins.list[builtins._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    parameters {
+      name: "__item"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "builtins.list.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "builtins.list.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "builtins.list.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__iterable"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "sort"
+    fullname: "builtins.list.sort"
+    definitions {
+      name: "sort"
+      fully_qualified_name: "builtins.list.sort"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "reverse"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "sort"
+      fully_qualified_name: "builtins.list.sort"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "reverse"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "builtins.list.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "builtins.list.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__i"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "builtins.list.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__s"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__setitem__"
+    fullname: "builtins.list.__setitem__"
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "builtins.list.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "builtins.list.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__add__"
+    fullname: "builtins.list.__add__"
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.list.__add__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.list.__add__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[Union[builtins._S,builtins._T]]"
+        args {
+          pretty_printed_name: "Union[builtins._S,builtins._T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins._S"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._S]"
+          args {
+            pretty_printed_name: "builtins._S"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "builtins.list.__hash__"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "ErrorDuringImport"
   fully_qualified_name: "pydoc.ErrorDuringImport"
   super_classes: "builtins.Exception"
@@ -30,56 +1230,10 @@ classes {
       name: "exc_info"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "Type[builtins.BaseException]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "builtins.BaseException"
-                fully_qualified_name: "builtins.BaseException"
-              }
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "Union[builtins.BaseException,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          args {
-            pretty_printed_name: "Union[types.TracebackType,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "types.TracebackType"
-              fully_qualified_name: "types.TracebackType"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-        }
-        fully_qualified_name: "pydoc._Exc_Info"
+        pretty_printed_name: "UnboundType[OptExcInfo]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -87,7 +1241,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -101,13 +1254,32 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  attributes {
+    name: "exc"
+    fully_qualified_name: "pydoc.ErrorDuringImport.exc"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   attributes {
     name: "exc"
@@ -128,11 +1300,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -151,7 +1318,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -174,7 +1340,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -235,7 +1400,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -291,7 +1455,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -347,7 +1510,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -403,7 +1568,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -459,7 +1626,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -515,7 +1684,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -571,7 +1742,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -627,7 +1800,9 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -675,7 +1850,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -683,7 +1857,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -697,324 +1870,18 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "HTMLRepr"
-  fully_qualified_name: "pydoc.HTMLRepr"
-  super_classes: "repr.Repr"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pydoc.HTMLRepr.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "escape"
-    fully_qualified_name: "pydoc.HTMLRepr.escape"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "text"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr"
-    fully_qualified_name: "pydoc.HTMLRepr.repr"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "object"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr1"
-    fully_qualified_name: "pydoc.HTMLRepr.repr1"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_string"
-    fully_qualified_name: "pydoc.HTMLRepr.repr_string"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_str"
-    fully_qualified_name: "pydoc.HTMLRepr.repr_str"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_instance"
-    fully_qualified_name: "pydoc.HTMLRepr.repr_instance"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_unicode"
-    fully_qualified_name: "pydoc.HTMLRepr.repr_unicode"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "maxlist"
-    fully_qualified_name: "pydoc.HTMLRepr.maxlist"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxtuple"
-    fully_qualified_name: "pydoc.HTMLRepr.maxtuple"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxdict"
-    fully_qualified_name: "pydoc.HTMLRepr.maxdict"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxstring"
-    fully_qualified_name: "pydoc.HTMLRepr.maxstring"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxother"
-    fully_qualified_name: "pydoc.HTMLRepr.maxother"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
 }
 classes {
   name: "HTMLRepr"
   fully_qualified_name: "pydoc.HTMLRepr"
   super_classes: "reprlib.Repr"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pydoc.HTMLRepr.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLRepr"
-        fully_qualified_name: "pydoc.HTMLRepr"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "escape"
     fully_qualified_name: "pydoc.HTMLRepr.escape"
@@ -1271,76 +2138,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "maxlist"
-    fully_qualified_name: "pydoc.HTMLRepr.maxlist"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxtuple"
-    fully_qualified_name: "pydoc.HTMLRepr.maxtuple"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxdict"
-    fully_qualified_name: "pydoc.HTMLRepr.maxdict"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxstring"
-    fully_qualified_name: "pydoc.HTMLRepr.maxstring"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxother"
-    fully_qualified_name: "pydoc.HTMLRepr.maxother"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "HTMLDoc"
@@ -1377,7 +2174,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1433,7 +2229,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1532,7 +2327,61 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "multicolumn"
+    fully_qualified_name: "pydoc.HTMLDoc.multicolumn"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pydoc.HTMLDoc"
+        fully_qualified_name: "pydoc.HTMLDoc"
+      }
+    }
+    parameters {
+      name: "list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[pydoc._T]"
+        args {
+          pretty_printed_name: "pydoc._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "cols"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1571,7 +2420,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1602,63 +2450,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "multicolumn"
-    fully_qualified_name: "pydoc.HTMLDoc.multicolumn"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.HTMLDoc"
-        fully_qualified_name: "pydoc.HTMLDoc"
-      }
-    }
-    parameters {
-      name: "list"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "format"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "cols"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1689,7 +2480,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1736,7 +2526,6 @@ classes {
         fully_qualified_name: "typing.MutableMapping"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1775,7 +2564,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1806,7 +2594,6 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1853,7 +2640,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1956,13 +2742,97 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "formattree"
+    fully_qualified_name: "pydoc.HTMLDoc.formattree"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pydoc.HTMLDoc"
+        fully_qualified_name: "pydoc.HTMLDoc"
+      }
+    }
+    parameters {
+      name: "tree"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Union[Tuple[builtins.type,Tuple[builtins.type,Any]],builtins.list[Any]]]"
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.type,Tuple[builtins.type,Any]],builtins.list[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Tuple[builtins.type,Any]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.type,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.type"
+                fully_qualified_name: "builtins.type"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.list[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.list"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "modname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "formattree"
@@ -2040,11 +2910,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2113,7 +2978,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2220,7 +3084,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2251,7 +3114,6 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2384,15 +3246,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2474,15 +3327,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2555,7 +3399,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2637,15 +3480,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2701,7 +3535,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2740,7 +3573,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2748,13 +3580,26 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "_repr_instance"
+    fully_qualified_name: "pydoc.HTMLDoc._repr_instance"
+    type_annotation {
+      pretty_printed_name: "pydoc.HTMLRepr"
+      fully_qualified_name: "pydoc.HTMLRepr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   attributes {
     name: "repr"
     fully_qualified_name: "pydoc.HTMLDoc.repr"
@@ -2766,7 +3611,6 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2785,241 +3629,18 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "TextRepr"
-  fully_qualified_name: "pydoc.TextRepr"
-  super_classes: "repr.Repr"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pydoc.TextRepr.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr1"
-    fully_qualified_name: "pydoc.TextRepr.repr1"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_string"
-    fully_qualified_name: "pydoc.TextRepr.repr_string"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_str"
-    fully_qualified_name: "pydoc.TextRepr.repr_str"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "repr_instance"
-    fully_qualified_name: "pydoc.TextRepr.repr_instance"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    parameters {
-      name: "x"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "maxlist"
-    fully_qualified_name: "pydoc.TextRepr.maxlist"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxtuple"
-    fully_qualified_name: "pydoc.TextRepr.maxtuple"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxdict"
-    fully_qualified_name: "pydoc.TextRepr.maxdict"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxstring"
-    fully_qualified_name: "pydoc.TextRepr.maxstring"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "maxother"
-    fully_qualified_name: "pydoc.TextRepr.maxother"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
 }
 classes {
   name: "TextRepr"
   fully_qualified_name: "pydoc.TextRepr"
   super_classes: "reprlib.Repr"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "pydoc.TextRepr.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "pydoc.TextRepr"
-        fully_qualified_name: "pydoc.TextRepr"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "repr1"
     fully_qualified_name: "pydoc.TextRepr.repr1"
@@ -3178,76 +3799,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "maxlist"
-    fully_qualified_name: "pydoc.TextRepr.maxlist"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxtuple"
-    fully_qualified_name: "pydoc.TextRepr.maxtuple"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxdict"
-    fully_qualified_name: "pydoc.TextRepr.maxdict"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxstring"
-    fully_qualified_name: "pydoc.TextRepr.maxstring"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "maxother"
-    fully_qualified_name: "pydoc.TextRepr.maxother"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "TextDoc"
@@ -3276,7 +3827,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3316,7 +3866,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3355,13 +3904,106 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "formattree"
+    fully_qualified_name: "pydoc.TextDoc.formattree"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pydoc.TextDoc"
+        fully_qualified_name: "pydoc.TextDoc"
+      }
+    }
+    parameters {
+      name: "tree"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Union[Tuple[builtins.type,Tuple[builtins.type,Any]],builtins.list[Any]]]"
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.type,Tuple[builtins.type,Any]],builtins.list[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Tuple[builtins.type,Any]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.type,Any]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.type"
+                fully_qualified_name: "builtins.type"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.list[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.list"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "modname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "formattree"
@@ -3448,11 +4090,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -3513,15 +4150,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3594,7 +4222,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3625,7 +4252,6 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3707,15 +4333,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3797,15 +4414,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3887,15 +4495,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4011,15 +4610,6 @@ classes {
       }
       has_default: true
     }
-    parameters {
-      name: "ignored"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4027,13 +4617,26 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "_repr_instance"
+    fully_qualified_name: "pydoc.TextDoc._repr_instance"
+    type_annotation {
+      pretty_printed_name: "pydoc.TextRepr"
+      fully_qualified_name: "pydoc.TextRepr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   attributes {
     name: "repr"
     fully_qualified_name: "pydoc.TextDoc.repr"
@@ -4045,7 +4648,6 @@ classes {
         fully_qualified_name: "builtins.function"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4053,18 +4655,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "_OldStyleClass"
-  fully_qualified_name: "pydoc._OldStyleClass"
-  super_classes: "builtins.object"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 classes {
   name: "Helper"
@@ -4127,7 +4717,64 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "input"
+    fully_qualified_name: "pydoc.Helper.input"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pydoc.Helper"
+        fully_qualified_name: "pydoc.Helper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "output"
+    fully_qualified_name: "pydoc.Helper.output"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pydoc.Helper"
+        fully_qualified_name: "pydoc.Helper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4171,7 +4818,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4194,7 +4840,6 @@ classes {
         fully_qualified_name: "pydoc.Helper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4225,7 +4870,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4256,7 +4900,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4279,7 +4922,6 @@ classes {
         fully_qualified_name: "pydoc.Helper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4332,7 +4974,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4355,7 +4996,6 @@ classes {
         fully_qualified_name: "pydoc.Helper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4378,7 +5018,6 @@ classes {
         fully_qualified_name: "pydoc.Helper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4401,7 +5040,6 @@ classes {
         fully_qualified_name: "pydoc.Helper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4441,7 +5079,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4472,7 +5109,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4504,7 +5140,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4512,7 +5147,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4550,7 +5184,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4573,13 +5206,48 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  attributes {
+    name: "topics"
+    fully_qualified_name: "pydoc.Helper.topics"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Union[builtins.str,Tuple[builtins.str,Any]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   attributes {
     name: "topics"
@@ -4608,49 +5276,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "input"
-    fully_qualified_name: "pydoc.Helper.input"
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "output"
-    fully_qualified_name: "pydoc.Helper.output"
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4690,11 +5315,11 @@ classes {
       name: "key"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[builtins.str,None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
         args {
           pretty_printed_name: "None"
@@ -4745,7 +5370,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4753,7 +5377,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4767,7 +5390,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4787,30 +5409,12 @@ functions {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "getdoc"
-  fully_qualified_name: "pydoc.getdoc"
-  return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  parameters {
-    name: "object"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "getdoc"
@@ -4857,7 +5461,6 @@ functions {
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4888,7 +5491,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4911,7 +5513,6 @@ functions {
       fully_qualified_name: "builtins.object"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4942,7 +5543,6 @@ functions {
       kind: TYPE_VAR
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4973,7 +5573,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4996,38 +5595,12 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "allmethods"
-  fully_qualified_name: "pydoc.allmethods"
-  return_annotation {
-    pretty_printed_name: "typing.MutableMapping[builtins.str,types.UnboundMethodType]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "types.UnboundMethodType"
-      fully_qualified_name: "types.UnboundMethodType"
-    }
-    fully_qualified_name: "typing.MutableMapping"
-  }
-  parameters {
-    name: "cl"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.type"
-      fully_qualified_name: "builtins.type"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "allmethods"
@@ -5112,7 +5685,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5155,7 +5727,6 @@ functions {
       fully_qualified_name: "builtins.object"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5178,7 +5749,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5213,7 +5783,6 @@ functions {
       fully_qualified_name: "typing.IO"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5269,7 +5838,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5292,7 +5860,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5304,8 +5871,16 @@ functions {
   name: "safeimport"
   fully_qualified_name: "pydoc.safeimport"
   return_annotation {
-    pretty_printed_name: "types.ModuleType"
-    fully_qualified_name: "types.ModuleType"
+    pretty_printed_name: "Union[types.ModuleType,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
   parameters {
     name: "path"
@@ -5341,7 +5916,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5364,7 +5938,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5383,7 +5956,6 @@ functions {
       fully_qualified_name: "builtins.function"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5406,7 +5978,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5437,7 +6008,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5468,7 +6038,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5491,7 +6060,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5514,7 +6082,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5537,7 +6104,6 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5569,7 +6135,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5625,7 +6190,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5691,7 +6255,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5761,7 +6324,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5801,7 +6363,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5850,7 +6411,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5873,7 +6433,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5892,11 +6451,10 @@ functions {
     name: "x"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5911,7 +6469,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5919,73 +6476,23 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-functions {
-  name: "serve"
-  fully_qualified_name: "pydoc.serve"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "port"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+vars {
+  name: "__all__"
+  fully_qualified_name: "pydoc.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
+    fully_qualified_name: "builtins.list"
   }
-  parameters {
-    name: "callback"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "completer"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "gui"
-  fully_qualified_name: "pydoc.gui"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "__author__"
@@ -5994,7 +6501,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6009,7 +6515,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6024,7 +6529,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6039,7 +6543,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6054,7 +6557,6 @@ vars {
     pretty_printed_name: "pydoc.TextDoc"
     fully_qualified_name: "pydoc.TextDoc"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6069,7 +6571,6 @@ vars {
     pretty_printed_name: "pydoc.HTMLDoc"
     fully_qualified_name: "pydoc.HTMLDoc"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6084,7 +6585,6 @@ vars {
     pretty_printed_name: "pydoc.Helper"
     fully_qualified_name: "pydoc.Helper"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

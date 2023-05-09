@@ -1,5 +1,1030 @@
 fully_qualified_name: "unittest.case"
 classes {
+  name: "AbstractSet"
+  fully_qualified_name: "typing.AbstractSet"
+  super_classes: "typing.Collection"
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "typing.AbstractSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "x"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_hash"
+    fully_qualified_name: "typing.AbstractSet._hash"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "typing.AbstractSet.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "typing.AbstractSet.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "typing.AbstractSet.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "typing.AbstractSet.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "typing.AbstractSet.__and__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing.AbstractSet.__or__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "typing.AbstractSet.__sub__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "typing.AbstractSet.__xor__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "typing.AbstractSet.isdisjoint"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_BaseTestCaseContext"
+  fully_qualified_name: "unittest.case._BaseTestCaseContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.case._BaseTestCaseContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case._BaseTestCaseContext"
+        fully_qualified_name: "unittest.case._BaseTestCaseContext"
+      }
+    }
+    parameters {
+      name: "test_case"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_LoggingWatcher"
+  fully_qualified_name: "unittest.case._LoggingWatcher"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "unittest.case._LoggingWatcher._replace"
+    return_annotation {
+      pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "records"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.list[logging.LogRecord]"
+        args {
+          pretty_printed_name: "logging.LogRecord"
+          fully_qualified_name: "logging.LogRecord"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "output"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "unittest.case._LoggingWatcher.__new__"
+    return_annotation {
+      pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[unittest.case._LoggingWatcher._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "records"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[logging.LogRecord]"
+        args {
+          pretty_printed_name: "logging.LogRecord"
+          fully_qualified_name: "logging.LogRecord"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "output"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "unittest.case._LoggingWatcher._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "unittest.case._LoggingWatcher._make"
+    return_annotation {
+      pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[unittest.case._LoggingWatcher._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "unittest.case._LoggingWatcher._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  attributes {
+    name: "records"
+    fully_qualified_name: "unittest.case._LoggingWatcher.records"
+    type_annotation {
+      pretty_printed_name: "builtins.list[logging.LogRecord]"
+      args {
+        pretty_printed_name: "logging.LogRecord"
+        fully_qualified_name: "logging.LogRecord"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+  }
+  attributes {
+    name: "output"
+    fully_qualified_name: "unittest.case._LoggingWatcher.output"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "unittest.case._LoggingWatcher._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "unittest.case._LoggingWatcher._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "unittest.case._LoggingWatcher._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "unittest.case._LoggingWatcher._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "unittest.case._LoggingWatcher.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+}
+classes {
+  name: "_AssertLogsContext"
+  fully_qualified_name: "unittest.case._AssertLogsContext"
+  super_classes: "unittest.case._BaseTestCaseContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.case._AssertLogsContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case._AssertLogsContext[unittest.case._L]"
+        args {
+          pretty_printed_name: "unittest.case._L"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertLogsContext"
+      }
+    }
+    parameters {
+      name: "test_case"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "logger_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "unittest.case._AssertLogsContext.__enter__"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.list[logging.LogRecord],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.list[logging.LogRecord]"
+        args {
+          pretty_printed_name: "logging.LogRecord"
+          fully_qualified_name: "logging.LogRecord"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "unittest.case._AssertLogsContext[unittest.case._L]"
+        args {
+          pretty_printed_name: "unittest.case._L"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertLogsContext"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "unittest.case._AssertLogsContext.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "unittest.case._AssertLogsContext[unittest.case._L]"
+        args {
+          pretty_printed_name: "unittest.case._L"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertLogsContext"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  attributes {
+    name: "LOGGING_FORMAT"
+    fully_qualified_name: "unittest.case._AssertLogsContext.LOGGING_FORMAT"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "test_case"
+    fully_qualified_name: "unittest.case._AssertLogsContext.test_case"
+    type_annotation {
+      pretty_printed_name: "unittest.case.TestCase"
+      fully_qualified_name: "unittest.case.TestCase"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "logger_name"
+    fully_qualified_name: "unittest.case._AssertLogsContext.logger_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "level"
+    fully_qualified_name: "unittest.case._AssertLogsContext.level"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "msg"
+    fully_qualified_name: "unittest.case._AssertLogsContext.msg"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+}
+classes {
   name: "SkipTest"
   fully_qualified_name: "unittest.case.SkipTest"
   super_classes: "builtins.Exception"
@@ -41,6 +1066,19 @@ classes {
   valid_for: "310"
 }
 classes {
+  name: "_SupportsAbsAndDunderGE"
+  fully_qualified_name: "unittest.case._SupportsAbsAndDunderGE"
+  super_classes: "_typeshed.SupportsDunderGE"
+  super_classes: "typing.SupportsAbs"
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "TestCase"
   fully_qualified_name: "unittest.case.TestCase"
   super_classes: "builtins.object"
@@ -67,6 +1105,34 @@ classes {
         fully_qualified_name: "builtins.str"
       }
       has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "unittest.case.TestCase.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -275,8 +1341,8 @@ classes {
     name: "skipTest"
     fully_qualified_name: "unittest.case.TestCase.skipTest"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
     }
     parameters {
       name: "self"
@@ -305,12 +1371,12 @@ classes {
     name: "subTest"
     fully_qualified_name: "unittest.case.TestCase.subTest"
     return_annotation {
-      pretty_printed_name: "typing.ContextManager[None]"
+      pretty_printed_name: "contextlib.AbstractContextManager[None]"
       args {
         pretty_printed_name: "None"
         kind: NONE
       }
-      fully_qualified_name: "typing.ContextManager"
+      fully_qualified_name: "contextlib.AbstractContextManager"
     }
     parameters {
       name: "self"
@@ -447,8 +1513,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -494,8 +1568,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -533,8 +1615,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -572,8 +1662,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -603,24 +1701,32 @@ classes {
       name: "expr1"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "expr2"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -650,24 +1756,32 @@ classes {
       name: "expr1"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "expr2"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -697,16 +1811,24 @@ classes {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -736,16 +1858,24 @@ classes {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -807,8 +1937,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -870,8 +2008,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -901,36 +2047,32 @@ classes {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.type,builtins.tuple[builtins.type]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.type]"
-          args {
-            pretty_printed_name: "builtins.type"
-            fully_qualified_name: "builtins.type"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
+        pretty_printed_name: "UnboundType[_ClassInfo]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -960,224 +2102,32 @@ classes {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.type,builtins.tuple[builtins.type]]"
+        pretty_printed_name: "UnboundType[_ClassInfo]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.type"
-          fully_qualified_name: "builtins.type"
+          pretty_printed_name: "Any"
+          kind: ANY
         }
         args {
-          pretty_printed_name: "builtins.tuple[builtins.type]"
-          args {
-            pretty_printed_name: "builtins.type"
-            fully_qualified_name: "builtins.type"
-          }
-          fully_qualified_name: "builtins.tuple"
+          pretty_printed_name: "None"
+          kind: NONE
         }
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertGreater"
-    fully_qualified_name: "unittest.case.TestCase.assertGreater"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertGreaterEqual"
-    fully_qualified_name: "unittest.case.TestCase.assertGreaterEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertLess"
-    fully_qualified_name: "unittest.case.TestCase.assertLess"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertLessEqual"
-    fully_qualified_name: "unittest.case.TestCase.assertLessEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "a"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "b"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
       }
       has_default: true
     }
@@ -1192,7 +2142,27 @@ classes {
     name: "assertLogs"
     fully_qualified_name: "unittest.case.TestCase.assertLogs"
     return_annotation {
-      pretty_printed_name: "unittest.case._AssertLogsContext"
+      pretty_printed_name: "unittest.case._AssertLogsContext[Tuple[builtins.list[logging.LogRecord],builtins.list[builtins.str]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.list[logging.LogRecord],builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[logging.LogRecord]"
+          args {
+            pretty_printed_name: "logging.LogRecord"
+            fully_qualified_name: "logging.LogRecord"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
       fully_qualified_name: "unittest.case._AssertLogsContext"
     }
     parameters {
@@ -1249,6 +2219,84 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "assertLogs"
+    fully_qualified_name: "unittest.case.TestCase.assertLogs"
+    return_annotation {
+      pretty_printed_name: "unittest._log._AssertLogsContext[Tuple[builtins.list[logging.LogRecord],builtins.list[builtins.str]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.list[logging.LogRecord],builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[logging.LogRecord]"
+          args {
+            pretty_printed_name: "logging.LogRecord"
+            fully_qualified_name: "logging.LogRecord"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "unittest._log._AssertLogsContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "logger"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,logging.Logger,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "logging.Logger"
+          fully_qualified_name: "logging.Logger"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -1279,19 +2327,19 @@ classes {
       name: "expected_regex"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
+        pretty_printed_name: "Union[typing.AnyStr,re.Pattern[typing.AnyStr]]"
         kind: UNION
         args {
           pretty_printed_name: "typing.AnyStr"
           kind: TYPE_VAR
         }
         args {
-          pretty_printed_name: "typing.Pattern[typing.AnyStr]"
+          pretty_printed_name: "re.Pattern[typing.AnyStr]"
           args {
             pretty_printed_name: "typing.AnyStr"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Pattern"
+          fully_qualified_name: "re.Pattern"
         }
       }
     }
@@ -1299,8 +2347,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1338,19 +2394,19 @@ classes {
       name: "unexpected_regex"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
+        pretty_printed_name: "Union[typing.AnyStr,re.Pattern[typing.AnyStr]]"
         kind: UNION
         args {
           pretty_printed_name: "typing.AnyStr"
           kind: TYPE_VAR
         }
         args {
-          pretty_printed_name: "typing.Pattern[typing.AnyStr]"
+          pretty_printed_name: "re.Pattern[typing.AnyStr]"
           args {
             pretty_printed_name: "typing.AnyStr"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Pattern"
+          fully_qualified_name: "re.Pattern"
         }
       }
     }
@@ -1358,8 +2414,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1413,8 +2477,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1424,6 +2496,46 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "addTypeEqualityFunc"
+    fully_qualified_name: "unittest.case.TestCase.addTypeEqualityFunc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "typeobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "function"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "addTypeEqualityFunc"
@@ -1464,10 +2576,6 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1506,8 +2614,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1561,8 +2677,94 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "seq_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "assertSequenceEqual"
+    fully_qualified_name: "unittest.case.TestCase.assertSequenceEqual"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "seq1"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "seq2"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1591,10 +2793,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1641,8 +2839,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1652,6 +2858,75 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "assertTupleEqual"
+    fully_qualified_name: "unittest.case.TestCase.assertTupleEqual"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "tuple1"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "tuple2"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "assertTupleEqual"
@@ -1696,15 +2971,19 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1751,8 +3030,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1814,8 +3101,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1845,8 +3140,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1972,12 +3275,8 @@ classes {
       name: "function"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -2018,12 +3317,8 @@ classes {
     parameters {
       name: "__function"
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -2157,671 +3452,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "failUnlessEqual"
-    fully_qualified_name: "unittest.case.TestCase.failUnlessEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertEquals"
-    fully_qualified_name: "unittest.case.TestCase.assertEquals"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "failIfEqual"
-    fully_qualified_name: "unittest.case.TestCase.failIfEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertNotEquals"
-    fully_qualified_name: "unittest.case.TestCase.assertNotEquals"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "failUnless"
-    fully_qualified_name: "unittest.case.TestCase.failUnless"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "expr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assert_"
-    fully_qualified_name: "unittest.case.TestCase.assert_"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "expr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "failIf"
-    fully_qualified_name: "unittest.case.TestCase.failIf"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "expr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "failUnlessAlmostEqual"
-    fully_qualified_name: "unittest.case.TestCase.failUnlessAlmostEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "places"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertAlmostEquals"
-    fully_qualified_name: "unittest.case.TestCase.assertAlmostEquals"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "places"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delta"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "failIfAlmostEqual"
-    fully_qualified_name: "unittest.case.TestCase.failIfAlmostEqual"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "places"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertNotAlmostEquals"
-    fully_qualified_name: "unittest.case.TestCase.assertNotAlmostEquals"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "first"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "second"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "places"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delta"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertRegexpMatches"
-    fully_qualified_name: "unittest.case.TestCase.assertRegexpMatches"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "text"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "regex"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing.Pattern[typing.AnyStr]"
-          args {
-            pretty_printed_name: "typing.AnyStr"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Pattern"
-        }
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "assertNotRegexpMatches"
-    fully_qualified_name: "unittest.case.TestCase.assertNotRegexpMatches"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "text"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "regex"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing.Pattern[typing.AnyStr]"
-          args {
-            pretty_printed_name: "typing.AnyStr"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "typing.Pattern"
-        }
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "assertDictContainsSubset"
     fully_qualified_name: "unittest.case.TestCase.assertDictContainsSubset"
     return_annotation {
@@ -2872,8 +3502,16 @@ classes {
       name: "msg"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
+        pretty_printed_name: "Union[builtins.object,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -2906,12 +3544,8 @@ classes {
     parameters {
       name: "__function"
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -2962,6 +3596,692 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "assertNoLogs"
+    fully_qualified_name: "unittest.case.TestCase.assertNoLogs"
+    return_annotation {
+      pretty_printed_name: "unittest._log._AssertLogsContext[None]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "unittest._log._AssertLogsContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "logger"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,logging.Logger,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "logging.Logger"
+          fully_qualified_name: "logging.Logger"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertGreater"
+    fullname: "unittest.case.TestCase.assertGreater"
+    definitions {
+      name: "assertGreater"
+      fully_qualified_name: "unittest.case.TestCase.assertGreater"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderGT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderGT"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertGreater"
+      fully_qualified_name: "unittest.case.TestCase.assertGreater"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderLT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderLT"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertGreaterEqual"
+    fullname: "unittest.case.TestCase.assertGreaterEqual"
+    definitions {
+      name: "assertGreaterEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertGreaterEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderGE[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderGE"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertGreaterEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertGreaterEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderLE[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderLE"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertLess"
+    fullname: "unittest.case.TestCase.assertLess"
+    definitions {
+      name: "assertLess"
+      fully_qualified_name: "unittest.case.TestCase.assertLess"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderLT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderLT"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertLess"
+      fully_qualified_name: "unittest.case.TestCase.assertLess"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderGT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderGT"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertLessEqual"
+    fullname: "unittest.case.TestCase.assertLessEqual"
+    definitions {
+      name: "assertLessEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertLessEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderLT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderLT"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertLessEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertLessEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsDunderGT[unittest.case._T]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsDunderGT"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertRaises"
+    fullname: "unittest.case.TestCase.assertRaises"
+    definitions {
+      name: "assertRaises"
+      fully_qualified_name: "unittest.case.TestCase.assertRaises"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_exception"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "callable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertRaises"
+      fully_qualified_name: "unittest.case.TestCase.assertRaises"
+      return_annotation {
+        pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
+        args {
+          pretty_printed_name: "unittest.case._E"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertRaisesContext"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_exception"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   overloaded_methods {
     name: "assertRaises"
@@ -3090,7 +4410,180 @@ classes {
       }
       parameters {
         name: "msg"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertRaisesRegex"
+    fullname: "unittest.case.TestCase.assertRaisesRegex"
+    definitions {
+      name: "assertRaisesRegex"
+      fully_qualified_name: "unittest.case.TestCase.assertRaisesRegex"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
         kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_exception"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "expected_regex"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "re.Pattern[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "re.Pattern"
+          }
+        }
+      }
+      parameters {
+        name: "callable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertRaisesRegex"
+      fully_qualified_name: "unittest.case.TestCase.assertRaisesRegex"
+      return_annotation {
+        pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
+        args {
+          pretty_printed_name: "unittest.case._E"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertRaisesContext"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_exception"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "expected_regex"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "re.Pattern[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "re.Pattern"
+          }
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: KEYWORD_ONLY
         type_annotation {
           pretty_printed_name: "Any"
           kind: ANY
@@ -3105,8 +4598,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "assertRaisesRegex"
@@ -3158,31 +4649,19 @@ classes {
         name: "expected_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -3269,37 +4748,150 @@ classes {
         name: "expected_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
       parameters {
         name: "msg"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertWarns"
+    fullname: "unittest.case.TestCase.assertWarns"
+    definitions {
+      name: "assertWarns"
+      fully_qualified_name: "unittest.case.TestCase.assertWarns"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
         kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_warning"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "callable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertWarns"
+      fully_qualified_name: "unittest.case.TestCase.assertWarns"
+      return_annotation {
+        pretty_printed_name: "unittest.case._AssertWarnsContext"
+        fully_qualified_name: "unittest.case._AssertWarnsContext"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_warning"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: KEYWORD_ONLY
         type_annotation {
           pretty_printed_name: "Any"
           kind: ANY
@@ -3314,8 +4906,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "assertWarns"
@@ -3367,12 +4957,8 @@ classes {
         name: "callable"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "Any"
+          kind: ANY
         }
       }
       parameters {
@@ -3440,7 +5026,172 @@ classes {
       }
       parameters {
         name: "msg"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "assertWarnsRegex"
+    fullname: "unittest.case.TestCase.assertWarnsRegex"
+    definitions {
+      name: "assertWarnsRegex"
+      fully_qualified_name: "unittest.case.TestCase.assertWarnsRegex"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
         kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_warning"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "expected_regex"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "re.Pattern[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "re.Pattern"
+          }
+        }
+      }
+      parameters {
+        name: "callable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: VAR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertWarnsRegex"
+      fully_qualified_name: "unittest.case.TestCase.assertWarnsRegex"
+      return_annotation {
+        pretty_printed_name: "unittest.case._AssertWarnsContext"
+        fully_qualified_name: "unittest.case._AssertWarnsContext"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "expected_warning"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.type,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+      }
+      parameters {
+        name: "expected_regex"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "re.Pattern[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "re.Pattern"
+          }
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: KEYWORD_ONLY
         type_annotation {
           pretty_printed_name: "Any"
           kind: ANY
@@ -3455,8 +5206,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "assertWarnsRegex"
@@ -3508,31 +5257,19 @@ classes {
         name: "expected_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -3540,12 +5277,8 @@ classes {
         name: "callable"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "Any"
+          kind: ANY
         }
       }
       parameters {
@@ -3615,37 +5348,25 @@ classes {
         name: "expected_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
       parameters {
         name: "msg"
-        kind: POSITIONAL_OR_KEYWORD
+        kind: KEYWORD_ONLY
         type_annotation {
           pretty_printed_name: "Any"
           kind: ANY
@@ -3656,10 +5377,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -3685,16 +5402,160 @@ classes {
         name: "first"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "second"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "places"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "delta"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._SupportsAbsAndDunderGE"
+          fully_qualified_name: "unittest.case._SupportsAbsAndDunderGE"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertAlmostEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertAlmostEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "first"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "second"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "places"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "delta"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "unittest.case._SupportsAbsAndDunderGE"
+          fully_qualified_name: "unittest.case._SupportsAbsAndDunderGE"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertAlmostEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertAlmostEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "first"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsSub[unittest.case._T,typing.SupportsAbs[typing.SupportsRound[builtins.object]]]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.SupportsAbs[typing.SupportsRound[builtins.object]]"
+            args {
+              pretty_printed_name: "typing.SupportsRound[builtins.object]"
+              args {
+                pretty_printed_name: "builtins.object"
+                fully_qualified_name: "builtins.object"
+              }
+              fully_qualified_name: "typing.SupportsRound"
+            }
+            fully_qualified_name: "typing.SupportsAbs"
+          }
+          fully_qualified_name: "_typeshed.SupportsSub"
+        }
+      }
+      parameters {
+        name: "second"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
         }
       }
       parameters {
@@ -3718,8 +5579,16 @@ classes {
         name: "msg"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -3727,16 +5596,8 @@ classes {
         name: "delta"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
+          pretty_printed_name: "None"
+          kind: NONE
         }
         has_default: true
       }
@@ -3763,16 +5624,32 @@ classes {
         name: "first"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "second"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "_typeshed.SupportsRSub[unittest.case._T,typing.SupportsAbs[typing.SupportsRound[builtins.object]]]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.SupportsAbs[typing.SupportsRound[builtins.object]]"
+            args {
+              pretty_printed_name: "typing.SupportsRound[builtins.object]"
+              args {
+                pretty_printed_name: "builtins.object"
+                fully_qualified_name: "builtins.object"
+              }
+              fully_qualified_name: "typing.SupportsRound"
+            }
+            fully_qualified_name: "typing.SupportsAbs"
+          }
+          fully_qualified_name: "_typeshed.SupportsRSub"
         }
       }
       parameters {
@@ -3796,8 +5673,16 @@ classes {
         name: "msg"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -3805,16 +5690,8 @@ classes {
         name: "delta"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[datetime.timedelta,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "datetime.timedelta"
-            fully_qualified_name: "datetime.timedelta"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
+          pretty_printed_name: "None"
+          kind: NONE
         }
         has_default: true
       }
@@ -3851,26 +5728,41 @@ classes {
         name: "first"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "second"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "places"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
       parameters {
         name: "msg"
-        kind: KEYWORD_ONLY
+        kind: POSITIONAL_OR_KEYWORD
         type_annotation {
           pretty_printed_name: "Any"
           kind: ANY
         }
-        has_default: true
+      }
+      parameters {
+        name: "delta"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._SupportsAbsAndDunderGE"
+          fully_qualified_name: "unittest.case._SupportsAbsAndDunderGE"
+        }
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -3895,16 +5787,101 @@ classes {
         name: "first"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "second"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
+          pretty_printed_name: "unittest.case._S"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "places"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "delta"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "unittest.case._SupportsAbsAndDunderGE"
+          fully_qualified_name: "unittest.case._SupportsAbsAndDunderGE"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "assertNotAlmostEqual"
+      fully_qualified_name: "unittest.case.TestCase.assertNotAlmostEqual"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+      parameters {
+        name: "first"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsSub[unittest.case._T,typing.SupportsAbs[typing.SupportsRound[builtins.object]]]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.SupportsAbs[typing.SupportsRound[builtins.object]]"
+            args {
+              pretty_printed_name: "typing.SupportsRound[builtins.object]"
+              args {
+                pretty_printed_name: "builtins.object"
+                fully_qualified_name: "builtins.object"
+              }
+              fully_qualified_name: "typing.SupportsRound"
+            }
+            fully_qualified_name: "typing.SupportsAbs"
+          }
+          fully_qualified_name: "_typeshed.SupportsSub"
+        }
+      }
+      parameters {
+        name: "second"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
         }
       }
       parameters {
@@ -3928,64 +5905,11 @@ classes {
         name: "msg"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "assertNotAlmostEqual"
-      fully_qualified_name: "unittest.case.TestCase.assertNotAlmostEqual"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
-        }
-      }
-      parameters {
-        name: "first"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-      }
-      parameters {
-        name: "second"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-      }
-      parameters {
-        name: "msg"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        has_default: true
-      }
-      parameters {
-        name: "delta"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
+          pretty_printed_name: "Union[Any,None]"
           kind: UNION
           args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
+            pretty_printed_name: "Any"
+            kind: ANY
           }
           args {
             pretty_printed_name: "None"
@@ -3994,6 +5918,15 @@ classes {
         }
         has_default: true
       }
+      parameters {
+        name: "delta"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
       has_decorators: true
       resolved_decorator_names: "overload"
       is_overload: true
@@ -4017,16 +5950,32 @@ classes {
         name: "first"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "unittest.case._T"
+          kind: TYPE_VAR
         }
       }
       parameters {
         name: "second"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "_typeshed.SupportsRSub[unittest.case._T,typing.SupportsAbs[typing.SupportsRound[builtins.object]]]"
+          args {
+            pretty_printed_name: "unittest.case._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.SupportsAbs[typing.SupportsRound[builtins.object]]"
+            args {
+              pretty_printed_name: "typing.SupportsRound[builtins.object]"
+              args {
+                pretty_printed_name: "builtins.object"
+                fully_qualified_name: "builtins.object"
+              }
+              fully_qualified_name: "typing.SupportsRound"
+            }
+            fully_qualified_name: "typing.SupportsAbs"
+          }
+          fully_qualified_name: "_typeshed.SupportsRSub"
         }
       }
       parameters {
@@ -4050,20 +5999,11 @@ classes {
         name: "msg"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        has_default: true
-      }
-      parameters {
-        name: "delta"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[datetime.timedelta,None]"
+          pretty_printed_name: "Union[Any,None]"
           kind: UNION
           args {
-            pretty_printed_name: "datetime.timedelta"
-            fully_qualified_name: "datetime.timedelta"
+            pretty_printed_name: "Any"
+            kind: ANY
           }
           args {
             pretty_printed_name: "None"
@@ -4072,358 +6012,12 @@ classes {
         }
         has_default: true
       }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "failUnlessRaises"
-    fullname: "unittest.case.TestCase.failUnlessRaises"
-    definitions {
-      name: "failUnlessRaises"
-      fully_qualified_name: "unittest.case.TestCase.failUnlessRaises"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
       parameters {
-        name: "self"
+        name: "delta"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
-        }
-      }
-      parameters {
-        name: "exception"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[Type[builtins.BaseException],builtins.tuple[Type[builtins.BaseException]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Type[builtins.BaseException]]"
-            args {
-              pretty_printed_name: "Type[builtins.BaseException]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "builtins.BaseException"
-                fully_qualified_name: "builtins.BaseException"
-              }
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-        }
-      }
-      parameters {
-        name: "callable"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "args"
-        kind: VAR_POSITIONAL
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      parameters {
-        name: "kwargs"
-        kind: VAR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "failUnlessRaises"
-      fully_qualified_name: "unittest.case.TestCase.failUnlessRaises"
-      return_annotation {
-        pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
-        args {
-          pretty_printed_name: "unittest.case._E"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "unittest.case._AssertRaisesContext"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
-        }
-      }
-      parameters {
-        name: "exception"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[Type[unittest.case._E],builtins.tuple[Type[unittest.case._E]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[unittest.case._E]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "unittest.case._E"
-              kind: TYPE_VAR
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Type[unittest.case._E]]"
-            args {
-              pretty_printed_name: "Type[unittest.case._E]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "unittest.case._E"
-                kind: TYPE_VAR
-              }
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-        }
-      }
-      parameters {
-        name: "msg"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  overloaded_methods {
-    name: "assertRaisesRegexp"
-    fullname: "unittest.case.TestCase.assertRaisesRegexp"
-    definitions {
-      name: "assertRaisesRegexp"
-      fully_qualified_name: "unittest.case.TestCase.assertRaisesRegexp"
-      return_annotation {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
-        }
-      }
-      parameters {
-        name: "exception"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[Type[builtins.BaseException],builtins.tuple[Type[builtins.BaseException]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[builtins.BaseException]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "builtins.BaseException"
-              fully_qualified_name: "builtins.BaseException"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Type[builtins.BaseException]]"
-            args {
-              pretty_printed_name: "Type[builtins.BaseException]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "builtins.BaseException"
-                fully_qualified_name: "builtins.BaseException"
-              }
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-        }
-      }
-      parameters {
-        name: "expected_regex"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
-          }
-        }
-      }
-      parameters {
-        name: "callable"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      parameters {
-        name: "args"
-        kind: VAR_POSITIONAL
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      parameters {
-        name: "kwargs"
-        kind: VAR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "assertRaisesRegexp"
-      fully_qualified_name: "unittest.case.TestCase.assertRaisesRegexp"
-      return_annotation {
-        pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
-        args {
-          pretty_printed_name: "unittest.case._E"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "unittest.case._AssertRaisesContext"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
-        }
-      }
-      parameters {
-        name: "exception"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[Type[unittest.case._E],builtins.tuple[Type[unittest.case._E]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Type[unittest.case._E]"
-            kind: TYPE
-            args {
-              pretty_printed_name: "unittest.case._E"
-              kind: TYPE_VAR
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Type[unittest.case._E]]"
-            args {
-              pretty_printed_name: "Type[unittest.case._E]"
-              kind: TYPE
-              args {
-                pretty_printed_name: "unittest.case._E"
-                kind: TYPE_VAR
-              }
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-        }
-      }
-      parameters {
-        name: "expected_regex"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,typing.Pattern[builtins.str],typing.Pattern[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.Pattern"
-          }
-          args {
-            pretty_printed_name: "typing.Pattern[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.Pattern"
-          }
-        }
-      }
-      parameters {
-        name: "msg"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "None"
+          kind: NONE
         }
         has_default: true
       }
@@ -4448,6 +6042,18 @@ classes {
     name: "failureException"
     fully_qualified_name: "unittest.case.TestCase.failureException"
     type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "failureException"
+    fully_qualified_name: "unittest.case.TestCase.failureException"
+    type_annotation {
       pretty_printed_name: "Type[builtins.BaseException]"
       kind: TYPE
       args {
@@ -4455,10 +6061,6 @@ classes {
         fully_qualified_name: "builtins.BaseException"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4518,6 +6120,282 @@ classes {
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failUnlessEqual"
+    fully_qualified_name: "unittest.case.TestCase.failUnlessEqual"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertEquals"
+    fully_qualified_name: "unittest.case.TestCase.assertEquals"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failIfEqual"
+    fully_qualified_name: "unittest.case.TestCase.failIfEqual"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertNotEquals"
+    fully_qualified_name: "unittest.case.TestCase.assertNotEquals"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failUnless"
+    fully_qualified_name: "unittest.case.TestCase.failUnless"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assert_"
+    fully_qualified_name: "unittest.case.TestCase.assert_"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failIf"
+    fully_qualified_name: "unittest.case.TestCase.failIf"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failUnlessRaises"
+    fully_qualified_name: "unittest.case.TestCase.failUnlessRaises"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failUnlessAlmostEqual"
+    fully_qualified_name: "unittest.case.TestCase.failUnlessAlmostEqual"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertAlmostEquals"
+    fully_qualified_name: "unittest.case.TestCase.assertAlmostEquals"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failIfAlmostEqual"
+    fully_qualified_name: "unittest.case.TestCase.failIfAlmostEqual"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertNotAlmostEquals"
+    fully_qualified_name: "unittest.case.TestCase.assertNotAlmostEquals"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertRegexpMatches"
+    fully_qualified_name: "unittest.case.TestCase.assertRegexpMatches"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertNotRegexpMatches"
+    fully_qualified_name: "unittest.case.TestCase.assertNotRegexpMatches"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "assertRaisesRegexp"
+    fully_qualified_name: "unittest.case.TestCase.assertRaisesRegexp"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
     }
     valid_for: "35"
     valid_for: "36"
@@ -4661,12 +6539,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "unittest.case._AssertRaisesContext.__enter__"
     return_annotation {
-      pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
-      args {
-        pretty_printed_name: "unittest.case._E"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "unittest.case._AssertRaisesContext"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4707,15 +6581,11 @@ classes {
     parameters {
       name: "exc_type"
       type_annotation {
-        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        pretty_printed_name: "Union[builtins.type,None]"
         kind: UNION
         args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
         }
         args {
           pretty_printed_name: "None"
@@ -4724,7 +6594,7 @@ classes {
       }
     }
     parameters {
-      name: "exc_val"
+      name: "exc_value"
       type_annotation {
         pretty_printed_name: "Union[builtins.BaseException,None]"
         kind: UNION
@@ -4739,7 +6609,7 @@ classes {
       }
     }
     parameters {
-      name: "exc_tb"
+      name: "tb"
       type_annotation {
         pretty_printed_name: "Union[types.TracebackType,None]"
         kind: UNION
@@ -4757,6 +6627,74 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "unittest.case._AssertRaisesContext.__exit__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "unittest.case._AssertRaisesContext[unittest.case._E]"
+        args {
+          pretty_printed_name: "unittest.case._E"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "unittest.case._AssertRaisesContext"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -4825,8 +6763,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "unittest.case._AssertWarnsContext.__enter__"
     return_annotation {
-      pretty_printed_name: "unittest.case._AssertWarnsContext"
-      fully_qualified_name: "unittest.case._AssertWarnsContext"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4841,6 +6779,70 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "unittest.case._AssertWarnsContext.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "unittest.case._AssertWarnsContext"
+        fully_qualified_name: "unittest.case._AssertWarnsContext"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -4876,7 +6878,7 @@ classes {
       }
     }
     parameters {
-      name: "exc_val"
+      name: "exc_value"
       type_annotation {
         pretty_printed_name: "Union[builtins.BaseException,None]"
         kind: UNION
@@ -4891,7 +6893,7 @@ classes {
       }
     }
     parameters {
-      name: "exc_tb"
+      name: "tb"
       type_annotation {
         pretty_printed_name: "Union[types.TracebackType,None]"
         kind: UNION
@@ -4905,10 +6907,6 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -4968,212 +6966,6 @@ classes {
       args {
         pretty_printed_name: "warnings.WarningMessage"
         fully_qualified_name: "warnings.WarningMessage"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_AssertLogsContext"
-  fully_qualified_name: "unittest.case._AssertLogsContext"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "unittest.case._AssertLogsContext.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case._AssertLogsContext"
-        fully_qualified_name: "unittest.case._AssertLogsContext"
-      }
-    }
-    parameters {
-      name: "test_case"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.case.TestCase"
-        fully_qualified_name: "unittest.case.TestCase"
-      }
-    }
-    parameters {
-      name: "logger_name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "unittest.case._AssertLogsContext.__enter__"
-    return_annotation {
-      pretty_printed_name: "unittest.case._AssertLogsContext"
-      fully_qualified_name: "unittest.case._AssertLogsContext"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "unittest.case._AssertLogsContext"
-        fully_qualified_name: "unittest.case._AssertLogsContext"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "unittest.case._AssertLogsContext.__exit__"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.bool,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "unittest.case._AssertLogsContext"
-        fully_qualified_name: "unittest.case._AssertLogsContext"
-      }
-    }
-    parameters {
-      name: "exc_type"
-      type_annotation {
-        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "exc_val"
-      type_annotation {
-        pretty_printed_name: "Union[builtins.BaseException,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.BaseException"
-          fully_qualified_name: "builtins.BaseException"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "exc_tb"
-      type_annotation {
-        pretty_printed_name: "Union[types.TracebackType,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "types.TracebackType"
-          fully_qualified_name: "types.TracebackType"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "LOGGING_FORMAT"
-    fully_qualified_name: "unittest.case._AssertLogsContext.LOGGING_FORMAT"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "records"
-    fully_qualified_name: "unittest.case._AssertLogsContext.records"
-    type_annotation {
-      pretty_printed_name: "builtins.list[logging.LogRecord]"
-      args {
-        pretty_printed_name: "logging.LogRecord"
-        fully_qualified_name: "logging.LogRecord"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "output"
-    fully_qualified_name: "unittest.case._AssertLogsContext.output"
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
       }
       fully_qualified_name: "builtins.list"
     }
@@ -5311,12 +7103,8 @@ functions {
   parameters {
     name: "__function"
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   parameters {
@@ -5354,6 +7142,48 @@ vars {
   name: "unittest"
   fully_qualified_name: "unittest"
   is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "unittest.case._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DIFF_OMITTED"
+  fully_qualified_name: "unittest.case.DIFF_OMITTED"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ClassInfo"
+  fully_qualified_name: "unittest.case._ClassInfo"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

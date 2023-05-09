@@ -22,21 +22,8 @@ classes {
       name: "fileobj"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -44,8 +31,8 @@ classes {
       name: "fd"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -53,8 +40,8 @@ classes {
       name: "events"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -97,37 +84,24 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -244,21 +218,8 @@ classes {
     name: "fileobj"
     fully_qualified_name: "selectors.SelectorKey.fileobj"
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "_typeshed.HasFileno"
-          fully_qualified_name: "_typeshed.HasFileno"
-        }
-      }
-      fully_qualified_name: "_typeshed.FileDescriptorLike"
+      pretty_printed_name: "UnboundType[FileDescriptorLike]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "35"
@@ -277,8 +238,8 @@ classes {
     name: "fd"
     fully_qualified_name: "selectors.SelectorKey.fd"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "UnboundType[FileDescriptor]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "35"
@@ -297,8 +258,8 @@ classes {
     name: "events"
     fully_qualified_name: "selectors.SelectorKey.events"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "UnboundType[_EventMask]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "35"
@@ -452,32 +413,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.BaseSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -496,37 +444,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -544,32 +487,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.BaseSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -588,21 +518,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -619,32 +536,19 @@ classes {
     name: "modify"
     fully_qualified_name: "selectors.BaseSelector.modify"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -663,37 +567,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -708,37 +607,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.BaseSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -746,8 +632,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -813,32 +699,19 @@ classes {
     name: "get_key"
     fully_qualified_name: "selectors.BaseSelector.get_key"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -857,21 +730,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -885,51 +745,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.BaseSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -960,8 +794,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "selectors.BaseSelector.__enter__"
     return_annotation {
-      pretty_printed_name: "selectors.BaseSelector"
-      fully_qualified_name: "selectors.BaseSelector"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -995,8 +829,8 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1023,32 +857,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.SelectSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1067,37 +888,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1112,32 +928,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.SelectSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1156,21 +959,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1184,37 +974,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.SelectSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -1222,8 +999,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -1264,51 +1041,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.SelectSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -1347,32 +1098,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.PollSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1391,37 +1129,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1436,32 +1169,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.PollSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1480,21 +1200,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1508,37 +1215,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.PollSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -1546,8 +1240,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -1588,51 +1282,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.PollSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -1693,32 +1361,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.EpollSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1737,37 +1392,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -1782,32 +1432,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.EpollSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -1826,21 +1463,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1854,37 +1478,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.EpollSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -1892,8 +1503,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -1934,51 +1545,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.EpollSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -2039,32 +1624,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.DevpollSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2083,29 +1655,16 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -2128,32 +1687,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.DevpollSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2172,21 +1718,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -2200,37 +1733,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.DevpollSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -2238,8 +1758,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -2280,51 +1800,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.DevpollSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -2385,32 +1879,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.KqueueSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2429,37 +1910,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -2474,32 +1950,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.KqueueSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2518,21 +1981,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -2546,37 +1996,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.KqueueSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -2584,8 +2021,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -2626,51 +2063,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.KqueueSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -2709,32 +2120,19 @@ classes {
     name: "register"
     fully_qualified_name: "selectors.DefaultSelector.register"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2753,37 +2151,32 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "events"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -2798,32 +2191,19 @@ classes {
     name: "unregister"
     fully_qualified_name: "selectors.DefaultSelector.unregister"
     return_annotation {
-      pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+      pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
       kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[FileDescriptor]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "UnboundType[_EventMask]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "Any"
@@ -2842,21 +2222,8 @@ classes {
       name: "fileobj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -2870,37 +2237,24 @@ classes {
     name: "select"
     fully_qualified_name: "selectors.DefaultSelector.select"
     return_annotation {
-      pretty_printed_name: "builtins.list[Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]]"
+      pretty_printed_name: "builtins.list[Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]]"
       args {
-        pretty_printed_name: "Tuple[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any],builtins.int]"
+        pretty_printed_name: "Tuple[Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any],UnboundType[_EventMask]]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+          pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
           kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "_typeshed.HasFileno"
-                fully_qualified_name: "_typeshed.HasFileno"
-              }
-            }
-            fully_qualified_name: "_typeshed.FileDescriptorLike"
+            pretty_printed_name: "UnboundType[FileDescriptorLike]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[FileDescriptor]"
+            kind: UNBOUND
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "UnboundType[_EventMask]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Any"
@@ -2908,8 +2262,8 @@ classes {
           }
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "builtins.list"
@@ -2950,51 +2304,25 @@ classes {
     name: "get_map"
     fully_qualified_name: "selectors.DefaultSelector.get_map"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      pretty_printed_name: "typing.Mapping[UnboundType[FileDescriptorLike],Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        pretty_printed_name: "Tuple[UnboundType[FileDescriptorLike],UnboundType[FileDescriptor],UnboundType[_EventMask],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "_typeshed.HasFileno"
-              fully_qualified_name: "_typeshed.HasFileno"
-            }
-          }
-          fully_qualified_name: "_typeshed.FileDescriptorLike"
+          pretty_printed_name: "UnboundType[FileDescriptorLike]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[FileDescriptor]"
+          kind: UNBOUND
         }
         args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "UnboundType[_EventMask]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -3026,11 +2354,25 @@ classes {
   valid_for: "310"
 }
 vars {
+  name: "_EventMask"
+  fully_qualified_name: "selectors._EventMask"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "EVENT_READ"
   fully_qualified_name: "selectors.EVENT_READ"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "UnboundType[_EventMask]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"
@@ -3043,8 +2385,8 @@ vars {
   name: "EVENT_WRITE"
   fully_qualified_name: "selectors.EVENT_WRITE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "UnboundType[_EventMask]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

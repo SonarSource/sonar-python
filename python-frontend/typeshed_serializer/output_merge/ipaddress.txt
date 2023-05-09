@@ -4,149 +4,11 @@ classes {
   fully_qualified_name: "ipaddress._IPAddressBase"
   super_classes: "builtins.object"
   methods {
-    name: "__eq__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__eq__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._IPAddressBase"
-        fully_qualified_name: "ipaddress._IPAddressBase"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ge__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__ge__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__gt__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__gt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__le__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__le__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__lt__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__lt__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__ne__"
-    fully_qualified_name: "ipaddress._IPAddressBase.__ne__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "ipaddress._IPAddressBase"
-        fully_qualified_name: "ipaddress._IPAddressBase"
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
     name: "compressed"
     fully_qualified_name: "ipaddress._IPAddressBase.compressed"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -159,14 +21,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "exploded"
     fully_qualified_name: "ipaddress._IPAddressBase.exploded"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -179,14 +46,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "reverse_pointer"
     fully_qualified_name: "ipaddress._IPAddressBase.reverse_pointer"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -199,7 +71,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "version"
@@ -219,9 +96,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "_BaseAddress"
@@ -251,20 +138,25 @@ classes {
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__add__"
     fully_qualified_name: "ipaddress._BaseAddress.__add__"
     return_annotation {
-      pretty_printed_name: "ipaddress._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
       }
     }
     parameters {
@@ -274,24 +166,12 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "ipaddress._BaseAddress.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ipaddress._BaseAddress"
-        fully_qualified_name: "ipaddress._BaseAddress"
-      }
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__int__"
@@ -307,20 +187,25 @@ classes {
         fully_qualified_name: "ipaddress._BaseAddress"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__sub__"
     fully_qualified_name: "ipaddress._BaseAddress.__sub__"
     return_annotation {
-      pretty_printed_name: "ipaddress._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
       }
     }
     parameters {
@@ -330,7 +215,176 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "ipaddress._BaseAddress.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "ipaddress._BaseAddress.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "ipaddress._BaseAddress.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "ipaddress._BaseAddress.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "ipaddress._BaseAddress.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_global"
@@ -350,7 +404,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_link_local"
@@ -370,7 +429,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_loopback"
@@ -390,7 +454,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_multicast"
@@ -410,7 +479,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_private"
@@ -430,7 +504,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_reserved"
@@ -450,7 +529,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_unspecified"
@@ -470,7 +554,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "max_prefixlen"
@@ -490,14 +579,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "packed"
     fully_qualified_name: "ipaddress._BaseAddress.packed"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
     }
     parameters {
       name: "self"
@@ -510,9 +604,45 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "__format__"
+    fully_qualified_name: "ipaddress._BaseAddress.__format__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseAddress"
+        fully_qualified_name: "ipaddress._BaseAddress"
+      }
+    }
+    parameters {
+      name: "fmt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "_BaseNetwork"
@@ -556,7 +686,12 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__contains__"
@@ -583,7 +718,12 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__getitem__"
@@ -610,7 +750,12 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__iter__"
@@ -634,16 +779,205 @@ classes {
         fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "ipaddress._BaseNetwork.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "ipaddress._BaseNetwork.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "ipaddress._BaseNetwork.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "ipaddress._BaseNetwork.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "ipaddress._BaseNetwork.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "address_exclude"
     fully_qualified_name: "ipaddress._BaseNetwork.address_exclude"
     return_annotation {
-      pretty_printed_name: "typing.Iterator[ipaddress._T]"
+      pretty_printed_name: "typing.Iterator[UnboundType[Self]]"
       args {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterator"
     }
@@ -651,19 +985,28 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
     parameters {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "broadcast_address"
@@ -687,7 +1030,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "compare_networks"
@@ -700,19 +1048,28 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
     parameters {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "hosts"
@@ -737,7 +1094,12 @@ classes {
         fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_global"
@@ -761,7 +1123,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_link_local"
@@ -785,7 +1152,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_loopback"
@@ -809,7 +1181,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_multicast"
@@ -833,7 +1210,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_private"
@@ -857,7 +1239,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_reserved"
@@ -881,7 +1268,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_unspecified"
@@ -905,7 +1297,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "max_prefixlen"
@@ -929,7 +1326,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "num_addresses"
@@ -953,7 +1355,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "overlaps"
@@ -978,15 +1385,32 @@ classes {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        pretty_printed_name: "Union[ipaddress._BaseNetwork[ipaddress.IPv4Address],ipaddress._BaseNetwork[ipaddress.IPv6Address]]"
+        kind: UNION
         args {
-          pretty_printed_name: "ipaddress._A"
-          kind: TYPE_VAR
+          pretty_printed_name: "ipaddress._BaseNetwork[ipaddress.IPv4Address]"
+          args {
+            pretty_printed_name: "ipaddress.IPv4Address"
+            fully_qualified_name: "ipaddress.IPv4Address"
+          }
+          fully_qualified_name: "ipaddress._BaseNetwork"
         }
-        fully_qualified_name: "ipaddress._BaseNetwork"
+        args {
+          pretty_printed_name: "ipaddress._BaseNetwork[ipaddress.IPv6Address]"
+          args {
+            pretty_printed_name: "ipaddress.IPv6Address"
+            fully_qualified_name: "ipaddress.IPv6Address"
+          }
+          fully_qualified_name: "ipaddress._BaseNetwork"
+        }
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "prefixlen"
@@ -1010,16 +1434,89 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "subnet_of"
+    fully_qualified_name: "ipaddress._BaseNetwork.subnet_of"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "supernet_of"
+    fully_qualified_name: "ipaddress._BaseNetwork.supernet_of"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "subnets"
     fully_qualified_name: "ipaddress._BaseNetwork.subnets"
     return_annotation {
-      pretty_printed_name: "typing.Iterator[ipaddress._T]"
+      pretty_printed_name: "typing.Iterator[UnboundType[Self]]"
       args {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterator"
     }
@@ -1027,8 +1524,12 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
     parameters {
@@ -1057,21 +1558,30 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "supernet"
     fully_qualified_name: "ipaddress._BaseNetwork.supernet"
     return_annotation {
-      pretty_printed_name: "ipaddress._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ipaddress._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "ipaddress._BaseNetwork[ipaddress._A]"
+        args {
+          pretty_printed_name: "ipaddress._A"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "ipaddress._BaseNetwork"
       }
     }
     parameters {
@@ -1100,14 +1610,19 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_hostmask"
     fully_qualified_name: "ipaddress._BaseNetwork.with_hostmask"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1124,14 +1639,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_netmask"
     fully_qualified_name: "ipaddress._BaseNetwork.with_netmask"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1148,14 +1668,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_prefixlen"
     fully_qualified_name: "ipaddress._BaseNetwork.with_prefixlen"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1172,7 +1697,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "hostmask"
@@ -1196,10 +1726,20 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "network_address"
     fully_qualified_name: "ipaddress._BaseNetwork.network_address"
@@ -1207,7 +1747,12 @@ classes {
       pretty_printed_name: "ipaddress._A"
       kind: TYPE_VAR
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "netmask"
@@ -1216,7 +1761,12 @@ classes {
       pretty_printed_name: "ipaddress._A"
       kind: TYPE_VAR
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
 }
 classes {
@@ -1249,14 +1799,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_hostmask"
     fully_qualified_name: "ipaddress._BaseInterface.with_hostmask"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1277,14 +1832,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_netmask"
     fully_qualified_name: "ipaddress._BaseInterface.with_netmask"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1305,14 +1865,19 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "with_prefixlen"
     fully_qualified_name: "ipaddress._BaseInterface.with_prefixlen"
     return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
     parameters {
       name: "self"
@@ -1333,10 +1898,20 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "hostmask"
     fully_qualified_name: "ipaddress._BaseInterface.hostmask"
@@ -1344,7 +1919,12 @@ classes {
       pretty_printed_name: "ipaddress._A"
       kind: TYPE_VAR
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "netmask"
@@ -1353,7 +1933,12 @@ classes {
       pretty_printed_name: "ipaddress._A"
       kind: TYPE_VAR
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "network"
@@ -1362,31 +1947,192 @@ classes {
       pretty_printed_name: "ipaddress._N"
       kind: TYPE_VAR
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
+}
+classes {
+  name: "_BaseV4"
+  fully_qualified_name: "ipaddress._BaseV4"
+  super_classes: "builtins.object"
+  methods {
+    name: "version"
+    fully_qualified_name: "ipaddress._BaseV4.version"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseV4"
+        fully_qualified_name: "ipaddress._BaseV4"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max_prefixlen"
+    fully_qualified_name: "ipaddress._BaseV4.max_prefixlen"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseV4"
+        fully_qualified_name: "ipaddress._BaseV4"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv4Address"
   fully_qualified_name: "ipaddress.IPv4Address"
+  super_classes: "ipaddress._BaseV4"
   super_classes: "ipaddress._BaseAddress"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv4Network"
   fully_qualified_name: "ipaddress.IPv4Network"
+  super_classes: "ipaddress._BaseV4"
   super_classes: "ipaddress._BaseNetwork"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv4Interface"
   fully_qualified_name: "ipaddress.IPv4Interface"
   super_classes: "ipaddress.IPv4Address"
   super_classes: "ipaddress._BaseInterface"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_BaseV6"
+  fully_qualified_name: "ipaddress._BaseV6"
+  super_classes: "builtins.object"
+  methods {
+    name: "version"
+    fully_qualified_name: "ipaddress._BaseV6.version"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseV6"
+        fully_qualified_name: "ipaddress._BaseV6"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max_prefixlen"
+    fully_qualified_name: "ipaddress._BaseV6.max_prefixlen"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress._BaseV6"
+        fully_qualified_name: "ipaddress._BaseV6"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv6Address"
   fully_qualified_name: "ipaddress.IPv6Address"
+  super_classes: "ipaddress._BaseV6"
   super_classes: "ipaddress._BaseAddress"
   methods {
     name: "ipv4_mapped"
@@ -1414,7 +2160,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "is_site_local"
@@ -1434,7 +2185,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "sixtofour"
@@ -1462,7 +2218,12 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "teredo"
@@ -1498,13 +2259,53 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "scope_id"
+    fully_qualified_name: "ipaddress.IPv6Address.scope_id"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ipaddress.IPv6Address"
+        fully_qualified_name: "ipaddress.IPv6Address"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv6Network"
   fully_qualified_name: "ipaddress.IPv6Network"
+  super_classes: "ipaddress._BaseV6"
   super_classes: "ipaddress._BaseNetwork"
   methods {
     name: "is_site_local"
@@ -1524,59 +2325,133 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "IPv6Interface"
   fully_qualified_name: "ipaddress.IPv6Interface"
   super_classes: "ipaddress.IPv6Address"
   super_classes: "ipaddress._BaseInterface"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "AddressValueError"
   fully_qualified_name: "ipaddress.AddressValueError"
   super_classes: "builtins.ValueError"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "NetmaskValueError"
   fully_qualified_name: "ipaddress.NetmaskValueError"
   super_classes: "builtins.ValueError"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "ip_address"
   fully_qualified_name: "ipaddress.ip_address"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address]"
+    kind: UNION
+    args {
+      pretty_printed_name: "ipaddress.IPv4Address"
+      fully_qualified_name: "ipaddress.IPv4Address"
+    }
+    args {
+      pretty_printed_name: "ipaddress.IPv6Address"
+      fully_qualified_name: "ipaddress.IPv6Address"
+    }
   }
   parameters {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
+      pretty_printed_name: "UnboundType[_RawIPAddress]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "ip_network"
   fully_qualified_name: "ipaddress.ip_network"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "Union[ipaddress.IPv4Network,ipaddress.IPv6Network]"
+    kind: UNION
+    args {
+      pretty_printed_name: "ipaddress.IPv4Network"
+      fully_qualified_name: "ipaddress.IPv4Network"
+    }
+    args {
+      pretty_printed_name: "ipaddress.IPv6Network"
+      fully_qualified_name: "ipaddress.IPv6Network"
+    }
   }
   parameters {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
+      pretty_printed_name: "Union[UnboundType[_RawIPAddress],UnboundType[_RawNetworkPart],Tuple[UnboundType[_RawIPAddress]],Tuple[UnboundType[_RawIPAddress],builtins.int]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_RawIPAddress]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "UnboundType[_RawNetworkPart]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "Tuple[UnboundType[_RawIPAddress]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[_RawIPAddress]"
+          kind: UNBOUND
+        }
+      }
+      args {
+        pretty_printed_name: "Tuple[UnboundType[_RawIPAddress],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[_RawIPAddress]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
     }
   }
   parameters {
@@ -1588,31 +2463,77 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "ip_interface"
   fully_qualified_name: "ipaddress.ip_interface"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "Union[ipaddress.IPv4Interface,ipaddress.IPv6Interface]"
+    kind: UNION
+    args {
+      pretty_printed_name: "ipaddress.IPv4Interface"
+      fully_qualified_name: "ipaddress.IPv4Interface"
+    }
+    args {
+      pretty_printed_name: "ipaddress.IPv6Interface"
+      fully_qualified_name: "ipaddress.IPv6Interface"
+    }
   }
   parameters {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
+      pretty_printed_name: "Union[UnboundType[_RawIPAddress],UnboundType[_RawNetworkPart],Tuple[UnboundType[_RawIPAddress]],Tuple[UnboundType[_RawIPAddress],builtins.int]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_RawIPAddress]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "UnboundType[_RawNetworkPart]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "Tuple[UnboundType[_RawIPAddress]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[_RawIPAddress]"
+          kind: UNBOUND
+        }
+      }
+      args {
+        pretty_printed_name: "Tuple[UnboundType[_RawIPAddress],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "UnboundType[_RawIPAddress]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "v4_int_to_packed"
   fully_qualified_name: "ipaddress.v4_int_to_packed"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "address"
@@ -1622,14 +2543,19 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "v6_int_to_packed"
   fully_qualified_name: "ipaddress.v6_int_to_packed"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "address"
@@ -1639,7 +2565,12 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "collapse_addresses"
@@ -1664,7 +2595,12 @@ functions {
       fully_qualified_name: "typing.Iterable"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 overloaded_functions {
   name: "summarize_address_range"
@@ -1731,7 +2667,71 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
+  definitions {
+    name: "summarize_address_range"
+    fully_qualified_name: "ipaddress.summarize_address_range"
+    return_annotation {
+      pretty_printed_name: "Union[typing.Iterator[ipaddress.IPv4Network],typing.Iterator[ipaddress.IPv6Network]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterator[ipaddress.IPv4Network]"
+        args {
+          pretty_printed_name: "ipaddress.IPv4Network"
+          fully_qualified_name: "ipaddress.IPv4Network"
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+      args {
+        pretty_printed_name: "typing.Iterator[ipaddress.IPv6Network]"
+        args {
+          pretty_printed_name: "ipaddress.IPv6Network"
+          fully_qualified_name: "ipaddress.IPv6Network"
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+    }
+    parameters {
+      name: "first"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address]"
+        kind: UNION
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+      }
+    }
+    parameters {
+      name: "last"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address]"
+        kind: UNION
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 overloaded_functions {
   name: "get_mixed_type_key"
@@ -1825,23 +2825,74 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "IPV4LENGTH"
   fully_qualified_name: "ipaddress.IPV4LENGTH"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "IPV6LENGTH"
   fully_qualified_name: "ipaddress.IPV6LENGTH"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_RawIPAddress"
+  fully_qualified_name: "ipaddress._RawIPAddress"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_RawNetworkPart"
+  fully_qualified_name: "ipaddress._RawNetworkPart"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

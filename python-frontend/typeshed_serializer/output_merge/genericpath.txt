@@ -10,54 +10,8 @@ functions {
     name: "path"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "exists"
-  fully_qualified_name: "genericpath.exists"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -78,54 +32,8 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "getsize"
-  fully_qualified_name: "genericpath.getsize"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -146,54 +54,8 @@ functions {
     name: "path"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "isfile"
-  fully_qualified_name: "genericpath.isfile"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "path"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -214,54 +76,8 @@ functions {
     name: "s"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "isdir"
-  fully_qualified_name: "genericpath.isdir"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -282,54 +98,8 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "getatime"
-  fully_qualified_name: "genericpath.getatime"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -350,54 +120,8 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "getmtime"
-  fully_qualified_name: "genericpath.getmtime"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -418,54 +142,8 @@ functions {
     name: "filename"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "getctime"
-  fully_qualified_name: "genericpath.getctime"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -486,74 +164,16 @@ functions {
     name: "f1"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "f2"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -604,16 +224,96 @@ functions {
     name: "s1"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "os.stat_result"
-      fully_qualified_name: "os.stat_result"
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
     }
   }
   parameters {
     name: "s2"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "os.stat_result"
-      fully_qualified_name: "os.stat_result"
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
     }
   }
   valid_for: "35"
@@ -630,29 +330,17 @@ overloaded_functions {
     name: "commonprefix"
     fully_qualified_name: "genericpath.commonprefix"
     return_annotation {
-      pretty_printed_name: "Union[builtins.str,Literal[builtins.unicode]]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Literal[builtins.unicode]"
-        kind: LITERAL
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
     }
     parameters {
       name: "m"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.str]"
+        pretty_printed_name: "typing.Sequence[UnboundType[LiteralString]]"
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -661,96 +349,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  definitions {
-    name: "commonprefix"
-    fully_qualified_name: "genericpath.commonprefix"
-    return_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    parameters {
-      name: "m"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "commonprefix"
-    fully_qualified_name: "genericpath.commonprefix"
-    return_annotation {
-      pretty_printed_name: "typing.Sequence[_typeshed.SupportsLessThanT]"
-      args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    parameters {
-      name: "m"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsLessThanT]]"
-        args {
-          pretty_printed_name: "builtins.list[_typeshed.SupportsLessThanT]"
-          args {
-            pretty_printed_name: "_typeshed.SupportsLessThanT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "commonprefix"
-    fully_qualified_name: "genericpath.commonprefix"
-    return_annotation {
-      pretty_printed_name: "typing.Sequence[_typeshed.SupportsLessThanT]"
-      args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-    parameters {
-      name: "m"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.tuple[_typeshed.SupportsLessThanT]]"
-        args {
-          pretty_printed_name: "builtins.tuple[_typeshed.SupportsLessThanT]"
-          args {
-            pretty_printed_name: "_typeshed.SupportsLessThanT"
-            kind: TYPE_VAR
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  valid_for: "27"
-}
-overloaded_functions {
-  name: "commonprefix"
-  fullname: "genericpath.commonprefix"
   definitions {
     name: "commonprefix"
     fully_qualified_name: "genericpath.commonprefix"
@@ -762,27 +360,10 @@ overloaded_functions {
       name: "m"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]]"
+        pretty_printed_name: "typing.Sequence[UnboundType[StrPath]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrPath"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -814,27 +395,10 @@ overloaded_functions {
       name: "m"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.bytes,os.PathLike[builtins.bytes]]]]"
+        pretty_printed_name: "typing.Sequence[UnboundType[BytesPath]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.bytes,os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bytes,os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.BytesPath"
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -847,9 +411,9 @@ overloaded_functions {
     name: "commonprefix"
     fully_qualified_name: "genericpath.commonprefix"
     return_annotation {
-      pretty_printed_name: "typing.Sequence[_typeshed.SupportsLessThanT]"
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
       args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Sequence"
@@ -858,11 +422,11 @@ overloaded_functions {
       name: "m"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsLessThanT]]"
+        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsRichComparisonT]]"
         args {
-          pretty_printed_name: "builtins.list[_typeshed.SupportsLessThanT]"
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
           args {
-            pretty_printed_name: "_typeshed.SupportsLessThanT"
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
             kind: TYPE_VAR
           }
           fully_qualified_name: "builtins.list"
@@ -878,9 +442,9 @@ overloaded_functions {
     name: "commonprefix"
     fully_qualified_name: "genericpath.commonprefix"
     return_annotation {
-      pretty_printed_name: "typing.Sequence[_typeshed.SupportsLessThanT]"
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
       args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Sequence"
@@ -889,11 +453,166 @@ overloaded_functions {
       name: "m"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.tuple[_typeshed.SupportsLessThanT]]"
+        pretty_printed_name: "typing.Sequence[Tuple[_typeshed.SupportsRichComparisonT,Any]]"
         args {
-          pretty_printed_name: "builtins.tuple[_typeshed.SupportsLessThanT]"
+          pretty_printed_name: "Tuple[_typeshed.SupportsRichComparisonT,Any]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "_typeshed.SupportsLessThanT"
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+overloaded_functions {
+  name: "commonprefix"
+  fullname: "genericpath.commonprefix"
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[StrPath]]"
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bytes,Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[BytesPath]]"
+        args {
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsRichComparisonT]]"
+        args {
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.tuple[_typeshed.SupportsRichComparisonT]]"
+        args {
+          pretty_printed_name: "builtins.tuple[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
             kind: TYPE_VAR
           }
           fully_qualified_name: "builtins.tuple"
@@ -904,6 +623,20 @@ overloaded_functions {
     has_decorators: true
     resolved_decorator_names: "overload"
     is_overload: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "genericpath.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"

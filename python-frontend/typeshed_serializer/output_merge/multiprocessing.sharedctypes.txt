@@ -94,15 +94,11 @@ classes {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -139,7 +135,7 @@ classes {
     name: "__reduce__"
     fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase.__reduce__"
     return_annotation {
-      pretty_printed_name: "Tuple[CallableType[builtins.function],Tuple[Any,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]]"
+      pretty_printed_name: "Tuple[CallableType[builtins.function],Tuple[Any,UnboundType[_LockLike]]]"
       kind: TUPLE
       args {
         pretty_printed_name: "CallableType[builtins.function]"
@@ -150,28 +146,15 @@ classes {
         }
       }
       args {
-        pretty_printed_name: "Tuple[Any,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Tuple[Any,UnboundType[_LockLike]]"
         kind: TUPLE
         args {
           pretty_printed_name: "Any"
           kind: ANY
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
     }
@@ -224,21 +207,8 @@ classes {
     name: "get_lock"
     fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase.get_lock"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-        kind: UNION
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
-        }
-      }
-      fully_qualified_name: "multiprocessing.synchronize._LockLike"
+      pretty_printed_name: "UnboundType[_LockLike]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -303,17 +273,122 @@ classes {
       }
     }
     parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
+      name: "__exc_type"
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedBase[multiprocessing.sharedctypes._CT]"
+        args {
+          pretty_printed_name: "multiprocessing.sharedctypes._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -470,7 +545,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "value"
       type_annotation {
         pretty_printed_name: "multiprocessing.sharedctypes._CT"
         kind: TYPE_VAR
@@ -666,6 +741,68 @@ overloaded_functions {
       name: "typecode_or_type"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "RawValue"
+    fully_qualified_name: "multiprocessing.sharedctypes.RawValue"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+overloaded_functions {
+  name: "RawValue"
+  fullname: "multiprocessing.sharedctypes.RawValue"
+  definitions {
+    name: "RawValue"
+    fully_qualified_name: "multiprocessing.sharedctypes.RawValue"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes._CT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "Type[multiprocessing.sharedctypes._CT]"
         kind: TYPE
         args {
@@ -713,10 +850,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -727,12 +860,102 @@ overloaded_functions {
     name: "RawArray"
     fully_qualified_name: "multiprocessing.sharedctypes.RawArray"
     return_annotation {
-      pretty_printed_name: "ctypes.Array[multiprocessing.sharedctypes._CT]"
+      pretty_printed_name: "_ctypes.Array[multiprocessing.sharedctypes._CT]"
       args {
         pretty_printed_name: "multiprocessing.sharedctypes._CT"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "ctypes.Array"
+      fully_qualified_name: "_ctypes.Array"
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "RawArray"
+    fully_qualified_name: "multiprocessing.sharedctypes.RawArray"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+overloaded_functions {
+  name: "RawArray"
+  fullname: "multiprocessing.sharedctypes.RawArray"
+  definitions {
+    name: "RawArray"
+    fully_qualified_name: "multiprocessing.sharedctypes.RawArray"
+    return_annotation {
+      pretty_printed_name: "_ctypes.Array[multiprocessing.sharedctypes._CT]"
+      args {
+        pretty_printed_name: "multiprocessing.sharedctypes._CT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "_ctypes.Array"
     }
     parameters {
       name: "typecode_or_type"
@@ -809,12 +1032,279 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "Value"
+  fullname: "multiprocessing.sharedctypes.Value"
+  definitions {
+    name: "Value"
+    fully_qualified_name: "multiprocessing.sharedctypes.Value"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes._CT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Value"
+    fully_qualified_name: "multiprocessing.sharedctypes.Value"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedBase[multiprocessing.sharedctypes._CT]"
+      args {
+        pretty_printed_name: "multiprocessing.sharedctypes._CT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase"
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Value"
+    fully_qualified_name: "multiprocessing.sharedctypes.Value"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedBase[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase"
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Value"
+    fully_qualified_name: "multiprocessing.sharedctypes.Value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.type]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 overloaded_functions {
   name: "Value"
@@ -914,7 +1404,7 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "Literal[builtins.bool]"
@@ -925,23 +1415,11 @@ overloaded_functions {
           }
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
+      has_default: true
     }
     parameters {
       name: "ctx"
@@ -995,7 +1473,7 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "Literal[builtins.bool]"
@@ -1006,23 +1484,11 @@ overloaded_functions {
           }
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
+      has_default: true
     }
     parameters {
       name: "ctx"
@@ -1056,18 +1522,18 @@ overloaded_functions {
       name: "typecode_or_type"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,Type[ctypes._CData]]"
+        pretty_printed_name: "Union[builtins.str,Type[_ctypes._CData]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "Type[ctypes._CData]"
+          pretty_printed_name: "Type[_ctypes._CData]"
           kind: TYPE
           args {
-            pretty_printed_name: "ctypes._CData"
-            fully_qualified_name: "ctypes._CData"
+            pretty_printed_name: "_ctypes._CData"
+            fully_qualified_name: "_ctypes._CData"
           }
         }
       }
@@ -1084,28 +1550,332 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.bool"
           fully_qualified_name: "builtins.bool"
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "Array"
+  fullname: "multiprocessing.sharedctypes.Array"
+  definitions {
+    name: "Array"
+    fully_qualified_name: "multiprocessing.sharedctypes.Array"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes._CT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
           args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
+            pretty_printed_name: "Any"
+            kind: ANY
           }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Array"
+    fully_qualified_name: "multiprocessing.sharedctypes.Array"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedArray[multiprocessing.sharedctypes._CT]"
+      args {
+        pretty_printed_name: "multiprocessing.sharedctypes._CT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedArray"
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Array"
+    fully_qualified_name: "multiprocessing.sharedctypes.Array"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedArray[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedArray"
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ctx"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "Array"
+    fully_qualified_name: "multiprocessing.sharedctypes.Array"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typecode_or_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.type]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+    }
+    parameters {
+      name: "size_or_initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
       has_default: true
@@ -1135,8 +1905,6 @@ overloaded_functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
 }
 overloaded_functions {
   name: "Array"
@@ -1260,7 +2028,7 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "Literal[builtins.bool]"
@@ -1271,23 +2039,11 @@ overloaded_functions {
           }
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
+      has_default: true
     }
     parameters {
       name: "ctx"
@@ -1353,7 +2109,7 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "Literal[builtins.bool]"
@@ -1364,23 +2120,11 @@ overloaded_functions {
           }
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
+      has_default: true
     }
     parameters {
       name: "ctx"
@@ -1414,18 +2158,18 @@ overloaded_functions {
       name: "typecode_or_type"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,Type[ctypes._CData]]"
+        pretty_printed_name: "Union[builtins.str,Type[_ctypes._CData]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "Type[ctypes._CData]"
+          pretty_printed_name: "Type[_ctypes._CData]"
           kind: TYPE
           args {
-            pretty_printed_name: "ctypes._CData"
-            fully_qualified_name: "ctypes._CData"
+            pretty_printed_name: "_ctypes._CData"
+            fully_qualified_name: "_ctypes._CData"
           }
         }
       }
@@ -1454,28 +2198,15 @@ overloaded_functions {
       name: "lock"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+        pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.bool"
           fully_qualified_name: "builtins.bool"
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-            kind: UNION
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.Lock"
-              fully_qualified_name: "multiprocessing.synchronize.Lock"
-            }
-            args {
-              pretty_printed_name: "multiprocessing.synchronize.RLock"
-              fully_qualified_name: "multiprocessing.synchronize.RLock"
-            }
-          }
-          fully_qualified_name: "multiprocessing.synchronize._LockLike"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
       }
       has_default: true
@@ -1501,10 +2232,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -1526,27 +2253,23 @@ overloaded_functions {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ctypes._SimpleCData[multiprocessing.sharedctypes._T]"
+        pretty_printed_name: "_ctypes._SimpleCData[multiprocessing.sharedctypes._T]"
         args {
           pretty_printed_name: "multiprocessing.sharedctypes._T"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "ctypes._SimpleCData"
+        fully_qualified_name: "_ctypes._SimpleCData"
       }
     }
     parameters {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1587,27 +2310,23 @@ overloaded_functions {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ctypes.Array[ctypes.c_char]"
+        pretty_printed_name: "_ctypes.Array[ctypes.c_char]"
         args {
           pretty_printed_name: "ctypes.c_char"
           fully_qualified_name: "ctypes.c_char"
         }
-        fully_qualified_name: "ctypes.Array"
+        fully_qualified_name: "_ctypes.Array"
       }
     }
     parameters {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1652,27 +2371,23 @@ overloaded_functions {
       name: "obj"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "ctypes.Array[multiprocessing.sharedctypes._CT]"
+        pretty_printed_name: "_ctypes.Array[multiprocessing.sharedctypes._CT]"
         args {
           pretty_printed_name: "multiprocessing.sharedctypes._CT"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "ctypes.Array"
+        fully_qualified_name: "_ctypes.Array"
       }
     }
     parameters {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1725,15 +2440,11 @@ overloaded_functions {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1762,6 +2473,24 @@ overloaded_functions {
     has_decorators: true
     resolved_decorator_names: "overload"
     is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.sharedctypes.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
   }
   valid_for: "35"
   valid_for: "36"

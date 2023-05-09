@@ -62,8 +62,16 @@ classes {
     name: "body"
     fully_qualified_name: "tkinter.simpledialog.Dialog.body"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     parameters {
       name: "self"
@@ -77,8 +85,8 @@ classes {
       name: "master"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "tkinter.Frame"
+        fully_qualified_name: "tkinter.Frame"
       }
     }
     valid_for: "35"
@@ -91,9 +99,147 @@ classes {
   methods {
     name: "buttonbox"
     fully_qualified_name: "tkinter.simpledialog.Dialog.buttonbox"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.simpledialog.Dialog"
+        fully_qualified_name: "tkinter.simpledialog.Dialog"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ok"
+    fully_qualified_name: "tkinter.simpledialog.Dialog.ok"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.simpledialog.Dialog"
+        fully_qualified_name: "tkinter.simpledialog.Dialog"
+      }
+    }
+    parameters {
+      name: "event"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[tkinter.Event[tkinter.Misc],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "tkinter.Event[tkinter.Misc]"
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          fully_qualified_name: "tkinter.Event"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "tkinter.simpledialog.Dialog.cancel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.simpledialog.Dialog"
+        fully_qualified_name: "tkinter.simpledialog.Dialog"
+      }
+    }
+    parameters {
+      name: "event"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[tkinter.Event[tkinter.Misc],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "tkinter.Event[tkinter.Misc]"
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          fully_qualified_name: "tkinter.Event"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate"
+    fully_qualified_name: "tkinter.simpledialog.Dialog.validate"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.simpledialog.Dialog"
+        fully_qualified_name: "tkinter.simpledialog.Dialog"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "apply"
+    fully_qualified_name: "tkinter.simpledialog.Dialog.apply"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.simpledialog.Dialog"
+        fully_qualified_name: "tkinter.simpledialog.Dialog"
+      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -368,8 +514,16 @@ functions {
   name: "askfloat"
   fully_qualified_name: "tkinter.simpledialog.askfloat"
   return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
+    pretty_printed_name: "Union[builtins.float,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
   parameters {
     name: "title"
@@ -396,12 +550,72 @@ functions {
     }
   }
   parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
+    name: "initialvalue"
+    kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
+    has_default: true
+  }
+  parameters {
+    name: "minvalue"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "maxvalue"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
   }
   valid_for: "35"
   valid_for: "36"
@@ -414,8 +628,16 @@ functions {
   name: "askinteger"
   fully_qualified_name: "tkinter.simpledialog.askinteger"
   return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Union[builtins.int,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
   parameters {
     name: "title"
@@ -442,12 +664,72 @@ functions {
     }
   }
   parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
+    name: "initialvalue"
+    kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
+    has_default: true
+  }
+  parameters {
+    name: "minvalue"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "maxvalue"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
   }
   valid_for: "35"
   valid_for: "36"
@@ -460,8 +742,16 @@ functions {
   name: "askstring"
   fully_qualified_name: "tkinter.simpledialog.askstring"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
   }
   parameters {
     name: "title"
@@ -488,12 +778,55 @@ functions {
     }
   }
   parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
+    name: "initialvalue"
+    kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
+    has_default: true
+  }
+  parameters {
+    name: "show"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parent"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
   }
   valid_for: "35"
   valid_for: "36"

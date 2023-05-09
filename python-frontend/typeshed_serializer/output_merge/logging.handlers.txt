@@ -22,85 +22,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delay"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.WatchedFileHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.WatchedFileHandler"
-        fully_qualified_name: "logging.handlers.WatchedFileHandler"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -162,25 +85,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -253,7 +159,6 @@ classes {
         fully_qualified_name: "logging.handlers.WatchedFileHandler"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -283,7 +188,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -297,7 +201,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -312,7 +215,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -322,12 +224,12 @@ classes {
   }
 }
 classes {
-  name: "RotatingFileHandler"
-  fully_qualified_name: "logging.handlers.RotatingFileHandler"
-  super_classes: "logging.Handler"
+  name: "BaseRotatingHandler"
+  fully_qualified_name: "logging.handlers.BaseRotatingHandler"
+  super_classes: "logging.FileHandler"
   methods {
     name: "__init__"
-    fully_qualified_name: "logging.handlers.RotatingFileHandler.__init__"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.__init__"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -336,16 +238,16 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "logging.handlers.RotatingFileHandler"
-        fully_qualified_name: "logging.handlers.RotatingFileHandler"
+        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
+        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
       }
     }
     parameters {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -355,25 +257,6 @@ classes {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      has_default: true
-    }
-    parameters {
-      name: "maxBytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "backupCount"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
     }
     parameters {
       name: "encoding"
@@ -401,11 +284,14 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
-    name: "doRollover"
-    fully_qualified_name: "logging.handlers.RotatingFileHandler.doRollover"
+    name: "__init__"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.__init__"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -414,13 +300,198 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "logging.handlers.RotatingFileHandler"
-        fully_qualified_name: "logging.handlers.RotatingFileHandler"
+        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
+        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
       }
     }
-    valid_for: "27"
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "rotation_filename"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotation_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
+        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
+      }
+    }
+    parameters {
+      name: "default_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rotate"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
+        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "dest"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "namer"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.namer"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "rotator"
+    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotator"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "RotatingFileHandler"
@@ -445,25 +516,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -543,25 +597,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -713,8 +750,8 @@ classes {
     name: "backupCount"
     fully_qualified_name: "logging.handlers.RotatingFileHandler.backupCount"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     valid_for: "35"
     valid_for: "36"
@@ -723,116 +760,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "TimedRotatingFileHandler"
-  fully_qualified_name: "logging.handlers.TimedRotatingFileHandler"
-  super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.TimedRotatingFileHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.TimedRotatingFileHandler"
-        fully_qualified_name: "logging.handlers.TimedRotatingFileHandler"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "when"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "interval"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "backupCount"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delay"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "utc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "doRollover"
-    fully_qualified_name: "logging.handlers.TimedRotatingFileHandler.doRollover"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.TimedRotatingFileHandler"
-        fully_qualified_name: "logging.handlers.TimedRotatingFileHandler"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
 }
 classes {
   name: "TimedRotatingFileHandler"
@@ -857,25 +784,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -944,11 +854,11 @@ classes {
       name: "atTime"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.datetime,None]"
+        pretty_printed_name: "Union[datetime.time,None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "datetime.time"
+          fully_qualified_name: "datetime.time"
         }
         args {
           pretty_printed_name: "None"
@@ -981,25 +891,8 @@ classes {
       name: "filename"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1068,11 +961,11 @@ classes {
       name: "atTime"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.datetime,None]"
+        pretty_printed_name: "Union[datetime.time,None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
+          pretty_printed_name: "datetime.time"
+          fully_qualified_name: "datetime.time"
         }
         args {
           pretty_printed_name: "None"
@@ -1233,8 +1126,8 @@ classes {
     name: "backupCount"
     fully_qualified_name: "logging.handlers.TimedRotatingFileHandler.backupCount"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     valid_for: "35"
     valid_for: "36"
@@ -1261,11 +1154,11 @@ classes {
     name: "atTime"
     fully_qualified_name: "logging.handlers.TimedRotatingFileHandler.atTime"
     type_annotation {
-      pretty_printed_name: "Union[datetime.datetime,None]"
+      pretty_printed_name: "Union[datetime.time,None]"
       kind: UNION
       args {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
       }
       args {
         pretty_printed_name: "None"
@@ -1339,12 +1232,12 @@ classes {
     name: "extMatch"
     fully_qualified_name: "logging.handlers.TimedRotatingFileHandler.extMatch"
     type_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
     valid_for: "35"
     valid_for: "36"
@@ -1358,39 +1251,6 @@ classes {
   name: "SocketHandler"
   fully_qualified_name: "logging.handlers.SocketHandler"
   super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.SocketHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SocketHandler"
-        fully_qualified_name: "logging.handlers.SocketHandler"
-      }
-    }
-    parameters {
-      name: "host"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "port"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.SocketHandler.__init__"
@@ -1441,32 +1301,6 @@ classes {
     name: "makeSocket"
     fully_qualified_name: "logging.handlers.SocketHandler.makeSocket"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SocketHandler"
-        fully_qualified_name: "logging.handlers.SocketHandler"
-      }
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "makeSocket"
-    fully_qualified_name: "logging.handlers.SocketHandler.makeSocket"
-    return_annotation {
       pretty_printed_name: "socket.socket"
       fully_qualified_name: "socket.socket"
     }
@@ -1493,31 +1327,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "makePickle"
-    fully_qualified_name: "logging.handlers.SocketHandler.makePickle"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SocketHandler"
-        fully_qualified_name: "logging.handlers.SocketHandler"
-      }
-    }
-    parameters {
-      name: "record"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.LogRecord"
-        fully_qualified_name: "logging.LogRecord"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "makePickle"
@@ -1568,33 +1377,8 @@ classes {
       name: "s"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "send"
-    fully_qualified_name: "logging.handlers.SocketHandler.send"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SocketHandler"
-        fully_qualified_name: "logging.handlers.SocketHandler"
-      }
-    }
-    parameters {
-      name: "s"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1619,7 +1403,6 @@ classes {
         fully_qualified_name: "logging.handlers.SocketHandler"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1627,58 +1410,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "retryStart"
-    fully_qualified_name: "logging.handlers.SocketHandler.retryStart"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "retryFactor"
-    fully_qualified_name: "logging.handlers.SocketHandler.retryFactor"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "retryMax"
-    fully_qualified_name: "logging.handlers.SocketHandler.retryMax"
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   attributes {
     name: "host"
     fully_qualified_name: "logging.handlers.SocketHandler.host"
@@ -1803,28 +1540,53 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "retryStart"
+    fully_qualified_name: "logging.handlers.SocketHandler.retryStart"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "retryFactor"
+    fully_qualified_name: "logging.handlers.SocketHandler.retryFactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "retryMax"
+    fully_qualified_name: "logging.handlers.SocketHandler.retryMax"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "DatagramHandler"
   fully_qualified_name: "logging.handlers.DatagramHandler"
   super_classes: "logging.handlers.SocketHandler"
-  methods {
-    name: "makeSocket"
-    fully_qualified_name: "logging.handlers.DatagramHandler.makeSocket"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.DatagramHandler"
-        fully_qualified_name: "logging.handlers.DatagramHandler"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "makeSocket"
     fully_qualified_name: "logging.handlers.DatagramHandler.makeSocket"
@@ -1847,7 +1609,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1859,74 +1620,6 @@ classes {
   name: "SysLogHandler"
   fully_qualified_name: "logging.handlers.SysLogHandler"
   super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.SysLogHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SysLogHandler"
-        fully_qualified_name: "logging.handlers.SysLogHandler"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "facility"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "socktype"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.SysLogHandler.__init__"
@@ -2047,7 +1740,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2078,7 +1770,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2086,7 +1777,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2100,7 +1790,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2115,7 +1804,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2130,7 +1818,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2145,7 +1832,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2160,7 +1846,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2175,7 +1860,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2190,7 +1874,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2205,7 +1888,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2220,7 +1902,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2235,7 +1916,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2250,7 +1930,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2265,7 +1944,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2280,7 +1958,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2295,7 +1972,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2310,7 +1986,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2325,7 +2000,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2340,7 +2014,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2355,7 +2028,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2370,7 +2042,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2385,7 +2056,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2400,7 +2070,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2415,7 +2084,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2430,7 +2098,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2445,7 +2112,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2460,7 +2126,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2475,7 +2140,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2490,7 +2154,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2505,7 +2168,36 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "address"
+    fully_qualified_name: "logging.handlers.SysLogHandler.address"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2520,22 +2212,12 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "socktype"
-    fully_qualified_name: "logging.handlers.SysLogHandler.socktype"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
   }
   attributes {
     name: "socktype"
@@ -2544,90 +2226,6 @@ classes {
       pretty_printed_name: "socket.SocketKind"
       fully_qualified_name: "socket.SocketKind"
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "facility"
-    fully_qualified_name: "logging.handlers.SysLogHandler.facility"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "priority_names"
-    fully_qualified_name: "logging.handlers.SysLogHandler.priority_names"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "facility_names"
-    fully_qualified_name: "logging.handlers.SysLogHandler.facility_names"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "priority_map"
-    fully_qualified_name: "logging.handlers.SysLogHandler.priority_map"
-    type_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2655,6 +2253,86 @@ classes {
     type_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "facility"
+    fully_qualified_name: "logging.handlers.SysLogHandler.facility"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "priority_names"
+    fully_qualified_name: "logging.handlers.SysLogHandler.priority_names"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "facility_names"
+    fully_qualified_name: "logging.handlers.SysLogHandler.facility_names"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "priority_map"
+    fully_qualified_name: "logging.handlers.SysLogHandler.priority_map"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
     }
     valid_for: "35"
     valid_for: "36"
@@ -2757,7 +2435,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2788,7 +2465,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2819,7 +2495,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2850,7 +2525,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2858,7 +2532,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2870,133 +2543,6 @@ classes {
   name: "SMTPHandler"
   fully_qualified_name: "logging.handlers.SMTPHandler"
   super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.SMTPHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.SMTPHandler"
-        fully_qualified_name: "logging.handlers.SMTPHandler"
-      }
-    }
-    parameters {
-      name: "mailhost"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-    }
-    parameters {
-      name: "fromaddr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "toaddrs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "subject"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "credentials"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "secure"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str],Tuple[builtins.str,builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.SMTPHandler.__init__"
@@ -3324,7 +2870,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3332,7 +2877,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3581,7 +3125,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3612,7 +3155,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3620,32 +3162,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "buffer"
-    fully_qualified_name: "logging.handlers.BufferingHandler.buffer"
-    type_annotation {
-      pretty_printed_name: "builtins.list[logging.LogRecord]"
-      args {
-        pretty_printed_name: "logging.LogRecord"
-        fully_qualified_name: "logging.LogRecord"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   attributes {
     name: "capacity"
     fully_qualified_name: "logging.handlers.BufferingHandler.capacity"
@@ -3660,62 +3182,29 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "buffer"
+    fully_qualified_name: "logging.handlers.BufferingHandler.buffer"
+    type_annotation {
+      pretty_printed_name: "builtins.list[logging.LogRecord]"
+      args {
+        pretty_printed_name: "logging.LogRecord"
+        fully_qualified_name: "logging.LogRecord"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "MemoryHandler"
   fully_qualified_name: "logging.handlers.MemoryHandler"
   super_classes: "logging.handlers.BufferingHandler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.MemoryHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.MemoryHandler"
-        fully_qualified_name: "logging.handlers.MemoryHandler"
-      }
-    }
-    parameters {
-      name: "capacity"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flushLevel"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "target"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[logging.Handler,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "logging.Handler"
-          fully_qualified_name: "logging.Handler"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.MemoryHandler.__init__"
@@ -3800,31 +3289,6 @@ classes {
       name: "target"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "logging.Handler"
-        fully_qualified_name: "logging.Handler"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setTarget"
-    fully_qualified_name: "logging.handlers.MemoryHandler.setTarget"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.MemoryHandler"
-        fully_qualified_name: "logging.handlers.MemoryHandler"
-      }
-    }
-    parameters {
-      name: "target"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
         pretty_printed_name: "Union[logging.Handler,None]"
         kind: UNION
         args {
@@ -3844,7 +3308,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3906,48 +3369,6 @@ classes {
   name: "HTTPHandler"
   fully_qualified_name: "logging.handlers.HTTPHandler"
   super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.HTTPHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.HTTPHandler"
-        fully_qualified_name: "logging.handlers.HTTPHandler"
-      }
-    }
-    parameters {
-      name: "host"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "url"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "method"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.HTTPHandler.__init__"
@@ -4077,7 +3498,6 @@ classes {
         fully_qualified_name: "logging.LogRecord"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4119,7 +3539,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4236,343 +3655,9 @@ classes {
   }
 }
 classes {
-  name: "BaseRotatingHandler"
-  fully_qualified_name: "logging.handlers.BaseRotatingHandler"
-  super_classes: "logging.FileHandler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
-        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delay"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
-        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "delay"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "errors"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "rotation_filename"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotation_filename"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
-        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
-      }
-    }
-    parameters {
-      name: "default_name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "rotate"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotate"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.BaseRotatingHandler"
-        fully_qualified_name: "logging.handlers.BaseRotatingHandler"
-      }
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "dest"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "namer"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.namer"
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "rotator"
-    fully_qualified_name: "logging.handlers.BaseRotatingHandler.rotator"
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
   name: "QueueHandler"
   fully_qualified_name: "logging.handlers.QueueHandler"
   super_classes: "logging.Handler"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.QueueHandler.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.QueueHandler"
-        fully_qualified_name: "logging.handlers.QueueHandler"
-      }
-    }
-    parameters {
-      name: "queue"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "queue.Queue[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "queue.Queue"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.QueueHandler.__init__"
@@ -4612,6 +3697,8 @@ classes {
         }
       }
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -4687,20 +3774,6 @@ classes {
     name: "queue"
     fully_qualified_name: "logging.handlers.QueueHandler.queue"
     type_annotation {
-      pretty_printed_name: "queue.Queue[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "queue.Queue"
-    }
-    valid_for: "35"
-    valid_for: "36"
-  }
-  attributes {
-    name: "queue"
-    fully_qualified_name: "logging.handlers.QueueHandler.queue"
-    type_annotation {
       pretty_printed_name: "Union[queue.SimpleQueue[Any],queue.Queue[Any]]"
       kind: UNION
       args {
@@ -4720,6 +3793,8 @@ classes {
         fully_qualified_name: "queue.Queue"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -4730,53 +3805,6 @@ classes {
   name: "QueueListener"
   fully_qualified_name: "logging.handlers.QueueListener"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "logging.handlers.QueueListener.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "logging.handlers.QueueListener"
-        fully_qualified_name: "logging.handlers.QueueListener"
-      }
-    }
-    parameters {
-      name: "queue"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "queue.Queue[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "queue.Queue"
-      }
-    }
-    parameters {
-      name: "handlers"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "logging.Handler"
-        fully_qualified_name: "logging.Handler"
-      }
-    }
-    parameters {
-      name: "respect_handler_level"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-  }
   methods {
     name: "__init__"
     fully_qualified_name: "logging.handlers.QueueListener.__init__"
@@ -4833,6 +3861,8 @@ classes {
       }
       has_default: true
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -5004,17 +4034,33 @@ classes {
     name: "handlers"
     fully_qualified_name: "logging.handlers.QueueListener.handlers"
     type_annotation {
-      pretty_printed_name: "Tuple[logging.Handler]"
+      pretty_printed_name: "Tuple[logging.Handler,Any]"
       kind: TUPLE
       args {
         pretty_printed_name: "logging.Handler"
         fully_qualified_name: "logging.Handler"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "handlers"
+    fully_qualified_name: "logging.handlers.QueueListener.handlers"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[logging.Handler]"
+      args {
+        pretty_printed_name: "logging.Handler"
+        fully_qualified_name: "logging.Handler"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -5031,20 +4077,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "queue"
-    fully_qualified_name: "logging.handlers.QueueListener.queue"
-    type_annotation {
-      pretty_printed_name: "queue.Queue[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "queue.Queue"
-    }
-    valid_for: "35"
-    valid_for: "36"
   }
   attributes {
     name: "queue"
@@ -5069,11 +4101,24 @@ classes {
         fully_qualified_name: "queue.Queue"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
+}
+vars {
+  name: "http"
+  fully_qualified_name: "http"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 vars {
   name: "DEFAULT_TCP_LOGGING_PORT"
@@ -5082,7 +4127,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5097,7 +4141,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5112,7 +4155,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5127,7 +4169,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5142,7 +4183,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -5157,18 +4197,6 @@ vars {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "http"
-  fully_qualified_name: "http"
-  is_imported_module: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

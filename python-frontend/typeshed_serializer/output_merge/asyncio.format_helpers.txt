@@ -59,6 +59,8 @@ functions {
       fully_qualified_name: "typing.Iterable"
     }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -99,6 +101,8 @@ functions {
       fully_qualified_name: "builtins.dict"
     }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -156,6 +160,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -202,6 +208,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -229,37 +237,8 @@ overloaded_functions {
       name: "func"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[types.FunctionType,asyncio.format_helpers._HasWrapper,functools.partial[Any],functools.partialmethod[Any]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[types.FunctionType,asyncio.format_helpers._HasWrapper,functools.partial[Any],functools.partialmethod[Any]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.FunctionType"
-            fully_qualified_name: "types.FunctionType"
-          }
-          args {
-            pretty_printed_name: "asyncio.format_helpers._HasWrapper"
-            fully_qualified_name: "asyncio.format_helpers._HasWrapper"
-          }
-          args {
-            pretty_printed_name: "functools.partial[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "functools.partial"
-          }
-          args {
-            pretty_printed_name: "functools.partialmethod[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "functools.partialmethod"
-          }
-        }
-        fully_qualified_name: "asyncio.format_helpers._FuncType"
+        pretty_printed_name: "UnboundType[_FuncType]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -301,6 +280,22 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FuncType"
+  fully_qualified_name: "asyncio.format_helpers._FuncType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

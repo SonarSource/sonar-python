@@ -22,38 +22,8 @@ classes {
       name: "stmt"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "timeit._str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-        }
-        fully_qualified_name: "timeit._stmt"
+        pretty_printed_name: "UnboundType[_Stmt]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -61,38 +31,8 @@ classes {
       name: "setup"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.unicode"
-                fully_qualified_name: "builtins.unicode"
-              }
-            }
-            fully_qualified_name: "timeit._str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-        }
-        fully_qualified_name: "timeit._stmt"
+        pretty_printed_name: "UnboundType[_Stmt]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -100,104 +40,8 @@ classes {
       name: "timer"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "timeit._Timer"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "timeit.Timer.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "timeit.Timer"
-        fully_qualified_name: "timeit.Timer"
-      }
-    }
-    parameters {
-      name: "stmt"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-        }
-        fully_qualified_name: "timeit._Stmt"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "setup"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-        }
-        fully_qualified_name: "timeit._Stmt"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "timer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "timeit._Timer"
+        pretty_printed_name: "UnboundType[_Timer]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -269,7 +113,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -301,7 +144,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -346,7 +188,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -405,7 +246,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -424,38 +264,8 @@ functions {
     name: "stmt"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "timeit._str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._stmt"
+      pretty_printed_name: "UnboundType[_Stmt]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -463,38 +273,8 @@ functions {
     name: "setup"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "timeit._str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._stmt"
+      pretty_printed_name: "UnboundType[_Stmt]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -502,105 +282,8 @@ functions {
     name: "timer"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "timeit._Timer"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "number"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "timeit"
-  fully_qualified_name: "timeit.timeit"
-  return_annotation {
-    pretty_printed_name: "builtins.float"
-    fully_qualified_name: "builtins.float"
-  }
-  parameters {
-    name: "stmt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._Stmt"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "setup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._Stmt"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "timer"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "timeit._Timer"
+      pretty_printed_name: "UnboundType[_Timer]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -660,38 +343,8 @@ functions {
     name: "stmt"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "timeit._str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._stmt"
+      pretty_printed_name: "UnboundType[_Stmt]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -699,38 +352,8 @@ functions {
     name: "setup"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.unicode]],CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.unicode"
-              fully_qualified_name: "builtins.unicode"
-            }
-          }
-          fully_qualified_name: "timeit._str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._stmt"
+      pretty_printed_name: "UnboundType[_Stmt]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -738,118 +361,8 @@ functions {
     name: "timer"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "timeit._Timer"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "repeat"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "number"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "repeat"
-  fully_qualified_name: "timeit.repeat"
-  return_annotation {
-    pretty_printed_name: "builtins.list[builtins.float]"
-    args {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "stmt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._Stmt"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "setup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,CallableType[builtins.function]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-      }
-      fully_qualified_name: "timeit._Stmt"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "timer"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "timeit._Timer"
+      pretty_printed_name: "UnboundType[_Timer]"
+      kind: UNBOUND
     }
     has_default: true
   }
@@ -952,7 +465,52 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "timeit.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Timer"
+  fully_qualified_name: "timeit._Timer"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Stmt"
+  fully_qualified_name: "timeit._Stmt"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -964,19 +522,9 @@ vars {
   name: "default_timer"
   fully_qualified_name: "timeit.default_timer"
   type_annotation {
-    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    fully_qualified_name: "timeit._Timer"
+    pretty_printed_name: "UnboundType[_Timer]"
+    kind: UNBOUND
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

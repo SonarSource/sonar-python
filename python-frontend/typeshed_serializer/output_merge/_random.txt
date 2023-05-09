@@ -27,7 +27,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -53,12 +52,19 @@ classes {
     parameters {
       name: "__n"
       type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
+        pretty_printed_name: "Union[builtins.object,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -70,17 +76,8 @@ classes {
     name: "getstate"
     fully_qualified_name: "_random.Random.getstate"
     return_annotation {
-      pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.tuple[builtins.int]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        fully_qualified_name: "builtins.tuple"
-      }
-      fully_qualified_name: "_random._State"
+      pretty_printed_name: "UnboundType[_State]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -90,7 +87,6 @@ classes {
         fully_qualified_name: "_random.Random"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -116,20 +112,10 @@ classes {
     parameters {
       name: "__state"
       type_annotation {
-        pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        fully_qualified_name: "_random._State"
+        pretty_printed_name: "UnboundType[_State]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -152,7 +138,6 @@ classes {
         fully_qualified_name: "_random.Random"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -182,7 +167,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -190,32 +174,20 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "jumpahead"
-    fully_qualified_name: "_random.Random.jumpahead"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_random.Random"
-        fully_qualified_name: "_random.Random"
-      }
-    }
-    parameters {
-      name: "i"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_State"
+  fully_qualified_name: "_random._State"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

@@ -28,7 +28,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -36,14 +35,28 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  has_decorators: true
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "__call__"
+    fully_qualified_name: "_weakref.CallableProxyType.__call__"
+    type_annotation {
+      pretty_printed_name: "_weakref._C"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ProxyType"
@@ -74,7 +87,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -82,8 +94,8 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  has_decorators: true
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -96,35 +108,37 @@ classes {
   fully_qualified_name: "_weakref.ReferenceType"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "_weakref.ReferenceType.__init__"
+    name: "__new__"
+    fully_qualified_name: "_weakref.ReferenceType.__new__"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
-      name: "self"
+      name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+        pretty_printed_name: "Type[_weakref.ReferenceType[_weakref._T]]"
+        kind: TYPE
         args {
-          pretty_printed_name: "_weakref._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
+          args {
+            pretty_printed_name: "_weakref._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_weakref.ReferenceType"
         }
-        fully_qualified_name: "_weakref.ReferenceType"
       }
     }
     parameters {
-      name: "o"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__o"
       type_annotation {
         pretty_printed_name: "_weakref._T"
         kind: TYPE_VAR
       }
     }
     parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__callback"
       type_annotation {
         pretty_printed_name: "Union[CallableType[builtins.function],None]"
         kind: UNION
@@ -143,7 +157,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -178,34 +191,6 @@ classes {
         fully_qualified_name: "_weakref.ReferenceType"
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "_weakref.ReferenceType.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_weakref.ReferenceType[_weakref._T]"
-        args {
-          pretty_printed_name: "_weakref._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "_weakref.ReferenceType"
-      }
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -249,7 +234,6 @@ classes {
     valid_for: "310"
   }
   is_generic: true
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -289,7 +273,6 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -309,14 +292,12 @@ functions {
     fully_qualified_name: "builtins.list"
   }
   parameters {
-    name: "object"
-    kind: POSITIONAL_OR_KEYWORD
+    name: "__object"
     type_annotation {
       pretty_printed_name: "Any"
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -339,16 +320,14 @@ overloaded_functions {
       fully_qualified_name: "_weakref.CallableProxyType"
     }
     parameters {
-      name: "object"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__object"
       type_annotation {
         pretty_printed_name: "_weakref._C"
         kind: TYPE_VAR
       }
     }
     parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__callback"
       type_annotation {
         pretty_printed_name: "Union[CallableType[builtins.function],None]"
         kind: UNION
@@ -379,16 +358,14 @@ overloaded_functions {
       kind: ANY
     }
     parameters {
-      name: "object"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__object"
       type_annotation {
         pretty_printed_name: "_weakref._T"
         kind: TYPE_VAR
       }
     }
     parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__callback"
       type_annotation {
         pretty_printed_name: "Union[CallableType[builtins.function],None]"
         kind: UNION
@@ -411,7 +388,6 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

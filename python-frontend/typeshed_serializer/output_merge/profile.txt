@@ -56,7 +56,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -87,7 +86,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -118,7 +116,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -141,7 +138,6 @@ classes {
         fully_qualified_name: "profile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -181,7 +177,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -208,62 +203,8 @@ classes {
       name: "file"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "dump_stats"
-    fully_qualified_name: "profile.Profile.dump_stats"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "profile.Profile"
-        fully_qualified_name: "profile.Profile"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -288,7 +229,6 @@ classes {
         fully_qualified_name: "profile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -311,7 +251,6 @@ classes {
         fully_qualified_name: "profile.Profile"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -323,15 +262,15 @@ classes {
     name: "run"
     fully_qualified_name: "profile.Profile.run"
     return_annotation {
-      pretty_printed_name: "profile._SelfT"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "profile._SelfT"
-        kind: TYPE_VAR
+        pretty_printed_name: "profile.Profile"
+        fully_qualified_name: "profile.Profile"
       }
     }
     parameters {
@@ -342,7 +281,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -354,15 +292,15 @@ classes {
     name: "runctx"
     fully_qualified_name: "profile.Profile.runctx"
     return_annotation {
-      pretty_printed_name: "profile._SelfT"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "profile._SelfT"
-        kind: TYPE_VAR
+        pretty_printed_name: "profile.Profile"
+        fully_qualified_name: "profile.Profile"
       }
     }
     parameters {
@@ -405,7 +343,6 @@ classes {
         fully_qualified_name: "builtins.dict"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -431,12 +368,8 @@ classes {
     parameters {
       name: "__func"
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -455,7 +388,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -495,7 +427,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -503,7 +434,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -517,7 +447,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -529,30 +458,13 @@ classes {
     name: "stats"
     fully_qualified_name: "profile.Profile.stats"
     type_annotation {
-      pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]]"
+      pretty_printed_name: "builtins.dict[UnboundType[_Label],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[UnboundType[_Label],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]]"
       args {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "profile._Label"
+        pretty_printed_name: "UnboundType[_Label]"
+        kind: UNBOUND
       }
       args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]"
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.dict[UnboundType[_Label],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]]"
         kind: TUPLE
         args {
           pretty_printed_name: "builtins.int"
@@ -571,27 +483,10 @@ classes {
           fully_qualified_name: "builtins.int"
         }
         args {
-          pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]"
+          pretty_printed_name: "builtins.dict[UnboundType[_Label],Tuple[builtins.int,builtins.int,builtins.int,builtins.int]]"
           args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int,builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "profile._Label"
+            pretty_printed_name: "UnboundType[_Label]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int]"
@@ -618,7 +513,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -676,7 +570,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -765,7 +658,52 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "profile.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "profile._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Label"
+  fully_qualified_name: "profile._Label"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

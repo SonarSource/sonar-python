@@ -10,12 +10,20 @@ functions {
     name: "main"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Awaitable[asyncio.runners._T]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.runners._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "asyncio.runners._T"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.Awaitable"
+      fully_qualified_name: "typing.Coroutine"
     }
   }
   parameters {
@@ -27,6 +35,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
 }
 functions {
@@ -40,12 +50,20 @@ functions {
     name: "main"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Awaitable[asyncio.runners._T]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.runners._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "asyncio.runners._T"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.Awaitable"
+      fully_qualified_name: "typing.Coroutine"
     }
   }
   parameters {
@@ -65,6 +83,24 @@ functions {
     }
     has_default: true
   }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.runners.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"

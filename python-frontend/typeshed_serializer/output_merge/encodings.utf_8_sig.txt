@@ -1,0 +1,494 @@
+fully_qualified_name: "encodings.utf_8_sig"
+classes {
+  name: "IncrementalEncoder"
+  fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder"
+  super_classes: "codecs.IncrementalEncoder"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalEncoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder"
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "encode"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder.encode"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalEncoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder.getstate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalEncoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalEncoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalEncoder"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IncrementalDecoder"
+  fully_qualified_name: "encodings.utf_8_sig.IncrementalDecoder"
+  super_classes: "codecs.BufferedIncrementalDecoder"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalDecoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalDecoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalDecoder"
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_buffer_decode"
+    fully_qualified_name: "encodings.utf_8_sig.IncrementalDecoder._buffer_decode"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.IncrementalDecoder"
+        fully_qualified_name: "encodings.utf_8_sig.IncrementalDecoder"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StreamWriter"
+  fully_qualified_name: "encodings.utf_8_sig.StreamWriter"
+  super_classes: "codecs.StreamWriter"
+  methods {
+    name: "encode"
+    fully_qualified_name: "encodings.utf_8_sig.StreamWriter.encode"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.StreamWriter"
+        fully_qualified_name: "encodings.utf_8_sig.StreamWriter"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StreamReader"
+  fully_qualified_name: "encodings.utf_8_sig.StreamReader"
+  super_classes: "codecs.StreamReader"
+  methods {
+    name: "decode"
+    fully_qualified_name: "encodings.utf_8_sig.StreamReader.decode"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "encodings.utf_8_sig.StreamReader"
+        fully_qualified_name: "encodings.utf_8_sig.StreamReader"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getregentry"
+  fully_qualified_name: "encodings.utf_8_sig.getregentry"
+  return_annotation {
+    pretty_printed_name: "Tuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "codecs._Encoder"
+      fully_qualified_name: "codecs._Encoder"
+    }
+    args {
+      pretty_printed_name: "codecs._Decoder"
+      fully_qualified_name: "codecs._Decoder"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamReader"
+      fully_qualified_name: "codecs._StreamReader"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamWriter"
+      fully_qualified_name: "codecs._StreamWriter"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "encode"
+  fully_qualified_name: "encodings.utf_8_sig.encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "input"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "decode"
+  fully_qualified_name: "encodings.utf_8_sig.decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "input"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

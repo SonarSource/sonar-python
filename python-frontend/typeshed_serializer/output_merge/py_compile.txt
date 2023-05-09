@@ -22,6 +22,59 @@ classes {
       name: "exc_type"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "exc_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "py_compile.PyCompileError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "py_compile.PyCompileError"
+        fully_qualified_name: "py_compile.PyCompileError"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "Type[builtins.BaseException]"
         kind: TYPE
         args {
@@ -55,15 +108,9 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -77,7 +124,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -92,7 +138,6 @@ classes {
       pretty_printed_name: "builtins.BaseException"
       fully_qualified_name: "builtins.BaseException"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -107,7 +152,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -122,7 +166,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -136,6 +179,8 @@ classes {
   fully_qualified_name: "py_compile.PycInvalidationMode"
   super_classes: "enum.Enum"
   is_enum: true
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -147,6 +192,8 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -159,6 +206,8 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -171,6 +220,8 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -178,163 +229,18 @@ classes {
   }
 }
 functions {
-  name: "compile"
-  fully_qualified_name: "py_compile.compile"
+  name: "_get_default_invalidation_mode"
+  fully_qualified_name: "py_compile._get_default_invalidation_mode"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-      }
-      fully_qualified_name: "py_compile._EitherStr"
-    }
-  }
-  parameters {
-    name: "cfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "dfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "doraise"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "compile"
-  fully_qualified_name: "py_compile.compile"
-  return_annotation {
-    pretty_printed_name: "Union[typing.AnyStr,None]"
-    kind: UNION
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    args {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-  }
-  parameters {
-    name: "file"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-  }
-  parameters {
-    name: "cfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.AnyStr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "dfile"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.AnyStr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "doraise"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "optimize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
+    pretty_printed_name: "py_compile.PycInvalidationMode"
+    fully_qualified_name: "py_compile.PycInvalidationMode"
   }
   valid_for: "35"
   valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
   name: "compile"
@@ -428,6 +334,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
 }
 functions {
@@ -546,36 +454,6 @@ functions {
     name: "args"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.list[builtins.unicode],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.list[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "main"
-  fully_qualified_name: "py_compile.main"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "args"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "Union[builtins.list[builtins.str],None]"
       kind: UNION
       args {
@@ -598,15 +476,29 @@ functions {
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
-  valid_for: "310"
 }
 functions {
-  name: "_get_default_invalidation_mode"
-  fully_qualified_name: "py_compile._get_default_invalidation_mode"
+  name: "main"
+  fully_qualified_name: "py_compile.main"
   return_annotation {
-    pretty_printed_name: "py_compile.PycInvalidationMode"
-    fully_qualified_name: "py_compile.PycInvalidationMode"
+    pretty_printed_name: "None"
+    kind: NONE
   }
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "py_compile.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

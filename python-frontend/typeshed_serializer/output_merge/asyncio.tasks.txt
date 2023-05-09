@@ -14,9 +14,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -26,45 +26,28 @@ classes {
       name: "coro"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+        pretty_printed_name: "Union[typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co],typing.Awaitable[asyncio.tasks._T_co]]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T]"
+          pretty_printed_name: "typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "asyncio.futures.Future[builtins.object]"
-                args {
-                  pretty_printed_name: "builtins.object"
-                  fully_qualified_name: "builtins.object"
-                }
-                fully_qualified_name: "asyncio.futures.Future"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-            fully_qualified_name: "asyncio.tasks._TaskYieldType"
+            pretty_printed_name: "UnboundType[_TaskYieldType]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "None"
             kind: NONE
           }
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "typing.Generator"
         }
         args {
-          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "typing.Awaitable"
@@ -95,9 +78,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -107,45 +90,28 @@ classes {
       name: "coro"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+        pretty_printed_name: "Union[typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co],typing.Awaitable[asyncio.tasks._T_co]]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T]"
+          pretty_printed_name: "typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "asyncio.futures.Future[builtins.object]"
-                args {
-                  pretty_printed_name: "builtins.object"
-                  fully_qualified_name: "builtins.object"
-                }
-                fully_qualified_name: "asyncio.futures.Future"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-            fully_qualified_name: "asyncio.tasks._TaskYieldType"
+            pretty_printed_name: "UnboundType[_TaskYieldType]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "None"
             kind: NONE
           }
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "typing.Generator"
         }
         args {
-          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "typing.Awaitable"
@@ -183,31 +149,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__repr__"
-    fully_qualified_name: "asyncio.tasks.Task.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
-        args {
-          pretty_printed_name: "asyncio.tasks._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "asyncio.tasks.Task"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "get_stack"
     fully_qualified_name: "asyncio.tasks.Task.get_stack"
     return_annotation {
@@ -222,9 +163,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -265,9 +206,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -315,69 +256,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "cancel"
-    fully_qualified_name: "asyncio.tasks.Task.cancel"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
-        args {
-          pretty_printed_name: "asyncio.tasks._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "asyncio.tasks.Task"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "cancel"
-    fully_qualified_name: "asyncio.tasks.Task.cancel"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
-        args {
-          pretty_printed_name: "asyncio.tasks._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "asyncio.tasks.Task"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "current_task"
     fully_qualified_name: "asyncio.tasks.Task.current_task"
     return_annotation {
@@ -400,12 +278,12 @@ classes {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T]]"
+        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T_co]]"
         kind: TYPE
         args {
-          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "asyncio.tasks.Task"
@@ -456,12 +334,12 @@ classes {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T]]"
+        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T_co]]"
         kind: TYPE
         args {
-          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "asyncio.tasks.Task"
@@ -494,82 +372,31 @@ classes {
     valid_for: "38"
   }
   methods {
-    name: "_wakeup"
-    fully_qualified_name: "asyncio.tasks.Task._wakeup"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
-        args {
-          pretty_printed_name: "asyncio.tasks._T"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "asyncio.tasks.Task"
-      }
-    }
-    parameters {
-      name: "fut"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.futures.Future[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "asyncio.futures.Future"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
     name: "get_coro"
     fully_qualified_name: "asyncio.tasks.Task.get_coro"
     return_annotation {
-      pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+      pretty_printed_name: "Union[typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co],typing.Awaitable[asyncio.tasks._T_co]]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T]"
+        pretty_printed_name: "typing.Generator[UnboundType[_TaskYieldType],None,asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "asyncio.futures.Future[builtins.object]"
-              args {
-                pretty_printed_name: "builtins.object"
-                fully_qualified_name: "builtins.object"
-              }
-              fully_qualified_name: "asyncio.futures.Future"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "asyncio.tasks._TaskYieldType"
+          pretty_printed_name: "UnboundType[_TaskYieldType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
           kind: NONE
         }
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.Generator"
       }
       args {
-        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.Awaitable"
@@ -579,9 +406,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -602,9 +429,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -625,9 +452,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
         args {
-          pretty_printed_name: "asyncio.tasks._T"
+          pretty_printed_name: "asyncio.tasks._T_co"
           kind: TYPE_VAR
         }
         fully_qualified_name: "asyncio.tasks.Task"
@@ -655,12 +482,12 @@ classes {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T]]"
+        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T_co]]"
         kind: TYPE
         args {
-          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
           args {
-            pretty_printed_name: "asyncio.tasks._T"
+            pretty_printed_name: "asyncio.tasks._T_co"
             kind: TYPE_VAR
           }
           fully_qualified_name: "asyncio.tasks.Task"
@@ -706,47 +533,10 @@ functions {
     name: "fs"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Iterable[TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]]"
+      pretty_printed_name: "typing.Iterable[UnboundType[_FutureLike]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterable"
     }
@@ -810,47 +600,10 @@ functions {
     name: "fs"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Iterable[TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]]"
+      pretty_printed_name: "typing.Iterable[UnboundType[_FutureLike]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Iterable"
     }
@@ -889,45 +642,8 @@ functions {
     name: "coro"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "asyncio.futures.Future"
-        }
-        args {
-          pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Generator"
-        }
-        args {
-          pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Awaitable"
-        }
-      }
-      fully_qualified_name: "asyncio.tasks._FutureT"
+      pretty_printed_name: "UnboundType[_FutureLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -960,45 +676,8 @@ functions {
     name: "arg"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "asyncio.futures.Future"
-        }
-        args {
-          pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Generator"
-        }
-        args {
-          pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Awaitable"
-        }
-      }
-      fully_qualified_name: "asyncio.tasks._FutureT"
+      pretty_printed_name: "UnboundType[_FutureLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -1039,127 +718,9 @@ functions {
     name: "arg"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "asyncio.futures.Future"
-        }
-        args {
-          pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Generator"
-        }
-        args {
-          pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Awaitable"
-        }
-      }
-      fully_qualified_name: "asyncio.tasks._FutureT"
+      pretty_printed_name: "UnboundType[_FutureLike]"
+      kind: UNBOUND
     }
-  }
-  valid_for: "310"
-}
-functions {
-  name: "sleep"
-  fully_qualified_name: "asyncio.tasks.sleep"
-  return_annotation {
-    pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
-    args {
-      pretty_printed_name: "asyncio.tasks._T"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "asyncio.futures.Future"
-  }
-  parameters {
-    name: "delay"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-  }
-  parameters {
-    name: "result"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "asyncio.tasks._T"
-      kind: TYPE_VAR
-    }
-    has_default: true
-  }
-  parameters {
-    name: "loop"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-}
-functions {
-  name: "sleep"
-  fully_qualified_name: "asyncio.tasks.sleep"
-  return_annotation {
-    pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
-    args {
-      pretty_printed_name: "asyncio.tasks._T"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "asyncio.futures.Future"
-  }
-  parameters {
-    name: "delay"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-  }
-  parameters {
-    name: "result"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "asyncio.tasks._T"
-      kind: TYPE_VAR
-    }
-    has_default: true
   }
   valid_for: "310"
 }
@@ -1167,56 +728,27 @@ functions {
   name: "wait_for"
   fully_qualified_name: "asyncio.tasks.wait_for"
   return_annotation {
-    pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
     args {
       pretty_printed_name: "asyncio.tasks._T"
       kind: TYPE_VAR
     }
-    fully_qualified_name: "asyncio.futures.Future"
+    fully_qualified_name: "typing.Coroutine"
   }
   parameters {
     name: "fut"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "asyncio.futures.Future"
-        }
-        args {
-          pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Generator"
-        }
-        args {
-          pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Awaitable"
-        }
-      }
-      fully_qualified_name: "asyncio.tasks._FutureT"
+      pretty_printed_name: "UnboundType[_FutureLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -1252,6 +784,7 @@ functions {
     }
     has_default: true
   }
+  is_asynchronous: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1262,56 +795,27 @@ functions {
   name: "wait_for"
   fully_qualified_name: "asyncio.tasks.wait_for"
   return_annotation {
-    pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
     args {
       pretty_printed_name: "asyncio.tasks._T"
       kind: TYPE_VAR
     }
-    fully_qualified_name: "asyncio.futures.Future"
+    fully_qualified_name: "typing.Coroutine"
   }
   parameters {
     name: "fut"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "asyncio.futures.Future"
-        }
-        args {
-          pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Generator"
-        }
-        args {
-          pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-          args {
-            pretty_printed_name: "UnboundType[_T]"
-            kind: UNBOUND
-          }
-          fully_qualified_name: "typing.Awaitable"
-        }
-      }
-      fully_qualified_name: "asyncio.tasks._FutureT"
+      pretty_printed_name: "UnboundType[_FutureLike]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -1330,6 +834,7 @@ functions {
       }
     }
   }
+  is_asynchronous: true
   valid_for: "310"
 }
 functions {
@@ -1364,6 +869,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -1384,30 +891,13 @@ functions {
     name: "coro"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+      pretty_printed_name: "Union[typing.Generator[Any,None,asyncio.tasks._T],typing.Coroutine[Any,Any,asyncio.tasks._T]]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T]"
+        pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
         args {
-          pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "asyncio.futures.Future[builtins.object]"
-              args {
-                pretty_printed_name: "builtins.object"
-                fully_qualified_name: "builtins.object"
-              }
-              fully_qualified_name: "asyncio.futures.Future"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "asyncio.tasks._TaskYieldType"
+          pretty_printed_name: "Any"
+          kind: ANY
         }
         args {
           pretty_printed_name: "None"
@@ -1420,15 +910,25 @@ functions {
         fully_qualified_name: "typing.Generator"
       }
       args {
-        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
         args {
           pretty_printed_name: "asyncio.tasks._T"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "typing.Awaitable"
+        fully_qualified_name: "typing.Coroutine"
       }
     }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
 }
 functions {
@@ -1446,30 +946,13 @@ functions {
     name: "coro"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+      pretty_printed_name: "Union[typing.Generator[Any,None,asyncio.tasks._T],typing.Coroutine[Any,Any,asyncio.tasks._T]]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T]"
+        pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
         args {
-          pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "asyncio.futures.Future[builtins.object]"
-              args {
-                pretty_printed_name: "builtins.object"
-                fully_qualified_name: "builtins.object"
-              }
-              fully_qualified_name: "asyncio.futures.Future"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
-          fully_qualified_name: "asyncio.tasks._TaskYieldType"
+          pretty_printed_name: "Any"
+          kind: ANY
         }
         args {
           pretty_printed_name: "None"
@@ -1482,12 +965,20 @@ functions {
         fully_qualified_name: "typing.Generator"
       }
       args {
-        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
         args {
           pretty_printed_name: "asyncio.tasks._T"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "typing.Awaitable"
+        fully_qualified_name: "typing.Coroutine"
       }
     }
   }
@@ -1548,6 +1039,128 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "_enter_task"
+  fully_qualified_name: "asyncio.tasks._enter_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "_leave_task"
+  fully_qualified_name: "asyncio.tasks._leave_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "_register_task"
+  fully_qualified_name: "asyncio.tasks._register_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "_unregister_task"
+  fully_qualified_name: "asyncio.tasks._unregister_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -1662,48 +1275,10 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1760,93 +1335,17 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1907,138 +1406,24 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -2103,183 +1488,31 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -2348,228 +1581,38 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future5"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -2610,366 +1653,6 @@ overloaded_functions {
     name: "gather"
     fully_qualified_name: "asyncio.tasks.gather"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[builtins.list[Any]]"
-      args {
-        pretty_printed_name: "builtins.list[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "asyncio.futures.Future"
-    }
-    parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future6"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coros_or_futures"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "loop"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "return_exceptions"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "gather"
-    fully_qualified_name: "asyncio.tasks.gather"
-    return_annotation {
       pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]]"
       args {
         pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]"
@@ -2990,48 +1673,10 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3058,7 +1703,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -3100,93 +1744,17 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3213,7 +1781,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -3267,138 +1834,24 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3425,7 +1878,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -3491,183 +1943,31 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3694,7 +1994,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -3772,228 +2071,90 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future5"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
         args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
         }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[builtins.list[Any]]"
+      args {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "coros_or_futures"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4051,48 +2212,10 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4132,93 +2255,17 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4262,138 +2309,24 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4441,183 +2374,31 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4669,228 +2450,38 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future5"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4903,349 +2494,6 @@ overloaded_functions {
           pretty_printed_name: "builtins.bool"
           fully_qualified_name: "builtins.bool"
         }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "gather"
-    fully_qualified_name: "asyncio.tasks.gather"
-    return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[builtins.list[Any]]"
-      args {
-        pretty_printed_name: "builtins.list[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "asyncio.futures.Future"
-    }
-    parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coro_or_future6"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "coros_or_futures"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
-      }
-    }
-    parameters {
-      name: "return_exceptions"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
       }
       has_default: true
     }
@@ -5277,48 +2525,10 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5328,7 +2538,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -5370,93 +2579,17 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5466,7 +2599,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -5520,138 +2652,24 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5661,7 +2679,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -5727,183 +2744,31 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5913,7 +2778,6 @@ overloaded_functions {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -5991,228 +2855,73 @@ overloaded_functions {
       fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
-      name: "coro_or_future1"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future1"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future2"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future2"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future3"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future3"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future4"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future4"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
-        }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
-      name: "coro_or_future5"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__coro_or_future5"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[builtins.list[Any]]"
+      args {
+        pretty_printed_name: "builtins.list[Any]"
         args {
-          pretty_printed_name: "Union[asyncio.futures.Future[UnboundType[_T]],typing.Generator[Any,None,UnboundType[_T]],typing.Awaitable[UnboundType[_T]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "asyncio.futures.Future[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "asyncio.futures.Future"
-          }
-          args {
-            pretty_printed_name: "typing.Generator[Any,None,UnboundType[_T]]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Generator"
-          }
-          args {
-            pretty_printed_name: "typing.Awaitable[UnboundType[_T]]"
-            args {
-              pretty_printed_name: "UnboundType[_T]"
-              kind: UNBOUND
-            }
-            fully_qualified_name: "typing.Awaitable"
-          }
+          pretty_printed_name: "Any"
+          kind: ANY
         }
-        fully_qualified_name: "asyncio.tasks._FutureT"
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "coros_or_futures"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[_FutureLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -6231,13 +2940,213 @@ overloaded_functions {
   valid_for: "310"
 }
 overloaded_functions {
+  name: "sleep"
+  fullname: "asyncio.tasks.sleep"
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+overloaded_functions {
+  name: "sleep"
+  fullname: "asyncio.tasks.sleep"
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  valid_for: "310"
+}
+overloaded_functions {
   name: "wait"
   fullname: "asyncio.tasks.wait"
   definitions {
     name: "wait"
     fully_qualified_name: "asyncio.tasks.wait"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]"
         kind: TUPLE
@@ -6258,7 +3167,7 @@ overloaded_functions {
           fully_qualified_name: "builtins.set"
         }
       }
-      fully_qualified_name: "asyncio.futures.Future"
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "fs"
@@ -6317,13 +3226,22 @@ overloaded_functions {
     }
     has_decorators: true
     resolved_decorator_names: "overload"
+    is_asynchronous: true
     is_overload: true
   }
   definitions {
     name: "wait"
     fully_qualified_name: "asyncio.tasks.wait"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]"
         kind: TUPLE
@@ -6352,7 +3270,7 @@ overloaded_functions {
           fully_qualified_name: "builtins.set"
         }
       }
-      fully_qualified_name: "asyncio.futures.Future"
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "fs"
@@ -6415,6 +3333,7 @@ overloaded_functions {
     }
     has_decorators: true
     resolved_decorator_names: "overload"
+    is_asynchronous: true
     is_overload: true
   }
   valid_for: "35"
@@ -6430,7 +3349,15 @@ overloaded_functions {
     name: "wait"
     fully_qualified_name: "asyncio.tasks.wait"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]"
         kind: TUPLE
@@ -6451,7 +3378,7 @@ overloaded_functions {
           fully_qualified_name: "builtins.set"
         }
       }
-      fully_qualified_name: "asyncio.futures.Future"
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "fs"
@@ -6493,13 +3420,22 @@ overloaded_functions {
     }
     has_decorators: true
     resolved_decorator_names: "overload"
+    is_asynchronous: true
     is_overload: true
   }
   definitions {
     name: "wait"
     fully_qualified_name: "asyncio.tasks.wait"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]"
         kind: TUPLE
@@ -6528,7 +3464,7 @@ overloaded_functions {
           fully_qualified_name: "builtins.set"
         }
       }
-      fully_qualified_name: "asyncio.futures.Future"
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "fs"
@@ -6574,6 +3510,7 @@ overloaded_functions {
     }
     has_decorators: true
     resolved_decorator_names: "overload"
+    is_asynchronous: true
     is_overload: true
   }
   valid_for: "310"
@@ -6590,11 +3527,115 @@ vars {
   valid_for: "310"
 }
 vars {
-  name: "FIRST_EXCEPTION"
-  fully_qualified_name: "asyncio.tasks.FIRST_EXCEPTION"
+  name: "__all__"
+  fully_qualified_name: "asyncio.tasks.__all__"
   type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FutureLike"
+  fully_qualified_name: "asyncio.tasks._FutureLike"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_TaskYieldType"
+  fully_qualified_name: "asyncio.tasks._TaskYieldType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"
@@ -6607,8 +3648,30 @@ vars {
   name: "FIRST_COMPLETED"
   fully_qualified_name: "asyncio.tasks.FIRST_COMPLETED"
   type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FIRST_EXCEPTION"
+  fully_qualified_name: "asyncio.tasks.FIRST_EXCEPTION"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -6621,8 +3684,12 @@ vars {
   name: "ALL_COMPLETED"
   fully_qualified_name: "asyncio.tasks.ALL_COMPLETED"
   type_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
   valid_for: "35"
   valid_for: "36"

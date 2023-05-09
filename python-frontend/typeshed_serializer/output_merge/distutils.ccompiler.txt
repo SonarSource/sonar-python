@@ -45,7 +45,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -76,7 +75,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -111,7 +109,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -142,7 +139,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -177,7 +173,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -208,7 +203,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -243,7 +237,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -274,7 +267,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -309,7 +301,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -357,7 +348,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -388,7 +378,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -419,7 +408,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -454,7 +442,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -505,7 +492,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -565,7 +551,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -680,7 +665,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -711,7 +695,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -742,7 +725,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -773,7 +755,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -804,7 +785,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -864,35 +844,11 @@ classes {
       name: "macros"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]],None]"
+        pretty_printed_name: "Union[UnboundType[_Macro],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Tuple[builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Union[builtins.str,None]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-          }
+          pretty_printed_name: "UnboundType[_Macro]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -994,7 +950,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1080,7 +1035,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1317,7 +1271,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1508,7 +1461,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1737,7 +1689,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1966,7 +1917,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2018,46 +1968,13 @@ classes {
       name: "macros"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.list[TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]],None]"
+        pretty_printed_name: "Union[builtins.list[UnboundType[_Macro]],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.list[TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]]"
+          pretty_printed_name: "builtins.list[UnboundType[_Macro]]"
           args {
-            pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "Tuple[builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              args {
-                pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Union[builtins.str,None]"
-                  kind: UNION
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "None"
-                    kind: NONE
-                  }
-                }
-              }
-            }
-            fully_qualified_name: "distutils.ccompiler._Macro"
+            pretty_printed_name: "UnboundType[_Macro]"
+            kind: UNBOUND
           }
           fully_qualified_name: "builtins.list"
         }
@@ -2131,7 +2048,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2180,7 +2096,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2238,7 +2153,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2295,7 +2209,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2344,13 +2257,86 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "execute"
+    fully_qualified_name: "distutils.ccompiler.CCompiler.execute"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "distutils.ccompiler.CCompiler"
+        fully_qualified_name: "distutils.ccompiler.CCompiler"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "execute"
@@ -2417,11 +2403,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2452,7 +2433,6 @@ classes {
         fully_qualified_name: "builtins.list"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2492,7 +2472,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2531,7 +2510,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2571,7 +2549,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2602,7 +2579,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2633,7 +2609,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2641,7 +2616,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2655,7 +2629,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2670,7 +2643,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2685,7 +2657,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2708,7 +2679,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2720,47 +2690,13 @@ classes {
     name: "macros"
     fully_qualified_name: "distutils.ccompiler.CCompiler.macros"
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]]"
+      pretty_printed_name: "builtins.list[UnboundType[_Macro]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.str,None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-          }
-        }
-        fully_qualified_name: "distutils.ccompiler._Macro"
+        pretty_printed_name: "UnboundType[_Macro]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2779,7 +2715,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2798,7 +2733,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2817,7 +2751,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2836,7 +2769,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2855,7 +2787,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2919,7 +2850,6 @@ functions {
       fully_qualified_name: "builtins.list"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2942,43 +2872,10 @@ functions {
     name: "macros"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]]"
+      pretty_printed_name: "builtins.list[UnboundType[_Macro]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str],Tuple[builtins.str,Union[builtins.str,None]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.str,None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-          }
-        }
-        fully_qualified_name: "distutils.ccompiler._Macro"
+        pretty_printed_name: "UnboundType[_Macro]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
@@ -2995,7 +2892,6 @@ functions {
       fully_qualified_name: "builtins.list"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3044,7 +2940,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3120,7 +3015,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3135,7 +3029,20 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Macro"
+  fully_qualified_name: "distutils.ccompiler._Macro"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

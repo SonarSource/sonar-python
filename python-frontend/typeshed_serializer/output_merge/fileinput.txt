@@ -1,106 +1,101 @@
 fully_qualified_name: "fileinput"
 classes {
-  name: "FileInput"
-  fully_qualified_name: "fileinput.FileInput"
-  super_classes: "typing.Iterable"
+  name: "_HasReadlineAndFileno"
+  fully_qualified_name: "fileinput._HasReadlineAndFileno"
+  super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "fileinput.FileInput.__init__"
+    name: "readline"
+    fully_qualified_name: "fileinput._HasReadlineAndFileno.readline"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "_typeshed.AnyStr_co"
+      kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
         args {
-          pretty_printed_name: "typing.AnyStr"
+          pretty_printed_name: "_typeshed.AnyStr_co"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "fileinput.FileInput"
+        fully_qualified_name: "fileinput._HasReadlineAndFileno"
       }
     }
-    parameters {
-      name: "files"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.unicode,typing.Iterable[builtins.unicode]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.unicode]"
-          args {
-            pretty_printed_name: "builtins.unicode"
-            fully_qualified_name: "builtins.unicode"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "inplace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "backup"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "openhook"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
-    name: "__init__"
-    fully_qualified_name: "fileinput.FileInput.__init__"
+    name: "fileno"
+    fully_qualified_name: "fileinput._HasReadlineAndFileno.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput._HasReadlineAndFileno[_typeshed.AnyStr_co]"
+        args {
+          pretty_printed_name: "_typeshed.AnyStr_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput._HasReadlineAndFileno"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FileInput"
+  fully_qualified_name: "fileinput.FileInput"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__del__"
+    fully_qualified_name: "fileinput.FileInput.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "fileinput.FileInput.close"
     return_annotation {
       pretty_printed_name: "None"
       kind: NONE
@@ -117,385 +112,2668 @@ classes {
         fully_qualified_name: "fileinput.FileInput"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "fileinput.FileInput.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
     parameters {
-      name: "files"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "self"
       type_annotation {
-        pretty_printed_name: "Union[None,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]"
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "fileinput.FileInput.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
         kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
         args {
           pretty_printed_name: "None"
           kind: NONE
         }
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
         }
         args {
-          pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-          args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.str]"
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.bytes]"
-                args {
-                  pretty_printed_name: "builtins.bytes"
-                  fully_qualified_name: "builtins.bytes"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-            }
-            fully_qualified_name: "_typeshed.StrOrBytesPath"
-          }
-          fully_qualified_name: "typing.Iterable"
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
-      has_default: true
     }
     parameters {
-      name: "inplace"
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "fileinput.FileInput.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "fileinput.FileInput.__iter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "fileinput.FileInput.__next__"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
       }
-      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "fileinput.FileInput.__getitem__"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
     }
     parameters {
-      name: "backup"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "self"
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
       }
-      has_default: true
     }
     parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "i"
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
       }
-      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "nextfile"
+    fully_qualified_name: "fileinput.FileInput.nextfile"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
     }
     parameters {
-      name: "mode"
+      name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "openhook"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
         args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "fileinput.FileInput.readline"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "filename"
+    fully_qualified_name: "fileinput.FileInput.filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "lineno"
+    fully_qualified_name: "fileinput.FileInput.lineno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "filelineno"
+    fully_qualified_name: "fileinput.FileInput.filelineno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "fileinput.FileInput.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isfirstline"
+    fully_qualified_name: "fileinput.FileInput.isfirstline"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isstdin"
+    fully_qualified_name: "fileinput.FileInput.isstdin"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "fileinput.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "fileinput.FileInput.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[fileinput.FileInput[typing.AnyStr]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "fileinput.FileInput"
         }
       }
-      has_default: true
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "fileinput.FileInput.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "bufsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "UnboundType[_TextMode]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      parameters {
+        name: "openhook"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "bufsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "bufsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "bufsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "bufsize"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
   }
-  methods {
+  overloaded_methods {
     name: "__init__"
-    fully_qualified_name: "fileinput.FileInput.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
+    fullname: "fileinput.FileInput.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
       }
-    }
-    parameters {
-      name: "files"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[None,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.str]"
           args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
             args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
             }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "UnboundType[_TextMode]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
             args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
             }
           }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.str]"
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.bytes]"
-                args {
-                  pretty_printed_name: "builtins.bytes"
-                  fully_qualified_name: "builtins.bytes"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-            }
-            fully_qualified_name: "_typeshed.StrOrBytesPath"
+            pretty_printed_name: "None"
+            kind: NONE
           }
-          fully_qualified_name: "typing.Iterable"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "fileinput.FileInput"
         }
       }
-      has_default: true
-    }
-    parameters {
-      name: "inplace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
       }
-      has_default: true
-    }
-    parameters {
-      name: "backup"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
       }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
       }
-      has_default: true
-    }
-    parameters {
-      name: "openhook"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
         }
       }
-      has_default: true
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
     }
     valid_for: "38"
     valid_for: "39"
   }
-  methods {
+  overloaded_methods {
     name: "__init__"
-    fully_qualified_name: "fileinput.FileInput.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
+    fullname: "fileinput.FileInput.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
       }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "UnboundType[_TextMode]"
+          kind: UNBOUND
+        }
+        has_default: true
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "encoding"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "errors"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "encoding"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "errors"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "fileinput.FileInput.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fileinput.FileInput[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "fileinput.FileInput"
+        }
+      }
+      parameters {
+        name: "files"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+            args {
+              pretty_printed_name: "UnboundType[StrOrBytesPath]"
+              kind: UNBOUND
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "inplace"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "backup"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "mode"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "openhook"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[CallableType[builtins.function],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "encoding"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "errors"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "close"
+  fully_qualified_name: "fileinput.close"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "nextfile"
+  fully_qualified_name: "fileinput.nextfile"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "filename"
+  fully_qualified_name: "fileinput.filename"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lineno"
+  fully_qualified_name: "fileinput.lineno"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "filelineno"
+  fully_qualified_name: "fileinput.filelineno"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fileno"
+  fully_qualified_name: "fileinput.fileno"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isfirstline"
+  fully_qualified_name: "fileinput.isfirstline"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isstdin"
+  fully_qualified_name: "fileinput.isstdin"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "hook_compressed"
+  fully_qualified_name: "fileinput.hook_compressed"
+  return_annotation {
+    pretty_printed_name: "typing.IO[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "hook_compressed"
+  fully_qualified_name: "fileinput.hook_compressed"
+  return_annotation {
+    pretty_printed_name: "typing.IO[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "310"
+}
+functions {
+  name: "hook_encoded"
+  fully_qualified_name: "fileinput.hook_encoded"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "input"
+  fullname: "fileinput.input"
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "fileinput.FileInput"
     }
     parameters {
       name: "files"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[None,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]"
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
         kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
         args {
           pretty_printed_name: "None"
           kind: NONE
         }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_TextMode]"
+        kind: UNBOUND
+      }
+      has_default: true
+    }
+    parameters {
+      name: "openhook"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
           args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
           }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
         }
         args {
-          pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
           args {
-            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.str]"
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-              args {
-                pretty_printed_name: "os.PathLike[builtins.bytes]"
-                args {
-                  pretty_printed_name: "builtins.bytes"
-                  fully_qualified_name: "builtins.bytes"
-                }
-                fully_qualified_name: "os.PathLike"
-              }
-            }
-            fully_qualified_name: "_typeshed.StrOrBytesPath"
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
           }
           fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+overloaded_functions {
+  name: "input"
+  fullname: "fileinput.input"
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "UnboundType[_TextMode]"
+        kind: UNBOUND
+      }
+      has_default: true
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
       has_default: true
@@ -525,17 +2803,118 @@ classes {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "38"
+  valid_for: "39"
+}
+overloaded_functions {
+  name: "input"
+  fullname: "fileinput.input"
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "UnboundType[_TextMode]"
+        kind: UNBOUND
+      }
       has_default: true
     }
     parameters {
       name: "openhook"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
         args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
       has_default: true
@@ -574,1343 +2953,266 @@ classes {
       }
       has_default: true
     }
-    valid_for: "310"
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
   }
-  methods {
-    name: "__del__"
-    fully_qualified_name: "fileinput.FileInput.__del__"
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
+      pretty_printed_name: "fileinput.FileInput[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
       }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "fileinput.FileInput.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      fully_qualified_name: "fileinput.FileInput"
     }
     parameters {
-      name: "self"
+      name: "files"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
         args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
         }
-        fully_qualified_name: "fileinput.FileInput"
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "fileinput.FileInput.__iter__"
-    return_annotation {
-      pretty_printed_name: "typing.Iterator[typing.AnyStr]"
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Iterator"
+      has_default: true
     }
     parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__next__"
-    fully_qualified_name: "fileinput.FileInput.__next__"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
+      name: "inplace"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
       }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "fileinput.FileInput.__getitem__"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
+      has_default: true
     }
     parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    parameters {
-      name: "i"
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "nextfile"
-    fully_qualified_name: "fileinput.FileInput.nextfile"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
+      name: "backup"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "readline"
-    fully_qualified_name: "fileinput.FileInput.readline"
-    return_annotation {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "filename"
-    fully_qualified_name: "fileinput.FileInput.filename"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "lineno"
-    fully_qualified_name: "fileinput.FileInput.lineno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "filelineno"
-    fully_qualified_name: "fileinput.FileInput.filelineno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "fileinput.FileInput.fileno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isfirstline"
-    fully_qualified_name: "fileinput.FileInput.isfirstline"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isstdin"
-    fully_qualified_name: "fileinput.FileInput.isstdin"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "fileinput.FileInput.__enter__"
-    return_annotation {
-      pretty_printed_name: "_typeshed.Self"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "_typeshed.Self"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "fileinput.FileInput.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-        args {
-          pretty_printed_name: "typing.AnyStr"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "fileinput.FileInput"
-      }
-    }
-    parameters {
-      name: "type"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "value"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "traceback"
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  is_generic: true
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "input"
-  fully_qualified_name: "fileinput.input"
-  return_annotation {
-    pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "fileinput.FileInput"
-  }
-  parameters {
-    name: "files"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,typing.Iterable[builtins.unicode],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "typing.Iterable[builtins.unicode]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "inplace"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "backup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "openhook"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "input"
-  fully_qualified_name: "fileinput.input"
-  return_annotation {
-    pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "fileinput.FileInput"
-  }
-  parameters {
-    name: "files"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      args {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "inplace"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "backup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "openhook"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-}
-functions {
-  name: "input"
-  fully_qualified_name: "fileinput.input"
-  return_annotation {
-    pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "fileinput.FileInput"
-  }
-  parameters {
-    name: "files"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      args {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "inplace"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "backup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "openhook"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "38"
-  valid_for: "39"
-}
-functions {
-  name: "input"
-  fully_qualified_name: "fileinput.input"
-  return_annotation {
-    pretty_printed_name: "fileinput.FileInput[typing.AnyStr]"
-    args {
-      pretty_printed_name: "typing.AnyStr"
-      kind: TYPE_VAR
-    }
-    fully_qualified_name: "fileinput.FileInput"
-  }
-  parameters {
-    name: "files"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrOrBytesPath"
-      }
-      args {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-            args {
-              pretty_printed_name: "os.PathLike[builtins.bytes]"
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              fully_qualified_name: "os.PathLike"
-            }
-          }
-          fully_qualified_name: "_typeshed.StrOrBytesPath"
-        }
-        fully_qualified_name: "typing.Iterable"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "inplace"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "backup"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "openhook"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "encoding"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      args {
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: KEYWORD_ONLY
+      type_annotation {
         pretty_printed_name: "None"
         kind: NONE
       }
+      has_default: true
     }
-    has_default: true
+    parameters {
+      name: "errors"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
   }
-  parameters {
-    name: "errors"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
+  definitions {
+    name: "input"
+    fully_qualified_name: "fileinput.input"
+    return_annotation {
+      pretty_printed_name: "fileinput.FileInput[Any]"
       args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "fileinput.FileInput"
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.Iterable[UnboundType[StrOrBytesPath]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrOrBytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[UnboundType[StrOrBytesPath]]"
+          args {
+            pretty_printed_name: "UnboundType[StrOrBytesPath]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "inplace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "backup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
-    has_default: true
-  }
-  valid_for: "310"
-}
-functions {
-  name: "close"
-  fully_qualified_name: "fileinput.close"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "nextfile"
-  fully_qualified_name: "fileinput.nextfile"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "filename"
-  fully_qualified_name: "fileinput.filename"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "lineno"
-  fully_qualified_name: "fileinput.lineno"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "filelineno"
-  fully_qualified_name: "fileinput.filelineno"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "fileno"
-  fully_qualified_name: "fileinput.fileno"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isfirstline"
-  fully_qualified_name: "fileinput.isfirstline"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isstdin"
-  fully_qualified_name: "fileinput.isstdin"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "hook_compressed"
-  fully_qualified_name: "fileinput.hook_compressed"
-  return_annotation {
-    pretty_printed_name: "typing.IO[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
+    parameters {
+      name: "openhook"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
     }
-    fully_qualified_name: "typing.IO"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "hook_compressed"
-  fully_qualified_name: "fileinput.hook_compressed"
-  return_annotation {
-    pretty_printed_name: "typing.IO[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "typing.IO"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+    parameters {
+      name: "encoding"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      has_default: true
     }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-}
-functions {
-  name: "hook_compressed"
-  fully_qualified_name: "fileinput.hook_compressed"
-  return_annotation {
-    pretty_printed_name: "typing.IO[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "typing.IO"
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+    parameters {
+      name: "errors"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "None"
+          kind: NONE
         }
       }
-      fully_qualified_name: "_typeshed.StrOrBytesPath"
+      has_default: true
     }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "errors"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
   }
   valid_for: "310"
 }
-functions {
-  name: "hook_encoded"
-  fully_qualified_name: "fileinput.hook_encoded"
-  return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
+vars {
+  name: "__all__"
+  fully_qualified_name: "fileinput.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
     args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
+    fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
-functions {
-  name: "hook_encoded"
-  fully_qualified_name: "fileinput.hook_encoded"
-  return_annotation {
-    pretty_printed_name: "CallableType[builtins.function]"
-    kind: CALLABLE
-    args {
-      pretty_printed_name: "builtins.function"
-      fully_qualified_name: "builtins.function"
-    }
-  }
-  parameters {
-    name: "encoding"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "errors"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
+vars {
+  name: "_TextMode"
+  fully_qualified_name: "fileinput._TextMode"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

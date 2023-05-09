@@ -1,58 +1,92 @@
 fully_qualified_name: "asyncio.events"
 classes {
-  name: "Handle"
-  fully_qualified_name: "asyncio.events.Handle"
+  name: "_TaskFactory"
+  fully_qualified_name: "asyncio.events._TaskFactory"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.events.Handle.__init__"
+    name: "__call__"
+    fully_qualified_name: "asyncio.events._TaskFactory.__call__"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "asyncio.futures.Future[asyncio.events._T]"
+      args {
+        pretty_printed_name: "asyncio.events._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.events.Handle"
-        fully_qualified_name: "asyncio.events.Handle"
+        pretty_printed_name: "asyncio.events._TaskFactory"
+        fully_qualified_name: "asyncio.events._TaskFactory"
       }
     }
     parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "loop"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__loop"
       type_annotation {
         pretty_printed_name: "asyncio.events.AbstractEventLoop"
         fully_qualified_name: "asyncio.events.AbstractEventLoop"
       }
     }
+    parameters {
+      name: "__factory"
+      type_annotation {
+        pretty_printed_name: "Union[typing.Coroutine[Any,Any,asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "asyncio.events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Coroutine"
+        }
+        args {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+      }
+    }
     valid_for: "35"
     valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Handle"
+  fully_qualified_name: "asyncio.events.Handle"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "asyncio.events.Handle.__init__"
@@ -116,25 +150,6 @@ classes {
         }
       }
       has_default: true
-    }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__repr__"
-    fully_qualified_name: "asyncio.events.Handle.__repr__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "asyncio.events.Handle"
-        fully_qualified_name: "asyncio.events.Handle"
-      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -202,6 +217,8 @@ classes {
         fully_qualified_name: "asyncio.events.Handle"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -305,64 +322,6 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractEventLoop"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.events.TimerHandle.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.TimerHandle"
-        fully_qualified_name: "asyncio.events.TimerHandle"
-      }
-    }
-    parameters {
-      name: "when"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-    }
-    parameters {
-      name: "callback"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "args"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "loop"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
     parameters {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
@@ -379,26 +338,6 @@ classes {
         }
       }
       has_default: true
-    }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "asyncio.events.TimerHandle.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.TimerHandle"
-        fully_qualified_name: "asyncio.events.TimerHandle"
-      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -422,6 +361,148 @@ classes {
         fully_qualified_name: "asyncio.events.TimerHandle"
       }
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "asyncio.events.TimerHandle.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "asyncio.events.TimerHandle.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "asyncio.events.TimerHandle.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "asyncio.events.TimerHandle.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "asyncio.events.TimerHandle.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.events.TimerHandle"
+        fully_qualified_name: "asyncio.events.TimerHandle"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -453,6 +534,9 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractServer"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -461,10 +545,10 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "wait_closed"
-    fully_qualified_name: "asyncio.events.AbstractServer.wait_closed"
+    name: "__aenter__"
+    fully_qualified_name: "asyncio.events.AbstractServer.__aenter__"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,UnboundType[Self]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -474,8 +558,8 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "None"
-        kind: NONE
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -490,39 +574,6 @@ classes {
     is_asynchronous: true
     valid_for: "35"
     valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__aenter__"
-    fully_qualified_name: "asyncio.events.AbstractServer.__aenter__"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.events._T]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "asyncio.events._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events._T"
-        kind: TYPE_VAR
-      }
-    }
-    is_asynchronous: true
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -559,11 +610,13 @@ classes {
       name: "exc"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -584,6 +637,11 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractServer"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -604,6 +662,11 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractServer"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -636,7 +699,12 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractServer"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -669,7 +737,50 @@ classes {
         fully_qualified_name: "asyncio.events.AbstractServer"
       }
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "wait_closed"
+    fully_qualified_name: "asyncio.events.AbstractServer.wait_closed"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractServer"
+        fully_qualified_name: "asyncio.events.AbstractServer"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -891,6 +1002,62 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "call_soon"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.call_soon"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.Handle"
+      fully_qualified_name: "asyncio.events.Handle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "39"
     valid_for: "310"
   }
@@ -944,6 +1111,70 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "call_later"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.call_later"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.TimerHandle"
+      fully_qualified_name: "asyncio.events.TimerHandle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "39"
     valid_for: "310"
   }
@@ -997,6 +1228,70 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "call_at"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.call_at"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.TimerHandle"
+      fully_qualified_name: "asyncio.events.TimerHandle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "when"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "39"
     valid_for: "310"
   }
@@ -1077,15 +1372,23 @@ classes {
       name: "coro"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Awaitable[asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]"
+        pretty_printed_name: "Union[typing.Coroutine[Any,Any,asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Awaitable[asyncio.events._T]"
+          pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
           args {
             pretty_printed_name: "asyncio.events._T"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Awaitable"
+          fully_qualified_name: "typing.Coroutine"
         }
         args {
           pretty_printed_name: "typing.Generator[Any,None,asyncio.events._T]"
@@ -1135,15 +1438,23 @@ classes {
       name: "coro"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Awaitable[asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]"
+        pretty_printed_name: "Union[typing.Coroutine[Any,Any,asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Awaitable[asyncio.events._T]"
+          pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
           args {
             pretty_printed_name: "asyncio.events._T"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Awaitable"
+          fully_qualified_name: "typing.Coroutine"
         }
         args {
           pretty_printed_name: "typing.Generator[Any,None,asyncio.events._T]"
@@ -1206,15 +1517,11 @@ classes {
       name: "factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        pretty_printed_name: "Union[asyncio.events._TaskFactory,None]"
         kind: UNION
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "asyncio.events._TaskFactory"
+          fully_qualified_name: "asyncio.events._TaskFactory"
         }
         args {
           pretty_printed_name: "None"
@@ -1236,15 +1543,11 @@ classes {
     name: "get_task_factory"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.get_task_factory"
     return_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      pretty_printed_name: "Union[asyncio.events._TaskFactory,None]"
       kind: UNION
       args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "asyncio.events._TaskFactory"
+        fully_qualified_name: "asyncio.events._TaskFactory"
       }
       args {
         pretty_printed_name: "None"
@@ -1311,6 +1614,62 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "call_soon_threadsafe"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.call_soon_threadsafe"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.Handle"
+      fully_qualified_name: "asyncio.events.Handle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     valid_for: "39"
     valid_for: "310"
   }
@@ -1318,12 +1677,12 @@ classes {
     name: "run_in_executor"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.run_in_executor"
     return_annotation {
-      pretty_printed_name: "typing.Awaitable[asyncio.events._T]"
+      pretty_printed_name: "asyncio.futures.Future[asyncio.events._T]"
       args {
         pretty_printed_name: "asyncio.events._T"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.Awaitable"
+      fully_qualified_name: "asyncio.futures.Future"
     }
     parameters {
       name: "self"
@@ -1491,8 +1850,12 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[builtins.bytes,builtins.str,None]"
         kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
@@ -1507,8 +1870,12 @@ classes {
       name: "port"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+        pretty_printed_name: "Union[builtins.bytes,builtins.str,builtins.int,None]"
         kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
@@ -1666,10 +2033,10 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "create_unix_connection"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_unix_connection"
+    name: "start_tls"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.start_tls"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.transports.Transport]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -1679,21 +2046,8 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
-        }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        pretty_printed_name: "asyncio.transports.Transport"
+        fully_qualified_name: "asyncio.transports.Transport"
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -1706,208 +2060,35 @@ classes {
       }
     }
     parameters {
-      name: "protocol_factory"
+      name: "transport"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
       }
     }
     parameters {
-      name: "path"
+      name: "protocol"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
       }
     }
     parameters {
-      name: "ssl"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "ssl.SSLContext"
-            fully_qualified_name: "ssl.SSLContext"
-          }
-        }
-        fully_qualified_name: "asyncio.events._SSLContext"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "sock"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[socket.socket,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "server_hostname"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    is_asynchronous: true
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
-    name: "create_unix_connection"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_unix_connection"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
-        }
-        fully_qualified_name: "asyncio.events._TransProtPair"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
+      name: "sslcontext"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        pretty_printed_name: "ssl.SSLContext"
+        fully_qualified_name: "ssl.SSLContext"
       }
     }
     parameters {
-      name: "protocol_factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ssl"
+      name: "server_side"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "ssl.SSLContext"
-            fully_qualified_name: "ssl.SSLContext"
-          }
-        }
-        fully_qualified_name: "asyncio.events._SSLContext"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "sock"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[socket.socket,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
       }
       has_default: true
     }
@@ -1945,7 +2126,12 @@ classes {
       }
       has_default: true
     }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -1982,136 +2168,19 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
+        pretty_printed_name: "UnboundType[_ProtocolFactory]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[socket.socket,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "backlog"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ssl"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "ssl.SSLContext"
-            fully_qualified_name: "ssl.SSLContext"
-          }
-        }
-        fully_qualified_name: "asyncio.events._SSLContext"
-      }
-      has_default: true
-    }
-    is_asynchronous: true
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
-    name: "create_unix_server"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_unix_server"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "asyncio.base_events.Server"
-        fully_qualified_name: "asyncio.base_events.Server"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "protocol_factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -2150,25 +2219,16 @@ classes {
       name: "ssl"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+        kind: UNION
         args {
-          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "ssl.SSLContext"
-            fully_qualified_name: "ssl.SSLContext"
-          }
+          pretty_printed_name: "UnboundType[_SSLContext]"
+          kind: UNBOUND
         }
-        fully_qualified_name: "asyncio.events._SSLContext"
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -2199,16 +2259,18 @@ classes {
       has_default: true
     }
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
   methods {
-    name: "create_datagram_endpoint"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_datagram_endpoint"
+    name: "create_unix_connection"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_unix_connection"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -2218,21 +2280,16 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
+          pretty_printed_name: "asyncio.transports.Transport"
+          fully_qualified_name: "asyncio.transports.Transport"
         }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -2248,24 +2305,353 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
         }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ssl"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_SSLContext]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "sock"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[socket.socket,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "server_hostname"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ssl_handshake_timeout"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sock_sendfile"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_sendfile"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fallback"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sendfile"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.sendfile"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.WriteTransport"
+        fully_qualified_name: "asyncio.transports.WriteTransport"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fallback"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_datagram_endpoint"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.create_datagram_endpoint"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.DatagramTransport,asyncio.events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.DatagramTransport,asyncio.events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.DatagramTransport"
+          fully_qualified_name: "asyncio.transports.DatagramTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
       }
     }
     parameters {
       name: "local_addr"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],None]"
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str,None]"
         kind: UNION
         args {
           pretty_printed_name: "Tuple[builtins.str,builtins.int]"
@@ -2278,6 +2664,10 @@ classes {
             pretty_printed_name: "builtins.int"
             fully_qualified_name: "builtins.int"
           }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
         args {
           pretty_printed_name: "None"
@@ -2290,7 +2680,7 @@ classes {
       name: "remote_addr"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],None]"
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str,None]"
         kind: UNION
         args {
           pretty_printed_name: "Tuple[builtins.str,builtins.int]"
@@ -2303,6 +2693,10 @@ classes {
             pretty_printed_name: "builtins.int"
             fully_qualified_name: "builtins.int"
           }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
         args {
           pretty_printed_name: "None"
@@ -2421,7 +2815,7 @@ classes {
     name: "connect_read_pipe"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.connect_read_pipe"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.ReadTransport,asyncio.events._ProtocolT]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -2431,21 +2825,16 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Tuple[asyncio.transports.ReadTransport,asyncio.events._ProtocolT]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
+          pretty_printed_name: "asyncio.transports.ReadTransport"
+          fully_qualified_name: "asyncio.transports.ReadTransport"
         }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -2461,17 +2850,12 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
         }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
       }
     }
     parameters {
@@ -2497,7 +2881,7 @@ classes {
     name: "connect_write_pipe"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.connect_write_pipe"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.WriteTransport,asyncio.events._ProtocolT]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -2507,21 +2891,16 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Tuple[asyncio.transports.WriteTransport,asyncio.events._ProtocolT]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
+          pretty_printed_name: "asyncio.transports.WriteTransport"
+          fully_qualified_name: "asyncio.transports.WriteTransport"
         }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -2537,17 +2916,12 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
         }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
       }
     }
     parameters {
@@ -2573,7 +2947,7 @@ classes {
     name: "subprocess_shell"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.subprocess_shell"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.events._ProtocolT]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -2583,21 +2957,16 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Tuple[asyncio.transports.SubprocessTransport,asyncio.events._ProtocolT]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
+          pretty_printed_name: "asyncio.transports.SubprocessTransport"
+          fully_qualified_name: "asyncio.transports.SubprocessTransport"
         }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -2613,17 +2982,12 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
         }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
       }
     }
     parameters {
@@ -2818,7 +3182,7 @@ classes {
     name: "subprocess_exec"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.subprocess_exec"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.events._ProtocolT]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -2828,21 +3192,16 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "Tuple[asyncio.transports.SubprocessTransport,asyncio.events._ProtocolT]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "asyncio.transports.BaseTransport"
-            fully_qualified_name: "asyncio.transports.BaseTransport"
-          }
-          args {
-            pretty_printed_name: "asyncio.protocols.BaseProtocol"
-            fully_qualified_name: "asyncio.protocols.BaseProtocol"
-          }
+          pretty_printed_name: "asyncio.transports.SubprocessTransport"
+          fully_qualified_name: "asyncio.transports.SubprocessTransport"
         }
-        fully_qualified_name: "asyncio.events._TransProtPair"
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -2858,17 +3217,12 @@ classes {
       name: "protocol_factory"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
         }
-        fully_qualified_name: "asyncio.events._ProtocolFactory"
       }
     }
     parameters {
@@ -3057,21 +3411,8 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3108,8 +3449,8 @@ classes {
     name: "remove_reader"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.remove_reader"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
@@ -3123,21 +3464,8 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -3169,21 +3497,8 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -3220,8 +3535,8 @@ classes {
     name: "remove_writer"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.remove_writer"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
@@ -3235,21 +3550,8 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -3261,47 +3563,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "sock_recv"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_recv"
-    return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "asyncio.futures.Future"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
   }
   methods {
     name: "sock_recv"
@@ -3350,21 +3611,31 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
   methods {
-    name: "sock_sendall"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_sendall"
+    name: "sock_recv_into"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_recv_into"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[None]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
       args {
-        pretty_printed_name: "None"
-        kind: NONE
+        pretty_printed_name: "Any"
+        kind: ANY
       }
-      fully_qualified_name: "asyncio.futures.Future"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "self"
@@ -3383,18 +3654,23 @@ classes {
       }
     }
     parameters {
-      name: "data"
+      name: "buf"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[WriteableBuffer]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
+    is_asynchronous: true
     valid_for: "35"
     valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "sock_sendall"
@@ -3435,76 +3711,20 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "sock_connect"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_connect"
-    return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[None]"
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-      fully_qualified_name: "asyncio.futures.Future"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.tuple[Any],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.tuple[Any],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "_socket._Address"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
   }
   methods {
     name: "sock_connect"
@@ -3545,31 +3765,16 @@ classes {
       name: "address"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.tuple[Any],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.tuple[Any],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "_socket._Address"
+        pretty_printed_name: "UnboundType[_Address]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -3579,53 +3784,7 @@ classes {
     name: "sock_accept"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_accept"
     return_annotation {
-      pretty_printed_name: "asyncio.futures.Future[Tuple[socket.socket,TypeAlias[Any]]]"
-      args {
-        pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Any]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "_socket._RetAddress"
-        }
-      }
-      fully_qualified_name: "asyncio.futures.Future"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
-    name: "sock_accept"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_accept"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[socket.socket,TypeAlias[Any]]]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[socket.socket,UnboundType[_RetAddress]]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -3635,20 +3794,15 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+        pretty_printed_name: "Tuple[socket.socket,UnboundType[_RetAddress]]"
         kind: TUPLE
         args {
           pretty_printed_name: "socket.socket"
           fully_qualified_name: "socket.socket"
         }
         args {
-          pretty_printed_name: "TypeAlias[Any]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "_socket._RetAddress"
+          pretty_printed_name: "UnboundType[_RetAddress]"
+          kind: UNBOUND
         }
       }
       fully_qualified_name: "typing.Coroutine"
@@ -3673,6 +3827,8 @@ classes {
     resolved_decorator_names: "abstractmethod"
     is_abstract: true
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -3783,15 +3939,11 @@ classes {
       name: "handler"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        pretty_printed_name: "Union[UnboundType[_ExceptionHandler],None]"
         kind: UNION
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "UnboundType[_ExceptionHandler]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -3813,15 +3965,11 @@ classes {
     name: "get_exception_handler"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.get_exception_handler"
     return_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      pretty_printed_name: "Union[UnboundType[_ExceptionHandler],None]"
       kind: UNION
       args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_ExceptionHandler]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3865,21 +4013,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.dict[builtins.str,Any]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        fully_qualified_name: "asyncio.events._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -3911,21 +4046,8 @@ classes {
       name: "context"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "builtins.dict[builtins.str,Any]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        fully_qualified_name: "asyncio.events._Context"
+        pretty_printed_name: "UnboundType[_Context]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -3997,351 +4119,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "sock_sendfile"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_sendfile"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.IO[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "count"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "fallback"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bool,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    is_asynchronous: true
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "sendfile"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sendfile"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "transport"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports.BaseTransport"
-        fully_qualified_name: "asyncio.transports.BaseTransport"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.IO[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-    parameters {
-      name: "offset"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "count"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "fallback"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    is_asynchronous: true
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "start_tls"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.start_tls"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.transports.BaseTransport]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "asyncio.transports.BaseTransport"
-        fully_qualified_name: "asyncio.transports.BaseTransport"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "transport"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports.BaseTransport"
-        fully_qualified_name: "asyncio.transports.BaseTransport"
-      }
-    }
-    parameters {
-      name: "protocol"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BaseProtocol"
-        fully_qualified_name: "asyncio.protocols.BaseProtocol"
-      }
-    }
-    parameters {
-      name: "sslcontext"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ssl.SSLContext"
-        fully_qualified_name: "ssl.SSLContext"
-      }
-    }
-    parameters {
-      name: "server_side"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "server_hostname"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ssl_handshake_timeout"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[builtins.float,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    is_asynchronous: true
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "sock_recv_into"
-    fully_qualified_name: "asyncio.events.AbstractEventLoop.sock_recv_into"
-    return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      fully_qualified_name: "typing.Coroutine"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.AbstractEventLoop"
-        fully_qualified_name: "asyncio.events.AbstractEventLoop"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    parameters {
-      name: "buf"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytearray"
-        fully_qualified_name: "builtins.bytearray"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    is_asynchronous: true
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "shutdown_default_executor"
     fully_qualified_name: "asyncio.events.AbstractEventLoop.shutdown_default_executor"
     return_annotation {
@@ -4373,6 +4150,98 @@ classes {
     is_abstract: true
     is_asynchronous: true
     valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connect_accepted_socket"
+    fully_qualified_name: "asyncio.events.AbstractEventLoop.connect_accepted_socket"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.Transport"
+          fully_qualified_name: "asyncio.transports.Transport"
+        }
+        args {
+          pretty_printed_name: "asyncio.events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "ssl"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_SSLContext]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ssl_handshake_timeout"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    is_asynchronous: true
     valid_for: "310"
   }
   overloaded_methods {
@@ -4466,7 +4335,7 @@ classes {
       name: "create_connection"
       fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
       return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
@@ -4476,21 +4345,16 @@ classes {
           kind: ANY
         }
         args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
           }
-          fully_qualified_name: "asyncio.events._TransProtPair"
+          args {
+            pretty_printed_name: "asyncio.events._ProtocolT"
+            kind: TYPE_VAR
+          }
         }
         fully_qualified_name: "typing.Coroutine"
       }
@@ -4506,17 +4370,12 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
           args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
           }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
         }
       }
       parameters {
@@ -4541,25 +4400,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -4641,6 +4491,23 @@ classes {
         }
         has_default: true
       }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
       has_decorators: true
       resolved_decorator_names: "overload"
       resolved_decorator_names: "abstractmethod"
@@ -4652,7 +4519,7 @@ classes {
       name: "create_connection"
       fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
       return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
@@ -4662,21 +4529,16 @@ classes {
           kind: ANY
         }
         args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
           }
-          fully_qualified_name: "asyncio.events._TransProtPair"
+          args {
+            pretty_printed_name: "asyncio.events._ProtocolT"
+            kind: TYPE_VAR
+          }
         }
         fully_qualified_name: "typing.Coroutine"
       }
@@ -4692,17 +4554,12 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
           args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
           }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
         }
       }
       parameters {
@@ -4727,25 +4584,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -4802,6 +4650,23 @@ classes {
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
           }
           args {
             pretty_printed_name: "None"
@@ -4819,399 +4684,6 @@ classes {
     }
     valid_for: "35"
     valid_for: "36"
-  }
-  overloaded_methods {
-    name: "create_connection"
-    fullname: "asyncio.events.AbstractEventLoop.create_connection"
-    definitions {
-      name: "create_connection"
-      fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
-      return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
-          }
-          fully_qualified_name: "asyncio.events._TransProtPair"
-        }
-        fully_qualified_name: "typing.Coroutine"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-      }
-      parameters {
-        name: "protocol_factory"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
-        }
-      }
-      parameters {
-        name: "host"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "port"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
-          }
-          fully_qualified_name: "asyncio.events._SSLContext"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "family"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "proto"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "flags"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "sock"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "local_addr"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "server_hostname"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl_handshake_timeout"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      resolved_decorator_names: "abstractmethod"
-      is_abstract: true
-      is_asynchronous: true
-      is_overload: true
-    }
-    definitions {
-      name: "create_connection"
-      fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
-      return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
-          }
-          fully_qualified_name: "asyncio.events._TransProtPair"
-        }
-        fully_qualified_name: "typing.Coroutine"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-      }
-      parameters {
-        name: "protocol_factory"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
-        }
-      }
-      parameters {
-        name: "host"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "port"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
-          }
-          fully_qualified_name: "asyncio.events._SSLContext"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "family"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "proto"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "flags"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "sock"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-      }
-      parameters {
-        name: "local_addr"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "server_hostname"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl_handshake_timeout"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      resolved_decorator_names: "abstractmethod"
-      is_abstract: true
-      is_asynchronous: true
-      is_overload: true
-    }
     valid_for: "37"
   }
   overloaded_methods {
@@ -5221,7 +4693,7 @@ classes {
       name: "create_connection"
       fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
       return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
@@ -5231,21 +4703,16 @@ classes {
           kind: ANY
         }
         args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
           }
-          fully_qualified_name: "asyncio.events._TransProtPair"
+          args {
+            pretty_printed_name: "asyncio.events._ProtocolT"
+            kind: TYPE_VAR
+          }
         }
         fully_qualified_name: "typing.Coroutine"
       }
@@ -5261,17 +4728,12 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
           args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
           }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
         }
       }
       parameters {
@@ -5296,25 +4758,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -5458,7 +4911,7 @@ classes {
       name: "create_connection"
       fully_qualified_name: "asyncio.events.AbstractEventLoop.create_connection"
       return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]"
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]]"
         args {
           pretty_printed_name: "Any"
           kind: ANY
@@ -5468,21 +4921,16 @@ classes {
           kind: ANY
         }
         args {
-          pretty_printed_name: "TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.events._ProtocolT]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "asyncio.transports.BaseTransport"
-              fully_qualified_name: "asyncio.transports.BaseTransport"
-            }
-            args {
-              pretty_printed_name: "asyncio.protocols.BaseProtocol"
-              fully_qualified_name: "asyncio.protocols.BaseProtocol"
-            }
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
           }
-          fully_qualified_name: "asyncio.events._TransProtPair"
+          args {
+            pretty_printed_name: "asyncio.events._ProtocolT"
+            kind: TYPE_VAR
+          }
         }
         fully_qualified_name: "typing.Coroutine"
       }
@@ -5498,17 +4946,12 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
           args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
           }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
         }
       }
       parameters {
@@ -5533,25 +4976,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -5712,17 +5146,8 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
+          pretty_printed_name: "UnboundType[_ProtocolFactory]"
+          kind: UNBOUND
         }
       }
       parameters {
@@ -5799,25 +5224,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -5852,6 +5268,32 @@ classes {
             pretty_printed_name: "None"
             kind: NONE
           }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "start_serving"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
         }
         has_default: true
       }
@@ -5893,17 +5335,8 @@ classes {
         name: "protocol_factory"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
+          pretty_printed_name: "UnboundType[_ProtocolFactory]"
+          kind: UNBOUND
         }
       }
       parameters {
@@ -5949,6 +5382,7 @@ classes {
           pretty_printed_name: "socket.socket"
           fully_qualified_name: "socket.socket"
         }
+        has_default: true
       }
       parameters {
         name: "backlog"
@@ -5963,25 +5397,16 @@ classes {
         name: "ssl"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
+          pretty_printed_name: "Union[UnboundType[_SSLContext],None]"
+          kind: UNION
           args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
+            pretty_printed_name: "UnboundType[_SSLContext]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "asyncio.events._SSLContext"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
         }
         has_default: true
       }
@@ -6016,6 +5441,32 @@ classes {
             pretty_printed_name: "None"
             kind: NONE
           }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      parameters {
+        name: "start_serving"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
         }
         has_default: true
       }
@@ -6028,415 +5479,11 @@ classes {
     }
     valid_for: "35"
     valid_for: "36"
-  }
-  overloaded_methods {
-    name: "create_server"
-    fullname: "asyncio.events.AbstractEventLoop.create_server"
-    definitions {
-      name: "create_server"
-      fully_qualified_name: "asyncio.events.AbstractEventLoop.create_server"
-      return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "asyncio.base_events.Server"
-          fully_qualified_name: "asyncio.base_events.Server"
-        }
-        fully_qualified_name: "typing.Coroutine"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-      }
-      parameters {
-        name: "protocol_factory"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
-        }
-      }
-      parameters {
-        name: "host"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "typing.Sequence[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.Sequence"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "port"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "family"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "flags"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "sock"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "backlog"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
-          }
-          fully_qualified_name: "asyncio.events._SSLContext"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "reuse_address"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.bool,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "reuse_port"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.bool,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl_handshake_timeout"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "start_serving"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      resolved_decorator_names: "abstractmethod"
-      is_abstract: true
-      is_asynchronous: true
-      is_overload: true
-    }
-    definitions {
-      name: "create_server"
-      fully_qualified_name: "asyncio.events.AbstractEventLoop.create_server"
-      return_annotation {
-        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "asyncio.base_events.Server"
-          fully_qualified_name: "asyncio.base_events.Server"
-        }
-        fully_qualified_name: "typing.Coroutine"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-      }
-      parameters {
-        name: "protocol_factory"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          fully_qualified_name: "asyncio.events._ProtocolFactory"
-        }
-      }
-      parameters {
-        name: "host"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "port"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      parameters {
-        name: "family"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "flags"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "sock"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "backlog"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "ssl.SSLContext"
-              fully_qualified_name: "ssl.SSLContext"
-            }
-          }
-          fully_qualified_name: "asyncio.events._SSLContext"
-        }
-        has_default: true
-      }
-      parameters {
-        name: "reuse_address"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.bool,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "reuse_port"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.bool,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "ssl_handshake_timeout"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "Union[builtins.float,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        has_default: true
-      }
-      parameters {
-        name: "start_serving"
-        kind: KEYWORD_ONLY
-        type_annotation {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      resolved_decorator_names: "abstractmethod"
-      is_abstract: true
-      is_asynchronous: true
-      is_overload: true
-    }
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
-  has_metaclass: true
-  metaclass_name: "abc.ABCMeta"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6611,8 +5658,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  has_metaclass: true
-  metaclass_name: "abc.ABCMeta"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -6624,28 +5669,6 @@ classes {
   name: "BaseDefaultEventLoopPolicy"
   fully_qualified_name: "asyncio.events.BaseDefaultEventLoopPolicy"
   super_classes: "asyncio.events.AbstractEventLoopPolicy"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.events.BaseDefaultEventLoopPolicy.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.events.BaseDefaultEventLoopPolicy"
-        fully_qualified_name: "asyncio.events.BaseDefaultEventLoopPolicy"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   methods {
     name: "get_event_loop"
     fully_qualified_name: "asyncio.events.BaseDefaultEventLoopPolicy.get_event_loop"
@@ -6741,6 +5764,8 @@ classes {
   name: "SendfileNotAvailableError"
   fully_qualified_name: "asyncio.events.SendfileNotAvailableError"
   super_classes: "builtins.RuntimeError"
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
 }
 functions {
@@ -6931,6 +5956,210 @@ functions {
     pretty_printed_name: "asyncio.events.AbstractEventLoop"
     fully_qualified_name: "asyncio.events.AbstractEventLoop"
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.events.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.events.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Context"
+  fully_qualified_name: "asyncio.events._Context"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ExceptionHandler"
+  fully_qualified_name: "asyncio.events._ExceptionHandler"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ProtocolFactory"
+  fully_qualified_name: "asyncio.events._ProtocolFactory"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_SSLContext"
+  fully_qualified_name: "asyncio.events._SSLContext"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

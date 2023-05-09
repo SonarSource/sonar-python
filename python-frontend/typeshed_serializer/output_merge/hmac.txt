@@ -4,318 +4,8 @@ classes {
   fully_qualified_name: "hmac.HMAC"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "hmac.HMAC.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hmac.HMAC"
-        fully_qualified_name: "hmac.HMAC"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "array.array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-        args {
-          pretty_printed_name: "builtins.buffer"
-          fully_qualified_name: "builtins.buffer"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "digestmod"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function],types.ModuleType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          args {
-            pretty_printed_name: "types.ModuleType"
-            fully_qualified_name: "types.ModuleType"
-          }
-        }
-        fully_qualified_name: "hmac._DigestMod"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "hmac.HMAC.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hmac.HMAC"
-        fully_qualified_name: "hmac.HMAC"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "array.array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "digestmod"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function],types.ModuleType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          args {
-            pretty_printed_name: "types.ModuleType"
-            fully_qualified_name: "types.ModuleType"
-          }
-        }
-        fully_qualified_name: "hmac._DigestMod"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "hmac.HMAC.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hmac.HMAC"
-        fully_qualified_name: "hmac.HMAC"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "update"
-    fully_qualified_name: "hmac.HMAC.update"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "hmac.HMAC"
-        fully_qualified_name: "hmac.HMAC"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "digest"
-    fully_qualified_name: "hmac.HMAC.digest"
+    name: "name"
+    fully_qualified_name: "hmac.HMAC.name"
     return_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
@@ -328,7 +18,175 @@ classes {
         fully_qualified_name: "hmac.HMAC"
       }
     }
-    valid_for: "27"
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "hmac.HMAC.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "hmac.HMAC"
+        fully_qualified_name: "hmac.HMAC"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "digestmod"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_DigestMod],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_DigestMod]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "hmac.HMAC.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "hmac.HMAC"
+        fully_qualified_name: "hmac.HMAC"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "digestmod"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_DigestMod]"
+        kind: UNBOUND
+      }
+      has_default: true
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "hmac.HMAC.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "hmac.HMAC"
+        fully_qualified_name: "hmac.HMAC"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "digest"
@@ -367,7 +225,6 @@ classes {
         fully_qualified_name: "hmac.HMAC"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -390,7 +247,6 @@ classes {
         fully_qualified_name: "hmac.HMAC"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -398,7 +254,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -433,20 +288,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  attributes {
-    name: "name"
-    fully_qualified_name: "hmac.HMAC.name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 functions {
   name: "new"
@@ -459,102 +300,7 @@ functions {
     name: "key"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "msg"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytearray"
-        fully_qualified_name: "builtins.bytearray"
-      }
-      args {
-        pretty_printed_name: "builtins.memoryview"
-        fully_qualified_name: "builtins.memoryview"
-      }
-      args {
-        pretty_printed_name: "array.array[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "array.array"
-      }
-      args {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
-      }
-      args {
-        pretty_printed_name: "builtins.buffer"
-        fully_qualified_name: "builtins.buffer"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "digestmod"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "types.ModuleType"
-        fully_qualified_name: "types.ModuleType"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "new"
-  fully_qualified_name: "hmac.new"
-  return_annotation {
-    pretty_printed_name: "hmac.HMAC"
-    fully_qualified_name: "hmac.HMAC"
-  }
-  parameters {
-    name: "key"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  parameters {
-    name: "msg"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,None]"
+      pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.bytes"
@@ -564,21 +310,17 @@ functions {
         pretty_printed_name: "builtins.bytearray"
         fully_qualified_name: "builtins.bytearray"
       }
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
+      kind: UNION
       args {
-        pretty_printed_name: "builtins.memoryview"
-        fully_qualified_name: "builtins.memoryview"
-      }
-      args {
-        pretty_printed_name: "array.array[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "array.array"
-      }
-      args {
-        pretty_printed_name: "mmap.mmap"
-        fully_qualified_name: "mmap.mmap"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -591,23 +333,11 @@ functions {
     name: "digestmod"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType,None]"
+      pretty_printed_name: "Union[UnboundType[_DigestMod],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "types.ModuleType"
-        fully_qualified_name: "types.ModuleType"
+        pretty_printed_name: "UnboundType[_DigestMod]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -631,55 +361,28 @@ functions {
     name: "key"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[_BufferWithLen]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "msg"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.bytearray"
-          fully_qualified_name: "builtins.bytearray"
-        }
-        args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "array.array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
-        }
-      }
-      fully_qualified_name: "_typeshed.ReadableBuffer"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "digest"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_DigestMod]"
+      kind: UNBOUND
     }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -698,194 +401,15 @@ overloaded_functions {
     parameters {
       name: "__a"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "__b"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,builtins.buffer]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-          args {
-            pretty_printed_name: "builtins.buffer"
-            fully_qualified_name: "builtins.buffer"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "compare_digest"
-    fully_qualified_name: "hmac.compare_digest"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "__a"
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "__b"
-      type_annotation {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  valid_for: "27"
-}
-overloaded_functions {
-  name: "compare_digest"
-  fullname: "hmac.compare_digest"
-  definitions {
-    name: "compare_digest"
-    fully_qualified_name: "hmac.compare_digest"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "__a"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
-      }
-    }
-    parameters {
-      name: "__b"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.ReadableBuffer"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -938,15 +462,7 @@ overloaded_functions {
       name: "key"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-    }
-    parameters {
-      name: "msg"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,None]"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.bytes"
@@ -956,21 +472,17 @@ overloaded_functions {
           pretty_printed_name: "builtins.bytearray"
           fully_qualified_name: "builtins.bytearray"
         }
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[ReadableBuffer],None]"
+        kind: UNION
         args {
-          pretty_printed_name: "builtins.memoryview"
-          fully_qualified_name: "builtins.memoryview"
-        }
-        args {
-          pretty_printed_name: "array.array[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "array.array"
-        }
-        args {
-          pretty_printed_name: "mmap.mmap"
-          fully_qualified_name: "mmap.mmap"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -982,29 +494,8 @@ overloaded_functions {
       name: "digestmod"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function],types.ModuleType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          args {
-            pretty_printed_name: "types.ModuleType"
-            fully_qualified_name: "types.ModuleType"
-          }
-        }
-        fully_qualified_name: "hmac._DigestMod"
+        pretty_printed_name: "UnboundType[_DigestMod]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -1022,37 +513,24 @@ overloaded_functions {
       name: "key"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
       }
     }
     parameters {
       name: "digestmod"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,CallableType[builtins.function],types.ModuleType]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],types.ModuleType]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "CallableType[builtins.function]"
-            kind: CALLABLE
-            args {
-              pretty_printed_name: "builtins.function"
-              fully_qualified_name: "builtins.function"
-            }
-          }
-          args {
-            pretty_printed_name: "types.ModuleType"
-            fully_qualified_name: "types.ModuleType"
-          }
-        }
-        fully_qualified_name: "hmac._DigestMod"
+        pretty_printed_name: "UnboundType[_DigestMod]"
+        kind: UNBOUND
       }
     }
     has_decorators: true
@@ -1064,13 +542,68 @@ overloaded_functions {
   valid_for: "310"
 }
 vars {
+  name: "_Hash"
+  fully_qualified_name: "hmac._Hash"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_DigestMod"
+  fully_qualified_name: "hmac._DigestMod"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "trans_5C"
+  fully_qualified_name: "hmac.trans_5C"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "trans_36"
+  fully_qualified_name: "hmac.trans_36"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "digest_size"
   fully_qualified_name: "hmac.digest_size"
   type_annotation {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

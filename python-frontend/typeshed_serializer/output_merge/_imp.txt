@@ -1,5 +1,35 @@
 fully_qualified_name: "_imp"
 functions {
+  name: "source_hash"
+  fully_qualified_name: "_imp.source_hash"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "source"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
   name: "create_builtin"
   fully_qualified_name: "_imp.create_builtin"
   return_annotation {
@@ -24,8 +54,8 @@ functions {
   name: "create_dynamic"
   fully_qualified_name: "_imp.create_dynamic"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
+    pretty_printed_name: "types.ModuleType"
+    fully_qualified_name: "types.ModuleType"
   }
   parameters {
     name: "__spec"
@@ -37,8 +67,16 @@ functions {
   parameters {
     name: "__file"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     has_default: true
   }
@@ -115,27 +153,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
     fully_qualified_name: "builtins.list"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "get_frozen_object"
-  fully_qualified_name: "_imp.get_frozen_object"
-  return_annotation {
-    pretty_printed_name: "types.CodeType"
-    fully_qualified_name: "types.CodeType"
-  }
-  parameters {
-    name: "__name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
   }
   valid_for: "35"
   valid_for: "36"
@@ -248,6 +265,41 @@ functions {
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_frozen_object"
+  fully_qualified_name: "_imp.get_frozen_object"
+  return_annotation {
+    pretty_printed_name: "types.CodeType"
+    fully_qualified_name: "types.CodeType"
+  }
+  parameters {
+    name: "__name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "check_hash_based_pycs"
+  fully_qualified_name: "_imp.check_hash_based_pycs"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
   }
   valid_for: "35"
   valid_for: "36"

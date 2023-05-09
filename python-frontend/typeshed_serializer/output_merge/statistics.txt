@@ -165,18 +165,18 @@ classes {
     name: "from_samples"
     fully_qualified_name: "statistics.NormalDist.from_samples"
     return_annotation {
-      pretty_printed_name: "statistics._T"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[statistics._T]"
+        pretty_printed_name: "Type[statistics.NormalDist]"
         kind: TYPE
         args {
-          pretty_printed_name: "statistics._T"
-          kind: TYPE_VAR
+          pretty_printed_name: "statistics.NormalDist"
+          fully_qualified_name: "statistics.NormalDist"
         }
       }
     }
@@ -388,6 +388,31 @@ classes {
     valid_for: "310"
   }
   methods {
+    name: "__eq__"
+    fully_qualified_name: "statistics.NormalDist.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "statistics.NormalDist"
+        fully_qualified_name: "statistics.NormalDist"
+      }
+    }
+    parameters {
+      name: "x2"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "__add__"
     fully_qualified_name: "statistics.NormalDist.__add__"
     return_annotation {
@@ -573,25 +598,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__hash__"
-    fully_qualified_name: "statistics.NormalDist.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "statistics.NormalDist"
-        fully_qualified_name: "statistics.NormalDist"
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "zscore"
     fully_qualified_name: "statistics.NormalDist.zscore"
     return_annotation {
@@ -671,7 +677,7 @@ classes {
       }
     }
     parameters {
-      name: "intercept"
+      name: "slope"
       kind: KEYWORD_ONLY
       type_annotation {
         pretty_printed_name: "builtins.float"
@@ -680,7 +686,7 @@ classes {
       has_default: true
     }
     parameters {
-      name: "slope"
+      name: "intercept"
       kind: KEYWORD_ONLY
       type_annotation {
         pretty_printed_name: "builtins.float"
@@ -710,7 +716,7 @@ classes {
       }
     }
     parameters {
-      name: "intercept"
+      name: "slope"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "builtins.float"
@@ -718,7 +724,7 @@ classes {
       }
     }
     parameters {
-      name: "slope"
+      name: "intercept"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "builtins.float"
@@ -808,8 +814,8 @@ classes {
   }
   valid_for: "310"
   attributes {
-    name: "intercept"
-    fully_qualified_name: "statistics.LinearRegression.intercept"
+    name: "slope"
+    fully_qualified_name: "statistics.LinearRegression.slope"
     type_annotation {
       pretty_printed_name: "builtins.float"
       fully_qualified_name: "builtins.float"
@@ -818,8 +824,8 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "slope"
-    fully_qualified_name: "statistics.LinearRegression.slope"
+    name: "intercept"
+    fully_qualified_name: "statistics.LinearRegression.intercept"
     type_annotation {
       pretty_printed_name: "builtins.float"
       fully_qualified_name: "builtins.float"
@@ -979,30 +985,13 @@ functions {
     name: "weights"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[typing.Iterable[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]],None]"
+      pretty_printed_name: "Union[typing.Iterable[UnboundType[_Number]],None]"
       kind: UNION
       args {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+        pretty_printed_name: "typing.Iterable[UnboundType[_Number]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "decimal.Decimal"
-              fully_qualified_name: "decimal.Decimal"
-            }
-            args {
-              pretty_printed_name: "fractions.Fraction"
-              fully_qualified_name: "fractions.Fraction"
-            }
-          }
-          fully_qualified_name: "statistics._Number"
+          pretty_printed_name: "UnboundType[_Number]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Iterable"
       }
@@ -1045,16 +1034,16 @@ functions {
   name: "median_low"
   fully_qualified_name: "statistics.median_low"
   return_annotation {
-    pretty_printed_name: "_typeshed.SupportsLessThanT"
+    pretty_printed_name: "_typeshed.SupportsRichComparisonT"
     kind: TYPE_VAR
   }
   parameters {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Iterable[_typeshed.SupportsLessThanT]"
+      pretty_printed_name: "typing.Iterable[_typeshed.SupportsRichComparisonT]"
       args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Iterable"
@@ -1071,16 +1060,16 @@ functions {
   name: "median_high"
   fully_qualified_name: "statistics.median_high"
   return_annotation {
-    pretty_printed_name: "_typeshed.SupportsLessThanT"
+    pretty_printed_name: "_typeshed.SupportsRichComparisonT"
     kind: TYPE_VAR
   }
   parameters {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "typing.Iterable[_typeshed.SupportsLessThanT]"
+      pretty_printed_name: "typing.Iterable[_typeshed.SupportsRichComparisonT]"
       args {
-        pretty_printed_name: "_typeshed.SupportsLessThanT"
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
         kind: TYPE_VAR
       }
       fully_qualified_name: "typing.Iterable"
@@ -1097,8 +1086,16 @@ functions {
   name: "median_grouped"
   fully_qualified_name: "statistics.median_grouped"
   return_annotation {
-    pretty_printed_name: "statistics._NumberT"
-    kind: TYPE_VAR
+    pretty_printed_name: "Union[statistics._NumberT,builtins.float]"
+    kind: UNION
+    args {
+      pretty_printed_name: "statistics._NumberT"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
   }
   parameters {
     name: "data"
@@ -1116,8 +1113,16 @@ functions {
     name: "interval"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "statistics._NumberT"
-      kind: TYPE_VAR
+      pretty_printed_name: "Union[statistics._NumberT,builtins.float]"
+      kind: UNION
+      args {
+        pretty_printed_name: "statistics._NumberT"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
     }
     has_default: true
   }
@@ -1435,8 +1440,24 @@ functions {
     name: "method"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
     }
     has_default: true
   }
@@ -1454,27 +1475,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
@@ -1482,27 +1486,10 @@ functions {
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
@@ -1519,27 +1506,10 @@ functions {
   parameters {
     name: "__x"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
@@ -1547,27 +1517,10 @@ functions {
   parameters {
     name: "__y"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
@@ -1592,27 +1545,10 @@ functions {
   parameters {
     name: "__regressor"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
@@ -1620,30 +1556,45 @@ functions {
   parameters {
     name: "__dependent_variable"
     type_annotation {
-      pretty_printed_name: "typing.Sequence[TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]]"
+      pretty_printed_name: "typing.Sequence[UnboundType[_Number]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[builtins.float,decimal.Decimal,fractions.Fraction]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-        fully_qualified_name: "statistics._Number"
+        pretty_printed_name: "UnboundType[_Number]"
+        kind: UNBOUND
       }
       fully_qualified_name: "typing.Sequence"
     }
   }
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "statistics.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Number"
+  fully_qualified_name: "statistics._Number"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
   valid_for: "310"
 }

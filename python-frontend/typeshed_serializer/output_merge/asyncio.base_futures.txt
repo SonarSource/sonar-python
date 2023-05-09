@@ -1,7 +1,7 @@
 fully_qualified_name: "asyncio.base_futures"
 functions {
   name: "isfuture"
-  fully_qualified_name: "asyncio.base_futures.isfuture"
+  fully_qualified_name: "asyncio.futures.isfuture"
   return_annotation {
     pretty_printed_name: "builtins.bool"
     fully_qualified_name: "builtins.bool"
@@ -20,32 +20,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "_format_callbacks"
-  fully_qualified_name: "asyncio.base_futures._format_callbacks"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "cb"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "typing.Sequence[CallableType[builtins.function]]"
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "typing.Sequence"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
 }
 functions {
   name: "_format_callbacks"
@@ -78,6 +52,8 @@ functions {
       fully_qualified_name: "typing.Sequence"
     }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -105,6 +81,20 @@ functions {
       }
       fully_qualified_name: "asyncio.futures.Future"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.base_futures.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[]"
+    kind: TUPLE
   }
   valid_for: "35"
   valid_for: "36"

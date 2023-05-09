@@ -3,30 +3,6 @@ classes {
   name: "ServerHandler"
   fully_qualified_name: "wsgiref.simple_server.ServerHandler"
   super_classes: "wsgiref.handlers.SimpleHandler"
-  methods {
-    name: "close"
-    fully_qualified_name: "wsgiref.simple_server.ServerHandler.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.ServerHandler"
-        fully_qualified_name: "wsgiref.simple_server.ServerHandler"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -40,145 +16,12 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "WSGIServer"
-  fully_qualified_name: "wsgiref.simple_server.WSGIServer"
-  super_classes: "BaseHTTPServer.HTTPServer"
-  methods {
-    name: "setup_environ"
-    fully_qualified_name: "wsgiref.simple_server.WSGIServer.setup_environ"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIServer"
-        fully_qualified_name: "wsgiref.simple_server.WSGIServer"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_app"
-    fully_qualified_name: "wsgiref.simple_server.WSGIServer.get_app"
-    return_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIServer"
-        fully_qualified_name: "wsgiref.simple_server.WSGIServer"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "set_app"
-    fully_qualified_name: "wsgiref.simple_server.WSGIServer.set_app"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIServer"
-        fully_qualified_name: "wsgiref.simple_server.WSGIServer"
-      }
-    }
-    parameters {
-      name: "application"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "application"
-    fully_qualified_name: "wsgiref.simple_server.WSGIServer.application"
-    type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "base_environ"
-    fully_qualified_name: "wsgiref.simple_server.WSGIServer.base_environ"
-    type_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -211,15 +54,11 @@ classes {
     name: "get_app"
     fully_qualified_name: "wsgiref.simple_server.WSGIServer.get_app"
     return_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      pretty_printed_name: "Union[UnboundType[WSGIApplication],None]"
       kind: UNION
       args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -260,15 +99,11 @@ classes {
       name: "application"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        pretty_printed_name: "Union[UnboundType[WSGIApplication],None]"
         kind: UNION
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "UnboundType[WSGIApplication]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -293,15 +128,11 @@ classes {
     name: "application"
     fully_qualified_name: "wsgiref.simple_server.WSGIServer.application"
     type_annotation {
-      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      pretty_printed_name: "Union[UnboundType[WSGIApplication],None]"
       kind: UNION
       args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -319,21 +150,8 @@ classes {
     name: "base_environ"
     fully_qualified_name: "wsgiref.simple_server.WSGIServer.base_environ"
     type_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      pretty_printed_name: "UnboundType[WSGIEnvironment]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "36"
@@ -341,85 +159,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-}
-classes {
-  name: "WSGIRequestHandler"
-  fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler"
-  super_classes: "BaseHTTPServer.BaseHTTPRequestHandler"
-  methods {
-    name: "get_environ"
-    fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.get_environ"
-    return_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIRequestHandler"
-        fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "get_stderr"
-    fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.get_stderr"
-    return_annotation {
-      pretty_printed_name: "_typeshed.wsgi.ErrorStream"
-      fully_qualified_name: "_typeshed.wsgi.ErrorStream"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIRequestHandler"
-        fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "handle"
-    fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.handle"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIRequestHandler"
-        fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler"
-      }
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "server_version"
-    fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.server_version"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
   }
 }
 classes {
@@ -430,21 +169,8 @@ classes {
     name: "get_environ"
     fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.get_environ"
     return_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      pretty_printed_name: "UnboundType[WSGIEnvironment]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -467,28 +193,6 @@ classes {
     return_annotation {
       pretty_printed_name: "_typeshed.wsgi.ErrorStream"
       fully_qualified_name: "_typeshed.wsgi.ErrorStream"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "wsgiref.simple_server.WSGIRequestHandler"
-        fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "handle"
-    fully_qualified_name: "wsgiref.simple_server.WSGIRequestHandler.handle"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
     }
     parameters {
       name: "self"
@@ -530,48 +234,6 @@ functions {
   name: "demo_app"
   fully_qualified_name: "wsgiref.simple_server.demo_app"
   return_annotation {
-    pretty_printed_name: "builtins.list[builtins.str]"
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "environ"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
-        args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
-    }
-  }
-  parameters {
-    name: "start_response"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_typeshed.wsgi.StartResponse"
-      fully_qualified_name: "_typeshed.wsgi.StartResponse"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "demo_app"
-  fully_qualified_name: "wsgiref.simple_server.demo_app"
-  return_annotation {
     pretty_printed_name: "builtins.list[builtins.bytes]"
     args {
       pretty_printed_name: "builtins.bytes"
@@ -583,21 +245,8 @@ functions {
     name: "environ"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      pretty_printed_name: "UnboundType[WSGIEnvironment]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -645,17 +294,112 @@ overloaded_functions {
       name: "app"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "handler_class"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "make_server"
+    fully_qualified_name: "wsgiref.simple_server.make_server"
+    return_annotation {
+      pretty_printed_name: "wsgiref.simple_server._S"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "server_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "handler_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+overloaded_functions {
+  name: "make_server"
+  fullname: "wsgiref.simple_server.make_server"
+  definitions {
+    name: "make_server"
+    fully_qualified_name: "wsgiref.simple_server.make_server"
+    return_annotation {
+      pretty_printed_name: "wsgiref.simple_server.WSGIServer"
+      fully_qualified_name: "wsgiref.simple_server.WSGIServer"
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -702,17 +446,8 @@ overloaded_functions {
       name: "app"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
-        }
-        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+        pretty_printed_name: "UnboundType[WSGIApplication]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -744,7 +479,20 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "wsgiref.simple_server.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -759,7 +507,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -774,7 +521,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -789,7 +535,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

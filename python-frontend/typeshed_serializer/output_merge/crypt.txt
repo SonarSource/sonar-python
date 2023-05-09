@@ -11,101 +11,6 @@ classes {
   valid_for: "310"
 }
 functions {
-  name: "crypt"
-  fully_qualified_name: "crypt.crypt"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "word"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "salt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "crypt"
-  fully_qualified_name: "crypt.crypt"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "word"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "salt"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,crypt._Method,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "crypt._Method"
-        fully_qualified_name: "crypt._Method"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "mksalt"
-  fully_qualified_name: "crypt.mksalt"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "method"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[crypt._Method,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "crypt._Method"
-        fully_qualified_name: "crypt._Method"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-}
-functions {
   name: "mksalt"
   fully_qualified_name: "crypt.mksalt"
   return_annotation {
@@ -146,6 +51,51 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "crypt"
+  fully_qualified_name: "crypt.crypt"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "word"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "salt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,crypt._Method,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "crypt._Method"
+        fully_qualified_name: "crypt._Method"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -208,6 +158,20 @@ vars {
   valid_for: "310"
 }
 vars {
+  name: "METHOD_BLOWFISH"
+  fully_qualified_name: "crypt.METHOD_BLOWFISH"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
   name: "methods"
   fully_qualified_name: "crypt.methods"
   type_annotation {
@@ -220,18 +184,6 @@ vars {
   }
   valid_for: "35"
   valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "METHOD_BLOWFISH"
-  fully_qualified_name: "crypt.METHOD_BLOWFISH"
-  type_annotation {
-    pretty_printed_name: "crypt._Method"
-    fully_qualified_name: "crypt._Method"
-  }
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

@@ -7,44 +7,8 @@ classes {
     name: "timetuple"
     fully_qualified_name: "xmlrpc.client._SupportsTimeTuple.timetuple"
     return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
+      pretty_printed_name: "time.struct_time"
+      fully_qualified_name: "time.struct_time"
     }
     parameters {
       name: "self"
@@ -336,7 +300,7 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.str,datetime.datetime,Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],builtins.tuple[builtins.int]]"
+        pretty_printed_name: "Union[builtins.int,builtins.str,datetime.datetime,time.struct_time,Tuple[builtins.int,Any]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.int"
@@ -351,44 +315,65 @@ classes {
           fully_qualified_name: "datetime.datetime"
         }
         args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+          pretty_printed_name: "time.struct_time"
+          fully_qualified_name: "time.struct_time"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,Any]"
           kind: TUPLE
           args {
             pretty_printed_name: "builtins.int"
             fully_qualified_name: "builtins.int"
           }
           args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
+            pretty_printed_name: "Any"
+            kind: ANY
           }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "xmlrpc.client.DateTime.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.DateTime"
+        fully_qualified_name: "xmlrpc.client.DateTime"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str,datetime.datetime,time.struct_time,builtins.tuple[builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "time.struct_time"
+          fully_qualified_name: "time.struct_time"
         }
         args {
           pretty_printed_name: "builtins.tuple[builtins.int]"
@@ -401,10 +386,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -425,29 +406,8 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -474,29 +434,8 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -523,29 +462,8 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -572,29 +490,8 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -621,29 +518,8 @@ classes {
     parameters {
       name: "other"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -680,29 +556,8 @@ classes {
       name: "other"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[xmlrpc.client.DateTime,datetime.datetime,builtins.str,xmlrpc.client._SupportsTimeTuple]"
-          kind: UNION
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client._SupportsTimeTuple"
-            fully_qualified_name: "xmlrpc.client._SupportsTimeTuple"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+        pretty_printed_name: "UnboundType[_DateTimeComparable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -716,44 +571,8 @@ classes {
     name: "timetuple"
     fully_qualified_name: "xmlrpc.client.DateTime.timetuple"
     return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
+      pretty_printed_name: "time.struct_time"
+      fully_qualified_name: "time.struct_time"
     }
     parameters {
       name: "self"
@@ -878,11 +697,15 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,None]"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,None]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.bytes"
           fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
         }
         args {
           pretty_printed_name: "None"
@@ -917,8 +740,8 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -953,6 +776,34 @@ classes {
           fully_qualified_name: "builtins.str"
         }
         fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "xmlrpc.client.Binary.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.Binary"
+        fully_qualified_name: "xmlrpc.client.Binary"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     valid_for: "35"
@@ -1036,15 +887,15 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
       }
     }
@@ -1155,86 +1006,17 @@ classes {
       name: "values"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[xmlrpc.client.Fault,typing.Iterable[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+        pretty_printed_name: "Union[xmlrpc.client.Fault,typing.Iterable[UnboundType[_Marshallable]]]"
         kind: UNION
         args {
           pretty_printed_name: "xmlrpc.client.Fault"
           fully_qualified_name: "xmlrpc.client.Fault"
         }
         args {
-          pretty_printed_name: "typing.Iterable[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+          pretty_printed_name: "typing.Iterable[UnboundType[_Marshallable]]"
           args {
-            pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-              kind: UNION
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-              args {
-                pretty_printed_name: "builtins.bool"
-                fully_qualified_name: "builtins.bool"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.float"
-                fully_qualified_name: "builtins.float"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "builtins.tuple[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.tuple"
-              }
-              args {
-                pretty_printed_name: "builtins.list[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "builtins.dict[Any,Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.dict"
-              }
-              args {
-                pretty_printed_name: "datetime.datetime"
-                fully_qualified_name: "datetime.datetime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.DateTime"
-                fully_qualified_name: "xmlrpc.client.DateTime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.Binary"
-                fully_qualified_name: "xmlrpc.client.Binary"
-              }
-            }
-            fully_qualified_name: "xmlrpc.client._Marshallable"
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
           }
           fully_qualified_name: "typing.Iterable"
         }
@@ -1266,89 +1048,16 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1385,12 +1094,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1427,12 +1132,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1469,12 +1170,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1511,12 +1208,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1553,12 +1246,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1595,12 +1284,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1642,20 +1327,16 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1684,79 +1365,10 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Iterable[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+        pretty_printed_name: "typing.Iterable[UnboundType[_Marshallable]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-            kind: UNION
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.tuple[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.tuple"
-            }
-            args {
-              pretty_printed_name: "builtins.list[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[Any,Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-            args {
-              pretty_printed_name: "datetime.datetime"
-              fully_qualified_name: "datetime.datetime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.DateTime"
-              fully_qualified_name: "xmlrpc.client.DateTime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.Binary"
-              fully_qualified_name: "xmlrpc.client.Binary"
-            }
-          }
-          fully_qualified_name: "xmlrpc.client._Marshallable"
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Iterable"
       }
@@ -1765,12 +1377,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -1799,83 +1407,14 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+        pretty_printed_name: "typing.Mapping[builtins.str,UnboundType[_Marshallable]]"
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-            kind: UNION
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.tuple[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.tuple"
-            }
-            args {
-              pretty_printed_name: "builtins.list[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[Any,Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-            args {
-              pretty_printed_name: "datetime.datetime"
-              fully_qualified_name: "datetime.datetime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.DateTime"
-              fully_qualified_name: "xmlrpc.client.DateTime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.Binary"
-              fully_qualified_name: "xmlrpc.client.Binary"
-            }
-          }
-          fully_qualified_name: "xmlrpc.client._Marshallable"
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Mapping"
       }
@@ -1884,12 +1423,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -1931,81 +1466,16 @@ classes {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,datetime.datetime,builtins.tuple[builtins.int],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,datetime.datetime,builtins.tuple[builtins.int],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[builtins.int]"
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._XMLDate"
+        pretty_printed_name: "UnboundType[_XMLDate]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -2042,12 +1512,8 @@ classes {
       name: "write"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "UnboundType[_WriteCallback]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -2063,6 +1529,30 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "dispatch"
+    fully_qualified_name: "xmlrpc.client.Marshaller.dispatch"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.type,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
   attributes {
     name: "dispatch"
     fully_qualified_name: "xmlrpc.client.Marshaller.dispatch"
@@ -2086,10 +1576,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2214,81 +1700,16 @@ classes {
     name: "close"
     fully_qualified_name: "xmlrpc.client.Unmarshaller.close"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     parameters {
       name: "self"
@@ -2302,6 +1723,26 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "xmlrpc.client.Unmarshaller.close"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.Unmarshaller"
+        fully_qualified_name: "xmlrpc.client.Unmarshaller"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -2995,79 +2436,10 @@ classes {
     name: "_stack"
     fully_qualified_name: "xmlrpc.client.Unmarshaller._stack"
     type_annotation {
-      pretty_printed_name: "builtins.list[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "builtins.list[UnboundType[_Marshallable]]"
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
@@ -3234,86 +2606,17 @@ classes {
       name: "call_list"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.list[Tuple[builtins.str,TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+        pretty_printed_name: "builtins.list[Tuple[builtins.str,UnboundType[_Marshallable]]]"
         args {
-          pretty_printed_name: "Tuple[builtins.str,TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+          pretty_printed_name: "Tuple[builtins.str,UnboundType[_Marshallable]]"
           kind: TUPLE
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-              kind: UNION
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-              args {
-                pretty_printed_name: "builtins.bool"
-                fully_qualified_name: "builtins.bool"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.float"
-                fully_qualified_name: "builtins.float"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "builtins.tuple[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.tuple"
-              }
-              args {
-                pretty_printed_name: "builtins.list[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "builtins.dict[Any,Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.dict"
-              }
-              args {
-                pretty_printed_name: "datetime.datetime"
-                fully_qualified_name: "datetime.datetime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.DateTime"
-                fully_qualified_name: "xmlrpc.client.DateTime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.Binary"
-                fully_qualified_name: "xmlrpc.client.Binary"
-              }
-            }
-            fully_qualified_name: "xmlrpc.client._Marshallable"
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
           }
         }
         fully_qualified_name: "builtins.list"
@@ -3381,77 +2684,8 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -3471,90 +2705,25 @@ classes {
     name: "__call_list"
     fully_qualified_name: "xmlrpc.client._MultiCallMethod.__call_list"
     type_annotation {
-      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]]"
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,Tuple[UnboundType[_Marshallable],Any]]]"
       args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+        pretty_printed_name: "Tuple[builtins.str,Tuple[UnboundType[_Marshallable],Any]]"
         kind: TUPLE
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+          pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-              kind: UNION
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-              args {
-                pretty_printed_name: "builtins.bool"
-                fully_qualified_name: "builtins.bool"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.float"
-                fully_qualified_name: "builtins.float"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "builtins.tuple[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.tuple"
-              }
-              args {
-                pretty_printed_name: "builtins.list[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "builtins.dict[Any,Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.dict"
-              }
-              args {
-                pretty_printed_name: "datetime.datetime"
-                fully_qualified_name: "datetime.datetime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.DateTime"
-                fully_qualified_name: "xmlrpc.client.DateTime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.Binary"
-                fully_qualified_name: "xmlrpc.client.Binary"
-              }
-            }
-            fully_qualified_name: "xmlrpc.client._Marshallable"
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "builtins.tuple"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
         }
       }
       fully_qualified_name: "builtins.list"
@@ -3563,6 +2732,30 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "__call_list"
+    fully_qualified_name: "xmlrpc.client._MultiCallMethod.__call_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.tuple[UnboundType[_Marshallable]]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[UnboundType[_Marshallable]]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+          args {
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -3604,81 +2797,12 @@ classes {
       name: "results"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.list[builtins.list[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+        pretty_printed_name: "builtins.list[builtins.list[UnboundType[_Marshallable]]]"
         args {
-          pretty_printed_name: "builtins.list[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+          pretty_printed_name: "builtins.list[UnboundType[_Marshallable]]"
           args {
-            pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-              kind: UNION
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-              args {
-                pretty_printed_name: "builtins.bool"
-                fully_qualified_name: "builtins.bool"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.float"
-                fully_qualified_name: "builtins.float"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "builtins.tuple[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.tuple"
-              }
-              args {
-                pretty_printed_name: "builtins.list[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "builtins.dict[Any,Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.dict"
-              }
-              args {
-                pretty_printed_name: "datetime.datetime"
-                fully_qualified_name: "datetime.datetime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.DateTime"
-                fully_qualified_name: "xmlrpc.client.DateTime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.Binary"
-                fully_qualified_name: "xmlrpc.client.Binary"
-              }
-            }
-            fully_qualified_name: "xmlrpc.client._Marshallable"
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
           }
           fully_qualified_name: "builtins.list"
         }
@@ -3696,77 +2820,8 @@ classes {
     name: "__getitem__"
     fully_qualified_name: "xmlrpc.client.MultiCallIterator.__getitem__"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        args {
-          pretty_printed_name: "builtins.list[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "builtins.dict[Any,Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-        args {
-          pretty_printed_name: "xmlrpc.client.DateTime"
-          fully_qualified_name: "xmlrpc.client.DateTime"
-        }
-        args {
-          pretty_printed_name: "xmlrpc.client.Binary"
-          fully_qualified_name: "xmlrpc.client.Binary"
-        }
-      }
-      fully_qualified_name: "xmlrpc.client._Marshallable"
+      pretty_printed_name: "UnboundType[_Marshallable]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -3799,81 +2854,12 @@ classes {
     name: "results"
     fully_qualified_name: "xmlrpc.client.MultiCallIterator.results"
     type_annotation {
-      pretty_printed_name: "builtins.list[builtins.list[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+      pretty_printed_name: "builtins.list[builtins.list[UnboundType[_Marshallable]]]"
       args {
-        pretty_printed_name: "builtins.list[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+        pretty_printed_name: "builtins.list[UnboundType[_Marshallable]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-            kind: UNION
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.tuple[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.tuple"
-            }
-            args {
-              pretty_printed_name: "builtins.list[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[Any,Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-            args {
-              pretty_printed_name: "datetime.datetime"
-              fully_qualified_name: "datetime.datetime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.DateTime"
-              fully_qualified_name: "xmlrpc.client.DateTime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.Binary"
-              fully_qualified_name: "xmlrpc.client.Binary"
-            }
-          }
-          fully_qualified_name: "xmlrpc.client._Marshallable"
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
         fully_qualified_name: "builtins.list"
       }
@@ -3936,7 +2922,7 @@ classes {
       }
     }
     parameters {
-      name: "item"
+      name: "name"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -3995,90 +2981,25 @@ classes {
     name: "__call_list"
     fully_qualified_name: "xmlrpc.client.MultiCall.__call_list"
     type_annotation {
-      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]]"
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,Tuple[UnboundType[_Marshallable],Any]]]"
       args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+        pretty_printed_name: "Tuple[builtins.str,Tuple[UnboundType[_Marshallable],Any]]"
         kind: TUPLE
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+          pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+          kind: TUPLE
           args {
-            pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-              kind: UNION
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-              args {
-                pretty_printed_name: "builtins.bool"
-                fully_qualified_name: "builtins.bool"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.float"
-                fully_qualified_name: "builtins.float"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.bytes"
-                fully_qualified_name: "builtins.bytes"
-              }
-              args {
-                pretty_printed_name: "builtins.tuple[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.tuple"
-              }
-              args {
-                pretty_printed_name: "builtins.list[Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.list"
-              }
-              args {
-                pretty_printed_name: "builtins.dict[Any,Any]"
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                args {
-                  pretty_printed_name: "Any"
-                  kind: ANY
-                }
-                fully_qualified_name: "builtins.dict"
-              }
-              args {
-                pretty_printed_name: "datetime.datetime"
-                fully_qualified_name: "datetime.datetime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.DateTime"
-                fully_qualified_name: "xmlrpc.client.DateTime"
-              }
-              args {
-                pretty_printed_name: "xmlrpc.client.Binary"
-                fully_qualified_name: "xmlrpc.client.Binary"
-              }
-            }
-            fully_qualified_name: "xmlrpc.client._Marshallable"
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
           }
-          fully_qualified_name: "builtins.tuple"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
         }
       }
       fully_qualified_name: "builtins.list"
@@ -4087,6 +3008,30 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "__call_list"
+    fully_qualified_name: "xmlrpc.client.MultiCall.__call_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.tuple[UnboundType[_Marshallable]]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.tuple[UnboundType[_Marshallable]]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+          args {
+            pretty_printed_name: "UnboundType[_Marshallable]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -4114,34 +3059,12 @@ classes {
       name: "response"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+        pretty_printed_name: "_typeshed.SupportsRead[UnboundType[ReadableBuffer]]"
         args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
         }
         fully_qualified_name: "_typeshed.SupportsRead"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "xmlrpc.client.GzipDecodedResponse.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "xmlrpc.client.GzipDecodedResponse"
-        fully_qualified_name: "xmlrpc.client.GzipDecodedResponse"
       }
     }
     valid_for: "35"
@@ -4250,77 +3173,8 @@ classes {
     name: "__call__"
     fully_qualified_name: "xmlrpc.client._Method.__call__"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        args {
-          pretty_printed_name: "builtins.list[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "builtins.dict[Any,Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-        args {
-          pretty_printed_name: "xmlrpc.client.DateTime"
-          fully_qualified_name: "xmlrpc.client.DateTime"
-        }
-        args {
-          pretty_printed_name: "xmlrpc.client.Binary"
-          fully_qualified_name: "xmlrpc.client.Binary"
-        }
-      }
-      fully_qualified_name: "xmlrpc.client._Marshallable"
+      pretty_printed_name: "UnboundType[_Marshallable]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4334,77 +3188,8 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -4556,81 +3341,16 @@ classes {
     name: "request"
     fully_qualified_name: "xmlrpc.client.Transport.request"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     parameters {
       name: "self"
@@ -4644,37 +3364,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4689,8 +3380,8 @@ classes {
       name: "request_body"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4706,6 +3397,59 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "request"
+    fully_qualified_name: "xmlrpc.client.Transport.request"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.Transport"
+        fully_qualified_name: "xmlrpc.client.Transport"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "request_body"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "verbose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -4713,81 +3457,16 @@ classes {
     name: "single_request"
     fully_qualified_name: "xmlrpc.client.Transport.single_request"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     parameters {
       name: "self"
@@ -4801,37 +3480,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4846,8 +3496,8 @@ classes {
       name: "request_body"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -4863,6 +3513,59 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "single_request"
+    fully_qualified_name: "xmlrpc.client.Transport.single_request"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.Transport"
+        fully_qualified_name: "xmlrpc.client.Transport"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "request_body"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "verbose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -4947,37 +3650,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -5006,37 +3680,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -5087,37 +3732,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5132,8 +3748,8 @@ classes {
       name: "request_body"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -5228,8 +3844,8 @@ classes {
       name: "request_body"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[_BufferWithLen]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -5243,81 +3859,16 @@ classes {
     name: "parse_response"
     fully_qualified_name: "xmlrpc.client.Transport.parse_response"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     parameters {
       name: "self"
@@ -5339,6 +3890,34 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "parse_response"
+    fully_qualified_name: "xmlrpc.client.Transport.parse_response"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.Transport"
+        fully_qualified_name: "xmlrpc.client.Transport"
+      }
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.client.HTTPResponse"
+        fully_qualified_name: "http.client.HTTPResponse"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -5430,34 +4009,14 @@ classes {
     name: "_connection"
     fully_qualified_name: "xmlrpc.client.Transport._connection"
     type_annotation {
-      pretty_printed_name: "Tuple[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str,None],Union[http.client.HTTPConnection,None]]"
+      pretty_printed_name: "Tuple[Union[UnboundType[_HostType],None],Union[http.client.HTTPConnection,None]]"
       kind: TUPLE
       args {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str,None]"
+        pretty_printed_name: "Union[UnboundType[_HostType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "UnboundType[_HostType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -5689,37 +4248,8 @@ classes {
       name: "host"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]],builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._HostType"
+        pretty_printed_name: "UnboundType[_HostType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -6021,8 +4551,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "xmlrpc.client.ServerProxy.__enter__"
     return_annotation {
-      pretty_printed_name: "xmlrpc.client.ServerProxy"
-      fully_qualified_name: "xmlrpc.client.ServerProxy"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -6037,6 +4567,70 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "xmlrpc.client.ServerProxy.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.ServerProxy"
+        fully_qualified_name: "xmlrpc.client.ServerProxy"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -6101,10 +4695,6 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -6134,79 +4724,62 @@ classes {
     name: "__request"
     fully_qualified_name: "xmlrpc.client.ServerProxy.__request"
     return_annotation {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "xmlrpc.client.ServerProxy"
+        fully_qualified_name: "xmlrpc.client.ServerProxy"
+      }
+    }
+    parameters {
+      name: "methodname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__request"
+    fully_qualified_name: "xmlrpc.client.ServerProxy.__request"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.tuple"
     }
@@ -6230,87 +4803,14 @@ classes {
       name: "params"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+        pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
         args {
-          pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-            kind: UNION
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.tuple[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.tuple"
-            }
-            args {
-              pretty_printed_name: "builtins.list[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[Any,Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-            args {
-              pretty_printed_name: "datetime.datetime"
-              fully_qualified_name: "datetime.datetime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.DateTime"
-              fully_qualified_name: "xmlrpc.client.DateTime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.Binary"
-              fully_qualified_name: "xmlrpc.client.Binary"
-            }
-          }
-          fully_qualified_name: "xmlrpc.client._Marshallable"
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
         fully_qualified_name: "builtins.tuple"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -6575,69 +5075,8 @@ functions {
     name: "value"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.int,datetime.datetime,builtins.tuple[builtins.int],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.int,datetime.datetime,builtins.tuple[builtins.int],Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[builtins.int]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      fully_qualified_name: "xmlrpc.client._XMLDate"
+      pretty_printed_name: "UnboundType[_XMLDate]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -6702,8 +5141,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -6764,88 +5203,23 @@ functions {
     name: "params"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[xmlrpc.client.Fault,builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]]"
+      pretty_printed_name: "Union[xmlrpc.client.Fault,Tuple[UnboundType[_Marshallable],Any]]"
       kind: UNION
       args {
         pretty_printed_name: "xmlrpc.client.Fault"
         fully_qualified_name: "xmlrpc.client.Fault"
       }
       args {
-        pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+        pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+        kind: TUPLE
         args {
-          pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-            kind: UNION
-            args {
-              pretty_printed_name: "None"
-              kind: NONE
-            }
-            args {
-              pretty_printed_name: "builtins.bool"
-              fully_qualified_name: "builtins.bool"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.float"
-              fully_qualified_name: "builtins.float"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            args {
-              pretty_printed_name: "builtins.tuple[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.tuple"
-            }
-            args {
-              pretty_printed_name: "builtins.list[Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.list"
-            }
-            args {
-              pretty_printed_name: "builtins.dict[Any,Any]"
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              args {
-                pretty_printed_name: "Any"
-                kind: ANY
-              }
-              fully_qualified_name: "builtins.dict"
-            }
-            args {
-              pretty_printed_name: "datetime.datetime"
-              fully_qualified_name: "datetime.datetime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.DateTime"
-              fully_qualified_name: "xmlrpc.client.DateTime"
-            }
-            args {
-              pretty_printed_name: "xmlrpc.client.Binary"
-              fully_qualified_name: "xmlrpc.client.Binary"
-            }
-          }
-          fully_qualified_name: "xmlrpc.client._Marshallable"
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
         }
-        fully_qualified_name: "builtins.tuple"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
       }
     }
   }
@@ -6913,6 +5287,94 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "dumps"
+  fully_qualified_name: "xmlrpc.client.dumps"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "params"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[xmlrpc.client.Fault,builtins.tuple[UnboundType[_Marshallable]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "xmlrpc.client.Fault"
+        fully_qualified_name: "xmlrpc.client.Fault"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+        args {
+          pretty_printed_name: "UnboundType[_Marshallable]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+  }
+  parameters {
+    name: "methodname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "methodresponse"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "allow_none"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -6920,84 +5382,19 @@ functions {
   name: "loads"
   fully_qualified_name: "xmlrpc.client.loads"
   return_annotation {
-    pretty_printed_name: "Tuple[builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]],Union[builtins.str,None]]"
+    pretty_printed_name: "Tuple[Tuple[UnboundType[_Marshallable],Any],Union[builtins.str,None]]"
     kind: TUPLE
     args {
-      pretty_printed_name: "builtins.tuple[TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]]"
+      pretty_printed_name: "Tuple[UnboundType[_Marshallable],Any]"
+      kind: TUPLE
       args {
-        pretty_printed_name: "TypeAlias[Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.tuple[Any],builtins.list[Any],builtins.dict[Any,Any],datetime.datetime,xmlrpc.client.DateTime,xmlrpc.client.Binary]"
-          kind: UNION
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.tuple[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.tuple"
-          }
-          args {
-            pretty_printed_name: "builtins.list[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.list"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[Any,Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-          args {
-            pretty_printed_name: "datetime.datetime"
-            fully_qualified_name: "datetime.datetime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.DateTime"
-            fully_qualified_name: "xmlrpc.client.DateTime"
-          }
-          args {
-            pretty_printed_name: "xmlrpc.client.Binary"
-            fully_qualified_name: "xmlrpc.client.Binary"
-          }
-        }
-        fully_qualified_name: "xmlrpc.client._Marshallable"
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     args {
       pretty_printed_name: "Union[builtins.str,None]"
@@ -7042,6 +5439,60 @@ functions {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+functions {
+  name: "loads"
+  fully_qualified_name: "xmlrpc.client.loads"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.tuple[UnboundType[_Marshallable]],Union[builtins.str,None]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.tuple[UnboundType[_Marshallable]]"
+      args {
+        pretty_printed_name: "UnboundType[_Marshallable]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "use_datetime"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "use_builtin_types"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
   valid_for: "39"
   valid_for: "310"
 }
@@ -7056,8 +5507,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -7078,8 +5529,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -7102,6 +5553,62 @@ vars {
   name: "http"
   fully_qualified_name: "http"
   is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_DateTimeComparable"
+  fully_qualified_name: "xmlrpc.client._DateTimeComparable"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Marshallable"
+  fully_qualified_name: "xmlrpc.client._Marshallable"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_XMLDate"
+  fully_qualified_name: "xmlrpc.client._XMLDate"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_HostType"
+  fully_qualified_name: "xmlrpc.client._HostType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -7309,6 +5816,26 @@ vars {
   name: "WRAPPERS"
   fully_qualified_name: "xmlrpc.client.WRAPPERS"
   type_annotation {
+    pretty_printed_name: "Tuple[builtins.type,builtins.type]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    args {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+vars {
+  name: "WRAPPERS"
+  fully_qualified_name: "xmlrpc.client.WRAPPERS"
+  type_annotation {
     pretty_printed_name: "Tuple[Type[xmlrpc.client.DateTime],Type[xmlrpc.client.Binary]]"
     kind: TUPLE
     args {
@@ -7327,6 +5854,16 @@ vars {
         fully_qualified_name: "xmlrpc.client.Binary"
       }
     }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_WriteCallback"
+  fully_qualified_name: "xmlrpc.client._WriteCallback"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

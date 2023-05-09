@@ -3,7 +3,6 @@ classes {
   name: "Error"
   fully_qualified_name: "binascii.Error"
   super_classes: "builtins.ValueError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -15,7 +14,6 @@ classes {
   name: "Incomplete"
   fully_qualified_name: "binascii.Incomplete"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -27,38 +25,14 @@ functions {
   name: "a2b_uu"
   fully_qualified_name: "binascii.a2b_uu"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "a2b_uu"
-  fully_qualified_name: "binascii.a2b_uu"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -72,47 +46,14 @@ functions {
   name: "b2a_uu"
   fully_qualified_name: "binascii.b2a_uu"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "b2a_uu"
-  fully_qualified_name: "binascii.b2a_uu"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-}
-functions {
-  name: "b2a_uu"
-  fully_qualified_name: "binascii.b2a_uu"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -124,26 +65,12 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "a2b_base64"
-  fully_qualified_name: "binascii.a2b_base64"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "a2b_base64"
@@ -155,16 +82,8 @@ functions {
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -178,30 +97,14 @@ functions {
   name: "b2a_base64"
   fully_qualified_name: "binascii.b2a_base64"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "b2a_base64"
-  fully_qualified_name: "binascii.b2a_base64"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -224,32 +127,6 @@ functions {
   name: "a2b_qp"
   fully_qualified_name: "binascii.a2b_qp"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "data"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "a2b_qp"
-  fully_qualified_name: "binascii.a2b_qp"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
@@ -257,16 +134,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -289,50 +158,6 @@ functions {
   name: "b2a_qp"
   fully_qualified_name: "binascii.b2a_qp"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "data"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "quotetabs"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "istext"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "header"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "b2a_qp"
-  fully_qualified_name: "binascii.b2a_qp"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
@@ -340,8 +165,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -382,27 +207,179 @@ functions {
   name: "a2b_hqx"
   fully_qualified_name: "binascii.a2b_hqx"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 functions {
-  name: "a2b_hqx"
-  fully_qualified_name: "binascii.a2b_hqx"
+  name: "rledecode_hqx"
+  fully_qualified_name: "binascii.rledecode_hqx"
   return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "rlecode_hqx"
+  fully_qualified_name: "binascii.rlecode_hqx"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "b2a_hqx"
+  fully_qualified_name: "binascii.b2a_hqx"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "crc_hqx"
+  fully_qualified_name: "binascii.crc_hqx"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__crc"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "crc32"
+  fully_qualified_name: "binascii.crc32"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__crc"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "b2a_hex"
+  fully_qualified_name: "binascii.b2a_hex"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+functions {
+  name: "b2a_hex"
+  fully_qualified_name: "binascii.b2a_hex"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "sep"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "Union[builtins.str,builtins.bytes]"
       kind: UNION
@@ -415,281 +392,20 @@ functions {
         fully_qualified_name: "builtins.bytes"
       }
     }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "rledecode_hqx"
-  fully_qualified_name: "binascii.rledecode_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    has_default: true
   }
   parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "rledecode_hqx"
-  fully_qualified_name: "binascii.rledecode_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "rlecode_hqx"
-  fully_qualified_name: "binascii.rlecode_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "rlecode_hqx"
-  fully_qualified_name: "binascii.rlecode_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "b2a_hqx"
-  fully_qualified_name: "binascii.b2a_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "b2a_hqx"
-  fully_qualified_name: "binascii.b2a_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "crc_hqx"
-  fully_qualified_name: "binascii.crc_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "__crc"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "crc_hqx"
-  fully_qualified_name: "binascii.crc_hqx"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  parameters {
-    name: "__crc"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "crc32"
-  fully_qualified_name: "binascii.crc32"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "__crc"
+    name: "bytes_per_sep"
+    kind: POSITIONAL_OR_KEYWORD
     type_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
     has_default: true
   }
-  valid_for: "27"
-}
-functions {
-  name: "crc32"
-  fully_qualified_name: "binascii.crc32"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  parameters {
-    name: "__crc"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "b2a_hex"
-  fully_qualified_name: "binascii.b2a_hex"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "b2a_hex"
-  fully_qualified_name: "binascii.b2a_hex"
-  return_annotation {
-    pretty_printed_name: "builtins.bytes"
-    fully_qualified_name: "builtins.bytes"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "hexlify"
-  fully_qualified_name: "binascii.hexlify"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__data"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "hexlify"
@@ -701,8 +417,8 @@ functions {
   parameters {
     name: "__data"
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -720,8 +436,8 @@ functions {
     name: "data"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -758,38 +474,14 @@ functions {
   name: "a2b_hex"
   fully_qualified_name: "binascii.a2b_hex"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__hexstr"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "a2b_hex"
-  fully_qualified_name: "binascii.a2b_hex"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__hexstr"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
   }
   valid_for: "35"
@@ -803,39 +495,29 @@ functions {
   name: "unhexlify"
   fully_qualified_name: "binascii.unhexlify"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "__hexstr"
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "unhexlify"
-  fully_qualified_name: "binascii.unhexlify"
-  return_annotation {
     pretty_printed_name: "builtins.bytes"
     fully_qualified_name: "builtins.bytes"
   }
   parameters {
     name: "__hexstr"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
+      pretty_printed_name: "UnboundType[_AsciiBuffer]"
+      kind: UNBOUND
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_AsciiBuffer"
+  fully_qualified_name: "binascii._AsciiBuffer"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

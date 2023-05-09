@@ -22,8 +22,8 @@ classes {
       name: "handle"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     parameters {
@@ -47,48 +47,6 @@ classes {
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "multiprocessing.connection._ConnectionBase.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
-        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
-      }
-    }
-    parameters {
-      name: "handle"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.SupportsIndex"
-        fully_qualified_name: "typing.SupportsIndex"
-      }
-    }
-    parameters {
-      name: "readable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "writable"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -231,8 +189,8 @@ classes {
       name: "buf"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -441,8 +399,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "multiprocessing.connection._ConnectionBase.__enter__"
     return_annotation {
-      pretty_printed_name: "multiprocessing.connection._ConnectionBase"
-      fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -457,6 +415,70 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -521,10 +543,6 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -569,23 +587,11 @@ classes {
       name: "address"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int],None]"
+        pretty_printed_name: "Union[UnboundType[_Address],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
+          pretty_printed_name: "UnboundType[_Address]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -692,29 +698,8 @@ classes {
     name: "address"
     fully_qualified_name: "multiprocessing.connection.Listener.address"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      fully_qualified_name: "multiprocessing.connection._Address"
+      pretty_printed_name: "UnboundType[_Address]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -738,23 +723,11 @@ classes {
     name: "last_accepted"
     fully_qualified_name: "multiprocessing.connection.Listener.last_accepted"
     return_annotation {
-      pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int],None]"
+      pretty_printed_name: "Union[UnboundType[_Address],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
+        pretty_printed_name: "UnboundType[_Address]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -783,14 +756,14 @@ classes {
     name: "__enter__"
     fully_qualified_name: "multiprocessing.connection.Listener.__enter__"
     return_annotation {
-      pretty_printed_name: "_typeshed.Self"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
       type_annotation {
-        pretty_printed_name: "_typeshed.Self"
-        kind: TYPE_VAR
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
       }
     }
     valid_for: "35"
@@ -799,6 +772,70 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.connection.Listener.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -863,10 +900,6 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1019,29 +1052,8 @@ functions {
     name: "address"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      fully_qualified_name: "multiprocessing.connection._Address"
+      pretty_printed_name: "UnboundType[_Address]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -1108,6 +1120,38 @@ functions {
       fully_qualified_name: "builtins.bool"
     }
     has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.connection.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Address"
+  fully_qualified_name: "multiprocessing.connection._Address"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

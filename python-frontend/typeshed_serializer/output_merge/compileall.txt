@@ -52,8 +52,8 @@ functions {
     name: "dir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -69,249 +69,11 @@ functions {
     name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "force"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "rx"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Pattern[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Pattern[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Pattern"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "quiet"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "compile_dir"
-  fully_qualified_name: "compileall.compile_dir"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "dir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
-    }
-  }
-  parameters {
-    name: "maxlevels"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "ddir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "force"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "rx"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[compileall._SupportsSearch,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "compileall._SupportsSearch"
-        fully_qualified_name: "compileall._SupportsSearch"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "quiet"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "legacy"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "optimize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "workers"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-}
-functions {
-  name: "compile_dir"
-  fully_qualified_name: "compileall.compile_dir"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "dir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
-    }
-  }
-  parameters {
-    name: "maxlevels"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "ddir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -399,6 +161,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
 }
@@ -413,25 +177,8 @@ functions {
     name: "dir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
@@ -455,19 +202,11 @@ functions {
     name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -576,19 +315,11 @@ functions {
     name: "prependdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -601,19 +332,11 @@ functions {
     name: "limit_sl_dest"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -632,32 +355,31 @@ functions {
     has_default: true
   }
   valid_for: "39"
-  valid_for: "310"
 }
 functions {
-  name: "compile_file"
-  fully_qualified_name: "compileall.compile_file"
+  name: "compile_dir"
+  fully_qualified_name: "compileall.compile_dir"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
   parameters {
-    name: "fullname"
+    name: "dir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
-    name: "ddir"
+    name: "maxlevels"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.unicode,None]"
+      pretty_printed_name: "Union[builtins.int,None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
       args {
         pretty_printed_name: "None"
@@ -667,95 +389,14 @@ functions {
     has_default: true
   }
   parameters {
-    name: "force"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "rx"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[typing.Pattern[Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "typing.Pattern[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "typing.Pattern"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "quiet"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "compile_file"
-  fully_qualified_name: "compileall.compile_file"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "fullname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
-    }
-  }
-  parameters {
     name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -817,8 +458,93 @@ functions {
     }
     has_default: true
   }
-  valid_for: "35"
-  valid_for: "36"
+  parameters {
+    name: "workers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "invalidation_mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[py_compile.PycInvalidationMode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "py_compile.PycInvalidationMode"
+        fully_qualified_name: "py_compile.PycInvalidationMode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "stripdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "prependdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit_sl_dest"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "hardlink_dupes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "310"
 }
 functions {
   name: "compile_file"
@@ -831,44 +557,19 @@ functions {
     name: "fullname"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -947,6 +648,8 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
 }
@@ -961,44 +664,19 @@ functions {
     name: "fullname"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-      }
-      fully_qualified_name: "_typeshed.StrPath"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
   }
   parameters {
     name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1098,19 +776,11 @@ functions {
     name: "prependdir"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1123,19 +793,11 @@ functions {
     name: "limit_sl_dest"
     kind: KEYWORD_ONLY
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "os.PathLike[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "os.PathLike"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1154,30 +816,36 @@ functions {
     has_default: true
   }
   valid_for: "39"
-  valid_for: "310"
 }
 functions {
-  name: "compile_path"
-  fully_qualified_name: "compileall.compile_path"
+  name: "compile_file"
+  fully_qualified_name: "compileall.compile_file"
   return_annotation {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
   parameters {
-    name: "skip_curdir"
+    name: "fullname"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
     }
-    has_default: true
   }
   parameters {
-    name: "maxlevels"
+    name: "ddir"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     has_default: true
   }
@@ -1191,47 +859,19 @@ functions {
     has_default: true
   }
   parameters {
-    name: "quiet"
+    name: "rx"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "compile_path"
-  fully_qualified_name: "compileall.compile_path"
-  return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  parameters {
-    name: "skip_curdir"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "maxlevels"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "force"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "Union[compileall._SupportsSearch,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "compileall._SupportsSearch"
+        fully_qualified_name: "compileall._SupportsSearch"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     has_default: true
   }
@@ -1262,8 +902,84 @@ functions {
     }
     has_default: true
   }
-  valid_for: "35"
-  valid_for: "36"
+  parameters {
+    name: "invalidation_mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[py_compile.PycInvalidationMode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "py_compile.PycInvalidationMode"
+        fully_qualified_name: "py_compile.PycInvalidationMode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "stripdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "prependdir"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit_sl_dest"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrPath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "hardlink_dupes"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "310"
 }
 functions {
   name: "compile_path"
@@ -1343,6 +1059,26 @@ functions {
     }
     has_default: true
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "compileall.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

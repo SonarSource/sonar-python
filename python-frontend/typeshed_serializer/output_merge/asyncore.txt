@@ -3,7 +3,6 @@ classes {
   name: "ExitNow"
   fully_qualified_name: "asyncore.ExitNow"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -34,11 +33,11 @@ classes {
       name: "sock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[_Socket],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[_Socket]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -51,78 +50,11 @@ classes {
       name: "map"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+        pretty_printed_name: "Union[UnboundType[_MapType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncore.dispatcher.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[socket.socket,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "map"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
+          pretty_printed_name: "UnboundType[_MapType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -157,19 +89,11 @@ classes {
       name: "map"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+        pretty_printed_name: "Union[UnboundType[_MapType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
+          pretty_printed_name: "UnboundType[_MapType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -178,7 +102,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -205,19 +128,11 @@ classes {
       name: "map"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+        pretty_printed_name: "Union[UnboundType[_MapType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
+          pretty_printed_name: "UnboundType[_MapType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -226,7 +141,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -267,7 +181,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -294,77 +207,19 @@ classes {
       name: "sock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[_Socket]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "map"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+        pretty_printed_name: "Union[UnboundType[_MapType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "set_socket"
-    fully_qualified_name: "asyncore.dispatcher.set_socket"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
-      }
-    }
-    parameters {
-      name: "map"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
+          pretty_printed_name: "UnboundType[_MapType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -395,7 +250,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -418,7 +272,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -441,7 +294,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -472,13 +324,56 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "bind"
+    fully_qualified_name: "asyncore.dispatcher.bind"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncore.dispatcher"
+        fully_qualified_name: "asyncore.dispatcher"
+      }
+    }
+    parameters {
+      name: "addr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[Any,Any],builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "bind"
@@ -515,13 +410,52 @@ classes {
         }
       }
     }
-    valid_for: "27"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connect"
+    fully_qualified_name: "asyncore.dispatcher.connect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncore.dispatcher"
+        fully_qualified_name: "asyncore.dispatcher"
+      }
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[Any,Any],builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "connect"
@@ -558,11 +492,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -570,47 +499,14 @@ classes {
     name: "accept"
     fully_qualified_name: "asyncore.dispatcher.accept"
     return_annotation {
-      pretty_printed_name: "Union[Tuple[Any,Any],None]"
+      pretty_printed_name: "Union[Tuple[UnboundType[_Socket],Any],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Tuple[Any,Any]"
+        pretty_printed_name: "Tuple[UnboundType[_Socket],Any]"
         kind: TUPLE
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "accept"
-    fully_qualified_name: "asyncore.dispatcher.accept"
-    return_annotation {
-      pretty_printed_name: "Union[Tuple[socket.socket,Any],None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Tuple[socket.socket,Any]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
+          pretty_printed_name: "UnboundType[_Socket]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "Any"
@@ -656,33 +552,8 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "send"
-    fully_qualified_name: "asyncore.dispatcher.send"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -691,31 +562,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "recv"
-    fully_qualified_name: "asyncore.dispatcher.recv"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "buffer_size"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "recv"
@@ -762,7 +608,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -793,7 +638,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -833,7 +677,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -856,7 +699,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -879,7 +721,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -902,7 +743,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -925,7 +765,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -948,7 +787,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -971,7 +809,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -994,7 +831,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1017,7 +853,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1040,7 +875,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1063,7 +897,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1086,7 +919,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1094,633 +926,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "detach"
-    fully_qualified_name: "asyncore.dispatcher.detach"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "fileno"
-    fully_qualified_name: "asyncore.dispatcher.fileno"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getpeername"
-    fully_qualified_name: "asyncore.dispatcher.getpeername"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "getsockname"
-    fully_qualified_name: "asyncore.dispatcher.getsockname"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "gettimeout"
-    fully_qualified_name: "asyncore.dispatcher.gettimeout"
-    return_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "ioctl"
-    fully_qualified_name: "asyncore.dispatcher.ioctl"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "control"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "option"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "makefile"
-    fully_qualified_name: "asyncore.dispatcher.makefile"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "buffering"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "errors"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "newline"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recvfrom"
-    fully_qualified_name: "asyncore.dispatcher.recvfrom"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recvfrom_into"
-    fully_qualified_name: "asyncore.dispatcher.recvfrom_into"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "recv_into"
-    fully_qualified_name: "asyncore.dispatcher.recv_into"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "buffer"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "sendall"
-    fully_qualified_name: "asyncore.dispatcher.sendall"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "sendto"
-    fully_qualified_name: "asyncore.dispatcher.sendto"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "address"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setblocking"
-    fully_qualified_name: "asyncore.dispatcher.setblocking"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "flag"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "settimeout"
-    fully_qualified_name: "asyncore.dispatcher.settimeout"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.float,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setsockopt"
-    fully_qualified_name: "asyncore.dispatcher.setsockopt"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "optname"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.str]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "shutdown"
-    fully_qualified_name: "asyncore.dispatcher.shutdown"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher"
-        fully_qualified_name: "asyncore.dispatcher"
-      }
-    }
-    parameters {
-      name: "how"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "getsockopt"
-    fullname: "asyncore.dispatcher.getsockopt"
-    definitions {
-      name: "getsockopt"
-      fully_qualified_name: "asyncore.dispatcher.getsockopt"
-      return_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncore.dispatcher"
-          fully_qualified_name: "asyncore.dispatcher"
-        }
-      }
-      parameters {
-        name: "level"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "optname"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "buflen"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "getsockopt"
-      fully_qualified_name: "asyncore.dispatcher.getsockopt"
-      return_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncore.dispatcher"
-          fully_qualified_name: "asyncore.dispatcher"
-        }
-      }
-      parameters {
-        name: "level"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "optname"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "buflen"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1734,7 +939,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1749,7 +953,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1764,7 +967,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1779,7 +981,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1794,7 +995,6 @@ classes {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1813,7 +1013,6 @@ classes {
       }
       fully_qualified_name: "builtins.frozenset"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1825,28 +1024,11 @@ classes {
     name: "socket"
     fully_qualified_name: "asyncore.dispatcher.socket"
     type_annotation {
-      pretty_printed_name: "Union[Any,None]"
+      pretty_printed_name: "Union[UnboundType[_Socket],None]"
       kind: UNION
       args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "socket"
-    fully_qualified_name: "asyncore.dispatcher.socket"
-    type_annotation {
-      pretty_printed_name: "Union[socket.socket,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "socket.socket"
-        fully_qualified_name: "socket.socket"
+        pretty_printed_name: "UnboundType[_Socket]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -1866,121 +1048,6 @@ classes {
   fully_qualified_name: "asyncore.dispatcher_with_send"
   super_classes: "asyncore.dispatcher"
   methods {
-    name: "__init__"
-    fully_qualified_name: "asyncore.dispatcher_with_send.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher_with_send"
-        fully_qualified_name: "asyncore.dispatcher_with_send"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "map"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncore.dispatcher_with_send.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher_with_send"
-        fully_qualified_name: "asyncore.dispatcher_with_send"
-      }
-    }
-    parameters {
-      name: "sock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[socket.socket,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "socket.socket"
-          fully_qualified_name: "socket.socket"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "map"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "initiate_send"
     fully_qualified_name: "asyncore.dispatcher_with_send.initiate_send"
     return_annotation {
@@ -1995,7 +1062,6 @@ classes {
         fully_qualified_name: "asyncore.dispatcher_with_send"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2003,30 +1069,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "handle_write"
-    fully_qualified_name: "asyncore.dispatcher_with_send.handle_write"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.dispatcher_with_send"
-        fully_qualified_name: "asyncore.dispatcher_with_send"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2061,47 +1103,12 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "recv"
-    fully_qualified_name: "asyncore.file_wrapper.recv"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.file_wrapper"
-        fully_qualified_name: "asyncore.file_wrapper"
-      }
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "recv"
@@ -2141,40 +1148,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "send"
-    fully_qualified_name: "asyncore.file_wrapper.send"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.file_wrapper"
-        fully_qualified_name: "asyncore.file_wrapper"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "send"
@@ -2219,40 +1192,6 @@ classes {
     name: "read"
     fully_qualified_name: "asyncore.file_wrapper.read"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.file_wrapper"
-        fully_qualified_name: "asyncore.file_wrapper"
-      }
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "asyncore.file_wrapper.read"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -2287,40 +1226,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "write"
-    fully_qualified_name: "asyncore.file_wrapper.write"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncore.file_wrapper"
-        fully_qualified_name: "asyncore.file_wrapper"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "flags"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    valid_for: "27"
   }
   methods {
     name: "write"
@@ -2376,7 +1281,6 @@ classes {
         fully_qualified_name: "asyncore.file_wrapper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2399,105 +1303,12 @@ classes {
         fully_qualified_name: "asyncore.file_wrapper"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  overloaded_methods {
-    name: "getsockopt"
-    fullname: "asyncore.file_wrapper.getsockopt"
-    definitions {
-      name: "getsockopt"
-      fully_qualified_name: "asyncore.file_wrapper.getsockopt"
-      return_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncore.file_wrapper"
-          fully_qualified_name: "asyncore.file_wrapper"
-        }
-      }
-      parameters {
-        name: "level"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "optname"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "buflen"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        has_default: true
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "getsockopt"
-      fully_qualified_name: "asyncore.file_wrapper.getsockopt"
-      return_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "asyncore.file_wrapper"
-          fully_qualified_name: "asyncore.file_wrapper"
-        }
-      }
-      parameters {
-        name: "level"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "optname"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      parameters {
-        name: "buflen"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
   }
   overloaded_methods {
     name: "getsockopt"
@@ -2596,7 +1407,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2610,7 +1420,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2642,40 +1451,19 @@ classes {
       name: "fd"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "_typeshed.HasFileno"
-            fully_qualified_name: "_typeshed.HasFileno"
-          }
-        }
-        fully_qualified_name: "_typeshed.FileDescriptorLike"
+        pretty_printed_name: "UnboundType[FileDescriptorLike]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "map"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+        pretty_printed_name: "Union[UnboundType[_MapType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[builtins.int,Any]"
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.dict"
+          pretty_printed_name: "UnboundType[_MapType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -2684,7 +1472,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2715,7 +1502,6 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2723,7 +1509,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2746,7 +1531,6 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2769,7 +1553,6 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2800,7 +1583,6 @@ functions {
       fully_qualified_name: "builtins.int"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2828,19 +1610,11 @@ functions {
     name: "map"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+      pretty_printed_name: "Union[UnboundType[_MapType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.dict[builtins.int,Any]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
+        pretty_printed_name: "UnboundType[_MapType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2849,7 +1623,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2877,19 +1650,11 @@ functions {
     name: "map"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+      pretty_printed_name: "Union[UnboundType[_MapType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.dict[builtins.int,Any]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
+        pretty_printed_name: "UnboundType[_MapType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2898,7 +1663,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2935,19 +1699,11 @@ functions {
     name: "map"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+      pretty_printed_name: "Union[UnboundType[_MapType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.dict[builtins.int,Any]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
+        pretty_printed_name: "UnboundType[_MapType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -2973,7 +1729,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3016,7 +1771,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3035,19 +1789,11 @@ functions {
     name: "map"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+      pretty_printed_name: "Union[UnboundType[_MapType],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.dict[builtins.int,Any]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
+        pretty_printed_name: "UnboundType[_MapType]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3065,7 +1811,34 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_MapType"
+  fully_qualified_name: "asyncore._MapType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Socket"
+  fully_qualified_name: "asyncore._Socket"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3077,23 +1850,9 @@ vars {
   name: "socket_map"
   fully_qualified_name: "asyncore.socket_map"
   type_annotation {
-    pretty_printed_name: "TypeAlias[builtins.dict[builtins.int,Any]]"
-    kind: TYPE_ALIAS
-    args {
-      pretty_printed_name: "builtins.dict[builtins.int,Any]"
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    fully_qualified_name: "asyncore._maptype"
+    pretty_printed_name: "UnboundType[_MapType]"
+    kind: UNBOUND
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3112,7 +1871,6 @@ vars {
       fully_qualified_name: "builtins.function"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

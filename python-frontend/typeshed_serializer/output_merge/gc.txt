@@ -1,50 +1,5 @@
 fully_qualified_name: "gc"
 functions {
-  name: "enable"
-  fully_qualified_name: "gc.enable"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "disable"
-  fully_qualified_name: "gc.disable"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "isenabled"
-  fully_qualified_name: "gc.isenabled"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
   name: "collect"
   fully_qualified_name: "gc.collect"
   return_annotation {
@@ -60,7 +15,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -69,32 +23,48 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "set_debug"
-  fully_qualified_name: "gc.set_debug"
+  name: "disable"
+  fully_qualified_name: "gc.disable"
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
   }
-  parameters {
-    name: "flags"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "enable"
+  fully_qualified_name: "gc.enable"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_count"
+  fully_qualified_name: "gc.get_count"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "set_debug"
-  fully_qualified_name: "gc.set_debug"
-  return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
-  }
-  parameters {
-    name: "__flags"
-    type_annotation {
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
@@ -113,7 +83,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -132,7 +101,6 @@ functions {
     }
     fully_qualified_name: "builtins.list"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -170,39 +138,12 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "set_threshold"
-  fully_qualified_name: "gc.set_threshold"
+  name: "freeze"
+  fully_qualified_name: "gc.freeze"
   return_annotation {
     pretty_printed_name: "None"
     kind: NONE
   }
-  parameters {
-    name: "threshold0"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-  }
-  parameters {
-    name: "threshold1"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "threshold2"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -211,25 +152,12 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "get_count"
-  fully_qualified_name: "gc.get_count"
+  name: "unfreeze"
+  fully_qualified_name: "gc.unfreeze"
   return_annotation {
-    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
+    pretty_printed_name: "None"
+    kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -238,52 +166,12 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "get_threshold"
-  fully_qualified_name: "gc.get_threshold"
+  name: "get_freeze_count"
+  fully_qualified_name: "gc.get_freeze_count"
   return_annotation {
-    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    args {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "get_referrers"
-  fully_qualified_name: "gc.get_referrers"
-  return_annotation {
-    pretty_printed_name: "builtins.list[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  parameters {
-    name: "objs"
-    kind: VAR_POSITIONAL
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -310,7 +198,6 @@ functions {
       kind: ANY
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -319,31 +206,19 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "is_tracked"
-  fully_qualified_name: "gc.is_tracked"
+  name: "get_referrers"
+  fully_qualified_name: "gc.get_referrers"
   return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
+    pretty_printed_name: "builtins.list[Any]"
+    args {
       pretty_printed_name: "Any"
       kind: ANY
     }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "is_tracked"
-  fully_qualified_name: "gc.is_tracked"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
+    fully_qualified_name: "builtins.list"
   }
   parameters {
-    name: "__obj"
+    name: "objs"
+    kind: VAR_POSITIONAL
     type_annotation {
       pretty_printed_name: "Any"
       kind: ANY
@@ -383,36 +258,122 @@ functions {
   valid_for: "310"
 }
 functions {
-  name: "freeze"
-  fully_qualified_name: "gc.freeze"
+  name: "get_threshold"
+  fully_qualified_name: "gc.get_threshold"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
+    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
 functions {
-  name: "unfreeze"
-  fully_qualified_name: "gc.unfreeze"
+  name: "is_tracked"
+  fully_qualified_name: "gc.is_tracked"
   return_annotation {
-    pretty_printed_name: "None"
-    kind: NONE
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
   }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
 functions {
-  name: "get_freeze_count"
-  fully_qualified_name: "gc.get_freeze_count"
+  name: "isenabled"
+  fully_qualified_name: "gc.isenabled"
   return_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_debug"
+  fully_qualified_name: "gc.set_debug"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__flags"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_threshold"
+  fully_qualified_name: "gc.set_threshold"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "threshold0"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "threshold1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "threshold2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
@@ -436,95 +397,16 @@ functions {
   valid_for: "310"
 }
 vars {
-  name: "garbage"
-  fully_qualified_name: "gc.garbage"
-  type_annotation {
-    pretty_printed_name: "builtins.list[Any]"
-    args {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    fully_qualified_name: "builtins.list"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "DEBUG_STATS"
-  fully_qualified_name: "gc.DEBUG_STATS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
   name: "DEBUG_COLLECTABLE"
   fully_qualified_name: "gc.DEBUG_COLLECTABLE"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "DEBUG_UNCOLLECTABLE"
-  fully_qualified_name: "gc.DEBUG_UNCOLLECTABLE"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
-  name: "DEBUG_INSTANCES"
-  fully_qualified_name: "gc.DEBUG_INSTANCES"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "DEBUG_OBJECTS"
-  fully_qualified_name: "gc.DEBUG_OBJECTS"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
-}
-vars {
-  name: "DEBUG_SAVEALL"
-  fully_qualified_name: "gc.DEBUG_SAVEALL"
-  type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
-  }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -536,10 +418,81 @@ vars {
   name: "DEBUG_LEAK"
   fully_qualified_name: "gc.DEBUG_LEAK"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEBUG_SAVEALL"
+  fully_qualified_name: "gc.DEBUG_SAVEALL"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEBUG_STATS"
+  fully_qualified_name: "gc.DEBUG_STATS"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEBUG_UNCOLLECTABLE"
+  fully_qualified_name: "gc.DEBUG_UNCOLLECTABLE"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CallbackType"
+  fully_qualified_name: "gc._CallbackType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -550,6 +503,24 @@ vars {
 vars {
   name: "callbacks"
   fully_qualified_name: "gc.callbacks"
+  type_annotation {
+    pretty_printed_name: "builtins.list[UnboundType[_CallbackType]]"
+    args {
+      pretty_printed_name: "UnboundType[_CallbackType]"
+      kind: UNBOUND
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "garbage"
+  fully_qualified_name: "gc.garbage"
   type_annotation {
     pretty_printed_name: "builtins.list[Any]"
     args {

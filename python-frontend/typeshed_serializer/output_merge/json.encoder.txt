@@ -67,11 +67,15 @@ classes {
       name: "indent"
       kind: KEYWORD_ONLY
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
+        pretty_printed_name: "Union[builtins.int,builtins.str,None]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
         }
         args {
           pretty_printed_name: "None"
@@ -344,8 +348,16 @@ classes {
     name: "indent"
     fully_qualified_name: "json.encoder.JSONEncoder.indent"
     type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "Union[builtins.int,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -354,4 +366,138 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+}
+functions {
+  name: "py_encode_basestring"
+  fully_qualified_name: "json.encoder.py_encode_basestring"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "py_encode_basestring_ascii"
+  fully_qualified_name: "json.encoder.py_encode_basestring_ascii"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ESCAPE"
+  fully_qualified_name: "json.encoder.ESCAPE"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ESCAPE_ASCII"
+  fully_qualified_name: "json.encoder.ESCAPE_ASCII"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HAS_UTF8"
+  fully_qualified_name: "json.encoder.HAS_UTF8"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ESCAPE_DCT"
+  fully_qualified_name: "json.encoder.ESCAPE_DCT"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INFINITY"
+  fully_qualified_name: "json.encoder.INFINITY"
+  type_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

@@ -1,8 +1,88 @@
 fully_qualified_name: "tracemalloc"
 classes {
+  name: "BaseFilter"
+  fully_qualified_name: "tracemalloc.BaseFilter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tracemalloc.BaseFilter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.BaseFilter"
+        fully_qualified_name: "tracemalloc.BaseFilter"
+      }
+    }
+    parameters {
+      name: "inclusive"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "inclusive"
+    fully_qualified_name: "tracemalloc.BaseFilter.inclusive"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "DomainFilter"
   fully_qualified_name: "tracemalloc.DomainFilter"
-  super_classes: "builtins.object"
+  super_classes: "tracemalloc.BaseFilter"
+  methods {
+    name: "domain"
+    fully_qualified_name: "tracemalloc.DomainFilter.domain"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.DomainFilter"
+        fully_qualified_name: "tracemalloc.DomainFilter"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "__init__"
     fully_qualified_name: "tracemalloc.DomainFilter.__init__"
@@ -47,39 +127,36 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "inclusive"
-    fully_qualified_name: "tracemalloc.DomainFilter.inclusive"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "domain"
-    fully_qualified_name: "tracemalloc.DomainFilter.domain"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "Filter"
   fully_qualified_name: "tracemalloc.Filter"
-  super_classes: "builtins.object"
+  super_classes: "tracemalloc.BaseFilter"
+  methods {
+    name: "filename_pattern"
+    fully_qualified_name: "tracemalloc.Filter.filename_pattern"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Filter"
+        fully_qualified_name: "tracemalloc.Filter"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "__init__"
     fully_qualified_name: "tracemalloc.Filter.__init__"
@@ -190,20 +267,6 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "inclusive"
-    fully_qualified_name: "tracemalloc.Filter.inclusive"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
     name: "lineno"
     fully_qualified_name: "tracemalloc.Filter.lineno"
     type_annotation {
@@ -217,20 +280,6 @@ classes {
         pretty_printed_name: "None"
         kind: NONE
       }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "filename_pattern"
-    fully_qualified_name: "tracemalloc.Filter.filename_pattern"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
     }
     valid_for: "35"
     valid_for: "36"
@@ -295,6 +344,34 @@ classes {
       type_annotation {
         pretty_printed_name: "builtins.int"
         fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "tracemalloc.Statistic.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Statistic"
+        fully_qualified_name: "tracemalloc.Statistic"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     valid_for: "35"
@@ -419,6 +496,34 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "tracemalloc.StatisticDiff.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.StatisticDiff"
+        fully_qualified_name: "tracemalloc.StatisticDiff"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -501,6 +606,56 @@ classes {
   fully_qualified_name: "tracemalloc.Frame"
   super_classes: "builtins.object"
   methods {
+    name: "filename"
+    fully_qualified_name: "tracemalloc.Frame.filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "lineno"
+    fully_qualified_name: "tracemalloc.Frame.lineno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "__init__"
     fully_qualified_name: "tracemalloc.Frame.__init__"
     return_annotation {
@@ -519,22 +674,173 @@ classes {
       name: "frame"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-        fully_qualified_name: "tracemalloc._FrameTupleT"
+        pretty_printed_name: "UnboundType[_FrameTuple]"
+        kind: UNBOUND
       }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "tracemalloc.Frame.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "tracemalloc.Frame.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "tracemalloc.Frame.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "tracemalloc.Frame.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "tracemalloc.Frame.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
     }
     valid_for: "35"
     valid_for: "36"
@@ -549,45 +855,17 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "filename"
-    fully_qualified_name: "tracemalloc.Frame.filename"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "lineno"
-    fully_qualified_name: "tracemalloc.Frame.lineno"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "Trace"
   fully_qualified_name: "tracemalloc.Trace"
   super_classes: "builtins.object"
   methods {
-    name: "__init__"
-    fully_qualified_name: "tracemalloc.Trace.__init__"
+    name: "domain"
+    fully_qualified_name: "tracemalloc.Trace.domain"
     return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
     parameters {
       name: "self"
@@ -597,52 +875,65 @@ classes {
         fully_qualified_name: "tracemalloc.Trace"
       }
     }
-    parameters {
-      name: "trace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-              }
-              fully_qualified_name: "tracemalloc._FrameTupleT"
-            }
-            fully_qualified_name: "typing.Sequence"
-          }
-        }
-        fully_qualified_name: "tracemalloc._TraceTupleT"
-      }
-    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "tracemalloc.Trace.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Trace"
+        fully_qualified_name: "tracemalloc.Trace"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "traceback"
+    fully_qualified_name: "tracemalloc.Trace.traceback"
+    return_annotation {
+      pretty_printed_name: "tracemalloc.Traceback"
+      fully_qualified_name: "tracemalloc.Traceback"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Trace"
+        fully_qualified_name: "tracemalloc.Trace"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "__init__"
@@ -663,93 +954,42 @@ classes {
       name: "trace"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]],Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]],Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-              args {
-                pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-                kind: TYPE_ALIAS
-                args {
-                  pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                  kind: TUPLE
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                }
-                fully_qualified_name: "tracemalloc._FrameTupleT"
-              }
-              fully_qualified_name: "typing.Sequence"
-            }
-            args {
-              pretty_printed_name: "Union[builtins.int,None]"
-              kind: UNION
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "None"
-                kind: NONE
-              }
-            }
-          }
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-              args {
-                pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-                kind: TYPE_ALIAS
-                args {
-                  pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                  kind: TUPLE
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                }
-                fully_qualified_name: "tracemalloc._FrameTupleT"
-              }
-              fully_qualified_name: "typing.Sequence"
-            }
-          }
-        }
-        fully_qualified_name: "tracemalloc._TraceTupleT"
+        pretty_printed_name: "UnboundType[_TraceTuple]"
+        kind: UNBOUND
       }
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "tracemalloc.Trace.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Trace"
+        fully_qualified_name: "tracemalloc.Trace"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -759,48 +999,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "domain"
-    fully_qualified_name: "tracemalloc.Trace.domain"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "size"
-    fully_qualified_name: "tracemalloc.Trace.size"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "traceback"
-    fully_qualified_name: "tracemalloc.Trace.traceback"
-    type_annotation {
-      pretty_printed_name: "tracemalloc.Traceback"
-      fully_qualified_name: "tracemalloc.Traceback"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "Traceback"
@@ -825,23 +1023,10 @@ classes {
       name: "frames"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
+        pretty_printed_name: "typing.Sequence[UnboundType[_FrameTuple]]"
         args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "tracemalloc._FrameTupleT"
+          pretty_printed_name: "UnboundType[_FrameTuple]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -870,23 +1055,10 @@ classes {
       name: "frames"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
+        pretty_printed_name: "typing.Sequence[UnboundType[_FrameTuple]]"
         args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          fully_qualified_name: "tracemalloc._FrameTupleT"
+          pretty_printed_name: "UnboundType[_FrameTuple]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -947,45 +1119,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-  }
-  methods {
-    name: "format"
-    fully_qualified_name: "tracemalloc.Traceback.format"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "tracemalloc.Traceback"
-        fully_qualified_name: "tracemalloc.Traceback"
-      }
-    }
-    parameters {
-      name: "limit"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
     parameters {
       name: "most_recent_first"
       kind: POSITIONAL_OR_KEYWORD
@@ -995,6 +1128,36 @@ classes {
       }
       has_default: true
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "tracemalloc.Traceback.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "frame"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Frame"
+        fully_qualified_name: "tracemalloc.Frame"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -1021,6 +1184,199 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "tracemalloc.Traceback.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "tracemalloc.Traceback.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "tracemalloc.Traceback.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "tracemalloc.Traceback.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "tracemalloc.Traceback.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    parameters {
+      name: "NotImplemented"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "total_nframe"
+    fully_qualified_name: "tracemalloc.Traceback.total_nframe"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tracemalloc.Traceback"
+        fully_qualified_name: "tracemalloc.Traceback"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
   overloaded_methods {
     name: "__getitem__"
     fullname: "tracemalloc.Traceback.__getitem__"
@@ -1039,10 +1395,10 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
         }
       }
       has_decorators: true
@@ -1068,7 +1424,7 @@ classes {
         }
       }
       parameters {
-        name: "s"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
@@ -1091,24 +1447,6 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "total_nframe"
-    fully_qualified_name: "tracemalloc.Traceback.total_nframe"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "Snapshot"
@@ -1133,44 +1471,10 @@ classes {
       name: "traces"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]]"
+        pretty_printed_name: "typing.Sequence[UnboundType[_TraceTuple]]"
         args {
-          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-            args {
-              pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-              args {
-                pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-                kind: TYPE_ALIAS
-                args {
-                  pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                  kind: TUPLE
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "builtins.int"
-                    fully_qualified_name: "builtins.int"
-                  }
-                }
-                fully_qualified_name: "tracemalloc._FrameTupleT"
-              }
-              fully_qualified_name: "typing.Sequence"
-            }
-          }
-          fully_qualified_name: "tracemalloc._TraceTupleT"
+          pretty_printed_name: "UnboundType[_TraceTuple]"
+          kind: UNBOUND
         }
         fully_qualified_name: "typing.Sequence"
       }
@@ -1187,125 +1491,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "tracemalloc.Snapshot.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "tracemalloc.Snapshot"
-        fully_qualified_name: "tracemalloc.Snapshot"
-      }
-    }
-    parameters {
-      name: "traces"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[TypeAlias[Union[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]],Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]]]"
-        args {
-          pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]],Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]],Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]"
-            kind: UNION
-            args {
-              pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]],Union[builtins.int,None]]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-                args {
-                  pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-                  kind: TYPE_ALIAS
-                  args {
-                    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                    kind: TUPLE
-                    args {
-                      pretty_printed_name: "builtins.str"
-                      fully_qualified_name: "builtins.str"
-                    }
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                  }
-                  fully_qualified_name: "tracemalloc._FrameTupleT"
-                }
-                fully_qualified_name: "typing.Sequence"
-              }
-              args {
-                pretty_printed_name: "Union[builtins.int,None]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.int"
-                  fully_qualified_name: "builtins.int"
-                }
-                args {
-                  pretty_printed_name: "None"
-                  kind: NONE
-                }
-              }
-            }
-            args {
-              pretty_printed_name: "Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "builtins.int"
-                fully_qualified_name: "builtins.int"
-              }
-              args {
-                pretty_printed_name: "typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]"
-                args {
-                  pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.int]]"
-                  kind: TYPE_ALIAS
-                  args {
-                    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-                    kind: TUPLE
-                    args {
-                      pretty_printed_name: "builtins.str"
-                      fully_qualified_name: "builtins.str"
-                    }
-                    args {
-                      pretty_printed_name: "builtins.int"
-                      fully_qualified_name: "builtins.int"
-                    }
-                  }
-                  fully_qualified_name: "tracemalloc._FrameTupleT"
-                }
-                fully_qualified_name: "typing.Sequence"
-              }
-            }
-          }
-          fully_qualified_name: "tracemalloc._TraceTupleT"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "traceback_limit"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -1704,6 +1889,34 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FrameTuple"
+  fully_qualified_name: "tracemalloc._FrameTuple"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_TraceTuple"
+  fully_qualified_name: "tracemalloc._TraceTuple"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }

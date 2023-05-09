@@ -145,6 +145,79 @@ classes {
       name: "trailing_error"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
+        pretty_printed_name: "Union[builtins.type,Tuple[builtins.type,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.type,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "decomp_args"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_compression.DecompressReader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_compression.DecompressReader"
+        fully_qualified_name: "_compression.DecompressReader"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_compression._Reader"
+        fully_qualified_name: "_compression._Reader"
+      }
+    }
+    parameters {
+      name: "decomp_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "trailing_error"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
         pretty_printed_name: "Union[Type[builtins.Exception],builtins.tuple[Type[builtins.Exception]]]"
         kind: UNION
         args {
@@ -178,76 +251,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "readable"
-    fully_qualified_name: "_compression.DecompressReader.readable"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_compression.DecompressReader"
-        fully_qualified_name: "_compression.DecompressReader"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "_compression.DecompressReader.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_compression.DecompressReader"
-        fully_qualified_name: "_compression.DecompressReader"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "seekable"
-    fully_qualified_name: "_compression.DecompressReader.seekable"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_compression.DecompressReader"
-        fully_qualified_name: "_compression.DecompressReader"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -270,33 +273,8 @@ classes {
       name: "b"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytearray"
-            fully_qualified_name: "builtins.bytearray"
-          }
-          args {
-            pretty_printed_name: "builtins.memoryview"
-            fully_qualified_name: "builtins.memoryview"
-          }
-          args {
-            pretty_printed_name: "array.array[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "array.array"
-          }
-          args {
-            pretty_printed_name: "mmap.mmap"
-            fully_qualified_name: "mmap.mmap"
-          }
-        }
-        fully_qualified_name: "_typeshed.WriteableBuffer"
+        pretty_printed_name: "UnboundType[WriteableBuffer]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -376,28 +354,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "tell"
-    fully_qualified_name: "_compression.DecompressReader.tell"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_compression.DecompressReader"
-        fully_qualified_name: "_compression.DecompressReader"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -409,8 +365,12 @@ vars {
   name: "BUFFER_SIZE"
   fully_qualified_name: "_compression.BUFFER_SIZE"
   type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "35"
   valid_for: "36"

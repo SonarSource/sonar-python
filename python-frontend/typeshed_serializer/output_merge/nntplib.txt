@@ -1,9 +1,1208 @@
 fully_qualified_name: "nntplib"
 classes {
+  name: "_list"
+  fully_qualified_name: "builtins.list"
+  super_classes: "typing.MutableSequence"
+  methods {
+    name: "copy"
+    fully_qualified_name: "builtins.list.copy"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "builtins.list.append"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__object"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "builtins.list.extend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__iterable"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "builtins.list.pop"
+    return_annotation {
+      pretty_printed_name: "builtins._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__index"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "builtins.list.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__start"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "__stop"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "builtins.list.count"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "builtins.list.insert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__index"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    parameters {
+      name: "__object"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "builtins.list.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "builtins.list.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "builtins.list.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "builtins.list.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__key"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "builtins.list.__iadd__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "builtins.list.__mul__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "builtins.list.__rmul__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "builtins.list.__imul__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "builtins.list.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__key"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "builtins.list.__reversed__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins._T]"
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "builtins.list.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "builtins.list.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "builtins.list.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "builtins.list.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "builtins.list.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[builtins.list[builtins._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    parameters {
+      name: "__item"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "builtins.list.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "builtins.list.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "builtins.list.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__iterable"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "sort"
+    fullname: "builtins.list.sort"
+    definitions {
+      name: "sort"
+      fully_qualified_name: "builtins.list.sort"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "reverse"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "sort"
+      fully_qualified_name: "builtins.list.sort"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "reverse"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "builtins.list.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "builtins.list.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__i"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "builtins.list.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__s"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__setitem__"
+    fullname: "builtins.list.__setitem__"
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "builtins.list.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "builtins.list.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__add__"
+    fullname: "builtins.list.__add__"
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.list.__add__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__add__"
+      fully_qualified_name: "builtins.list.__add__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[Union[builtins._S,builtins._T]]"
+        args {
+          pretty_printed_name: "Union[builtins._S,builtins._T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins._S"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._T]"
+          args {
+            pretty_printed_name: "builtins._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins._S]"
+          args {
+            pretty_printed_name: "builtins._S"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "builtins.list.__hash__"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
   name: "NNTPError"
   fully_qualified_name: "nntplib.NNTPError"
   super_classes: "builtins.Exception"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -17,7 +1216,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -30,7 +1228,6 @@ classes {
   name: "NNTPReplyError"
   fully_qualified_name: "nntplib.NNTPReplyError"
   super_classes: "nntplib.NNTPError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -42,7 +1239,6 @@ classes {
   name: "NNTPTemporaryError"
   fully_qualified_name: "nntplib.NNTPTemporaryError"
   super_classes: "nntplib.NNTPError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -54,7 +1250,6 @@ classes {
   name: "NNTPPermanentError"
   fully_qualified_name: "nntplib.NNTPPermanentError"
   super_classes: "nntplib.NNTPError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -66,7 +1261,6 @@ classes {
   name: "NNTPProtocolError"
   fully_qualified_name: "nntplib.NNTPProtocolError"
   super_classes: "nntplib.NNTPError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -78,7 +1272,6 @@ classes {
   name: "NNTPDataError"
   fully_qualified_name: "nntplib.NNTPDataError"
   super_classes: "nntplib.NNTPError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -141,7 +1334,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -200,7 +1392,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -231,7 +1422,6 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -291,7 +1481,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -299,7 +1488,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -313,8 +1501,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -335,8 +1521,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -357,8 +1541,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -379,8 +1561,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -417,7 +1597,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -440,7 +1619,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -463,7 +1641,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -478,7 +1655,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -501,7 +1677,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -514,54 +1689,6 @@ classes {
   name: "ArticleInfo"
   fully_qualified_name: "nntplib.ArticleInfo"
   super_classes: "builtins.tuple"
-  methods {
-    name: "_replace"
-    fully_qualified_name: "nntplib.ArticleInfo._replace"
-    return_annotation {
-      pretty_printed_name: "nntplib.ArticleInfo._NT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "_self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib.ArticleInfo._NT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "number"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "message_id"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "lines"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
   methods {
     name: "_replace"
     fully_qualified_name: "nntplib.ArticleInfo._replace"
@@ -614,55 +1741,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__new__"
-    fully_qualified_name: "nntplib.ArticleInfo.__new__"
-    return_annotation {
-      pretty_printed_name: "nntplib.ArticleInfo._NT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "_cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[nntplib.ArticleInfo._NT]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "nntplib.ArticleInfo._NT"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "number"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "message_id"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "lines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__new__"
@@ -741,7 +1819,6 @@ classes {
         kind: TYPE_VAR
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -801,7 +1878,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -809,7 +1885,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -823,8 +1898,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -845,8 +1918,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
-    valid_for: "27"
     valid_for: "35"
     valid_for: "35"
     valid_for: "36"
@@ -859,20 +1930,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
     valid_for: "310"
-  }
-  attributes {
-    name: "lines"
-    fully_qualified_name: "nntplib.ArticleInfo.lines"
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "27"
   }
   attributes {
     name: "lines"
@@ -917,7 +1974,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -940,7 +1996,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -963,7 +2018,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -978,7 +2032,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1001,3086 +2054,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "_NNTPBase"
-  fully_qualified_name: "nntplib._NNTPBase"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "nntplib._NNTPBase.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.IO[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-    parameters {
-      name: "host"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "readermode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bool,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "nntplib._NNTPBase.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.IO[builtins.bytes]"
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        fully_qualified_name: "typing.IO"
-      }
-    }
-    parameters {
-      name: "host"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "readermode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bool,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "timeout"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "nntplib._NNTPBase.__enter__"
-    return_annotation {
-      pretty_printed_name: "nntplib._SelfT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "nntplib._SelfT"
-        kind: TYPE_VAR
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "nntplib._NNTPBase.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "getwelcome"
-    fully_qualified_name: "nntplib._NNTPBase.getwelcome"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "getcapabilities"
-    fully_qualified_name: "nntplib._NNTPBase.getcapabilities"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.str]]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "set_debuglevel"
-    fully_qualified_name: "nntplib._NNTPBase.set_debuglevel"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "debug"
-    fully_qualified_name: "nntplib._NNTPBase.debug"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "level"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "capabilities"
-    fully_qualified_name: "nntplib._NNTPBase.capabilities"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.list[builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.str]]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "newgroups"
-    fully_qualified_name: "nntplib._NNTPBase.newgroups"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "date"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
-        kind: UNION
-        args {
-          pretty_printed_name: "datetime.date"
-          fully_qualified_name: "datetime.date"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "newgroups"
-    fully_qualified_name: "nntplib._NNTPBase.newgroups"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "date"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
-        kind: UNION
-        args {
-          pretty_printed_name: "datetime.date"
-          fully_qualified_name: "datetime.date"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "newnews"
-    fully_qualified_name: "nntplib._NNTPBase.newnews"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "date"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
-        kind: UNION
-        args {
-          pretty_printed_name: "datetime.date"
-          fully_qualified_name: "datetime.date"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "newnews"
-    fully_qualified_name: "nntplib._NNTPBase.newnews"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "date"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
-        kind: UNION
-        args {
-          pretty_printed_name: "datetime.date"
-          fully_qualified_name: "datetime.date"
-        }
-        args {
-          pretty_printed_name: "datetime.datetime"
-          fully_qualified_name: "datetime.datetime"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "list"
-    fully_qualified_name: "nntplib._NNTPBase.list"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group_pattern"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "list"
-    fully_qualified_name: "nntplib._NNTPBase.list"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group_pattern"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "description"
-    fully_qualified_name: "nntplib._NNTPBase.description"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "descriptions"
-    fully_qualified_name: "nntplib._NNTPBase.descriptions"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.dict"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group_pattern"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "group"
-    fully_qualified_name: "nntplib._NNTPBase.group"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int,builtins.int,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "help"
-    fully_qualified_name: "nntplib._NNTPBase.help"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "help"
-    fully_qualified_name: "nntplib._NNTPBase.help"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "stat"
-    fully_qualified_name: "nntplib._NNTPBase.stat"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "next"
-    fully_qualified_name: "nntplib._NNTPBase.next"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "last"
-    fully_qualified_name: "nntplib._NNTPBase.last"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "head"
-    fully_qualified_name: "nntplib._NNTPBase.head"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "head"
-    fully_qualified_name: "nntplib._NNTPBase.head"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "body"
-    fully_qualified_name: "nntplib._NNTPBase.body"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "body"
-    fully_qualified_name: "nntplib._NNTPBase.body"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "article"
-    fully_qualified_name: "nntplib._NNTPBase.article"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.str]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "article"
-    fully_qualified_name: "nntplib._NNTPBase.article"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "builtins.list"
-        }
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "slave"
-    fully_qualified_name: "nntplib._NNTPBase.slave"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "xhdr"
-    fully_qualified_name: "nntplib._NNTPBase.xhdr"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "hdr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "str"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "xhdr"
-    fully_qualified_name: "nntplib._NNTPBase.xhdr"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "hdr"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "str"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "xover"
-    fully_qualified_name: "nntplib._NNTPBase.xover"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "end"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "xover"
-    fully_qualified_name: "nntplib._NNTPBase.xover"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "start"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "end"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "over"
-    fully_qualified_name: "nntplib._NNTPBase.over"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.str,builtins.list[Any],builtins.tuple[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "over"
-    fully_qualified_name: "nntplib._NNTPBase.over"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "builtins.dict"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_spec"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.str,builtins.list[Any],builtins.tuple[Any]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.list[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.list"
-        }
-        args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "xgtitle"
-    fully_qualified_name: "nntplib._NNTPBase.xgtitle"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.str],builtins.str,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.str],builtins.str,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "xgtitle"
-    fully_qualified_name: "nntplib._NNTPBase.xgtitle"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
-        args {
-          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "builtins.list"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "group"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "file"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[typing.IO[builtins.bytes],builtins.bytes,builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "typing.IO[builtins.bytes]"
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-            fully_qualified_name: "typing.IO"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        fully_qualified_name: "nntplib._File"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "xpath"
-    fully_qualified_name: "nntplib._NNTPBase.xpath"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "id"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "date"
-    fully_qualified_name: "nntplib._NNTPBase.date"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.str,datetime.datetime]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "post"
-    fully_qualified_name: "nntplib._NNTPBase.post"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,typing.Iterable[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "post"
-    fully_qualified_name: "nntplib._NNTPBase.post"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,typing.Iterable[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "ihave"
-    fully_qualified_name: "nntplib._NNTPBase.ihave"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_id"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,typing.Iterable[builtins.str]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "ihave"
-    fully_qualified_name: "nntplib._NNTPBase.ihave"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "message_id"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bytes,typing.Iterable[builtins.bytes]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-        args {
-          pretty_printed_name: "typing.Iterable[builtins.bytes]"
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          fully_qualified_name: "typing.Iterable"
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "quit"
-    fully_qualified_name: "nntplib._NNTPBase.quit"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "login"
-    fully_qualified_name: "nntplib._NNTPBase.login"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "user"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "password"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "usenetrc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "starttls"
-    fully_qualified_name: "nntplib._NNTPBase.starttls"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "nntplib._NNTPBase"
-        fully_qualified_name: "nntplib._NNTPBase"
-      }
-    }
-    parameters {
-      name: "context"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[ssl.SSLContext,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "ssl.SSLContext"
-          fully_qualified_name: "ssl.SSLContext"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "encoding"
-    fully_qualified_name: "nntplib._NNTPBase.encoding"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "errors"
-    fully_qualified_name: "nntplib._NNTPBase.errors"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "host"
-    fully_qualified_name: "nntplib._NNTPBase.host"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "file"
-    fully_qualified_name: "nntplib._NNTPBase.file"
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "file"
-    fully_qualified_name: "nntplib._NNTPBase.file"
-    type_annotation {
-      pretty_printed_name: "typing.IO[builtins.bytes]"
-      args {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "debugging"
-    fully_qualified_name: "nntplib._NNTPBase.debugging"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "welcome"
-    fully_qualified_name: "nntplib._NNTPBase.welcome"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "readermode_afterauth"
-    fully_qualified_name: "nntplib._NNTPBase.readermode_afterauth"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "tls_on"
-    fully_qualified_name: "nntplib._NNTPBase.tls_on"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "authenticated"
-    fully_qualified_name: "nntplib._NNTPBase.authenticated"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "nntp_implementation"
-    fully_qualified_name: "nntplib._NNTPBase.nntp_implementation"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "nntp_version"
-    fully_qualified_name: "nntplib._NNTPBase.nntp_version"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4092,7 +2065,7 @@ classes {
 classes {
   name: "NNTP"
   fully_qualified_name: "nntplib.NNTP"
-  super_classes: "nntplib._NNTPBase"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "nntplib.NNTP.__init__"
@@ -4194,7 +2167,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4202,7 +2174,1677 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "nntplib.NNTP.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "nntplib.NNTP.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getwelcome"
+    fully_qualified_name: "nntplib.NNTP.getwelcome"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getcapabilities"
+    fully_qualified_name: "nntplib.NNTP.getcapabilities"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.str]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_debuglevel"
+    fully_qualified_name: "nntplib.NNTP.set_debuglevel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "debug"
+    fully_qualified_name: "nntplib.NNTP.debug"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "capabilities"
+    fully_qualified_name: "nntplib.NNTP.capabilities"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.list[builtins.str]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.list[builtins.str]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "newgroups"
+    fully_qualified_name: "nntplib.NNTP.newgroups"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.date"
+          fully_qualified_name: "datetime.date"
+        }
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "newnews"
+    fully_qualified_name: "nntplib.NNTP.newnews"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.date,datetime.datetime]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.date"
+          fully_qualified_name: "datetime.date"
+        }
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "list"
+    fully_qualified_name: "nntplib.NNTP.list"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "group_pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "description"
+    fully_qualified_name: "nntplib.NNTP.description"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "descriptions"
+    fully_qualified_name: "nntplib.NNTP.descriptions"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "group_pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "group"
+    fully_qualified_name: "nntplib.NNTP.group"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int,builtins.int,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "help"
+    fully_qualified_name: "nntplib.NNTP.help"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "stat"
+    fully_qualified_name: "nntplib.NNTP.stat"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "nntplib.NNTP.next"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "last"
+    fully_qualified_name: "nntplib.NNTP.last"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "head"
+    fully_qualified_name: "nntplib.NNTP.head"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "body"
+    fully_qualified_name: "nntplib.NNTP.body"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "article"
+    fully_qualified_name: "nntplib.NNTP.article"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.list[builtins.bytes]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "slave"
+    fully_qualified_name: "nntplib.NNTP.slave"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "xhdr"
+    fully_qualified_name: "nntplib.NNTP.xhdr"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "hdr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "str"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "xover"
+    fully_qualified_name: "nntplib.NNTP.xover"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "end"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "over"
+    fully_qualified_name: "nntplib.NNTP.over"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.str,builtins.list[Any],Tuple[Any,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "over"
+    fully_qualified_name: "nntplib.NNTP.over"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.dict[builtins.str,builtins.str]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.str,builtins.list[Any],builtins.tuple[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "xgtitle"
+    fully_qualified_name: "nntplib.NNTP.xgtitle"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_File],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_File]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "xpath"
+    fully_qualified_name: "nntplib.NNTP.xpath"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "date"
+    fully_qualified_name: "nntplib.NNTP.date"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,datetime.datetime]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "post"
+    fully_qualified_name: "nntplib.NNTP.post"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,typing.Iterable[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ihave"
+    fully_qualified_name: "nntplib.NNTP.ihave"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "message_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,typing.Iterable[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "quit"
+    fully_qualified_name: "nntplib.NNTP.quit"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "login"
+    fully_qualified_name: "nntplib.NNTP.login"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "user"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "usenetrc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "starttls"
+    fully_qualified_name: "nntplib.NNTP.starttls"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "nntplib.NNTP"
+        fully_qualified_name: "nntplib.NNTP"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[ssl.SSLContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "ssl.SSLContext"
+          fully_qualified_name: "ssl.SSLContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4210,13 +3852,54 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
+    name: "encoding"
+    fully_qualified_name: "nntplib.NNTP.encoding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "errors"
+    fully_qualified_name: "nntplib.NNTP.errors"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "host"
+    fully_qualified_name: "nntplib.NNTP.host"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
     name: "port"
     fully_qualified_name: "nntplib.NNTP.port"
     type_annotation {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4231,7 +3914,122 @@ classes {
       pretty_printed_name: "socket.socket"
       fully_qualified_name: "socket.socket"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "file"
+    fully_qualified_name: "nntplib.NNTP.file"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "debugging"
+    fully_qualified_name: "nntplib.NNTP.debugging"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "welcome"
+    fully_qualified_name: "nntplib.NNTP.welcome"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "readermode_afterauth"
+    fully_qualified_name: "nntplib.NNTP.readermode_afterauth"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tls_on"
+    fully_qualified_name: "nntplib.NNTP.tls_on"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "authenticated"
+    fully_qualified_name: "nntplib.NNTP.authenticated"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nntp_implementation"
+    fully_qualified_name: "nntplib.NNTP.nntp_implementation"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nntp_version"
+    fully_qualified_name: "nntplib.NNTP.nntp_version"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4243,7 +4041,7 @@ classes {
 classes {
   name: "NNTP_SSL"
   fully_qualified_name: "nntplib.NNTP_SSL"
-  super_classes: "nntplib._NNTPBase"
+  super_classes: "nntplib.NNTP"
   methods {
     name: "__init__"
     fully_qualified_name: "nntplib.NNTP_SSL.__init__"
@@ -4362,7 +4160,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4370,7 +4167,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4378,13 +4174,34 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
+    name: "ssl_context"
+    fully_qualified_name: "nntplib.NNTP_SSL.ssl_context"
+    type_annotation {
+      pretty_printed_name: "Union[ssl.SSLContext,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "ssl.SSLContext"
+        fully_qualified_name: "ssl.SSLContext"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
     name: "sock"
     fully_qualified_name: "nntplib.NNTP_SSL.sock"
     type_annotation {
-      pretty_printed_name: "socket.socket"
-      fully_qualified_name: "socket.socket"
+      pretty_printed_name: "ssl.SSLSocket"
+      fully_qualified_name: "ssl.SSLSocket"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -4408,7 +4225,38 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "nntplib.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_File"
+  fully_qualified_name: "nntplib._File"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4420,10 +4268,13 @@ vars {
   name: "NNTP_PORT"
   fully_qualified_name: "nntplib.NNTP_PORT"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -4435,10 +4286,13 @@ vars {
   name: "NNTP_SSL_PORT"
   fully_qualified_name: "nntplib.NNTP_SSL_PORT"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

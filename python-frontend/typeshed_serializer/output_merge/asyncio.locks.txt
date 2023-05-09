@@ -43,8 +43,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "asyncio.locks._ContextManager.__enter__"
     return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
+      pretty_printed_name: "None"
+      kind: NONE
     }
     parameters {
       name: "self"
@@ -76,8 +76,8 @@ classes {
       name: "args"
       kind: VAR_POSITIONAL
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -94,90 +94,6 @@ classes {
   name: "_ContextManagerMixin"
   fully_qualified_name: "asyncio.locks._ContextManagerMixin"
   super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.locks._ContextManagerMixin.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.locks._ContextManagerMixin"
-        fully_qualified_name: "asyncio.locks._ContextManagerMixin"
-      }
-    }
-    parameters {
-      name: "lock"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[asyncio.locks.Lock,asyncio.locks.Semaphore]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.locks.Lock"
-          fully_qualified_name: "asyncio.locks.Lock"
-        }
-        args {
-          pretty_printed_name: "asyncio.locks.Semaphore"
-          fully_qualified_name: "asyncio.locks.Semaphore"
-        }
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__enter__"
-    fully_qualified_name: "asyncio.locks._ContextManagerMixin.__enter__"
-    return_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "asyncio.locks._ContextManagerMixin"
-        fully_qualified_name: "asyncio.locks._ContextManagerMixin"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  methods {
-    name: "__exit__"
-    fully_qualified_name: "asyncio.locks._ContextManagerMixin.__exit__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "asyncio.locks._ContextManagerMixin"
-        fully_qualified_name: "asyncio.locks._ContextManagerMixin"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
   methods {
     name: "__iter__"
     fully_qualified_name: "asyncio.locks._ContextManagerMixin.__iter__"
@@ -245,12 +161,20 @@ classes {
     name: "__aenter__"
     fully_qualified_name: "asyncio.locks._ContextManagerMixin.__aenter__"
     return_annotation {
-      pretty_printed_name: "typing.Awaitable[None]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "None"
         kind: NONE
       }
-      fully_qualified_name: "typing.Awaitable"
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "self"
@@ -260,6 +184,7 @@ classes {
         fully_qualified_name: "asyncio.locks._ContextManagerMixin"
       }
     }
+    is_asynchronous: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -271,12 +196,101 @@ classes {
     name: "__aexit__"
     fully_qualified_name: "asyncio.locks._ContextManagerMixin.__aexit__"
     return_annotation {
-      pretty_printed_name: "typing.Awaitable[None]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
       args {
         pretty_printed_name: "None"
         kind: NONE
       }
-      fully_qualified_name: "typing.Awaitable"
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.locks._ContextManagerMixin"
+        fully_qualified_name: "asyncio.locks._ContextManagerMixin"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "asyncio.locks._ContextManagerMixin.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
     }
     parameters {
       name: "self"
@@ -338,10 +352,7 @@ classes {
         }
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
+    is_asynchronous: true
     valid_for: "39"
     valid_for: "310"
   }
@@ -393,6 +404,22 @@ classes {
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.locks.Lock.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.locks.Lock"
+        fully_qualified_name: "asyncio.locks.Lock"
+      }
+    }
     valid_for: "310"
   }
   methods {
@@ -421,7 +448,7 @@ classes {
     name: "acquire"
     fully_qualified_name: "asyncio.locks.Lock.acquire"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Literal[builtins.bool]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -431,8 +458,12 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -522,6 +553,22 @@ classes {
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.locks.Event.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.locks.Event"
+        fully_qualified_name: "asyncio.locks.Event"
+      }
+    }
     valid_for: "310"
   }
   methods {
@@ -594,7 +641,7 @@ classes {
     name: "wait"
     fully_qualified_name: "asyncio.locks.Event.wait"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Literal[builtins.bool]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -604,8 +651,12 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -690,6 +741,39 @@ classes {
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.locks.Condition.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.locks.Condition"
+        fully_qualified_name: "asyncio.locks.Condition"
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.locks.Lock,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.locks.Lock"
+          fully_qualified_name: "asyncio.locks.Lock"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "310"
   }
   methods {
@@ -718,7 +802,7 @@ classes {
     name: "acquire"
     fully_qualified_name: "asyncio.locks.Condition.acquire"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Literal[builtins.bool]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -728,8 +812,12 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -775,7 +863,7 @@ classes {
     name: "wait"
     fully_qualified_name: "asyncio.locks.Condition.wait"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Literal[builtins.bool]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -785,8 +873,12 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -963,6 +1055,31 @@ classes {
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.locks.Semaphore.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.locks.Semaphore"
+        fully_qualified_name: "asyncio.locks.Semaphore"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
     valid_for: "310"
   }
   methods {
@@ -991,7 +1108,7 @@ classes {
     name: "acquire"
     fully_qualified_name: "asyncio.locks.Semaphore.acquire"
     return_annotation {
-      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      pretty_printed_name: "typing.Coroutine[Any,Any,Literal[builtins.bool]]"
       args {
         pretty_printed_name: "Any"
         kind: ANY
@@ -1001,8 +1118,12 @@ classes {
         kind: ANY
       }
       args {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
       }
       fully_qualified_name: "typing.Coroutine"
     }
@@ -1113,53 +1234,39 @@ classes {
   name: "BoundedSemaphore"
   fully_qualified_name: "asyncio.locks.BoundedSemaphore"
   super_classes: "asyncio.locks.Semaphore"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "asyncio.locks.BoundedSemaphore.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.locks.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.locks.BoundedSemaphore"
-        fully_qualified_name: "asyncio.locks.BoundedSemaphore"
-      }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "loop"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "asyncio.events.AbstractEventLoop"
-          fully_qualified_name: "asyncio.events.AbstractEventLoop"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
   valid_for: "35"
   valid_for: "36"

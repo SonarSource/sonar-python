@@ -1,5 +1,1012 @@
 fully_qualified_name: "multiprocessing.context"
 classes {
+  name: "_Pool"
+  fully_qualified_name: "multiprocessing.pool.Pool"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.pool.Pool.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "processes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "initargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxtasksperchild"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "apply"
+    fully_qualified_name: "multiprocessing.pool.Pool.apply"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "apply_async"
+    fully_qualified_name: "multiprocessing.pool.Pool.apply_async"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool.ApplyResult[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.pool.ApplyResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "error_callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "map"
+    fully_qualified_name: "multiprocessing.pool.Pool.map"
+    return_annotation {
+      pretty_printed_name: "builtins.list[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[multiprocessing.pool._S]"
+        args {
+          pretty_printed_name: "multiprocessing.pool._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "map_async"
+    fully_qualified_name: "multiprocessing.pool.Pool.map_async"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool.MapResult[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.pool.MapResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[multiprocessing.pool._S]"
+        args {
+          pretty_printed_name: "multiprocessing.pool._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "error_callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "imap"
+    fully_qualified_name: "multiprocessing.pool.Pool.imap"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool.IMapIterator[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.pool.IMapIterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[multiprocessing.pool._S]"
+        args {
+          pretty_printed_name: "multiprocessing.pool._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "imap_unordered"
+    fully_qualified_name: "multiprocessing.pool.Pool.imap_unordered"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool.IMapIterator[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "multiprocessing.pool.IMapIterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[multiprocessing.pool._S]"
+        args {
+          pretty_printed_name: "multiprocessing.pool._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "starmap"
+    fully_qualified_name: "multiprocessing.pool.Pool.starmap"
+    return_annotation {
+      pretty_printed_name: "builtins.list[multiprocessing.pool._T]"
+      args {
+        pretty_printed_name: "multiprocessing.pool._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.Iterable[Any]]"
+        args {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "starmap_async"
+    fully_qualified_name: "multiprocessing.pool.Pool.starmap_async"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]"
+      args {
+        pretty_printed_name: "builtins.list[multiprocessing.pool._T]"
+        args {
+          pretty_printed_name: "multiprocessing.pool._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "multiprocessing.pool.ApplyResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.Iterable[Any]]"
+        args {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "chunksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "error_callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.pool.Pool.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "terminate"
+    fully_qualified_name: "multiprocessing.pool.Pool.terminate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "multiprocessing.pool.Pool.join"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "multiprocessing.pool.Pool.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.pool.Pool.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.pool.Pool.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.pool.Pool"
+        fully_qualified_name: "multiprocessing.pool.Pool"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "ProcessError"
   fully_qualified_name: "multiprocessing.context.ProcessError"
   super_classes: "builtins.Exception"
@@ -111,8 +1118,8 @@ classes {
     name: "Manager"
     fully_qualified_name: "multiprocessing.context.BaseContext.Manager"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "multiprocessing.managers.SyncManager"
+      fully_qualified_name: "multiprocessing.managers.SyncManager"
     }
     parameters {
       name: "self"
@@ -133,8 +1140,16 @@ classes {
     name: "Pipe"
     fully_qualified_name: "multiprocessing.context.BaseContext.Pipe"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Tuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "multiprocessing.connection.Connection"
+        fully_qualified_name: "multiprocessing.connection.Connection"
+      }
+      args {
+        pretty_printed_name: "multiprocessing.connection.Connection"
+        fully_qualified_name: "multiprocessing.connection.Connection"
+      }
     }
     parameters {
       name: "self"
@@ -278,15 +1293,11 @@ classes {
       name: "lock"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]"
+        pretty_printed_name: "Union[UnboundType[_LockLike],None]"
         kind: UNION
         args {
-          pretty_printed_name: "multiprocessing.synchronize.Lock"
-          fully_qualified_name: "multiprocessing.synchronize.Lock"
-        }
-        args {
-          pretty_printed_name: "multiprocessing.synchronize.RLock"
-          fully_qualified_name: "multiprocessing.synchronize.RLock"
+          pretty_printed_name: "UnboundType[_LockLike]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -648,11 +1659,11 @@ classes {
       name: "level"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[UnboundType[_LoggingLevel],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "UnboundType[_LoggingLevel]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -746,37 +1757,6 @@ classes {
         }
         fully_qualified_name: "builtins.list"
       }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "get_start_method"
-    fully_qualified_name: "multiprocessing.context.BaseContext.get_start_method"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "multiprocessing.context.BaseContext"
-        fully_qualified_name: "multiprocessing.context.BaseContext"
-      }
-    }
-    parameters {
-      name: "allow_none"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
     }
     valid_for: "35"
     valid_for: "36"
@@ -898,6 +1878,84 @@ classes {
         name: "typecode_or_type"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "RawValue"
+      fully_qualified_name: "multiprocessing.context.BaseContext.RawValue"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "RawValue"
+    fullname: "multiprocessing.context.BaseContext.RawValue"
+    definitions {
+      name: "RawValue"
+      fully_qualified_name: "multiprocessing.context.BaseContext.RawValue"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.context._CT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
           pretty_printed_name: "Type[multiprocessing.context._CT]"
           kind: TYPE
           args {
@@ -953,10 +2011,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -967,12 +2021,118 @@ classes {
       name: "RawArray"
       fully_qualified_name: "multiprocessing.context.BaseContext.RawArray"
       return_annotation {
-        pretty_printed_name: "ctypes.Array[multiprocessing.context._CT]"
+        pretty_printed_name: "_ctypes.Array[multiprocessing.context._CT]"
         args {
           pretty_printed_name: "multiprocessing.context._CT"
           kind: TYPE_VAR
         }
-        fully_qualified_name: "ctypes.Array"
+        fully_qualified_name: "_ctypes.Array"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "RawArray"
+      fully_qualified_name: "multiprocessing.context.BaseContext.RawArray"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "RawArray"
+    fullname: "multiprocessing.context.BaseContext.RawArray"
+    definitions {
+      name: "RawArray"
+      fully_qualified_name: "multiprocessing.context.BaseContext.RawArray"
+      return_annotation {
+        pretty_printed_name: "_ctypes.Array[multiprocessing.context._CT]"
+        args {
+          pretty_printed_name: "multiprocessing.context._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_ctypes.Array"
       }
       parameters {
         name: "self"
@@ -1065,12 +2225,243 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "Value"
+    fullname: "multiprocessing.context.BaseContext.Value"
+    definitions {
+      name: "Value"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Value"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.context._CT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Value"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Value"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedBase[multiprocessing.context._CT]"
+        args {
+          pretty_printed_name: "multiprocessing.context._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.bool]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Value"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Value"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedBase[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedBase"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.bool]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Value"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Value"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,builtins.type]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "Value"
@@ -1169,7 +2560,7 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "Literal[builtins.bool]"
@@ -1180,23 +2571,11 @@ classes {
             }
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
-            }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
+        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -1241,7 +2620,7 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "Literal[builtins.bool]"
@@ -1252,23 +2631,11 @@ classes {
             }
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
-            }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
+        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -1293,18 +2660,18 @@ classes {
         name: "typecode_or_type"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,Type[ctypes._CData]]"
+          pretty_printed_name: "Union[builtins.str,Type[_ctypes._CData]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Type[ctypes._CData]"
+            pretty_printed_name: "Type[_ctypes._CData]"
             kind: TYPE
             args {
-              pretty_printed_name: "ctypes._CData"
-              fully_qualified_name: "ctypes._CData"
+              pretty_printed_name: "_ctypes._CData"
+              fully_qualified_name: "_ctypes._CData"
             }
           }
         }
@@ -1321,28 +2688,296 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "Array"
+    fullname: "multiprocessing.context.BaseContext.Array"
+    definitions {
+      name: "Array"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Array"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.context._CT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
             args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
+              pretty_printed_name: "Any"
+              kind: ANY
             }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Array"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Array"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._CT]"
+        args {
+          pretty_printed_name: "multiprocessing.context._CT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedArray"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.bool]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Array"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Array"
+      return_annotation {
+        pretty_printed_name: "multiprocessing.sharedctypes.SynchronizedArray[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "multiprocessing.sharedctypes.SynchronizedArray"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.bool]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "Array"
+      fully_qualified_name: "multiprocessing.context.BaseContext.Array"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "typecode_or_type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,builtins.type]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.type"
+            fully_qualified_name: "builtins.type"
+          }
+        }
+      }
+      parameters {
+        name: "size_or_initializer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,typing.Sequence[Any]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+        }
+      }
+      parameters {
+        name: "lock"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
         has_default: true
@@ -1355,8 +2990,6 @@ classes {
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   overloaded_methods {
     name: "Array"
@@ -1479,7 +3112,7 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "Literal[builtins.bool]"
@@ -1490,23 +3123,11 @@ classes {
             }
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
-            }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
+        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -1563,7 +3184,7 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[Literal[builtins.bool],UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "Literal[builtins.bool]"
@@ -1574,23 +3195,11 @@ classes {
             }
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
-            }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
+        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -1615,18 +3224,18 @@ classes {
         name: "typecode_or_type"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,Type[ctypes._CData]]"
+          pretty_printed_name: "Union[builtins.str,Type[_ctypes._CData]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "Type[ctypes._CData]"
+            pretty_printed_name: "Type[_ctypes._CData]"
             kind: TYPE
             args {
-              pretty_printed_name: "ctypes._CData"
-              fully_qualified_name: "ctypes._CData"
+              pretty_printed_name: "_ctypes._CData"
+              fully_qualified_name: "_ctypes._CData"
             }
           }
         }
@@ -1655,28 +3264,15 @@ classes {
         name: "lock"
         kind: KEYWORD_ONLY
         type_annotation {
-          pretty_printed_name: "Union[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]"
+          pretty_printed_name: "Union[builtins.bool,UnboundType[_LockLike]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
           }
           args {
-            pretty_printed_name: "TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]"
-              kind: UNION
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.Lock"
-                fully_qualified_name: "multiprocessing.synchronize.Lock"
-              }
-              args {
-                pretty_printed_name: "multiprocessing.synchronize.RLock"
-                fully_qualified_name: "multiprocessing.synchronize.RLock"
-              }
-            }
-            fully_qualified_name: "multiprocessing.context._LockLike"
+            pretty_printed_name: "UnboundType[_LockLike]"
+            kind: UNBOUND
           }
         }
         has_default: true
@@ -1685,10 +3281,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1851,6 +3443,83 @@ classes {
     valid_for: "310"
   }
   overloaded_methods {
+    name: "get_start_method"
+    fullname: "multiprocessing.context.BaseContext.get_start_method"
+    definitions {
+      name: "get_start_method"
+      fully_qualified_name: "multiprocessing.context.BaseContext.get_start_method"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "allow_none"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_start_method"
+      fully_qualified_name: "multiprocessing.context.BaseContext.get_start_method"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+      }
+      parameters {
+        name: "allow_none"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
     name: "reducer"
     fullname: "multiprocessing.context.BaseContext.reducer"
     definitions {
@@ -1913,38 +3582,28 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
-    name: "Process"
-    fully_qualified_name: "multiprocessing.context.BaseContext.Process"
+    name: "ProcessError"
+    fully_qualified_name: "multiprocessing.context.BaseContext.ProcessError"
     type_annotation {
-      pretty_printed_name: "Type[multiprocessing.process.BaseProcess]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "multiprocessing.process.BaseProcess"
-        fully_qualified_name: "multiprocessing.process.BaseProcess"
-      }
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   attributes {
     name: "ProcessError"
     fully_qualified_name: "multiprocessing.context.BaseContext.ProcessError"
     type_annotation {
-      pretty_printed_name: "Type[builtins.Exception]"
+      pretty_printed_name: "Type[multiprocessing.context.ProcessError]"
       kind: TYPE
       args {
-        pretty_printed_name: "builtins.Exception"
-        fully_qualified_name: "builtins.Exception"
+        pretty_printed_name: "multiprocessing.context.ProcessError"
+        fully_qualified_name: "multiprocessing.context.ProcessError"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1952,17 +3611,25 @@ classes {
     name: "BufferTooShort"
     fully_qualified_name: "multiprocessing.context.BaseContext.BufferTooShort"
     type_annotation {
-      pretty_printed_name: "Type[builtins.Exception]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "builtins.Exception"
-        fully_qualified_name: "builtins.Exception"
-      }
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "BufferTooShort"
+    fully_qualified_name: "multiprocessing.context.BaseContext.BufferTooShort"
+    type_annotation {
+      pretty_printed_name: "Type[multiprocessing.context.BufferTooShort]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "multiprocessing.context.BufferTooShort"
+        fully_qualified_name: "multiprocessing.context.BufferTooShort"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -1970,17 +3637,25 @@ classes {
     name: "TimeoutError"
     fully_qualified_name: "multiprocessing.context.BaseContext.TimeoutError"
     type_annotation {
-      pretty_printed_name: "Type[builtins.Exception]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "builtins.Exception"
-        fully_qualified_name: "builtins.Exception"
-      }
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "TimeoutError"
+    fully_qualified_name: "multiprocessing.context.BaseContext.TimeoutError"
+    type_annotation {
+      pretty_printed_name: "Type[multiprocessing.context.TimeoutError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "multiprocessing.context.TimeoutError"
+        fully_qualified_name: "multiprocessing.context.TimeoutError"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -1988,17 +3663,25 @@ classes {
     name: "AuthenticationError"
     fully_qualified_name: "multiprocessing.context.BaseContext.AuthenticationError"
     type_annotation {
-      pretty_printed_name: "Type[builtins.Exception]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "builtins.Exception"
-        fully_qualified_name: "builtins.Exception"
-      }
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
     }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  attributes {
+    name: "AuthenticationError"
+    fully_qualified_name: "multiprocessing.context.BaseContext.AuthenticationError"
+    type_annotation {
+      pretty_printed_name: "Type[multiprocessing.context.AuthenticationError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "multiprocessing.context.AuthenticationError"
+        fully_qualified_name: "multiprocessing.context.AuthenticationError"
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -2096,53 +3779,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "set_start_method"
-    fully_qualified_name: "multiprocessing.context.DefaultContext.set_start_method"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "multiprocessing.context.DefaultContext"
-        fully_qualified_name: "multiprocessing.context.DefaultContext"
-      }
-    }
-    parameters {
-      name: "method"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-    parameters {
-      name: "force"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "get_start_method"
     fully_qualified_name: "multiprocessing.context.DefaultContext.get_start_method"
     return_annotation {
@@ -2209,6 +3845,18 @@ classes {
     name: "Process"
     fully_qualified_name: "multiprocessing.context.DefaultContext.Process"
     type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "Process"
+    fully_qualified_name: "multiprocessing.context.DefaultContext.Process"
+    type_annotation {
       pretty_printed_name: "Type[multiprocessing.context.Process]"
       kind: TYPE
       args {
@@ -2216,21 +3864,32 @@ classes {
         fully_qualified_name: "multiprocessing.context.Process"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__all__"
+    fully_qualified_name: "multiprocessing.context.DefaultContext.__all__"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
 }
 classes {
-  name: "ForkProcess"
-  fully_qualified_name: "multiprocessing.context.ForkProcess"
+  name: "SpawnProcess"
+  fully_qualified_name: "multiprocessing.context.SpawnProcess"
   super_classes: "multiprocessing.process.BaseProcess"
   methods {
     name: "_Popen"
-    fully_qualified_name: "multiprocessing.context.ForkProcess._Popen"
+    fully_qualified_name: "multiprocessing.context.SpawnProcess._Popen"
     return_annotation {
       pretty_printed_name: "Any"
       kind: ANY
@@ -2261,7 +3920,7 @@ classes {
   valid_for: "310"
   attributes {
     name: "_start_method"
-    fully_qualified_name: "multiprocessing.context.ForkProcess._start_method"
+    fully_qualified_name: "multiprocessing.context.SpawnProcess._start_method"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
@@ -2275,15 +3934,66 @@ classes {
   }
 }
 classes {
-  name: "SpawnProcess"
-  fully_qualified_name: "multiprocessing.context.SpawnProcess"
+  name: "SpawnContext"
+  fully_qualified_name: "multiprocessing.context.SpawnContext"
+  super_classes: "multiprocessing.context.BaseContext"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_name"
+    fully_qualified_name: "multiprocessing.context.SpawnContext._name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Process"
+    fully_qualified_name: "multiprocessing.context.SpawnContext.Process"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "Process"
+    fully_qualified_name: "multiprocessing.context.SpawnContext.Process"
+    type_annotation {
+      pretty_printed_name: "Type[multiprocessing.context.SpawnProcess]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "multiprocessing.context.SpawnProcess"
+        fully_qualified_name: "multiprocessing.context.SpawnProcess"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ForkProcess"
+  fully_qualified_name: "multiprocessing.context.ForkProcess"
   super_classes: "multiprocessing.process.BaseProcess"
   methods {
     name: "_Popen"
-    fully_qualified_name: "multiprocessing.context.SpawnProcess._Popen"
+    fully_qualified_name: "multiprocessing.context.ForkProcess._Popen"
     return_annotation {
-      pretty_printed_name: "multiprocessing.context.SpawnProcess"
-      fully_qualified_name: "multiprocessing.context.SpawnProcess"
+      pretty_printed_name: "multiprocessing.popen_fork.Popen"
+      fully_qualified_name: "multiprocessing.popen_fork.Popen"
     }
     parameters {
       name: "process_obj"
@@ -2311,7 +4021,7 @@ classes {
   valid_for: "310"
   attributes {
     name: "_start_method"
-    fully_qualified_name: "multiprocessing.context.SpawnProcess._start_method"
+    fully_qualified_name: "multiprocessing.context.ForkProcess._start_method"
     type_annotation {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
@@ -2402,6 +4112,18 @@ classes {
     name: "Process"
     fully_qualified_name: "multiprocessing.context.ForkContext.Process"
     type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "Process"
+    fully_qualified_name: "multiprocessing.context.ForkContext.Process"
+    type_annotation {
       pretty_printed_name: "Type[multiprocessing.context.ForkProcess]"
       kind: TYPE
       args {
@@ -2409,53 +4131,6 @@ classes {
         fully_qualified_name: "multiprocessing.context.ForkProcess"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "SpawnContext"
-  fully_qualified_name: "multiprocessing.context.SpawnContext"
-  super_classes: "multiprocessing.context.BaseContext"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "_name"
-    fully_qualified_name: "multiprocessing.context.SpawnContext._name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "Process"
-    fully_qualified_name: "multiprocessing.context.SpawnContext.Process"
-    type_annotation {
-      pretty_printed_name: "Type[multiprocessing.context.SpawnProcess]"
-      kind: TYPE
-      args {
-        pretty_printed_name: "multiprocessing.context.SpawnProcess"
-        fully_qualified_name: "multiprocessing.context.SpawnProcess"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2488,6 +4163,18 @@ classes {
     name: "Process"
     fully_qualified_name: "multiprocessing.context.ForkServerContext.Process"
     type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "Process"
+    fully_qualified_name: "multiprocessing.context.ForkServerContext.Process"
+    type_annotation {
       pretty_printed_name: "Type[multiprocessing.context.ForkServerProcess]"
       kind: TYPE
       args {
@@ -2495,10 +4182,6 @@ classes {
         fully_qualified_name: "multiprocessing.context.ForkServerProcess"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2583,6 +4266,60 @@ functions {
       pretty_printed_name: "Any"
       kind: ANY
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_LoggingLevel"
+  fully_qualified_name: "logging._Level"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.context.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.context.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[]"
+    kind: TUPLE
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_LockLike"
+  fully_qualified_name: "multiprocessing.context._LockLike"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
   }
   valid_for: "35"
   valid_for: "36"

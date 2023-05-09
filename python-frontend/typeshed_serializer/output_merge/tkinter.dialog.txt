@@ -22,11 +22,11 @@ classes {
       name: "master"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[Any,None]"
+        pretty_printed_name: "Union[UnboundType[Incomplete],None]"
         kind: UNION
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -56,8 +56,8 @@ classes {
       name: "kw"
       kind: VAR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -135,6 +135,20 @@ vars {
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "tkinter.dialog.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "39"
   valid_for: "310"
 }

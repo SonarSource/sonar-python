@@ -31,6 +31,9 @@ classes {
       }
     }
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -63,6 +66,9 @@ classes {
       }
     }
     is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -85,12 +91,8 @@ classes {
     parameters {
       name: "__func"
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -109,10 +111,30 @@ classes {
         kind: ANY
       }
     }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "unittest.async_case._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"

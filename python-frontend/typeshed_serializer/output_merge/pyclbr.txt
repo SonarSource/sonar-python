@@ -78,9 +78,28 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pyclbr.Class,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pyclbr.Class"
+          fully_qualified_name: "pyclbr.Class"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "35"
     valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
   }
   methods {
     name: "__init__"
@@ -114,7 +133,7 @@ classes {
       }
     }
     parameters {
-      name: "super"
+      name: "super_"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "Union[builtins.list[Union[pyclbr.Class,builtins.str]],None]"
@@ -174,12 +193,25 @@ classes {
       }
       has_default: true
     }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
+    parameters {
+      name: "end_lineno"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -193,7 +225,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -208,7 +239,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -243,7 +273,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -266,7 +295,6 @@ classes {
       }
       fully_qualified_name: "builtins.dict"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -281,7 +309,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -296,12 +323,80 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parent"
+    fully_qualified_name: "pyclbr.Class.parent"
+    type_annotation {
+      pretty_printed_name: "Union[pyclbr.Class,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pyclbr.Class"
+        fully_qualified_name: "pyclbr.Class"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "children"
+    fully_qualified_name: "pyclbr.Class.children"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Union[pyclbr.Class,pyclbr.Function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[pyclbr.Class,pyclbr.Function]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pyclbr.Class"
+          fully_qualified_name: "pyclbr.Class"
+        }
+        args {
+          pretty_printed_name: "pyclbr.Function"
+          fully_qualified_name: "pyclbr.Function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "end_lineno"
+    fully_qualified_name: "pyclbr.Class.end_lineno"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
     valid_for: "310"
   }
 }
@@ -356,9 +451,32 @@ classes {
         fully_qualified_name: "builtins.int"
       }
     }
-    valid_for: "27"
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pyclbr.Function,pyclbr.Class,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pyclbr.Function"
+          fully_qualified_name: "pyclbr.Function"
+        }
+        args {
+          pretty_printed_name: "pyclbr.Class"
+          fully_qualified_name: "pyclbr.Class"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "35"
     valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
   }
   methods {
     name: "__init__"
@@ -411,11 +529,15 @@ classes {
       name: "parent"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[pyclbr.Function,None]"
+        pretty_printed_name: "Union[pyclbr.Function,pyclbr.Class,None]"
         kind: UNION
         args {
           pretty_printed_name: "pyclbr.Function"
           fully_qualified_name: "pyclbr.Function"
+        }
+        args {
+          pretty_printed_name: "pyclbr.Class"
+          fully_qualified_name: "pyclbr.Class"
         }
         args {
           pretty_printed_name: "None"
@@ -424,12 +546,34 @@ classes {
       }
       has_default: true
     }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
+    parameters {
+      name: "is_async"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "end_lineno"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -443,7 +587,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -458,7 +601,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -473,7 +615,6 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -488,12 +629,93 @@ classes {
       pretty_printed_name: "builtins.int"
       fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parent"
+    fully_qualified_name: "pyclbr.Function.parent"
+    type_annotation {
+      pretty_printed_name: "Union[pyclbr.Function,pyclbr.Class,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pyclbr.Function"
+        fully_qualified_name: "pyclbr.Function"
+      }
+      args {
+        pretty_printed_name: "pyclbr.Class"
+        fully_qualified_name: "pyclbr.Class"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "children"
+    fully_qualified_name: "pyclbr.Function.children"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Union[pyclbr.Class,pyclbr.Function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[pyclbr.Class,pyclbr.Function]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pyclbr.Class"
+          fully_qualified_name: "pyclbr.Class"
+        }
+        args {
+          pretty_printed_name: "pyclbr.Function"
+          fully_qualified_name: "pyclbr.Function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "end_lineno"
+    fully_qualified_name: "pyclbr.Function.end_lineno"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_async"
+    fully_qualified_name: "pyclbr.Function.is_async"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
     valid_for: "310"
   }
 }
@@ -541,7 +763,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -609,7 +830,24 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "pyclbr.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

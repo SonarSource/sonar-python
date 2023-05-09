@@ -3,7 +3,7 @@ functions {
   name: "to_thread"
   fully_qualified_name: "asyncio.threads.to_thread"
   return_annotation {
-    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.threads._T]"
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.threads._R]"
     args {
       pretty_printed_name: "Any"
       kind: ANY
@@ -13,7 +13,7 @@ functions {
       kind: ANY
     }
     args {
-      pretty_printed_name: "asyncio.threads._T"
+      pretty_printed_name: "asyncio.threads._R"
       kind: TYPE_VAR
     }
     fully_qualified_name: "typing.Coroutine"
@@ -21,12 +21,8 @@ functions {
   parameters {
     name: "__func"
     type_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   parameters {
@@ -46,6 +42,42 @@ functions {
     }
   }
   is_asynchronous: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.threads.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "asyncio.threads._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }

@@ -1,9 +1,219 @@
 fully_qualified_name: "ast"
 classes {
+  name: "AST"
+  fully_qualified_name: "_ast.AST"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_ast.AST.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.AST"
+        fully_qualified_name: "_ast.AST"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "_ast.AST._attributes"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "_ast.AST._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "_ast.AST._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "_ast.AST._fields"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "_ast.AST.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "col_offset"
+    fully_qualified_name: "_ast.AST.col_offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "end_lineno"
+    fully_qualified_name: "_ast.AST.end_lineno"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "end_col_offset"
+    fully_qualified_name: "_ast.AST.end_col_offset"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comment"
+    fully_qualified_name: "_ast.AST.type_comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AST.__match_args__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+    valid_for: "310"
+  }
+}
+classes {
   name: "mod"
   fully_qualified_name: "_ast.mod"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -12,10 +222,58 @@ classes {
   valid_for: "310"
 }
 classes {
+  name: "Module"
+  fully_qualified_name: "_ast.Module"
+  super_classes: "_ast.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.Module.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_ignores"
+    fully_qualified_name: "_ast.Module.type_ignores"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.TypeIgnore]"
+      args {
+        pretty_printed_name: "_ast.TypeIgnore"
+        fully_qualified_name: "_ast.TypeIgnore"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Module.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
   name: "Interactive"
   fully_qualified_name: "_ast.Interactive"
   super_classes: "_ast.mod"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -33,7 +291,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -41,12 +298,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Interactive.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Expression"
   fully_qualified_name: "_ast.Expression"
   super_classes: "_ast.mod"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -60,7 +321,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -68,69 +328,27 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "Suite"
-  fully_qualified_name: "_ast.Suite"
-  super_classes: "_ast.mod"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   attributes {
-    name: "body"
-    fully_qualified_name: "_ast.Suite.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Expression.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "stmt"
   fully_qualified_name: "_ast.stmt"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "lineno"
-    fully_qualified_name: "_ast.stmt.lineno"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "col_offset"
-    fully_qualified_name: "_ast.stmt.col_offset"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "FunctionDef"
   fully_qualified_name: "_ast.FunctionDef"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -141,10 +359,9 @@ classes {
     name: "name"
     fully_qualified_name: "_ast.FunctionDef.name"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -159,7 +376,6 @@ classes {
       pretty_printed_name: "_ast.arguments"
       fully_qualified_name: "_ast.arguments"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -178,7 +394,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -197,7 +412,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -227,12 +441,118 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.FunctionDef.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AsyncFunctionDef"
+  fully_qualified_name: "_ast.AsyncFunctionDef"
+  super_classes: "_ast.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "_ast.AsyncFunctionDef.name"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "_ast.AsyncFunctionDef.args"
+    type_annotation {
+      pretty_printed_name: "_ast.arguments"
+      fully_qualified_name: "_ast.arguments"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.AsyncFunctionDef.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "decorator_list"
+    fully_qualified_name: "_ast.AsyncFunctionDef.decorator_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.expr]"
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "returns"
+    fully_qualified_name: "_ast.AsyncFunctionDef.returns"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AsyncFunctionDef.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ClassDef"
   fully_qualified_name: "_ast.ClassDef"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -243,10 +563,9 @@ classes {
     name: "name"
     fully_qualified_name: "_ast.ClassDef.name"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -265,45 +584,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.ClassDef.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "decorator_list"
-    fully_qualified_name: "_ast.ClassDef.decorator_list"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -329,12 +609,52 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.ClassDef.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "decorator_list"
+    fully_qualified_name: "_ast.ClassDef.decorator_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.expr]"
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.ClassDef.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Return"
   fully_qualified_name: "_ast.Return"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -356,7 +676,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -364,12 +683,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Return.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Delete"
   fully_qualified_name: "_ast.Delete"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -387,7 +710,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -395,12 +717,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Delete.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Assign"
   fully_qualified_name: "_ast.Assign"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -418,7 +744,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -433,7 +758,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -441,12 +765,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Assign.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "AugAssign"
   fully_qualified_name: "_ast.AugAssign"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -457,10 +785,21 @@ classes {
     name: "target"
     fully_qualified_name: "_ast.AugAssign.target"
     type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
+      pretty_printed_name: "Union[_ast.Name,_ast.Attribute,_ast.Subscript]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.Name"
+        fully_qualified_name: "_ast.Name"
+      }
+      args {
+        pretty_printed_name: "_ast.Attribute"
+        fully_qualified_name: "_ast.Attribute"
+      }
+      args {
+        pretty_printed_name: "_ast.Subscript"
+        fully_qualified_name: "_ast.Subscript"
+      }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -475,7 +814,6 @@ classes {
       pretty_printed_name: "_ast.operator"
       fully_qualified_name: "_ast.operator"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -490,7 +828,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -498,15 +835,65 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AugAssign.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
-  name: "Print"
-  fully_qualified_name: "_ast.Print"
+  name: "AnnAssign"
+  fully_qualified_name: "_ast.AnnAssign"
   super_classes: "_ast.stmt"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
-    name: "dest"
-    fully_qualified_name: "_ast.Print.dest"
+    name: "target"
+    fully_qualified_name: "_ast.AnnAssign.target"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.Name,_ast.Attribute,_ast.Subscript]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.Name"
+        fully_qualified_name: "_ast.Name"
+      }
+      args {
+        pretty_printed_name: "_ast.Attribute"
+        fully_qualified_name: "_ast.Attribute"
+      }
+      args {
+        pretty_printed_name: "_ast.Subscript"
+        fully_qualified_name: "_ast.Subscript"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "annotation"
+    fully_qualified_name: "_ast.AnnAssign.annotation"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.AnnAssign.value"
     type_annotation {
       pretty_printed_name: "Union[_ast.expr,None]"
       kind: UNION
@@ -519,36 +906,37 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
-    name: "values"
-    fully_qualified_name: "_ast.Print.values"
+    name: "simple"
+    fully_qualified_name: "_ast.AnnAssign.simple"
     type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
-    name: "nl"
-    fully_qualified_name: "_ast.Print.nl"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    valid_for: "27"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AnnAssign.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "For"
   fully_qualified_name: "_ast.For"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -562,7 +950,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -577,7 +964,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -596,7 +982,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -615,7 +1000,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -623,12 +1007,96 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.For.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AsyncFor"
+  fully_qualified_name: "_ast.AsyncFor"
+  super_classes: "_ast.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "target"
+    fully_qualified_name: "_ast.AsyncFor.target"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "iter"
+    fully_qualified_name: "_ast.AsyncFor.iter"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.AsyncFor.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "_ast.AsyncFor.orelse"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AsyncFor.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "While"
   fully_qualified_name: "_ast.While"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -642,7 +1110,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -661,7 +1128,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -680,7 +1146,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -688,12 +1153,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.While.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "If"
   fully_qualified_name: "_ast.If"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -707,7 +1176,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -726,7 +1194,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -745,12 +1212,16 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.If.__match_args__"
     valid_for: "310"
   }
 }
@@ -758,58 +1229,12 @@ classes {
   name: "With"
   fully_qualified_name: "_ast.With"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "context_expr"
-    fully_qualified_name: "_ast.With.context_expr"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "optional_vars"
-    fully_qualified_name: "_ast.With.optional_vars"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.With.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   attributes {
     name: "items"
     fully_qualified_name: "_ast.With.items"
@@ -828,12 +1253,34 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.With.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.With.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
-  name: "Raise"
-  fully_qualified_name: "_ast.Raise"
+  name: "AsyncWith"
+  fully_qualified_name: "_ast.AsyncWith"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -841,56 +1288,57 @@ classes {
   valid_for: "39"
   valid_for: "310"
   attributes {
-    name: "type"
-    fully_qualified_name: "_ast.Raise.type"
+    name: "items"
+    fully_qualified_name: "_ast.AsyncWith.items"
     type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
+      pretty_printed_name: "builtins.list[_ast.withitem]"
       args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
+        pretty_printed_name: "_ast.withitem"
+        fully_qualified_name: "_ast.withitem"
       }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
-    name: "inst"
-    fully_qualified_name: "_ast.Raise.inst"
+    name: "body"
+    fully_qualified_name: "_ast.AsyncWith.body"
     type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
+      pretty_printed_name: "builtins.list[_ast.stmt]"
       args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
       }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
+      fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
-    name: "tback"
-    fully_qualified_name: "_ast.Raise.tback"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.AsyncWith.__match_args__"
+    valid_for: "310"
   }
+}
+classes {
+  name: "Raise"
+  fully_qualified_name: "_ast.Raise"
+  super_classes: "_ast.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "exc"
     fully_qualified_name: "_ast.Raise.exc"
@@ -935,15 +1383,25 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Raise.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
-  name: "TryExcept"
-  fully_qualified_name: "_ast.TryExcept"
+  name: "Try"
+  fully_qualified_name: "_ast.Try"
   super_classes: "_ast.stmt"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "body"
-    fully_qualified_name: "_ast.TryExcept.body"
+    fully_qualified_name: "_ast.Try.body"
     type_annotation {
       pretty_printed_name: "builtins.list[_ast.stmt]"
       args {
@@ -952,11 +1410,16 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "handlers"
-    fully_qualified_name: "_ast.TryExcept.handlers"
+    fully_qualified_name: "_ast.Try.handlers"
     type_annotation {
       pretty_printed_name: "builtins.list[_ast.ExceptHandler]"
       args {
@@ -965,11 +1428,16 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "orelse"
-    fully_qualified_name: "_ast.TryExcept.orelse"
+    fully_qualified_name: "_ast.Try.orelse"
     type_annotation {
       pretty_printed_name: "builtins.list[_ast.stmt]"
       args {
@@ -978,30 +1446,16 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
-  }
-}
-classes {
-  name: "TryFinally"
-  fully_qualified_name: "_ast.TryFinally"
-  super_classes: "_ast.stmt"
-  valid_for: "27"
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.TryFinally.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   attributes {
     name: "finalbody"
-    fully_qualified_name: "_ast.TryFinally.finalbody"
+    fully_qualified_name: "_ast.Try.finalbody"
     type_annotation {
       pretty_printed_name: "builtins.list[_ast.stmt]"
       args {
@@ -1010,14 +1464,23 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Try.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "Assert"
   fully_qualified_name: "_ast.Assert"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1031,7 +1494,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1054,7 +1516,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1062,12 +1523,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Assert.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Import"
   fully_qualified_name: "_ast.Import"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1085,7 +1550,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1093,12 +1557,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Import.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ImportFrom"
   fully_qualified_name: "_ast.ImportFrom"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1120,7 +1588,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1139,30 +1606,12 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  attributes {
-    name: "level"
-    fully_qualified_name: "_ast.ImportFrom.level"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
   }
   attributes {
     name: "level"
@@ -1178,61 +1627,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-}
-classes {
-  name: "Exec"
-  fully_qualified_name: "_ast.Exec"
-  super_classes: "_ast.stmt"
-  valid_for: "27"
   attributes {
-    name: "body"
-    fully_qualified_name: "_ast.Exec.body"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "globals"
-    fully_qualified_name: "_ast.Exec.globals"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "locals"
-    fully_qualified_name: "_ast.Exec.locals"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.ImportFrom.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "Global"
   fully_qualified_name: "_ast.Global"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1243,14 +1647,13 @@ classes {
     name: "names"
     fully_qualified_name: "_ast.Global.names"
     type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
+      pretty_printed_name: "builtins.list[UnboundType[_Identifier]]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1258,12 +1661,50 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Global.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Nonlocal"
+  fully_qualified_name: "_ast.Nonlocal"
+  super_classes: "_ast.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "names"
+    fully_qualified_name: "_ast.Nonlocal.names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[UnboundType[_Identifier]]"
+      args {
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Nonlocal.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Expr"
   fully_qualified_name: "_ast.Expr"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1277,7 +1718,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1285,12 +1725,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Expr.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Pass"
   fully_qualified_name: "_ast.Pass"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1302,7 +1746,6 @@ classes {
   name: "Break"
   fully_qualified_name: "_ast.Break"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1314,257 +1757,28 @@ classes {
   name: "Continue"
   fully_qualified_name: "_ast.Continue"
   super_classes: "_ast.stmt"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "slice"
-  fully_qualified_name: "_ast.slice"
-  super_classes: "_ast.AST"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-}
-classes {
-  name: "Slice"
-  fully_qualified_name: "_ast.Slice"
-  super_classes: "_ast.slice"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  attributes {
-    name: "lower"
-    fully_qualified_name: "_ast.Slice.lower"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  attributes {
-    name: "upper"
-    fully_qualified_name: "_ast.Slice.upper"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-  attributes {
-    name: "step"
-    fully_qualified_name: "_ast.Slice.step"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-}
-classes {
-  name: "Slice"
-  fully_qualified_name: "_ast.Slice"
-  super_classes: "_ast.expr"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "lower"
-    fully_qualified_name: "_ast.Slice.lower"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "upper"
-    fully_qualified_name: "_ast.Slice.upper"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "step"
-    fully_qualified_name: "_ast.Slice.step"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "ExtSlice"
-  fully_qualified_name: "_ast.ExtSlice"
-  super_classes: "_ast.slice"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  attributes {
-    name: "dims"
-    fully_qualified_name: "_ast.ExtSlice.dims"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.slice]"
-      args {
-        pretty_printed_name: "_ast.slice"
-        fully_qualified_name: "_ast.slice"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-}
-classes {
-  name: "Index"
-  fully_qualified_name: "_ast.Index"
-  super_classes: "_ast.slice"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.Index.value"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-  }
-}
-classes {
-  name: "Ellipsis"
-  fully_qualified_name: "_ast.Ellipsis"
-  super_classes: "_ast.slice"
-  valid_for: "27"
-}
-classes {
-  name: "Ellipsis"
-  fully_qualified_name: "_ast.Ellipsis"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
 }
 classes {
   name: "expr"
   fully_qualified_name: "_ast.expr"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "lineno"
-    fully_qualified_name: "_ast.expr.lineno"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "col_offset"
-    fully_qualified_name: "_ast.expr.col_offset"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
 }
 classes {
   name: "BoolOp"
   fully_qualified_name: "_ast.BoolOp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1578,7 +1792,6 @@ classes {
       pretty_printed_name: "_ast.boolop"
       fully_qualified_name: "_ast.boolop"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1597,7 +1810,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1605,12 +1817,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.BoolOp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "BinOp"
   fully_qualified_name: "_ast.BinOp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1624,7 +1840,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1639,7 +1854,6 @@ classes {
       pretty_printed_name: "_ast.operator"
       fully_qualified_name: "_ast.operator"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1654,7 +1868,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1662,12 +1875,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.BinOp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "UnaryOp"
   fully_qualified_name: "_ast.UnaryOp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1681,7 +1898,6 @@ classes {
       pretty_printed_name: "_ast.unaryop"
       fully_qualified_name: "_ast.unaryop"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1696,7 +1912,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1704,12 +1919,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.UnaryOp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Lambda"
   fully_qualified_name: "_ast.Lambda"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1723,7 +1942,6 @@ classes {
       pretty_printed_name: "_ast.arguments"
       fully_qualified_name: "_ast.arguments"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1738,7 +1956,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1746,12 +1963,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Lambda.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "IfExp"
   fully_qualified_name: "_ast.IfExp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1765,7 +1986,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1780,7 +2000,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1795,7 +2014,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1803,31 +2021,22 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.IfExp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Dict"
   fully_qualified_name: "_ast.Dict"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "keys"
-    fully_qualified_name: "_ast.Dict.keys"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "keys"
     fully_qualified_name: "_ast.Dict.keys"
@@ -1865,7 +2074,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1873,12 +2081,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Dict.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Set"
   fully_qualified_name: "_ast.Set"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1896,7 +2108,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1904,12 +2115,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Set.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ListComp"
   fully_qualified_name: "_ast.ListComp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1923,7 +2138,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1942,7 +2156,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1950,12 +2163,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.ListComp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "SetComp"
   fully_qualified_name: "_ast.SetComp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1969,7 +2186,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1988,7 +2204,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1996,12 +2211,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.SetComp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "DictComp"
   fully_qualified_name: "_ast.DictComp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2015,7 +2234,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2030,7 +2248,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2049,7 +2266,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2057,12 +2273,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.DictComp.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "GeneratorExp"
   fully_qualified_name: "_ast.GeneratorExp"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2076,7 +2296,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2095,7 +2314,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2103,12 +2321,46 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.GeneratorExp.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Await"
+  fully_qualified_name: "_ast.Await"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.Await.value"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Await.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Yield"
   fully_qualified_name: "_ast.Yield"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2130,7 +2382,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2138,12 +2389,46 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Yield.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "YieldFrom"
+  fully_qualified_name: "_ast.YieldFrom"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.YieldFrom.value"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.YieldFrom.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Compare"
   fully_qualified_name: "_ast.Compare"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2157,7 +2442,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2176,7 +2460,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2195,7 +2478,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2203,12 +2485,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Compare.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Call"
   fully_qualified_name: "_ast.Call"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2222,7 +2508,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2241,7 +2526,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2260,7 +2544,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2269,60 +2552,115 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "starargs"
-    fully_qualified_name: "_ast.Call.starargs"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "kwargs"
-    fully_qualified_name: "_ast.Call.kwargs"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Call.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
-  name: "Repr"
-  fully_qualified_name: "_ast.Repr"
+  name: "FormattedValue"
+  fully_qualified_name: "_ast.FormattedValue"
   super_classes: "_ast.expr"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
   attributes {
     name: "value"
-    fully_qualified_name: "_ast.Repr.value"
+    fully_qualified_name: "_ast.FormattedValue.value"
     type_annotation {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "conversion"
+    fully_qualified_name: "_ast.FormattedValue.conversion"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "format_spec"
+    fully_qualified_name: "_ast.FormattedValue.format_spec"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.FormattedValue.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "JoinedStr"
+  fully_qualified_name: "_ast.JoinedStr"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "values"
+    fully_qualified_name: "_ast.JoinedStr.values"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.expr]"
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.JoinedStr.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "Num"
   fully_qualified_name: "_ast.Num"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2330,17 +2668,20 @@ classes {
     name: "n"
     fully_qualified_name: "_ast.Num.n"
     type_annotation {
-      pretty_printed_name: "builtins.float"
-      fully_qualified_name: "builtins.float"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "n"
-    fully_qualified_name: "_ast.Num.n"
-    type_annotation {
-      pretty_printed_name: "builtins.complex"
-      fully_qualified_name: "builtins.complex"
+      pretty_printed_name: "Union[builtins.int,builtins.float,builtins.complex]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.complex"
+        fully_qualified_name: "builtins.complex"
+      }
     }
     valid_for: "35"
     valid_for: "36"
@@ -2351,7 +2692,6 @@ classes {
   name: "Str"
   fully_qualified_name: "_ast.Str"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2362,17 +2702,153 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
   }
 }
 classes {
+  name: "Bytes"
+  fully_qualified_name: "_ast.Bytes"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  attributes {
+    name: "s"
+    fully_qualified_name: "_ast.Bytes.s"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+}
+classes {
+  name: "NameConstant"
+  fully_qualified_name: "_ast.NameConstant"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.NameConstant.value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+}
+classes {
+  name: "Ellipsis"
+  fully_qualified_name: "_ast.Ellipsis"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+classes {
+  name: "Constant"
+  fully_qualified_name: "_ast.Constant"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.Constant.value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "kind"
+    fully_qualified_name: "_ast.Constant.kind"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "s"
+    fully_qualified_name: "_ast.Constant.s"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "n"
+    fully_qualified_name: "_ast.Constant.n"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.float,builtins.complex]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.complex"
+        fully_qualified_name: "builtins.complex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Constant.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
   name: "Attribute"
   fully_qualified_name: "_ast.Attribute"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2386,7 +2862,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2398,10 +2873,9 @@ classes {
     name: "attr"
     fully_qualified_name: "_ast.Attribute.attr"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2416,7 +2890,6 @@ classes {
       pretty_printed_name: "_ast.expr_context"
       fully_qualified_name: "_ast.expr_context"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2424,12 +2897,169 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Attribute.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "slice"
+  fully_qualified_name: "_ast.slice"
+  super_classes: "_ast.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+classes {
+  name: "Slice"
+  fully_qualified_name: "_ast.Slice"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "lower"
+    fully_qualified_name: "_ast.Slice.lower"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "upper"
+    fully_qualified_name: "_ast.Slice.upper"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "step"
+    fully_qualified_name: "_ast.Slice.step"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Slice.__match_args__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ExtSlice"
+  fully_qualified_name: "_ast.ExtSlice"
+  super_classes: "_ast.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  attributes {
+    name: "dims"
+    fully_qualified_name: "_ast.ExtSlice.dims"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.slice]"
+      args {
+        pretty_printed_name: "_ast.slice"
+        fully_qualified_name: "_ast.slice"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+}
+classes {
+  name: "Index"
+  fully_qualified_name: "_ast.Index"
+  super_classes: "_ast.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.Index.value"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
 }
 classes {
   name: "Subscript"
   fully_qualified_name: "_ast.Subscript"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2443,7 +3073,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2455,22 +3084,13 @@ classes {
     name: "slice"
     fully_qualified_name: "_ast.Subscript.slice"
     type_annotation {
-      pretty_printed_name: "_ast.slice"
-      fully_qualified_name: "_ast.slice"
+      pretty_printed_name: "UnboundType[_Slice]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-  }
-  attributes {
-    name: "slice"
-    fully_qualified_name: "_ast.Subscript.slice"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -2481,7 +3101,6 @@ classes {
       pretty_printed_name: "_ast.expr_context"
       fully_qualified_name: "_ast.expr_context"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2489,12 +3108,60 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Subscript.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Starred"
+  fully_qualified_name: "_ast.Starred"
+  super_classes: "_ast.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "_ast.Starred.value"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "_ast.Starred.ctx"
+    type_annotation {
+      pretty_printed_name: "_ast.expr_context"
+      fully_qualified_name: "_ast.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Starred.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Name"
   fully_qualified_name: "_ast.Name"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2505,10 +3172,9 @@ classes {
     name: "id"
     fully_qualified_name: "_ast.Name.id"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2523,7 +3189,6 @@ classes {
       pretty_printed_name: "_ast.expr_context"
       fully_qualified_name: "_ast.expr_context"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2531,12 +3196,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Name.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "List"
   fully_qualified_name: "_ast.List"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2554,7 +3223,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2569,7 +3237,6 @@ classes {
       pretty_printed_name: "_ast.expr_context"
       fully_qualified_name: "_ast.expr_context"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2577,12 +3244,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.List.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Tuple"
   fully_qualified_name: "_ast.Tuple"
   super_classes: "_ast.expr"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2600,7 +3271,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2615,7 +3285,6 @@ classes {
       pretty_printed_name: "_ast.expr_context"
       fully_qualified_name: "_ast.expr_context"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2623,12 +3292,30 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "dims"
+    fully_qualified_name: "_ast.Tuple.dims"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.expr]"
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Tuple.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "expr_context"
   fully_qualified_name: "_ast.expr_context"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2640,7 +3327,6 @@ classes {
   name: "AugLoad"
   fully_qualified_name: "_ast.AugLoad"
   super_classes: "_ast.expr_context"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2650,17 +3336,49 @@ classes {
   name: "AugStore"
   fully_qualified_name: "_ast.AugStore"
   super_classes: "_ast.expr_context"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
 }
 classes {
+  name: "Param"
+  fully_qualified_name: "_ast.Param"
+  super_classes: "_ast.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+classes {
+  name: "Suite"
+  fully_qualified_name: "_ast.Suite"
+  super_classes: "_ast.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  attributes {
+    name: "body"
+    fully_qualified_name: "_ast.Suite.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.stmt]"
+      args {
+        pretty_printed_name: "_ast.stmt"
+        fully_qualified_name: "_ast.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+}
+classes {
   name: "Del"
   fully_qualified_name: "_ast.Del"
   super_classes: "_ast.expr_context"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2672,7 +3390,6 @@ classes {
   name: "Load"
   fully_qualified_name: "_ast.Load"
   super_classes: "_ast.expr_context"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2681,20 +3398,9 @@ classes {
   valid_for: "310"
 }
 classes {
-  name: "Param"
-  fully_qualified_name: "_ast.Param"
-  super_classes: "_ast.expr_context"
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-}
-classes {
   name: "Store"
   fully_qualified_name: "_ast.Store"
   super_classes: "_ast.expr_context"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2706,7 +3412,6 @@ classes {
   name: "boolop"
   fully_qualified_name: "_ast.boolop"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2718,7 +3423,6 @@ classes {
   name: "And"
   fully_qualified_name: "_ast.And"
   super_classes: "_ast.boolop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2730,7 +3434,6 @@ classes {
   name: "Or"
   fully_qualified_name: "_ast.Or"
   super_classes: "_ast.boolop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2742,7 +3445,6 @@ classes {
   name: "operator"
   fully_qualified_name: "_ast.operator"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2754,7 +3456,6 @@ classes {
   name: "Add"
   fully_qualified_name: "_ast.Add"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2766,7 +3467,6 @@ classes {
   name: "BitAnd"
   fully_qualified_name: "_ast.BitAnd"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2778,7 +3478,6 @@ classes {
   name: "BitOr"
   fully_qualified_name: "_ast.BitOr"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2790,7 +3489,6 @@ classes {
   name: "BitXor"
   fully_qualified_name: "_ast.BitXor"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2802,7 +3500,6 @@ classes {
   name: "Div"
   fully_qualified_name: "_ast.Div"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2814,7 +3511,6 @@ classes {
   name: "FloorDiv"
   fully_qualified_name: "_ast.FloorDiv"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2826,7 +3522,6 @@ classes {
   name: "LShift"
   fully_qualified_name: "_ast.LShift"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2838,7 +3533,6 @@ classes {
   name: "Mod"
   fully_qualified_name: "_ast.Mod"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2850,7 +3544,17 @@ classes {
   name: "Mult"
   fully_qualified_name: "_ast.Mult"
   super_classes: "_ast.operator"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "MatMult"
+  fully_qualified_name: "_ast.MatMult"
+  super_classes: "_ast.operator"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2862,7 +3566,6 @@ classes {
   name: "Pow"
   fully_qualified_name: "_ast.Pow"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2874,7 +3577,6 @@ classes {
   name: "RShift"
   fully_qualified_name: "_ast.RShift"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2886,7 +3588,6 @@ classes {
   name: "Sub"
   fully_qualified_name: "_ast.Sub"
   super_classes: "_ast.operator"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2898,7 +3599,6 @@ classes {
   name: "unaryop"
   fully_qualified_name: "_ast.unaryop"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2910,7 +3610,6 @@ classes {
   name: "Invert"
   fully_qualified_name: "_ast.Invert"
   super_classes: "_ast.unaryop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2922,7 +3621,6 @@ classes {
   name: "Not"
   fully_qualified_name: "_ast.Not"
   super_classes: "_ast.unaryop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2934,7 +3632,6 @@ classes {
   name: "UAdd"
   fully_qualified_name: "_ast.UAdd"
   super_classes: "_ast.unaryop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2946,7 +3643,6 @@ classes {
   name: "USub"
   fully_qualified_name: "_ast.USub"
   super_classes: "_ast.unaryop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2958,7 +3654,6 @@ classes {
   name: "cmpop"
   fully_qualified_name: "_ast.cmpop"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2970,7 +3665,6 @@ classes {
   name: "Eq"
   fully_qualified_name: "_ast.Eq"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2982,7 +3676,6 @@ classes {
   name: "Gt"
   fully_qualified_name: "_ast.Gt"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2994,7 +3687,6 @@ classes {
   name: "GtE"
   fully_qualified_name: "_ast.GtE"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3006,7 +3698,6 @@ classes {
   name: "In"
   fully_qualified_name: "_ast.In"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3018,7 +3709,6 @@ classes {
   name: "Is"
   fully_qualified_name: "_ast.Is"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3030,7 +3720,6 @@ classes {
   name: "IsNot"
   fully_qualified_name: "_ast.IsNot"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3042,7 +3731,6 @@ classes {
   name: "Lt"
   fully_qualified_name: "_ast.Lt"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3054,7 +3742,6 @@ classes {
   name: "LtE"
   fully_qualified_name: "_ast.LtE"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3066,7 +3753,6 @@ classes {
   name: "NotEq"
   fully_qualified_name: "_ast.NotEq"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3078,7 +3764,6 @@ classes {
   name: "NotIn"
   fully_qualified_name: "_ast.NotIn"
   super_classes: "_ast.cmpop"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3090,7 +3775,6 @@ classes {
   name: "comprehension"
   fully_qualified_name: "_ast.comprehension"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3104,7 +3788,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3119,7 +3802,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3138,7 +3820,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3160,12 +3841,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.comprehension.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "excepthandler"
   fully_qualified_name: "_ast.excepthandler"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3177,7 +3862,6 @@ classes {
   name: "ExceptHandler"
   fully_qualified_name: "_ast.ExceptHandler"
   super_classes: "_ast.excepthandler"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3199,7 +3883,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3211,28 +3894,11 @@ classes {
     name: "name"
     fully_qualified_name: "_ast.ExceptHandler.name"
     type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "name"
-    fully_qualified_name: "_ast.ExceptHandler.name"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3257,7 +3923,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3266,48 +3931,21 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "lineno"
-    fully_qualified_name: "_ast.ExceptHandler.lineno"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "col_offset"
-    fully_qualified_name: "_ast.ExceptHandler.col_offset"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "27"
+    name: "__match_args__"
+    fully_qualified_name: "_ast.ExceptHandler.__match_args__"
+    valid_for: "310"
   }
 }
 classes {
   name: "arguments"
   fully_qualified_name: "_ast.arguments"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-  attributes {
-    name: "args"
-    fully_qualified_name: "_ast.arguments.args"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
-  }
   attributes {
     name: "args"
     fully_qualified_name: "_ast.arguments.args"
@@ -3330,23 +3968,6 @@ classes {
     name: "vararg"
     fully_qualified_name: "_ast.arguments.vararg"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "vararg"
-    fully_qualified_name: "_ast.arguments.vararg"
-    type_annotation {
       pretty_printed_name: "Union[_ast.arg,None]"
       kind: UNION
       args {
@@ -3358,64 +3979,6 @@ classes {
         kind: NONE
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "kwarg"
-    fully_qualified_name: "_ast.arguments.kwarg"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "kwarg"
-    fully_qualified_name: "_ast.arguments.kwarg"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.arg,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.arg"
-        fully_qualified_name: "_ast.arg"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "defaults"
-    fully_qualified_name: "_ast.arguments.defaults"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3468,6 +4031,46 @@ classes {
     valid_for: "310"
   }
   attributes {
+    name: "kwarg"
+    fully_qualified_name: "_ast.arguments.kwarg"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.arg,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.arg"
+        fully_qualified_name: "_ast.arg"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "defaults"
+    fully_qualified_name: "_ast.arguments.defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_ast.expr]"
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
     name: "posonlyargs"
     fully_qualified_name: "_ast.arguments.posonlyargs"
     type_annotation {
@@ -3482,12 +4085,68 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.arguments.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "arg"
+  fully_qualified_name: "_ast.arg"
+  super_classes: "_ast.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "arg"
+    fully_qualified_name: "_ast.arg.arg"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "annotation"
+    fully_qualified_name: "_ast.arg.annotation"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.arg.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "keyword"
   fully_qualified_name: "_ast.keyword"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3498,20 +4157,11 @@ classes {
     name: "arg"
     fully_qualified_name: "_ast.keyword.arg"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "arg"
-    fully_qualified_name: "_ast.keyword.arg"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -3532,7 +4182,6 @@ classes {
       pretty_printed_name: "_ast.expr"
       fully_qualified_name: "_ast.expr"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3540,12 +4189,16 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.keyword.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "alias"
   fully_qualified_name: "_ast.alias"
   super_classes: "_ast.AST"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -3556,10 +4209,9 @@ classes {
     name: "name"
     fully_qualified_name: "_ast.alias.name"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[_Identifier]"
+      kind: UNBOUND
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3571,23 +4223,79 @@ classes {
     name: "asname"
     fully_qualified_name: "_ast.alias.asname"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
         kind: NONE
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.alias.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "withitem"
+  fully_qualified_name: "_ast.withitem"
+  super_classes: "_ast.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "context_expr"
+    fully_qualified_name: "_ast.withitem.context_expr"
+    type_annotation {
+      pretty_printed_name: "_ast.expr"
+      fully_qualified_name: "_ast.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "optional_vars"
+    fully_qualified_name: "_ast.withitem.optional_vars"
+    type_annotation {
+      pretty_printed_name: "Union[_ast.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.expr"
+        fully_qualified_name: "_ast.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.withitem.__match_args__"
     valid_for: "310"
   }
 }
@@ -3618,7 +4326,6 @@ classes {
         fully_qualified_name: "_ast.AST"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -3649,7 +4356,6 @@ classes {
         fully_qualified_name: "_ast.AST"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -7068,7 +7774,233 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "visit_TypeIgnore"
+    fully_qualified_name: "ast.NodeVisitor.visit_TypeIgnore"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.TypeIgnore"
+        fully_qualified_name: "_ast.TypeIgnore"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_Match"
+    fully_qualified_name: "ast.NodeVisitor.visit_Match"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.Match"
+        fully_qualified_name: "_ast.Match"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchValue"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchValue"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchValue"
+        fully_qualified_name: "_ast.MatchValue"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchSequence"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchSequence"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchSequence"
+        fully_qualified_name: "_ast.MatchSequence"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchStar"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchStar"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchStar"
+        fully_qualified_name: "_ast.MatchStar"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchMapping"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchMapping"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchMapping"
+        fully_qualified_name: "_ast.MatchMapping"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchClass"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchClass"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchClass"
+        fully_qualified_name: "_ast.MatchClass"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchAs"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchAs"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchAs"
+        fully_qualified_name: "_ast.MatchAs"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "visit_MatchOr"
+    fully_qualified_name: "ast.NodeVisitor.visit_MatchOr"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast.NodeVisitor"
+        fully_qualified_name: "ast.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_ast.MatchOr"
+        fully_qualified_name: "_ast.MatchOr"
+      }
+    }
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -7080,39 +8012,6 @@ classes {
   name: "NodeTransformer"
   fully_qualified_name: "ast.NodeTransformer"
   super_classes: "ast.NodeVisitor"
-  methods {
-    name: "generic_visit"
-    fully_qualified_name: "ast.NodeTransformer.generic_visit"
-    return_annotation {
-      pretty_printed_name: "Union[_ast.AST,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.AST"
-        fully_qualified_name: "_ast.AST"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "ast.NodeTransformer"
-        fully_qualified_name: "ast.NodeTransformer"
-      }
-    }
-    parameters {
-      name: "node"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_ast.AST"
-        fully_qualified_name: "_ast.AST"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "generic_visit"
     fully_qualified_name: "ast.NodeTransformer.generic_visit"
@@ -7143,1038 +8042,12 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-classes {
-  name: "AST"
-  fully_qualified_name: "_ast.AST"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "_ast.AST.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "_ast.AST"
-        fully_qualified_name: "_ast.AST"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "_attributes"
-    fully_qualified_name: "_ast.AST._attributes"
-    type_annotation {
-      pretty_printed_name: "builtins.tuple[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "_fields"
-    fully_qualified_name: "_ast.AST._fields"
-    type_annotation {
-      pretty_printed_name: "builtins.tuple[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.tuple"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "lineno"
-    fully_qualified_name: "_ast.AST.lineno"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "col_offset"
-    fully_qualified_name: "_ast.AST.col_offset"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "end_lineno"
-    fully_qualified_name: "_ast.AST.end_lineno"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "end_col_offset"
-    fully_qualified_name: "_ast.AST.end_col_offset"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "type_comment"
-    fully_qualified_name: "_ast.AST.type_comment"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Module"
-  fully_qualified_name: "_ast.Module"
-  super_classes: "_ast.mod"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.Module.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "type_ignores"
-    fully_qualified_name: "_ast.Module.type_ignores"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.TypeIgnore]"
-      args {
-        pretty_printed_name: "_ast.TypeIgnore"
-        fully_qualified_name: "_ast.TypeIgnore"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "AsyncFunctionDef"
-  fully_qualified_name: "_ast.AsyncFunctionDef"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "name"
-    fully_qualified_name: "_ast.AsyncFunctionDef.name"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "args"
-    fully_qualified_name: "_ast.AsyncFunctionDef.args"
-    type_annotation {
-      pretty_printed_name: "_ast.arguments"
-      fully_qualified_name: "_ast.arguments"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.AsyncFunctionDef.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "decorator_list"
-    fully_qualified_name: "_ast.AsyncFunctionDef.decorator_list"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "returns"
-    fully_qualified_name: "_ast.AsyncFunctionDef.returns"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "AnnAssign"
-  fully_qualified_name: "_ast.AnnAssign"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "target"
-    fully_qualified_name: "_ast.AnnAssign.target"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "annotation"
-    fully_qualified_name: "_ast.AnnAssign.annotation"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.AnnAssign.value"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "simple"
-    fully_qualified_name: "_ast.AnnAssign.simple"
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "AsyncFor"
-  fully_qualified_name: "_ast.AsyncFor"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "target"
-    fully_qualified_name: "_ast.AsyncFor.target"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "iter"
-    fully_qualified_name: "_ast.AsyncFor.iter"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.AsyncFor.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "orelse"
-    fully_qualified_name: "_ast.AsyncFor.orelse"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "AsyncWith"
-  fully_qualified_name: "_ast.AsyncWith"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "items"
-    fully_qualified_name: "_ast.AsyncWith.items"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.withitem]"
-      args {
-        pretty_printed_name: "_ast.withitem"
-        fully_qualified_name: "_ast.withitem"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.AsyncWith.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Try"
-  fully_qualified_name: "_ast.Try"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "body"
-    fully_qualified_name: "_ast.Try.body"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "handlers"
-    fully_qualified_name: "_ast.Try.handlers"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.ExceptHandler]"
-      args {
-        pretty_printed_name: "_ast.ExceptHandler"
-        fully_qualified_name: "_ast.ExceptHandler"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "orelse"
-    fully_qualified_name: "_ast.Try.orelse"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "finalbody"
-    fully_qualified_name: "_ast.Try.finalbody"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.stmt]"
-      args {
-        pretty_printed_name: "_ast.stmt"
-        fully_qualified_name: "_ast.stmt"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Nonlocal"
-  fully_qualified_name: "_ast.Nonlocal"
-  super_classes: "_ast.stmt"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "names"
-    fully_qualified_name: "_ast.Nonlocal.names"
-    type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Await"
-  fully_qualified_name: "_ast.Await"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.Await.value"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "YieldFrom"
-  fully_qualified_name: "_ast.YieldFrom"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.YieldFrom.value"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "FormattedValue"
-  fully_qualified_name: "_ast.FormattedValue"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.FormattedValue.value"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "conversion"
-    fully_qualified_name: "_ast.FormattedValue.conversion"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "format_spec"
-    fully_qualified_name: "_ast.FormattedValue.format_spec"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "JoinedStr"
-  fully_qualified_name: "_ast.JoinedStr"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "values"
-    fully_qualified_name: "_ast.JoinedStr.values"
-    type_annotation {
-      pretty_printed_name: "builtins.list[_ast.expr]"
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Bytes"
-  fully_qualified_name: "_ast.Bytes"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  attributes {
-    name: "s"
-    fully_qualified_name: "_ast.Bytes.s"
-    type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-}
-classes {
-  name: "NameConstant"
-  fully_qualified_name: "_ast.NameConstant"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.NameConstant.value"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-  }
-}
-classes {
-  name: "Constant"
-  fully_qualified_name: "_ast.Constant"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.Constant.value"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "kind"
-    fully_qualified_name: "_ast.Constant.kind"
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "s"
-    fully_qualified_name: "_ast.Constant.s"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "n"
-    fully_qualified_name: "_ast.Constant.n"
-    type_annotation {
-      pretty_printed_name: "builtins.complex"
-      fully_qualified_name: "builtins.complex"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "Starred"
-  fully_qualified_name: "_ast.Starred"
-  super_classes: "_ast.expr"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "value"
-    fully_qualified_name: "_ast.Starred.value"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "ctx"
-    fully_qualified_name: "_ast.Starred.ctx"
-    type_annotation {
-      pretty_printed_name: "_ast.expr_context"
-      fully_qualified_name: "_ast.expr_context"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "MatMult"
-  fully_qualified_name: "_ast.MatMult"
-  super_classes: "_ast.operator"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-classes {
-  name: "arg"
-  fully_qualified_name: "_ast.arg"
-  super_classes: "_ast.AST"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "arg"
-    fully_qualified_name: "_ast.arg.arg"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "annotation"
-    fully_qualified_name: "_ast.arg.annotation"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-}
-classes {
-  name: "withitem"
-  fully_qualified_name: "_ast.withitem"
-  super_classes: "_ast.AST"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-  attributes {
-    name: "context_expr"
-    fully_qualified_name: "_ast.withitem.context_expr"
-    type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "optional_vars"
-    fully_qualified_name: "_ast.withitem.optional_vars"
-    type_annotation {
-      pretty_printed_name: "Union[_ast.expr,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "_ast.expr"
-        fully_qualified_name: "_ast.expr"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
 }
 classes {
   name: "type_ignore"
@@ -8200,6 +8073,11 @@ classes {
     }
     valid_for: "38"
     valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.TypeIgnore.__match_args__"
     valid_for: "310"
   }
 }
@@ -8236,6 +8114,11 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.FunctionType.__match_args__"
+    valid_for: "310"
+  }
 }
 classes {
   name: "NamedExpr"
@@ -8248,8 +8131,8 @@ classes {
     name: "target"
     fully_qualified_name: "_ast.NamedExpr.target"
     type_annotation {
-      pretty_printed_name: "_ast.expr"
-      fully_qualified_name: "_ast.expr"
+      pretty_printed_name: "_ast.Name"
+      fully_qualified_name: "_ast.Name"
     }
     valid_for: "38"
     valid_for: "39"
@@ -8266,11 +8149,52 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.NamedExpr.__match_args__"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_ABC"
+  fully_qualified_name: "ast._ABC"
+  super_classes: "builtins.type"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "ast._ABC.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ast._ABC"
+        fully_qualified_name: "ast._ABC"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }
 classes {
   name: "Num"
   fully_qualified_name: "ast.Num"
   super_classes: "_ast.Constant"
+  has_metaclass: true
+  metaclass_name: "ast._ABC"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -8278,8 +8202,20 @@ classes {
     name: "value"
     fully_qualified_name: "ast.Num.value"
     type_annotation {
-      pretty_printed_name: "builtins.complex"
-      fully_qualified_name: "builtins.complex"
+      pretty_printed_name: "Union[builtins.int,builtins.float,builtins.complex]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.complex"
+        fully_qualified_name: "builtins.complex"
+      }
     }
     valid_for: "38"
     valid_for: "39"
@@ -8290,6 +8226,8 @@ classes {
   name: "Str"
   fully_qualified_name: "ast.Str"
   super_classes: "_ast.Constant"
+  has_metaclass: true
+  metaclass_name: "ast._ABC"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -8320,6 +8258,8 @@ classes {
   name: "Bytes"
   fully_qualified_name: "ast.Bytes"
   super_classes: "_ast.Constant"
+  has_metaclass: true
+  metaclass_name: "ast._ABC"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -8350,6 +8290,8 @@ classes {
   name: "NameConstant"
   fully_qualified_name: "ast.NameConstant"
   super_classes: "_ast.Constant"
+  has_metaclass: true
+  metaclass_name: "ast._ABC"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -8358,6 +8300,8 @@ classes {
   name: "Ellipsis"
   fully_qualified_name: "ast.Ellipsis"
   super_classes: "_ast.Constant"
+  has_metaclass: true
+  metaclass_name: "ast._ABC"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -8417,6 +8361,11 @@ classes {
   super_classes: "_ast.stmt"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.Match.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "subject"
     fully_qualified_name: "_ast.Match.subject"
     type_annotation {
@@ -8451,11 +8400,16 @@ classes {
   super_classes: "_ast.AST"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.match_case.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "pattern"
     fully_qualified_name: "_ast.match_case.pattern"
     type_annotation {
-      pretty_printed_name: "_ast.pattern"
-      fully_qualified_name: "_ast.pattern"
+      pretty_printed_name: "UnboundType[_Pattern]"
+      kind: UNBOUND
     }
     valid_for: "310"
   }
@@ -8496,6 +8450,11 @@ classes {
   super_classes: "_ast.pattern"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchValue.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "value"
     fully_qualified_name: "_ast.MatchValue.value"
     type_annotation {
@@ -8510,6 +8469,11 @@ classes {
   fully_qualified_name: "_ast.MatchSingleton"
   super_classes: "_ast.pattern"
   valid_for: "310"
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchSingleton.__match_args__"
+    valid_for: "310"
+  }
   attributes {
     name: "value"
     fully_qualified_name: "_ast.MatchSingleton.value"
@@ -8546,6 +8510,11 @@ classes {
   super_classes: "_ast.pattern"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchSequence.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "patterns"
     fully_qualified_name: "_ast.MatchSequence.patterns"
     type_annotation {
@@ -8565,14 +8534,19 @@ classes {
   super_classes: "_ast.pattern"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchStar.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "name"
     fully_qualified_name: "_ast.MatchStar.name"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -8587,6 +8561,11 @@ classes {
   fully_qualified_name: "_ast.MatchMapping"
   super_classes: "_ast.pattern"
   valid_for: "310"
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchMapping.__match_args__"
+    valid_for: "310"
+  }
   attributes {
     name: "keys"
     fully_qualified_name: "_ast.MatchMapping.keys"
@@ -8617,11 +8596,11 @@ classes {
     name: "rest"
     fully_qualified_name: "_ast.MatchMapping.rest"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -8636,6 +8615,11 @@ classes {
   fully_qualified_name: "_ast.MatchClass"
   super_classes: "_ast.pattern"
   valid_for: "310"
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchClass.__match_args__"
+    valid_for: "310"
+  }
   attributes {
     name: "cls"
     fully_qualified_name: "_ast.MatchClass.cls"
@@ -8662,10 +8646,10 @@ classes {
     name: "kwd_attrs"
     fully_qualified_name: "_ast.MatchClass.kwd_attrs"
     type_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
+      pretty_printed_name: "builtins.list[UnboundType[_Identifier]]"
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       fully_qualified_name: "builtins.list"
     }
@@ -8691,14 +8675,19 @@ classes {
   super_classes: "_ast.pattern"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchAs.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "pattern"
     fully_qualified_name: "_ast.MatchAs.pattern"
     type_annotation {
-      pretty_printed_name: "Union[_ast.pattern,None]"
+      pretty_printed_name: "Union[UnboundType[_Pattern],None]"
       kind: UNION
       args {
-        pretty_printed_name: "_ast.pattern"
-        fully_qualified_name: "_ast.pattern"
+        pretty_printed_name: "UnboundType[_Pattern]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -8711,11 +8700,11 @@ classes {
     name: "name"
     fully_qualified_name: "_ast.MatchAs.name"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[UnboundType[_Identifier],None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "UnboundType[_Identifier]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -8731,6 +8720,11 @@ classes {
   super_classes: "_ast.pattern"
   valid_for: "310"
   attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_ast.MatchOr.__match_args__"
+    valid_for: "310"
+  }
+  attributes {
     name: "patterns"
     fully_qualified_name: "_ast.MatchOr.patterns"
     type_annotation {
@@ -8743,90 +8737,6 @@ classes {
     }
     valid_for: "310"
   }
-}
-functions {
-  name: "parse"
-  fully_qualified_name: "ast.parse"
-  return_annotation {
-    pretty_printed_name: "_ast.Module"
-    fully_qualified_name: "_ast.Module"
-  }
-  parameters {
-    name: "source"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-  }
-  parameters {
-    name: "filename"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    has_default: true
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "copy_location"
-  fully_qualified_name: "ast.copy_location"
-  return_annotation {
-    pretty_printed_name: "_ast.AST"
-    fully_qualified_name: "_ast.AST"
-  }
-  parameters {
-    name: "new_node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-  }
-  parameters {
-    name: "old_node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "copy_location"
@@ -8891,7 +8801,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -8958,23 +8867,6 @@ functions {
   name: "fix_missing_locations"
   fully_qualified_name: "ast.fix_missing_locations"
   return_annotation {
-    pretty_printed_name: "_ast.AST"
-    fully_qualified_name: "_ast.AST"
-  }
-  parameters {
-    name: "node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-  }
-  valid_for: "27"
-}
-functions {
-  name: "fix_missing_locations"
-  fully_qualified_name: "ast.fix_missing_locations"
-  return_annotation {
     pretty_printed_name: "ast._T"
     kind: TYPE_VAR
   }
@@ -8997,32 +8889,6 @@ functions {
   name: "get_docstring"
   fully_qualified_name: "ast.get_docstring"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-  }
-  parameters {
-    name: "clean"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "get_docstring"
-  fully_qualified_name: "ast.get_docstring"
-  return_annotation {
     pretty_printed_name: "Union[builtins.str,None]"
     kind: UNION
     args {
@@ -9038,8 +8904,24 @@ functions {
     name: "node"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
+      pretty_printed_name: "Union[_ast.AsyncFunctionDef,_ast.FunctionDef,_ast.ClassDef,_ast.Module]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_ast.AsyncFunctionDef"
+        fully_qualified_name: "_ast.AsyncFunctionDef"
+      }
+      args {
+        pretty_printed_name: "_ast.FunctionDef"
+        fully_qualified_name: "_ast.FunctionDef"
+      }
+      args {
+        pretty_printed_name: "_ast.ClassDef"
+        fully_qualified_name: "_ast.ClassDef"
+      }
+      args {
+        pretty_printed_name: "_ast.Module"
+        fully_qualified_name: "_ast.Module"
+      }
     }
   }
   parameters {
@@ -9057,32 +8939,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "increment_lineno"
-  fully_qualified_name: "ast.increment_lineno"
-  return_annotation {
-    pretty_printed_name: "_ast.AST"
-    fully_qualified_name: "_ast.AST"
-  }
-  parameters {
-    name: "node"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-  }
-  parameters {
-    name: "n"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "increment_lineno"
@@ -9134,7 +8990,6 @@ functions {
       fully_qualified_name: "_ast.AST"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -9169,42 +9024,12 @@ functions {
       fully_qualified_name: "_ast.AST"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "literal_eval"
-  fully_qualified_name: "ast.literal_eval"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "node_or_string"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.unicode,_ast.AST]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "_ast.AST"
-        fully_qualified_name: "_ast.AST"
-      }
-    }
-  }
-  valid_for: "27"
 }
 functions {
   name: "literal_eval"
@@ -9255,7 +9080,6 @@ functions {
       fully_qualified_name: "_ast.AST"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -9325,324 +9149,1092 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-overloaded_functions {
-  name: "parse"
-  fullname: "ast.parse"
-  definitions {
-    name: "parse"
-    fully_qualified_name: "ast.parse"
-    return_annotation {
-      pretty_printed_name: "_ast.Module"
-      fully_qualified_name: "_ast.Module"
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Literal[builtins.str]"
-        kind: LITERAL
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
+functions {
+  name: "main"
+  fully_qualified_name: "ast.main"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
   }
-  definitions {
-    name: "parse"
-    fully_qualified_name: "ast.parse"
-    return_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-}
-overloaded_functions {
-  name: "parse"
-  fullname: "ast.parse"
-  definitions {
-    name: "parse"
-    fully_qualified_name: "ast.parse"
-    return_annotation {
-      pretty_printed_name: "_ast.Module"
-      fully_qualified_name: "_ast.Module"
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Literal[builtins.str]"
-        kind: LITERAL
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "type_comments"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "feature_version"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  definitions {
-    name: "parse"
-    fully_qualified_name: "ast.parse"
-    return_annotation {
-      pretty_printed_name: "_ast.AST"
-      fully_qualified_name: "_ast.AST"
-    }
-    parameters {
-      name: "source"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "builtins.bytes"
-          fully_qualified_name: "builtins.bytes"
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "type_comments"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "feature_version"
-      kind: KEYWORD_ONLY
-      type_annotation {
-        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
-        kind: UNION
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-          kind: TUPLE
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-        }
-      }
-      has_default: true
-    }
-    has_decorators: true
-    resolved_decorator_names: "overload"
-    is_overload: true
-  }
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
-vars {
-  name: "_typing"
-  fully_qualified_name: "typing"
-  is_imported_module: true
-  valid_for: "27"
+overloaded_functions {
+  name: "parse"
+  fullname: "ast.parse"
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Module"
+      fully_qualified_name: "_ast.Module"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Expression"
+      fully_qualified_name: "_ast.Expression"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Interactive"
+      fully_qualified_name: "_ast.Interactive"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Expression"
+      fully_qualified_name: "_ast.Expression"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Interactive"
+      fully_qualified_name: "_ast.Interactive"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.AST"
+      fully_qualified_name: "_ast.AST"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
+}
+overloaded_functions {
+  name: "parse"
+  fullname: "ast.parse"
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Module"
+      fully_qualified_name: "_ast.Module"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Expression"
+      fully_qualified_name: "_ast.Expression"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.FunctionType"
+      fully_qualified_name: "_ast.FunctionType"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Interactive"
+      fully_qualified_name: "_ast.Interactive"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Expression"
+      fully_qualified_name: "_ast.Expression"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.FunctionType"
+      fully_qualified_name: "_ast.FunctionType"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.Interactive"
+      fully_qualified_name: "_ast.Interactive"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parse"
+    fully_qualified_name: "ast.parse"
+    return_annotation {
+      pretty_printed_name: "_ast.AST"
+      fully_qualified_name: "_ast.AST"
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer],os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "UnboundType[ReadableBuffer]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "type_comments"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "feature_version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,Tuple[builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
@@ -9651,10 +10243,13 @@ vars {
   name: "PyCF_ONLY_AST"
   fully_qualified_name: "_ast.PyCF_ONLY_AST"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -9666,8 +10261,12 @@ vars {
   name: "PyCF_TYPE_COMMENTS"
   fully_qualified_name: "_ast.PyCF_TYPE_COMMENTS"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "38"
   valid_for: "39"
@@ -9677,8 +10276,12 @@ vars {
   name: "PyCF_ALLOW_TOP_LEVEL_AWAIT"
   fully_qualified_name: "_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT"
   type_annotation {
-    pretty_printed_name: "builtins.int"
-    fully_qualified_name: "builtins.int"
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
   }
   valid_for: "38"
   valid_for: "39"

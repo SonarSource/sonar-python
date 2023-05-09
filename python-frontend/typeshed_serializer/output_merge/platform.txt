@@ -1,144 +1,5 @@
 fully_qualified_name: "platform"
 classes {
-  name: "_popen"
-  fully_qualified_name: "platform._popen"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "platform._popen.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "platform._popen"
-        fully_qualified_name: "platform._popen"
-      }
-    }
-    parameters {
-      name: "cmd"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    parameters {
-      name: "bufsize"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "read"
-    fully_qualified_name: "platform._popen.read"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readlines"
-    fully_qualified_name: "platform._popen.readlines"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "platform._popen.close"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "remove"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    parameters {
-      name: "error"
-      kind: POSITIONAL_OR_KEYWORD
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-  attributes {
-    name: "tmpfile"
-    fully_qualified_name: "platform._popen.tmpfile"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "pipe"
-    fully_qualified_name: "platform._popen.pipe"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "bufsize"
-    fully_qualified_name: "platform._popen.bufsize"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "mode"
-    fully_qualified_name: "platform._popen.mode"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-  attributes {
-    name: "__del__"
-    fully_qualified_name: "platform._popen.__del__"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    valid_for: "27"
-  }
-}
-classes {
   name: "uname_result"
   fully_qualified_name: "platform.uname_result"
   super_classes: "builtins.tuple"
@@ -630,51 +491,6 @@ functions {
   name: "libc_ver"
   fully_qualified_name: "platform.libc_ver"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "executable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "lib"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "version"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "chunksize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "libc_ver"
-  fully_qualified_name: "platform.libc_ver"
-  return_annotation {
     pretty_printed_name: "Tuple[builtins.str,builtins.str]"
     kind: TUPLE
     args {
@@ -793,60 +609,6 @@ functions {
   name: "linux_distribution"
   fully_qualified_name: "platform.linux_distribution"
   return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "distname"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "version"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "id"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "supported_dists"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "full_distribution_name"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "linux_distribution"
-  fully_qualified_name: "platform.linux_distribution"
-  return_annotation {
     pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
     kind: TUPLE
     args {
@@ -893,12 +655,16 @@ functions {
     name: "supported_dists"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.tuple[builtins.str]"
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     has_default: true
   }
@@ -918,31 +684,6 @@ functions {
 functions {
   name: "dist"
   fully_qualified_name: "platform.dist"
-  parameters {
-    name: "distname"
-    kind: POSITIONAL_OR_KEYWORD
-    has_default: true
-  }
-  parameters {
-    name: "version"
-    kind: POSITIONAL_OR_KEYWORD
-    has_default: true
-  }
-  parameters {
-    name: "id"
-    kind: POSITIONAL_OR_KEYWORD
-    has_default: true
-  }
-  parameters {
-    name: "supported_dists"
-    kind: POSITIONAL_OR_KEYWORD
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "dist"
-  fully_qualified_name: "platform.dist"
   return_annotation {
     pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
     kind: TUPLE
@@ -990,61 +731,22 @@ functions {
     name: "supported_dists"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.tuple[builtins.str]"
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "builtins.tuple"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
     }
     has_default: true
   }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
-}
-functions {
-  name: "popen"
-  fully_qualified_name: "platform.popen"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "cmd"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "mode"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bufsize"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[Any,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "win32_ver"
@@ -1105,7 +807,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1183,7 +884,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1298,30 +998,12 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "system_alias"
-  fully_qualified_name: "platform.system_alias"
-  parameters {
-    name: "system"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  parameters {
-    name: "release"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  parameters {
-    name: "version"
-    kind: POSITIONAL_OR_KEYWORD
-  }
-  valid_for: "27"
 }
 functions {
   name: "system_alias"
@@ -1372,50 +1054,6 @@ functions {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "architecture"
-  fully_qualified_name: "platform.architecture"
-  return_annotation {
-    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
-    kind: TUPLE
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    args {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "executable"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "bits"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "linkage"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "architecture"
@@ -1497,7 +1135,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1512,7 +1149,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1527,7 +1163,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1542,7 +1177,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1557,7 +1191,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1572,7 +1205,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1587,7 +1219,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1602,7 +1233,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1617,7 +1247,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1644,7 +1273,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1659,7 +1287,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1674,7 +1301,6 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1697,7 +1323,6 @@ functions {
       fully_qualified_name: "builtins.str"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -1712,40 +1337,12 @@ functions {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "platform"
-  fully_qualified_name: "platform.platform"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "aliased"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  parameters {
-    name: "terse"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "platform"
@@ -1801,23 +1398,22 @@ functions {
   valid_for: "39"
   valid_for: "310"
 }
-vars {
-  name: "__copyright__"
-  fully_qualified_name: "platform.__copyright__"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+functions {
+  name: "freedesktop_os_release"
+  fully_qualified_name: "platform.freedesktop_os_release"
+  return_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
   }
-  valid_for: "27"
-}
-vars {
-  name: "DEV_NULL"
-  fully_qualified_name: "platform.DEV_NULL"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
+  valid_for: "310"
 }
 vars {
   name: "DEV_NULL"

@@ -7,8 +7,8 @@ classes {
     name: "from_float"
     fully_qualified_name: "fractions.Fraction.from_float"
     return_annotation {
-      pretty_printed_name: "fractions.Fraction"
-      fully_qualified_name: "fractions.Fraction"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
@@ -33,7 +33,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -45,8 +44,8 @@ classes {
     name: "from_decimal"
     fully_qualified_name: "fractions.Fraction.from_decimal"
     return_annotation {
-      pretty_printed_name: "fractions.Fraction"
-      fully_qualified_name: "fractions.Fraction"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
@@ -64,14 +63,13 @@ classes {
       name: "dec"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "decimal.Decimal"
-        fully_qualified_name: "decimal.Decimal"
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
       }
     }
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -103,7 +101,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -119,7 +116,7 @@ classes {
       fully_qualified_name: "builtins.int"
     }
     parameters {
-      name: "self"
+      name: "a"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
@@ -129,7 +126,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -145,7 +141,7 @@ classes {
       fully_qualified_name: "builtins.int"
     }
     parameters {
-      name: "self"
+      name: "a"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
@@ -155,7 +151,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -171,13 +166,12 @@ classes {
       fully_qualified_name: "fractions.Fraction"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -193,13 +187,12 @@ classes {
       fully_qualified_name: "fractions.Fraction"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -215,13 +208,12 @@ classes {
       fully_qualified_name: "fractions.Fraction"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -237,14 +229,57 @@ classes {
       fully_qualified_name: "builtins.int"
     }
     parameters {
-      name: "self"
+      name: "a"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__floor__"
+    fully_qualified_name: "fractions.Fraction.__floor__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fractions.Fraction"
+        fully_qualified_name: "fractions.Fraction"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ceil__"
+    fully_qualified_name: "fractions.Fraction.__ceil__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fractions.Fraction"
+        fully_qualified_name: "fractions.Fraction"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -267,7 +302,6 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -283,20 +317,19 @@ classes {
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
     parameters {
-      name: "other"
+      name: "b"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -312,41 +345,19 @@ classes {
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
     parameters {
-      name: "other"
+      name: "b"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "numbers.Real"
-            fully_qualified_name: "numbers.Real"
-          }
-        }
-        fully_qualified_name: "fractions._ComparableNum"
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -362,41 +373,19 @@ classes {
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
     parameters {
-      name: "other"
+      name: "b"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "numbers.Real"
-            fully_qualified_name: "numbers.Real"
-          }
-        }
-        fully_qualified_name: "fractions._ComparableNum"
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -412,41 +401,19 @@ classes {
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
     parameters {
-      name: "other"
+      name: "b"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "numbers.Real"
-            fully_qualified_name: "numbers.Real"
-          }
-        }
-        fully_qualified_name: "fractions._ComparableNum"
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -462,41 +429,19 @@ classes {
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
     parameters {
-      name: "other"
+      name: "b"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.int,builtins.float,decimal.Decimal,numbers.Real]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.float"
-            fully_qualified_name: "builtins.float"
-          }
-          args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
-          }
-          args {
-            pretty_printed_name: "numbers.Real"
-            fully_qualified_name: "numbers.Real"
-          }
-        }
-        fully_qualified_name: "fractions._ComparableNum"
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -505,20 +450,78 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__nonzero__"
-    fully_qualified_name: "fractions.Fraction.__nonzero__"
+    name: "__bool__"
+    fully_qualified_name: "fractions.Fraction.__bool__"
     return_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "fractions.Fraction"
         fully_qualified_name: "fractions.Fraction"
       }
     }
-    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "fractions.Fraction.__copy__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fractions.Fraction"
+        fully_qualified_name: "fractions.Fraction"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "fractions.Fraction.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "fractions.Fraction"
+        fully_qualified_name: "fractions.Fraction"
+      }
+    }
+    parameters {
+      name: "memo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
   }
   methods {
     name: "real"
@@ -538,7 +541,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -568,7 +570,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -582,73 +583,6 @@ classes {
     return_annotation {
       pretty_printed_name: "fractions.Fraction"
       fully_qualified_name: "fractions.Fraction"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fractions.Fraction"
-        fully_qualified_name: "fractions.Fraction"
-      }
-    }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__floor__"
-    fully_qualified_name: "fractions.Fraction.__floor__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fractions.Fraction"
-        fully_qualified_name: "fractions.Fraction"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__ceil__"
-    fully_qualified_name: "fractions.Fraction.__ceil__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "fractions.Fraction"
-        fully_qualified_name: "fractions.Fraction"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__bool__"
-    fully_qualified_name: "fractions.Fraction.__bool__"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
@@ -699,18 +633,18 @@ classes {
       name: "__new__"
       fully_qualified_name: "fractions.Fraction.__new__"
       return_annotation {
-        pretty_printed_name: "fractions._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[fractions._T]"
+          pretty_printed_name: "Type[fractions.Fraction]"
           kind: TYPE
           args {
-            pretty_printed_name: "fractions._T"
-            kind: TYPE_VAR
+            pretty_printed_name: "fractions.Fraction"
+            fully_qualified_name: "fractions.Fraction"
           }
         }
       }
@@ -769,33 +703,33 @@ classes {
       name: "__new__"
       fully_qualified_name: "fractions.Fraction.__new__"
       return_annotation {
-        pretty_printed_name: "fractions._T"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[fractions._T]"
+          pretty_printed_name: "Type[fractions.Fraction]"
           kind: TYPE
           args {
-            pretty_printed_name: "fractions._T"
-            kind: TYPE_VAR
+            pretty_printed_name: "fractions.Fraction"
+            fully_qualified_name: "fractions.Fraction"
           }
         }
       }
       parameters {
         name: "__value"
         type_annotation {
-          pretty_printed_name: "Union[builtins.float,decimal.Decimal,builtins.str]"
+          pretty_printed_name: "Union[builtins.float,_decimal.Decimal,builtins.str]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.float"
             fully_qualified_name: "builtins.float"
           }
           args {
-            pretty_printed_name: "decimal.Decimal"
-            fully_qualified_name: "decimal.Decimal"
+            pretty_printed_name: "_decimal.Decimal"
+            fully_qualified_name: "_decimal.Decimal"
           }
           args {
             pretty_printed_name: "builtins.str"
@@ -816,7 +750,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -835,14 +768,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -868,14 +801,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -893,14 +826,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -910,7 +843,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -929,14 +861,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -962,14 +894,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -987,14 +919,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1004,7 +936,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1023,14 +954,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1056,14 +987,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1081,14 +1012,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1098,7 +1029,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1117,14 +1047,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1150,14 +1080,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1175,14 +1105,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1192,7 +1122,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1211,14 +1140,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1244,14 +1173,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1269,14 +1198,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1286,7 +1215,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1305,14 +1233,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1338,14 +1266,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1363,14 +1291,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1380,7 +1308,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1399,14 +1326,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1432,14 +1359,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1457,14 +1384,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1474,7 +1401,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1493,14 +1419,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1526,14 +1452,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1551,14 +1477,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -1568,189 +1494,12 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  overloaded_methods {
-    name: "__div__"
-    fullname: "fractions.Fraction.__div__"
-    definitions {
-      name: "__div__"
-      fully_qualified_name: "fractions.Fraction.__div__"
-      return_annotation {
-        pretty_printed_name: "fractions.Fraction"
-        fully_qualified_name: "fractions.Fraction"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__div__"
-      fully_qualified_name: "fractions.Fraction.__div__"
-      return_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__div__"
-      fully_qualified_name: "fractions.Fraction.__div__"
-      return_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "builtins.complex"
-          fully_qualified_name: "builtins.complex"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
-  }
-  overloaded_methods {
-    name: "__rdiv__"
-    fullname: "fractions.Fraction.__rdiv__"
-    definitions {
-      name: "__rdiv__"
-      fully_qualified_name: "fractions.Fraction.__rdiv__"
-      return_annotation {
-        pretty_printed_name: "fractions.Fraction"
-        fully_qualified_name: "fractions.Fraction"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "fractions.Fraction"
-            fully_qualified_name: "fractions.Fraction"
-          }
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__rdiv__"
-      fully_qualified_name: "fractions.Fraction.__rdiv__"
-      return_annotation {
-        pretty_printed_name: "builtins.float"
-        fully_qualified_name: "builtins.float"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "builtins.float"
-          fully_qualified_name: "builtins.float"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "__rdiv__"
-      fully_qualified_name: "fractions.Fraction.__rdiv__"
-      return_annotation {
-        pretty_printed_name: "builtins.complex"
-        fully_qualified_name: "builtins.complex"
-      }
-      parameters {
-        name: "self"
-        type_annotation {
-          pretty_printed_name: "fractions.Fraction"
-          fully_qualified_name: "fractions.Fraction"
-        }
-      }
-      parameters {
-        name: "other"
-        type_annotation {
-          pretty_printed_name: "builtins.complex"
-          fully_qualified_name: "builtins.complex"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
   }
   overloaded_methods {
     name: "__floordiv__"
@@ -1763,14 +1512,14 @@ classes {
         fully_qualified_name: "builtins.int"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1796,14 +1545,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1813,7 +1562,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1832,14 +1580,14 @@ classes {
         fully_qualified_name: "builtins.int"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1865,14 +1613,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1882,7 +1630,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1901,14 +1648,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -1934,14 +1681,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -1951,7 +1698,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1970,14 +1716,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
           kind: UNION
@@ -2003,14 +1749,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.float"
           fully_qualified_name: "builtins.float"
@@ -2020,7 +1766,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2105,10 +1850,87 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
+  }
+  overloaded_methods {
+    name: "__divmod__"
+    fullname: "fractions.Fraction.__divmod__"
+    definitions {
+      name: "__divmod__"
+      fully_qualified_name: "fractions.Fraction.__divmod__"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.int,fractions.Fraction]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "a"
+        type_annotation {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "b"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "fractions.Fraction"
+            fully_qualified_name: "fractions.Fraction"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__divmod__"
+      fully_qualified_name: "fractions.Fraction.__divmod__"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.float,fractions.Fraction]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "a"
+        type_annotation {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "b"
+        type_annotation {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -2194,10 +2016,91 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
+  }
+  overloaded_methods {
+    name: "__rdivmod__"
+    fullname: "fractions.Fraction.__rdivmod__"
+    definitions {
+      name: "__rdivmod__"
+      fully_qualified_name: "fractions.Fraction.__rdivmod__"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.int,fractions.Fraction]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,fractions.Fraction]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "fractions.Fraction"
+            fully_qualified_name: "fractions.Fraction"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__rdivmod__"
+      fully_qualified_name: "fractions.Fraction.__rdivmod__"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.float,fractions.Fraction]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "a"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "fractions.Fraction"
+          fully_qualified_name: "fractions.Fraction"
+        }
+      }
+      parameters {
+        name: "b"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -2213,14 +2116,14 @@ classes {
         fully_qualified_name: "fractions.Fraction"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -2238,14 +2141,14 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "Union[builtins.float,fractions.Fraction]"
           kind: UNION
@@ -2271,14 +2174,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "a"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "b"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -2288,7 +2191,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2307,21 +2209,17 @@ classes {
         fully_qualified_name: "builtins.float"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.float,fractions.Fraction]"
+          pretty_printed_name: "Union[builtins.float,fractions.Fraction]"
           kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
           args {
             pretty_printed_name: "builtins.float"
             fully_qualified_name: "builtins.float"
@@ -2344,14 +2242,14 @@ classes {
         fully_qualified_name: "builtins.complex"
       }
       parameters {
-        name: "self"
+        name: "b"
         type_annotation {
           pretty_printed_name: "fractions.Fraction"
           fully_qualified_name: "fractions.Fraction"
         }
       }
       parameters {
-        name: "other"
+        name: "a"
         type_annotation {
           pretty_printed_name: "builtins.complex"
           fully_qualified_name: "builtins.complex"
@@ -2361,7 +2259,6 @@ classes {
       resolved_decorator_names: "overload"
       is_overload: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2434,7 +2331,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -2553,9 +2449,40 @@ overloaded_functions {
     resolved_decorator_names: "overload"
     is_overload: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
+}
+vars {
+  name: "_ComparableNum"
+  fully_qualified_name: "fractions._ComparableNum"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "fractions.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

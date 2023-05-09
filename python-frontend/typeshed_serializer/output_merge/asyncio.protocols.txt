@@ -194,9 +194,140 @@ classes {
   valid_for: "310"
 }
 classes {
+  name: "BufferedProtocol"
+  fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+  super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "get_buffer"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.get_buffer"
+    return_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+    parameters {
+      name: "sizehint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "buffer_updated"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.buffer_updated"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+    parameters {
+      name: "nbytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "eof_received"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.eof_received"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
   name: "DatagramProtocol"
   fully_qualified_name: "asyncio.protocols.DatagramProtocol"
   super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "connection_made"
+    fully_qualified_name: "asyncio.protocols.DatagramProtocol.connection_made"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.DatagramProtocol"
+        fully_qualified_name: "asyncio.protocols.DatagramProtocol"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.DatagramTransport"
+        fully_qualified_name: "asyncio.transports.DatagramTransport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "datagram_received"
     fully_qualified_name: "asyncio.protocols.DatagramProtocol.datagram_received"
@@ -224,11 +355,19 @@ classes {
       name: "addr"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+        pretty_printed_name: "Tuple[Union[builtins.str,Any],builtins.int]"
         kind: TUPLE
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "Union[builtins.str,Any]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
         }
         args {
           pretty_printed_name: "builtins.int"
@@ -397,66 +536,35 @@ classes {
   valid_for: "39"
   valid_for: "310"
 }
-classes {
-  name: "BufferedProtocol"
-  fully_qualified_name: "asyncio.protocols.BufferedProtocol"
-  super_classes: "asyncio.protocols.BaseProtocol"
-  methods {
-    name: "get_buffer"
-    fully_qualified_name: "asyncio.protocols.BufferedProtocol.get_buffer"
-    return_annotation {
-      pretty_printed_name: "builtins.bytearray"
-      fully_qualified_name: "builtins.bytearray"
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.protocols.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
-        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
-      }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "sizehint"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
-  methods {
-    name: "buffer_updated"
-    fully_qualified_name: "asyncio.protocols.BufferedProtocol.buffer_updated"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
-        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
-      }
-    }
-    parameters {
-      name: "nbytes"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
+  valid_for: "35"
+  valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"

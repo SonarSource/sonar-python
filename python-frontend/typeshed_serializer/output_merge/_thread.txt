@@ -36,7 +36,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -59,7 +58,6 @@ classes {
         fully_qualified_name: "_thread.LockType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -82,7 +80,6 @@ classes {
         fully_qualified_name: "_thread.LockType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -104,13 +101,76 @@ classes {
         fully_qualified_name: "_thread.LockType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "_thread.LockType.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -175,15 +235,10 @@ classes {
         }
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  has_decorators: true
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -194,7 +249,27 @@ classes {
 classes {
   name: "_ExceptHookArgs"
   fully_qualified_name: "_thread._ExceptHookArgs"
-  super_classes: "builtins.tuple"
+  super_classes: "_typeshed.structseq"
+  methods {
+    name: "exc_type"
+    fully_qualified_name: "_thread._ExceptHookArgs.exc_type"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_thread._ExceptHookArgs"
+        fully_qualified_name: "_thread._ExceptHookArgs"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "38"
+  }
   methods {
     name: "exc_type"
     fully_qualified_name: "_thread._ExceptHookArgs.exc_type"
@@ -210,58 +285,13 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[threading.Thread,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "threading.Thread"
-            fully_qualified_name: "threading.Thread"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
+        pretty_printed_name: "_thread._ExceptHookArgs"
+        fully_qualified_name: "_thread._ExceptHookArgs"
       }
     }
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -284,52 +314,8 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[threading.Thread,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "threading.Thread"
-            fully_qualified_name: "threading.Thread"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
+        pretty_printed_name: "_thread._ExceptHookArgs"
+        fully_qualified_name: "_thread._ExceptHookArgs"
       }
     }
     has_decorators: true
@@ -358,52 +344,8 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[threading.Thread,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "threading.Thread"
-            fully_qualified_name: "threading.Thread"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
+        pretty_printed_name: "_thread._ExceptHookArgs"
+        fully_qualified_name: "_thread._ExceptHookArgs"
       }
     }
     has_decorators: true
@@ -432,52 +374,8 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "Type[builtins.BaseException]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-        }
-        args {
-          pretty_printed_name: "Union[builtins.BaseException,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.BaseException"
-            fully_qualified_name: "builtins.BaseException"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[types.TracebackType,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "types.TracebackType"
-            fully_qualified_name: "types.TracebackType"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "Union[threading.Thread,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "threading.Thread"
-            fully_qualified_name: "threading.Thread"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
+        pretty_printed_name: "_thread._ExceptHookArgs"
+        fully_qualified_name: "_thread._ExceptHookArgs"
       }
     }
     has_decorators: true
@@ -487,9 +385,35 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  has_decorators: true
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "__match_args__"
+    fully_qualified_name: "_thread._ExceptHookArgs.__match_args__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "310"
+  }
 }
 functions {
   name: "_count"
@@ -498,13 +422,69 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+}
+functions {
+  name: "start_new_thread"
+  fully_qualified_name: "_thread.start_new_thread"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "function"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
 }
 functions {
   name: "start_new_thread"
@@ -554,11 +534,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
   valid_for: "39"
   valid_for: "310"
 }
@@ -569,7 +544,6 @@ functions {
     pretty_printed_name: "None"
     kind: NONE
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -584,7 +558,6 @@ functions {
     pretty_printed_name: "NoReturn"
     kind: UNINHABITED
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -599,7 +572,6 @@ functions {
     pretty_printed_name: "_thread.LockType"
     fully_qualified_name: "_thread.LockType"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -614,7 +586,6 @@ functions {
     pretty_printed_name: "builtins.int"
     fully_qualified_name: "builtins.int"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -638,7 +609,6 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -658,28 +628,12 @@ functions {
   valid_for: "310"
 }
 vars {
-  name: "_dangling"
-  fully_qualified_name: "_thread._dangling"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  valid_for: "27"
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-vars {
   name: "TIMEOUT_MAX"
   fully_qualified_name: "_thread.TIMEOUT_MAX"
   type_annotation {
     pretty_printed_name: "builtins.float"
     fully_qualified_name: "builtins.float"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

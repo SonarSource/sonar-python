@@ -3,37 +3,15 @@ functions {
   name: "coroutine"
   fully_qualified_name: "asyncio.coroutines.coroutine"
   return_annotation {
-    pretty_printed_name: "asyncio.coroutines._F"
+    pretty_printed_name: "asyncio.coroutines._FunctionT"
     kind: TYPE_VAR
   }
   parameters {
     name: "func"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "asyncio.coroutines._F"
+      pretty_printed_name: "asyncio.coroutines._FunctionT"
       kind: TYPE_VAR
-    }
-  }
-  valid_for: "35"
-  valid_for: "36"
-  valid_for: "37"
-  valid_for: "38"
-  valid_for: "39"
-  valid_for: "310"
-}
-functions {
-  name: "iscoroutinefunction"
-  fully_qualified_name: "asyncio.coroutines.iscoroutinefunction"
-  return_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-  parameters {
-    name: "func"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.object"
-      fully_qualified_name: "builtins.object"
     }
   }
   valid_for: "35"
@@ -57,6 +35,136 @@ functions {
       pretty_printed_name: "builtins.object"
       fully_qualified_name: "builtins.object"
     }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "iscoroutinefunction"
+  fullname: "asyncio.coroutines.iscoroutinefunction"
+  definitions {
+    name: "iscoroutinefunction"
+    fully_qualified_name: "asyncio.coroutines.iscoroutinefunction"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "iscoroutinefunction"
+    fully_qualified_name: "asyncio.coroutines.iscoroutinefunction"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "iscoroutinefunction"
+    fully_qualified_name: "asyncio.coroutines.iscoroutinefunction"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "iscoroutinefunction"
+    fully_qualified_name: "asyncio.coroutines.iscoroutinefunction"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.coroutines.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "asyncio.coroutines._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
   }
   valid_for: "35"
   valid_for: "36"

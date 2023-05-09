@@ -3,7 +3,6 @@ classes {
   name: "error"
   fully_qualified_name: "dbm.ndbm.error"
   super_classes: "builtins.OSError"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -30,49 +29,12 @@ classes {
         fully_qualified_name: "dbm.ndbm._dbm"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "__getitem__"
-    fully_qualified_name: "dbm.ndbm._dbm.__getitem__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "dbm.ndbm._dbm"
-        fully_qualified_name: "dbm.ndbm._dbm"
-      }
-    }
-    parameters {
-      name: "item"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "__getitem__"
@@ -91,21 +53,8 @@ classes {
     parameters {
       name: "item"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
+        pretty_printed_name: "UnboundType[_KeyType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -132,97 +81,15 @@ classes {
     parameters {
       name: "key"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
+        pretty_printed_name: "UnboundType[_KeyType]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "value"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._ValueType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__setitem__"
-    fully_qualified_name: "dbm.ndbm._dbm.__setitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "dbm.ndbm._dbm"
-        fully_qualified_name: "dbm.ndbm._dbm"
-      }
-    }
-    parameters {
-      name: "key"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
-      }
-    }
-    parameters {
-      name: "value"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._ValueType"
+        pretty_printed_name: "UnboundType[_ValueType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -249,57 +116,8 @@ classes {
     parameters {
       name: "key"
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__delitem__"
-    fully_qualified_name: "dbm.ndbm._dbm.__delitem__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "dbm.ndbm._dbm"
-        fully_qualified_name: "dbm.ndbm._dbm"
-      }
-    }
-    parameters {
-      name: "key"
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
+        pretty_printed_name: "UnboundType[_KeyType]"
+        kind: UNBOUND
       }
     }
     valid_for: "35"
@@ -323,7 +141,6 @@ classes {
         fully_qualified_name: "dbm.ndbm._dbm"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -345,7 +162,6 @@ classes {
         fully_qualified_name: "dbm.ndbm._dbm"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -357,8 +173,8 @@ classes {
     name: "__enter__"
     fully_qualified_name: "dbm.ndbm._dbm.__enter__"
     return_annotation {
-      pretty_printed_name: "dbm.ndbm._dbm"
-      fully_qualified_name: "dbm.ndbm._dbm"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -367,13 +183,76 @@ classes {
         fully_qualified_name: "dbm.ndbm._dbm"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "dbm.ndbm._dbm.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "dbm.ndbm._dbm"
+        fully_qualified_name: "dbm.ndbm._dbm"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
   }
   methods {
     name: "__exit__"
@@ -438,34 +317,8 @@ classes {
         }
       }
     }
-    valid_for: "27"
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  methods {
-    name: "keys"
-    fully_qualified_name: "dbm.ndbm._dbm.keys"
-    return_annotation {
-      pretty_printed_name: "builtins.list[builtins.str]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      fully_qualified_name: "builtins.list"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "dbm.ndbm._dbm"
-        fully_qualified_name: "dbm.ndbm._dbm"
-      }
-    }
-    valid_for: "27"
   }
   methods {
     name: "keys"
@@ -497,66 +350,6 @@ classes {
     name: "setdefault"
     fully_qualified_name: "dbm.ndbm._dbm.setdefault"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "dbm.ndbm._dbm"
-        fully_qualified_name: "dbm.ndbm._dbm"
-      }
-    }
-    parameters {
-      name: "k"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.str]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._ValueType"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "setdefault"
-    fully_qualified_name: "dbm.ndbm._dbm.setdefault"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -572,42 +365,16 @@ classes {
       name: "k"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._KeyType"
+        pretty_printed_name: "UnboundType[_KeyType]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "default"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-        }
-        fully_qualified_name: "dbm.ndbm._ValueType"
+        pretty_printed_name: "UnboundType[_ValueType]"
+        kind: UNBOUND
       }
       has_default: true
     }
@@ -617,123 +384,6 @@ classes {
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
-  }
-  overloaded_methods {
-    name: "get"
-    fullname: "dbm.ndbm._dbm.get"
-    definitions {
-      name: "get"
-      fully_qualified_name: "dbm.ndbm._dbm.get"
-      return_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "dbm.ndbm._dbm"
-          fully_qualified_name: "dbm.ndbm._dbm"
-        }
-      }
-      parameters {
-        name: "k"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.str]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          fully_qualified_name: "dbm.ndbm._KeyType"
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    definitions {
-      name: "get"
-      fully_qualified_name: "dbm.ndbm._dbm.get"
-      return_annotation {
-        pretty_printed_name: "Union[builtins.str,dbm.ndbm._T]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "dbm.ndbm._T"
-          kind: TYPE_VAR
-        }
-      }
-      parameters {
-        name: "self"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "dbm.ndbm._dbm"
-          fully_qualified_name: "dbm.ndbm._dbm"
-        }
-      }
-      parameters {
-        name: "k"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.str]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-          }
-          fully_qualified_name: "dbm.ndbm._KeyType"
-        }
-      }
-      parameters {
-        name: "default"
-        kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,dbm.ndbm._T]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "dbm.ndbm._T"
-            kind: TYPE_VAR
-          }
-        }
-      }
-      has_decorators: true
-      resolved_decorator_names: "overload"
-      is_overload: true
-    }
-    valid_for: "27"
   }
   overloaded_methods {
     name: "get"
@@ -765,21 +415,8 @@ classes {
         name: "k"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-          }
-          fully_qualified_name: "dbm.ndbm._KeyType"
+          pretty_printed_name: "UnboundType[_KeyType]"
+          kind: UNBOUND
         }
       }
       has_decorators: true
@@ -813,37 +450,16 @@ classes {
         name: "k"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
-          kind: TYPE_ALIAS
-          args {
-            pretty_printed_name: "Union[builtins.str,builtins.bytes]"
-            kind: UNION
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.bytes"
-              fully_qualified_name: "builtins.bytes"
-            }
-          }
-          fully_qualified_name: "dbm.ndbm._KeyType"
+          pretty_printed_name: "UnboundType[_KeyType]"
+          kind: UNBOUND
         }
       }
       parameters {
         name: "default"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.bytes,dbm.ndbm._T]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.bytes"
-            fully_qualified_name: "builtins.bytes"
-          }
-          args {
-            pretty_printed_name: "dbm.ndbm._T"
-            kind: TYPE_VAR
-          }
+          pretty_printed_name: "dbm.ndbm._T"
+          kind: TYPE_VAR
         }
       }
       has_decorators: true
@@ -857,7 +473,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -871,7 +486,6 @@ classes {
       pretty_printed_name: "None"
       kind: NONE
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -886,7 +500,6 @@ classes {
       pretty_printed_name: "None"
       kind: NONE
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -925,7 +538,34 @@ functions {
     }
     has_default: true
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_KeyType"
+  fully_qualified_name: "dbm.ndbm._KeyType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ValueType"
+  fully_qualified_name: "dbm.ndbm._ValueType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -940,7 +580,6 @@ vars {
     pretty_printed_name: "builtins.str"
     fully_qualified_name: "builtins.str"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

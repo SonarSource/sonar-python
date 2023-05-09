@@ -80,28 +80,6 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "printErrors"
-    fully_qualified_name: "unittest.runner.TextTestResult.printErrors"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "unittest.runner.TextTestResult"
-        fully_qualified_name: "unittest.runner.TextTestResult"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "printErrorList"
     fully_qualified_name: "unittest.runner.TextTestResult.printErrorList"
     return_annotation {
@@ -128,16 +106,20 @@ classes {
       name: "errors"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
-        kind: TUPLE
+        pretty_printed_name: "typing.Iterable[Tuple[unittest.case.TestCase,builtins.str]]"
         args {
-          pretty_printed_name: "unittest.case.TestCase"
-          fully_qualified_name: "unittest.case.TestCase"
+          pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "unittest.case.TestCase"
+            fully_qualified_name: "unittest.case.TestCase"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
         }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
+        fully_qualified_name: "typing.Iterable"
       }
     }
     valid_for: "35"
@@ -210,8 +192,8 @@ classes {
     valid_for: "310"
   }
   attributes {
-    name: "showall"
-    fully_qualified_name: "unittest.runner.TextTestResult.showall"
+    name: "showAll"
+    fully_qualified_name: "unittest.runner.TextTestResult.showAll"
     type_annotation {
       pretty_printed_name: "builtins.bool"
       fully_qualified_name: "builtins.bool"
@@ -314,15 +296,127 @@ classes {
       name: "resultclass"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        pretty_printed_name: "Union[UnboundType[_ResultClassType],None]"
         kind: UNION
         args {
-          pretty_printed_name: "CallableType[builtins.function]"
-          kind: CALLABLE
-          args {
-            pretty_printed_name: "builtins.function"
-            fully_qualified_name: "builtins.function"
-          }
+          pretty_printed_name: "UnboundType[_ResultClassType]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "warnings"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "tb_locals"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.runner.TextTestRunner.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestRunner"
+        fully_qualified_name: "unittest.runner.TextTestRunner"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "descriptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "verbosity"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "failfast"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "resultclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_ResultClassType],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_ResultClassType]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -361,10 +455,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -438,17 +528,8 @@ classes {
     name: "resultclass"
     fully_qualified_name: "unittest.runner.TextTestRunner.resultclass"
     type_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "unittest.runner._ResultClassType"
+      pretty_printed_name: "UnboundType[_ResultClassType]"
+      kind: UNBOUND
     }
     valid_for: "35"
     valid_for: "36"
@@ -462,6 +543,20 @@ vars {
   name: "unittest"
   fully_qualified_name: "unittest"
   is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ResultClassType"
+  fully_qualified_name: "unittest.runner._ResultClassType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

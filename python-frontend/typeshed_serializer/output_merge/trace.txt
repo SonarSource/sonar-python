@@ -55,38 +55,13 @@ classes {
       name: "calledfuncs"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],builtins.int],None]"
+        pretty_printed_name: "Union[builtins.dict[UnboundType[_FileModuleFunction],builtins.int],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],builtins.int]"
+          pretty_printed_name: "builtins.dict[UnboundType[_FileModuleFunction],builtins.int]"
           args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "Union[builtins.str,None]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "None"
-                  kind: NONE
-                }
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "trace._fileModuleFunction"
+            pretty_printed_name: "UnboundType[_FileModuleFunction]"
+            kind: UNBOUND
           }
           args {
             pretty_printed_name: "builtins.int"
@@ -105,11 +80,11 @@ classes {
       name: "infile"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -122,70 +97,20 @@ classes {
       name: "callers"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.dict[Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],builtins.int],None]"
+        pretty_printed_name: "Union[builtins.dict[Tuple[UnboundType[_FileModuleFunction],UnboundType[_FileModuleFunction]],builtins.int],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.dict[Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],builtins.int]"
+          pretty_printed_name: "builtins.dict[Tuple[UnboundType[_FileModuleFunction],UnboundType[_FileModuleFunction]],builtins.int]"
           args {
-            pretty_printed_name: "Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
+            pretty_printed_name: "Tuple[UnboundType[_FileModuleFunction],UnboundType[_FileModuleFunction]]"
             kind: TUPLE
             args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Union[builtins.str,None]"
-                  kind: UNION
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "None"
-                    kind: NONE
-                  }
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              fully_qualified_name: "trace._fileModuleFunction"
+              pretty_printed_name: "UnboundType[_FileModuleFunction]"
+              kind: UNBOUND
             }
             args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Union[builtins.str,None]"
-                  kind: UNION
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "None"
-                    kind: NONE
-                  }
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              fully_qualified_name: "trace._fileModuleFunction"
+              pretty_printed_name: "UnboundType[_FileModuleFunction]"
+              kind: UNBOUND
             }
           }
           args {
@@ -205,244 +130,11 @@ classes {
       name: "outfile"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "trace.CoverageResults.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "trace.CoverageResults"
-        fully_qualified_name: "trace.CoverageResults"
-      }
-    }
-    parameters {
-      name: "counts"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[Tuple[builtins.str,builtins.int],builtins.int],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[Tuple[builtins.str,builtins.int],builtins.int]"
-          args {
-            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            args {
-              pretty_printed_name: "builtins.int"
-              fully_qualified_name: "builtins.int"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "calledfuncs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],builtins.int],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],builtins.int]"
-          args {
-            pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-            kind: TYPE_ALIAS
-            args {
-              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-              kind: TUPLE
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-              args {
-                pretty_printed_name: "Union[builtins.str,None]"
-                kind: UNION
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "None"
-                  kind: NONE
-                }
-              }
-              args {
-                pretty_printed_name: "builtins.str"
-                fully_qualified_name: "builtins.str"
-              }
-            }
-            fully_qualified_name: "trace._fileModuleFunction"
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "infile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "callers"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.dict[Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],builtins.int],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.dict[Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]],builtins.int]"
-          args {
-            pretty_printed_name: "Tuple[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]],TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]"
-            kind: TUPLE
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Union[builtins.str,None]"
-                  kind: UNION
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "None"
-                    kind: NONE
-                  }
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              fully_qualified_name: "trace._fileModuleFunction"
-            }
-            args {
-              pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-              kind: TYPE_ALIAS
-              args {
-                pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-                kind: TUPLE
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-                args {
-                  pretty_printed_name: "Union[builtins.str,None]"
-                  kind: UNION
-                  args {
-                    pretty_printed_name: "builtins.str"
-                    fully_qualified_name: "builtins.str"
-                  }
-                  args {
-                    pretty_printed_name: "None"
-                    kind: NONE
-                  }
-                }
-                args {
-                  pretty_printed_name: "builtins.str"
-                  fully_qualified_name: "builtins.str"
-                }
-              }
-              fully_qualified_name: "trace._fileModuleFunction"
-            }
-          }
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          fully_qualified_name: "builtins.dict"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "outfile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -481,7 +173,6 @@ classes {
         fully_qualified_name: "trace.CoverageResults"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -526,71 +217,11 @@ classes {
       name: "coverdir"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "write_results"
-    fully_qualified_name: "trace.CoverageResults.write_results"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "trace.CoverageResults"
-        fully_qualified_name: "trace.CoverageResults"
-      }
-    }
-    parameters {
-      name: "show_missing"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "summary"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "coverdir"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -633,111 +264,8 @@ classes {
       name: "path"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "lines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-    }
-    parameters {
-      name: "lnotab"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "lines_hit"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Mapping[builtins.int,builtins.int]"
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        fully_qualified_name: "typing.Mapping"
-      }
-    }
-    parameters {
-      name: "encoding"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "write_results_file"
-    fully_qualified_name: "trace.CoverageResults.write_results_file"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "trace.CoverageResults"
-        fully_qualified_name: "trace.CoverageResults"
-      }
-    }
-    parameters {
-      name: "path"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
-        kind: TYPE_ALIAS
-        args {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[builtins.str]"
-            args {
-              pretty_printed_name: "builtins.str"
-              fully_qualified_name: "builtins.str"
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-        }
-        fully_qualified_name: "_typeshed.StrPath"
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -800,7 +328,36 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  methods {
+    name: "is_ignored_filename"
+    fully_qualified_name: "trace.CoverageResults.is_ignored_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "trace.CoverageResults"
+        fully_qualified_name: "trace.CoverageResults"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -893,11 +450,11 @@ classes {
       name: "infile"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -910,149 +467,11 @@ classes {
       name: "outfile"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.unicode,None]"
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.unicode"
-          fully_qualified_name: "builtins.unicode"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "timing"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__init__"
-    fully_qualified_name: "trace.Trace.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "trace.Trace"
-        fully_qualified_name: "trace.Trace"
-      }
-    }
-    parameters {
-      name: "count"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "trace"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "countfuncs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "countcallers"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ignoremods"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "ignoredirs"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.Sequence[builtins.str]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        fully_qualified_name: "typing.Sequence"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "infile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "outfile"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[builtins.str]"
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          fully_qualified_name: "os.PathLike"
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1108,7 +527,6 @@ classes {
         }
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1197,7 +615,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1224,12 +641,8 @@ classes {
       name: "func"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     parameters {
@@ -1248,11 +661,49 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
+  }
+  methods {
+    name: "runfunc"
+    fully_qualified_name: "trace.Trace.runfunc"
+    return_annotation {
+      pretty_printed_name: "trace._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "trace.Trace"
+        fully_qualified_name: "trace.Trace"
+      }
+    }
+    parameters {
+      name: "__func"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
     valid_for: "39"
     valid_for: "310"
   }
@@ -1260,33 +711,8 @@ classes {
     name: "file_module_function_of"
     fully_qualified_name: "trace.Trace.file_module_function_of"
     return_annotation {
-      pretty_printed_name: "TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],builtins.str]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-      }
-      fully_qualified_name: "trace._fileModuleFunction"
+      pretty_printed_name: "UnboundType[_FileModuleFunction]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1304,7 +730,6 @@ classes {
         fully_qualified_name: "types.FrameType"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1351,7 +776,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1398,7 +822,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1445,7 +868,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1457,17 +879,8 @@ classes {
     name: "localtrace_trace_and_count"
     fully_qualified_name: "trace.Trace.localtrace_trace_and_count"
     return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "trace._localtrace"
+      pretty_printed_name: "UnboundType[TraceFunction]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1501,7 +914,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1513,17 +925,8 @@ classes {
     name: "localtrace_trace"
     fully_qualified_name: "trace.Trace.localtrace_trace"
     return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "trace._localtrace"
+      pretty_printed_name: "UnboundType[TraceFunction]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1557,7 +960,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1569,17 +971,8 @@ classes {
     name: "localtrace_count"
     fully_qualified_name: "trace.Trace.localtrace_count"
     return_annotation {
-      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
-      kind: TYPE_ALIAS
-      args {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-      fully_qualified_name: "trace._localtrace"
+      pretty_printed_name: "UnboundType[TraceFunction]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1613,7 +1006,6 @@ classes {
         kind: ANY
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1636,7 +1028,6 @@ classes {
         fully_qualified_name: "trace.Trace"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -1644,7 +1035,52 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "trace.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "trace._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FileModuleFunction"
+  fully_qualified_name: "trace._FileModuleFunction"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

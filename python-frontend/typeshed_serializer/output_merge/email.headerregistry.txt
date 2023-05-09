@@ -7,18 +7,18 @@ classes {
     name: "__new__"
     fully_qualified_name: "datetime.datetime.__new__"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
+        pretty_printed_name: "Type[datetime.datetime]"
         kind: TYPE
         args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
         }
       }
     }
@@ -26,32 +26,32 @@ classes {
       name: "year"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     parameters {
       name: "month"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     parameters {
       name: "day"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
     }
     parameters {
       name: "hour"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -59,8 +59,8 @@ classes {
       name: "minute"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -68,8 +68,8 @@ classes {
       name: "second"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -77,8 +77,8 @@ classes {
       name: "microsecond"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -86,11 +86,11 @@ classes {
       name: "tzinfo"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -108,81 +108,6 @@ classes {
       }
       has_default: true
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "year"
-    fully_qualified_name: "datetime.datetime.year"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "month"
-    fully_qualified_name: "datetime.datetime.month"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "day"
-    fully_qualified_name: "datetime.datetime.day"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -294,11 +219,11 @@ classes {
     name: "tzinfo"
     fully_qualified_name: "datetime.datetime.tzinfo"
     return_annotation {
-      pretty_printed_name: "Union[datetime.tzinfo,None]"
+      pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
       kind: UNION
       args {
-        pretty_printed_name: "datetime.tzinfo"
-        fully_qualified_name: "datetime.tzinfo"
+        pretty_printed_name: "UnboundType[_TzInfo]"
+        kind: UNBOUND
       }
       args {
         pretty_printed_name: "None"
@@ -352,24 +277,23 @@ classes {
     name: "fromtimestamp"
     fully_qualified_name: "datetime.datetime.fromtimestamp"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
+        pretty_printed_name: "Type[datetime.datetime]"
         kind: TYPE
         args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
         }
       }
     }
     parameters {
-      name: "t"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__timestamp"
       type_annotation {
         pretty_printed_name: "builtins.float"
         fully_qualified_name: "builtins.float"
@@ -379,11 +303,11 @@ classes {
       name: "tz"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -406,24 +330,23 @@ classes {
     name: "utcfromtimestamp"
     fully_qualified_name: "datetime.datetime.utcfromtimestamp"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
+        pretty_printed_name: "Type[datetime.datetime]"
         kind: TYPE
         args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
         }
       }
     }
     parameters {
-      name: "t"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__t"
       type_annotation {
         pretty_printed_name: "builtins.float"
         fully_qualified_name: "builtins.float"
@@ -440,87 +363,21 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "today"
-    fully_qualified_name: "datetime.datetime.today"
-    return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "fromordinal"
-    fully_qualified_name: "datetime.datetime.fromordinal"
-    return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "n"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
     name: "utcnow"
     fully_qualified_name: "datetime.datetime.utcnow"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
+        pretty_printed_name: "Type[datetime.datetime]"
         kind: TYPE
         args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
         }
       }
     }
@@ -538,8 +395,8 @@ classes {
     name: "combine"
     fully_qualified_name: "datetime.datetime.combine"
     return_annotation {
-      pretty_printed_name: "datetime.datetime"
-      fully_qualified_name: "datetime.datetime"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
@@ -557,27 +414,27 @@ classes {
       name: "date"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "datetime.date"
-        fully_qualified_name: "datetime.date"
+        pretty_printed_name: "UnboundType[_Date]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "time"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "datetime.time"
-        fully_qualified_name: "datetime.time"
+        pretty_printed_name: "UnboundType[_Time]"
+        kind: UNBOUND
       }
     }
     parameters {
       name: "tzinfo"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -589,146 +446,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "classmethod"
     is_class_method: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "strftime"
-    fully_qualified_name: "datetime.datetime.strftime"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    parameters {
-      name: "fmt"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__format__"
-    fully_qualified_name: "datetime.datetime.__format__"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    parameters {
-      name: "fmt"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "toordinal"
-    fully_qualified_name: "datetime.datetime.toordinal"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "timetuple"
-    fully_qualified_name: "datetime.datetime.timetuple"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -762,44 +479,8 @@ classes {
     name: "utctimetuple"
     fully_qualified_name: "datetime.datetime.utctimetuple"
     return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
+      pretty_printed_name: "time.struct_time"
+      fully_qualified_name: "time.struct_time"
     }
     parameters {
       name: "self"
@@ -820,8 +501,8 @@ classes {
     name: "date"
     fully_qualified_name: "datetime.datetime.date"
     return_annotation {
-      pretty_printed_name: "datetime.date"
-      fully_qualified_name: "datetime.date"
+      pretty_printed_name: "UnboundType[_Date]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -842,8 +523,8 @@ classes {
     name: "time"
     fully_qualified_name: "datetime.datetime.time"
     return_annotation {
-      pretty_printed_name: "datetime.time"
-      fully_qualified_name: "datetime.time"
+      pretty_printed_name: "UnboundType[_Time]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -864,8 +545,8 @@ classes {
     name: "timetz"
     fully_qualified_name: "datetime.datetime.timetz"
     return_annotation {
-      pretty_printed_name: "datetime.time"
-      fully_qualified_name: "datetime.time"
+      pretty_printed_name: "UnboundType[_Time]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -886,8 +567,8 @@ classes {
     name: "replace"
     fully_qualified_name: "datetime.datetime.replace"
     return_annotation {
-      pretty_printed_name: "datetime.datetime"
-      fully_qualified_name: "datetime.datetime"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -901,8 +582,8 @@ classes {
       name: "year"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -910,8 +591,8 @@ classes {
       name: "month"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -919,8 +600,8 @@ classes {
       name: "day"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -928,8 +609,8 @@ classes {
       name: "hour"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -937,8 +618,8 @@ classes {
       name: "minute"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -946,8 +627,8 @@ classes {
       name: "second"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -955,8 +636,8 @@ classes {
       name: "microsecond"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
       }
       has_default: true
     }
@@ -964,11 +645,11 @@ classes {
       name: "tzinfo"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1012,11 +693,11 @@ classes {
       name: "tz"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1033,44 +714,8 @@ classes {
     name: "astimezone"
     fully_qualified_name: "datetime.datetime.astimezone"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime._S"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "tz"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "ctime"
-    fully_qualified_name: "datetime.datetime.ctime"
-    return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -1080,9 +725,23 @@ classes {
         fully_qualified_name: "datetime.datetime"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -1131,8 +790,8 @@ classes {
     name: "strptime"
     fully_qualified_name: "datetime.datetime.strptime"
     return_annotation {
-      pretty_printed_name: "datetime.datetime"
-      fully_qualified_name: "datetime.datetime"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
@@ -1147,16 +806,14 @@ classes {
       }
     }
     parameters {
-      name: "date_string"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__date_string"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
     }
     parameters {
-      name: "format"
-      kind: POSITIONAL_OR_KEYWORD
+      name: "__format"
       type_annotation {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -1277,7 +934,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.datetime"
         fully_qualified_name: "datetime.datetime"
@@ -1305,7 +962,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.datetime"
         fully_qualified_name: "datetime.datetime"
@@ -1333,7 +990,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.datetime"
         fully_qualified_name: "datetime.datetime"
@@ -1361,7 +1018,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.datetime"
         fully_qualified_name: "datetime.datetime"
@@ -1389,7 +1046,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.timedelta"
         fully_qualified_name: "datetime.timedelta"
@@ -1398,31 +1055,6 @@ classes {
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
-  }
-  methods {
-    name: "__add__"
-    fully_qualified_name: "datetime.datetime.__add__"
-    return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "datetime._S"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "datetime.timedelta"
-        fully_qualified_name: "datetime.timedelta"
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "__radd__"
@@ -1439,7 +1071,7 @@ classes {
       }
     }
     parameters {
-      name: "other"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "datetime.timedelta"
         fully_qualified_name: "datetime.timedelta"
@@ -1448,183 +1080,23 @@ classes {
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
-  }
-  methods {
-    name: "__radd__"
-    fully_qualified_name: "datetime.datetime.__radd__"
-    return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      type_annotation {
-        pretty_printed_name: "datetime._S"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "other"
-      type_annotation {
-        pretty_printed_name: "datetime.timedelta"
-        fully_qualified_name: "datetime.timedelta"
-      }
-    }
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__hash__"
-    fully_qualified_name: "datetime.datetime.__hash__"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "weekday"
-    fully_qualified_name: "datetime.datetime.weekday"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isoweekday"
-    fully_qualified_name: "datetime.datetime.isoweekday"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "isocalendar"
-    fully_qualified_name: "datetime.datetime.isocalendar"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "datetime.datetime"
-        fully_qualified_name: "datetime.datetime"
-      }
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "fromisoformat"
-    fully_qualified_name: "datetime.datetime.fromisoformat"
-    return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "cls"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
-        }
-      }
-    }
-    parameters {
-      name: "date_string"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "classmethod"
-    is_class_method: true
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "now"
     fully_qualified_name: "datetime.datetime.now"
     return_annotation {
-      pretty_printed_name: "datetime._S"
-      kind: TYPE_VAR
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[datetime._S]"
+        pretty_printed_name: "Type[datetime.datetime]"
         kind: TYPE
         args {
-          pretty_printed_name: "datetime._S"
-          kind: TYPE_VAR
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
         }
       }
     }
@@ -1632,11 +1104,11 @@ classes {
       name: "tz"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        pretty_printed_name: "Union[UnboundType[_TzInfo],None]"
         kind: UNION
         args {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -1659,18 +1131,18 @@ classes {
       name: "now"
       fully_qualified_name: "datetime.datetime.now"
       return_annotation {
-        pretty_printed_name: "datetime._S"
-        kind: TYPE_VAR
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
       }
       parameters {
         name: "cls"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Type[datetime._S]"
+          pretty_printed_name: "Type[datetime.datetime]"
           kind: TYPE
           args {
-            pretty_printed_name: "datetime._S"
-            kind: TYPE_VAR
+            pretty_printed_name: "datetime.datetime"
+            fully_qualified_name: "datetime.datetime"
           }
         }
       }
@@ -1712,8 +1184,8 @@ classes {
         name: "tz"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "datetime.tzinfo"
-          fully_qualified_name: "datetime.tzinfo"
+          pretty_printed_name: "UnboundType[_TzInfo]"
+          kind: UNBOUND
         }
       }
       has_decorators: true
@@ -1744,7 +1216,7 @@ classes {
         }
       }
       parameters {
-        name: "other"
+        name: "__value"
         type_annotation {
           pretty_printed_name: "datetime.datetime"
           fully_qualified_name: "datetime.datetime"
@@ -1769,7 +1241,7 @@ classes {
         }
       }
       parameters {
-        name: "other"
+        name: "__value"
         type_annotation {
           pretty_printed_name: "datetime.timedelta"
           fully_qualified_name: "datetime.timedelta"
@@ -1782,6 +1254,60 @@ classes {
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
+  }
+  overloaded_methods {
+    name: "__sub__"
+    fullname: "datetime.datetime.__sub__"
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__value"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
     valid_for: "38"
     valid_for: "39"
     valid_for: "310"
@@ -1812,20 +1338,6 @@ classes {
     type_annotation {
       pretty_printed_name: "datetime.datetime"
       fully_qualified_name: "datetime.datetime"
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  attributes {
-    name: "resolution"
-    fully_qualified_name: "datetime.datetime.resolution"
-    type_annotation {
-      pretty_printed_name: "datetime.timedelta"
-      fully_qualified_name: "datetime.timedelta"
     }
     valid_for: "35"
     valid_for: "36"
@@ -1868,6 +1380,37 @@ classes {
     name: "defects"
     fully_qualified_name: "email.headerregistry.BaseHeader.defects"
     return_annotation {
+      pretty_printed_name: "Tuple[email.errors.MessageDefect,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "email.errors.MessageDefect"
+        fully_qualified_name: "email.errors.MessageDefect"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.BaseHeader"
+        fully_qualified_name: "email.headerregistry.BaseHeader"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "defects"
+    fully_qualified_name: "email.headerregistry.BaseHeader.defects"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[email.errors.MessageDefect]"
       args {
         pretty_printed_name: "email.errors.MessageDefect"
@@ -1886,43 +1429,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "max_count"
-    fully_qualified_name: "email.headerregistry.BaseHeader.max_count"
-    return_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.headerregistry.BaseHeader"
-        fully_qualified_name: "email.headerregistry.BaseHeader"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -1930,8 +1436,8 @@ classes {
     name: "__new__"
     fully_qualified_name: "email.headerregistry.BaseHeader.__new__"
     return_annotation {
-      pretty_printed_name: "email.headerregistry.BaseHeader"
-      fully_qualified_name: "email.headerregistry.BaseHeader"
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "cls"
@@ -2054,6 +1560,32 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.BaseHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "UnstructuredHeader"
@@ -2143,6 +1675,32 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.UnstructuredHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "UniqueUnstructuredHeader"
@@ -2154,11 +1712,87 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.UniqueUnstructuredHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "DateHeader"
   fully_qualified_name: "email.headerregistry.DateHeader"
   super_classes: "builtins.object"
+  methods {
+    name: "init"
+    fully_qualified_name: "email.headerregistry.DateHeader.init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.DateHeader"
+        fully_qualified_name: "email.headerregistry.DateHeader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parse_tree"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email._header_value_parser.TokenList"
+        fully_qualified_name: "email._header_value_parser.TokenList"
+      }
+    }
+    parameters {
+      name: "defects"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.errors.MessageDefect]"
+        args {
+          pretty_printed_name: "email.errors.MessageDefect"
+          fully_qualified_name: "email.errors.MessageDefect"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "datetime"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "datetime"
     fully_qualified_name: "email.headerregistry.DateHeader.datetime"
@@ -2276,6 +1910,32 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.DateHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "UniqueDateHeader"
@@ -2287,11 +1947,122 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.UniqueDateHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "AddressHeader"
   fully_qualified_name: "email.headerregistry.AddressHeader"
   super_classes: "builtins.object"
+  methods {
+    name: "init"
+    fully_qualified_name: "email.headerregistry.AddressHeader.init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.AddressHeader"
+        fully_qualified_name: "email.headerregistry.AddressHeader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parse_tree"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email._header_value_parser.TokenList"
+        fully_qualified_name: "email._header_value_parser.TokenList"
+      }
+    }
+    parameters {
+      name: "defects"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.errors.MessageDefect]"
+        args {
+          pretty_printed_name: "email.errors.MessageDefect"
+          fully_qualified_name: "email.errors.MessageDefect"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "groups"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.headerregistry.Group]"
+        args {
+          pretty_printed_name: "email.headerregistry.Group"
+          fully_qualified_name: "email.headerregistry.Group"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "groups"
+    fully_qualified_name: "email.headerregistry.AddressHeader.groups"
+    return_annotation {
+      pretty_printed_name: "Tuple[email.headerregistry.Group,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "email.headerregistry.Group"
+        fully_qualified_name: "email.headerregistry.Group"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.AddressHeader"
+        fully_qualified_name: "email.headerregistry.AddressHeader"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
   methods {
     name: "groups"
     fully_qualified_name: "email.headerregistry.AddressHeader.groups"
@@ -2314,12 +2085,39 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addresses"
+    fully_qualified_name: "email.headerregistry.AddressHeader.addresses"
+    return_annotation {
+      pretty_printed_name: "Tuple[email.headerregistry.Address,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "email.headerregistry.Address"
+        fully_qualified_name: "email.headerregistry.Address"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.AddressHeader"
+        fully_qualified_name: "email.headerregistry.AddressHeader"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "addresses"
@@ -2343,10 +2141,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -2434,6 +2228,32 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.AddressHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "UniqueAddressHeader"
@@ -2445,6 +2265,24 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.UniqueAddressHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "SingleAddressHeader"
@@ -2492,11 +2330,127 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.UniqueSingleAddressHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "MIMEVersionHeader"
   fully_qualified_name: "email.headerregistry.MIMEVersionHeader"
   super_classes: "builtins.object"
+  methods {
+    name: "init"
+    fully_qualified_name: "email.headerregistry.MIMEVersionHeader.init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.MIMEVersionHeader"
+        fully_qualified_name: "email.headerregistry.MIMEVersionHeader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parse_tree"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email._header_value_parser.TokenList"
+        fully_qualified_name: "email._header_value_parser.TokenList"
+      }
+    }
+    parameters {
+      name: "defects"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.errors.MessageDefect]"
+        args {
+          pretty_printed_name: "email.errors.MessageDefect"
+          fully_qualified_name: "email.errors.MessageDefect"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "major"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "minor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "version"
     fully_qualified_name: "email.headerregistry.MIMEVersionHeader.version"
@@ -2680,16 +2634,100 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.MIMEVersionHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ParameterizedMIMEHeader"
   fully_qualified_name: "email.headerregistry.ParameterizedMIMEHeader"
   super_classes: "builtins.object"
   methods {
+    name: "init"
+    fully_qualified_name: "email.headerregistry.ParameterizedMIMEHeader.init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.ParameterizedMIMEHeader"
+        fully_qualified_name: "email.headerregistry.ParameterizedMIMEHeader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parse_tree"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email._header_value_parser.TokenList"
+        fully_qualified_name: "email._header_value_parser.TokenList"
+      }
+    }
+    parameters {
+      name: "defects"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.errors.MessageDefect]"
+        args {
+          pretty_printed_name: "email.errors.MessageDefect"
+          fully_qualified_name: "email.errors.MessageDefect"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "params"
     fully_qualified_name: "email.headerregistry.ParameterizedMIMEHeader.params"
     return_annotation {
-      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      pretty_printed_name: "types.MappingProxyType[builtins.str,Any]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
@@ -2698,7 +2736,7 @@ classes {
         pretty_printed_name: "Any"
         kind: ANY
       }
-      fully_qualified_name: "typing.Mapping"
+      fully_qualified_name: "types.MappingProxyType"
     }
     parameters {
       name: "self"
@@ -2777,6 +2815,24 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.ParameterizedMIMEHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "ContentTypeHeader"
@@ -2897,8 +2953,16 @@ classes {
     name: "content_disposition"
     fully_qualified_name: "email.headerregistry.ContentDispositionHeader.content_disposition"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
     parameters {
       name: "self"
@@ -2954,6 +3018,56 @@ classes {
   name: "ContentTransferEncodingHeader"
   fully_qualified_name: "email.headerregistry.ContentTransferEncodingHeader"
   super_classes: "builtins.object"
+  methods {
+    name: "init"
+    fully_qualified_name: "email.headerregistry.ContentTransferEncodingHeader.init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.ContentTransferEncodingHeader"
+        fully_qualified_name: "email.headerregistry.ContentTransferEncodingHeader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parse_tree"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email._header_value_parser.TokenList"
+        fully_qualified_name: "email._header_value_parser.TokenList"
+      }
+    }
+    parameters {
+      name: "defects"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[email.errors.MessageDefect]"
+        args {
+          pretty_printed_name: "email.errors.MessageDefect"
+          fully_qualified_name: "email.errors.MessageDefect"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
   methods {
     name: "cte"
     fully_qualified_name: "email.headerregistry.ContentTransferEncodingHeader.cte"
@@ -3063,11 +3177,192 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.ContentTransferEncodingHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_HeaderParser"
+  fully_qualified_name: "email.headerregistry._HeaderParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "value_parser"
+    fully_qualified_name: "email.headerregistry._HeaderParser.value_parser"
+    return_annotation {
+      pretty_printed_name: "email._header_value_parser.TokenList"
+      fully_qualified_name: "email._header_value_parser.TokenList"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.headerregistry._HeaderParser.parse"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[email.headerregistry._HeaderParser]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "email.headerregistry._HeaderParser"
+          fully_qualified_name: "email.headerregistry._HeaderParser"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry._HeaderParser.max_count"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "HeaderRegistry"
   fully_qualified_name: "email.headerregistry.HeaderRegistry"
   super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.HeaderRegistry"
+        fully_qualified_name: "email.headerregistry.HeaderRegistry"
+      }
+    }
+    parameters {
+      name: "base_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "default_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "use_default_map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
   methods {
     name: "__init__"
     fully_qualified_name: "email.headerregistry.HeaderRegistry.__init__"
@@ -3100,11 +3395,11 @@ classes {
       name: "default_class"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Type[email.headerregistry.BaseHeader]"
+        pretty_printed_name: "Type[email.headerregistry._HeaderParser]"
         kind: TYPE
         args {
-          pretty_printed_name: "email.headerregistry.BaseHeader"
-          fully_qualified_name: "email.headerregistry.BaseHeader"
+          pretty_printed_name: "email.headerregistry._HeaderParser"
+          fully_qualified_name: "email.headerregistry._HeaderParser"
         }
       }
       has_default: true
@@ -3118,12 +3413,44 @@ classes {
       }
       has_default: true
     }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "map_to_type"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.map_to_type"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.HeaderRegistry"
+        fully_qualified_name: "email.headerregistry.HeaderRegistry"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "map_to_type"
@@ -3160,12 +3487,34 @@ classes {
         }
       }
     }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.HeaderRegistry"
+        fully_qualified_name: "email.headerregistry.HeaderRegistry"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
     valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
   }
   methods {
     name: "__getitem__"
@@ -3192,10 +3541,6 @@ classes {
         fully_qualified_name: "builtins.str"
       }
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -3243,6 +3588,100 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "registry"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.registry"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.type]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "registry"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.registry"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Type[email.headerregistry._HeaderParser]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Type[email.headerregistry._HeaderParser]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "email.headerregistry._HeaderParser"
+          fully_qualified_name: "email.headerregistry._HeaderParser"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "base_class"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.base_class"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "base_class"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.base_class"
+    type_annotation {
+      pretty_printed_name: "Type[email.headerregistry.BaseHeader]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "email.headerregistry.BaseHeader"
+        fully_qualified_name: "email.headerregistry.BaseHeader"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "default_class"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.default_class"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "default_class"
+    fully_qualified_name: "email.headerregistry.HeaderRegistry.default_class"
+    type_annotation {
+      pretty_printed_name: "Type[email.headerregistry._HeaderParser]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "email.headerregistry._HeaderParser"
+        fully_qualified_name: "email.headerregistry._HeaderParser"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
 }
 classes {
   name: "Address"
@@ -3431,17 +3870,24 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__str__"
-    fully_qualified_name: "email.headerregistry.Address.__str__"
+    name: "__eq__"
+    fully_qualified_name: "email.headerregistry.Address.__eq__"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
       type_annotation {
         pretty_printed_name: "email.headerregistry.Address"
         fully_qualified_name: "email.headerregistry.Address"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     valid_for: "35"
@@ -3499,6 +3945,37 @@ classes {
     name: "addresses"
     fully_qualified_name: "email.headerregistry.Group.addresses"
     return_annotation {
+      pretty_printed_name: "Tuple[email.headerregistry.Address,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "email.headerregistry.Address"
+        fully_qualified_name: "email.headerregistry.Address"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.headerregistry.Group"
+        fully_qualified_name: "email.headerregistry.Group"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "addresses"
+    fully_qualified_name: "email.headerregistry.Group.addresses"
+    return_annotation {
       pretty_printed_name: "builtins.tuple[email.headerregistry.Address]"
       args {
         pretty_printed_name: "email.headerregistry.Address"
@@ -3517,10 +3994,6 @@ classes {
     has_decorators: true
     resolved_decorator_names: "property"
     is_property: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
     valid_for: "39"
     valid_for: "310"
   }
@@ -3585,17 +4058,24 @@ classes {
     valid_for: "310"
   }
   methods {
-    name: "__str__"
-    fully_qualified_name: "email.headerregistry.Group.__str__"
+    name: "__eq__"
+    fully_qualified_name: "email.headerregistry.Group.__eq__"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
     }
     parameters {
       name: "self"
       type_annotation {
         pretty_printed_name: "email.headerregistry.Group"
         fully_qualified_name: "email.headerregistry.Group"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
       }
     }
     valid_for: "35"
@@ -3691,4 +4171,19 @@ classes {
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
+  attributes {
+    name: "max_count"
+    fully_qualified_name: "email.headerregistry.MessageIDHeader.max_count"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.int]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
 }

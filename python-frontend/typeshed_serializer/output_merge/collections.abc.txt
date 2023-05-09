@@ -39,6 +39,32 @@ classes {
     valid_for: "310"
   }
   methods {
+    name: "_hash"
+    fully_qualified_name: "typing.AbstractSet._hash"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "__le__"
     fully_qualified_name: "typing.AbstractSet.__le__"
     return_annotation {
@@ -57,7 +83,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -93,7 +119,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -129,7 +155,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -165,7 +191,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -205,7 +231,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -253,7 +279,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[typing._T]"
         args {
@@ -293,7 +319,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -341,7 +367,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[typing._T]"
         args {
@@ -435,9 +461,6 @@ classes {
         fully_qualified_name: "typing.AsyncGenerator"
       }
     }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -516,50 +539,6 @@ classes {
         fully_qualified_name: "typing.AsyncGenerator"
       }
     }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "__aiter__"
-    fully_qualified_name: "typing.AsyncGenerator.__aiter__"
-    return_annotation {
-      pretty_printed_name: "typing.AsyncGenerator[typing._T_co,typing._T_contra]"
-      args {
-        pretty_printed_name: "typing._T_co"
-        kind: TYPE_VAR
-      }
-      args {
-        pretty_printed_name: "typing._T_contra"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.AsyncGenerator"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.AsyncGenerator[typing._T_co,typing._T_contra]"
-        args {
-          pretty_printed_name: "typing._T_co"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing._T_contra"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.AsyncGenerator"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "abstractmethod"
-    is_abstract: true
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -2167,7 +2146,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
@@ -2211,7 +2190,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2251,7 +2230,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "item"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
@@ -2348,7 +2327,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2408,7 +2387,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2460,7 +2439,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
@@ -2504,7 +2483,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2564,7 +2543,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2624,7 +2603,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2875,7 +2854,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
@@ -2915,7 +2894,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -2951,7 +2930,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "key"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
@@ -3024,7 +3003,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -3072,7 +3051,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -3112,7 +3091,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[Any]"
         args {
@@ -3152,7 +3131,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -3200,7 +3179,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -3248,7 +3227,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "other"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -3326,7 +3305,7 @@ classes {
       }
     }
     parameters {
-      name: "k"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "typing._KT"
         kind: TYPE_VAR
@@ -3346,20 +3325,16 @@ classes {
     name: "items"
     fully_qualified_name: "typing.Mapping.items"
     return_annotation {
-      pretty_printed_name: "typing.AbstractSet[Tuple[typing._KT,typing._VT_co]]"
+      pretty_printed_name: "typing.ItemsView[typing._KT,typing._VT_co]"
       args {
-        pretty_printed_name: "Tuple[typing._KT,typing._VT_co]"
-        kind: TUPLE
-        args {
-          pretty_printed_name: "typing._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing._VT_co"
-          kind: TYPE_VAR
-        }
+        pretty_printed_name: "typing._KT"
+        kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.AbstractSet"
+      args {
+        pretty_printed_name: "typing._VT_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.ItemsView"
     }
     parameters {
       name: "self"
@@ -3388,12 +3363,12 @@ classes {
     name: "keys"
     fully_qualified_name: "typing.Mapping.keys"
     return_annotation {
-      pretty_printed_name: "typing.AbstractSet[typing._KT]"
+      pretty_printed_name: "typing.KeysView[typing._KT]"
       args {
         pretty_printed_name: "typing._KT"
         kind: TYPE_VAR
       }
-      fully_qualified_name: "typing.AbstractSet"
+      fully_qualified_name: "typing.KeysView"
     }
     parameters {
       name: "self"
@@ -3475,7 +3450,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
@@ -3523,8 +3498,7 @@ classes {
         }
       }
       parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
+        name: "__key"
         type_annotation {
           pretty_printed_name: "typing._KT"
           kind: TYPE_VAR
@@ -3566,8 +3540,7 @@ classes {
         }
       }
       parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
+        name: "__key"
         type_annotation {
           pretty_printed_name: "typing._KT"
           kind: TYPE_VAR
@@ -3705,14 +3678,14 @@ classes {
       }
     }
     parameters {
-      name: "k"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "typing._KT"
         kind: TYPE_VAR
       }
     }
     parameters {
-      name: "v"
+      name: "__value"
       type_annotation {
         pretty_printed_name: "typing._VT"
         kind: TYPE_VAR
@@ -3751,7 +3724,7 @@ classes {
       }
     }
     parameters {
-      name: "v"
+      name: "__key"
       type_annotation {
         pretty_printed_name: "typing._KT"
         kind: TYPE_VAR
@@ -3835,53 +3808,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "setdefault"
-    fully_qualified_name: "typing.MutableMapping.setdefault"
-    return_annotation {
-      pretty_printed_name: "typing._VT"
-      kind: TYPE_VAR
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing.MutableMapping[typing._KT,typing._VT]"
-        args {
-          pretty_printed_name: "typing._KT"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing._VT"
-          kind: TYPE_VAR
-        }
-        fully_qualified_name: "typing.MutableMapping"
-      }
-    }
-    parameters {
-      name: "key"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing._KT"
-        kind: TYPE_VAR
-      }
-    }
-    parameters {
-      name: "default"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "typing._VT"
-        kind: TYPE_VAR
-      }
-      has_default: true
-    }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
   overloaded_methods {
     name: "pop"
     fullname: "typing.MutableMapping.pop"
@@ -3909,8 +3835,7 @@ classes {
         }
       }
       parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
+        name: "__key"
         type_annotation {
           pretty_printed_name: "typing._KT"
           kind: TYPE_VAR
@@ -3952,8 +3877,7 @@ classes {
         }
       }
       parameters {
-        name: "key"
-        kind: POSITIONAL_OR_KEYWORD
+        name: "__key"
         type_annotation {
           pretty_printed_name: "typing._KT"
           kind: TYPE_VAR
@@ -3974,7 +3898,115 @@ classes {
             kind: TYPE_VAR
           }
         }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "setdefault"
+    fullname: "typing.MutableMapping.setdefault"
+    definitions {
+      name: "setdefault"
+      fully_qualified_name: "typing.MutableMapping.setdefault"
+      return_annotation {
+        pretty_printed_name: "Union[typing._T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.MutableMapping[typing._KT,Union[typing._T,None]]"
+          args {
+            pretty_printed_name: "typing._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Union[typing._T,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing._T"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__default"
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
         has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "setdefault"
+      fully_qualified_name: "typing.MutableMapping.setdefault"
+      return_annotation {
+        pretty_printed_name: "typing._VT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.MutableMapping[typing._KT,typing._VT]"
+          args {
+            pretty_printed_name: "typing._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing._VT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+      }
+      parameters {
+        name: "__key"
+        type_annotation {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__default"
+        type_annotation {
+          pretty_printed_name: "typing._VT"
+          kind: TYPE_VAR
+        }
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -4016,7 +4048,7 @@ classes {
       parameters {
         name: "__m"
         type_annotation {
-          pretty_printed_name: "typing.Mapping[typing._KT,typing._VT]"
+          pretty_printed_name: "_typeshed.SupportsKeysAndGetItem[typing._KT,typing._VT]"
           args {
             pretty_printed_name: "typing._KT"
             kind: TYPE_VAR
@@ -4025,7 +4057,7 @@ classes {
             pretty_printed_name: "typing._VT"
             kind: TYPE_VAR
           }
-          fully_qualified_name: "typing.Mapping"
+          fully_qualified_name: "_typeshed.SupportsKeysAndGetItem"
         }
       }
       parameters {
@@ -4390,12 +4422,8 @@ classes {
     name: "__iadd__"
     fully_qualified_name: "typing.MutableSequence.__iadd__"
     return_annotation {
-      pretty_printed_name: "typing.MutableSequence[typing._T]"
-      args {
-        pretty_printed_name: "typing._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.MutableSequence"
+      pretty_printed_name: "UnboundType[typing_extensions.Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4409,7 +4437,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "values"
       type_annotation {
         pretty_printed_name: "typing.Iterable[typing._T]"
         args {
@@ -4448,7 +4476,7 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -4483,7 +4511,7 @@ classes {
         }
       }
       parameters {
-        name: "s"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
@@ -4524,14 +4552,14 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
         }
       }
       parameters {
-        name: "o"
+        name: "value"
         type_annotation {
           pretty_printed_name: "typing._T"
           kind: TYPE_VAR
@@ -4562,14 +4590,14 @@ classes {
         }
       }
       parameters {
-        name: "s"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
         }
       }
       parameters {
-        name: "o"
+        name: "value"
         type_annotation {
           pretty_printed_name: "typing.Iterable[typing._T]"
           args {
@@ -4614,7 +4642,7 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -4645,7 +4673,7 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
@@ -4840,20 +4868,8 @@ classes {
     name: "__ior__"
     fully_qualified_name: "typing.MutableSet.__ior__"
     return_annotation {
-      pretty_printed_name: "typing.MutableSet[Union[typing._T,typing._S]]"
-      args {
-        pretty_printed_name: "Union[typing._T,typing._S]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing._S"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "typing.MutableSet"
+      pretty_printed_name: "UnboundType[typing_extensions.Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4867,11 +4883,11 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "it"
       type_annotation {
-        pretty_printed_name: "typing.AbstractSet[typing._S]"
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
         args {
-          pretty_printed_name: "typing._S"
+          pretty_printed_name: "typing._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.AbstractSet"
@@ -4888,12 +4904,8 @@ classes {
     name: "__iand__"
     fully_qualified_name: "typing.MutableSet.__iand__"
     return_annotation {
-      pretty_printed_name: "typing.MutableSet[typing._T]"
-      args {
-        pretty_printed_name: "typing._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.MutableSet"
+      pretty_printed_name: "UnboundType[typing_extensions.Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4907,7 +4919,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "it"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -4928,20 +4940,8 @@ classes {
     name: "__ixor__"
     fully_qualified_name: "typing.MutableSet.__ixor__"
     return_annotation {
-      pretty_printed_name: "typing.MutableSet[Union[typing._T,typing._S]]"
-      args {
-        pretty_printed_name: "Union[typing._T,typing._S]"
-        kind: UNION
-        args {
-          pretty_printed_name: "typing._T"
-          kind: TYPE_VAR
-        }
-        args {
-          pretty_printed_name: "typing._S"
-          kind: TYPE_VAR
-        }
-      }
-      fully_qualified_name: "typing.MutableSet"
+      pretty_printed_name: "UnboundType[typing_extensions.Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4955,11 +4955,11 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "it"
       type_annotation {
-        pretty_printed_name: "typing.AbstractSet[typing._S]"
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
         args {
-          pretty_printed_name: "typing._S"
+          pretty_printed_name: "typing._T"
           kind: TYPE_VAR
         }
         fully_qualified_name: "typing.AbstractSet"
@@ -4976,12 +4976,8 @@ classes {
     name: "__isub__"
     fully_qualified_name: "typing.MutableSet.__isub__"
     return_annotation {
-      pretty_printed_name: "typing.MutableSet[typing._T]"
-      args {
-        pretty_printed_name: "typing._T"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.MutableSet"
+      pretty_printed_name: "UnboundType[typing_extensions.Self]"
+      kind: UNBOUND
     }
     parameters {
       name: "self"
@@ -4995,7 +4991,7 @@ classes {
       }
     }
     parameters {
-      name: "s"
+      name: "it"
       type_annotation {
         pretty_printed_name: "typing.AbstractSet[Any]"
         args {
@@ -5176,7 +5172,7 @@ classes {
       }
     }
     parameters {
-      name: "x"
+      name: "value"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"
@@ -5269,7 +5265,7 @@ classes {
         }
       }
       parameters {
-        name: "i"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.int"
           fully_qualified_name: "builtins.int"
@@ -5304,7 +5300,7 @@ classes {
         }
       }
       parameters {
-        name: "s"
+        name: "index"
         type_annotation {
           pretty_printed_name: "builtins.slice"
           fully_qualified_name: "builtins.slice"
@@ -5374,7 +5370,7 @@ classes {
   name: "ValuesView"
   fully_qualified_name: "typing.ValuesView"
   super_classes: "typing.MappingView"
-  super_classes: "typing.Iterable"
+  super_classes: "typing.Collection"
   methods {
     name: "__init__"
     fully_qualified_name: "typing.ValuesView.__init__"
@@ -5436,7 +5432,7 @@ classes {
       }
     }
     parameters {
-      name: "o"
+      name: "value"
       type_annotation {
         pretty_printed_name: "builtins.object"
         fully_qualified_name: "builtins.object"

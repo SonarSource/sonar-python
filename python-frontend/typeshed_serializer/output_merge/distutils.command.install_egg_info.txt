@@ -18,7 +18,6 @@ classes {
         fully_qualified_name: "distutils.command.install_egg_info.install_egg_info"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -41,7 +40,6 @@ classes {
         fully_qualified_name: "distutils.command.install_egg_info.install_egg_info"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -64,7 +62,6 @@ classes {
         fully_qualified_name: "distutils.command.install_egg_info.install_egg_info"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -91,7 +88,6 @@ classes {
         fully_qualified_name: "distutils.command.install_egg_info.install_egg_info"
       }
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -99,7 +95,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -113,7 +108,6 @@ classes {
       pretty_printed_name: "builtins.str"
       fully_qualified_name: "builtins.str"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -152,7 +146,6 @@ classes {
       }
       fully_qualified_name: "builtins.list"
     }
-    valid_for: "27"
     valid_for: "35"
     valid_for: "36"
     valid_for: "37"
@@ -160,4 +153,88 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
+  attributes {
+    name: "install_dir"
+    fully_qualified_name: "distutils.command.install_egg_info.install_egg_info.install_dir"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "target"
+    fully_qualified_name: "distutils.command.install_egg_info.install_egg_info.target"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "outputs"
+    fully_qualified_name: "distutils.command.install_egg_info.install_egg_info.outputs"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "safe_name"
+  fully_qualified_name: "distutils.command.install_egg_info.safe_name"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "safe_version"
+  fully_qualified_name: "distutils.command.install_egg_info.safe_version"
+  parameters {
+    name: "version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "to_filename"
+  fully_qualified_name: "distutils.command.install_egg_info.to_filename"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
 }

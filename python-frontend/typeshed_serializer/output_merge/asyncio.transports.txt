@@ -22,13 +22,13 @@ classes {
       name: "extra"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Mapping[Any,Any],None]"
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Mapping[Any,Any]"
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
           args {
-            pretty_printed_name: "Any"
-            kind: ANY
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
             pretty_printed_name: "Any"
@@ -69,16 +69,24 @@ classes {
       name: "name"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
       }
     }
     parameters {
       name: "default"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
       }
       has_default: true
     }
@@ -197,6 +205,28 @@ classes {
   fully_qualified_name: "asyncio.transports.ReadTransport"
   super_classes: "asyncio.transports.BaseTransport"
   methods {
+    name: "is_reading"
+    fully_qualified_name: "asyncio.transports.ReadTransport.is_reading"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.ReadTransport"
+        fully_qualified_name: "asyncio.transports.ReadTransport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "pause_reading"
     fully_qualified_name: "asyncio.transports.ReadTransport.pause_reading"
     return_annotation {
@@ -235,26 +265,6 @@ classes {
     }
     valid_for: "35"
     valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
-  }
-  methods {
-    name: "is_reading"
-    fully_qualified_name: "asyncio.transports.ReadTransport.is_reading"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports.ReadTransport"
-        fully_qualified_name: "asyncio.transports.ReadTransport"
-      }
-    }
     valid_for: "37"
     valid_for: "38"
     valid_for: "39"
@@ -350,6 +360,36 @@ classes {
     valid_for: "310"
   }
   methods {
+    name: "get_write_buffer_limits"
+    fully_qualified_name: "asyncio.transports.WriteTransport.get_write_buffer_limits"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.WriteTransport"
+        fully_qualified_name: "asyncio.transports.WriteTransport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
     name: "write"
     fully_qualified_name: "asyncio.transports.WriteTransport.write"
     return_annotation {
@@ -368,8 +408,20 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "builtins.memoryview"
+          fully_qualified_name: "builtins.memoryview"
+        }
       }
     }
     valid_for: "35"
@@ -398,12 +450,24 @@ classes {
       name: "list_of_data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.list[Any]"
+        pretty_printed_name: "typing.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview]]"
         args {
-          pretty_printed_name: "Any"
-          kind: ANY
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
         }
-        fully_qualified_name: "builtins.list"
+        fully_qualified_name: "typing.Iterable"
       }
     }
     valid_for: "35"
@@ -521,27 +585,31 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "builtins.memoryview"
+          fully_qualified_name: "builtins.memoryview"
+        }
       }
     }
     parameters {
       name: "addr"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.tuple[Any],builtins.str,None]"
+        pretty_printed_name: "Union[UnboundType[_Address],None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.tuple[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "builtins.tuple"
-        }
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "UnboundType[_Address]"
+          kind: UNBOUND
         }
         args {
           pretty_printed_name: "None"
@@ -684,8 +752,8 @@ classes {
     name: "send_signal"
     fully_qualified_name: "asyncio.transports.SubprocessTransport.send_signal"
     return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
+      pretty_printed_name: "None"
+      kind: NONE
     }
     parameters {
       name: "self"
@@ -784,13 +852,13 @@ classes {
       name: "extra"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[typing.Mapping[Any,Any],None]"
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
         kind: UNION
         args {
-          pretty_printed_name: "typing.Mapping[Any,Any]"
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
           args {
-            pretty_printed_name: "Any"
-            kind: ANY
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
           }
           args {
             pretty_printed_name: "Any"
@@ -829,35 +897,43 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  methods {
-    name: "get_write_buffer_limits"
-    fully_qualified_name: "asyncio.transports._FlowControlMixin.get_write_buffer_limits"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.transports.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "asyncio.transports._FlowControlMixin"
-        fully_qualified_name: "asyncio.transports._FlowControlMixin"
-      }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
     }
-    valid_for: "35"
-    valid_for: "36"
-    valid_for: "37"
-    valid_for: "38"
-    valid_for: "39"
-    valid_for: "310"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
   }
   valid_for: "35"
   valid_for: "36"

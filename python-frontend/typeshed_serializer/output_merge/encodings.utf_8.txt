@@ -7,40 +7,6 @@ classes {
     name: "encode"
     fully_qualified_name: "encodings.utf_8.IncrementalEncoder.encode"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "encodings.utf_8.IncrementalEncoder"
-        fully_qualified_name: "encodings.utf_8.IncrementalEncoder"
-      }
-    }
-    parameters {
-      name: "input"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-    }
-    parameters {
-      name: "final"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "encode"
-    fully_qualified_name: "encodings.utf_8.IncrementalEncoder.encode"
-    return_annotation {
       pretty_printed_name: "builtins.bytes"
       fully_qualified_name: "builtins.bytes"
     }
@@ -76,7 +42,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -88,55 +53,6 @@ classes {
   name: "IncrementalDecoder"
   fully_qualified_name: "encodings.utf_8.IncrementalDecoder"
   super_classes: "codecs.BufferedIncrementalDecoder"
-  methods {
-    name: "_buffer_decode"
-    fully_qualified_name: "encodings.utf_8.IncrementalDecoder._buffer_decode"
-    return_annotation {
-      pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
-      kind: TUPLE
-      args {
-        pretty_printed_name: "builtins.unicode"
-        fully_qualified_name: "builtins.unicode"
-      }
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "encodings.utf_8.IncrementalDecoder"
-        fully_qualified_name: "encodings.utf_8.IncrementalDecoder"
-      }
-    }
-    parameters {
-      name: "input"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "errors"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "final"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-    }
-    valid_for: "27"
-  }
   methods {
     name: "_buffer_decode"
     fully_qualified_name: "encodings.utf_8.IncrementalDecoder._buffer_decode"
@@ -155,8 +71,8 @@ classes {
     parameters {
       name: "__data"
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -193,7 +109,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -253,7 +168,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -283,8 +197,8 @@ classes {
     parameters {
       name: "__data"
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
       }
     }
     parameters {
@@ -321,7 +235,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -352,39 +265,12 @@ functions {
       fully_qualified_name: "codecs._StreamWriter"
     }
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
   valid_for: "38"
   valid_for: "39"
   valid_for: "310"
-}
-functions {
-  name: "encode"
-  fully_qualified_name: "encodings.utf_8.encode"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "input"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-  }
-  parameters {
-    name: "errors"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    has_default: true
-  }
-  valid_for: "27"
 }
 functions {
   name: "encode"
@@ -435,32 +321,6 @@ functions {
   name: "decode"
   fully_qualified_name: "encodings.utf_8.decode"
   return_annotation {
-    pretty_printed_name: "builtins.unicode"
-    fully_qualified_name: "builtins.unicode"
-  }
-  parameters {
-    name: "input"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  parameters {
-    name: "errors"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.unicode"
-      fully_qualified_name: "builtins.unicode"
-    }
-    has_default: true
-  }
-  valid_for: "27"
-}
-functions {
-  name: "decode"
-  fully_qualified_name: "encodings.utf_8.decode"
-  return_annotation {
     pretty_printed_name: "Tuple[builtins.str,builtins.int]"
     kind: TUPLE
     args {
@@ -476,8 +336,8 @@ functions {
     name: "input"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "builtins.bytes"
-      fully_qualified_name: "builtins.bytes"
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
     }
   }
   parameters {

@@ -306,15 +306,27 @@ classes {
         name: "anchor"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
+          pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
           kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
           }
         }
         has_default: true
@@ -384,19 +396,19 @@ classes {
         name: "pattern"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -423,7 +435,6 @@ classes {
             }
           }
         }
-        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -448,19 +459,19 @@ classes {
         name: "pattern"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -468,15 +479,27 @@ classes {
         name: "anchor"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
+          pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
           kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
           }
         }
         has_default: true
@@ -502,16 +525,8 @@ classes {
         name: "is_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
         }
         has_default: true
       }
@@ -556,15 +571,27 @@ classes {
         name: "anchor"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
+          pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
           kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
           }
         }
         has_default: true
@@ -634,19 +661,19 @@ classes {
         name: "pattern"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -673,7 +700,6 @@ classes {
             }
           }
         }
-        has_default: true
       }
       has_decorators: true
       resolved_decorator_names: "overload"
@@ -698,19 +724,19 @@ classes {
         name: "pattern"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+          pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
           kind: UNION
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
           args {
-            pretty_printed_name: "typing.Pattern[builtins.str]"
+            pretty_printed_name: "re.Pattern[builtins.str]"
             args {
               pretty_printed_name: "builtins.str"
               fully_qualified_name: "builtins.str"
             }
-            fully_qualified_name: "typing.Pattern"
+            fully_qualified_name: "re.Pattern"
           }
         }
       }
@@ -718,15 +744,27 @@ classes {
         name: "anchor"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
+          pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
           kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
           args {
             pretty_printed_name: "builtins.bool"
             fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
           }
         }
         has_default: true
@@ -752,16 +790,8 @@ classes {
         name: "is_regex"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "Union[builtins.int,builtins.bool]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.int"
-            fully_qualified_name: "builtins.int"
-          }
-          args {
-            pretty_printed_name: "builtins.bool"
-            fully_qualified_name: "builtins.bool"
-          }
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
         }
         has_default: true
       }
@@ -776,7 +806,6 @@ classes {
     valid_for: "39"
     valid_for: "310"
   }
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -884,12 +913,12 @@ overloaded_functions {
     name: "translate_pattern"
     fully_qualified_name: "distutils.filelist.translate_pattern"
     return_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
     parameters {
       name: "pattern"
@@ -903,15 +932,27 @@ overloaded_functions {
       name: "anchor"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.bool]"
+        pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
         kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
         args {
           pretty_printed_name: "builtins.bool"
           fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
         }
       }
       has_default: true
@@ -966,30 +1007,30 @@ overloaded_functions {
     name: "translate_pattern"
     fully_qualified_name: "distutils.filelist.translate_pattern"
     return_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
     parameters {
       name: "pattern"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+        pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "typing.Pattern[builtins.str]"
+          pretty_printed_name: "re.Pattern[builtins.str]"
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
-          fully_qualified_name: "typing.Pattern"
+          fully_qualified_name: "re.Pattern"
         }
       }
     }
@@ -1016,7 +1057,6 @@ overloaded_functions {
           }
         }
       }
-      has_default: true
     }
     has_decorators: true
     resolved_decorator_names: "overload"
@@ -1026,30 +1066,30 @@ overloaded_functions {
     name: "translate_pattern"
     fully_qualified_name: "distutils.filelist.translate_pattern"
     return_annotation {
-      pretty_printed_name: "typing.Pattern[builtins.str]"
+      pretty_printed_name: "re.Pattern[builtins.str]"
       args {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      fully_qualified_name: "typing.Pattern"
+      fully_qualified_name: "re.Pattern"
     }
     parameters {
       name: "pattern"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.str,typing.Pattern[builtins.str]]"
+        pretty_printed_name: "Union[builtins.str,re.Pattern[builtins.str]]"
         kind: UNION
         args {
           pretty_printed_name: "builtins.str"
           fully_qualified_name: "builtins.str"
         }
         args {
-          pretty_printed_name: "typing.Pattern[builtins.str]"
+          pretty_printed_name: "re.Pattern[builtins.str]"
           args {
             pretty_printed_name: "builtins.str"
             fully_qualified_name: "builtins.str"
           }
-          fully_qualified_name: "typing.Pattern"
+          fully_qualified_name: "re.Pattern"
         }
       }
     }
@@ -1057,15 +1097,27 @@ overloaded_functions {
       name: "anchor"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.bool]"
+        pretty_printed_name: "Union[builtins.bool,Literal[builtins.int],Literal[builtins.int]]"
         kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
         args {
           pretty_printed_name: "builtins.bool"
           fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
         }
       }
       has_default: true
@@ -1091,16 +1143,8 @@ overloaded_functions {
       name: "is_regex"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "Union[builtins.int,builtins.bool]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
       }
       has_default: true
     }

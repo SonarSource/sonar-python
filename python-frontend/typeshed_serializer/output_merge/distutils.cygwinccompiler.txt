@@ -3,7 +3,6 @@ classes {
   name: "CygwinCCompiler"
   fully_qualified_name: "distutils.cygwinccompiler.CygwinCCompiler"
   super_classes: "distutils.unixccompiler.UnixCCompiler"
-  valid_for: "27"
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
@@ -15,7 +14,202 @@ classes {
   name: "Mingw32CCompiler"
   fully_qualified_name: "distutils.cygwinccompiler.Mingw32CCompiler"
   super_classes: "distutils.cygwinccompiler.CygwinCCompiler"
-  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_msvcr"
+  fully_qualified_name: "distutils.cygwinccompiler.get_msvcr"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "check_config_h"
+  fully_qualified_name: "distutils.cygwinccompiler.check_config_h"
+  return_annotation {
+    pretty_printed_name: "Tuple[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]],builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_versions"
+  fully_qualified_name: "distutils.cygwinccompiler.get_versions"
+  return_annotation {
+    pretty_printed_name: "Tuple[Union[distutils.version.LooseVersion,None],Any]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Union[distutils.version.LooseVersion,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "distutils.version.LooseVersion"
+        fully_qualified_name: "distutils.version.LooseVersion"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "get_versions"
+  fully_qualified_name: "distutils.cygwinccompiler.get_versions"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[Union[distutils.version.LooseVersion,None]]"
+    args {
+      pretty_printed_name: "Union[distutils.version.LooseVersion,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "distutils.version.LooseVersion"
+        fully_qualified_name: "distutils.version.LooseVersion"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_cygwingcc"
+  fully_qualified_name: "distutils.cygwinccompiler.is_cygwingcc"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CONFIG_H_OK"
+  fully_qualified_name: "distutils.cygwinccompiler.CONFIG_H_OK"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CONFIG_H_NOTOK"
+  fully_qualified_name: "distutils.cygwinccompiler.CONFIG_H_NOTOK"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CONFIG_H_UNCERTAIN"
+  fully_qualified_name: "distutils.cygwinccompiler.CONFIG_H_UNCERTAIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RE_VERSION"
+  fully_qualified_name: "distutils.cygwinccompiler.RE_VERSION"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"

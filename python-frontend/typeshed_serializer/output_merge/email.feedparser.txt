@@ -1,244 +1,5 @@
 fully_qualified_name: "email.feedparser"
 classes {
-  name: "BufferedSubFile"
-  fully_qualified_name: "email.feedparser.BufferedSubFile"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.BufferedSubFile"
-        fully_qualified_name: "email.feedparser.BufferedSubFile"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "push_eof_matcher"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.push_eof_matcher"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.BufferedSubFile"
-        fully_qualified_name: "email.feedparser.BufferedSubFile"
-      }
-    }
-    parameters {
-      name: "pred"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pop_eof_matcher"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.pop_eof_matcher"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.close"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.BufferedSubFile"
-        fully_qualified_name: "email.feedparser.BufferedSubFile"
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "readline"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.readline"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "unreadline"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.unreadline"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.BufferedSubFile"
-        fully_qualified_name: "email.feedparser.BufferedSubFile"
-      }
-    }
-    parameters {
-      name: "line"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "push"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.push"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "pushlines"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.pushlines"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.BufferedSubFile"
-        fully_qualified_name: "email.feedparser.BufferedSubFile"
-      }
-    }
-    parameters {
-      name: "lines"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "is_closed"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.is_closed"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "__iter__"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.__iter__"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "next"
-    fully_qualified_name: "email.feedparser.BufferedSubFile.next"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-}
-classes {
-  name: "FeedParser"
-  fully_qualified_name: "email.feedparser.FeedParser"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "email.feedparser.FeedParser.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.FeedParser"
-        fully_qualified_name: "email.feedparser.FeedParser"
-      }
-    }
-    parameters {
-      name: "_factory"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      has_default: true
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "feed"
-    fully_qualified_name: "email.feedparser.FeedParser.feed"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "email.feedparser.FeedParser"
-        fully_qualified_name: "email.feedparser.FeedParser"
-      }
-    }
-    parameters {
-      name: "data"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    valid_for: "27"
-  }
-  methods {
-    name: "close"
-    fully_qualified_name: "email.feedparser.FeedParser.close"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    valid_for: "27"
-  }
-  valid_for: "27"
-}
-classes {
   name: "FeedParser"
   fully_qualified_name: "email.feedparser.FeedParser"
   super_classes: "builtins.object"
@@ -253,9 +14,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._M]"
+        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
         args {
-          pretty_printed_name: "email.feedparser._M"
+          pretty_printed_name: "email.feedparser._MessageT"
           kind: TYPE_VAR
         }
         fully_qualified_name: "email.feedparser.FeedParser"
@@ -280,16 +41,16 @@ classes {
     name: "close"
     fully_qualified_name: "email.feedparser.FeedParser.close"
     return_annotation {
-      pretty_printed_name: "email.feedparser._M"
+      pretty_printed_name: "email.feedparser._MessageT"
       kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._M]"
+        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
         args {
-          pretty_printed_name: "email.feedparser._M"
+          pretty_printed_name: "email.feedparser._MessageT"
           kind: TYPE_VAR
         }
         fully_qualified_name: "email.feedparser.FeedParser"
@@ -357,9 +118,9 @@ classes {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._M]"
+          pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
           args {
-            pretty_printed_name: "email.feedparser._M"
+            pretty_printed_name: "email.feedparser._MessageT"
             kind: TYPE_VAR
           }
           fully_qualified_name: "email.feedparser.FeedParser"
@@ -420,9 +181,9 @@ classes {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._M]"
+        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
         args {
-          pretty_printed_name: "email.feedparser._M"
+          pretty_printed_name: "email.feedparser._MessageT"
           kind: TYPE_VAR
         }
         fully_qualified_name: "email.feedparser.BytesFeedParser"
@@ -432,8 +193,16 @@ classes {
       name: "data"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "builtins.bytes"
-        fully_qualified_name: "builtins.bytes"
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
       }
     }
     valid_for: "35"
@@ -447,16 +216,16 @@ classes {
     name: "close"
     fully_qualified_name: "email.feedparser.BytesFeedParser.close"
     return_annotation {
-      pretty_printed_name: "email.feedparser._M"
+      pretty_printed_name: "email.feedparser._MessageT"
       kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
       type_annotation {
-        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._M]"
+        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
         args {
-          pretty_printed_name: "email.feedparser._M"
+          pretty_printed_name: "email.feedparser._MessageT"
           kind: TYPE_VAR
         }
         fully_qualified_name: "email.feedparser.BytesFeedParser"
@@ -524,9 +293,9 @@ classes {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
         type_annotation {
-          pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._M]"
+          pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
           args {
-            pretty_printed_name: "email.feedparser._M"
+            pretty_printed_name: "email.feedparser._MessageT"
             kind: TYPE_VAR
           }
           fully_qualified_name: "email.feedparser.BytesFeedParser"
@@ -565,6 +334,24 @@ classes {
     valid_for: "310"
   }
   is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "email.feedparser.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
   valid_for: "35"
   valid_for: "36"
   valid_for: "37"
